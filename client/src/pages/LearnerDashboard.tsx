@@ -245,6 +245,12 @@ export default function LearnerDashboard() {
     { enabled: isAuthenticated }
   );
 
+  // Fetch learner's coaching plans
+  const { data: coachingPlans } = trpc.learner.getMyCoachingPlans.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
   // Fetch learner profile for SLE levels
   const { data: learnerProfile } = trpc.learner.getProfile.useQuery(
     undefined,
@@ -260,6 +266,12 @@ export default function LearnerDashboard() {
   // Fetch certification status for CertificationExpiryWidget
   const { data: certificationData } = trpc.learner.getCertificationStatus.useQuery(
     undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch recent practice sessions for dashboard preview
+  const { data: recentPracticeSessions } = trpc.sleCompanion.getSessionHistory.useQuery(
+    { limit: 3 },
     { enabled: isAuthenticated }
   );
 
@@ -726,6 +738,55 @@ export default function LearnerDashboard() {
                 )}
               </GlassCard>
 
+              {/* My Coaching Plan */}
+              {coachingPlans && coachingPlans.length > 0 && (() => {
+                const activePlan = coachingPlans.find((p: any) => p.status === "active");
+                if (!activePlan) return null;
+                const remainPct = Math.round((activePlan.remainingSessions / activePlan.totalSessions) * 100);
+                const expiresDate = new Date(activePlan.expiresAt);
+                const daysLeft = Math.max(0, Math.ceil((expiresDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+                return (
+                  <Card className="border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        <CreditCard className="h-5 w-5 text-emerald-600" />
+                        {language === "fr" ? "Mon plan de coaching" : "My Coaching Plan"}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-black dark:text-white">{activePlan.planName}</span>
+                        <Badge variant="default" className="bg-emerald-600">
+                          {language === "fr" ? "Actif" : "Active"}
+                        </Badge>
+                      </div>
+                      <div>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="text-muted-foreground">
+                            {language === "fr" ? "Sessions restantes" : "Sessions remaining"}
+                          </span>
+                          <span className="font-medium text-black dark:text-white">
+                            {activePlan.remainingSessions}/{activePlan.totalSessions}
+                          </span>
+                        </div>
+                        <Progress value={remainPct} className="h-2" />
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground flex items-center gap-1">
+                          <Clock className="h-3.5 w-3.5" />
+                          {language === "fr" ? `Expire dans ${daysLeft} jours` : `Expires in ${daysLeft} days`}
+                        </span>
+                        <Link href="/coaches">
+                          <Button size="sm" variant="outline" className="text-xs h-7">
+                            {language === "fr" ? "Réserver" : "Book Session"}
+                          </Button>
+                        </Link>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })()}
+
               {/* Recommended Next Steps - Personalized */}
               <RecommendedNextSteps language={language} />
 
@@ -781,6 +842,72 @@ export default function LearnerDashboard() {
                   </Link>
                 </div>
               </GlassCard>
+
+              {/* Recent Practice Sessions */}
+              {recentPracticeSessions && recentPracticeSessions.length > 0 && (
+                <GlassCard className="p-6" hover={false}>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-black dark:text-white flex items-center gap-2">
+                      <Bot className="h-5 w-5 text-purple-500" />
+                      {language === "fr" ? "Sessions récentes" : "Recent Sessions"}
+                    </h3>
+                    <Link href="/practice-history">
+                      <Button variant="ghost" size="sm" className="text-xs text-muted-foreground hover:text-foreground">
+                        {language === "fr" ? "Voir tout" : "View all"}
+                        <ChevronRight className="h-3 w-3 ml-1" />
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="space-y-3">
+                    {recentPracticeSessions.slice(0, 3).map((session: any) => (
+                      <Link key={session.id} href={`/practice-history/${session.id}`}>
+                        <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 dark:bg-white/5 hover:bg-white/10 dark:hover:bg-white/10 transition-colors cursor-pointer border border-transparent hover:border-purple-400/20">
+                          <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                            <MessageSquare className="h-4 w-4 text-purple-400" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-foreground truncate">
+                              {session.coach?.name || "Coach"}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {session.createdAt ? new Date(session.createdAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short", day: "numeric" }) : ""}
+                              {session.level ? ` · Niveau ${session.level}` : ""}
+                            </p>
+                          </div>
+                          {session.averageScore != null && session.averageScore > 0 && (
+                            <Badge className={`text-[10px] ${
+                              session.averageScore >= 80 ? "bg-green-500/20 text-green-500" :
+                              session.averageScore >= 60 ? "bg-amber-500/20 text-amber-500" :
+                              "bg-red-500/20 text-red-500"
+                            }`}>
+                              {session.averageScore}%
+                            </Badge>
+                          )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-white/10">
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-foreground">{recentPracticeSessions.length}</p>
+                      <p className="text-[10px] text-muted-foreground">{language === "fr" ? "Sessions" : "Sessions"}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-foreground">
+                        {recentPracticeSessions.length > 0 ? Math.round(recentPracticeSessions.reduce((acc: number, s: any) => acc + (s.averageScore || 0), 0) / recentPracticeSessions.length) : 0}%
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">{language === "fr" ? "Score moy." : "Avg Score"}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-foreground">
+                        {recentPracticeSessions.reduce((acc: number, s: any) => acc + ((s as any).messageCount || 0), 0)}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">{language === "fr" ? "Messages" : "Messages"}</p>
+                    </div>
+                  </div>
+                </GlassCard>
+              )}
 
               {/* Streak Protection Card */}
               <StreakRecovery

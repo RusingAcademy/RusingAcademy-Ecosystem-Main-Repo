@@ -31,6 +31,7 @@ interface CoachOnboardingChecklistProps {
     headline?: string | null;
     photoUrl?: string | null;
     videoUrl?: string | null;
+    bunnyVideoId?: string | null;
     hourlyRate?: number | null;
     trialRate?: number | null;
     specializations?: Record<string, boolean> | null;
@@ -79,7 +80,7 @@ export function CoachOnboardingChecklist({
       },
       video: {
         title: "Ajouter une vidéo d'introduction",
-        description: "Présentez-vous en vidéo (YouTube)",
+        description: "Téléchargez une vidéo via le gestionnaire Bunny Stream",
       },
       pricing: {
         title: "Définir vos tarifs",
@@ -130,7 +131,7 @@ export function CoachOnboardingChecklist({
       },
       video: {
         title: "Add an intro video",
-        description: "Introduce yourself on video (YouTube)",
+        description: "Upload a video via the Bunny Stream manager",
       },
       pricing: {
         title: "Set your rates",
@@ -175,7 +176,7 @@ export function CoachOnboardingChecklist({
     },
     {
       id: "video",
-      completed: !!coachProfile.videoUrl,
+      completed: !!(coachProfile.bunnyVideoId || coachProfile.videoUrl),
       required: false,
     },
     {

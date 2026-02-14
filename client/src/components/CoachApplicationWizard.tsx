@@ -1,4 +1,5 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import { BunnyVideoManager } from "@/components/BunnyVideoManager";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -119,7 +120,8 @@ interface MediaUploads {
   photoFile: File | null;
   videoUrl: string;
   videoFile: File | null;
-  videoType: "upload" | "youtube";
+  videoType: "upload" | "youtube" | "bunny";
+  bunnyVideoId: string;
 }
 
 interface LegalConsents {
@@ -302,7 +304,8 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
         photoFile: null,
         videoUrl: prev.introVideoUrl || "",
         videoFile: null,
-        videoType: "youtube",
+        videoType: "bunny",
+        bunnyVideoId: "",
       },
       legalConsents: {
         termsOfService: false, // Must re-accept
@@ -322,7 +325,6 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [draftRestored, setDraftRestored] = useState(!!draft || !!prefillData);
   const photoInputRef = useRef<HTMLInputElement>(null);
-  const videoInputRef = useRef<HTMLInputElement>(null);
   // Form data state
   const [data, setData] = useState<ApplicationData>(draft?.data || prefillData || {
     personalInfo: {
@@ -392,7 +394,8 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
       photoFile: null,
       videoUrl: "",
       videoFile: null,
-      videoType: "youtube",
+      videoType: "bunny",
+      bunnyVideoId: "",
     },
     legalConsents: {
       termsOfService: false,
@@ -411,6 +414,13 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
 
   const submitMutation = trpc.coach.submitApplication.useMutation();
   const uploadMediaMutation = trpc.coach.uploadApplicationMedia.useMutation();
+
+  // Bunny Stream config for embed URLs
+  const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
+  const bunnyEmbedUrl = useMemo(() => {
+    if (!data.mediaUploads.bunnyVideoId || !bunnyConfig?.libraryId) return "";
+    return `https://iframe.mediadelivery.net/embed/${bunnyConfig.libraryId}/${data.mediaUploads.bunnyVideoId}?autoplay=false&preload=true`;
+  }, [data.mediaUploads.bunnyVideoId, bunnyConfig?.libraryId]);
 
   const progress = (currentStep / STEPS.length) * 100;
 
@@ -525,17 +535,6 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
     }
   };
 
-  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 100 * 1024 * 1024) {
-        toast.error(isEn ? "Video must be less than 100MB" : "La vidéo doit faire moins de 100 Mo");
-        return;
-      }
-      updateMediaUploads("videoFile", file);
-      updateMediaUploads("videoType", "upload");
-    }
-  };
 
   const toggleDay = (day: string) => {
     const days = data.availabilityPricing.preferredDays;
@@ -643,6 +642,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
     try {
       let photoUrl = data.mediaUploads.photoUrl || undefined;
       let videoUrl = data.mediaUploads.videoUrl || undefined;
+      const bunnyVideoId = data.mediaUploads.bunnyVideoId || undefined;
 
       // Upload photo to S3 if a file was selected
       if (data.mediaUploads.photoFile) {
@@ -661,22 +661,9 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
         }
       }
 
-      // Upload video to S3 if a file was selected (not YouTube URL)
-      if (data.mediaUploads.videoFile && data.mediaUploads.videoType === "upload") {
-        try {
-          const base64 = await fileToBase64(data.mediaUploads.videoFile);
-          const result = await uploadMediaMutation.mutateAsync({
-            fileData: base64,
-            fileName: data.mediaUploads.videoFile.name,
-            mimeType: data.mediaUploads.videoFile.type,
-            mediaType: "video",
-          });
-          videoUrl = result.url;
-        } catch (uploadError: any) {
-          console.error("Video upload failed:", uploadError);
-          toast.error(isEn ? "Failed to upload video. Submitting without video." : "Échec du téléchargement de la vidéo. Soumission sans vidéo.");
-        }
-      }
+      // Video is uploaded directly to Bunny Stream via BunnyVideoManager (TUS upload)
+      // bunnyVideoId is already set from the BunnyVideoManager onSelect callback
+      // No base64 upload needed for video
 
       // Submit all application data to the backend
       await submitMutation.mutateAsync({
@@ -714,11 +701,12 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
         hourlyRate: data.availabilityPricing.hourlyRate * 100, // Convert to cents
         trialRate: data.availabilityPricing.trialRate * 100,
         weeklyHours: data.availabilityPricing.weeklyHours,
-        availableDays: data.availabilityPricing.availableDays,
-        availableTimeSlots: data.availabilityPricing.availableTimeSlots,
-        // Media (now with S3 URLs from upload)
+        availableDays: data.availabilityPricing.preferredDays,
+        availableTimeSlots: data.availabilityPricing.preferredTimes,
+        // Media
         photoUrl,
         videoUrl,
+        bunnyVideoId,
         // Legal Consents
         termsAccepted: data.legalConsents.termsOfService,
         privacyAccepted: data.legalConsents.privacyPolicy,
@@ -1571,7 +1559,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
 
       <Separator />
 
-      {/* Video Upload */}
+      {/* Video Upload — Bunny Stream */}
       <div className="space-y-4">
         <div>
           <Label className="text-base font-medium">
@@ -1579,66 +1567,48 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
           </Label>
           <p className="text-sm text-muted-foreground mt-1">
             {isEn 
-              ? "A short video (1-3 minutes) introducing yourself helps learners connect with you."
-              : "Une courte vidéo (1-3 minutes) vous présentant aide les apprenants à se connecter avec vous."}
+              ? "Upload a short video (1-3 minutes) introducing yourself. This helps learners connect with you before booking."
+              : "Téléchargez une courte vidéo (1-3 minutes) vous présentant. Cela aide les apprenants à se connecter avec vous avant de réserver."}
           </p>
         </div>
 
         <div className="space-y-4">
-          <RadioGroup
-            value={data.mediaUploads.videoType}
-            onValueChange={(value: "upload" | "youtube") => updateMediaUploads("videoType", value)}
-            className="flex gap-4"
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="youtube" id="youtube" />
-              <Label htmlFor="youtube">{isEn ? "YouTube Link" : "Lien YouTube"}</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="upload" id="upload" />
-              <Label htmlFor="upload">{isEn ? "Upload Video" : "Télécharger une vidéo"}</Label>
-            </div>
-          </RadioGroup>
-
-          {data.mediaUploads.videoType === "youtube" ? (
-            <div className="space-y-2">
-              <Input
-                value={data.mediaUploads.videoUrl}
-                onChange={(e) => updateMediaUploads("videoUrl", e.target.value)}
-                placeholder="https://youtube.com/watch?v=..."
-              />
-            </div>
+          {data.mediaUploads.bunnyVideoId ? (
+            <BunnyVideoManager
+              selectedVideoId={data.mediaUploads.bunnyVideoId}
+              onSelect={(video) => {
+                updateMediaUploads("bunnyVideoId", video.videoId);
+                updateMediaUploads("videoUrl", video.embedUrl);
+              }}
+              onClear={() => {
+                updateMediaUploads("bunnyVideoId", "");
+                updateMediaUploads("videoUrl", "");
+              }}
+              compact
+            />
           ) : (
-            <div
-              className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer hover:border-gray-400 transition-colors"
-              onClick={() => videoInputRef.current?.click()}
-            >
-              {data.mediaUploads.videoFile ? (
-                <div className="space-y-2">
-                  <Play className="h-12 w-12 text-teal-500 mx-auto" />
-                  <p className="text-sm text-teal-600">{data.mediaUploads.videoFile.name}</p>
-                  <p className="text-xs text-[#67E8F9]">
-                    {(data.mediaUploads.videoFile.size / (1024 * 1024)).toFixed(1)} MB
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
-                  <p className="text-sm text-black">
-                    {isEn ? "Click to upload video" : "Cliquez pour télécharger une vidéo"}
-                  </p>
-                  <p className="text-xs text-[#67E8F9]">
-                    MP4, MOV (max 100MB)
-                  </p>
-                </div>
-              )}
-              <input
-                ref={videoInputRef}
-                type="file"
-                accept="video/mp4,video/quicktime"
-                onChange={handleVideoUpload}
-                className="hidden"
-              />
+            <BunnyVideoManager
+              selectedVideoId={null}
+              onSelect={(video) => {
+                updateMediaUploads("bunnyVideoId", video.videoId);
+                updateMediaUploads("videoUrl", video.embedUrl);
+                updateMediaUploads("videoType", "bunny");
+              }}
+            />
+          )}
+
+          {data.mediaUploads.bunnyVideoId && bunnyEmbedUrl && (
+            <div className="rounded-lg overflow-hidden border">
+              <div className="aspect-video">
+                <iframe
+                  src={bunnyEmbedUrl}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  title={isEn ? "Video Preview" : "Aperçu de la vidéo"}
+                />
+              </div>
             </div>
           )}
         </div>

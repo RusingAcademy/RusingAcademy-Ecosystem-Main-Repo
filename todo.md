@@ -6025,11 +6025,95 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Write vitest tests for push subscription, notification endpoints, and enrollment triggers
 
 ### C) GitHub Export & Deployment Guide
-- [x] Guide user to export code to GitHub via Management UI Settings → GitHub
-- [ ] Provide Railway staging deployment instructions (user action)
-- [ ] Document environment variables needed for Railway deployment (user action)
+- [x] Exported to GitHub: feature/ecosystemhub-preview branch on RusingAcademy/rusingacademy-ecosystem (505e6bab)
+- [x] Railway migration guide created (docs/railway-migration-guide.md)
+- [x] 54 environment variables documented with categories and values
 
 ### D) Tests & Quality Gate
 - [x] Write vitest tests for GSC, VAPID, push hook, enrollment triggers, SW (sprint14.test.ts)
 - [x] Verify all existing tests pass (zero regressions) — 118 files, 2976 tests passed
 - [x] Save checkpoint with Sprint 14 completion report
+
+## Sprint 15: PR Review, Manus Publish & Railway Migration Plan
+
+### A) PR #100 Review
+- [x] Audit PR diff integrity — 883 changed files, 438 commits, 47 test files, 57 routers
+- [x] Verify no sensitive data — zero .env/.pem/.key files, zero hardcoded API keys
+- [x] Confirm all Sprint 1-14 features present (sitemap, push, email, reviews, dashboard, SEO)
+- [x] PR review summary: clean, ready for merge after staging validation
+
+### B) Manus Publish
+- [x] Checkpoint saved (fdf8548c) — ready for publish
+- [x] Guide user to click Publish button in Management UI
+- [ ] Verify published site is accessible (user action: click Publish)
+
+### C) Railway Migration Plan
+- [x] Audit complete: 85% portable, 3 auto-switching services, 5 Manus-only (3 unused)
+- [x] Architecture documented: dual-mode auth, Bunny storage, OpenAI direct, email notifications
+- [x] Complete env var mapping: 54 variables categorized (core, auth, storage, payments, etc.)
+- [x] Abstraction layers already exist: storage.ts auto-switches, llm.ts auto-switches, const.ts auth toggle
+- [x] Migration guide: 10 sections, risk assessment, rollback plan, 2-hour execution timeline
+
+
+## Sprint 16: Bunny Stream Video Pipeline for Coaches (Critical)
+
+- [x] Add `bunnyVideoId` field to `coachProfiles` schema + migration
+- [x] Add `bunnyVideoId` to `coachApplications` schema + migration
+- [x] Replace CoachProfileEditor video URL input with BunnyVideoManager (TUS upload + library browse)
+- [x] Wire CoachApplicationWizard video step to Bunny Stream TUS upload
+- [x] Update `coach.updateProfile` to accept and store `bunnyVideoId`
+- [x] Update `coach.submitApplication` to store `bunnyVideoId`
+- [x] Update `approveCoachApplication` to copy `bunnyVideoId` from application to profile
+- [x] Update CoachProfile public page to render Bunny Stream iframe embed
+- [x] Add `videoUrl` and `bunnyVideoId` to `coach.list` response
+- [x] Add video thumbnail from Bunny Stream to coach cards on /coaches page
+- [x] Write vitest tests for Bunny Stream coach integration
+- [x] Verify all existing tests pass + save checkpoint
+
+## Sprint 17: Coach Onboarding & Dashboard Polish
+
+- [x] Link onboarding checklist "Upload Video" action to BunnyVideoManager dialog
+- [x] Add video preview in CoachDashboard overview tab (Bunny Stream embed)
+- [x] Add "Profile Preview" button in CoachDashboard
+- [x] Enhance admin CoachesManagement with video preview in application review
+- [x] Add coach profile completeness percentage to admin coaches list
+- [x] Wire "Profile Hidden" warning to actual onboarding completion check
+- [ ] Add coach availability editor in CoachProfileEditor (day/time slot picker) — deferred
+- [ ] Add Calendly URL field with validation in CoachProfileEditor — deferred
+- [x] Make FeaturedCoaches pull from DB instead of hardcoded data (already has bunnyVideoId)
+- [x] Write vitest tests + save checkpoint
+
+## Sprint 18: Lingueefy Marketplace & Booking Polish
+
+- [x] Wire LingueefyLanding "Find a Coach" CTA to /coaches with filter params
+- [x] Add coach search/filter on Coaches page (language, specialization, price, availability) — already implemented
+- [x] Add "Book Trial Session" button on coach cards and CoachProfile page
+- [x] Enhance BookSession page with coach availability calendar — already implemented
+- [ ] Add session reminder emails (24h and 1h before) via cron — deferred (email-reminders.ts exists)
+- [ ] Add post-session review prompt (email + in-app notification) — deferred
+- [x] Verify coaching plan purchase flow end-to-end (fixed mutation path)
+- [x] Add "My Coaching Plan" section in learner dashboard
+- [x] Ensure /lingueefy route renders LingueefyLanding (fixed route)
+- [x] Add SEO to Coaches and CoachProfile pages (dynamic meta, JSON-LD Person)
+- [x] Write vitest tests + save checkpoint
+
+## Sprint 19-30: SLE Practice Polish, Dashboard Integration & Admin Trends
+
+- [x] Wire SessionSummaryCard into SLE AI Companion widget at end of session
+- [x] Add session summary screen with score breakdown, strengths, areas to improve
+- [x] Add "View Full Summary" button linking to PracticeSessionDetail page
+- [x] Create PracticeSessionDetail page with full conversation history
+- [x] Add message-by-message replay with coach avatar, timestamps, and role badges
+- [x] Add session metadata header (coach, level, skill, score, duration)
+- [x] Add back navigation to practice history
+- [x] Register /practice-history/:sessionId route in App.tsx
+- [x] Add recent practice sessions preview widget to LearnerDashboard
+- [x] Show last 3 sessions with coach, level, score, and date
+- [x] Add "View All Sessions" link to PracticeHistory page
+- [x] Add date range filtering to PracticeHistory (7d, 30d, 90d, 6m)
+- [x] Add skill filter (oral expression, written expression, oral comprehension, written comprehension)
+- [x] Add "Reset Filters" button when active filters are applied
+- [x] Add performance trends SVG line chart to admin AICompanionPanel (sessions + avg score)
+- [x] Keep daily usage bar breakdown table below the chart
+- [x] All 3,002 tests pass — zero regressions
+- [x] Save checkpoint

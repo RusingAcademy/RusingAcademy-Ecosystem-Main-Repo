@@ -228,6 +228,7 @@ export const coachRouter = router({
         // Media
         photoUrl: z.string().optional(),
         videoUrl: z.string().url().optional(),
+        bunnyVideoId: z.string().max(100).optional(),
         calendlyUrl: z.string().url().optional(),
         // Legal
         termsAccepted: z.boolean().optional(),
@@ -312,6 +313,7 @@ export const coachRouter = router({
         sleReadingLevel: input.sleReadingLevel || null,
         photoUrl: input.photoUrl || null,
         introVideoUrl: input.videoUrl || null,
+        bunnyVideoId: input.bunnyVideoId || null,
         termsAccepted: input.termsAccepted || false,
         privacyAccepted: input.privacyAccepted || false,
         backgroundCheckConsent: input.backgroundCheckConsent || false,
@@ -382,6 +384,7 @@ export const coachRouter = router({
         hourlyRate: z.number().min(0).max(20000).optional(),
         trialRate: z.number().min(0).max(10000).optional(),
         videoUrl: z.string().url().nullable().optional(),
+        bunnyVideoId: z.string().max(100).nullable().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {

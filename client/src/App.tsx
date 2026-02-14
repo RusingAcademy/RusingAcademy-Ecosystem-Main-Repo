@@ -93,6 +93,7 @@ const SLEExamSimulation = lazy(() => import("./pages/SLEExamSimulation"));
 const SLEProgressDashboard = lazy(() => import("./pages/SLEProgressDashboard"));
 const DictationPractice = lazy(() => import("./pages/DictationPractice"));
 const PracticeHistory = lazy(() => import("./pages/PracticeHistory"));
+const PracticeSessionDetail = lazy(() => import("./pages/PracticeSessionDetail"));
 
 // Booking
 const BookingForm = lazy(() => import("./pages/BookingForm"));
@@ -197,7 +198,7 @@ function Router() {
         <Route path="/" component={Hub} />
         <Route path="/ecosystem" component={Hub} />
         <Route path="/ecosystem-old" component={EcosystemLanding} />
-        <Route path="/lingueefy" component={Home} />
+        <Route path="/lingueefy" component={LingueefyLanding} />
         <Route path="/lingueefy/success" component={CoachingPlanSuccess} />
         <Route path="/home" component={HomeRedirect} />
         <Route path="/coaches" component={Coaches} />
@@ -325,7 +326,7 @@ function Router() {
         <Route path="/sle-progress" component={SLEProgressDashboard} />
         <Route path="/dictation-practice" component={DictationPractice} />
         <Route path="/practice-history" component={PracticeHistory} />
-        <Route path="/practice-history/:sessionId" component={PracticeHistory} />
+        <Route path="/practice-history/:sessionId" component={PracticeSessionDetail} />
         <Route path="/downloads" component={MyDownloads} />
         
         {/* Coach Dashboard */}

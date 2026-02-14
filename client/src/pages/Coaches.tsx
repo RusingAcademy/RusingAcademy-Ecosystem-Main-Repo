@@ -569,10 +569,16 @@ export default function Coaches() {
 
                             {/* Action Buttons */}
                             <div className="space-y-3">
-                              <Link href={`/coach/${coach.slug}`}>
+                              <Link href={`/coaches/${coach.slug}`}>
                                 <Button className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 transition-all duration-300">
                                   {language === 'fr' ? 'Voir le profil' : 'View Profile'}
                                   <ChevronRight className="w-4 h-4 ml-1" />
+                                </Button>
+                              </Link>
+                              <Link href={`/coaches/${coach.slug}?book=trial`}>
+                                <Button variant="outline" className="w-full border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20">
+                                  <Calendar className="w-4 h-4 mr-2" />
+                                  {language === 'fr' ? 'Réserver un essai' : 'Book Trial Session'}
                                 </Button>
                               </Link>
                               {(coach as any)?.linkedinUrl && (

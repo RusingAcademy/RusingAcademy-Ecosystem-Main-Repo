@@ -294,7 +294,7 @@ export async function recalculateProfileComplete(coachId: number): Promise<boole
   const hasBio = !!coach.bio && coach.bio.length >= 50;
   const hasHeadline = !!coach.headline && coach.headline.length >= 10;
   const hasPhoto = !!coach.photoUrl;
-  const hasVideo = !!coach.videoUrl;
+  const hasVideo = !!coach.videoUrl || !!coach.bunnyVideoId;
   const hasPricing = (coach.hourlyRate ?? 0) > 0;
   const hasSpecializations = !!coach.specializations && Object.keys(coach.specializations as object).length > 0;
   const hasStripe = coach.stripeOnboarded === true;
@@ -345,7 +345,7 @@ export async function getProfileCompletionStatus(coachId: number) {
     hasBio: !!coach.bio && coach.bio.length >= 50,
     hasHeadline: !!coach.headline && coach.headline.length >= 10,
     hasPhoto: !!coach.photoUrl,
-    hasVideo: !!coach.videoUrl,
+    hasVideo: !!(coach.videoUrl || coach.bunnyVideoId),
     hasPricing: (coach.hourlyRate ?? 0) > 0,
     hasSpecializations: !!coach.specializations && Object.keys(coach.specializations as object).length > 0,
     hasAvailability: availability.length > 0,
