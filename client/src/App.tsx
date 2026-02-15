@@ -240,6 +240,8 @@ const AcctSettings = lazy(() => import("./pages/accounting/Settings"));
 const AcctSupplierDetail = lazy(() => import("./pages/accounting/SupplierDetail"));
 const AcctSuppliers = lazy(() => import("./pages/accounting/Suppliers"));
 const AcctTrialBalanceReport = lazy(() => import("./pages/accounting/TrialBalanceReport"));
+const LibraryPage = lazy(() => import("./pages/Library"));
+const BookLandingPage = lazy(() => import("./pages/BookLandingPage"));
 
 function Router() {
   // Track page views on route changes
@@ -611,6 +613,8 @@ function Router() {
           <Route path="/accounting/suppliers/:id" component={AcctSupplierDetail} />
           <Route path="/accounting/suppliers" component={AcctSuppliers} />
           <Route path="/accounting/reports/trial-balance" component={AcctTrialBalanceReport} />
+          <Route path="/library" component={LibraryPage} />
+          <Route path="/library/books/:slug" component={BookLandingPage} />
 <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

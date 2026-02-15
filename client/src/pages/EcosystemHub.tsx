@@ -1533,7 +1533,7 @@ function FinalCTASection({ language }: { language: string }) {
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
               </Button>
             </Link>
-            <Link href="/courses">
+            <Link href="/library">
               <Button
                 size="lg"
                 variant="outline"

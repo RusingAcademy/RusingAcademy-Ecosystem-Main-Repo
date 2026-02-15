@@ -14,6 +14,7 @@ import {
   Cpu,
   Mic,
   Mail,
+  Library,
 } from "lucide-react";
 import React from "react";
 
@@ -57,6 +58,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Cpu,
   Mic,
   Mail,
+  Library,
 };
 
 export function getIconComponent(iconName: string | null | undefined): React.ComponentType<{ className?: string }> | null {
@@ -71,6 +73,7 @@ export function getIconComponent(iconName: string | null | undefined): React.Com
 const FALLBACK_RUSINGACADEMY: NavItem[] = [
   { id: "ra-1", href: "/courses", labelEn: "Courses", labelFr: "Formations", icon: "BookOpen", target: "_self" },
   { id: "ra-2", href: "/curriculum", labelEn: "Our Curriculum", labelFr: "Notre programme", icon: "GraduationCap", target: "_self" },
+  { id: "ra-6", href: "/library", labelEn: "Library", labelFr: "Bibliothèque", icon: "Library", target: "_self" },
   { id: "ra-3", href: "/rusingacademy/for-business", labelEn: "For Business", labelFr: "Entreprises", icon: "Building2", target: "_self" },
   { id: "ra-4", href: "/rusingacademy/for-government", labelEn: "For Government", labelFr: "Gouvernement", icon: "Landmark", target: "_self" },
   { id: "ra-5", href: "/coaches", labelEn: "Our Team", labelFr: "Notre équipe", icon: "Users", target: "_self" },
