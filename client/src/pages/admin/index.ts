@@ -65,3 +65,4 @@ export { default as QuizManagement } from "./QuizManagement";
 export { default as GovernmentReporting } from "./GovernmentReporting";
 export { default as WebhookHealthDashboard } from "./WebhookHealthDashboard";
 export { default as LearningPathBuilder } from "./LearningPathBuilder";
+export { default as ContentWorkflowBoard } from "./ContentWorkflowBoard";

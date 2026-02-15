@@ -65,6 +65,7 @@ import {
   GovernmentReporting,
   WebhookHealthDashboard,
   LearningPathBuilder,
+  ContentWorkflowBoard,
 } from "./admin";
 
 interface Props {
@@ -151,6 +152,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   "content-pipeline": ContentPipelineDashboard,
   "quiz-management": QuizManagement,
   "learning-paths": LearningPathBuilder,
+  "content-workflow": ContentWorkflowBoard,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {
