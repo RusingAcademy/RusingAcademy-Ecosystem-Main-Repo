@@ -206,6 +206,40 @@ const Membership = lazy(() => import("./pages/Membership"));
 const Moderation = lazy(() => import("./pages/Moderation"));
 const RevenueDashboard = lazy(() => import("./pages/RevenueDashboard"));
 const SearchResults = lazy(() => import("./pages/SearchResults"));
+const AcctAccountRegister = lazy(() => import("./pages/accounting/AccountRegister"));
+const AcctAgingReport = lazy(() => import("./pages/accounting/AgingReport"));
+const AcctAuditLog = lazy(() => import("./pages/accounting/AuditLog"));
+const AcctAuditTrail = lazy(() => import("./pages/accounting/AuditTrail"));
+const AcctBalanceSheetReport = lazy(() => import("./pages/accounting/BalanceSheetReport"));
+const AcctBankRules = lazy(() => import("./pages/accounting/BankRules"));
+const AcctBankTransactions = lazy(() => import("./pages/accounting/BankTransactions"));
+const AcctBills = lazy(() => import("./pages/accounting/Bills"));
+const AcctChartOfAccounts = lazy(() => import("./pages/accounting/ChartOfAccounts"));
+const AcctCustomerDetail = lazy(() => import("./pages/accounting/CustomerDetail"));
+const AcctCustomers = lazy(() => import("./pages/accounting/Customers"));
+const AcctDeposits = lazy(() => import("./pages/accounting/Deposits"));
+const AcctEmailTemplates = lazy(() => import("./pages/accounting/EmailTemplates"));
+const AcctEstimates = lazy(() => import("./pages/accounting/Estimates"));
+const AcctExchangeRates = lazy(() => import("./pages/accounting/ExchangeRates"));
+const AcctExpenseDetail = lazy(() => import("./pages/accounting/ExpenseDetail"));
+const AcctExpenses = lazy(() => import("./pages/accounting/Expenses"));
+const AcctGeneralLedgerReport = lazy(() => import("./pages/accounting/GeneralLedgerReport"));
+const AcctInvoiceDetail = lazy(() => import("./pages/accounting/InvoiceDetail"));
+const AcctInvoicePdf = lazy(() => import("./pages/accounting/InvoicePdf"));
+const AcctInvoices = lazy(() => import("./pages/accounting/Invoices"));
+const AcctJournalEntries = lazy(() => import("./pages/accounting/JournalEntries"));
+const AcctProductDetail = lazy(() => import("./pages/accounting/ProductDetail"));
+const AcctProductsServices = lazy(() => import("./pages/accounting/ProductsServices"));
+const AcctProfitLossReport = lazy(() => import("./pages/accounting/ProfitLossReport"));
+const AcctReconciliation = lazy(() => import("./pages/accounting/Reconciliation"));
+const AcctReconciliationWorkspace = lazy(() => import("./pages/accounting/ReconciliationWorkspace"));
+const AcctRecurringTransactions = lazy(() => import("./pages/accounting/RecurringTransactions"));
+const AcctReports = lazy(() => import("./pages/accounting/Reports"));
+const AcctSalesTax = lazy(() => import("./pages/accounting/SalesTax"));
+const AcctSettings = lazy(() => import("./pages/accounting/Settings"));
+const AcctSupplierDetail = lazy(() => import("./pages/accounting/SupplierDetail"));
+const AcctSuppliers = lazy(() => import("./pages/accounting/Suppliers"));
+const AcctTrialBalanceReport = lazy(() => import("./pages/accounting/TrialBalanceReport"));
 
 function Router() {
   // Track page views on route changes
@@ -542,7 +576,42 @@ function Router() {
           <Route path="/programs/:programId/:pathId">{() => <Suspense fallback={<div>Loading...</div>}><PathDetail /></Suspense>}</Route>
           <Route path="/programs/:programId/:pathId/quiz/:quizId">{() => <Suspense fallback={<div>Loading...</div>}><QuizPage /></Suspense>}</Route>
           <Route path="/programs/:programId/:pathId/:lessonId">{() => <Suspense fallback={<div>Loading...</div>}><LessonViewer /></Suspense>}</Route>
-      <Route path="/404" component={NotFound} />
+                <Route path="/accounting" component={AcctInvoices} />
+          <Route path="/accounting/accounts/:id/register" component={AcctAccountRegister} />
+          <Route path="/accounting/reports/aging" component={AcctAgingReport} />
+          <Route path="/accounting/audit-log" component={AcctAuditLog} />
+          <Route path="/accounting/audit-trail" component={AcctAuditTrail} />
+          <Route path="/accounting/reports/balance-sheet" component={AcctBalanceSheetReport} />
+          <Route path="/accounting/bank-rules" component={AcctBankRules} />
+          <Route path="/accounting/bank-transactions" component={AcctBankTransactions} />
+          <Route path="/accounting/bills" component={AcctBills} />
+          <Route path="/accounting/chart-of-accounts" component={AcctChartOfAccounts} />
+          <Route path="/accounting/customers/:id" component={AcctCustomerDetail} />
+          <Route path="/accounting/customers" component={AcctCustomers} />
+          <Route path="/accounting/deposits" component={AcctDeposits} />
+          <Route path="/accounting/email-templates" component={AcctEmailTemplates} />
+          <Route path="/accounting/estimates" component={AcctEstimates} />
+          <Route path="/accounting/exchange-rates" component={AcctExchangeRates} />
+          <Route path="/accounting/expenses/:id" component={AcctExpenseDetail} />
+          <Route path="/accounting/expenses" component={AcctExpenses} />
+          <Route path="/accounting/reports/general-ledger" component={AcctGeneralLedgerReport} />
+          <Route path="/accounting/invoices/:id" component={AcctInvoiceDetail} />
+          <Route path="/accounting/invoices/:id/pdf" component={AcctInvoicePdf} />
+          <Route path="/accounting/invoices" component={AcctInvoices} />
+          <Route path="/accounting/journal-entries" component={AcctJournalEntries} />
+          <Route path="/accounting/products/:id" component={AcctProductDetail} />
+          <Route path="/accounting/products-services" component={AcctProductsServices} />
+          <Route path="/accounting/reports/profit-and-loss" component={AcctProfitLossReport} />
+          <Route path="/accounting/reconciliation" component={AcctReconciliation} />
+          <Route path="/accounting/reconciliation/workspace" component={AcctReconciliationWorkspace} />
+          <Route path="/accounting/recurring" component={AcctRecurringTransactions} />
+          <Route path="/accounting/reports" component={AcctReports} />
+          <Route path="/accounting/sales-tax" component={AcctSalesTax} />
+          <Route path="/accounting/settings" component={AcctSettings} />
+          <Route path="/accounting/suppliers/:id" component={AcctSupplierDetail} />
+          <Route path="/accounting/suppliers" component={AcctSuppliers} />
+          <Route path="/accounting/reports/trial-balance" component={AcctTrialBalanceReport} />
+<Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
