@@ -1,15 +1,15 @@
 /**
- * CoachDashboardHome — Coach Portal main dashboard
- * KPIs: Active students, sessions this month, revenue, rating
- * Sections: Upcoming sessions, recent student activity, quick actions
+ * CoachDashboardHome — Coach Portal main dashboard (Sprint H2)
+ * Wired to real backend: coach.getMyProfile, coach.getTodaysSessions, coach.getEarningsSummaryV2, coach.getMyLearners
  */
 import CoachLayout from "@/components/CoachLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { trpc } from "@/lib/trpc";
+import { Link } from "wouter";
 
 const ACCENT = "#7c3aed";
 
-function KPICard({ icon, value, label, trend, trendUp }: { icon: string; value: string; label: string; trend?: string; trendUp?: boolean }) {
+function KPICard({ icon, value, label, trend, trendUp, loading }: { icon: string; value: string; label: string; trend?: string; trendUp?: boolean; loading?: boolean }) {
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
@@ -22,80 +22,76 @@ function KPICard({ icon, value, label, trend, trendUp }: { icon: string; value: 
           </span>
         )}
       </div>
-      <p className="text-2xl font-bold text-gray-900 mt-3">{value}</p>
+      {loading ? (
+        <div className="h-8 w-16 bg-gray-100 rounded animate-pulse mt-3" />
+      ) : (
+        <p className="text-2xl font-bold text-gray-900 mt-3">{value}</p>
+      )}
       <p className="text-xs text-gray-500 mt-1">{label}</p>
-    </div>
-  );
-}
-
-function UpcomingSessionCard({ student, time, type, level }: { student: string; time: string; type: string; level: string }) {
-  return (
-    <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
-        {student.charAt(0)}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-gray-900 truncate">{student}</p>
-        <p className="text-xs text-gray-500">{type} · {level}</p>
-      </div>
-      <div className="text-right">
-        <p className="text-xs font-semibold text-[#7c3aed]">{time}</p>
-        <button className="text-[10px] text-gray-400 hover:text-[#7c3aed] mt-0.5 transition-colors">
-          <span className="material-icons text-[14px]">videocam</span>
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function StudentActivityRow({ name, action, time, score }: { name: string; action: string; time: string; score?: number }) {
-  return (
-    <div className="flex items-center gap-3 py-3 border-b border-gray-50 last:border-0">
-      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 font-semibold text-xs">
-        {name.charAt(0)}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm text-gray-800 truncate">{name}</p>
-        <p className="text-[11px] text-gray-400">{action}</p>
-      </div>
-      <div className="text-right">
-        {score !== undefined && (
-          <span className={`text-xs font-bold ${score >= 80 ? "text-green-600" : score >= 60 ? "text-amber-600" : "text-red-500"}`}>
-            {score}%
-          </span>
-        )}
-        <p className="text-[10px] text-gray-400">{time}</p>
-      </div>
     </div>
   );
 }
 
 export default function CoachDashboardHome() {
   const { lang } = useLanguage();
-  const [period] = useState<"week" | "month">("month");
+
+  const profileQuery = trpc.coach.getMyProfile.useQuery();
+  const todayQuery = trpc.coach.getTodaysSessions.useQuery();
+  const upcomingQuery = trpc.coach.getUpcomingSessions.useQuery({ limit: 5 });
+  const earningsQuery = trpc.coach.getEarningsSummaryV2.useQuery();
+  const learnersQuery = trpc.coach.getMyLearners.useQuery();
+
+  const profile = profileQuery.data;
+  const todaySessions = todayQuery.data || [];
+  const upcomingSessions = upcomingQuery.data || [];
+  const earnings = earningsQuery.data;
+  const learners = learnersQuery.data || [];
 
   const now = new Date();
   const dateStr = now.toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", {
     weekday: "long", year: "numeric", month: "long", day: "numeric"
   });
 
+  const isLoading = profileQuery.isLoading || earningsQuery.isLoading;
+
   return (
     <CoachLayout>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto" role="main" aria-label={lang === "fr" ? "Tableau de bord du coach" : "Coach Dashboard"}>
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
             {lang === "fr" ? "Tableau de bord" : "Dashboard"}
+            {profile?.firstName && <span className="text-[#7c3aed]"> — {profile.firstName}</span>}
           </h1>
           <p className="text-sm text-gray-500 capitalize">{dateStr}</p>
         </div>
 
         {/* KPI Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <KPICard icon="people" value="24" label={lang === "fr" ? "Étudiants actifs" : "Active Students"} trend="12%" trendUp={true} />
-          <KPICard icon="event" value="18" label={lang === "fr" ? "Sessions ce mois" : "Sessions This Month"} trend="8%" trendUp={true} />
-          <KPICard icon="attach_money" value="$2,340" label={lang === "fr" ? "Revenus ce mois" : "Revenue This Month"} trend="15%" trendUp={true} />
-          <KPICard icon="star" value="4.8" label={lang === "fr" ? "Note moyenne" : "Average Rating"} trend="0.2" trendUp={true} />
+          <KPICard
+            icon="people"
+            value={String(learners.length || 0)}
+            label={lang === "fr" ? "Étudiants actifs" : "Active Students"}
+            loading={learnersQuery.isLoading}
+          />
+          <KPICard
+            icon="event"
+            value={String(todaySessions.length || 0)}
+            label={lang === "fr" ? "Sessions aujourd'hui" : "Sessions Today"}
+            loading={todayQuery.isLoading}
+          />
+          <KPICard
+            icon="attach_money"
+            value={earnings ? `$${(earnings.thisMonthEarnings || 0).toLocaleString()}` : "$0"}
+            label={lang === "fr" ? "Revenus ce mois" : "Revenue This Month"}
+            loading={earningsQuery.isLoading}
+          />
+          <KPICard
+            icon="star"
+            value={profile?.avgRating ? Number(profile.avgRating).toFixed(1) : "—"}
+            label={lang === "fr" ? "Note moyenne" : "Average Rating"}
+            loading={profileQuery.isLoading}
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -106,75 +102,142 @@ export default function CoachDashboardHome() {
                 <h2 className="text-base font-semibold text-gray-900">
                   {lang === "fr" ? "Sessions à venir" : "Upcoming Sessions"}
                 </h2>
-                <button className="text-xs text-[#7c3aed] font-medium hover:underline">
+                <Link href="/coach/sessions" className="text-xs text-[#7c3aed] font-medium hover:underline">
                   {lang === "fr" ? "Voir tout" : "View All"} →
-                </button>
+                </Link>
               </div>
-              <div className="space-y-3">
-                <UpcomingSessionCard student="Marie Dupont" time="10:00 AM" type="FSL Conversation" level="B1" />
-                <UpcomingSessionCard student="James Wilson" time="11:30 AM" type="SLE Prep" level="B2" />
-                <UpcomingSessionCard student="Sophie Tremblay" time="2:00 PM" type="Grammar Review" level="A2" />
-                <UpcomingSessionCard student="David Chen" time="3:30 PM" type="Writing Workshop" level="B1" />
-              </div>
+              {upcomingQuery.isLoading ? (
+                <div className="space-y-3">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="h-16 bg-gray-50 rounded-xl animate-pulse" />
+                  ))}
+                </div>
+              ) : upcomingSessions.length === 0 ? (
+                <div className="text-center py-8">
+                  <span className="material-icons text-gray-300 text-4xl">event_available</span>
+                  <p className="text-sm text-gray-500 mt-2">
+                    {lang === "fr" ? "Aucune session à venir" : "No upcoming sessions"}
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {upcomingSessions.map((session: any) => (
+                    <div key={session.id} className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
+                        {(session.learnerName || "?").charAt(0)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate">{session.learnerName || "—"}</p>
+                        <p className="text-xs text-gray-500">{session.sessionType || "Session"} · {session.level || ""}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs font-semibold text-[#7c3aed]">
+                          {session.scheduledAt ? new Date(session.scheduledAt).toLocaleTimeString(lang === "fr" ? "fr-CA" : "en-CA", { hour: "2-digit", minute: "2-digit" }) : "—"}
+                        </p>
+                        {session.meetingUrl && (
+                          <a href={session.meetingUrl} target="_blank" rel="noopener noreferrer" className="text-[10px] text-gray-400 hover:text-[#7c3aed] mt-0.5 transition-colors">
+                            <span className="material-icons text-[14px]">videocam</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Quick Actions */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { icon: "add_circle", label: lang === "fr" ? "Nouvelle session" : "New Session", color: "#7c3aed" },
-                { icon: "assignment", label: lang === "fr" ? "Donner un devoir" : "Assign Homework", color: "#2563eb" },
-                { icon: "rate_review", label: lang === "fr" ? "Écrire un feedback" : "Write Feedback", color: "#059669" },
-                { icon: "description", label: lang === "fr" ? "Créer un rapport" : "Create Report", color: "#d97706" },
+                { icon: "people", label: lang === "fr" ? "Mes étudiants" : "My Students", href: "/coach/students", color: "#7c3aed" },
+                { icon: "event_note", label: lang === "fr" ? "Mes sessions" : "My Sessions", href: "/coach/sessions", color: "#2563eb" },
+                { icon: "bar_chart", label: lang === "fr" ? "Performance" : "Performance", href: "/coach/performance", color: "#059669" },
+                { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "#d97706" },
               ].map((action) => (
-                <button key={action.label} className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-all group">
-                  <span className="material-icons text-2xl transition-transform group-hover:scale-110" style={{ color: action.color }}>
-                    {action.icon}
-                  </span>
-                  <span className="text-xs font-medium text-gray-700 text-center">{action.label}</span>
-                </button>
+                <Link key={action.label} href={action.href}>
+                  <button className="w-full flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-all group">
+                    <span className="material-icons text-2xl transition-transform group-hover:scale-110" style={{ color: action.color }}>
+                      {action.icon}
+                    </span>
+                    <span className="text-xs font-medium text-gray-700 text-center">{action.label}</span>
+                  </button>
+                </Link>
               ))}
             </div>
           </div>
 
           {/* Right Column */}
           <div className="space-y-6">
-            {/* Student Activity */}
+            {/* Active Learners */}
             <div className="bg-white rounded-xl border border-gray-100 p-5">
               <h2 className="text-base font-semibold text-gray-900 mb-4">
-                {lang === "fr" ? "Activité récente" : "Recent Activity"}
+                {lang === "fr" ? "Étudiants actifs" : "Active Students"}
               </h2>
-              <div>
-                <StudentActivityRow name="Marie D." action={lang === "fr" ? "Quiz terminé — Path II" : "Completed quiz — Path II"} time="2h" score={88} />
-                <StudentActivityRow name="James W." action={lang === "fr" ? "Soumission d'écriture" : "Writing submission"} time="3h" />
-                <StudentActivityRow name="Sophie T." action={lang === "fr" ? "Leçon terminée — Module 5" : "Completed lesson — Module 5"} time="5h" score={72} />
-                <StudentActivityRow name="David C." action={lang === "fr" ? "Exercice de prononciation" : "Pronunciation exercise"} time="6h" score={95} />
-                <StudentActivityRow name="Luc B." action={lang === "fr" ? "Examen SLE simulé" : "Mock SLE exam"} time="1d" score={67} />
-              </div>
+              {learnersQuery.isLoading ? (
+                <div className="space-y-3">
+                  {[1, 2, 3].map((i) => <div key={i} className="h-10 bg-gray-50 rounded animate-pulse" />)}
+                </div>
+              ) : learners.length === 0 ? (
+                <div className="text-center py-6">
+                  <span className="material-icons text-gray-300 text-3xl">school</span>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {lang === "fr" ? "Aucun étudiant pour le moment" : "No students yet"}
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  {learners.slice(0, 5).map((learner: any) => (
+                    <div key={learner.id || learner.learnerId} className="flex items-center gap-3 py-3 border-b border-gray-50 last:border-0">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 font-semibold text-xs">
+                        {(learner.name || learner.learnerName || "?").charAt(0)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-gray-800 truncate">{learner.name || learner.learnerName || "—"}</p>
+                        <p className="text-[11px] text-gray-400">{learner.level || learner.currentLevel || ""}</p>
+                      </div>
+                      {learner.sessionsCompleted !== undefined && (
+                        <span className="text-xs text-gray-500">{learner.sessionsCompleted} {lang === "fr" ? "sessions" : "sessions"}</span>
+                      )}
+                    </div>
+                  ))}
+                  {learners.length > 5 && (
+                    <Link href="/coach/students" className="block text-center text-xs text-[#7c3aed] font-medium mt-3 hover:underline">
+                      {lang === "fr" ? `Voir les ${learners.length} étudiants` : `View all ${learners.length} students`}
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
 
-            {/* Monthly Summary */}
+            {/* Earnings Summary */}
             <div className="bg-gradient-to-br from-[#7c3aed] to-[#6d28d9] rounded-xl p-5 text-white">
               <h3 className="text-sm font-semibold mb-3 opacity-90">
-                {lang === "fr" ? "Résumé mensuel" : "Monthly Summary"}
+                {lang === "fr" ? "Résumé des revenus" : "Earnings Summary"}
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="opacity-80">{lang === "fr" ? "Heures enseignées" : "Hours Taught"}</span>
-                  <span className="font-bold">36h</span>
+              {earningsQuery.isLoading ? (
+                <div className="space-y-2">
+                  {[1, 2, 3].map((i) => <div key={i} className="h-5 bg-white/10 rounded animate-pulse" />)}
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="opacity-80">{lang === "fr" ? "Taux de complétion" : "Completion Rate"}</span>
-                  <span className="font-bold">94%</span>
+              ) : (
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="opacity-80">{lang === "fr" ? "Ce mois" : "This Month"}</span>
+                    <span className="font-bold">${(earnings?.thisMonthEarnings || 0).toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="opacity-80">{lang === "fr" ? "Total gagné" : "Total Earned"}</span>
+                    <span className="font-bold">${(earnings?.totalEarnings || 0).toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="opacity-80">{lang === "fr" ? "En attente" : "Pending"}</span>
+                    <span className="font-bold">${(earnings?.pendingPayout || 0).toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="opacity-80">{lang === "fr" ? "Sessions totales" : "Total Sessions"}</span>
+                    <span className="font-bold">{earnings?.totalSessions || 0}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="opacity-80">{lang === "fr" ? "Étudiants satisfaits" : "Satisfied Students"}</span>
-                  <span className="font-bold">22/24</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="opacity-80">{lang === "fr" ? "Commission gagnée" : "Commission Earned"}</span>
-                  <span className="font-bold">$468</span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
