@@ -36,6 +36,7 @@ import { registerVoiceRoutes } from "../routes/registerVoiceRoutes";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { metricsCollector, globalErrorHandler, registerMetricsEndpoint } from "../middleware/observability";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -68,6 +69,9 @@ async function startServer() {
   // Request correlation IDs — must be early so all downstream handlers get req.log
   const { requestIdMiddleware } = await import("../middleware/requestId");
   app.use(requestIdMiddleware);
+
+  // Metrics collection — records request count, error rate, latency per route
+  app.use(metricsCollector);
 
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
@@ -501,6 +505,12 @@ async function startServer() {
   } else {
     serveStatic(app);
   }
+
+  // REST metrics endpoint (protected by CRON_SECRET)
+  registerMetricsEndpoint(app);
+
+  // Global error handler — must be LAST middleware
+  app.use(globalErrorHandler);
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);
