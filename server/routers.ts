@@ -146,6 +146,16 @@ import { peerReviewRouter } from "./routers/peerReview";
 import { bookmarksRouter } from "./routers/bookmarks";
 import { executiveSummaryRouter } from "./routers/executiveSummary";
 import { contentPipelineRouter } from "./routers/contentPipeline";
+import {
+  accountsRouter, invoicesRouter, customersRouter, productsRouter,
+  billsRouter, suppliersRouter, expensesRouter, paymentsRouter,
+  journalEntriesRouter, bankTransactionsRouter, bankRulesRouter,
+  estimatesRouter, reconciliationsRouter, reconciliationWorkspaceRouter,
+  recurringRouter, recurringAutoGenRouter, taxRatesRouter, taxFilingsRouter,
+  transfersRouter, acctEmailTemplatesRouter, exchangeRatesRouter,
+  auditRouter, companyRouter as acctCompanyRouter, acctDashboardRouter,
+  bulkRouter, chartsRouter, invoicePdfRouter, reportsRouter,
+} from "./routers/accounting";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9132,6 +9142,35 @@ export const appRouter = router({
   bookmarks: bookmarksRouter,
   executiveSummary: executiveSummaryRouter,
   contentPipeline: contentPipelineRouter,
+
+  // Accounting Module (28 sub-routers)
+  accounts: accountsRouter,
+  invoices: invoicesRouter,
+  customers: customersRouter,
+  products: productsRouter,
+  bills: billsRouter,
+  suppliers: suppliersRouter,
+  expenses: expensesRouter,
+  payments: paymentsRouter,
+  journalEntries: journalEntriesRouter,
+  bankTransactions: bankTransactionsRouter,
+  bankRules: bankRulesRouter,
+  estimates: estimatesRouter,
+  reconciliations: reconciliationsRouter,
+  reconciliationWorkspace: reconciliationWorkspaceRouter,
+  recurring: recurringRouter,
+  recurringAutoGen: recurringAutoGenRouter,
+  taxRates: taxRatesRouter,
+  taxFilings: taxFilingsRouter,
+  transfers: transfersRouter,
+  exchangeRates: exchangeRatesRouter,
+  audit: auditRouter,
+  company: acctCompanyRouter,
+  dashboard: acctDashboardRouter,
+  bulk: bulkRouter,
+  charts: chartsRouter,
+  invoicePdf: invoicePdfRouter,
+  reports: reportsRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
