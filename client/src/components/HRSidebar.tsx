@@ -8,6 +8,7 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/_core/hooks/useAuth";
 import SocialLinks from "@/components/SocialLinks";
+import { trpc } from "@/lib/trpc";
 
 const LOGO_ICON = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mrXRaWLUDJGHdcjc.png";
 
@@ -86,22 +87,8 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
           </Link>
         </div>
 
-        {/* Organization Card — Client's department info */}
-        <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 border border-[#2563eb]/15">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="material-icons text-[#2563eb] text-sm">account_balance</span>
-            <span className="text-xs font-bold text-gray-800">{lang === "fr" ? "Mon département" : "My Department"}</span>
-          </div>
-          <p className="text-[10px] text-gray-500">{lang === "fr" ? "Secrétariat du Conseil du Trésor" : "Treasury Board Secretariat"}</p>
-          <div className="flex justify-between mt-2">
-            <span className="text-[10px] text-gray-500">{lang === "fr" ? "Participants inscrits" : "Enrolled Participants"}</span>
-            <span className="text-[10px] text-[#2563eb] font-bold">45</span>
-          </div>
-          <div className="flex justify-between mt-1">
-            <span className="text-[10px] text-gray-500">{lang === "fr" ? "Contrat actif" : "Active Contract"}</span>
-            <span className="text-[10px] text-green-600 font-bold">✓</span>
-          </div>
-        </div>
+        {/* Organization Card — Client's department info (dynamic) */}
+        <OrgCard lang={lang} />
 
         <nav className="flex-1 overflow-y-auto px-3 space-y-0.5">
           <div className="text-[10px] text-gray-400 uppercase tracking-wider px-3 mb-1 font-semibold">{lang === "fr" ? "Principal" : "Main"}</div>
@@ -153,5 +140,34 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
         </div>
       </aside>
     </>
+  );
+}
+
+/** Dynamic organization card that fetches real data */
+function OrgCard({ lang }: { lang: string }) {
+  const { data: org } = trpc.hr.getMyOrganization.useQuery(undefined, {
+    retry: false,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const orgName = org?.name || (lang === "fr" ? "Mon département" : "My Department");
+  const participantCount = org?.participantCount ?? "—";
+
+  return (
+    <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 border border-[#2563eb]/15">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="material-icons text-[#2563eb] text-sm">account_balance</span>
+        <span className="text-xs font-bold text-gray-800">{lang === "fr" ? "Mon département" : "My Department"}</span>
+      </div>
+      <p className="text-[10px] text-gray-500 truncate" title={orgName}>{orgName}</p>
+      <div className="flex justify-between mt-2">
+        <span className="text-[10px] text-gray-500">{lang === "fr" ? "Participants inscrits" : "Enrolled Participants"}</span>
+        <span className="text-[10px] text-[#2563eb] font-bold">{participantCount}</span>
+      </div>
+      <div className="flex justify-between mt-1">
+        <span className="text-[10px] text-gray-500">{lang === "fr" ? "Contrat actif" : "Active Contract"}</span>
+        <span className="text-[10px] text-green-600 font-bold">✓</span>
+      </div>
+    </div>
   );
 }
