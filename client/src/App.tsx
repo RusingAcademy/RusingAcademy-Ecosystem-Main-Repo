@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -67,10 +67,8 @@ import Courses from "./pages/Courses";
 import CoursesPage from "./pages/CoursesPage";
 import CourseDetail from "./pages/CourseDetail";
 import Paths from "./pages/Paths";
-import PathDetail from "./pages/PathDetail";
 import PathEnrollmentSuccess from "./pages/PathEnrollmentSuccess";
 import CourseSuccess from "./pages/CourseSuccess";
-import LessonViewer from "./pages/LessonViewer";
 import LearnCourse from "./pages/LearnCourse";
 import LearnPortal from "./pages/LearnPortal";
 import LearnLessonPage from "./pages/LearnLessonPage";
