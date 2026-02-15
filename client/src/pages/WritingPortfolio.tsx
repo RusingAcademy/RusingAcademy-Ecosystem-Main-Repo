@@ -1,9 +1,11 @@
 /**
  * Writing Portfolio — Submit writing exercises and get AI feedback
+ * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
 import DashboardLayout from "@/components/DashboardLayout";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -28,6 +30,8 @@ type FeedbackData = {
 
 export default function WritingPortfolio() {
   const { user } = useAuth();
+  const { t, language: uiLang } = useLanguage();
+  const isFr = uiLang === "fr";
   const [view, setView] = useState<"list" | "editor" | "detail">("list");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [title, setTitle] = useState("");
@@ -45,7 +49,7 @@ export default function WritingPortfolio() {
     onSuccess: () => {
       utils.writing.list.invalidate();
       resetEditor();
-      toast.success("Submission saved!");
+      toast.success(isFr ? "Soumission enregistrée !" : "Submission saved!");
     },
   });
 
@@ -53,7 +57,7 @@ export default function WritingPortfolio() {
     onSuccess: () => {
       utils.writing.list.invalidate();
       utils.writing.get.invalidate();
-      toast.success("Submission updated!");
+      toast.success(isFr ? "Soumission mise à jour !" : "Submission updated!");
     },
   });
 
@@ -61,7 +65,7 @@ export default function WritingPortfolio() {
     onSuccess: () => {
       utils.writing.list.invalidate();
       setView("list");
-      toast.success("Submission deleted");
+      toast.success(isFr ? "Soumission supprimée" : "Submission deleted");
     },
   });
 
@@ -70,7 +74,7 @@ export default function WritingPortfolio() {
       setFeedback(data as FeedbackData);
       utils.writing.list.invalidate();
       utils.writing.get.invalidate();
-      toast.success("AI feedback received!");
+      toast.success(isFr ? "Retour IA reçu !" : "AI feedback received!");
     },
   });
 
@@ -117,8 +121,17 @@ export default function WritingPortfolio() {
     }
   };
 
+  const statusLabel = (status: string) => {
+    const labels: Record<string, { en: string; fr: string }> = {
+      draft: { en: "Draft", fr: "Brouillon" },
+      submitted: { en: "Submitted", fr: "Soumis" },
+      reviewed: { en: "Reviewed", fr: "Révisé" },
+    };
+    return labels[status] ? (isFr ? labels[status].fr : labels[status].en) : status;
+  };
+
   const ScoreBar = ({ label, score, color }: { label: string; score: number; color: string }) => (
-    <div className="mb-3">
+    <div className="mb-3" role="meter" aria-valuenow={score} aria-valuemin={0} aria-valuemax={100} aria-label={`${label}: ${score}/100`}>
       <div className="flex justify-between text-xs mb-1">
         <span className="text-gray-600">{label}</span>
         <span className="font-semibold" style={{ color }}>{score}/100</span>
@@ -136,71 +149,81 @@ export default function WritingPortfolio() {
     return (
       <DashboardLayout>
         <div className="max-w-4xl mx-auto px-4 py-6">
-          <button onClick={resetEditor} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors">
-            <span className="material-icons text-[18px]">arrow_back</span> Back to Portfolio
+          <button onClick={resetEditor}
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+            aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
+            <span className="material-icons text-[18px]" aria-hidden="true">arrow_back</span>
+            {isFr ? "Retour au portfolio" : "Back to Portfolio"}
           </button>
           {submission.isLoading ? (
-            <div className="space-y-4">{[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse" />)}</div>
+            <div className="space-y-4" role="status" aria-label={t("skillLabs.loading")}>
+              {[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse" />)}
+              <span className="sr-only">{t("skillLabs.loading")}</span>
+            </div>
           ) : s ? (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="lg:col-span-2">
-                <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <article className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <h1 className="text-xl font-bold text-gray-900">{s.title}</h1>
                     <div className="flex items-center gap-2">
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${getStatusColor(s.status)}`}>{s.status}</span>
-                      <button onClick={() => { if (confirm("Delete?")) deleteMutation.mutate({ id: s.id }); }} className="text-gray-400 hover:text-red-500">
-                        <span className="material-icons text-[18px]">delete</span>
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${getStatusColor(s.status)}`}>{statusLabel(s.status)}</span>
+                      <button onClick={() => { if (confirm(isFr ? "Supprimer ?" : "Delete?")) deleteMutation.mutate({ id: s.id }); }}
+                        className="text-gray-400 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-300 rounded"
+                        aria-label={isFr ? "Supprimer la soumission" : "Delete submission"}>
+                        <span className="material-icons text-[18px]" aria-hidden="true">delete</span>
                       </button>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 mb-4 text-[11px] text-gray-400">
                     {s.cefrLevel && <span className="px-2 py-0.5 bg-[#008090]/10 text-[#008090] rounded-full font-medium">{s.cefrLevel}</span>}
-                    <span>{s.wordCount} words</span>
-                    <span>{new Date(s.createdAt).toLocaleDateString()}</span>
+                    <span>{s.wordCount} {isFr ? "mots" : "words"}</span>
+                    <span>{new Date(s.createdAt).toLocaleDateString(isFr ? "fr-CA" : "en-CA")}</span>
                   </div>
                   <div className="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">{s.content}</div>
-                </div>
+                </article>
                 {!fb && s.status !== "reviewed" && (
                   <button
                     onClick={() => handleSubmitForFeedback(s.id, s.content)}
                     disabled={feedbackMutation.isPending}
-                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#008090] to-[#006d7a] text-white text-sm rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm"
+                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#008090] to-[#006d7a] text-white text-sm rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                   >
-                    <span className="material-icons text-[18px]">auto_awesome</span>
-                    {feedbackMutation.isPending ? "Analyzing your writing..." : "Get AI Feedback"}
+                    <span className="material-icons text-[18px]" aria-hidden="true">auto_awesome</span>
+                    {feedbackMutation.isPending
+                      ? (isFr ? "Analyse en cours..." : "Analyzing your writing...")
+                      : t("writing.getAIFeedback")}
                   </button>
                 )}
               </div>
               {fb && (
-                <div className="space-y-4">
+                <div className="space-y-4" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
                   <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
                     <div className="text-center mb-4">
                       <div className="text-3xl font-bold text-[#008090]">{fb.score}</div>
-                      <div className="text-[10px] text-gray-400 uppercase tracking-wider">Overall Score</div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "Score global" : "Overall Score"}</div>
                     </div>
-                    <ScoreBar label="Grammar" score={fb.grammar.score} color="#3b82f6" />
-                    <ScoreBar label="Vocabulary" score={fb.vocabulary.score} color="#8b5cf6" />
-                    <ScoreBar label="Coherence" score={fb.coherence.score} color="#10b981" />
+                    <ScoreBar label={isFr ? "Grammaire" : "Grammar"} score={fb.grammar.score} color="#3b82f6" />
+                    <ScoreBar label={isFr ? "Vocabulaire" : "Vocabulary"} score={fb.vocabulary.score} color="#8b5cf6" />
+                    <ScoreBar label={isFr ? "Cohérence" : "Coherence"} score={fb.coherence.score} color="#10b981" />
                   </div>
                   <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2">Feedback</h3>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-2">{isFr ? "Commentaires" : "Feedback"}</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">{fb.overallFeedback}</p>
                   </div>
                   {fb.highlights.length > 0 && (
                     <div className="bg-green-50 border border-green-200 rounded-xl p-4">
                       <h3 className="text-sm font-semibold text-green-800 mb-2 flex items-center gap-1">
-                        <span className="material-icons text-[16px]">thumb_up</span> Strengths
+                        <span className="material-icons text-[16px]" aria-hidden="true">thumb_up</span> {isFr ? "Points forts" : "Strengths"}
                       </h3>
-                      <ul className="space-y-1">{fb.highlights.map((h, i) => <li key={i} className="text-xs text-green-700">• {h}</li>)}</ul>
+                      <ul className="space-y-1" role="list">{fb.highlights.map((h, i) => <li key={i} className="text-xs text-green-700">• {h}</li>)}</ul>
                     </div>
                   )}
                   {fb.suggestions.length > 0 && (
                     <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                       <h3 className="text-sm font-semibold text-amber-800 mb-2 flex items-center gap-1">
-                        <span className="material-icons text-[16px]">lightbulb</span> Suggestions
+                        <span className="material-icons text-[16px]" aria-hidden="true">lightbulb</span> {isFr ? "Suggestions" : "Suggestions"}
                       </h3>
-                      <ul className="space-y-1">{fb.suggestions.map((s, i) => <li key={i} className="text-xs text-amber-700">• {s}</li>)}</ul>
+                      <ul className="space-y-1" role="list">{fb.suggestions.map((s, i) => <li key={i} className="text-xs text-amber-700">• {s}</li>)}</ul>
                     </div>
                   )}
                 </div>
@@ -217,55 +240,79 @@ export default function WritingPortfolio() {
     return (
       <DashboardLayout>
         <div className="max-w-3xl mx-auto px-4 py-6">
-          <button onClick={resetEditor} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors">
-            <span className="material-icons text-[18px]">arrow_back</span> Back to Portfolio
+          <button onClick={resetEditor}
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+            aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
+            <span className="material-icons text-[18px]" aria-hidden="true">arrow_back</span>
+            {isFr ? "Retour au portfolio" : "Back to Portfolio"}
           </button>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">{editingId ? "Edit Submission" : "New Writing Exercise"}</h2>
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              {editingId
+                ? (isFr ? "Modifier la soumission" : "Edit Submission")
+                : (isFr ? "Nouvel exercice d'écriture" : "New Writing Exercise")}
+            </h2>
             <div className="grid grid-cols-2 gap-3 mb-4">
-              <select value={language} onChange={(e) => setLanguage(e.target.value as any)} className="border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
-                <option value="fr">French</option>
-                <option value="en">English</option>
-              </select>
-              <select value={cefrLevel} onChange={(e) => setCefrLevel(e.target.value)} className="border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
-                {CEFR_LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
-              </select>
+              <div>
+                <label htmlFor="writing-lang" className="sr-only">{isFr ? "Langue" : "Language"}</label>
+                <select id="writing-lang" value={language} onChange={(e) => setLanguage(e.target.value as any)}
+                  className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  <option value="fr">{isFr ? "Français" : "French"}</option>
+                  <option value="en">{isFr ? "Anglais" : "English"}</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="writing-level" className="sr-only">{isFr ? "Niveau CECR" : "CEFR Level"}</label>
+                <select id="writing-level" value={cefrLevel} onChange={(e) => setCefrLevel(e.target.value)}
+                  className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {CEFR_LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
+                </select>
+              </div>
             </div>
+            <label htmlFor="writing-title" className="sr-only">{isFr ? "Titre" : "Title"}</label>
             <input
+              id="writing-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title of your writing..."
+              placeholder={isFr ? "Titre de votre texte..." : "Title of your writing..."}
               className="w-full border border-gray-200 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
             />
+            <label htmlFor="writing-content" className="sr-only">{isFr ? "Contenu" : "Content"}</label>
             <textarea
+              id="writing-content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Start writing here..."
+              placeholder={isFr ? "Commencez à écrire ici..." : "Start writing here..."}
               className="w-full border border-gray-200 rounded-lg p-4 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#008090]/30 min-h-[300px] leading-relaxed"
             />
             <div className="flex items-center justify-between mt-4">
-              <span className="text-[11px] text-gray-400">{content.trim().split(/\s+/).filter(Boolean).length} words</span>
+              <span className="text-[11px] text-gray-400">{content.trim().split(/\s+/).filter(Boolean).length} {isFr ? "mots" : "words"}</span>
               <div className="flex gap-2">
-                <button onClick={resetEditor} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800">Cancel</button>
+                <button onClick={resetEditor}
+                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded">
+                  {isFr ? "Annuler" : "Cancel"}
+                </button>
                 <button
                   onClick={handleSave}
                   disabled={!title.trim() || !content.trim() || createMutation.isPending || updateMutation.isPending}
-                  className="px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] disabled:opacity-50 transition-colors"
+                  className="px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] disabled:opacity-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                 >
-                  {createMutation.isPending || updateMutation.isPending ? "Saving..." : "Save Draft"}
+                  {createMutation.isPending || updateMutation.isPending
+                    ? (isFr ? "Enregistrement..." : "Saving...")
+                    : (isFr ? "Enregistrer le brouillon" : "Save Draft")}
                 </button>
               </div>
             </div>
           </div>
 
           {feedback && (
-            <div className="mt-4 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            <div className="mt-4 bg-white border border-gray-200 rounded-xl p-6 shadow-sm" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
               <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#008090]">auto_awesome</span> AI Feedback
+                <span className="material-icons text-[#008090]" aria-hidden="true">auto_awesome</span> {isFr ? "Retour IA" : "AI Feedback"}
               </h3>
               <div className="text-center mb-4">
                 <div className="text-4xl font-bold text-[#008090]">{feedback.score}</div>
-                <div className="text-xs text-gray-400">Overall Score</div>
+                <div className="text-xs text-gray-400">{isFr ? "Score global" : "Overall Score"}</div>
               </div>
               <p className="text-sm text-gray-700 mb-4">{feedback.overallFeedback}</p>
             </div>
@@ -278,26 +325,30 @@ export default function WritingPortfolio() {
   /* ─── LIST VIEW ─── */
   return (
     <DashboardLayout>
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="max-w-4xl mx-auto px-4 py-6" role="main" aria-label={t("writing.title")}>
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Writing Portfolio</h1>
-            <p className="text-sm text-gray-500 mt-1">Practice writing and get AI-powered feedback</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t("writing.title")}</h1>
+            <p className="text-sm text-gray-500 mt-1">{isFr ? "Pratiquez l'écriture et obtenez un retour IA" : "Practice writing and get AI-powered feedback"}</p>
           </div>
-          <button onClick={() => openEditor()} className="flex items-center gap-2 px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] transition-colors shadow-sm">
-            <span className="material-icons text-[18px]">edit_note</span> New Writing
+          <button onClick={() => openEditor()}
+            className="flex items-center gap-2 px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+            aria-label={t("writing.newEntry")}>
+            <span className="material-icons text-[18px]" aria-hidden="true">edit_note</span> {t("writing.newEntry")}
           </button>
         </div>
 
         {/* Writing Prompts */}
         <div className="mb-6">
-          <h2 className="text-sm font-semibold text-gray-700 mb-3">Writing Prompts by Level</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <h2 className="text-sm font-semibold text-gray-700 mb-3">{isFr ? "Sujets d'écriture par niveau" : "Writing Prompts by Level"}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" role="list">
             {WRITING_PROMPTS.map((prompt, i) => (
               <button
                 key={i}
+                role="listitem"
                 onClick={() => openEditor(prompt)}
-                className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-[#008090]/30 transition-all"
+                className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-[#008090]/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                aria-label={`${prompt.level}: ${language === "fr" ? prompt.fr : prompt.en}`}
               >
                 <span className="px-2 py-0.5 bg-[#008090]/10 text-[#008090] rounded-full text-[10px] font-semibold">{prompt.level}</span>
                 <p className="text-xs text-gray-700 mt-2 line-clamp-2">{language === "fr" ? prompt.fr : prompt.en}</p>
@@ -307,38 +358,44 @@ export default function WritingPortfolio() {
         </div>
 
         {/* Submissions List */}
-        <h2 className="text-sm font-semibold text-gray-700 mb-3">Your Submissions</h2>
+        <h2 className="text-sm font-semibold text-gray-700 mb-3">{t("writing.history")}</h2>
         {submissions.isLoading ? (
-          <div className="space-y-3">{[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse" />)}</div>
+          <div className="space-y-3" role="status" aria-label={t("skillLabs.loading")}>
+            {[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse" />)}
+            <span className="sr-only">{t("skillLabs.loading")}</span>
+          </div>
         ) : (submissions.data || []).length === 0 ? (
-          <div className="text-center py-12">
-            <span className="material-icons text-gray-300 text-5xl mb-3">edit_note</span>
-            <h3 className="text-lg font-semibold text-gray-700 mb-1">No submissions yet</h3>
-            <p className="text-sm text-gray-400">Start with a writing prompt above or create a free-form exercise</p>
+          <div className="text-center py-12" role="status">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
+              <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">edit_note</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("writing.emptyTitle")}</h3>
+            <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("writing.emptyDesc")}</p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-3" role="list" aria-label={t("writing.history")}>
             {(submissions.data || []).map((s) => (
               <button
                 key={s.id}
+                role="listitem"
                 onClick={() => openDetail(s.id)}
-                className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-[#008090]/30 transition-all"
+                className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-[#008090]/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
               >
                 <div className="flex items-start justify-between">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="text-sm font-semibold text-gray-900 truncate">{s.title}</h3>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${getStatusColor(s.status)}`}>{s.status}</span>
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${getStatusColor(s.status)}`}>{statusLabel(s.status)}</span>
                     </div>
                     <p className="text-xs text-gray-500 line-clamp-1">{s.content.slice(0, 120)}...</p>
                     <div className="flex items-center gap-3 mt-2 text-[10px] text-gray-400">
                       {s.cefrLevel && <span className="px-1.5 py-0.5 bg-[#008090]/10 text-[#008090] rounded-full font-medium">{s.cefrLevel}</span>}
-                      <span>{s.wordCount} words</span>
-                      <span>{new Date(s.updatedAt).toLocaleDateString()}</span>
+                      <span>{s.wordCount} {isFr ? "mots" : "words"}</span>
+                      <span>{new Date(s.updatedAt).toLocaleDateString(isFr ? "fr-CA" : "en-CA")}</span>
                     </div>
                   </div>
                   {s.aiScore !== null && (
-                    <div className="text-center ml-4">
+                    <div className="text-center ml-4" role="status" aria-label={`Score: ${s.aiScore}`}>
                       <div className="text-xl font-bold text-[#008090]">{s.aiScore}</div>
                       <div className="text-[9px] text-gray-400">Score</div>
                     </div>

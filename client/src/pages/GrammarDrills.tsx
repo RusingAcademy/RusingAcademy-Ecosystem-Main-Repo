@@ -1,20 +1,19 @@
 /**
  * Grammar Drills Engine — Interactive grammar exercises by topic and CEFR level
- * Sprint 36: Grammar Drills Engine
+ * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
 import { useState, useCallback, useMemo } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
-import { toast } from "sonner";
 
 /* ─── Grammar Drill Data ─── */
 type DrillQuestion = { prompt: string; answer: string; options?: string[]; hint?: string };
 type DrillSet = { topic: string; level: string; type: "fill_blank" | "conjugation" | "reorder" | "multiple_choice"; questions: DrillQuestion[] };
 
 const DRILLS: DrillSet[] = [
-  // A1 — Articles
   { topic: "Articles définis et indéfinis", level: "A1", type: "fill_blank", questions: [
     { prompt: "___ chat est sur la table.", answer: "Le", options: ["Le", "La", "Un", "Des"], hint: "Chat is masculine" },
     { prompt: "J'ai ___ sœur et ___ frère.", answer: "une, un", options: ["une, un", "un, une", "la, le", "des, des"], hint: "Sister is feminine, brother is masculine" },
@@ -22,7 +21,6 @@ const DRILLS: DrillSet[] = [
     { prompt: "___ enfants jouent dans le parc.", answer: "Les", options: ["Les", "Des", "Un", "Le"], hint: "Plural definite article" },
     { prompt: "Il y a ___ fleurs dans le jardin.", answer: "des", options: ["des", "les", "une", "la"], hint: "Plural indefinite article" },
   ]},
-  // A1 — Être/Avoir
   { topic: "Être et Avoir au présent", level: "A1", type: "conjugation", questions: [
     { prompt: "Je ___ (être) étudiant.", answer: "suis", options: ["suis", "es", "est", "sommes"] },
     { prompt: "Nous ___ (avoir) un chien.", answer: "avons", options: ["avons", "avez", "ont", "ai"] },
@@ -30,7 +28,6 @@ const DRILLS: DrillSet[] = [
     { prompt: "Tu ___ (avoir) quel âge?", answer: "as", options: ["as", "ai", "a", "avez"] },
     { prompt: "Elle ___ (être) canadienne.", answer: "est", options: ["est", "es", "suis", "sont"] },
   ]},
-  // A2 — Passé composé
   { topic: "Le passé composé", level: "A2", type: "fill_blank", questions: [
     { prompt: "J'___ (manger) une pizza hier.", answer: "ai mangé", options: ["ai mangé", "suis mangé", "mange", "mangeais"] },
     { prompt: "Elle ___ (aller) au bureau.", answer: "est allée", options: ["est allée", "a allé", "a allée", "est allé"] },
@@ -38,14 +35,12 @@ const DRILLS: DrillSet[] = [
     { prompt: "Ils ___ (venir) à la réunion.", answer: "sont venus", options: ["sont venus", "ont venu", "ont venus", "sont venu"] },
     { prompt: "Tu ___ (prendre) le bus?", answer: "as pris", options: ["as pris", "es pris", "a pris", "prends"] },
   ]},
-  // A2 — Sentence reorder
   { topic: "L'ordre des mots", level: "A2", type: "reorder", questions: [
     { prompt: "bureau / au / je / vais / chaque / matin", answer: "Je vais au bureau chaque matin", hint: "Subject + verb + location + time" },
     { prompt: "ne / pas / je / français / parle", answer: "Je ne parle pas français", hint: "Subject + ne + verb + pas + object" },
     { prompt: "souvent / elle / café / boit / du", answer: "Elle boit souvent du café", hint: "Subject + verb + adverb + object" },
     { prompt: "hier / nous / sommes / allés / cinéma / au", answer: "Hier nous sommes allés au cinéma", hint: "Time + subject + auxiliary + past participle + location" },
   ]},
-  // B1 — Subjonctif
   { topic: "Le subjonctif présent", level: "B1", type: "conjugation", questions: [
     { prompt: "Il faut que je ___ (faire) mes devoirs.", answer: "fasse", options: ["fasse", "fais", "fait", "ferai"] },
     { prompt: "Je veux que tu ___ (être) heureux.", answer: "sois", options: ["sois", "es", "seras", "étais"] },
@@ -53,7 +48,6 @@ const DRILLS: DrillSet[] = [
     { prompt: "Bien qu'il ___ (pleuvoir), nous sortons.", answer: "pleuve", options: ["pleuve", "pleut", "pleuvra", "pleuvait"] },
     { prompt: "Je doute qu'elle ___ (pouvoir) venir.", answer: "puisse", options: ["puisse", "peut", "pourra", "pouvait"] },
   ]},
-  // B1 — Pronoms relatifs
   { topic: "Les pronoms relatifs", level: "B1", type: "multiple_choice", questions: [
     { prompt: "Le livre ___ j'ai lu est intéressant.", answer: "que", options: ["que", "qui", "dont", "où"] },
     { prompt: "La femme ___ parle est ma collègue.", answer: "qui", options: ["qui", "que", "dont", "où"] },
@@ -61,7 +55,6 @@ const DRILLS: DrillSet[] = [
     { prompt: "Le sujet ___ nous parlons est important.", answer: "dont", options: ["dont", "que", "qui", "où"] },
     { prompt: "Les étudiants ___ ont réussi sont contents.", answer: "qui", options: ["qui", "que", "dont", "où"] },
   ]},
-  // B2 — Concordance des temps
   { topic: "La concordance des temps", level: "B2", type: "fill_blank", questions: [
     { prompt: "Si j'avais su, je ___ (venir) plus tôt.", answer: "serais venu", options: ["serais venu", "suis venu", "viendrai", "venais"] },
     { prompt: "Il a dit qu'il ___ (finir) le rapport demain.", answer: "finirait", options: ["finirait", "finira", "finit", "a fini"] },
@@ -69,7 +62,6 @@ const DRILLS: DrillSet[] = [
     { prompt: "Elle pensait que tu ___ (être) malade.", answer: "étais", options: ["étais", "es", "seras", "serais"] },
     { prompt: "Quand j'___ (arriver), il pleuvait.", answer: "suis arrivé", options: ["suis arrivé", "arrivais", "arriverai", "arrive"] },
   ]},
-  // C1 — Voix passive et nominalisations
   { topic: "La voix passive et les nominalisations", level: "C1", type: "multiple_choice", questions: [
     { prompt: "Le rapport ___ par le comité hier.", answer: "a été approuvé", options: ["a été approuvé", "a approuvé", "est approuvé", "approuvait"] },
     { prompt: "La ___ de ce projet nécessite des ressources.", answer: "réalisation", options: ["réalisation", "réaliser", "réalisé", "réalisant"] },
@@ -83,6 +75,8 @@ type Phase = "select" | "drill" | "results";
 
 export default function GrammarDrillsPage() {
   const { user, loading: authLoading } = useAuth();
+  const { t, language } = useLanguage();
+  const isFr = language === "fr";
   const utils = trpc.useUtils();
   const saveResult = trpc.grammarDrills.saveResult.useMutation({
     onSuccess: () => { utils.grammarDrills.history.invalidate(); utils.grammarDrills.stats.invalidate(); utils.grammarDrills.statsByTopic.invalidate(); },
@@ -146,43 +140,55 @@ export default function GrammarDrillsPage() {
     setPhase("results");
   }, [selectedDrill, answers, startTime, saveResult]);
 
-  const drillTypeLabel = (t: string) => ({ fill_blank: "Fill in the Blank", conjugation: "Conjugation", reorder: "Sentence Reorder", multiple_choice: "Multiple Choice" }[t] || t);
-  const drillTypeIcon = (t: string) => ({ fill_blank: "edit_note", conjugation: "spellcheck", reorder: "swap_vert", multiple_choice: "checklist" }[t] || "quiz");
+  const drillTypeLabels: Record<string, { en: string; fr: string }> = {
+    fill_blank: { en: "Fill in the Blank", fr: "Compléter le blanc" },
+    conjugation: { en: "Conjugation", fr: "Conjugaison" },
+    reorder: { en: "Sentence Reorder", fr: "Réordonner la phrase" },
+    multiple_choice: { en: "Multiple Choice", fr: "Choix multiple" },
+  };
+  const drillTypeLabel = (tp: string) => (drillTypeLabels[tp] ? (isFr ? drillTypeLabels[tp].fr : drillTypeLabels[tp].en) : tp);
+  const drillTypeIcon = (tp: string) => ({ fill_blank: "edit_note", conjugation: "spellcheck", reorder: "swap_vert", multiple_choice: "checklist" }[tp] || "quiz");
 
-  if (authLoading) return <div className="flex h-screen items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return (
+    <div className="flex h-screen items-center justify-center" role="status" aria-label={t("skillLabs.loading")}>
+      <div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" />
+      <span className="sr-only">{t("skillLabs.loading")}</span>
+    </div>
+  );
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto" role="main" aria-label={t("grammar.title")}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                <span className="material-icons text-[#008090]">spellcheck</span>
-                Grammar Drills
+                <span className="material-icons text-[#008090]" aria-hidden="true">spellcheck</span>
+                {t("grammar.title")}
               </h1>
-              <p className="text-gray-500 mt-1">Master French grammar through targeted practice</p>
+              <p className="text-gray-500 mt-1">{t("grammar.subtitle")}</p>
             </div>
             <button onClick={() => setShowHistory(!showHistory)}
-              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5">
-              <span className="material-icons text-base">{showHistory ? "play_circle" : "history"}</span>
-              {showHistory ? "Practice" : "History"}
+              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+              aria-label={showHistory ? t("grammar.practice") : t("grammar.history")}>
+              <span className="material-icons text-base" aria-hidden="true">{showHistory ? "play_circle" : "history"}</span>
+              {showHistory ? t("grammar.practice") : t("grammar.history")}
             </button>
           </div>
 
           {/* Stats */}
           {stats && (
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-3 gap-4 mb-8" role="region" aria-label={t("grammar.stats")}>
               {[
-                { label: "Drills", value: stats.totalDrills ?? 0, icon: "assignment", color: "#008090" },
-                { label: "Avg Score", value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },
-                { label: "Total Time", value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "#8b5cf6" },
+                { label: t("grammar.drills"), value: stats.totalDrills ?? 0, icon: "assignment", color: "#008090" },
+                { label: t("grammar.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },
+                { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "#8b5cf6" },
               ].map((s, i) => (
-                <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
-                  <span className="material-icons text-2xl mb-1" style={{ color: s.color }}>{s.icon}</span>
+                <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center" role="status">
+                  <span className="material-icons text-lg mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{s.value}</div>
                   <div className="text-xs text-gray-500">{s.label}</div>
                 </div>
@@ -192,11 +198,14 @@ export default function GrammarDrillsPage() {
 
           {showHistory ? (
             <div className="space-y-3">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Drill History</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("grammar.history")}</h2>
               {!history?.length ? (
-                <div className="text-center py-16 text-gray-400">
-                  <span className="material-icons text-5xl mb-3 block">spellcheck</span>
-                  <p>No grammar drills completed yet.</p>
+                <div className="text-center py-16" role="status">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
+                    <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">spellcheck</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("grammar.emptyTitle")}</h3>
+                  <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("grammar.emptyDesc")}</p>
                 </div>
               ) : history.map((h: any, i: number) => (
                 <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex items-center justify-between">
@@ -208,17 +217,18 @@ export default function GrammarDrillsPage() {
                       <span>{h.correctAnswers}/{h.totalQuestions}</span>
                     </div>
                   </div>
-                  <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "#22c55e" : (h.score ?? 0) >= 60 ? "#f5a623" : "#e74c3c" }}>{h.score}%</div>
+                  <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "#22c55e" : (h.score ?? 0) >= 60 ? "#f5a623" : "#e74c3c" }} aria-label={`${t("grammar.score")}: ${h.score}%`}>{h.score}%</div>
                 </div>
               ))}
             </div>
           ) : phase === "select" ? (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Choose Your Level</h2>
-              <div className="flex gap-3 mb-6 flex-wrap">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("grammar.chooseLevel")}</h2>
+              <div className="flex gap-3 mb-6 flex-wrap" role="radiogroup" aria-label={t("grammar.chooseLevel")}>
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => setSelectedLevel(level)}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
+                    role="radio" aria-checked={selectedLevel === level}
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
                     {level}
                   </button>
                 ))}
@@ -226,8 +236,8 @@ export default function GrammarDrillsPage() {
 
               {/* Topic Stats */}
               {topicStats && topicStats.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-gray-600 mb-3">Your Topic Performance</h3>
+                <div className="mb-6" role="region" aria-label={isFr ? "Performance par sujet" : "Topic Performance"}>
+                  <h3 className="text-sm font-semibold text-gray-600 mb-3">{isFr ? "Performance par sujet" : "Your Topic Performance"}</h3>
                   <div className="flex gap-2 flex-wrap">
                     {topicStats.map((ts: any, i: number) => (
                       <div key={i} className="px-3 py-1.5 rounded-lg bg-white border border-gray-100 text-xs flex items-center gap-2">
@@ -239,46 +249,52 @@ export default function GrammarDrillsPage() {
                 </div>
               )}
 
-              <div className="space-y-4">
+              <div className="space-y-4" role="list" aria-label={t("grammar.drills")}>
                 {filteredDrills.map((drill, i) => (
-                  <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                    onClick={() => startDrill(drill)}>
+                  <div key={i} role="listitem"
+                    className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-[#008090]/30"
+                    onClick={() => startDrill(drill)}
+                    onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startDrill(drill); }}}
+                    tabIndex={0}
+                    aria-label={`${drill.topic} — ${drillTypeLabel(drill.type)} — ${drill.questions.length} questions`}>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-[#008090]/10 flex items-center justify-center">
-                          <span className="material-icons text-[#008090]">{drillTypeIcon(drill.type)}</span>
+                          <span className="material-icons text-[#008090]" aria-hidden="true">{drillTypeIcon(drill.type)}</span>
                         </div>
                         <div>
                           <h3 className="font-semibold text-gray-900">{drill.topic}</h3>
                           <div className="text-sm text-gray-500 mt-0.5">{drillTypeLabel(drill.type)} · {drill.questions.length} questions</div>
                         </div>
                       </div>
-                      <span className="material-icons text-[#008090] text-2xl">play_circle</span>
+                      <span className="material-icons text-[#008090] text-2xl" aria-hidden="true">play_circle</span>
                     </div>
                   </div>
                 ))}
                 {filteredDrills.length === 0 && (
-                  <div className="text-center py-12 text-gray-400">
-                    <span className="material-icons text-4xl mb-2 block">construction</span>
-                    <p>More drills coming soon for this level!</p>
+                  <div className="text-center py-12" role="status">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+                      <span className="material-icons text-3xl text-gray-400" aria-hidden="true">construction</span>
+                    </div>
+                    <p className="text-sm text-gray-500">{isFr ? "Plus d'exercices bientôt pour ce niveau !" : "More drills coming soon for this level!"}</p>
                   </div>
                 )}
               </div>
             </div>
           ) : phase === "drill" && selectedDrill ? (
-            <div>
+            <div role="region" aria-label={selectedDrill.topic}>
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900">{selectedDrill.topic}</h2>
                   <div className="text-sm text-gray-500">{drillTypeLabel(selectedDrill.type)}</div>
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500" aria-live="polite">
                   {currentQ + 1} / {selectedDrill.questions.length}
                 </div>
               </div>
 
               {/* Progress bar */}
-              <div className="w-full h-2 bg-gray-200 rounded-full mb-8">
+              <div className="w-full h-2 bg-gray-200 rounded-full mb-8" role="progressbar" aria-valuenow={currentQ + 1} aria-valuemin={1} aria-valuemax={selectedDrill.questions.length}>
                 <div className="h-2 bg-[#008090] rounded-full transition-all" style={{ width: `${((currentQ + 1) / selectedDrill.questions.length) * 100}%` }} />
               </div>
 
@@ -287,30 +303,33 @@ export default function GrammarDrillsPage() {
                 <p className="text-lg font-semibold text-gray-900 mb-6">{selectedDrill.questions[currentQ].prompt}</p>
 
                 {selectedDrill.questions[currentQ].options ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label={isFr ? "Options de réponse" : "Answer options"}>
                     {selectedDrill.questions[currentQ].options!.map((opt, oi) => (
                       <button key={oi} onClick={() => answerCurrent(opt)}
-                        className={`p-4 rounded-xl text-sm text-left transition-all ${answers[currentQ] === opt ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
+                        role="radio" aria-checked={answers[currentQ] === opt}
+                        className={`p-4 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[currentQ] === opt ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
                         {opt}
                       </button>
                     ))}
                   </div>
                 ) : selectedDrill.type === "reorder" ? (
                   <div>
-                    <input type="text" value={reorderInput} onChange={e => setReorderInput(e.target.value)}
+                    <label htmlFor="reorder-input" className="sr-only">{isFr ? "Tapez la phrase correcte" : "Type the correct sentence"}</label>
+                    <input id="reorder-input" type="text" value={reorderInput} onChange={e => setReorderInput(e.target.value)}
                       onKeyDown={e => { if (e.key === "Enter" && reorderInput.trim()) answerCurrent(reorderInput.trim()); }}
-                      placeholder="Type the correct sentence order..."
-                      className="w-full p-4 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30" />
+                      placeholder={isFr ? "Tapez la phrase dans le bon ordre..." : "Type the correct sentence order..."}
+                      className="w-full p-4 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                      autoFocus />
                     <button onClick={() => { if (reorderInput.trim()) answerCurrent(reorderInput.trim()); }}
-                      className="mt-3 px-4 py-2 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75]">
-                      Confirm
+                      className="mt-3 px-4 py-2 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                      {isFr ? "Confirmer" : "Confirm"}
                     </button>
                   </div>
                 ) : null}
 
                 {selectedDrill.questions[currentQ].hint && (
                   <p className="text-xs text-gray-400 mt-4 flex items-center gap-1">
-                    <span className="material-icons text-xs">lightbulb</span> {selectedDrill.questions[currentQ].hint}
+                    <span className="material-icons text-xs" aria-hidden="true">lightbulb</span> {selectedDrill.questions[currentQ].hint}
                   </p>
                 )}
               </div>
@@ -319,29 +338,33 @@ export default function GrammarDrillsPage() {
               <div className="flex justify-between">
                 <button onClick={() => { if (currentQ > 0) { setCurrentQ(currentQ - 1); setReorderInput(""); } }}
                   disabled={currentQ === 0}
-                  className="px-4 py-2 rounded-xl text-sm text-gray-500 hover:text-gray-700 disabled:opacity-30">
-                  ← Previous
+                  className="px-4 py-2 rounded-xl text-sm text-gray-500 hover:text-gray-700 disabled:opacity-30 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                  aria-label={isFr ? "Précédent" : "Previous"}>
+                  {isFr ? "← Précédent" : "← Previous"}
                 </button>
                 {currentQ === selectedDrill.questions.length - 1 ? (
                   <button onClick={submitDrill}
                     disabled={answers.filter(a => a).length < selectedDrill.questions.length}
-                    className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40">
-                    Submit Drill
+                    className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                    {t("grammar.submit")}
                   </button>
                 ) : (
                   <button onClick={() => { setCurrentQ(currentQ + 1); setReorderInput(""); }}
-                    className="px-4 py-2 rounded-xl text-sm text-[#008090] hover:text-[#006a75]">
-                    Next →
+                    className="px-4 py-2 rounded-xl text-sm text-[#008090] hover:text-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                    aria-label={t("grammar.next")}>
+                    {t("grammar.next")} →
                   </button>
                 )}
               </div>
             </div>
           ) : (
             /* Results */
-            <div>
+            <div role="region" aria-label={t("grammar.drillComplete")}>
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-8">
-                <span className="material-icons text-5xl mb-3 text-[#008090]">emoji_events</span>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Drill Complete!</h2>
+                <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
+                  <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("grammar.drillComplete")}</h2>
                 {(() => {
                   const correct = selectedDrill?.questions.reduce((sum, q, i) => {
                     const userAns = (answers[i] || "").toLowerCase().trim();
@@ -350,30 +373,30 @@ export default function GrammarDrillsPage() {
                   const total = selectedDrill?.questions.length ?? 1;
                   const score = Math.round((correct / total) * 100);
                   return (
-                    <div className="text-4xl font-bold mt-4" style={{ color: score >= 80 ? "#22c55e" : score >= 60 ? "#f5a623" : "#e74c3c" }}>
+                    <div className="text-4xl font-bold mt-4" style={{ color: score >= 80 ? "#22c55e" : score >= 60 ? "#f5a623" : "#e74c3c" }} aria-label={`${t("grammar.score")}: ${score}%`}>
                       {score}%
-                      <div className="text-sm text-gray-500 font-normal mt-1">{correct}/{total} correct</div>
+                      <div className="text-sm text-gray-500 font-normal mt-1">{correct}/{total} {t("grammar.correct").toLowerCase()}</div>
                     </div>
                   );
                 })()}
               </div>
 
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 mb-8" role="list" aria-label={isFr ? "Résultats détaillés" : "Detailed results"}>
                 {selectedDrill?.questions.map((q, qi) => {
                   const userAns = (answers[qi] || "").toLowerCase().trim();
                   const isCorrect = userAns === q.answer.toLowerCase().trim();
                   return (
-                    <div key={qi} className={`rounded-xl p-4 border ${isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
+                    <div key={qi} role="listitem" className={`rounded-xl p-4 border ${isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
                       <div className="flex items-start gap-2">
-                        <span className={`material-icons text-lg ${isCorrect ? "text-green-600" : "text-red-600"}`}>
+                        <span className={`material-icons text-lg ${isCorrect ? "text-green-600" : "text-red-600"}`} aria-hidden="true">
                           {isCorrect ? "check_circle" : "cancel"}
                         </span>
                         <div>
                           <p className="font-medium text-gray-900">{q.prompt}</p>
                           {!isCorrect && (
                             <p className="text-sm mt-1">
-                              <span className="text-red-600">Your answer: {answers[qi] || "(no answer)"}</span>
-                              <span className="text-green-600 ml-3">Correct: {q.answer}</span>
+                              <span className="text-red-600">{isFr ? "Votre réponse" : "Your answer"}: {answers[qi] || (isFr ? "(aucune)" : "(no answer)")}</span>
+                              <span className="text-green-600 ml-3">{t("grammar.correct")}: {q.answer}</span>
                             </p>
                           )}
                         </div>
@@ -385,13 +408,13 @@ export default function GrammarDrillsPage() {
 
               <div className="flex gap-3 justify-center">
                 <button onClick={() => setPhase("select")}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5">
-                  Choose Another
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {t("grammar.chooseAnother")}
                 </button>
                 {selectedDrill && (
                   <button onClick={() => startDrill(selectedDrill)}
-                    className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75]">
-                    Try Again
+                    className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                    {t("grammar.tryAgain")}
                   </button>
                 )}
               </div>
