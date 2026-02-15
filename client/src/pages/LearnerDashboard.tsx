@@ -275,6 +275,18 @@ export default function LearnerDashboard() {
     { enabled: isAuthenticated }
   );
 
+  // S08: Fetch aggregated dashboard stats (real data)
+  const { data: dashboardStats } = trpc.learner.getDashboardStats.useQuery(
+    undefined,
+    { enabled: isAuthenticated, staleTime: 30_000 }
+  );
+
+  // S08: Fetch resume point for "Continue" CTA
+  const { data: resumePoint } = trpc.learner.getResumePoint.useQuery(
+    undefined,
+    { enabled: isAuthenticated, staleTime: 30_000 }
+  );
+
   // Fetch gamification data
   const { data: gamificationStats } = trpc.gamification.getMyStats.useQuery(
     undefined,
@@ -313,10 +325,18 @@ export default function LearnerDashboard() {
   const upcomingSessions = upcomingSessionsData || [];
   const courses = myCourses || [];
 
-  const recentAiSessions = [
-    { id: 1, type: "Practice", language: "French", date: "2026-01-05", duration: 25 },
-    { id: 2, type: "Placement", language: "French", date: "2026-01-03", duration: 15 },
-  ];
+  // S08: Derive display values from real dashboard stats
+  const ds = dashboardStats;
+  const displayXp = ds?.totalXp?.toLocaleString() ?? "0";
+  const displayLevel = ds?.level ?? 1;
+  const displayLevelTitle = language === "fr" ? (ds?.levelTitleFr ?? "Débutant") : (ds?.levelTitle ?? "Beginner");
+  const displayBadges = ds?.totalBadges ?? 0;
+  const displayStreak = ds?.currentStreak ?? 0;
+  const displayStudyHours = ds?.monthlyStudyHours ?? 0;
+  const displayProgress = ds?.overallProgress ?? 0;
+  const displayCurrentLevel = formatSLELevel(ds?.currentLevel as any) || "XXX";
+  const displayTargetLevel = formatSLELevel(ds?.targetLevel as any) || "XXX";
+  const displayDaysUntilExam = ds?.daysUntilExam ?? null;
 
   const labels = {
     en: {
@@ -461,10 +481,12 @@ export default function LearnerDashboard() {
                       day: 'numeric' 
                     })}
                   </span>
-                  <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">
-                    <Flame className="h-3 w-3 mr-1" />
-                    7 {language === "fr" ? "jours" : "days"}
-                  </Badge>
+                  {displayStreak > 0 && (
+                    <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">
+                      <Flame className="h-3 w-3 mr-1" />
+                      {displayStreak} {language === "fr" ? "jours" : "days"}
+                    </Badge>
+                  )}
                 </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {l.welcome}, {user?.name?.split(" ")[0] || "Learner"}! 👋
@@ -473,10 +495,18 @@ export default function LearnerDashboard() {
                   {l.subtitle}
                 </p>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
                 <RoleSwitcherCompact />
+                {resumePoint && (
+                  <Link href={`/courses/${resumePoint.courseId}/lessons/${resumePoint.lessonId}`}>
+                    <Button size="lg" className="bg-white text-black hover:bg-slate-100 shadow-lg">
+                      <Play className="h-5 w-5 mr-2" />
+                      {language === "fr" ? "Reprendre" : "Resume"}
+                    </Button>
+                  </Link>
+                )}
                 <Link href="/ai-practice">
-                  <Button size="lg" className="bg-white text-black hover:bg-slate-100 shadow-lg">
+                  <Button size="lg" variant={resumePoint ? "outline" : "default"} className={resumePoint ? "border-white/50 text-white hover:bg-white/10" : "bg-white text-black hover:bg-slate-100 shadow-lg"}>
                     <Bot className="h-5 w-5 mr-2" />
                     {l.startPractice}
                   </Button>
@@ -485,19 +515,19 @@ export default function LearnerDashboard() {
             </div>
           </div>
 
-          {/* Stats Grid */}
+          {/* Stats Grid — S08: Wired to real API data */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <GlassStatCard
               icon={Zap}
-              value="1,250"
+              value={displayXp}
               label={l.xpPoints}
-              sublabel={language === "fr" ? "Niveau 5" : "Level 5"}
+              sublabel={`${language === "fr" ? "Niveau" : "Level"} ${displayLevel}`}
               color="amber"
               delay={0}
             />
             <GlassStatCard
               icon={Clock}
-              value="12.5h"
+              value={`${displayStudyHours}h`}
               label={l.hoursLearned}
               sublabel={language === "fr" ? "Ce mois" : "This month"}
               color="blue"
@@ -505,7 +535,7 @@ export default function LearnerDashboard() {
             />
             <GlassStatCard
               icon={Trophy}
-              value="8"
+              value={displayBadges}
               label={l.badges}
               sublabel={language === "fr" ? "Gagnés" : "Earned"}
               color="purple"
@@ -513,9 +543,9 @@ export default function LearnerDashboard() {
             />
             <GlassStatCard
               icon={Target}
-              value="65%"
+              value={`${displayProgress}%`}
               label={l.progress}
-              sublabel="BBB → CBC"
+              sublabel={`${displayCurrentLevel} → ${displayTargetLevel}`}
               color="emerald"
               delay={300}
             />
@@ -544,25 +574,25 @@ export default function LearnerDashboard() {
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   <div className="flex-shrink-0">
                     <ProgressRing
-                      progress={65}
+                      progress={displayProgress}
                       size={160}
                       strokeWidth={14}
                       color="stroke-emerald-500"
                       label={language === "fr" ? "Progression" : "Progress"}
-                      sublabel="BBB → CBC"
+                      sublabel={`${displayCurrentLevel} → ${displayTargetLevel}`}
                     />
                   </div>
                   <div className="flex-1 grid grid-cols-3 gap-4 w-full">
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50">
-                      <p className="text-3xl font-bold bg-gradient-to-r from-[#0a6969] to-[#062b2b] dark:from-slate-200 dark:to-white bg-clip-text text-transparent">BBB</p>
+                      <p className="text-3xl font-bold bg-gradient-to-r from-[#0a6969] to-[#062b2b] dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
                       <p className="text-sm text-black dark:text-[#67E8F9] mt-1">{l.currentLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
-                      <p className="text-3xl font-bold text-emerald-600">CBC</p>
+                      <p className="text-3xl font-bold text-emerald-600">{displayTargetLevel}</p>
                       <p className="text-sm text-emerald-600/70 mt-1">{l.targetLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/50 dark:to-amber-950/30 border border-amber-200/50 dark:border-amber-700/50">
-                      <p className="text-3xl font-bold text-amber-600">45</p>
+                      <p className="text-3xl font-bold text-amber-600">{displayDaysUntilExam ?? "—"}</p>
                       <p className="text-sm text-amber-600/70 mt-1">{l.daysUntilExam}</p>
                     </div>
                   </div>
@@ -571,9 +601,9 @@ export default function LearnerDashboard() {
 
               {/* SLE Velocity Widget - Exam Readiness Prediction */}
               <SLEVelocityWidget
-                currentLevel={formatSLELevel(velocityData?.currentLevel) || "BBB"}
-                targetLevel={formatSLELevel(velocityData?.targetLevel) || "CBC"}
-                examDate={velocityData?.examDate ? new Date(velocityData.examDate) : new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)}
+                currentLevel={displayCurrentLevel !== "XXX" ? displayCurrentLevel : formatSLELevel(velocityData?.currentLevel) || "BBB"}
+                targetLevel={displayTargetLevel !== "XXX" ? displayTargetLevel : formatSLELevel(velocityData?.targetLevel) || "CBC"}
+                examDate={ds?.examDate ? new Date(ds.examDate) : velocityData?.examDate ? new Date(velocityData.examDate) : new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)}
                 weeklyHours={velocityData?.weeklyStudyHours || 0}
                 averageProgress={velocityData?.lessonsCompleted ? Math.min(velocityData.lessonsCompleted / 3, 5) : 2}
                 language={language}
@@ -591,6 +621,37 @@ export default function LearnerDashboard() {
                 language={language}
                 className="shadow-sm"
               />
+
+              {/* S08: Resume Last Lesson Card */}
+              {resumePoint && (
+                <GlassCard className="p-5 border-l-4 border-l-emerald-500" hover={false}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center flex-shrink-0">
+                        <Play className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          {language === "fr" ? "Reprendre où vous étiez" : "Pick up where you left off"}
+                        </p>
+                        <p className="font-semibold text-black dark:text-white">
+                          {language === "fr" ? (resumePoint.lessonTitleFr || resumePoint.lessonTitle) : resumePoint.lessonTitle}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {language === "fr" ? (resumePoint.courseTitleFr || resumePoint.courseTitle) : resumePoint.courseTitle}
+                          {resumePoint.moduleName && ` • ${language === "fr" ? (resumePoint.moduleNameFr || resumePoint.moduleName) : resumePoint.moduleName}`}
+                        </p>
+                      </div>
+                    </div>
+                    <Link href={`/courses/${resumePoint.courseId}/lessons/${resumePoint.lessonId}`}>
+                      <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700">
+                        <Play className="h-4 w-4 mr-2" />
+                        {language === "fr" ? "Continuer" : "Continue"}
+                      </Button>
+                    </Link>
+                  </div>
+                </GlassCard>
+              )}
 
               {/* Continue Learning Section */}
               <GlassCard className="p-6" hover={false}>
