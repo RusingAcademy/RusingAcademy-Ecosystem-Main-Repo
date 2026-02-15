@@ -47,6 +47,7 @@ const navSections: NavSection[] = [
     { id: "certificates", label: "Certificates", icon: Award, path: "/admin/certificates", requiredPermission: "manage_courses" },
     { id: "reviews", label: "Reviews", icon: Star, path: "/admin/reviews", requiredPermission: "manage_courses" },
     { id: "gamification", label: "Gamification", icon: Trophy, path: "/admin/gamification", requiredPermission: "manage_courses" },
+    { id: "content-pipeline", label: "Content Pipeline", icon: Workflow, path: "/admin/content-pipeline", requiredPermission: "manage_courses" },
   ]},
 
   // ── SALES ─────────────────────────────────────────────────────────────────
