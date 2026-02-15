@@ -170,6 +170,12 @@ const HRCohorts = lazy(() => import("./pages/hr/HRCohorts"));
 const HRCompliance = lazy(() => import("./pages/hr/HRCompliance"));
 const HRDashboardHome = lazy(() => import("./pages/hr/HRDashboardHome"));
 const HRTeam = lazy(() => import("./pages/hr/HRTeam"));
+const HRReports = lazy(() => import("./pages/hr/HRReports"));
+const HRCalendar = lazy(() => import("./pages/hr/HRCalendar"));
+const HRNotifications = lazy(() => import("./pages/hr/HRNotifications"));
+const HROrganization = lazy(() => import("./pages/hr/HROrganization"));
+const HRSettings = lazy(() => import("./pages/hr/HRSettings"));
+const HRHelp = lazy(() => import("./pages/hr/HRHelp"));
 const Help = lazy(() => import("./pages/Help"));
 const LearningMaterials = lazy(() => import("./pages/LearningMaterials"));
 const ListeningLab = lazy(() => import("./pages/ListeningLab"));
@@ -574,6 +580,12 @@ function Router() {
           <Route path="/hr/portal/cohorts">{() => <Suspense fallback={<div>Loading...</div>}><HRCohorts /></Suspense>}</Route>
           <Route path="/hr/portal/budget">{() => <Suspense fallback={<div>Loading...</div>}><HRBudget /></Suspense>}</Route>
           <Route path="/hr/portal/compliance">{() => <Suspense fallback={<div>Loading...</div>}><HRCompliance /></Suspense>}</Route>
+          <Route path="/hr/portal/reports">{() => <Suspense fallback={<div>Loading...</div>}><HRReports /></Suspense>}</Route>
+          <Route path="/hr/portal/calendar">{() => <Suspense fallback={<div>Loading...</div>}><HRCalendar /></Suspense>}</Route>
+          <Route path="/hr/portal/notifications">{() => <Suspense fallback={<div>Loading...</div>}><HRNotifications /></Suspense>}</Route>
+          <Route path="/hr/portal/organization">{() => <Suspense fallback={<div>Loading...</div>}><HROrganization /></Suspense>}</Route>
+          <Route path="/hr/portal/settings">{() => <Suspense fallback={<div>Loading...</div>}><HRSettings /></Suspense>}</Route>
+          <Route path="/hr/portal/help">{() => <Suspense fallback={<div>Loading...</div>}><HRHelp /></Suspense>}</Route>
           <Route path="/hr/team">{() => <Suspense fallback={<div>Loading...</div>}><HRTeam /></Suspense>}</Route>
           <Route path="/hr/cohorts">{() => <Suspense fallback={<div>Loading...</div>}><HRCohorts /></Suspense>}</Route>
           <Route path="/admin/content-pipeline">{() => <AdminControlCenter section="content-pipeline" />}</Route>
