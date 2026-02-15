@@ -1,13 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useLocation } from "wouter";
 import { useAuthContext, ProtectedRoute } from "@/contexts/AuthContext";
-import LearnerDashboard from "@/pages/LearnerDashboard";
-import CoachDashboard from "@/pages/CoachDashboard";
-import HRDashboard from "@/pages/HRDashboard";
-import AdminDashboard from "@/pages/AdminDashboard";
+
+// Lazy-load role-based dashboards for code splitting
+const LearnerDashboard = lazy(() => import("@/pages/LearnerDashboard"));
+const CoachDashboard = lazy(() => import("@/pages/CoachDashboard"));
+const HRDashboard = lazy(() => import("@/pages/HRDashboard"));
+const AdminDashboard = lazy(() => import("@/pages/AdminDashboard"));
 
 // Debug mode
 const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true" || import.meta.env.DEV;
+
+/** Loading skeleton for dashboard code-split chunks */
+function DashboardSkeleton() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#062b2b]">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-white text-lg">Loading dashboard...</p>
+      </div>
+    </div>
+  );
+}
 
 /**
  * DashboardContent - The actual dashboard content based on user role
@@ -62,26 +76,12 @@ function DashboardContent() {
 
   // Show loading while determining role
   if (isLoading || !user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#062b2b]">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-lg">Loading dashboard...</p>
-        </div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   // Show redirecting state
   if (hasRedirected) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#062b2b]">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-lg">Redirecting to your dashboard...</p>
-        </div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   // Fallback: render based on role directly (shouldn't normally reach here)
@@ -92,13 +92,13 @@ function DashboardContent() {
   }
 
   if (role === "owner" || role === "admin") {
-    return <AdminDashboard />;
+    return <Suspense fallback={<DashboardSkeleton />}><AdminDashboard /></Suspense>;
   } else if (role === "hr") {
-    return <HRDashboard />;
+    return <Suspense fallback={<DashboardSkeleton />}><HRDashboard /></Suspense>;
   } else if (role === "coach") {
-    return <CoachDashboard />;
+    return <Suspense fallback={<DashboardSkeleton />}><CoachDashboard /></Suspense>;
   } else {
-    return <LearnerDashboard />;
+    return <Suspense fallback={<DashboardSkeleton />}><LearnerDashboard /></Suspense>;
   }
 }
 
