@@ -11,11 +11,14 @@ import {
   getCoachByUserId,
   updateCoachProfile,
   getUserById,
+  createNotification,
+  getDb,
 } from "../db";
 import { sendSessionConfirmationEmails } from "../email";
 import { sendCoursePurchaseConfirmationEmail, sendCoachingPlanPurchaseConfirmationEmail } from "../email-purchase-confirmations";
 import { generateMeetingDetails } from "../video";
 import { logAnalyticsEvent, createAdminNotification } from "../analytics-events";
+import { sql } from "drizzle-orm";
 import { claimWebhookEvent, markEventProcessed, markEventFailed } from "../webhookIdempotency";
 
 // Stripe will be initialized lazily to avoid startup errors when key is not set
@@ -244,6 +247,54 @@ export async function handleStripeWebhook(req: Request, res: Response) {
         });
         break;
       }
+      case "customer.subscription.trial_will_end": {
+        const trialSub = event.data.object as Stripe.Subscription;
+        log.info(`[Stripe Webhook] Trial ending soon for subscription ${trialSub.id}`);
+        try {
+          const customerId = typeof trialSub.customer === "string" ? trialSub.customer : trialSub.customer?.id;
+          if (customerId) {
+            const db = await getDb();
+            if (db) {
+              const [userRows] = await db.execute(sql`
+                SELECT id, email, firstName FROM users WHERE stripeCustomerId = ${customerId} LIMIT 1
+              `);
+              const user = Array.isArray(userRows) && userRows[0] ? userRows[0] as any : null;
+              if (user) {
+                await createNotification({
+                  userId: user.id,
+                  title: "Your trial is ending soon",
+                  message: `Your trial subscription will end in 3 days. Upgrade now to keep your access.`,
+                  type: "warning",
+                  link: "/pricing",
+                });
+              }
+            }
+          }
+          await createAdminNotification({
+            targetRole: "admin",
+            title: "Trial Ending Soon",
+            message: `Subscription ${trialSub.id} trial ending soon`,
+            type: "info",
+            link: "/admin/sales-analytics",
+          });
+        } catch (trialErr) {
+          log.error("Error handling trial_will_end:", trialErr);
+        }
+        break;
+      }
+
+      case "payment_method.attached": {
+        const pm = event.data.object as Stripe.PaymentMethod;
+        log.info(`[Stripe Webhook] Payment method ${pm.id} attached to customer ${pm.customer}`);
+        break;
+      }
+
+      case "payment_method.detached": {
+        const pmDetached = event.data.object as Stripe.PaymentMethod;
+        log.info(`[Stripe Webhook] Payment method ${pmDetached.id} detached`);
+        break;
+      }
+
       default:
         log.info(`[Stripe Webhook] Unhandled event type: ${event.type}`);
     }

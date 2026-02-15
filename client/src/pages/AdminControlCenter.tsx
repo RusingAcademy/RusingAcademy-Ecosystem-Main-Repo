@@ -63,6 +63,7 @@ import {
   ContentPipelineDashboard,
   QuizManagement,
   GovernmentReporting,
+  WebhookHealthDashboard,
 } from "./admin";
 
 interface Props {
@@ -121,6 +122,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   "live-kpi": LiveKPIDashboard,
   reports: ReportsAdmin,
   "gov-reporting": GovernmentReporting,
+  "webhook-health": WebhookHealthDashboard,
 
   // ── More / Settings ──
   settings: AdminSettings,
