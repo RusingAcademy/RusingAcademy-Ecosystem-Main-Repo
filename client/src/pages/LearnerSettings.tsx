@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { NotificationPreferences } from "@/components/NotificationPreferences";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -588,6 +589,9 @@ export default function LearnerSettings() {
                       </div>
                     </div>
                     
+                    {/* Sprint C3: In-app notification preferences */}
+                    <NotificationPreferences />
+
                     <Button onClick={handleSaveNotifications} disabled={updateReportsMutation.isPending}>
                       {updateReportsMutation.isPending ? (
                         <>

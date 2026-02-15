@@ -437,4 +437,40 @@ export const adminDashboardDataRouter = router({
     }).from(learningPaths).orderBy(learningPaths.title);
     return allPaths;
   }),
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // C3: Admin Broadcast Notification
+  // ═══════════════════════════════════════════════════════════════════════════
+  broadcastNotification: protectedProcedure
+    .input(z.object({
+      title: z.string().min(1).max(200),
+      message: z.string().min(1).max(2000),
+      link: z.string().optional(),
+      targetRole: z.enum(["all", "learner", "coach"]).default("all"),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Get target user IDs based on role filter
+      let userRows;
+      if (input.targetRole === "all") {
+        userRows = await db.select({ id: users.id }).from(users);
+      } else {
+        userRows = await db.select({ id: users.id }).from(users)
+          .where(eq(users.role, input.targetRole));
+      }
+
+      const userIds = userRows.map(u => u.id);
+
+      if (userIds.length === 0) {
+        return { sent: 0, failed: 0, total: 0 };
+      }
+
+      const { broadcastNotification } = await import("../services/learnerNotifications");
+      const result = await broadcastNotification(userIds, input.title, input.message, input.link);
+
+      log.info(`[Admin] Broadcast notification sent by admin ${ctx.user.id}: "${input.title}" to ${userIds.length} users (${input.targetRole})`);
+      return { ...result, total: userIds.length };
+    }),
 });

@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
+import { AdminBroadcastPanel } from "@/components/AdminBroadcastPanel";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -258,6 +259,11 @@ export default function NotificationsCenter() {
             );
           })
         )}
+      </div>
+
+      {/* Sprint C3: Broadcast Panel */}
+      <div className="mt-8">
+        <AdminBroadcastPanel />
       </div>
     </div>
   );

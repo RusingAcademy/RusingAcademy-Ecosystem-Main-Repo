@@ -671,6 +671,16 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
     });
 
     log.info(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
+
+    // Sprint C3: In-app notification for paid enrollment
+    try {
+      const { notifyLearner } = await import("../services/learnerNotifications");
+      await notifyLearner(userId, {
+        type: "enrollment",
+        courseTitle: courseTitle || "Course",
+        courseSlug: pathSlug || metadata.course_slug || undefined,
+      });
+    } catch (_notifErr) { /* best-effort */ }
   }
 
   log.info(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);

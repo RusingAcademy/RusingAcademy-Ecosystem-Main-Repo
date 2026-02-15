@@ -282,6 +282,18 @@ export const coursesRouter = router({
         console.warn("[Push] Failed to send enrollment notification:", pushErr);
       }
 
+      // Sprint C3: In-app notification for enrollment
+      try {
+        const { notifyLearner } = await import("../services/learnerNotifications");
+        await notifyLearner(ctx.user.id, {
+          type: "enrollment",
+          courseTitle: course.title,
+          courseSlug: course.slug || undefined,
+        });
+      } catch (notifErr) {
+        console.warn("[Notification] Failed to send enrollment notification:", notifErr);
+      }
+
       return { success: true, courseId: input.courseId, courseSlug: course.slug || String(input.courseId) };
     }),
 
@@ -556,6 +568,15 @@ export const coursesRouter = router({
                     data: { type: "course_completed", courseId: enrollment.courseId, certificateId: certNum },
                   });
                 } catch (_pushErr) { /* best-effort */ }
+
+                // Sprint C3: In-app notification for course completion
+                try {
+                  const { notifyLearner } = await import("../services/learnerNotifications");
+                  await notifyLearner(ctx.user.id, {
+                    type: "course_completion",
+                    courseTitle: courseForCert.title,
+                  });
+                } catch (_notifErr) { /* best-effort */ }
               }
             }
           }
@@ -665,6 +686,18 @@ export const coursesRouter = router({
         completedAt: new Date(),
       });
       
+      // Sprint C3: In-app notification for quiz result
+      try {
+        const { notifyLearner } = await import("../services/learnerNotifications");
+        await notifyLearner(ctx.user.id, {
+          type: "quiz_result",
+          lessonTitle: quiz.title || "Quiz",
+          score: earnedPoints,
+          totalPoints,
+          passed,
+        });
+      } catch (_notifErr) { /* best-effort */ }
+
       return {
         score: earnedPoints,
         maxScore: totalPoints,
