@@ -3167,6 +3167,120 @@ const learnerRouter = router({
       
       return progress;
     }),
+
+  // ============================================================================
+  // ONBOARDING & PROFILE MANAGEMENT (Sprint H1)
+  // ============================================================================
+  saveOnboarding: protectedProcedure
+    .input(z.object({
+      currentLevel: z.string().optional(),
+      targetLevel: z.string().optional(),
+      learningGoal: z.string().optional(),
+      weeklyHours: z.number().optional(),
+      preferredTime: z.string().optional(),
+      department: z.string().optional(),
+      position: z.string().optional(),
+      targetLanguage: z.enum(["french", "english"]).optional(),
+      primaryFocus: z.enum(["oral", "written", "reading", "all"]).optional(),
+      diagnosticScore: z.number().optional(),
+      diagnosticLevel: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        await db.insert(learnerProfiles).values({
+          userId: ctx.user.id,
+          currentLevel: input.currentLevel ? JSON.stringify({ reading: input.currentLevel, writing: input.currentLevel, oral: input.currentLevel }) : undefined,
+          targetLevel: input.targetLevel ? JSON.stringify({ reading: input.targetLevel, writing: input.targetLevel, oral: input.targetLevel }) : undefined,
+          learningGoals: input.learningGoal,
+          weeklyStudyHours: input.weeklyHours ? String(input.weeklyHours) : undefined,
+          department: input.department,
+          position: input.position,
+          targetLanguage: input.targetLanguage || "french",
+          primaryFocus: input.primaryFocus || "oral",
+        });
+      } else {
+        const updates: Record<string, unknown> = {};
+        if (input.currentLevel) updates.currentLevel = JSON.stringify({ reading: input.currentLevel, writing: input.currentLevel, oral: input.currentLevel });
+        if (input.targetLevel) updates.targetLevel = JSON.stringify({ reading: input.targetLevel, writing: input.targetLevel, oral: input.targetLevel });
+        if (input.learningGoal) updates.learningGoals = input.learningGoal;
+        if (input.weeklyHours) updates.weeklyStudyHours = String(input.weeklyHours);
+        if (input.department) updates.department = input.department;
+        if (input.position) updates.position = input.position;
+        if (input.targetLanguage) updates.targetLanguage = input.targetLanguage;
+        if (input.primaryFocus) updates.primaryFocus = input.primaryFocus;
+        if (input.diagnosticScore !== undefined) updates.lastAssessmentScore = input.diagnosticScore;
+        if (input.diagnosticLevel) updates.currentLevel = JSON.stringify({ reading: input.diagnosticLevel, writing: input.diagnosticLevel, oral: input.diagnosticLevel });
+        if (Object.keys(updates).length > 0) {
+          await db.update(learnerProfiles).set(updates).where(eq(learnerProfiles.id, learner.id));
+        }
+      }
+      return { success: true };
+    }),
+
+  getOnboardingStatus: protectedProcedure.query(async ({ ctx }) => {
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return { completed: false, profile: null };
+    const hasGoals = !!learner.learningGoals;
+    const hasLevel = !!learner.currentLevel;
+    return {
+      completed: hasGoals && hasLevel,
+      profile: {
+        currentLevel: learner.currentLevel,
+        targetLevel: learner.targetLevel,
+        learningGoals: learner.learningGoals,
+        department: learner.department,
+        position: learner.position,
+        targetLanguage: learner.targetLanguage,
+        primaryFocus: learner.primaryFocus,
+        weeklyStudyHours: learner.weeklyStudyHours,
+      },
+    };
+  }),
+
+  updateProfile: protectedProcedure
+    .input(z.object({
+      name: z.string().optional(),
+      department: z.string().optional(),
+      position: z.string().optional(),
+      targetLanguage: z.enum(["french", "english"]).optional(),
+      primaryFocus: z.enum(["oral", "written", "reading", "all"]).optional(),
+      currentLevel: z.object({ reading: z.string(), writing: z.string(), oral: z.string() }).optional(),
+      targetLevel: z.object({ reading: z.string(), writing: z.string(), oral: z.string() }).optional(),
+      learningGoals: z.string().optional(),
+      weeklyStudyHours: z.number().optional(),
+      examDate: z.string().optional(),
+      preferredLanguage: z.enum(["en", "fr"]).optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+      if (input.name || input.preferredLanguage) {
+        const userUpdates: Record<string, unknown> = {};
+        if (input.name) userUpdates.name = input.name;
+        if (input.preferredLanguage) userUpdates.preferredLanguage = input.preferredLanguage;
+        await db.update(users).set(userUpdates).where(eq(users.id, ctx.user.id));
+      }
+      const learner = await getLearnerByUserId(ctx.user.id);
+      const profileUpdates: Record<string, unknown> = {};
+      if (input.department) profileUpdates.department = input.department;
+      if (input.position) profileUpdates.position = input.position;
+      if (input.targetLanguage) profileUpdates.targetLanguage = input.targetLanguage;
+      if (input.primaryFocus) profileUpdates.primaryFocus = input.primaryFocus;
+      if (input.currentLevel) profileUpdates.currentLevel = JSON.stringify(input.currentLevel);
+      if (input.targetLevel) profileUpdates.targetLevel = JSON.stringify(input.targetLevel);
+      if (input.learningGoals) profileUpdates.learningGoals = input.learningGoals;
+      if (input.weeklyStudyHours !== undefined) profileUpdates.weeklyStudyHours = String(input.weeklyStudyHours);
+      if (input.examDate) profileUpdates.examDate = new Date(input.examDate);
+      if (learner && Object.keys(profileUpdates).length > 0) {
+        await db.update(learnerProfiles).set(profileUpdates).where(eq(learnerProfiles.id, learner.id));
+      } else if (!learner && Object.keys(profileUpdates).length > 0) {
+        await db.insert(learnerProfiles).values({ userId: ctx.user.id, ...profileUpdates });
+      }
+      return { success: true };
+    }),
 });
 
 // ============================================================================
