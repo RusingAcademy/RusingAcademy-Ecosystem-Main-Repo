@@ -1,0 +1,70 @@
+# =============================================================================
+# RusingAcademy Ecosystem — Deploy to Staging (Railway)
+# Sprint Y1-W1-S01 | Chief Ecosystem Orchestrator
+# =============================================================================
+
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy-staging:
+    name: Deploy to Railway Staging
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Railway
+        id: deploy
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          echo "Railway deployment triggered by push to main"
+          echo "Commit: ${{ github.sha }}"
+          echo "Railway auto-deploys from main branch"
+          echo "url=https://new-rusingacademy-project-production.up.railway.app" >> "$GITHUB_OUTPUT"
+
+      - name: Health Check
+        run: |
+          echo "Waiting 90s for deployment to propagate..."
+          sleep 90
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 "https://new-rusingacademy-project-production.up.railway.app/")
+          echo "Health check status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "::error::Staging health check failed with status $STATUS"
+            exit 1
+          fi
+          echo "Staging deployment healthy"
+
+      - name: Smoke Test Critical Routes
+        run: |
+          BASE="https://new-rusingacademy-project-production.up.railway.app"
+          ROUTES="/ /login /courses /pricing /about /api/health"
+          FAILED=0
+          for ROUTE in $ROUTES; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 15 "$BASE$ROUTE")
+            if [ "$STATUS" = "200" ]; then
+              echo "PASS $ROUTE ($STATUS)"
+            else
+              echo "FAIL $ROUTE ($STATUS)"
+              FAILED=$((FAILED + 1))
+            fi
+          done
+          if [ "$FAILED" -gt 0 ]; then
+            echo "::warning::$FAILED route(s) failed smoke test"
+          fi
+          echo "Smoke test complete"
