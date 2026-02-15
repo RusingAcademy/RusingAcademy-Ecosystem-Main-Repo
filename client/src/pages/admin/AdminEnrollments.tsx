@@ -6,16 +6,61 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { GraduationCap, Search, Download, Users, BookOpen, TrendingUp, Clock, RefreshCw } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { GraduationCap, Search, Download, Users, BookOpen, TrendingUp, Clock, RefreshCw, UserPlus, XCircle } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminEnrollments() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [enrollDialogOpen, setEnrollDialogOpen] = useState(false);
+  const [enrollType, setEnrollType] = useState<"course" | "path">("course");
+  const [selectedUserId, setSelectedUserId] = useState<string>("");
+  const [selectedTargetId, setSelectedTargetId] = useState<string>("");
+  const [enrollReason, setEnrollReason] = useState("");
 
   // Fetch enrollments data from admin procedure
   const { data, isLoading, error, refetch } = trpc.admin.getEnrollments.useQuery(undefined, {
     retry: 1,
+  });
+
+  // Fetch users and courses/paths for manual enrollment
+  const { data: usersForEnroll } = trpc.admin.getUsersForEnrollment.useQuery(undefined, {
+    enabled: enrollDialogOpen,
+  });
+  const { data: coursesForEnroll } = trpc.admin.getCoursesForEnrollment.useQuery(undefined, {
+    enabled: enrollDialogOpen && enrollType === "course",
+  });
+  const { data: pathsForEnroll } = trpc.admin.getPathsForEnrollment.useQuery(undefined, {
+    enabled: enrollDialogOpen && enrollType === "path",
+  });
+
+  // Manual enrollment mutation
+  const manualEnrollMutation = trpc.admin.manualEnroll.useMutation({
+    onSuccess: (result) => {
+      toast.success(result.message);
+      setEnrollDialogOpen(false);
+      setSelectedUserId("");
+      setSelectedTargetId("");
+      setEnrollReason("");
+      refetch();
+    },
+    onError: (err) => {
+      toast.error(err.message || "Failed to enroll user");
+    },
+  });
+
+  // Unenroll mutation
+  const unenrollMutation = trpc.admin.unenroll.useMutation({
+    onSuccess: () => {
+      toast.success("Enrollment cancelled successfully");
+      refetch();
+    },
+    onError: (err) => {
+      toast.error(err.message || "Failed to cancel enrollment");
+    },
   });
 
   const enrollments = data?.enrollments ?? [];
@@ -39,15 +84,16 @@ export default function AdminEnrollments() {
       toast.error("No data to export");
       return;
     }
-    const headers = ["Student", "Email", "Course", "Status", "Progress", "Enrolled Date", "Payment"];
+    const headers = ["Student", "Email", "Course/Path", "Type", "Status", "Progress", "Enrolled Date", "Payment"];
     const rows = filteredEnrollments.map((e: any) => [
       e.userName || "N/A",
       e.userEmail || "N/A",
       e.courseName || "N/A",
+      e.type || "course",
       e.status || "N/A",
       `${e.progressPercent || 0}%`,
       e.enrolledAt ? new Date(e.enrolledAt).toLocaleDateString() : "N/A",
-      "N/A",
+      (e as any).paymentStatus || "free",
     ]);
     const csv = [headers.join(","), ...rows.map(r => r.map(c => `"${c}"`).join(","))].join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -58,6 +104,27 @@ export default function AdminEnrollments() {
     a.click();
     URL.revokeObjectURL(url);
     toast.success("CSV exported successfully");
+  };
+
+  const handleManualEnroll = () => {
+    if (!selectedUserId || !selectedTargetId) {
+      toast.error("Please select a user and a course/path");
+      return;
+    }
+    manualEnrollMutation.mutate({
+      userId: parseInt(selectedUserId),
+      type: enrollType,
+      targetId: parseInt(selectedTargetId),
+      reason: enrollReason || undefined,
+    });
+  };
+
+  const handleUnenroll = (enrollmentId: number, type: string) => {
+    if (!confirm("Are you sure you want to cancel this enrollment?")) return;
+    unenrollMutation.mutate({
+      enrollmentId,
+      type: type as "course" | "path",
+    });
   };
 
   const getStatusBadge = (status: string) => {
@@ -77,6 +144,7 @@ export default function AdminEnrollments() {
       pending: { variant: "outline", label: "Pending" },
       refunded: { variant: "destructive", label: "Refunded" },
       free: { variant: "secondary", label: "Free" },
+      manual: { variant: "outline", label: "Manual" },
     };
     const config = variants[status] || { variant: "outline" as const, label: status };
     return <Badge variant={config.variant}>{config.label}</Badge>;
@@ -112,12 +180,100 @@ export default function AdminEnrollments() {
           <GraduationCap className="h-8 w-8 text-teal-600" />
           <div>
             <h1 className="text-2xl font-bold">Enrollments</h1>
-            <p className="text-muted-foreground">Manage student enrollments across all courses</p>
+            <p className="text-muted-foreground">Manage student enrollments across all courses and paths</p>
           </div>
         </div>
-        <Button variant="outline" className="gap-1.5" onClick={handleExportCSV}>
-          <Download className="h-4 w-4" /> Export CSV
-        </Button>
+        <div className="flex items-center gap-2">
+          {/* Manual Enrollment Dialog */}
+          <Dialog open={enrollDialogOpen} onOpenChange={setEnrollDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="gap-1.5 bg-teal-600 hover:bg-teal-700">
+                <UserPlus className="h-4 w-4" /> Manual Enroll
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[480px]">
+              <DialogHeader>
+                <DialogTitle>Manual Enrollment</DialogTitle>
+                <DialogDescription>
+                  Enroll a user in a course or learning path without payment.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 py-4">
+                <div className="space-y-2">
+                  <Label>Enrollment Type</Label>
+                  <Select value={enrollType} onValueChange={(v) => { setEnrollType(v as any); setSelectedTargetId(""); }}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="course">Course</SelectItem>
+                      <SelectItem value="path">Learning Path</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>User</Label>
+                  <Select value={selectedUserId} onValueChange={setSelectedUserId}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a user..." />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[200px]">
+                      {(usersForEnroll || []).map((u: any) => (
+                        <SelectItem key={u.id} value={String(u.id)}>
+                          {u.name || u.email} {u.name ? `(${u.email})` : ""}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>{enrollType === "course" ? "Course" : "Learning Path"}</Label>
+                  <Select value={selectedTargetId} onValueChange={setSelectedTargetId}>
+                    <SelectTrigger>
+                      <SelectValue placeholder={`Select a ${enrollType}...`} />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[200px]">
+                      {enrollType === "course"
+                        ? (coursesForEnroll || []).map((c: any) => (
+                            <SelectItem key={c.id} value={String(c.id)}>
+                              {c.title} {c.level ? `(${c.level})` : ""}
+                            </SelectItem>
+                          ))
+                        : (pathsForEnroll || []).map((p: any) => (
+                            <SelectItem key={p.id} value={String(p.id)}>
+                              {p.title}
+                            </SelectItem>
+                          ))
+                      }
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Reason (optional)</Label>
+                  <Textarea
+                    placeholder="e.g., Complimentary access, government partnership..."
+                    value={enrollReason}
+                    onChange={(e) => setEnrollReason(e.target.value)}
+                    rows={2}
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setEnrollDialogOpen(false)}>Cancel</Button>
+                <Button
+                  onClick={handleManualEnroll}
+                  disabled={manualEnrollMutation.isPending || !selectedUserId || !selectedTargetId}
+                  className="bg-teal-600 hover:bg-teal-700"
+                >
+                  {manualEnrollMutation.isPending ? "Enrolling..." : "Enroll User"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+          <Button variant="outline" className="gap-1.5" onClick={handleExportCSV}>
+            <Download className="h-4 w-4" /> Export CSV
+          </Button>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -200,23 +356,31 @@ export default function AdminEnrollments() {
             <div className="py-12 text-center text-muted-foreground">Loading enrollments...</div>
           ) : filteredEnrollments.length === 0 ? (
             <div className="py-12 text-center text-muted-foreground">
-              {enrollments.length === 0 ? "No enrollments yet" : "No enrollments match your filters"}
+              {enrollments.length === 0 ? (
+                <div className="space-y-3">
+                  <GraduationCap className="h-12 w-12 mx-auto text-muted-foreground/50" />
+                  <p className="text-lg font-medium">No enrollments yet</p>
+                  <p className="text-sm">Use the "Manual Enroll" button to add your first student.</p>
+                </div>
+              ) : "No enrollments match your filters"}
             </div>
           ) : (
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>Student</TableHead>
-                  <TableHead>Course</TableHead>
+                  <TableHead>Course / Path</TableHead>
+                  <TableHead>Type</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Progress</TableHead>
                   <TableHead>Payment</TableHead>
                   <TableHead>Enrolled</TableHead>
+                  <TableHead className="w-[80px]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredEnrollments.map((enrollment: any) => (
-                  <TableRow key={enrollment.id}>
+                  <TableRow key={`${enrollment.type}-${enrollment.id}`}>
                     <TableCell>
                       <div>
                         <p className="font-medium">{enrollment.userName || "Unknown"}</p>
@@ -224,6 +388,11 @@ export default function AdminEnrollments() {
                       </div>
                     </TableCell>
                     <TableCell className="max-w-[200px] truncate">{enrollment.courseName || "N/A"}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className="text-xs">
+                        {enrollment.type === "path" ? "Path" : "Course"}
+                      </Badge>
+                    </TableCell>
                     <TableCell>{getStatusBadge(enrollment.status)}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
@@ -239,6 +408,19 @@ export default function AdminEnrollments() {
                     <TableCell>{getPaymentBadge(enrollment.type === "path" ? (enrollment as any).paymentStatus || "free" : "free")}</TableCell>
                     <TableCell className="text-sm text-muted-foreground">
                       {enrollment.enrolledAt ? new Date(enrollment.enrolledAt).toLocaleDateString() : "N/A"}
+                    </TableCell>
+                    <TableCell>
+                      {enrollment.status !== "cancelled" && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 w-8 p-0 text-destructive hover:text-destructive"
+                          onClick={() => handleUnenroll(enrollment.id, enrollment.type || "course")}
+                          title="Cancel enrollment"
+                        >
+                          <XCircle className="h-4 w-4" />
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}

@@ -69,6 +69,8 @@ import CourseDetail from "./pages/CourseDetail";
 import Paths from "./pages/Paths";
 import PathEnrollmentSuccess from "./pages/PathEnrollmentSuccess";
 import CourseSuccess from "./pages/CourseSuccess";
+import FreeEnrollmentSuccess from "./pages/FreeEnrollmentSuccess";
+import PaymentError from "./pages/PaymentError";
 import LearnCourse from "./pages/LearnCourse";
 import LearnPortal from "./pages/LearnPortal";
 import LearnLessonPage from "./pages/LearnLessonPage";
@@ -277,6 +279,9 @@ function Router() {
       <Route path="/courses" component={CoursesPage} />
       <Route path="/courses-old" component={Courses} />
       <Route path="/courses/success" component={CourseSuccess} />
+      <Route path="/courses/:courseId/enrolled" component={FreeEnrollmentSuccess} />
+      <Route path="/payment/error" component={PaymentError} />
+      <Route path="/payment/cancelled" component={PaymentError} />
       <Route path="/courses/:slug" component={CourseDetail} />
       <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
       <Route path="/learn/:slug" component={LearnPortal} />

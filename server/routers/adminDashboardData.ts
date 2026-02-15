@@ -11,7 +11,8 @@ import {
   learningPaths,
   activities 
 } from "../../drizzle/schema";
-import { eq, desc, sql, count } from "drizzle-orm";
+import { eq, desc, sql, count, and } from "drizzle-orm";
+import { z } from "zod";
 import { createLogger } from "../logger";
 const log = createLogger("routers-adminDashboardData");
 
@@ -288,4 +289,152 @@ export const adminDashboardDataRouter = router({
         };
       }
     }),
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // S09: Admin Manual Enrollment — Enroll/unenroll users in courses/paths
+  // ═══════════════════════════════════════════════════════════════════════════
+  manualEnroll: protectedProcedure
+    .input(z.object({
+      userId: z.number(),
+      type: z.enum(["course", "path"]),
+      targetId: z.number(), // courseId or pathId
+      reason: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Verify user exists
+      const [user] = await db.select({ id: users.id, name: users.name, email: users.email })
+        .from(users).where(eq(users.id, input.userId)).limit(1);
+      if (!user) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+
+      if (input.type === "course") {
+        const { lessons } = await import("../../drizzle/schema");
+        // Check if already enrolled
+        const [existing] = await db.select({ id: courseEnrollments.id })
+          .from(courseEnrollments)
+          .where(and(eq(courseEnrollments.userId, input.userId), eq(courseEnrollments.courseId, input.targetId)))
+          .limit(1);
+        if (existing) throw new TRPCError({ code: "CONFLICT", message: "User is already enrolled in this course" });
+
+        // Count lessons
+        const [lessonCount] = await db.select({ total: count() })
+          .from(lessons).where(eq(lessons.courseId, input.targetId));
+
+        await db.insert(courseEnrollments).values({
+          courseId: input.targetId,
+          userId: input.userId,
+          progressPercent: 0,
+          lessonsCompleted: 0,
+          totalLessons: lessonCount?.total || 0,
+        });
+
+        log.info(`[Admin] Manual enrollment: user ${input.userId} enrolled in course ${input.targetId} by admin ${ctx.user.id}`);
+        return { success: true, message: `User ${user.name || user.email} enrolled in course` };
+      } else {
+        // Path enrollment
+        const { pathCourses, lessons } = await import("../../drizzle/schema");
+        const [existing] = await db.select({ id: pathEnrollments.id })
+          .from(pathEnrollments)
+          .where(and(eq(pathEnrollments.userId, input.userId), eq(pathEnrollments.pathId, input.targetId)))
+          .limit(1);
+        if (existing) throw new TRPCError({ code: "CONFLICT", message: "User is already enrolled in this path" });
+
+        // Create path enrollment
+        await db.insert(pathEnrollments).values({
+          pathId: input.targetId,
+          userId: input.userId,
+          status: "active",
+          paymentStatus: "manual",
+          amountPaid: "0",
+          startedAt: new Date(),
+        });
+
+        // Auto-enroll in all path courses
+        const pathCoursesResult = await db.select({ courseId: pathCourses.courseId })
+          .from(pathCourses).where(eq(pathCourses.pathId, input.targetId));
+
+        for (const pc of pathCoursesResult) {
+          const [existingCourse] = await db.select({ id: courseEnrollments.id })
+            .from(courseEnrollments)
+            .where(and(eq(courseEnrollments.userId, input.userId), eq(courseEnrollments.courseId, pc.courseId)))
+            .limit(1);
+          if (!existingCourse) {
+            const [lessonCount] = await db.select({ total: count() })
+              .from(lessons).where(eq(lessons.courseId, pc.courseId));
+            await db.insert(courseEnrollments).values({
+              courseId: pc.courseId,
+              userId: input.userId,
+              progressPercent: 0,
+              lessonsCompleted: 0,
+              totalLessons: lessonCount?.total || 0,
+            });
+          }
+        }
+
+        log.info(`[Admin] Manual enrollment: user ${input.userId} enrolled in path ${input.targetId} (${pathCoursesResult.length} courses) by admin ${ctx.user.id}`);
+        return { success: true, message: `User ${user.name || user.email} enrolled in path with ${pathCoursesResult.length} courses` };
+      }
+    }),
+
+  unenroll: protectedProcedure
+    .input(z.object({
+      enrollmentId: z.number(),
+      type: z.enum(["course", "path"]),
+      reason: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      if (input.type === "course") {
+        await db.update(courseEnrollments)
+          .set({ status: "cancelled" })
+          .where(eq(courseEnrollments.id, input.enrollmentId));
+      } else {
+        await db.update(pathEnrollments)
+          .set({ status: "cancelled" })
+          .where(eq(pathEnrollments.id, input.enrollmentId));
+      }
+
+      log.info(`[Admin] Unenrollment: ${input.type} enrollment ${input.enrollmentId} cancelled by admin ${ctx.user.id}`);
+      return { success: true, message: "Enrollment cancelled" };
+    }),
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // S09: Get all users for manual enrollment dropdown
+  // ═══════════════════════════════════════════════════════════════════════════
+  getUsersForEnrollment: protectedProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const allUsers = await db.select({
+      id: users.id,
+      name: users.name,
+      email: users.email,
+    }).from(users).orderBy(users.name).limit(500);
+    return allUsers;
+  }),
+
+  getCoursesForEnrollment: protectedProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const allCourses = await db.select({
+      id: courses.id,
+      title: courses.title,
+      level: courses.level,
+    }).from(courses).orderBy(courses.title);
+    return allCourses;
+  }),
+
+  getPathsForEnrollment: protectedProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const allPaths = await db.select({
+      id: learningPaths.id,
+      title: learningPaths.title,
+      slug: learningPaths.slug,
+    }).from(learningPaths).orderBy(learningPaths.title);
+    return allPaths;
+  }),
 });
