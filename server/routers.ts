@@ -2,6 +2,7 @@ import { z } from "zod";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
+import { metricsRouter } from "./routers/metrics";
 import { contactRouter } from "./routers/contact";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { TRPCError } from "@trpc/server";
@@ -8848,8 +8849,9 @@ export const appRouter = router({
   kajabiDownloadsAdmin: downloadsAdminRouter,
   kajabiNewslettersAdmin: newslettersAdminRouter,
   kajabiCommunityAdmin: communityAdminRouter,
-  kajabiAllProducts: allProductsRouter,
-
+   kajabiAllProducts: allProductsRouter,
+  // Observability metrics (admin-only)
+  metrics: metricsRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure
