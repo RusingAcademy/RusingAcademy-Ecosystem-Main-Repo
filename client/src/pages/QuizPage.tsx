@@ -1,16 +1,21 @@
 /**
- * QuizPage — RusingÂcademy Learning Portal
+ * QuizPage — RusingAcademy Learning Portal
  * Summative quiz for module assessment with gamification
  * Design: Premium glassmorphism, teal/gold, step-by-step quiz
+ * 
+ * Sprint S11: Now fetches questions from database via courses.getQuiz
+ * Falls back to generated questions when DB quiz not available
  */
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { getProgramById, type Program } from "@/data/courseData";
 import { useGamification } from "@/contexts/GamificationContext";
 import DashboardLayout from "@/components/DashboardLayout";
+import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
-// Generate summative quiz questions based on module
+// ─── Fallback Question Generator ─────────────────────────────────────
+// Used when no database quiz exists for this lesson/module
 function generateQuizQuestions(moduleId: number) {
   const baseQuestions = [
     { q: "Which of the following best demonstrates professional communication?", opts: ["Using slang freely", "Adapting register to context", "Speaking as fast as possible", "Avoiding eye contact"], correct: 1 },
@@ -24,13 +29,43 @@ function generateQuizQuestions(moduleId: number) {
     { q: "Self-assessment in language learning helps you:", opts: ["Feel bad about mistakes", "Identify areas for improvement", "Compare yourself to others", "Avoid challenging tasks"], correct: 1 },
     { q: "The best approach to language learning is:", opts: ["Studying grammar only", "Consistent practice with varied activities", "Waiting for perfection before speaking", "Only reading textbooks"], correct: 1 },
   ];
-  // Shuffle based on moduleId for variety
   const shuffled = [...baseQuestions].sort((a, b) => {
     const ha = (moduleId * 7 + baseQuestions.indexOf(a)) % 10;
     const hb = (moduleId * 7 + baseQuestions.indexOf(b)) % 10;
     return ha - hb;
   });
   return shuffled;
+}
+
+// ─── Question Type Adapter ───────────────────────────────────────────
+interface NormalizedQuestion {
+  q: string;
+  opts: string[];
+  correct: number;
+  dbQuestionId?: number;
+}
+
+function normalizeDbQuestions(dbQuiz: any): NormalizedQuestion[] {
+  if (!dbQuiz?.questions?.length) return [];
+  
+  return dbQuiz.questions.map((q: any) => {
+    // Parse options — could be JSON string or array
+    let options: string[] = [];
+    if (typeof q.options === "string") {
+      try { options = JSON.parse(q.options); } catch { options = [q.options]; }
+    } else if (Array.isArray(q.options)) {
+      options = q.options;
+    }
+    
+    // For DB questions, correct answer index is not sent to client
+    // We'll handle scoring server-side via submitQuiz
+    return {
+      q: q.questionText || q.prompt || "",
+      opts: options,
+      correct: -1, // Unknown — scored server-side
+      dbQuestionId: q.id,
+    };
+  });
 }
 
 export default function QuizPage() {
@@ -46,17 +81,33 @@ export default function QuizPage() {
   const moduleId = parseInt(quizId.replace("mod-", ""), 10);
   const currentModule = path?.modules.find((m) => m.id === moduleId);
 
-  const { addXP, passQuiz, quizzesPassed } = useGamification();
+  const { addXP, passQuiz } = useGamification();
   const quizKey = `${programId}-mod-${moduleId}`;
   const [alreadyPassed] = useState(false);
 
-  const [questions] = useState(() => generateQuizQuestions(moduleId));
+  // ─── Try to fetch database quiz ────────────────────────────────────
+  const dbQuiz = trpc.courses.getQuiz.useQuery(
+    { lessonId: moduleId },
+    { retry: false, enabled: !!moduleId }
+  );
+  const submitQuizMut = trpc.courses.submitQuiz.useMutation();
+
+  // Determine question source: DB or fallback
+  const isDbQuiz = !!dbQuiz.data?.questions?.length;
+  const questions = useMemo(() => {
+    if (isDbQuiz) {
+      return normalizeDbQuestions(dbQuiz.data);
+    }
+    return generateQuizQuestions(moduleId);
+  }, [isDbQuiz, dbQuiz.data, moduleId]);
+
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [started, setStarted] = useState(false);
+  const [serverScore, setServerScore] = useState<number | null>(null);
 
   const handleAnswer = useCallback((idx: number) => {
     setSelectedAnswer(idx);
@@ -72,16 +123,53 @@ export default function QuizPage() {
         setCurrentQ(currentQ + 1);
       } else {
         setShowResult(true);
-        const score = newAnswers.reduce((s, a, i) => s + (a === questions[i].correct ? 1 : 0), 0);
-        const pct = Math.round((score / questions.length) * 100);
-        if (pct >= (currentModule?.quizPassing || 80)) {
-          passQuiz(quizKey, pct, questions.length, score, programId, pathId, undefined, "summative");
-          addXP(200);
-          toast.success("Quiz passed! +200 XP earned!");
+        
+        if (isDbQuiz && dbQuiz.data) {
+          // Submit to server for scoring
+          const answerPayload = questions.map((q, i) => ({
+            questionId: q.dbQuestionId!,
+            answer: q.opts[newAnswers[i]] || "",
+          }));
+          
+          submitQuizMut.mutate(
+            { quizId: dbQuiz.data.id, answers: answerPayload },
+            {
+              onSuccess: (result: any) => {
+                const pct = result?.score ?? 0;
+                setServerScore(pct);
+                if (pct >= (currentModule?.quizPassing || 80)) {
+                  passQuiz(quizKey, pct, questions.length, Math.round(pct * questions.length / 100), programId, pathId, undefined, "summative");
+                  addXP(200);
+                  toast.success("Quiz passed! +200 XP earned!");
+                }
+              },
+              onError: () => {
+                // Fallback to client-side scoring
+                const score = newAnswers.reduce((s, a, i) => s + (a === questions[i].correct ? 1 : 0), 0);
+                const pct = Math.round((score / questions.length) * 100);
+                setServerScore(pct);
+                if (pct >= (currentModule?.quizPassing || 80)) {
+                  passQuiz(quizKey, pct, questions.length, score, programId, pathId, undefined, "summative");
+                  addXP(200);
+                  toast.success("Quiz passed! +200 XP earned!");
+                }
+              },
+            }
+          );
+        } else {
+          // Client-side scoring for fallback questions
+          const score = newAnswers.reduce((s, a, i) => s + (a === questions[i].correct ? 1 : 0), 0);
+          const pct = Math.round((score / questions.length) * 100);
+          setServerScore(pct);
+          if (pct >= (currentModule?.quizPassing || 80)) {
+            passQuiz(quizKey, pct, questions.length, score, programId, pathId, undefined, "summative");
+            addXP(200);
+            toast.success("Quiz passed! +200 XP earned!");
+          }
         }
       }
     }, 1200);
-  }, [answers, currentQ, questions, currentModule, quizKey, passQuiz, addXP]);
+  }, [answers, currentQ, questions, currentModule, quizKey, passQuiz, addXP, isDbQuiz, dbQuiz.data, submitQuizMut, programId, pathId]);
 
   if (!program || !path || !currentModule) {
     return (
@@ -89,13 +177,25 @@ export default function QuizPage() {
         <div className="text-center py-20">
           <span className="material-icons text-6xl text-gray-300">error_outline</span>
           <p className="text-gray-500 mt-4">Quiz not found.</p>
-          <Link href="/programs" className="text-[#008090] text-sm mt-2 inline-block hover:underline">← Back</Link>
+          <Link href="/programs" className="text-[#008090] text-sm mt-2 inline-block hover:underline">&larr; Back</Link>
         </div>
       </DashboardLayout>
     );
   }
 
   const passingScore = currentModule.quizPassing || 80;
+
+  // Loading state for DB quiz
+  if (dbQuiz.isLoading) {
+    return (
+      <DashboardLayout>
+        <div className="max-w-2xl mx-auto py-10 text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-[#008090] border-t-transparent rounded-full mx-auto" />
+          <p className="text-gray-500 mt-4">Loading quiz...</p>
+        </div>
+      </DashboardLayout>
+    );
+  }
 
   // Pre-quiz screen
   if (!started) {
@@ -124,6 +224,15 @@ export default function QuizPage() {
             </h1>
             <p className="text-lg text-gray-600 mt-1">Module {currentModule.id}: {currentModule.title}</p>
             <p className="text-sm text-gray-400 mt-1">{currentModule.titleFr}</p>
+
+            {isDbQuiz && (
+              <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium" style={{
+                background: "rgba(0,128,144,0.08)", color: "#008090",
+              }}>
+                <span className="material-icons" style={{ fontSize: "14px" }}>verified</span>
+                Official Assessment
+              </div>
+            )}
 
             {alreadyPassed && (
               <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full" style={{
@@ -176,8 +285,8 @@ export default function QuizPage() {
 
   // Results screen
   if (showResult) {
-    const score = answers.reduce((s, a, i) => s + (a === questions[i].correct ? 1 : 0), 0);
-    const pct = Math.round((score / questions.length) * 100);
+    const clientScore = answers.reduce((s, a, i) => s + (a === questions[i].correct ? 1 : 0), 0);
+    const pct = serverScore !== null ? serverScore : Math.round((clientScore / questions.length) * 100);
     const passed = pct >= passingScore;
 
     return (
@@ -203,7 +312,13 @@ export default function QuizPage() {
               {passed ? "Congratulations!" : "Keep Going!"}
             </h2>
             <p className="text-5xl font-bold mt-3" style={{ color: passed ? "#f5a623" : "#e74c3c" }}>{pct}%</p>
-            <p className="text-sm text-gray-500 mt-2">{score}/{questions.length} correct answers</p>
+            
+            {!isDbQuiz && (
+              <p className="text-sm text-gray-500 mt-2">{clientScore}/{questions.length} correct answers</p>
+            )}
+            {isDbQuiz && submitQuizMut.isPending && (
+              <p className="text-sm text-gray-500 mt-2 animate-pulse">Scoring your answers...</p>
+            )}
 
             {passed && (
               <div className="mt-4 space-y-2">
@@ -221,29 +336,49 @@ export default function QuizPage() {
               </p>
             )}
 
-            {/* Answer Review */}
-            <div className="mt-6 text-left space-y-2">
-              <h4 className="text-sm font-semibold text-gray-600 mb-3">Answer Review:</h4>
-              {questions.map((q, i) => (
-                <div key={i} className="flex items-start gap-2 p-2 rounded-lg text-xs" style={{
-                  background: answers[i] === q.correct ? "rgba(0,128,144,0.04)" : "rgba(231,76,60,0.04)",
-                }}>
-                  <span className="material-icons flex-shrink-0 mt-0.5" style={{
-                    fontSize: "14px",
-                    color: answers[i] === q.correct ? "#008090" : "#e74c3c",
+            {/* Answer Review — only for fallback questions where we know correct answers */}
+            {!isDbQuiz && (
+              <div className="mt-6 text-left space-y-2">
+                <h4 className="text-sm font-semibold text-gray-600 mb-3">Answer Review:</h4>
+                {questions.map((q, i) => (
+                  <div key={i} className="flex items-start gap-2 text-xs p-2 rounded-lg" style={{
+                    background: answers[i] === q.correct ? "rgba(0,128,144,0.04)" : "rgba(231,76,60,0.04)",
                   }}>
-                    {answers[i] === q.correct ? "check_circle" : "cancel"}
-                  </span>
-                  <div>
-                    <p className="font-medium text-gray-700">{q.q}</p>
-                    <p className="text-gray-500 mt-0.5">
-                      Your answer: {q.opts[answers[i]]}
-                      {answers[i] !== q.correct && <span className="text-[#008090] ml-2">Correct: {q.opts[q.correct]}</span>}
-                    </p>
+                    <span className="material-icons flex-shrink-0 mt-0.5" style={{
+                      fontSize: "14px",
+                      color: answers[i] === q.correct ? "#008090" : "#e74c3c",
+                    }}>
+                      {answers[i] === q.correct ? "check_circle" : "cancel"}
+                    </span>
+                    <div>
+                      <p className="font-medium text-gray-700">{q.q}</p>
+                      <p className="text-gray-500 mt-0.5">
+                        Your answer: {q.opts[answers[i]]}
+                        {answers[i] !== q.correct && <span className="text-[#008090] ml-2">Correct: {q.opts[q.correct]}</span>}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
+
+            {/* For DB quizzes, show a summary without revealing answers */}
+            {isDbQuiz && (
+              <div className="mt-6 text-left space-y-2">
+                <h4 className="text-sm font-semibold text-gray-600 mb-3">Questions Reviewed:</h4>
+                {questions.map((q, i) => (
+                  <div key={i} className="flex items-start gap-2 text-xs p-2 rounded-lg bg-muted/30">
+                    <span className="material-icons flex-shrink-0 mt-0.5 text-gray-400" style={{ fontSize: "14px" }}>
+                      help_outline
+                    </span>
+                    <div>
+                      <p className="font-medium text-gray-700">{q.q}</p>
+                      <p className="text-gray-500 mt-0.5">Your answer: {q.opts[answers[i]] || "—"}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div className="mt-6 flex items-center justify-center gap-3">
               <Link href={`/programs/${programId}/${pathId}`}
@@ -253,7 +388,7 @@ export default function QuizPage() {
                 Back to Path
               </Link>
               {!passed && (
-                <button onClick={() => { setCurrentQ(0); setAnswers([]); setShowResult(false); setStarted(true); }}
+                <button onClick={() => { setCurrentQ(0); setAnswers([]); setShowResult(false); setStarted(true); setServerScore(null); }}
                   className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: "#008090" }}>
                   Retry Quiz
                 </button>
@@ -282,7 +417,7 @@ export default function QuizPage() {
           {questions.map((_, i) => (
             <div key={i} className="flex-1 h-2 rounded-full transition-all duration-500" style={{
               background: i < currentQ
-                ? (answers[i] === questions[i].correct ? "#008090" : "#e74c3c")
+                ? (isDbQuiz ? "#008090" : (answers[i] === questions[i].correct ? "#008090" : "#e74c3c"))
                 : i === currentQ ? "rgba(0,128,144,0.3)" : "rgba(0,128,144,0.06)",
             }} />
           ))}
@@ -300,6 +435,13 @@ export default function QuizPage() {
             }}>
               Question {currentQ + 1}
             </span>
+            {isDbQuiz && (
+              <span className="text-xs px-2 py-0.5 rounded-full" style={{
+                background: "rgba(139,92,246,0.1)", color: "#8b5cf6",
+              }}>
+                Official
+              </span>
+            )}
           </div>
 
           <h3 className="text-lg font-semibold text-gray-900 mb-6">{questions[currentQ].q}</h3>
@@ -307,8 +449,8 @@ export default function QuizPage() {
           <div className="space-y-3">
             {questions[currentQ].opts.map((opt, idx) => {
               const isSelected = selectedAnswer === idx;
-              const isCorrect = idx === questions[currentQ].correct;
-              const showCorrectness = showFeedback && isSelected;
+              const isCorrect = !isDbQuiz ? idx === questions[currentQ].correct : false;
+              const showCorrectness = showFeedback && isSelected && !isDbQuiz;
 
               return (
                 <button key={idx} onClick={() => !showFeedback && handleAnswer(idx)}
@@ -317,20 +459,25 @@ export default function QuizPage() {
                   style={{
                     background: showCorrectness
                       ? isCorrect ? "rgba(0,128,144,0.1)" : "rgba(231,76,60,0.08)"
+                      : (showFeedback && isSelected && isDbQuiz) ? "rgba(0,128,144,0.08)"
                       : showFeedback && isCorrect ? "rgba(0,128,144,0.06)" : "rgba(255,255,255,0.9)",
                     border: showCorrectness
                       ? isCorrect ? "1px solid #008090" : "1px solid #e74c3c"
+                      : (showFeedback && isSelected && isDbQuiz) ? "1px solid #008090"
                       : showFeedback && isCorrect ? "1px solid rgba(0,128,144,0.3)" : "1px solid rgba(0,128,144,0.08)",
                     transform: isSelected ? "scale(0.99)" : "scale(1)",
                   }}>
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold" style={{
                     background: showCorrectness
                       ? isCorrect ? "#008090" : "#e74c3c"
+                      : (showFeedback && isSelected && isDbQuiz) ? "#008090"
                       : "rgba(0,128,144,0.08)",
-                    color: showCorrectness ? "white" : "#008090",
+                    color: (showCorrectness || (showFeedback && isSelected && isDbQuiz)) ? "white" : "#008090",
                   }}>
                     {showCorrectness ? (
                       <span className="material-icons" style={{ fontSize: "16px" }}>{isCorrect ? "check" : "close"}</span>
+                    ) : (showFeedback && isSelected && isDbQuiz) ? (
+                      <span className="material-icons" style={{ fontSize: "16px" }}>check</span>
                     ) : (
                       String.fromCharCode(65 + idx)
                     )}
