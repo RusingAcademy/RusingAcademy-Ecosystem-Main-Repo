@@ -151,4 +151,118 @@ export const adminStabilityRouter = router({
       }
       return Array.from(allPerms).map(name => ({ permission: name }));
     }),
+
+  // ========================================================================
+  // WEBHOOK HARDENING (Sprint C5)
+  // ========================================================================
+
+  /**
+   * Retry a failed webhook event by resetting its status to allow reprocessing.
+   */
+  retryWebhookEvent: protectedProcedure
+    .use(adminGuard)
+    .input(z.object({ stripeEventId: z.string() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+
+      const [existing] = await db.execute(sql`
+        SELECT status, attempts FROM webhook_events_log 
+        WHERE stripeEventId = ${input.stripeEventId} LIMIT 1
+      `);
+      const row = Array.isArray(existing) && existing[0] ? existing[0] as any : null;
+      if (!row) throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
+      if (row.status === "processed") {
+        return { success: false, message: "Event already processed successfully" };
+      }
+
+      // Reset to allow reprocessing
+      await db.execute(sql`
+        UPDATE webhook_events_log 
+        SET status = 'pending_retry', attempts = GREATEST(attempts - 1, 0)
+        WHERE stripeEventId = ${input.stripeEventId}
+      `);
+
+      return { success: true, message: `Event ${input.stripeEventId} queued for retry` };
+    }),
+
+  /**
+   * Get detailed info about a specific webhook event.
+   */
+  getWebhookEventDetail: protectedProcedure
+    .use(adminGuard)
+    .input(z.object({ stripeEventId: z.string() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return null;
+
+      const [rows] = await db.execute(sql`
+        SELECT stripeEventId, eventType, status, attempts, lastError, processedAt, createdAt
+        FROM webhook_events_log 
+        WHERE stripeEventId = ${input.stripeEventId} LIMIT 1
+      `);
+      const row = Array.isArray(rows) && rows[0] ? rows[0] as any : null;
+      if (!row) return null;
+
+      // Calculate latency
+      const latencyMs = row.processedAt && row.createdAt
+        ? new Date(row.processedAt).getTime() - new Date(row.createdAt).getTime()
+        : null;
+
+      return {
+        ...row,
+        latencyMs,
+        latencyFormatted: latencyMs !== null ? `${latencyMs}ms` : "N/A",
+      };
+    }),
+
+  /**
+   * Get failed webhook events (dead letter queue visibility).
+   */
+  getFailedWebhookEvents: protectedProcedure
+    .use(adminGuard)
+    .query(async () => {
+      const db = await getDb();
+      if (!db) return [];
+
+      const [rows] = await db.execute(sql`
+        SELECT stripeEventId, eventType, status, attempts, lastError, createdAt
+        FROM webhook_events_log 
+        WHERE status IN ('failed', 'pending_retry')
+        ORDER BY createdAt DESC
+        LIMIT 50
+      `);
+
+      return Array.isArray(rows) ? rows : [];
+    }),
+
+  /**
+   * Get webhook processing latency stats.
+   */
+  getWebhookLatencyStats: protectedProcedure
+    .use(adminGuard)
+    .query(async () => {
+      const db = await getDb();
+      if (!db) return { avgLatencyMs: 0, p95LatencyMs: 0, maxLatencyMs: 0, totalProcessed: 0 };
+
+      try {
+        const [stats] = await db.execute(sql`
+          SELECT 
+            AVG(TIMESTAMPDIFF(MICROSECOND, createdAt, processedAt)) / 1000 as avgLatencyMs,
+            MAX(TIMESTAMPDIFF(MICROSECOND, createdAt, processedAt)) / 1000 as maxLatencyMs,
+            COUNT(*) as totalProcessed
+          FROM webhook_events_log 
+          WHERE status = 'processed' AND processedAt IS NOT NULL
+        `);
+        const row = Array.isArray(stats) && stats[0] ? stats[0] as any : {};
+
+        return {
+          avgLatencyMs: Math.round(Number(row.avgLatencyMs || 0)),
+          maxLatencyMs: Math.round(Number(row.maxLatencyMs || 0)),
+          totalProcessed: Number(row.totalProcessed || 0),
+        };
+      } catch (error) {
+        return { avgLatencyMs: 0, maxLatencyMs: 0, totalProcessed: 0 };
+      }
+    }),
 });

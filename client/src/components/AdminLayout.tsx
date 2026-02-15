@@ -126,6 +126,7 @@ const navSections: NavSection[] = [
     { id: "ab-testing", label: "A/B Testing", icon: FlaskConical, path: "/admin/ab-testing", requiredPermission: "manage_analytics" },
     { id: "org-billing", label: "Org Billing", icon: Receipt, path: "/admin/org-billing", requiredPermission: "manage_enterprise" },
     { id: "weekly-challenges", label: "Challenges", icon: Trophy, path: "/admin/weekly-challenges", requiredPermission: "manage_courses" },
+    { id: "webhook-health", label: "Webhook Health", icon: Zap, path: "/admin/webhook-health", requiredPermission: "manage_settings" },
   ]},
 ];
 
