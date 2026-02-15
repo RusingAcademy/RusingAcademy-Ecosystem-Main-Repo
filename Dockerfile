@@ -1,0 +1,76 @@
+# =============================================================================
+# RusingÂcademy Ecosystem — Production Dockerfile
+# Multi-stage build for optimal image size and security
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Stage 1: Dependencies
+# ---------------------------------------------------------------------------
+FROM node:22-alpine AS deps
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install pnpm and dependencies
+RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN pnpm install --frozen-lockfile --prod=false
+
+# ---------------------------------------------------------------------------
+# Stage 2: Build
+# ---------------------------------------------------------------------------
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Copy dependencies from previous stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Build the application (Vite frontend + esbuild backend)
+RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN pnpm run build
+
+# ---------------------------------------------------------------------------
+# Stage 3: Production
+# ---------------------------------------------------------------------------
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+# Security: run as non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 rusingacademy
+
+# Install production dependencies only
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && corepack prepare pnpm@latest --activate && \
+    pnpm install --frozen-lockfile --prod && \
+    pnpm store prune
+
+# Copy built artifacts
+COPY --from=builder /app/dist ./dist
+
+# Copy static assets and data files
+COPY --from=builder /app/data ./data
+COPY --from=builder /app/client/public ./client/public
+
+# Set ownership
+RUN chown -R rusingacademy:nodejs /app
+
+USER rusingacademy
+
+# Environment defaults
+ENV NODE_ENV=production
+ENV PORT=5000
+
+# Expose the application port
+EXPOSE 5000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:5000/api/health || exit 1
+
+# Start the application
+CMD ["node", "dist/index.js"]
