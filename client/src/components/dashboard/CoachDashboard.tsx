@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AtRiskLearnerAlerts from "@/components/AtRiskLearnerAlerts";
+import LearnerProgressCards from "@/components/LearnerProgressCards";
+import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
@@ -52,6 +55,16 @@ export default function CoachDashboardContent({ user }: CoachDashboardProps) {
   const { data: upcomingSessions, isLoading: sessionsLoading } = trpc.coach.getUpcomingSessions.useQuery();
   const { data: myLearners, isLoading: learnersLoading } = trpc.coach.getMyLearners.useQuery();
   const { data: earnings, isLoading: earningsLoading } = trpc.coach.getEarningsSummary.useQuery();
+
+  // Session notes save mutation
+  const saveNotesMutation = trpc.coach.saveSessionNotes.useMutation({
+    onSuccess: () => {
+      toast.success(isEn ? "Notes saved successfully" : "Notes enregistrées avec succès");
+    },
+    onError: () => {
+      toast.error(isEn ? "Failed to save notes" : "Échec de l'enregistrement des notes");
+    },
+  });
 
   const firstName = user.name?.split(" ")[0] || "Coach";
 
@@ -258,54 +271,16 @@ export default function CoachDashboardContent({ user }: CoachDashboardProps) {
                 </CardContent>
               </Card>
 
-              {/* My Learners */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-primary" />
-                    {labels.myLearners}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {learnersLoading ? (
-                    <div className="space-y-3">
-                      <Skeleton className="h-16 w-full" />
-                      <Skeleton className="h-16 w-full" />
-                    </div>
-                  ) : myLearners?.length ? (
-                    <div className="space-y-3">
-                      {myLearners.slice(0, 6).map((learner: any) => (
-                        <div key={learner.id} className="flex items-center gap-4 p-3 rounded-lg border hover:bg-accent/50 transition-colors">
-                          <Avatar className="h-10 w-10">
-                            <AvatarFallback className="bg-primary/10 text-primary">
-                              {learner.name?.split(" ").map((n: string) => n[0]).join("") || "L"}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1">
-                            <p className="font-medium">{learner.name}</p>
-                            <p className="text-sm text-muted-foreground">
-                              {learner.sessionsCount} sessions • {learner.level || "N/A"}
-                            </p>
-                          </div>
-                          <Button variant="ghost" size="sm" onClick={() => setSelectedLearner(learner.id)}>
-                            <MessageSquare className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-6 text-muted-foreground">
-                      <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p>{labels.noLearners}</p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+              {/* Learner Progress Cards — enhanced with SLE levels and cohort summary */}
+              <LearnerProgressCards />
             </div>
 
             {/* Sidebar - 1 column */}
             <div className="space-y-6">
               
+              {/* At-Risk Learner Alerts */}
+              <AtRiskLearnerAlerts />
+
               {/* Earnings Summary */}
               <Card>
                 <CardHeader>
@@ -395,8 +370,23 @@ export default function CoachDashboardContent({ user }: CoachDashboardProps) {
                         onChange={(e) => setSessionNotes({ ...sessionNotes, [selectedLearner]: e.target.value })}
                         rows={4}
                       />
-                      <Button size="sm" className="w-full">
-                        {labels.saveNote}
+                      <Button
+                        size="sm"
+                        className="w-full"
+                        disabled={saveNotesMutation.isPending}
+                        onClick={() => {
+                          if (selectedLearner && sessionNotes[selectedLearner]) {
+                            saveNotesMutation.mutate({
+                              sessionId: selectedLearner,
+                              notes: sessionNotes[selectedLearner],
+                              sharedWithLearner: false,
+                            });
+                          }
+                        }}
+                      >
+                        {saveNotesMutation.isPending
+                          ? (isEn ? "Saving..." : "Enregistrement...")
+                          : labels.saveNote}
                       </Button>
                     </div>
                   ) : (
