@@ -294,6 +294,22 @@ export const coursesRouter = router({
         console.warn("[Notification] Failed to send enrollment notification:", notifErr);
       }
 
+      // Sprint D4: Send enrollment confirmation email
+      try {
+        const { sendEnrollmentConfirmation } = await import("../email-transactional-templates");
+        const userEmail = ctx.user.email || "";
+        if (userEmail) {
+          await sendEnrollmentConfirmation({
+            learnerName: ctx.user.name || ctx.user.email || "Learner",
+            learnerEmail: userEmail,
+            courseName: course.title,
+            courseSlug: course.slug || String(input.courseId),
+            price: 0,
+            language: "en",
+          });
+        }
+      } catch (_emailErr) { /* best-effort */ }
+
       return { success: true, courseId: input.courseId, courseSlug: course.slug || String(input.courseId) };
     }),
 
@@ -577,6 +593,21 @@ export const coursesRouter = router({
                     courseTitle: courseForCert.title,
                   });
                 } catch (_notifErr) { /* best-effort */ }
+                // Sprint D4: Send course completion email
+                try {
+                  const { sendCourseCompletionEmail } = await import("../email-transactional-templates");
+                  const userEmail = ctx.user.email || "";
+                  if (userEmail) {
+                    await sendCourseCompletionEmail({
+                      learnerName: ctx.user.name || ctx.user.email || "Learner",
+                      learnerEmail: userEmail,
+                      courseName: courseForCert.title,
+                      completionDate: new Date(),
+                      certificateUrl: `https://rusingacademy.com/portal/certificates`,
+                      language: "en",
+                    });
+                  }
+                } catch (_emailErr) { /* best-effort */ }
               }
             }
           }
@@ -697,6 +728,24 @@ export const coursesRouter = router({
           passed,
         });
       } catch (_notifErr) { /* best-effort */ }
+
+      // Sprint D4: Send quiz results email
+      try {
+        const { sendQuizResultsEmail } = await import("../email-transactional-templates");
+        const userEmail = ctx.user.email || "";
+        if (userEmail) {
+          await sendQuizResultsEmail({
+            learnerName: ctx.user.name || ctx.user.email || "Learner",
+            learnerEmail: userEmail,
+            quizTitle: quiz.title || "Quiz",
+            score: scorePercent,
+            totalQuestions: questions.length,
+            correctAnswers: Math.round((earnedPoints / (totalPoints || 1)) * questions.length),
+            passed,
+            language: "en",
+          });
+        }
+      } catch (_emailErr) { /* best-effort */ }
 
       return {
         score: earnedPoints,
