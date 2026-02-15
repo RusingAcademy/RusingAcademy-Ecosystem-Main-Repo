@@ -55,7 +55,7 @@ const LESSON_TYPE_ICONS: Record<string, { icon: React.ComponentType<{ className?
   video: { icon: Video, label: "Video", labelFr: "Vidéo", color: "text-blue-600", bgColor: "bg-blue-100 dark:bg-blue-900/30" },
   audio: { icon: Headphones, label: "Audio", labelFr: "Audio", color: "text-purple-600", bgColor: "bg-purple-100 dark:bg-purple-900/30" },
   quiz: { icon: HelpCircle, label: "Quiz", labelFr: "Quiz", color: "text-amber-600", bgColor: "bg-amber-100 dark:bg-amber-900/30" },
-  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-slate-600", bgColor: "bg-slate-100 dark:bg-slate-900/30" },
+  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-black", bgColor: "bg-slate-100 dark:bg-[#062b2b]/30" },
   pdf: { icon: Download, label: "PDF", labelFr: "PDF", color: "text-red-600", bgColor: "bg-red-100 dark:bg-red-900/30" },
   assignment: { icon: PenTool, label: "Assignment", labelFr: "Devoir", color: "text-green-600", bgColor: "bg-green-100 dark:bg-green-900/30" },
   download: { icon: Download, label: "Download", labelFr: "Téléchargement", color: "text-indigo-600", bgColor: "bg-indigo-100 dark:bg-indigo-900/30" },
@@ -190,7 +190,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white dark:from-[#041e1e] dark:to-[#062b2b]">
       <Header />
 
       <main id="main-content" className="flex-1" role="main" aria-label={isEn ? "Learner Dashboard" : "Tableau de bord apprenant"}>
@@ -222,12 +222,12 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
                     {labels.heroTitle}
                   </h1>
-                  <p className="text-lg text-white/80 mb-6 max-w-xl">
+                  <p className="text-lg text-white/90 mb-6 max-w-xl">
                     {labels.heroSubtitle}
                   </p>
                   
                   {/* Current Course Card with Next Lesson */}
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20 max-w-xl mx-auto lg:mx-0">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/60 max-w-xl mx-auto lg:mx-0">
                     <div className="flex items-start gap-4">
                       <div className="h-14 w-14 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
                         <GraduationCap className="h-7 w-7 text-white" />
@@ -244,7 +244,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                         {/* Next Lesson Info with Type Icon and Duration */}
                         {nextLesson && !nextLessonLoading && (
                           <div className="bg-white/10 rounded-lg p-3 mt-2">
-                            <div className="text-xs text-white/60 uppercase tracking-wide mb-1">{labels.nextLesson}</div>
+                            <div className="text-xs text-white/90 uppercase tracking-wide mb-1">{labels.nextLesson}</div>
                             <div className="flex items-center gap-3">
                               {/* Lesson Type Icon */}
                               {(() => {
@@ -260,7 +260,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                                 <div className="font-medium truncate text-sm">
                                   {nextLesson.lessonTitle}
                                 </div>
-                                <div className="flex items-center gap-2 text-xs text-white/60">
+                                <div className="flex items-center gap-2 text-xs text-white/90">
                                   {/* Lesson Type Label */}
                                   <span className="flex items-center gap-1">
                                     {isEn 
@@ -311,7 +311,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
                   {labels.emptyCoursesTitle}
                 </h1>
-                <p className="text-lg text-white/80 mb-8">
+                <p className="text-lg text-white/90 mb-8">
                   {labels.emptyCoursesDesc}
                 </p>
                 <Link href="/courses">
@@ -595,7 +595,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   </Link>
                   <Link href="/app/settings" className="block">
                     <Button variant="outline" className="w-full justify-start gap-3">
-                      <Settings className="h-4 w-4 text-slate-600" />
+                      <Settings className="h-4 w-4 text-black" />
                       {isEn ? "Settings" : "Paramètres"}
                     </Button>
                   </Link>

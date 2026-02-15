@@ -12,6 +12,8 @@
  */
 
 import { recalculateAllLeadScores } from "../lead-scoring";
+import { createLogger } from "../logger";
+const log = createLogger("cron-lead-score-recalc");
 
 export interface LeadScoreRecalcResult {
   success: boolean;
@@ -27,14 +29,14 @@ export interface LeadScoreRecalcResult {
 export async function runLeadScoreRecalculation(): Promise<LeadScoreRecalcResult> {
   const startTime = Date.now();
   
-  console.log("[Lead Score Recalc] Starting daily recalculation...");
+  log.info("[Lead Score Recalc] Starting daily recalculation...");
   
   try {
     const { updated, errors } = await recalculateAllLeadScores();
     
     const duration = Date.now() - startTime;
     
-    console.log(`[Lead Score Recalc] Completed in ${duration}ms: ${updated} updated, ${errors} errors`);
+    log.info(`[Lead Score Recalc] Completed in ${duration}ms: ${updated} updated, ${errors} errors`);
     
     return {
       success: true,
@@ -45,7 +47,7 @@ export async function runLeadScoreRecalculation(): Promise<LeadScoreRecalcResult
     };
   } catch (error) {
     const duration = Date.now() - startTime;
-    console.error("[Lead Score Recalc] Failed:", error);
+    log.error("[Lead Score Recalc] Failed:", error);
     
     return {
       success: false,

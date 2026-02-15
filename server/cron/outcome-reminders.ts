@@ -8,6 +8,8 @@ import { getDb } from "../db";
 import { crmMeetings, ecosystemLeads, users } from "../../drizzle/schema";
 import { eq, and, lt, sql } from "drizzle-orm";
 import { sendEmail } from "../email";
+import { createLogger } from "../logger";
+const log = createLogger("cron-outcome-reminders");
 
 // Types
 interface PendingMeeting {
@@ -67,7 +69,7 @@ async function getPendingOutcomeMeetings(): Promise<PendingMeeting[]> {
  */
 async function sendOutcomeReminderEmail(meeting: PendingMeeting): Promise<boolean> {
   if (!meeting.organizerEmail) {
-    console.log(`[Outcome Reminder] No email for organizer of meeting ${meeting.id}`);
+    log.info(`[Outcome Reminder] No email for organizer of meeting ${meeting.id}`);
     return false;
   }
   
@@ -158,10 +160,10 @@ async function sendOutcomeReminderEmail(meeting: PendingMeeting): Promise<boolea
       html,
     });
     
-    console.log(`[Outcome Reminder] Sent reminder for meeting ${meeting.id} to ${meeting.organizerEmail}`);
+    log.info(`[Outcome Reminder] Sent reminder for meeting ${meeting.id} to ${meeting.organizerEmail}`);
     return true;
   } catch (error) {
-    console.error(`[Outcome Reminder] Failed to send reminder for meeting ${meeting.id}:`, error);
+    log.error(`[Outcome Reminder] Failed to send reminder for meeting ${meeting.id}:`, error);
     return false;
   }
 }
@@ -175,10 +177,10 @@ export async function executeOutcomeRemindersCron(): Promise<{
   failed: number;
   meetings: Array<{ id: number; title: string; sent: boolean }>;
 }> {
-  console.log("[Outcome Reminder Cron] Starting execution...");
+  log.info("[Outcome Reminder Cron] Starting execution...");
   
   const pendingMeetings = await getPendingOutcomeMeetings();
-  console.log(`[Outcome Reminder Cron] Found ${pendingMeetings.length} meetings pending outcome`);
+  log.info(`[Outcome Reminder Cron] Found ${pendingMeetings.length} meetings pending outcome`);
   
   let sent = 0;
   let failed = 0;
@@ -200,7 +202,7 @@ export async function executeOutcomeRemindersCron(): Promise<{
     });
   }
   
-  console.log(`[Outcome Reminder Cron] Completed: ${sent} sent, ${failed} failed`);
+  log.info(`[Outcome Reminder Cron] Completed: ${sent} sent, ${failed} failed`);
   
   return {
     processed: pendingMeetings.length,

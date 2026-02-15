@@ -23,6 +23,8 @@ import {
 } from "./sleDatasetService";
 import { normalizeCriterionScores } from "./sleScoringService";
 import { CANONICAL_CRITERIA_KEYS, type CanonicalCriterionKey } from "./sleScoringRubric";
+import { createLogger } from "../logger";
+const log = createLogger("services-sleAdaptiveRouter");
 
 // ─── Types ───────────────────────────────────────────────────
 
@@ -365,7 +367,7 @@ export async function withTTSFallback(
     };
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
-    console.warn(`[SLE TTS Fallback] TTS failed: ${errorMsg}`);
+    log.warn(`[SLE TTS Fallback] TTS failed: ${errorMsg}`);
     return {
       success: false,
       fallbackText: text,

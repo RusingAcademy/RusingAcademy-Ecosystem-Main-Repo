@@ -158,8 +158,8 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                     }
                   `}
                 >
-                  <Icon className={`h-3.5 w-3.5 mb-0.5 ${isFilled ? slot.textColor : "text-gray-300"}`} />
-                  <span className={`text-[7px] font-semibold leading-tight text-center truncate w-full px-0.5 ${isFilled ? slot.textColor : "text-gray-400"}`}>
+                  <Icon className={`h-3.5 w-3.5 mb-0.5 ${isFilled ? slot.textColor : "text-white/90"}`} />
+                  <span className={`text-[7px] font-semibold leading-tight text-center truncate w-full px-0.5 ${isFilled ? slot.textColor : "text-[#67E8F9]"}`}>
                     {slot.labelEn.split(" ")[0]}
                   </span>
                   {isFilled && (
@@ -172,7 +172,7 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                     </div>
                   )}
                   {!isFilled && (
-                    <Plus className="h-2.5 w-2.5 text-gray-300 group-hover:text-gray-500 absolute bottom-0.5 right-0.5" />
+                    <Plus className="h-2.5 w-2.5 text-white/90 group-hover:text-black absolute bottom-0.5 right-0.5" />
                   )}
                 </button>
               </TooltipTrigger>
@@ -405,7 +405,7 @@ function TreeLessonRow({ lesson, activities, isExpanded, onToggle, onEdit, onDel
             )}
             {activities.length === 0 && (
               <div className="px-12 py-4 text-center border-t bg-muted/10">
-                <Layers className="h-6 w-6 mx-auto mb-1.5 text-muted-foreground/40" />
+                <Layers className="h-6 w-6 mx-auto mb-1.5 text-black/50 dark:text-white/50" />
                 <p className="text-[11px] text-muted-foreground">
                   No activities yet. Click a slot above or{" "}
                   <button className="text-primary underline font-medium" onClick={() => onAddActivity(lesson)}>add one</button>
@@ -525,7 +525,7 @@ function TreeModuleRow({
         )}
         {expanded && lessons.length === 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-10 pb-4 pt-2 text-center">
-            <FileText className="h-6 w-6 mx-auto mb-1 text-muted-foreground/30" />
+            <FileText className="h-6 w-6 mx-auto mb-1 text-black/40 dark:text-white/40" />
             <p className="text-xs text-muted-foreground">
               No lessons yet.{" "}
               <button className="text-primary underline font-medium" onClick={() => onAddLesson(mod.id)}>Add one</button>
@@ -802,6 +802,42 @@ function ActivityDialog({
   const [isMandatory, setIsMandatory] = useState(activity?.isMandatory ?? true);
   const [unlockMode, setUnlockMode] = useState(activity?.unlockMode || "immediate");
   const [activeTab, setActiveTab] = useState("content-en");
+  const [isLoadingFull, setIsLoadingFull] = useState(false);
+
+  // Fetch full activity data (including content) when editing
+  const fullActivityQuery = trpc.activities.getById.useQuery(
+    { activityId: activity?.id! },
+    { enabled: isEditing && open }
+  );
+
+  // Populate all fields once full data arrives
+  useEffect(() => {
+    const full = fullActivityQuery.data;
+    if (!full) return;
+    setTitle(full.title || "");
+    setTitleFr(full.titleFr || "");
+    setDescription(full.description || "");
+    setDescriptionFr(full.descriptionFr || "");
+    setActivityType(full.activityType || "text");
+    setContent(full.content || "");
+    setContentFr(full.contentFr || "");
+    setContentJson(full.contentJson || null);
+    setContentJsonFr(full.contentJsonFr || null);
+    setVideoUrl(full.videoUrl || "");
+    setVideoProvider(full.videoProvider || "youtube");
+    setAudioUrl(full.audioUrl || "");
+    setDownloadUrl(full.downloadUrl || "");
+    setDownloadFileName(full.downloadFileName || "");
+    setEmbedCode(full.embedCode || "");
+    setThumbnailUrl(full.thumbnailUrl || "");
+    setEstimatedMinutes(full.estimatedMinutes || 5);
+    setPoints(full.points || 0);
+    setPassingScore(full.passingScore || undefined);
+    setStatus(full.status || "draft");
+    setIsPreview(full.isPreview || false);
+    setIsMandatory(full.isMandatory ?? true);
+    setUnlockMode(full.unlockMode || "immediate");
+  }, [fullActivityQuery.data]);
 
   const createActivity = trpc.activities.create.useMutation({
     onSuccess: () => { toast.success("Activity created"); onOpenChange(false); onSuccess(); },
@@ -849,8 +885,17 @@ function ActivityDialog({
   };
 
   const isPending = createActivity.isPending || updateActivity.isPending;
+  const isLoadingFullData = isEditing && fullActivityQuery.isLoading;
 
   const renderContentEditor = (lang: "en" | "fr") => {
+    if (isLoadingFullData) {
+      return (
+        <div className="flex items-center justify-center py-12 text-muted-foreground">
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mr-3" />
+          Loading content...
+        </div>
+      );
+    }
     const isEn = lang === "en";
     const currentContent = isEn ? content : contentFr;
     const currentJson = isEn ? contentJson : contentJsonFr;
@@ -1046,6 +1091,7 @@ function ActivityDialog({
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="draft">Draft</SelectItem>
+                  <SelectItem value="review">In Review</SelectItem>
                   <SelectItem value="published">Published</SelectItem>
                   <SelectItem value="archived">Archived</SelectItem>
                 </SelectContent>
@@ -1206,6 +1252,7 @@ function PublishGateDialog({ courseId, open, onOpenChange, onPublished }: {
 export default function CourseBuilder() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [langFilter, setLangFilter] = useState<"all" | "french" | "english">("all");
   const [createOpen, setCreateOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newDesc, setNewDesc] = useState("");
@@ -1349,11 +1396,13 @@ export default function CourseBuilder() {
   const filtered = useMemo(() => safeCourses.filter((c: any) => {
     const matchSearch = !search || c.title?.toLowerCase().includes(search.toLowerCase());
     const matchStatus = statusFilter === "all" || c.status === statusFilter;
-    return matchSearch && matchStatus;
-  }), [safeCourses, search, statusFilter]);
+    const matchLang = langFilter === "all" || c.targetLanguage === langFilter;
+    return matchSearch && matchStatus && matchLang;
+  }), [safeCourses, search, statusFilter, langFilter]);
   const stats = useMemo(() => ({
     total: safeCourses.length,
     published: safeCourses.filter((c: any) => c.status === "published").length,
+    review: safeCourses.filter((c: any) => c.status === "review").length,
     draft: safeCourses.filter((c: any) => c.status === "draft").length,
     archived: safeCourses.filter((c: any) => c.status === "archived").length,
   }), [safeCourses]);
@@ -1544,7 +1593,7 @@ export default function CourseBuilder() {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-xl font-bold truncate">{course.title}</h1>
-                <Badge variant={course.status === "published" ? "default" : "secondary"} className={course.status === "published" ? "bg-emerald-100 text-emerald-700" : ""}>
+               <Badge variant={course.status === "published" ? "default" : "secondary"} className={`${course.status === "published" ? "bg-emerald-100 text-emerald-700" : course.status === "review" ? "bg-blue-100 text-blue-700" : ""}`}>
                   {course.status}
                 </Badge>
                 {course.pathNumber && (
@@ -1573,8 +1622,14 @@ export default function CourseBuilder() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild><Button variant="outline" size="sm" className="gap-1.5"><Settings2 className="h-4 w-4" /> Actions</Button></DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
+                  {course.status === "draft" && (
+                    <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "review" })} className="text-blue-600"><Eye className="h-4 w-4 mr-2" /> Submit for Review</DropdownMenuItem>
+                  )}
                   {course.status === "published" && (
                     <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Unpublish</DropdownMenuItem>
+                  )}
+                  {course.status === "review" && (
+                    <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Return to Draft</DropdownMenuItem>
                   )}
                   <DropdownMenuItem onClick={() => setShowCourseSettings(true)}><Settings2 className="h-4 w-4 mr-2" /> Course Settings</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => duplicateCourse.mutate({ courseId: course.id })}><Copy className="h-4 w-4 mr-2" /> Duplicate</DropdownMenuItem>
@@ -1849,12 +1904,13 @@ export default function CourseBuilder() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         {[
           { label: "Total", value: stats.total, color: "text-foreground", bg: "bg-muted/30" },
           { label: "Published", value: stats.published, color: "text-emerald-600", bg: "bg-emerald-50" },
+          { label: "In Review", value: stats.review, color: "text-blue-600", bg: "bg-blue-50" },
           { label: "Drafts", value: stats.draft, color: "text-amber-600", bg: "bg-amber-50" },
-          { label: "Archived", value: stats.archived, color: "text-gray-400", bg: "bg-gray-50" },
+          { label: "Archived", value: stats.archived, color: "text-[#67E8F9]", bg: "bg-gray-50" },
         ].map((stat, i) => (
           <Card key={i} className="overflow-hidden hover:shadow-md transition-shadow">
             <CardContent className={`p-4 ${stat.bg}`}>
@@ -1878,8 +1934,17 @@ export default function CourseBuilder() {
               <SelectContent>
                 <SelectItem value="all">All Status</SelectItem>
                 <SelectItem value="published">Published</SelectItem>
+                <SelectItem value="review">In Review</SelectItem>
                 <SelectItem value="draft">Draft</SelectItem>
                 <SelectItem value="archived">Archived</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={langFilter} onValueChange={(v) => setLangFilter(v as any)}>
+              <SelectTrigger className="w-40"><SelectValue placeholder="All Languages" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Languages</SelectItem>
+                <SelectItem value="french">🇫🇷 FSL (French)</SelectItem>
+                <SelectItem value="english">🇬🇧 ESL (English)</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -1919,7 +1984,7 @@ export default function CourseBuilder() {
                   <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute bottom-2 left-2 flex items-center gap-1.5">
-                    <Badge variant={course.status === "published" ? "default" : "secondary"} className={`text-[10px] ${course.status === "published" ? "bg-emerald-500/90 text-white" : ""}`}>
+                    <Badge variant={course.status === "published" ? "default" : "secondary"} className={`text-[10px] ${course.status === "published" ? "bg-emerald-500/90 text-white" : course.status === "review" ? "bg-blue-500/90 text-white" : ""}`}>
                       {course.status}
                     </Badge>
                     {course.price > 0 ? (
@@ -1933,7 +1998,7 @@ export default function CourseBuilder() {
                 <div className="aspect-video w-full bg-gradient-to-br from-foundation/10 to-cta/10 flex items-center justify-center relative">
                   <GraduationCap className="h-12 w-12 text-foundation/20" />
                   <div className="absolute bottom-2 left-2 flex items-center gap-1.5">
-                    <Badge variant={course.status === "published" ? "default" : "secondary"}>{course.status}</Badge>
+                    <Badge variant={course.status === "published" ? "default" : "secondary"} className={course.status === "review" ? "bg-blue-100 text-blue-700" : ""}>{course.status === "review" ? "In Review" : course.status}</Badge>
                   </div>
                 </div>
               )}
@@ -1955,6 +2020,9 @@ export default function CourseBuilder() {
                 </div>
                 <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{course.description || "No description"}</p>
                 <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${course.targetLanguage === 'english' ? 'bg-blue-100 text-blue-700' : 'bg-indigo-100 text-indigo-700'}`}>
+                    {course.targetLanguage === 'english' ? '🇬🇧 ESL' : '🇫🇷 FSL'}
+                  </span>
                   <span className="flex items-center gap-1"><Layers className="h-3 w-3" /> {course.moduleCount ?? 0}</span>
                   <span className="flex items-center gap-1"><FileText className="h-3 w-3" /> {course.lessonCount ?? 0}</span>
                   <span className="flex items-center gap-1"><Users className="h-3 w-3" /> {course.enrollmentCount ?? 0}</span>

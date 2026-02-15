@@ -1,0 +1,70 @@
+{
+  "query": "SELECT id, name, email, role FROM users WHERE role = 'user' ORDER BY id LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name, email, role FROM users WHERE role = 'user' ORDER BY id LIMIT 10;",
+  "rows": [
+    {
+      "id": "842728",
+      "name": "Test Coach",
+      "email": "test-1769401739274@example.com",
+      "role": "user"
+    },
+    {
+      "id": "842734",
+      "name": "Test Coach",
+      "email": "test-1769401756215@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1110041",
+      "name": "Test Coach",
+      "email": "test-1769719382608@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1110044",
+      "name": "Test Coach",
+      "email": "test-1769719407002@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1170061",
+      "name": "Test Coach",
+      "email": "test-1769747429567@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1170062",
+      "name": "Test Coach",
+      "email": "test-1769747459033@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1290003",
+      "name": "Test Coach",
+      "email": "test-1769780541054@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1290012",
+      "name": "Test Coach",
+      "email": "test-1769782703457@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1320873",
+      "name": "Test Coach",
+      "email": "test-1769837625858@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1320878",
+      "name": "Test Coach",
+      "email": "test-1769838247362@example.com",
+      "role": "user"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\trole\n842728\tTest Coach\ttest-1769401739274@example.com\tuser\n842734\tTest Coach\ttest-1769401756215@example.com\tuser\n1110041\tTest Coach\ttest-1769719382608@example.com\tuser\n1110044\tTest Coach\ttest-1769719407002@example.com\tuser\n1170061\tTest Coach\ttest-1769747429567@example.com\tuser\n1170062\tTest Coach\ttest-1769747459033@example.com\tuser\n1290003\tTest Coach\ttest-1769780541054@example.com\tuser\n1290012\tTest Coach\ttest-1769782703457@example.com\tuser\n1320873\tTest Coach\ttest-1769837625858@example.com\tuser\n1320878\tTest Coach\ttest-1769838247362@example.com\tuser\n",
+  "stderr": "",
+  "execution_time_ms": 357
+}

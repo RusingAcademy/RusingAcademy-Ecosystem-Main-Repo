@@ -47,7 +47,7 @@ const RARITY_COLORS = {
     bg: "from-slate-400 to-slate-500",
     border: "border-slate-400",
     glow: "shadow-slate-400/50",
-    text: "text-slate-600",
+    text: "text-black",
   },
   uncommon: {
     bg: "from-emerald-400 to-emerald-600",
@@ -226,7 +226,7 @@ export function AnimatedBadge({
           sizeClasses[size],
           isUnlocked
             ? `bg-gradient-to-br ${colors.bg} shadow-lg ${isHovered ? colors.glow : ""}`
-            : "bg-slate-200 dark:bg-slate-700",
+            : "bg-slate-200 dark:bg-[#0a6969]",
           "transition-shadow duration-300"
         )}
         initial={showAnimation && isNew ? { scale: 0, rotate: -180 } : {}}
@@ -264,7 +264,7 @@ export function AnimatedBadge({
         {isUnlocked ? (
           <Icon className={cn(iconSizes[size], "text-white drop-shadow-md")} />
         ) : (
-          <Lock className={cn(iconSizes[size], "text-slate-400 dark:text-slate-500")} />
+          <Lock className={cn(iconSizes[size], "text-[#67E8F9] dark:text-black")} />
         )}
 
         {/* New badge indicator */}
@@ -284,7 +284,7 @@ export function AnimatedBadge({
       <motion.span
         className={cn(
           "text-xs font-medium mt-2 text-center line-clamp-2 max-w-[80px]",
-          isUnlocked ? "text-slate-700 dark:text-slate-200" : "text-slate-400 dark:text-slate-500"
+          isUnlocked ? "text-black dark:text-white" : "text-[#67E8F9] dark:text-black"
         )}
         initial={showAnimation && isNew ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}
@@ -309,7 +309,7 @@ export function AnimatedBadge({
       <AnimatePresence>
         {isHovered && description && (
           <motion.div
-            className="absolute bottom-full mb-2 px-3 py-2 bg-slate-900 dark:bg-slate-800 text-white text-xs rounded-lg shadow-xl z-30 max-w-[150px] text-center"
+            className="absolute bottom-full mb-2 px-3 py-2 bg-[#062b2b] dark:bg-[#0a4040] text-white text-xs rounded-lg shadow-xl z-30 max-w-[150px] text-center"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}

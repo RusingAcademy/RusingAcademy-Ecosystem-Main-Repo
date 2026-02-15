@@ -456,7 +456,7 @@ export default function DealPipelineKanban() {
   };
 
   const getScoreColor = (score: number | null) => {
-    if (!score) return "bg-gray-100 text-gray-600";
+    if (!score) return "bg-gray-100 text-black";
     if (score >= 70) return "bg-green-100 text-green-700";
     if (score >= 40) return "bg-amber-100 text-amber-700";
     return "bg-red-100 text-red-700";
@@ -685,7 +685,7 @@ export default function DealPipelineKanban() {
             onDrop={(e) => handleDrop(e, stage.id)}
           >
             {/* Stage Header */}
-            <div className="p-3 border-b bg-white/50 dark:bg-black/20 rounded-t-lg">
+            <div className="p-3 border-b bg-white/50 dark:bg-[#041e1e]/20 rounded-t-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className={`font-semibold ${stage.color}`}>
@@ -719,7 +719,7 @@ export default function DealPipelineKanban() {
                       setSelectedLead(lead);
                       setShowLeadDialog(true);
                     }}
-                    className={`bg-white dark:bg-slate-900 rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
+                    className={`bg-white dark:bg-[#062b2b] rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
                       draggedLead?.id === lead.id ? "opacity-50" : ""
                     }`}
                   >
@@ -916,11 +916,11 @@ export default function DealPipelineKanban() {
 
               {/* Metrics */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-lg bg-white dark:bg-slate-800">
+                <div className="p-3 rounded-lg bg-white dark:bg-[#0a4040]">
                   <p className="text-xs text-muted-foreground">{l.score}</p>
                   <p className="text-lg font-bold">{selectedLead.leadScore || 0}</p>
                 </div>
-                <div className="p-3 rounded-lg bg-white dark:bg-slate-800">
+                <div className="p-3 rounded-lg bg-white dark:bg-[#0a4040]">
                   <p className="text-xs text-muted-foreground">{l.dealValue}</p>
                   <p className="text-lg font-bold">
                     {selectedLead.dealValue

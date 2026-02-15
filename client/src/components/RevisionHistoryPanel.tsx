@@ -2,7 +2,7 @@
  * RevisionHistoryPanel — View per-section change history and restore previous states
  * Can be used as a dialog or embedded panel
  */
-import { useState } from "react";
+import React, { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -80,20 +80,20 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
             {sectionId ? "Section" : "Page"} Revision History
           </DialogTitle>
           {sectionTitle && (
-            <p className="text-xs text-gray-500 mt-1">Section: {sectionTitle}</p>
+            <p className="text-xs text-black mt-1">Section: {sectionTitle}</p>
           )}
         </DialogHeader>
 
         <ScrollArea className="max-h-[55vh]">
           {isLoading ? (
-            <div className="flex items-center justify-center gap-2 py-12 text-sm text-gray-400">
+            <div className="flex items-center justify-center gap-2 py-12 text-sm text-[#67E8F9]">
               <Loader2 className="h-4 w-4 animate-spin" /> Loading history...
             </div>
           ) : revisions.length === 0 ? (
             <div className="text-center py-12">
-              <History className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-              <p className="text-sm text-gray-400">No revisions yet</p>
-              <p className="text-xs text-gray-300 mt-1">Changes will appear here when sections are edited</p>
+              <History className="h-8 w-8 text-white/90 mx-auto mb-2" />
+              <p className="text-sm text-[#67E8F9]">No revisions yet</p>
+              <p className="text-xs text-white/90 mt-1">Changes will appear here when sections are edited</p>
             </div>
           ) : (
             <div className="space-y-1 pr-2">
@@ -120,15 +120,15 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                             {config.label}
                           </Badge>
                           {rev.fieldChanged && (
-                            <span className="text-[10px] text-gray-400 truncate max-w-[150px]">{rev.fieldChanged}</span>
+                            <span className="text-[10px] text-[#67E8F9] truncate max-w-[150px]">{rev.fieldChanged}</span>
                           )}
                           {(rev as any).sectionTitle && (
-                            <span className="text-[10px] text-gray-500 font-medium truncate max-w-[120px]">
+                            <span className="text-[10px] text-black font-medium truncate max-w-[120px]">
                               {(rev as any).sectionTitle}
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 mt-1 text-[10px] text-gray-400">
+                        <div className="flex items-center gap-3 mt-1 text-[10px] text-[#67E8F9]">
                           <span className="flex items-center gap-1">
                             <User className="h-2.5 w-2.5" /> {rev.userName || "System"}
                           </span>
@@ -157,7 +157,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                             Restore
                           </Button>
                         )}
-                        {isExpanded ? <ChevronUp className="h-3 w-3 text-gray-400" /> : <ChevronDown className="h-3 w-3 text-gray-400" />}
+                        {isExpanded ? <ChevronUp className="h-3 w-3 text-[#67E8F9]" /> : <ChevronDown className="h-3 w-3 text-[#67E8F9]" />}
                       </div>
                     </div>
 
@@ -171,8 +171,8 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                               <div className="bg-red-50 rounded p-2 text-[10px] space-y-0.5 max-h-32 overflow-auto">
                                 {Object.entries(rev.previousData).map(([k, v]) => (
                                   <div key={k}>
-                                    <span className="text-gray-500">{k}:</span>{" "}
-                                    <span className="text-gray-700 break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
+                                    <span className="text-black">{k}:</span>{" "}
+                                    <span className="text-black break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
                                   </div>
                                 ))}
                               </div>
@@ -184,8 +184,8 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                               <div className="bg-green-50 rounded p-2 text-[10px] space-y-0.5 max-h-32 overflow-auto">
                                 {Object.entries(rev.newData).map(([k, v]) => (
                                   <div key={k}>
-                                    <span className="text-gray-500">{k}:</span>{" "}
-                                    <span className="text-gray-700 break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
+                                    <span className="text-black">{k}:</span>{" "}
+                                    <span className="text-black break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
                                   </div>
                                 ))}
                               </div>

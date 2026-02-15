@@ -5,6 +5,8 @@
 import { z } from "zod";
 import { protectedProcedure, router } from "../_core/trpc";
 import { gatherProgressData, generateReportHTML } from "../services/pdfProgressReport";
+import { createLogger } from "../logger";
+const log = createLogger("routers-progressReport");
 
 export const progressReportRouter = router({
   /**
@@ -38,7 +40,7 @@ export const progressReportRouter = router({
       // Verify the requester is admin or coach
       if (ctx.user.role !== "admin") {
         // If not admin, could be a coach — we allow it but log it
-        console.log(`[ProgressReport] Coach ${ctx.user.id} generating report for learner ${input.learnerId}`);
+        log.info(`[ProgressReport] Coach ${ctx.user.id} generating report for learner ${input.learnerId}`);
       }
       const data = await gatherProgressData(input.learnerId, input.periodDays);
       if (!data) {

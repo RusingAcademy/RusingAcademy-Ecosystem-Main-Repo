@@ -6,7 +6,8 @@
 import webpush from "web-push";
 import { getDb } from "../db";
 import { sql, eq, and } from "drizzle-orm";
-import { structuredLog } from "../structuredLogger";
+import { createLogger } from "../logger";
+const log = createLogger("services-pushNotificationService");
 
 // ─── VAPID Configuration ───────────────────────────────────
 // Generate VAPID keys if not set (in production, these should be env vars)
@@ -22,7 +23,7 @@ function ensureVapidConfigured() {
     // Generate keys dynamically for development
     const keys = webpush.generateVAPIDKeys();
     webpush.setVapidDetails(VAPID_SUBJECT, keys.publicKey, keys.privateKey);
-    structuredLog("warn", "push", "Using auto-generated VAPID keys. Set VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY for production.", {});
+    log.warn("Using auto-generated VAPID keys. Set VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY for production.");
     vapidConfigured = true;
     return true;
   }
@@ -31,7 +32,7 @@ function ensureVapidConfigured() {
     vapidConfigured = true;
     return true;
   } catch (err) {
-    structuredLog("error", "push", "Failed to configure VAPID", { error: String(err) });
+    log.error({ error: String(err) }, "Failed to configure VAPID");
     return false;
   }
 }
@@ -114,19 +115,19 @@ export async function sendPushToUser(userId: number, payload: PushPayload): Prom
           await db.execute(sql`
             UPDATE push_subscriptions SET isActive = 0 WHERE id = ${sub.id}
           `);
-          structuredLog("info", "push", "Deactivated expired subscription", { subId: sub.id, userId });
+          log.info({ subId: sub.id, userId }, "Deactivated expired subscription");
         }
       } else {
-        structuredLog("error", "push", "Failed to send push", {
+        log.error({
           userId,
           error: err.message,
           statusCode: err.statusCode,
-        });
+        }, "Failed to send push");
       }
     }
   }
 
-  structuredLog("info", "push", `Push sent to user ${userId}`, { sent, failed, category: payload.category });
+  log.info({ sent, failed, category: payload.category }, `Push sent to user ${userId}`);
   return { sent, failed };
 }
 
@@ -244,7 +245,7 @@ export async function checkStreaksAtRisk(): Promise<number> {
     if (result.sent > 0) notified++;
   }
 
-  structuredLog("info", "push-cron", `Streak risk check: ${notified}/${users.length} users notified`, {});
+  log.info(`Streak risk check: ${notified}/${users.length} users notified`);
   return notified;
 }
 
@@ -304,7 +305,7 @@ export async function checkUpcomingSessions(): Promise<number> {
     notified++;
   }
 
-  structuredLog("info", "push-cron", `Session reminders: ${notified} sessions notified`, {});
+  log.info(`Session reminders: ${notified} sessions notified`);
   return notified;
 }
 

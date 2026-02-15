@@ -26,6 +26,8 @@ import {
   InsertCoachPayout,
   coachAvailability,
   InsertCoachAvailability,
+  coachBlockedDates,
+  InsertCoachBlockedDate,
   InsertReview,
   notifications,
   InsertNotification,
@@ -33,6 +35,8 @@ import {
   InsertCoachInvitation,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
+import { createLogger } from "./logger";
+const log = createLogger("db");
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -41,7 +45,7 @@ export async function getDb() {
     try {
       _db = drizzle(process.env.DATABASE_URL);
     } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
+      log.warn("[Database] Failed to connect:", error);
       _db = null;
     }
   }
@@ -59,7 +63,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
 
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot upsert user: database not available");
+    log.warn("[Database] Cannot upsert user: database not available");
     return;
   }
 
@@ -106,7 +110,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       set: updateSet,
     });
   } catch (error) {
-    console.error("[Database] Failed to upsert user:", error);
+    log.error("[Database] Failed to upsert user:", error);
     throw error;
   }
 }
@@ -114,7 +118,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot get user: database not available");
+    log.warn("[Database] Cannot get user: database not available");
     return undefined;
   }
 
@@ -146,15 +150,15 @@ export interface CoachFilters {
 }
 
 export async function getApprovedCoaches(filters: CoachFilters = {}) {
-  console.log('[DB] getApprovedCoaches called with filters:', JSON.stringify(filters));
+  log.info('[DB] getApprovedCoaches called with filters:', JSON.stringify(filters));
   
   try {
     const db = await getDb();
     if (!db) {
-      console.log('[DB] ERROR: Database connection is null!');
+      log.info('[DB] ERROR: Database connection is null!');
       return [];
     }
-    console.log('[DB] Database connection established');
+    log.info('[DB] Database connection established');
 
     // SOLUTION: Query ALL approved coaches first, then filter in JavaScript
     // This bypasses any Drizzle boolean comparison issues
@@ -174,9 +178,9 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
       .orderBy(desc(coachProfiles.averageRating))
       .limit(100); // Get more to filter
 
-    console.log('[DB] Executing query...');
+    log.info('[DB] Executing query...');
     const allApproved = await query;
-    console.log('[DB] Query returned', allApproved.length, 'approved coaches');
+    log.info('[DB] Query returned', allApproved.length, 'approved coaches');
     
     // Filter by profileComplete in JavaScript (bypasses Drizzle boolean issues)
     let results = allApproved.filter(r => {
@@ -184,7 +188,7 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
       // Handle both boolean true and number 1
       return pc === true || (pc as any) === 1 || (pc as any) === '1';
     });
-    console.log('[DB] After profileComplete filter:', results.length, 'coaches');
+    log.info('[DB] After profileComplete filter:', results.length, 'coaches');
 
     // Apply additional filters
     if (filters.language && filters.language !== "both") {
@@ -210,10 +214,10 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
     const limit = filters.limit || 20;
     const paginatedResults = results.slice(offset, offset + limit);
     
-    console.log('[DB] Final result count:', paginatedResults.length);
+    log.info('[DB] Final result count:', paginatedResults.length);
     return paginatedResults;
   } catch (error) {
-    console.error('[DB] ERROR in getApprovedCoaches:', error);
+    log.error('[DB] ERROR in getApprovedCoaches:', error);
     return [];
   }
 }
@@ -290,7 +294,7 @@ export async function recalculateProfileComplete(coachId: number): Promise<boole
   const hasBio = !!coach.bio && coach.bio.length >= 50;
   const hasHeadline = !!coach.headline && coach.headline.length >= 10;
   const hasPhoto = !!coach.photoUrl;
-  const hasVideo = !!coach.videoUrl;
+  const hasVideo = !!coach.videoUrl || !!coach.bunnyVideoId;
   const hasPricing = (coach.hourlyRate ?? 0) > 0;
   const hasSpecializations = !!coach.specializations && Object.keys(coach.specializations as object).length > 0;
   const hasStripe = coach.stripeOnboarded === true;
@@ -341,7 +345,7 @@ export async function getProfileCompletionStatus(coachId: number) {
     hasBio: !!coach.bio && coach.bio.length >= 50,
     hasHeadline: !!coach.headline && coach.headline.length >= 10,
     hasPhoto: !!coach.photoUrl,
-    hasVideo: !!coach.videoUrl,
+    hasVideo: !!(coach.videoUrl || coach.bunnyVideoId),
     hasPricing: (coach.hourlyRate ?? 0) > 0,
     hasSpecializations: !!coach.specializations && Object.keys(coach.specializations as object).length > 0,
     hasAvailability: availability.length > 0,
@@ -375,7 +379,7 @@ export async function getCoachReviews(coachId: number, limit = 10) {
     return results;
   } catch (error) {
     // Table may not exist yet - return empty array
-    console.warn("[DB] getCoachReviews error (table may not exist):", error);
+    log.warn("[DB] getCoachReviews error (table may not exist):", error);
     return [];
   }
 }
@@ -467,7 +471,7 @@ export async function updateCoachAverageRating(coachId: number) {
     }
   } catch (error) {
     // Table may not exist yet - skip silently
-    console.warn("[DB] updateCoachAverageRating error (table may not exist):", error);
+    log.warn("[DB] updateCoachAverageRating error (table may not exist):", error);
   }
 }
 
@@ -1099,6 +1103,19 @@ export async function getAvailableTimeSlotsForDate(coachId: number, date: Date) 
 
   const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
 
+  // Check if this date is blocked
+  const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+  const blocked = await db
+    .select()
+    .from(coachBlockedDates)
+    .where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, dateStr)
+      )
+    );
+  if (blocked.length > 0) return []; // Date is blocked, no slots available
+
   // Get coach's availability for this day of week
   const availability = await db
     .select()
@@ -1168,6 +1185,82 @@ export async function getAvailableTimeSlotsForDate(coachId: number, date: Date) 
   return slots;
 }
 
+// ============================================================================
+// COACH BLOCKED DATES QUERIES
+// ============================================================================
+
+export async function getCoachBlockedDates(coachId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select()
+    .from(coachBlockedDates)
+    .where(eq(coachBlockedDates.coachId, coachId))
+    .orderBy(coachBlockedDates.date);
+}
+
+export async function addCoachBlockedDate(coachId: number, date: string, reason?: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Check for duplicates
+  const existing = await db
+    .select()
+    .from(coachBlockedDates)
+    .where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, date)
+      )
+    );
+  if (existing.length > 0) {
+    throw new Error("Date is already blocked");
+  }
+
+  await db.insert(coachBlockedDates).values({
+    coachId,
+    date,
+    reason: reason || null,
+  });
+  return { success: true };
+}
+
+export async function removeCoachBlockedDate(coachId: number, dateOrId: string | number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  if (typeof dateOrId === "number") {
+    await db.delete(coachBlockedDates).where(
+      and(
+        eq(coachBlockedDates.id, dateOrId),
+        eq(coachBlockedDates.coachId, coachId)
+      )
+    );
+  } else {
+    await db.delete(coachBlockedDates).where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, dateOrId)
+      )
+    );
+  }
+  return { success: true };
+}
+
+export async function isDateBlocked(coachId: number, date: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  const result = await db
+    .select()
+    .from(coachBlockedDates)
+    .where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, date)
+      )
+    );
+  return result.length > 0;
+}
 
 // ============================================================================
 // NOTIFICATION QUERIES
@@ -1683,4 +1776,166 @@ export async function getCoachesWithInvitationStatus() {
     pendingInvitation: invitationMap.get(coach.id) || null,
     hasClaimedProfile: user.role === 'coach', // If user has coach role, they've claimed it
   }));
+}
+
+// ============================================================================
+// EMAIL LOGGING (Sprint 11)
+// ============================================================================
+
+/**
+ * Log an email send attempt to the email_logs table
+ */
+export async function logEmailToDb(data: {
+  userId?: number;
+  toEmail: string;
+  type: string;
+  subject: string;
+  relatedType?: string;
+  relatedId?: number;
+  status: "sent" | "failed" | "bounced";
+  errorMessage?: string;
+  providerMessageId?: string;
+}) {
+  try {
+    const db = await getDb();
+    if (!db) return null;
+    const { emailLogs } = await import("../drizzle/schema");
+    const [result] = await db.insert(emailLogs).values({
+      userId: data.userId ?? null,
+      toEmail: data.toEmail,
+      type: data.type as any,
+      subject: data.subject,
+      relatedType: data.relatedType as any ?? null,
+      relatedId: data.relatedId ?? null,
+      status: data.status as any,
+      errorMessage: data.errorMessage ?? null,
+      providerMessageId: data.providerMessageId ?? null,
+    });
+    return result;
+  } catch (error) {
+    // Silently fail - email logging should never break the email send
+    console.error("[logEmailToDb] Failed to log email:", error);
+    return null;
+  }
+}
+
+/**
+ * Get email logs for admin dashboard with filtering
+ */
+export async function getEmailLogs(filters?: {
+  type?: string;
+  status?: string;
+  limit?: number;
+  offset?: number;
+}) {
+  const db = await getDb();
+  if (!db) return { logs: [], total: 0 };
+  const { emailLogs } = await import("../drizzle/schema");
+
+  const conditions: any[] = [];
+  if (filters?.type && filters.type !== "all") {
+    conditions.push(eq(emailLogs.type, filters.type as any));
+  }
+  if (filters?.status && filters.status !== "all") {
+    conditions.push(eq(emailLogs.status, filters.status as any));
+  }
+
+  const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+  const limit = filters?.limit ?? 100;
+  const offset = filters?.offset ?? 0;
+
+  const { count } = await import("drizzle-orm");
+  const [totalResult] = await db.select({ count: count() }).from(emailLogs).where(whereClause);
+  const total = totalResult?.count ?? 0;
+
+  const logs = await db.select().from(emailLogs)
+    .where(whereClause)
+    .orderBy(desc(emailLogs.sentAt))
+    .limit(limit)
+    .offset(offset);
+
+  return { logs, total };
+}
+
+/**
+ * Get email delivery stats for admin dashboard
+ */
+export async function getEmailDeliveryStats() {
+  const db = await getDb();
+  if (!db) return { sent: 0, failed: 0, bounced: 0, total: 0, byType: [] };
+  const { emailLogs } = await import("../drizzle/schema");
+  const { count } = await import("drizzle-orm");
+
+  const [totalResult] = await db.select({ count: count() }).from(emailLogs);
+  const total = totalResult?.count ?? 0;
+
+  const statusCounts = await db.select({
+    status: emailLogs.status,
+    count: count(),
+  }).from(emailLogs).groupBy(emailLogs.status);
+
+  const sent = statusCounts.find(s => s.status === "sent")?.count ?? 0;
+  const failed = statusCounts.find(s => s.status === "failed")?.count ?? 0;
+  const bounced = statusCounts.find(s => s.status === "bounced")?.count ?? 0;
+
+  const byType = await db.select({
+    type: emailLogs.type,
+    count: count(),
+  }).from(emailLogs).groupBy(emailLogs.type);
+
+  return { sent, failed, bounced, total, byType };
+}
+
+// ============================================================================
+// ADMIN REVIEWS (Sprint 11)
+// ============================================================================
+
+/**
+ * Get all course reviews for admin moderation
+ */
+export async function getAdminCourseReviews(filters?: {
+  courseId?: number;
+  visibleOnly?: boolean;
+  limit?: number;
+}) {
+  const db = await getDb();
+  if (!db) return [];
+  const { courseReviews, users: usersTable, courses: coursesTable } = await import("../drizzle/schema");
+
+  const conditions: any[] = [];
+  if (filters?.courseId) {
+    conditions.push(eq(courseReviews.courseId, filters.courseId));
+  }
+  if (filters?.visibleOnly) {
+    conditions.push(eq(courseReviews.isVisible, true));
+  }
+
+  const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+
+  const reviewsList = await db.select({
+    id: courseReviews.id,
+    userId: courseReviews.userId,
+    userName: usersTable.name,
+    userEmail: usersTable.email,
+    courseId: courseReviews.courseId,
+    courseName: coursesTable.title,
+    rating: courseReviews.rating,
+    title: courseReviews.title,
+    comment: courseReviews.comment,
+    helpfulVotes: courseReviews.helpfulVotes,
+    isVisible: courseReviews.isVisible,
+    isVerifiedPurchase: courseReviews.isVerifiedPurchase,
+    instructorResponse: courseReviews.instructorResponse,
+    instructorRespondedAt: courseReviews.instructorRespondedAt,
+    createdAt: courseReviews.createdAt,
+    updatedAt: courseReviews.updatedAt,
+  })
+  .from(courseReviews)
+  .leftJoin(usersTable, eq(courseReviews.userId, usersTable.id))
+  .leftJoin(coursesTable, eq(courseReviews.courseId, coursesTable.id))
+  .where(whereClause)
+  .orderBy(desc(courseReviews.createdAt))
+  .limit(filters?.limit ?? 200);
+
+  return reviewsList;
 }

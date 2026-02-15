@@ -4,7 +4,7 @@
  */
 
 import Stripe from "stripe";
-import { PATH_SERIES_COURSES, COACHING_PLANS, getCourseById, getCoachingPlanById } from "../stripe/products";
+import { ALL_COURSES, COACHING_PLANS, getCourseById, getCoachingPlanById } from "../stripe/products";
 
 // Lazy Stripe initialization
 let stripeInstance: Stripe | null = null;
@@ -187,7 +187,7 @@ export function constructWebhookEvent(payload: Buffer, signature: string): Strip
  * Get all available courses for display
  */
 export function getAllCourses() {
-  return PATH_SERIES_COURSES;
+  return ALL_COURSES;
 }
 
 /**

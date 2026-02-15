@@ -296,21 +296,21 @@ export default function BecomeCoach() {
   // Application success view
   if (applicationComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-[#062b2b] flex items-center justify-center p-4">
         <Card className="max-w-lg w-full">
           <CardContent className="pt-8 text-center">
             <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="h-8 w-8 text-emerald-600" />
             </div>
             <h1 className="text-2xl font-bold mb-2">{l.successTitle}</h1>
-            <p className="text-slate-900 dark:text-slate-100 mb-6">{l.successMessage}</p>
+            <p className="text-black dark:text-white mb-6">{l.successMessage}</p>
             <div className="text-left bg-white rounded-lg p-4 mb-6">
               <h3 className="font-semibold mb-3">{l.successNext}</h3>
               <ul className="space-y-2">
                 {l.successSteps.map((step, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-emerald-500 mt-1 shrink-0" />
-                    <span className="text-sm text-slate-900 dark:text-slate-100">{step}</span>
+                    <span className="text-sm text-black dark:text-white">{step}</span>
                   </li>
                 ))}
               </ul>
@@ -349,7 +349,7 @@ export default function BecomeCoach() {
 
       <main>
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white overflow-hidden">
+        <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" />
@@ -360,7 +360,7 @@ export default function BecomeCoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
-              <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <Sparkles className="h-4 w-4 mr-2" />
                 {isEn ? "Join Our Coach Network" : "Rejoignez notre réseau de coachs"}
               </Badge>
@@ -402,7 +402,7 @@ export default function BecomeCoach() {
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 )}
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 gap-2">
                   <Video className="h-4 w-4" />
                   {isEn ? "Watch Video" : "Voir la vidéo"}
                 </Button>
@@ -413,7 +413,7 @@ export default function BecomeCoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-6"
+                    className="bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-teal-200">{stat.label}</div>
@@ -442,7 +442,7 @@ export default function BecomeCoach() {
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyJoin}</h2>
-              <p className="text-slate-900 dark:text-slate-100 max-w-2xl mx-auto">
+              <p className="text-black dark:text-white max-w-2xl mx-auto">
                 {isEn 
                   ? "Join a platform designed with coaches in mind. We handle the business side so you can focus on what you do best."
                   : "Rejoignez une plateforme conçue pour les coachs. Nous gérons le côté affaires pour que vous puissiez vous concentrer sur ce que vous faites de mieux."}
@@ -467,7 +467,7 @@ export default function BecomeCoach() {
                         <Icon className="h-6 w-6" />
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
-                      <p className="text-slate-900 dark:text-slate-100">{benefit.description}</p>
+                      <p className="text-black dark:text-white">{benefit.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -479,12 +479,12 @@ export default function BecomeCoach() {
         {/* Trusted By Section */}
         <section className="py-12 bg-white border-y">
           <div className="container">
-            <p className="text-center text-sm text-slate-900 dark:text-slate-100 mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm text-black dark:text-white mb-6 uppercase tracking-wider">
               {isEn ? "Our coaches help public servants from" : "Nos coachs aident les fonctionnaires de"}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {federalOrgs.map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors">
+                <div key={i} className="flex items-center gap-2 text-black hover:text-black transition-colors">
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -501,7 +501,7 @@ export default function BecomeCoach() {
                 {isEn ? "Simple Process" : "Processus simple"}
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.howItWorks}</h2>
-              <p className="text-slate-900 dark:text-slate-100 max-w-2xl mx-auto">
+              <p className="text-black dark:text-white max-w-2xl mx-auto">
                 {isEn 
                   ? "Getting started is easy. Follow these four simple steps to begin your coaching journey."
                   : "Commencer est facile. Suivez ces quatre étapes simples pour débuter votre parcours de coach."}
@@ -518,7 +518,7 @@ export default function BecomeCoach() {
                     {step.step}
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                  <p className="text-slate-900 dark:text-slate-100 text-sm">{step.description}</p>
+                  <p className="text-black dark:text-white text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -565,7 +565,7 @@ export default function BecomeCoach() {
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     {isEn ? "Earn What You Deserve" : "Gagnez ce que vous méritez"}
                   </h2>
-                  <p className="text-slate-900 dark:text-slate-100 mb-6">
+                  <p className="text-black dark:text-white mb-6">
                     {isEn 
                       ? "Our transparent commission structure rewards your hard work. The more you teach, the more you keep."
                       : "Notre structure de commission transparente récompense votre travail acharné. Plus vous enseignez, plus vous gardez."}
@@ -578,7 +578,7 @@ export default function BecomeCoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Weekly Payouts" : "Paiements hebdomadaires"}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "Via Stripe Connect" : "Via Stripe Connect"}</div>
+                        <div className="text-sm text-black dark:text-white">{isEn ? "Via Stripe Connect" : "Via Stripe Connect"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -587,7 +587,7 @@ export default function BecomeCoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "15-26% Commission" : "15-26% de commission"}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "Volume-based tiers" : "Paliers basés sur le volume"}</div>
+                        <div className="text-sm text-black dark:text-white">{isEn ? "Volume-based tiers" : "Paliers basés sur le volume"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -596,20 +596,20 @@ export default function BecomeCoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "You Set Your Rates" : "Vous fixez vos tarifs"}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "$40-$100+/hour" : "40-100$+/heure"}</div>
+                        <div className="text-sm text-black dark:text-white">{isEn ? "$40-$100+/hour" : "40-100$+/heure"}</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-8 text-white">
+                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] rounded-2xl p-8 text-white">
                   <h3 className="text-xl font-semibold mb-6">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center py-3 border-b border-white/20">
+                    <div className="flex justify-between items-center py-3 border-b border-white/60">
                       <span className="text-teal-200">{isEn ? "20 sessions/month" : "20 sessions/mois"}</span>
                       <span className="text-2xl font-bold">$1,200+</span>
                     </div>
-                    <div className="flex justify-between items-center py-3 border-b border-white/20">
+                    <div className="flex justify-between items-center py-3 border-b border-white/60">
                       <span className="text-teal-200">{isEn ? "40 sessions/month" : "40 sessions/mois"}</span>
                       <span className="text-2xl font-bold">$2,600+</span>
                     </div>
@@ -646,7 +646,7 @@ export default function BecomeCoach() {
                         <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
-                    <p className="text-slate-900 dark:text-slate-100 mb-6 italic">"{testimonial.quote}"</p>
+                    <p className="text-black dark:text-white mb-6 italic">"{testimonial.quote}"</p>
                     <div className="flex items-center gap-3">
                       <img
                         loading="lazy" src={testimonial.image}
@@ -655,7 +655,7 @@ export default function BecomeCoach() {
                       />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{testimonial.role}</div>
+                        <div className="text-sm text-black dark:text-white">{testimonial.role}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -680,7 +680,7 @@ export default function BecomeCoach() {
                 <Card key={i} className="border-0 shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="pt-6">
                     <h3 className="font-semibold text-lg mb-2">{faq.q}</h3>
-                    <p className="text-slate-900 dark:text-slate-100">{faq.a}</p>
+                    <p className="text-black dark:text-white">{faq.a}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -689,7 +689,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
@@ -697,7 +697,7 @@ export default function BecomeCoach() {
           </div>
 
           <div className="container relative text-center">
-            <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>

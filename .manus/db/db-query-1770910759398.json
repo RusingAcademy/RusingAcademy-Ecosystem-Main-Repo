@@ -1,0 +1,19 @@
+{
+  "query": "SHOW TABLES LIKE 'conversations'; SHOW TABLES LIKE 'messages';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW TABLES LIKE 'conversations'; SHOW TABLES LIKE 'messages';",
+  "rows": [
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (conversations)": "conversations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (conversations)": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (messages)"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (conversations)": "messages"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (conversations)\nconversations\nTables_in_cwh3JmcrqYgAZTUAinEMzM (messages)\nmessages\n",
+  "stderr": "",
+  "execution_time_ms": 435
+}

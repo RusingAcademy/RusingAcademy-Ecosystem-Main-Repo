@@ -298,7 +298,7 @@ export default function AdminContentManagement() {
     },
   });
   
-  const updateCourseMutation = trpc.admin.updateCourse.useMutation({
+  const updateCourseMutation = trpc.admin.updateCourseBasic.useMutation({
     onSuccess: () => {
       toast.success("Course updated");
       setEditingCourseId(null);
@@ -316,7 +316,7 @@ export default function AdminContentManagement() {
     onError: (error) => toast.error(`Failed: ${error.message}`),
   });
   
-  const updateLessonMutation = trpc.admin.updateLesson.useMutation({
+  const updateLessonMutation = trpc.admin.updateLessonBasic.useMutation({
     onSuccess: () => {
       toast.success("Lesson updated");
       setEditingLessonId(null);
@@ -1349,7 +1349,7 @@ export default function AdminContentManagement() {
               {/* Question Stats Table */}
               <div>
                 <h4 className="font-medium mb-3">Per-Question Performance</h4>
-                <div className="border rounded-lg overflow-hidden">
+                <div className="border rounded-lg overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead className="bg-muted">
                       <tr>

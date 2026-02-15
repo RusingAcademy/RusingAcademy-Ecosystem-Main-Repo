@@ -7,6 +7,8 @@
  */
 import { getDb } from "./db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("webhookIdempotency");
 
 export type WebhookEventStatus = "processing" | "processed" | "failed";
 
@@ -32,7 +34,7 @@ export async function claimWebhookEvent(
 ): Promise<boolean> {
   const db = await getDb();
   if (!db) {
-    console.error("[Idempotency] Database not available, allowing event through");
+    log.error("[Idempotency] Database not available, allowing event through");
     return true; // Fail open — better to double-process than to drop
   }
 
@@ -55,12 +57,12 @@ export async function claimWebhookEvent(
       const row = Array.isArray(existing) && existing[0] ? existing[0] as any : null;
 
       if (row?.status === "processed") {
-        console.log(`[Idempotency] Event ${stripeEventId} already processed, skipping`);
+        log.info(`[Idempotency] Event ${stripeEventId} already processed, skipping`);
         return false;
       }
 
       if (row?.status === "processing") {
-        console.log(`[Idempotency] Event ${stripeEventId} currently being processed, skipping`);
+        log.info(`[Idempotency] Event ${stripeEventId} currently being processed, skipping`);
         return false;
       }
 
@@ -71,17 +73,17 @@ export async function claimWebhookEvent(
           SET status = 'processing', attempts = attempts + 1 
           WHERE stripeEventId = ${stripeEventId}
         `);
-        console.log(`[Idempotency] Retrying failed event ${stripeEventId} (attempt ${(row?.attempts || 0) + 1})`);
+        log.info(`[Idempotency] Retrying failed event ${stripeEventId} (attempt ${(row?.attempts || 0) + 1})`);
         return true;
       }
 
-      console.log(`[Idempotency] Event ${stripeEventId} exhausted retries (${row?.attempts} attempts), skipping`);
+      log.info(`[Idempotency] Event ${stripeEventId} exhausted retries (${row?.attempts} attempts), skipping`);
       return false;
     }
 
     return true; // New event, safe to process
   } catch (error) {
-    console.error("[Idempotency] Error claiming event:", error);
+    log.error("[Idempotency] Error claiming event:", error);
     return true; // Fail open
   }
 }
@@ -100,7 +102,7 @@ export async function markEventProcessed(stripeEventId: string): Promise<void> {
       WHERE stripeEventId = ${stripeEventId}
     `);
   } catch (error) {
-    console.error("[Idempotency] Error marking event processed:", error);
+    log.error("[Idempotency] Error marking event processed:", error);
   }
 }
 
@@ -121,7 +123,7 @@ export async function markEventFailed(
       WHERE stripeEventId = ${stripeEventId}
     `);
   } catch (error) {
-    console.error("[Idempotency] Error marking event failed:", error);
+    log.error("[Idempotency] Error marking event failed:", error);
   }
 }
 
@@ -156,7 +158,7 @@ export async function getWebhookEventStats(): Promise<{
       recentEvents: Array.isArray(recentRows) ? recentRows : [],
     };
   } catch (error) {
-    console.error("[Idempotency] Error getting stats:", error);
+    log.error("[Idempotency] Error getting stats:", error);
     return { total: 0, processed: 0, failed: 0, processing: 0, recentEvents: [] };
   }
 }

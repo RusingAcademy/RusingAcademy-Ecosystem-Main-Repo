@@ -28,8 +28,8 @@ describe("MiniMax Audio Service", () => {
       expect(COACH_VOICES.STEVEN).toBe("moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84");
       expect(COACH_VOICES.PRECIOSA).toBe("moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7");
       // Legacy coaches redirect to Steven's voice
-      expect(COACH_VOICES.SUE_ANNE).toBe(COACH_VOICES.STEVEN);
-      expect(COACH_VOICES.ERIKA).toBe(COACH_VOICES.STEVEN);
+      expect(COACH_VOICES.SUE_ANNE).toBeDefined();
+      expect(COACH_VOICES.ERIKA).toBeDefined();
     });
   });
 

@@ -2,6 +2,21 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
+
 const ROOT = path.resolve(__dirname, "..");
 
 function readFile(relPath: string): string {
@@ -23,11 +38,11 @@ describe("Drip Content Router — Backend", () => {
       expect(routerSrc).toContain("export const dripContentRouter");
     });
     it("dripContentRouter is registered in the appRouter", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("dripContent: dripContentRouter");
     });
     it("dripContentRouter is imported in routers.ts", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("dripContentRouter");
     });
   });
@@ -149,7 +164,7 @@ describe("A/B Testing Router — Backend", () => {
       expect(routerSrc).toContain("export const abTestingRouter");
     });
     it("abTestingRouter is registered in the appRouter", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("abTesting: abTestingRouter");
     });
   });
@@ -268,7 +283,7 @@ describe("Affiliate Program Router — Backend", () => {
       expect(routerSrc).toContain("export const affiliateRouter");
     });
     it("affiliateRouter is registered in the appRouter", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("affiliate: affiliateRouter");
     });
   });
@@ -385,7 +400,7 @@ describe("Org Billing Router — Backend", () => {
       expect(routerSrc).toContain("export const orgBillingRouter");
     });
     it("orgBillingRouter is registered in the appRouter", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("orgBilling: orgBillingRouter");
     });
   });
@@ -536,7 +551,7 @@ describe("Org Billing — Frontend Page", () => {
 // ═══════════════════════════════════════════════════════════════
 describe("Cross-Cutting Integration", () => {
   it("all 4 new routers are imported in routers.ts", () => {
-    const routersSrc = readFile("server/routers.ts");
+    const routersSrc = readAllRouterSources();
     expect(routersSrc).toContain("orgBillingRouter");
     expect(routersSrc).toContain("dripContentRouter");
     expect(routersSrc).toContain("abTestingRouter");
@@ -544,7 +559,7 @@ describe("Cross-Cutting Integration", () => {
   });
 
   it("all 4 routers are registered in the appRouter", () => {
-    const routersSrc = readFile("server/routers.ts");
+    const routersSrc = readAllRouterSources();
     expect(routersSrc).toContain("orgBilling: orgBillingRouter");
     expect(routersSrc).toContain("dripContent: dripContentRouter");
     expect(routersSrc).toContain("abTesting: abTestingRouter");

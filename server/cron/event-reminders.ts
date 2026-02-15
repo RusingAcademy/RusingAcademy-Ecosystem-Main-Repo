@@ -10,13 +10,15 @@
 import { getDb } from "../db";
 import { sendEventReminder } from "../email";
 import { and, eq, gte, lte } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("cron-event-reminders");
 
 export async function sendEventReminders() {
-  console.log("[Event Reminders] Starting reminder job...");
+  log.info("[Event Reminders] Starting reminder job...");
   
   const db = await getDb();
   if (!db) {
-    console.error("[Event Reminders] Database not available");
+    log.error("[Event Reminders] Database not available");
     return { success: false, error: "Database not available" };
   }
   
@@ -37,7 +39,7 @@ export async function sendEventReminders() {
         lte(communityEvents.startAt, dayAfterTomorrow)
       ));
     
-    console.log(`[Event Reminders] Found ${upcomingEvents.length} events starting tomorrow`);
+    log.info(`[Event Reminders] Found ${upcomingEvents.length} events starting tomorrow`);
     
     let remindersSent = 0;
     let errors = 0;
@@ -56,14 +58,14 @@ export async function sendEventReminders() {
           eq(eventRegistrations.reminderSent, false)
         ));
       
-      console.log(`[Event Reminders] Event "${event.title}" has ${registrations.length} registrations to remind`);
+      log.info(`[Event Reminders] Event "${event.title}" has ${registrations.length} registrations to remind`);
       
       for (const { registration, user } of registrations) {
         const userEmail = registration.email || user.email;
         const userName = registration.name || user.name || "Member";
         
         if (!userEmail) {
-          console.log(`[Event Reminders] Skipping user ${user.id} - no email`);
+          log.info(`[Event Reminders] Skipping user ${user.id} - no email`);
           continue;
         }
         
@@ -91,19 +93,19 @@ export async function sendEventReminders() {
             .where(eq(eventRegistrations.id, registration.id));
           
           remindersSent++;
-          console.log(`[Event Reminders] Sent reminder to ${userEmail} for "${event.title}"`);
+          log.info(`[Event Reminders] Sent reminder to ${userEmail} for "${event.title}"`);
         } catch (error) {
           errors++;
-          console.error(`[Event Reminders] Failed to send reminder to ${userEmail}:`, error);
+          log.error(`[Event Reminders] Failed to send reminder to ${userEmail}:`, error);
         }
       }
     }
     
-    console.log(`[Event Reminders] Job completed. Sent: ${remindersSent}, Errors: ${errors}`);
+    log.info(`[Event Reminders] Job completed. Sent: ${remindersSent}, Errors: ${errors}`);
     return { success: true, remindersSent, errors };
     
   } catch (error) {
-    console.error("[Event Reminders] Job failed:", error);
+    log.error("[Event Reminders] Job failed:", error);
     return { success: false, error: String(error) };
   }
 }
@@ -112,11 +114,11 @@ export async function sendEventReminders() {
 if (import.meta.url === `file://${process.argv[1]}`) {
   sendEventReminders()
     .then(result => {
-      console.log("[Event Reminders] Result:", result);
+      log.info("[Event Reminders] Result:", result);
       process.exit(result.success ? 0 : 1);
     })
     .catch(error => {
-      console.error("[Event Reminders] Fatal error:", error);
+      log.error("[Event Reminders] Fatal error:", error);
       process.exit(1);
     });
 }

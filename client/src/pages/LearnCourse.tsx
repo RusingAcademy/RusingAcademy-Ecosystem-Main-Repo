@@ -142,7 +142,7 @@ export default function LearnCourse() {
             <GraduationCap className="h-3 w-3 mr-1" />
             {course.level || "All Levels"}
           </Badge>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">{course.title}</h1>
+          <h1 className="text-3xl font-bold text-black mb-2">{course.title}</h1>
           <p className="text-lg text-muted-foreground">{course.description}</p>
           
           {/* Progress Section */}
@@ -251,7 +251,7 @@ export default function LearnCourse() {
                                 ) : isInProgress ? (
                                   <div className="h-5 w-5 rounded-full border-2 border-primary border-t-transparent animate-spin" />
                                 ) : (
-                                  <Circle className="h-5 w-5 text-slate-300" />
+                                  <Circle className="h-5 w-5 text-white/90" />
                                 )}
                               </div>
                               

@@ -22,9 +22,9 @@
      TEXT COLORS (HIGH CONTRAST)
      ======================================== */
   --text: #0a0a0a;            /* Primary text - near black for max contrast */
-  --text-muted: #374151;      /* Secondary text - dark gray (was #4A5B66) */
+  --text-muted: #0a6969;      /* Secondary text - dark gray (was #4A5B66) */
   --text-inverse: #FFFFFF;    /* Text on dark/colored backgrounds */
-  --text-paragraph: #1f2937;  /* Paragraph text - very dark gray */
+  --text-paragraph: #0a4040;  /* Paragraph text - very dark gray */
   
   /* ========================================
      BRAND COLORS - ECOSYSTEM
@@ -43,7 +43,7 @@
   --barholex-gold: #F5A623;
   --barholex-gold-hover: #E69500;
   --barholex-gold-light: #FEF9EE;
-  --barholex-ink: #111827;
+  --barholex-ink: #062b2b;
   
   /* ========================================
      CTA COLORS (Orange Only)
@@ -127,7 +127,7 @@
   --background: var(--bg);
   --foreground: var(--text);
   --muted: var(--bg-alt);                    /* Background muted - cream */
-  --muted-foreground: #374151;               /* TEXT muted - DARK GRAY for contrast */
+  --muted-foreground: #0a6969;               /* TEXT muted - DARK GRAY for contrast */
   --card: var(--surface);
   --card-foreground: var(--text);
   --primary: var(--teal);

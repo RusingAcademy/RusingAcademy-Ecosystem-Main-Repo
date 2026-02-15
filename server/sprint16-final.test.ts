@@ -65,7 +65,7 @@ describe("Sprint 16.3: HR Dashboard Integration", () => {
       "utf-8"
     );
     expect(content).toContain("<TeamOverviewWidget");
-    expect(content).toContain("totalEmployees={");
+    expect(content).toContain("stats={");
   });
 
   it("should render TeamComplianceWidget with department data", () => {

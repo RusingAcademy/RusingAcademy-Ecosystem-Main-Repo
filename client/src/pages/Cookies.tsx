@@ -291,7 +291,7 @@ Nous visons à répondre aux demandes liées aux cookies dans les 5 jours ouvrab
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#062b2b] dark:to-[#0a4040]">
           <div className="container max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -9,6 +9,8 @@
  */
 
 import sgMail from '@sendgrid/mail';
+import { createLogger } from "../logger";
+const log = createLogger("services-emailDeliverabilityConfig");
 
 // SendGrid API configuration
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || '';
@@ -99,10 +101,10 @@ export async function sendDiagnosticReportEmail(config: DiagnosticEmailConfig): 
 
   try {
     await sgMail.send(msg);
-    console.log(`Diagnostic report sent successfully to ${recipientEmail}`);
+    log.info(`Diagnostic report sent successfully to ${recipientEmail}`);
     return true;
   } catch (error) {
-    console.error('Error sending diagnostic email:', error);
+    log.error('Error sending diagnostic email:', error);
     return false;
   }
 }

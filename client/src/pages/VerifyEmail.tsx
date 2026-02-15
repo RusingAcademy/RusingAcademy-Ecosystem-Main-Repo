@@ -39,8 +39,8 @@ export default function VerifyEmail() {
   }, [token]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
-      <Card className="w-full max-w-md bg-slate-800/50 border-slate-700">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
+      <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -58,7 +58,7 @@ export default function VerifyEmail() {
             {status === "loading" && (
               <>
                 <Loader2 className="w-16 h-16 text-teal-500 mx-auto animate-spin" />
-                <p className="text-slate-300">Verifying your email...</p>
+                <p className="text-white/90">Verifying your email...</p>
               </>
             )}
             
@@ -66,8 +66,8 @@ export default function VerifyEmail() {
               <>
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
                 <h2 className="text-xl font-semibold text-white">Email Verified!</h2>
-                <p className="text-slate-300">{message}</p>
-                <p className="text-sm text-slate-400">Redirecting to login...</p>
+                <p className="text-white/90">{message}</p>
+                <p className="text-sm text-[#67E8F9]">Redirecting to login...</p>
               </>
             )}
             
@@ -75,7 +75,7 @@ export default function VerifyEmail() {
               <>
                 <XCircle className="w-16 h-16 text-red-500 mx-auto" />
                 <h2 className="text-xl font-semibold text-white">Verification Failed</h2>
-                <p className="text-slate-300">{message}</p>
+                <p className="text-white/90">{message}</p>
                 <div className="pt-4 space-y-2">
                   <Button
                     asChild
@@ -86,7 +86,7 @@ export default function VerifyEmail() {
                   <Button
                     asChild
                     variant="outline"
-                    className="w-full border-slate-600 text-slate-300 hover:bg-slate-700"
+                    className="w-full border-slate-600 text-white/90 hover:bg-[#0a6969]"
                   >
                     <Link to="/signup">Create New Account</Link>
                   </Button>

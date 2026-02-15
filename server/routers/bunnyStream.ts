@@ -10,8 +10,9 @@
  */
 
 import { z } from "zod";
-import { router, protectedProcedure } from "../_core/trpc";
+import { router, protectedProcedure, publicProcedure } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
+import { ENV } from "../_core/env";
 import {
   createVideo,
   getVideo,
@@ -144,6 +145,16 @@ export const bunnyStreamRouter = router({
         hlsUrl: getHlsUrl(input.videoId),
       };
     }),
+
+  /**
+   * Get Bunny Stream config (library ID, CDN hostname) for frontend embed URLs.
+   */
+  getConfig: publicProcedure.query(() => {
+    return {
+      libraryId: ENV.bunnyStreamLibraryId,
+      cdnHostname: ENV.bunnyStreamCdnHostname,
+    };
+  }),
 });
 
 /**

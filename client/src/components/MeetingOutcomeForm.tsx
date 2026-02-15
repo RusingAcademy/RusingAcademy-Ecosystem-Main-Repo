@@ -134,7 +134,7 @@ const outcomeOptions = [
   { value: "not_qualified", icon: XCircle, color: "text-red-400", bgColor: "bg-red-500/20", borderColor: "border-red-500/50" },
   { value: "needs_follow_up", icon: Clock, color: "text-yellow-400", bgColor: "bg-yellow-500/20", borderColor: "border-yellow-500/50" },
   { value: "converted", icon: Trophy, color: "text-teal-400", bgColor: "bg-teal-500/20", borderColor: "border-teal-500/50" },
-  { value: "no_show", icon: UserX, color: "text-slate-400", bgColor: "bg-white0/20", borderColor: "border-slate-500/50" },
+  { value: "no_show", icon: UserX, color: "text-[#67E8F9]", bgColor: "bg-white0/20", borderColor: "border-slate-500/50" },
 ] as const;
 
 export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: MeetingOutcomeFormProps) {
@@ -194,14 +194,14 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-slate-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-[#0a4040] rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold">{t.title}</h2>
-            <p className="text-slate-400 mt-1">{t.subtitle}</p>
+            <p className="text-[#67E8F9] mt-1">{t.subtitle}</p>
           </div>
           <button
             onClick={onClose}
@@ -217,15 +217,15 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
             <Calendar className="w-5 h-5 text-teal-400" />
             <span className="font-medium">{meeting.title}</span>
           </div>
-          <div className="text-sm text-slate-400">
+          <div className="text-sm text-[#67E8F9]">
             {t.meetingWith}: <span className="text-white">{meeting.leadName}</span> ({meeting.leadEmail})
           </div>
-          <div className="text-sm text-slate-400 mt-1">{formattedDate}</div>
+          <div className="text-sm text-[#67E8F9] mt-1">{formattedDate}</div>
         </div>
         
         {/* Outcome Selection */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-slate-300 mb-3">{t.selectOutcome}</label>
+          <label className="block text-sm font-medium text-white/90 mb-3">{t.selectOutcome}</label>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {outcomeOptions.map((option) => {
               const Icon = option.icon;
@@ -245,7 +245,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                 >
                   <Icon className={`w-6 h-6 mb-2 ${option.color}`} />
                   <div className="font-medium">{label}</div>
-                  <div className="text-xs text-slate-400 mt-1">{desc}</div>
+                  <div className="text-xs text-[#67E8F9] mt-1">{desc}</div>
                 </button>
               );
             })}
@@ -268,11 +268,11 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
             >
               {/* Qualification Score */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-white/90 mb-2">
                   <Target className="w-4 h-4 inline mr-2" />
                   {t.qualificationScore}
                 </label>
-                <p className="text-xs text-slate-400 mb-3">{t.qualificationScoreDesc}</p>
+                <p className="text-xs text-[#67E8F9] mb-3">{t.qualificationScoreDesc}</p>
                 <div className="flex items-center gap-4">
                   <input
                     type="range"
@@ -292,28 +292,28 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
               {(outcome === "qualified" || outcome === "converted") && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-white/90 mb-2">
                       <DollarSign className="w-4 h-4 inline mr-2" />
                       {t.dealValue}
                     </label>
-                    <p className="text-xs text-slate-400 mb-2">{t.dealValueDesc}</p>
+                    <p className="text-xs text-[#67E8F9] mb-2">{t.dealValueDesc}</p>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#67E8F9]">$</span>
                       <input
                         type="number"
                         value={dealValue}
                         onChange={(e) => setDealValue(e.target.value)}
                         placeholder="0"
-                        className="w-full pl-8 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                        className="w-full pl-8 pr-4 py-3 bg-white/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-white/90 mb-2">
                       {t.dealProbability}
                     </label>
-                    <p className="text-xs text-slate-400 mb-2">{t.dealProbabilityDesc}</p>
+                    <p className="text-xs text-[#67E8F9] mb-2">{t.dealProbabilityDesc}</p>
                     <div className="flex items-center gap-3">
                       <input
                         type="range"
@@ -332,46 +332,46 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
               
               {/* Next Steps */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-white/90 mb-2">
                   <FileText className="w-4 h-4 inline mr-2" />
                   {t.nextSteps}
                 </label>
-                <p className="text-xs text-slate-400 mb-2">{t.nextStepsDesc}</p>
+                <p className="text-xs text-[#67E8F9] mb-2">{t.nextStepsDesc}</p>
                 <input
                   type="text"
                   value={nextSteps}
                   onChange={(e) => setNextSteps(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                   placeholder={language === "fr" ? "Ex: Envoyer une proposition" : "Ex: Send proposal"}
                 />
               </div>
               
               {/* Notes */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-white/90 mb-2">
                   {t.notes}
                 </label>
-                <p className="text-xs text-slate-400 mb-2">{t.notesDesc}</p>
+                <p className="text-xs text-[#67E8F9] mb-2">{t.notesDesc}</p>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-teal-500 transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors resize-none"
                 />
               </div>
               
               {/* Follow-up Scheduling */}
               {outcome === "needs_follow_up" && (
-                <div className="border-t border-white/10 pt-6">
+                <div className="border-t border-white/60 pt-6">
                   <div className="flex items-center justify-between mb-4">
-                    <label className="text-sm font-medium text-slate-300">
+                    <label className="text-sm font-medium text-white/90">
                       <Calendar className="w-4 h-4 inline mr-2" />
                       {t.scheduleFollowUp}
                     </label>
                     <button
                       onClick={() => setShowFollowUp(!showFollowUp)}
                       className={`px-3 py-1 rounded-lg text-sm transition-colors ${
-                        showFollowUp ? "bg-teal-500 text-white" : "bg-white/10 text-slate-300"
+                        showFollowUp ? "bg-teal-500 text-white" : "bg-white/10 text-white/90"
                       }`}
                     >
                       {showFollowUp ? "On" : "Off"}
@@ -387,21 +387,21 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                         className="grid grid-cols-2 gap-4"
                       >
                         <div>
-                          <label className="block text-xs text-slate-400 mb-2">{t.followUpDate}</label>
+                          <label className="block text-xs text-[#67E8F9] mb-2">{t.followUpDate}</label>
                           <input
                             type="datetime-local"
                             value={followUpDate}
                             onChange={(e) => setFollowUpDate(e.target.value)}
-                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-xs text-slate-400 mb-2">{t.followUpType}</label>
+                          <label className="block text-xs text-[#67E8F9] mb-2">{t.followUpType}</label>
                           <select
                             value={followUpType}
                             onChange={(e) => setFollowUpType(e.target.value as "call" | "email" | "meeting")}
-                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                           >
                             <option value="call">{t.call}</option>
                             <option value="email">{t.email}</option>
@@ -418,7 +418,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
         </AnimatePresence>
         
         {/* Actions */}
-        <div className="flex gap-3 mt-6 pt-6 border-t border-white/10">
+        <div className="flex gap-3 mt-6 pt-6 border-t border-white/60">
           <button
             onClick={onClose}
             className="flex-1 px-4 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors"
@@ -432,7 +432,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
           >
             {isSubmitting ? (
               <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-white/60 border-t-white rounded-full animate-spin" />
                 {t.submitting}
               </>
             ) : (

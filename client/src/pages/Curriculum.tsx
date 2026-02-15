@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -230,7 +231,7 @@ function CourseCard({ course, isEn, onEnroll, isLoading }: {
             {course.level}
           </Badge>
           {course.sleBadge && (
-            <Badge variant="secondary" className="bg-white/90 text-gray-800 font-semibold">
+            <Badge variant="secondary" className="bg-white/90 text-black font-semibold">
               → {course.sleBadge}
             </Badge>
           )}
@@ -244,7 +245,7 @@ function CourseCard({ course, isEn, onEnroll, isLoading }: {
           <h3 className="text-xl font-bold text-white">
             {isEn ? course.title : course.titleFr}
           </h3>
-          <p className="text-white/80 text-sm">
+          <p className="text-white/90 text-sm">
             {isEn ? course.subtitle : course.subtitleFr}
           </p>
         </div>
@@ -351,8 +352,8 @@ export default function Curriculum() {
     : courses.filter(c => c.levelCategory === activeTab);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <main id="main-content" className="flex-1">
+    <div className="min-h-screen flex flex-col bg-background">      <main id="main-content" className="flex-1">
+      <SEO title="Curriculum" description="Explore RusingAcademy's structured bilingual curriculum from foundations to executive-level French." canonical="/curriculum" />
         <Breadcrumb 
           items={[
             { label: "Discover Our Courses", labelFr: "Découvrez nos cours" }

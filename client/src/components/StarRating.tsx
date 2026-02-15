@@ -83,7 +83,7 @@ export function StarRating({
               <Star
                 className={cn(
                   sizeClasses[size],
-                  "text-gray-300 dark:text-gray-600"
+                  "text-white/90 dark:text-black"
                 )}
               />
               
@@ -107,7 +107,7 @@ export function StarRating({
       </div>
       
       {showValue && (
-        <span className={cn("font-semibold text-gray-800 dark:text-gray-200", textSizeClasses[size])}>
+        <span className={cn("font-semibold text-black dark:text-white/90", textSizeClasses[size])}>
           {rating > 0 ? rating.toFixed(1) : "New"}
         </span>
       )}

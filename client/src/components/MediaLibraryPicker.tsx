@@ -42,7 +42,7 @@ function getFileIcon(mimeType: string) {
   if (mimeType?.startsWith("image/")) return <FileImage className="h-4 w-4 text-blue-500" />;
   if (mimeType?.startsWith("video/")) return <FileVideo className="h-4 w-4 text-purple-500" />;
   if (mimeType?.startsWith("audio/")) return <FileAudio className="h-4 w-4 text-green-500" />;
-  return <File className="h-4 w-4 text-gray-500" />;
+  return <File className="h-4 w-4 text-black" />;
 }
 
 function formatFileSize(bytes: number): string {
@@ -146,7 +146,7 @@ export default function MediaLibraryPicker({
             {/* Search & Filters */}
             <div className="flex items-center gap-3 py-3 shrink-0">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#67E8F9]" />
                 <Input
                   value={search}
                   onChange={(e) => { setSearch(e.target.value); setPage(0); }}
@@ -170,13 +170,13 @@ export default function MediaLibraryPicker({
               <div className="flex items-center border rounded-md">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 text-gray-900" : "text-gray-400"}`}
+                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 text-black" : "text-[#67E8F9]"}`}
                 >
                   <Grid3X3 className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 text-gray-900" : "text-gray-400"}`}
+                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 text-black" : "text-[#67E8F9]"}`}
                 >
                   <LayoutList className="h-4 w-4" />
                 </button>
@@ -192,7 +192,7 @@ export default function MediaLibraryPicker({
                     <div className="animate-spin h-6 w-6 border-2 border-indigo-500 border-t-transparent rounded-full" />
                   </div>
                 ) : items.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-48 text-gray-400">
+                  <div className="flex flex-col items-center justify-center h-48 text-[#67E8F9]">
                     <ImageIcon className="h-10 w-10 mb-2" />
                     <p className="text-sm">No media found</p>
                     <p className="text-xs mt-1">Try adjusting your search or filters</p>
@@ -220,7 +220,7 @@ export default function MediaLibraryPicker({
                         ) : (
                           <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50">
                             {getFileIcon(item.mimeType)}
-                            <span className="text-xs text-gray-500 mt-1 px-2 truncate w-full text-center">{item.fileName}</span>
+                            <span className="text-xs text-black mt-1 px-2 truncate w-full text-center">{item.fileName}</span>
                           </div>
                         )}
                         {selectedItem?.id === item.id && (
@@ -256,7 +256,7 @@ export default function MediaLibraryPicker({
                         )}
                         <div className="flex-1 text-left">
                           <p className="text-sm font-medium truncate">{item.fileName}</p>
-                          <p className="text-xs text-gray-400">{item.mimeType} · {formatFileSize(item.fileSize)}</p>
+                          <p className="text-xs text-[#67E8F9]">{item.mimeType} · {formatFileSize(item.fileSize)}</p>
                         </div>
                         {selectedItem?.id === item.id && (
                           <Check className="h-4 w-4 text-indigo-500" />
@@ -282,34 +282,34 @@ export default function MediaLibraryPicker({
                     )}
                     <div className="space-y-2">
                       <div>
-                        <Label className="text-xs text-gray-500">Filename</Label>
+                        <Label className="text-xs text-black">Filename</Label>
                         <p className="text-sm font-medium truncate">{selectedItem.fileName}</p>
                       </div>
                       {selectedItem.altText && (
                         <div>
-                          <Label className="text-xs text-gray-500">Alt Text</Label>
-                          <p className="text-xs text-gray-600">{selectedItem.altText}</p>
+                          <Label className="text-xs text-black">Alt Text</Label>
+                          <p className="text-xs text-black">{selectedItem.altText}</p>
                         </div>
                       )}
                       <div className="flex gap-3">
                         <div>
-                          <Label className="text-xs text-gray-500">Type</Label>
+                          <Label className="text-xs text-black">Type</Label>
                           <p className="text-xs">{selectedItem.mimeType}</p>
                         </div>
                         <div>
-                          <Label className="text-xs text-gray-500">Size</Label>
+                          <Label className="text-xs text-black">Size</Label>
                           <p className="text-xs">{formatFileSize(selectedItem.fileSize)}</p>
                         </div>
                       </div>
                       {selectedItem.folder && (
                         <div>
-                          <Label className="text-xs text-gray-500">Folder</Label>
+                          <Label className="text-xs text-black">Folder</Label>
                           <Badge variant="outline" className="text-xs">{selectedItem.folder}</Badge>
                         </div>
                       )}
                       {selectedItem.tags && (
                         <div>
-                          <Label className="text-xs text-gray-500">Tags</Label>
+                          <Label className="text-xs text-black">Tags</Label>
                           <div className="flex flex-wrap gap-1 mt-0.5">
                             {selectedItem.tags.split(",").map((tag: string, i: number) => (
                               <Badge key={i} variant="secondary" className="text-xs">{tag.trim()}</Badge>
@@ -326,7 +326,7 @@ export default function MediaLibraryPicker({
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-between py-2 border-t shrink-0">
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-black">
                   Showing {page * ITEMS_PER_PAGE + 1}–{Math.min((page + 1) * ITEMS_PER_PAGE, total)} of {total}
                 </p>
                 <div className="flex items-center gap-1">
@@ -339,7 +339,7 @@ export default function MediaLibraryPicker({
                   >
                     <ChevronLeft className="h-3.5 w-3.5" />
                   </Button>
-                  <span className="text-xs text-gray-500 px-2">
+                  <span className="text-xs text-black px-2">
                     {page + 1} / {totalPages}
                   </span>
                   <Button
@@ -366,13 +366,13 @@ export default function MediaLibraryPicker({
                   placeholder="https://example.com/image.jpg"
                   className="text-sm"
                 />
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-black">
                   Enter a direct URL to an image. Supports JPEG, PNG, WebP, GIF, and SVG formats.
                 </p>
               </div>
               {urlInput && (
                 <div className="space-y-2">
-                  <Label className="text-xs text-gray-500">Preview</Label>
+                  <Label className="text-xs text-black">Preview</Label>
                   <div className="w-48 h-48 rounded-lg border overflow-hidden bg-gray-50">
                     <img
                       src={urlInput}

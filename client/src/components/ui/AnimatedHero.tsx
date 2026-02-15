@@ -43,11 +43,11 @@ export function AnimatedHero({
   const getBackgroundClass = () => {
     switch (variant) {
       case 'gradient':
-        return 'bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900';
+        return 'bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-teal-900';
       case 'dark':
-        return 'bg-slate-900';
+        return 'bg-[#062b2b]';
       default:
-        return 'bg-white dark:bg-slate-900';
+        return 'bg-white dark:bg-[#062b2b]';
     }
   };
 
@@ -126,14 +126,14 @@ export function AnimatedHero({
 
             <motion.h1
               variants={heroTextVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900 dark:text-white"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-black dark:text-white"
             >
               {renderTitle()}
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-xl"
+              className="text-lg md:text-xl text-black dark:text-white/90 max-w-xl"
             >
               {subtitle}
             </motion.p>
@@ -163,7 +163,7 @@ export function AnimatedHero({
                     initial="idle"
                     whileHover="hover"
                     whileTap="tap"
-                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:border-teal-500 hover:text-teal-500 transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 dark:border-slate-600 text-black dark:text-white font-semibold rounded-xl hover:border-teal-500 hover:text-teal-500 transition-colors"
                   >
                     {secondaryCTA.icon}
                     {secondaryCTA.text}
@@ -175,7 +175,7 @@ export function AnimatedHero({
             {stats && stats.length > 0 && (
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-wrap gap-8 pt-8 border-t border-slate-200 dark:border-slate-700"
+                className="flex flex-wrap gap-8 pt-8 border-t border-slate-200 dark:border-[#0a6969]"
               >
                 {stats.map((stat, index) => (
                   <motion.div
@@ -186,7 +186,7 @@ export function AnimatedHero({
                     className="text-center"
                   >
                     <div className="text-3xl font-bold text-teal-500">{stat.value}</div>
-                    <div className="text-sm text-slate-500 dark:text-slate-400">{stat.label}</div>
+                    <div className="text-sm text-black dark:text-[#67E8F9]">{stat.label}</div>
                   </motion.div>
                 ))}
               </motion.div>

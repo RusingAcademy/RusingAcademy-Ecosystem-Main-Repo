@@ -3,6 +3,8 @@ import { protectedProcedure, adminProcedure, publicProcedure } from "../_core/tr
 import { router } from "../_core/trpc";
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-premiumFeatures");
 
 // ============================================================================
 // STRIPE LIVE TESTING ROUTER
@@ -276,7 +278,7 @@ export const onboardingRouter = router({
       stepTitle: z.string().optional(),
       stepDescription: z.string().optional(),
       sortOrder: z.number().optional(),
-      actionConfig: z.any().optional(),
+      actionConfig: z.record(z.string(), z.unknown()).optional(),
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -299,7 +301,7 @@ export const onboardingRouter = router({
       stepTitle: z.string(),
       stepDescription: z.string().optional(),
       actionType: z.enum(["email", "notification", "course_assign", "checklist", "redirect"]),
-      actionConfig: z.any().optional(),
+      actionConfig: z.record(z.string(), z.unknown()).optional(),
       sortOrder: z.number().default(0),
     }))
     .mutation(async ({ input }) => {
@@ -713,7 +715,7 @@ export const sleExamRouter = router({
       level: z.enum(["A", "B", "C"]),
       title: z.string().min(1),
       description: z.string().optional(),
-      questions: z.any().optional(),
+      questions: z.array(z.record(z.string(), z.unknown())).optional(),
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -746,7 +748,7 @@ export const sleExamRouter = router({
   submitExam: protectedProcedure
     .input(z.object({
       sessionId: z.number(),
-      answers: z.any(),
+      answers: z.array(z.object({ questionId: z.number(), answer: z.string(), correct: z.boolean().optional() })),
       timeUsed: z.number(),
     }))
     .mutation(async ({ input, ctx }) => {
@@ -1046,11 +1048,12 @@ export const funnelsRouter = router({
     .input(z.object({ search: z.string().optional(), status: z.string().optional() }).optional())
     .query(async ({ input }) => {
       const db = await getDb();
-      let query = `SELECT * FROM funnels ORDER BY updatedAt DESC`;
+      let rows: any;
       if (input?.status && input.status !== "all") {
-        query = `SELECT * FROM funnels WHERE status = '${input.status}' ORDER BY updatedAt DESC`;
+        [rows] = await db.execute(sql`SELECT * FROM funnels WHERE status = ${input.status} ORDER BY updatedAt DESC`);
+      } else {
+        [rows] = await db.execute(sql`SELECT * FROM funnels ORDER BY updatedAt DESC`);
       }
-      const [rows] = await db.execute(sql.raw(query));
       let results = Array.isArray(rows) ? rows : [];
       if (input?.search) {
         const s = input.search.toLowerCase();
@@ -1082,7 +1085,7 @@ export const funnelsRouter = router({
         title: z.string(),
         description: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input, ctx }) => {
@@ -1108,7 +1111,7 @@ export const funnelsRouter = router({
         title: z.string(),
         description: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input }) => {
@@ -1157,11 +1160,12 @@ export const automationsRouter = router({
     .input(z.object({ search: z.string().optional(), status: z.string().optional() }).optional())
     .query(async ({ input }) => {
       const db = await getDb();
-      let query = `SELECT * FROM automations ORDER BY updatedAt DESC`;
+      let rows: any;
       if (input?.status && input.status !== "all") {
-        query = `SELECT * FROM automations WHERE status = '${input.status}' ORDER BY updatedAt DESC`;
+        [rows] = await db.execute(sql`SELECT * FROM automations WHERE status = ${input.status} ORDER BY updatedAt DESC`);
+      } else {
+        [rows] = await db.execute(sql`SELECT * FROM automations ORDER BY updatedAt DESC`);
       }
-      const [rows] = await db.execute(sql.raw(query));
       let results = Array.isArray(rows) ? rows : [];
       if (input?.search) {
         const s = input.search.toLowerCase();
@@ -1190,12 +1194,12 @@ export const automationsRouter = router({
       description: z.string().optional(),
       triggerType: z.enum(["enrollment", "purchase", "course_complete", "lesson_complete", "signup", "inactivity", "tag_added", "manual"]),
       // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-      triggerConfig: z.record(z.any()).optional(),
+      triggerConfig: z.record(z.string(), z.unknown()).optional(),
       steps: z.array(z.object({
         id: z.string(),
         type: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input, ctx }) => {
@@ -1218,12 +1222,12 @@ export const automationsRouter = router({
       status: z.enum(["active", "paused", "draft"]).optional(),
       triggerType: z.enum(["enrollment", "purchase", "course_complete", "lesson_complete", "signup", "inactivity", "tag_added", "manual"]).optional(),
       // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-      triggerConfig: z.record(z.any()).optional(),
+      triggerConfig: z.record(z.string(), z.unknown()).optional(),
       steps: z.array(z.object({
         id: z.string(),
         type: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input }) => {
@@ -1391,7 +1395,7 @@ export const orgBillingRouter = router({
         
         return { url: session.url, sessionId: session.id };
       } catch (error: any) {
-        console.error("[OrgBilling] Checkout error:", error.message);
+        log.error("[OrgBilling] Checkout error:", error.message);
         return { url: null, error: error.message };
       }
     }),

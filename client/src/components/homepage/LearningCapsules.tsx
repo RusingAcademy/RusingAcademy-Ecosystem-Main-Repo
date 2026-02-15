@@ -21,7 +21,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où la répétition a libéré le français de Sarah",
     subtitleEn: "The day repetition freed Sarah's French",
     color: "from-teal-600 to-teal-700",
-    image: "/images/capsules/behaviorism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hzRvIpwVFPNHSvQz.jpg",
   },
   {
     number: 2,
@@ -30,7 +30,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Mark a arrêté de perdre ses mots",
     subtitleEn: "The day Mark stopped losing his words",
     color: "from-blue-600 to-blue-700",
-    image: "/images/capsules/cognitivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/cgvNhGAZalKeDrdd.jpg",
   },
   {
     number: 3,
@@ -39,7 +39,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Julie a découvert la règle par elle-même",
     subtitleEn: "The day Julie discovered the rule herself",
     color: "from-emerald-600 to-emerald-700",
-    image: "/images/capsules/constructivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ePeUWNVSiCyKZjmw.jpg",
   },
   {
     number: 4,
@@ -48,7 +48,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où le groupe a libéré la voix de Karim",
     subtitleEn: "The day the group freed Karim's voice",
     color: "from-[#C65A1E] to-[#A84A15]",
-    image: "/images/capsules/socio-constructivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZbojUzmtnVPkHCjP.jpg",
   },
   {
     number: 5,
@@ -56,8 +56,8 @@ const capsules: Capsule[] = [
     titleEn: "HUMANISM",
     subtitleFr: "Le jour où Amélie a arrêté d'avoir peur d'être jugée",
     subtitleEn: "The day Amélie stopped fearing judgment",
-    color: "from-slate-600 to-slate-700",
-    image: "/images/capsules/humanism.jpg",
+    color: "from-slate-600 to-[#0a6969]",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZLqfMOEgQqwhMFzT.jpg",
   },
   {
     number: 6,
@@ -66,7 +66,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Marie a découvert qu'elle n'était plus seule à apprendre",
     subtitleEn: "The day Marie discovered she wasn't learning alone",
     color: "from-teal-500 to-teal-600",
-    image: "/images/capsules/connectivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/BBNGbNFEyBpsXvad.jpg",
   },
   {
     number: 7,
@@ -75,7 +75,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Sam a appris le français en commandant un café",
     subtitleEn: "The day Sam learned French ordering coffee",
     color: "from-[#C65A1E] to-[#A84A15]",
-    image: "/images/capsules/experiential.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ABRBxddRHSYGoPbj.jpg",
   },
 ];
 
@@ -121,15 +121,15 @@ export default function LearningCapsules() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-2">
             {language === 'fr' ? 'Trucs et astuces d\'apprentissage :' : 'Learning Tips & Tricks:'}
           </h2>
-          <h3 className="text-xl md:text-2xl font-semibold text-slate-700 mb-4">
+          <h3 className="text-xl md:text-2xl font-semibold text-black mb-4">
             {language === 'fr' 
               ? '40 micro-leçons fondées sur des données probantes pour les apprenants adultes'
               : '40 Evidence-Based Micro-Lessons for Adult Learners'}
           </h3>
-          <p className="text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-black max-w-4xl mx-auto leading-relaxed">
             {language === 'fr' 
               ? 'Des leçons vidéo courtes et ciblées, fondées sur les sciences de l\'apprentissage et les principes de l\'éducation des adultes, conçues spécifiquement pour les professionnels occupés.'
               : 'Short, focused video lessons grounded in learning science and adult education principles, designed specifically for busy professionals.'}
@@ -148,7 +148,7 @@ export default function LearningCapsules() {
             className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 -translate-x-4 md:translate-x-0"
             aria-label="Previous capsule"
           >
-            <ChevronLeft className="h-6 w-6 text-slate-700" />
+            <ChevronLeft className="h-6 w-6 text-black" />
           </button>
           
           <button
@@ -156,7 +156,7 @@ export default function LearningCapsules() {
             className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 translate-x-4 md:translate-x-0"
             aria-label="Next capsule"
           >
-            <ChevronRight className="h-6 w-6 text-slate-700" />
+            <ChevronRight className="h-6 w-6 text-black" />
           </button>
 
           {/* Carousel Track */}
@@ -192,7 +192,7 @@ export default function LearningCapsules() {
                         <span className="px-4 py-2 bg-[#C65A1E] text-white text-sm font-bold rounded-full shadow-lg">
                           Capsule {capsule.number} / {capsules.length}
                         </span>
-                        <div className="flex items-center gap-2 text-white/80 text-sm">
+                        <div className="flex items-center gap-2 text-white/90 text-sm">
                           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                           {language === 'fr' ? 'Vidéo disponible' : 'Video available'}
                         </div>
@@ -203,7 +203,7 @@ export default function LearningCapsules() {
                         <h4 className="text-3xl md:text-4xl font-black text-white mb-2 tracking-wide">
                           {language === 'fr' ? capsule.titleFr : capsule.titleEn}
                         </h4>
-                        <p className="text-sm text-white/70 uppercase tracking-widest mb-4">
+                        <p className="text-sm text-white/90 uppercase tracking-widest mb-4">
                           {language === 'fr' ? capsule.titleEn : capsule.titleFr}
                         </p>
                         <p className="text-lg text-white/90 leading-relaxed max-w-md">

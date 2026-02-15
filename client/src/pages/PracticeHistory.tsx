@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -13,9 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { format } from "date-fns";
+import { format, subDays, subMonths, isAfter } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
+import { CalendarDays, Filter, X } from "lucide-react";
 
 // Coach images mapping
 const coachImages: Record<string, string> = {
@@ -61,6 +63,8 @@ export default function PracticeHistory() {
   const { user, loading: authLoading } = useAuth();
   const [coachFilter, setCoachFilter] = useState<string>("all");
   const [levelFilter, setLevelFilter] = useState<string>("all");
+  const [skillFilter, setSkillFilter] = useState<string>("all");
+  const [dateRange, setDateRange] = useState<string>("all");
 
   // Fetch session history
   const { data: sessions, isLoading } = trpc.sleCompanion.getSessionHistory.useQuery(
@@ -68,12 +72,37 @@ export default function PracticeHistory() {
     { enabled: !!user }
   );
 
+  // Date range cutoff
+  const dateCutoff = useMemo(() => {
+    const now = new Date();
+    switch (dateRange) {
+      case "7d": return subDays(now, 7);
+      case "30d": return subDays(now, 30);
+      case "90d": return subDays(now, 90);
+      case "6m": return subMonths(now, 6);
+      default: return null;
+    }
+  }, [dateRange]);
+
   // Filter sessions
   const filteredSessions = sessions?.filter((session) => {
     if (coachFilter !== "all" && session.coach?.id !== coachFilter) return false;
     if (levelFilter !== "all" && session.level !== levelFilter) return false;
+    if (skillFilter !== "all" && session.skill !== skillFilter) return false;
+    if (dateCutoff && session.createdAt) {
+      if (!isAfter(new Date(session.createdAt), dateCutoff)) return false;
+    }
     return true;
   });
+
+  const hasActiveFilters = coachFilter !== "all" || levelFilter !== "all" || skillFilter !== "all" || dateRange !== "all";
+
+  const clearAllFilters = () => {
+    setCoachFilter("all");
+    setLevelFilter("all");
+    setSkillFilter("all");
+    setDateRange("all");
+  };
 
   // Calculate stats
   const totalSessions = sessions?.length || 0;
@@ -86,7 +115,7 @@ export default function PracticeHistory() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-6">
         <div className="max-w-4xl mx-auto">
           <Skeleton className="h-10 w-64 mb-6" />
           <div className="grid grid-cols-3 gap-4 mb-6">
@@ -102,11 +131,11 @@ export default function PracticeHistory() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
-        <Card className="max-w-md bg-white/5 border-white/10">
+      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] flex items-center justify-center p-6">
+        <Card className="max-w-md bg-white/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Connexion requise</CardTitle>
-            <CardDescription className="text-gray-400">
+            <CardDescription className="text-[#67E8F9]">
               Vous devez être connecté pour voir votre historique de pratique.
             </CardDescription>
           </CardHeader>
@@ -123,7 +152,7 @@ export default function PracticeHistory() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -131,12 +160,12 @@ export default function PracticeHistory() {
             <h1 className="text-2xl font-bold text-white mb-1">
               Historique de Pratique
             </h1>
-            <p className="text-gray-400">
+            <p className="text-[#67E8F9]">
               Vos sessions de pratique avec le SLE AI Companion
             </p>
           </div>
           <Link href="/dashboard">
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+            <Button variant="outline" className="border-white/60 text-white hover:bg-white/10">
               ← Retour au tableau de bord
             </Button>
           </Link>
@@ -144,42 +173,42 @@ export default function PracticeHistory() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
                   <span className="text-2xl">📊</span>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Sessions totales</p>
+                  <p className="text-[#67E8F9] text-sm">Sessions totales</p>
                   <p className="text-2xl font-bold text-white">{totalSessions}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
                   <span className="text-2xl">⭐</span>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Score moyen</p>
+                  <p className="text-[#67E8F9] text-sm">Score moyen</p>
                   <p className="text-2xl font-bold text-white">{avgScore}/100</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
                   <span className="text-2xl">💬</span>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Messages échangés</p>
+                  <p className="text-[#67E8F9] text-sm">Messages échangés</p>
                   <p className="text-2xl font-bold text-white">{totalMessages}</p>
                 </div>
               </div>
@@ -188,9 +217,23 @@ export default function PracticeHistory() {
         </div>
 
         {/* Filters */}
-        <div className="flex gap-4 mb-6">
+        <div className="flex flex-wrap gap-3 mb-6 items-center">
+          <Select value={dateRange} onValueChange={setDateRange}>
+            <SelectTrigger className="w-44 bg-white/5 border-white/60 text-white">
+              <CalendarDays className="w-4 h-4 mr-2 text-cyan-400" />
+              <SelectValue placeholder="Toutes les dates" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Toutes les dates</SelectItem>
+              <SelectItem value="7d">7 derniers jours</SelectItem>
+              <SelectItem value="30d">30 derniers jours</SelectItem>
+              <SelectItem value="90d">3 derniers mois</SelectItem>
+              <SelectItem value="6m">6 derniers mois</SelectItem>
+            </SelectContent>
+          </Select>
+
           <Select value={coachFilter} onValueChange={setCoachFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/20 text-white">
+            <SelectTrigger className="w-44 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les coaches" />
             </SelectTrigger>
             <SelectContent>
@@ -201,7 +244,7 @@ export default function PracticeHistory() {
           </Select>
 
           <Select value={levelFilter} onValueChange={setLevelFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/20 text-white">
+            <SelectTrigger className="w-40 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les niveaux" />
             </SelectTrigger>
             <SelectContent>
@@ -211,6 +254,31 @@ export default function PracticeHistory() {
               <SelectItem value="C">Niveau C</SelectItem>
             </SelectContent>
           </Select>
+
+          <Select value={skillFilter} onValueChange={setSkillFilter}>
+            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
+              <SelectValue placeholder="Toutes les compétences" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Toutes les compétences</SelectItem>
+              <SelectItem value="oral_expression">Expression orale</SelectItem>
+              <SelectItem value="written_expression">Expression écrite</SelectItem>
+              <SelectItem value="oral_comprehension">Compréhension orale</SelectItem>
+              <SelectItem value="written_comprehension">Compréhension écrite</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {hasActiveFilters && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearAllFilters}
+              className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10"
+            >
+              <X className="w-4 h-4 mr-1" />
+              Réinitialiser
+            </Button>
+          )}
         </div>
 
         {/* Sessions List */}
@@ -225,7 +293,7 @@ export default function PracticeHistory() {
             {filteredSessions.map((session) => (
               <Card
                 key={session.id}
-                className="bg-white/5 border-white/10 hover:border-cyan-400/30 transition-colors"
+                className="bg-white/5 border-white/60 hover:border-cyan-400/30 transition-colors"
               >
                 <CardContent className="p-4">
                   <div className="flex items-center gap-4">
@@ -245,11 +313,11 @@ export default function PracticeHistory() {
                         <Badge className={levelColors[session.level || "A"] || levelColors.A}>
                           Niveau {session.level}
                         </Badge>
-                        <Badge variant="outline" className="border-white/20 text-gray-300">
+                        <Badge variant="outline" className="border-white/60 text-white/90">
                           {skillIcons[session.skill]} {skillLabels[session.skill] || session.skill}
                         </Badge>
                       </div>
-                      <p className="text-gray-400 text-sm">
+                      <p className="text-[#67E8F9] text-sm">
                         {session.createdAt
                           ? format(new Date(session.createdAt), "d MMMM yyyy 'à' HH:mm", {
                               locale: fr,
@@ -261,24 +329,24 @@ export default function PracticeHistory() {
                     {/* Stats */}
                     <div className="flex items-center gap-6 text-center">
                       <div>
-                        <p className="text-gray-400 text-xs">Messages</p>
+                        <p className="text-[#67E8F9] text-xs">Messages</p>
                         <p className="text-white font-semibold">{(session as any).messageCount || 0}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-xs">Score</p>
+                        <p className="text-[#67E8F9] text-xs">Score</p>
                         <p className="text-cyan-400 font-semibold">
                           {session.averageScore ? `${session.averageScore}/100` : "-"}
                         </p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-xs">Statut</p>
+                        <p className="text-[#67E8F9] text-xs">Statut</p>
                         <Badge
                           className={
                             session.status === "completed"
                               ? "bg-green-500/20 text-green-400"
                               : session.status === "active"
                               ? "bg-blue-500/20 text-blue-400"
-                              : "bg-gray-500/20 text-gray-400"
+                              : "bg-[#0a6969]/20 text-[#67E8F9]"
                           }
                         >
                           {session.status === "completed"
@@ -305,13 +373,13 @@ export default function PracticeHistory() {
             ))}
           </div>
         ) : (
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-8 text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-500/20 flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#0a6969]/20 flex items-center justify-center">
                 <span className="text-3xl">🎯</span>
               </div>
               <h3 className="text-white font-semibold mb-2">Aucune session trouvée</h3>
-              <p className="text-gray-400 mb-4">
+              <p className="text-[#67E8F9] mb-4">
                 {coachFilter !== "all" || levelFilter !== "all"
                   ? "Aucune session ne correspond à vos filtres."
                   : "Commencez à pratiquer avec le SLE AI Companion pour voir votre historique ici."}

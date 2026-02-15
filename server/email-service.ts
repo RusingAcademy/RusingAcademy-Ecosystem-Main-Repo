@@ -16,6 +16,10 @@
  */
 
 import nodemailer from 'nodemailer';
+import { createLogger } from "./logger";
+import { retry } from "./resilience";
+import { logEmailToDb } from "./db";
+const log = createLogger("email-service");
 
 // Email configuration from environment
 interface EmailConfig {
@@ -107,16 +111,27 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
   
   // If no SMTP configured, log to console (development mode)
   if (!config || !transport) {
-    console.log('\n========== EMAIL (Development Mode) ==========');
-    console.log(`To: ${Array.isArray(params.to) ? params.to.join(', ') : params.to}`);
-    console.log(`Subject: ${params.subject}`);
-    console.log('---------- Content ----------');
-    console.log(params.text || 'HTML content only');
-    console.log('============================================\n');
+    log.info('\n========== EMAIL (Development Mode) ==========');
+    log.info(`To: ${Array.isArray(params.to) ? params.to.join(', ') : params.to}`);
+    log.info(`Subject: ${params.subject}`);
+    log.info('---------- Content ----------');
+    log.info(params.text || 'HTML content only');
+    log.info('============================================\n');
+    
+    const devMessageId = `dev-${Date.now()}`;
+    // Log to DB even in dev mode
+    const toEmail = Array.isArray(params.to) ? params.to[0] : params.to;
+    logEmailToDb({
+      toEmail,
+      type: (params as any).emailType || "welcome",
+      subject: params.subject,
+      status: "sent",
+      providerMessageId: devMessageId,
+    }).catch(() => {});
     
     return {
       success: true,
-      messageId: `dev-${Date.now()}`,
+      messageId: devMessageId,
     };
   }
   
@@ -130,7 +145,7 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
     }));
     
     // Send email
-    const result = await transport.sendMail({
+    const result = await retry.email(() => transport.sendMail({
       from: `"${config.fromName}" <${config.from}>`,
       to: params.to,
       cc: params.cc,
@@ -140,16 +155,36 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
       text: params.text,
       html: params.html,
       attachments,
-    });
+    }), "sendMail");
     
-    console.log(`[Email] Sent successfully to ${params.to}: ${params.subject} (ID: ${result.messageId})`);
+    log.info(`[Email] Sent successfully to ${params.to}: ${params.subject} (ID: ${result.messageId})`);
+    
+    // Log successful send to DB
+    const toEmailProd = Array.isArray(params.to) ? params.to[0] : params.to;
+    logEmailToDb({
+      toEmail: toEmailProd,
+      type: (params as any).emailType || "welcome",
+      subject: params.subject,
+      status: "sent",
+      providerMessageId: result.messageId,
+    }).catch(() => {});
     
     return {
       success: true,
       messageId: result.messageId,
     };
   } catch (error: any) {
-    console.error(`[Email] Failed to send to ${params.to}:`, error.message);
+    log.error(`[Email] Failed to send to ${params.to}:`, error.message);
+    
+    // Log failed send to DB
+    const toEmailFail = Array.isArray(params.to) ? params.to[0] : params.to;
+    logEmailToDb({
+      toEmail: toEmailFail,
+      type: (params as any).emailType || "welcome",
+      subject: params.subject,
+      status: "failed",
+      errorMessage: error.message,
+    }).catch(() => {});
     
     return {
       success: false,

@@ -13,7 +13,8 @@ import {
   courseModules, 
   courses, 
   lessonProgress,
-  quizQuestions
+  quizQuestions,
+  courseEnrollments
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
 
@@ -274,6 +275,52 @@ export const lessonsRouter = router({
           completedAt: new Date(),
         }
       });
+      
+      // Cascade: update enrollment progress
+      try {
+        const [enrollment] = await db.select()
+          .from(courseEnrollments)
+          .where(and(
+            eq(courseEnrollments.userId, ctx.user.id),
+            eq(courseEnrollments.courseId, lesson.courseId)
+          ))
+          .limit(1);
+        
+        if (enrollment) {
+          const [completedCount] = await db.select({ count: sql<number>`count(*)` })
+            .from(lessonProgress)
+            .where(and(
+              eq(lessonProgress.courseId, lesson.courseId),
+              eq(lessonProgress.userId, ctx.user.id),
+              eq(lessonProgress.status, "completed")
+            ));
+          
+          const totalLessons = enrollment.totalLessons || 1;
+          const newProgress = Math.round(((completedCount?.count || 0) / totalLessons) * 100);
+          const now = new Date();
+          
+          await db.update(courseEnrollments)
+            .set({
+              lessonsCompleted: completedCount?.count || 0,
+              progressPercent: Math.min(newProgress, 100),
+              lastAccessedAt: now,
+              completedAt: newProgress >= 100 ? now : null,
+              status: newProgress >= 100 ? "completed" : "active",
+            })
+            .where(eq(courseEnrollments.id, enrollment.id));
+        }
+      } catch (e) {
+        // Don't fail the lesson completion if enrollment update fails
+        console.error("[lessons.markComplete] Enrollment cascade error:", e);
+      }
+      
+      // Cascade: update path enrollment progress (async, non-blocking)
+      try {
+        const { updatePathProgress } = await import("../services/pathProgressService");
+        await updatePathProgress(ctx.user.id, lesson.courseId);
+      } catch (e) {
+        console.error("[lessons.markComplete] Path progress cascade error:", e);
+      }
       
       return { success: true };
     }),

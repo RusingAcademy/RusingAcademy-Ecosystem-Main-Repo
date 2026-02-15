@@ -73,7 +73,7 @@ export function SLEVelocityWidget({
   const l = labels[language];
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-[#062b2b] p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -81,8 +81,8 @@ export function SLEVelocityWidget({
             <TrendingUp className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-slate-900 dark:text-white">{l.title}</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400">{l.subtitle}</p>
+            <h3 className="font-semibold text-black dark:text-white">{l.title}</h3>
+            <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
           </div>
         </div>
         <div className={cn(
@@ -99,9 +99,9 @@ export function SLEVelocityWidget({
       {/* Progress Visualization */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-2xl font-bold text-slate-900 dark:text-white">{currentLevel}</span>
+          <span className="text-2xl font-bold text-black dark:text-white">{currentLevel}</span>
           <div className="flex-1 mx-4 relative">
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div className="h-3 bg-slate-200 dark:bg-[#0a6969] rounded-full overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full transition-all duration-1000"
                 style={{ width: `${(currentProgress / targetProgress) * 100}%` }}
@@ -114,43 +114,43 @@ export function SLEVelocityWidget({
           </div>
           <span className="text-2xl font-bold text-emerald-600">{targetLevel}</span>
         </div>
-        <p className="text-center text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-center text-sm text-black dark:text-[#67E8F9]">
           {weeksToTarget} {l.weeksToGo}
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
           <div className="flex items-center gap-2 mb-1">
-            <Clock className="h-4 w-4 text-slate-500" />
-            <span className="text-sm text-slate-500 dark:text-slate-400">{l.weeklyHours}</span>
+            <Clock className="h-4 w-4 text-black" />
+            <span className="text-sm text-black dark:text-[#67E8F9]">{l.weeklyHours}</span>
           </div>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white">{weeklyHours}h</p>
+          <p className="text-2xl font-bold text-black dark:text-white">{weeklyHours}h</p>
         </div>
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
           <div className="flex items-center gap-2 mb-1">
-            <TrendingUp className="h-4 w-4 text-slate-500" />
-            <span className="text-sm text-slate-500 dark:text-slate-400">{l.avgProgress}</span>
+            <TrendingUp className="h-4 w-4 text-black" />
+            <span className="text-sm text-black dark:text-[#67E8F9]">{l.avgProgress}</span>
           </div>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white">+{averageProgress}%</p>
+          <p className="text-2xl font-bold text-black dark:text-white">+{averageProgress}%</p>
         </div>
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
           <div className="flex items-center gap-2 mb-1">
-            <Calendar className="h-4 w-4 text-slate-500" />
-            <span className="text-sm text-slate-500 dark:text-slate-400">{l.estimatedReady}</span>
+            <Calendar className="h-4 w-4 text-black" />
+            <span className="text-sm text-black dark:text-[#67E8F9]">{l.estimatedReady}</span>
           </div>
-          <p className="text-lg font-bold text-slate-900 dark:text-white">
+          <p className="text-lg font-bold text-black dark:text-white">
             {predictedReadyDate.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short", day: "numeric" })}
           </p>
         </div>
         {daysUntilExam && (
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800">
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
             <div className="flex items-center gap-2 mb-1">
-              <Target className="h-4 w-4 text-slate-500" />
-              <span className="text-sm text-slate-500 dark:text-slate-400">{l.daysUntilExam}</span>
+              <Target className="h-4 w-4 text-black" />
+              <span className="text-sm text-black dark:text-[#67E8F9]">{l.daysUntilExam}</span>
             </div>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{daysUntilExam}</p>
+            <p className="text-2xl font-bold text-black dark:text-white">{daysUntilExam}</p>
           </div>
         )}
       </div>
@@ -162,7 +162,7 @@ export function SLEVelocityWidget({
           ? "bg-emerald-50 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800"
           : "bg-amber-50 border-amber-200 dark:bg-amber-900/20 dark:border-amber-800"
       )}>
-        <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{l.recommendation}</p>
+        <p className="text-sm font-medium text-black dark:text-white/90 mb-1">{l.recommendation}</p>
         <p className={cn(
           "text-sm",
           isOnTrack ? "text-emerald-700 dark:text-emerald-400" : "text-amber-700 dark:text-amber-400"

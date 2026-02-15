@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
+import { FREE_ACCESS_MODE } from "@shared/const";
 import CourseImage from "@/components/CourseImage";
 import { motion } from "framer-motion";
 
@@ -285,13 +286,26 @@ export default function Courses() {
                     <CardFooter className="border-t pt-4">
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-baseline gap-2">
-                          <span className="text-2xl font-bold text-primary">
-                            {formatPrice(course.price || 0)}
-                          </span>
-                          {course.originalPrice && course.originalPrice > (course.price || 0) && (
-                            <span className="text-sm text-muted-foreground line-through">
-                              {formatPrice(course.originalPrice)}
-                            </span>
+                          {FREE_ACCESS_MODE ? (
+                            <>
+                              <span className="text-sm text-muted-foreground line-through">
+                                {formatPrice(course.price || 0)}
+                              </span>
+                              <span className="text-2xl font-bold text-emerald-600">
+                                {isEn ? "Free" : "Gratuit"}
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <span className="text-2xl font-bold text-primary">
+                                {formatPrice(course.price || 0)}
+                              </span>
+                              {course.originalPrice && course.originalPrice > (course.price || 0) && (
+                                <span className="text-sm text-muted-foreground line-through">
+                                  {formatPrice(course.originalPrice)}
+                                </span>
+                              )}
+                            </>
                           )}
                         </div>
                         <Link href={`/courses/${course.slug}`}>

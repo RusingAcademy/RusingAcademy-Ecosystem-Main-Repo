@@ -10,17 +10,6 @@
     <meta name="description" content="Professional bilingual training ecosystem for Canadian public servants. SLE exam prep, expert coaching, and structured learning paths to achieve your language goals." />
     <meta name="keywords" content="SLE exam, bilingual training, Canadian public servants, French courses, English courses, language coaching, RusingAcademy" />
     
-    <!-- PWA Configuration -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#0D7377" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="RusingÂcademy" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="RusingÂcademy" />
-    <meta name="msapplication-TileColor" content="#0D7377" />
-    <meta name="msapplication-tap-highlight" content="no" />
-
     <!-- Open Graph -->
     <meta property="og:title" content="RusingÂcademy | Bilingual Excellence" />
     <meta property="og:description" content="Professional bilingual training ecosystem for Canadian public servants. SLE exam prep, expert coaching, and structured learning paths." />
@@ -33,12 +22,77 @@
     <meta name="twitter:title" content="RusingÂcademy | Bilingual Excellence" />
     <meta name="twitter:description" content="Professional bilingual training for Canadian public servants." />
     
-    <!-- Favicon & Icons -->
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0F3D3E" />
+    <meta name="msapplication-TileColor" content="#0F3D3E" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/webp" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/kYkwBIsONvktdchX.webp" />
     <link rel="icon" type="image/x-icon" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/pPwLmKuRPcHsWZvr.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WGWTbhEIsrcjkFYM.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+    <link rel="apple-touch-icon" href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WGWTbhEIsrcjkFYM.png" />
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://files.manuscdn.com" />
+    <link rel="dns-prefetch" href="https://api.manus.im" />
+    
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "RusingAcademy",
+      "alternateName": "Rusinga International Consulting Ltd.",
+      "url": "https://www.rusingacademy.ca",
+      "logo": "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/kYkwBIsONvktdchX.webp",
+      "description": "Professional bilingual training ecosystem for Canadian public servants. SLE exam prep, expert coaching, and structured learning paths.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CA"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/rusingacademy"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Canada"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Bilingual Training Programs",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "SLE Preparation",
+            "description": "Comprehensive preparation for the Second Language Evaluation"
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Professional French Training",
+            "description": "Structured French language courses for professionals"
+          }
+        ]
+      }
+    }
+    </script>
+    
+    <!-- Structured Data: WebSite with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "RusingAcademy",
+      "url": "https://www.rusingacademy.ca",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.rusingacademy.ca/courses?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": ["en", "fr"]
+    }
+    </script>
   </head>
 
   <body>

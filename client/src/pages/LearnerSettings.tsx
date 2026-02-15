@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -550,6 +551,9 @@ export default function LearnerSettings() {
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="space-y-4">
+                      {/* Push Notifications Toggle */}
+                      <PushNotificationToggle />
+
                       <div className="flex items-center justify-between p-4 rounded-lg border">
                         <div className="space-y-0.5">
                           <Label>{t.sessionReminders}</Label>
@@ -606,6 +610,58 @@ export default function LearnerSettings() {
       </main>
       
       {!isInsideAppLayout && <Footer />}
+    </div>
+  );
+}
+
+// ── Push Notification Toggle Sub-component ──────────────────────────────
+function PushNotificationToggle() {
+  const { isSupported, isSubscribed, permission, isLoading, subscribe, unsubscribe } = usePushNotifications();
+  const { language } = useLanguage();
+
+  const t = language === "fr" ? {
+    label: "Notifications push",
+    desc: "Recevoir des alertes instantanées sur votre appareil",
+    unsupported: "Non supporté par ce navigateur",
+    denied: "Notifications bloquées — vérifiez les paramètres de votre navigateur",
+  } : {
+    label: "Push Notifications",
+    desc: "Receive instant alerts on your device",
+    unsupported: "Not supported in this browser",
+    denied: "Notifications blocked — check your browser settings",
+  };
+
+  if (!isSupported) {
+    return (
+      <div className="flex items-center justify-between p-4 rounded-lg border opacity-60">
+        <div className="space-y-0.5">
+          <Label>{t.label}</Label>
+          <p className="text-sm text-muted-foreground">{t.unsupported}</p>
+        </div>
+        <Switch disabled checked={false} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center justify-between p-4 rounded-lg border">
+      <div className="space-y-0.5">
+        <Label>{t.label}</Label>
+        <p className="text-sm text-muted-foreground">
+          {permission === "denied" ? t.denied : t.desc}
+        </p>
+      </div>
+      <Switch
+        disabled={isLoading || permission === "denied"}
+        checked={isSubscribed}
+        onCheckedChange={async (checked) => {
+          if (checked) {
+            await subscribe();
+          } else {
+            await unsubscribe();
+          }
+        }}
+      />
     </div>
   );
 }

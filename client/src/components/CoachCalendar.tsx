@@ -149,7 +149,7 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
       case "pending": return "bg-yellow-500";
       case "cancelled": return "bg-red-500";
       case "completed": return "bg-blue-500";
-      default: return "bg-gray-500";
+      default: return "bg-[#0a6969]";
     }
   };
 
@@ -299,7 +299,7 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
             </p>
           ) : selectedDateSessions.length === 0 ? (
             <div className="text-center py-8">
-              <CalendarIcon className="w-12 h-12 mx-auto text-muted-foreground/50 mb-2" />
+              <CalendarIcon className="w-12 h-12 mx-auto text-black/60 dark:text-white/60 mb-2" />
               <p className="text-muted-foreground">
                 {language === "fr" ? "Aucune session ce jour" : "No sessions this day"}
               </p>

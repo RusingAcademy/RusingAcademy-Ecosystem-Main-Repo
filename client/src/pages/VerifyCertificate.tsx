@@ -48,8 +48,8 @@ export default function VerifyCertificate() {
                 <span className="text-white font-bold text-lg">R</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">RusingAcademy</h1>
-                <p className="text-sm text-gray-500">Certificate Verification</p>
+                <h1 className="text-xl font-bold text-black">RusingAcademy</h1>
+                <p className="text-sm text-black">Certificate Verification</p>
               </div>
             </div>
           </div>
@@ -58,10 +58,10 @@ export default function VerifyCertificate() {
         <main className="max-w-4xl mx-auto px-4 py-12">
           {/* Search Section */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-black mb-4">
               Verify Certificate Authenticity
             </h2>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-black mb-8 max-w-2xl mx-auto">
               Enter a certificate number to verify its authenticity. All RusingAcademy certificates 
               are digitally signed and can be verified using this tool.
             </p>
@@ -93,7 +93,7 @@ export default function VerifyCertificate() {
               {isLoading ? (
                 <div className="text-center py-12">
                   <div className="inline-block w-8 h-8 border-4 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="mt-4 text-gray-600">Verifying certificate...</p>
+                  <p className="mt-4 text-black">Verifying certificate...</p>
                 </div>
               ) : error ? (
                 <div className="bg-red-50 border border-red-200 rounded-xl p-8 text-center">
@@ -127,37 +127,37 @@ export default function VerifyCertificate() {
                   <div className="p-8">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-black uppercase tracking-wide">
                           Certificate Number
                         </label>
-                        <p className="text-lg font-mono text-gray-900 mt-1">
+                        <p className="text-lg font-mono text-black mt-1">
                           {params.certificateNumber}
                         </p>
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-black uppercase tracking-wide">
                           Issue Date
                         </label>
-                        <p className="text-lg text-gray-900 mt-1">
+                        <p className="text-lg text-black mt-1">
                           {(certificate as any).certificate?.issuedAt ? formatDate((certificate as any).certificate.issuedAt.toString()) : 'N/A'}
                         </p>
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-black uppercase tracking-wide">
                           Recipient
                         </label>
-                        <p className="text-lg text-gray-900 mt-1">
+                        <p className="text-lg text-black mt-1">
                           {(certificate as any).certificate?.recipientName}
                         </p>
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-black uppercase tracking-wide">
                           Course Completed
                         </label>
-                        <p className="text-lg text-gray-900 mt-1">
+                        <p className="text-lg text-black mt-1">
                           {(certificate as any).course?.title || (certificate as any).certificate?.courseTitle}
                         </p>
                       </div>
@@ -170,8 +170,8 @@ export default function VerifyCertificate() {
                           <span className="text-teal-700 font-bold text-lg">SR</span>
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">Prof. Steven Rusinga</p>
-                          <p className="text-sm text-gray-500">Founder & Lead Instructor, RusingAcademy</p>
+                          <p className="font-medium text-black">Prof. Steven Rusinga</p>
+                          <p className="text-sm text-black">Founder & Lead Instructor, RusingAcademy</p>
                         </div>
                       </div>
                     </div>
@@ -189,8 +189,8 @@ export default function VerifyCertificate() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Secure Verification</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-black mb-2">Secure Verification</h3>
+              <p className="text-sm text-black">
                 Each certificate has a unique number that can be verified instantly.
               </p>
             </div>
@@ -201,8 +201,8 @@ export default function VerifyCertificate() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Employer Trusted</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-black mb-2">Employer Trusted</h3>
+              <p className="text-sm text-black">
                 Recognized by Canadian public service employers for bilingual proficiency.
               </p>
             </div>
@@ -213,8 +213,8 @@ export default function VerifyCertificate() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Permanent Record</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-black mb-2">Permanent Record</h3>
+              <p className="text-sm text-black">
                 Certificates are stored permanently and can be verified at any time.
               </p>
             </div>
@@ -222,7 +222,7 @@ export default function VerifyCertificate() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 text-white mt-16">
+        <footer className="bg-[#062b2b] text-white mt-16">
           <div className="max-w-4xl mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -231,14 +231,14 @@ export default function VerifyCertificate() {
                 </div>
                 <span className="font-semibold">RusingAcademy</span>
               </div>
-              <p className="text-gray-400 text-sm">
+              <p className="text-[#67E8F9] text-sm">
                 © {new Date().getFullYear()} RusingAcademy. All rights reserved.
               </p>
               <div className="flex gap-4">
-                <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm">
+                <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-[#67E8F9] hover:text-white text-sm">
                   rusing.academy
                 </a>
-                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm">
+                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-[#67E8F9] hover:text-white text-sm">
                   rusingacademy.com
                 </a>
               </div>

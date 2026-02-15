@@ -357,15 +357,15 @@
   
   /* Ensure text is fully opaque */
   .text-muted-foreground,
-  .text-slate-500,
-  .text-gray-500 {
+  .text-black,
+  .text-black {
     opacity: 1;
-    color: #374151 !important;
+    color: #0a6969 !important;
   }
   
   .dark .text-muted-foreground,
-  .dark .text-slate-500,
-  .dark .text-gray-500 {
+  .dark .text-black,
+  .dark .text-black {
     color: #D1D5DB !important;
   }
 }

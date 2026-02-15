@@ -9,6 +9,8 @@ import { getDb } from "./db";
 import { sequenceEmailLogs } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
+import { createLogger } from "./logger";
+const log = createLogger("email-tracking");
 
 // Types
 export interface TrackingData {
@@ -139,7 +141,7 @@ export function decodeTrackingToken(token: string): {
     const decoded = JSON.parse(Buffer.from(token, "base64url").toString());
     return decoded;
   } catch (error) {
-    console.error("Failed to decode tracking token:", error);
+    log.error("Failed to decode tracking token:", error);
     return null;
   }
 }
@@ -175,10 +177,10 @@ export async function recordEmailOpen(
       })
       .where(eq(sequenceEmailLogs.id, logId));
     
-    console.log(`[Email Tracking] Recorded open for log ${logId}`);
+    log.info(`[Email Tracking] Recorded open for log ${logId}`);
     return true;
   } catch (error) {
-    console.error(`[Email Tracking] Failed to record open for log ${logId}:`, error);
+    log.error(`[Email Tracking] Failed to record open for log ${logId}:`, error);
     return false;
   }
 }
@@ -218,10 +220,10 @@ export async function recordEmailClick(
       })
       .where(eq(sequenceEmailLogs.id, logId));
     
-    console.log(`[Email Tracking] Recorded click for log ${logId}, URL: ${linkUrl}`);
+    log.info(`[Email Tracking] Recorded click for log ${logId}, URL: ${linkUrl}`);
     return true;
   } catch (error) {
-    console.error(`[Email Tracking] Failed to record click for log ${logId}:`, error);
+    log.error(`[Email Tracking] Failed to record click for log ${logId}:`, error);
     return false;
   }
 }

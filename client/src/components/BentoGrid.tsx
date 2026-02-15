@@ -1,205 +1,238 @@
-import React from "react";
 import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
 /**
- * Bento Grid Layout Component
- * A modern, modular grid system inspired by Apple's Bento design
- * Features: responsive, accessible, clean aesthetics
+ * Semantic color tokens for consistent dashboard theming.
+ * Maps semantic intent to Tailwind color classes.
  */
+export const SemanticColors = {
+  success: {
+    bg: "bg-emerald-50 dark:bg-emerald-950/30",
+    text: "text-emerald-700 dark:text-emerald-300",
+    border: "border-emerald-200 dark:border-emerald-800",
+    accent: "bg-emerald-500",
+  },
+  warning: {
+    bg: "bg-amber-50 dark:bg-amber-950/30",
+    text: "text-amber-700 dark:text-amber-300",
+    border: "border-amber-200 dark:border-amber-800",
+    accent: "bg-amber-500",
+  },
+  danger: {
+    bg: "bg-red-50 dark:bg-red-950/30",
+    text: "text-red-700 dark:text-red-300",
+    border: "border-red-200 dark:border-red-800",
+    accent: "bg-red-500",
+  },
+  info: {
+    bg: "bg-blue-50 dark:bg-blue-950/30",
+    text: "text-blue-700 dark:text-blue-300",
+    border: "border-blue-200 dark:border-blue-800",
+    accent: "bg-blue-500",
+  },
+  neutral: {
+    bg: "bg-gray-50 dark:bg-gray-950/30",
+    text: "text-gray-700 dark:text-gray-300",
+    border: "border-gray-200 dark:border-gray-800",
+    accent: "bg-gray-500",
+  },
+} as const;
+
+export type SemanticColorKey = keyof typeof SemanticColors;
+
+// ─── BentoGrid ───────────────────────────────────────────────────────────────
 
 interface BentoGridProps {
   children: React.ReactNode;
   className?: string;
-  cols?: 1 | 2 | 3 | 4;
+  columns?: 2 | 3 | 4;
 }
 
-export function BentoGrid({ children, className, cols = 4 }: BentoGridProps) {
+/**
+ * A responsive bento-style grid layout for dashboard widgets.
+ * Supports 2, 3, or 4 column layouts with automatic responsive breakpoints.
+ */
+export function BentoGrid({ children, className, columns = 3 }: BentoGridProps) {
   const colClasses = {
-    1: "grid-cols-1",
     2: "grid-cols-1 md:grid-cols-2",
     3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-    4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+    4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
   };
 
   return (
-    <div
-      className={cn(
-        "grid gap-4",
-        colClasses[cols],
-        className
-      )}
-    >
+    <div className={cn("grid gap-4", colClasses[columns], className)}>
       {children}
     </div>
   );
 }
+
+// ─── BentoCard ───────────────────────────────────────────────────────────────
 
 interface BentoCardProps {
   children: React.ReactNode;
   className?: string;
-  span?: "1" | "2" | "3" | "4" | "full";
-  rowSpan?: "1" | "2";
-  variant?: "default" | "highlight" | "subtle" | "glass";
-  hover?: boolean;
+  colSpan?: 1 | 2 | 3;
+  rowSpan?: 1 | 2;
+  colorScheme?: SemanticColorKey;
   onClick?: () => void;
 }
 
+/**
+ * A single card within a BentoGrid. Supports spanning multiple columns/rows
+ * and semantic color schemes.
+ */
 export function BentoCard({
   children,
   className,
-  span = "1",
-  rowSpan = "1",
-  variant = "default",
-  hover = true,
+  colSpan = 1,
+  rowSpan = 1,
+  colorScheme,
   onClick,
 }: BentoCardProps) {
-  const spanClasses = {
-    "1": "col-span-1",
-    "2": "col-span-1 md:col-span-2",
-    "3": "col-span-1 md:col-span-2 lg:col-span-3",
-    "4": "col-span-1 md:col-span-2 lg:col-span-4",
-    "full": "col-span-full",
-  };
+  const spanClasses = cn(
+    colSpan === 2 && "md:col-span-2",
+    colSpan === 3 && "md:col-span-2 lg:col-span-3",
+    rowSpan === 2 && "row-span-2"
+  );
 
-  const rowSpanClasses = {
-    "1": "row-span-1",
-    "2": "row-span-1 md:row-span-2",
-  };
-
-  const variantClasses = {
-    default: "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700",
-    highlight: "bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black border-slate-700 text-white",
-    subtle: "bg-slate-50 dark:bg-slate-800/50 border-slate-200/50 dark:border-slate-700/50",
-    glass: "bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50",
-  };
-
-  const Component = onClick ? "button" : "div";
+  const colors = colorScheme ? SemanticColors[colorScheme] : undefined;
 
   return (
-    <Component
-      onClick={onClick}
+    <Card
       className={cn(
-        "relative overflow-hidden rounded-xl border p-5 shadow-sm",
-        spanClasses[span],
-        rowSpanClasses[rowSpan],
-        variantClasses[variant],
-        hover && "transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600",
-        onClick && "cursor-pointer text-left w-full focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2",
+        "transition-all duration-200 hover:shadow-md",
+        spanClasses,
+        colors?.bg,
+        colors?.border,
+        onClick && "cursor-pointer hover:scale-[1.01]",
         className
       )}
+      onClick={onClick}
     >
       {children}
-    </Component>
+    </Card>
   );
 }
 
+// ─── BentoHeader ─────────────────────────────────────────────────────────────
+
 interface BentoHeaderProps {
-  icon?: React.ReactNode;
   title: string;
   subtitle?: string;
+  icon?: React.ReactNode;
   action?: React.ReactNode;
   className?: string;
 }
 
-export function BentoHeader({ icon, title, subtitle, action, className }: BentoHeaderProps) {
+/**
+ * A standardized header for BentoCards with optional icon and action slot.
+ */
+export function BentoHeader({ title, subtitle, icon, action, className }: BentoHeaderProps) {
   return (
-    <div className={cn("flex items-start justify-between mb-4", className)}>
-      <div className="flex items-center gap-3">
-        {icon && (
-          <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-            {icon}
+    <CardHeader className={cn("pb-2", className)}>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {icon && <span className="text-muted-foreground">{icon}</span>}
+          <div>
+            <CardTitle className="text-base font-semibold">{title}</CardTitle>
+            {subtitle && (
+              <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>
+            )}
           </div>
-        )}
-        <div>
-          <h3 className="font-semibold text-slate-900 dark:text-white">{title}</h3>
-          {subtitle && (
-            <p className="text-sm text-slate-500 dark:text-slate-400">{subtitle}</p>
-          )}
         </div>
+        {action && <div>{action}</div>}
       </div>
-      {action && <div className="flex-shrink-0">{action}</div>}
-    </div>
+    </CardHeader>
   );
 }
 
+// ─── BentoStat ───────────────────────────────────────────────────────────────
+
 interface BentoStatProps {
-  value: string | number;
   label: string;
-  sublabel?: string;
+  value: string | number;
+  change?: number;
+  changeLabel?: string;
   icon?: React.ReactNode;
-  trend?: "up" | "down" | "neutral";
-  trendValue?: string;
-  color?: "default" | "success" | "warning" | "danger" | "info";
+  colorScheme?: SemanticColorKey;
   className?: string;
 }
 
+/**
+ * A compact stat display for BentoCards showing a value with optional
+ * change indicator and semantic coloring.
+ */
 export function BentoStat({
-  value,
   label,
-  sublabel,
+  value,
+  change,
+  changeLabel,
   icon,
-  trend,
-  trendValue,
-  color = "default",
+  colorScheme = "neutral",
   className,
 }: BentoStatProps) {
-  const colorClasses = {
-    default: "text-slate-900 dark:text-white",
-    success: "text-emerald-600 dark:text-emerald-400",
-    warning: "text-amber-600 dark:text-amber-400",
-    danger: "text-red-600 dark:text-red-400",
-    info: "text-blue-600 dark:text-blue-400",
-  };
-
-  const trendColors = {
-    up: "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30",
-    down: "text-red-600 bg-red-50 dark:bg-red-900/30",
-    neutral: "text-slate-600 bg-slate-50 dark:bg-slate-800",
-  };
+  const colors = SemanticColors[colorScheme];
+  const isPositive = change && change > 0;
+  const isNegative = change && change < 0;
 
   return (
-    <div className={cn("flex flex-col", className)}>
+    <div className={cn("flex items-start gap-3 p-3 rounded-lg", colors.bg, className)}>
       {icon && (
-        <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-3">
+        <div className={cn("p-2 rounded-md", colors.accent, "text-white")}>
           {icon}
         </div>
       )}
-      <div className="flex items-baseline gap-2">
-        <span className={cn("text-3xl font-bold", colorClasses[color])}>{value}</span>
-        {trend && trendValue && (
-          <span className={cn("text-xs font-medium px-2 py-0.5 rounded-full", trendColors[trend])}>
-            {trend === "up" ? "↑" : trend === "down" ? "↓" : "→"} {trendValue}
-          </span>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs text-muted-foreground truncate">{label}</p>
+        <p className={cn("text-2xl font-bold tracking-tight", colors.text)}>
+          {value}
+        </p>
+        {change !== undefined && (
+          <p
+            className={cn(
+              "text-xs mt-0.5",
+              isPositive && "text-emerald-600",
+              isNegative && "text-red-600",
+              !isPositive && !isNegative && "text-muted-foreground"
+            )}
+          >
+            {isPositive ? "+" : ""}
+            {change}%{changeLabel ? ` ${changeLabel}` : ""}
+          </p>
         )}
       </div>
-      <span className="text-sm font-medium text-slate-600 dark:text-slate-300 mt-1">{label}</span>
-      {sublabel && (
-        <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{sublabel}</span>
-      )}
     </div>
   );
 }
 
+// ─── BentoProgress ───────────────────────────────────────────────────────────
+
 interface BentoProgressProps {
+  label: string;
   value: number;
   max?: number;
-  label?: string;
-  showValue?: boolean;
+  showPercentage?: boolean;
+  colorScheme?: SemanticColorKey;
   size?: "sm" | "md" | "lg";
-  color?: "default" | "success" | "warning" | "danger" | "info";
   className?: string;
 }
 
+/**
+ * A progress bar component for BentoCards with semantic coloring
+ * and configurable size.
+ */
 export function BentoProgress({
+  label,
   value,
   max = 100,
-  label,
-  showValue = true,
+  showPercentage = true,
+  colorScheme = "info",
   size = "md",
-  color = "default",
   className,
 }: BentoProgressProps) {
-  const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+  const percentage = Math.round((value / max) * 100);
+  const colors = SemanticColors[colorScheme];
 
   const sizeClasses = {
     sm: "h-1.5",
@@ -207,68 +240,17 @@ export function BentoProgress({
     lg: "h-4",
   };
 
-  const colorClasses = {
-    default: "bg-slate-600 dark:bg-slate-400",
-    success: "bg-emerald-500",
-    warning: "bg-amber-500",
-    danger: "bg-red-500",
-    info: "bg-blue-500",
-  };
-
   return (
-    <div className={cn("w-full", className)}>
-      {(label || showValue) && (
-        <div className="flex justify-between items-center mb-2">
-          {label && <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</span>}
-          {showValue && <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{Math.round(percentage)}%</span>}
-        </div>
-      )}
-      <div className={cn("w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden", sizeClasses[size])}>
-        <div
-          className={cn("h-full rounded-full transition-all duration-500 ease-out", colorClasses[color])}
-          style={{ width: `${percentage}%` }}
-          role="progressbar"
-          aria-valuenow={value}
-          aria-valuemin={0}
-          aria-valuemax={max}
-        />
+    <div className={cn("space-y-1.5", className)}>
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">{label}</span>
+        {showPercentage && (
+          <span className={cn("text-sm font-medium", colors.text)}>
+            {percentage}%
+          </span>
+        )}
       </div>
+      <Progress value={percentage} className={cn(sizeClasses[size])} />
     </div>
   );
 }
-
-// Semantic color utilities for LMS context
-export const SemanticColors = {
-  success: {
-    bg: "bg-emerald-50 dark:bg-emerald-900/20",
-    border: "border-emerald-200 dark:border-emerald-800",
-    text: "text-emerald-700 dark:text-emerald-300",
-    icon: "text-emerald-600",
-  },
-  warning: {
-    bg: "bg-amber-50 dark:bg-amber-900/20",
-    border: "border-amber-200 dark:border-amber-800",
-    text: "text-amber-700 dark:text-amber-300",
-    icon: "text-amber-600",
-  },
-  danger: {
-    bg: "bg-red-50 dark:bg-red-900/20",
-    border: "border-red-200 dark:border-red-800",
-    text: "text-red-700 dark:text-red-300",
-    icon: "text-red-600",
-  },
-  info: {
-    bg: "bg-blue-50 dark:bg-blue-900/20",
-    border: "border-blue-200 dark:border-blue-800",
-    text: "text-blue-700 dark:text-blue-300",
-    icon: "text-blue-600",
-  },
-  neutral: {
-    bg: "bg-slate-50 dark:bg-slate-800",
-    border: "border-slate-200 dark:border-slate-700",
-    text: "text-slate-700 dark:text-slate-300",
-    icon: "text-slate-600",
-  },
-};
-
-export default BentoGrid;

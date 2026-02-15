@@ -3,6 +3,8 @@ import { useParams, Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import { generateCourseSchema } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -39,6 +41,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import DownloadCourseButton from "@/components/DownloadCourseButton";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // Category configuration
 const categoryConfig: Record<string, { icon: typeof BookOpen; labelEn: string; labelFr: string; color: string }> = {
@@ -170,6 +173,17 @@ export default function CourseDetail() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={course?.title || "Course"}
+        description={course?.description?.slice(0, 160) || "Explore this course on RusingAcademy"}
+        canonical={`/courses/${slug}`}
+        type="product"
+        schema={course ? generateCourseSchema({
+          name: course.title || "",
+          description: course.description || "",
+          provider: "Rusinga International Consulting Ltd.",
+        }) : undefined}
+      />
       {/* Student Preview Banner */}
       {isStudentPreview && (
         <div className="bg-amber-500 text-white py-3 px-4 flex items-center justify-between sticky top-0 z-50">
@@ -204,17 +218,17 @@ export default function CourseDetail() {
       
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://rusingacademy-cdn.b-cdn.net/images/pattern-grid.svg')] opacity-5" />
         
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-20 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-slate-400 mb-6">
+          <nav className="flex items-center gap-2 text-sm text-[#67E8F9] mb-6">
             <Link href="/courses" className="hover:text-white transition-colors">
               {isEn ? "Courses" : "Cours"}
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-300">{getCategoryLabel(course.category || "")}</span>
+            <span className="text-white/90">{getCategoryLabel(course.category || "")}</span>
           </nav>
           
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
@@ -235,7 +249,7 @@ export default function CourseDetail() {
                     {getLevelLabel(course.level || "")}
                   </Badge>
                   {course.targetLanguage && (
-                    <Badge variant="outline" className="border-slate-600 text-slate-300">
+                    <Badge variant="outline" className="border-slate-600 text-white/90">
                       <Globe className="h-3 w-3 mr-1" />
                       {course.targetLanguage === "french" ? "Français" : "English"}
                     </Badge>
@@ -248,12 +262,12 @@ export default function CourseDetail() {
                 </h1>
                 
                 {/* Short Description */}
-                <p className="text-lg text-slate-300 mb-6 max-w-2xl">
+                <p className="text-lg text-white/90 mb-6 max-w-2xl">
                   {course.shortDescription}
                 </p>
                 
                 {/* Stats Row */}
-                <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400 mb-6">
+                <div className="flex flex-wrap items-center gap-6 text-sm text-[#67E8F9] mb-6">
                   {course.totalDurationMinutes && course.totalDurationMinutes > 0 && (
                     <span className="flex items-center gap-2">
                       <Clock className="h-4 w-4" />
@@ -290,7 +304,7 @@ export default function CourseDetail() {
                           className={`h-5 w-5 ${
                             i < Math.round(Number(course.averageRating))
                               ? "fill-yellow-400 text-yellow-400"
-                              : "text-slate-600"
+                              : "text-black"
                           }`}
                         />
                       ))}
@@ -299,7 +313,7 @@ export default function CourseDetail() {
                       {Number(course.averageRating).toFixed(1)}
                     </span>
                     {course.totalReviews && course.totalReviews > 0 && (
-                      <span className="text-slate-400">
+                      <span className="text-[#67E8F9]">
                         ({course.totalReviews} {isEn ? "reviews" : "avis"})
                       </span>
                     )}
@@ -313,7 +327,7 @@ export default function CourseDetail() {
                       {course.instructorName.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-sm text-slate-400">{isEn ? "Instructor" : "Instructeur"}</p>
+                      <p className="text-sm text-[#67E8F9]">{isEn ? "Instructor" : "Instructeur"}</p>
                       <p className="font-medium text-white">{course.instructorName}</p>
                     </div>
                   </div>
@@ -328,9 +342,9 @@ export default function CourseDetail() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="sticky top-24 bg-white dark:bg-slate-800 shadow-2xl border-0">
+                <Card className="sticky top-24 bg-white dark:bg-[#0a4040] shadow-2xl border-0">
                   {/* Thumbnail */}
-                  <div className="relative aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden rounded-t-lg">
+                  <div className="relative aspect-video bg-slate-200 dark:bg-[#0a6969] overflow-hidden rounded-t-lg">
                     {course.thumbnailUrl ? (
                       <img
                         loading="lazy" src={course.thumbnailUrl}
@@ -350,7 +364,7 @@ export default function CourseDetail() {
                         className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition-opacity"
                       >
                         <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                          <Play className="h-8 w-8 text-slate-900 ml-1" />
+                          <Play className="h-8 w-8 text-black ml-1" />
                         </div>
                       </a>
                     )}
@@ -397,6 +411,14 @@ export default function CourseDetail() {
                       </div>
                     )}
                     
+                    {/* Free Access Banner */}
+                    {FREE_ACCESS_MODE && !enrollment && (
+                      <div className="mb-4 bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-center">
+                        <span className="text-emerald-700 font-semibold text-sm">
+                          {isEn ? "\u2728 Free preview access \u2014 All lessons unlocked" : "\u2728 Acc\u00e8s gratuit \u2014 Toutes les le\u00e7ons d\u00e9verrouill\u00e9es"}
+                        </span>
+                      </div>
+                    )}
                     {/* CTA Button */}
                     {enrollment ? (
                       <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg h-14">
@@ -404,8 +426,10 @@ export default function CourseDetail() {
                         {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
                       </Button>
                     ) : user ? (
-                      <Button size="lg" className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14">
-                        {(course.price || 0) > 0 ? (
+                      <Button size="lg" className={`w-full ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#F97316] hover:bg-[#EA580C]'} text-white text-lg h-14`}>
+                        {FREE_ACCESS_MODE ? (
+                          <>{isEn ? "Start Free Course" : "Commencer le cours gratuit"}</>
+                        ) : (course.price || 0) > 0 ? (
                           <>{isEn ? "Enroll Now" : "S'inscrire maintenant"}</>
                         ) : (
                           <>{isEn ? "Start Free Course" : "Commencer le cours gratuit"}</>
@@ -544,7 +568,7 @@ export default function CourseDetail() {
                               const typeConfig = lessonTypeIcons[lesson.contentType || "video"] || lessonTypeIcons.video;
                               const LessonIcon = typeConfig.icon;
                               const isPreview = lesson.isPreview;
-                              const isLocked = !enrollment && !isPreview;
+                              const isLocked = FREE_ACCESS_MODE ? false : (!enrollment && !isPreview);
                               // Use estimatedMinutes from schema, fallback to videoDurationSeconds
                               const durationMin = lesson.estimatedMinutes || (lesson.videoDurationSeconds ? Math.round(lesson.videoDurationSeconds / 60) : null);
                               
@@ -733,9 +757,11 @@ export default function CourseDetail() {
           </p>
           {!enrollment && (
             <Button size="lg" className="bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14 px-8">
-              {(course.price || 0) > 0 
-                ? (isEn ? `Enroll for ${formatPrice(course.price)}` : `S'inscrire pour ${formatPrice(course.price)}`)
-                : (isEn ? "Start Free Course" : "Commencer le cours gratuit")}
+              {FREE_ACCESS_MODE
+                ? (isEn ? "Start Free Course" : "Commencer le cours gratuit")
+                : ((course.price || 0) > 0 
+                    ? (isEn ? `Enroll for ${formatPrice(course.price)}` : `S'inscrire pour ${formatPrice(course.price)}`)
+                    : (isEn ? "Start Free Course" : "Commencer le cours gratuit"))}
             </Button>
           )}
         </div>

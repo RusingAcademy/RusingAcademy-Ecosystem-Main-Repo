@@ -1,3 +1,6 @@
+import { createLogger } from "../logger";
+const log = createLogger("services-calendlyService");
+
 /**
  * Calendly API Service
  * Handles integration with Calendly for coach scheduling
@@ -99,7 +102,7 @@ export class CalendlyService {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error(`[Calendly] API error on ${endpoint}:`, error);
+      log.error(`[Calendly] API error on ${endpoint}:`, error);
       throw new Error(`Calendly API error: ${response.status}`);
     }
 

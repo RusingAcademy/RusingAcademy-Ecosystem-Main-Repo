@@ -53,19 +53,19 @@ export default function BarholexSubHeader() {
           style={{ height: isScrolled ? "44px" : "44px" }}
         >
           {/* Home Button - Left */}
-          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
-            <Home className="h-5 w-5 text-slate-500 dark:text-slate-400" />
+          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-[#0a4040] dark:hover:bg-[#0a6969]" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
+            <Home className="h-5 w-5 text-black dark:text-[#67E8F9]" />
           </Link>
 
           {/* Logo/Brand */}
           <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300 ml-3">
             <img 
-              loading="lazy" src="/barholex-logo.png" 
-              alt="Barholex Media Logo"
-              className="transition-all duration-300 object-contain"
+              loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vQofylSAnWOMKrec.png" 
+              alt="RusingAcademy Logo"
+              className="transition-all duration-300 rounded-lg object-contain"
               style={{ 
-                height: isScrolled ? "32px" : "36px",
-                width: "auto",
+                width: isScrolled ? "36px" : "40px",
+                height: isScrolled ? "36px" : "40px",
               }}
             />
           </Link>

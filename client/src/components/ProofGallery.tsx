@@ -180,13 +180,13 @@ export default function ProofGallery() {
           </span>
           <h2 
             id="proof-gallery-title" 
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            className="text-3xl md:text-4xl font-bold text-black mb-4"
           >
             {language === "fr" 
               ? "Témoignages et Capsules d'Apprentissage" 
               : "Testimonials & Learning Capsules"}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <p className="text-black max-w-2xl mx-auto text-lg">
             {language === "fr"
               ? "Découvrez les témoignages de fonctionnaires qui ont atteint leurs objectifs linguistiques et explorez nos capsules d'apprentissage."
               : "Watch testimonials from public servants who achieved their language goals and explore our learning capsules."}
@@ -202,7 +202,7 @@ export default function ProofGallery() {
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 activeFilter === option.value
                   ? "bg-teal-600 text-white shadow-md"
-                  : "bg-white text-gray-700 border border-gray-200 hover:border-teal-300 hover:bg-teal-50"
+                  : "bg-white text-black border border-gray-200 hover:border-teal-300 hover:bg-teal-50"
               }`}
               aria-pressed={activeFilter === option.value}
             >
@@ -246,14 +246,14 @@ export default function ProofGallery() {
               
               {/* Content */}
               <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2 group-hover:text-teal-600 transition-colors">
+                <h3 className="font-semibold text-black mb-1 line-clamp-2 group-hover:text-teal-600 transition-colors">
                   {language === "fr" ? video.titleFr : video.title}
                 </h3>
-                <p className="text-sm text-gray-500 line-clamp-2">
+                <p className="text-sm text-black line-clamp-2">
                   {language === "fr" ? video.descriptionFr : video.description}
                 </p>
                 {video.views && (
-                  <p className="text-xs text-gray-400 mt-2">
+                  <p className="text-xs text-[#67E8F9] mt-2">
                     {video.views} {language === "fr" ? "vues" : "views"}
                   </p>
                 )}
@@ -290,16 +290,16 @@ export default function ProofGallery() {
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <div>
-                <h3 className="font-semibold text-gray-900">
+                <h3 className="font-semibold text-black">
                   {language === "fr" ? selectedVideo.titleFr : selectedVideo.title}
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-black">
                   {language === "fr" ? selectedVideo.descriptionFr : selectedVideo.description}
                 </p>
               </div>
               <button
                 onClick={handleCloseModal}
-                className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors"
+                className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-black hover:bg-gray-200 hover:text-black transition-colors"
                 aria-label={language === "fr" ? "Fermer" : "Close"}
               >
                 <X className="h-5 w-5" />

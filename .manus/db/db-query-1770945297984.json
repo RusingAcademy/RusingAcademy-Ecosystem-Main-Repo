@@ -1,0 +1,58 @@
+{
+  "query": "SELECT id, title, price, originalPrice, status, enrollmentCount FROM learning_paths ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, price, originalPrice, status, enrollmentCount FROM learning_paths ORDER BY id;",
+  "rows": [
+    {
+      "id": "60007",
+      "title": "Path I: Foundations of Professional French (A1)",
+      "price": "499.00",
+      "originalPrice": "NULL",
+      "status": "draft",
+      "enrollmentCount": "0"
+    },
+    {
+      "id": "90002",
+      "title": "Path II: Everyday Communication (A2)",
+      "price": "499.00",
+      "originalPrice": "NULL",
+      "status": "draft",
+      "enrollmentCount": "0"
+    },
+    {
+      "id": "90003",
+      "title": "Path III: Operational French (B1)",
+      "price": "599.00",
+      "originalPrice": "NULL",
+      "status": "draft",
+      "enrollmentCount": "0"
+    },
+    {
+      "id": "90004",
+      "title": "Path IV: Professional Mastery (B2)",
+      "price": "699.00",
+      "originalPrice": "NULL",
+      "status": "draft",
+      "enrollmentCount": "0"
+    },
+    {
+      "id": "90005",
+      "title": "Path V: Executive French (C1)",
+      "price": "799.00",
+      "originalPrice": "NULL",
+      "status": "draft",
+      "enrollmentCount": "0"
+    },
+    {
+      "id": "90006",
+      "title": "Path VI: SLE Exam Preparation (B2-C1)",
+      "price": "899.00",
+      "originalPrice": "NULL",
+      "status": "draft",
+      "enrollmentCount": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tprice\toriginalPrice\tstatus\tenrollmentCount\n60007\tPath I: Foundations of Professional French (A1)\t499.00\tNULL\tdraft\t0\n90002\tPath II: Everyday Communication (A2)\t499.00\tNULL\tdraft\t0\n90003\tPath III: Operational French (B1)\t599.00\tNULL\tdraft\t0\n90004\tPath IV: Professional Mastery (B2)\t699.00\tNULL\tdraft\t0\n90005\tPath V: Executive French (C1)\t799.00\tNULL\tdraft\t0\n90006\tPath VI: SLE Exam Preparation (B2-C1)\t899.00\tNULL\tdraft\t0\n",
+  "stderr": "",
+  "execution_time_ms": 99
+}

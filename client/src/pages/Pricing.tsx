@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Footer from "@/components/Footer";
@@ -326,6 +327,7 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <SEO title="Pricing & Plans" description="Explore RusingAcademy's flexible pricing plans for SLE preparation, coaching sessions, and self-paced bilingual courses." canonical="/pricing" />
       <main id="main-content" className="flex-1">
         <Breadcrumb 
           items={[
@@ -334,7 +336,7 @@ export default function Pricing() {
         />
 
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
@@ -348,7 +350,7 @@ export default function Pricing() {
           <div className="container relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               {/* Glass badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 mb-8">
                 <Sparkles className="h-4 w-4 text-teal-400" />
                 <span className="text-sm font-medium text-white/90">
                   {language === "fr" ? "Tarification transparente" : "Transparent Pricing"}
@@ -377,7 +379,7 @@ export default function Pricing() {
                 ].map((stat, i) => (
                   <div 
                     key={i}
-                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300"
+                    className="bg-white/5 backdrop-blur-md border border-white/60 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-teal-400 mb-1">{stat.value}</div>
                     <div className="text-sm text-white/90 font-medium">{stat.label}</div>
@@ -394,7 +396,7 @@ export default function Pricing() {
                   </Button>
                 </Link>
                 <Link href="/coaches">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8">
+                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 px-8">
                     {l.findCoach}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
@@ -424,8 +426,7 @@ export default function Pricing() {
               {l.valueProps.map((prop, i) => {
                 const Icon = getValuePropIcon(prop.icon);
                 return (
-                  <div 
-                    key={i}
+                  <div                    key={i}
                     className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-teal-200 transition-all duration-300 group"
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >
@@ -433,7 +434,7 @@ export default function Pricing() {
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{prop.title}</h3>
-                    <p className="text-sm text-slate-600">{prop.description}</p>
+                    <p className="text-sm text-black">{prop.description}</p>
                   </div>
                 );
               })}
@@ -446,7 +447,7 @@ export default function Pricing() {
               <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6">{l.trustedBy}</p>
               <div className="flex flex-wrap justify-center gap-8 items-center">
                 {organizations.map((org, i) => (
-                  <div key={i} className="flex items-center gap-2 text-gray-400 hover:text-teal-600 transition-colors">
+                  <div key={i} className="flex items-center gap-2 text-[#67E8F9] hover:text-teal-600 transition-colors">
                     <Building2 className="h-5 w-5" />
                     <span className="font-medium">{org.name}</span>
                   </div>
@@ -600,7 +601,7 @@ export default function Pricing() {
                   {/* Quote icon */}
                   <div className="text-4xl text-[#C65A1E]200 font-serif mb-2">"</div>
                   
-                  <p className="text-gray-700 mb-6 italic">{testimonial.quote}</p>
+                  <p className="text-black mb-6 italic">{testimonial.quote}</p>
                   
                   <div className="border-t pt-4">
                     <p className="font-semibold">{testimonial.author}</p>
@@ -766,7 +767,7 @@ export default function Pricing() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
@@ -776,7 +777,7 @@ export default function Pricing() {
           <div className="container relative z-10">
             <div className="text-center max-w-3xl mx-auto">
               {/* Glass badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 mb-8">
                 <Sparkles className="h-4 w-4 text-teal-400" />
                 <span className="text-sm font-medium text-white/90">
                   {language === "fr" ? "Commencez aujourd'hui" : "Start Today"}
@@ -790,7 +791,7 @@ export default function Pricing() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/70 mb-10">
+              <p className="text-lg text-white/90 mb-10">
                 {l.ctaSubtitle}
               </p>
 
@@ -803,7 +804,7 @@ export default function Pricing() {
                   </Button>
                 </Link>
                 <Link href="/coaches">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8">
+                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 px-8">
                     {l.findCoach}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
@@ -811,7 +812,7 @@ export default function Pricing() {
               </div>
 
               {/* Trust signals */}
-              <div className="flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+              <div className="flex flex-wrap justify-center gap-6 text-white/90 text-sm">
                 <div className="flex items-center gap-2">
                   <RefreshCw className="h-4 w-4" />
                   <span>{l.guarantee}</span>

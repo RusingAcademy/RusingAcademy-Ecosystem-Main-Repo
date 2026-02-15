@@ -1,0 +1,58 @@
+{
+  "query": "SHOW TABLES LIKE '%coach%'; SHOW TABLES LIKE '%session%'; SHOW TABLES LIKE '%payout%'; SHOW TABLES LIKE '%application%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW TABLES LIKE '%coach%'; SHOW TABLES LIKE '%session%'; SHOW TABLES LIKE '%payout%'; SHOW TABLES LIKE '%application%';",
+  "rows": [
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "coach_applications"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "coach_invitations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "coach_profiles"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "coaching_plan_purchases"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%session%)"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "ai_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "sle_companion_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "sle_exam_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "sle_user_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "user_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%payout%)"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "affiliate_payouts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "payout_ledger"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%application%)"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)": "coach_applications"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%coach%)\ncoach_applications\ncoach_invitations\ncoach_profiles\ncoaching_plan_purchases\nTables_in_cwh3JmcrqYgAZTUAinEMzM (%session%)\nai_sessions\nsessions\nsle_companion_sessions\nsle_exam_sessions\nsle_user_sessions\nuser_sessions\nTables_in_cwh3JmcrqYgAZTUAinEMzM (%payout%)\naffiliate_payouts\npayout_ledger\nTables_in_cwh3JmcrqYgAZTUAinEMzM (%application%)\ncoach_applications\n",
+  "stderr": "",
+  "execution_time_ms": 492
+}

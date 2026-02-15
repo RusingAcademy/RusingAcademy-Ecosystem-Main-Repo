@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -39,6 +39,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link, useParams, useLocation } from "wouter";
+import SEO from "@/components/SEO";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { getLoginUrl } from "@/const";
@@ -90,6 +91,18 @@ export default function CoachProfile() {
   const [activeTab, setActiveTab] = useState("about");
   const [showReviewModal, setShowReviewModal] = useState(false);
   
+  // Auto-open booking dialog from ?book=trial query param
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("book") === "trial" && coach) {
+      setSessionType("trial");
+      setBookingDialogOpen(true);
+    }
+  }, [coach]);
+
+  // Start conversation mutation
+  const startConvMutation = trpc.message.startConversation.useMutation();
+
   // Coupon state
   const [couponCode, setCouponCode] = useState("");
   const [couponDiscount, setCouponDiscount] = useState<{ type: string; value: number; couponId: number } | null>(null);
@@ -101,6 +114,9 @@ export default function CoachProfile() {
     undefined,
     { enabled: isAuthenticated }
   );
+
+  // Bunny Stream config for video embeds
+  const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
 
   // Fetch coach data from database
   const { data: coach, isLoading, error } = trpc.coach.bySlug.useQuery(
@@ -225,7 +241,7 @@ export default function CoachProfile() {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="h-12 w-12 animate-spin text-teal-600 mx-auto mb-4" />
-            <p className="text-slate-900 dark:text-slate-100">{isEn ? "Loading coach profile..." : "Chargement du profil..."}</p>
+            <p className="text-black dark:text-white">{isEn ? "Loading coach profile..." : "Chargement du profil..."}</p>
           </div>
       </main>
       <Footer />
@@ -244,7 +260,7 @@ export default function CoachProfile() {
                 <Users className="h-8 w-8 text-red-600" />
               </div>
               <h2 className="text-2xl font-bold mb-2">{isEn ? "Coach Not Found" : "Coach introuvable"}</h2>
-              <p className="text-slate-900 dark:text-slate-100 mb-6">
+              <p className="text-black dark:text-white mb-6">
                 {isEn 
                   ? "The coach profile you're looking for doesn't exist or has been removed."
                   : "Le profil du coach que vous recherchez n'existe pas ou a été supprimé."}
@@ -272,11 +288,35 @@ export default function CoachProfile() {
   const languageLabel = coach.languages === "french" ? "French" : 
                         coach.languages === "english" ? "English" : "French & English";
 
+  // Build JSON-LD Person schema for SEO
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: coach.name || `${coach.firstName} ${coach.lastName}`,
+    jobTitle: coach.headline || "Language Coach",
+    description: coach.bio?.substring(0, 160) || "",
+    image: coach.photoUrl || undefined,
+    url: `https://www.rusingacademy.ca/coaches/${coach.slug}`,
+    worksFor: {
+      "@type": "Organization",
+      name: "Lingueefy by RusingAcademy",
+    },
+    knowsLanguage: coach.languages === "both" ? ["French", "English"] : [coach.languages === "french" ? "French" : "English"],
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#062b2b]">
+      <SEO
+        title={`${coach.name || coach.firstName} - ${coach.headline || 'Language Coach'}`}
+        description={coach.bio?.substring(0, 160) || `Book a session with ${coach.name || coach.firstName}, a certified language coach on RusingAcademy.`}
+        canonical={`/coaches/${coach.slug}`}
+        image={coach.photoUrl || undefined}
+        schema={personSchema}
+        type="website"
+      />
       <main className="flex-1">
         {/* Premium Hero Section */}
-        <section className="relative bg-gradient-to-br from-slate-900 via-teal-900 to-slate-800 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#0a4040] overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -291,14 +331,14 @@ export default function CoachProfile() {
           <div className="container relative z-10 py-12">
             {/* Breadcrumb */}
             <div className="mb-6">
-              <Link href="/coaches" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+              <Link href="/coaches" className="inline-flex items-center gap-2 text-sm text-white/90 hover:text-white transition-colors">
                 <ArrowLeft className="h-4 w-4" />
                 {isEn ? "Back to coaches" : "Retour aux coachs"}
               </Link>
             </div>
             
             {/* Profile Header Card with Glassmorphism */}
-            <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl">
+            <div className="backdrop-blur-xl bg-white/10 border border-white/60 rounded-3xl p-8 shadow-2xl">
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Avatar Section */}
                 <div className="shrink-0 flex flex-col items-center lg:items-start">
@@ -320,10 +360,10 @@ export default function CoachProfile() {
                         coachId={coach.id}
                         initialFavorited={isFavorite}
                         onToggle={(favorited) => setIsFavorite(favorited)}
-                        className="bg-white/10 hover:bg-white/20 border-white/20"
+                        className="bg-white/10 hover:bg-white/20 border-white/60"
                       />
                     )}
-                    <Button variant="outline" size="icon" className="bg-white/10 hover:bg-white/20 border-white/20 text-white">
+                    <Button variant="outline" size="icon" className="bg-white/10 hover:bg-white/20 border-white/60 text-white">
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -340,7 +380,7 @@ export default function CoachProfile() {
 
                   {/* Stats Row - Glassmorphism Cards */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                         <span className="text-2xl font-bold text-white">{coach.averageRating || "New"}</span>
@@ -349,14 +389,14 @@ export default function CoachProfile() {
                         {reviews && reviews.length > 0 ? `${reviews.length} reviews` : "Rating"}
                       </p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Users className="h-5 w-5 text-cyan-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalStudents || 0}</span>
                       </div>
                       <p className="text-sm text-white/90">{isEn ? "Students" : "Étudiants"}</p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <CalendarIcon className="h-5 w-5 text-teal-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalSessions || 0}</span>
@@ -372,7 +412,7 @@ export default function CoachProfile() {
                         <p className="text-sm text-emerald-200 font-medium">{isEn ? "Success Rate" : "Taux de réussite"}</p>
                       </div>
                     ) : (
-                      <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                      <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                         <div className="flex items-center justify-center gap-1 mb-1">
                           <Clock className="h-5 w-5 text-[#0F3D3E]" />
                           <span className="text-2xl font-bold text-white">{coach.responseTimeHours || 24}h</span>
@@ -394,7 +434,7 @@ export default function CoachProfile() {
 
                   {/* Specializations */}
                   <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                    <Badge className="bg-white/20 text-white border-white/30 hover:bg-white/30">
+                    <Badge className="bg-white/20 text-white border-white/60 hover:bg-white/30">
                       <Globe className="h-3 w-3 mr-1" />
                       {languageLabel}
                     </Badge>
@@ -415,8 +455,8 @@ export default function CoachProfile() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Video Introduction */}
-              {coach.videoUrl && (
+              {/* Video Introduction — Bunny Stream priority, YouTube/native fallback */}
+              {(coach.bunnyVideoId || coach.videoUrl) && (
                 <Card className="border-0 shadow-lg overflow-hidden">
                   <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                     <CardTitle className="flex items-center gap-2 text-teal-800 dark:text-teal-200">
@@ -426,8 +466,24 @@ export default function CoachProfile() {
                   </CardHeader>
                   <CardContent className="p-0">
                     {(() => {
+                      // Priority 1: Bunny Stream embed
+                      if (coach.bunnyVideoId && bunnyConfig?.libraryId) {
+                        return (
+                          <div className="aspect-video">
+                            <iframe
+                              className="w-full h-full rounded-b-lg"
+                              src={`https://iframe.mediadelivery.net/embed/${bunnyConfig.libraryId}/${coach.bunnyVideoId}?autoplay=false&preload=true`}
+                              title={isEn ? "Coach Introduction Video" : "Vidéo de présentation du coach"}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              loading="lazy"
+                              style={{ border: 0 }}
+                            />
+                          </div>
+                        );
+                      }
                       const url = coach.videoUrl || "";
-                      // Parse YouTube URLs (both youtube.com/watch and youtu.be short links)
+                      // Priority 2: YouTube URLs
                       const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
                       if (ytMatch) {
                         return (
@@ -443,7 +499,7 @@ export default function CoachProfile() {
                           </div>
                         );
                       }
-                      // Native video files (mp4, webm, etc.)
+                      // Priority 3: Native video files
                       if (url.match(/\.(mp4|webm|ogg)($|\?)/i)) {
                         return (
                           <div className="aspect-video">
@@ -461,7 +517,7 @@ export default function CoachProfile() {
                       }
                       // Fallback: external link
                       return (
-                        <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center rounded-b-lg">
+                        <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 dark:from-[#0a4040] dark:to-[#062b2b] flex items-center justify-center rounded-b-lg">
                           <a href={url} target="_blank" rel="noopener noreferrer">
                             <Button size="lg" className="gap-2 bg-teal-600 hover:bg-teal-700">
                               <Play className="h-5 w-5" />
@@ -478,14 +534,14 @@ export default function CoachProfile() {
 
               {/* Tabs - Custom Implementation */}
               <div className="w-full">
-                <div className="bg-white dark:bg-slate-800 inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-slate-700 mb-6">
+                <div className="bg-white dark:bg-[#0a4040] inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-[#0a6969] mb-6">
                   <button
                     onClick={() => setActiveTab("about")}
                     aria-pressed={activeTab === "about"}
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "about"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-slate-600 dark:text-slate-400 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-black dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "About" : "À propos"}
@@ -496,7 +552,7 @@ export default function CoachProfile() {
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "reviews"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-slate-600 dark:text-slate-400 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-black dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "Reviews" : "Avis"} {reviews && reviews.length > 0 ? `(${reviews.length})` : ""}
@@ -507,7 +563,7 @@ export default function CoachProfile() {
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "gallery"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-slate-600 dark:text-slate-400 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-black dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "Gallery" : "Galerie"}
@@ -525,7 +581,7 @@ export default function CoachProfile() {
                     <CardContent>
                       <div className="prose prose-slate dark:prose-invert max-w-none">
                         {((!isEn && coach.bioFr) ? coach.bioFr : coach.bio)?.split("\n\n").map((paragraph, i) => (
-                          <p key={i} className="text-slate-900 dark:text-slate-100 mb-4 leading-relaxed">
+                          <p key={i} className="text-black dark:text-white mb-4 leading-relaxed">
                             {paragraph}
                           </p>
                         ))}
@@ -540,8 +596,8 @@ export default function CoachProfile() {
                           <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                             <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Experience" : "Expérience"}</p>
-                              <p className="text-sm text-slate-900 dark:text-slate-100">
+                              <p className="font-medium text-black dark:text-white">{isEn ? "Experience" : "Expérience"}</p>
+                              <p className="text-sm text-black dark:text-white">
                                 {coach.yearsExperience} {isEn ? "years teaching SLE preparation" : "ans d'enseignement SLE"}
                               </p>
                             </div>
@@ -549,8 +605,8 @@ export default function CoachProfile() {
                           <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                             <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Credentials" : "Diplômes"}</p>
-                              <p className="text-sm text-slate-900 dark:text-slate-100">
+                              <p className="font-medium text-black dark:text-white">{isEn ? "Credentials" : "Diplômes"}</p>
+                              <p className="text-sm text-black dark:text-white">
                                 {coach.credentials}
                               </p>
                             </div>
@@ -558,8 +614,8 @@ export default function CoachProfile() {
                           <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                             <Clock className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Response Time" : "Temps de réponse"}</p>
-                              <p className="text-sm text-slate-900 dark:text-slate-100">
+                              <p className="font-medium text-black dark:text-white">{isEn ? "Response Time" : "Temps de réponse"}</p>
+                              <p className="text-sm text-black dark:text-white">
                                 {isEn ? `Usually responds within ${coach.responseTimeHours || 24} hours` : `Répond généralement en ${coach.responseTimeHours || 24} heures`}
                               </p>
                             </div>
@@ -568,8 +624,8 @@ export default function CoachProfile() {
                             <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30">
                               <TrendingUp className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
                               <div>
-                                <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Success Rate" : "Taux de réussite"}</p>
-                                <p className="text-sm text-slate-900 dark:text-slate-100">
+                                <p className="font-medium text-black dark:text-white">{isEn ? "Success Rate" : "Taux de réussite"}</p>
+                                <p className="text-sm text-black dark:text-white">
                                   {coach.successRate}% {isEn ? "of students achieved their SLE goal" : "des étudiants ont atteint leur objectif SLE"}
                                 </p>
                               </div>
@@ -623,7 +679,7 @@ export default function CoachProfile() {
                               </Avatar>
                               <div>
                                 <p className="font-medium">{review.learnerName || "Anonymous"}</p>
-                                <p className="text-sm text-slate-900 dark:text-slate-100">
+                                <p className="text-sm text-black dark:text-white">
                                   {new Date(review.createdAt).toLocaleDateString(isEn ? "en-CA" : "fr-CA", {
                                     year: "numeric",
                                     month: "long",
@@ -639,13 +695,13 @@ export default function CoachProfile() {
                                   className={`h-4 w-4 ${
                                     i < review.rating
                                       ? "fill-amber-400 text-amber-400"
-                                      : "text-slate-300"
+                                      : "text-white/90"
                                   }`}
                                 />
                               ))}
                             </div>
                           </div>
-                          <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">{review.comment}</p>
+                          <p className="text-black dark:text-white/90 mb-4 leading-relaxed">{review.comment}</p>
                           {review.sleAchievement && (
                             <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-300">
                               <Award className="h-3 w-3 mr-1" />
@@ -658,10 +714,10 @@ export default function CoachProfile() {
                   ) : (
                     <Card className="border-0 shadow-lg">
                       <CardContent className="pt-8 pb-8 text-center">
-                        <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <MessageSquare className="h-8 w-8 text-slate-400" />
+                        <div className="w-16 h-16 bg-slate-100 dark:bg-[#0a4040] rounded-full flex items-center justify-center mx-auto mb-4">
+                          <MessageSquare className="h-8 w-8 text-[#67E8F9]" />
                         </div>
-                        <p className="text-slate-900 dark:text-slate-100">
+                        <p className="text-black dark:text-white">
                           {isEn ? "No reviews yet. Be the first to leave a review!" : "Aucun avis pour le moment. Soyez le premier à laisser un avis!"}
                         </p>
                       </CardContent>
@@ -693,38 +749,38 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "trial" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-teal-300"
+                            : "bg-white dark:bg-[#0a4040] border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("trial")}
                       >
                         <div>
-                          <p className="font-semibold text-slate-900 dark:text-slate-100">{isEn ? "Trial Session" : "Séance d'essai"}</p>
-                          <p className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "30 minutes" : "30 minutes"}</p>
+                          <p className="font-semibold text-black dark:text-white">{isEn ? "Trial Session" : "Séance d'essai"}</p>
+                          <p className="text-sm text-black dark:text-white">{isEn ? "30 minutes" : "30 minutes"}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-teal-600">
                             ${((coach.trialRate || 2500) / 100).toFixed(0)}
                           </p>
-                          <p className="text-xs text-slate-900 dark:text-slate-100">CAD</p>
+                          <p className="text-xs text-black dark:text-white">CAD</p>
                         </div>
                       </div>
                       <div 
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "single" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-teal-300"
+                            : "bg-white dark:bg-[#0a4040] border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("single")}
                       >
                         <div>
-                          <p className="font-semibold text-slate-900 dark:text-slate-100">{isEn ? "Regular Session" : "Séance régulière"}</p>
-                          <p className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "60 minutes" : "60 minutes"}</p>
+                          <p className="font-semibold text-black dark:text-white">{isEn ? "Regular Session" : "Séance régulière"}</p>
+                          <p className="text-sm text-black dark:text-white">{isEn ? "60 minutes" : "60 minutes"}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-teal-600">
                             ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                           </p>
-                          <p className="text-xs text-slate-900 dark:text-slate-100">CAD</p>
+                          <p className="text-xs text-black dark:text-white">CAD</p>
                         </div>
                       </div>
                     </div>
@@ -861,7 +917,7 @@ export default function CoachProfile() {
                             {/* Booking Summary */}
                             <div className="p-4 bg-teal-50 dark:bg-teal-950/30 rounded-lg border border-teal-200 dark:border-teal-800">
                               <h4 className="font-medium mb-2">{isEn ? "Booking Summary" : "Résumé de la réservation"}</h4>
-                              <div className="text-sm space-y-1 text-slate-900 dark:text-slate-100">
+                              <div className="text-sm space-y-1 text-black dark:text-white">
                                 <p><strong>{isEn ? "Coach" : "Coach"}:</strong> {coach.name}</p>
                                 <p><strong>{isEn ? "Date" : "Date"}:</strong> {selectedDate.toLocaleDateString(isEn ? "en-CA" : "fr-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
                                 <p><strong>{isEn ? "Time" : "Heure"}:</strong> {selectedTime}</p>
@@ -937,29 +993,51 @@ export default function CoachProfile() {
                     </Dialog>
                     )}
 
-                    <Button variant="outline" className="w-full border-teal-200 hover:bg-teal-50 dark:border-teal-800 dark:hover:bg-teal-950/30" size="lg">
-                      <MessageSquare className="h-4 w-4 mr-2" />
+                    <Button 
+                      variant="outline" 
+                      className="w-full border-teal-200 hover:bg-teal-50 dark:border-teal-800 dark:hover:bg-teal-950/30" 
+                      size="lg"
+                      disabled={startConvMutation.isPending}
+                      onClick={async () => {
+                        if (!isAuthenticated) {
+                          sessionStorage.setItem('messageCoachAfterLogin', String(coach.userId));
+                          window.location.href = getLoginUrl();
+                          return;
+                        }
+                        try {
+                          const conv = await startConvMutation.mutateAsync({ participantId: coach.userId });
+                          navigate(`/messages?conversation=${conv.id}`);
+                        } catch (err: any) {
+                          toast.error(isEn ? 'Failed to start conversation' : 'Erreur lors de la création de la conversation');
+                        }
+                      }}
+                    >
+                      {startConvMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <MessageSquare className="h-4 w-4 mr-2" />
+                      )}
                       {isEn ? "Send Message" : "Envoyer un message"}
                     </Button>
                   </CardContent>
                 </Card>
 
                 {/* Trust Signals Card */}
-                <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
+                <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b]">
                   <CardContent className="p-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30">
                         <Shield className="h-5 w-5 text-emerald-600" />
                         <div>
-                          <p className="font-medium text-sm text-slate-900 dark:text-slate-100">{isEn ? "Satisfaction Guaranteed" : "Satisfaction garantie"}</p>
-                          <p className="text-xs text-slate-900 dark:text-slate-100">{isEn ? "Money-back if not satisfied" : "Remboursement si non satisfait"}</p>
+                          <p className="font-medium text-sm text-black dark:text-white">{isEn ? "Satisfaction Guaranteed" : "Satisfaction garantie"}</p>
+                          <p className="text-xs text-black dark:text-white">{isEn ? "Money-back if not satisfied" : "Remboursement si non satisfait"}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3 p-3 rounded-lg bg-teal-50 dark:bg-teal-950/30">
                         <Sparkles className="h-5 w-5 text-teal-600" />
                         <div>
-                          <p className="font-medium text-sm text-slate-900 dark:text-slate-100">{isEn ? "Verified Coach" : "Coach vérifié"}</p>
-                          <p className="text-xs text-slate-900 dark:text-slate-100">{isEn ? "Background checked" : "Vérification effectuée"}</p>
+                          <p className="font-medium text-sm text-black dark:text-white">{isEn ? "Verified Coach" : "Coach vérifié"}</p>
+                          <p className="text-xs text-black dark:text-white">{isEn ? "Background checked" : "Vérification effectuée"}</p>
                         </div>
                       </div>
                     </div>
@@ -975,23 +1053,23 @@ export default function CoachProfile() {
                     </h4>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-900 dark:text-slate-100">{isEn ? "Response time" : "Temps de réponse"}</span>
+                        <span className="text-black dark:text-white">{isEn ? "Response time" : "Temps de réponse"}</span>
                         <span className="font-medium flex items-center gap-1">
                           <Clock className="h-4 w-4 text-teal-600" />
                           {coach.responseTimeHours || 24}h
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-900 dark:text-slate-100">{isEn ? "Total sessions" : "Séances totales"}</span>
+                        <span className="text-black dark:text-white">{isEn ? "Total sessions" : "Séances totales"}</span>
                         <span className="font-medium">{coach.totalSessions || 0}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-900 dark:text-slate-100">{isEn ? "Students helped" : "Étudiants aidés"}</span>
+                        <span className="text-black dark:text-white">{isEn ? "Students helped" : "Étudiants aidés"}</span>
                         <span className="font-medium">{coach.totalStudents || 0}</span>
                       </div>
                       {coach.successRate && coach.successRate > 0 && (
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-900 dark:text-slate-100">{isEn ? "SLE success rate" : "Taux de réussite SLE"}</span>
+                          <span className="text-black dark:text-white">{isEn ? "SLE success rate" : "Taux de réussite SLE"}</span>
                           <span className="font-medium text-emerald-600">
                             {coach.successRate}%
                           </span>
@@ -1007,10 +1085,10 @@ export default function CoachProfile() {
       </main>
 
       {/* Mobile Sticky Booking Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 shadow-2xl p-3">
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-[#062b2b] border-t border-slate-200 dark:border-[#0a6969] shadow-2xl p-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">{coach.name}</p>
+            <p className="text-sm font-semibold text-black dark:text-white truncate">{coach.name}</p>
             <p className="text-xs text-muted-foreground">
               {isEn ? "From" : "Dès"} ${((coach.trialRate || 2500) / 100).toFixed(0)} CAD
             </p>

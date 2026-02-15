@@ -1,0 +1,35 @@
+{
+  "query": "\nSELECT 'courses' as type, COUNT(*) as total, SUM(status='published') as published FROM courses WHERE slug LIKE 'esl-%'\nUNION ALL\nSELECT 'learning_paths', COUNT(*), SUM(status='published') FROM learning_paths WHERE slug LIKE 'esl-%'\nUNION ALL\nSELECT 'modules', COUNT(*), SUM(status='published') FROM course_modules WHERE courseId BETWEEN 200001 AND 200006\nUNION ALL\nSELECT 'lessons', COUNT(*), SUM(status='published') FROM lessons WHERE courseId BETWEEN 200001 AND 200006\nUNION ALL\nSELECT 'activities', COUNT(*), SUM(status='published') FROM activities WHERE courseId BETWEEN 200001 AND 200006;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute \nSELECT 'courses' as type, COUNT(*) as total, SUM(status='published') as published FROM courses WHERE slug LIKE 'esl-%'\nUNION ALL\nSELECT 'learning_paths', COUNT(*), SUM(status='published') FROM learning_paths WHERE slug LIKE 'esl-%'\nUNION ALL\nSELECT 'modules', COUNT(*), SUM(status='published') FROM course_modules WHERE courseId BETWEEN 200001 AND 200006\nUNION ALL\nSELECT 'lessons', COUNT(*), SUM(status='published') FROM lessons WHERE courseId BETWEEN 200001 AND 200006\nUNION ALL\nSELECT 'activities', COUNT(*), SUM(status='published') FROM activities WHERE courseId BETWEEN 200001 AND 200006;\n",
+  "rows": [
+    {
+      "type": "modules",
+      "total": "24",
+      "published": "24"
+    },
+    {
+      "type": "courses",
+      "total": "6",
+      "published": "6"
+    },
+    {
+      "type": "learning_paths",
+      "total": "6",
+      "published": "6"
+    },
+    {
+      "type": "lessons",
+      "total": "96",
+      "published": "96"
+    },
+    {
+      "type": "activities",
+      "total": "672",
+      "published": "672"
+    }
+  ],
+  "messages": [],
+  "stdout": "type\ttotal\tpublished\nmodules\t24\t24\ncourses\t6\t6\nlearning_paths\t6\t6\nlessons\t96\t96\nactivities\t672\t672\n",
+  "stderr": "",
+  "execution_time_ms": 63
+}

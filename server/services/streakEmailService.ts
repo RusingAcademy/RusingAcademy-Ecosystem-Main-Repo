@@ -7,6 +7,8 @@ import { getDb } from "../db";
 import { learnerXp, users } from "../../drizzle/schema";
 import { eq, and, sql, lt, gt, isNotNull } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
+import { createLogger } from "../logger";
+const log = createLogger("services-streakEmailService");
 
 interface StreakAtRiskUser {
   userId: number;
@@ -151,18 +153,18 @@ export async function sendStreakReminders(): Promise<{ sent: number; errors: num
   const atRiskUsers = await findStreaksAtRisk();
   
   if (atRiskUsers.length === 0) {
-    console.log("[StreakEmail] No users with at-risk streaks");
+    log.info("[StreakEmail] No users with at-risk streaks");
     return { sent: 0, errors: 0 };
   }
 
-  console.log(`[StreakEmail] Found ${atRiskUsers.length} users with at-risk streaks`);
+  log.info(`[StreakEmail] Found ${atRiskUsers.length} users with at-risk streaks`);
 
   let sent = 0;
   let errors = 0;
 
   for (const user of atRiskUsers) {
     if (!user.email) {
-      console.log(`[StreakEmail] Skipping user ${user.userId} - no email`);
+      log.info(`[StreakEmail] Skipping user ${user.userId} - no email`);
       continue;
     }
 
@@ -170,14 +172,14 @@ export async function sendStreakReminders(): Promise<{ sent: number; errors: num
       const { subject, html } = generateStreakReminderEmail(user);
       
       // For now, log the email (in production, integrate with email service)
-      console.log(`[StreakEmail] Would send to ${user.email}: ${subject}`);
+      log.info(`[StreakEmail] Would send to ${user.email}: ${subject}`);
       
       // TODO: Integrate with actual email service
       // await sendEmail({ to: user.email, subject, html });
       
       sent++;
     } catch (error) {
-      console.error(`[StreakEmail] Error sending to ${user.email}:`, error);
+      log.error(`[StreakEmail] Error sending to ${user.email}:`, error);
       errors++;
     }
   }
@@ -209,5 +211,5 @@ export function initializeStreakEmailScheduler(): void {
     }
   }, 60 * 60 * 1000);
 
-  console.log("[StreakEmail] Streak email scheduler initialized");
+  log.info("[StreakEmail] Streak email scheduler initialized");
 }

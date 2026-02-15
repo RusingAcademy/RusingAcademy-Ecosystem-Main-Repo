@@ -271,7 +271,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900">
+    <div className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-[#062b2b]">
       {!isPlaying ? (
         <>
           {/* Thumbnail */}
@@ -319,7 +319,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
           </div>
           
           {/* Title */}
-          <div className="p-4 bg-slate-800">
+          <div className="p-4 bg-[#0a4040]">
             <h4 className="text-white font-medium line-clamp-2">
               {language === 'fr' ? video.titleFr : video.titleEn}
             </h4>
@@ -371,7 +371,7 @@ export default function YouTubeVideos() {
   return (
     <>
       {/* Short-Form Videos Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
@@ -390,7 +390,7 @@ export default function YouTubeVideos() {
                 ? 'Conseils rapides pour la préparation aux examens'
                 : 'Quick Tips for Exam Preparation'}
             </h2>
-            <p className="text-slate-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[#67E8F9] max-w-3xl mx-auto leading-relaxed">
               {language === 'fr'
                 ? 'Des conseils de 60 secondes de nos experts pour vous aider à réussir vos examens SLE/ELS.'
                 : '60-second tips from our experts to help you ace your SLE exams.'}
@@ -412,7 +412,7 @@ export default function YouTubeVideos() {
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     idx === currentShortIndex 
                       ? 'w-8 bg-red-500' 
-                      : 'bg-slate-600 hover:bg-white0'
+                      : 'bg-[#0a6969] hover:bg-white0'
                   }`}
                   aria-label={`Go to short ${idx + 1}`}
                 />
@@ -448,7 +448,7 @@ export default function YouTubeVideos() {
       </section>
 
       {/* Long-Form Videos Section */}
-      <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-[#062b2b] to-[#0a4040] relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl" />
         <div className="absolute top-1/4 right-0 w-64 h-64 bg-[#C65A1E]/5 rounded-full blur-3xl" />
@@ -465,7 +465,7 @@ export default function YouTubeVideos() {
                 ? 'Vidéos pour la préparation aux examens GC'
                 : 'Illustrative YouTube Videos for GC Exam Preparation'}
             </h2>
-            <p className="text-slate-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[#67E8F9] max-w-3xl mx-auto leading-relaxed">
               {language === 'fr'
                 ? 'Explorez nos vidéos approfondies, podcasts et présentations de coachs pour une préparation complète.'
                 : 'Explore our in-depth videos, podcasts, and coach introductions for comprehensive exam preparation.'}

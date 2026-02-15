@@ -5,6 +5,7 @@
  */
 
 import Stripe from "stripe";
+import { retry } from "../resilience";
 
 // Lazy Stripe initialization to avoid startup errors
 let stripeInstance: Stripe | null = null;
@@ -85,7 +86,7 @@ export async function getOrCreateCustomer(params: {
   // If customer already exists, return it
   if (existingCustomerId) {
     try {
-      await stripe.customers.retrieve(existingCustomerId);
+      await retry.stripe(() => stripe.customers.retrieve(existingCustomerId), "retrieve");
       return existingCustomerId;
     } catch {
       // Customer doesn't exist, create new one
@@ -93,14 +94,14 @@ export async function getOrCreateCustomer(params: {
   }
 
   // Create new customer
-  const customer = await stripe.customers.create({
+  const customer = await retry.stripe(() => stripe.customers.create({
     email,
     name,
     metadata: {
       user_id: userId.toString(),
       platform: "lingueefy",
     },
-  });
+  }), "create");
 
   return customer.id;
 }
@@ -118,36 +119,36 @@ export async function getOrCreatePrice(params: {
   const amount = interval === "month" ? plan.monthlyPrice : plan.annualPrice;
 
   // Search for existing price
-  const prices = await stripe.prices.search({
+  const prices = await retry.stripe(() => stripe.prices.search({
     query: `active:'true' AND metadata['plan_type']:'${planType}' AND metadata['interval']:'${interval}'`,
-  });
+  }), "searchPrices");
 
   if (prices.data.length > 0) {
     return prices.data[0].id;
   }
 
   // Create product if it doesn't exist
-  const products = await stripe.products.search({
+  const products = await retry.stripe(() => stripe.products.search({
     query: `active:'true' AND metadata['plan_type']:'${planType}'`,
-  });
+  }), "searchProducts");
 
   let productId: string;
   if (products.data.length > 0) {
     productId = products.data[0].id;
   } else {
-    const product = await stripe.products.create({
+    const product = await retry.stripe(() => stripe.products.create({
       name: plan.name,
       description: plan.description,
       metadata: {
         plan_type: planType,
         platform: "lingueefy",
       },
-    });
+    }), "createProduct");
     productId = product.id;
   }
 
   // Create price
-  const price = await stripe.prices.create({
+  const price = await retry.stripe(() => stripe.prices.create({
     product: productId,
     unit_amount: amount,
     currency: "cad",
@@ -159,7 +160,7 @@ export async function getOrCreatePrice(params: {
       interval,
       platform: "lingueefy",
     },
-  });
+  }), "createPrice");
 
   return price.id;
 }
@@ -206,7 +207,7 @@ export async function createSubscriptionCheckout(params: {
     };
   }
 
-  const session = await stripe.checkout.sessions.create(sessionParams);
+  const session = await retry.stripe(() => stripe.checkout.sessions.create(sessionParams), "createCheckout");
 
   return {
     sessionId: session.id,
@@ -224,10 +225,10 @@ export async function createCustomerPortal(params: {
   const stripe = getStripeInstance();
   const { customerId, returnUrl } = params;
 
-  const session = await stripe.billingPortal.sessions.create({
+  const session = await retry.stripe(() => stripe.billingPortal.sessions.create({
     customer: customerId,
     return_url: returnUrl,
-  });
+  }), "createPortal");
 
   return session.url;
 }
@@ -238,7 +239,7 @@ export async function createCustomerPortal(params: {
 export async function getSubscription(subscriptionId: string): Promise<Stripe.Subscription | null> {
   const stripe = getStripeInstance();
   try {
-    return await stripe.subscriptions.retrieve(subscriptionId);
+    return await retry.stripe(() => stripe.subscriptions.retrieve(subscriptionId), "getSubscription");
   } catch {
     return null;
   }
@@ -255,11 +256,11 @@ export async function cancelSubscription(params: {
   const { subscriptionId, cancelAtPeriodEnd = true } = params;
 
   if (cancelAtPeriodEnd) {
-    return await stripe.subscriptions.update(subscriptionId, {
+    return await retry.stripe(() => stripe.subscriptions.update(subscriptionId, {
       cancel_at_period_end: true,
-    });
+    }), "updateSubscription");
   } else {
-    return await stripe.subscriptions.cancel(subscriptionId);
+    return await retry.stripe(() => stripe.subscriptions.cancel(subscriptionId), "cancelSubscription");
   }
 }
 
@@ -268,9 +269,9 @@ export async function cancelSubscription(params: {
  */
 export async function resumeSubscription(subscriptionId: string): Promise<Stripe.Subscription> {
   const stripe = getStripeInstance();
-  return await stripe.subscriptions.update(subscriptionId, {
+  return await retry.stripe(() => stripe.subscriptions.update(subscriptionId, {
     cancel_at_period_end: false,
-  });
+  }), "updateSubscription");
 }
 
 /**
@@ -284,9 +285,9 @@ export async function updateSubscriptionPlan(params: {
   const stripe = getStripeInstance();
   const { subscriptionId, newPriceId, prorate = true } = params;
 
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const subscription = await retry.stripe(() => stripe.subscriptions.retrieve(subscriptionId), "getSubscription");
   
-  return await stripe.subscriptions.update(subscriptionId, {
+  return await retry.stripe(() => stripe.subscriptions.update(subscriptionId, {
     items: [
       {
         id: subscription.items.data[0].id,
@@ -294,7 +295,7 @@ export async function updateSubscriptionPlan(params: {
       },
     ],
     proration_behavior: prorate ? "create_prorations" : "none",
-  });
+  }), "updateSubscription");
 }
 
 /**
@@ -302,10 +303,10 @@ export async function updateSubscriptionPlan(params: {
  */
 export async function getCustomerSubscriptions(customerId: string): Promise<Stripe.Subscription[]> {
   const stripe = getStripeInstance();
-  const subscriptions = await stripe.subscriptions.list({
+  const subscriptions = await retry.stripe(() => stripe.subscriptions.list({
     customer: customerId,
     status: "all",
-  });
+  }), "listSubscriptions");
 
   return subscriptions.data;
 }
@@ -316,9 +317,9 @@ export async function getCustomerSubscriptions(customerId: string): Promise<Stri
 export async function getUpcomingInvoice(customerId: string): Promise<Stripe.Invoice | null> {
   const stripe = getStripeInstance();
   try {
-    return await stripe.invoices.createPreview({
+    return await retry.stripe(() => stripe.invoices.createPreview({
       customer: customerId,
-    });
+    }), "createPreview");
   } catch {
     return null;
   }
@@ -334,10 +335,10 @@ export async function getInvoiceHistory(params: {
   const stripe = getStripeInstance();
   const { customerId, limit = 10 } = params;
 
-  const invoices = await stripe.invoices.list({
+  const invoices = await retry.stripe(() => stripe.invoices.list({
     customer: customerId,
     limit,
-  });
+  }), "listInvoices");
 
   return invoices.data;
 }

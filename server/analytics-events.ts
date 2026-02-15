@@ -6,6 +6,8 @@
  */
 import { getDb } from "./db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("analytics-events");
 
 export type AnalyticsEventType = 
   | "page_view" | "opt_in" | "checkout_started" | "checkout_completed"
@@ -38,9 +40,9 @@ export async function logAnalyticsEvent(event: AnalyticsEvent): Promise<void> {
       INSERT INTO analytics_events (eventType, source, userId, sessionId, productId, productName, productType, amount, currency, metadata, stripeEventId)
       VALUES (${event.eventType}, ${event.source || "stripe"}, ${event.userId || null}, ${event.sessionId || null}, ${event.productId || null}, ${event.productName || null}, ${event.productType || null}, ${event.amount || 0}, ${event.currency || "cad"}, ${event.metadata ? JSON.stringify(event.metadata) : null}, ${event.stripeEventId || null})
     `);
-    console.log(`[Analytics] Event logged: ${event.eventType} | user=${event.userId} | product=${event.productName || "N/A"} | amount=${event.amount || 0}`);
+    log.info(`[Analytics] Event logged: ${event.eventType} | user=${event.userId} | product=${event.productName || "N/A"} | amount=${event.amount || 0}`);
   } catch (error) {
-    console.error(`[Analytics] Failed to log event ${event.eventType}:`, error);
+    log.error(`[Analytics] Failed to log event ${event.eventType}:`, error);
   }
 }
 
@@ -61,9 +63,9 @@ export async function createAdminNotification(params: {
       INSERT INTO admin_notifications (userId, targetRole, title, message, type, link)
       VALUES (${params.userId || null}, ${params.targetRole || "admin"}, ${params.title}, ${params.message}, ${params.type || "info"}, ${params.link || null})
     `);
-    console.log(`[Notification] Created: ${params.title} → ${params.targetRole || "admin"}`);
+    log.info(`[Notification] Created: ${params.title} → ${params.targetRole || "admin"}`);
   } catch (error) {
-    console.error(`[Notification] Failed to create:`, error);
+    log.error(`[Notification] Failed to create:`, error);
   }
 }
 
@@ -79,19 +81,19 @@ export async function getAnalyticsEvents(filters: {
   limit?: number;
 }) {
   const db = await getDb();
-  const conditions: string[] = ["1=1"];
-  if (filters.eventType) conditions.push(`eventType = '${filters.eventType}'`);
-  if (filters.source) conditions.push(`source = '${filters.source}'`);
-  if (filters.userId) conditions.push(`userId = ${filters.userId}`);
-  if (filters.startDate) conditions.push(`createdAt >= '${filters.startDate}'`);
-  if (filters.endDate) conditions.push(`createdAt <= '${filters.endDate}'`);
+  const conditions: ReturnType<typeof sql>[] = [sql`1=1`];
+  if (filters.eventType) conditions.push(sql`eventType = ${filters.eventType}`);
+  if (filters.source) conditions.push(sql`source = ${filters.source}`);
+  if (filters.userId) conditions.push(sql`userId = ${filters.userId}`);
+  if (filters.startDate) conditions.push(sql`createdAt >= ${filters.startDate}`);
+  if (filters.endDate) conditions.push(sql`createdAt <= ${filters.endDate}`);
   
-  const whereClause = conditions.join(" AND ");
+  const whereFragment = sql.join(conditions, sql` AND `);
   const limit = filters.limit || 100;
   
-  const [rows] = await db.execute(sql.raw(`
-    SELECT * FROM analytics_events WHERE ${whereClause} ORDER BY createdAt DESC LIMIT ${limit}
-  `));
+  const [rows] = await db.execute(
+    sql`SELECT * FROM analytics_events WHERE ${whereFragment} ORDER BY createdAt DESC LIMIT ${limit}`
+  );
   return rows;
 }
 
@@ -100,17 +102,19 @@ export async function getAnalyticsEvents(filters: {
  */
 export async function getConversionFunnel(startDate?: string, endDate?: string) {
   const db = await getDb();
-  const dateFilter = startDate && endDate 
-    ? `AND createdAt BETWEEN '${startDate}' AND '${endDate}'` 
-    : "";
+  const conditions: ReturnType<typeof sql>[] = [sql`1=1`];
+  if (startDate && endDate) {
+    conditions.push(sql`createdAt BETWEEN ${startDate} AND ${endDate}`);
+  }
+  const whereFragment = sql.join(conditions, sql` AND `);
   
-  const [rows] = await db.execute(sql.raw(`
-    SELECT eventType, COUNT(*) as count, SUM(amount) as totalAmount
+  const [rows] = await db.execute(
+    sql`SELECT eventType, COUNT(*) as count, SUM(amount) as totalAmount
     FROM analytics_events
-    WHERE 1=1 ${dateFilter}
+    WHERE ${whereFragment}
     GROUP BY eventType
-    ORDER BY count DESC
-  `));
+    ORDER BY count DESC`
+  );
   return rows;
 }
 
@@ -119,17 +123,21 @@ export async function getConversionFunnel(startDate?: string, endDate?: string) 
  */
 export async function getRevenueByProduct(startDate?: string, endDate?: string) {
   const db = await getDb();
-  const dateFilter = startDate && endDate 
-    ? `AND createdAt BETWEEN '${startDate}' AND '${endDate}'` 
-    : "";
+  const conditions: ReturnType<typeof sql>[] = [
+    sql`eventType IN ('checkout_completed', 'payment_succeeded', 'invoice_paid')`
+  ];
+  if (startDate && endDate) {
+    conditions.push(sql`createdAt BETWEEN ${startDate} AND ${endDate}`);
+  }
+  const whereFragment = sql.join(conditions, sql` AND `);
   
-  const [rows] = await db.execute(sql.raw(`
-    SELECT productName, productType, COUNT(*) as purchases, SUM(amount) as revenue
+  const [rows] = await db.execute(
+    sql`SELECT productName, productType, COUNT(*) as purchases, SUM(amount) as revenue
     FROM analytics_events
-    WHERE eventType IN ('checkout_completed', 'payment_succeeded', 'invoice_paid') ${dateFilter}
+    WHERE ${whereFragment}
     GROUP BY productName, productType
-    ORDER BY revenue DESC
-  `));
+    ORDER BY revenue DESC`
+  );
   return rows;
 }
 
@@ -143,17 +151,17 @@ export async function getAdminNotifications(params: {
   limit?: number;
 }) {
   const db = await getDb();
-  const conditions: string[] = ["1=1"];
-  if (params.userId) conditions.push(`userId = ${params.userId}`);
-  if (params.targetRole) conditions.push(`targetRole = '${params.targetRole}'`);
-  if (params.unreadOnly) conditions.push(`isRead = FALSE`);
+  const conditions: ReturnType<typeof sql>[] = [sql`1=1`];
+  if (params.userId) conditions.push(sql`userId = ${params.userId}`);
+  if (params.targetRole) conditions.push(sql`targetRole = ${params.targetRole}`);
+  if (params.unreadOnly) conditions.push(sql`isRead = FALSE`);
   
-  const whereClause = conditions.join(" AND ");
+  const whereFragment = sql.join(conditions, sql` AND `);
   const limit = params.limit || 50;
   
-  const [rows] = await db.execute(sql.raw(`
-    SELECT * FROM admin_notifications WHERE ${whereClause} ORDER BY createdAt DESC LIMIT ${limit}
-  `));
+  const [rows] = await db.execute(
+    sql`SELECT * FROM admin_notifications WHERE ${whereFragment} ORDER BY createdAt DESC LIMIT ${limit}`
+  );
   return rows;
 }
 
@@ -184,12 +192,13 @@ export async function markAllNotificationsRead(params: { userId?: number; target
  */
 export async function getUnreadNotificationCount(params: { userId?: number; targetRole?: string }): Promise<number> {
   const db = await getDb();
-  const conditions: string[] = ["isRead = FALSE"];
-  if (params.userId) conditions.push(`userId = ${params.userId}`);
-  if (params.targetRole) conditions.push(`targetRole = '${params.targetRole}'`);
+  const conditions: ReturnType<typeof sql>[] = [sql`isRead = FALSE`];
+  if (params.userId) conditions.push(sql`userId = ${params.userId}`);
+  if (params.targetRole) conditions.push(sql`targetRole = ${params.targetRole}`);
   
-  const [rows] = await db.execute(sql.raw(`
-    SELECT COUNT(*) as count FROM admin_notifications WHERE ${conditions.join(" AND ")}
-  `));
+  const whereFragment = sql.join(conditions, sql` AND `);
+  const [rows] = await db.execute(
+    sql`SELECT COUNT(*) as count FROM admin_notifications WHERE ${whereFragment}`
+  );
   return (rows as any)[0]?.count || 0;
 }

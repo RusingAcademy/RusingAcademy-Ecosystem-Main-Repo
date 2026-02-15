@@ -22,6 +22,8 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 import CoachPhotoGallery from "@/components/CoachPhotoGallery";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
+import { BunnyVideoManager } from "@/components/BunnyVideoManager";
+import { useMemo } from "react";
 
 const SPECIALIZATIONS = [
   { id: "oralA", en: "Oral A — Basic", fr: "Oral A — Débutant" },
@@ -60,6 +62,9 @@ export default function CoachProfileEditor() {
     { enabled: isAuthenticated }
   );
 
+  // Bunny Stream config for embed URLs
+  const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
+
   // Form state
   const [form, setForm] = useState({
     headline: "",
@@ -71,6 +76,7 @@ export default function CoachProfileEditor() {
     specializations: {} as Record<string, boolean>,
     languages: {} as Record<string, boolean>,
     videoUrl: "",
+    bunnyVideoId: "",
     linkedinUrl: "",
     websiteUrl: "",
     yearsExperience: 0,
@@ -78,6 +84,12 @@ export default function CoachProfileEditor() {
     teachingApproach: "",
     targetAudience: "",
   });
+
+  // Bunny embed URL (computed from form state + config)
+  const bunnyEmbedUrl = useMemo(() => {
+    if (!form.bunnyVideoId || !bunnyConfig?.libraryId) return "";
+    return `https://iframe.mediadelivery.net/embed/${bunnyConfig.libraryId}/${form.bunnyVideoId}?autoplay=false&preload=true`;
+  }, [form.bunnyVideoId, bunnyConfig?.libraryId]);
 
   // Populate form from profile data
   useEffect(() => {
@@ -92,6 +104,7 @@ export default function CoachProfileEditor() {
         specializations: (coachProfile.specializations as Record<string, boolean>) || {},
         languages: (coachProfile as any).languages || {},
         videoUrl: coachProfile.videoUrl || "",
+        bunnyVideoId: (coachProfile as any).bunnyVideoId || "",
         linkedinUrl: (coachProfile as any).linkedinUrl || "",
         websiteUrl: (coachProfile as any).websiteUrl || "",
         yearsExperience: (coachProfile as any).yearsExperience || 0,
@@ -126,6 +139,7 @@ export default function CoachProfileEditor() {
       trialRate: form.trialRate,
       specializations: form.specializations,
       videoUrl: form.videoUrl || undefined,
+      bunnyVideoId: form.bunnyVideoId || undefined,
     });
   };
 
@@ -195,7 +209,7 @@ export default function CoachProfileEditor() {
   const activeSpecCount = Object.values(form.specializations).filter(Boolean).length;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
       {!isInsideAppLayout && <Header />}
       <main className="flex-1">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1200px] mx-auto">
@@ -420,22 +434,87 @@ export default function CoachProfileEditor() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Video className="h-5 w-5 text-primary" />
-                    {isEn ? "Video & Links" : "Vidéo et liens"}
+                    {isEn ? "Introduction Video" : "Vidéo d'introduction"}
                   </CardTitle>
+                  <CardDescription>
+                    {isEn
+                      ? "Upload your introduction video directly via Bunny Stream for the best playback experience, or provide an external URL."
+                      : "Téléversez votre vidéo d'introduction directement via Bunny Stream pour la meilleure expérience de lecture, ou fournissez une URL externe."}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {/* Bunny Stream Video Upload */}
                   <div>
-                    <Label htmlFor="videoUrl">{isEn ? "Introduction Video URL" : "URL de la vidéo d'introduction"}</Label>
-                    <Input
-                      id="videoUrl"
-                      value={form.videoUrl}
-                      onChange={(e) => setForm(prev => ({ ...prev, videoUrl: e.target.value }))}
-                      placeholder="https://www.youtube.com/watch?v=..."
-                    />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {isEn ? "YouTube or Vimeo link recommended" : "Lien YouTube ou Vimeo recommandé"}
-                    </p>
+                    <Label className="mb-2 block">{isEn ? "Bunny Stream Video (Recommended)" : "Vidéo Bunny Stream (Recommandé)"}</Label>
+                    {form.bunnyVideoId ? (
+                      <div className="space-y-3">
+                        <div className="relative aspect-video rounded-lg overflow-hidden border bg-black">
+                          <iframe
+                            src={bunnyEmbedUrl}
+                            className="absolute inset-0 w-full h-full"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="flex gap-2">
+                          <BunnyVideoManager
+                            selectedVideoId={form.bunnyVideoId}
+                            onSelect={(video) => {
+                              setForm(prev => ({
+                                ...prev,
+                                bunnyVideoId: video.videoId,
+                                videoUrl: video.embedUrl,
+                              }));
+                            }}
+                            onClear={() => {
+                              setForm(prev => ({
+                                ...prev,
+                                bunnyVideoId: "",
+                                videoUrl: "",
+                              }));
+                            }}
+                            compact
+                          />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setForm(prev => ({ ...prev, bunnyVideoId: "", videoUrl: "" }))}
+                          >
+                            <X className="h-4 w-4 mr-1" />
+                            {isEn ? "Remove" : "Retirer"}
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <BunnyVideoManager
+                        selectedVideoId={null}
+                        onSelect={(video) => {
+                          setForm(prev => ({
+                            ...prev,
+                            bunnyVideoId: video.videoId,
+                            videoUrl: video.embedUrl,
+                          }));
+                        }}
+                      />
+                    )}
                   </div>
+
+                  {/* Fallback: External URL */}
+                  {!form.bunnyVideoId && (
+                    <div>
+                      <Label htmlFor="videoUrl">{isEn ? "Or External Video URL" : "Ou URL de vidéo externe"}</Label>
+                      <Input
+                        id="videoUrl"
+                        value={form.videoUrl}
+                        onChange={(e) => setForm(prev => ({ ...prev, videoUrl: e.target.value }))}
+                        placeholder="https://www.youtube.com/watch?v=..."
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {isEn ? "YouTube or Vimeo link as fallback" : "Lien YouTube ou Vimeo comme alternative"}
+                      </p>
+                    </div>
+                  )}
                   <div>
                     <Label htmlFor="linkedinUrl">{isEn ? "LinkedIn Profile" : "Profil LinkedIn"}</Label>
                     <div className="relative">
@@ -587,7 +666,7 @@ export default function CoachProfileEditor() {
                       {isEn ? "Dashboard" : "Tableau de bord"}
                     </Button>
                   </Link>
-                  <Link href="/coach/availability">
+                  <Link href="/app/availability">
                     <Button variant="outline" className="w-full justify-start gap-2">
                       <Clock className="h-4 w-4" />
                       {isEn ? "Manage Availability" : "Gérer les disponibilités"}

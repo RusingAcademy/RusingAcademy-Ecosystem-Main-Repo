@@ -1,0 +1,389 @@
+[
+  {
+    "file_name": "Main Router (server/routers.ts)",
+    "raw": "{\n  \"file_name\": \"server/routers.ts\",\n  \"critical_count\": 0,\n  \"high_count\": 2,\n  \"medium_count\": 5,\n  \"low_count\": 6,\n  \"top_finding\": \"The router file is excessively large, leading to poor maintainability and scalability. Refactor into smaller, domain-specific routers.\",\n  \"findings\": [\n    {\n      \"severity\": \"HIGH\",\n      \"category\": \"Architecture\",\n      \"description\": \"The `routers.ts` file is extremely large (8811 lines total, 600 lines shown here, but already covers many domains). This violates the Single Responsibility Principle and makes the file difficult to navigate, understand, and maintain. It also increases the risk of merge conflicts and makes code reviews challenging. The file imports many `db` functions and `drizzle/schema` tables directly, indicating a lack of clear separation of concerns.\",\n      \"location\": \"Overall file structure\",\n      \"fix\": \"Refactor this monolithic router into smaller, domain-specific routers. For example, `coachRouter` should be its own file (as it appears to be partially already, but then imported into this large file). Similarly, all other domain-specific routers (e.g., `learnerRouter`, `reviewRouter`, `applicationRouter`) should be extracted. The main `appRouter` should then combine these smaller routers using `router.merge()`.\"\n    },\n    {\n      \"severity\": \"HIGH\",\n      \"category\": \"Security\",\n      \"description\": \"The `uploadPhoto` and `uploadGalleryPhoto` procedures handle base64 encoded file data directly. While `Buffer.from(base64Data, 'base64')` is used, there's no explicit validation of the file content type *after* decoding or size limits enforced at this stage. An attacker could potentially upload malicious files (e.g., disguised as images) that could be exploited later if the server or client processes them without proper sanitization, or large files leading to DoS.\",\n      \"location\": \"coachRouter.uploadPhoto, coachRouter.uploadGalleryPhoto\",\n      \"fix\": \"Implement robust file validation: 1. Verify `mimeType` against a whitelist of allowed image types (e.g., `image/jpeg`, `image/png`). 2. Add server-side size limits for uploaded files. 3. Consider using a dedicated file upload service or library that handles these security concerns more robustly. 4. If possible, process images (e.g., resize, re-encode) to strip potential malicious metadata.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Security\",\n      \"description\": \"In `submitApplication`, `input.firstName`, `input.lastName`, `input.phone`, `input.city`, `input.education`, `input.certifications`, `input.nativeLanguage`, `input.teachingLanguage`, `input.teachingPhilosophy`, `input.uniqueValue`, `input.credentials`, `input.headline`, `input.headlineFr`, `input.bio`, `input.bioFr`, `input.digitalSignature` are directly inserted into the database. While Zod provides some validation (e.g., `min`/`max` length), it doesn't prevent all forms of injection or malicious content if these fields are later rendered unescaped on a webpage (XSS).\",\n      \"location\": \"coachRouter.submitApplication\",\n      \"fix\": \"Sanitize all user-provided text inputs before storing them in the database, especially if they are later rendered in HTML. Use a library like `DOMPurify` on the client-side before sending, and ensure proper escaping (e.g., React's automatic escaping, or explicit `html-entities` encoding on the server) when rendering this content in the UI.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Performance\",\n      \"description\": \"The `coachRouter.list` procedure fetches all coaches and then maps over them to select specific fields. While the `getApprovedCoaches` function might already be optimized, if it fetches a wide range of columns from `coach` and `user` tables, this could lead to fetching more data than necessary, especially if the `input` object is optional and defaults to no filters. This is a potential N+1 if `getApprovedCoaches` is not optimized to join and select specific columns.\",\n      \"location\": \"coachRouter.list\",\n      \"fix\": \"Ensure `getApprovedCoaches` is optimized to only select the columns required by the `coachRouter.list` output. Use Drizzle's `select` method with specific columns (`db.select({ id: coachProfiles.id, ... })`) rather than `db.select().from(...)` to avoid over-fetching data from the database.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The `submitApplication` procedure has a significant amount of business logic, including checking existing applications/profiles, fetching user data, inserting into the database, sending emails, and creating notifications. This procedure is quite long and complex, making it harder to read, test, and maintain. It violates the Single Responsibility Principle.\",\n      \"location\": \"coachRouter.submitApplication\",\n      \"fix\": \"Extract complex business logic into dedicated service functions. For example, create a `coachApplicationService` with methods like `submitApplication`, `checkExistingApplication`, `notifyAdminOfNewApplication`, etc. This would make the tRPC procedure thinner and more focused on input validation and calling services.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Bug\",\n      \"description\": \"In `submitApplication`, `input.province` is assigned to `country` in the `coachApplications` table, with a default of 'Canada'. This seems like a potential mismatch. A province is a sub-national division, not a country. This could lead to incorrect data being stored if `input.province` is intended to be the actual province/state and a separate `country` field is needed.\",\n      \"location\": \"coachRouter.submitApplication (line ~300)\",\n      \"fix\": \"Clarify the schema and input. If `province` is truly a province, rename the `country` column in `coachApplications` to `province` or `state`, or add a separate `country` field to the input and schema if both are needed. Ensure data consistency.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The `getDb()` function is called multiple times within the same procedure (e.g., `submitApplication`, `uploadGalleryPhoto`, `deleteGalleryPhoto`). While Drizzle ORM might handle connection pooling, repeatedly calling `getDb()` might incur a slight overhead or obscure where the database connection is being managed. It's better practice to get the `db` instance once if it's used multiple times within a single request context.\",\n      \"location\": \"Multiple locations, e.g., coachRouter.submitApplication, coachRouter.uploadGalleryPhoto\",\n      \"fix\": \"Pass the `db` instance via the tRPC context (`ctx.db`) instead of calling `getDb()` directly within every procedure. This ensures the `db` instance is consistently available and potentially reduces overhead. The `_core/trpc.ts` file should be modified to include `db` in the context.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `generateMockSlots` function is a helper function defined at the top level of this large file. Given the size of the file, it's easy for such helpers to get lost or become difficult to find. If this function is only used within the `coachRouter` (or a specific part of it), it should be co-located with that logic or in a dedicated `utils` file for that domain.\",\n      \"location\": \"generateMockSlots function (line ~120)\",\n      \"fix\": \"Move `generateMockSlots` into a more specific utility file (e.g., `server/utils/coachAvailability.ts`) or directly within the `coachRouter` definition if its scope is limited to that router.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `import(\"../drizzle/schema\")` and `import(\"./email-application-notifications\")` are dynamic imports within the `submitApplication` mutation. While dynamic imports can be useful for code splitting, using them inside a frequently called mutation might introduce a slight runtime overhead on the first call. For core dependencies that are always needed, static imports are generally preferred for clarity and predictability.\",\n      \"location\": \"coachRouter.submitApplication (lines ~250, ~251)\",\n      \"fix\": \"Convert dynamic imports for `coachApplications` schema and `sendApplicationStatusEmail` to static imports at the top of the file, as these are core components of the application submission process.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `coachRouter.list` input schema uses `z.object({ ... }).optional()`. This makes the entire input object optional, meaning `input` can",
+    "error": "JSON parse failed"
+  },
+  {
+    "file_name": "Stripe Webhook (server/stripe/webhook.ts)",
+    "raw": "{\n  \"file_name\": \"server/stripe/webhook.ts\",\n  \"critical_count\": 0,\n  \"high_count\": 2,\n  \"medium_count\": 5,\n  \"low_count\": 8,\n  \"top_finding\": \"Potential for race conditions in webhook idempotency and missing transactionality for multi-step database operations.\",\n  \"findings\": [\n    {\n      \"severity\": \"HIGH\",\n      \"category\": \"Security\",\n      \"description\": \"The `webhookSecret` is read from `process.env.STRIPE_WEBHOOK_SECRET` and defaults to an empty string if not set. An empty string secret will cause `constructEvent` to always succeed, effectively bypassing signature verification. This allows any attacker to send arbitrary Stripe events to the endpoint, potentially leading to data corruption, unauthorized access, or denial of service.\",\n      \"location\": \"line 36\",\n      \"fix\": \"Ensure `process.env.STRIPE_WEBHOOK_SECRET` is always set in production environments. Remove the `|| \\\"\\\"` fallback, or make it explicitly throw an error if the secret is not configured, similar to how `STRIPE_SECRET_KEY` is handled.\"\n    },\n    {\n      \"severity\": \"HIGH\",\n      \"category\": \"Bug\",\n      \"description\": \"Several handlers (e.g., `handleCheckoutCompleted`, `handleCoursePurchase`, `handleCoachingPlanPurchase`) perform multiple database writes and other side effects (e.g., sending emails). If an error occurs midway through these operations, some changes might be committed while others are not, leading to an inconsistent state. For example, a path enrollment might be created, but course enrollments within that path might fail.\",\n      \"location\": \"Multiple handlers, e.g., `handleCoursePurchase` (lines 316-399)\",\n      \"fix\": \"Wrap multi-step database operations within a Drizzle transaction. This ensures that all operations either succeed or are rolled back if any step fails, maintaining data consistency. For side effects like emails, consider an outbox pattern or retry mechanisms.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Performance\",\n      \"description\": \"In `handleCoursePurchase`, there are multiple `db.select().from().where().limit(1)` calls to check for existing enrollments before inserting. Also, inside the loop for path courses, `db.select({ total: count() }).from(lessons).where(eq(lessons.courseId, pc.courseId))` is called for each course. These can lead to N+1 query issues if a path has many courses.\",\n      \"location\": \"lines 327, 362, 381\",\n      \"fix\": \"For existing enrollments, consider fetching all relevant existing enrollments in a single query (e.g., `WHERE (pathId IN (...) AND userId = ...) OR (courseId IN (...) AND userId = ...)`) and then processing them in memory. For lesson counts, fetch all lesson counts for the relevant course IDs in a single query using `GROUP BY courseId`.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The `getStripe` function initializes `stripeInstance` lazily. While this avoids startup errors, it means the first webhook event will incur the overhead of initialization. More importantly, the `apiVersion` is hardcoded to `2025-12-15.clover`. Stripe API versions are released regularly, and hardcoding a future version might lead to unexpected behavior if the actual Stripe API changes significantly before that date, or if the server's Stripe library is not updated to support it. It's generally safer to use a stable, well-tested API version or one that matches the library's recommended version.\",\n      \"location\": \"lines 17-26\",\n      \"fix\": \"Consider initializing Stripe at application startup if possible, or at least ensure the `apiVersion` is a stable, currently supported version (e.g., `2024-06-20`) and update it periodically as part of maintenance. Stripe recommends using the API version that corresponds to the version of the Stripe library you are using.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Architecture\",\n      \"description\": \"The `handleStripeWebhook` function is quite large and handles all event types directly within a single `switch` statement. This violates the Single Responsibility Principle and makes the file harder to read, test, and maintain. Each event type handler also performs multiple actions (DB writes, analytics, notifications, emails).\",\n      \"location\": \"lines 67-175\",\n      \"fix\": \"Refactor the `handleStripeWebhook` function to delegate event handling to a map or registry of dedicated handler functions, one for each `event.type`. This would improve modularity and separation of concerns. For example, `eventHandlers[event.type](event.data.object)`.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The code frequently uses `parseInt(metadata.some_id || \\\"0\\\")`. If `metadata.some_id` is `undefined` or `null`, it defaults to `0`. If `metadata.some_id` is a non-numeric string (e.g., 'abc'), `parseInt` will return `NaN`, which then becomes `0` due to `|| \\\"0\\\"` or `|| undefined`. This can lead to silently incorrect `id` values being used in database queries or other logic, potentially affecting the wrong records or failing to find records.\",\n      \"location\": \"Multiple locations, e.g., lines 98, 204, 205, 290, 311, 312, 409, 410\",\n      \"fix\": \"Implement a robust metadata parsing utility that explicitly checks for valid numeric IDs and handles invalid cases by throwing an error or returning `null`/`undefined` to be handled upstream. For example, `const userId = metadata.user_id ? parseInt(metadata.user_id) : null; if (userId === null || isNaN(userId)) { throw new Error('Invalid user_id'); }`.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Bug\",\n      \"description\": \"In `handleCheckoutCompleted`, the `commissionBps` calculation `Math.round((platformFee / amountTotal) * 10000)` assumes `amountTotal` is always greater than 0. If `amountTotal` is 0 (which might happen for free trials or edge cases), this will result in a division by zero, leading to `NaN` or an error. While `amountTotal` is likely positive for a 'completed checkout', robust code should handle this possibility.\",\n      \"location\": \"lines 217-220\",\n      \"fix\": \"Add a check to prevent division by zero: `if (amountTotal > 0) { commissionBps = Math.round((platformFee / amountTotal) * 10000); } else { commissionBps = 0; }`.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `console.log` statements are used extensively for debugging and information. While useful during development, in a production environment, these can clutter logs, impact performance, and potentially expose sensitive information. The `structuredLog` function is used, but not consistently.\",\n      \"location\": \"Multiple locations, e.g., lines 40, 48, 59, 159, 237, 269, 299, 304, 347, 372, 396, 421, 422, 423, 442, 443\",\n      \"fix\": \"Replace most `console.log` statements with `structuredLog` calls, ensuring consistent logging practices. Configure `structuredLog` to filter verbosity levels in production to only show warnings and errors, or use a dedicated logging library with proper levels (info, debug, warn, error).\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `db` instance is retrieved using `await getDb()` in almost every handler function. While `getDb` might memoize the database connection, repeatedly calling it adds boilerplate and potential (minor) overhead. It also makes it harder to pass a transactional `db` instance.\",\n      \"location\": \"Multiple locations, e.g., lines 281, 307, 400\",\n      \"fix\": \"Pass the `db` instance as an argument to the handler functions, or refactor `getDb` to ensure it's a singleton and can be easily accessed without `await` if the connection is already established.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Bug\",\n      \"description\": \"In `handleSubscriptionCreated`, the `currentPeriodStart`, `currentPeriodEnd`, `trialStart`, and `trialEnd` fields",
+    "error": "JSON parse failed"
+  },
+  {
+    "file_name": "Auth Context (server/_core/context.ts)",
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 5,
+    "low_count": 2,
+    "top_finding": "The authentication context creation logic is overly complex, leading to potential inconsistencies and difficult debugging. The fallback Manus authentication path can create unexpected behavior.",
+    "findings": [
+      {
+        "severity": "MEDIUM",
+        "category": "Architecture",
+        "description": "The `createContext` function has multiple paths for authentication (`unifiedSession` handling custom/manus, then a `sdk.authenticateRequest` fallback). This creates a complex flow that is hard to reason about and maintain. The `sdk.authenticateRequest` is called inside the `unifiedSession` block AND as a fallback, potentially leading to redundant calls or unexpected order of operations.",
+        "location": "L45-L100",
+        "fix": "Refactor the authentication flow to be more linear and explicit. Prioritize one primary method (e.g., `getUnifiedSessionFromRequest`) and then have a clear, distinct fallback if the primary fails. Avoid calling the same authentication logic (`sdk.authenticateRequest`) in multiple, uncoordinated places. Perhaps `sdk.authenticateRequest` should be the primary mechanism for Manus, and `getUnifiedSessionFromRequest` for custom, with clear separation."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Performance",
+        "description": "The `getDb()` function is awaited at the beginning of every request. While connection pooling might mitigate some overhead, repeatedly awaiting a database connection getter on every single tRPC request can introduce unnecessary latency, especially if `getDb` performs any non-trivial setup or validation.",
+        "location": "L32",
+        "fix": "Ensure `getDb()` is highly optimized and ideally returns an already established connection pool or a promise that resolves instantly if the pool is ready. For serverless environments, this pattern is common, but for long-running Express servers, consider initializing the DB connection once globally and passing it down, or ensuring `getDb` is idempotent and very fast."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `sessionPayload` and `sessionType` variables are reset to `null` if a user is not found for a custom session. However, in the Manus OAuth path, if `sdk.authenticateRequest` fails, `sessionType` is reset to `null` but `sessionPayload` is not explicitly handled or reset, which could lead to an inconsistent state where `sessionPayload` still holds a Manus payload but `sessionType` is null.",
+        "location": "L67-L69, L88-L90",
+        "fix": "Ensure `sessionPayload` and `sessionType` are always kept in a consistent state. If `sessionType` is set to `null`, `sessionPayload` should also be set to `null` to avoid logical inconsistencies. Consider a helper function to reset session state."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Bug",
+        "description": "The `sdk.authenticateRequest(opts.req)` call is made twice in the `createContext` function: once within the `unifiedSession` Manus branch (L80) and again as a general fallback if no user is found (L96). If the first call succeeds, the second call is redundant. If the first call fails and the second succeeds, it means the `unifiedSession` logic might have been flawed or incomplete regarding Manus. This redundancy can lead to unexpected side effects or performance overhead.",
+        "location": "L80, L96",
+        "fix": "Consolidate the Manus authentication logic. If `unifiedSession` is meant to handle Manus, it should be the primary and potentially only place where `sdk.authenticateRequest` is called. If `sdk.authenticateRequest` is a general fallback, it should not be called within the `unifiedSession` Manus branch. Decide on a clear priority and flow for Manus authentication."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Security",
+        "description": "The `sdk.authenticateRequest` function is called as a 'fallback' if no user is found. If `sdk.authenticateRequest` performs a full re-authentication or token refresh process, calling it without a clear indication of why the initial session lookup failed (e.g., token expired vs. token invalid) could be inefficient or potentially open up avenues for session fixation if not handled carefully within `sdk.authenticateRequest` itself.",
+        "location": "L96",
+        "fix": "Review the implementation of `sdk.authenticateRequest`. Ensure it's designed to be safely and efficiently called as a fallback. If it involves re-issuing tokens or extensive network calls, consider if it's truly appropriate as a 'fallback' or if the primary `unifiedSession` logic should be more robust in handling Manus sessions, including refresh mechanisms if applicable."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The console logs are quite verbose and might not be suitable for production environments. While useful for debugging, they can clutter logs and potentially expose sensitive information (like user emails, although in this context it's just for success/failure).",
+        "location": "L64, L76, L82, L88, L98",
+        "fix": "Implement a proper logging solution (e.g., Winston, Pino) with different log levels (debug, info, warn, error). Configure logging to be less verbose in production, perhaps only logging warnings and errors, or specific audit-level events."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `sdk` object is imported but its full path or purpose isn't immediately clear from this file alone. Assuming it's a client for an external service (Manus OAuth), its naming could be more descriptive (e.g., `manusAuthSdk`).",
+        "location": "L3",
+        "fix": "Rename `sdk` to something more descriptive like `manusAuthSdk` or `authServiceSdk` to improve readability and understanding of its role within the application."
+      }
+    ],
+    "overall_assessment": "The authentication context creation is functional but suffers from excessive complexity due to multiple, overlapping authentication paths. This increases the risk of bugs, inconsistent state, and makes the code harder to maintain and debug. Performance could be slightly impacted by repeated DB connection acquisition. A refactor to streamline the authentication flow and ensure consistent state management is recommended."
+  },
+  {
+    "file_name": "App Routes (client/src/App.tsx)",
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 4,
+    "low_count": 3,
+    "top_finding": "The application's routing is highly complex and contains many redundant or overlapping routes, which can lead to maintainability issues and potential unexpected behavior.",
+    "findings": [
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "Multiple routes for the same logical page exist, e.g., `/signup` and `/sign-up`, `/login` and `/sign-in`, `/ecosystem` and `/ecosystem-old`, `/curriculum` and `/curriculum-old`, `/courses` and `/courses-old`. This creates ambiguity, increases maintenance overhead, and can lead to inconsistent user experiences or analytics.",
+        "location": "L168-L170, L172-L173, L178-L179, L188-L189, L190-L191, L250-L251, L340-L341, L343-L344",
+        "fix": "Consolidate redundant routes to a single canonical URL. Implement redirects (301 for SEO) from old/alternative paths to the canonical one. For 'old' versions, consider if they are truly deprecated and can be removed."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Architecture",
+        "description": "The `Router` component is excessively large with 200+ routes defined directly within a single `Switch` statement. This violates the Single Responsibility Principle, makes the file difficult to read and maintain, and can impact performance during route matching, especially with `wouter`'s linear matching.",
+        "location": "L166-L368",
+        "fix": "Refactor the routing into smaller, more manageable modules. For example, create separate route files for `AuthRoutes`, `PublicRoutes`, `LearnerDashboardRoutes`, `CoachDashboardRoutes`, `AdminRoutes`, and `EcosystemRoutes`. These can then be imported and composed within the main `Switch`."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "Many routes for `AppDashboard` and `AdminControlCenter` use a functional component `() => <Component section=\"value\" />` directly in the `Route` prop. While this works, it creates a new function on every render of the `Router` component, which can lead to unnecessary re-renders of the `AppDashboard` or `AdminControlCenter` components even if the `section` prop is the same, due to reference equality.",
+        "location": "L220-L247, L287-L335",
+        "fix": "Memoize these functional components using `useCallback` if they are complex, or ideally, define them outside the render function if they don't capture scope. For `wouter`, a common pattern is to pass the component directly and let the component handle prop parsing, or use `render` prop if available and memoize the render function."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Architecture",
+        "description": "The `DashboardRouter` component is listed as an RBAC-based router, but then there are many explicit routes for `AppDashboard`, `LearnerDashboard`, `CoachDashboard`, `HRDashboard`, and `AdminControlCenter`. This suggests a potential overlap or lack of clear separation in how different dashboard types are routed and rendered. It's unclear if `DashboardRouter` is still fully utilized or if the explicit routes circumvent its logic.",
+        "location": "L218, L249, L279, L282, L287",
+        "fix": "Clarify the role of `DashboardRouter`. If it's meant to be the central entry point for all dashboards, all dashboard-related routes should ideally funnel through it, with `DashboardRouter` being responsible for determining the correct sub-dashboard component based on user role and path. If not, remove `DashboardRouter` and rely solely on explicit routes, ensuring RBAC is handled within the individual dashboard components or a higher-order component."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The use of `@ts-ignore` for `TS1149` on `SignUp` suggests a potential TypeScript configuration or naming conflict issue that has been suppressed rather than resolved. While not critical, it indicates a potential underlying problem that could resurface or cause confusion.",
+        "location": "L152-L153",
+        "fix": "Investigate the root cause of `TS1149`. This error usually relates to file paths or module resolution. Ensure consistent naming conventions (`Signup` vs `SignUp`) and correct import paths. Remove `@ts-ignore` once the issue is properly addressed."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `Router` component contains several 'legacy' or 'old' routes (e.g., `/ecosystem-old`, `/curriculum-old`, `/courses-old`, `/rusingacademy/old`, `/barholex/old`). While they might be for backward compatibility, their continued presence adds to the route complexity and could indicate uncleaned-up technical debt. If these are truly deprecated, they should eventually be removed after appropriate redirects are in place.",
+        "location": "L179, L189, L191, L341, L344",
+        "fix": "Review the usage of these 'old' routes. If they are no longer actively used or have been fully migrated, remove them. If they are for backward compatibility, ensure proper 301 redirects are in place at the server level (or client-side if server control is not possible) and document their deprecation."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The file includes commented-out 'Deploy trigger' lines at the very end. These are likely artifacts from a CI/CD process or local testing and do not belong in the committed source code.",
+        "location": "L414-L415",
+        "fix": "Remove the 'Deploy trigger' comments from the file."
+      }
+    ],
+    "overall_assessment": "The `App.tsx` file serves as the central routing hub for the EcosystemHub platform. While it correctly sets up global providers and an error boundary, the `Router` component is overly complex with a large number of routes, including many redundancies and potentially overlapping dashboard structures. Refactoring the routing logic into smaller, more modular components would significantly improve maintainability and readability."
+  },
+  {
+    "file_name": "Index CSS (client/src/index.css)",
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 4,
+    "low_count": 5,
+    "top_finding": "Overuse of `!important` and high specificity selectors, particularly for color overrides, indicates potential issues with the theming system and Tailwind CSS integration.",
+    "findings": [
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `--color-muted-foreground` variable is explicitly set to pure black (`#000000`) in the base theme, which contradicts the general purpose of 'muted' and might lead to poor contrast on dark backgrounds or in dark mode if not properly overridden. This is then overridden in the high contrast media query, suggesting an inconsistency.",
+        "location": "line 65",
+        "fix": "Review the design system's intent for `--color-muted-foreground`. It should likely be a dynamic color that adapts to the theme (light/dark) or a specific muted shade. If it's meant to be pure black for contrast, this should be explicitly documented and its interaction with dark mode handled systematically, perhaps by using `oklch` or `hsl` for better control."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `@theme inline` block attempts to redefine Tailwind's `--radius-*` variables using themselves (e.g., `--radius-sm: var(--radius-sm);`). This is redundant and has no effect, as it simply assigns a variable to itself. These should either be defined with actual values or removed if Tailwind's defaults are sufficient.",
+        "location": "lines 9-12",
+        "fix": "Remove the redundant `--radius-*` definitions from the `@theme inline` block. If custom radius values are needed, define them directly (e.g., `--radius-sm: 0.125rem;`) or ensure they are correctly sourced from another token file."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "There is an overuse of `!important` declarations, especially for color overrides in sections like `.section-teal`, `.section-dark`, `.coach-card`, and `footer`. This indicates a 'specificity war' and makes the CSS difficult to maintain, override, and debug. It suggests that the theming system or Tailwind's utility-first approach isn't being fully leveraged.",
+        "location": "lines 77, 192, 203, 204, 219-223, 228-232, 237, 241, 245, 335, 340, 345, 350, 351, 356, 357, 439, 443, 448, 453, 458, 463, 468, 473, 478, 483, 488, 493, 498, 503, 508, 513, 518, 523, 528, 533, 538, 543, 548, 553, 558, 563, 568, 573, 578, 583, 588, 593, 598, 603, 608, 613, 618, 623, 628",
+        "fix": "Refactor the CSS to rely more on CSS variables, Tailwind's dark mode variant (`dark:`), or a more structured component-based styling approach. Instead of `!important`, ensure proper cascade order, use more specific selectors where necessary, or adjust the base styles. For example, use `color: var(--text-on-dark-bg);` instead of `color: #ffffff !important;`."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The custom container definitions in `@layer base` override Tailwind's default `.container` behavior. While this is explicitly stated as a 'PERMANENT design rule,' it means that any future updates to Tailwind's default container behavior might be missed or require manual reconciliation. It also duplicates logic that Tailwind's `container` plugin already provides.",
+        "location": "lines 142-162",
+        "fix": "Leverage Tailwind's `container` configuration in `tailwind.config.js` to define custom breakpoints and max-widths. This allows for a more maintainable and idiomatic Tailwind approach, rather than manually overriding in CSS. If the current implementation is strictly necessary, ensure it's well-documented why the config approach was insufficient."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The accessibility utilities for `text-high-contrast`, `text-medium-contrast`, and `text-low-contrast` all apply `text-black dark:text-white` for the first two, which seems redundant or potentially incorrect. `text-low-contrast` also uses a specific hex code for dark mode (`#67E8F9`) which might not align with the broader color token system.",
+        "location": "lines 92-100",
+        "fix": "Review the intended contrast levels for these utilities. Ensure `text-high-contrast` and `text-medium-contrast` have distinct and meaningful styles. For `text-low-contrast` in dark mode, consider using a CSS variable from the token system (e.g., `var(--color-muted)`) for consistency."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `footer` styles explicitly set colors to `#ffffff` and use `!important` for `text-muted-foreground`. This implies that the default theming system or color variables are not effectively reaching the footer, or the footer is designed to always be dark regardless of the main theme. This creates a rigid styling dependency.",
+        "location": "lines 476-488",
+        "fix": "Integrate the footer into the main theming system using CSS variables (e.g., `var(--color-on-footer-bg)`) instead of hardcoding white. If the footer is always dark, define a specific set of variables for it that ensures contrast, and avoid `!important` by ensuring the footer's background sets the context for its text colors."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `coach-card` specific fixes use direct hex codes (`#000000`, `#0f766e`) and `!important` declarations. This bypasses the established color token system and makes it harder to manage the overall design language. The high specificity selectors like `[class*=\"dark:bg-slate\"]` are also brittle.",
+        "location": "lines 436-473",
+        "fix": "Replace direct hex codes with CSS variables from the design system (e.g., `var(--color-text)` or a specific coach-card text variable). Refactor these styles to integrate with Tailwind's dark mode variants and the token system, reducing the need for `!important` and overly specific selectors. Consider defining a `coach-card` theme or a set of variables for it."
+      },
+      {
+        "severity": "LOW",
+        "category": "Architecture",
+        "description": "The `GLOBAL BEAUTIFICATION UTILITIES` section is a large, unstructured block of CSS with comments indicating its purpose. While the intent is clear, grouping such a wide range of utilities (containers, tables, padding, text, glassmorphism, cards, backgrounds, typography, buttons, links, forms, animations, responsive typography, text shadows) under a single 'beautification' umbrella can make it harder to quickly locate specific styles or understand their architectural role.",
+        "location": "lines 130-432",
+        "fix": "Consider further categorizing these utilities into more granular sections or separate files if they grow larger. For example, `_containers.css`, `_typography.css`, `_components.css`, `_effects.css`. This improves modularity and maintainability, especially for a large platform."
+      }
+    ],
+    "overall_assessment": "The `index.css` file demonstrates a strong effort towards a comprehensive design system with accessibility and theming considerations. However, the overuse of `!important` and direct color values, especially in specific component overrides, suggests a 'specificity war' that could lead to maintenance challenges. Refactoring to leverage CSS variables and Tailwind's capabilities more consistently would significantly improve code quality and maintainability."
+  },
+  {
+    "file_name": "Storage S3 (server/storage.ts)",
+    "critical_count": 0,
+    "high_count": 1,
+    "medium_count": 3,
+    "low_count": 2,
+    "top_finding": "The `getStorageConfig` function throws an error in development if environment variables are not set, which might halt the application unnecessarily if the intent is to use Bunny Storage in production and Manus S3 in development.",
+    "findings": [
+      {
+        "severity": "HIGH",
+        "category": "Security",
+        "description": "The `buildAuthHeaders` function directly uses `apiKey` from environment variables without any sanitization or validation. While `Authorization` headers are typically safe, if `apiKey` somehow contained malicious characters or was improperly handled upstream, it could lead to unexpected behavior or injection if the downstream system isn't robust. More critically, the `apiKey` is passed to `buildDownloadUrl` which then makes a `fetch` request. If the `baseUrl` or `relKey` could be manipulated by a malicious actor, this could lead to SSRF (Server-Side Request Forgery) where the server makes requests to internal or unauthorized endpoints.",
+        "location": "Line 51: `function buildAuthHeaders(apiKey: string): HeadersInit { return { Authorization: `Bearer ${apiKey}` }; }` and usage in `buildDownloadUrl` and `storagePut`.",
+        "fix": "Ensure `apiKey` is always treated as a sensitive credential and not exposed or logged. Validate `baseUrl` and `relKey` rigorously before making any `fetch` requests, especially if parts of them can originate from user input. Consider using a dedicated HTTP client that handles credential injection more securely or validating the `baseUrl` against a whitelist of allowed domains."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `getStorageConfig` function throws an `Error` if `BUILT_IN_FORGE_API_URL` or `BUILT_IN_FORGE_API_KEY` are missing. The console error message states, 'This is expected in development. Bunny Storage will be used in production.' However, if the application is running in a development environment where Bunny Storage is *not* configured (e.g., local development without `BUNNY_STORAGE_API_KEY`), and Manus S3 is intended for use, this error will halt the application. This makes local development setup more cumbersome.",
+        "location": "Lines 17-23: `if (!baseUrl || !apiKey) { ... throw new Error(...) }`",
+        "fix": "Refactor `getStorageConfig` to return `null` or `undefined` if credentials are not found, rather than throwing an error. The calling functions (`storagePut`, `storageGet`) should then explicitly check for `null`/`undefined` and handle the fallback logic (e.g., use Bunny Storage or another default) more gracefully. This allows for more flexible environment configurations."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Architecture",
+        "description": "The logic for determining which storage backend to use (`useBunnyStorage()`) is duplicated in both `storagePut` and `storageGet`. While small, this violates the DRY principle and could lead to inconsistencies if the decision logic needs to change in the future.",
+        "location": "Lines 58 and 79: `if (useBunnyStorage()) { ... }`",
+        "fix": "Introduce a higher-order function or a single entry point that encapsulates the storage backend selection. For example, a `getStorageProvider()` function that returns an object with `put` and `get` methods, abstracting away the backend choice."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `toFormData` function uses a type assertion `data as any` for `Blob([data as any], { type: contentType })`. While it might work, it indicates a potential type safety issue or a misunderstanding of `Blob` constructor overloads. `Buffer` and `Uint8Array` are `BlobPart` types and should be directly usable without `any`.",
+        "location": "Line 42: `new Blob([data as any], { type: contentType })`",
+        "fix": "Remove the `as any` type assertion. The `Blob` constructor accepts `BlobPart[]`, and `Buffer` (which is a `Uint8Array` subclass in Node.js) and `Uint8Array` are valid `BlobPart`s. The code should be `new Blob([data], { type: contentType })`."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `console.log` statements for 'Using Bunny Storage' and 'Using Manus S3' are useful for debugging but might be too verbose for production environments. They also reveal implementation details that might not be necessary for general logging.",
+        "location": "Lines 59, 66, 80, 87",
+        "fix": "Consider using a more sophisticated logging library that allows for different log levels (e.g., debug, info, warn, error) and can be configured to suppress debug/info messages in production. Alternatively, wrap these logs in an `if (ENV.NODE_ENV === 'development')` check."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `ensureTrailingSlash` function is simple but could be slightly more robust. If `value` is an empty string, it will return `/`, which might not always be the desired behavior depending on how it's used. While `baseUrl` is unlikely to be empty, it's a minor edge case.",
+        "location": "Line 34: `function ensureTrailingSlash(value: string): string { return value.endsWith('/') ? value : `${value}/`; }`",
+        "fix": "Add an explicit check for an empty string if an empty string input should result in an empty string output, or clarify the expected behavior in documentation. For `baseUrl`, it's likely fine as is."
+      }
+    ],
+    "overall_assessment": "The storage utility provides a clear abstraction for multi-backend storage, which is good for environment-specific configurations. However, it has a high-severity security risk related to potential SSRF due to unvalidated URL components, and several medium-severity issues related to error handling in development and minor code quality concerns. Addressing these issues will improve the robustness, security, and maintainability of the module."
+  },
+  {
+    "file_name": "Activities Router (server/routers/activities.ts)",
+    "raw": "{\n  \"file_name\": \"server/routers/activities.ts\",\n  \"critical_count\": 0,\n  \"high_count\": 1,\n  \"medium_count\": 5,\n  \"low_count\": 6,\n  \"top_finding\": \"The `contentJson` and `contentJsonFr` fields use `z.any()` which bypasses schema validation and could lead to data integrity issues or unexpected behavior.\",\n  \"findings\": [\n    {\n      \"severity\": \"HIGH\",\n      \"category\": \"Security\",\n      \"description\": \"The `contentJson` and `contentJsonFr` fields in `createActivitySchema` and `updateActivitySchema` use `z.any()`. This bypasses all Zod validation for these fields, allowing any arbitrary JSON structure or even non-JSON data to be stored. This can lead to data corruption, unexpected behavior in the frontend, or potential injection vulnerabilities if this content is directly rendered without proper sanitization.\",\n      \"location\": \"L61, L62, L83, L84\",\n      \"fix\": \"Replace `z.any()` with a more specific schema, such as `z.record(z.string(), z.any())` for a generic JSON object, or a more detailed schema if the structure is known. If the content is to be rendered directly, ensure proper sanitization is applied on the client-side to prevent XSS.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Performance\",\n      \"description\": \"The `getById` procedure fetches `prevActivity` and `nextActivity` using separate queries. This results in two additional database calls for each `getById` request. While `LIMIT 1` helps, it's still two separate queries.\",\n      \"location\": \"L159, L170\",\n      \"fix\": \"Consider using window functions (e.g., `LAG`, `LEAD`) if Drizzle ORM supports them efficiently for your database, or refactor to a single query that fetches the current activity along with its neighbors using subqueries or a more complex join if performance becomes an issue on high traffic.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Performance\",\n      \"description\": \"In `completeActivity`, the calculation of `totalActivities` and `completedActivities` for lesson progress involves two separate `COUNT(*)` queries. This could be optimized into a single query using conditional aggregation or a subquery.\",\n      \"location\": \"L280, L287\",\n      \"fix\": \"Combine the two `COUNT` queries into one using a conditional `COUNT` (e.g., `COUNT(CASE WHEN status = 'completed' THEN 1 END)`) or a single join with the `activities` table to get total activities and then count completed ones.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Bug\",\n      \"description\": \"In `completeActivity`, the `totalActivities` count is taken from `activities` where `status = 'published'`. However, `completedActivities` counts from `activityProgress` without filtering by the activity's status. This means a user could complete an 'archived' or 'draft' activity, and it would count towards lesson completion, while the `totalActivities` count would exclude it, leading to incorrect progress calculations.\",\n      \"location\": \"L280, L287\",\n      \"fix\": \"Ensure consistency in filtering. Either both `totalActivities` and `completedActivities` consider only 'published' activities, or both consider all activities regardless of status. The most logical approach for learner progress is usually to only count published activities as part of the total, and only count progress on published activities.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The `assertAdmin` function uses `ctx.user.openId !== process.env.OWNER_OPEN_ID` as an additional check for admin access. While this might be a specific requirement, relying on an environment variable for a single user's ID for admin checks can be less maintainable and scalable than role-based access control. If `OWNER_OPEN_ID` is not set, this check might fail silently or incorrectly.\",\n      \"location\": \"L100\",\n      \"fix\": \"Prefer a purely role-based system (`ctx.user.role === 'admin' || ctx.user.role === 'owner'`). If a super-admin bypass is truly needed, ensure `process.env.OWNER_OPEN_ID` is always present in production environments and consider logging if it's missing. Document this special case clearly.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Security\",\n      \"description\": \"The `embedCode` field in `createActivitySchema` and `updateActivitySchema` is a `z.string().optional()`. If this embed code is directly rendered on the client-side without proper sanitization, it could lead to Cross-Site Scripting (XSS) vulnerabilities, allowing attackers to inject malicious scripts.\",\n      \"location\": \"L60, L82\",\n      \"fix\": \"When rendering `embedCode` on the client-side, ensure it is thoroughly sanitized using a library like `DOMPurify` or rendered within a sandboxed iframe to prevent XSS attacks. The server-side validation should also consider adding length limits or pattern matching if possible, though client-side sanitization is paramount for user-generated content.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `SLOT_TEMPLATE` constant uses `as const` for its array and object types, which is good. However, `type: \\\"introduction\\\" as const` and `activityType: \\\"text\\\" as const` are redundant within the `as const` array, as TypeScript infers literal types for properties of `as const` objects.\",\n      \"location\": \"L20-L26\",\n      \"fix\": \"Remove the redundant `as const` assertions within the `SLOT_TEMPLATE` object properties. For example, `type: \\\"introduction\\\" as const` can just be `type: \\\"introduction\\\"`.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `SLOT_TEMPLATE` defines `defaultMinutes` for each slot, but the `createActivitySchema` uses a generic `estimatedMinutes: z.number().default(5)`. This means new activities created via the API might not respect the slot-specific default minutes defined in `SLOT_TEMPLATE`.\",\n      \"location\": \"L64, L20-L26\",\n      \"fix\": \"When creating an activity, use the `defaultMinutes` from the `SLOT_TEMPLATE` corresponding to the `slotIndex` provided, rather than a fixed default of 5. This could be handled in the service layer or by making `estimatedMinutes` optional and deriving it if not provided.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `getDb()` function is called multiple times within each procedure. While `getDb()` might internally memoize or pool connections, repeated `await getDb()` calls can make the code slightly more verbose and potentially hide performance issues if `getDb()` is not optimized.\",\n      \"location\": \"Multiple occurrences (e.g., L119, L139, L154, L190, L214, L241, L264)\",\n      \"fix\": \"Consider passing the `db` instance through the `ctx` object of tRPC if it's always available, or at least call `const db = await getDb();` once at the beginning of each procedure and reuse the `db` variable.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `getLessonSlots` procedure uses `result.find((a) => a.slotIndex === slot.index)` within a `map` loop. For lessons with many activities, this `find` operation inside a loop can lead to O(N*M) complexity, where N is `SLOT_TEMPLATE.length` and M is `result.length`. While `SLOT_TEMPLATE` is small (7), `result` could grow.\",\n      \"location\": \"L147\",\n      \"fix\": \"For better performance, especially with larger `result` sets, first convert `result` into a `Map` indexed by `slotIndex`. Then, the lookup inside the `map` loop becomes O(1), reducing the overall complexity to O(N+M).\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `completeActivity` mutation updates `lessonProgress` and `courseEnrollments` with `timeSpentSeconds: 0`. This seems incorrect as `timeSpentSeconds` should reflect the actual time spent by the user, which is available in the `input` for `completeActivity`.\",\n      \"location\": \"L316, L319\",\n      \"fix\": \"Pass the",
+    "error": "JSON parse failed"
+  },
+  {
+    "file_name": "SLE Scoring Service (server/services/sleScoringService.ts)",
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 2,
+    "low_count": 4,
+    "top_finding": "The `detectCommonErrors` function uses simple `includes` for pattern matching, which is prone to false positives and lacks robustness for linguistic error detection.",
+    "findings": [
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `detectCommonErrors` function uses a simple `toLowerCase().includes()` for pattern matching. This approach is highly prone to false positives (e.g., detecting 'can' in 'candy') and lacks the sophistication required for accurate linguistic error detection. It will not handle word boundaries, stemming, or more complex grammatical patterns, leading to irrelevant or incorrect error feedback.",
+        "location": "L180: `if (lowerText.includes(patternLower))`",
+        "fix": "Implement a more robust pattern matching mechanism. Consider using regular expressions with word boundaries (`\\b`) for patterns, or integrating a natural language processing (NLP) library for more accurate tokenization and error detection. For example, `new RegExp(`\\\\b${patternLower}\\\\b`).test(lowerText)` for whole word matching."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `LEGACY_KEY_MAP` contains duplicate mappings for `logical_connectors` (e.g., `coherenceOrganization` and `logicalConnectors` both map to `logical_connectors`). While `Math.max` in `normalizeCriterionScores` handles the score aggregation, the duplication itself indicates potential for confusion or redundancy. Also, `languageFunctions` maps to `fluency` and `lexicalRichness` maps to `vocabulary`, which might be subjective interpretations of the original criteria.",
+        "location": "L45-L68: `LEGACY_KEY_MAP`",
+        "fix": "Review the `LEGACY_KEY_MAP` for any redundant or potentially ambiguous mappings. Ensure each legacy key maps to the most appropriate canonical key. Add comments explaining the rationale for specific mappings if they are not immediately obvious."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `console.warn` in `normalizeCriterionScores` might log sensitive information if criterion keys could contain user-supplied data, or it could clutter logs in production environments if unexpected keys are common. While unlikely to be sensitive here, it's a general logging best practice.",
+        "location": "L85: `console.warn(`[SLE Scoring] Unknown criterion key: \"${key}\" — skipping`);`",
+        "fix": "Consider using a more structured logging approach (e.g., a dedicated logger with different levels like `debug`, `info`, `warn`, `error`) that can be configured to be less verbose in production. Ensure no sensitive data can accidentally be logged."
+      },
+      {
+        "severity": "LOW",
+        "category": "Bug",
+        "description": "In `computeSessionScore`, when getting rubric descriptors, the code uses `(critLevel === 'X' ? 'A' : critLevel) as 'A' | 'B' | 'C'`. If `critLevel` is 'X', it defaults to 'A'. However, 'X' indicates a very low score (below 36), which might mean the 'A' rubric descriptor (for high scores) is not the most appropriate feedback. It might be better to have specific descriptors for 'X' or a more general 'needs significant improvement' type of feedback.",
+        "location": "L120: `const rubrics = getRubrics(language, (critLevel === \"X\" ? \"A\" : critLevel) as \"A\" | \"B\" | \"C\");`",
+        "fix": "Review the `getRubrics` logic for 'X' level scores. Either create specific rubric descriptors for 'X' level, or default to a more general 'needs improvement' category instead of 'A' if 'X' implies a very poor performance. This ensures the feedback aligns with the actual performance level."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `generateCriterionFeedback` function has a fallback to 'general' templates if no specific templates are found. However, if `generalTemplates` is also empty, it returns an empty string. This could lead to silent failures where no feedback is provided without any indication.",
+        "location": "L207: `return \"\";`",
+        "fix": "Consider adding a default, very generic feedback message if all template lookups fail. This ensures that the user always receives some form of feedback, even if it's not highly specific. Alternatively, log a warning when an empty string is returned to indicate that feedback generation failed for a specific criterion."
+      },
+      {
+        "severity": "LOW",
+        "category": "Performance",
+        "description": "The `computeRollingAverage` and `hasSustainedLevel` functions create a slice of the `sessionScores` array (`sessionScores.slice(-windowSize)`). While for small `windowSize` and `sessionScores` this is negligible, for very large arrays or frequent calls, this creates a new array in memory. If `sessionScores` is extremely large, this could have a minor performance impact.",
+        "location": "L229: `const window = sessionScores.slice(-windowSize);` and L247: `const window = recentScores.slice(-windowSize);`",
+        "fix": "For extremely performance-sensitive scenarios with very large arrays, consider iterating directly over the last `windowSize` elements without creating a new slice. For most typical use cases, the current approach is acceptable for readability and simplicity."
+      }
+    ],
+    "overall_assessment": "The SLE Scoring Service v2 demonstrates good separation of concerns and includes a thoughtful normalization layer for backward compatibility. The core scoring logic appears sound. Key areas for improvement include enhancing the robustness of error detection and refining the logic for generating feedback, especially for edge cases like very low scores or missing templates, to ensure a consistently high-quality user experience."
+  },
+  {
+    "file_name": "Admin Control Center (server/routers/adminControlCenter.ts)",
+    "raw": "{\n  \"file_name\": \"server/routers/adminControlCenter.ts\",\n  \"critical_count\": 0,\n  \"high_count\": 2,\n  \"medium_count\": 6,\n  \"low_count\": 7,\n  \"top_finding\": \"The extensive use of raw SQL queries without Drizzle ORM's query builder introduces significant SQL injection risks and reduces type safety and maintainability.\",\n  \"findings\": [\n    {\n      \"severity\": \"HIGH\",\n      \"category\": \"Security\",\n      \"description\": \"The `updatePage` mutation constructs an `UPDATE` statement using `sql.raw` and directly interpolates input values. While `vals` array is used for parameters, the `setClause` itself is built by concatenating strings. If `input.title`, `input.slug`, etc., were allowed to contain SQL keywords or malicious characters, it could lead to SQL injection, especially if the `sets` array construction or `vals` array population has a subtle bug or if a future change inadvertently allows direct interpolation into `setClause`.\",\n      \"location\": \"Line 108: `await db.execute(sql.raw(`UPDATE cms_pages SET ${setClause} WHERE id = ${input.id}`));`\",\n      \"fix\": \"Refactor all raw SQL queries to use Drizzle ORM's query builder (e.g., `db.update(cms_pages).set({...}).where(...)`) for type safety and automatic parameter sanitization. If raw SQL is absolutely necessary, ensure all dynamic parts are properly parameterized and never directly concatenated into the query string, especially with `sql.raw`.\"\n    },\n    {\n      \"severity\": \"HIGH\",\n      \"category\": \"Security\",\n      \"description\": \"Several `INSERT` and `UPDATE` statements, particularly in the `cmsRouter` and `settingsRouter`, use `sql` template literals directly. While Drizzle's `sql` tag is generally safe for simple values, complex objects or arrays passed to `JSON.stringify` and then directly into the template could potentially bypass some sanitization if the underlying driver doesn't handle JSON strings as expected, or if the `JSON.stringify` output itself contains characters that could break out of the string literal in the SQL query. This is a common pattern for SQL injection when not using a proper ORM builder.\",\n      \"location\": \"Multiple locations, e.g., Line 43: `VALUES (${input.key}, ${val}, ${input.description ?? null}, ${ctx.user.id})`\",\n      \"fix\": \"Transition all database operations from raw SQL template literals to Drizzle ORM's query builder API. This provides type safety, compile-time checks, and robust SQL injection protection. For JSON data, Drizzle's `jsonb` or `json` column types should be used, allowing the ORM to handle serialization and deserialization securely.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The code repeatedly checks `if (!db) return ...` or `if (!db) throw new TRPCError(...)`. This is redundant and makes the code verbose. The `getDb()` function should ideally ensure a database connection is always available or throw an error itself, or the `db` instance should be provided via context or dependency injection in a way that guarantees its presence.\",\n      \"location\": \"Multiple locations, e.g., Line 20: `if (!db) return {};`\",\n      \"fix\": \"Refactor `getDb()` to throw an error if a connection cannot be established, or integrate a more robust connection management strategy. Alternatively, create a wrapper function or a custom tRPC middleware that handles the `db` availability check once per procedure, rather than at the start of every async function.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The `updateSection` mutation performs multiple individual `UPDATE` statements for each optional field. This is inefficient as it results in N database calls for N updated fields. It also makes the transaction management more complex if atomicity is required across all updates.\",\n      \"location\": \"Lines 200-228: Multiple `await db.execute(sql`UPDATE cms_page_sections SET ...` );` calls.\",\n      \"fix\": \"Consolidate these updates into a single `UPDATE` statement using a dynamic `SET` clause (similar to `updatePage` but with proper parameterization) or, preferably, use Drizzle ORM's `db.update().set({...}).where()` method which handles this efficiently and securely.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Performance\",\n      \"description\": \"The `reorderSections` mutation iterates through `input.sectionIds` and executes an `UPDATE` query for each ID. If there are many sections, this will lead to an N+1 query problem, causing significant performance overhead due to multiple round-trips to the database.\",\n      \"location\": \"Lines 281-285: `for (let i = 0; i < input.sectionIds.length; i++) { await db.execute(...) }`\",\n      \"fix\": \"Implement a single `UPDATE` statement with a `CASE` expression or a similar bulk update mechanism supported by the database (e.g., `UPDATE cms_page_sections SET sortOrder = CASE id WHEN 1 THEN 0 WHEN 2 THEN 1 ... END WHERE id IN (...)`). Drizzle ORM provides ways to construct such bulk updates.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The `getPublicNavigation` procedure performs a loop over menus and then executes a separate query for menu items for each menu. This results in an N+1 query problem if there are many menus, as it makes N+1 database calls (1 for menus, N for their items).\",\n      \"location\": \"Lines 444-450: `for (const menu of menus as any[]) { const [itemRows] = await db.execute(...) }`\",\n      \"fix\": \"Refactor this to use a single JOIN query (e.g., `SELECT * FROM navigation_menus nm LEFT JOIN navigation_menu_items nmi ON nm.id = nmi.menuId WHERE nm.location = ...`) to fetch all menus and their items in one go. Then, process the results in application code to reconstruct the nested structure.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Quality\",\n      \"description\": \"The `restoreVersion` mutation first deletes all existing sections for a page and then inserts new ones from the version snapshot. This is inefficient and potentially disruptive. If the insert fails halfway, the page could end up without any sections.\",\n      \"location\": \"Lines 387-395: `await db.execute(sql`DELETE FROM cms_page_sections WHERE pageId = ${version.pageId}`); for (const section of sections) { await db.execute(sql`INSERT INTO cms_page_sections (...)` )}`\",\n      \"fix\": \"Wrap the delete and insert operations in a database transaction to ensure atomicity. Consider a more efficient update strategy if possible (e.g., identifying changes and performing `UPSERT` or targeted `UPDATE`/`DELETE` instead of a full wipe and recreate). However, for a full restore, a transaction is crucial.\"\n    },\n    {\n      \"severity\": \"MEDIUM\",\n      \"category\": \"Bug\",\n      \"description\": \"In `updatePage`, the `vals` array is built to hold parameters, but the `sql.raw` call directly interpolates the `setClause`. This means the parameters in `vals` are not actually used by the SQL driver for the `setClause` itself. This is a critical SQL injection vulnerability if `setClause` can be manipulated.\",\n      \"location\": \"Line 108: `await db.execute(sql.raw(`UPDATE cms_pages SET ${setClause} WHERE id = ${input.id}`));`\",\n      \"fix\": \"This is a severe bug. The `sql.raw` function should be avoided for dynamic clauses. Instead, build the query using Drizzle's API. If `sql.raw` is unavoidable, the parameters must be passed in the second argument of `db.execute` and referenced in the `sql.raw` string using `?` placeholders. However, the best fix is to use Drizzle's query builder.\"\n    },\n    {\n      \"severity\": \"LOW\",\n      \"category\": \"Quality\",\n      \"description\": \"The `logRevision` call in `updateSection` catches and logs errors but proceeds as if successful. While revision logging might be considered non-critical, silently failing to log important changes could hinder debugging or auditing. The `console.error` is a minimal logging strategy.\",\n      \"location\": \"Lines 234-245: `try { await logRevision(...) } catch (e) { console.error(...) }`\",\n      \"fix\": \"Consider a more robust logging mechanism (e.g., a dedicated logging service) and potentially alerting for revision logging failures if it's deemed important for compliance or auditing. For non-critical operations, this 'best-effort' approach",
+    "error": "JSON parse failed"
+  },
+  {
+    "file_name": "Webhook Idempotency (server/webhookIdempotency.ts)",
+    "critical_count": 0,
+    "high_count": 1,
+    "medium_count": 4,
+    "low_count": 4,
+    "top_finding": "The use of raw SQL queries without Drizzle ORM's type safety and query builder features introduces potential SQL injection risks and reduces maintainability.",
+    "findings": [
+      {
+        "severity": "HIGH",
+        "category": "Security",
+        "description": "The `claimWebhookEvent` function uses `INSERT IGNORE` and subsequent `SELECT` and `UPDATE` statements to handle idempotency. While parameters are used, the reliance on raw SQL queries (`db.execute(sql`...`)`) directly, rather than Drizzle's ORM capabilities, increases the risk of SQL injection if not all inputs are properly sanitized or if the `sql` tag template literal is misused in other parts of the codebase. Although `drizzle-orm`'s `sql` tag is generally safe against direct injection for parameterized values, the pattern encourages raw SQL which can be dangerous if not consistently applied.",
+        "location": "L30, L40, L52, L59, L76, L90, L106, L119, L120, L121, L122, L123, L124",
+        "fix": "Refactor all database interactions to use Drizzle ORM's query builder API. This provides type safety, better readability, and significantly reduces the chance of SQL injection vulnerabilities. For example, instead of `db.execute(sql`...`)`, use `db.insert(webhookEventsLog).values({...}).onConflictDoNothing()` for the insert, and `db.select().from(webhookEventsLog).where(eq(webhookEventsLog.stripeEventId, stripeEventId))` for selects."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Performance",
+        "description": "The `getWebhookEventStats` function executes five separate `COUNT(*)` and `SELECT` queries to retrieve statistics. This results in an N+1 query problem for the stats, where N=4 count queries + 1 recent events query. It would be more efficient to perform these operations in fewer database calls.",
+        "location": "L119-L124",
+        "fix": "Combine the `COUNT(*)` queries into a single query using `GROUP BY status` or conditional aggregation (e.g., `COUNT(CASE WHEN status = 'processed' THEN 1 END)`). The `recentEvents` query can remain separate, but combining the counts will reduce database round trips. Alternatively, if the database supports it, use a single query with subqueries or CTEs."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The `claimWebhookEvent` function uses `INSERT IGNORE` which is a MySQL-specific syntax. This makes the code less portable to other SQL databases (e.g., PostgreSQL) which might use `ON CONFLICT DO NOTHING` or similar constructs. While Drizzle supports various dialects, using a dialect-specific feature directly in `sql` templates limits flexibility.",
+        "location": "L30",
+        "fix": "Utilize Drizzle ORM's `onConflictDoNothing()` method when performing inserts to achieve database-agnostic idempotency for inserts. This will automatically translate to the correct syntax for the configured Drizzle dialect."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Quality",
+        "description": "The type assertion `result as any` and `existing[0] as any` are used frequently, especially when handling query results. This bypasses TypeScript's type checking and can hide potential issues where the actual data structure might differ from expectations. Drizzle ORM's query builder provides strong typing for query results, which is not being leveraged here.",
+        "location": "L34, L43",
+        "fix": "Refactor database interactions to use Drizzle ORM's type-safe query builder. Define Drizzle schemas for `webhook_events_log` and use them to ensure that query results are correctly typed, removing the need for `as any` assertions."
+      },
+      {
+        "severity": "MEDIUM",
+        "category": "Bug",
+        "description": "The `claimWebhookEvent` function has a race condition. If two requests for the same `stripeEventId` arrive almost simultaneously: 1. Both check `INSERT IGNORE`. 2. One succeeds, the other gets `affectedRows === 0`. 3. The one that failed to insert then `SELECT`s and sees `status = 'processing'`. 4. The `SELECT` might happen before the first request updates the status to 'processed'. This could lead to both requests proceeding to process the event, or one incorrectly thinking it's already being processed when it's not. Specifically, if the `SELECT` happens before the first request has updated the status to 'processing' (which happens after the `INSERT`), it might incorrectly think it's a new event.",
+        "location": "L21-L69",
+        "fix": "Implement a more robust locking mechanism or a transactional approach. A common pattern for idempotency is to use `INSERT ... ON CONFLICT DO UPDATE ... RETURNING ...` (PostgreSQL) or a similar atomic operation that claims the event and updates its status in a single, atomic transaction. For MySQL, this might involve a `SELECT ... FOR UPDATE` followed by an `UPDATE` within a transaction, or using an upsert-like pattern that atomically sets the status to 'processing' and increments attempts. Drizzle ORM's `onConflictDoUpdate` can be used for this."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `console.error` calls for database unavailability (`getDb()` returns null) are not ideal for production. While 'fail open' is a valid strategy for idempotency in this context, the error logging should ideally integrate with a proper logging framework (e.g., Winston, Pino) that can capture structured logs, alert on critical issues, and provide context.",
+        "location": "L24, L71, L85, L99",
+        "fix": "Replace `console.error` with a structured logging solution. This allows for better error monitoring, alerting, and debugging in a production environment."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `lastError` field in `markEventFailed` is truncated to 1000 characters using `errorMessage.slice(0, 1000)`. While preventing excessively long strings, this truncation might discard valuable debugging information for complex errors. Consider if 1000 characters is sufficient or if a larger limit or a mechanism to store full error details (e.g., in a separate log file or a dedicated error details column) is needed.",
+        "location": "L93",
+        "fix": "Evaluate the appropriate maximum length for `lastError`. If full error details are critical, consider storing them in a separate, larger text field or a dedicated error logging service. For the current approach, ensure the column in the database can accommodate the specified length."
+      },
+      {
+        "severity": "LOW",
+        "category": "Quality",
+        "description": "The `getDb()` function is awaited multiple times within the same function calls (`claimWebhookEvent`, `markEventProcessed`, `markEventFailed`, `getWebhookEventStats`). While `getDb()` might be memoized, if it performs any asynchronous setup each time, this could lead to unnecessary overhead. It's generally better to await it once and reuse the `db` instance.",
+        "location": "L21, L74, L88, L112",
+        "fix": "Await `getDb()` once at the beginning of each function and store the result in a local variable to reuse it for all subsequent database operations within that function. Example: `const db = await getDb(); if (!db) return;`"
+      },
+      {
+        "severity": "LOW",
+        "category": "Architecture",
+        "description": "The `WebhookEventRecord` interface and `WebhookEventStatus` type are defined manually. When using Drizzle ORM, these types can often be automatically generated or derived from the Drizzle schema definition, ensuring consistency between the code and the database schema.",
+        "location": "L10-L18",
+        "fix": "Define the `webhook_events_log` table using Drizzle ORM's schema definition. Then, use Drizzle's `createSelectSchema` or `createInsertSchema` to generate TypeScript types directly from the schema, ensuring type safety and reducing manual maintenance."
+      }
+    ],
+    "overall_assessment": "The webhook idempotency layer provides a good foundation for preventing duplicate event processing. However, it heavily relies on raw SQL queries, which introduces security risks and reduces maintainability. There are also potential race conditions and performance inefficiencies that should be addressed."
+  }
+]

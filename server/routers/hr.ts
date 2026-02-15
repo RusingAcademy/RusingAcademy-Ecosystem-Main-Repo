@@ -287,46 +287,48 @@ export const hrRouter = router({
         .where(eq(users.email, input.email))
         .limit(1);
       
+      // Wrap user creation + org membership + cohort assignment in a transaction
       let userId: number;
-      
-      if (existingUser) {
-        userId = existingUser.id;
-      } else {
-        // Create new user with invited status
-        const openId = `invited_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        await db.insert(users).values({
-          openId,
-          name: input.name,
-          email: input.email,
+      await db.transaction(async (tx) => {
+        if (existingUser) {
+          userId = existingUser.id;
+        } else {
+          // Create new user with invited status
+          const openId = `invited_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+          await tx.insert(users).values({
+            openId,
+            name: input.name,
+            email: input.email,
+            role: "learner",
+          });
+          
+          const [newUser] = await tx.select()
+            .from(users)
+            .where(eq(users.email, input.email))
+            .limit(1);
+          userId = newUser.id;
+        }
+        
+        // Add to organization
+        await tx.insert(organizationMembers).values({
+          organizationId: input.organizationId,
+          userId,
           role: "learner",
+          status: "invited",
+          invitedAt: new Date(),
+        }).onDuplicateKeyUpdate({
+          set: { status: "invited", invitedAt: new Date() }
         });
         
-        const [newUser] = await db.select()
-          .from(users)
-          .where(eq(users.email, input.email))
-          .limit(1);
-        userId = newUser.id;
-      }
-      
-      // Add to organization
-      await db.insert(organizationMembers).values({
-        organizationId: input.organizationId,
-        userId,
-        role: "learner",
-        status: "invited",
-        invitedAt: new Date(),
-      }).onDuplicateKeyUpdate({
-        set: { status: "invited", invitedAt: new Date() }
+        // Add to cohort if specified
+        if (input.cohortId) {
+          await tx.execute(sql`
+            INSERT INTO cohort_members (cohortId, userId, addedBy, status)
+            VALUES (${input.cohortId}, ${userId}, ${ctx.user.id}, 'active')
+            ON DUPLICATE KEY UPDATE status = 'active'
+          `);
+        }
       });
-      
-      // Add to cohort if specified
-      if (input.cohortId) {
-        await db.execute(sql`
-          INSERT INTO cohort_members (cohortId, userId, addedBy, status)
-          VALUES (${input.cohortId}, ${userId}, ${ctx.user.id}, 'active')
-          ON DUPLICATE KEY UPDATE status = 'active'
-        `);
-      }
       
       // Log action
       await db.execute(sql`
@@ -405,16 +407,16 @@ export const hrRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       
-      const updates: string[] = [];
-      if (input.name) updates.push(`name = '${input.name}'`);
-      if (input.department) updates.push(`department = '${input.department}'`);
-      if (input.status) updates.push(`status = '${input.status}'`);
+      const setClauses: ReturnType<typeof sql>[] = [];
+      if (input.name) setClauses.push(sql`name = ${input.name}`);
+      if (input.department) setClauses.push(sql`department = ${input.department}`);
+      if (input.status) setClauses.push(sql`status = ${input.status}`);
       
-      if (updates.length > 0) {
-        await db.execute(sql.raw(`
-          UPDATE cohorts SET ${updates.join(", ")} 
-          WHERE id = ${input.cohortId} AND organizationId = ${input.organizationId}
-        `));
+      if (setClauses.length > 0) {
+        const setFragment = sql.join(setClauses, sql`, `);
+        await db.execute(
+          sql`UPDATE cohorts SET ${setFragment} WHERE id = ${input.cohortId} AND organizationId = ${input.organizationId}`
+        );
       }
       
       return { success: true };

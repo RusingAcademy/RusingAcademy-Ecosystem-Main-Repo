@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
@@ -202,6 +203,7 @@ export default function Community() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#080a14] via-[#0d1020] to-[#080a14] text-white">
+      <SEO title="Community" description="Join the RusingAcademy learning community. Connect with fellow public servants preparing for SLE exams." canonical="/community" />
       
       
       {/* Hero Section */}
@@ -219,9 +221,9 @@ export default function Community() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/60 mb-6">
               <Users className="w-4 h-4 text-[#17E2C6]" />
-              <span className="text-sm font-medium text-white/80">
+              <span className="text-sm font-medium text-white/90">
                 {language === "en" ? "Join 5,200+ members" : "Rejoignez 5 200+ membres"}
               </span>
             </div>
@@ -238,7 +240,7 @@ export default function Community() {
               )}
             </h1>
 
-            <p className="text-lg text-white/70 mb-8 leading-relaxed">
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
               {language === "en"
                 ? "Connect with fellow public servants, share experiences, attend events, and access exclusive resources on your journey to bilingual excellence."
                 : "Connectez-vous avec d'autres fonctionnaires, partagez vos expériences, participez à des événements et accédez à des ressources exclusives dans votre parcours vers l'excellence bilingue."}
@@ -256,7 +258,7 @@ export default function Community() {
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-white/5 text-white border-white/20 px-8 py-6 text-base font-bold rounded-xl hover:bg-white/10 transition-all"
+                className="bg-white/5 text-white border-white/60 px-8 py-6 text-base font-bold rounded-xl hover:bg-white/10 transition-all"
               >
                 {language === "en" ? "Learn More" : "En savoir plus"}
               </Button>
@@ -273,12 +275,12 @@ export default function Community() {
             {communityStats.map((stat, index) => (
               <div
                 key={index}
-                className="text-center p-6 rounded-2xl bg-white/5 border border-white/10"
+                className="text-center p-6 rounded-2xl bg-white/5 border border-white/60"
               >
                 <div className="text-3xl md:text-4xl font-black text-[#17E2C6] mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-white/60">
+                <div className="text-sm text-white/90">
                   {stat.label[language]}
                 </div>
               </div>
@@ -290,7 +292,7 @@ export default function Community() {
       {/* Tab Navigation */}
       <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-8">
         <div className="flex justify-center">
-          <div className="inline-flex bg-white/5 rounded-2xl p-2 border border-white/10">
+          <div className="inline-flex bg-white/5 rounded-2xl p-2 border border-white/60">
             {[
               { id: "events", icon: Calendar, label: { en: "Events", fr: "Événements" } },
               { id: "forum", icon: MessageSquare, label: { en: "Forum", fr: "Forum" } },
@@ -303,7 +305,7 @@ export default function Community() {
                 className={`flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   activeTab === tab.id
                     ? "bg-[#17E2C6] text-black"
-                    : "text-white/70 hover:text-white hover:bg-white/5"
+                    : "text-white/90 hover:text-white hover:bg-white/5"
                 }`}
               >
                 <tab.icon className="w-4 h-4" aria-hidden="true" />
@@ -346,7 +348,7 @@ export default function Community() {
                     <motion.div
                       key={event.id}
                       whileHover={{ y: -5 }}
-                      className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#17E2C6]/30 transition-all"
+                      className="group relative p-6 rounded-2xl bg-white/5 border border-white/60 hover:border-[#17E2C6]/30 transition-all"
                     >
                       {/* Event type badge */}
                       <div 
@@ -360,11 +362,11 @@ export default function Community() {
                         {language === "en" ? event.title : event.titleFr}
                       </h3>
 
-                      <p className="text-white/60 text-sm mb-4 line-clamp-2">
+                      <p className="text-white/90 text-sm mb-4 line-clamp-2">
                         {language === "en" ? event.description : event.descriptionFr}
                       </p>
 
-                      <div className="flex flex-wrap gap-4 text-sm text-white/80 mb-4">
+                      <div className="flex flex-wrap gap-4 text-sm text-white/90 mb-4">
                         <div className="flex items-center gap-1.5">
                           <Calendar className="w-4 h-4" />
                           {new Date(event.startAt).toLocaleDateString(language === "en" ? "en-CA" : "fr-CA", {
@@ -387,7 +389,7 @@ export default function Community() {
                       <div className="flex items-center justify-between">
                         <div className="text-sm">
                           <span className="text-[#17E2C6] font-bold">{spotsLeft > 0 ? spotsLeft : 0}</span>
-                          <span className="text-white/80"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
+                          <span className="text-white/90"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
                         </div>
                         <Button
                           size="sm"
@@ -435,7 +437,7 @@ export default function Community() {
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/80">
+              <div className="text-center py-20 text-white/90">
                 <Calendar className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No upcoming events at the moment." : "Aucun événement à venir pour le moment."}</p>
               </div>
@@ -482,10 +484,9 @@ export default function Community() {
                   const categoryColor = category.color || "#17E2C6";
                   
                   return (
-                    <motion.div
-                      key={category.id}
+                    <Link key={category.id} href={`/community/category/${category.id}`}>                    <motion.div
                       whileHover={{ y: -5 }}
-                      className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+                      className="group p-6 rounded-2xl bg-white/5 border border-white/60 hover:border-white/60 transition-all cursor-pointer"
                     >
                       <div className="flex items-start gap-4">
                         <div 
@@ -498,22 +499,23 @@ export default function Community() {
                           <h3 className="text-lg font-bold mb-1 group-hover:text-[#17E2C6] transition-colors">
                             {language === "en" ? category.name : category.nameFr}
                           </h3>
-                          <p className="text-white/60 text-sm mb-3">
+                          <p className="text-white/90 text-sm mb-3">
                             {language === "en" ? category.description : category.descriptionFr}
                           </p>
-                          <div className="flex gap-4 text-xs text-white/75">
+                          <div className="flex gap-4 text-xs text-white/90">
                             <span>{category.threadCount || 0} {language === "en" ? "threads" : "fils"}</span>
                             <span>{category.postCount || 0} {language === "en" ? "posts" : "messages"}</span>
                           </div>
                         </div>
-                        <ChevronRight className="w-5 h-5 text-white/75 group-hover:text-[#17E2C6] transition-colors" />
+                        <ChevronRight className="w-5 h-5 text-white/90 group-hover:text-[#17E2C6] transition-colors" />
                       </div>
                     </motion.div>
+                    </Link>
                   );
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/80">
+              <div className="text-center py-20 text-white/90">
                 <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No forum categories available." : "Aucune catégorie de forum disponible."}</p>
               </div>
@@ -530,7 +532,7 @@ export default function Community() {
                 <Globe className="w-5 h-5 text-[#17E2C6]" />
                 {language === "en" ? "Community Guidelines" : "Lignes directrices de la communauté"}
               </h3>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm text-white/70">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm text-white/90">
                 <li className="flex items-start gap-2">
                   <span className="text-[#17E2C6]">•</span>
                   {language === "en" ? "Be respectful and supportive of fellow learners" : "Soyez respectueux et soutenez les autres apprenants"}
@@ -576,7 +578,7 @@ export default function Community() {
                 <motion.div
                   key={resource.id}
                   whileHover={{ y: -5 }}
-                  className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
+                  className="group p-6 rounded-2xl bg-white/5 border border-white/60 hover:border-white/60 transition-all"
                 >
                   <div className="flex items-start gap-4">
                     <div 
@@ -593,18 +595,18 @@ export default function Community() {
                         >
                           {resource.format}
                         </span>
-                        {resource.size && <span className="text-xs text-white/75">{resource.size}</span>}
-                        {resource.duration && <span className="text-xs text-white/75">{resource.duration}</span>}
-                        {resource.episodes && <span className="text-xs text-white/75">{resource.episodes} {language === "en" ? "episodes" : "épisodes"}</span>}
+                        {resource.size && <span className="text-xs text-white/90">{resource.size}</span>}
+                        {resource.duration && <span className="text-xs text-white/90">{resource.duration}</span>}
+                        {resource.episodes && <span className="text-xs text-white/90">{resource.episodes} {language === "en" ? "episodes" : "épisodes"}</span>}
                       </div>
                       <h3 className="text-lg font-bold mb-2 group-hover:text-[#17E2C6] transition-colors">
                         {resource.title[language]}
                       </h3>
-                      <p className="text-white/60 text-sm mb-4">
+                      <p className="text-white/90 text-sm mb-4">
                         {resource.description[language]}
                       </p>
                       <div className="flex items-center justify-between">
-                        <div className="text-xs text-white/75">
+                        <div className="text-xs text-white/90">
                           {resource.downloads && `${resource.downloads.toLocaleString()} ${language === "en" ? "downloads" : "téléchargements"}`}
                           {resource.views && `${resource.views.toLocaleString()} ${language === "en" ? "views" : "vues"}`}
                           {resource.subscribers && `${resource.subscribers.toLocaleString()} ${language === "en" ? "subscribers" : "abonnés"}`}
@@ -649,7 +651,7 @@ export default function Community() {
                   <h3 className="text-2xl font-black mb-2">
                     {language === "en" ? "SLE Success Toolkit" : "Trousse de réussite ELS"}
                   </h3>
-                  <p className="text-white/70 mb-4">
+                  <p className="text-white/90 mb-4">
                     {language === "en"
                       ? "Our comprehensive toolkit includes study guides, practice tests, vocabulary lists, and exam strategies - everything you need to succeed."
                       : "Notre trousse complète comprend des guides d'étude, des tests pratiques, des listes de vocabulaire et des stratégies d'examen - tout ce dont vous avez besoin pour réussir."}
@@ -675,13 +677,13 @@ export default function Community() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center p-12 rounded-3xl bg-gradient-to-r from-white/5 to-white/10 border border-white/10"
+          className="text-center p-12 rounded-3xl bg-gradient-to-r from-white/5 to-white/10 border border-white/60"
         >
           <Heart className="w-12 h-12 text-[#17E2C6] mx-auto mb-4" />
           <h2 className="text-3xl font-black mb-4">
             {language === "en" ? "Ready to Join Our Community?" : "Prêt à rejoindre notre communauté?"}
           </h2>
-          <p className="text-white/70 max-w-2xl mx-auto mb-8">
+          <p className="text-white/90 max-w-2xl mx-auto mb-8">
             {language === "en"
               ? "Connect with thousands of public servants on their bilingual journey. Get support, share experiences, and accelerate your language learning."
               : "Connectez-vous avec des milliers de fonctionnaires dans leur parcours bilingue. Obtenez du soutien, partagez vos expériences et accélérez votre apprentissage des langues."}
@@ -698,7 +700,7 @@ export default function Community() {
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-white/5 text-white border-white/20 px-8 py-6 text-base font-bold rounded-xl hover:bg-white/10 transition-all"
+                className="bg-white/5 text-white border-white/60 px-8 py-6 text-base font-bold rounded-xl hover:bg-white/10 transition-all"
               >
                 {language === "en" ? "Contact Us" : "Nous contacter"}
               </Button>
@@ -721,7 +723,7 @@ export default function Community() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-lg bg-[#0d1020] rounded-2xl border border-white/10 p-6"
+              className="w-full max-w-lg bg-[#0d1020] rounded-2xl border border-white/60 p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
@@ -740,7 +742,7 @@ export default function Community() {
               <div className="space-y-4">
                 {/* Category Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-white/70 mb-2">
+                  <label className="block text-sm font-medium text-white/90 mb-2">
                     {language === "en" ? "Category" : "Catégorie"}
                   </label>
                   <div className="grid grid-cols-2 gap-2">
@@ -752,7 +754,7 @@ export default function Community() {
                         className={`p-3 rounded-xl text-left text-sm transition-all ${
                           selectedCategoryId === category.id
                             ? "bg-[#17E2C6]/20 border-[#17E2C6] border"
-                            : "bg-white/5 border border-white/10 hover:border-white/20"
+                            : "bg-white/5 border border-white/60 hover:border-white/60"
                         }`}
                       >
                         <span className="font-medium">
@@ -765,7 +767,7 @@ export default function Community() {
 
                 {/* Title */}
                 <div>
-                  <label className="block text-sm font-medium text-white/70 mb-2">
+                  <label className="block text-sm font-medium text-white/90 mb-2">
                     {language === "en" ? "Title" : "Titre"}
                   </label>
                   <input
@@ -773,13 +775,13 @@ export default function Community() {
                     value={newThreadTitle}
                     onChange={(e) => setNewThreadTitle(e.target.value)}
                     placeholder={language === "en" ? "What's your question or topic?" : "Quelle est votre question ou sujet?"}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/60 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40"
                   />
                 </div>
 
                 {/* Content */}
                 <div>
-                  <label className="block text-sm font-medium text-white/70 mb-2">
+                  <label className="block text-sm font-medium text-white/90 mb-2">
                     {language === "en" ? "Content" : "Contenu"}
                   </label>
                   <textarea
@@ -787,7 +789,7 @@ export default function Community() {
                     onChange={(e) => setNewThreadContent(e.target.value)}
                     placeholder={language === "en" ? "Share more details..." : "Partagez plus de détails..."}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40 resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/60 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40 resize-none"
                   />
                 </div>
 
@@ -796,7 +798,7 @@ export default function Community() {
                   <Button
                     variant="outline"
                     onClick={() => setShowNewThreadModal(false)}
-                    className="flex-1 bg-white/5 border-white/10 text-white hover:bg-white/10"
+                    className="flex-1 bg-white/5 border-white/60 text-white hover:bg-white/10"
                   >
                     {language === "en" ? "Cancel" : "Annuler"}
                   </Button>

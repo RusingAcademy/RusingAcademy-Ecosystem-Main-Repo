@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -60,6 +61,8 @@ import LearnerCourses from "./pages/LearnerCourses";
 import BookSession from "./pages/BookSession";
 import Organizations from "./pages/Organizations";
 import Community from "./pages/Community";
+import CategoryThreads from "./pages/CategoryThreads";
+import ThreadDetail from "./pages/ThreadDetail";
 import Courses from "./pages/Courses";
 import CoursesPage from "./pages/CoursesPage";
 import CourseDetail from "./pages/CourseDetail";
@@ -136,6 +139,110 @@ import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
 import PWAInstallBanner from "./components/PWAInstallBanner";
 
+// === Learner Portal Pages (Wave 2) ===
+const QuizPage = lazy(() => import("./pages/QuizPage"));
+const LessonViewer = lazy(() => import("./pages/LessonViewer"));
+const PathDetail = lazy(() => import("./pages/PathDetail"));
+const PathList = lazy(() => import("./pages/PathList"));
+const AIAssistant = lazy(() => import("./pages/AIAssistant"));
+const Achievements = lazy(() => import("./pages/Achievements"));
+const AdminCoachHub = lazy(() => import("./pages/AdminCoachHub"));
+const AdminContentPipeline = lazy(() => import("./pages/AdminContentPipeline"));
+const AdminExecutiveSummary = lazy(() => import("./pages/AdminExecutiveSummary"));
+const Authorizations = lazy(() => import("./pages/Authorizations"));
+const Bookmarks = lazy(() => import("./pages/Bookmarks"));
+const CalendarPage = lazy(() => import("./pages/Calendar"));
+const CoachDashboardHome = lazy(() => import("./pages/coach/CoachDashboardHome"));
+const CoachPerformance = lazy(() => import("./pages/coach/CoachPerformance"));
+const CoachRevenue = lazy(() => import("./pages/coach/CoachRevenue"));
+const CoachSessions = lazy(() => import("./pages/coach/CoachSessions"));
+const CoachStudents = lazy(() => import("./pages/coach/CoachStudents"));
+const CommunityForum = lazy(() => import("./pages/CommunityForum"));
+const CulturalImmersion = lazy(() => import("./pages/CulturalImmersion"));
+const DailyReview = lazy(() => import("./pages/DailyReview"));
+const DictationExercises = lazy(() => import("./pages/DictationExercises"));
+const DiscussionBoards = lazy(() => import("./pages/DiscussionBoards"));
+const Flashcards = lazy(() => import("./pages/Flashcards"));
+const GlobalSearch = lazy(() => import("./pages/GlobalSearch"));
+const GrammarDrills = lazy(() => import("./pages/GrammarDrills"));
+const HRBudget = lazy(() => import("./pages/hr/HRBudget"));
+const HRCohorts = lazy(() => import("./pages/hr/HRCohorts"));
+const HRCompliance = lazy(() => import("./pages/hr/HRCompliance"));
+const HRDashboardHome = lazy(() => import("./pages/hr/HRDashboardHome"));
+const HRTeam = lazy(() => import("./pages/hr/HRTeam"));
+const Help = lazy(() => import("./pages/Help"));
+const LearningMaterials = lazy(() => import("./pages/LearningMaterials"));
+const ListeningLab = lazy(() => import("./pages/ListeningLab"));
+const MockSLEExam = lazy(() => import("./pages/MockSLEExam"));
+const MyProfile = lazy(() => import("./pages/MyProfile"));
+const MySettings = lazy(() => import("./pages/MySettings"));
+const Notes = lazy(() => import("./pages/Notes"));
+const Notifications = lazy(() => import("./pages/Notifications"));
+const OnboardingWizard = lazy(() => import("./pages/OnboardingWizard"));
+const PeerReview = lazy(() => import("./pages/PeerReview"));
+const PortalComingSoon = lazy(() => import("./pages/PortalComingSoon"));
+const ProgramSelect = lazy(() => import("./pages/ProgramSelect"));
+const Progress = lazy(() => import("./pages/Progress"));
+const ProgressAnalytics = lazy(() => import("./pages/ProgressAnalytics"));
+const PronunciationLab = lazy(() => import("./pages/PronunciationLab"));
+const ReadingLab = lazy(() => import("./pages/ReadingLab"));
+const Reports = lazy(() => import("./pages/Reports"));
+const Results = lazy(() => import("./pages/Results"));
+const StudyGroups = lazy(() => import("./pages/StudyGroups"));
+const StudyPlanner = lazy(() => import("./pages/StudyPlanner"));
+const TutoringSessions = lazy(() => import("./pages/TutoringSessions"));
+const Vocabulary = lazy(() => import("./pages/Vocabulary"));
+const WeeklyChallenges = lazy(() => import("./pages/WeeklyChallenges"));
+const WritingPortfolio = lazy(() => import("./pages/WritingPortfolio"));
+
+// === Community Pages (Wave 3) ===
+const Certificates = lazy(() => import("./pages/Certificates"));
+const Channels = lazy(() => import("./pages/Channels"));
+const CourseBuilder = lazy(() => import("./pages/CourseBuilder"));
+const CourseCatalog = lazy(() => import("./pages/CourseCatalog"));
+const CoursePlayer = lazy(() => import("./pages/CoursePlayer"));
+const EmailBroadcasts = lazy(() => import("./pages/EmailBroadcasts"));
+const Membership = lazy(() => import("./pages/Membership"));
+const Moderation = lazy(() => import("./pages/Moderation"));
+const RevenueDashboard = lazy(() => import("./pages/RevenueDashboard"));
+const SearchResults = lazy(() => import("./pages/SearchResults"));
+const AcctAccountRegister = lazy(() => import("./pages/accounting/AccountRegister"));
+const AcctAgingReport = lazy(() => import("./pages/accounting/AgingReport"));
+const AcctAuditLog = lazy(() => import("./pages/accounting/AuditLog"));
+const AcctAuditTrail = lazy(() => import("./pages/accounting/AuditTrail"));
+const AcctBalanceSheetReport = lazy(() => import("./pages/accounting/BalanceSheetReport"));
+const AcctBankRules = lazy(() => import("./pages/accounting/BankRules"));
+const AcctBankTransactions = lazy(() => import("./pages/accounting/BankTransactions"));
+const AcctBills = lazy(() => import("./pages/accounting/Bills"));
+const AcctChartOfAccounts = lazy(() => import("./pages/accounting/ChartOfAccounts"));
+const AcctCustomerDetail = lazy(() => import("./pages/accounting/CustomerDetail"));
+const AcctCustomers = lazy(() => import("./pages/accounting/Customers"));
+const AcctDeposits = lazy(() => import("./pages/accounting/Deposits"));
+const AcctEmailTemplates = lazy(() => import("./pages/accounting/EmailTemplates"));
+const AcctEstimates = lazy(() => import("./pages/accounting/Estimates"));
+const AcctExchangeRates = lazy(() => import("./pages/accounting/ExchangeRates"));
+const AcctExpenseDetail = lazy(() => import("./pages/accounting/ExpenseDetail"));
+const AcctExpenses = lazy(() => import("./pages/accounting/Expenses"));
+const AcctGeneralLedgerReport = lazy(() => import("./pages/accounting/GeneralLedgerReport"));
+const AcctInvoiceDetail = lazy(() => import("./pages/accounting/InvoiceDetail"));
+const AcctInvoicePdf = lazy(() => import("./pages/accounting/InvoicePdf"));
+const AcctInvoices = lazy(() => import("./pages/accounting/Invoices"));
+const AcctJournalEntries = lazy(() => import("./pages/accounting/JournalEntries"));
+const AcctProductDetail = lazy(() => import("./pages/accounting/ProductDetail"));
+const AcctProductsServices = lazy(() => import("./pages/accounting/ProductsServices"));
+const AcctProfitLossReport = lazy(() => import("./pages/accounting/ProfitLossReport"));
+const AcctReconciliation = lazy(() => import("./pages/accounting/Reconciliation"));
+const AcctReconciliationWorkspace = lazy(() => import("./pages/accounting/ReconciliationWorkspace"));
+const AcctRecurringTransactions = lazy(() => import("./pages/accounting/RecurringTransactions"));
+const AcctReports = lazy(() => import("./pages/accounting/Reports"));
+const AcctSalesTax = lazy(() => import("./pages/accounting/SalesTax"));
+const AcctSettings = lazy(() => import("./pages/accounting/Settings"));
+const AcctSupplierDetail = lazy(() => import("./pages/accounting/SupplierDetail"));
+const AcctSuppliers = lazy(() => import("./pages/accounting/Suppliers"));
+const AcctTrialBalanceReport = lazy(() => import("./pages/accounting/TrialBalanceReport"));
+const LibraryPage = lazy(() => import("./pages/Library"));
+const BookLandingPage = lazy(() => import("./pages/BookLandingPage"));
+
 function Router() {
   // Track page views on route changes
   usePageTracking();
@@ -201,6 +308,8 @@ function Router() {
       <Route path="/for-business" component={ForBusiness} />
       <Route path="/organizations" component={Organizations} />
       <Route path="/community" component={Community} />
+      <Route path="/community/category/:id" component={CategoryThreads} />
+      <Route path="/community/thread/:id" component={ThreadDetail} />
       
       {/* SLE Diagnostic Page */}
       <Route path="/sle-diagnostic" component={SLEDiagnostic} />
@@ -306,6 +415,7 @@ function Router() {
       <Route path="/admin/coaches">{() => <AdminControlCenter section="coaches" />}</Route>
       <Route path="/admin/coaching">{() => <AdminControlCenter section="coaches" />}</Route>
       <Route path="/admin/courses">{() => <AdminControlCenter section="courses" />}</Route>
+      <Route path="/admin/products">{() => <AdminControlCenter section="all-products" />}</Route>
       <Route path="/admin/pricing">{() => <AdminControlCenter section="pricing" />}</Route>
       <Route path="/admin/coupons">{() => <AdminControlCenter section="coupons" />}</Route>
       <Route path="/admin/crm">{() => <AdminControlCenter section="crm" />}</Route>
@@ -340,6 +450,36 @@ function Router() {
       <Route path="/admin/reviews">{() => <AdminControlCenter section="reviews" />}</Route>
       <Route path="/admin/certificates">{() => <AdminControlCenter section="certificates" />}</Route>
       <Route path="/admin/gamification">{() => <AdminControlCenter section="gamification" />}</Route>
+
+      {/* ═══ Kajabi Integration — New Admin Routes ═══ */}
+      {/* Products */}
+      <Route path="/admin/all-products">{() => <AdminControlCenter section="all-products" />}</Route>
+      <Route path="/admin/podcasts">{() => <AdminControlCenter section="podcasts" />}</Route>
+      <Route path="/admin/newsletters">{() => <AdminControlCenter section="newsletters" />}</Route>
+      <Route path="/admin/downloads">{() => <AdminControlCenter section="downloads" />}</Route>
+      <Route path="/admin/community">{() => <AdminControlCenter section="community" />}</Route>
+      {/* Sales */}
+      <Route path="/admin/payments">{() => <AdminControlCenter section="payments" />}</Route>
+      <Route path="/admin/offers">{() => <AdminControlCenter section="offers" />}</Route>
+      <Route path="/admin/cart">{() => <AdminControlCenter section="cart" />}</Route>
+      <Route path="/admin/invoices">{() => <AdminControlCenter section="invoices" />}</Route>
+      <Route path="/admin/affiliates">{() => <AdminControlCenter section="affiliates" />}</Route>
+      {/* Website */}
+      <Route path="/admin/design">{() => <AdminControlCenter section="design" />}</Route>
+      <Route path="/admin/navigation">{() => <AdminControlCenter section="navigation" />}</Route>
+      <Route path="/admin/blog">{() => <AdminControlCenter section="blog" />}</Route>
+      {/* Marketing */}
+      <Route path="/admin/marketing">{() => <AdminControlCenter section="marketing" />}</Route>
+      <Route path="/admin/inbox">{() => <AdminControlCenter section="inbox" />}</Route>
+      <Route path="/admin/forms">{() => <AdminControlCenter section="forms" />}</Route>
+      <Route path="/admin/events">{() => <AdminControlCenter section="events" />}</Route>
+      {/* Contacts */}
+      <Route path="/admin/contacts">{() => <AdminControlCenter section="contacts" />}</Route>
+      <Route path="/admin/contact-insights">{() => <AdminControlCenter section="contact-insights" />}</Route>
+      <Route path="/admin/assessments">{() => <AdminControlCenter section="assessments" />}</Route>
+      {/* Analytics */}
+      <Route path="/admin/reports">{() => <AdminControlCenter section="reports" />}</Route>
+
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />
@@ -373,11 +513,139 @@ function Router() {
       <Route path="/p/:slug" component={CMSPage} />
 
       {/* Error Pages */}
-      <Route path="/404" component={NotFound} />
+
+
+          {/* === Community Routes (Wave 3) === */}
+          <Route path="/channels">{() => <Suspense fallback={<div>Loading...</div>}><Channels /></Suspense>}</Route>
+          <Route path="/certificates">{() => <Suspense fallback={<div>Loading...</div>}><Certificates /></Suspense>}</Route>
+          <Route path="/email-broadcasts">{() => <Suspense fallback={<div>Loading...</div>}><EmailBroadcasts /></Suspense>}</Route>
+          <Route path="/revenue">{() => <Suspense fallback={<div>Loading...</div>}><RevenueDashboard /></Suspense>}</Route>
+          <Route path="/membership">{() => <Suspense fallback={<div>Loading...</div>}><Membership /></Suspense>}</Route>
+          <Route path="/moderation">{() => <Suspense fallback={<div>Loading...</div>}><Moderation /></Suspense>}</Route>
+          <Route path="/courses/:id">{() => <Suspense fallback={<div>Loading...</div>}><CoursePlayer /></Suspense>}</Route>
+          <Route path="/admin/courses/new">{() => <Suspense fallback={<div>Loading...</div>}><CourseBuilder /></Suspense>}</Route>
+          <Route path="/admin/courses/:id/edit">{() => <Suspense fallback={<div>Loading...</div>}><CourseBuilder /></Suspense>}</Route>
+          {/* === Learner Portal Routes (Wave 2) === */}
+          <Route path="/achievements">{() => <Suspense fallback={<div>Loading...</div>}><Achievements /></Suspense>}</Route>
+          <Route path="/ai-assistant">{() => <Suspense fallback={<div>Loading...</div>}><AIAssistant /></Suspense>}</Route>
+          <Route path="/authorizations">{() => <Suspense fallback={<div>Loading...</div>}><Authorizations /></Suspense>}</Route>
+          <Route path="/bookmarks">{() => <Suspense fallback={<div>Loading...</div>}><Bookmarks /></Suspense>}</Route>
+          <Route path="/calendar">{() => <Suspense fallback={<div>Loading...</div>}><CalendarPage /></Suspense>}</Route>
+          <Route path="/community-forum">{() => <Suspense fallback={<div>Loading...</div>}><CommunityForum /></Suspense>}</Route>
+          <Route path="/cultural-immersion">{() => <Suspense fallback={<div>Loading...</div>}><CulturalImmersion /></Suspense>}</Route>
+          <Route path="/daily-review">{() => <Suspense fallback={<div>Loading...</div>}><DailyReview /></Suspense>}</Route>
+          <Route path="/dictation">{() => <Suspense fallback={<div>Loading...</div>}><DictationExercises /></Suspense>}</Route>
+          <Route path="/discussions">{() => <Suspense fallback={<div>Loading...</div>}><DiscussionBoards /></Suspense>}</Route>
+          <Route path="/flashcards">{() => <Suspense fallback={<div>Loading...</div>}><Flashcards /></Suspense>}</Route>
+          <Route path="/grammar-drills">{() => <Suspense fallback={<div>Loading...</div>}><GrammarDrills /></Suspense>}</Route>
+          <Route path="/help">{() => <Suspense fallback={<div>Loading...</div>}><Help /></Suspense>}</Route>
+          <Route path="/learning-materials">{() => <Suspense fallback={<div>Loading...</div>}><LearningMaterials /></Suspense>}</Route>
+          <Route path="/listening-lab">{() => <Suspense fallback={<div>Loading...</div>}><ListeningLab /></Suspense>}</Route>
+          <Route path="/mock-sle">{() => <Suspense fallback={<div>Loading...</div>}><MockSLEExam /></Suspense>}</Route>
+          <Route path="/notes">{() => <Suspense fallback={<div>Loading...</div>}><Notes /></Suspense>}</Route>
+          <Route path="/notifications">{() => <Suspense fallback={<div>Loading...</div>}><Notifications /></Suspense>}</Route>
+          <Route path="/onboarding">{() => <Suspense fallback={<div>Loading...</div>}><OnboardingWizard /></Suspense>}</Route>
+          <Route path="/peer-review">{() => <Suspense fallback={<div>Loading...</div>}><PeerReview /></Suspense>}</Route>
+          <Route path="/profile">{() => <Suspense fallback={<div>Loading...</div>}><MyProfile /></Suspense>}</Route>
+          <Route path="/programs">{() => <Suspense fallback={<div>Loading...</div>}><ProgramSelect /></Suspense>}</Route>
+          <Route path="/pronunciation-lab">{() => <Suspense fallback={<div>Loading...</div>}><PronunciationLab /></Suspense>}</Route>
+          <Route path="/reading-lab">{() => <Suspense fallback={<div>Loading...</div>}><ReadingLab /></Suspense>}</Route>
+          <Route path="/reports">{() => <Suspense fallback={<div>Loading...</div>}><Reports /></Suspense>}</Route>
+          <Route path="/results">{() => <Suspense fallback={<div>Loading...</div>}><Results /></Suspense>}</Route>
+          <Route path="/search">{() => <Suspense fallback={<div>Loading...</div>}><GlobalSearch /></Suspense>}</Route>
+          <Route path="/study-groups">{() => <Suspense fallback={<div>Loading...</div>}><StudyGroups /></Suspense>}</Route>
+          <Route path="/study-planner">{() => <Suspense fallback={<div>Loading...</div>}><StudyPlanner /></Suspense>}</Route>
+          <Route path="/tutoring-sessions">{() => <Suspense fallback={<div>Loading...</div>}><TutoringSessions /></Suspense>}</Route>
+          <Route path="/vocabulary">{() => <Suspense fallback={<div>Loading...</div>}><Vocabulary /></Suspense>}</Route>
+          <Route path="/writing-portfolio">{() => <Suspense fallback={<div>Loading...</div>}><WritingPortfolio /></Suspense>}</Route>
+          <Route path="/analytics">{() => <Suspense fallback={<div>Loading...</div>}><ProgressAnalytics /></Suspense>}</Route>
+          <Route path="/challenges">{() => <Suspense fallback={<div>Loading...</div>}><WeeklyChallenges /></Suspense>}</Route>
+          <Route path="/coach/portal">{() => <Suspense fallback={<div>Loading...</div>}><CoachDashboardHome /></Suspense>}</Route>
+          <Route path="/coach/students">{() => <Suspense fallback={<div>Loading...</div>}><CoachStudents /></Suspense>}</Route>
+          <Route path="/coach/sessions">{() => <Suspense fallback={<div>Loading...</div>}><CoachSessions /></Suspense>}</Route>
+          <Route path="/coach/revenue">{() => <Suspense fallback={<div>Loading...</div>}><CoachRevenue /></Suspense>}</Route>
+          <Route path="/coach/performance">{() => <Suspense fallback={<div>Loading...</div>}><CoachPerformance /></Suspense>}</Route>
+          <Route path="/hr/portal">{() => <Suspense fallback={<div>Loading...</div>}><HRDashboardHome /></Suspense>}</Route>
+          <Route path="/hr/portal/dashboard">{() => <Suspense fallback={<div>Loading...</div>}><HRDashboardHome /></Suspense>}</Route>
+          <Route path="/hr/portal/team">{() => <Suspense fallback={<div>Loading...</div>}><HRTeam /></Suspense>}</Route>
+          <Route path="/hr/portal/cohorts">{() => <Suspense fallback={<div>Loading...</div>}><HRCohorts /></Suspense>}</Route>
+          <Route path="/hr/portal/budget">{() => <Suspense fallback={<div>Loading...</div>}><HRBudget /></Suspense>}</Route>
+          <Route path="/hr/portal/compliance">{() => <Suspense fallback={<div>Loading...</div>}><HRCompliance /></Suspense>}</Route>
+          <Route path="/hr/team">{() => <Suspense fallback={<div>Loading...</div>}><HRTeam /></Suspense>}</Route>
+          <Route path="/hr/cohorts">{() => <Suspense fallback={<div>Loading...</div>}><HRCohorts /></Suspense>}</Route>
+          <Route path="/admin/content-pipeline">{() => <Suspense fallback={<div>Loading...</div>}><AdminContentPipeline /></Suspense>}</Route>
+          <Route path="/programs/:programId">{() => <Suspense fallback={<div>Loading...</div>}><PathList /></Suspense>}</Route>
+          <Route path="/programs/:programId/:pathId">{() => <Suspense fallback={<div>Loading...</div>}><PathDetail /></Suspense>}</Route>
+          <Route path="/programs/:programId/:pathId/quiz/:quizId">{() => <Suspense fallback={<div>Loading...</div>}><QuizPage /></Suspense>}</Route>
+          <Route path="/programs/:programId/:pathId/:lessonId">{() => <Suspense fallback={<div>Loading...</div>}><LessonViewer /></Suspense>}</Route>
+                <Route path="/accounting" component={AcctInvoices} />
+          <Route path="/accounting/accounts/:id/register" component={AcctAccountRegister} />
+          <Route path="/accounting/reports/aging" component={AcctAgingReport} />
+          <Route path="/accounting/audit-log" component={AcctAuditLog} />
+          <Route path="/accounting/audit-trail" component={AcctAuditTrail} />
+          <Route path="/accounting/reports/balance-sheet" component={AcctBalanceSheetReport} />
+          <Route path="/accounting/bank-rules" component={AcctBankRules} />
+          <Route path="/accounting/bank-transactions" component={AcctBankTransactions} />
+          <Route path="/accounting/bills" component={AcctBills} />
+          <Route path="/accounting/chart-of-accounts" component={AcctChartOfAccounts} />
+          <Route path="/accounting/customers/:id" component={AcctCustomerDetail} />
+          <Route path="/accounting/customers" component={AcctCustomers} />
+          <Route path="/accounting/deposits" component={AcctDeposits} />
+          <Route path="/accounting/email-templates" component={AcctEmailTemplates} />
+          <Route path="/accounting/estimates" component={AcctEstimates} />
+          <Route path="/accounting/exchange-rates" component={AcctExchangeRates} />
+          <Route path="/accounting/expenses/:id" component={AcctExpenseDetail} />
+          <Route path="/accounting/expenses" component={AcctExpenses} />
+          <Route path="/accounting/reports/general-ledger" component={AcctGeneralLedgerReport} />
+          <Route path="/accounting/invoices/:id" component={AcctInvoiceDetail} />
+          <Route path="/accounting/invoices/:id/pdf" component={AcctInvoicePdf} />
+          <Route path="/accounting/invoices" component={AcctInvoices} />
+          <Route path="/accounting/journal-entries" component={AcctJournalEntries} />
+          <Route path="/accounting/products/:id" component={AcctProductDetail} />
+          <Route path="/accounting/products-services" component={AcctProductsServices} />
+          <Route path="/accounting/reports/profit-and-loss" component={AcctProfitLossReport} />
+          <Route path="/accounting/reconciliation" component={AcctReconciliation} />
+          <Route path="/accounting/reconciliation/workspace" component={AcctReconciliationWorkspace} />
+          <Route path="/accounting/recurring" component={AcctRecurringTransactions} />
+          <Route path="/accounting/reports" component={AcctReports} />
+          <Route path="/accounting/sales-tax" component={AcctSalesTax} />
+          <Route path="/accounting/settings" component={AcctSettings} />
+          <Route path="/accounting/suppliers/:id" component={AcctSupplierDetail} />
+          <Route path="/accounting/suppliers" component={AcctSuppliers} />
+          <Route path="/accounting/reports/trial-balance" component={AcctTrialBalanceReport} />
+          <Route path="/library" component={LibraryPage} />
+          <Route path="/library/books/:slug" component={BookLandingPage} />
+<Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
+}
+
+// Handle post-login redirect from localStorage + messageCoachAfterLogin from sessionStorage
+function PostLoginRedirect() {
+  useEffect(() => {
+    // 1. Check for general post-login redirect
+    const redirect = localStorage.getItem("postLoginRedirect");
+    if (redirect) {
+      localStorage.removeItem("postLoginRedirect");
+      setTimeout(() => {
+        window.location.href = redirect;
+      }, 100);
+      return;
+    }
+    // 2. Check for "Message Coach" post-login flow
+    const coachUserId = sessionStorage.getItem("messageCoachAfterLogin");
+    if (coachUserId) {
+      sessionStorage.removeItem("messageCoachAfterLogin");
+      // Redirect to messages with autostart flag — the Messages page will
+      // call startConversation and auto-select the conversation
+      setTimeout(() => {
+        window.location.href = `/messages?coachUserId=${coachUserId}&autostart=1`;
+      }, 200);
+    }
+  }, []);
+  return null;
 }
 
 function App() {
@@ -390,6 +658,7 @@ function App() {
               <NotificationProvider>
                 <GamificationProvider>
                   <Toaster />
+                  <PostLoginRedirect />
                   {/* Skip link for keyboard navigation accessibility */}
                   <a href="#main-content" className="skip-link">
                     Skip to main content

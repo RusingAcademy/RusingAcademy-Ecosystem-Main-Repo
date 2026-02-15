@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
@@ -26,6 +26,8 @@ import { formatDistanceToNow, format, isToday, isYesterday } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useSearch } from "wouter";
+import { toast } from "sonner";
 
 interface Conversation {
   id: number;
@@ -62,6 +64,16 @@ export default function Messages() {
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const searchStr = useSearch();
+  const params = new URLSearchParams(searchStr);
+  const conversationIdFromUrl = params.get('conversation');
+  const coachUserIdFromUrl = params.get('coachUserId');
+  const autostartFromUrl = params.get('autostart');
+  const [autoSelectedOnce, setAutoSelectedOnce] = useState(false);
+  const [autostartDone, setAutostartDone] = useState(false);
+
+  // startConversation mutation for autostart flow
+  const startConversationMutation = trpc.message.startConversation.useMutation();
 
   // Fetch conversations with polling for real-time updates
   const { data: conversations, isLoading: conversationsLoading, refetch: refetchConversations } = 
@@ -87,6 +99,9 @@ export default function Messages() {
       refetchMessages();
       refetchConversations();
     },
+    onError: (err) => {
+      toast.error(isEn ? 'Failed to send message. Please try again.' : 'Échec de l\'envoi du message. Veuillez réessayer.');
+    },
   });
 
   // Mark as read mutation
@@ -100,6 +115,56 @@ export default function Messages() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Auto-select conversation from URL query param (e.g. /messages?conversation=5)
+  useEffect(() => {
+    if (conversationIdFromUrl && conversations && !autoSelectedOnce) {
+      const convId = parseInt(conversationIdFromUrl, 10);
+      const conv = (conversations as unknown as Conversation[]).find(c => c.id === convId);
+      if (conv) {
+        setSelectedConversation(conv);
+        setAutoSelectedOnce(true);
+      }
+    }
+  }, [conversationIdFromUrl, conversations, autoSelectedOnce]);
+
+  // Post-login autostart: /messages?coachUserId=123&autostart=1
+  // Creates or finds existing conversation with the coach, then auto-selects it
+  useEffect(() => {
+    if (!coachUserIdFromUrl || !autostartFromUrl || !isAuthenticated || autostartDone) return;
+    if (conversationsLoading) return; // Wait for conversations to load first
+
+    const coachId = parseInt(coachUserIdFromUrl, 10);
+    if (isNaN(coachId)) return;
+
+    setAutostartDone(true);
+
+    // Check if conversation already exists with this coach
+    const existingConv = (conversations as unknown as Conversation[] | undefined)?.find(
+      c => c.participantId === coachId
+    );
+
+    if (existingConv) {
+      setSelectedConversation(existingConv);
+      return;
+    }
+
+    // No existing conversation — create one
+    startConversationMutation.mutateAsync({ participantId: coachId })
+      .then((conv) => {
+        refetchConversations().then((result) => {
+          const newConv = (result.data as unknown as Conversation[] | undefined)?.find(
+            c => c.id === conv.id
+          );
+          if (newConv) {
+            setSelectedConversation(newConv);
+          }
+        });
+      })
+      .catch(() => {
+        toast.error(isEn ? 'Failed to start conversation with this coach.' : 'Échec de la création de la conversation avec ce coach.');
+      });
+  }, [coachUserIdFromUrl, autostartFromUrl, isAuthenticated, conversations, conversationsLoading, autostartDone]);
 
   // Mark messages as read when conversation is selected
   useEffect(() => {
@@ -179,11 +244,11 @@ export default function Messages() {
         <main className="container mx-auto px-4 py-16">
           <Card className="max-w-md mx-auto">
             <CardContent className="p-8 text-center">
-              <MessageSquare className="h-12 w-12 mx-auto mb-4 text-slate-900 dark:text-slate-100" />
+              <MessageSquare className="h-12 w-12 mx-auto mb-4 text-black dark:text-white" />
               <h2 className="text-xl font-semibold mb-2">
                 {isEn ? "Sign in to view messages" : "Connectez-vous pour voir les messages"}
               </h2>
-              <p className="text-slate-900 dark:text-slate-100 mb-4">
+              <p className="text-black dark:text-white mb-4">
                 {isEn 
                   ? "You need to be signed in to access your messages."
                   : "Vous devez être connecté pour accéder à vos messages."}
@@ -210,7 +275,7 @@ export default function Messages() {
             <h1 className="text-3xl font-bold mb-2">
               {isEn ? "Messages" : "Messages"}
             </h1>
-            <p className="text-slate-900 dark:text-slate-100">
+            <p className="text-black dark:text-white">
               {isEn 
                 ? "Communicate with your coaches and learners"
                 : "Communiquez avec vos coachs et apprenants"}
@@ -228,7 +293,7 @@ export default function Messages() {
                 {/* Search & Filter Header */}
                 <div className="p-4 border-b space-y-3">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-900 dark:text-slate-100" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black dark:text-white" />
                     <Input
                       placeholder={isEn ? "Search conversations..." : "Rechercher..."}
                       value={searchQuery}
@@ -270,10 +335,10 @@ export default function Messages() {
                 <ScrollArea className="flex-1">
                   {conversationsLoading ? (
                     <div className="flex items-center justify-center py-8">
-                      <Loader2 className="h-6 w-6 animate-spin text-slate-900 dark:text-slate-100" />
+                      <Loader2 className="h-6 w-6 animate-spin text-black dark:text-white" />
                     </div>
                   ) : filteredConversations.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-8 text-slate-900 dark:text-slate-100">
+                    <div className="flex flex-col items-center justify-center py-8 text-black dark:text-white">
                       <MessageSquare className="h-8 w-8 mb-2 opacity-50" />
                       <p className="text-sm">
                         {searchQuery 
@@ -304,12 +369,12 @@ export default function Messages() {
                                 <span className="font-medium truncate">
                                   {conv.participantName}
                                 </span>
-                                <span className="text-xs text-slate-900 dark:text-slate-100 whitespace-nowrap">
+                                <span className="text-xs text-black dark:text-white whitespace-nowrap">
                                   {formatMessageDate(new Date(conv.lastMessageAt))}
                                 </span>
                               </div>
                               <div className="flex items-center justify-between gap-2 mt-0.5">
-                                <p className="text-sm text-slate-900 dark:text-slate-100 truncate">
+                                <p className="text-sm text-black dark:text-white truncate">
                                   {conv.lastMessage}
                                 </p>
                                 {conv.unreadCount > 0 && (
@@ -378,7 +443,7 @@ export default function Messages() {
                     {showSearch && (
                       <div className="p-3 border-b bg-muted/30">
                         <div className="relative">
-                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-900 dark:text-slate-100" />
+                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black dark:text-white" />
                           <Input
                             placeholder={isEn ? "Search in conversation..." : "Rechercher dans la conversation..."}
                             value={messageSearchQuery}
@@ -398,7 +463,7 @@ export default function Messages() {
                           )}
                         </div>
                         {messageSearchQuery && (
-                          <p className="text-xs text-slate-900 dark:text-slate-100 mt-2">
+                          <p className="text-xs text-black dark:text-white mt-2">
                             {filteredMessages.length} {isEn ? "results found" : "résultats trouvés"}
                           </p>
                         )}
@@ -409,10 +474,10 @@ export default function Messages() {
                     <ScrollArea className="flex-1 p-4">
                       {messagesLoading ? (
                         <div className="flex items-center justify-center py-8">
-                          <Loader2 className="h-6 w-6 animate-spin text-slate-900 dark:text-slate-100" />
+                          <Loader2 className="h-6 w-6 animate-spin text-black dark:text-white" />
                         </div>
                       ) : filteredMessages.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-8 text-slate-900 dark:text-slate-100">
+                        <div className="flex flex-col items-center justify-center py-8 text-black dark:text-white">
                           <MessageSquare className="h-8 w-8 mb-2 opacity-50" />
                           <p className="text-sm">
                             {messageSearchQuery
@@ -449,7 +514,7 @@ export default function Messages() {
                                   )}>
                                     <span className={cn(
                                       "text-xs",
-                                      isOwn ? "text-primary-foreground/70" : "text-slate-900 dark:text-slate-100"
+                                      isOwn ? "text-primary-foreground/70" : "text-black dark:text-white"
                                     )}>
                                       {format(new Date(msg.createdAt), "HH:mm", { locale })}
                                     </span>
@@ -506,7 +571,7 @@ export default function Messages() {
                     </div>
                   </>
                 ) : (
-                  <div className="flex-1 flex flex-col items-center justify-center text-slate-900 dark:text-slate-100">
+                  <div className="flex-1 flex flex-col items-center justify-center text-black dark:text-white">
                     <MessageSquare className="h-12 w-12 mb-4 opacity-50" />
                     <h3 className="text-lg font-medium mb-1">
                       {isEn ? "Select a conversation" : "Sélectionnez une conversation"}

@@ -37,3 +37,26 @@ export { default as AdminEnrollments } from "./AdminEnrollments";
 export { default as AdminReviews } from "./AdminReviews";
 export { default as AdminCertificates } from "./AdminCertificates";
 export { default as AdminGamification } from "./AdminGamification";
+
+// ═══ Kajabi Integration — New Pages ═══
+export { default as AllProducts } from "./AllProducts";
+export { default as PodcastsAdmin } from "./PodcastsAdmin";
+export { default as NewslettersAdmin } from "./NewslettersAdmin";
+export { default as DownloadsAdmin } from "./DownloadsAdmin";
+export { default as CommunityAdmin } from "./CommunityAdmin";
+export { default as PaymentsAdmin } from "./PaymentsAdmin";
+export { default as OffersAdmin } from "./OffersAdmin";
+export { default as CartAdmin } from "./CartAdmin";
+export { default as InvoicesAdmin } from "./InvoicesAdmin";
+export { default as AffiliatesAdmin } from "./AffiliatesAdmin";
+export { default as DesignAdmin } from "./DesignAdmin";
+export { default as NavigationAdmin } from "./NavigationAdmin";
+export { default as BlogAdmin } from "./BlogAdmin";
+export { default as MarketingOverview } from "./MarketingOverview";
+export { default as InboxAdmin } from "./InboxAdmin";
+export { default as FormsAdmin } from "./FormsAdmin";
+export { default as EventsAdmin } from "./EventsAdmin";
+export { default as AllContacts } from "./AllContacts";
+export { default as ContactInsights } from "./ContactInsights";
+export { default as AssessmentsAdmin } from "./AssessmentsAdmin";
+export { default as ReportsAdmin } from "./ReportsAdmin";

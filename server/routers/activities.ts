@@ -29,8 +29,16 @@ import {
   certificates,
   learningPaths,
   pathCourses,
+  quizzes,
+  quizAttempts,
+  learnerXp,
+  xpTransactions,
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
+import { createLogger } from "../logger";
+import { sendEmail } from "../email";
+import { EMAIL_BRANDING, generateEmailFooter } from "../email-branding";
+const log = createLogger("routers-activities");
 
 // ============================================================================
 // CONSTANTS & TYPES
@@ -67,8 +75,8 @@ const createActivitySchema = z.object({
   activityType: z.enum(ACTIVITY_TYPES).default("text"),
   content: z.string().optional(),
   contentFr: z.string().optional(),
-  contentJson: z.any().optional(),
-  contentJsonFr: z.any().optional(),
+  contentJson: z.record(z.string(), z.unknown()).optional(),
+  contentJsonFr: z.record(z.string(), z.unknown()).optional(),
   videoUrl: z.string().optional(),
   videoProvider: z.enum(["youtube", "vimeo", "bunny", "self_hosted"]).optional(),
   audioUrl: z.string().optional(),
@@ -99,8 +107,8 @@ const updateActivitySchema = z.object({
   activityType: z.enum(ACTIVITY_TYPES).optional(),
   content: z.string().optional().nullable(),
   contentFr: z.string().optional().nullable(),
-  contentJson: z.any().optional().nullable(),
-  contentJsonFr: z.any().optional().nullable(),
+  contentJson: z.record(z.string(), z.unknown()).optional().nullable(),
+  contentJsonFr: z.record(z.string(), z.unknown()).optional().nullable(),
   videoUrl: z.string().optional().nullable(),
   videoProvider: z.enum(["youtube", "vimeo", "bunny", "self_hosted"]).optional().nullable(),
   audioUrl: z.string().optional().nullable(),
@@ -441,7 +449,7 @@ export const activitiesRouter = router({
         activityId: z.number(),
         score: z.number().optional(),
         timeSpentSeconds: z.number().optional(),
-        responseData: z.any().optional(),
+        responseData: z.record(z.string(), z.unknown()).optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -454,6 +462,7 @@ export const activitiesRouter = router({
           lessonId: activities.lessonId,
           courseId: activities.courseId,
           passingScore: activities.passingScore,
+          activityType: activities.activityType,
         })
         .from(activities)
         .where(eq(activities.id, input.activityId));
@@ -495,10 +504,43 @@ export const activitiesRouter = router({
           },
         });
 
+      // ─── Record quiz_attempt if this is a quiz activity ───
+      if (activity.activityType === "quiz" && activity.lessonId && input.score !== undefined) {
+        try {
+          // Find the quiz for this lesson
+          const [quiz] = await db.select().from(quizzes)
+            .where(eq(quizzes.lessonId, activity.lessonId)).limit(1);
+          if (quiz) {
+            // Count existing attempts for this user+quiz
+            const [existingAttempts] = await db.select({ count: sql<number>`count(*)` })
+              .from(quizAttempts)
+              .where(and(eq(quizAttempts.userId, ctx.user.id), eq(quizAttempts.quizId, quiz.id)));
+            const attemptNum = (existingAttempts?.count || 0) + 1;
+            const passed = input.score >= (quiz.passingScore || 70);
+            await db.insert(quizAttempts).values({
+              userId: ctx.user.id,
+              quizId: quiz.id,
+              attemptNumber: attemptNum,
+              score: input.score,
+              pointsEarned: Math.round((input.score / 100) * (quiz.totalQuestions || 1)),
+              totalPoints: quiz.totalQuestions || 1,
+              passed,
+              completedAt: new Date(),
+              timeSpentSeconds: input.timeSpentSeconds || 0,
+              answers: input.responseData || {},
+            });
+            log.info(`[QuizAttempt] User ${ctx.user.id} attempt #${attemptNum} on quiz ${quiz.id}: ${input.score}% ${passed ? "PASSED" : "FAILED"}`);
+          }
+        } catch (quizErr) {
+          log.error("[QuizAttempt] Failed to record quiz attempt:", quizErr);
+        }
+      }
+
       // ─── Auto-propagate to lesson-level progress ───
       // Count how many activities in this lesson are completed by this user
       if (status === "completed" && activity.lessonId) {
         try {
+          // Count PUBLISHED activities for this lesson (the denominator)
           const totalActivities = await db
             .select({ count: sql<number>`count(*)` })
             .from(activities)
@@ -506,16 +548,19 @@ export const activitiesRouter = router({
               eq(activities.lessonId, activity.lessonId),
               eq(activities.status, "published")
             ));
+          // Count completed progress entries ONLY for published activities (aligned filter)
           const completedActivities = await db
             .select({ count: sql<number>`count(*)` })
             .from(activityProgress)
+            .innerJoin(activities, eq(activityProgress.activityId, activities.id))
             .where(and(
               eq(activityProgress.lessonId, activity.lessonId),
               eq(activityProgress.userId, ctx.user.id),
-              eq(activityProgress.status, "completed")
+              eq(activityProgress.status, "completed"),
+              eq(activities.status, "published")
             ));
 
-          const total = totalActivities[0]?.count || 7;
+          const total = totalActivities[0]?.count || 1; // fallback to 1 to avoid division by zero
           const completed = completedActivities[0]?.count || 0;
           const lessonPercent = Math.min(100, Math.round((completed / total) * 100));
           const lessonStatus = lessonPercent >= 100 ? "completed" : "in_progress";
@@ -637,7 +682,7 @@ export const activitiesRouter = router({
                             totalLessons: enrollment.totalLessons || undefined,
                           });
                         } catch (pdfErr) {
-                          console.error("[AutoCert] PDF generation failed:", pdfErr);
+                          log.error("[AutoCert] PDF generation failed:", pdfErr);
                         }
 
                         await db.insert(certificates).values({
@@ -661,12 +706,49 @@ export const activitiesRouter = router({
                             autoGenerated: true,
                           },
                         });
-                        console.log(`[AutoCert] Certificate ${certificateNumber} auto-generated for user ${ctx.user.id}, course ${activity.courseId}`);
+                        log.info(`[AutoCert] Certificate ${certificateNumber} auto-generated for user ${ctx.user.id}, course ${activity.courseId}`);
+
+                        // Send certificate email notification
+                        try {
+                          const userEmail = (ctx.user as any).email;
+                          if (userEmail) {
+                            const isEn = (ctx.user as any).preferredLanguage !== "fr";
+                            await sendEmail({
+                              to: userEmail,
+                              subject: isEn
+                                ? `Congratulations! Your Certificate for ${courseForCert.title} is Ready`
+                                : `F\u00e9licitations ! Votre certificat pour ${courseForCert.title} est pr\u00eat`,
+                              html: `
+                                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
+                                  <div style="background: linear-gradient(135deg, ${EMAIL_BRANDING.colors.primary}, ${EMAIL_BRANDING.colors.primaryLight}); padding: 32px; text-align: center;">
+                                    <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="height: 40px; margin-bottom: 16px;" />
+                                    <h1 style="color: white; font-size: 24px; margin: 0;">${isEn ? "Certificate of Completion" : "Certificat de r\u00e9ussite"}</h1>
+                                  </div>
+                                  <div style="padding: 32px;">
+                                    <p style="font-size: 16px; color: #333;">${isEn ? "Dear" : "Cher(e)"} ${ctx.user.name || "Learner"},</p>
+                                    <p style="font-size: 16px; color: #333;">${isEn
+                                      ? "Congratulations on completing <strong>" + courseForCert.title + "</strong>! Your certificate has been generated and is ready for download."
+                                      : "F\u00e9licitations pour avoir termin\u00e9 <strong>" + courseForCert.title + "</strong> ! Votre certificat a \u00e9t\u00e9 g\u00e9n\u00e9r\u00e9 et est pr\u00eat \u00e0 t\u00e9l\u00e9charger."}</p>
+                                    <div style="background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+                                      <p style="font-size: 14px; color: #666; margin: 0 0 8px 0;">${isEn ? "Certificate Number" : "Num\u00e9ro de certificat"}</p>
+                                      <p style="font-size: 20px; font-weight: bold; color: ${EMAIL_BRANDING.colors.primary}; margin: 0; letter-spacing: 1px;">${certificateNumber}</p>
+                                    </div>
+                                    ${pdfUrl ? `<div style="text-align: center; margin: 24px 0;"><a href="${pdfUrl}" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">${isEn ? "Download Certificate" : "T\u00e9l\u00e9charger le certificat"}</a></div>` : ""}
+                                  </div>
+                                  ${generateEmailFooter()}
+                                </div>
+                              `,
+                            });
+                            log.info(`[AutoCert] Certificate email sent to ${userEmail}`);
+                          }
+                        } catch (emailErr) {
+                          log.error("[AutoCert] Certificate email failed:", emailErr);
+                        }
                       }
                     }
                   } catch (certErr) {
                     // Don't fail activity completion if certificate generation fails
-                    console.error("[AutoCert] Auto-certificate generation error:", certErr);
+                    log.error("[AutoCert] Auto-certificate generation error:", certErr);
                   }
                 }
               }
@@ -674,8 +756,57 @@ export const activitiesRouter = router({
           }
         } catch (e) {
           // Don't fail the activity completion if progress propagation fails
-          console.error("[completeActivity] Progress propagation error:", e);
+          log.error("[completeActivity] Progress propagation error:", e);
         }
+      }
+
+      // ─── Auto-award XP and update streak ─────────────────────────────
+      let streakDays = 0;
+      try {
+        const XP_FOR_SLOT = 5; // Base XP per slot completion
+        // Upsert learnerXp record
+        const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, ctx.user.id)).limit(1);
+        let xpRecord = xpRecords[0];
+        if (!xpRecord) {
+          await db.insert(learnerXp).values({
+            userId: ctx.user.id, totalXp: 0, weeklyXp: 0, monthlyXp: 0,
+            currentLevel: 1, levelTitle: "Beginner", currentStreak: 0, longestStreak: 0,
+          });
+          const newRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, ctx.user.id)).limit(1);
+          xpRecord = newRecords[0];
+        }
+        // Award XP
+        const newTotal = (xpRecord?.totalXp || 0) + XP_FOR_SLOT;
+        await db.insert(xpTransactions).values({
+          userId: ctx.user.id, amount: XP_FOR_SLOT, reason: "lesson_complete",
+          referenceType: "activity", referenceId: activity.id,
+          description: `Completed activity: ${activity.title}`,
+        });
+        // Update streak
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        const lastAct = xpRecord?.lastActivityDate ? new Date(xpRecord.lastActivityDate) : null;
+        if (lastAct) lastAct.setHours(0, 0, 0, 0);
+        const yesterday = new Date(today); yesterday.setDate(yesterday.getDate() - 1);
+        let newStreak = xpRecord?.currentStreak || 0;
+        if (!lastAct || lastAct.getTime() < yesterday.getTime()) {
+          newStreak = 1;
+        } else if (lastAct.getTime() === yesterday.getTime()) {
+          newStreak = (xpRecord?.currentStreak || 0) + 1;
+        }
+        // else: same day, keep streak
+        const newLongest = Math.max(newStreak, xpRecord?.longestStreak || 0);
+        streakDays = newStreak;
+        await db.update(learnerXp).set({
+          totalXp: newTotal,
+          weeklyXp: (xpRecord?.weeklyXp || 0) + XP_FOR_SLOT,
+          monthlyXp: (xpRecord?.monthlyXp || 0) + XP_FOR_SLOT,
+          currentStreak: newStreak,
+          longestStreak: newLongest,
+          lastActivityDate: new Date(),
+        }).where(eq(learnerXp.userId, ctx.user.id));
+        log.info(`[XP] Awarded ${XP_FOR_SLOT} XP to user ${ctx.user.id}, streak: ${newStreak}`);
+      } catch (xpErr) {
+        log.error("[XP] XP/streak auto-award error:", xpErr);
       }
 
       // ─── Auto-check badge triggers after cascade ───────────────────────
@@ -688,13 +819,49 @@ export const activitiesRouter = router({
           courseId: activity.courseId || undefined,
           lessonId: activity.lessonId || undefined,
           activityId: activity.id,
+          streakDays,
         });
         if (badgeResult.awarded.length > 0) {
-          console.log(`[Badges] Awarded ${badgeResult.awarded.length} badge(s) to user ${ctx.user.id}: ${badgeResult.awarded.map(b => b.id).join(", ")}`);
+          log.info(`[Badges] Awarded ${badgeResult.awarded.length} badge(s) to user ${ctx.user.id}: ${badgeResult.awarded.map(b => b.id).join(", ")}`);
         }
       } catch (badgeErr) {
         // Non-critical: don't fail activity completion if badge check fails
-        console.error("[Badges] Badge check error:", badgeErr);
+        log.error("[Badges] Badge check error:", badgeErr);
+      }
+
+      // ─── Auto-update weekly challenge progress ─────────────────────────
+      try {
+        const { weeklyChallenges, userWeeklyChallenges } = await import("../../drizzle/schema");
+        const now = new Date();
+        const activeChallenges = await db.select().from(weeklyChallenges)
+          .where(and(
+            eq(weeklyChallenges.isActive, true),
+            sql`${weeklyChallenges.weekStart} <= ${now}`,
+            sql`${weeklyChallenges.weekEnd} >= ${now}`
+          ));
+        for (const challenge of activeChallenges) {
+          // Check if user has joined this challenge
+          const userProgressList = await db.select().from(userWeeklyChallenges)
+            .where(and(
+              eq(userWeeklyChallenges.userId, ctx.user.id),
+              eq(userWeeklyChallenges.challengeId, challenge.id)
+            )).limit(1);
+          const userProgress = userProgressList[0];
+          if (userProgress && userProgress.status !== "completed") {
+            const newProgress = (userProgress.currentProgress || 0) + 1;
+            const isComplete = newProgress >= (challenge.targetCount || 1);
+            await db.update(userWeeklyChallenges).set({
+              currentProgress: newProgress,
+              status: isComplete ? "completed" : "in_progress",
+              completedAt: isComplete ? new Date() : undefined,
+            }).where(eq(userWeeklyChallenges.id, userProgress.id));
+            if (isComplete) {
+              log.info(`[Challenge] User ${ctx.user.id} completed challenge ${challenge.id}: ${challenge.title}`);
+            }
+          }
+        }
+      } catch (challengeErr) {
+        log.error("[Challenge] Auto-progress error:", challengeErr);
       }
 
       return { success: true, status, };

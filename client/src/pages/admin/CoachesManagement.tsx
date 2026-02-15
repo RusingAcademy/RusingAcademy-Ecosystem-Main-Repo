@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { CheckCircle, XCircle, Clock, UserPlus, GraduationCap, Eye, Loader2, User, Mail, DollarSign, Calendar, Globe, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
+import { CheckCircle, XCircle, Clock, UserPlus, GraduationCap, Eye, Loader2, User, Mail, DollarSign, Calendar, Globe, Briefcase, ChevronDown, ChevronUp, ShieldOff, ShieldCheck, AlertTriangle } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { EmptyState } from "@/components/EmptyState";
@@ -14,6 +14,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 
 export default function CoachesManagement() {
   const { data: applications, isLoading, refetch } = trpc.admin.getCoachApplications.useQuery();
+  const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
 
   // Confirmation state
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -32,6 +33,12 @@ export default function CoachesManagement() {
   const [rejectAppId, setRejectAppId] = useState<number | null>(null);
   const [rejectAppName, setRejectAppName] = useState("");
   const [rejectionReason, setRejectionReason] = useState("");
+
+  // Sprint 2: Suspend dialog state
+  const [showSuspendDialog, setShowSuspendDialog] = useState(false);
+  const [suspendCoachId, setSuspendCoachId] = useState<number | null>(null);
+  const [suspendCoachName, setSuspendCoachName] = useState("");
+  const [suspendReason, setSuspendReason] = useState("");
 
   // Expanded rows for quick preview
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
@@ -59,6 +66,30 @@ export default function CoachesManagement() {
     },
     onError: (e: any) => toast.error(e.message),
   });
+
+  // Sprint 2: Suspend & Reactivate mutations
+  const suspend = trpc.admin.suspendCoach.useMutation({
+    onSuccess: () => {
+      toast.success(`Coach suspended`);
+      setShowSuspendDialog(false);
+      setSuspendCoachId(null);
+      setSuspendCoachName("");
+      setSuspendReason("");
+      refetch();
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const reactivate = trpc.admin.reactivateCoach.useMutation({
+    onSuccess: () => {
+      toast.success(`Coach reactivated`);
+      refetch();
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  // Sprint 2: Lifecycle stats
+  const { data: lifecycleStats } = trpc.admin.getCoachLifecycleStats.useQuery();
 
   const handleApprove = (applicationId: number, name: string) => {
     setPendingAction({ type: "approve", applicationId, name });
@@ -91,9 +122,22 @@ export default function CoachesManagement() {
   };
 
   const allApps = (applications ?? []) as any[];
-  const pending = allApps.filter((a: any) => a.status === "submitted" || a.status === "pending");
+  const pending = allApps.filter((a: any) => a.status === "submitted" || a.status === "pending" || a.status === "resubmission");
+  const underReview = allApps.filter((a: any) => a.status === "under_review");
   const approved = allApps.filter((a: any) => a.status === "approved");
   const rejected = allApps.filter((a: any) => a.status === "rejected");
+  const suspended = allApps.filter((a: any) => a.status === "suspended");
+
+  const handleSuspend = (coachId: number, name: string) => {
+    setSuspendCoachId(coachId);
+    setSuspendCoachName(name);
+    setShowSuspendDialog(true);
+  };
+
+  const confirmSuspend = () => {
+    if (!suspendCoachId || !suspendReason.trim()) return;
+    suspend.mutate({ coachId: suspendCoachId, reason: suspendReason.trim() });
+  };
 
   const formatRate = (rate: number | null | undefined) => {
     if (!rate) return "N/A";
@@ -124,10 +168,10 @@ export default function CoachesManagement() {
 
     return (
       <div key={app.id} className="border-b last:border-b-0">
-        <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+        <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#0a4040]/50 transition-colors">
           <div className="flex items-center gap-4 flex-1 min-w-0">
             {/* Photo */}
-            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-[#0a4040] overflow-hidden flex-shrink-0">
               {app.photoUrl || app.profilePhotoUrl ? (
                 <img
                   src={app.photoUrl || app.profilePhotoUrl}
@@ -135,12 +179,12 @@ export default function CoachesManagement() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
-                    (e.target as HTMLImageElement).parentElement!.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-lg font-semibold text-slate-400">${name.charAt(0).toUpperCase()}</span></div>`;
+                    (e.target as HTMLImageElement).parentElement!.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-lg font-semibold text-[#67E8F9]">${name.charAt(0).toUpperCase()}</span></div>`;
                   }}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <User className="w-6 h-6 text-slate-400" />
+                  <User className="w-6 h-6 text-[#67E8F9]" />
                 </div>
               )}
             </div>
@@ -149,6 +193,7 @@ export default function CoachesManagement() {
             <div className="min-w-0 flex-1">
               <p className="font-semibold text-sm truncate">{name}</p>
               <p className="text-xs text-muted-foreground truncate">{email}</p>
+              {(app.resubmissionCount > 0 || app.isResubmission) && <Badge variant="secondary" className="text-xs mt-0.5 bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">Resubmission #{app.resubmissionCount || 1}</Badge>}
               <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
                 {app.hourlyRate && (
                   <span className="flex items-center gap-1">
@@ -187,12 +232,22 @@ export default function CoachesManagement() {
                 </Button>
               </>
             )}
+            {app.status === "approved" && (
+              <Button size="sm" variant="outline" className="text-orange-600 border-orange-300 hover:bg-orange-50" onClick={() => handleSuspend(app.id, name)}>
+                <ShieldOff className="h-4 w-4 mr-1" /> Suspend
+              </Button>
+            )}
+            {app.status === "suspended" && (
+              <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => reactivate.mutate({ coachId: app.id })}>
+                <ShieldCheck className="h-4 w-4 mr-1" /> Reactivate
+              </Button>
+            )}
           </div>
         </div>
 
         {/* Expanded Quick Preview */}
         {isExpanded && (
-          <div className="px-4 pb-4 pt-0 bg-slate-50/50 dark:bg-slate-800/20">
+          <div className="px-4 pb-4 pt-0 bg-slate-50/50 dark:bg-[#0a4040]/20">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               {app.bio && (
                 <div>
@@ -249,18 +304,44 @@ export default function CoachesManagement() {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Coaching Management</h1>
+        <h1 className="text-2xl font-bold">Coaches Management</h1>
         <p className="text-sm text-muted-foreground">Review applications, manage coach profiles, and control access.</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card><CardContent className="p-4 flex items-center gap-3"><Clock className="h-5 w-5 text-amber-500" /><div><p className="text-xl font-bold">{pending.length}</p><p className="text-xs text-muted-foreground">Pending</p></div></CardContent></Card>
-        <Card><CardContent className="p-4 flex items-center gap-3"><CheckCircle className="h-5 w-5 text-green-500" /><div><p className="text-xl font-bold">{approved.length}</p><p className="text-xs text-muted-foreground">Approved</p></div></CardContent></Card>
-        <Card><CardContent className="p-4 flex items-center gap-3"><XCircle className="h-5 w-5 text-red-500" /><div><p className="text-xl font-bold">{rejected.length}</p><p className="text-xs text-muted-foreground">Rejected</p></div></CardContent></Card>
-      </div>
+      {/* Sprint 2: Coach Lifecycle Pipeline Visualization */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex items-center gap-2 mb-4">
+            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Coach Lifecycle Pipeline</h3>
+          </div>
+          <div className="flex items-center justify-between gap-2 overflow-x-auto">
+            {[
+              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100 dark:bg-slate-800", textColor: "text-slate-600 dark:text-slate-300", icon: UserPlus },
+              { label: "Pending", count: pending.length, color: "bg-amber-50 dark:bg-amber-900/20", textColor: "text-amber-600", icon: Clock },
+              { label: "Under Review", count: underReview.length, color: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-600", icon: Eye },
+              { label: "Approved", count: approved.length, color: "bg-emerald-50 dark:bg-emerald-900/20", textColor: "text-emerald-600", icon: CheckCircle },
+              { label: "Suspended", count: lifecycleStats?.profiles?.suspended || suspended.length, color: "bg-orange-50 dark:bg-orange-900/20", textColor: "text-orange-600", icon: ShieldOff },
+              { label: "Rejected", count: rejected.length, color: "bg-red-50 dark:bg-red-900/20", textColor: "text-red-600", icon: XCircle },
+            ].map((stage, i, arr) => (
+              <div key={stage.label} className="flex items-center gap-2 flex-1 min-w-0">
+                <div className={`${stage.color} rounded-lg p-3 flex-1 min-w-[100px] text-center`}>
+                  <stage.icon className={`h-5 w-5 mx-auto mb-1 ${stage.textColor}`} />
+                  <p className={`text-xl font-bold ${stage.textColor}`}>{stage.count}</p>
+                  <p className="text-xs text-muted-foreground">{stage.label}</p>
+                </div>
+                {i < arr.length - 1 && (
+                  <div className="text-muted-foreground/30 text-lg flex-shrink-0">→</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
       <Tabs defaultValue="pending">
         <TabsList>
           <TabsTrigger value="pending">Pending ({pending.length})</TabsTrigger>
+          <TabsTrigger value="under_review">Under Review ({underReview.length})</TabsTrigger>
           <TabsTrigger value="approved">Approved ({approved.length})</TabsTrigger>
+          <TabsTrigger value="suspended">Suspended ({suspended.length})</TabsTrigger>
           <TabsTrigger value="rejected">Rejected ({rejected.length})</TabsTrigger>
         </TabsList>
 
@@ -280,6 +361,20 @@ export default function CoachesManagement() {
           </CardContent></Card>
         </TabsContent>
 
+        <TabsContent value="under_review">
+          <Card><CardContent className="p-0">
+            {underReview.length === 0 ? (
+              <EmptyState
+                icon={Eye}
+                title="No applications under review"
+                description="Applications currently being reviewed will appear here."
+              />
+            ) : (
+              <div>{underReview.map((app: any) => renderApplicationCard(app, true))}</div>
+            )}
+          </CardContent></Card>
+        </TabsContent>
+
         <TabsContent value="approved">
           <Card><CardContent className="p-0">
             {approved.length === 0 ? (
@@ -290,6 +385,20 @@ export default function CoachesManagement() {
               />
             ) : (
               <div>{approved.map((a: any) => renderApplicationCard(a, false))}</div>
+            )}
+          </CardContent></Card>
+        </TabsContent>
+
+        <TabsContent value="suspended">
+          <Card><CardContent className="p-0">
+            {suspended.length === 0 ? (
+              <EmptyState
+                icon={ShieldOff}
+                title="No suspended coaches"
+                description="Suspended coaches will appear here. You can reactivate them at any time."
+              />
+            ) : (
+              <div>{suspended.map((a: any) => renderApplicationCard(a, false))}</div>
             )}
           </CardContent></Card>
         </TabsContent>
@@ -322,7 +431,7 @@ export default function CoachesManagement() {
             <div className="space-y-6">
               {/* Header */}
               <div className="flex items-center gap-4">
-                <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-[#0a4040] overflow-hidden flex-shrink-0">
                   {selectedApp.photoUrl || selectedApp.profilePhotoUrl ? (
                     <img
                       src={selectedApp.photoUrl || selectedApp.profilePhotoUrl}
@@ -331,7 +440,7 @@ export default function CoachesManagement() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <User className="w-10 h-10 text-slate-400" />
+                      <User className="w-10 h-10 text-[#67E8F9]" />
                     </div>
                   )}
                 </div>
@@ -374,7 +483,7 @@ export default function CoachesManagement() {
               {selectedApp.headline && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Headline (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3">{selectedApp.headline}</p>
+                  <p className="text-sm bg-slate-50 dark:bg-[#0a4040]/50 rounded-lg p-3">{selectedApp.headline}</p>
                 </div>
               )}
 
@@ -390,7 +499,7 @@ export default function CoachesManagement() {
               {selectedApp.bio && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Bio (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
+                  <p className="text-sm bg-slate-50 dark:bg-[#0a4040]/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
                 </div>
               )}
 
@@ -419,13 +528,27 @@ export default function CoachesManagement() {
                 </div>
               )}
 
-              {/* Video */}
-              {selectedApp.introVideoUrl && (
+              {/* Video — Bunny Stream embed or fallback link */}
+              {((selectedApp as any).bunnyVideoId || selectedApp.introVideoUrl) && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Introduction Video</p>
-                  <a href={selectedApp.introVideoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
-                    {selectedApp.introVideoUrl}
-                  </a>
+                  {(selectedApp as any).bunnyVideoId && bunnyConfig?.libraryId ? (
+                    <div className="aspect-video rounded-lg overflow-hidden border mt-1">
+                      <iframe
+                        className="w-full h-full"
+                        src={`https://iframe.mediadelivery.net/embed/${bunnyConfig.libraryId}/${(selectedApp as any).bunnyVideoId}?autoplay=false&preload=true`}
+                        title="Application Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                        style={{ border: 0 }}
+                      />
+                    </div>
+                  ) : selectedApp.introVideoUrl ? (
+                    <a href={selectedApp.introVideoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
+                      {selectedApp.introVideoUrl}
+                    </a>
+                  ) : null}
                 </div>
               )}
 
@@ -440,18 +563,26 @@ export default function CoachesManagement() {
                 </Badge>
               </div>
 
+              {/* Previous rejection reason for resubmissions */}
+              {(selectedApp.resubmissionCount > 0 || selectedApp.isResubmission) && selectedApp.previousRejectionReason && (
+                <div>
+                  <p className="font-medium text-muted-foreground text-sm mb-1">Previous Rejection Reason</p>
+                  <p className="text-sm bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3 text-amber-700 dark:text-amber-400 whitespace-pre-wrap">{selectedApp.previousRejectionReason}</p>
+                </div>
+              )}
+
               {/* Rejection reason if rejected */}
               {selectedApp.status === "rejected" && selectedApp.reviewNotes && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Rejection Reason</p>
-                  <p className="text-sm bg-red-50 dark:bg-red-900/20 rounded-lg p-3 text-red-700 dark:text-red-400">{selectedApp.reviewNotes}</p>
+                  <p className="text-sm bg-red-50 dark:bg-red-900/20 rounded-lg p-3 text-red-700 dark:text-red-400 whitespace-pre-wrap">{selectedApp.reviewNotes}</p>
                 </div>
               )}
             </div>
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowDetail(false)}>Close</Button>
-            {selectedApp && (selectedApp.status === "submitted" || selectedApp.status === "pending") && (
+            {selectedApp && (selectedApp.status === "submitted" || selectedApp.status === "pending" || selectedApp.status === "under_review" || selectedApp.status === "resubmission") && (
               <>
                 <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={() => handleApprove(selectedApp.id, getAppName(selectedApp))}>
                   <CheckCircle className="h-4 w-4 mr-1" /> Approve
@@ -476,6 +607,39 @@ export default function CoachesManagement() {
         onConfirm={confirmApprove}
         loading={approve.isPending}
       />
+
+      {/* Sprint 2: Suspend Dialog with Reason */}
+      <Dialog open={showSuspendDialog} onOpenChange={setShowSuspendDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+              Suspend Coach
+            </DialogTitle>
+            <DialogDescription>
+              Suspending {suspendCoachName} will prevent them from accepting new students and appearing in search results. They will be notified.
+            </DialogDescription>
+          </DialogHeader>
+          <Textarea
+            placeholder="Reason for suspension (required)..."
+            value={suspendReason}
+            onChange={(e) => setSuspendReason(e.target.value)}
+            rows={4}
+            className="mt-2"
+          />
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setShowSuspendDialog(false); setSuspendReason(""); }}>Cancel</Button>
+            <Button
+              className="bg-orange-600 hover:bg-orange-700 text-white"
+              onClick={confirmSuspend}
+              disabled={!suspendReason.trim() || suspend.isPending}
+            >
+              {suspend.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+              Confirm Suspension
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Reject Dialog with Reason */}
       <Dialog open={showRejectDialog} onOpenChange={setShowRejectDialog}>

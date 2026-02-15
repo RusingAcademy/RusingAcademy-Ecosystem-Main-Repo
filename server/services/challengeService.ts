@@ -6,6 +6,8 @@
 import { getDb } from "../db";
 import { weeklyChallenges, userWeeklyChallenges, learnerXp } from "../../drizzle/schema";
 import { eq, and, sql, lte, gte } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("services-challengeService");
 
 // Challenge templates for automatic generation
 const CHALLENGE_TEMPLATES = [
@@ -97,7 +99,7 @@ function getCurrentWeekBounds(): { weekStart: Date; weekEnd: Date } {
 export async function generateWeeklyChallenges(): Promise<number> {
   const db = await getDb();
   if (!db) {
-    console.error("[Challenges] Database not available");
+    log.error("[Challenges] Database not available");
     return 0;
   }
 
@@ -113,7 +115,7 @@ export async function generateWeeklyChallenges(): Promise<number> {
     .limit(1);
 
   if (existingChallenges.length > 0) {
-    console.log("[Challenges] Challenges already exist for this week");
+    log.info("[Challenges] Challenges already exist for this week");
     return 0;
   }
 
@@ -143,7 +145,7 @@ export async function generateWeeklyChallenges(): Promise<number> {
 
     // @ts-ignore - overload resolution
   await db.insert(weeklyChallenges).values(challengesToInsert);
-  console.log(`[Challenges] Generated ${challengesToInsert.length} challenges for week starting ${weekStart.toISOString()}`);
+  log.info(`[Challenges] Generated ${challengesToInsert.length} challenges for week starting ${weekStart.toISOString()}`);
 
   return challengesToInsert.length;
 }
@@ -175,7 +177,7 @@ export async function resetWeeklyXp(): Promise<void> {
   if (!db) return;
 
   await db.update(learnerXp).set({ weeklyXp: 0 });
-  console.log("[Challenges] Reset weekly XP for all users");
+  log.info("[Challenges] Reset weekly XP for all users");
 }
 
 /**
@@ -184,12 +186,12 @@ export async function resetWeeklyXp(): Promise<void> {
  */
 export function initializeChallengeScheduler(): void {
   // Generate challenges immediately if none exist for current week
-  generateWeeklyChallenges().catch(console.error);
+  generateWeeklyChallenges().catch((err: unknown) => log.error({ err }, "Challenge service error"));
 
   // Check every hour for expired challenges
   setInterval(() => {
-    deactivateExpiredChallenges().catch(console.error);
+    deactivateExpiredChallenges().catch((err: unknown) => log.error({ err }, "Challenge service error"));
   }, 60 * 60 * 1000);
 
-  console.log("[Challenges] Challenge scheduler initialized");
+  log.info("[Challenges] Challenge scheduler initialized");
 }

@@ -5,6 +5,8 @@
 
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("services-xpEngine");
 
 async function getDbOrThrow() {
   const db = await getDb();
@@ -317,7 +319,7 @@ export async function getPersonalizedRecommendations(userId: number): Promise<{
       focusAreaFr: focus.fr,
     };
   } catch (error) {
-    console.error("[XPEngine] Error generating recommendations:", error);
+    log.error("[XPEngine] Error generating recommendations:", error);
     return {
       nextSteps: [],
       focusArea: "General Language Skills",
@@ -401,7 +403,7 @@ export async function getActivityFeed(userId: number, limit: number = 20): Promi
       };
     });
   } catch (error) {
-    console.error("[XPEngine] Error fetching activity feed:", error);
+    log.error("[XPEngine] Error fetching activity feed:", error);
     return [];
   }
 }

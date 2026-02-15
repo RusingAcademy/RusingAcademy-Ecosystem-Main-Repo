@@ -1,0 +1,90 @@
+{
+  "query": "SELECT id, title, slug, targetLanguage, category, pathNumber, status, totalModules, totalLessons, totalActivities FROM courses WHERE slug LIKE '%path%' ORDER BY pathNumber; SELECT id, title, slug, level, status FROM learning_paths ORDER BY displayOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, slug, targetLanguage, category, pathNumber, status, totalModules, totalLessons, totalActivities FROM courses WHERE slug LIKE '%path%' ORDER BY pathNumber; SELECT id, title, slug, level, status FROM learning_paths ORDER BY displayOrder;",
+  "rows": [
+    {
+      "id": "90007",
+      "title": "Path I: Foundations of Professional French (A1)",
+      "slug": "path-i-foundations",
+      "targetLanguage": "french",
+      "category": "sle_oral",
+      "pathNumber": "1",
+      "status": "published",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112"
+    },
+    {
+      "id": "120002",
+      "title": "Path II: Everyday Communication (A2)",
+      "slug": "path-ii-everyday-communication",
+      "targetLanguage": "french",
+      "category": "sle_oral",
+      "pathNumber": "2",
+      "status": "published",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112"
+    },
+    {
+      "id": "120003",
+      "title": "Path III: Operational French (B1)",
+      "slug": "path-iii-operational-french",
+      "targetLanguage": "french",
+      "category": "sle_oral",
+      "pathNumber": "3",
+      "status": "published",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112"
+    },
+    {
+      "id": "120004",
+      "title": "Path IV: Professional Mastery (B2)",
+      "slug": "path-iv-professional-mastery",
+      "targetLanguage": "french",
+      "category": "sle_oral",
+      "pathNumber": "4",
+      "status": "published",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112"
+    },
+    {
+      "id": "120005",
+      "title": "Path V: Executive French (C1)",
+      "slug": "path-v-executive-french",
+      "targetLanguage": "french",
+      "category": "sle_oral",
+      "pathNumber": "5",
+      "status": "published",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112"
+    },
+    {
+      "id": "120006",
+      "title": "Path VI: SLE Exam Preparation (B2-C1)",
+      "slug": "path-vi-sle-preparation",
+      "targetLanguage": "french",
+      "category": "sle_oral",
+      "pathNumber": "6",
+      "status": "published",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112"
+    }
+  ],
+  "messages": [
+    "id\ttitle\tslug\tlevel\tstatus",
+    "60007\tPath I: Foundations of Professional French (A1)\tpath-i-foundations\tA1\tdraft",
+    "90002\tPath II: Everyday Communication (A2)\tpath-ii-everyday-communication\tA2\tdraft",
+    "90003\tPath III: Operational French (B1)\tpath-iii-operational-french\tB1\tdraft",
+    "90004\tPath IV: Professional Mastery (B2)\tpath-iv-professional-mastery\tB2\tdraft",
+    "90005\tPath V: Executive French (C1)\tpath-v-executive-french\tC1\tdraft",
+    "90006\tPath VI: SLE Exam Preparation (B2-C1)\tpath-vi-sle-preparation\texam_prep\tdraft"
+  ],
+  "stdout": "id\ttitle\tslug\ttargetLanguage\tcategory\tpathNumber\tstatus\ttotalModules\ttotalLessons\ttotalActivities\n90007\tPath I: Foundations of Professional French (A1)\tpath-i-foundations\tfrench\tsle_oral\t1\tpublished\t4\t16\t112\n120002\tPath II: Everyday Communication (A2)\tpath-ii-everyday-communication\tfrench\tsle_oral\t2\tpublished\t4\t16\t112\n120003\tPath III: Operational French (B1)\tpath-iii-operational-french\tfrench\tsle_oral\t3\tpublished\t4\t16\t112\n120004\tPath IV: Professional Mastery (B2)\tpath-iv-professional-mastery\tfrench\tsle_oral\t4\tpublished\t4\t16\t112\n120005\tPath V: Executive French (C1)\tpath-v-executive-french\tfrench\tsle_oral\t5\tpublished\t4\t16\t112\n120006\tPath VI: SLE Exam Preparation (B2-C1)\tpath-vi-sle-preparation\tfrench\tsle_oral\t6\tpublished\t4\t16\t112\nid\ttitle\tslug\tlevel\tstatus\n60007\tPath I: Foundations of Professional French (A1)\tpath-i-foundations\tA1\tdraft\n90002\tPath II: Everyday Communication (A2)\tpath-ii-everyday-communication\tA2\tdraft\n90003\tPath III: Operational French (B1)\tpath-iii-operational-french\tB1\tdraft\n90004\tPath IV: Professional Mastery (B2)\tpath-iv-professional-mastery\tB2\tdraft\n90005\tPath V: Executive French (C1)\tpath-v-executive-french\tC1\tdraft\n90006\tPath VI: SLE Exam Preparation (B2-C1)\tpath-vi-sle-preparation\texam_prep\tdraft\n",
+  "stderr": "",
+  "execution_time_ms": 87
+}

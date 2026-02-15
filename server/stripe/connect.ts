@@ -5,6 +5,7 @@
  */
 
 import Stripe from "stripe";
+import { retry } from "../resilience";
 // Note: appUrl is derived from request origin in checkout session
 
 // Lazy Stripe initialization to avoid startup errors
@@ -33,7 +34,7 @@ export async function createConnectAccount(coachData: {
 }): Promise<{ accountId: string; onboardingUrl: string }> {
   const stripe = getStripeInstance();
   // Create Express account for the coach
-  const account = await stripe.accounts.create({
+  const account = await retry.stripe(() => stripe.accounts.create({
     type: "express",
     country: "CA",
     email: coachData.email,
@@ -46,15 +47,15 @@ export async function createConnectAccount(coachData: {
       coach_id: coachData.coachId.toString(),
       platform: "lingueefy",
     },
-  });
+  }), "createAccount");
 
   // Create onboarding link
-  const accountLink = await stripe.accountLinks.create({
+  const accountLink = await retry.stripe(() => stripe.accountLinks.create({
     account: account.id,
     refresh_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=refresh`,
     return_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=success`,
     type: "account_onboarding",
-  });
+  }), "createAccountLink");
 
   return {
     accountId: account.id,
@@ -67,12 +68,12 @@ export async function createConnectAccount(coachData: {
  */
 export async function getOnboardingLink(accountId: string): Promise<string> {
   const stripe = getStripeInstance();
-  const accountLink = await stripe.accountLinks.create({
+  const accountLink = await retry.stripe(() => stripe.accountLinks.create({
     account: accountId,
     refresh_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=refresh`,
     return_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=success`,
     type: "account_onboarding",
-  });
+  }), "createAccountLink");
 
   return accountLink.url;
 }
@@ -87,7 +88,7 @@ export async function checkAccountStatus(accountId: string): Promise<{
   requiresAction: boolean;
 }> {
   const stripe = getStripeInstance();
-  const account = await stripe.accounts.retrieve(accountId);
+  const account = await retry.stripe(() => stripe.accounts.retrieve(accountId), "getAccount");
 
   return {
     isOnboarded: account.details_submitted ?? false,
@@ -164,7 +165,7 @@ export async function createCheckoutSession(params: {
   const taxAmountCents = Math.round(amountCents * HST_RATE);
   const totalWithTaxCents = amountCents + taxAmountCents;
 
-  const checkoutSession = await stripe.checkout.sessions.create({
+  const checkoutSession = await retry.stripe(() => stripe.checkout.sessions.create({
     mode: "payment",
     customer_email: learnerEmail,
     client_reference_id: learnerId.toString(),
@@ -216,7 +217,7 @@ export async function createCheckoutSession(params: {
     allow_promotion_codes: true,
     success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/booking/cancelled`,
-  });
+  }), "createCheckout");
 
   return {
     sessionId: checkoutSession.id,
@@ -243,13 +244,13 @@ export async function processRefund(params: {
     refundApplicationFee = true,
   } = params;
 
-  const refund = await stripe.refunds.create({
+  const refund = await retry.stripe(() => stripe.refunds.create({
     payment_intent: paymentIntentId,
     amount: amountCents,
     reason,
     reverse_transfer: reverseTransfer,
     refund_application_fee: refundApplicationFee,
-  });
+  }), "createRefund");
 
   return {
     refundId: refund.id,

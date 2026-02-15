@@ -30,18 +30,18 @@
   --brand-cta-soft: #FFF1E8;
   
   /* === PREMIUM DARK (Obsidian Grey) === */
-  --brand-obsidian: #111827;
-  --brand-obsidian-2: #0B1220;
+  --brand-obsidian: #062b2b;
+  --brand-obsidian-2: #041e1e;
   
   /* === NEUTRALS (Porcelain & Sand) === */
   --bg: #F7F6F3;
   --surface: #FFFFFF;
   --sand: #EEE9DF;
-  --text: #0B1220;
+  --text: #041e1e;
   --text-inverse: #FFFFFF;
   --text-on-dark: #F7F6F3;
-  --muted: #1f2937;           /* Dark gray for text - HIGH CONTRAST */
-  --muted-on-dark: rgba(255, 255, 255, 0.85);
+  --muted: #000000;           /* Pure black for strict contrast */
+  --muted-on-dark: #ffffff;
   --border: #E5E7EB;
   
   /* === BRAND ACCENTS === */
@@ -467,14 +467,14 @@ body, p, span, div, li, a, button, input, select, textarea {
    (teal-900, slate-900, obsidian, etc.)
    ============================================ */
 
-/* Primary text on dark backgrounds - high contrast white */
+/* Primary text on dark backgrounds - PURE WHITE for max contrast */
 .text-on-dark {
-  color: var(--text-on-dark) !important;
+  color: #FFFFFF !important;
 }
 
-/* Muted/secondary text on dark backgrounds - slightly transparent white */
+/* Muted/secondary text on dark backgrounds - WHITE at 90% for strong contrast */
 .text-muted-on-dark {
-  color: var(--muted-on-dark) !important;
+  color: #ffffff !important;
 }
 
 /* Specific text colors for dark sections */
@@ -485,7 +485,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 .dark-section .text-muted-foreground,
 .dark-section p,
 .dark-section span:not(.bg-clip-text) {
-  color: var(--muted-on-dark);
+  color: #ffffff !important;
 }
 
 .dark-section h1,
@@ -494,15 +494,15 @@ body, p, span, div, li, a, button, input, select, textarea {
 .dark-section h4,
 .dark-section h5,
 .dark-section h6 {
-  color: var(--text-on-dark);
+  color: #FFFFFF !important;
 }
 
 /* Auto-apply to common dark background patterns */
 .bg-gradient-to-br.from-teal-900,
-.bg-gradient-to-br.from-slate-900,
-.bg-gradient-to-b.from-slate-900,
+.bg-gradient-to-br.from-[#062b2b],
+.bg-gradient-to-b.from-[#062b2b],
 .bg-gradient-to-r.from-teal-600,
-[class*="bg-slate-900"],
+[class*="bg-[#062b2b]"],
 [class*="bg-teal-900"],
 [class*="bg-obsidian"] {
   color: var(--text-on-dark);
@@ -510,11 +510,11 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* Ensure text-muted-foreground is visible on dark backgrounds */
 .bg-gradient-to-br.from-teal-900 .text-muted-foreground,
-.bg-gradient-to-br.from-slate-900 .text-muted-foreground,
-.bg-gradient-to-b.from-slate-900 .text-muted-foreground,
-[class*="bg-slate-900"] .text-muted-foreground,
+.bg-gradient-to-br.from-[#062b2b] .text-muted-foreground,
+.bg-gradient-to-b.from-[#062b2b] .text-muted-foreground,
+[class*="bg-[#062b2b]"] .text-muted-foreground,
 [class*="bg-teal-900"] .text-muted-foreground {
-  color: rgba(255, 255, 255, 0.8);
+  color: #ffffff !important;
 }
 
 /* ============================================
@@ -526,7 +526,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* High contrast text - meets AAA */
 .text-high-contrast {
-  color: #0B1220 !important;
+  color: #041e1e !important;
 }
 
 .text-high-contrast-on-dark {
@@ -535,11 +535,11 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* Medium contrast - meets AA */
 .text-medium-contrast {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
 .text-medium-contrast-on-dark {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
 }
 
 /* ============================================
@@ -547,25 +547,25 @@ body, p, span, div, li, a, button, input, select, textarea {
    ============================================ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0B1220;
-    --surface: #1F2937;
-    --sand: #374151;
+    --bg: #041e1e;
+    --surface: #0a4040;
+    --sand: #0a6969;
     --text: #F7F6F3;
-    --text-inverse: #0B1220;
-    --muted: #9CA3AF;
-    --border: #374151;
+    --text-inverse: #041e1e;
+    --muted: #ffffff;
+    --border: #0a6969;
   }
 }
 
 /* Manual dark mode class */
 .dark {
-  --bg: #0B1220;
-  --surface: #1F2937;
-  --sand: #374151;
+  --bg: #041e1e;
+  --surface: #0a4040;
+  --sand: #0a6969;
   --text: #F7F6F3;
-  --text-inverse: #0B1220;
-  --muted: #9CA3AF;
-  --border: #374151;
+  --text-inverse: #041e1e;
+  --muted: #ffffff;
+  --border: #0a6969;
   
   /* Brand colors adjustments for dark mode */
   --brand-foundation-soft: #1a4a4b;
@@ -609,7 +609,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 }
 
 .dark .text-muted-foreground {
-  color: var(--muted) !important;
+  color: #ffffff !important;
 }
 
 /* Dark mode borders */
@@ -713,14 +713,14 @@ body, p, span, div, li, a, button, input, select, textarea {
    on light backgrounds for maximum readability
    ============================================ */
 
-/* Force text-muted-foreground to be dark gray */
+/* Force text-muted-foreground to near-black on light backgrounds */
 .text-muted-foreground {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
-/* Force all paragraphs to be readable */
+/* Force all paragraphs to near-black */
 p, .prose p, article p {
-  color: #1f2937;
+  color: #000000;
 }
 
 /* Ensure card descriptions are readable */
@@ -728,7 +728,7 @@ p, .prose p, article p {
 .card .text-muted-foreground,
 [class*="Card"] p,
 [class*="Card"] .text-muted-foreground {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
 /* Fix for sections with white/light backgrounds */
@@ -742,35 +742,188 @@ p, .prose p, article p {
 .bg-surface .text-muted-foreground,
 section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) p,
 section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) .text-muted-foreground {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
-/* Dark mode: ensure text is light on dark backgrounds */
+/* Dark mode: ensure text is pure white on dark backgrounds */
 .dark .text-muted-foreground {
-  color: #9CA3AF !important;
+  color: #ffffff !important;
 }
 
 .dark p,
 .dark .prose p,
 .dark article p {
-  color: #E5E7EB;
+  color: #ffffff;
 }
 
 .dark .card p,
 .dark .card .text-muted-foreground,
 .dark [class*="Card"] p,
 .dark [class*="Card"] .text-muted-foreground {
-  color: #9CA3AF !important;
+  color: #ffffff !important;
 }
 
 /* Ensure text on dark sections remains light */
-[class*="bg-slate-900"] p,
-[class*="bg-slate-900"] .text-muted-foreground,
+[class*="bg-[#062b2b]"] p,
+[class*="bg-[#062b2b]"] .text-muted-foreground,
+[class*="bg-[#041e1e]"] p,
+[class*="bg-[#041e1e]"] .text-muted-foreground,
+[class*="bg-[#0a4040]"] p,
+[class*="bg-[#0a4040]"] .text-muted-foreground,
+[class*="bg-[#0a6969]"] p,
+[class*="bg-[#0a6969]"] .text-muted-foreground,
 [class*="bg-teal-900"] p,
 [class*="bg-teal-900"] .text-muted-foreground,
 [class*="bg-obsidian"] p,
 [class*="bg-obsidian"] .text-muted-foreground,
 .bg-gradient-to-br.from-teal-900 p,
-.bg-gradient-to-br.from-slate-900 p {
-  color: rgba(255, 255, 255, 0.9) !important;
+.bg-gradient-to-br.from-[#062b2b] p,
+.bg-gradient-to-b.from-[#041e1e] p,
+.bg-gradient-to-br.from-[#041e1e] p {
+  color: #ffffff !important;
+}
+
+/* ============================================
+   ADMIN SIDEBAR DARK MODE OVERRIDES
+   ============================================ */
+.dark .bg-sidebar {
+  background-color: var(--surface) !important;
+}
+.dark .text-sidebar-foreground {
+  color: #ffffff !important;
+}
+.dark .text-sidebar-accent-foreground {
+  color: #ffffff !important;
+}
+.dark .border-sidebar-border {
+  border-color: var(--border) !important;
+}
+.dark .bg-sidebar-accent {
+  background-color: var(--sand) !important;
+}
+.dark .bg-sidebar-primary {
+  background-color: var(--brand-foundation) !important;
+}
+.dark .text-sidebar-primary-foreground {
+  color: #ffffff !important;
+}
+/* Admin topbar dark mode */
+.dark .bg-background\/95 {
+  background-color: rgba(4, 30, 30, 0.95) !important;
+}
+/* Admin table headers dark mode */
+.dark thead th,
+.dark [role="columnheader"] {
+  color: #ffffff !important;
+}
+.dark tbody td,
+.dark [role="cell"] {
+  color: #ffffff !important;
+}
+/* Admin badges dark mode */
+.dark .badge,
+.dark [class*="Badge"] {
+  color: #ffffff;
+}
+/* Admin dropdown/popover dark mode */
+.dark [role="menu"],
+.dark [role="listbox"],
+.dark .popover-content {
+  background-color: var(--surface) !important;
+  color: #ffffff !important;
+}
+.dark [role="menuitem"],
+.dark [role="option"] {
+  color: #ffffff !important;
+}
+/* Admin tooltip dark mode */
+.dark [role="tooltip"] {
+  background-color: var(--surface) !important;
+  color: #ffffff !important;
+}
+/* Admin modal/dialog dark mode */
+.dark [role="dialog"] {
+  background-color: var(--surface) !important;
+  color: #ffffff !important;
+}
+.dark [role="dialog"] p,
+.dark [role="dialog"] span,
+.dark [role="dialog"] label {
+  color: #ffffff !important;
+}
+/* Admin form labels dark mode */
+.dark label {
+  color: #ffffff !important;
+}
+.dark .text-sm.font-medium {
+  color: #ffffff !important;
+}
+/* Admin breadcrumb dark mode */
+.dark nav[aria-label="breadcrumb"] a,
+.dark nav[aria-label="breadcrumb"] span {
+  color: #ffffff !important;
+}
+
+/* ============================================
+   ADMIN LIGHT MODE OVERRIDES
+   ============================================ */
+/* Admin table headers light mode */
+thead th,
+[role="columnheader"] {
+  color: #000000 !important;
+}
+tbody td,
+[role="cell"] {
+  color: #000000;
+}
+/* Admin form labels light mode */
+label {
+  color: #000000;
+}
+/* Admin breadcrumb light mode */
+nav[aria-label="breadcrumb"] a,
+nav[aria-label="breadcrumb"] span {
+  color: #000000;
+}
+/* Admin dropdown/popover light mode */
+[role="menuitem"],
+[role="option"] {
+  color: #000000;
+}
+/* Admin tooltip light mode */
+[role="tooltip"] {
+  color: #000000;
+}
+/* Admin modal/dialog light mode */
+[role="dialog"] p,
+[role="dialog"] span,
+[role="dialog"] label {
+  color: #000000;
+}
+/* Admin notification/toast text */
+[role="alert"] p,
+[role="alert"] span,
+[role="status"] p,
+[role="status"] span {
+  color: #000000;
+}
+.dark [role="alert"] p,
+.dark [role="alert"] span,
+.dark [role="status"] p,
+.dark [role="status"] span {
+  color: #ffffff !important;
+}
+/* Admin select trigger text */
+button[role="combobox"] {
+  color: #000000;
+}
+.dark button[role="combobox"] {
+  color: #ffffff !important;
+}
+/* Admin textarea and input text */
+input, textarea, select {
+  color: #000000;
+}
+.dark input, .dark textarea, .dark select {
+  color: #ffffff !important;
 }

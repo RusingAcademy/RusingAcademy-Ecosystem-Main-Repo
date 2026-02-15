@@ -8,6 +8,7 @@
 
 import crypto from "crypto";
 import { ENV } from "./_core/env";
+import { retry } from "./resilience";
 
 const BUNNY_STREAM_BASE = "https://video.bunnycdn.com";
 
@@ -98,14 +99,14 @@ export async function createVideo(
   const body: Record<string, unknown> = { title };
   if (collectionId) body.collectionId = collectionId;
 
-  const res = await fetch(`${BUNNY_STREAM_BASE}/library/${libraryId}/videos`, {
+  const res = await retry.api(() => fetch(`${BUNNY_STREAM_BASE}/library/${libraryId}/videos`, {
     method: "POST",
     headers: {
       ...getHeaders(),
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
-  });
+  }), "bunnyStream.fetch1");
 
   if (!res.ok) {
     const text = await res.text();
@@ -124,7 +125,7 @@ export async function uploadVideo(
 ): Promise<{ success: boolean; message: string; statusCode: number }> {
   const libraryId = getLibraryId();
 
-  const res = await fetch(
+  const res = await retry.api(() => fetch(
     `${BUNNY_STREAM_BASE}/library/${libraryId}/videos/${videoId}`,
     {
       method: "PUT",
@@ -134,7 +135,7 @@ export async function uploadVideo(
       },
       body: fileBuffer,
     }
-  );
+  ), "bunnyStream.fetch2");
 
   if (!res.ok) {
     const text = await res.text();
@@ -178,13 +179,13 @@ export function generateTusCredentials(videoId: string): TusUploadCredentials {
 export async function getVideo(videoId: string): Promise<BunnyVideo> {
   const libraryId = getLibraryId();
 
-  const res = await fetch(
+  const res = await retry.api(() => fetch(
     `${BUNNY_STREAM_BASE}/library/${libraryId}/videos/${videoId}`,
     {
       method: "GET",
       headers: getHeaders(),
     }
-  );
+  ), "bunnyStream.fetch3");
 
   if (!res.ok) {
     const text = await res.text();
@@ -212,13 +213,13 @@ export async function listVideos(opts?: {
   if (opts?.collection) params.set("collection", opts.collection);
   if (opts?.orderBy) params.set("orderBy", opts.orderBy);
 
-  const res = await fetch(
+  const res = await retry.api(() => fetch(
     `${BUNNY_STREAM_BASE}/library/${libraryId}/videos?${params.toString()}`,
     {
       method: "GET",
       headers: getHeaders(),
     }
-  );
+  ), "bunnyStream.fetch4");
 
   if (!res.ok) {
     const text = await res.text();
@@ -238,13 +239,13 @@ export async function deleteVideo(
 ): Promise<{ success: boolean; message: string; statusCode: number }> {
   const libraryId = getLibraryId();
 
-  const res = await fetch(
+  const res = await retry.api(() => fetch(
     `${BUNNY_STREAM_BASE}/library/${libraryId}/videos/${videoId}`,
     {
       method: "DELETE",
       headers: getHeaders(),
     }
-  );
+  ), "bunnyStream.fetch5");
 
   if (!res.ok) {
     const text = await res.text();
@@ -265,7 +266,7 @@ export async function updateVideo(
 ): Promise<{ success: boolean; message: string; statusCode: number }> {
   const libraryId = getLibraryId();
 
-  const res = await fetch(
+  const res = await retry.api(() => fetch(
     `${BUNNY_STREAM_BASE}/library/${libraryId}/videos/${videoId}`,
     {
       method: "POST",
@@ -275,7 +276,7 @@ export async function updateVideo(
       },
       body: JSON.stringify(data),
     }
-  );
+  ), "bunnyStream.fetch6");
 
   if (!res.ok) {
     const text = await res.text();
@@ -296,7 +297,7 @@ export async function fetchVideoFromUrl(
 ): Promise<{ success: boolean; message: string; statusCode: number }> {
   const libraryId = getLibraryId();
 
-  const res = await fetch(
+  const res = await retry.api(() => fetch(
     `${BUNNY_STREAM_BASE}/library/${libraryId}/videos/fetch`,
     {
       method: "POST",
@@ -306,7 +307,7 @@ export async function fetchVideoFromUrl(
       },
       body: JSON.stringify({ url, headers: headers ?? {} }),
     }
-  );
+  ), "bunnyStream.fetch7");
 
   if (!res.ok) {
     const text = await res.text();

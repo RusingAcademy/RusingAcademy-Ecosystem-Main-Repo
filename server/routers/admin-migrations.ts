@@ -3,6 +3,8 @@ import { getDb } from "../db";
 import { sql } from "drizzle-orm";
 import * as crypto from "crypto";
 import argon2 from "argon2";
+import { createLogger } from "../logger";
+const log = createLogger("routers-admin-migrations");
 
 const router = Router();
 
@@ -21,7 +23,7 @@ router.post("/run-rbac-migration", async (req, res) => {
       return res.status(503).json({ error: "Database not available" });
     }
 
-    console.log("🚀 Starting RBAC migration...\n");
+    log.info("🚀 Starting RBAC migration...\n");
     const results: string[] = [];
 
     // Step 1: Create tables
@@ -218,7 +220,7 @@ router.post("/run-rbac-migration", async (req, res) => {
       results 
     });
   } catch (error: any) {
-    console.error("❌ Migration failed:", error);
+    log.error("❌ Migration failed:", error);
     return res.status(500).json({ 
       success: false, 
       error: error.message 
@@ -247,7 +249,7 @@ router.post("/create-owner", async (req, res) => {
       return res.status(400).json({ error: "Email and name are required" });
     }
 
-    console.log(`🚀 Creating Owner account for ${email}...`);
+    log.info(`🚀 Creating Owner account for ${email}...`);
 
     // Get the owner role ID
     const [roleRows] = await db.execute(sql`SELECT id FROM roles WHERE name = 'owner'`);
@@ -311,7 +313,7 @@ router.post("/create-owner", async (req, res) => {
       expiresIn: "7 days"
     });
   } catch (error: any) {
-    console.error("❌ Failed to create owner account:", error);
+    log.error("❌ Failed to create owner account:", error);
     return res.status(500).json({ 
       success: false, 
       error: error.message 
@@ -340,7 +342,7 @@ router.post("/promote-to-owner", async (req, res) => {
       return res.status(400).json({ error: "Email is required" });
     }
 
-    console.log(`🚀 Promoting user ${email} to Owner...`);
+    log.info(`🚀 Promoting user ${email} to Owner...`);
 
     // Check if user exists
     const [existingUser] = await db.execute(sql`SELECT id, name, role, isOwner FROM users WHERE email = ${email}`);
@@ -359,7 +361,7 @@ router.post("/promote-to-owner", async (req, res) => {
     
     // If owner role doesn't exist, create it
     if (!ownerRoleId) {
-      console.log("Owner role not found, creating it...");
+      log.info("Owner role not found, creating it...");
       await db.execute(sql`
         INSERT INTO roles (name, displayName, description, level, isSystem, maxUsers)
         VALUES ('owner', 'Owner', 'Super-admin with full platform access', 100, TRUE, 1)
@@ -383,7 +385,7 @@ router.post("/promote-to-owner", async (req, res) => {
         VALUES (${user.id}, 'user.promote_to_owner', 'user', ${user.id}, ${JSON.stringify({ email, previousRole: user.role })})
       `);
     } catch (e) {
-      console.log("Audit log not available, skipping");
+      log.info("Audit log not available, skipping");
     }
 
     return res.json({
@@ -405,7 +407,7 @@ router.post("/promote-to-owner", async (req, res) => {
       ]
     });
   } catch (error: any) {
-    console.error("❌ Failed to promote user to owner:", error);
+    log.error("❌ Failed to promote user to owner:", error);
     return res.status(500).json({ 
       success: false, 
       error: error.message 
@@ -428,7 +430,7 @@ router.post("/run-hr-migration", async (req, res) => {
       return res.status(503).json({ error: "Database not available" });
     }
 
-    console.log("🚀 Starting HR tables migration...\n");
+    log.info("🚀 Starting HR tables migration...\n");
     const results: string[] = [];
 
     // Create cohorts table
@@ -569,7 +571,7 @@ router.post("/run-hr-migration", async (req, res) => {
       results 
     });
   } catch (error: any) {
-    console.error("❌ HR Migration failed:", error);
+    log.error("❌ HR Migration failed:", error);
     return res.status(500).json({ 
       success: false, 
       error: error.message 
@@ -598,7 +600,7 @@ router.post("/create-hr-admin", async (req, res) => {
       return res.status(400).json({ error: "Email and organizationId are required" });
     }
 
-    console.log(`🚀 Creating HR Admin for ${email} in org ${organizationId}...`);
+    log.info(`🚀 Creating HR Admin for ${email} in org ${organizationId}...`);
 
     // Check if user exists
     const [existingUser] = await db.execute(sql`SELECT id, name, role FROM users WHERE email = ${email}`);
@@ -658,7 +660,7 @@ router.post("/create-hr-admin", async (req, res) => {
       ]
     });
   } catch (error: any) {
-    console.error("❌ Failed to create HR admin:", error);
+    log.error("❌ Failed to create HR admin:", error);
     return res.status(500).json({ 
       success: false, 
       error: error.message 
@@ -706,7 +708,7 @@ router.post("/reset-password", async (req, res) => {
       message: `Password reset successfully for ${email}`,
     });
   } catch (error: any) {
-    console.error("❌ Failed to reset password:", error);
+    log.error("❌ Failed to reset password:", error);
     return res.status(500).json({ 
       success: false, 
       error: error.message 
@@ -736,7 +738,7 @@ router.get("/list-users", async (req, res) => {
       users: users[0],
     });
   } catch (error: any) {
-    console.error("❌ Failed to list users:", error);
+    log.error("❌ Failed to list users:", error);
     return res.status(500).json({ 
       success: false, 
       error: error.message 

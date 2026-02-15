@@ -6,9 +6,10 @@
  * 
  * Stores metrics in-memory with periodic flush to database.
  */
-import { structuredLog, startTimer } from "../structuredLogger";
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("services-aiPipelineMonitor");
 
 // ============================================================================
 // TYPES
@@ -60,17 +61,17 @@ export function recordPipelineMetric(metric: PipelineMetric): void {
 
   // Log to structured logger
   if (!metric.success) {
-    structuredLog("error", "ai-pipeline", `${metric.stage} failed`, {
+    log.error({
       durationMs: metric.durationMs,
       error: metric.errorMessage,
       userId: metric.userId,
       sessionId: metric.sessionId,
-    });
+    }, `${metric.stage} failed`);
   } else {
-    structuredLog("info", "ai-pipeline", `${metric.stage} completed`, {
+    log.info({
       durationMs: metric.durationMs,
       userId: metric.userId,
-    });
+    }, `${metric.stage} completed`);
   }
 
   // Trim buffer if too large
@@ -88,12 +89,11 @@ export function trackPipelineStage(
   userId?: number,
   sessionId?: string
 ) {
-  const timer = startTimer("ai-pipeline", stage);
   const startTime = Date.now();
 
   return {
     success: (metadata?: Record<string, any>) => {
-      const durationMs = timer(metadata);
+      const durationMs = Date.now() - startTime;
       recordPipelineMetric({
         stage,
         durationMs,
@@ -267,14 +267,14 @@ export async function flushMetricsToDb(): Promise<number> {
         )
       `);
     }
-    structuredLog("info", "ai-pipeline", `Flushed ${batch.length} metrics to database`);
+    log.info(`Flushed ${batch.length} metrics to database`);
     return batch.length;
   } catch (error) {
     // Put metrics back in buffer on failure
     METRICS_BUFFER.unshift(...batch);
-    structuredLog("error", "ai-pipeline", "Failed to flush metrics to database", {
+    log.error({
       error: error instanceof Error ? error.message : String(error),
-    });
+    }, "Failed to flush metrics to database");
     return 0;
   }
 }

@@ -897,7 +897,7 @@ export default function AdminDashboard() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">
       <Header />
 
       <main className="flex-1">
@@ -2721,7 +2721,7 @@ export default function AdminDashboard() {
                           activity.type === "enrollment" ? "bg-blue-100 text-blue-600" :
                           activity.type === "session" ? "bg-green-100 text-green-600" :
                           activity.type === "payment" ? "bg-yellow-100 text-yellow-600" :
-                          "bg-gray-100 text-gray-600"
+                          "bg-gray-100 text-black"
                         }`}>
                           {activity.type === "enrollment" && <BookOpen className="h-4 w-4" />}
                           {activity.type === "session" && <Video className="h-4 w-4" />}

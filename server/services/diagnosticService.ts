@@ -9,6 +9,8 @@
 
 import PDFDocument from 'pdfkit';
 import nodemailer from 'nodemailer';
+import { createLogger } from "../logger";
+const log = createLogger("services-diagnosticService");
 
 // Design tokens for PDF
 const PDF_COLORS = {
@@ -120,7 +122,7 @@ export async function sendDiagnosticEmail(result: DiagnosticResult, pdfBuffer: B
     });
     return true;
   } catch (error) {
-    console.error('Error sending diagnostic email:', error);
+    log.error('Error sending diagnostic email:', error);
     return false;
   }
 }

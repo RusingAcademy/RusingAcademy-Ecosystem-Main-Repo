@@ -596,7 +596,7 @@ export default function PageBuilder() {
               <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Live Preview</h3>
               <div className="border rounded-lg overflow-auto bg-white shadow-inner mx-auto" style={{ maxWidth: previewWidth, maxHeight: "calc(100vh - 200px)" }}>
                 {sections.filter((s: any) => s.isVisible !== false).length === 0 ? (
-                  <div className="p-16 text-center text-gray-400 text-sm">No visible sections to preview</div>
+                  <div className="p-16 text-center text-[#67E8F9] text-sm">No visible sections to preview</div>
                 ) : (
                   sections.filter((s: any) => s.isVisible !== false).map((section: any) => (
                     <LivePreviewSection key={section.id} section={section} />
@@ -884,7 +884,7 @@ export default function PageBuilder() {
               <LivePreviewSection key={section.id} section={section} />
             ))}
             {((pageQuery.data as any)?.sections || []).filter((s: any) => s.isVisible !== false).length === 0 && (
-              <div className="p-16 text-center text-gray-400">No visible sections to preview</div>
+              <div className="p-16 text-center text-[#67E8F9]">No visible sections to preview</div>
             )}
           </div>
         </DialogContent>

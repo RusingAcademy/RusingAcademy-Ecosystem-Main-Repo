@@ -20,7 +20,7 @@ export function useServiceWorker() {
   // Register service worker
   useEffect(() => {
     if (!("serviceWorker" in navigator)) {
-      console.log("[SW Hook] Service workers not supported");
+      
       return;
     }
 
@@ -32,7 +32,7 @@ export function useServiceWorker() {
           scope: "/",
         });
 
-        console.log("[SW Hook] Service worker registered:", registration.scope);
+        
 
         setState((prev) => ({
           ...prev,
@@ -64,7 +64,7 @@ export function useServiceWorker() {
     // Listen for messages from service worker
     navigator.serviceWorker.addEventListener("message", (event) => {
       if (event.data?.type === "COURSE_CACHED") {
-        console.log("[SW Hook] Course cached:", event.data);
+        
       }
     });
   }, []);

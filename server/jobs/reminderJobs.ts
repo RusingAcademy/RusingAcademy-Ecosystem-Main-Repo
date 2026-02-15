@@ -10,6 +10,9 @@ import {
   sendPlanExpiryReminderEmail,
   sendInactivityReminderEmail,
 } from "../email-reminders";
+import { createLogger } from "../logger";
+const log = createLogger("jobs-reminderJobs");
+
 
 // Job state tracking
 let isRunning = false;
@@ -26,7 +29,7 @@ export async function checkExpiringPlans(): Promise<{
 }> {
   const db = await getDb();
   if (!db) {
-    console.error("[Jobs] Database not available for checkExpiringPlans");
+    log.error("[Jobs] Database not available for checkExpiringPlans");
     return { processed: 0, sent: 0, errors: 0 };
   }
 
@@ -87,19 +90,19 @@ export async function checkExpiringPlans(): Promise<{
           });
 
           stats.sent++;
-          console.log(
+          log.info(
             `[Jobs] Sent ${daysBeforeExpiry}-day expiry reminder to ${user.email} for plan ${plan.id}`
           );
         } catch (error) {
           stats.errors++;
-          console.error(
+          log.error(
             `[Jobs] Failed to send expiry reminder to ${user.email}:`,
             error
           );
         }
       }
     } catch (error) {
-      console.error(
+      log.error(
         `[Jobs] Error checking ${daysBeforeExpiry}-day expiring plans:`,
         error
       );
@@ -121,7 +124,7 @@ export async function checkInactiveUsers(): Promise<{
 }> {
   const db = await getDb();
   if (!db) {
-    console.error("[Jobs] Database not available for checkInactiveUsers");
+    log.error("[Jobs] Database not available for checkInactiveUsers");
     return { processed: 0, sent: 0, errors: 0 };
   }
 
@@ -177,19 +180,19 @@ export async function checkInactiveUsers(): Promise<{
         });
 
         stats.sent++;
-        console.log(
+        log.info(
           `[Jobs] Sent inactivity reminder to ${user.email} (${daysSinceLogin} days inactive)`
         );
       } catch (error) {
         stats.errors++;
-        console.error(
+        log.error(
           `[Jobs] Failed to send inactivity reminder to ${user.email}:`,
           error
         );
       }
     }
   } catch (error) {
-    console.error("[Jobs] Error checking inactive users:", error);
+    log.error("[Jobs] Error checking inactive users:", error);
     stats.errors++;
   }
 
@@ -205,7 +208,7 @@ export async function runAllReminderJobs(): Promise<{
   runTime: Date;
 }> {
   if (isRunning) {
-    console.log("[Jobs] Reminder jobs already running, skipping...");
+    log.info("[Jobs] Reminder jobs already running, skipping...");
     return {
       expiryReminders: { processed: 0, sent: 0, errors: 0 },
       inactivityReminders: { processed: 0, sent: 0, errors: 0 },
@@ -215,7 +218,7 @@ export async function runAllReminderJobs(): Promise<{
 
   isRunning = true;
   const startTime = new Date();
-  console.log(`[Jobs] Starting reminder jobs at ${startTime.toISOString()}`);
+  log.info(`[Jobs] Starting reminder jobs at ${startTime.toISOString()}`);
 
   try {
     const [expiryResults, inactivityResults] = await Promise.all([
@@ -224,7 +227,7 @@ export async function runAllReminderJobs(): Promise<{
     ]);
 
     lastRunTime = new Date();
-    console.log(
+    log.info(
       `[Jobs] Reminder jobs completed. Expiry: ${expiryResults.sent} sent, Inactivity: ${inactivityResults.sent} sent`
     );
 
@@ -254,7 +257,7 @@ export function scheduleReminderJobs(hour: number = 9, minute: number = 0): Node
   // Check every minute if it's time to run
   const intervalId = setInterval(runJob, 60 * 1000);
 
-  console.log(
+  log.info(
     `[Jobs] Reminder jobs scheduled to run daily at ${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`
   );
 

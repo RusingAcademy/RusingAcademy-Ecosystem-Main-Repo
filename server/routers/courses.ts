@@ -17,6 +17,9 @@ import {
 } from "../../drizzle/schema";
 import { eq, and, desc, asc, like, sql, or } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
+import { createLogger } from "../logger";
+import { FREE_ACCESS_MODE } from "../../shared/const";
+const log = createLogger("routers-courses");
 
 export const coursesRouter = router({
   // ============================================================================
@@ -228,7 +231,7 @@ export const coursesRouter = router({
         });
       }
       
-      if ((course.price || 0) > 0) {
+      if (!FREE_ACCESS_MODE && (course.price || 0) > 0) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "This course requires payment",
@@ -263,7 +266,22 @@ export const coursesRouter = router({
       await db.update(courses)
         .set({ totalEnrollments: sql`${courses.totalEnrollments} + 1` })
         .where(eq(courses.id, input.courseId));
-      
+
+      // Send push notification for enrollment confirmation (best-effort)
+      try {
+        const { sendPushToUser } = await import("../services/pushNotificationService");
+        await sendPushToUser(ctx.user.id, {
+          title: "\u2705 Enrollment Confirmed!",
+          body: `You are now enrolled in "${course.title}". Start learning today!`,
+          tag: `enrollment-course-${input.courseId}`,
+          category: "reminders",
+          url: `/courses/${course.slug || input.courseId}`,
+          data: { type: "enrollment_confirmed", courseId: input.courseId },
+        });
+      } catch (pushErr) {
+        console.warn("[Push] Failed to send enrollment notification:", pushErr);
+      }
+
       return { success: true };
     }),
 
@@ -300,7 +318,7 @@ export const coursesRouter = router({
             .limit(1);
           enrollment = enrollmentRows[0];
         } catch (err: any) {
-          console.error(`[getLesson] Enrollment query failed:`, err.message);
+          log.error(`[getLesson] Enrollment query failed:`, err.message);
           // If the enrollment query fails (schema mismatch), try auto-enrolling anyway
         }
         
@@ -314,7 +332,7 @@ export const coursesRouter = router({
           const isFree = course && (course.price === null || course.price === undefined || Number(course.price) === 0);
           const isAdmin = ctx.user.role === 'admin';
           
-          if (course && (isFree || isAdmin)) {
+          if (course && (FREE_ACCESS_MODE || isFree || isAdmin)) {
             try {
               await db.insert(courseEnrollments).values({
                 userId: ctx.user.id,
@@ -453,12 +471,101 @@ export const coursesRouter = router({
             completedAt: newProgress >= 100 ? now : null,
             status: newProgress >= 100 ? "completed" : "active",
           })
-          .where(eq(courseEnrollments.id, enrollment.id));
+           .where(eq(courseEnrollments.id, enrollment.id));
       }
       
+      // Cascade: update path enrollment progress
+      if (input.completed) {
+        try {
+          const { updatePathProgress } = await import("../services/pathProgressService");
+          await updatePathProgress(ctx.user.id, lesson.courseId);
+        } catch (e) {
+          console.error("[courses.updateProgress] Path progress cascade error:", e);
+        }
+      }
+
+      // Cascade: auto-generate certificate when course reaches 100%
+      if (input.completed) {
+        try {
+          const completedCheck = await db.select({ count: sql<number>`count(*)` })
+            .from(lessonProgress)
+            .where(and(
+              eq(lessonProgress.courseId, enrollment.courseId),
+              eq(lessonProgress.status, "completed")
+            ));
+          const totalL = enrollment.totalLessons || 1;
+          const pct = Math.round((completedCheck[0].count / totalL) * 100);
+          if (pct >= 100) {
+            const [existingCert] = await db.select({ id: certificates.id })
+              .from(certificates)
+              .where(and(
+                eq(certificates.userId, ctx.user.id),
+                eq(certificates.courseId, enrollment.courseId)
+              ))
+              .limit(1);
+            if (!existingCert) {
+              const [courseForCert] = await db.select()
+                .from(courses)
+                .where(eq(courses.id, enrollment.courseId))
+                .limit(1);
+              if (courseForCert) {
+                const ts = Date.now().toString(36).toUpperCase();
+                const up = ctx.user.id.toString(36).toUpperCase().padStart(4, "0");
+                const cp = enrollment.courseId.toString(36).toUpperCase().padStart(3, "0");
+                const rnd = Math.random().toString(36).substring(2, 6).toUpperCase();
+                const certNum = `RA-${ts}-${up}-${cp}-${rnd}`;
+                let pdfUrl: string | null = null;
+                try {
+                  const { generateCertificatePdf } = await import("../services/certificatePdfService");
+                  pdfUrl = await generateCertificatePdf({
+                    recipientName: ctx.user.name || "Learner",
+                    courseTitle: courseForCert.title,
+                    certificateNumber: certNum,
+                    issuedAt: now,
+                    language: (ctx.user as any).preferredLanguage === "fr" ? "fr" : "en",
+                    totalLessons: totalL,
+                  });
+                } catch (_) { /* PDF gen is best-effort */ }
+                await db.insert(certificates).values({
+                  certificateId: certNum,
+                  userId: ctx.user.id,
+                  courseId: enrollment.courseId,
+                  enrollmentId: enrollment.id,
+                  recipientName: ctx.user.name || "Learner",
+                  courseName: courseForCert.title,
+                  completionDate: now,
+                  verificationUrl: `https://rusingacademy.com/verify/${certNum}`,
+                  pdfUrl,
+                  metadata: {
+                    language: (ctx.user as any).preferredLanguage || "en",
+                    autoGenerated: true,
+                    source: "courses.updateProgress",
+                  },
+                });
+                log.info(`[AutoCert] Certificate ${certNum} auto-generated via courses.updateProgress`);
+
+                // Push notification for course completion + certificate
+                try {
+                  const { sendPushToUser } = await import("../services/pushNotificationService");
+                  await sendPushToUser(ctx.user.id, {
+                    title: "\ud83c\udf93 Course Completed!",
+                    body: `Congratulations! You completed "${courseForCert.title}" and earned a certificate!`,
+                    tag: `completion-course-${enrollment.courseId}`,
+                    category: "reminders",
+                    url: `/portal/certificates`,
+                    data: { type: "course_completed", courseId: enrollment.courseId, certificateId: certNum },
+                  });
+                } catch (_pushErr) { /* best-effort */ }
+              }
+            }
+          }
+        } catch (certErr) {
+          log.error("[courses.updateProgress] Certificate auto-gen error:", certErr);
+        }
+      }
+
       return { success: true };
     }),
-
   // Get quiz for a lesson
   getQuiz: protectedProcedure
     .input(z.object({ lessonId: z.number() }))

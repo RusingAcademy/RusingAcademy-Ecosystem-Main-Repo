@@ -12,6 +12,8 @@
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
+import { createLogger } from "../logger";
+const log = createLogger("services-adminNotifications");
 
 // ============================================================================
 // TYPES
@@ -50,7 +52,7 @@ export async function sendAdminAlert(alert: AdminAlert): Promise<boolean> {
     `);
     const recentCount = Number((recentAlerts as any)?.[0]?.cnt ?? 0);
     if (recentCount > 0) {
-      console.log(`[AdminNotif] Dedup: "${alert.title}" already sent within ${cooldownMinutes}min, skipping`);
+      log.info(`[AdminNotif] Dedup: "${alert.title}" already sent within ${cooldownMinutes}min, skipping`);
       return false;
     }
 
@@ -78,10 +80,10 @@ export async function sendAdminAlert(alert: AdminAlert): Promise<boolean> {
       });
     }
 
-    console.log(`[AdminNotif] Alert sent: [${alert.severity}] ${alert.title} → ${adminIds.length} admins`);
+    log.info(`[AdminNotif] Alert sent: [${alert.severity}] ${alert.title} → ${adminIds.length} admins`);
     return true;
   } catch (err) {
-    console.error("[AdminNotif] Failed to send alert:", err);
+    log.error("[AdminNotif] Failed to send alert:", err);
     return false;
   }
 }
@@ -129,7 +131,7 @@ export async function checkWebhookHealth(): Promise<void> {
       });
     }
   } catch (err) {
-    console.error("[AdminNotif] checkWebhookHealth error:", err);
+    log.error("[AdminNotif] checkWebhookHealth error:", err);
   }
 }
 
@@ -173,7 +175,7 @@ export async function checkAIScoreHealth(): Promise<void> {
       });
     }
   } catch (err) {
-    console.error("[AdminNotif] checkAIScoreHealth error:", err);
+    log.error("[AdminNotif] checkAIScoreHealth error:", err);
   }
 }
 
@@ -208,7 +210,7 @@ export async function checkNewCoachSignups(): Promise<void> {
       metadata: { count: coaches.length, coaches: coaches.map((c: any) => ({ id: c.id, name: c.name })) },
     });
   } catch (err) {
-    console.error("[AdminNotif] checkNewCoachSignups error:", err);
+    log.error("[AdminNotif] checkNewCoachSignups error:", err);
   }
 }
 
@@ -254,7 +256,7 @@ export async function checkAIPipelineHealth(): Promise<void> {
       });
     }
   } catch (err) {
-    console.error("[AdminNotif] checkAIPipelineHealth error:", err);
+    log.error("[AdminNotif] checkAIPipelineHealth error:", err);
   }
 }
 
@@ -266,7 +268,7 @@ export async function checkAIPipelineHealth(): Promise<void> {
  * Run all health checks. Call this from a cron job or scheduler.
  */
 export async function runAllHealthChecks(): Promise<{ checked: string[]; alerts: number }> {
-  console.log("[AdminNotif] Running all health checks...");
+  log.info("[AdminNotif] Running all health checks...");
   const checks = [
     { name: "webhookHealth", fn: checkWebhookHealth },
     { name: "aiScoreHealth", fn: checkAIScoreHealth },
@@ -282,11 +284,11 @@ export async function runAllHealthChecks(): Promise<{ checked: string[]; alerts:
       await check.fn();
       checked.push(check.name);
     } catch (err) {
-      console.error(`[AdminNotif] Health check "${check.name}" failed:`, err);
+      log.error(`[AdminNotif] Health check "${check.name}" failed:`, err);
     }
   }
 
-  console.log(`[AdminNotif] Health checks complete: ${checked.length}/${checks.length} ran`);
+  log.info(`[AdminNotif] Health checks complete: ${checked.length}/${checks.length} ran`);
   return { checked, alerts: alertCount };
 }
 

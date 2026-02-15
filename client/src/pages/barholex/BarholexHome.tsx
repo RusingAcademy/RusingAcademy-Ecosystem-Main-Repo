@@ -153,7 +153,7 @@ export default function BarholexHome() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
       <main id="main-content">
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
@@ -168,7 +168,7 @@ export default function BarholexHome() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white">
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-white/10 border border-white/60 text-white">
                   <Clapperboard className="w-4 h-4 text-[#D4AF37]" />
                   {language === "en" ? "Creative Production & EdTech" : "Production créative & EdTech"}
                 </span>
@@ -186,7 +186,7 @@ export default function BarholexHome() {
               
               <motion.p 
                 variants={fadeInUp}
-                className="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed"
+                className="text-lg md:text-xl text-[#67E8F9] mb-8 max-w-3xl mx-auto leading-relaxed"
               >
                 {language === "en"
                   ? "Full-service creative agency specializing in EdTech solutions, multimedia production, and digital innovation for language learning organizations."
@@ -202,7 +202,7 @@ export default function BarholexHome() {
                   </Button>
                 </Link>
                 <Link href="/barholex/portfolio">
-                  <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 border-white/30 text-white hover:bg-white/10 rounded-full">
+                  <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 border-white/60 text-white hover:bg-white/10 rounded-full">
                     <Play className="w-5 h-5" />
                     {language === "en" ? "View Portfolio" : "Voir le portfolio"}
                   </Button>
@@ -213,24 +213,24 @@ export default function BarholexHome() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-white/10 bg-white/5 backdrop-blur-sm">
+        <section className="py-8 border-y border-white/60 bg-white/5 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={projects.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{projects.count}+</div>
-                <div className="text-sm text-gray-400">{language === "en" ? "Projects Delivered" : "Projets livrés"}</div>
+                <div className="text-sm text-[#67E8F9]">{language === "en" ? "Projects Delivered" : "Projets livrés"}</div>
               </div>
               <div ref={clients.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{clients.count}+</div>
-                <div className="text-sm text-gray-400">{language === "en" ? "Happy Clients" : "Clients satisfaits"}</div>
+                <div className="text-sm text-[#67E8F9]">{language === "en" ? "Happy Clients" : "Clients satisfaits"}</div>
               </div>
               <div ref={awards.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{awards.count}</div>
-                <div className="text-sm text-gray-400">{language === "en" ? "Industry Awards" : "Prix de l'industrie"}</div>
+                <div className="text-sm text-[#67E8F9]">{language === "en" ? "Industry Awards" : "Prix de l'industrie"}</div>
               </div>
               <div ref={years.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{years.count}+</div>
-                <div className="text-sm text-gray-400">{language === "en" ? "Years Experience" : "Années d'expérience"}</div>
+                <div className="text-sm text-[#67E8F9]">{language === "en" ? "Years Experience" : "Années d'expérience"}</div>
               </div>
             </div>
           </div>
@@ -243,7 +243,7 @@ export default function BarholexHome() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Our Services" : "Nos services"}
               </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg text-[#67E8F9] max-w-2xl mx-auto">
                 {language === "en"
                   ? "Comprehensive creative solutions tailored for the education and language learning industry"
                   : "Solutions créatives complètes adaptées à l'industrie de l'éducation et de l'apprentissage des langues"
@@ -258,7 +258,7 @@ export default function BarholexHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#D4AF37]/50 transition-all group"
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/60 hover:border-[#D4AF37]/50 transition-all group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-colors">
                     <service.icon className="w-6 h-6 text-[#D4AF37]" />
@@ -266,7 +266,7 @@ export default function BarholexHome() {
                   <h3 className="font-bold text-white mb-2">
                     {language === "en" ? service.titleEn : service.titleFr}
                   </h3>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-[#67E8F9]">
                     {language === "en" ? service.descEn : service.descFr}
                   </p>
                 </motion.div>
@@ -276,13 +276,13 @@ export default function BarholexHome() {
         </section>
 
         {/* Portfolio Preview */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-900 to-black">
+        <section className="py-20 px-4 bg-gradient-to-br from-[#062b2b] to-[#041e1e]">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Featured Work" : "Travaux en vedette"}
               </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg text-[#67E8F9] max-w-2xl mx-auto">
                 {language === "en"
                   ? "A selection of our recent projects across various industries"
                   : "Une sélection de nos projets récents dans diverses industries"
@@ -318,7 +318,7 @@ export default function BarholexHome() {
 
             <div className="text-center mt-10">
               <Link href="/barholex/portfolio">
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-8">
+                <Button variant="outline" className="border-white/60 text-white hover:bg-white/10 rounded-full px-8">
                   {language === "en" ? "View All Projects" : "Voir tous les projets"}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -343,7 +343,7 @@ export default function BarholexHome() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  className="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm"
+                  className="px-6 py-3 rounded-full bg-white/5 border border-white/60 text-white/90 text-sm"
                 >
                   {language === "en" ? client.nameEn : client.nameFr}
                 </motion.div>
@@ -368,7 +368,7 @@ export default function BarholexHome() {
               <Link href="/barholex/contact">
                 <Button 
                   size="lg" 
-                  className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-gray-900"
+                  className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-[#062b2b]"
                 >
                   {language === "en" ? "Get in Touch" : "Nous contacter"}
                   <ArrowRight className="ml-2 h-5 w-5" />

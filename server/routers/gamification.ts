@@ -14,9 +14,14 @@ import {
   users,
   inAppNotifications,
   weeklyChallenges,
-  userWeeklyChallenges
+  userWeeklyChallenges,
+  lessonProgress,
+  quizAttempts,
+  courseEnrollments
 } from "../../drizzle/schema";
 import { eq, desc, sql, and } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-gamification");
 
 // XP amounts for different actions
 const XP_REWARDS = {
@@ -264,7 +269,7 @@ export const gamificationRouter = router({
       descriptionFr: z.string().optional(),
       courseId: z.number().optional(),
       moduleId: z.number().optional(),
-      metadata: z.record(z.string(), z.any()).optional(),
+      metadata: z.record(z.string(), z.unknown()).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
@@ -951,6 +956,29 @@ export const gamificationRouter = router({
       
       const levelInfo = getLevelForXp(totalXp);
       
+      // Calculate real progress stats
+      let lessonsCompletedCount = 0;
+      let quizzesPassedCount = 0;
+      let coursesEnrolledCount = 0;
+      try {
+        const [lc] = await db.select({ count: sql<number>`count(*)` })
+          .from(lessonProgress)
+          .where(and(eq(lessonProgress.userId, userId), eq(lessonProgress.status, "completed")));
+        lessonsCompletedCount = lc?.count || 0;
+      } catch { /* table may not exist yet */ }
+      try {
+        const [qp] = await db.select({ count: sql<number>`count(*)` })
+          .from(quizAttempts)
+          .where(and(eq(quizAttempts.userId, userId), eq(quizAttempts.passed, true)));
+        quizzesPassedCount = qp?.count || 0;
+      } catch { /* table may not exist yet */ }
+      try {
+        const [ce] = await db.select({ count: sql<number>`count(*)` })
+          .from(courseEnrollments)
+          .where(eq(courseEnrollments.userId, userId));
+        coursesEnrolledCount = ce?.count || 0;
+      } catch { /* table may not exist yet */ }
+      
       return {
         id: user.id,
         name: user.name,
@@ -962,9 +990,9 @@ export const gamificationRouter = router({
         longestStreak: xpRecord?.longestStreak || 0,
         rank: (higherRanked[0]?.count || 0) + 1,
         badgeCount: badgeCount[0]?.count || 0,
-        lessonsCompleted: 0, // TODO: Calculate from progress
-        quizzesPassed: 0, // TODO: Calculate from progress
-        coursesEnrolled: 0, // TODO: Calculate from enrollments
+        lessonsCompleted: lessonsCompletedCount,
+        quizzesPassed: quizzesPassedCount,
+        coursesEnrolled: coursesEnrolledCount,
         joinedAt: user.createdAt,
       };
     }),
@@ -1018,7 +1046,7 @@ export const gamificationRouter = router({
         }));
       } catch (error) {
         // Table may not exist yet, return empty array
-        console.log("[Gamification] getLearningHistory - table may not exist:", error);
+        log.info("[Gamification] getLearningHistory - table may not exist:", error);
         return [];
       }
     }),

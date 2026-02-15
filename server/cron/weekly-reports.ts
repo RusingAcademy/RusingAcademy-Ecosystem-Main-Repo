@@ -17,6 +17,8 @@
  */
 
 import { sendSundayProgressReports, sendMondayProgressReports } from "../progress-reports";
+import { createLogger } from "../logger";
+const log = createLogger("cron-weekly-reports");
 
 export interface CronResult {
   success: boolean;
@@ -48,7 +50,7 @@ export async function executeWeeklyReportsCron(): Promise<CronResult> {
     result = await sendMondayProgressReports();
   } else {
     // Not a report day - this shouldn't happen if cron is configured correctly
-    console.log(`[Cron] Weekly reports cron called on ${now.toLocaleDateString('en-US', { weekday: 'long' })} - no reports to send`);
+    log.info(`[Cron] Weekly reports cron called on ${now.toLocaleDateString('en-US', { weekday: 'long' })} - no reports to send`);
     return {
       success: true,
       day: now.toLocaleDateString('en-US', { weekday: 'long' }),

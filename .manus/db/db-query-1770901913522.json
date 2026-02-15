@@ -1,0 +1,328 @@
+{
+  "query": "SHOW TABLES;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW TABLES;",
+  "rows": [
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "__drizzle_migrations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "ab_tests"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "activities"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "activity_progress"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "admin_activity_log"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "admin_activity_logs"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "admin_invitations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "admin_notifications"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "affiliate_earnings"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "affiliate_payouts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "affiliate_referrals"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "affiliates"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "ai_pipeline_metrics"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "ai_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "analytics_events"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "audit_log"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "automations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "badges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "certificates"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cms_page_sections"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cms_page_versions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cms_pages"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cms_section_revisions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cms_section_templates"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cms_style_presets"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "coach_applications"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "coach_invitations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "coach_profiles"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "coaching_plan_purchases"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cohort_members"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cohorts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "community_events"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "content_analytics"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "course_assignments"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "course_enrollments"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "course_modules"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "course_reviews"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "courses"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "drip_content"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "ecosystem_leads"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "email_templates"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "email_verification_tokens"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "event_registrations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "forum_categories"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "forum_post_likes"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "forum_posts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "forum_threads"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "funnels"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "hr_audit_log"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learner_badges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learner_profiles"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learner_xp"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learning_paths"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "lesson_progress"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "lessons"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "media_library"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "navigation_menu_items"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "navigation_menus"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "notifications"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "offers"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "onboarding_config"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "onboarding_progress"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "org_course_assignments"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "org_members"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "organizations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "password_reset_tokens"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "path_courses"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "path_enrollments"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "path_reviews"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "payout_ledger"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "permissions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "platform_settings"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "practice_logs"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "quiz_attempts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "quiz_questions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "quizzes"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "review_schedule"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "reviews"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "role_permissions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "roles"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_companion_messages"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_companion_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_error_taxonomy"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_evaluation_rubrics"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_exam_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_interaction_logs"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_knowledge_collections"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_model_answers"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_oral_scenarios"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_practice_attempts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_practice_questions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_proficiency_standards"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_skill_trend"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_user_profiles"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_user_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "transactions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_badges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_permissions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_streaks"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_weekly_challenges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_xp"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "users"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "webhook_events_log"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "weekly_challenges"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_cwh3JmcrqYgAZTUAinEMzM\n__drizzle_migrations\nab_tests\nactivities\nactivity_progress\nadmin_activity_log\nadmin_activity_logs\nadmin_invitations\nadmin_notifications\naffiliate_earnings\naffiliate_payouts\naffiliate_referrals\naffiliates\nai_pipeline_metrics\nai_sessions\nanalytics_events\naudit_log\nautomations\nbadges\ncertificates\ncms_page_sections\ncms_page_versions\ncms_pages\ncms_section_revisions\ncms_section_templates\ncms_style_presets\ncoach_applications\ncoach_invitations\ncoach_profiles\ncoaching_plan_purchases\ncohort_members\ncohorts\ncommunity_events\ncontent_analytics\ncourse_assignments\ncourse_enrollments\ncourse_modules\ncourse_reviews\ncourses\ndrip_content\necosystem_leads\nemail_templates\nemail_verification_tokens\nevent_registrations\nforum_categories\nforum_post_likes\nforum_posts\nforum_threads\nfunnels\nhr_audit_log\nlearner_badges\nlearner_profiles\nlearner_xp\nlearning_paths\nlesson_progress\nlessons\nmedia_library\nnavigation_menu_items\nnavigation_menus\nnotifications\noffers\nonboarding_config\nonboarding_progress\norg_course_assignments\norg_members\norganizations\npassword_reset_tokens\npath_courses\npath_enrollments\npath_reviews\npayout_ledger\npermissions\nplatform_settings\npractice_logs\nquiz_attempts\nquiz_questions\nquizzes\nreview_schedule\nreviews\nrole_permissions\nroles\nsessions\nsle_companion_messages\nsle_companion_sessions\nsle_error_taxonomy\nsle_evaluation_rubrics\nsle_exam_sessions\nsle_interaction_logs\nsle_knowledge_collections\nsle_model_answers\nsle_oral_scenarios\nsle_practice_attempts\nsle_practice_questions\nsle_proficiency_standards\nsle_skill_trend\nsle_user_profiles\nsle_user_sessions\ntransactions\nuser_badges\nuser_permissions\nuser_sessions\nuser_streaks\nuser_weekly_challenges\nuser_xp\nusers\nwebhook_events_log\nweekly_challenges\n",
+  "stderr": "",
+  "execution_time_ms": 352
+}

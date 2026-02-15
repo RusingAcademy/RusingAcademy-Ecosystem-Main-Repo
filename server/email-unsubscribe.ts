@@ -9,6 +9,8 @@ import { getDb } from "./db";
 import { ecosystemLeads, leadSequenceEnrollments, sequenceEmailLogs } from "../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 import crypto from "crypto";
+import { createLogger } from "./logger";
+const log = createLogger("email-unsubscribe");
 
 // Types
 export interface UnsubscribeData {
@@ -51,7 +53,7 @@ export function decodeUnsubscribeToken(token: string): { leadId: number; valid: 
     // Token is valid if it can be decoded (signature validation is simplified)
     return { leadId: decoded.lid, valid: true };
   } catch (error) {
-    console.error("Failed to decode unsubscribe token:", error);
+    log.error("Failed to decode unsubscribe token:", error);
     return { leadId: 0, valid: false };
   }
 }
@@ -140,14 +142,14 @@ export async function processUnsubscribe(
         )
       );
     
-    console.log(`[Unsubscribe] Lead ${leadId} (${lead.email}) unsubscribed. Reason: ${reason || "Not provided"}`);
+    log.info(`[Unsubscribe] Lead ${leadId} (${lead.email}) unsubscribed. Reason: ${reason || "Not provided"}`);
     
     return { 
       success: true, 
       message: "Successfully unsubscribed" 
     };
   } catch (error) {
-    console.error(`[Unsubscribe] Error processing unsubscribe for lead ${leadId}:`, error);
+    log.error(`[Unsubscribe] Error processing unsubscribe for lead ${leadId}:`, error);
     return { success: false, message: "Failed to process unsubscribe request" };
   }
 }
@@ -225,10 +227,10 @@ export async function resubscribeLead(leadId: number): Promise<boolean> {
       })
       .where(eq(ecosystemLeads.id, leadId));
     
-    console.log(`[Unsubscribe] Lead ${leadId} re-subscribed`);
+    log.info(`[Unsubscribe] Lead ${leadId} re-subscribed`);
     return true;
   } catch (error) {
-    console.error(`[Unsubscribe] Error re-subscribing lead ${leadId}:`, error);
+    log.error(`[Unsubscribe] Error re-subscribing lead ${leadId}:`, error);
     return false;
   }
 }

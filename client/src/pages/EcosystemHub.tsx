@@ -74,7 +74,7 @@ const scaleIn = {
 // ============================================================================
 function HeroSection({ language }: { language: string }) {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
@@ -91,7 +91,7 @@ function HeroSection({ language }: { language: string }) {
         >
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 text-white text-sm font-medium">
               <Globe className="w-4 h-4 text-[#C65A1E]400" />
               {language === "en" ? "Canada's Premier Bilingual Training Ecosystem" : "L'écosystème de formation bilingue de référence au Canada"}
             </span>
@@ -122,7 +122,7 @@ function HeroSection({ language }: { language: string }) {
           {/* Subheadline */}
           <motion.p
             variants={fadeInUp}
-            className="text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed"
           >
             {language === "en"
               ? "A methodology designed for Canadian public servants to pass second language exams and perform effectively in the workplace."
@@ -144,7 +144,7 @@ function HeroSection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
+                className="border-2 border-white/60 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
               >
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
               </Button>
@@ -198,7 +198,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Understanding why most professionals struggle with second language exams is the first step toward breaking through. These three structural barriers affect thousands of public servants every year."
               : "Comprendre pourquoi la plupart des professionnels échouent aux examens de langue seconde est la première étape pour les surmonter. Ces trois obstacles structurels affectent des milliers de fonctionnaires chaque année."}
@@ -213,10 +213,10 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {language === "en"
               ? "What you lose every day without your Level C"
               : "Ce que vous perdez chaque jour sans votre niveau C"}
@@ -231,7 +231,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-12"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-800">
+          <h3 className="text-2xl md:text-3xl font-bold text-black">
             {language === "en" ? "The Bilingual Excellence Trilemma" : "Le Trilemme de l'Excellence Bilingue"}
           </h3>
         </motion.div>
@@ -253,10 +253,10 @@ function TrilemmeSection({ language }: { language: string }) {
               <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${obstacle.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <obstacle.icon className="w-8 h-8 text-white" />
               </div>
-              <h4 className="text-xl font-bold text-slate-900 mb-3">
+              <h4 className="text-xl font-bold text-black mb-3">
                 {language === "en" ? obstacle.titleEn : obstacle.titleFr}
               </h4>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-black leading-relaxed">
                 {language === "en" ? obstacle.descEn : obstacle.descFr}
               </p>
             </motion.div>
@@ -277,15 +277,15 @@ function TrilemmeSection({ language }: { language: string }) {
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-lg text-slate-700 leading-relaxed">
+                <p className="text-lg text-black leading-relaxed">
                   {language === "en" ? (
                     <>
-                      <strong className="text-slate-900">RusingÂcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
+                      <strong className="text-black">RusingÂcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
                       <strong className="text-[#C65A1E]600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
-                      <strong className="text-slate-900">RusingÂcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
+                      <strong className="text-black">RusingÂcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
                       <strong className="text-[#C65A1E]600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
@@ -359,7 +359,7 @@ function EcosystemSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Unlike fragmented solutions, our ecosystem provides a complete, integrated approach. Each pillar serves a specific purpose while working together to ensure your success."
               : "Contrairement aux solutions fragmentées, notre écosystème offre une approche complète et intégrée. Chaque pilier remplit un rôle spécifique tout en travaillant ensemble pour assurer votre réussite."}
@@ -374,10 +374,10 @@ function EcosystemSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {language === "en"
               ? "We combine human expertise, advanced pedagogy, and technology through three complementary pillars"
               : "Nous combinons expertise humaine, pédagogie avancée et technologie à travers trois piliers complémentaires"}
@@ -413,19 +413,19 @@ function EcosystemSection({ language }: { language: string }) {
 
               {/* Content */}
               <div className="p-6">
-                <p className="text-sm font-medium text-slate-500 mb-1">
+                <p className="text-sm font-medium text-black mb-1">
                   {language === "en" ? pillar.nameEn : pillar.nameFr}
                 </p>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className="text-xl font-bold text-black mb-3">
                   {language === "en" ? pillar.brandEn : pillar.brandFr}
                 </h3>
-                <p className="text-slate-600 mb-4 leading-relaxed">
+                <p className="text-black mb-4 leading-relaxed">
                   {language === "en" ? pillar.descEn : pillar.descFr}
                 </p>
                 <Link href={pillar.link}>
                   <Button
                     variant="outline"
-                    className="w-full group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300"
+                    className="w-full group-hover:bg-[#062b2b] group-hover:text-white transition-colors duration-300"
                   >
                     {language === "en" ? "Learn more" : "En savoir plus"}
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -485,7 +485,7 @@ function MethodologySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our proven three-step methodology has helped hundreds of public servants achieve their language goals. Each step builds on the previous one to create a clear path to success."
               : "Notre méthodologie éprouvée en trois étapes a aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques. Chaque étape s'appuie sur la précédente pour créer un chemin clair vers le succès."}
@@ -500,10 +500,10 @@ function MethodologySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             {language === "en" ? "Our 3-Step Method" : "Notre méthode en 3 étapes"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {language === "en" ? "Simple. Targeted. Results-oriented." : "Simple. Ciblée. Orientée résultats."}
           </p>
         </motion.div>
@@ -529,7 +529,7 @@ function MethodologySection({ language }: { language: string }) {
 
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
                 {/* Step Number */}
-                <div className="text-5xl font-bold text-slate-100 mb-4">{step.number}</div>
+                <div className="text-5xl font-bold text-white mb-4">{step.number}</div>
 
                 {/* Icon */}
                 <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mx-auto mb-6 shadow-lg`}>
@@ -537,10 +537,10 @@ function MethodologySection({ language }: { language: string }) {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className="text-xl font-bold text-black mb-3">
                   {language === "en" ? step.titleEn : step.titleFr}
                 </h3>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-black leading-relaxed">
                   {language === "en" ? step.descEn : step.descFr}
                 </p>
               </div>
@@ -612,7 +612,7 @@ function OffersSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our solutions are designed specifically for Canadian public servants. Whether you need structured courses, personalized coaching, or innovative learning tools, we have the right solution for you."
               : "Nos solutions sont conçues spécifiquement pour les fonctionnaires canadiens. Que vous ayez besoin de cours structurés, de coaching personnalisé ou d'outils d'apprentissage innovants, nous avons la solution adaptée pour vous."}
@@ -627,7 +627,7 @@ function OffersSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             {language === "en" ? "The RusingÂcademy Solution" : "La solution RusingÂcademy"}
           </h2>
         </motion.div>
@@ -653,9 +653,9 @@ function OffersSection({ language }: { language: string }) {
                   alt={language === "en" ? offer.titleEn : offer.titleFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <div className="flex items-center gap-2 text-white/80 text-sm mb-1">
+                  <div className="flex items-center gap-2 text-white/90 text-sm mb-1">
                     <offer.icon className="w-4 h-4" />
                     {language === "en" ? offer.subtitleEn : offer.subtitleFr}
                   </div>
@@ -667,11 +667,11 @@ function OffersSection({ language }: { language: string }) {
 
               {/* Content */}
               <div className="p-6">
-                <p className="text-slate-600 mb-6 leading-relaxed text-sm">
+                <p className="text-black mb-6 leading-relaxed text-sm">
                   {language === "en" ? offer.descEn : offer.descFr}
                 </p>
                 <Link href={offer.link}>
-                  <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white">
+                  <Button className="w-full bg-[#062b2b] hover:bg-[#0a4040] text-white">
                     {language === "en" ? offer.ctaEn : offer.ctaFr}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -735,7 +735,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-800">
+    <section className="py-24 px-4 bg-gradient-to-b from-[#062b2b] to-[#0a4040]">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -745,7 +745,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+          <p className="text-[#67E8F9] text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
               : "Nos programmes sont spécifiquement conçus pour les fonctionnaires canadiens à différentes étapes de leur carrière. Si vous vous reconnaissez dans l'un de ces profils, nous pouvons vous aider à atteindre vos objectifs linguistiques."}
@@ -777,7 +777,7 @@ function TargetAudienceSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300"
+              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60 hover:bg-white/10 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center flex-shrink-0">
@@ -787,7 +787,7 @@ function TargetAudienceSection({ language }: { language: string }) {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {language === "en" ? profile.titleEn : profile.titleFr}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-[#67E8F9] text-sm leading-relaxed">
                     {language === "en" ? profile.descEn : profile.descFr}
                   </p>
                 </div>
@@ -873,7 +873,7 @@ function TestimonialsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Don't just take our word for it. Hear from public servants who have transformed their careers through our programs. These testimonials represent real results from real professionals."
               : "Ne nous croyez pas sur parole. Écoutez les fonctionnaires qui ont transformé leur carrière grâce à nos programmes. Ces témoignages représentent des résultats réels de vrais professionnels."}
@@ -888,7 +888,7 @@ function TestimonialsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             Trusted by public servants
           </h2>
         </motion.div>
@@ -910,7 +910,7 @@ function TestimonialsSection({ language }: { language: string }) {
               {/* Quote */}
               <div className="mb-6">
                 <div className="text-4xl text-[#C65A1E]500 mb-4">"</div>
-                <p className="text-slate-700 leading-relaxed italic">
+                <p className="text-black leading-relaxed italic">
                   {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
                 </p>
               </div>
@@ -925,13 +925,13 @@ function TestimonialsSection({ language }: { language: string }) {
                   />
                 ) : (
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
-                    <Users className="w-6 h-6 text-slate-500" />
+                    <Users className="w-6 h-6 text-black" />
                   </div>
                 )}
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-900">{testimonial.name}</h4>
-                  <p className="text-sm text-slate-600">{testimonial.role}</p>
-                  <p className="text-sm text-slate-500">{testimonial.org}</p>
+                  <h4 className="font-semibold text-black">{testimonial.name}</h4>
+                  <p className="text-sm text-black">{testimonial.role}</p>
+                  <p className="text-sm text-black">{testimonial.org}</p>
                 </div>
                 <a
                   href={testimonial.linkedin}
@@ -965,7 +965,7 @@ function LeadershipSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Behind every great institution is a visionary leader. Learn about the founder who created this ecosystem to address a real gap in professional language training."
               : "Derrière chaque grande institution se trouve un leader visionnaire. Découvrez le fondateur qui a créé cet écosystème pour combler un véritable manque dans la formation linguistique professionnelle."}
@@ -988,24 +988,24 @@ function LeadershipSection({ language }: { language: string }) {
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent md:bg-gradient-to-r" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-transparent to-transparent md:bg-gradient-to-r" />
               </motion.div>
 
               {/* Content */}
               <motion.div variants={fadeInUp} className="p-8 md:p-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">
                   Who is Steven Barholere?
                 </h2>
 
                 {/* Quote */}
                 <blockquote className="border-l-4 border-amber-500 pl-4 mb-8">
-                  <p className="text-lg text-slate-700 italic">
+                  <p className="text-lg text-black italic">
                     "Language is not merely a technical skill; it is a strategic enabler of connection, leadership, and opportunity."
                   </p>
                 </blockquote>
 
                 {/* Bio */}
-                <div className="space-y-4 text-slate-600 leading-relaxed">
+                <div className="space-y-4 text-black leading-relaxed">
                   <p>
                     {language === "en"
                       ? "Throughout his career in both the private sector and Canada's federal public service, Steven Barholere observed a recurring challenge: highly capable professionals often struggle to translate years of language study into real, confident, and functional bilingual performance in the workplace."
@@ -1082,12 +1082,12 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             </motion.div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#062b2b] via-[#0a6969] to-[#062b2b] bg-clip-text text-transparent">
                 {language === "en" ? "What His Colleagues Say" : "Ce que disent ses collègues"}
               </span>
             </h2>
             
-            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-black max-w-3xl mx-auto leading-relaxed">
               {language === "en"
                 ? "These heartfelt Kudoboard messages from former public servant colleagues capture the real, transformative impact of Steven's French instruction. Click to view in full resolution."
                 : "Ces messages Kudoboard sincères d'anciens collègues fonctionnaires capturent l'impact réel et transformateur de l'enseignement du français de Steven. Cliquez pour voir en pleine résolution."}
@@ -1110,7 +1110,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                 onClick={() => setSelectedImage(board.src)}
               >
                 {/* Glassmorphism Card */}
-                <div className="relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/50 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
+                <div className="relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/70 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
                   {/* Gradient Border Effect */}
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-[#C65A1E]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
@@ -1124,10 +1124,10 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                         loading="lazy"                       />
                       
                       {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-[#062b2b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
                         <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 backdrop-blur-sm shadow-xl">
                           <ZoomIn className="w-5 h-5 text-teal-600" />
-                          <span className="font-medium text-slate-800">
+                          <span className="font-medium text-black">
                             {language === "en" ? "Click to enlarge" : "Cliquez pour agrandir"}
                           </span>
                         </div>
@@ -1139,8 +1139,8 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                   <div className="px-6 pb-6 pt-2">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-1">{board.title}</h3>
-                        <p className="text-sm text-slate-500">
+                        <h3 className="text-xl font-bold text-black mb-1">{board.title}</h3>
+                        <p className="text-sm text-black">
                           {language === "en" ? "High resolution • Click to zoom" : "Haute résolution • Cliquez pour zoomer"}
                         </p>
                       </div>
@@ -1164,7 +1164,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100/80 backdrop-blur-sm border border-slate-200">
               <Users className="w-5 h-5 text-teal-600" />
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-black">
                 {language === "en"
                   ? "Real messages from federal public servants who benefited from Steven's French instruction"
                   : "Messages réels de fonctionnaires fédéraux qui ont bénéficié de l'enseignement du français de Steven"}
@@ -1212,7 +1212,7 @@ function InstitutionsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-black mb-4">
             {language === "en" ? "They trust us" : "Ils nous font confiance"}
           </h2>
         </motion.div>
@@ -1232,7 +1232,7 @@ function InstitutionsSection({ language }: { language: string }) {
               className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
             >
               <div className="h-12 md:h-16 flex items-center justify-center">
-                <Building2 className="w-12 h-12 text-slate-400" />
+                <Building2 className="w-12 h-12 text-[#67E8F9]" />
               </div>
             </motion.div>
           ))}
@@ -1246,7 +1246,7 @@ function InstitutionsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center"
         >
-          <p className="text-sm text-slate-500 italic max-w-2xl mx-auto">
+          <p className="text-sm text-black italic max-w-2xl mx-auto">
             {language === "en"
               ? "Official logos of Canadian federal institutions. RusingÂcademy is a private entrepreneurial initiative."
               : "Logos officiels des institutions fédérales canadiennes. RusingÂcademy est une initiative entrepreneuriale privée."}
@@ -1303,7 +1303,7 @@ function ValueSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "What sets us apart from traditional language schools? Our exclusive focus on the Canadian public service, combined with a proven methodology and personalized approach."
               : "Qu'est-ce qui nous distingue des écoles de langues traditionnelles ? Notre concentration exclusive sur la fonction publique canadienne, combinée à une méthodologie éprouvée et une approche personnalisée."}
@@ -1318,7 +1318,7 @@ function ValueSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             Why Choose RusingÂcademy?
           </h2>
         </motion.div>
@@ -1337,7 +1337,7 @@ function ValueSection({ language }: { language: string }) {
               alt="Steven teaching"
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/40 to-transparent" />
           </motion.div>
 
           {/* Values Grid */}
@@ -1357,10 +1357,10 @@ function ValueSection({ language }: { language: string }) {
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center mb-4">
                   <value.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                <h3 className="text-lg font-bold text-black mb-2">
                   {language === "en" ? value.titleEn : value.titleFr}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-black text-sm leading-relaxed">
                   {language === "en" ? value.descEn : value.descFr}
                 </p>
               </motion.div>
@@ -1418,7 +1418,7 @@ function TeamSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our team brings together experts from education, public service, and technology. Each member contributes unique expertise to ensure your success."
               : "Notre équipe réunit des experts de l'éducation, de la fonction publique et de la technologie. Chaque membre apporte une expertise unique pour assurer votre réussite."}
@@ -1433,10 +1433,10 @@ function TeamSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             Meet our experts
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {language === "en"
               ? "A team of passionate experts dedicated to your success in the Canadian public service."
               : "Une équipe d'experts passionnés dédiés à votre réussite dans la fonction publique canadienne."}
@@ -1464,14 +1464,14 @@ function TeamSection({ language }: { language: string }) {
                   alt={member.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 to-transparent" />
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
+                <h3 className="text-lg font-bold text-black mb-1">{member.name}</h3>
                 <p className="text-sm text-[#C65A1E]600 font-medium mb-3">{member.role}</p>
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-black text-sm leading-relaxed">
                   {language === "en" ? member.bioEn : member.bioFr}
                 </p>
               </div>
@@ -1488,7 +1488,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="py-24 px-4 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1502,7 +1502,7 @@ function FinalCTASection({ language }: { language: string }) {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
               {language === "en" ? "Ready to take the next step?" : "Prêt à franchir l'étape suivante ?"}
             </h2>
-            <p className="text-xl text-slate-300 mb-12">
+            <p className="text-xl text-white/90 mb-12">
               {language === "en"
                 ? "Stop guessing. Start passing your exams today."
                 : "Ne devinez plus. Commencez à réussir vos examens dès aujourd'hui."}
@@ -1527,17 +1527,17 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-white/60 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <ClipboardCheck className="w-5 h-5" />
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
               </Button>
             </Link>
-            <Link href="/courses">
+            <Link href="/library">
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-white/60 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <FileText className="w-5 h-5" />
                 {language === "en" ? "Explore the product library" : "Explorer la bibliothèque de produits"}
@@ -1551,131 +1551,7 @@ function FinalCTASection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 12: PROOF GALLERY
-// ============================================================================
-function ProofGallerySection({ language }: { language: string }) {
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const filters = [
-    { id: "all", labelEn: "All", labelFr: "Tous" },
-    { id: "podcast", labelEn: "Podcast Shorts", labelFr: "Podcast Shorts" },
-    { id: "coach", labelEn: "Coach Intros", labelFr: "Coach Intros" },
-    { id: "capsules", labelEn: "Learning Capsules", labelFr: "Learning Capsules" },
-  ];
-
-  const content = [
-    { id: 1, type: "podcast", title: "SLE Exam Prep Tips", duration: "0:58", level: "B", lang: "EN", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/podcast-1.jpg" },
-    { id: 2, type: "podcast", title: "Oral Fluency Secrets", duration: "1:12", level: "C", lang: "FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/podcast-2.jpg" },
-    { id: 3, type: "coach", title: "Meet Steven", duration: "2:30", level: "All", lang: "EN/FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/coach-steven.jpg" },
-    { id: 4, type: "capsules", title: "Grammar Essentials", duration: "5:45", level: "B", lang: "FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/capsule-1.jpg" },
-    { id: 5, type: "podcast", title: "Level C Strategies", duration: "1:05", level: "C", lang: "EN", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/podcast-3.jpg" },
-    { id: 6, type: "coach", title: "Meet Sue-Anne", duration: "2:15", level: "All", lang: "FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/coach-sueanne.jpg" },
-  ];
-
-  const filteredContent = activeFilter === "all" ? content : content.filter(item => item.type === activeFilter);
-
-  return (
-    <section className="py-24 px-4 bg-white">
-      <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
-              : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
-          </p>
-        </motion.div>
-
-        {/* Section Header */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
-          </h2>
-        </motion.div>
-
-        {/* Filters */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {filters.map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              aria-pressed={activeFilter === filter.id}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeFilter === filter.id
-                  ? "bg-slate-900 text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-              }`}
-            >
-              {language === "en" ? filter.labelEn : filter.labelFr}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Content Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredContent.map((item) => (
-            <motion.div
-              key={item.id}
-              variants={scaleIn}
-              className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer"
-            >
-              {/* Thumbnail */}
-              <div className="relative h-48 bg-slate-200 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
-                  <Play className="w-16 h-16 text-white/80 group-hover:text-white/80 group-hover:scale-110 transition-all duration-300" />
-                </div>
-                {/* Duration Badge */}
-                <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                  {item.duration}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-4">
-                <h3 className="font-semibold text-slate-900 mb-2">{item.title}</h3>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs px-2 py-1 rounded bg-amber-100 text-[#C65A1E]700 font-medium">
-                    Level {item.level}
-                  </span>
-                  <span className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-600">
-                    {item.lang}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// SECTION 13: FAQ
+// SECTION 12: FAQ (ProofGallerySection removed — replaced by CrossEcosystemSection)
 // ============================================================================
 function FAQSection({ language }: { language: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -1724,7 +1600,7 @@ function FAQSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-black text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Have questions? We've compiled answers to the most common questions from public servants considering our programs."
               : "Vous avez des questions ? Nous avons compilé les réponses aux questions les plus fréquentes des fonctionnaires qui envisagent nos programmes."}
@@ -1739,7 +1615,7 @@ function FAQSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
             {language === "en" ? "Frequently Asked Questions" : "Questions fréquemment posées"}
           </h2>
         </motion.div>
@@ -1763,18 +1639,18 @@ function FAQSection({ language }: { language: string }) {
                 aria-expanded={openIndex === index}
                 className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white transition-colors"
               >
-                <span className="font-semibold text-slate-900 pr-4">
+                <span className="font-semibold text-black pr-4">
                   {language === "en" ? faq.questionEn : faq.questionFr}
                 </span>
                 {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" aria-hidden="true" />
+                  <ChevronUp className="w-5 h-5 text-black flex-shrink-0" aria-hidden="true" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" aria-hidden="true" />
+                  <ChevronDown className="w-5 h-5 text-black flex-shrink-0" aria-hidden="true" />
                 )}
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-5">
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-black leading-relaxed">
                     {language === "en" ? faq.answerEn : faq.answerFr}
                   </p>
                 </div>
@@ -1837,13 +1713,10 @@ export default function EcosystemHub() {
         {/* Section 11: CTA Final */}
         <FinalCTASection language={language} />
 
-        {/* Section 12: Proof Gallery */}
-        <ProofGallerySection language={language} />
-
-        {/* Section 13: FAQ */}
+        {/* Section 12: FAQ */}
         <FAQSection language={language} />
 
-        {/* Cross-Ecosystem Section - Take learning beyond the session */}
+        {/* Cross-Ecosystem Section - Take learning beyond the session (Single Source of Truth) */}
         <CrossEcosystemSection variant="hub" />
       </main>
 
