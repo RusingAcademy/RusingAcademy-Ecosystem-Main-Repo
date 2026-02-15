@@ -1050,5 +1050,60 @@ export const gamificationRouter = router({
         return [];
       }
     }),
+
+  // ── Wave G: Combined profile endpoint for ProgressAnalytics ──────────
+  getProfile: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+    const userId = ctx.user.id;
+
+    // Get XP stats
+    const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, userId)).limit(1);
+    let xpRecord = xpRecords[0];
+    if (!xpRecord) {
+      await db.insert(learnerXp).values({
+        userId,
+        totalXp: 0,
+        weeklyXp: 0,
+        monthlyXp: 0,
+        currentLevel: 1,
+        levelTitle: "Beginner",
+        currentStreak: 0,
+        longestStreak: 0,
+      });
+      xpRecord = { totalXp: 0, weeklyXp: 0, monthlyXp: 0, currentLevel: 1, levelTitle: "Beginner", currentStreak: 0, longestStreak: 0 } as any;
+    }
+
+    // Get badges
+    let badges: any[] = [];
+    try {
+      const userBadges = await db.select().from(learnerBadges)
+        .where(eq(learnerBadges.userId, userId))
+        .orderBy(desc(learnerBadges.awardedAt));
+      badges = userBadges.map(b => ({
+        id: b.id,
+        name: b.title,
+        nameFr: b.titleFr,
+        description: b.description,
+        icon: b.badgeType?.includes('streak') ? '🔥' : b.badgeType?.includes('xp') ? '⭐' : '🏆',
+        type: b.badgeType,
+        awardedAt: b.awardedAt,
+      }));
+    } catch { /* table may not exist */ }
+
+    return {
+      profile: {
+        level: xpRecord.currentLevel ?? 1,
+        levelTitle: (xpRecord as any).levelTitle ?? "Beginner",
+        totalXp: xpRecord.totalXp ?? 0,
+        weeklyXp: xpRecord.weeklyXp ?? 0,
+        monthlyXp: xpRecord.monthlyXp ?? 0,
+        currentStreak: xpRecord.currentStreak ?? 0,
+        longestStreak: xpRecord.longestStreak ?? 0,
+      },
+      badges,
+    };
+  }),
 });
 
