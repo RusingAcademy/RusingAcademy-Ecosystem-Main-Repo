@@ -61,6 +61,7 @@ import {
   AssessmentsAdmin,
   ReportsAdmin,
   ContentPipelineDashboard,
+  QuizManagement,
 } from "./admin";
 
 interface Props {
@@ -143,6 +144,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   certificates: AdminCertificates,
   gamification: AdminGamification,
   "content-pipeline": ContentPipelineDashboard,
+  "quiz-management": QuizManagement,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

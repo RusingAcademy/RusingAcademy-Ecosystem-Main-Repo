@@ -5288,7 +5288,7 @@ export const appRouter = router({
         }
         const db = await getDb();
         if (!db) return [];
-        const { lessons, courseModules, courses } = await import("../drizzle/schema");
+        const { lessons, courseModules, courses, quizQuestions } = await import("../drizzle/schema");
         
         const quizLessons = await db.select({
           id: lessons.id,
@@ -5302,7 +5302,17 @@ export const appRouter = router({
           .where(eq(lessons.contentType, "quiz"))
           .orderBy(asc(courses.title), asc(courseModules.sortOrder), asc(lessons.sortOrder));
         
-        return quizLessons;
+        // Enrich with question counts
+        const enriched = await Promise.all(
+          quizLessons.map(async (lesson) => {
+            const qCount = await db.select({ count: sql<number>`count(*)` })
+              .from(quizQuestions)
+              .where(eq(quizQuestions.lessonId, lesson.id));
+            return { ...lesson, questionCount: Number(qCount[0]?.count ?? 0) };
+          })
+        );
+        
+        return enriched;
       }),
     
     // Get all registered users with their roles
