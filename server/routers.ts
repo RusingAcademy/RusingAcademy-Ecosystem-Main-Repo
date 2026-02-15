@@ -131,7 +131,6 @@ import { moderationRouter } from "./routers/moderation";
 import { referralRouter } from "./routers/referral";
 import { membershipRouter } from "./routers/membership";
 import { emailBroadcastRouter } from "./routers/emailBroadcast";
-import { adminDashboardDataRouter } from "./routers/adminDashboardData";
 import { adminCoursesRouter } from "./routers/adminCourses";
 import { adminCommissionRouter } from "./routers/adminCommission";
 import { courseAdminRouter } from "./routers/courseAdmin";
@@ -145,6 +144,8 @@ import { discussionsRouter } from "./routers/discussions";
 import { dictationRouter } from "./routers/dictation";
 import { peerReviewRouter } from "./routers/peerReview";
 import { bookmarksRouter } from "./routers/bookmarks";
+import { executiveSummaryRouter } from "./routers/executiveSummary";
+import { contentPipelineRouter } from "./routers/contentPipeline";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9129,6 +9130,8 @@ export const appRouter = router({
   dictation: dictationRouter,
   peerReview: peerReviewRouter,
   bookmarks: bookmarksRouter,
+  executiveSummary: executiveSummaryRouter,
+  contentPipeline: contentPipelineRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
