@@ -2,7 +2,7 @@
  * Grammar Drills Engine — Interactive grammar exercises by topic and CEFR level
  * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -93,6 +93,41 @@ export default function GrammarDrillsPage() {
   const [showHistory, setShowHistory] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [reorderInput, setReorderInput] = useState("");
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Live timer during drill (Sprint F3)
+  useEffect(() => {
+    if (phase === "drill" && startTime > 0) {
+      timerRef.current = setInterval(() => {
+        setElapsedSeconds(Math.floor((Date.now() - startTime) / 1000));
+      }, 1000);
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [phase, startTime]);
+
+  // Keyboard shortcuts for multiple choice (Sprint F3)
+  useEffect(() => {
+    if (phase !== "drill" || !selectedDrill) return;
+    const q = selectedDrill.questions[currentQ];
+    if (!q?.options) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      const idx = parseInt(e.key) - 1;
+      if (idx >= 0 && idx < (q.options?.length ?? 0)) {
+        e.preventDefault();
+        answerCurrent(q.options![idx]);
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [phase, selectedDrill, currentQ, answerCurrent]);
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  };
 
   const filteredDrills = useMemo(() => DRILLS.filter(d => d.level === selectedLevel), [selectedLevel]);
 
@@ -102,6 +137,7 @@ export default function GrammarDrillsPage() {
     setCurrentQ(0);
     setStartTime(Date.now());
     setReorderInput("");
+    setElapsedSeconds(0);
     setPhase("drill");
   }, []);
 
@@ -137,6 +173,7 @@ export default function GrammarDrillsPage() {
       language: "fr",
     });
 
+    if (timerRef.current) clearInterval(timerRef.current);
     setPhase("results");
   }, [selectedDrill, answers, startTime, saveResult]);
 
@@ -288,8 +325,14 @@ export default function GrammarDrillsPage() {
                   <h2 className="text-lg font-semibold text-gray-900">{selectedDrill.topic}</h2>
                   <div className="text-sm text-gray-500">{drillTypeLabel(selectedDrill.type)}</div>
                 </div>
-                <div className="text-sm text-gray-500" aria-live="polite">
-                  {currentQ + 1} / {selectedDrill.questions.length}
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1 text-sm text-gray-400">
+                    <span className="material-icons text-sm" aria-hidden="true">timer</span>
+                    <span aria-live="polite">{formatTime(elapsedSeconds)}</span>
+                  </div>
+                  <div className="text-sm text-gray-500" aria-live="polite">
+                    {currentQ + 1} / {selectedDrill.questions.length}
+                  </div>
                 </div>
               </div>
 
@@ -365,6 +408,10 @@ export default function GrammarDrillsPage() {
                   <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("grammar.drillComplete")}</h2>
+                <p className="text-sm text-gray-400 mb-2">
+                  <span className="material-icons text-sm align-middle mr-1" aria-hidden="true">timer</span>
+                  {formatTime(Math.floor((Date.now() - startTime) / 1000))}
+                </p>
                 {(() => {
                   const correct = selectedDrill?.questions.reduce((sum, q, i) => {
                     const userAns = (answers[i] || "").toLowerCase().trim();

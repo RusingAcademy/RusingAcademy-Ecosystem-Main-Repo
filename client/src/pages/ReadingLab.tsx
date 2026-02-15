@@ -321,7 +321,11 @@ export default function ReadingLab() {
                   </div>
                 ))}
               </div>
-              <div className="mt-6 flex justify-end">
+              <p className="text-[10px] text-gray-400 text-center mt-4">
+                <span className="material-icons text-[10px] align-middle mr-1" aria-hidden="true">keyboard</span>
+                {isFr ? "Cliquez sur A, B, C ou D pour répondre" : "Click A, B, C, or D to answer"}
+              </p>
+              <div className="mt-4 flex justify-end">
                 <button onClick={submitAnswers}
                   disabled={answers.filter(a => a !== undefined).length < (passage?.questions.length ?? 0)}
                   className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
