@@ -1,13 +1,13 @@
 /**
  * Listening Comprehension Lab — Audio passages with comprehension questions
- * Sprint 35: Listening Comprehension Lab
+ * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
 import { useState, useCallback, useMemo, useRef } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
-import { toast } from "sonner";
 
 /* ─── Listening Exercises by CEFR Level ─── */
 const EXERCISES: Record<string, { title: string; transcript: string; questions: { q: string; options: string[]; correct: number }[] }[]> = {
@@ -84,6 +84,8 @@ type Phase = "select" | "listening" | "questions" | "results";
 
 export default function ListeningLab() {
   const { user, loading: authLoading } = useAuth();
+  const { t, language: uiLang } = useLanguage();
+  const isFr = uiLang === "fr";
   const utils = trpc.useUtils();
   const saveResult = trpc.listeningLab.saveResult.useMutation({
     onSuccess: () => { utils.listeningLab.history.invalidate(); utils.listeningLab.stats.invalidate(); },
@@ -160,40 +162,46 @@ export default function ListeningLab() {
     setPhase("results");
   }, [exercise, answers, startTime, selectedLevel, saveResult]);
 
-  if (authLoading) return <div className="flex h-screen items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return (
+    <div className="flex h-screen items-center justify-center" role="status" aria-label={t("skillLabs.loading")}>
+      <div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" />
+      <span className="sr-only">{t("skillLabs.loading")}</span>
+    </div>
+  );
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto" role="main" aria-label={t("listening.title")}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                <span className="material-icons text-[#008090]">headphones</span>
-                Listening Comprehension Lab
+                <span className="material-icons text-[#008090]" aria-hidden="true">headphones</span>
+                {t("listening.title")}
               </h1>
-              <p className="text-gray-500 mt-1">Train your ear with authentic French audio</p>
+              <p className="text-gray-500 mt-1">{isFr ? "Entraînez votre oreille avec du français authentique" : "Train your ear with authentic French audio"}</p>
             </div>
             <button onClick={() => setShowHistory(!showHistory)}
-              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5">
-              <span className="material-icons text-base">{showHistory ? "play_circle" : "history"}</span>
-              {showHistory ? "Practice" : "History"}
+              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+              aria-label={showHistory ? t("grammar.practice") : t("listening.history")}>
+              <span className="material-icons text-base" aria-hidden="true">{showHistory ? "play_circle" : "history"}</span>
+              {showHistory ? t("grammar.practice") : t("listening.history")}
             </button>
           </div>
 
           {/* Stats Bar */}
           {stats && (
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-3 gap-4 mb-8" role="region" aria-label={t("listening.stats")}>
               {[
-                { label: "Exercises", value: stats.totalExercises ?? 0, icon: "headphones", color: "#008090" },
-                { label: "Avg Score", value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },
-                { label: "Total Time", value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "#8b5cf6" },
+                { label: t("listening.totalExercises"), value: stats.totalExercises ?? 0, icon: "headphones", color: "#008090" },
+                { label: t("listening.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },
+                { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "#8b5cf6" },
               ].map((s, i) => (
-                <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
-                  <span className="material-icons text-2xl mb-1" style={{ color: s.color }}>{s.icon}</span>
+                <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center" role="status">
+                  <span className="material-icons text-lg mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{s.value}</div>
                   <div className="text-xs text-gray-500">{s.label}</div>
                 </div>
@@ -203,11 +211,14 @@ export default function ListeningLab() {
 
           {showHistory ? (
             <div className="space-y-3">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Listening History</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("listening.history")}</h2>
               {!history?.length ? (
-                <div className="text-center py-16 text-gray-400">
-                  <span className="material-icons text-5xl mb-3 block">headphones</span>
-                  <p>No listening exercises completed yet.</p>
+                <div className="text-center py-16" role="status">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
+                    <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">headphones</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("listening.emptyTitle")}</h3>
+                  <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("listening.emptyDesc")}</p>
                 </div>
               ) : history.map((h: any, i: number) => (
                 <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex items-center justify-between">
@@ -215,41 +226,46 @@ export default function ListeningLab() {
                     <div className="font-semibold text-gray-900">{h.exerciseTitle}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
                       <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#008090]/10 text-[#008090]">{h.cefrLevel}</span>
-                      <span>{h.correctAnswers}/{h.totalQuestions} correct</span>
+                      <span>{h.correctAnswers}/{h.totalQuestions} {t("grammar.correct").toLowerCase()}</span>
                     </div>
                   </div>
-                  <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "#22c55e" : (h.score ?? 0) >= 60 ? "#f5a623" : "#e74c3c" }}>{h.score}%</div>
+                  <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "#22c55e" : (h.score ?? 0) >= 60 ? "#f5a623" : "#e74c3c" }} aria-label={`${t("grammar.score")}: ${h.score}%`}>{h.score}%</div>
                 </div>
               ))}
             </div>
           ) : phase === "select" ? (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Choose Your Level</h2>
-              <div className="flex gap-3 mb-6 flex-wrap">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("grammar.chooseLevel")}</h2>
+              <div className="flex gap-3 mb-6 flex-wrap" role="radiogroup" aria-label={t("grammar.chooseLevel")}>
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => { setSelectedLevel(level); setExerciseIndex(0); }}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
+                    role="radio" aria-checked={selectedLevel === level}
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
                     {level}
                   </button>
                 ))}
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4" role="list" aria-label={isFr ? "Exercices d'écoute" : "Listening exercises"}>
                 {EXERCISES[selectedLevel]?.map((e, i) => (
-                  <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                    onClick={() => { setExerciseIndex(i); startExercise(); }}>
+                  <div key={i} role="listitem"
+                    className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-[#008090]/30"
+                    onClick={() => { setExerciseIndex(i); startExercise(); }}
+                    onKeyDown={ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setExerciseIndex(i); startExercise(); }}}
+                    tabIndex={0}
+                    aria-label={`${e.title} — ${e.questions.length} questions`}>
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-semibold text-gray-900 text-lg">{e.title}</h3>
                         <div className="text-sm text-gray-500 mt-1">{e.questions.length} questions</div>
                       </div>
-                      <span className="material-icons text-[#008090] text-3xl">play_circle</span>
+                      <span className="material-icons text-[#008090] text-3xl" aria-hidden="true">play_circle</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           ) : phase === "listening" ? (
-            <div>
+            <div role="region" aria-label={exercise?.title}>
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <span className="px-3 py-1 rounded-full text-sm font-semibold bg-[#008090]/10 text-[#008090]">{selectedLevel}</span>
@@ -259,29 +275,32 @@ export default function ListeningLab() {
 
               {/* Audio Player */}
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-6">
-                <span className="material-icons text-6xl text-[#008090] mb-4 block">{isPlaying ? "graphic_eq" : "headphones"}</span>
+                <span className="material-icons text-6xl text-[#008090] mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <button onClick={isPlaying ? stopAudio : playAudio}
-                    className="w-14 h-14 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006a75] transition-colors shadow-lg">
-                    <span className="material-icons text-2xl">{isPlaying ? "stop" : "play_arrow"}</span>
+                    className="w-14 h-14 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006a75] transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                    aria-label={isPlaying ? (isFr ? "Arrêter" : "Stop") : t("listening.playAudio")}>
+                    <span className="material-icons text-2xl" aria-hidden="true">{isPlaying ? "stop" : "play_arrow"}</span>
                   </button>
                 </div>
-                <div className="flex items-center justify-center gap-3 mb-4">
-                  <span className="text-sm text-gray-500">Speed:</span>
+                <div className="flex items-center justify-center gap-3 mb-4" role="group" aria-label={isFr ? "Vitesse de lecture" : "Playback speed"}>
+                  <span className="text-sm text-gray-500">{isFr ? "Vitesse :" : "Speed:"}</span>
                   {[0.75, 1, 1.25].map(speed => (
                     <button key={speed} onClick={() => setPlaybackSpeed(speed)}
-                      className={`px-3 py-1 rounded-lg text-sm font-medium ${playbackSpeed === speed ? "bg-[#008090] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                      aria-pressed={playbackSpeed === speed}
+                      className={`px-3 py-1 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${playbackSpeed === speed ? "bg-[#008090] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
                       {speed}x
                     </button>
                   ))}
                 </div>
                 <button onClick={() => setShowTranscript(!showTranscript)}
-                  className="text-sm text-[#008090] hover:underline flex items-center gap-1 mx-auto">
-                  <span className="material-icons text-base">description</span>
-                  {showTranscript ? "Hide Transcript" : "Show Transcript"}
+                  className="text-sm text-[#008090] hover:underline flex items-center gap-1 mx-auto focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+                  aria-expanded={showTranscript}>
+                  <span className="material-icons text-base" aria-hidden="true">description</span>
+                  {showTranscript ? (isFr ? "Masquer la transcription" : "Hide Transcript") : (isFr ? "Afficher la transcription" : "Show Transcript")}
                 </button>
                 {showTranscript && (
-                  <div className="mt-4 p-4 bg-gray-50 rounded-xl text-left">
+                  <div className="mt-4 p-4 bg-gray-50 rounded-xl text-left" role="region" aria-label={isFr ? "Transcription" : "Transcript"}>
                     <p className="text-sm text-gray-700 leading-relaxed font-serif">{exercise?.transcript}</p>
                   </div>
                 )}
@@ -289,27 +308,30 @@ export default function ListeningLab() {
 
               <div className="flex justify-center">
                 <button onClick={goToQuestions}
-                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] transition-colors">
-                  Answer Questions
+                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {isFr ? "Répondre aux questions" : "Answer Questions"}
                 </button>
               </div>
             </div>
           ) : phase === "questions" ? (
-            <div>
+            <div role="region" aria-label={isFr ? "Questions de compréhension" : "Comprehension Questions"}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-gray-900">Comprehension Questions</h2>
-                <button onClick={playAudio} className="text-sm text-[#008090] hover:underline flex items-center gap-1">
-                  <span className="material-icons text-base">replay</span> Listen Again
+                <h2 className="text-lg font-semibold text-gray-900">{isFr ? "Questions de compréhension" : "Comprehension Questions"}</h2>
+                <button onClick={playAudio}
+                  className="text-sm text-[#008090] hover:underline flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+                  aria-label={t("listening.replay")}>
+                  <span className="material-icons text-base" aria-hidden="true">replay</span> {t("listening.replay")}
                 </button>
               </div>
               <div className="space-y-6">
                 {exercise?.questions.map((q, qi) => (
                   <div key={qi} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
                     <p className="font-semibold text-gray-900 mb-4">{qi + 1}. {q.q}</p>
-                    <div className="space-y-2">
+                    <div className="space-y-2" role="radiogroup" aria-label={q.q}>
                       {q.options.map((opt, oi) => (
                         <button key={oi} onClick={() => answerQuestion(qi, oi)}
-                          className={`w-full p-3 rounded-xl text-sm text-left transition-all ${answers[qi] === oi ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
+                          role="radio" aria-checked={answers[qi] === oi}
+                          className={`w-full p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[qi] === oi ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
                           <span className="font-semibold mr-2">{String.fromCharCode(65 + oi)}.</span> {opt}
                         </button>
                       ))}
@@ -320,44 +342,46 @@ export default function ListeningLab() {
               <div className="mt-6 flex justify-end">
                 <button onClick={submitAnswers}
                   disabled={answers.filter(a => a !== undefined).length < (exercise?.questions.length ?? 0)}
-                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 transition-colors">
-                  Submit Answers
+                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {t("grammar.submit")}
                 </button>
               </div>
             </div>
           ) : (
-            <div>
+            <div role="region" aria-label={t("grammar.drillComplete")}>
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-8">
-                <span className="material-icons text-5xl mb-3 text-[#008090]">emoji_events</span>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Exercise Complete!</h2>
+                <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
+                  <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("grammar.drillComplete")}</h2>
                 {(() => {
                   const correct = exercise?.questions.reduce((sum, q, i) => sum + (answers[i] === q.correct ? 1 : 0), 0) ?? 0;
                   const total = exercise?.questions.length ?? 1;
                   const score = Math.round((correct / total) * 100);
                   return (
-                    <div className="text-4xl font-bold mt-4" style={{ color: score >= 80 ? "#22c55e" : score >= 60 ? "#f5a623" : "#e74c3c" }}>
+                    <div className="text-4xl font-bold mt-4" style={{ color: score >= 80 ? "#22c55e" : score >= 60 ? "#f5a623" : "#e74c3c" }} aria-label={`${t("grammar.score")}: ${score}%`}>
                       {score}%
-                      <div className="text-sm text-gray-500 font-normal mt-1">{correct}/{total} correct</div>
+                      <div className="text-sm text-gray-500 font-normal mt-1">{correct}/{total} {t("grammar.correct").toLowerCase()}</div>
                     </div>
                   );
                 })()}
               </div>
 
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 mb-8" role="list" aria-label={isFr ? "Résultats détaillés" : "Detailed results"}>
                 {exercise?.questions.map((q, qi) => {
                   const isCorrect = answers[qi] === q.correct;
                   return (
-                    <div key={qi} className={`rounded-xl p-4 border ${isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
+                    <div key={qi} role="listitem" className={`rounded-xl p-4 border ${isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
                       <div className="flex items-start gap-2">
-                        <span className={`material-icons text-lg ${isCorrect ? "text-green-600" : "text-red-600"}`}>
+                        <span className={`material-icons text-lg ${isCorrect ? "text-green-600" : "text-red-600"}`} aria-hidden="true">
                           {isCorrect ? "check_circle" : "cancel"}
                         </span>
                         <div>
                           <p className="font-medium text-gray-900">{q.q}</p>
                           {!isCorrect && (
                             <p className="text-sm mt-1">
-                              <span className="text-red-600">Your answer: {q.options[answers[qi]]}</span>
-                              <span className="text-green-600 ml-3">Correct: {q.options[q.correct]}</span>
+                              <span className="text-red-600">{isFr ? "Votre réponse" : "Your answer"}: {q.options[answers[qi]]}</span>
+                              <span className="text-green-600 ml-3">{t("grammar.correct")}: {q.options[q.correct]}</span>
                             </p>
                           )}
                         </div>
@@ -369,12 +393,12 @@ export default function ListeningLab() {
 
               <div className="flex gap-3 justify-center">
                 <button onClick={() => setPhase("select")}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5">
-                  Choose Another
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {t("grammar.chooseAnother")}
                 </button>
                 <button onClick={startExercise}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75]">
-                  Try Again
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {t("grammar.tryAgain")}
                 </button>
               </div>
             </div>

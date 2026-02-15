@@ -1,13 +1,13 @@
 /**
  * Reading Comprehension Lab — Timed reading passages with comprehension questions
- * Sprint 34: Reading Comprehension Lab
+ * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
-import { toast } from "sonner";
 
 /* ─── Reading Passages by CEFR Level ─── */
 const PASSAGES: Record<string, { title: string; text: string; wordCount: number; questions: { q: string; options: string[]; correct: number }[] }[]> = {
@@ -93,6 +93,8 @@ type Phase = "select" | "reading" | "questions" | "results";
 
 export default function ReadingLab() {
   const { user, loading: authLoading } = useAuth();
+  const { t, language } = useLanguage();
+  const isFr = language === "fr";
   const utils = trpc.useUtils();
   const saveResult = trpc.readingLab.saveResult.useMutation({
     onSuccess: () => { utils.readingLab.history.invalidate(); utils.readingLab.stats.invalidate(); },
@@ -110,7 +112,6 @@ export default function ReadingLab() {
 
   const passage = useMemo(() => PASSAGES[selectedLevel]?.[passageIndex], [selectedLevel, passageIndex]);
 
-  // Timer
   useEffect(() => {
     if (phase !== "reading") return;
     const interval = setInterval(() => {
@@ -161,41 +162,47 @@ export default function ReadingLab() {
 
   const formatTime = (s: number) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
 
-  if (authLoading) return <div className="flex h-screen items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return (
+    <div className="flex h-screen items-center justify-center" role="status" aria-label={t("skillLabs.loading")}>
+      <div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" />
+      <span className="sr-only">{t("skillLabs.loading")}</span>
+    </div>
+  );
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto" role="main" aria-label={t("reading.title")}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                <span className="material-icons text-[#008090]">auto_stories</span>
-                Reading Comprehension Lab
+                <span className="material-icons text-[#008090]" aria-hidden="true">auto_stories</span>
+                {t("reading.title")}
               </h1>
-              <p className="text-gray-500 mt-1">Improve your reading speed and comprehension</p>
+              <p className="text-gray-500 mt-1">{isFr ? "Améliorez votre vitesse de lecture et votre compréhension" : "Improve your reading speed and comprehension"}</p>
             </div>
             <button onClick={() => setShowHistory(!showHistory)}
-              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5">
-              <span className="material-icons text-base">{showHistory ? "play_circle" : "history"}</span>
-              {showHistory ? "Practice" : "History"}
+              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+              aria-label={showHistory ? t("grammar.practice") : t("reading.history")}>
+              <span className="material-icons text-base" aria-hidden="true">{showHistory ? "play_circle" : "history"}</span>
+              {showHistory ? t("grammar.practice") : t("reading.history")}
             </button>
           </div>
 
           {/* Stats Bar */}
           {stats && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8" role="region" aria-label={t("reading.stats")}>
               {[
-                { label: "Exercises", value: stats.totalExercises ?? 0, icon: "assignment", color: "#008090" },
-                { label: "Avg Score", value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },
-                { label: "Avg WPM", value: stats.avgWpm ?? 0, icon: "speed", color: "#8b5cf6" },
-                { label: "Total Time", value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "#e74c3c" },
+                { label: t("reading.totalExercises"), value: stats.totalExercises ?? 0, icon: "assignment", color: "#008090" },
+                { label: t("reading.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },
+                { label: isFr ? "MPM moy." : "Avg WPM", value: stats.avgWpm ?? 0, icon: "speed", color: "#8b5cf6" },
+                { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "#e74c3c" },
               ].map((s, i) => (
-                <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
-                  <span className="material-icons text-2xl mb-1" style={{ color: s.color }}>{s.icon}</span>
+                <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center" role="status">
+                  <span className="material-icons text-2xl mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{s.value}</div>
                   <div className="text-xs text-gray-500">{s.label}</div>
                 </div>
@@ -204,13 +211,15 @@ export default function ReadingLab() {
           )}
 
           {showHistory ? (
-            /* History View */
             <div className="space-y-3">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Reading History</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("reading.history")}</h2>
               {!history?.length ? (
-                <div className="text-center py-16 text-gray-400">
-                  <span className="material-icons text-5xl mb-3 block">menu_book</span>
-                  <p>No reading exercises completed yet.</p>
+                <div className="text-center py-16" role="status">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
+                    <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">menu_book</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("reading.emptyTitle")}</h3>
+                  <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("reading.emptyDesc")}</p>
                 </div>
               ) : history.map((h: any, i: number) => (
                 <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex items-center justify-between">
@@ -218,88 +227,93 @@ export default function ReadingLab() {
                     <div className="font-semibold text-gray-900">{h.passageTitle}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
                       <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#008090]/10 text-[#008090]">{h.cefrLevel}</span>
-                      <span>{h.correctAnswers}/{h.totalQuestions} correct</span>
-                      <span>{h.wordsPerMinute} WPM</span>
+                      <span>{h.correctAnswers}/{h.totalQuestions} {t("grammar.correct").toLowerCase()}</span>
+                      <span>{h.wordsPerMinute} {isFr ? "MPM" : "WPM"}</span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "#22c55e" : (h.score ?? 0) >= 60 ? "#f5a623" : "#e74c3c" }}>{h.score}%</div>
+                    <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "#22c55e" : (h.score ?? 0) >= 60 ? "#f5a623" : "#e74c3c" }} aria-label={`${t("grammar.score")}: ${h.score}%`}>{h.score}%</div>
                     <div className="text-xs text-gray-400">{formatTime(h.timeSpentSeconds ?? 0)}</div>
                   </div>
                 </div>
               ))}
             </div>
           ) : phase === "select" ? (
-            /* Level & Passage Selection */
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Choose Your Level</h2>
-              <div className="flex gap-3 mb-6 flex-wrap">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("grammar.chooseLevel")}</h2>
+              <div className="flex gap-3 mb-6 flex-wrap" role="radiogroup" aria-label={t("grammar.chooseLevel")}>
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => { setSelectedLevel(level); setPassageIndex(0); }}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
+                    role="radio" aria-checked={selectedLevel === level}
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
                     {level}
                   </button>
                 ))}
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4" role="list" aria-label={t("reading.passage")}>
                 {PASSAGES[selectedLevel]?.map((p, i) => (
-                  <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                    onClick={() => { setPassageIndex(i); startReading(); }}>
+                  <div key={i} role="listitem"
+                    className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-[#008090]/30"
+                    onClick={() => { setPassageIndex(i); startReading(); }}
+                    onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setPassageIndex(i); startReading(); }}}
+                    tabIndex={0}
+                    aria-label={`${p.title} — ${p.wordCount} ${isFr ? "mots" : "words"} — ${p.questions.length} questions`}>
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-semibold text-gray-900 text-lg">{p.title}</h3>
                         <div className="text-sm text-gray-500 mt-1 flex items-center gap-4">
-                          <span>{p.wordCount} words</span>
+                          <span>{p.wordCount} {isFr ? "mots" : "words"}</span>
                           <span>{p.questions.length} questions</span>
                         </div>
                       </div>
-                      <span className="material-icons text-[#008090] text-3xl">play_circle</span>
+                      <span className="material-icons text-[#008090] text-3xl" aria-hidden="true">play_circle</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           ) : phase === "reading" ? (
-            /* Reading Phase */
-            <div>
+            <div role="region" aria-label={passage?.title}>
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <span className="px-3 py-1 rounded-full text-sm font-semibold bg-[#008090]/10 text-[#008090]">{selectedLevel}</span>
                   <h2 className="text-lg font-semibold text-gray-900">{passage?.title}</h2>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="text-sm text-gray-500 flex items-center gap-1">
-                    <span className="material-icons text-base">timer</span>
+                  <div className="text-sm text-gray-500 flex items-center gap-1" aria-live="polite">
+                    <span className="material-icons text-base" aria-hidden="true">timer</span>
                     {formatTime(elapsedSeconds)}
                   </div>
                   <button onClick={finishReading}
-                    className="px-4 py-2 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] transition-colors">
-                    Done Reading
+                    className="px-4 py-2 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                    {isFr ? "Lecture terminée" : "Done Reading"}
                   </button>
                 </div>
               </div>
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+              <article className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
                 <p className="text-lg leading-relaxed text-gray-800 font-serif">{passage?.text}</p>
+              </article>
+              <div className="text-center mt-4 text-sm text-gray-400">
+                {passage?.wordCount} {isFr ? "mots" : "words"} — {isFr ? "Lisez attentivement, puis cliquez sur « Lecture terminée » pour répondre aux questions" : "Read carefully, then click \"Done Reading\" to answer questions"}
               </div>
-              <div className="text-center mt-4 text-sm text-gray-400">{passage?.wordCount} words — Read carefully, then click "Done Reading" to answer questions</div>
             </div>
           ) : phase === "questions" ? (
-            /* Questions Phase */
-            <div>
+            <div role="region" aria-label={t("reading.questions")}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-gray-900">Comprehension Questions</h2>
-                <div className="text-sm text-gray-500">
-                  {answers.filter(a => a !== undefined).length}/{passage?.questions.length} answered
+                <h2 className="text-lg font-semibold text-gray-900">{isFr ? "Questions de compréhension" : "Comprehension Questions"}</h2>
+                <div className="text-sm text-gray-500" aria-live="polite">
+                  {answers.filter(a => a !== undefined).length}/{passage?.questions.length} {isFr ? "répondu" : "answered"}
                 </div>
               </div>
               <div className="space-y-6">
                 {passage?.questions.map((q, qi) => (
                   <div key={qi} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
                     <p className="font-semibold text-gray-900 mb-4">{qi + 1}. {q.q}</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label={q.q}>
                       {q.options.map((opt, oi) => (
                         <button key={oi} onClick={() => answerQuestion(qi, oi)}
-                          className={`p-3 rounded-xl text-sm text-left transition-all ${answers[qi] === oi ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
+                          role="radio" aria-checked={answers[qi] === oi}
+                          className={`p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[qi] === oi ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
                           <span className="font-semibold mr-2">{String.fromCharCode(65 + oi)}.</span> {opt}
                         </button>
                       ))}
@@ -310,17 +324,18 @@ export default function ReadingLab() {
               <div className="mt-6 flex justify-end">
                 <button onClick={submitAnswers}
                   disabled={answers.filter(a => a !== undefined).length < (passage?.questions.length ?? 0)}
-                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 transition-colors">
-                  Submit Answers
+                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {t("grammar.submit")}
                 </button>
               </div>
             </div>
           ) : (
-            /* Results Phase */
-            <div>
+            <div role="region" aria-label={t("grammar.drillComplete")}>
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-8">
-                <span className="material-icons text-5xl mb-3 text-[#008090]">emoji_events</span>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Exercise Complete!</h2>
+                <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
+                  <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("grammar.drillComplete")}</h2>
                 <div className="grid grid-cols-3 gap-6 mt-6">
                   {(() => {
                     const correct = passage?.questions.reduce((sum, q, i) => sum + (answers[i] === q.correct ? 1 : 0), 0) ?? 0;
@@ -329,11 +344,11 @@ export default function ReadingLab() {
                     const wpm = Math.round(((passage?.wordCount ?? 0) / totalTime) * 60);
                     const score = Math.round((correct / total) * 100);
                     return [
-                      { label: "Score", value: `${score}%`, color: score >= 80 ? "#22c55e" : score >= 60 ? "#f5a623" : "#e74c3c" },
-                      { label: "Reading Speed", value: `${wpm} WPM`, color: "#8b5cf6" },
-                      { label: "Time", value: formatTime(totalTime), color: "#008090" },
+                      { label: t("grammar.score"), value: `${score}%`, color: score >= 80 ? "#22c55e" : score >= 60 ? "#f5a623" : "#e74c3c" },
+                      { label: isFr ? "Vitesse de lecture" : "Reading Speed", value: `${wpm} ${isFr ? "MPM" : "WPM"}`, color: "#8b5cf6" },
+                      { label: isFr ? "Temps" : "Time", value: formatTime(totalTime), color: "#008090" },
                     ].map((r, i) => (
-                      <div key={i}>
+                      <div key={i} role="status">
                         <div className="text-3xl font-bold" style={{ color: r.color }}>{r.value}</div>
                         <div className="text-sm text-gray-500 mt-1">{r.label}</div>
                       </div>
@@ -342,22 +357,21 @@ export default function ReadingLab() {
                 </div>
               </div>
 
-              {/* Answer Review */}
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 mb-8" role="list" aria-label={isFr ? "Résultats détaillés" : "Detailed results"}>
                 {passage?.questions.map((q, qi) => {
                   const isCorrect = answers[qi] === q.correct;
                   return (
-                    <div key={qi} className={`rounded-xl p-4 border ${isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
+                    <div key={qi} role="listitem" className={`rounded-xl p-4 border ${isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
                       <div className="flex items-start gap-2">
-                        <span className={`material-icons text-lg ${isCorrect ? "text-green-600" : "text-red-600"}`}>
+                        <span className={`material-icons text-lg ${isCorrect ? "text-green-600" : "text-red-600"}`} aria-hidden="true">
                           {isCorrect ? "check_circle" : "cancel"}
                         </span>
                         <div>
                           <p className="font-medium text-gray-900">{q.q}</p>
                           {!isCorrect && (
                             <p className="text-sm mt-1">
-                              <span className="text-red-600">Your answer: {q.options[answers[qi]]}</span>
-                              <span className="text-green-600 ml-3">Correct: {q.options[q.correct]}</span>
+                              <span className="text-red-600">{isFr ? "Votre réponse" : "Your answer"}: {q.options[answers[qi]]}</span>
+                              <span className="text-green-600 ml-3">{t("grammar.correct")}: {q.options[q.correct]}</span>
                             </p>
                           )}
                         </div>
@@ -369,12 +383,12 @@ export default function ReadingLab() {
 
               <div className="flex gap-3 justify-center">
                 <button onClick={() => { setPhase("select"); }}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5">
-                  Choose Another
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {t("grammar.chooseAnother")}
                 </button>
                 <button onClick={startReading}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75]">
-                  Try Again
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  {t("grammar.tryAgain")}
                 </button>
               </div>
             </div>

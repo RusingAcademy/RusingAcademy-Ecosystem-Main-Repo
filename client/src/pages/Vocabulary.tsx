@@ -1,19 +1,20 @@
 /**
  * Vocabulary Builder — Word collection, mastery tracking, and quiz mode
- * Sprint 20: Vocabulary Builder & Dictionary
+ * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
 import { useState, useMemo, useCallback } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 
-const MASTERY_CONFIG: Record<string, { label: string; color: string; bg: string; icon: string }> = {
-  new: { label: "New", color: "#3b82f6", bg: "bg-blue-50 text-blue-700", icon: "fiber_new" },
-  learning: { label: "Learning", color: "#f59e0b", bg: "bg-amber-50 text-amber-700", icon: "school" },
-  familiar: { label: "Familiar", color: "#8b5cf6", bg: "bg-purple-50 text-purple-700", icon: "thumb_up" },
-  mastered: { label: "Mastered", color: "#22c55e", bg: "bg-green-50 text-green-700", icon: "verified" },
+const MASTERY_CONFIG: Record<string, { label: string; labelFr: string; color: string; bg: string; icon: string }> = {
+  new: { label: "New", labelFr: "Nouveau", color: "#3b82f6", bg: "bg-blue-50 text-blue-700", icon: "fiber_new" },
+  learning: { label: "Learning", labelFr: "En cours", color: "#f59e0b", bg: "bg-amber-50 text-amber-700", icon: "school" },
+  familiar: { label: "Familiar", labelFr: "Familier", color: "#8b5cf6", bg: "bg-purple-50 text-purple-700", icon: "thumb_up" },
+  mastered: { label: "Mastered", labelFr: "Maîtrisé", color: "#22c55e", bg: "bg-green-50 text-green-700", icon: "verified" },
 };
 
 const POS_OPTIONS = ["noun", "verb", "adjective", "adverb", "preposition", "conjunction", "pronoun", "interjection", "expression"];
@@ -22,6 +23,8 @@ type ViewMode = "list" | "quiz";
 
 export default function Vocabulary() {
   const { user, loading: authLoading } = useAuth();
+  const { t, language } = useLanguage();
+  const isFr = language === "fr";
   const [collapsed, setCollapsed] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,10 +72,10 @@ export default function Vocabulary() {
             partOfSpeech: w.partOfSpeech || undefined,
           });
         });
-        toast.success(`Added ${data.words.length} AI-suggested words!`);
+        toast.success(isFr ? `${data.words.length} mots ajoutés par l'IA !` : `Added ${data.words.length} AI-suggested words!`);
       }
     },
-    onError: () => toast.error("AI suggestion failed. Try again."),
+    onError: () => toast.error(isFr ? "La suggestion IA a échoué. Réessayez." : "AI suggestion failed. Try again."),
   });
 
   function resetForm() {
@@ -89,7 +92,6 @@ export default function Vocabulary() {
     });
   }
 
-  // Filter items
   const filteredItems = useMemo(() => {
     return items.filter(item => {
       const matchesSearch = !searchQuery ||
@@ -100,10 +102,8 @@ export default function Vocabulary() {
     });
   }, [items, searchQuery, filterMastery]);
 
-  // Quiz items (only non-mastered)
   const quizItems = useMemo(() => {
     const eligible = items.filter(i => i.mastery !== "mastered");
-    // Shuffle
     return [...eligible].sort(() => Math.random() - 0.5).slice(0, 10);
   }, [items]);
 
@@ -132,18 +132,23 @@ export default function Vocabulary() {
     }
   }, [quizItems, quizIndex, quizScore, reviewItem]);
 
-  if (authLoading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return (
+    <div className="flex items-center justify-center h-screen" role="status" aria-label={t("skillLabs.loading")}>
+      <div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full" />
+      <span className="sr-only">{t("skillLabs.loading")}</span>
+    </div>
+  );
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
-      <main className="flex-1 lg:ml-[240px] overflow-y-auto">
+      <main className="flex-1 lg:ml-[240px] overflow-y-auto" role="main" aria-label={t("vocab.title")}>
         <div className="lg:hidden flex items-center gap-3 p-4 bg-white border-b border-gray-200 sticky top-0 z-30">
-          <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100">
-            <span className="material-icons text-gray-600">menu</span>
+          <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100" aria-label="Toggle sidebar">
+            <span className="material-icons text-gray-600" aria-hidden="true">menu</span>
           </button>
-          <h1 className="text-lg font-semibold text-gray-900">Vocabulary</h1>
+          <h1 className="text-lg font-semibold text-gray-900">{t("vocab.title")}</h1>
         </div>
 
         <div className="max-w-6xl mx-auto p-6">
@@ -152,38 +157,41 @@ export default function Vocabulary() {
             <div>
               <div className="flex items-center gap-3">
                 {viewMode === "quiz" && (
-                  <button onClick={() => setViewMode("list")} className="p-1.5 rounded-lg hover:bg-gray-100">
-                    <span className="material-icons text-gray-500">arrow_back</span>
+                  <button onClick={() => setViewMode("list")} className="p-1.5 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#008090]/30" aria-label={t("flashcards.backToDecks")}>
+                    <span className="material-icons text-gray-500" aria-hidden="true">arrow_back</span>
                   </button>
                 )}
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                    <span className="material-icons text-[#008090]">translate</span>
-                    {viewMode === "list" ? "Vocabulary Builder" : "Vocabulary Quiz"}
+                    <span className="material-icons text-[#008090]" aria-hidden="true">translate</span>
+                    {viewMode === "list" ? t("vocab.title") : (isFr ? "Quiz de vocabulaire" : "Vocabulary Quiz")}
                   </h1>
                   <p className="text-sm text-gray-500 mt-1">
-                    {viewMode === "list" ? `${items.length} words collected` : `${quizItems.length} words to review`}
+                    {viewMode === "list" ? `${items.length} ${t("vocab.totalWords").toLowerCase()}` : `${quizItems.length} ${t("vocab.totalWords").toLowerCase()}`}
                   </p>
                 </div>
               </div>
             </div>
             {viewMode === "list" && (
-              <div className="flex gap-2">
+              <div className="flex gap-2" role="toolbar" aria-label={t("vocab.title")}>
                 <button onClick={startQuiz} disabled={items.filter(i => i.mastery !== "mastered").length === 0}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 disabled:opacity-40">
-                  <span className="material-icons text-base">quiz</span>
-                  Quiz Mode
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  aria-label={isFr ? "Mode quiz" : "Quiz Mode"}>
+                  <span className="material-icons text-base" aria-hidden="true">quiz</span>
+                  {isFr ? "Mode quiz" : "Quiz Mode"}
                 </button>
                 <button onClick={() => aiSuggest.mutate({ topic: "public service bilingualism", level: "B2", count: 5 })}
                   disabled={aiSuggest.isPending}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#8b5cf6] border border-[#8b5cf6] flex items-center gap-2 hover:bg-[#8b5cf6]/5 disabled:opacity-40">
-                  <span className="material-icons text-base">{aiSuggest.isPending ? "hourglass_empty" : "auto_awesome"}</span>
-                  {aiSuggest.isPending ? "Generating..." : "AI Suggest"}
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#8b5cf6] border border-[#8b5cf6] flex items-center gap-2 hover:bg-[#8b5cf6]/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
+                  aria-label={t("vocab.aiSuggest")}>
+                  <span className="material-icons text-base" aria-hidden="true">{aiSuggest.isPending ? "hourglass_empty" : "auto_awesome"}</span>
+                  {aiSuggest.isPending ? t("skillLabs.loading") : t("vocab.aiSuggest")}
                 </button>
                 <button onClick={() => setShowForm(true)}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 hover:shadow-md" style={{ background: "#008090" }}>
-                  <span className="material-icons text-base">add</span>
-                  Add Word
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}
+                  aria-label={t("vocab.addWord")}>
+                  <span className="material-icons text-base" aria-hidden="true">add</span>
+                  {t("vocab.addWord")}
                 </button>
               </div>
             )}
@@ -191,19 +199,21 @@ export default function Vocabulary() {
 
           {/* Stats Bar */}
           {viewMode === "list" && stats && stats.total > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6" role="region" aria-label={t("grammar.stats")}>
               {Object.entries(MASTERY_CONFIG).map(([key, config]) => (
                 <button key={key} onClick={() => setFilterMastery(filterMastery === key ? null : key)}
-                  className={`bg-white rounded-xl border p-4 text-center transition-all hover:shadow-sm ${filterMastery === key ? "border-[#008090] ring-1 ring-[#008090]/20" : "border-gray-100"}`}>
-                  <span className="material-icons text-lg mb-1" style={{ color: config.color }}>{config.icon}</span>
+                  className={`bg-white rounded-xl border p-4 text-center transition-all hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${filterMastery === key ? "border-[#008090] ring-1 ring-[#008090]/20" : "border-gray-100"}`}
+                  aria-pressed={filterMastery === key}
+                  aria-label={`${isFr ? config.labelFr : config.label}: ${(stats as any)[key] ?? 0}`}>
+                  <span className="material-icons text-lg mb-1" style={{ color: config.color }} aria-hidden="true">{config.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{(stats as any)[key] ?? 0}</div>
-                  <div className="text-[10px] text-gray-500 uppercase tracking-wider">{config.label}</div>
+                  <div className="text-[10px] text-gray-500 uppercase tracking-wider">{isFr ? config.labelFr : config.label}</div>
                 </button>
               ))}
-              <div className="bg-white rounded-xl border border-gray-100 p-4 text-center">
-                <span className="material-icons text-lg mb-1 text-[#008090]">analytics</span>
+              <div className="bg-white rounded-xl border border-gray-100 p-4 text-center" role="status">
+                <span className="material-icons text-lg mb-1 text-[#008090]" aria-hidden="true">analytics</span>
                 <div className="text-xl font-bold text-gray-900">{stats.total}</div>
-                <div className="text-[10px] text-gray-500 uppercase tracking-wider">Total</div>
+                <div className="text-[10px] text-gray-500 uppercase tracking-wider">{t("vocab.totalWords")}</div>
               </div>
             </div>
           )}
@@ -213,62 +223,69 @@ export default function Vocabulary() {
             <>
               {/* Search */}
               <div className="mb-4">
+                <label htmlFor="vocab-search" className="sr-only">{isFr ? "Rechercher des mots" : "Search words"}</label>
                 <div className="relative">
-                  <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
-                  <input type="text" placeholder="Search words..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
+                  <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" aria-hidden="true">search</span>
+                  <input id="vocab-search" type="text" placeholder={isFr ? "Rechercher des mots..." : "Search words..."} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]" />
                 </div>
               </div>
 
               {isLoading ? (
-                <div className="space-y-3">
+                <div className="space-y-3" role="status" aria-label={t("skillLabs.loading")}>
                   {[1,2,3,4,5].map(i => <div key={i} className="h-20 rounded-xl bg-gray-100 animate-pulse" />)}
+                  <span className="sr-only">{t("skillLabs.loading")}</span>
                 </div>
               ) : filteredItems.length === 0 ? (
-                <div className="text-center py-16">
-                  <span className="material-icons text-6xl text-gray-300 mb-4 block">translate</span>
+                <div className="text-center py-16" role="status">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
+                    <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">translate</span>
+                  </div>
                   <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                    {items.length === 0 ? "No vocabulary words yet" : "No matching words"}
+                    {items.length === 0 ? t("vocab.emptyTitle") : (isFr ? "Aucun mot correspondant" : "No matching words")}
                   </h3>
-                  <p className="text-sm text-gray-500 mb-4">
-                    {items.length === 0 ? "Start building your vocabulary by adding words!" : "Try adjusting your search or filter."}
+                  <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
+                    {items.length === 0 ? t("vocab.emptyDesc") : (isFr ? "Essayez d'ajuster votre recherche ou filtre." : "Try adjusting your search or filter.")}
                   </p>
                   {items.length === 0 && (
-                    <button onClick={() => setShowForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold text-white" style={{ background: "#008090" }}>
-                      Add First Word
+                    <button onClick={() => setShowForm(true)}
+                      className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                      <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
+                      {t("vocab.addWord")}
                     </button>
                   )}
                 </div>
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-2" role="list" aria-label={t("vocab.title")}>
                   {filteredItems.map(item => {
                     const mastery = MASTERY_CONFIG[item.mastery] ?? MASTERY_CONFIG.new;
                     return (
-                      <div key={item.id} className="bg-white rounded-xl border border-gray-100 p-4 group hover:shadow-sm transition-all">
+                      <div key={item.id} role="listitem" className="bg-white rounded-xl border border-gray-100 p-4 group hover:shadow-sm transition-all">
                         <div className="flex items-start gap-4">
                           <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: mastery.color + "15" }}>
-                            <span className="material-icons text-lg" style={{ color: mastery.color }}>{mastery.icon}</span>
+                            <span className="material-icons text-lg" style={{ color: mastery.color }} aria-hidden="true">{mastery.icon}</span>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-3 mb-1">
+                            <div className="flex items-center gap-3 mb-1 flex-wrap">
                               <span className="text-sm font-bold text-gray-900">{item.word}</span>
                               <span className="text-sm text-[#008090] font-medium">→ {item.translation}</span>
                               {item.partOfSpeech && (
                                 <span className="px-2 py-0.5 rounded-full bg-gray-100 text-[10px] text-gray-500 font-medium italic">{item.partOfSpeech}</span>
                               )}
-                              <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${mastery.bg}`}>{mastery.label}</span>
+                              <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${mastery.bg}`}>{isFr ? mastery.labelFr : mastery.label}</span>
                             </div>
                             {item.definition && <p className="text-xs text-gray-600 mb-1">{item.definition}</p>}
                             {item.exampleSentence && <p className="text-xs text-gray-400 italic">"{item.exampleSentence}"</p>}
                             {item.pronunciation && <p className="text-[10px] text-gray-400 mt-1">/{item.pronunciation}/</p>}
                             <div className="flex items-center gap-3 mt-2 text-[10px] text-gray-400">
-                              <span>Reviewed {item.reviewCount}x</span>
-                              <span>Correct {item.correctCount}/{item.reviewCount}</span>
+                              <span>{isFr ? "Révisé" : "Reviewed"} {item.reviewCount}x</span>
+                              <span>{isFr ? "Correct" : "Correct"} {item.correctCount}/{item.reviewCount}</span>
                             </div>
                           </div>
-                          <button onClick={() => { if (confirm("Delete this word?")) deleteItem.mutate({ itemId: item.id }); }}
-                            className="p-1.5 rounded-lg hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                            <span className="material-icons text-sm text-gray-400">delete</span>
+                          <button onClick={() => { if (confirm(t("flashcards.delete") + "?")) deleteItem.mutate({ itemId: item.id }); }}
+                            className="p-1.5 rounded-lg hover:bg-gray-100 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity shrink-0 focus:outline-none focus:ring-2 focus:ring-red-300"
+                            aria-label={`${t("flashcards.delete")} ${item.word}`}>
+                            <span className="material-icons text-sm text-gray-400" aria-hidden="true">delete</span>
                           </button>
                         </div>
                       </div>
@@ -282,41 +299,43 @@ export default function Vocabulary() {
           {/* QUIZ VIEW */}
           {viewMode === "quiz" && (
             quizDone || quizItems.length === 0 ? (
-              <div className="text-center py-16 max-w-md mx-auto">
-                <span className="material-icons text-6xl text-green-400 mb-4 block">emoji_events</span>
+              <div className="text-center py-16 max-w-md mx-auto" role="status">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
+                  <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
+                </div>
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                  {quizItems.length === 0 ? "No words to quiz!" : "Quiz Complete!"}
+                  {quizItems.length === 0 ? (isFr ? "Aucun mot à tester !" : "No words to quiz!") : (isFr ? "Quiz terminé !" : "Quiz Complete!")}
                 </h3>
                 {quizScore.total > 0 && (
                   <div className="mb-4">
                     <div className="text-4xl font-bold text-[#008090] mb-1">{Math.round((quizScore.correct / quizScore.total) * 100)}%</div>
-                    <p className="text-sm text-gray-500">{quizScore.correct}/{quizScore.total} correct</p>
+                    <p className="text-sm text-gray-500">{quizScore.correct}/{quizScore.total} {isFr ? "correct" : "correct"}</p>
                   </div>
                 )}
                 <div className="flex gap-3 justify-center">
-                  <button onClick={() => setViewMode("list")} className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 border border-gray-200 hover:bg-gray-50">
-                    Back to List
+                  <button onClick={() => setViewMode("list")} className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    {isFr ? "Retour à la liste" : "Back to List"}
                   </button>
                   {quizItems.length > 0 && (
-                    <button onClick={startQuiz} className="px-4 py-2 rounded-xl text-sm font-semibold text-white" style={{ background: "#008090" }}>
-                      Try Again
+                    <button onClick={startQuiz} className="px-4 py-2 rounded-xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                      {isFr ? "Réessayer" : "Try Again"}
                     </button>
                   )}
                 </div>
               </div>
             ) : (
-              <div className="max-w-lg mx-auto">
+              <div className="max-w-lg mx-auto" role="region" aria-label={isFr ? "Quiz de vocabulaire" : "Vocabulary Quiz"}>
                 {/* Progress */}
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow={quizIndex + 1} aria-valuemin={1} aria-valuemax={quizItems.length}>
                     <div className="h-full bg-[#008090] rounded-full transition-all duration-300" style={{ width: `${(quizIndex / quizItems.length) * 100}%` }} />
                   </div>
-                  <span className="text-xs text-gray-500 font-medium">{quizIndex + 1}/{quizItems.length}</span>
+                  <span className="text-xs text-gray-500 font-medium" aria-live="polite">{quizIndex + 1}/{quizItems.length}</span>
                 </div>
 
                 {/* Quiz card */}
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 text-center mb-6">
-                  <span className="text-[10px] text-gray-400 uppercase tracking-wider mb-4 block">Translate this word</span>
+                  <span className="text-[10px] text-gray-400 uppercase tracking-wider mb-4 block">{isFr ? "Traduisez ce mot" : "Translate this word"}</span>
                   <p className="text-3xl font-bold text-gray-900 mb-2">{quizItems[quizIndex]?.word}</p>
                   {quizItems[quizIndex]?.partOfSpeech && (
                     <p className="text-xs text-gray-400 italic mb-4">({quizItems[quizIndex].partOfSpeech})</p>
@@ -324,34 +343,35 @@ export default function Vocabulary() {
 
                   {!quizRevealed ? (
                     <>
-                      <input type="text" placeholder="Type your answer..." value={quizAnswer}
+                      <label htmlFor="quiz-answer" className="sr-only">{isFr ? "Votre réponse" : "Your answer"}</label>
+                      <input id="quiz-answer" type="text" placeholder={isFr ? "Tapez votre réponse..." : "Type your answer..."} value={quizAnswer}
                         onChange={e => setQuizAnswer(e.target.value)}
                         onKeyDown={e => { if (e.key === "Enter") setQuizRevealed(true); }}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 text-center text-gray-900 text-base mb-4 focus:outline-none focus:ring-2 focus:ring-[#008090]/20"
                         autoFocus />
                       <button onClick={() => setQuizRevealed(true)}
-                        className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: "#008090" }}>
-                        Check Answer
+                        className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                        {t("grammar.checkAnswer")}
                       </button>
                     </>
                   ) : (
                     <>
                       <div className="p-4 rounded-xl bg-gray-50 mb-4">
-                        <p className="text-xs text-gray-500 mb-1">Correct answer:</p>
+                        <p className="text-xs text-gray-500 mb-1">{isFr ? "Bonne réponse :" : "Correct answer:"}</p>
                         <p className="text-lg font-bold text-[#008090]">{quizItems[quizIndex]?.translation}</p>
                         {quizAnswer && (
-                          <p className="text-xs text-gray-400 mt-2">Your answer: <span className="font-medium">{quizAnswer}</span></p>
+                          <p className="text-xs text-gray-400 mt-2">{isFr ? "Votre réponse" : "Your answer"}: <span className="font-medium">{quizAnswer}</span></p>
                         )}
                       </div>
-                      <p className="text-xs text-gray-500 mb-4">Did you get it right?</p>
-                      <div className="flex gap-3 justify-center">
+                      <p className="text-xs text-gray-500 mb-4">{isFr ? "Avez-vous trouvé la bonne réponse ?" : "Did you get it right?"}</p>
+                      <div className="flex gap-3 justify-center" role="group" aria-label={t("flashcards.howWell")}>
                         <button onClick={() => handleQuizAnswer(false)}
-                          className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-red-50 text-red-600 hover:bg-red-100">
-                          Incorrect
+                          className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-red-50 text-red-600 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-300">
+                          {t("grammar.incorrect")}
                         </button>
                         <button onClick={() => handleQuizAnswer(true)}
-                          className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-green-50 text-green-600 hover:bg-green-100">
-                          Correct
+                          className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-green-50 text-green-600 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-300">
+                          {t("grammar.correct")}
                         </button>
                       </div>
                     </>
@@ -359,8 +379,8 @@ export default function Vocabulary() {
                 </div>
 
                 {/* Score */}
-                <div className="text-center text-xs text-gray-400">
-                  Score: {quizScore.correct}/{quizScore.total}
+                <div className="text-center text-xs text-gray-400" aria-live="polite">
+                  {t("grammar.score")}: {quizScore.correct}/{quizScore.total}
                 </div>
               </div>
             )
@@ -368,52 +388,54 @@ export default function Vocabulary() {
 
           {/* Add Word Modal */}
           {showForm && (
-            <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4" onClick={resetForm}>
+            <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={t("vocab.addWord")} onClick={resetForm}>
               <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-                <h2 className="text-lg font-bold text-gray-900 mb-4">Add Vocabulary Word</h2>
+                <h2 className="text-lg font-bold text-gray-900 mb-4">{t("vocab.addWord")}</h2>
 
                 <div className="space-y-3">
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Word / Expression *</label>
-                    <input type="text" placeholder="e.g., néanmoins" value={word} onChange={e => setWord(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]" />
+                    <label htmlFor="vocab-word" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.word")} *</label>
+                    <input id="vocab-word" type="text" placeholder={isFr ? "ex. néanmoins" : "e.g., néanmoins"} value={word} onChange={e => setWord(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]"
+                      aria-required="true" autoFocus />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Translation *</label>
-                    <input type="text" placeholder="e.g., nevertheless" value={translation} onChange={e => setTranslation(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]" />
+                    <label htmlFor="vocab-translation" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.translation")} *</label>
+                    <input id="vocab-translation" type="text" placeholder={isFr ? "ex. nevertheless" : "e.g., nevertheless"} value={translation} onChange={e => setTranslation(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]"
+                      aria-required="true" />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Part of Speech</label>
-                    <select value={partOfSpeech} onChange={e => setPartOfSpeech(e.target.value)}
+                    <label htmlFor="vocab-pos" className="text-xs font-medium text-gray-500 mb-1 block">{isFr ? "Partie du discours" : "Part of Speech"}</label>
+                    <select id="vocab-pos" value={partOfSpeech} onChange={e => setPartOfSpeech(e.target.value)}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20">
-                      <option value="">Select...</option>
+                      <option value="">{isFr ? "Sélectionner..." : "Select..."}</option>
                       {POS_OPTIONS.map(pos => <option key={pos} value={pos}>{pos}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Definition</label>
-                    <textarea placeholder="Optional definition..." value={definition} onChange={e => setDefinition(e.target.value)} rows={2}
+                    <label htmlFor="vocab-def" className="text-xs font-medium text-gray-500 mb-1 block">Definition</label>
+                    <textarea id="vocab-def" placeholder={isFr ? "Définition optionnelle..." : "Optional definition..."} value={definition} onChange={e => setDefinition(e.target.value)} rows={2}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 resize-none" />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Example Sentence</label>
-                    <textarea placeholder="Use the word in a sentence..." value={example} onChange={e => setExample(e.target.value)} rows={2}
+                    <label htmlFor="vocab-example" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.context")}</label>
+                    <textarea id="vocab-example" placeholder={isFr ? "Utilisez le mot dans une phrase..." : "Use the word in a sentence..."} value={example} onChange={e => setExample(e.target.value)} rows={2}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 resize-none" />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-500 mb-1 block">Pronunciation</label>
-                    <input type="text" placeholder="e.g., ne.ɑ̃.mwɛ̃" value={pronunciation} onChange={e => setPronunciation(e.target.value)}
+                    <label htmlFor="vocab-pron" className="text-xs font-medium text-gray-500 mb-1 block">{isFr ? "Prononciation" : "Pronunciation"}</label>
+                    <input id="vocab-pron" type="text" placeholder="e.g., ne.ɑ̃.mwɛ̃" value={pronunciation} onChange={e => setPronunciation(e.target.value)}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20" />
                   </div>
                 </div>
 
                 <div className="flex justify-end gap-3 mt-4">
-                  <button onClick={resetForm} className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gray-100">Cancel</button>
+                  <button onClick={resetForm} className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">{t("flashcards.cancel")}</button>
                   <button onClick={handleAdd}
                     disabled={!word.trim() || !translation.trim() || addItem.isPending}
-                    className="px-5 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50" style={{ background: "#008090" }}>
-                    {addItem.isPending ? "Adding..." : "Add Word"}
+                    className="px-5 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                    {addItem.isPending ? t("skillLabs.loading") : t("vocab.addWord")}
                   </button>
                 </div>
               </div>
