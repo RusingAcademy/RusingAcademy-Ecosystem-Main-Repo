@@ -125,6 +125,27 @@ import {
   allProductsRouter,
 } from "./routers/kajabiIntegration";
 
+// ═══ Wave G: Previously Unregistered Routers ═══
+import { coursePlayerRouter } from "./routers/coursePlayer";
+import { moderationRouter } from "./routers/moderation";
+import { referralRouter } from "./routers/referral";
+import { membershipRouter } from "./routers/membership";
+import { emailBroadcastRouter } from "./routers/emailBroadcast";
+import { adminDashboardDataRouter } from "./routers/adminDashboardData";
+import { adminCoursesRouter } from "./routers/adminCourses";
+import { adminCommissionRouter } from "./routers/adminCommission";
+import { courseAdminRouter } from "./routers/courseAdmin";
+import { analyticsRouter } from "./routers/analytics";
+import { advancedAnalyticsRouter } from "./routers/advancedAnalytics";
+import { certificateRouter } from "./routers/certificate";
+import { classroomRouter } from "./routers/classroom";
+import { notebookRouter } from "./routers/notebook";
+import { studyPlannerRouter } from "./routers/studyPlanner";
+import { discussionsRouter } from "./routers/discussions";
+import { dictationRouter } from "./routers/dictation";
+import { peerReviewRouter } from "./routers/peerReview";
+import { bookmarksRouter } from "./routers/bookmarks";
+
 // ============================================================================
 // HELPER FUNCTIONS
 // ============================================================================
@@ -8973,6 +8994,28 @@ export const appRouter = router({
   dailyGoals: dailyGoalsRouter,
   // Observability metrics (admin-only)
   metrics: metricsRouter,
+
+  // ═══ Wave G: Previously Unregistered Routers ═══
+  coursePlayer: coursePlayerRouter,
+  moderation: moderationRouter,
+  referral: referralRouter,
+  membership: membershipRouter,
+  emailBroadcast: emailBroadcastRouter,
+  adminDashboard: adminDashboardDataRouter,
+  adminCourses: adminCoursesRouter,
+  adminCommission: adminCommissionRouter,
+  courseAdmin: courseAdminRouter,
+  analytics: analyticsRouter,
+  advancedAnalytics: advancedAnalyticsRouter,
+  certificate: certificateRouter,
+  classroom: classroomRouter,
+  notebook: notebookRouter,
+  studyPlanner: studyPlannerRouter,
+  discussions: discussionsRouter,
+  dictation: dictationRouter,
+  peerReview: peerReviewRouter,
+  bookmarks: bookmarksRouter,
+
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure
