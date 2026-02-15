@@ -167,6 +167,22 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Core React runtime
+          'vendor-react': ['react', 'react-dom'],
+          // UI framework
+          'vendor-ui': ['@radix-ui/react-dialog', '@radix-ui/react-tooltip', '@radix-ui/react-popover', '@radix-ui/react-select', '@radix-ui/react-tabs', '@radix-ui/react-accordion'],
+          // Charts & visualization
+          'vendor-charts': ['recharts'],
+          // Form & validation
+          'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
+          // Rich text & markdown
+          'vendor-editor': ['@tiptap/react', '@tiptap/starter-kit', '@tiptap/extension-placeholder'],
+        },
+      },
+    },
   },
   server: {
     host: true,
