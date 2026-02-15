@@ -50,6 +50,7 @@ const navSections: NavSection[] = [
     { id: "content-pipeline", label: "Content Pipeline", icon: Workflow, path: "/admin/content-pipeline", requiredPermission: "manage_courses" },
     { id: "quiz-management", label: "Quiz Management", icon: HelpCircle, path: "/admin/quiz-management", requiredPermission: "manage_courses" },
     { id: "learning-paths", label: "Learning Paths", icon: Layers, path: "/admin/learning-paths", requiredPermission: "manage_courses" },
+    { id: "content-workflow", label: "Content Workflow", icon: FileText, path: "/admin/content-workflow", requiredPermission: "manage_courses" },
   ]},
 
   // ── SALES ─────────────────────────────────────────────────────────────────
