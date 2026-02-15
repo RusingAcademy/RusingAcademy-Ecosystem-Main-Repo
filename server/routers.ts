@@ -92,6 +92,7 @@ import { sleProgressRouter } from "./routers/sleProgress";
 import { adminStabilityRouter } from "./routers/adminStability";
 import { stripeKPIRouter } from "./routers/stripeKPIData";
 import { adminNotificationsRouter } from "./routers/adminNotifications";
+import { governmentReportingRouter } from "./routers/governmentReporting";
 import { learnerProgressionRouter } from "./routers/learnerProgression";
 import { coachLearnerMetricsRouter } from "./routers/coachLearnerMetrics";
 import { progressReportRouter } from "./routers/progressReport";
@@ -8842,6 +8843,7 @@ export const appRouter = router({
   badgeShowcase: badgeShowcaseRouter,
   // Admin Quiz Management
   adminQuiz: adminQuizRouter,
+  govReporting: governmentReportingRouter,
   // Mock SLE Exam Engine
   mockSle: mockSleRouter,
 

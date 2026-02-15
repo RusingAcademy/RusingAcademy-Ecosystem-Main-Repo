@@ -62,6 +62,7 @@ import {
   ReportsAdmin,
   ContentPipelineDashboard,
   QuizManagement,
+  GovernmentReporting,
 } from "./admin";
 
 interface Props {
@@ -119,6 +120,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   "sales-analytics": SalesAnalytics,
   "live-kpi": LiveKPIDashboard,
   reports: ReportsAdmin,
+  "gov-reporting": GovernmentReporting,
 
   // ── More / Settings ──
   settings: AdminSettings,

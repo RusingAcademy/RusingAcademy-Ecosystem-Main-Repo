@@ -101,6 +101,7 @@ const navSections: NavSection[] = [
     { id: "live-kpi", label: "Live KPI", icon: Gauge, path: "/admin/live-kpi", requiredPermission: "view_dashboard" },
     { id: "content-intelligence", label: "Content Intelligence", icon: Lightbulb, path: "/admin/content-intelligence", requiredPermission: "manage_analytics" },
     { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity", requiredPermission: "view_audit_log" },
+    { id: "gov-reporting", label: "GC Compliance", icon: Shield, path: "/admin/gov-reporting", requiredPermission: "manage_analytics" },
   ]},
 
   // ── AI & SLE ──────────────────────────────────────────────────────────────

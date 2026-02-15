@@ -62,3 +62,4 @@ export { default as AssessmentsAdmin } from "./AssessmentsAdmin";
 export { default as ReportsAdmin } from "./ReportsAdmin";
 export { default as ContentPipelineDashboard } from "./ContentPipelineDashboard";
 export { default as QuizManagement } from "./QuizManagement";
+export { default as GovernmentReporting } from "./GovernmentReporting";
