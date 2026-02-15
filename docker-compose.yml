@@ -1,0 +1,75 @@
+# =============================================================================
+# RusingÂcademy Ecosystem — Docker Compose (Local Development)
+# =============================================================================
+# Usage:
+#   docker compose up -d          # Start all services
+#   docker compose up -d app      # Start app only (uses external DB)
+#   docker compose logs -f app    # Follow app logs
+#   docker compose down            # Stop all services
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Application
+  # ---------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-5000}:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - DATABASE_URL=${DATABASE_URL}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - VITE_CLERK_PUBLISHABLE_KEY=${VITE_CLERK_PUBLISHABLE_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - CRON_SECRET=${CRON_SECRET}
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # Database (MySQL 8 — TiDB-compatible for local development)
+  # ---------------------------------------------------------------------------
+  db:
+    image: mysql:8.0
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-rusingacademy_dev}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-rusingacademy}
+      - MYSQL_USER=${MYSQL_USER:-rusingacademy}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-rusingacademy_dev}
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rusingacademy_dev}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+
+volumes:
+  db_data:
+    driver: local
