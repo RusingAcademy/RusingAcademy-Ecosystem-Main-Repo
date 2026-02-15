@@ -1,57 +1,27 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { UsersRound, Users, Shield, BarChart3, Plus, Edit, Trash2, MoreHorizontal } from "lucide-react";
-
-// TODO: Replace with tRPC router when available
-// import { trpc } from "@/lib/trpc";
+import { UsersRound, Users, Plus, Trash2, Search, RefreshCw } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 const AdminStudyGroups = () => {
-  // Mock Data using useState
-  const [stats, setStats] = useState({
-    totalGroups: 120,
-    totalMembers: 1500,
-    activeGroups: 85,
-    avgGroupSize: 12.5,
+  const [search, setSearch] = useState("");
+  const [showCreate, setShowCreate] = useState(false);
+  const [newGroup, setNewGroup] = useState({ name: "", nameFr: "", description: "", descriptionFr: "", cefrLevel: "B1", maxMembers: 20 });
+
+  const { data: groups, isLoading, refetch } = trpc.adminStudyGroups.list.useQuery({ search: search || undefined });
+  const createMutation = trpc.adminStudyGroups.create.useMutation({
+    onSuccess: () => { toast.success("Study group created"); refetch(); setShowCreate(false); setNewGroup({ name: "", nameFr: "", description: "", descriptionFr: "", cefrLevel: "B1", maxMembers: 20 }); },
+    onError: (e) => toast.error(e.message),
   });
-
-  const [groups, setGroups] = useState([
-    { id: "1", name: "B2 Intermediate Prep", description: "Focus on oral proficiency for the SLE.", memberCount: 15, cefrLevel: "B2", status: "active" },
-    { id: "2", name: "C1 Advanced Grammar", description: "Deep dive into complex grammar structures.", memberCount: 8, cefrLevel: "C1", status: "active" },
-    { id: "3", name: "A2 Beginner's Circle", description: "For those starting their language journey.", memberCount: 22, cefrLevel: "A2", status: "active" },
-    { id: "4", name: "Reading Comprehension Club", description: "Archived group for reading practice.", memberCount: 10, cefrLevel: "B1", status: "archived" },
-  ]);
-
-  const [members, setMembers] = useState([
-    { id: "m1", name: "Alice Johnson", email: "alice@example.com", group: "B2 Intermediate Prep", role: "Member", joined: "2023-10-15" },
-    { id: "m2", name: "Bob Williams", email: "bob@example.com", group: "B2 Intermediate Prep", role: "Moderator", joined: "2023-09-01" },
-    { id: "m3", name: "Charlie Brown", email: "charlie@example.com", group: "C1 Advanced Grammar", role: "Member", joined: "2024-01-20" },
-    { id: "m4", name: "Diana Miller", email: "diana@example.com", group: "A2 Beginner's Circle", role: "Member", joined: "2024-02-01" },
-    { id: "m5", name: "Ethan Davis", email: "ethan@example.com", group: "A2 Beginner's Circle", role: "Member", joined: "2024-02-05" },
-  ]);
-
-  const [settings, setSettings] = useState({
-    maxGroupSize: 25,
-    allowUserCreation: false,
-    activityRequirementDays: 30,
+  const deleteMutation = trpc.adminStudyGroups.delete.useMutation({
+    onSuccess: () => { toast.success("Group deleted"); refetch(); },
+    onError: (e) => toast.error(e.message),
   });
-
-  // TODO: Add tRPC mutations for create, update, delete
-  // const createGroup = trpc.admin.createStudyGroup.useMutation();
-  // const updateGroup = trpc.admin.updateStudyGroup.useMutation();
-  // const deleteGroup = trpc.admin.deleteStudyGroup.useMutation();
-
-  const handleAddGroup = () => {
-    toast.success("New group created!", { description: "The new study group has been added successfully." });
-    // TODO: Replace with actual tRPC call
-    // createGroup.mutate({ ... });
-  };
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
@@ -62,210 +32,128 @@ const AdminStudyGroups = () => {
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Study Groups</h1>
-            <p className="text-muted-foreground">Admin panel to manage study groups.</p>
+            <p className="text-muted-foreground">Create and manage collaborative study groups for learners.</p>
           </div>
         </div>
-        <Button onClick={handleAddGroup}>
+        <Button onClick={() => setShowCreate(!showCreate)}>
           <Plus className="mr-2 h-4 w-4" /> Create Group
         </Button>
       </div>
 
-      <Tabs defaultValue="overview">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
+      {showCreate && (
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>Create New Study Group</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <label className="text-sm font-medium">Name (EN)</label>
+                <Input value={newGroup.name} onChange={e => setNewGroup({ ...newGroup, name: e.target.value })} placeholder="B2 Oral Practice Group" />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Name (FR)</label>
+                <Input value={newGroup.nameFr} onChange={e => setNewGroup({ ...newGroup, nameFr: e.target.value })} placeholder="Groupe de pratique orale B2" />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Description (EN)</label>
+                <Input value={newGroup.description} onChange={e => setNewGroup({ ...newGroup, description: e.target.value })} placeholder="Weekly practice sessions..." />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Description (FR)</label>
+                <Input value={newGroup.descriptionFr} onChange={e => setNewGroup({ ...newGroup, descriptionFr: e.target.value })} placeholder="Sessions de pratique hebdomadaires..." />
+              </div>
+              <div>
+                <label className="text-sm font-medium">CEFR Level</label>
+                <select value={newGroup.cefrLevel} onChange={e => setNewGroup({ ...newGroup, cefrLevel: e.target.value })} className="w-full border rounded-md px-3 py-2 text-sm">
+                  {["A1","A2","B1","B2","C1"].map(l => <option key={l} value={l}>{l}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm font-medium">Max Members</label>
+                <Input type="number" value={newGroup.maxMembers} onChange={e => setNewGroup({ ...newGroup, maxMembers: Number(e.target.value) })} />
+              </div>
+            </div>
+            <div className="flex gap-2 mt-4">
+              <Button onClick={() => createMutation.mutate(newGroup)} disabled={!newGroup.name || createMutation.isPending}>
+                {createMutation.isPending ? "Creating..." : "Create Group"}
+              </Button>
+              <Button variant="outline" onClick={() => setShowCreate(false)}>Cancel</Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <Tabs defaultValue="groups">
+        <TabsList>
           <TabsTrigger value="groups">Groups</TabsTrigger>
-          <TabsTrigger value="members">Members</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview" className="mt-6">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Groups</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.totalGroups}</div>
-                <p className="text-xs text-muted-foreground">+5 since last month</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Members</CardTitle>
-                <UsersRound className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.totalMembers}</div>
-                <p className="text-xs text-muted-foreground">+50 since last month</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active Groups</CardTitle>
-                <Shield className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.activeGroups}</div>
-                <p className="text-xs text-muted-foreground">{Math.round((stats.activeGroups / stats.totalGroups) * 100)}% of total</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Avg. Group Size</CardTitle>
-                <BarChart3 className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.avgGroupSize}</div>
-                <p className="text-xs text-muted-foreground">Stable over the last quarter</p>
-              </CardContent>
-            </Card>
-          </div>
-          {/* TODO: Add more charts and detailed stats */}
-        </TabsContent>
-
-        <TabsContent value="groups" className="mt-6">
+        <TabsContent value="groups" className="mt-4">
           <Card>
             <CardHeader>
-              <CardTitle>Manage Groups</CardTitle>
-              <CardDescription>CRUD table of study groups with their details.</CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Manage Groups</CardTitle>
+                  <CardDescription>All study groups across the platform.</CardDescription>
+                </div>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="Search groups..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9 w-60" />
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Members</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CEFR Level</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                      <th scope="col" className="relative px-6 py-3">
-                        <span className="sr-only">Actions</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {/* TODO: Replace with data from tRPC query */}
-                    {groups.map((group) => (
-                      <tr key={group.id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{group.name}</div>
-                          <div className="text-sm text-gray-500 truncate max-w-xs">{group.description}</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.memberCount}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <Badge variant="secondary">{group.cefrLevel}</Badge>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <Badge variant={group.status === "active" ? "default" : "outline"}>
-                            {group.status}
-                          </Badge>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <Button variant="ghost" size="icon">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="icon" className="text-red-500">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              {groups.length === 0 && (
+              {isLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : !groups || (groups as any[]).length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground">
-                  <Users className="mx-auto h-12 w-12" />
-                  <h3 className="mt-2 text-sm font-medium">No study groups found</h3>
-                  <p className="mt-1 text-sm">Get started by creating a new group.</p>
+                  <Users className="mx-auto h-12 w-12 mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">No study groups yet</h3>
+                  <p className="text-sm">Click "Create Group" to get started.</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Members</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Level</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Owner</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                        <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {(groups as any[]).map((g: any) => (
+                        <tr key={g.id}>
+                          <td className="px-4 py-3">
+                            <div className="text-sm font-medium text-gray-900">{g.name}</div>
+                            {g.nameFr && g.nameFr !== g.name && <div className="text-xs text-gray-500 italic">{g.nameFr}</div>}
+                            {g.description && <div className="text-xs text-gray-400 truncate max-w-xs">{g.description}</div>}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-500">{g.memberCount ?? 0}</td>
+                          <td className="px-4 py-3"><Badge variant="outline">{g.cefrLevel || "—"}</Badge></td>
+                          <td className="px-4 py-3 text-sm text-gray-500">{g.ownerName || "—"}</td>
+                          <td className="px-4 py-3">
+                            <Badge variant={g.isActive ? "default" : "secondary"}>{g.isActive ? "Active" : "Inactive"}</Badge>
+                          </td>
+                          <td className="px-4 py-3 text-right">
+                            <Button variant="ghost" size="icon" className="text-red-500"
+                              onClick={() => { if (confirm("Delete this group and all members?")) deleteMutation.mutate({ id: g.id }); }}
+                              disabled={deleteMutation.isPending}>
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="members" className="mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Manage Members</CardTitle>
-              <CardDescription>Manage group membership and promote moderators.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Group</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined</th>
-                      <th scope="col" className="relative px-6 py-3">
-                        <span className="sr-only">Actions</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {/* TODO: Replace with data from tRPC query */}
-                    {members.map((member) => (
-                      <tr key={member.id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{member.name}</div>
-                          <div className="text-sm text-gray-500">{member.email}</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{member.group}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <Badge variant={member.role === "Moderator" ? "destructive" : "secondary"}>{member.role}</Badge>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{member.joined}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <Button variant="ghost" size="icon">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="icon" className="text-red-500">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="settings" className="mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Group Settings</CardTitle>
-              <CardDescription>Configure rules for study group creation and activity.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div>
-                  <label htmlFor="maxGroupSize" className="font-medium">Maximum Group Size</label>
-                  <p className="text-sm text-muted-foreground">Set the maximum number of members per group.</p>
-                </div>
-                <Input id="maxGroupSize" type="number" className="w-24" value={settings.maxGroupSize} onChange={(e) => setSettings({...settings, maxGroupSize: parseInt(e.target.value, 10)})} />
-              </div>
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div>
-                  <label htmlFor="allowUserCreation" className="font-medium">Allow User Creation</label>
-                  <p className="text-sm text-muted-foreground">Allow any user to create a new study group.</p>
-                </div>
-                <Checkbox id="allowUserCreation" checked={settings.allowUserCreation} onCheckedChange={(checked) => setSettings({...settings, allowUserCreation: !!checked})} />
-              </div>
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div>
-                  <label htmlFor="activityRequirementDays" className="font-medium">Activity Requirement (Days)</label>
-                  <p className="text-sm text-muted-foreground">Automatically archive groups after a period of inactivity.</p>
-                </div>
-                <Input id="activityRequirementDays" type="number" className="w-24" value={settings.activityRequirementDays} onChange={(e) => setSettings({...settings, activityRequirementDays: parseInt(e.target.value, 10)})} />
-              </div>
-              <div className="flex justify-end mt-6">
-                <Button onClick={() => toast.success("Settings saved!")}>Save Settings</Button>
-              </div>
             </CardContent>
           </Card>
         </TabsContent>

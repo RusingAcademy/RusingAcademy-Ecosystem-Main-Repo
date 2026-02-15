@@ -5,46 +5,43 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { Layers, BookOpen, Brain, BarChart3, Plus, Edit, Trash2, RotateCcw } from "lucide-react";
-
-// TODO: Replace with tRPC router once available
-// import { trpc } from "@/lib/trpc";
-
-const mockDecks = [
-  { id: "deck1", title: "French Vocabulary - A1", cardCount: 50, cefrLevel: "A1", category: "Vocabulary" },
-  { id: "deck2", title: "German Grammar - B2", cardCount: 120, cefrLevel: "B2", category: "Grammar" },
-  { id: "deck3", title: "Spanish Conversation Starters", cardCount: 75, cefrLevel: "B1", category: "Conversation" },
-];
-
-const mockCards = {
-  deck1: [
-    { id: "card1", front: "Bonjour", back: "Hello", hint: "Greeting" },
-    { id: "card2", front: "Merci", back: "Thank you", hint: "Gratitude" },
-  ],
-  deck2: [],
-  deck3: [],
-};
+import { Layers, BookOpen, Brain, BarChart3, Plus, Trash2, Search, RefreshCw } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 const AdminFlashcards = () => {
-  // TODO: Replace useState with tRPC queries
-  // const { data: stats, isLoading: isLoadingStats } = trpc.admin.getFlashcardStats.useQuery();
-  // const { data: decks, isLoading: isLoadingDecks } = trpc.admin.listFlashcardDecks.useQuery();
-  const [stats] = useState({ totalDecks: 3, totalCards: 245, activeLearners: 150, avgRetention: "85%" });
-  const [decks, setDecks] = useState(mockDecks);
-  const [selectedDeck, setSelectedDeck] = useState(mockDecks[0]);
+  const [search, setSearch] = useState("");
+  const [levelFilter, setLevelFilter] = useState<string>("");
 
-  const isLoadingStats = false;
-  const isLoadingDecks = false;
+  const { data: stats, isLoading: isLoadingStats } = trpc.adminFlashcards.getStats.useQuery();
+  const { data: decks, isLoading: isLoadingDecks, refetch: refetchDecks } = trpc.adminFlashcards.listDecks.useQuery({
+    search: search || undefined,
+    level: levelFilter || undefined,
+  });
+  const deleteDeckMutation = trpc.adminFlashcards.deleteDeck.useMutation({
+    onSuccess: () => { toast.success("Deck deleted successfully"); refetchDecks(); },
+    onError: (e) => toast.error(e.message),
+  });
+  const seedDeckMutation = trpc.adminFlashcards.createSeedDeck.useMutation({
+    onSuccess: () => { toast.success("Seed deck created"); refetchDecks(); },
+    onError: (e) => toast.error(e.message),
+  });
 
-  const handleAddDeck = () => {
-    // TODO: Implement tRPC mutation for adding a deck
-    toast.success("New deck created successfully!");
-  };
-
-  const handleDeleteDeck = (deckId: string) => {
-    // TODO: Implement tRPC mutation for deleting a deck
-    setDecks(decks.filter(d => d.id !== deckId));
-    toast.success("Deck deleted successfully!");
+  const handleSeedDeck = () => {
+    seedDeckMutation.mutate({
+      title: "SLE Oral B2 — Common Expressions",
+      titleFr: "ELS Oral B2 — Expressions courantes",
+      description: "Essential expressions for SLE oral exam preparation at B2 level",
+      descriptionFr: "Expressions essentielles pour la préparation à l'examen oral ELS au niveau B2",
+      cefrLevel: "B2",
+      category: "SLE Oral",
+      cards: [
+        { front: "I'd like to bring up an important point.", back: "J'aimerais soulever un point important.", frontFr: "J'aimerais soulever un point important.", backFr: "I'd like to bring up an important point." },
+        { front: "Could you elaborate on that?", back: "Pourriez-vous élaborer là-dessus?", frontFr: "Pourriez-vous élaborer là-dessus?", backFr: "Could you elaborate on that?" },
+        { front: "In my experience...", back: "D'après mon expérience...", frontFr: "D'après mon expérience...", backFr: "In my experience..." },
+        { front: "That's a valid concern.", back: "C'est une préoccupation valable.", frontFr: "C'est une préoccupation valable.", backFr: "That's a valid concern." },
+        { front: "Let me rephrase that.", back: "Permettez-moi de reformuler.", frontFr: "Permettez-moi de reformuler.", backFr: "Let me rephrase that." },
+      ],
+    });
   };
 
   return (
@@ -57,32 +54,34 @@ const AdminFlashcards = () => {
             <p className="text-muted-foreground">Manage flashcard decks and the spaced repetition system.</p>
           </div>
         </div>
-        <Button onClick={handleAddDeck}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add New Deck
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={handleSeedDeck} disabled={seedDeckMutation.isPending}>
+            <Plus className="mr-2 h-4 w-4" />
+            Seed SLE Deck
+          </Button>
+        </div>
       </div>
 
       <Tabs defaultValue="overview">
         <TabsList className="mb-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="decks">Decks</TabsTrigger>
-          <TabsTrigger value="cards">Cards</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview">
           {isLoadingStats ? (
-            <p>Loading stats...</p>
+            <div className="flex items-center justify-center py-12">
+              <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
+            </div>
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total Decks</CardTitle>
                   <Layers className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{stats?.totalDecks ?? 'N/A'}</div>
+                  <div className="text-2xl font-bold">{stats?.totalDecks ?? 0}</div>
                 </CardContent>
               </Card>
               <Card>
@@ -91,25 +90,34 @@ const AdminFlashcards = () => {
                   <BookOpen className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{stats?.totalCards ?? 'N/A'}</div>
+                  <div className="text-2xl font-bold">{stats?.totalCards ?? 0}</div>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Active Learners</CardTitle>
+                  <CardTitle className="text-sm font-medium">Active Users</CardTitle>
                   <Brain className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{stats?.activeLearners ?? 'N/A'}</div>
+                  <div className="text-2xl font-bold">{stats?.activeUsers ?? 0}</div>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Average Retention</CardTitle>
+                  <CardTitle className="text-sm font-medium">Avg Cards/Deck</CardTitle>
                   <BarChart3 className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{stats?.avgRetention ?? 'N/A'}</div>
+                  <div className="text-2xl font-bold">{stats?.avgCardsPerDeck ?? 0}</div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Avg Mastery</CardTitle>
+                  <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{stats?.avgMastery ?? 0}%</div>
                 </CardContent>
               </Card>
             </div>
@@ -119,72 +127,56 @@ const AdminFlashcards = () => {
         <TabsContent value="decks">
           <Card>
             <CardHeader>
-              <CardTitle>Flashcard Decks</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Flashcard Decks</CardTitle>
+                <div className="flex gap-2">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input placeholder="Search decks..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9 w-60" />
+                  </div>
+                  <select value={levelFilter} onChange={e => setLevelFilter(e.target.value)} className="border rounded-md px-3 py-2 text-sm">
+                    <option value="">All Levels</option>
+                    {["A1","A2","B1","B2","C1"].map(l => <option key={l} value={l}>{l}</option>)}
+                  </select>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
               {isLoadingDecks ? (
-                <p>Loading decks...</p>
+                <div className="flex items-center justify-center py-12">
+                  <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : !decks || decks.length === 0 ? (
+                <div className="text-center py-12">
+                  <Layers className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">No flashcard decks yet</h3>
+                  <p className="text-muted-foreground mb-4">Click "Seed SLE Deck" to create a starter deck for learners.</p>
+                </div>
               ) : (
-                <div className="space-y-4">
-                  {decks.map((deck) => (
-                    <div key={deck.id} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <div className="space-y-3">
+                  {(decks as any[]).map((deck: any) => (
+                    <div key={deck.id} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border">
                       <div>
                         <h3 className="font-semibold">{deck.title}</h3>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <span>{deck.cardCount} cards</span>
+                        {deck.titleFr && deck.titleFr !== deck.title && (
+                          <p className="text-sm text-muted-foreground italic">{deck.titleFr}</p>
+                        )}
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                          <span>{deck.cardCount ?? 0} cards</span>
                           <Badge variant="outline">{deck.cefrLevel}</Badge>
-                          <Badge variant="secondary">{deck.category}</Badge>
+                          {deck.category && <Badge variant="secondary">{deck.category}</Badge>}
+                          {deck.ownerName && <span>by {deck.ownerName}</span>}
                         </div>
                       </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="icon"><Edit className="h-4 w-4" /></Button>
-                        <Button variant="destructive" size="icon" onClick={() => handleDeleteDeck(deck.id)}><Trash2 className="h-4 w-4" /></Button>
-                      </div>
+                      <Button variant="destructive" size="icon"
+                        onClick={() => { if (confirm("Delete this deck and all its cards?")) deleteDeckMutation.mutate({ id: deck.id }); }}
+                        disabled={deleteDeckMutation.isPending}>
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     </div>
                   ))}
                 </div>
               )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="cards">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Manage Cards in &quot;{selectedDeck?.title}&quot;</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    {/* TODO: Implement card management UI */}
-                    <div className="text-center py-12">
-                        <p className="text-muted-foreground">Card management interface coming soon.</p>
-                        <p className="text-sm text-muted-foreground">Select a deck from the 'Decks' tab to manage its cards.</p>
-                    </div>
-                </CardContent>
-            </Card>
-        </TabsContent>
-
-        <TabsContent value="settings">
-          <Card>
-            <CardHeader>
-              <CardTitle>Spaced Repetition (SM-2) Settings</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <label htmlFor="interval1" className="block text-sm font-medium text-muted-foreground">First Review Interval (days)</label>
-                <Input id="interval1" type="number" defaultValue={1} className="mt-1" />
-              </div>
-              <div>
-                <label htmlFor="interval2" className="block text-sm font-medium text-muted-foreground">Second Review Interval (days)</label>
-                <Input id="interval2" type="number" defaultValue={6} className="mt-1" />
-              </div>
-              <div>
-                <label htmlFor="easeFactor" className="block text-sm font-medium text-muted-foreground">Default Ease Factor</label>
-                <Input id="easeFactor" type="number" step="0.1" defaultValue={2.5} className="mt-1" />
-              </div>
-              <Button>
-                <RotateCcw className="mr-2 h-4 w-4" />
-                Save Settings
-              </Button>
             </CardContent>
           </Card>
         </TabsContent>
