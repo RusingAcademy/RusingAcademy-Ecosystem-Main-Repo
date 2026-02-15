@@ -1,29 +1,10 @@
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "sonner";
-import { RotateCcw, Bell, BarChart3, TrendingUp, Settings, Calendar, PlusCircle } from 'lucide-react';
-import React, { useState } from 'react';
-
-// TODO: Replace with tRPC hooks once the router is available
-// import { trpc } from "@/lib/trpc";
+import { RotateCcw, BarChart3, TrendingUp, Calendar, Users, RefreshCw, Trophy } from 'lucide-react';
+import { trpc } from "@/lib/trpc";
 
 const AdminDailyReview = () => {
-  const [stats, setStats] = useState({ activeReviewers: 12, cardsDueToday: 152, avgCompletionRate: 88, streakDistribution: 'N/A' });
-  const [config, setConfig] = useState({ initialInterval: 1, easeFactorMin: 1.3, easeFactorMax: 2.5, graduatingInterval: 4 });
-  const [notifications, setNotifications] = useState({ remindersEnabled: true, reminderTime: '09:00' });
-
-  // TODO: Replace with tRPC query
-  // const { data: statsData, isLoading: isStatsLoading } = trpc.admin.getDailyReviewStats.useQuery();
-
-  // TODO: Replace with tRPC mutation
-  // const updateConfig = trpc.admin.updateDailyReviewConfig.useMutation({
-  //   onSuccess: () => toast.success('Configuration updated successfully!'),
-  //   onError: () => toast.error('Failed to update configuration.'),
-  // });
+  const { data: stats, isLoading } = trpc.adminDailyReview.getStats.useQuery();
 
   return (
     <div className="p-8">
@@ -32,136 +13,109 @@ const AdminDailyReview = () => {
           <RotateCcw className="w-8 h-8 text-primary" />
           <div>
             <h1 className="text-2xl font-bold">Admin Daily Review</h1>
-            <p className="text-muted-foreground">Manage the daily review queue system.</p>
+            <p className="text-muted-foreground">Monitor learner study streaks and daily review engagement.</p>
           </div>
         </div>
-        <Button>
-          <PlusCircle className="w-4 h-4 mr-2" />
-          New Action
-        </Button>
       </div>
 
-      {/* Stats Cards Row */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Reviewers</CardTitle>
-            <RotateCcw className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.activeReviewers}</div>
-            <p className="text-xs text-muted-foreground">Currently reviewing</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Cards Due Today</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.cardsDueToday}</div>
-            <p className="text-xs text-muted-foreground">In the next 24 hours</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg. Completion Rate</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.avgCompletionRate}%</div>
-            <p className="text-xs text-muted-foreground">Over the last 7 days</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Streak Distribution</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.streakDistribution}</div>
-            <p className="text-xs text-muted-foreground">Average review streak</p>
-          </CardContent>
-        </Card>
-      </div>
+      {isLoading ? (
+        <div className="flex items-center justify-center py-12">
+          <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
+        </div>
+      ) : (
+        <>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Active Streaks (24h)</CardTitle>
+                <Calendar className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stats?.activeStreaks ?? 0}</div>
+                <p className="text-xs text-muted-foreground">Learners who studied in the last 24 hours</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Sessions</CardTitle>
+                <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stats?.totalSessions ?? 0}</div>
+                <p className="text-xs text-muted-foreground">All-time study sessions recorded</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Avg Cards/Day</CardTitle>
+                <BarChart3 className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stats?.avgCardsPerDay ?? 0}</div>
+                <p className="text-xs text-muted-foreground">Average cards reviewed per session</p>
+              </CardContent>
+            </Card>
+          </div>
 
-      {/* Tabs Interface */}
-      <Tabs defaultValue="overview">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="queue-config">Queue Config</TabsTrigger>
-          <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          <TabsTrigger value="analytics">Analytics</TabsTrigger>
-        </TabsList>
-        <TabsContent value="overview">
-          <Card>
-            <CardHeader>
-              <CardTitle>Overview</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center text-muted-foreground py-12">
-              <p>Overview statistics will be displayed here.</p>
-              <p className="text-sm">TODO: Implement charts for streak distribution and completion rates.</p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="queue-config">
-          <Card>
-            <CardHeader>
-              <CardTitle>Queue Configuration</CardTitle>
-              <p className="text-muted-foreground text-sm">Adjust the SM-2 algorithm parameters.</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <label htmlFor="initial-interval">Initial Interval (days)</label>
-                <Input id="initial-interval" type="number" className="w-24" value={config.initialInterval} onChange={(e) => setConfig({...config, initialInterval: Number(e.target.value)})} />
-              </div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="ease-factor-min">Ease Factor (Min)</label>
-                <Input id="ease-factor-min" type="number" step="0.1" className="w-24" value={config.easeFactorMin} onChange={(e) => setConfig({...config, easeFactorMin: Number(e.target.value)})} />
-              </div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="ease-factor-max">Ease Factor (Max)</label>
-                <Input id="ease-factor-max" type="number" step="0.1" className="w-24" value={config.easeFactorMax} onChange={(e) => setConfig({...config, easeFactorMax: Number(e.target.value)})} />
-              </div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="graduating-interval">Graduating Interval (days)</label>
-                <Input id="graduating-interval" type="number" className="w-24" value={config.graduatingInterval} onChange={(e) => setConfig({...config, graduatingInterval: Number(e.target.value)})} />
-              </div>
-               <Button className="mt-4" onClick={() => { /* updateConfig.mutate(config) */ toast.info('Settings saved (mock)!'); }}>Save Changes</Button>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="notifications">
-          <Card>
-            <CardHeader>
-              <CardTitle>Notification Settings</CardTitle>
-               <p className="text-muted-foreground text-sm">Manage review reminder notifications.</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                    <p>Enable daily review reminders</p>
-                    <Button variant="outline" onClick={() => setNotifications({...notifications, remindersEnabled: !notifications.remindersEnabled})}>{notifications.remindersEnabled ? 'Disable' : 'Enable'}</Button>
-                </div>
-                <div className="flex items-center justify-between">
-                    <p>Reminder time</p>
-                    <Input type="time" className="w-32" value={notifications.reminderTime} onChange={(e) => setNotifications({...notifications, reminderTime: e.target.value})} />
-                </div>
-                 <Button className="mt-4" onClick={() => { /* updateNotifications.mutate(notifications) */ toast.info('Notification settings saved (mock)!'); }}>Save Changes</Button>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="analytics">
-          <Card>
-            <CardHeader>
-              <CardTitle>Analytics</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center text-muted-foreground py-12">
-              <p>Retention curves and review patterns will be displayed here.</p>
-              <p className="text-sm">TODO: Implement analytics charts.</p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+          <Tabs defaultValue="leaderboard">
+            <TabsList>
+              <TabsTrigger value="leaderboard">Top Learners</TabsTrigger>
+            </TabsList>
+            <TabsContent value="leaderboard" className="mt-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-yellow-500" />
+                    Study Streak Leaderboard
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {!stats?.topLearners || (stats.topLearners as any[]).length === 0 ? (
+                    <div className="text-center py-12 text-muted-foreground">
+                      <Users className="mx-auto h-12 w-12 mb-4" />
+                      <h3 className="text-lg font-semibold mb-2">No study sessions yet</h3>
+                      <p className="text-sm">Learners will appear here once they start reviewing flashcards.</p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rank</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Learner</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Streak Days</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total Cards</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Correct</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Accuracy</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          {(stats.topLearners as any[]).map((l: any, i: number) => (
+                            <tr key={l.userId}>
+                              <td className="px-4 py-3 text-sm font-bold text-gray-900">
+                                {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `#${i + 1}`}
+                              </td>
+                              <td className="px-4 py-3 text-sm font-medium text-gray-900">{l.name || `User #${l.userId}`}</td>
+                              <td className="px-4 py-3 text-sm text-gray-700 font-semibold">{l.streakDays} days</td>
+                              <td className="px-4 py-3 text-sm text-gray-500">{l.totalCards}</td>
+                              <td className="px-4 py-3 text-sm text-gray-500">{l.totalCorrect}</td>
+                              <td className="px-4 py-3 text-sm">
+                                <span className={`font-semibold ${l.totalCards > 0 && (l.totalCorrect / l.totalCards) >= 0.8 ? "text-green-600" : "text-gray-600"}`}>
+                                  {l.totalCards > 0 ? Math.round((l.totalCorrect / l.totalCards) * 100) : 0}%
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </>
+      )}
     </div>
   );
 };

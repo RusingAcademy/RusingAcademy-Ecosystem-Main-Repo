@@ -1,82 +1,39 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import {
-  Library,
-  BookOpen,
-  Brain,
-  Sparkles,
-  Plus,
-  Edit,
-  Trash2,
-  Search,
-} from "lucide-react";
+import { Library, BookOpen, Brain, Sparkles, Plus, Search, RefreshCw, Users } from "lucide-react";
 import { useState } from "react";
-
-// TODO: Replace with tRPC router when available
-// import { trpc } from "@/lib/trpc";
-
-const mockWords = [
-  {
-    id: "word1",
-    french: "Bonjour",
-    english: "Hello",
-    partOfSpeech: "Interjection",
-    cefrLevel: "A1",
-    example: "Bonjour, comment ça va?",
-    pronunciation: "/bɔ̃.ʒuʁ/",
-  },
-  {
-    id: "word2",
-    french: "Manger",
-    english: "To eat",
-    partOfSpeech: "Verb",
-    cefrLevel: "A1",
-    example: "Je vais manger une pomme.",
-    pronunciation: "/mɑ̃.ʒe/",
-  },
-  {
-    id: "word3",
-    french: "Ordinateur",
-    english: "Computer",
-    partOfSpeech: "Noun",
-    cefrLevel: "A2",
-    example: "Mon ordinateur est rapide.",
-    pronunciation: "/ɔʁ.di.na.tœʁ/",
-  },
-];
-
-const mockCategories = [
-  { id: "cat1", name: "Basics", wordCount: 150 },
-  { id: "cat2", name: "Business", wordCount: 450 },
-  { id: "cat3", name: "Technology", wordCount: 320 },
-];
+import { trpc } from "@/lib/trpc";
 
 export default function AdminVocabulary() {
-  // TODO: Replace with tRPC hooks
-  // const { data: stats, isLoading: isLoadingStats } = trpc.admin.vocabulary.getStats.useQuery();
-  // const { data: words, isLoading: isLoadingWords } = trpc.admin.vocabulary.listWords.useQuery();
-  // const { data: categories, isLoading: isLoadingCategories } = trpc.admin.vocabulary.listCategories.useQuery();
+  const [search, setSearch] = useState("");
+  const [levelFilter, setLevelFilter] = useState<string>("");
 
-  const [stats, setStats] = useState({ totalWords: 2500, mastery: { beginner: 1200, intermediate: 800, advanced: 500 }, popularCategories: ["Business", "Travel", "Technology"] });
-  const [words, setWords] = useState(mockWords);
-  const [categories, setCategories] = useState(mockCategories);
-  const [isLoadingStats, setIsLoadingStats] = useState(false);
-  const [isLoadingWords, setIsLoadingWords] = useState(false);
-  const [isLoadingCategories, setIsLoadingCategories] = useState(false);
+  const { data: stats, isLoading: isLoadingStats } = trpc.adminVocabulary.getStats.useQuery();
+  const { data: words, isLoading: isLoadingWords, refetch: refetchWords } = trpc.adminVocabulary.listWords.useQuery({
+    search: search || undefined,
+    level: levelFilter || undefined,
+  });
+  const { data: categories, isLoading: isLoadingCategories } = trpc.adminVocabulary.listCategories.useQuery();
 
-  const handleAddWord = () => {
-    toast.success("New word added successfully!");
-    // TODO: Implement tRPC mutation for adding a word
+  const seedMutation = trpc.adminVocabulary.seedWords.useMutation({
+    onSuccess: (data) => { toast.success(`${data.inserted} SLE words seeded`); refetchWords(); },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const handleSeedWords = () => {
+    seedMutation.mutate({
+      words: [
+        { word: "rendre compte", translation: "to report / to realize", category: "SLE Oral", cefrLevel: "B2", exampleSentence: "Je dois rendre compte de mes résultats.", exampleSentenceFr: "I must report on my results." },
+        { word: "en ce qui concerne", translation: "regarding / as for", category: "SLE Written", cefrLevel: "B2", exampleSentence: "En ce qui concerne le budget, nous devons en discuter.", exampleSentenceFr: "Regarding the budget, we need to discuss it." },
+        { word: "mettre en œuvre", translation: "to implement", category: "SLE Written", cefrLevel: "C1", exampleSentence: "Il faut mettre en œuvre cette politique.", exampleSentenceFr: "We must implement this policy." },
+        { word: "prendre en charge", translation: "to take care of / to handle", category: "SLE Oral", cefrLevel: "B1", exampleSentence: "Je vais prendre en charge ce dossier.", exampleSentenceFr: "I will handle this file." },
+        { word: "dans le cadre de", translation: "within the framework of", category: "SLE Written", cefrLevel: "C1", exampleSentence: "Dans le cadre de ce projet, nous allons collaborer.", exampleSentenceFr: "Within the framework of this project, we will collaborate." },
+      ],
+    });
   };
 
   return (
@@ -86,133 +43,120 @@ export default function AdminVocabulary() {
           <Library className="h-8 w-8 text-primary" />
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Vocabulary Builder</h1>
-            <p className="text-muted-foreground">
-              Manage vocabulary content, categories, and AI suggestions.
-            </p>
+            <p className="text-muted-foreground">Manage vocabulary content, categories, and AI suggestions.</p>
           </div>
         </div>
-        <Button onClick={handleAddWord}>
-          <Plus className="mr-2 h-4 w-4" /> Add New Word
+        <Button onClick={handleSeedWords} disabled={seedMutation.isPending}>
+          <Plus className="mr-2 h-4 w-4" /> Seed SLE Words
         </Button>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Words</CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{isLoadingStats ? "..." : stats?.totalWords || "N/A"}</div>
-            <p className="text-xs text-muted-foreground">in the entire word bank</p>
+            <div className="text-2xl font-bold">{isLoadingStats ? "..." : stats?.totalWords ?? 0}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Mastery Distribution</CardTitle>
+            <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{isLoadingStats ? "..." : stats?.activeUsers ?? 0}</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Avg Mastery</CardTitle>
             <Brain className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{isLoadingStats ? "..." : `${Math.round((stats?.mastery.beginner / stats?.totalWords) * 100)}%`}</div>
-            <p className="text-xs text-muted-foreground">Beginner level mastery across users</p>
+            <div className="text-2xl font-bold">{isLoadingStats ? "..." : `${stats?.avgMastery ?? 0}%`}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Popular Categories</CardTitle>
+            <CardTitle className="text-sm font-medium">Categories</CardTitle>
             <Sparkles className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-             <div className="flex flex-wrap gap-2 mt-2">
-              {(stats?.popularCategories || []).map(cat => <Badge key={cat} variant="secondary">{cat}</Badge>)}
-            </div>
+            <div className="text-2xl font-bold">{isLoadingCategories ? "..." : (categories as any[])?.length ?? 0}</div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Tabs */}
       <Tabs defaultValue="word-bank">
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="word-bank">Word Bank</TabsTrigger>
           <TabsTrigger value="categories">Categories</TabsTrigger>
-          <TabsTrigger value="ai-suggestions">AI Suggestions</TabsTrigger>
         </TabsList>
-
-        <TabsContent value="overview" className="mt-4">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Vocabulary Overview</CardTitle>
-                    <CardDescription>High-level statistics and trends for the vocabulary builder feature.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    {isLoadingStats ? (
-                        <p>Loading statistics...</p>
-                    ) : (
-                        <div className="text-center text-muted-foreground py-12">
-                            <p>Detailed charts and graphs will be displayed here.</p>
-                            <p className="text-sm">e.g., New words per week, user engagement, mastery progress over time.</p>
-                        </div>
-                    )}
-                </CardContent>
-            </Card>
-        </TabsContent>
 
         <TabsContent value="word-bank" className="mt-4">
           <Card>
             <CardHeader>
-                <CardTitle>Word Bank Management</CardTitle>
-                <CardDescription>Add, edit, or remove vocabulary words.</CardDescription>
-                 <div className="pt-4 relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input placeholder="Search words..." className="pl-10" />
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Word Bank Management</CardTitle>
+                  <CardDescription>Browse and manage vocabulary words across all learners.</CardDescription>
                 </div>
+                <div className="flex gap-2">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input placeholder="Search words..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9 w-60" />
+                  </div>
+                  <select value={levelFilter} onChange={e => setLevelFilter(e.target.value)} className="border rounded-md px-3 py-2 text-sm">
+                    <option value="">All Levels</option>
+                    {["A1","A2","B1","B2","C1"].map(l => <option key={l} value={l}>{l}</option>)}
+                  </select>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
               {isLoadingWords ? (
-                <p>Loading words...</p>
-              ) : words.length > 0 ? (
+                <div className="flex items-center justify-center py-12">
+                  <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : !words || (words as any[]).length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground">
+                  <BookOpen className="mx-auto h-12 w-12 mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">No vocabulary words yet</h3>
+                  <p className="text-sm">Click "Seed SLE Words" to create starter vocabulary for learners.</p>
+                </div>
+              ) : (
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">French</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">English</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Level</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Part of Speech</th>
-                        <th scope="col" className="relative px-6 py-3">
-                          <span className="sr-only">Actions</span>
-                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Word</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Translation</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Level</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Mastery</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Owner</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {words.map((word) => (
-                        <tr key={word.id}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{word.french}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{word.english}</td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <Badge variant={word.cefrLevel === 'A1' ? 'default' : 'secondary'}>{word.cefrLevel}</Badge>
+                      {(words as any[]).map((w: any) => (
+                        <tr key={w.id}>
+                          <td className="px-4 py-3 text-sm font-medium text-gray-900">{w.word}</td>
+                          <td className="px-4 py-3 text-sm text-gray-500">{w.translation}</td>
+                          <td className="px-4 py-3"><Badge variant="outline">{w.cefrLevel || "—"}</Badge></td>
+                          <td className="px-4 py-3 text-sm text-gray-500">{w.category || "—"}</td>
+                          <td className="px-4 py-3">
+                            <div className="w-16 bg-gray-200 rounded-full h-2">
+                              <div className="bg-primary rounded-full h-2" style={{ width: `${Math.min(100, (w.masteryLevel || 0) * 20)}%` }} />
+                            </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{word.partOfSpeech}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                            <Button variant="ghost" size="icon">
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive/80">
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-500">{w.ownerName || "—"}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                </div>
-              ) : (
-                <div className="text-center py-12 text-muted-foreground">
-                  <BookOpen className="mx-auto h-12 w-12" />
-                  <h3 className="mt-2 text-sm font-medium">No words found</h3>
-                  <p className="mt-1 text-sm">Get started by adding a new word.</p>
                 </div>
               )}
             </CardContent>
@@ -220,50 +164,38 @@ export default function AdminVocabulary() {
         </TabsContent>
 
         <TabsContent value="categories" className="mt-4">
-           <Card>
-                <CardHeader>
-                    <CardTitle>Topic Categories</CardTitle>
-                    <CardDescription>Manage topic-based word groups for focused learning.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                     {isLoadingCategories ? (
-                        <p>Loading categories...</p>
-                    ) : (
-                        <div className="space-y-4">
-                            {categories.map(cat => (
-                                <div key={cat.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border">
-                                    <div>
-                                        <p className="font-semibold">{cat.name}</p>
-                                        <p className="text-sm text-muted-foreground">{cat.wordCount} words</p>
-                                    </div>
-                                    <div className="space-x-2">
-                                        <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
-                                        <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive/80"><Trash2 className="h-4 w-4" /></Button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </CardContent>
-            </Card>
-        </TabsContent>
-
-        <TabsContent value="ai-suggestions" className="mt-4">
-           <Card>
-                <CardHeader>
-                    <CardTitle>AI-Powered Suggestions</CardTitle>
-                    <CardDescription>Configure and review AI-generated vocabulary suggestions.</CardDescription>
-                </CardHeader>
-                <CardContent className="text-center text-muted-foreground py-12">
-                    <Sparkles className="mx-auto h-12 w-12" />
-                    <h3 className="mt-2 text-sm font-medium">AI Configuration Panel</h3>
-                    <p className="mt-1 text-sm">Settings for generating new words, example sentences, and categories will be available here.</p>
-                    <Button className="mt-4">Configure AI</Button>
-                </CardContent>
-            </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Topic Categories</CardTitle>
+              <CardDescription>Word distribution by category across all learners.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {isLoadingCategories ? (
+                <div className="flex items-center justify-center py-12">
+                  <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : !categories || (categories as any[]).length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground">
+                  <Library className="mx-auto h-12 w-12 mb-4" />
+                  <p>No categories yet. Categories appear automatically as words are added.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {(categories as any[]).map((cat: any, i: number) => (
+                    <div key={i} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border">
+                      <div>
+                        <p className="font-semibold">{cat.category || "Uncategorized"}</p>
+                        <p className="text-sm text-muted-foreground">{cat.count} words</p>
+                      </div>
+                      <Badge variant="secondary">{cat.count} words</Badge>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
   );
 }
-
