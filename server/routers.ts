@@ -86,6 +86,7 @@ import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter,
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
 import { adminQuizRouter } from "./routers/adminQuiz";
+import { adminPathsRouter } from "./routers/adminPaths";
 import { mockSleRouter } from "./routers/mockSle";
 import { sleServicesRouter } from "./routers/sleServices";
 import { sleProgressRouter } from "./routers/sleProgress";
@@ -8843,6 +8844,7 @@ export const appRouter = router({
   badgeShowcase: badgeShowcaseRouter,
   // Admin Quiz Management
   adminQuiz: adminQuizRouter,
+  adminPaths: adminPathsRouter,
   govReporting: governmentReportingRouter,
   // Mock SLE Exam Engine
   mockSle: mockSleRouter,

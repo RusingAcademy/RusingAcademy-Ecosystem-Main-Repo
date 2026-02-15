@@ -10,7 +10,7 @@ import {
   Receipt, Trophy, Award, Star, Headphones, Newspaper, FolderDown,
   MessageCircle, DollarSign, ShoppingCart, FileSpreadsheet, Handshake,
   Link2, Palette, Navigation, PenTool, Megaphone, Inbox, CalendarDays,
-  Filter, UserCheck, BarChart2, PieChart, HelpCircle, type LucideIcon, ChevronDown,
+  Filter, UserCheck, BarChart2, PieChart, HelpCircle, Layers, type LucideIcon, ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -49,6 +49,7 @@ const navSections: NavSection[] = [
     { id: "gamification", label: "Gamification", icon: Trophy, path: "/admin/gamification", requiredPermission: "manage_courses" },
     { id: "content-pipeline", label: "Content Pipeline", icon: Workflow, path: "/admin/content-pipeline", requiredPermission: "manage_courses" },
     { id: "quiz-management", label: "Quiz Management", icon: HelpCircle, path: "/admin/quiz-management", requiredPermission: "manage_courses" },
+    { id: "learning-paths", label: "Learning Paths", icon: Layers, path: "/admin/learning-paths", requiredPermission: "manage_courses" },
   ]},
 
   // ── SALES ─────────────────────────────────────────────────────────────────
