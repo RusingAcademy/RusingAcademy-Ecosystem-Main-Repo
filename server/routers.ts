@@ -85,6 +85,8 @@ import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, act
 import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter, sleExamRouter, contentIntelligenceRouter, funnelsRouter, automationsRouter, orgBillingRouter, dripContentRouter, abTestingRouter, affiliateRouter } from "./routers/premiumFeatures";
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
+import { adminQuizRouter } from "./routers/adminQuiz";
+import { mockSleRouter } from "./routers/mockSle";
 import { sleServicesRouter } from "./routers/sleServices";
 import { sleProgressRouter } from "./routers/sleProgress";
 import { adminStabilityRouter } from "./routers/adminStability";
@@ -8828,6 +8830,10 @@ export const appRouter = router({
   adminCourseTree: adminCourseTreeRouter,
   progressCascade: progressCascadeRouter,
   badgeShowcase: badgeShowcaseRouter,
+  // Admin Quiz Management
+  adminQuiz: adminQuizRouter,
+  // Mock SLE Exam Engine
+  mockSle: mockSleRouter,
 
   // ═══ Kajabi Integration — New Routers ═══
   kajabiOffers: offersRouter,
