@@ -30,6 +30,107 @@ import {
   Quote
 } from 'lucide-react';
 import { FREE_ACCESS_MODE } from '@shared/const';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+// Bilingual UI strings
+const uiStrings = {
+  en: {
+    fslTab: 'French (FSL)',
+    eslTab: 'English (ESL)',
+    badge: 'Path Series\u2122 Curriculum',
+    eslBadge: 'ESL Path Series\u2122 Curriculum',
+    heroTitle: 'Structured Learning for',
+    eslHeroTitle: 'English Training for',
+    heroHighlight: 'Federal Success',
+    heroDesc: 'Six progressive courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE certification goals with our proven methodology.',
+    eslHeroDesc: 'Six progressive English courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE English certification goals.',
+    freeAssessment: 'Free Assessment',
+    stats: [
+      { value: '6', label: 'Progressive Paths' },
+      { value: '200+', label: 'Video Lessons' },
+      { value: '95%', label: 'Success Rate' },
+      { value: 'Lifetime', label: 'Access' },
+    ],
+    whyTitle: 'Why Choose',
+    whySubtitle: 'Built specifically for Canadian federal public servants preparing for SLE exams',
+    trustedBy: 'Trusted by public servants from',
+    howItWorks: 'How It Works',
+    howItWorksSubtitle: 'A clear path from assessment to certification',
+    filterLabel: 'Filter by Level:',
+    noCourses: 'No courses found',
+    noCoursesHint: 'Try selecting a different level filter',
+    successStories: 'Success Stories',
+    whatStudentsSay: 'What Our Students Say',
+    studentsSaySubtitle: 'Join thousands of federal public servants who have achieved their bilingual goals',
+    startToday: 'Start Today',
+    notSure: 'Not Sure Which Path to Start?',
+    notSureDesc: "Book a free diagnostic session with our team. We'll assess your current level and recommend the perfect learning path for your SLE goals.",
+    bookDiagnostic: 'Book Free Diagnostic',
+    viewAll: 'View All Programs',
+    guarantee: '30-day money-back guarantee',
+    lifetimeAccess: 'Lifetime access',
+    expertSupport: 'Expert support',
+    popular: 'Popular',
+    forLabel: 'For:',
+    outcomeLabel: 'Outcome:',
+    free: 'Free',
+    cadLifetime: 'CAD \u2022 Lifetime Access',
+    startFree: 'Start Free',
+    enrollNow: 'Enroll Now',
+    processing: 'Processing...',
+    loginToEnroll: 'Please log in to enroll in a course',
+    redirecting: 'Redirecting to checkout...',
+    checkoutFailed: 'Failed to create checkout session',
+  },
+  fr: {
+    fslTab: 'Fran\u00e7ais (FLS)',
+    eslTab: 'Anglais (ALS)',
+    badge: 'Programme Path Series\u2122',
+    eslBadge: 'Programme ALS Path Series\u2122',
+    heroTitle: 'Apprentissage structur\u00e9 pour la',
+    eslHeroTitle: 'Formation en anglais pour la',
+    heroHighlight: 'R\u00e9ussite f\u00e9d\u00e9rale',
+    heroDesc: 'Six cours progressifs con\u00e7us sp\u00e9cifiquement pour les fonctionnaires f\u00e9d\u00e9raux canadiens. De A1 \u00e0 C1, atteignez vos objectifs de certification ELS avec notre m\u00e9thodologie \u00e9prouv\u00e9e.',
+    eslHeroDesc: 'Six cours progressifs d\u2019anglais con\u00e7us sp\u00e9cifiquement pour les fonctionnaires f\u00e9d\u00e9raux canadiens. De A1 \u00e0 C1, atteignez vos objectifs de certification ELS en anglais.',
+    freeAssessment: '\u00c9valuation gratuite',
+    stats: [
+      { value: '6', label: 'Parcours progressifs' },
+      { value: '200+', label: 'Le\u00e7ons vid\u00e9o' },
+      { value: '95%', label: 'Taux de r\u00e9ussite' },
+      { value: '\u00c0 vie', label: 'Acc\u00e8s' },
+    ],
+    whyTitle: 'Pourquoi choisir',
+    whySubtitle: 'Con\u00e7u sp\u00e9cifiquement pour les fonctionnaires f\u00e9d\u00e9raux canadiens pr\u00e9parant les examens ELS',
+    trustedBy: 'Utilis\u00e9 par des fonctionnaires de',
+    howItWorks: 'Comment \u00e7a fonctionne',
+    howItWorksSubtitle: 'Un parcours clair de l\u2019\u00e9valuation \u00e0 la certification',
+    filterLabel: 'Filtrer par niveau\u00a0:',
+    noCourses: 'Aucun cours trouv\u00e9',
+    noCoursesHint: 'Essayez de s\u00e9lectionner un autre filtre de niveau',
+    successStories: 'T\u00e9moignages',
+    whatStudentsSay: 'Ce que disent nos \u00e9tudiants',
+    studentsSaySubtitle: 'Rejoignez des milliers de fonctionnaires f\u00e9d\u00e9raux qui ont atteint leurs objectifs bilingues',
+    startToday: 'Commencez aujourd\u2019hui',
+    notSure: 'Pas s\u00fbr du parcours \u00e0 choisir\u00a0?',
+    notSureDesc: 'R\u00e9servez une session diagnostique gratuite avec notre \u00e9quipe. Nous \u00e9valuerons votre niveau actuel et vous recommanderons le parcours d\u2019apprentissage id\u00e9al pour vos objectifs ELS.',
+    bookDiagnostic: 'R\u00e9server un diagnostic gratuit',
+    viewAll: 'Voir tous les programmes',
+    guarantee: 'Garantie de remboursement de 30 jours',
+    lifetimeAccess: 'Acc\u00e8s \u00e0 vie',
+    expertSupport: 'Soutien expert',
+    popular: 'Populaire',
+    forLabel: 'Pour\u00a0:',
+    outcomeLabel: 'R\u00e9sultat\u00a0:',
+    free: 'Gratuit',
+    cadLifetime: 'CAD \u2022 Acc\u00e8s \u00e0 vie',
+    startFree: 'Commencer gratuitement',
+    enrollNow: 'S\u2019inscrire',
+    processing: 'Traitement...',
+    loginToEnroll: 'Veuillez vous connecter pour vous inscrire \u00e0 un cours',
+    redirecting: 'Redirection vers le paiement...',
+    checkoutFailed: '\u00c9chec de la cr\u00e9ation de la session de paiement',
+  },
+};
 
 // Path Series Data
 const pathSeriesData = [
@@ -386,24 +487,26 @@ export default function CoursesPage() {
   const [enrollingCourse, setEnrollingCourse] = useState<string | null>(null);
   const [langTab, setLangTab] = useState<'fsl' | 'esl'>('fsl');
   const { user, isAuthenticated } = useAuth();
+  const { language } = useLanguage();
+  const ui = uiStrings[language];
   
   const createCheckout = trpc.stripe.createCheckout.useMutation({
     onSuccess: (data: { url: string }) => {
       if (data.url) {
-        toast.success('Redirecting to checkout...');
+        toast.success(uiStrings[language || 'en'].redirecting);
         window.open(data.url, '_blank');
       }
     },
     // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to create checkout session');
+      toast.error(error.message || uiStrings[language || 'en'].checkoutFailed);
       setEnrollingCourse(null);
     },
   });
 
   const handleEnroll = async (pathId: string) => {
     if (!isAuthenticated) {
-      toast.info('Please log in to enroll in a course');
+      toast.info(ui.loginToEnroll);
       window.location.href = getLoginUrl();
       return;
     }
@@ -455,7 +558,7 @@ export default function CoursesPage() {
                   }`}
                 >
                   <span className="text-base">🇫🇷</span>
-                  French (FSL)
+                  {ui.fslTab}
                 </button>
                 <button
                   onClick={() => { setLangTab('esl'); setSelectedLevel('all'); }}
@@ -466,7 +569,7 @@ export default function CoursesPage() {
                   }`}
                 >
                   <span className="text-base">🇬🇧</span>
-                  English (ESL)
+                  {ui.eslTab}
                 </button>
               </div>
             </div>
@@ -491,31 +594,22 @@ export default function CoursesPage() {
             >
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
-                <Sparkles className="w-4 h-4 text-teal-300" />
-                {langTab === 'esl' ? 'ESL Path Series™ Curriculum' : 'Path Series™ Curriculum'}
-              </div>
+                <Sparkles className="w-4 h-4 text-teal-300" />                {langTab === 'esl' ? ui.eslBadge : ui.badge}      </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                {langTab === 'esl' ? 'English Training for' : 'Structured Learning for'}
+                {langTab === 'esl' ? ui.eslHeroTitle : ui.heroTitle}
                 <span className={`block mt-2 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-300 via-sky-300 to-indigo-300' : 'from-teal-300 via-emerald-300 to-cyan-300'} bg-clip-text text-transparent`}>
-                  Federal Success
+                  {ui.heroHighlight}
                 </span>
               </h1>
               
               <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">
-                {langTab === 'esl'
-                  ? 'Six progressive English courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE English certification goals.'
-                  : 'Six progressive courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE certification goals with our proven methodology.'}
+                {langTab === 'esl' ? ui.eslHeroDesc : ui.heroDesc}
               </p>
 
               {/* Stats with Glassmorphism */}
               <div className="flex flex-wrap justify-center gap-4 lg:gap-6 mt-10">
-                {[
-                  { value: '6', label: 'Progressive Paths' },
-                  { value: '200+', label: 'Video Lessons' },
-                  { value: '95%', label: 'Success Rate' },
-                  { value: 'Lifetime', label: 'Access' },
-                ].map((stat, index) => (
+                {ui.stats.map((stat, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -545,7 +639,7 @@ export default function CoursesPage() {
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white/20 transition-all hover:scale-105"
                 >
                   <Calendar className="w-5 h-5" />
-                  Free Assessment
+                  {ui.freeAssessment}
                 </a>
               </div>
             </motion.div>
@@ -557,10 +651,10 @@ export default function CoursesPage() {
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
-                Why Choose <span className="text-teal-600">Path Series™</span>
+                {ui.whyTitle} <span className="text-teal-600">Path Series\u2122</span>
               </h2>
               <p className="text-lg text-black">
-                Built specifically for Canadian federal public servants preparing for SLE exams
+                {ui.whySubtitle}
               </p>
             </div>
 
@@ -589,7 +683,7 @@ export default function CoursesPage() {
         <section className="py-10 bg-white border-y border-gray-100">
           <div className="container">
             <p className="text-center text-sm font-medium text-black mb-6 uppercase tracking-wider">
-              Trusted by public servants from
+              {ui.trustedBy}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
               {federalOrgs.map((org, index) => (
@@ -607,10 +701,10 @@ export default function CoursesPage() {
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
-                How It Works
+                {ui.howItWorks}
               </h2>
               <p className="text-lg text-black">
-                A clear path from assessment to certification
+                {ui.howItWorksSubtitle}
               </p>
             </div>
 
@@ -651,7 +745,7 @@ export default function CoursesPage() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-black">
                 <Filter className="w-5 h-5" />
-                <span className="font-medium">Filter by Level:</span>
+                <span className="font-medium">{ui.filterLabel}</span>
               </div>
               
               <div className="flex flex-wrap gap-2">
@@ -699,7 +793,7 @@ export default function CoursesPage() {
                       <div className="absolute top-4 right-4 z-10">
                         <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#C65A1E] text-white text-xs font-bold shadow-lg">
                           <Star className="w-3 h-3 fill-current" />
-                          Popular
+                          {ui.popular}
                         </div>
                       </div>
                     )}
@@ -750,11 +844,11 @@ export default function CoursesPage() {
                       <div className="space-y-2 mb-4 p-3 rounded-xl bg-white">
                         <div className="flex items-start gap-2 text-sm">
                           <Users className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-black"><strong>For:</strong> {course.forWhom}</span>
+                          <span className="text-black"><strong>{ui.forLabel}</strong> {course.forWhom}</span>
                         </div>
                         <div className="flex items-start gap-2 text-sm">
                           <Target className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-black"><strong>Outcome:</strong> {course.outcome}</span>
+                          <span className="text-black"><strong>{ui.outcomeLabel}</strong> {course.outcome}</span>
                         </div>
                       </div>
 
@@ -774,12 +868,12 @@ export default function CoursesPage() {
                           {FREE_ACCESS_MODE ? (
                             <>
                               <p className="text-sm text-slate-400 line-through">{course.priceDisplay}</p>
-                              <p className="text-2xl font-bold text-emerald-600">Free</p>
+                              <p className="text-2xl font-bold text-emerald-600">{ui.free}</p>
                             </>
                           ) : (
                             <>
                               <p className="text-2xl font-bold text-black">{course.priceDisplay}</p>
-                              <p className="text-xs text-black">CAD • Lifetime Access</p>
+                              <p className="text-xs text-black">{ui.cadLifetime}</p>
                             </>
                           )}
                         </div>
@@ -791,11 +885,11 @@ export default function CoursesPage() {
                           {enrollingCourse === course.id ? (
                             <>
                               <span className="animate-spin">⏳</span>
-                              Processing...
+                              {ui.processing}
                             </>
                           ) : (
                             <>
-                              {FREE_ACCESS_MODE ? 'Start Free' : 'Enroll Now'}
+                              {FREE_ACCESS_MODE ? ui.startFree : ui.enrollNow}
                               <ArrowRight className="w-4 h-4" />
                             </>
                           )}
@@ -811,8 +905,8 @@ export default function CoursesPage() {
             {filteredCourses.length === 0 && (
               <div className="text-center py-16">
                 <GraduationCap className="w-16 h-16 text-white/90 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-black mb-2">No courses found</h3>
-                <p className="text-black">Try selecting a different level filter</p>
+                <h3 className="text-xl font-semibold text-black mb-2">{ui.noCourses}</h3>
+                <p className="text-black">{ui.noCoursesHint}</p>
               </div>
             )}
           </div>
@@ -824,13 +918,13 @@ export default function CoursesPage() {
             <div className="text-center max-w-3xl mx-auto mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-[#C65A1E]700 text-sm font-medium mb-4">
                 <MessageCircle className="w-4 h-4" />
-                Success Stories
+                {ui.successStories}
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
-                What Our Students Say
+                {ui.whatStudentsSay}
               </h2>
               <p className="text-lg text-black">
-                Join thousands of federal public servants who have achieved their bilingual goals
+                {ui.studentsSaySubtitle}
               </p>
             </div>
 
@@ -877,15 +971,14 @@ export default function CoursesPage() {
                 {/* Badge */}
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                   <Sparkles className="w-4 h-4 text-teal-300" />
-                  Start Today
+                  {ui.startToday}
                 </div>
                 
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-                  Not Sure Which Path to Start?
+                  {ui.notSure}
                 </h2>
                 <p className="text-lg text-white/90 mb-8">
-                  Book a free diagnostic session with our team. We'll assess your current level 
-                  and recommend the perfect learning path for your SLE goals.
+                  {ui.notSureDesc}
                 </p>
                 
                 <div className="flex flex-wrap justify-center gap-4">
@@ -895,14 +988,14 @@ export default function CoursesPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white text-[#0F3D3E] hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
                   >
-                    Book Free Diagnostic
+                    {ui.bookDiagnostic}
                     <ArrowRight className="w-5 h-5" />
                   </a>
                   <Link
                     href="/rusingacademy"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white/20 transition-all hover:scale-105"
                   >
-                    View All Programs
+                    {ui.viewAll}
                   </Link>
                 </div>
 
@@ -910,15 +1003,15 @@ export default function CoursesPage() {
                 <div className="flex flex-wrap justify-center gap-6 mt-10 text-white/90 text-sm">
                   <div className="flex items-center gap-2">
                     <Shield className="w-4 h-4" />
-                    <span>30-day money-back guarantee</span>
+                    <span>{ui.guarantee}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4" />
-                    <span>Lifetime access</span>
+                    <span>{ui.lifetimeAccess}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4" />
-                    <span>Expert support</span>
+                    <span>{ui.expertSupport}</span>
                   </div>
                 </div>
               </div>

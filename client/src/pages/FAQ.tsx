@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { COACH_RATES } from "@shared/pricing";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const translations = {
   en: {
@@ -271,7 +272,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function FAQ() {
-  const [language, setLanguage] = useState<'en' | 'fr'>('en');
+  const { language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('general');
   
   const content = translations[language];
