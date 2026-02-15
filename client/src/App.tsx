@@ -139,6 +139,62 @@ import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
 import PWAInstallBanner from "./components/PWAInstallBanner";
 
+// === Learner Portal Pages (Wave 2) ===
+const QuizPage = lazy(() => import("./pages/QuizPage"));
+const LessonViewer = lazy(() => import("./pages/LessonViewer"));
+const PathDetail = lazy(() => import("./pages/PathDetail"));
+const PathList = lazy(() => import("./pages/PathList"));
+const AIAssistant = lazy(() => import("./pages/AIAssistant"));
+const Achievements = lazy(() => import("./pages/Achievements"));
+const AdminCoachHub = lazy(() => import("./pages/AdminCoachHub"));
+const AdminContentPipeline = lazy(() => import("./pages/AdminContentPipeline"));
+const AdminExecutiveSummary = lazy(() => import("./pages/AdminExecutiveSummary"));
+const Authorizations = lazy(() => import("./pages/Authorizations"));
+const Bookmarks = lazy(() => import("./pages/Bookmarks"));
+const CalendarPage = lazy(() => import("./pages/Calendar"));
+const CoachDashboardHome = lazy(() => import("./pages/coach/CoachDashboardHome"));
+const CoachPerformance = lazy(() => import("./pages/coach/CoachPerformance"));
+const CoachRevenue = lazy(() => import("./pages/coach/CoachRevenue"));
+const CoachSessions = lazy(() => import("./pages/coach/CoachSessions"));
+const CoachStudents = lazy(() => import("./pages/coach/CoachStudents"));
+const CommunityForum = lazy(() => import("./pages/CommunityForum"));
+const CulturalImmersion = lazy(() => import("./pages/CulturalImmersion"));
+const DailyReview = lazy(() => import("./pages/DailyReview"));
+const DictationExercises = lazy(() => import("./pages/DictationExercises"));
+const DiscussionBoards = lazy(() => import("./pages/DiscussionBoards"));
+const Flashcards = lazy(() => import("./pages/Flashcards"));
+const GlobalSearch = lazy(() => import("./pages/GlobalSearch"));
+const GrammarDrills = lazy(() => import("./pages/GrammarDrills"));
+const HRBudget = lazy(() => import("./pages/hr/HRBudget"));
+const HRCohorts = lazy(() => import("./pages/hr/HRCohorts"));
+const HRCompliance = lazy(() => import("./pages/hr/HRCompliance"));
+const HRDashboardHome = lazy(() => import("./pages/hr/HRDashboardHome"));
+const HRTeam = lazy(() => import("./pages/hr/HRTeam"));
+const Help = lazy(() => import("./pages/Help"));
+const LearningMaterials = lazy(() => import("./pages/LearningMaterials"));
+const ListeningLab = lazy(() => import("./pages/ListeningLab"));
+const MockSLEExam = lazy(() => import("./pages/MockSLEExam"));
+const MyProfile = lazy(() => import("./pages/MyProfile"));
+const MySettings = lazy(() => import("./pages/MySettings"));
+const Notes = lazy(() => import("./pages/Notes"));
+const Notifications = lazy(() => import("./pages/Notifications"));
+const OnboardingWizard = lazy(() => import("./pages/OnboardingWizard"));
+const PeerReview = lazy(() => import("./pages/PeerReview"));
+const PortalComingSoon = lazy(() => import("./pages/PortalComingSoon"));
+const ProgramSelect = lazy(() => import("./pages/ProgramSelect"));
+const Progress = lazy(() => import("./pages/Progress"));
+const ProgressAnalytics = lazy(() => import("./pages/ProgressAnalytics"));
+const PronunciationLab = lazy(() => import("./pages/PronunciationLab"));
+const ReadingLab = lazy(() => import("./pages/ReadingLab"));
+const Reports = lazy(() => import("./pages/Reports"));
+const Results = lazy(() => import("./pages/Results"));
+const StudyGroups = lazy(() => import("./pages/StudyGroups"));
+const StudyPlanner = lazy(() => import("./pages/StudyPlanner"));
+const TutoringSessions = lazy(() => import("./pages/TutoringSessions"));
+const Vocabulary = lazy(() => import("./pages/Vocabulary"));
+const WeeklyChallenges = lazy(() => import("./pages/WeeklyChallenges"));
+const WritingPortfolio = lazy(() => import("./pages/WritingPortfolio"));
+
 function Router() {
   // Track page views on route changes
   usePageTracking();
@@ -409,6 +465,60 @@ function Router() {
       <Route path="/p/:slug" component={CMSPage} />
 
       {/* Error Pages */}
+
+          {/* === Learner Portal Routes (Wave 2) === */}
+          <Route path="/achievements">{() => <Suspense fallback={<div>Loading...</div>}><Achievements /></Suspense>}</Route>
+          <Route path="/ai-assistant">{() => <Suspense fallback={<div>Loading...</div>}><AIAssistant /></Suspense>}</Route>
+          <Route path="/authorizations">{() => <Suspense fallback={<div>Loading...</div>}><Authorizations /></Suspense>}</Route>
+          <Route path="/bookmarks">{() => <Suspense fallback={<div>Loading...</div>}><Bookmarks /></Suspense>}</Route>
+          <Route path="/calendar">{() => <Suspense fallback={<div>Loading...</div>}><CalendarPage /></Suspense>}</Route>
+          <Route path="/community-forum">{() => <Suspense fallback={<div>Loading...</div>}><CommunityForum /></Suspense>}</Route>
+          <Route path="/cultural-immersion">{() => <Suspense fallback={<div>Loading...</div>}><CulturalImmersion /></Suspense>}</Route>
+          <Route path="/daily-review">{() => <Suspense fallback={<div>Loading...</div>}><DailyReview /></Suspense>}</Route>
+          <Route path="/dictation">{() => <Suspense fallback={<div>Loading...</div>}><DictationExercises /></Suspense>}</Route>
+          <Route path="/discussions">{() => <Suspense fallback={<div>Loading...</div>}><DiscussionBoards /></Suspense>}</Route>
+          <Route path="/flashcards">{() => <Suspense fallback={<div>Loading...</div>}><Flashcards /></Suspense>}</Route>
+          <Route path="/grammar-drills">{() => <Suspense fallback={<div>Loading...</div>}><GrammarDrills /></Suspense>}</Route>
+          <Route path="/help">{() => <Suspense fallback={<div>Loading...</div>}><Help /></Suspense>}</Route>
+          <Route path="/learning-materials">{() => <Suspense fallback={<div>Loading...</div>}><LearningMaterials /></Suspense>}</Route>
+          <Route path="/listening-lab">{() => <Suspense fallback={<div>Loading...</div>}><ListeningLab /></Suspense>}</Route>
+          <Route path="/mock-sle">{() => <Suspense fallback={<div>Loading...</div>}><MockSLEExam /></Suspense>}</Route>
+          <Route path="/notes">{() => <Suspense fallback={<div>Loading...</div>}><Notes /></Suspense>}</Route>
+          <Route path="/notifications">{() => <Suspense fallback={<div>Loading...</div>}><Notifications /></Suspense>}</Route>
+          <Route path="/onboarding">{() => <Suspense fallback={<div>Loading...</div>}><OnboardingWizard /></Suspense>}</Route>
+          <Route path="/peer-review">{() => <Suspense fallback={<div>Loading...</div>}><PeerReview /></Suspense>}</Route>
+          <Route path="/profile">{() => <Suspense fallback={<div>Loading...</div>}><MyProfile /></Suspense>}</Route>
+          <Route path="/programs">{() => <Suspense fallback={<div>Loading...</div>}><ProgramSelect /></Suspense>}</Route>
+          <Route path="/pronunciation-lab">{() => <Suspense fallback={<div>Loading...</div>}><PronunciationLab /></Suspense>}</Route>
+          <Route path="/reading-lab">{() => <Suspense fallback={<div>Loading...</div>}><ReadingLab /></Suspense>}</Route>
+          <Route path="/reports">{() => <Suspense fallback={<div>Loading...</div>}><Reports /></Suspense>}</Route>
+          <Route path="/results">{() => <Suspense fallback={<div>Loading...</div>}><Results /></Suspense>}</Route>
+          <Route path="/search">{() => <Suspense fallback={<div>Loading...</div>}><GlobalSearch /></Suspense>}</Route>
+          <Route path="/study-groups">{() => <Suspense fallback={<div>Loading...</div>}><StudyGroups /></Suspense>}</Route>
+          <Route path="/study-planner">{() => <Suspense fallback={<div>Loading...</div>}><StudyPlanner /></Suspense>}</Route>
+          <Route path="/tutoring-sessions">{() => <Suspense fallback={<div>Loading...</div>}><TutoringSessions /></Suspense>}</Route>
+          <Route path="/vocabulary">{() => <Suspense fallback={<div>Loading...</div>}><Vocabulary /></Suspense>}</Route>
+          <Route path="/writing-portfolio">{() => <Suspense fallback={<div>Loading...</div>}><WritingPortfolio /></Suspense>}</Route>
+          <Route path="/analytics">{() => <Suspense fallback={<div>Loading...</div>}><ProgressAnalytics /></Suspense>}</Route>
+          <Route path="/challenges">{() => <Suspense fallback={<div>Loading...</div>}><WeeklyChallenges /></Suspense>}</Route>
+          <Route path="/coach/portal">{() => <Suspense fallback={<div>Loading...</div>}><CoachDashboardHome /></Suspense>}</Route>
+          <Route path="/coach/students">{() => <Suspense fallback={<div>Loading...</div>}><CoachStudents /></Suspense>}</Route>
+          <Route path="/coach/sessions">{() => <Suspense fallback={<div>Loading...</div>}><CoachSessions /></Suspense>}</Route>
+          <Route path="/coach/revenue">{() => <Suspense fallback={<div>Loading...</div>}><CoachRevenue /></Suspense>}</Route>
+          <Route path="/coach/performance">{() => <Suspense fallback={<div>Loading...</div>}><CoachPerformance /></Suspense>}</Route>
+          <Route path="/hr/portal">{() => <Suspense fallback={<div>Loading...</div>}><HRDashboardHome /></Suspense>}</Route>
+          <Route path="/hr/portal/dashboard">{() => <Suspense fallback={<div>Loading...</div>}><HRDashboardHome /></Suspense>}</Route>
+          <Route path="/hr/portal/team">{() => <Suspense fallback={<div>Loading...</div>}><HRTeam /></Suspense>}</Route>
+          <Route path="/hr/portal/cohorts">{() => <Suspense fallback={<div>Loading...</div>}><HRCohorts /></Suspense>}</Route>
+          <Route path="/hr/portal/budget">{() => <Suspense fallback={<div>Loading...</div>}><HRBudget /></Suspense>}</Route>
+          <Route path="/hr/portal/compliance">{() => <Suspense fallback={<div>Loading...</div>}><HRCompliance /></Suspense>}</Route>
+          <Route path="/hr/team">{() => <Suspense fallback={<div>Loading...</div>}><HRTeam /></Suspense>}</Route>
+          <Route path="/hr/cohorts">{() => <Suspense fallback={<div>Loading...</div>}><HRCohorts /></Suspense>}</Route>
+          <Route path="/admin/content-pipeline">{() => <Suspense fallback={<div>Loading...</div>}><AdminContentPipeline /></Suspense>}</Route>
+          <Route path="/programs/:programId">{() => <Suspense fallback={<div>Loading...</div>}><PathList /></Suspense>}</Route>
+          <Route path="/programs/:programId/:pathId">{() => <Suspense fallback={<div>Loading...</div>}><PathDetail /></Suspense>}</Route>
+          <Route path="/programs/:programId/:pathId/quiz/:quizId">{() => <Suspense fallback={<div>Loading...</div>}><QuizPage /></Suspense>}</Route>
+          <Route path="/programs/:programId/:pathId/:lessonId">{() => <Suspense fallback={<div>Loading...</div>}><LessonViewer /></Suspense>}</Route>
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
