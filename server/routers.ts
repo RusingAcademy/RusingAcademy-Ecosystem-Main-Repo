@@ -156,6 +156,9 @@ import {
   auditRouter, companyRouter as acctCompanyRouter, acctDashboardRouter,
   bulkRouter, chartsRouter, invoicePdfRouter, reportsRouter,
 } from "./routers/accounting";
+import { attachmentsRouter } from "./routers/attachments";
+import { celebrationsRouter } from "./routers/celebrations";
+import { clientPortalRouter } from "./routers/clientPortal";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9142,6 +9145,11 @@ export const appRouter = router({
   bookmarks: bookmarksRouter,
   executiveSummary: executiveSummaryRouter,
   contentPipeline: contentPipelineRouter,
+
+  // Sprint J1: Utility Routers
+  attachments: attachmentsRouter,
+  celebrations: celebrationsRouter,
+  clientPortal: clientPortalRouter,
 
   // Accounting Module (28 sub-routers)
   accounts: accountsRouter,
