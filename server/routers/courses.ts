@@ -282,7 +282,7 @@ export const coursesRouter = router({
         console.warn("[Push] Failed to send enrollment notification:", pushErr);
       }
 
-      return { success: true };
+      return { success: true, courseId: input.courseId, courseSlug: course.slug || String(input.courseId) };
     }),
 
   // Get lesson content (checks enrollment)
