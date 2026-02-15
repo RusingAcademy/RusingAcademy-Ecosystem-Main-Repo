@@ -2,7 +2,7 @@
  * Listening Comprehension Lab — Audio passages with comprehension questions
  * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -103,6 +103,24 @@ export default function ListeningLab() {
   const [showHistory, setShowHistory] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const synthRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Live timer during exercise (Sprint F3)
+  useEffect(() => {
+    if ((phase === "listening" || phase === "questions") && startTime > 0) {
+      timerRef.current = setInterval(() => {
+        setElapsedSeconds(Math.floor((Date.now() - startTime) / 1000));
+      }, 1000);
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [phase, startTime]);
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  };
 
   const exercise = useMemo(() => EXERCISES[selectedLevel]?.[exerciseIndex], [selectedLevel, exerciseIndex]);
 
@@ -127,6 +145,7 @@ export default function ListeningLab() {
     setAnswers([]);
     setShowTranscript(false);
     setStartTime(Date.now());
+    setElapsedSeconds(0);
     setPhase("listening");
   }, []);
 
@@ -159,6 +178,7 @@ export default function ListeningLab() {
       language: "fr",
     });
 
+    if (timerRef.current) clearInterval(timerRef.current);
     setPhase("results");
   }, [exercise, answers, startTime, selectedLevel, saveResult]);
 
@@ -269,10 +289,13 @@ export default function ListeningLab() {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <span className="px-3 py-1 rounded-full text-sm font-semibold bg-[#008090]/10 text-[#008090]">{selectedLevel}</span>
-                  <h2 className="text-lg font-semibold text-gray-900">{exercise?.title}</h2>
+                   <h2 className="text-lg font-semibold text-gray-900">{exercise?.title}</h2>
+                </div>
+                <div className="flex items-center gap-1 text-sm text-gray-400">
+                  <span className="material-icons text-sm" aria-hidden="true">timer</span>
+                  <span aria-live="polite">{formatTime(elapsedSeconds)}</span>
                 </div>
               </div>
-
               {/* Audio Player */}
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-6">
                 <span className="material-icons text-6xl text-[#008090] mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
@@ -354,6 +377,10 @@ export default function ListeningLab() {
                   <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("grammar.drillComplete")}</h2>
+                <p className="text-sm text-gray-400 mb-2">
+                  <span className="material-icons text-sm align-middle mr-1" aria-hidden="true">timer</span>
+                  {formatTime(Math.floor((Date.now() - startTime) / 1000))}
+                </p>
                 {(() => {
                   const correct = exercise?.questions.reduce((sum, q, i) => sum + (answers[i] === q.correct ? 1 : 0), 0) ?? 0;
                   const total = exercise?.questions.length ?? 1;

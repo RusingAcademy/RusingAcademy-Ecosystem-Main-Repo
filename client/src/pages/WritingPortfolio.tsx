@@ -6,7 +6,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 
 const CEFR_LEVELS = ["A1", "A2", "B1", "B2", "C1"] as const;
@@ -40,6 +40,27 @@ export default function WritingPortfolio() {
   const [cefrLevel, setCefrLevel] = useState<string>("B1");
   const [feedback, setFeedback] = useState<FeedbackData | null>(null);
   const [selectedSubmission, setSelectedSubmission] = useState<number | null>(null);
+  const [writingStartTime, setWritingStartTime] = useState<number | null>(null);
+  const [writingElapsed, setWritingElapsed] = useState(0);
+  const writingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Writing timer (Sprint F3)
+  useEffect(() => {
+    if (view === "editor" && writingStartTime) {
+      writingTimerRef.current = setInterval(() => {
+        setWritingElapsed(Math.floor((Date.now() - writingStartTime) / 1000));
+      }, 1000);
+    }
+    return () => { if (writingTimerRef.current) clearInterval(writingTimerRef.current); };
+  }, [view, writingStartTime]);
+
+  const formatWritingTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  };
+
+  const WORD_TARGETS: Record<string, number> = { A1: 50, A2: 100, B1: 150, B2: 250, C1: 400 };
 
   const submissions = trpc.writing.list.useQuery();
   const submission = trpc.writing.get.useQuery({ id: selectedSubmission! }, { enabled: !!selectedSubmission });
@@ -109,6 +130,8 @@ export default function WritingPortfolio() {
     setCefrLevel(prompt?.level || "B1");
     setEditingId(null);
     setFeedback(null);
+    setWritingStartTime(Date.now());
+    setWritingElapsed(0);
     setView("editor");
   };
 
@@ -286,7 +309,24 @@ export default function WritingPortfolio() {
               className="w-full border border-gray-200 rounded-lg p-4 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#008090]/30 min-h-[300px] leading-relaxed"
             />
             <div className="flex items-center justify-between mt-4">
-              <span className="text-[11px] text-gray-400">{content.trim().split(/\s+/).filter(Boolean).length} {isFr ? "mots" : "words"}</span>
+              <div className="flex items-center gap-4">
+                <span className="text-[11px] text-gray-400">
+                  {content.trim().split(/\s+/).filter(Boolean).length} / {WORD_TARGETS[cefrLevel] || 150} {isFr ? "mots" : "words"}
+                </span>
+                {/* Word count progress bar (Sprint F3) */}
+                <div className="w-24 h-1.5 bg-gray-100 rounded-full overflow-hidden" role="progressbar"
+                  aria-valuenow={content.trim().split(/\s+/).filter(Boolean).length}
+                  aria-valuemin={0} aria-valuemax={WORD_TARGETS[cefrLevel] || 150}>
+                  <div className="h-full rounded-full transition-all duration-300" style={{
+                    width: `${Math.min(100, (content.trim().split(/\s+/).filter(Boolean).length / (WORD_TARGETS[cefrLevel] || 150)) * 100)}%`,
+                    background: content.trim().split(/\s+/).filter(Boolean).length >= (WORD_TARGETS[cefrLevel] || 150) ? "#22c55e" : "#008090"
+                  }} />
+                </div>
+                <span className="text-[11px] text-gray-400 flex items-center gap-1">
+                  <span className="material-icons text-[11px]" aria-hidden="true">timer</span>
+                  {formatWritingTime(writingElapsed)}
+                </span>
+              </div>
               <div className="flex gap-2">
                 <button onClick={resetEditor}
                   className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded">
