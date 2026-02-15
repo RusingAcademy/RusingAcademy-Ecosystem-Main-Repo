@@ -516,11 +516,23 @@ export default function QuizBuilder({ lessonId, courseId, moduleId, compact }: Q
     });
   };
 
+  const reorderQuestions = trpc.admin.reorderQuizQuestions.useMutation({
+    onSuccess: () => { toast.success("Question order saved"); refetch(); },
+    onError: (e: any) => toast.error(e.message),
+  });
+
   const handleDragEnd = (event: DragEndEvent) => {
-    // Reordering is visual only for now — would need a reorder mutation
     const { active, over } = event;
     if (!over || active.id === over.id) return;
-    toast.info("Question reordering saved");
+    
+    const oldIndex = safeQuestions.findIndex(q => `question-${q.id}` === active.id);
+    const newIndex = safeQuestions.findIndex(q => `question-${q.id}` === over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
+    
+    const reordered = arrayMove(safeQuestions, oldIndex, newIndex);
+    const questionIds = reordered.map(q => q.id);
+    
+    reorderQuestions.mutate({ lessonId, questionIds });
   };
 
   const handleExport = (format: "json" | "csv") => {

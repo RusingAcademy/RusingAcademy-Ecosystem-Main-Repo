@@ -577,6 +577,7 @@ function Router() {
           <Route path="/hr/team">{() => <Suspense fallback={<div>Loading...</div>}><HRTeam /></Suspense>}</Route>
           <Route path="/hr/cohorts">{() => <Suspense fallback={<div>Loading...</div>}><HRCohorts /></Suspense>}</Route>
           <Route path="/admin/content-pipeline">{() => <AdminControlCenter section="content-pipeline" />}</Route>
+          <Route path="/admin/quiz-management">{() => <AdminControlCenter section="quiz-management" />}</Route>
           <Route path="/programs/:programId">{() => <Suspense fallback={<div>Loading...</div>}><PathList /></Suspense>}</Route>
           <Route path="/programs/:programId/:pathId">{() => <Suspense fallback={<div>Loading...</div>}><PathDetail /></Suspense>}</Route>
           <Route path="/programs/:programId/:pathId/quiz/:quizId">{() => <Suspense fallback={<div>Loading...</div>}><QuizPage /></Suspense>}</Route>
