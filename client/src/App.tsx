@@ -195,6 +195,18 @@ const Vocabulary = lazy(() => import("./pages/Vocabulary"));
 const WeeklyChallenges = lazy(() => import("./pages/WeeklyChallenges"));
 const WritingPortfolio = lazy(() => import("./pages/WritingPortfolio"));
 
+// === Community Pages (Wave 3) ===
+const Certificates = lazy(() => import("./pages/Certificates"));
+const Channels = lazy(() => import("./pages/Channels"));
+const CourseBuilder = lazy(() => import("./pages/CourseBuilder"));
+const CourseCatalog = lazy(() => import("./pages/CourseCatalog"));
+const CoursePlayer = lazy(() => import("./pages/CoursePlayer"));
+const EmailBroadcasts = lazy(() => import("./pages/EmailBroadcasts"));
+const Membership = lazy(() => import("./pages/Membership"));
+const Moderation = lazy(() => import("./pages/Moderation"));
+const RevenueDashboard = lazy(() => import("./pages/RevenueDashboard"));
+const SearchResults = lazy(() => import("./pages/SearchResults"));
+
 function Router() {
   // Track page views on route changes
   usePageTracking();
@@ -466,6 +478,17 @@ function Router() {
 
       {/* Error Pages */}
 
+
+          {/* === Community Routes (Wave 3) === */}
+          <Route path="/channels">{() => <Suspense fallback={<div>Loading...</div>}><Channels /></Suspense>}</Route>
+          <Route path="/certificates">{() => <Suspense fallback={<div>Loading...</div>}><Certificates /></Suspense>}</Route>
+          <Route path="/email-broadcasts">{() => <Suspense fallback={<div>Loading...</div>}><EmailBroadcasts /></Suspense>}</Route>
+          <Route path="/revenue">{() => <Suspense fallback={<div>Loading...</div>}><RevenueDashboard /></Suspense>}</Route>
+          <Route path="/membership">{() => <Suspense fallback={<div>Loading...</div>}><Membership /></Suspense>}</Route>
+          <Route path="/moderation">{() => <Suspense fallback={<div>Loading...</div>}><Moderation /></Suspense>}</Route>
+          <Route path="/courses/:id">{() => <Suspense fallback={<div>Loading...</div>}><CoursePlayer /></Suspense>}</Route>
+          <Route path="/admin/courses/new">{() => <Suspense fallback={<div>Loading...</div>}><CourseBuilder /></Suspense>}</Route>
+          <Route path="/admin/courses/:id/edit">{() => <Suspense fallback={<div>Loading...</div>}><CourseBuilder /></Suspense>}</Route>
           {/* === Learner Portal Routes (Wave 2) === */}
           <Route path="/achievements">{() => <Suspense fallback={<div>Loading...</div>}><Achievements /></Suspense>}</Route>
           <Route path="/ai-assistant">{() => <Suspense fallback={<div>Loading...</div>}><AIAssistant /></Suspense>}</Route>
