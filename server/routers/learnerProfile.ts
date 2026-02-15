@@ -3,7 +3,8 @@ import { router, protectedProcedure } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { eq, desc, and } from "drizzle-orm";
 import { getDb, getLearnerByUserId, getUserById } from "../db";
-import { coachProfiles, learnerProfiles, sessions, users } from "../../drizzle/schema";
+import { coachProfiles, learnerProfiles, sessions, users, learnerFavorites } from "../../drizzle/schema";
+import { sql } from "drizzle-orm";
 
 export const learnerProfileRouter = router({
   myProfile: protectedProcedure.query(async ({ ctx }) => {
@@ -371,4 +372,84 @@ export const learnerProfileRouter = router({
   }),
   
   // Get upcoming sessions for dashboard,
+
+  // ============================================================================
+  // ONBOARDING WIZARD — Learner-facing save (Sprint D1)
+  // ============================================================================
+  saveOnboarding: protectedProcedure
+    .input(z.object({
+      currentLevel: z.string().optional(),
+      targetLevel: z.string().optional(),
+      learningGoal: z.string().optional(),
+      weeklyHours: z.number().optional(),
+      preferredTime: z.string().optional(),
+      department: z.string().optional(),
+      position: z.string().optional(),
+      targetLanguage: z.enum(["french", "english"]).optional(),
+      primaryFocus: z.enum(["oral", "written", "reading", "all"]).optional(),
+      diagnosticScore: z.number().optional(),
+      diagnosticLevel: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        // Create a new learner profile
+        await db.insert(learnerProfiles).values({
+          userId: ctx.user.id,
+          currentLevel: input.currentLevel ? JSON.stringify({ reading: input.currentLevel, writing: input.currentLevel, oral: input.currentLevel }) : undefined,
+          targetLevel: input.targetLevel ? JSON.stringify({ reading: input.targetLevel, writing: input.targetLevel, oral: input.targetLevel }) : undefined,
+          learningGoals: input.learningGoal,
+          weeklyStudyHours: input.weeklyHours ? String(input.weeklyHours) : undefined,
+          department: input.department,
+          position: input.position,
+          targetLanguage: input.targetLanguage || "french",
+          primaryFocus: input.primaryFocus || "oral",
+        });
+      } else {
+        // Update existing profile
+        const updates: Record<string, unknown> = {};
+        if (input.currentLevel) updates.currentLevel = JSON.stringify({ reading: input.currentLevel, writing: input.currentLevel, oral: input.currentLevel });
+        if (input.targetLevel) updates.targetLevel = JSON.stringify({ reading: input.targetLevel, writing: input.targetLevel, oral: input.targetLevel });
+        if (input.learningGoal) updates.learningGoals = input.learningGoal;
+        if (input.weeklyHours) updates.weeklyStudyHours = String(input.weeklyHours);
+        if (input.department) updates.department = input.department;
+        if (input.position) updates.position = input.position;
+        if (input.targetLanguage) updates.targetLanguage = input.targetLanguage;
+        if (input.primaryFocus) updates.primaryFocus = input.primaryFocus;
+        if (input.diagnosticScore !== undefined) updates.lastAssessmentScore = input.diagnosticScore;
+        if (input.diagnosticLevel) updates.currentLevel = JSON.stringify({ reading: input.diagnosticLevel, writing: input.diagnosticLevel, oral: input.diagnosticLevel });
+
+        if (Object.keys(updates).length > 0) {
+          await db.update(learnerProfiles)
+            .set(updates)
+            .where(eq(learnerProfiles.id, learner.id));
+        }
+      }
+
+      return { success: true };
+    }),
+
+  // Get onboarding status — check if learner has completed onboarding
+  getOnboardingStatus: protectedProcedure.query(async ({ ctx }) => {
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return { completed: false, profile: null };
+    const hasGoals = !!learner.learningGoals;
+    const hasLevel = !!learner.currentLevel;
+    return {
+      completed: hasGoals && hasLevel,
+      profile: {
+        currentLevel: learner.currentLevel,
+        targetLevel: learner.targetLevel,
+        learningGoals: learner.learningGoals,
+        department: learner.department,
+        position: learner.position,
+        targetLanguage: learner.targetLanguage,
+        primaryFocus: learner.primaryFocus,
+        weeklyStudyHours: learner.weeklyStudyHours,
+      },
+    };
+  }),
 });
