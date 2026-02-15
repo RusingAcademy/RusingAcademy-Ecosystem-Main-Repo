@@ -3142,6 +3142,81 @@ const learnerRouter = router({
 });
 
 // ============================================================================
+// RESOURCE LIBRARY ROUTER (Learner-facing downloadable resources)
+// ============================================================================
+const resourceLibraryRouter = router({
+  // List all available resources for learners
+  list: protectedProcedure
+    .input(z.object({
+      search: z.string().optional(),
+      fileType: z.string().optional(),
+      limit: z.number().default(50),
+    }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const limit = input?.limit ?? 50;
+      const conditions: string[] = [];
+      if (input?.search) {
+        conditions.push(`(dr.title LIKE '%${input.search.replace(/'/g, "''")}%' OR dr.titleFr LIKE '%${input.search.replace(/'/g, "''")}%')`);
+      }
+      if (input?.fileType) {
+        conditions.push(`dr.fileType = '${input.fileType.replace(/'/g, "''")}' `);
+      }
+      const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+      const [rows] = await db.execute(sql.raw(`
+        SELECT dr.id, dr.title, dr.titleFr, dr.description, dr.descriptionFr,
+               dr.fileUrl, dr.fileName, dr.fileType, dr.fileSizeBytes,
+               dr.courseId, dr.requiresEnrollment, dr.downloadCount, dr.createdAt
+        FROM downloadable_resources dr
+        ${whereClause}
+        ORDER BY dr.createdAt DESC
+        LIMIT ${limit}
+      `));
+      return Array.isArray(rows) ? rows : [];
+    }),
+
+  // Get a single resource by ID
+  getById: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const [rows] = await db.execute(sql`SELECT * FROM downloadable_resources WHERE id = ${input.id}`);
+      return Array.isArray(rows) && rows[0] ? rows[0] : null;
+    }),
+
+  // Track a download
+  trackDownload: protectedProcedure
+    .input(z.object({ resourceId: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      // Insert download record
+      await db.execute(sql`INSERT INTO resource_downloads (userId, resourceId) VALUES (${ctx.user.id}, ${input.resourceId})`);
+      // Increment download count
+      await db.execute(sql`UPDATE downloadable_resources SET downloadCount = downloadCount + 1 WHERE id = ${input.resourceId}`);
+      return { success: true };
+    }),
+
+  // Get user's download history
+  myHistory: protectedProcedure
+    .input(z.object({ limit: z.number().default(50) }).optional())
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      const limit = input?.limit ?? 50;
+      const [rows] = await db.execute(sql`
+        SELECT rd.id, rd.downloadedAt, rd.resourceId,
+               dr.title, dr.titleFr, dr.description, dr.descriptionFr,
+               dr.fileUrl, dr.fileName, dr.fileType, dr.fileSizeBytes
+        FROM resource_downloads rd
+        JOIN downloadable_resources dr ON dr.id = rd.resourceId
+        WHERE rd.userId = ${ctx.user.id}
+        ORDER BY rd.downloadedAt DESC
+        LIMIT ${limit}
+      `);
+      return Array.isArray(rows) ? rows : [];
+    }),
+});
+
+// ============================================================================
 // AI SESSION ROUTER (SLE AI Companion AI)
 // ============================================================================
 const aiRouter = router({
@@ -8867,6 +8942,7 @@ export const appRouter = router({
   kajabiDesign: designRouter,
   kajabiEventsAdmin: eventsAdminRouter,
   kajabiDownloadsAdmin: downloadsAdminRouter,
+  resourceLibrary: resourceLibraryRouter,
   kajabiNewslettersAdmin: newslettersAdminRouter,
   kajabiCommunityAdmin: communityAdminRouter,
    kajabiAllProducts: allProductsRouter,

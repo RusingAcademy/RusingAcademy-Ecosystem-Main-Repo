@@ -8,6 +8,7 @@ import {
   blogPosts, blogCategories, podcasts, podcastEpisodes,
   forms, formSubmissions, navigationMenus,
   assessments, assessmentResults, cartRecoverySettings,
+  downloadableResources, resourceDownloads,
 } from "../../drizzle/schema";
 
 // ============================================================================
@@ -1302,6 +1303,120 @@ export const downloadsAdminRouter = router({
       totalDownloads: Array.isArray(downloadsResult) && downloadsResult[0] ? Number((downloadsResult[0] as any).total) : 0,
     };
   }),
+
+  create: adminProcedure
+    .input(z.object({
+      title: z.string().min(1),
+      titleFr: z.string().optional(),
+      description: z.string().optional(),
+      descriptionFr: z.string().optional(),
+      fileUrl: z.string().url(),
+      fileName: z.string(),
+      fileType: z.string().default("pdf"),
+      fileSizeBytes: z.number().optional(),
+      courseId: z.number().optional(),
+      moduleId: z.number().optional(),
+      lessonId: z.number().optional(),
+      requiresEnrollment: z.boolean().default(true),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      await db.insert(downloadableResources).values({
+        title: input.title,
+        titleFr: input.titleFr || null,
+        description: input.description || null,
+        descriptionFr: input.descriptionFr || null,
+        fileUrl: input.fileUrl,
+        fileName: input.fileName,
+        fileType: input.fileType,
+        fileSizeBytes: input.fileSizeBytes || null,
+        courseId: input.courseId || null,
+        moduleId: input.moduleId || null,
+        lessonId: input.lessonId || null,
+        requiresEnrollment: input.requiresEnrollment,
+      });
+      return { success: true };
+    }),
+
+  update: adminProcedure
+    .input(z.object({
+      id: z.number(),
+      title: z.string().optional(),
+      titleFr: z.string().optional(),
+      description: z.string().optional(),
+      descriptionFr: z.string().optional(),
+      fileUrl: z.string().url().optional(),
+      fileName: z.string().optional(),
+      fileType: z.string().optional(),
+      requiresEnrollment: z.boolean().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      const { id, ...updates } = input;
+      const cleanUpdates = Object.fromEntries(
+        Object.entries(updates).filter(([_, v]) => v !== undefined)
+      );
+      if (Object.keys(cleanUpdates).length > 0) {
+        await db.update(downloadableResources).set(cleanUpdates).where(eq(downloadableResources.id, id));
+      }
+      return { success: true };
+    }),
+
+  delete: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      await db.delete(resourceDownloads).where(eq(resourceDownloads.resourceId, input.id));
+      await db.delete(downloadableResources).where(eq(downloadableResources.id, input.id));
+      return { success: true };
+    }),
+
+  getAnalytics: adminProcedure
+    .input(z.object({ days: z.number().default(30) }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const days = input?.days ?? 30;
+      // Top downloaded resources
+      const [topResources] = await db.execute(sql`
+        SELECT dr.id, dr.title, dr.titleFr, dr.fileType, dr.downloadCount,
+               COUNT(rd.id) as recentDownloads
+        FROM downloadable_resources dr
+        LEFT JOIN resource_downloads rd ON rd.resourceId = dr.id
+          AND rd.downloadedAt >= DATE_SUB(NOW(), INTERVAL ${days} DAY)
+        GROUP BY dr.id
+        ORDER BY recentDownloads DESC
+        LIMIT 10
+      `);
+      // Downloads over time (daily for the period)
+      const [dailyDownloads] = await db.execute(sql`
+        SELECT DATE(downloadedAt) as date, COUNT(*) as count
+        FROM resource_downloads
+        WHERE downloadedAt >= DATE_SUB(NOW(), INTERVAL ${days} DAY)
+        GROUP BY DATE(downloadedAt)
+        ORDER BY date ASC
+      `);
+      // Downloads by file type
+      const [byFileType] = await db.execute(sql`
+        SELECT dr.fileType, COUNT(rd.id) as downloads
+        FROM resource_downloads rd
+        JOIN downloadable_resources dr ON dr.id = rd.resourceId
+        WHERE rd.downloadedAt >= DATE_SUB(NOW(), INTERVAL ${days} DAY)
+        GROUP BY dr.fileType
+        ORDER BY downloads DESC
+      `);
+      // Unique downloaders
+      const [uniqueUsers] = await db.execute(sql`
+        SELECT COUNT(DISTINCT userId) as total
+        FROM resource_downloads
+        WHERE downloadedAt >= DATE_SUB(NOW(), INTERVAL ${days} DAY)
+      `);
+      return {
+        topResources: Array.isArray(topResources) ? topResources : [],
+        dailyDownloads: Array.isArray(dailyDownloads) ? dailyDownloads : [],
+        byFileType: Array.isArray(byFileType) ? byFileType : [],
+        uniqueDownloaders: Array.isArray(uniqueUsers) && uniqueUsers[0] ? Number((uniqueUsers[0] as any).total) : 0,
+      };
+    }),
 });
 
 // ============================================================================
