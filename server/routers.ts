@@ -108,6 +108,7 @@ import { badgeShowcaseRouter } from "./routers/badgeShowcase";
 import { invitationsRouter } from "./routers/invitations";
 import { adminDashboardDataRouter } from "./routers/adminDashboardData";
 import { adminFlashcardsRouter, adminVocabularyRouter, adminGrammarDrillsRouter, adminDailyReviewRouter, adminStudyGroupsRouter } from "./routers/adminSkillLabs";
+import { dailyGoalsRouter } from "./routers/dailyGoals";
 // ═══ SLE Skill Labs Routers (Sprint E4) ═══
 import { flashcardsRouter } from "./routers/flashcards";
 import { vocabularyRouter, aiVocabularyRouter } from "./routers/vocabulary";
@@ -8969,6 +8970,7 @@ export const appRouter = router({
   adminGrammarDrills: adminGrammarDrillsRouter,
   adminDailyReview: adminDailyReviewRouter,
   adminStudyGroups: adminStudyGroupsRouter,
+  dailyGoals: dailyGoalsRouter,
   // Observability metrics (admin-only)
   metrics: metricsRouter,
   // Cron jobs router (protected by CRON_SECRET)
