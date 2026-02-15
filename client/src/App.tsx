@@ -625,6 +625,7 @@ function Router() {
       <Route path="/admin/quiz-management">{() => <L><AdminControlCenter section="quiz-management" /></L>}</Route>
       <Route path="/admin/gov-reporting">{() => <L><AdminControlCenter section="gov-reporting" /></L>}</Route>
       <Route path="/admin/webhook-health">{() => <L><AdminControlCenter section="webhook-health" /></L>}</Route>
+      <Route path="/admin/learning-paths">{() => <L><AdminControlCenter section="learning-paths" /></L>}</Route>
       <Route path="/programs/:programId">{() => <L><PathList /></L>}</Route>
       <Route path="/programs/:programId/:pathId">{() => <L><PathDetail /></L>}</Route>
       <Route path="/programs/:programId/:pathId/quiz/:quizId">{() => <L><QuizPage /></L>}</Route>
