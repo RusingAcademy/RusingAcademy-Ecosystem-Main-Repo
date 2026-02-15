@@ -2,7 +2,7 @@
  * Vocabulary Builder — Word collection, mastery tracking, and quiz mode
  * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -277,9 +277,25 @@ export default function Vocabulary() {
                             {item.definition && <p className="text-xs text-gray-600 mb-1">{item.definition}</p>}
                             {item.exampleSentence && <p className="text-xs text-gray-400 italic">"{item.exampleSentence}"</p>}
                             {item.pronunciation && <p className="text-[10px] text-gray-400 mt-1">/{item.pronunciation}/</p>}
-                            <div className="flex items-center gap-3 mt-2 text-[10px] text-gray-400">
-                              <span>{isFr ? "Révisé" : "Reviewed"} {item.reviewCount}x</span>
-                              <span>{isFr ? "Correct" : "Correct"} {item.correctCount}/{item.reviewCount}</span>
+                            {/* Mastery progress bar (Sprint F2) */}
+                            <div className="mt-3">
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex items-center gap-3 text-[10px] text-gray-400">
+                                  <span>{isFr ? "Révisé" : "Reviewed"} {item.reviewCount}x</span>
+                                  <span>{isFr ? "Correct" : "Correct"} {item.correctCount}/{item.reviewCount}</span>
+                                </div>
+                                <span className="text-[10px] font-medium" style={{ color: mastery.color }}>
+                                  {item.reviewCount > 0 ? Math.round((item.correctCount / item.reviewCount) * 100) : 0}%
+                                </span>
+                              </div>
+                              <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden" role="progressbar"
+                                aria-valuenow={item.reviewCount > 0 ? Math.round((item.correctCount / item.reviewCount) * 100) : 0}
+                                aria-valuemin={0} aria-valuemax={100}>
+                                <div className="h-full rounded-full transition-all duration-500" style={{
+                                  width: `${item.reviewCount > 0 ? Math.round((item.correctCount / item.reviewCount) * 100) : 0}%`,
+                                  background: mastery.color
+                                }} />
+                              </div>
                             </div>
                           </div>
                           <button onClick={() => { if (confirm(t("flashcards.delete") + "?")) deleteItem.mutate({ itemId: item.id }); }}
@@ -378,9 +394,15 @@ export default function Vocabulary() {
                   )}
                 </div>
 
-                {/* Score */}
-                <div className="text-center text-xs text-gray-400" aria-live="polite">
-                  {t("grammar.score")}: {quizScore.correct}/{quizScore.total}
+                {/* Score + keyboard hint (Sprint F2) */}
+                <div className="text-center space-y-2">
+                  <div className="text-xs text-gray-400" aria-live="polite">
+                    {t("grammar.score")}: {quizScore.correct}/{quizScore.total}
+                  </div>
+                  <p className="text-[10px] text-gray-400">
+                    <span className="material-icons text-[10px] align-middle mr-1" aria-hidden="true">keyboard</span>
+                    {isFr ? "Entrée pour vérifier" : "Enter to check"}
+                  </p>
                 </div>
               </div>
             )

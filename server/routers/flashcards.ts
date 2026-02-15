@@ -54,6 +54,21 @@ async function ensureFlashcardTables() {
     )
   `);
 
+  // Study streak tracking
+  await db.execute(sql`
+    CREATE TABLE IF NOT EXISTS study_streaks (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      userId INT NOT NULL,
+      studyDate DATE NOT NULL,
+      cardsReviewed INT DEFAULT 0,
+      correctCount INT DEFAULT 0,
+      sessionDurationSec INT DEFAULT 0,
+      createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY uk_user_date (userId, studyDate),
+      INDEX idx_ss_user (userId)
+    )
+  `);
+
   return db;
 }
 
@@ -286,5 +301,91 @@ export const flashcardsRouter = router({
       `);
 
       return { success: true, nextInterval: interval, easeFactor: ef };
+    }),
+
+  // ── Get study streak ─────────────────────────────────────────────────────
+  getStreak: protectedProcedure.query(async ({ ctx }) => {
+    const db = await ensureFlashcardTables();
+    // Get all study dates for this user, ordered descending
+    const [rows] = await db.execute(sql`
+      SELECT studyDate, cardsReviewed, correctCount, sessionDurationSec
+      FROM study_streaks
+      WHERE userId = ${ctx.user.id}
+      ORDER BY studyDate DESC
+      LIMIT 90
+    `);
+    const dates = Array.isArray(rows) ? rows.map((r: any) => ({
+      date: r.studyDate,
+      cards: Number(r.cardsReviewed),
+      correct: Number(r.correctCount),
+      duration: Number(r.sessionDurationSec),
+    })) : [];
+
+    // Calculate current streak
+    let currentStreak = 0;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    for (let i = 0; i < dates.length; i++) {
+      const d = new Date(dates[i].date);
+      d.setHours(0, 0, 0, 0);
+      const expected = new Date(today);
+      expected.setDate(expected.getDate() - i);
+      if (d.getTime() === expected.getTime()) {
+        currentStreak++;
+      } else {
+        break;
+      }
+    }
+
+    // Calculate longest streak
+    let longestStreak = 0;
+    let tempStreak = 1;
+    for (let i = 1; i < dates.length; i++) {
+      const prev = new Date(dates[i - 1].date);
+      const curr = new Date(dates[i].date);
+      const diffDays = Math.round((prev.getTime() - curr.getTime()) / (1000 * 60 * 60 * 24));
+      if (diffDays === 1) {
+        tempStreak++;
+      } else {
+        longestStreak = Math.max(longestStreak, tempStreak);
+        tempStreak = 1;
+      }
+    }
+    longestStreak = Math.max(longestStreak, tempStreak, currentStreak);
+
+    // Total stats
+    const totalCards = dates.reduce((s, d) => s + d.cards, 0);
+    const totalCorrect = dates.reduce((s, d) => s + d.correct, 0);
+    const totalDuration = dates.reduce((s, d) => s + d.duration, 0);
+
+    return {
+      currentStreak,
+      longestStreak,
+      totalCards,
+      totalCorrect,
+      totalDuration,
+      accuracy: totalCards > 0 ? Math.round((totalCorrect / totalCards) * 100) : 0,
+      recentDays: dates.slice(0, 30),
+    };
+  }),
+
+  // ── Record a study session ──────────────────────────────────────────────
+  recordSession: protectedProcedure
+    .input(z.object({
+      cardsReviewed: z.number().min(0),
+      correctCount: z.number().min(0),
+      sessionDurationSec: z.number().min(0),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await ensureFlashcardTables();
+      await db.execute(sql`
+        INSERT INTO study_streaks (userId, studyDate, cardsReviewed, correctCount, sessionDurationSec)
+        VALUES (${ctx.user.id}, CURDATE(), ${input.cardsReviewed}, ${input.correctCount}, ${input.sessionDurationSec})
+        ON DUPLICATE KEY UPDATE
+          cardsReviewed = cardsReviewed + ${input.cardsReviewed},
+          correctCount = correctCount + ${input.correctCount},
+          sessionDurationSec = sessionDurationSec + ${input.sessionDurationSec}
+      `);
+      return { success: true };
     }),
 });
