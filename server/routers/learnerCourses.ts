@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
-import { eq, desc, and, gte, inArray } from "drizzle-orm";
+import { eq, desc, and, gte, inArray, sql, sum } from "drizzle-orm";
 import { getDb, getLearnerByUserId } from "../db";
 import { badges, coachProfiles, coachingPlanPurchases, courseEnrollments, courseModules, courses, learnerProfiles, lessonProgress, lessons, sessions, users } from "../../drizzle/schema";
 
@@ -521,5 +521,204 @@ export const learnerCoursesRouter = router({
         ));
       
       return progress;
+    }),
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // S08: Dashboard Stats — Aggregated real data for learner dashboard
+  // ═══════════════════════════════════════════════════════════════════════════
+  getDashboardStats: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return {
+      totalXp: 0, level: 1, levelTitle: "Beginner", levelTitleFr: "Débutant",
+      totalBadges: 0, currentStreak: 0, longestStreak: 0,
+      totalStudyHours: 0, monthlyStudyHours: 0,
+      enrolledCourses: 0, completedCourses: 0,
+      overallProgress: 0,
+      currentLevel: null, targetLevel: null,
+      examDate: null, daysUntilExam: null,
+    };
+
+    const { learnerXp, learnerBadges, learnerProfiles: lp, courseEnrollments: ce, lessonProgress: lprog } = await import("../../drizzle/schema");
+    const userId = ctx.user.id;
+
+    // XP & Level
+    const [xp] = await db.select().from(learnerXp).where(eq(learnerXp.userId, userId)).limit(1);
+    const totalXp = xp?.totalXp ?? 0;
+    const level = xp?.currentLevel ?? 1;
+    const levelTitle = xp?.levelTitle ?? "Beginner";
+    const currentStreak = xp?.currentStreak ?? 0;
+    const longestStreak = xp?.longestStreak ?? 0;
+
+    // Badge count
+    const [badgeCount] = await db.select({ count: sql<number>`COUNT(*)` })
+      .from(learnerBadges).where(eq(learnerBadges.userId, userId));
+    const totalBadges = Number(badgeCount?.count ?? 0);
+
+    // Study time from lesson progress
+    const [studyTime] = await db.select({ total: sql<number>`COALESCE(SUM(${lprog.timeSpentSeconds}), 0)` })
+      .from(lprog).where(eq(lprog.userId, userId));
+    const totalStudyHours = Math.round((Number(studyTime?.total ?? 0) / 3600) * 10) / 10;
+
+    // Monthly study time
+    const monthStart = new Date();
+    monthStart.setDate(1);
+    monthStart.setHours(0, 0, 0, 0);
+    const [monthlyTime] = await db.select({ total: sql<number>`COALESCE(SUM(${lprog.timeSpentSeconds}), 0)` })
+      .from(lprog).where(and(eq(lprog.userId, userId), gte(lprog.lastAccessedAt, monthStart)));
+    const monthlyStudyHours = Math.round((Number(monthlyTime?.total ?? 0) / 3600) * 10) / 10;
+
+    // Course enrollment stats
+    const enrollments = await db.select({
+      courseId: ce.courseId,
+      status: ce.status,
+    }).from(ce).where(eq(ce.userId, userId));
+    const enrolledCourses = enrollments.length;
+    const completedCourses = enrollments.filter(e => e.status === "completed").length;
+
+    // Overall progress across all courses
+    let overallProgress = 0;
+    if (enrolledCourses > 0) {
+      const [totalLessons] = await db.select({ count: sql<number>`COUNT(DISTINCT ${lprog.lessonId})` })
+        .from(lprog).where(eq(lprog.userId, userId));
+      const [completedLessons] = await db.select({ count: sql<number>`COUNT(DISTINCT ${lprog.lessonId})` })
+        .from(lprog).where(and(eq(lprog.userId, userId), eq(lprog.status, "completed")));
+      const total = Number(totalLessons?.count ?? 0);
+      const completed = Number(completedLessons?.count ?? 0);
+      overallProgress = total > 0 ? Math.round((completed / total) * 100) : 0;
+    }
+
+    // Learner profile for SLE levels and exam date
+    const learner = await getLearnerByUserId(userId);
+    const currentLevel = learner?.currentLevel ?? null;
+    const targetLevel = learner?.targetLevel ?? null;
+    const examDate = learner?.examDate ?? null;
+    let daysUntilExam: number | null = null;
+    if (examDate) {
+      daysUntilExam = Math.max(0, Math.ceil((new Date(examDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+    }
+
+    // Level title in French
+    const levelTitleMap: Record<string, string> = {
+      Beginner: "Débutant", Apprentice: "Apprenti", Scholar: "Érudit",
+      Expert: "Expert", Master: "Maître", Champion: "Champion",
+      Legend: "Légende", Grandmaster: "Grand Maître",
+    };
+    const levelTitleFr = levelTitleMap[levelTitle] || levelTitle;
+
+    return {
+      totalXp, level, levelTitle, levelTitleFr,
+      totalBadges, currentStreak, longestStreak,
+      totalStudyHours, monthlyStudyHours,
+      enrolledCourses, completedCourses,
+      overallProgress,
+      currentLevel, targetLevel,
+      examDate, daysUntilExam,
+    };
+  }),
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // S08: Resume Point — Get the last accessed lesson for "Resume" CTA
+  // ═══════════════════════════════════════════════════════════════════════════
+  getResumePoint: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return null;
+
+    const { lessonProgress: lprog, lessons: l, courses: c, courseModules: cm } = await import("../../drizzle/schema");
+    const userId = ctx.user.id;
+
+    // Find the most recently accessed lesson
+    const [lastAccessed] = await db.select({
+      lessonId: lprog.lessonId,
+      courseId: lprog.courseId,
+      moduleId: lprog.moduleId,
+      status: lprog.status,
+      progressPercent: lprog.progressPercent,
+      lastAccessedAt: lprog.lastAccessedAt,
+      lessonTitle: l.title,
+      lessonTitleFr: l.titleFr,
+      courseTitle: c.title,
+      courseTitleFr: c.titleFr,
+      moduleName: cm.title,
+      moduleNameFr: cm.titleFr,
+      contentType: l.contentType,
+    })
+      .from(lprog)
+      .innerJoin(l, eq(lprog.lessonId, l.id))
+      .innerJoin(c, eq(lprog.courseId, c.id))
+      .leftJoin(cm, eq(lprog.moduleId, cm.id))
+      .where(eq(lprog.userId, userId))
+      .orderBy(desc(lprog.lastAccessedAt))
+      .limit(1);
+
+    if (!lastAccessed) return null;
+
+    return {
+      lessonId: lastAccessed.lessonId,
+      courseId: lastAccessed.courseId,
+      moduleId: lastAccessed.moduleId,
+      status: lastAccessed.status,
+      progressPercent: lastAccessed.progressPercent,
+      lastAccessedAt: lastAccessed.lastAccessedAt,
+      lessonTitle: lastAccessed.lessonTitle,
+      lessonTitleFr: lastAccessed.lessonTitleFr,
+      courseTitle: lastAccessed.courseTitle,
+      courseTitleFr: lastAccessed.courseTitleFr,
+      moduleName: lastAccessed.moduleName,
+      moduleNameFr: lastAccessed.moduleNameFr,
+      contentType: lastAccessed.contentType,
+    };
+  }),
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // S08: Track Study Time — Log time spent on a lesson
+  // ═══════════════════════════════════════════════════════════════════════════
+  trackStudyTime: protectedProcedure
+    .input(z.object({
+      lessonId: z.number(),
+      courseId: z.number(),
+      moduleId: z.number().optional(),
+      seconds: z.number().min(1).max(7200), // Max 2 hours per call
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      const { lessonProgress: lprog } = await import("../../drizzle/schema");
+      const userId = ctx.user.id;
+
+      // Check if progress record exists
+      const [existing] = await db.select()
+        .from(lprog)
+        .where(and(eq(lprog.userId, userId), eq(lprog.lessonId, input.lessonId)))
+        .limit(1);
+
+      if (existing) {
+        await db.update(lprog)
+          .set({
+            timeSpentSeconds: sql`${lprog.timeSpentSeconds} + ${input.seconds}`,
+            lastAccessedAt: new Date(),
+            status: existing.status === "not_started" ? "in_progress" : existing.status,
+          })
+          .where(eq(lprog.id, existing.id));
+      } else {
+        await db.insert(lprog).values({
+          lessonId: input.lessonId,
+          userId,
+          courseId: input.courseId,
+          moduleId: input.moduleId,
+          timeSpentSeconds: input.seconds,
+          status: "in_progress",
+          progressPercent: 0,
+          lastAccessedAt: new Date(),
+        });
+      }
+
+      // Also update course enrollment lastAccessedAt
+      const { courseEnrollments: ce } = await import("../../drizzle/schema");
+      await db.update(ce)
+        .set({ lastAccessedAt: new Date() })
+        .where(and(eq(ce.userId, userId), eq(ce.courseId, input.courseId)));
+
+      return { success: true };
     }),
 });
