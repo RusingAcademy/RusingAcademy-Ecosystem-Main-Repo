@@ -60,6 +60,7 @@ import {
   ContactInsights,
   AssessmentsAdmin,
   ReportsAdmin,
+  ContentPipelineDashboard,
 } from "./admin";
 
 interface Props {
@@ -141,6 +142,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   reviews: AdminReviews,
   certificates: AdminCertificates,
   gamification: AdminGamification,
+  "content-pipeline": ContentPipelineDashboard,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

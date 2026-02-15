@@ -60,3 +60,4 @@ export { default as AllContacts } from "./AllContacts";
 export { default as ContactInsights } from "./ContactInsights";
 export { default as AssessmentsAdmin } from "./AssessmentsAdmin";
 export { default as ReportsAdmin } from "./ReportsAdmin";
+export { default as ContentPipelineDashboard } from "./ContentPipelineDashboard";

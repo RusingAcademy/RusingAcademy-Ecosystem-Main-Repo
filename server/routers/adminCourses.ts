@@ -66,7 +66,7 @@ export const adminCoursesRouter = router({
     .input(z.object({
       id: z.number(),
       title: z.string().optional(),
-      type: z.enum(["video", "text", "quiz", "assignment", "live"]).optional(),
+      contentType: z.enum(["video", "text", "audio", "pdf", "quiz", "assignment", "download", "live_session"]).optional(),
       sortOrder: z.number().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
@@ -79,7 +79,7 @@ export const adminCoursesRouter = router({
       
       const updateData: any = {};
       if (input.title !== undefined) updateData.title = input.title;
-      if (input.type !== undefined) updateData.type = input.type;
+      if (input.contentType !== undefined) updateData.contentType = input.contentType;
       if (input.sortOrder !== undefined) updateData.sortOrder = input.sortOrder;
       
       await db.update(lessons).set(updateData).where(eq(lessons.id, input.id));
@@ -466,12 +466,12 @@ export const adminCoursesRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      const { courseModules } = await import("../../drizzle/schema");
-      const { moduleId, ...updateData } = input;
+      const { lessons } = await import("../../drizzle/schema");
+      const { lessonId, ...updateData } = input;
       
-      await db.update(courseModules)
+      await db.update(lessons)
         .set(updateData)
-        .where(eq(courseModules.id, moduleId));
+        .where(eq(lessons.id, lessonId));
       
       return { success: true };
     }),
@@ -542,7 +542,9 @@ export const adminCoursesRouter = router({
       moduleId: z.number(),
       courseId: z.number(),
       title: z.string().min(1),
+      titleFr: z.string().optional(),
       description: z.string().optional(),
+      descriptionFr: z.string().optional(),
       contentType: z.enum(["video", "text", "audio", "pdf", "quiz", "assignment", "download", "live_session"]).optional(),
       videoUrl: z.string().optional(),
       textContent: z.string().optional(),
@@ -604,6 +606,7 @@ export const adminCoursesRouter = router({
 
   updateLessonFull: protectedProcedure
     .input(z.object({
+      lessonId: z.number(),
       moduleId: z.number(),
       courseId: z.number(),
       title: z.string().min(1),
@@ -760,6 +763,291 @@ export const adminCoursesRouter = router({
         archivedCourses: archivedCourses.length,
         totalEnrollments: enrollmentCount?.count || 0,
         totalRevenue: totalRevenue / 100, // Convert from cents
+      };
+    }),
+
+  // ============================================================================
+  // CONTENT QUALITY SCORE
+  // ============================================================================
+  
+  getContentQuality: protectedProcedure
+    .input(z.object({ courseId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { courses, courseModules, lessons } = await import("../../drizzle/schema");
+      
+      const [course] = await db.select().from(courses).where(eq(courses.id, input.courseId));
+      if (!course) throw new TRPCError({ code: "NOT_FOUND", message: "Course not found" });
+      
+      const modules = await db.select().from(courseModules)
+        .where(eq(courseModules.courseId, input.courseId));
+      const courseLessons = await db.select().from(lessons)
+        .where(eq(lessons.courseId, input.courseId));
+      
+      // Calculate quality dimensions
+      const checks = {
+        hasThumbnail: !!course.thumbnailUrl,
+        hasDescription: !!course.description && course.description.length > 50,
+        hasShortDescription: !!course.shortDescription && course.shortDescription.length > 20,
+        hasFrenchTitle: !!course.titleFr,
+        hasFrenchDescription: !!course.descriptionFr,
+        hasMetaTitle: !!course.metaTitle,
+        hasMetaDescription: !!course.metaDescription,
+        hasPreviewVideo: !!course.previewVideoUrl,
+        hasModules: modules.length > 0,
+        hasLessons: courseLessons.length > 0,
+        allModulesHaveTitles: modules.every(m => !!m.title),
+        allModulesHaveFrenchTitles: modules.every(m => !!m.titleFr),
+        allLessonsHaveTitles: courseLessons.every(l => !!l.title),
+        allLessonsHaveFrenchTitles: courseLessons.every(l => !!l.titleFr),
+        allLessonsHaveContent: courseLessons.every(l => !!l.videoUrl || !!l.textContent || !!l.audioUrl || !!l.downloadUrl),
+        hasPrice: (course.price || 0) > 0 || course.accessType === "free",
+      };
+      
+      const totalChecks = Object.keys(checks).length;
+      const passedChecks = Object.values(checks).filter(Boolean).length;
+      const score = Math.round((passedChecks / totalChecks) * 100);
+      
+      // Categorize
+      let grade: "A" | "B" | "C" | "D" | "F";
+      if (score >= 90) grade = "A";
+      else if (score >= 75) grade = "B";
+      else if (score >= 60) grade = "C";
+      else if (score >= 40) grade = "D";
+      else grade = "F";
+      
+      return {
+        courseId: input.courseId,
+        score,
+        grade,
+        checks,
+        totalChecks,
+        passedChecks,
+        moduleCount: modules.length,
+        lessonCount: courseLessons.length,
+      };
+    }),
+
+  // ============================================================================
+  // BULK IMPORT (Courses + Modules + Lessons)
+  // ============================================================================
+  
+  bulkImport: protectedProcedure
+    .input(z.object({
+      courses: z.array(z.object({
+        title: z.string().min(1),
+        titleFr: z.string().optional(),
+        description: z.string().optional(),
+        descriptionFr: z.string().optional(),
+        shortDescription: z.string().optional(),
+        shortDescriptionFr: z.string().optional(),
+        category: z.enum(["sle_oral", "sle_written", "sle_reading", "sle_complete", "business_french", "business_english", "exam_prep", "conversation", "grammar", "vocabulary"]).optional(),
+        level: z.enum(["beginner", "intermediate", "advanced", "all_levels"]).optional(),
+        targetLanguage: z.enum(["french", "english", "both"]).optional(),
+        price: z.number().optional(),
+        pathNumber: z.number().optional(),
+        estimatedHours: z.number().optional(),
+        modules: z.array(z.object({
+          title: z.string().min(1),
+          titleFr: z.string().optional(),
+          description: z.string().optional(),
+          descriptionFr: z.string().optional(),
+          moduleNumber: z.number().optional(),
+          lessons: z.array(z.object({
+            title: z.string().min(1),
+            titleFr: z.string().optional(),
+            description: z.string().optional(),
+            descriptionFr: z.string().optional(),
+            contentType: z.enum(["video", "text", "audio", "pdf", "quiz", "assignment", "download", "live_session"]).optional(),
+            estimatedMinutes: z.number().optional(),
+            lessonNumber: z.number().optional(),
+          })).optional(),
+        })).optional(),
+      })),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { courses, courseModules, lessons } = await import("../../drizzle/schema");
+      
+      const results: { courseId: number; title: string; modulesCreated: number; lessonsCreated: number }[] = [];
+      const errors: { courseTitle: string; error: string }[] = [];
+      
+      for (const courseData of input.courses) {
+        try {
+          // Generate slug
+          const slug = courseData.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "") + "-" + Date.now();
+          
+          const [newCourse] = await db.insert(courses).values({
+            title: courseData.title,
+            titleFr: courseData.titleFr || null,
+            slug,
+            description: courseData.description || null,
+            descriptionFr: courseData.descriptionFr || null,
+            shortDescription: courseData.shortDescription || null,
+            shortDescriptionFr: courseData.shortDescriptionFr || null,
+            category: courseData.category || "sle_oral",
+            level: courseData.level || "all_levels",
+            targetLanguage: courseData.targetLanguage || "french",
+            price: courseData.price || 0,
+            pathNumber: courseData.pathNumber || null,
+            estimatedHours: courseData.estimatedHours || 30,
+            status: "draft",
+            instructorId: ctx.user.id,
+            instructorName: ctx.user.name || "Admin",
+          }).$returningId();
+          
+          let modulesCreated = 0;
+          let lessonsCreated = 0;
+          
+          if (courseData.modules) {
+            for (let mi = 0; mi < courseData.modules.length; mi++) {
+              const moduleData = courseData.modules[mi];
+              
+              const [newModule] = await db.insert(courseModules).values({
+                courseId: newCourse.id,
+                title: moduleData.title,
+                titleFr: moduleData.titleFr || null,
+                description: moduleData.description || null,
+                descriptionFr: moduleData.descriptionFr || null,
+                sortOrder: mi,
+                moduleNumber: moduleData.moduleNumber || mi + 1,
+              }).$returningId();
+              modulesCreated++;
+              
+              if (moduleData.lessons) {
+                for (let li = 0; li < moduleData.lessons.length; li++) {
+                  const lessonData = moduleData.lessons[li];
+                  
+                  await db.insert(lessons).values({
+                    moduleId: newModule.id,
+                    courseId: newCourse.id,
+                    title: lessonData.title,
+                    titleFr: lessonData.titleFr || null,
+                    description: lessonData.description || null,
+                    descriptionFr: lessonData.descriptionFr || null,
+                    contentType: lessonData.contentType || "video",
+                    estimatedMinutes: lessonData.estimatedMinutes || 10,
+                    sortOrder: li,
+                    lessonNumber: lessonData.lessonNumber || li + 1,
+                    status: "draft",
+                  });
+                  lessonsCreated++;
+                }
+              }
+            }
+          }
+          
+          // Update course stats
+          await db.update(courses)
+            .set({
+              totalModules: modulesCreated,
+              totalLessons: lessonsCreated,
+            })
+            .where(eq(courses.id, newCourse.id));
+          
+          results.push({
+            courseId: newCourse.id,
+            title: courseData.title,
+            modulesCreated,
+            lessonsCreated,
+          });
+        } catch (err: any) {
+          errors.push({
+            courseTitle: courseData.title,
+            error: err.message || "Unknown error",
+          });
+        }
+      }
+      
+      return {
+        success: errors.length === 0,
+        imported: results.length,
+        failed: errors.length,
+        results,
+        errors,
+      };
+    }),
+
+  // ============================================================================
+  // CONTENT HEALTH OVERVIEW (aggregated quality metrics)
+  // ============================================================================
+  
+  getContentHealth: protectedProcedure
+    .query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return {
+        totalCourses: 0,
+        coursesWithoutThumbnails: 0,
+        coursesWithoutFrench: 0,
+        emptyModules: 0,
+        lessonsWithoutContent: 0,
+        coursesWithoutSEO: 0,
+        averageQualityScore: 0,
+      };
+      
+      const { courses, courseModules, lessons } = await import("../../drizzle/schema");
+      
+      const allCourses = await db.select().from(courses);
+      const allModules = await db.select().from(courseModules);
+      const allLessons = await db.select().from(lessons);
+      
+      // Courses without thumbnails
+      const coursesWithoutThumbnails = allCourses.filter(c => !c.thumbnailUrl).length;
+      
+      // Courses without French translations
+      const coursesWithoutFrench = allCourses.filter(c => !c.titleFr || !c.descriptionFr).length;
+      
+      // Modules with no lessons
+      const moduleIds = new Set(allLessons.map(l => l.moduleId));
+      const emptyModules = allModules.filter(m => !moduleIds.has(m.id)).length;
+      
+      // Lessons without any content
+      const lessonsWithoutContent = allLessons.filter(l => 
+        !l.videoUrl && !l.textContent && !l.audioUrl && !l.downloadUrl
+      ).length;
+      
+      // Courses without SEO
+      const coursesWithoutSEO = allCourses.filter(c => !c.metaTitle || !c.metaDescription).length;
+      
+      // Average quality score (simplified)
+      let totalScore = 0;
+      for (const course of allCourses) {
+        let score = 0;
+        let checks = 0;
+        if (course.thumbnailUrl) score++; checks++;
+        if (course.description && course.description.length > 50) score++; checks++;
+        if (course.titleFr) score++; checks++;
+        if (course.descriptionFr) score++; checks++;
+        if (course.metaTitle) score++; checks++;
+        if (course.metaDescription) score++; checks++;
+        totalScore += checks > 0 ? Math.round((score / checks) * 100) : 0;
+      }
+      const averageQualityScore = allCourses.length > 0 ? Math.round(totalScore / allCourses.length) : 0;
+      
+      return {
+        totalCourses: allCourses.length,
+        coursesWithoutThumbnails,
+        coursesWithoutFrench,
+        emptyModules,
+        lessonsWithoutContent,
+        coursesWithoutSEO,
+        averageQualityScore,
       };
     }),
 });
