@@ -22,7 +22,10 @@
     "sle:data:seed": "npx tsx data/sle/scripts/seed.ts",
     "db:seed:sle:standards": "npx tsx scripts/sle/seed-standards-rubrics.ts",
     "sle:import": "npx tsx scripts/sle/import-jsonl.ts",
-    "sle:import:dry": "npx tsx scripts/sle/import-jsonl.ts --dry-run"
+    "sle:import:dry": "npx tsx scripts/sle/import-jsonl.ts --dry-run",
+    "test:e2e": "npx playwright test",
+    "test:e2e:ui": "npx playwright test --ui",
+    "test:e2e:prod": "E2E_BASE_URL=https://new-rusingacademy-project-production.up.railway.app npx playwright test"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
