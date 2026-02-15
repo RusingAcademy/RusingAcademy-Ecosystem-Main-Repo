@@ -107,6 +107,11 @@ import { progressCascadeRouter } from "./routers/progressCascade";
 import { badgeShowcaseRouter } from "./routers/badgeShowcase";
 import { invitationsRouter } from "./routers/invitations";
 import { adminDashboardDataRouter } from "./routers/adminDashboardData";
+// ═══ SLE Skill Labs Routers (Sprint E4) ═══
+import { flashcardsRouter } from "./routers/flashcards";
+import { vocabularyRouter, aiVocabularyRouter } from "./routers/vocabulary";
+import { grammarDrillsRouter } from "./routers/grammarDrills";
+import { readingLabRouter, writingRouter, listeningLabRouter, dailyReviewRouter, challengesRouter, studyGroupsRouter } from "./routers/skillLabs";
 
 // ═══ Kajabi Integration Routers ═══
 import {
@@ -8946,6 +8951,17 @@ export const appRouter = router({
   kajabiNewslettersAdmin: newslettersAdminRouter,
   kajabiCommunityAdmin: communityAdminRouter,
    kajabiAllProducts: allProductsRouter,
+  // ═══ SLE Skill Labs (Sprint E4) ═══
+  flashcards: flashcardsRouter,
+  vocabulary: vocabularyRouter,
+  aiVocabulary: aiVocabularyRouter,
+  grammarDrills: grammarDrillsRouter,
+  readingLab: readingLabRouter,
+  writing: writingRouter,
+  listeningLab: listeningLabRouter,
+  dailyReview: dailyReviewRouter,
+  challenges: challengesRouter,
+  studyGroups: studyGroupsRouter,
   // Observability metrics (admin-only)
   metrics: metricsRouter,
   // Cron jobs router (protected by CRON_SECRET)
