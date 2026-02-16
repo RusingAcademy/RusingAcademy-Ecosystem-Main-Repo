@@ -11,7 +11,7 @@ export default function MySettings() {
       <div className="max-w-[900px]">
         <div className="flex items-center gap-2 mb-4">
           <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
-            <span className="material-icons text-[20px]">navigate_before</span>
+            <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>My Settings</h1>
         </div>
@@ -27,7 +27,7 @@ export default function MySettings() {
             <div>
               <div className="flex items-center gap-1 mb-1">
                 <label className="text-sm text-gray-600">System Language</label>
-                <span className="material-icons text-[14px] text-gray-400">help_outline</span>
+                <span className="material-icons text-sm text-gray-400">help_outline</span>
               </div>
               <select className="w-full border border-gray-300 rounded px-3 py-2 text-sm text-gray-800 bg-white">
                 <option>English</option>
@@ -39,7 +39,7 @@ export default function MySettings() {
             <div>
               <div className="flex items-center gap-1 mb-1">
                 <label className="text-sm text-gray-600">Translation Language</label>
-                <span className="material-icons text-[14px] text-gray-400">help_outline</span>
+                <span className="material-icons text-sm text-gray-400">help_outline</span>
               </div>
               <select className="w-full border border-gray-300 rounded px-3 py-2 text-sm text-gray-800 bg-white">
                 <option>Français</option>

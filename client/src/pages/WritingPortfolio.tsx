@@ -175,7 +175,7 @@ export default function WritingPortfolio() {
           <button onClick={resetEditor}
             className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
             aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
-            <span className="material-icons text-[18px]" aria-hidden="true">arrow_back</span>
+            <span className="material-icons text-lg" aria-hidden="true">arrow_back</span>
             {isFr ? "Retour au portfolio" : "Back to Portfolio"}
           </button>
           {submission.isLoading ? (
@@ -194,7 +194,7 @@ export default function WritingPortfolio() {
                       <button onClick={() => { if (confirm(isFr ? "Supprimer ?" : "Delete?")) deleteMutation.mutate({ id: s.id }); }}
                         className="text-gray-400 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-300 rounded"
                         aria-label={isFr ? "Supprimer la soumission" : "Delete submission"}>
-                        <span className="material-icons text-[18px]" aria-hidden="true">delete</span>
+                        <span className="material-icons text-lg" aria-hidden="true">delete</span>
                       </button>
                     </div>
                   </div>
@@ -211,7 +211,7 @@ export default function WritingPortfolio() {
                     disabled={feedbackMutation.isPending}
                     className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#008090] to-[#006d7a] text-white text-sm rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                   >
-                    <span className="material-icons text-[18px]" aria-hidden="true">auto_awesome</span>
+                    <span className="material-icons text-lg" aria-hidden="true">auto_awesome</span>
                     {feedbackMutation.isPending
                       ? (isFr ? "Analyse en cours..." : "Analyzing your writing...")
                       : t("writing.getAIFeedback")}
@@ -236,7 +236,7 @@ export default function WritingPortfolio() {
                   {fb.highlights.length > 0 && (
                     <div className="bg-green-50 border border-green-200 rounded-xl p-4">
                       <h3 className="text-sm font-semibold text-green-800 mb-2 flex items-center gap-1">
-                        <span className="material-icons text-[16px]" aria-hidden="true">thumb_up</span> {isFr ? "Points forts" : "Strengths"}
+                        <span className="material-icons text-base" aria-hidden="true">thumb_up</span> {isFr ? "Points forts" : "Strengths"}
                       </h3>
                       <ul className="space-y-1" role="list">{fb.highlights.map((h, i) => <li key={i} className="text-xs text-green-700">• {h}</li>)}</ul>
                     </div>
@@ -244,7 +244,7 @@ export default function WritingPortfolio() {
                   {fb.suggestions.length > 0 && (
                     <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                       <h3 className="text-sm font-semibold text-amber-800 mb-2 flex items-center gap-1">
-                        <span className="material-icons text-[16px]" aria-hidden="true">lightbulb</span> {isFr ? "Suggestions" : "Suggestions"}
+                        <span className="material-icons text-base" aria-hidden="true">lightbulb</span> {isFr ? "Suggestions" : "Suggestions"}
                       </h3>
                       <ul className="space-y-1" role="list">{fb.suggestions.map((s, i) => <li key={i} className="text-xs text-amber-700">• {s}</li>)}</ul>
                     </div>
@@ -266,7 +266,7 @@ export default function WritingPortfolio() {
           <button onClick={resetEditor}
             className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
             aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
-            <span className="material-icons text-[18px]" aria-hidden="true">arrow_back</span>
+            <span className="material-icons text-lg" aria-hidden="true">arrow_back</span>
             {isFr ? "Retour au portfolio" : "Back to Portfolio"}
           </button>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
@@ -374,7 +374,7 @@ export default function WritingPortfolio() {
           <button onClick={() => openEditor()}
             className="flex items-center gap-2 px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
             aria-label={t("writing.newEntry")}>
-            <span className="material-icons text-[18px]" aria-hidden="true">edit_note</span> {t("writing.newEntry")}
+            <span className="material-icons text-lg" aria-hidden="true">edit_note</span> {t("writing.newEntry")}
           </button>
         </div>
 

@@ -108,7 +108,7 @@ export default function PronunciationLab() {
             <p className="text-sm text-gray-500 mt-1">Listen, practice, and perfect your French pronunciation</p>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 bg-[#008090]/10 rounded-full">
-            <span className="material-icons text-[#008090] text-[16px]">mic</span>
+            <span className="material-icons text-[#008090] text-base">mic</span>
             <span className="text-xs font-semibold text-[#008090]">{practiceCount} practices</span>
           </div>
         </div>
@@ -177,10 +177,10 @@ export default function PronunciationLab() {
               </div>
               <div className="mt-3 flex gap-2">
                 <button onClick={speakPhrase} className="flex-1 text-xs text-[#008090] bg-[#008090]/5 rounded-lg py-2 hover:bg-[#008090]/10 transition-colors">
-                  <span className="material-icons text-[14px] align-middle mr-1">compare_arrows</span>Compare with model
+                  <span className="material-icons text-sm align-middle mr-1">compare_arrows</span>Compare with model
                 </button>
                 <button onClick={startRecording} className="flex-1 text-xs text-gray-600 bg-gray-100 rounded-lg py-2 hover:bg-gray-200 transition-colors">
-                  <span className="material-icons text-[14px] align-middle mr-1">replay</span>Try again
+                  <span className="material-icons text-sm align-middle mr-1">replay</span>Try again
                 </button>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function PronunciationLab() {
           {/* Navigation */}
           <div className="flex items-center justify-between">
             <button onClick={prevExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] transition-colors">
-              <span className="material-icons text-[18px]">chevron_left</span> Previous
+              <span className="material-icons text-lg">chevron_left</span> Previous
             </button>
             <div className="flex gap-1">
               {exercises.map((_, i) => (
@@ -197,7 +197,7 @@ export default function PronunciationLab() {
               ))}
             </div>
             <button onClick={nextExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] transition-colors">
-              Next <span className="material-icons text-[18px]">chevron_right</span>
+              Next <span className="material-icons text-lg">chevron_right</span>
             </button>
           </div>
         </div>
@@ -205,7 +205,7 @@ export default function PronunciationLab() {
         {/* Tips */}
         <div className="bg-gradient-to-r from-[#008090]/5 to-[#006d7a]/5 border border-[#008090]/20 rounded-xl p-5">
           <h3 className="text-sm font-semibold text-[#008090] mb-2 flex items-center gap-1">
-            <span className="material-icons text-[16px]">tips_and_updates</span> Pronunciation Tips
+            <span className="material-icons text-base">tips_and_updates</span> Pronunciation Tips
           </h3>
           <ul className="space-y-1 text-xs text-gray-600">
             <li>• Listen to the model pronunciation first, then try to imitate it</li>

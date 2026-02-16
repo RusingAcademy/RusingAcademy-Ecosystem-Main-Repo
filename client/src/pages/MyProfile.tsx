@@ -253,7 +253,7 @@ export default function MyProfile() {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors" aria-label={t.back}>
-              <span className="material-icons text-[20px]">navigate_before</span>
+              <span className="material-icons text-xl">navigate_before</span>
             </Link>
             <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
               {t.title}
@@ -268,7 +268,7 @@ export default function MyProfile() {
             }`}
             aria-label={isEditing ? t.viewMode : t.editMode}
           >
-            <span className="material-icons text-[16px]">{isEditing ? "visibility" : "edit"}</span>
+            <span className="material-icons text-base">{isEditing ? "visibility" : "edit"}</span>
             {isEditing ? t.viewMode : t.editMode}
           </button>
         </div>
@@ -278,7 +278,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-personal">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-personal" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">person</span>
+                <span className="material-icons text-[#008090] text-lg">person</span>
                 {t.personal}
               </h2>
             </div>
@@ -346,7 +346,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-sle">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-sle" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">assessment</span>
+                <span className="material-icons text-[#008090] text-lg">assessment</span>
                 {t.sleLevels}
               </h2>
             </div>
@@ -414,7 +414,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-goals">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-goals" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">flag</span>
+                <span className="material-icons text-[#008090] text-lg">flag</span>
                 {t.learningGoals}
               </h2>
             </div>
@@ -487,7 +487,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-cert">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-cert" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">verified</span>
+                <span className="material-icons text-[#008090] text-lg">verified</span>
                 {t.certification}
               </h2>
             </div>
@@ -541,7 +541,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-prefs">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-prefs" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">settings</span>
+                <span className="material-icons text-[#008090] text-lg">settings</span>
                 {t.preferences}
               </h2>
             </div>

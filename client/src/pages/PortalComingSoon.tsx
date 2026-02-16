@@ -154,7 +154,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
               border: `1.5px solid ${config.color}30`,
             }}
           >
-            <span className="material-icons text-[18px]">construction</span>
+            <span className="material-icons text-lg">construction</span>
             {lang === "fr" ? "En cours de développement" : "Under Development"}
           </div>
 
@@ -196,7 +196,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
             <div className="space-y-2">
               {config.features.map((f) => (
                 <div key={f.en} className="flex items-center gap-2">
-                  <span className="material-icons text-[14px] text-gray-300">radio_button_unchecked</span>
+                  <span className="material-icons text-sm text-gray-300">radio_button_unchecked</span>
                   <span className="text-sm text-gray-600">{lang === "fr" ? f.fr : f.en}</span>
                 </div>
               ))}
@@ -208,7 +208,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
             onClick={() => setLocation("/")}
             className="inline-flex items-center gap-2 text-sm font-medium text-[#008090] hover:text-[#006d7a] transition-colors"
           >
-            <span className="material-icons text-[18px]">arrow_back</span>
+            <span className="material-icons text-lg">arrow_back</span>
             {lang === "fr" ? "Retour au portail d'apprentissage" : "Back to Learning Portal"}
           </button>
 

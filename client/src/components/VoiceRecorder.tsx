@@ -175,7 +175,7 @@ export function VoiceRecorder({
     <div className="glass-card rounded-xl p-5">
       {/* Header */}
       <div className="flex items-center gap-2 mb-4">
-        <span className="material-icons text-[#008090] text-[20px]">mic</span>
+        <span className="material-icons text-[#008090] text-xl">mic</span>
         <h4 className="text-sm font-semibold text-gray-900">Voice Recording</h4>
         {isRecording && (
           <span className="ml-auto flex items-center gap-1.5">
@@ -196,7 +196,7 @@ export function VoiceRecorder({
       {/* Permission Denied */}
       {permissionDenied && (
         <div className="bg-red-50 rounded-lg p-3 mb-4 flex items-start gap-2">
-          <span className="material-icons text-red-500 text-[18px] mt-0.5">warning</span>
+          <span className="material-icons text-red-500 text-lg mt-0.5">warning</span>
           <div>
             <p className="text-sm text-red-700 font-medium">Microphone access denied</p>
             <p className="text-xs text-red-600 mt-0.5">
@@ -243,7 +243,7 @@ export function VoiceRecorder({
               onClick={playRecording}
               className="w-10 h-10 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006070] transition-colors flex-shrink-0"
             >
-              <span className="material-icons text-[20px]">{isPlaying ? "pause" : "play_arrow"}</span>
+              <span className="material-icons text-xl">{isPlaying ? "pause" : "play_arrow"}</span>
             </button>
             <div className="flex-1">
               <p className="text-sm font-medium text-gray-900">Recording complete</p>
@@ -253,7 +253,7 @@ export function VoiceRecorder({
               onClick={resetRecording}
               className="text-xs text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1"
             >
-              <span className="material-icons text-[14px]">delete</span>
+              <span className="material-icons text-sm">delete</span>
               Discard
             </button>
           </div>
@@ -264,7 +264,7 @@ export function VoiceRecorder({
       {showTranscript && transcript && (
         <div className="mb-4 bg-gray-50 rounded-lg p-3">
           <p className="text-xs text-gray-500 mb-1 font-medium flex items-center gap-1">
-            <span className="material-icons text-[14px]">subtitles</span>
+            <span className="material-icons text-sm">subtitles</span>
             Live Transcript
           </p>
           <p className="text-sm text-gray-800">{transcript}</p>
@@ -278,7 +278,7 @@ export function VoiceRecorder({
             onClick={startRecording}
             className="flex items-center gap-2 px-6 py-3 bg-[#008090] text-white rounded-xl font-semibold text-sm hover:bg-[#006070] transition-colors shadow-md"
           >
-            <span className="material-icons text-[18px]">mic</span>
+            <span className="material-icons text-lg">mic</span>
             Start Recording
           </button>
         )}
@@ -288,13 +288,13 @@ export function VoiceRecorder({
               onClick={togglePause}
               className="w-10 h-10 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center hover:bg-gray-200 transition-colors"
             >
-              <span className="material-icons text-[20px]">{isPaused ? "play_arrow" : "pause"}</span>
+              <span className="material-icons text-xl">{isPaused ? "play_arrow" : "pause"}</span>
             </button>
             <button
               onClick={stopRecording}
               className="flex items-center gap-2 px-6 py-3 bg-red-500 text-white rounded-xl font-semibold text-sm hover:bg-red-600 transition-colors shadow-md"
             >
-              <span className="material-icons text-[18px]">stop</span>
+              <span className="material-icons text-lg">stop</span>
               Stop Recording
             </button>
           </>
@@ -304,7 +304,7 @@ export function VoiceRecorder({
             onClick={startRecording}
             className="flex items-center gap-2 px-6 py-3 bg-[#008090] text-white rounded-xl font-semibold text-sm hover:bg-[#006070] transition-colors"
           >
-            <span className="material-icons text-[18px]">refresh</span>
+            <span className="material-icons text-lg">refresh</span>
             Record Again
           </button>
         )}

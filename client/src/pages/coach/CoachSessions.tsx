@@ -55,14 +55,14 @@ function CalendarWidget({ sessions, lang }: { sessions: any[]; lang: string }) {
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm font-semibold text-gray-800">{MONTHS_EN[month]} {year}</span>
         <div className="flex gap-1">
-          <button onClick={prevMonth} className="p-1 hover:bg-gray-100 rounded"><span className="material-icons text-[18px] text-gray-500">chevron_left</span></button>
-          <button onClick={nextMonth} className="p-1 hover:bg-gray-100 rounded"><span className="material-icons text-[18px] text-gray-500">chevron_right</span></button>
+          <button onClick={prevMonth} className="p-1 hover:bg-gray-100 rounded"><span className="material-icons text-lg text-gray-500">chevron_left</span></button>
+          <button onClick={nextMonth} className="p-1 hover:bg-gray-100 rounded"><span className="material-icons text-lg text-gray-500">chevron_right</span></button>
         </div>
       </div>
       <div className="grid grid-cols-7 gap-0 text-center text-[10px] text-gray-400 mb-1">
         {(lang === "fr" ? ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]).map(d => <div key={d} className="py-1 font-medium">{d}</div>)}
       </div>
-      <div className="grid grid-cols-7 gap-0 text-center text-[12px]">
+      <div className="grid grid-cols-7 gap-0 text-center text-xs">
         {days.map((day, i) => (
           <div key={i} className={`py-1.5 rounded-full relative cursor-pointer ${
             day === today && isCurrentMonth ? "bg-[#7c3aed] text-white font-bold" :
@@ -202,13 +202,13 @@ export default function CoachSessions() {
                         {session.status === "confirmed" && session.meetingUrl && (
                           <a href={session.meetingUrl} target="_blank" rel="noopener noreferrer"
                             className="text-[11px] text-gray-400 hover:text-[#7c3aed] flex items-center gap-0.5">
-                            <span className="material-icons text-[14px]">videocam</span> Join
+                            <span className="material-icons text-sm">videocam</span> Join
                           </a>
                         )}
                         {session.status === "confirmed" && (
                           <button onClick={() => completeMutation.mutate({ sessionId: session.id })}
                             className="text-[11px] text-gray-400 hover:text-green-600 flex items-center gap-0.5">
-                            <span className="material-icons text-[14px]">check_circle</span>
+                            <span className="material-icons text-sm">check_circle</span>
                             {lang === "fr" ? "Terminer" : "Complete"}
                           </button>
                         )}

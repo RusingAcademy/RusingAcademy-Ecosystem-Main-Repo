@@ -264,7 +264,7 @@ export default function Reports() {
         {/* Header */}
         <div className="flex items-center gap-2 mb-2">
           <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
-            <span className="material-icons text-[20px]">navigate_before</span>
+            <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
             Reports & Analytics
@@ -286,7 +286,7 @@ export default function Reports() {
                   : "text-gray-500 hover:text-gray-700"
                 }`}
             >
-              <span className="material-icons text-[18px]">{tab.icon}</span>
+              <span className="material-icons text-lg">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
@@ -304,7 +304,7 @@ export default function Reports() {
                 { label: "Day Streak", value: `${gamification.streak}d`, icon: "local_fire_department", color: "#ef4444" },
               ].map((s) => (
                 <div key={s.label} className="glass-card rounded-xl p-4 text-center">
-                  <span className="material-icons text-[28px] mb-2" style={{ color: s.color }}>{s.icon}</span>
+                  <span className="material-icons text-[1.75rem] mb-2" style={{ color: s.color }}>{s.icon}</span>
                   <p className="text-2xl font-bold text-gray-900">{s.value}</p>
                   <p className="text-xs text-gray-500 mt-1">{s.label}</p>
                 </div>
@@ -314,7 +314,7 @@ export default function Reports() {
             {/* XP Over Time */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">show_chart</span>
+                <span className="material-icons text-[#008090] text-lg">show_chart</span>
                 XP Earned Over Time
               </h3>
               <LineChart data={xpData} color="#008090" label="Last 12 weeks" />
@@ -323,7 +323,7 @@ export default function Reports() {
             {/* Quiz Scores */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#6366f1] text-[18px]">quiz</span>
+                <span className="material-icons text-[#6366f1] text-lg">quiz</span>
                 Recent Quiz Scores
               </h3>
               <BarChart data={quizScores} labels={["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8"]} color="#6366f1" />
@@ -341,7 +341,7 @@ export default function Reports() {
           <div className="space-y-6">
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">route</span>
+                <span className="material-icons text-[#008090] text-lg">route</span>
                 Path Completion Progress
               </h3>
               <div className="space-y-4">
@@ -371,7 +371,7 @@ export default function Reports() {
             {/* Lessons per Path Bar Chart */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#f59e0b] text-[18px]">bar_chart</span>
+                <span className="material-icons text-[#f59e0b] text-lg">bar_chart</span>
                 Lessons Completed per Path
               </h3>
               <BarChart
@@ -384,7 +384,7 @@ export default function Reports() {
             {/* Milestones */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#10b981] text-[18px]">emoji_events</span>
+                <span className="material-icons text-[#10b981] text-lg">emoji_events</span>
                 Milestones
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -404,11 +404,11 @@ export default function Reports() {
                       m.done ? "bg-[rgba(0,128,144,0.08)] border border-[rgba(0,128,144,0.2)]" : "bg-gray-50 border border-gray-100 opacity-50"
                     }`}
                   >
-                    <span className={`material-icons text-[24px] mb-1 ${m.done ? "text-[#008090]" : "text-gray-300"}`}>
+                    <span className={`material-icons text-2xl mb-1 ${m.done ? "text-[#008090]" : "text-gray-300"}`}>
                       {m.icon}
                     </span>
                     <p className={`text-[10px] font-medium ${m.done ? "text-gray-700" : "text-gray-400"}`}>{m.name}</p>
-                    {m.done && <span className="material-icons text-[12px] text-[#10b981]">check_circle</span>}
+                    {m.done && <span className="material-icons text-xs text-[#10b981]">check_circle</span>}
                   </div>
                 ))}
               </div>
@@ -451,7 +451,7 @@ export default function Reports() {
             {/* Radar Chart */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">radar</span>
+                <span className="material-icons text-[#008090] text-lg">radar</span>
                 Skills Breakdown
               </h3>
               <RadarChart skills={sleSkills} />
@@ -493,7 +493,7 @@ export default function Reports() {
             {/* Activity Heatmap */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[18px]">calendar_today</span>
+                <span className="material-icons text-[#008090] text-lg">calendar_today</span>
                 Activity Heatmap (Last 12 Weeks)
               </h3>
               <ActivityHeatmap data={activityData} weeks={12} />
@@ -509,7 +509,7 @@ export default function Reports() {
             {/* Weekly Summary */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#f59e0b] text-[18px]">insights</span>
+                <span className="material-icons text-[#f59e0b] text-lg">insights</span>
                 Weekly Activity Summary
               </h3>
               <div className="grid grid-cols-7 gap-2">
@@ -537,7 +537,7 @@ export default function Reports() {
             {/* Recent Activity Log */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#6366f1] text-[18px]">history</span>
+                <span className="material-icons text-[#6366f1] text-lg">history</span>
                 Recent Activity
               </h3>
               <div className="space-y-3">
@@ -549,7 +549,7 @@ export default function Reports() {
                   { action: "Completed Oral Practice", type: "oral", time: "2 days ago", xp: "+15 XP" },
                 ].map((activity, i) => (
                   <div key={i} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0">
-                    <span className={`material-icons text-[18px] ${
+                    <span className={`material-icons text-lg ${
                       activity.type === "streak" ? "text-[#ef4444]" :
                       activity.type === "quiz" ? "text-[#6366f1]" :
                       "text-[#008090]"

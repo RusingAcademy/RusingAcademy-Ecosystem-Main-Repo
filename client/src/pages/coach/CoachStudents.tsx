@@ -149,7 +149,7 @@ export default function CoachStudents() {
 
                   {student.email && (
                     <div className="flex items-center gap-1 text-[11px] text-gray-400">
-                      <span className="material-icons text-[14px]">email</span>
+                      <span className="material-icons text-sm">email</span>
                       <span className="truncate">{student.email}</span>
                     </div>
                   )}
