@@ -99,7 +99,7 @@ async function startServer() {
       const stripeStart = Date.now();
       if (process.env.STRIPE_SECRET_KEY) {
         const Stripe = (await import("stripe")).default;
-        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2025-12-15.clover" as any });
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
         await stripe.balance.retrieve();
         checks.stripe = { status: "ok", latencyMs: Date.now() - stripeStart };
       } else {
@@ -111,8 +111,10 @@ async function startServer() {
 
     // 3. Memory usage
     const mem = process.memoryUsage();
+    const heapUsedMB = mem.heapUsed / 1024 / 1024;
+    const rssMB = mem.rss / 1024 / 1024;
     checks.memory = {
-      status: mem.heapUsed / mem.heapTotal < 0.9 ? "ok" : "warning",
+      status: rssMB > 450 ? "critical" : rssMB > 300 ? "warning" : "ok",
       latencyMs: 0,
     };
 
