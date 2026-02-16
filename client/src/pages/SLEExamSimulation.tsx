@@ -210,14 +210,14 @@ const coachData = {
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
     lang: "fr" as Language,
     specialty: "Français oral (FLS)",
-    flag: "🇫🇷",
+    flag: "🇨🇦",
   },
   PRECIOSA: {
     name: "Coach Preciosa",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
     lang: "en" as Language,
     specialty: "Oral English (ESL)",
-    flag: "🇬🇧",
+    flag: "🇨🇦",
   },
 };
 

@@ -232,8 +232,8 @@ export default function ConversationPractice() {
   };
 
   const coachOptions = [
-    { key: "STEVEN", name: "Coach Steven", specialty: isEn ? "French SLE Coach" : "Coach SLE français", emoji: "🇫🇷" },
-    { key: "PRECIOSA", name: "Coach Preciosa", specialty: isEn ? "English SLE Coach" : "Coach SLE anglais", emoji: "🇬🇧" },
+    { key: "STEVEN", name: "Coach Steven", specialty: isEn ? "French SLE Coach" : "Coach SLE français", emoji: "🇨🇦" },
+    { key: "PRECIOSA", name: "Coach Preciosa", specialty: isEn ? "English SLE Coach" : "Coach SLE anglais", emoji: "🇨🇦" },
   ];
 
   const skillOptions = [

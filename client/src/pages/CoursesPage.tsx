@@ -557,7 +557,7 @@ export default function CoursesPage() {
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <span className="text-base">🇫🇷</span>
+                  <span className="text-base">🇨🇦</span>
                   {ui.fslTab}
                 </button>
                 <button
@@ -568,7 +568,7 @@ export default function CoursesPage() {
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <span className="text-base">🇬🇧</span>
+                  <span className="text-base">🇨🇦</span>
                   {ui.eslTab}
                 </button>
               </div>

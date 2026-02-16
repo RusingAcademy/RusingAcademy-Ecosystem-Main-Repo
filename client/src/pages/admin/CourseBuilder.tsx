@@ -1943,8 +1943,8 @@ export default function CourseBuilder() {
               <SelectTrigger className="w-40"><SelectValue placeholder="All Languages" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Languages</SelectItem>
-                <SelectItem value="french">🇫🇷 FSL (French)</SelectItem>
-                <SelectItem value="english">🇬🇧 ESL (English)</SelectItem>
+                <SelectItem value="french">🇨🇦 FSL (French)</SelectItem>
+                <SelectItem value="english">🇨🇦 ESL (English)</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -2021,7 +2021,7 @@ export default function CourseBuilder() {
                 <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{course.description || "No description"}</p>
                 <div className="flex items-center gap-3 text-xs text-muted-foreground">
                   <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${course.targetLanguage === 'english' ? 'bg-blue-100 text-blue-700' : 'bg-indigo-100 text-indigo-700'}`}>
-                    {course.targetLanguage === 'english' ? '🇬🇧 ESL' : '🇫🇷 FSL'}
+                    {course.targetLanguage === 'english' ? '🇨🇦 ESL' : '🇨🇦 FSL'}
                   </span>
                   <span className="flex items-center gap-1"><Layers className="h-3 w-3" /> {course.moduleCount ?? 0}</span>
                   <span className="flex items-center gap-1"><FileText className="h-3 w-3" /> {course.lessonCount ?? 0}</span>

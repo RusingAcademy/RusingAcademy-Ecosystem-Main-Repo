@@ -15,14 +15,14 @@ const coaches: Coach[] = [
     id: "steven",
     name: "Coach Steven",
     specialty: "Oral French (FSL)",
-    specialtyIcon: "🇫🇷",
+    specialtyIcon: "🇨🇦",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp"
   },
   {
     id: "preciosa",
     name: "Coach Preciosa",
     specialty: "Oral English (ESL)",
-    specialtyIcon: "🇬🇧",
+    specialtyIcon: "🇨🇦",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp"
   }
 ];

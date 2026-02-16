@@ -1037,7 +1037,7 @@ export default function RusingAcademyLanding() {
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <span className="text-lg">&#x1F1EB;&#x1F1F7;</span>
+                  <span className="text-lg">&#x1F1E8;&#x1F1E6;</span>
                   French (FSL/FLS)
                 </button>
                 <button
@@ -1048,7 +1048,7 @@ export default function RusingAcademyLanding() {
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <span className="text-lg">&#x1F1EC;&#x1F1E7;</span>
+                  <span className="text-lg">&#x1F1E8;&#x1F1E6;</span>
                   English (ESL/ALS)
                 </button>
               </div>
