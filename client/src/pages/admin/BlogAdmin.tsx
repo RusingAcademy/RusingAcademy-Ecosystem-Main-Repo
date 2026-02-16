@@ -64,7 +64,7 @@ export default function BlogAdmin() {
               <Card key={post.id} className="hover:shadow-sm transition-shadow">
                 <CardContent className="p-4 flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    {post.featuredImageUrl ? <img src={post.featuredImageUrl} className="w-16 h-12 rounded object-cover" /> : <div className="w-16 h-12 rounded bg-blue-100 flex items-center justify-center"><FileText className="h-6 w-6 text-blue-600" /></div>}
+                    {post.featuredImageUrl ? <img src={post.featuredImageUrl} className="w-16 h-12 rounded object-cover" alt="" /> : <div className="w-16 h-12 rounded bg-blue-100 flex items-center justify-center"><FileText className="h-6 w-6 text-blue-600" /></div>}
                     <div>
                       <p className="font-medium">{post.title}</p>
                       <div className="flex items-center gap-2 mt-1">
