@@ -143,6 +143,7 @@ import { classroomRouter } from "./routers/classroom";
 import { notebookRouter } from "./routers/notebook";
 import { studyPlannerRouter } from "./routers/studyPlanner";
 import { discussionsRouter } from "./routers/discussions";
+import { privacyRouter } from "./routers/privacy";
 import { dictationRouter } from "./routers/dictation";
 import { peerReviewRouter } from "./routers/peerReview";
 import { bookmarksRouter } from "./routers/bookmarks";
@@ -9137,6 +9138,7 @@ export const appRouter = router({
   adminPayouts: adminPayoutsRouter,
   courseAdmin: courseAdminRouter,
   contentVersions: contentVersionsRouter,
+  privacy: privacyRouter,
   analytics: analyticsRouter,
   advancedAnalytics: advancedAnalyticsRouter,
   certificate: certificateRouter,
