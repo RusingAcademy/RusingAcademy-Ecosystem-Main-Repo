@@ -115,7 +115,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
-              className="bg-transparent text-sm outline-none w-full placeholder:text-muted-foreground/60 font-medium"
+              className="bg-transparent text-sm outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 w-full placeholder:text-muted-foreground/60 font-medium"
             />
             {searchQuery && (
               <button

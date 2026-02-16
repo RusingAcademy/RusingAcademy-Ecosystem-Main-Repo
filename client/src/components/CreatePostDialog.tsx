@@ -355,7 +355,7 @@ export default function CreatePostDialog({
                 placeholder="Share your thoughts, knowledge, or questions with the community..."
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="w-full min-h-[200px] text-sm text-foreground placeholder:text-muted-foreground/50 bg-transparent outline-none resize-none leading-relaxed"
+                className="w-full min-h-[200px] text-sm text-foreground placeholder:text-muted-foreground/50 bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 resize-none leading-relaxed"
               />
 
               {/* GIF Preview */}

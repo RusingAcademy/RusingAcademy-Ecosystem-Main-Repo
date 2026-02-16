@@ -186,7 +186,7 @@ export default function GifPicker({ isOpen, onClose, onSelect }: GifPickerProps)
                 placeholder="Search GIFs..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="bg-transparent text-sm outline-none w-full placeholder:text-muted-foreground/60"
+                className="bg-transparent text-sm outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 w-full placeholder:text-muted-foreground/60"
               />
               {query && (
                 <button

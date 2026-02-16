@@ -62,7 +62,7 @@ export default function SearchResultsPage() {
             value={query}
             onChange={(e) => handleSearch(e.target.value)}
             placeholder="Search courses, posts, events, members..."
-            className="bg-transparent text-sm outline-none w-full placeholder:text-muted-foreground"
+            className="bg-transparent text-sm outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 w-full placeholder:text-muted-foreground"
             autoFocus
           />
         </div>

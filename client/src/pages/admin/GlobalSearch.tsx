@@ -131,7 +131,7 @@ export default function GlobalSearchBar() {
                 ref={inputRef}
                 type="text"
                 placeholder="Search users, courses, pages, templates..."
-                className="flex-1 text-sm outline-none bg-transparent"
+                className="flex-1 text-sm outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 bg-transparent"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 autoFocus

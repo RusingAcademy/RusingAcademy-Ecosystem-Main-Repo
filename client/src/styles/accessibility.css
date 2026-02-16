@@ -440,3 +440,25 @@ html.transitioning *::after {
               border-color 0.3s ease, 
               color 0.2s ease !important;
 }
+
+/* ============================================
+   GLOBAL FOCUS-VISIBLE RING (Wave 9)
+   ============================================
+   Ensures all interactive elements that use
+   outline-none still show a visible focus ring
+   for keyboard users (WCAG 2.4.7)
+   ============================================ */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-teal-500, #14b8a6);
+  outline-offset: 2px;
+}
+
+/* Override for elements that already have custom focus styles */
+:where(.focus-ring-success, .focus-ring-warning, .focus-ring-danger, .focus-ring-info):focus-visible {
+  outline: none;
+}
+
+/* Ensure dark mode has visible focus ring */
+.dark :where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline-color: var(--color-teal-400, #2dd4bf);
+}
