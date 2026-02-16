@@ -3,20 +3,22 @@ import fs from "fs";
 import { type Server } from "http";
 import { nanoid } from "nanoid";
 import path from "path";
-import { createServer as createViteServer } from "vite";
-import viteConfig from "../../vite.config";
 
+// setupVite uses dynamic imports for 'vite' and 'vite.config' so they are NOT
+// bundled by esbuild --packages=external in production builds.
 export async function setupVite(app: Express, server: Server) {
-  const serverOptions = {
-    middlewareMode: true,
-    hmr: { server },
-    allowedHosts: true as const,
-  };
+  const viteModule = await import("vite");
+  const createViteServer = viteModule.createServer;
 
+  // Let Vite read vite.config.ts directly from disk instead of importing it,
+  // which would pull vite + all its plugins into the esbuild server bundle.
   const vite = await createViteServer({
-    ...viteConfig,
-    configFile: false,
-    server: serverOptions,
+    configFile: path.resolve(import.meta.dirname, "../../vite.config.ts"),
+    server: {
+      middlewareMode: true,
+      hmr: { server },
+      allowedHosts: true as const,
+    },
     appType: "custom",
   });
 
