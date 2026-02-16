@@ -2,7 +2,7 @@
  * Executive Summary Router — CEO Dashboard (Sprint I1)
  * Provides high-level platform metrics for the ExecutiveSummary admin page
  */
-import { router, protectedProcedure } from "../trpc";
+import { router, protectedProcedure } from "../_core/trpc";
 import { db } from "../db";
 import { sql } from "drizzle-orm";
 
