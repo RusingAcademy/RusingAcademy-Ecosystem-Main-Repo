@@ -42,7 +42,6 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
 import { FREE_ACCESS_MODE } from "@shared/const";
 
@@ -397,8 +396,7 @@ export default function PathDetail() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-50">
-        <EcosystemHeaderGold />
-        <div className="container py-16 px-4">
+<div className="container py-16 px-4">
           <div className="animate-pulse space-y-8">
             <div className="h-64 bg-slate-200 rounded-xl" />
             <div className="h-8 bg-slate-200 rounded w-1/2" />
@@ -413,8 +411,7 @@ export default function PathDetail() {
   if (!displayPath) {
     return (
       <div className="min-h-screen bg-slate-50">
-        <EcosystemHeaderGold />
-        <div className="container py-16 px-4 text-center">
+<div className="container py-16 px-4 text-center">
           <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-black mb-2">
             {t ? "Parcours non trouvé" : "Path Not Found"}
@@ -441,9 +438,7 @@ export default function PathDetail() {
         canonical={`/paths/${slug}`}
         type="product"
       />
-      <EcosystemHeaderGold />
-      
-      {/* Hero Section */}
+{/* Hero Section */}
       <section className={`relative py-16 md:py-24 overflow-hidden ${displayPath.bgColor || "bg-amber-50"}`}>
         {/* Banner Image Background */}
         {(displayPath.bannerUrl || displayPath.thumbnailUrl) && (

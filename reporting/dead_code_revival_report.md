@@ -1,4 +1,4 @@
-# Dead Code Revival Report — RusingÂcademy Ecosystem
+# Dead Code Revival Report — RusingAcademy Ecosystem
 
 **Author:** Manus AI  
 **Date:** February 12, 2026  

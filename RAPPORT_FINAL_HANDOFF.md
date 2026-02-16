@@ -12,7 +12,7 @@
 
 ### 1.1 Objectifs demandés
 1. Construire un écosystème EdTech premium pour fonctionnaires canadiens
-2. Créer 3 branches principales: RusingÂcademy (LMS), Lingueefy (Coaching IA), Barholex Media (Consulting)
+2. Créer 3 branches principales: RusingAcademy (LMS), Lingueefy (Coaching IA), Barholex Media (Consulting)
 3. Implémenter un système de coaching avec marketplace et onboarding
 4. Intégrer les paiements Stripe
 5. Respecter le "Golden Standard" design system
@@ -21,7 +21,7 @@
 | Fonctionnalité | Statut | Notes |
 |----------------|--------|-------|
 | Hub principal avec 3 branches | ✅ Complet | Navigation fluide entre les 3 piliers |
-| RusingÂcademy Landing | ✅ Complet | Hero, Path Series™, Bundles, Témoignages |
+| RusingAcademy Landing | ✅ Complet | Hero, Path Series™, Bundles, Témoignages |
 | Lingueefy Landing | ✅ Complet | Hero, Plans Maison ($597-$1997), Marketplace |
 | Barholex Media Landing | ✅ Complet | B2B, Services, Forfaits, Portfolio |
 | Page /courses | ✅ Complet | 6 cours Path Series™ affichés |
@@ -126,7 +126,7 @@ Procédures ajoutées:
 |---------|--------|
 | Couleur primaire Hub | Navy #1E3A8A |
 | Couleur Lingueefy | Teal #0EA5A4 |
-| Couleur RusingÂcademy | Gold #F7941D |
+| Couleur RusingAcademy | Gold #F7941D |
 | CTA primaire | Orange #F97316 |
 | Font principale | Inter (Google Fonts) |
 | Border radius | 0.5rem (cards), 0.375rem (buttons) |
@@ -329,7 +329,7 @@ pnpm dev
 
 #### Pages à tester
 - [ ] `/` - Hub principal avec 3 branches
-- [ ] `/rusingacademy` - Landing RusingÂcademy
+- [ ] `/rusingacademy` - Landing RusingAcademy
 - [ ] `/lingueefy` - Landing Lingueefy
 - [ ] `/barholex-media` - Landing Barholex Media
 - [ ] `/courses` - Liste des 6 cours Path Series™
@@ -464,7 +464,7 @@ https://www.linkedin.com/in/steven-barholere-1a17b8a6/
 ### Routes internes du projet
 ```
 /                       # Hub principal
-/rusingacademy          # Landing RusingÂcademy
+/rusingacademy          # Landing RusingAcademy
 /lingueefy              # Landing Lingueefy (Home.tsx)
 /barholex-media         # Landing Barholex Media
 /courses                # Liste des cours
@@ -542,7 +542,7 @@ ecosystemhub-preview/
 
 ## 11. CONCLUSION
 
-Le projet **EcosystemHub Preview** est un écosystème EdTech complet pour fonctionnaires canadiens, composé de 3 branches principales (RusingÂcademy, Lingueefy, Barholex Media). L'architecture est moderne (React 19, tRPC, Drizzle, Stripe) et le design respecte le "Golden Standard" avec une expérience premium cohérente.
+Le projet **EcosystemHub Preview** est un écosystème EdTech complet pour fonctionnaires canadiens, composé de 3 branches principales (RusingAcademy, Lingueefy, Barholex Media). L'architecture est moderne (React 19, tRPC, Drizzle, Stripe) et le design respecte le "Golden Standard" avec une expérience premium cohérente.
 
 **Points forts:**
 - Navigation fluide entre les 3 piliers

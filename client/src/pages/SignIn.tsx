@@ -19,7 +19,7 @@ export default function SignIn() {
             Welcome Back
           </h1>
           <p className="text-black">
-            Sign in to your RusingÂcademy account
+            Sign in to your RusingAcademy account
           </p>
         </div>
 

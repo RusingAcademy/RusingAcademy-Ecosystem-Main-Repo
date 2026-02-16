@@ -10,7 +10,7 @@
 
 ## 1. Executive Summary
 
-Phase C implements a complete user invitation workflow for the RusingÂcademy EcosystemHub. Administrators can now invite users by email with a specific role, track invitation status, resend or revoke invitations, and invited users can accept invitations through a dedicated registration page. The system includes email notifications, Argon2id password hashing, automatic session creation, and comprehensive error handling.
+Phase C implements a complete user invitation workflow for the RusingAcademy EcosystemHub. Administrators can now invite users by email with a specific role, track invitation status, resend or revoke invitations, and invited users can accept invitations through a dedicated registration page. The system includes email notifications, Argon2id password hashing, automatic session creation, and comprehensive error handling.
 
 ---
 
@@ -22,7 +22,7 @@ Phase C implements a complete user invitation workflow for the RusingÂcademy Ec
 | tRPC invitations router | COMPLETE | 6 procedures (create, list, resend, revoke, verifyToken, accept) |
 | InviteUserModal component | COMPLETE | 2 tabs (New Invitation + History), integrated into UsersRoles |
 | AcceptInvitation page | COMPLETE | `/invite/:token` route, 5 error states, registration form |
-| Invitation email template | COMPLETE | RusingÂcademy branded, 7-day expiry notice |
+| Invitation email template | COMPLETE | RusingAcademy branded, 7-day expiry notice |
 | Vitest tests | COMPLETE | 41/41 passing (12 test suites) |
 
 ---
@@ -100,7 +100,7 @@ Phase C implements a complete user invitation workflow for the RusingÂcademy Ec
 - **Error states:** 4 distinct error cards (invalid_token, already_accepted, revoked, expired) with appropriate icons and messages
 - **Registration form:** Pre-filled email (read-only), name input, password input with visibility toggle, password requirements display
 - **Success flow:** Creates account → auto-login → redirect to dashboard
-- **Design:** RusingÂcademy branded, centered card layout, responsive
+- **Design:** RusingAcademy branded, centered card layout, responsive
 
 ---
 

@@ -1,5 +1,5 @@
 // ============================================================
-// RusingÂcademy Learning Portal — Complete Course Data
+// RusingAcademy Learning Portal — Complete Course Data
 // ESL (English as a Second Language) + FSL (French as a Second Language)
 // RusingAcademy — Barholex Media Inc.
 // ============================================================

@@ -3,7 +3,7 @@
  *
  * Server-side helper for interacting with the Bunny Stream API.
  * Handles video creation, upload (direct + TUS), listing, deletion,
- * and metadata retrieval for the RusingÂcademy video library.
+ * and metadata retrieval for the RusingAcademy video library.
  */
 
 import crypto from "crypto";

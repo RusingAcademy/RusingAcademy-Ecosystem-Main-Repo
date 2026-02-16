@@ -1,4 +1,4 @@
-# RusingÂcademy Ecosystem — 30-Task Execution Plan
+# RusingAcademy Ecosystem — 30-Task Execution Plan
 
 **Date:** 7 février 2026  
 **Base:** Checkpoint `05f22e63` (Phase 3b validated)  

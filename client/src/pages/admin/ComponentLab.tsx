@@ -206,7 +206,7 @@ export default function ComponentLab() {
                       <div className="text-xl font-bold text-slate-900">
                         <TypewriterText
                           text="Master French 3–4× faster"
-                          highlightText="with RusingÂcademy."
+                          highlightText="with RusingAcademy."
                           highlightClassName="text-[#E07B39]"
                           speed={60}
                           delay={500}
@@ -307,7 +307,7 @@ export default function ComponentLab() {
                   </p>
                   <div className="grid grid-cols-3 gap-3">
                     {[
-                      { name: "RusingÂcademy", color: "#E07B39", desc: "Formation B2B/B2G" },
+                      { name: "RusingAcademy", color: "#E07B39", desc: "Formation B2B/B2G" },
                       { name: "Lingueefy", color: "#145A5B", desc: "Coaching personnalisé" },
                       { name: "Barholex Media", color: "#1E3A5F", desc: "EdTech & Contenu" },
                     ].map((brand) => (

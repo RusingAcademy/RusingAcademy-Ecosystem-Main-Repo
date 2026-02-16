@@ -25,12 +25,12 @@
 |---|---|---|
 | Page loads without errors | No console errors, full render | ✅ PASS |
 | Header displays institutional title | "Rusinga International Consulting Ltd." | ✅ PASS |
-| Ecosystem sub-header shows 3 pillars | RusingÂcademy, Lingueefy, Barholex Media | ✅ PASS |
+| Ecosystem sub-header shows 3 pillars | RusingAcademy, Lingueefy, Barholex Media | ✅ PASS |
 | Hero section renders | "CHOOSE YOUR PATH" glassmorphism panel + Steven's photo | ✅ PASS |
 | CTA buttons present | "Explore Ecosystem" + "Book a Diagnostic" | ✅ PASS |
 | SLE AI Companion widget | Visible in bottom-right | ✅ PASS |
 | Push notification prompt | "Stay Updated" prompt | ✅ PASS |
-| PWA install banner | "Install RusingÂcademy" | ✅ PASS |
+| PWA install banner | "Install RusingAcademy" | ✅ PASS |
 | YouTube Shorts carousel | 10 video cards with play buttons | ✅ PASS |
 | Testimonials section | 4 testimonials with LinkedIn links | ✅ PASS |
 | FAQ accordion | 5 questions expandable | ✅ PASS |
@@ -41,7 +41,7 @@
 | Route | Expected | Result |
 |---|---|---|
 | `/` | Hub page | ✅ PASS |
-| `/rusingacademy` | RusingÂcademy landing | ✅ PASS (lazy loaded) |
+| `/rusingacademy` | RusingAcademy landing | ✅ PASS (lazy loaded) |
 | `/lingueefy` | Lingueefy landing | ✅ PASS (lazy loaded) |
 | `/barholex` | Barholex Media landing | ✅ PASS (lazy loaded) |
 | `/admin` | Admin dashboard | ✅ PASS (lazy loaded) |

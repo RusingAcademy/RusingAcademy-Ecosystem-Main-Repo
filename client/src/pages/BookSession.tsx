@@ -38,7 +38,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import Footer from "@/components/Footer";
 
 
@@ -271,8 +270,7 @@ export default function BookSession() {
   if (authLoading || plansLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
-        <EcosystemHeaderGold />
-        <main className="container py-8">
+<main className="container py-8">
           <div className="flex items-center justify-center h-64">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
@@ -286,8 +284,7 @@ export default function BookSession() {
   if (!activePlan) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
-        <EcosystemHeaderGold />
-        <main className="container py-8">
+<main className="container py-8">
           <Link href="/app/my-courses">
             <Button variant="ghost" className="mb-6">
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -313,9 +310,7 @@ export default function BookSession() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
-      <EcosystemHeaderGold />
-      
-      <main className="container py-8">
+<main className="container py-8">
         {/* Back Button */}
         <Link href="/app/my-courses">
           <Button variant="ghost" className="mb-6">

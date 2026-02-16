@@ -1,5 +1,5 @@
 /**
- * AI Assistant — RusingÂcademy Learning Portal
+ * AI Assistant — RusingAcademy Learning Portal
  * Bilingual AI Language Coach with chat interface and adaptive recommendations
  * Design: Clean white light theme, accessible
  */

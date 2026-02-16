@@ -12,7 +12,7 @@
 ### Section "Le Problème" ✅
 - Titre: "Traditional Language Training Wasn't Built for Your Reality"
 - Tableau comparatif:
-  - Traditional Method vs RusingÂcademy Method
+  - Traditional Method vs RusingAcademy Method
   - Pace: 12-24 months vs 4-12 weeks to Level C
   - Flexibility: Fixed schedules vs Your schedule, your pace
   - Approach: Generic curriculum vs SLE-focused, personalized paths

@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Calendar Page
+ * RusingAcademy Learning Portal - Calendar Page
  * Design: Full month calendar view with category filters
  * Categories: Tutoring Sessions, Events, Deadlines, Holidays
  */

@@ -671,7 +671,7 @@ describe("OnboardingWorkflow Frontend", () => {
   it("should have email templates section with active/draft status", () => {
     const content = fs.readFileSync(filePath, "utf-8");
     expect(content).toContain("Onboarding Email Templates");
-    expect(content).toContain("Welcome to RusingÂcademy!");
+    expect(content).toContain("Welcome to RusingAcademy!");
     expect(content).toContain("active");
     expect(content).toContain("draft");
   });

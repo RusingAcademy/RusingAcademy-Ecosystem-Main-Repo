@@ -149,9 +149,9 @@
 
 ## Amélioration Premium Écosystème (22 janvier 2026)
 
-### RusingÂcademy (Page B - L'École)
+### RusingAcademy (Page B - L'École)
 - [x] Améliorer Hero avec focus sur "Crash Courses" intensifs pour fonctionnaires
-- [x] Ajouter section "Le Problème" avec tableau comparatif (Méthode Traditionnelle vs RusingÂcademy)
+- [x] Ajouter section "Le Problème" avec tableau comparatif (Méthode Traditionnelle vs RusingAcademy)
 - [x] Améliorer section Path Series™ avec onglets interactifs pour les 6 Paths
 - [x] Ajouter section "Les Bundles" (Fast Track to BBB, Fast Track to CCC, Bilingual Excellence)
 - [x] Améliorer preuve sociale avec profils cibles et témoignages
@@ -221,11 +221,11 @@
 - [x] Section 1: The Cost of Inaction - paragraphe fusionné sous le titre
 - [x] Section 2: A Complete Ecosystem for Your Success - paragraphe fusionné sous le titre
 - [x] Section 3: Our 3-Step Method - paragraphe fusionné sous le titre
-- [x] Section 4: The RusingÂcademy Solution - paragraphe fusionné sous le titre
+- [x] Section 4: The RusingAcademy Solution - paragraphe fusionné sous le titre
 - [x] Section 5: Who benefits most from this program? - paragraphe fusionné sous le titre
 - [x] Section 6: Trusted by public servants - paragraphe fusionné sous le titre
 - [x] Section 7: Meet the Founder - paragraphe fusionné sous le titre
-- [x] Section 8: Why Choose RusingÂcademy? - paragraphe fusionné sous le titre
+- [x] Section 8: Why Choose RusingAcademy? - paragraphe fusionné sous le titre
 - [x] Section 9: Meet our experts - paragraphe fusionné sous le titre
 - [x] Section 10: Take learning beyond the session - paragraphe fusionné sous le titre
 - [x] Section 11: Frequently Asked Questions - paragraphe fusionné sous le titre
@@ -694,8 +694,8 @@
 - [x] Valider le modal vidéo avec lecture avec son
 
 
-## Redesign Page RusingÂcademy (24 janvier 2026)
-- [ ] Analyser la structure actuelle de la page RusingÂcademy
+## Redesign Page RusingAcademy (24 janvier 2026)
+- [ ] Analyser la structure actuelle de la page RusingAcademy
 - [ ] Appliquer une hiérarchie forte: Titre → Lead → Contenu → CTA
 - [ ] Utiliser des cartes, espacement, rythme et layering subtil
 - [ ] Maintenir une haute crédibilité pour les fonctionnaires canadiens
@@ -706,15 +706,15 @@
 - [ ] Valider le design final
 
 
-## Redesign Premium Page RusingÂcademy (24 janvier 2026)
-- [x] Appliquer le framework de design premium à la page RusingÂcademy
+## Redesign Premium Page RusingAcademy (24 janvier 2026)
+- [x] Appliquer le framework de design premium à la page RusingAcademy
 - [x] Intégrer les thumbnails de cours de manière élégante (path_a1 à path_c2)
 - [x] Améliorer la hiérarchie visuelle (Titre → Lead → Contenu → CTA)
 - [x] Ajouter des effets glassmorphism et animations subtiles
 - [x] Valider le rendu professionnel et institutionnel
 - [x] Intégrer l'image hero_bilingual_excellence.jpg dans le Hero
 - [x] Intégrer l'image success_transformation.jpg dans les témoignages
-- [x] Créer la section comparaison Traditional vs RusingÂcademy Method
+- [x] Créer la section comparaison Traditional vs RusingAcademy Method
 - [x] Créer la section Path Series avec onglets interactifs
 - [x] Créer la section Bundles avec 3 forfaits premium
 - [x] Créer la section Learning Solutions
@@ -1620,7 +1620,7 @@ Combinations validées WCAG AA:
 
 ## Sprint 0 - Synchronisation Preview/Production (28 Jan 2026)
 - [x] Corriger les couleurs des cartes de marques (orange, teal, beige)
-- [x] Ajouter barre de sous-navigation pour RusingÂcademy (Courses, For Business, For Government, Our Team, Enroll Now)
+- [x] Ajouter barre de sous-navigation pour RusingAcademy (Courses, For Business, For Government, Our Team, Enroll Now)
 - [x] Ajouter lien "Our Curriculum" au sous-header RusingAcademy
 - [x] Corriger les liens For Business, For Government, Our Team pour qu'ils fonctionnent
 - [x] Remettre les cartes de marques en blanc (annuler les couleurs orange, teal, beige)
@@ -3264,7 +3264,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Améliorer le design de la page Contact avec fond blanc élégant
 - [x] Ajouter le badge "Trusted by 2,500+ Canadian public servants"
 - [x] Ajouter les 3 features (24-hour response, Bilingual support, Dedicated account managers)
-- [x] Améliorer le formulaire avec sélection de marque (Ecosystem Hub, RusingÂcademy, Lingueefy, Barholex Media)
+- [x] Améliorer le formulaire avec sélection de marque (Ecosystem Hub, RusingAcademy, Lingueefy, Barholex Media)
 - [x] Ajouter les informations de contact (email, téléphone, heures d'ouverture, emplacement)
 - [x] Ajouter les Quick Links (FAQ, Become a Coach, Enterprise Solutions)
 - [x] Ajouter la section "Based in Ottawa, Serving Canada"
@@ -4398,7 +4398,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Frontend: catégorisation (Hero, CTA, Testimonials, Features, Course Promo, Gov. Training, Team, Pricing, FAQ, Newsletter, Contact, Gallery)
 - [x] Frontend: templates éditables après insertion (contenu JSON complet copié)
 - [x] Frontend: support bilingue FR/EN dans les templates (badges EN, FR, EN+FR)
-- [x] Seed templates par défaut pour RusingÂcademy / Lingueefy / Barholex (20+ templates)
+- [x] Seed templates par défaut pour RusingAcademy / Lingueefy / Barholex (20+ templates)
 - [x] Vitest tests pour Template Marketplace (35 tests passing)
 
 ### Section Animation Presets (priorité esthétique)

@@ -3,7 +3,7 @@ const log = createLogger("services-diagnosticMonitoringService");
 
 /**
  * Diagnostic Quiz Monitoring Service
- * RusingÂcademy Learning Ecosystem
+ * RusingAcademy Learning Ecosystem
  * 
  * Real-time monitoring for the Diagnostic Quiz funnel to detect
  * PDF generation failures and track conversion metrics.

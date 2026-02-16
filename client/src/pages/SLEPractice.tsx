@@ -152,7 +152,7 @@ export default function SLEPractice() {
         {/* Back Link */}
         <Link href="/rusingacademy" className="inline-flex items-center text-[#0F3D3E] hover:underline mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          {isEn ? "Back to RusingÂcademy" : "Retour à RusingÂcademy"}
+          {isEn ? "Back to RusingAcademy" : "Retour à RusingAcademy"}
         </Link>
         
         {/* Hero Section */}

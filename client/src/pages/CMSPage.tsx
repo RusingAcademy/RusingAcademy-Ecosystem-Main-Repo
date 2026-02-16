@@ -447,7 +447,7 @@ export default function CMSPage() {
           <meta property="og:description" content={seoData.ogDescription || seoData.metaDescription || ""} />
           <meta property="og:url" content={pageUrl} />
           {seoData.ogImage && <meta property="og:image" content={seoData.ogImage} />}
-          <meta property="og:site_name" content="RusingÂcademy" />
+          <meta property="og:site_name" content="RusingAcademy" />
           <meta property="og:locale" content="en_CA" />
           <meta property="og:locale:alternate" content="fr_CA" />
 

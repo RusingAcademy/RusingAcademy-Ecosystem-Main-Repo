@@ -1,6 +1,6 @@
 # AUDIO_RESTORE_REPORT.md
 
-## TTS Audio Asset Audit — RusingÂcademy Ecosystem
+## TTS Audio Asset Audit — RusingAcademy Ecosystem
 
 **Date:** 2026-02-14  
 **Auditor:** Lead Release Engineer  

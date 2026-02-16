@@ -1,4 +1,4 @@
-# RusingÂcademy EcosystemHub — Railway Migration Guide
+# RusingAcademy EcosystemHub — Railway Migration Guide
 
 **Version:** 1.0  
 **Date:** February 13, 2026  
@@ -154,7 +154,7 @@ SMTP_PORT=587
 SMTP_USER=apikey
 SMTP_PASS=<your-sendgrid-api-key>
 SMTP_FROM=noreply@rusingacademy.ca
-SMTP_FROM_NAME=RusingÂcademy
+SMTP_FROM_NAME=RusingAcademy
 SMTP_SECURE=false
 
 # ─── Bunny CDN Storage ──────────────────────────────────────
@@ -181,7 +181,7 @@ STEVEN_VOICE_ID=moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84
 CALENDLY_API_KEY=<your-calendly-api-key>
 
 # ─── App Branding ───────────────────────────────────────────
-VITE_APP_TITLE=RusingÂcademy
+VITE_APP_TITLE=RusingAcademy
 VITE_APP_URL=https://app.rusingacademy.ca
 VITE_APP_LOGO=/logo.svg
 

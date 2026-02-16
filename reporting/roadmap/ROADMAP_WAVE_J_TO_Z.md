@@ -1,4 +1,4 @@
-# RusingÂcademy Ecosystem — Master Roadmap: Waves J → Z
+# RusingAcademy Ecosystem — Master Roadmap: Waves J → Z
 
 **Author**: Manus AI — Chief Ecosystem Orchestrator & Principal Architect
 **Date**: February 15, 2026
@@ -8,7 +8,7 @@
 
 ## 1. Executive Summary
 
-This roadmap defines the complete execution plan for Waves J through Z of the RusingÂcademy Learning Ecosystem. It encompasses approximately **75 sprints** organized across **12 waves**, each aligned to a strategic priority tier (P0–P5). The plan is designed for continuous, autonomous execution with zero regressions, premium quality, and full backward compatibility.
+This roadmap defines the complete execution plan for Waves J through Z of the RusingAcademy Learning Ecosystem. It encompasses approximately **75 sprints** organized across **12 waves**, each aligned to a strategic priority tier (P0–P5). The plan is designed for continuous, autonomous execution with zero regressions, premium quality, and full backward compatibility.
 
 The ecosystem currently stands at **334 pages**, **119 router files**, **163 schema tables**, and only **3 unmatched frontend-to-backend routers** remaining. The foundation is solid; these waves will elevate the platform from functional to world-class.
 
@@ -44,7 +44,7 @@ Wave J ensures the platform can accept payments, enroll learners, and operate re
 
 ### Wave K — Content at Scale (P1)
 
-Wave K builds the content creation and publishing pipeline that enables RusingÂcademy to deliver courses at scale.
+Wave K builds the content creation and publishing pipeline that enables RusingAcademy to deliver courses at scale.
 
 | Sprint | Title | Scope | Definition of Done |
 |:------:|:------|:------|:-------------------|

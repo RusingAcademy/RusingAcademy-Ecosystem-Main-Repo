@@ -124,7 +124,7 @@ export default function CoachOnboardingWizard() {
     <div className="min-h-screen bg-white py-8 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Devenir Coach RusingÂcademy</h1>
+          <h1 className="text-3xl font-bold text-slate-900 mb-2">Devenir Coach RusingAcademy</h1>
           <Progress value={progress} className="h-2" />
           <p className="text-sm text-slate-600 mt-2">Étape {currentStep} sur {STEPS.length}</p>
         </div>
@@ -177,7 +177,7 @@ export default function CoachOnboardingWizard() {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Checkbox checked={formData.acceptedTerms} onCheckedChange={(c) => updateFormData("acceptedTerms", c)} />
-                  <Label>J'accepte les Termes et Conditions de RusingÂcademy</Label>
+                  <Label>J'accepte les Termes et Conditions de RusingAcademy</Label>
                 </div>
                 <div className="flex items-start gap-3">
                   <Checkbox checked={formData.acceptedCommission} onCheckedChange={(c) => updateFormData("acceptedCommission", c)} />

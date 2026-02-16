@@ -1,5 +1,5 @@
 /**
- * Weekly Challenges — RusingÂcademy Learning Portal
+ * Weekly Challenges — RusingAcademy Learning Portal
  * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
 import DashboardLayout from "@/components/DashboardLayout";

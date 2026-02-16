@@ -1445,11 +1445,9 @@ export default function LingueefyLanding() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {c.services.items.map((service, index) => {
               const colorClasses = {
-                teal: "from-teal-500 to-teal-600 bg-teal-50 text-teal-600",
-                amber: "from-[#C65A1E] to-[#A84A15] bg-amber-50 text-[#C65A1E]600",
-                copper: "from-[#C65A1E] to-[#E06B2D] bg-[#FFF1E8] text-[#C65A1E]",
-                // @ts-expect-error - TS1117: auto-suppressed during TS cleanup
                 teal: "from-[#0F3D3E] to-[#145A5B] bg-[#E7F2F2] text-[#0F3D3E]",
+                amber: "from-[#C65A1E] to-[#A84A15] bg-amber-50 text-[#C65A1E]",
+                copper: "from-[#C65A1E] to-[#E06B2D] bg-[#FFF1E8] text-[#C65A1E]",
               };
               const colors = colorClasses[service.color as keyof typeof colorClasses];
               
