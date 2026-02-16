@@ -151,3 +151,60 @@
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* ============================================
+   HIGH-CONTRAST DASHBOARD UTILITIES (Wave 13)
+   ============================================ */
+
+:root {
+  --admin-text-primary: #111827;
+  --admin-text-secondary: #4B5563;
+  --admin-table-hover-bg: #F3F4F6;
+}
+
+.dark {
+  --admin-text-primary: #F9FAFB;
+  --admin-text-secondary: #D1D5DB;
+  --admin-table-hover-bg: #374151;
+}
+
+.dashboard-stat {
+  background: var(--admin-card-bg);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.dashboard-stat:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.dashboard-metric {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--admin-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.dashboard-metric-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--admin-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+}
+
+.status-dot-active { background-color: var(--semantic-success, #059669); }
+.status-dot-inactive { background-color: var(--semantic-neutral, #64748B); }
+.status-dot-warning { background-color: var(--semantic-warning, #D97706); }
+.status-dot-danger { background-color: var(--semantic-danger, #DC2626); }

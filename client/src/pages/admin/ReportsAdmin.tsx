@@ -17,10 +17,10 @@ export default function ReportsAdmin() {
 
   const reportTypes = [
     { name: "Revenue Report", icon: DollarSign, desc: "MRR, ARR, churn, LTV breakdown", color: "#22c55e" },
-    { name: "User Growth", icon: Users, desc: "Signups, activations, retention", color: "#3b82f6" },
+    { name: "User Growth", icon: Users, desc: "Signups, activations, retention", color: "var(--color-blue-500, #3b82f6)" },
     { name: "Course Performance", icon: BookOpen, desc: "Enrollments, completions, ratings", color: "#a855f7" },
-    { name: "Marketing Funnel", icon: TrendingUp, desc: "Conversion rates by channel", color: "#f59e0b" },
-    { name: "Coaching Analytics", icon: Calendar, desc: "Sessions, satisfaction, utilization", color: "#ef4444" },
+    { name: "Marketing Funnel", icon: TrendingUp, desc: "Conversion rates by channel", color: "var(--semantic-warning, #f59e0b)" },
+    { name: "Coaching Analytics", icon: Calendar, desc: "Sessions, satisfaction, utilization", color: "var(--semantic-danger, #ef4444)" },
     { name: "Content Engagement", icon: FileText, desc: "Views, time-on-page, downloads", color: "#06b6d4" },
   ];
 

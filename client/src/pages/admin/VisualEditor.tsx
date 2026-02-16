@@ -112,7 +112,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
     subtitle: "",
     content: { html: "<p>Discover our comprehensive bilingual training programs designed for Canadian professionals.</p><p>Découvrez nos programmes de formation bilingue complets conçus pour les professionnels canadiens.</p>", alignment: "left" },
     backgroundColor: "#ffffff",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 48,
     paddingBottom: 48,
   },
@@ -130,7 +130,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
       ],
     },
     backgroundColor: "#f8fafc",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 64,
     paddingBottom: 64,
   },
@@ -145,7 +145,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
       ],
     },
     backgroundColor: "#ffffff",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 64,
     paddingBottom: 64,
   },
@@ -169,7 +169,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
       ],
     },
     backgroundColor: "#f8fafc",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 64,
     paddingBottom: 64,
   },
@@ -184,7 +184,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
       ],
     },
     backgroundColor: "#ffffff",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 64,
     paddingBottom: 64,
   },
@@ -215,7 +215,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
       ],
     },
     backgroundColor: "#ffffff",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 64,
     paddingBottom: 64,
   },
@@ -224,7 +224,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
     subtitle: "We'd love to hear from you | Nous aimerions avoir de vos nouvelles",
     content: { email: "contact@rusingacademy.ca", phone: "", address: "" },
     backgroundColor: "#f8fafc",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 64,
     paddingBottom: 64,
   },
@@ -242,7 +242,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
     subtitle: "",
     content: { images: [], layout: "grid", columns: 3 },
     backgroundColor: "#ffffff",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 48,
     paddingBottom: 48,
   },
@@ -260,7 +260,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
     subtitle: "",
     content: { html: "<div style='padding: 2rem; text-align: center;'><p>Custom HTML content here</p></div>" },
     backgroundColor: "#ffffff",
-    textColor: "#1a1a2e",
+    textColor: "var(--brand-obsidian, #1a1a2e)",
     paddingTop: 0,
     paddingBottom: 0,
   },
@@ -359,7 +359,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
     : (section.content || {});
   const sectionStyle: React.CSSProperties = {
     backgroundColor: section.backgroundColor || "#ffffff",
-    color: section.textColor || "#1a1a1a",
+    color: section.textColor || "var(--brand-obsidian, #1a1a1a)",
     paddingTop: `${section.paddingTop ?? 48}px`,
     paddingBottom: `${section.paddingBottom ?? 48}px`,
     cursor: "pointer",
@@ -604,7 +604,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
     subtitle: section.subtitle || "",
     content: typeof section.content === "string" ? (() => { try { return JSON.parse(section.content); } catch { return {}; } })() : (section.content || {}),
     backgroundColor: section.backgroundColor || "#ffffff",
-    textColor: section.textColor || "#1a1a2e",
+    textColor: section.textColor || "var(--brand-obsidian, #1a1a2e)",
     paddingTop: section.paddingTop ?? 48,
     paddingBottom: section.paddingBottom ?? 48,
   });
@@ -616,7 +616,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
       subtitle: section.subtitle || "",
       content: typeof section.content === "string" ? (() => { try { return JSON.parse(section.content); } catch { return {}; } })() : (section.content || {}),
       backgroundColor: section.backgroundColor || "#ffffff",
-      textColor: section.textColor || "#1a1a2e",
+      textColor: section.textColor || "var(--brand-obsidian, #1a1a2e)",
       paddingTop: section.paddingTop ?? 48,
       paddingBottom: section.paddingBottom ?? 48,
     });
@@ -1005,7 +1005,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
                   <div className="space-y-1.5">
                     <Label className="text-xs">Text</Label>
                     <div className="flex items-center gap-2">
-                      <input type="color" value={localData.textColor || "#1a1a2e"} onChange={(e) => setLocalData((d: any) => ({ ...d, textColor: e.target.value }))} className="w-8 h-8 rounded border cursor-pointer" />
+                      <input type="color" value={localData.textColor || "var(--brand-obsidian, #1a1a2e)"} onChange={(e) => setLocalData((d: any) => ({ ...d, textColor: e.target.value }))} className="w-8 h-8 rounded border cursor-pointer" />
                       <Input value={localData.textColor || ""} onChange={(e) => setLocalData((d: any) => ({ ...d, textColor: e.target.value }))} className="text-xs flex-1" />
                     </div>
                   </div>
@@ -1057,7 +1057,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
                 }}
                 currentStyles={{
                   backgroundColor: localData.backgroundColor || "#ffffff",
-                  textColor: localData.textColor || "#1a1a2e",
+                  textColor: localData.textColor || "var(--brand-obsidian, #1a1a2e)",
                   paddingTop: localData.paddingTop || 0,
                   paddingBottom: localData.paddingBottom || 0,
                 }}

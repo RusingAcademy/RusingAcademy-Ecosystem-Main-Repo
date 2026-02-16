@@ -113,10 +113,10 @@ export default function UsersRoles() {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "Total Users", value: stats.total, icon: Users, color: "#2563eb" },
-          { label: "Admins", value: stats.admins, icon: Shield, color: "#dc2626" },
-          { label: "Coaches", value: stats.coaches, icon: GraduationCap, color: "#7c3aed" },
-          { label: "Learners", value: stats.learners, icon: UserCheck, color: "#059669" },
+          { label: "Total Users", value: stats.total, icon: Users, color: "var(--color-blue-600, #2563eb)" },
+          { label: "Admins", value: stats.admins, icon: Shield, color: "var(--semantic-danger, #dc2626)" },
+          { label: "Coaches", value: stats.coaches, icon: GraduationCap, color: "var(--color-violet-600, #7c3aed)" },
+          { label: "Learners", value: stats.learners, icon: UserCheck, color: "var(--semantic-success, #059669)" },
         ].map((s) => (
           <Card key={s.label}>
             <CardContent className="p-4 flex items-center gap-3">
