@@ -14,6 +14,7 @@
 @import "./styles/admin-tokens.css";
 @import "./styles/forms.css";
 @import "./styles/micro-animations.css";
+@import "./styles/print.css";
 
 @custom-variant dark (&:is(.dark *));
 

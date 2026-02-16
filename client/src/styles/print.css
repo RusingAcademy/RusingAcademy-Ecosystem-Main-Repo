@@ -1,0 +1,60 @@
+/**
+ * Print Styles — Wave 20
+ * 
+ * Ensures clean, readable print output
+ * for all pages in the ecosystem.
+ */
+
+@media print {
+  /* Hide non-essential UI elements */
+  nav,
+  .notification-popup,
+  .install-banner,
+  .offline-indicator,
+  button[aria-label="Toggle theme"],
+  .chat-widget,
+  footer nav,
+  .scroll-to-top {
+    display: none !important;
+  }
+
+  /* Reset backgrounds for ink savings */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Ensure text is readable */
+  * {
+    color: black !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Preserve brand colors for headings */
+  h1, h2, h3 {
+    color: #0F3D3E !important;
+  }
+
+  /* Show URLs for links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666 !important;
+  }
+
+  /* Avoid page breaks inside cards */
+  .card,
+  .glass-card,
+  .card-elevated,
+  .card-premium {
+    break-inside: avoid;
+    border: 1px solid #ddd !important;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 2cm;
+  }
+}
