@@ -47,7 +47,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
   if (showExam) return <ExamSimulator level={selectedLevel} section={selectedSection} onComplete={() => { setShowExam(false); fetchExamHistory(); }} />;
 
   return (
-    <div className="p-6 bg-[#0D0D1A] min-h-screen">
+    <div className="p-6 bg-slate-950 min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Mode Préparation Examen</h1>
@@ -110,7 +110,7 @@ function ExamSimulator({ level, section, onComplete }: { level: string; section:
   };
 
   return (
-    <div className="fixed inset-0 bg-[#0D0D1A] z-50 flex flex-col">
+    <div className="fixed inset-0 bg-slate-950 z-50 flex flex-col">
       {/* Timer Header */}
       <div className="bg-black/50 p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">

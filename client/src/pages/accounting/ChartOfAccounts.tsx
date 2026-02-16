@@ -91,7 +91,7 @@ export default function ChartOfAccounts() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Chart of accounts</h1>
-        <Button className="bg-[#2CA01C] hover:bg-[#248a17]" onClick={() => { setShowCreate(true); setForm({ name: "", accountType: "", detailType: "", description: "", accountNumber: "" }); }}>
+        <Button className="bg-green-600 hover:bg-green-700" onClick={() => { setShowCreate(true); setForm({ name: "", accountType: "", detailType: "", description: "", accountNumber: "" }); }}>
           <Plus size={16} className="mr-1" /> New Account
         </Button>
       </div>
@@ -151,7 +151,7 @@ export default function ChartOfAccounts() {
                     className={`hover:bg-gray-50 cursor-pointer ${acc.isActive === false ? "opacity-50" : ""}`}
                     onClick={() => navigate(`/accounts/${acc.id}/register`)}
                   >
-                    <td className="text-[#0077C5] font-medium">
+                    <td className="text-sky-600 font-medium">
                       {acc.isSubAccount ? <span className="text-gray-300 mr-2">↳</span> : null}
                       {acc.name}
                       {acc.accountNumber ? <span className="text-gray-400 text-xs ml-2">#{acc.accountNumber}</span> : null}
@@ -249,7 +249,7 @@ export default function ChartOfAccounts() {
             <Button
               onClick={() => createMutation.mutate(form)}
               disabled={createMutation.isPending || !form.name || !form.accountType}
-              className="bg-[#2CA01C] hover:bg-[#248a17]"
+              className="bg-green-600 hover:bg-green-700"
             >
               {createMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : null}
               Create Account
@@ -301,7 +301,7 @@ export default function ChartOfAccounts() {
             <Button
               onClick={() => editAccount && updateMutation.mutate({ id: editAccount.id, name: form.name, accountType: form.accountType, detailType: form.detailType, description: form.description })}
               disabled={updateMutation.isPending}
-              className="bg-[#2CA01C] hover:bg-[#248a17]"
+              className="bg-green-600 hover:bg-green-700"
             >
               {updateMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : null}
               Save Changes

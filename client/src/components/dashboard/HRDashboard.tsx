@@ -144,7 +144,7 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
             </h1>
             <div className="flex items-center gap-3">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-300" />
                 <input
                   type="text"
                   placeholder="Search..."
@@ -219,7 +219,7 @@ function GetStartedSection({ organizationId, checklist }: { organizationId: numb
             }`}
           >
             <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-              step.completed ? "bg-green-100 text-green-600" : "bg-gray-100 text-[#67E8F9]"
+              step.completed ? "bg-green-100 text-green-600" : "bg-gray-100 text-cyan-300"
             }`}>
               {step.completed ? (
                 <CheckSquare className="w-5 h-5" />
@@ -426,7 +426,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
                 </td>
                 <td className="px-4 py-3">
                   <button className="p-1 hover:bg-gray-100 rounded">
-                    <MoreVertical className="w-4 h-4 text-[#67E8F9]" />
+                    <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>
               </tr>
@@ -597,7 +597,7 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
                 </td>
                 <td className="px-4 py-3">
                   <button className="p-1 hover:bg-gray-100 rounded">
-                    <MoreVertical className="w-4 h-4 text-[#67E8F9]" />
+                    <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>
               </tr>

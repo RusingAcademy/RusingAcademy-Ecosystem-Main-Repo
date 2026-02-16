@@ -390,7 +390,7 @@ export default function YouTubeVideos() {
                 ? 'Conseils rapides pour la préparation aux examens'
                 : 'Quick Tips for Exam Preparation'}
             </h2>
-            <p className="text-[#67E8F9] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-cyan-300 max-w-3xl mx-auto leading-relaxed">
               {language === 'fr'
                 ? 'Des conseils de 60 secondes de nos experts pour vous aider à réussir vos examens SLE/ELS.'
                 : '60-second tips from our experts to help you ace your SLE exams.'}
@@ -412,7 +412,7 @@ export default function YouTubeVideos() {
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     idx === currentShortIndex 
                       ? 'w-8 bg-red-500' 
-                      : 'bg-[#0a6969] hover:bg-white0'
+                      : 'bg-teal-800 hover:bg-white0'
                   }`}
                   aria-label={`Go to short ${idx + 1}`}
                 />
@@ -465,7 +465,7 @@ export default function YouTubeVideos() {
                 ? 'Vidéos pour la préparation aux examens GC'
                 : 'Illustrative YouTube Videos for GC Exam Preparation'}
             </h2>
-            <p className="text-[#67E8F9] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-cyan-300 max-w-3xl mx-auto leading-relaxed">
               {language === 'fr'
                 ? 'Explorez nos vidéos approfondies, podcasts et présentations de coachs pour une préparation complète.'
                 : 'Explore our in-depth videos, podcasts, and coach introductions for comprehensive exam preparation.'}

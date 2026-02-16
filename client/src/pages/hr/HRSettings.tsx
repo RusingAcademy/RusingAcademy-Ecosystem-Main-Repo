@@ -46,7 +46,7 @@ export default function HRSettings() {
         {/* Portal Preferences */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="material-icons text-[#2563eb]">tune</span>
+            <span className="material-icons text-blue-600">tune</span>
             {ui.portalPreferences}
           </h3>
           <div className="space-y-4">
@@ -55,7 +55,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.language}</p>
                 <p className="text-xs text-gray-500">{ui.languageSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]">
+              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-[#2563eb]/20 focus:border-blue-600">
                 <option value="en">English</option>
                 <option value="fr">Français</option>
               </select>
@@ -65,7 +65,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.timezone}</p>
                 <p className="text-xs text-gray-500">{ui.timezoneSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]">
+              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-[#2563eb]/20 focus:border-blue-600">
                 <option value="America/Toronto">Eastern Time (ET)</option>
                 <option value="America/Winnipeg">Central Time (CT)</option>
                 <option value="America/Edmonton">Mountain Time (MT)</option>
@@ -80,12 +80,12 @@ export default function HRSettings() {
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-              <span className="material-icons text-[#2563eb]">group</span>
+              <span className="material-icons text-blue-600">group</span>
               {ui.teamAccess}
             </h3>
             <button
               onClick={() => toast.info(isEn ? "Team invitation coming soon" : "Invitation d'équipe bientôt disponible")}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-[#2563eb] bg-[#2563eb]/10 rounded-lg hover:bg-[#2563eb]/20 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-600/10 rounded-lg hover:bg-blue-600/20 transition-colors"
             >
               <span className="material-icons text-sm">person_add</span>
               {ui.inviteMember}
@@ -101,7 +101,7 @@ export default function HRSettings() {
         {/* Integrations */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="material-icons text-[#2563eb]">extension</span>
+            <span className="material-icons text-blue-600">extension</span>
             {ui.integrations}
           </h3>
           <p className="text-sm text-gray-500 mb-4">{ui.integrationsSub}</p>
@@ -129,7 +129,7 @@ export default function HRSettings() {
         {/* Data Export */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
-            <span className="material-icons text-[#2563eb]">cloud_download</span>
+            <span className="material-icons text-blue-600">cloud_download</span>
             {ui.dataExport}
           </h3>
           <p className="text-sm text-gray-500 mb-4">{ui.dataExportSub}</p>

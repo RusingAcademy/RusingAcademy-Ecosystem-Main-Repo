@@ -18,9 +18,9 @@ export default function AuthGuard({ children, requiredRole }: AuthGuardProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fb]">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center">
-          <div className="w-10 h-10 border-3 border-[#0D7377] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-10 h-10 border-3 border-teal-700 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-sm text-gray-500">
             {lang === "fr" ? "Vérification de l'authentification..." : "Verifying authentication..."}
           </p>
@@ -36,7 +36,7 @@ export default function AuthGuard({ children, requiredRole }: AuthGuardProps) {
 
   if (requiredRole && user?.role !== requiredRole) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fb]">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center max-w-md p-8">
           <span className="material-icons text-5xl text-red-400 mb-4">block</span>
           <h1 className="text-xl font-bold text-gray-900 mb-2">

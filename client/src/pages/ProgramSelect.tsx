@@ -19,7 +19,7 @@ export default function ProgramSelect() {
         <div className="bg-white border border-gray-200 rounded-xl p-8 md:p-10 shadow-sm">
           <div className="flex items-center gap-3 mb-3">
             <img src={LOGO_URL} alt="RusingAcademy" className="w-10 h-10 rounded-lg" />
-            <span className="text-xs font-bold uppercase tracking-widest text-[#008090]">Learning Portal</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-700">Learning Portal</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
             Choose Your Program
@@ -90,7 +90,7 @@ export default function ProgramSelect() {
                         { label: "Activities", value: stats.activities },
                       ].map((s) => (
                         <div key={s.label} className="text-center p-2 rounded-lg bg-gray-50">
-                          <div className="text-lg font-bold text-[#008090]">{s.value}</div>
+                          <div className="text-lg font-bold text-teal-700">{s.value}</div>
                           <div className="text-[9px] text-gray-400 uppercase">{s.label}</div>
                         </div>
                       ))}
@@ -104,7 +104,7 @@ export default function ProgramSelect() {
                           </span>
                         ))}
                       </div>
-                      <div className="flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all duration-300 text-[#008090]">
+                      <div className="flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all duration-300 text-teal-700">
                         Explore
                         <span className="material-icons" style={{ fontSize: "18px" }}>arrow_forward</span>
                       </div>
@@ -118,8 +118,8 @@ export default function ProgramSelect() {
 
         {/* Info Banner */}
         <div className="bg-white border border-gray-200 rounded-2xl p-6 flex items-start gap-4 shadow-sm">
-          <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-[#008090]/5">
-            <span className="material-icons text-[#008090]">info</span>
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-teal-700/5">
+            <span className="material-icons text-teal-700">info</span>
           </div>
           <div>
             <h3 className="text-sm font-bold text-gray-900">About Our Programs</h3>

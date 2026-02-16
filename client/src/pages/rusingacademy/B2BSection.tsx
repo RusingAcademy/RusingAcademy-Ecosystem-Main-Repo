@@ -90,7 +90,7 @@ export default function B2BSection() {
             {t.title} <span className="text-cta">{t.highlight}</span>
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{t.subtitle}</p>
-          <Button size="lg" className="bg-cta hover:bg-[#A84A18]">
+          <Button size="lg" className="bg-cta hover:bg-cta">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto">
@@ -147,7 +147,7 @@ export default function B2BSection() {
                       </li>
                     ))}
                   </ul>
-                  <Button className={`w-full ${pkg.popular ? 'bg-cta hover:bg-[#A84A18]' : 'bg-foundation hover:bg-[#0a2a2b]'}`}>
+                  <Button className={`w-full ${pkg.popular ? 'bg-cta hover:bg-cta' : 'bg-foundation hover:bg-[#0a2a2b]'}`}>
                     {t.cta}
                   </Button>
                 </CardContent>
@@ -183,7 +183,7 @@ export default function B2BSection() {
         <div className="container mx-auto px-6 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">{t.ctaTitle}</h3>
           <p className="text-white/90 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>
-          <Button size="lg" className="bg-cta hover:bg-[#A84A18]">
+          <Button size="lg" className="bg-cta hover:bg-cta">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>
         </div>

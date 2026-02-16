@@ -950,7 +950,7 @@ export default function LingueefyLanding() {
             <div className="max-w-3xl mx-auto mb-10">
               <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#67E8F9]" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-cyan-300" />
                   <Input 
                     placeholder={c.hero.searchPlaceholder}
                     className="pl-12 h-14 border-0 bg-transparent text-lg focus-visible:ring-0"
@@ -1011,7 +1011,7 @@ export default function LingueefyLanding() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
             {["ESDC", "IRCC", "CRA", "DND", "PSPC", "GAC"].map((dept, i) => (
-              <div key={i} className="text-[#67E8F9] font-semibold text-lg">{dept}</div>
+              <div key={i} className="text-cyan-300 font-semibold text-lg">{dept}</div>
             ))}
           </div>
         </div>
@@ -1022,7 +1022,7 @@ export default function LingueefyLanding() {
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 right-10 w-40 h-40 border border-teal-200 rounded-full" />
-          <div className="absolute bottom-20 left-10 w-60 h-60 border border-[#FFE4D6] rounded-full" />
+          <div className="absolute bottom-20 left-10 w-60 h-60 border border-orange-100 rounded-full" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -1110,7 +1110,7 @@ export default function LingueefyLanding() {
               </div>
               
               {/* Coaching Plans Option */}
-              <div className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 rounded-3xl p-8 border-2 border-[#FFE4D6] hover:border-[#D97B3D] transition-all duration-300 hover:shadow-xl group relative">
+              <div className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 rounded-3xl p-8 border-2 border-orange-100 hover:border-cta-2 transition-all duration-300 hover:shadow-xl group relative">
                 <div className="absolute -top-3 right-6">
                   <Badge className="bg-cta text-white border-0 px-4 py-1">Popular</Badge>
                 </div>
@@ -1172,7 +1172,7 @@ export default function LingueefyLanding() {
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-3 text-black text-sm">
-                          <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-[#67E8F9]'}`} />
+                          <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-cyan-300'}`} />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -1274,7 +1274,7 @@ export default function LingueefyLanding() {
                   },
                   amber: {
                     bg: 'from-[#FFF8F3] to-[#FFF0E6]/50',
-                    border: 'border-[#FFE4D6] hover:border-[#D97B3D]',
+                    border: 'border-orange-100 hover:border-cta-2',
                     badge: 'bg-cta',
                     icon: 'bg-amber-100 text-cta600',
                     check: 'text-cta500',

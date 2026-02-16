@@ -293,9 +293,9 @@ export default function BookSession() {
           </Link>
 
           <Card className="max-w-lg mx-auto text-center p-8">
-            <CreditCard className="h-16 w-16 mx-auto text-[#67E8F9] mb-4" />
+            <CreditCard className="h-16 w-16 mx-auto text-cyan-300 mb-4" />
             <h2 className="text-xl font-semibold text-black dark:text-white mb-2">{l.noPlan}</h2>
-            <p className="text-black dark:text-[#67E8F9] mb-6">{l.noPlanDesc}</p>
+            <p className="text-black dark:text-cyan-300 mb-6">{l.noPlanDesc}</p>
             <Link href="/ecosystem">
               <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                 {l.viewPlans}
@@ -322,7 +322,7 @@ export default function BookSession() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-black dark:text-white mb-2">{l.title}</h1>
-          <p className="text-black dark:text-[#67E8F9]">{l.subtitle}</p>
+          <p className="text-black dark:text-cyan-300">{l.subtitle}</p>
         </div>
 
         {/* Plan Info Card */}
@@ -334,7 +334,7 @@ export default function BookSession() {
               </div>
               <div>
                 <h3 className="font-semibold text-black dark:text-white">{activePlan.planName}</h3>
-                <p className="text-sm text-black dark:text-[#67E8F9]">
+                <p className="text-sm text-black dark:text-cyan-300">
                   {l.validUntil} {new Date(activePlan.expiresAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
                 </p>
               </div>
@@ -353,14 +353,14 @@ export default function BookSession() {
                 "w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all",
                 currentStep >= step 
                   ? "bg-gradient-to-r from-purple-500 to-violet-600 text-white" 
-                  : "bg-slate-200 dark:bg-[#0a6969] text-black"
+                  : "bg-slate-200 dark:bg-teal-800 text-black"
               )}>
                 {currentStep > step ? <Check className="h-5 w-5" /> : step}
               </div>
               {step < 3 && (
                 <div className={cn(
                   "w-16 h-1 mx-2 rounded-full transition-all",
-                  currentStep > step ? "bg-purple-500" : "bg-slate-200 dark:bg-[#0a6969]"
+                  currentStep > step ? "bg-purple-500" : "bg-slate-200 dark:bg-teal-800"
                 )} />
               )}
             </div>
@@ -375,7 +375,7 @@ export default function BookSession() {
             {/* Search and Filters */}
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#67E8F9]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-cyan-300" />
                 <Input
                   placeholder={l.searchCoaches}
                   value={searchQuery}
@@ -611,7 +611,7 @@ export default function BookSession() {
                 <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
                   <p className="text-sm text-purple-600 dark:text-purple-400">{l.planCredits}</p>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="text-black dark:text-[#67E8F9]">{l.afterBooking}</span>
+                    <span className="text-black dark:text-cyan-300">{l.afterBooking}</span>
                     <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
                       {activePlan.remainingSessions - 1} {l.sessionsRemaining}
                     </Badge>
@@ -662,7 +662,7 @@ function CoachCard({ coach, isSelected, onSelect, labels, language }: {
         "p-4 rounded-xl border-2 cursor-pointer transition-all",
         isSelected 
           ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20" 
-          : "border-slate-200 dark:border-[#0a6969] hover:border-purple-300 bg-white dark:bg-foundation"
+          : "border-slate-200 dark:border-teal-800 hover:border-purple-300 bg-white dark:bg-foundation"
       )}
     >
       <div className="flex items-start gap-4">
@@ -673,13 +673,13 @@ function CoachCard({ coach, isSelected, onSelect, labels, language }: {
         />
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-black dark:text-white truncate">{coach.name}</h3>
-          <p className="text-sm text-black dark:text-[#67E8F9] line-clamp-2">{coach.headline}</p>
+          <p className="text-sm text-black dark:text-cyan-300 line-clamp-2">{coach.headline}</p>
           
           <div className="flex items-center gap-3 mt-2">
             {coach.rating && (
               <div className="flex items-center gap-1 text-sm">
                 <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                <span className="text-black dark:text-[#67E8F9]">{coach.rating}</span>
+                <span className="text-black dark:text-cyan-300">{coach.rating}</span>
               </div>
             )}
             <Badge variant="outline" className="text-xs">

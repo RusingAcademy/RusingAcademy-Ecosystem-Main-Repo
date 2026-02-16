@@ -52,7 +52,7 @@ export default function Channels() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
       </div>
     );
   }

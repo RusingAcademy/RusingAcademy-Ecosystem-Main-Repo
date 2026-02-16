@@ -23,7 +23,7 @@ export function ApplicationResubmissionPrompt({
   const canResubmit = resubmissionCount < maxResubmissions;
 
   return (
-    <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] border border-[#FFE4D6] rounded-lg p-6 my-6">
+    <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] border border-orange-100 rounded-lg p-6 my-6">
       <div className="flex items-start gap-4">
         <AlertCircle className="text-amber-600 flex-shrink-0 mt-1" size={24} />
         <div className="flex-1">
@@ -38,7 +38,7 @@ export function ApplicationResubmissionPrompt({
           </p>
 
           {/* Rejection Reason Box */}
-          <div className="bg-white border border-[#FFE4D6] rounded-lg p-4 mb-4">
+          <div className="bg-white border border-orange-100 rounded-lg p-4 mb-4">
             <div className="flex items-start gap-3">
               <div className="text-amber-600 font-semibold">
                 {isEn ? "Feedback:" : "Commentaires :"}
@@ -101,7 +101,7 @@ export function ApplicationResubmissionPrompt({
 
           {/* Tips Section */}
           {showDetails && (
-            <div className="mt-4 p-4 bg-white border border-[#FFE4D6] rounded-lg">
+            <div className="mt-4 p-4 bg-white border border-orange-100 rounded-lg">
               <h4 className="font-semibold text-gray-900 mb-2">
                 {isEn ? "Tips for Improvement:" : "Conseils d'amélioration :"}
               </h4>

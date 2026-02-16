@@ -145,13 +145,13 @@ export function BadgeUnlockModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-gradient-to-b from-[#062b2b] to-[#041e1e] border-[#0a6969]">
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-gradient-to-b from-[#062b2b] to-[#041e1e] border-teal-800">
         {/* Close button */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 z-50 p-2 rounded-full bg-foundation/50 hover:bg-foundation-2/50 transition-colors"
         >
-          <X className="h-4 w-4 text-[#67E8F9]" />
+          <X className="h-4 w-4 text-cyan-300" />
         </button>
 
         {/* Confetti effect */}
@@ -177,7 +177,7 @@ export function BadgeUnlockModal({
           </motion.div>
 
           <motion.p
-            className="text-[#67E8F9] text-sm mb-8"
+            className="text-cyan-300 text-sm mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -211,7 +211,7 @@ export function BadgeUnlockModal({
 
           {/* Rarity badge */}
           <motion.div
-            className="mt-4 px-3 py-1 rounded-full bg-foundation/50 border border-[#0a6969]"
+            className="mt-4 px-3 py-1 rounded-full bg-foundation/50 border border-teal-800"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -228,7 +228,7 @@ export function BadgeUnlockModal({
           >
             <h3 className="text-xl font-bold text-white mb-2">{displayName}</h3>
             {displayDesc && (
-              <p className="text-[#67E8F9] text-sm max-w-xs">{displayDesc}</p>
+              <p className="text-cyan-300 text-sm max-w-xs">{displayDesc}</p>
             )}
           </motion.div>
 

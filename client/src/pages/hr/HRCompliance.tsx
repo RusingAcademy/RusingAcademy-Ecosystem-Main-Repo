@@ -91,7 +91,7 @@ export default function HRCompliance() {
           </div>
           <button
             onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#2563eb] text-white text-sm font-medium rounded-lg hover:bg-[#1d4ed8] transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
           >
             <span className="material-icons text-lg">download</span>
             {lang === "fr" ? "Exporter le rapport" : "Export Report"}
@@ -175,7 +175,7 @@ export default function HRCompliance() {
                         </div>
                       </td>
                       <td className="py-3 px-4 text-center">
-                        <span className="text-xs font-bold px-2 py-1 rounded-lg bg-[#2563eb]/10 text-[#2563eb]">{rec.targetResult ?? "—"}</span>
+                        <span className="text-xs font-bold px-2 py-1 rounded-lg bg-blue-600/10 text-blue-600">{rec.targetResult ?? "—"}</span>
                       </td>
                       <td className="py-3 px-4 text-center text-sm text-gray-700 font-mono">{rec.currentResult ?? "—"}</td>
                       <td className="py-3 px-4 text-xs text-gray-600">{rec.notes ?? "—"}</td>
@@ -193,15 +193,15 @@ export default function HRCompliance() {
 
         {/* Recommendations */}
         {allRecords.length > 0 && (highRisk > 0 || medRisk > 0) && (
-          <div className="mt-6 bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 rounded-xl border border-[#2563eb]/15 p-5">
+          <div className="mt-6 bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 rounded-xl border border-blue-600/15 p-5">
             <h2 className="text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span className="material-icons text-[#2563eb]">lightbulb</span>
+              <span className="material-icons text-blue-600">lightbulb</span>
               {lang === "fr" ? "Recommandations" : "Recommendations"}
             </h2>
             <div className="space-y-2">
               {highRisk > 0 && (
                 <div className="flex items-start gap-2 text-sm text-gray-700">
-                  <span className="text-[#2563eb] font-bold mt-0.5">1.</span>
+                  <span className="text-blue-600 font-bold mt-0.5">1.</span>
                   <span>
                     {lang === "fr"
                       ? `Inscrire les ${highRisk} participant(s) à risque élevé au programme intensif SLE Prep immédiatement.`
@@ -211,7 +211,7 @@ export default function HRCompliance() {
               )}
               {medRisk > 0 && (
                 <div className="flex items-start gap-2 text-sm text-gray-700">
-                  <span className="text-[#2563eb] font-bold mt-0.5">{highRisk > 0 ? "2" : "1"}.</span>
+                  <span className="text-blue-600 font-bold mt-0.5">{highRisk > 0 ? "2" : "1"}.</span>
                   <span>
                     {lang === "fr"
                       ? `Planifier des sessions supplémentaires pour les ${medRisk} participant(s) à risque moyen.`
@@ -220,7 +220,7 @@ export default function HRCompliance() {
                 </div>
               )}
               <div className="flex items-start gap-2 text-sm text-gray-700">
-                <span className="text-[#2563eb] font-bold mt-0.5">{(highRisk > 0 ? 1 : 0) + (medRisk > 0 ? 1 : 0) + 1}.</span>
+                <span className="text-blue-600 font-bold mt-0.5">{(highRisk > 0 ? 1 : 0) + (medRisk > 0 ? 1 : 0) + 1}.</span>
                 <span>
                   {lang === "fr"
                     ? "Considérer l'ajout d'une cohorte SLE Prep supplémentaire pour le trimestre prochain."

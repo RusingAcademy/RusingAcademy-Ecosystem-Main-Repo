@@ -72,7 +72,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
     return (
       <Card className={cn("animate-pulse", className)}>
         <CardHeader>
-          <div className="h-6 bg-slate-200 dark:bg-[#0a6969] rounded w-1/3" />
+          <div className="h-6 bg-slate-200 dark:bg-teal-800 rounded w-1/3" />
         </CardHeader>
         <CardContent className="space-y-4">
           {[1, 2, 3].map((i) => (
@@ -100,7 +100,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
             </div>
             <div>
               <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
+              <p className="text-sm text-black dark:text-cyan-300">{l.subtitle}</p>
             </div>
           </div>
           {challenges && challenges.length > 0 && (
@@ -114,7 +114,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
       
       <CardContent className="p-4 space-y-3">
         {!challenges || challenges.length === 0 ? (
-          <div className="text-center py-8 text-black dark:text-[#67E8F9]">
+          <div className="text-center py-8 text-black dark:text-cyan-300">
             <Trophy className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noChallenge}</p>
           </div>
@@ -132,8 +132,8 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                   isComplete && !isClaimed
                     ? "bg-emerald-50 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800"
                     : isClaimed
-                    ? "bg-slate-50 border-slate-200 dark:bg-foundation/50 dark:border-[#0a6969] opacity-75"
-                    : "bg-white border-slate-200 dark:bg-foundation dark:border-[#0a6969] hover:border-amber-300 dark:hover:border-amber-700"
+                    ? "bg-slate-50 border-slate-200 dark:bg-foundation/50 dark:border-teal-800 opacity-75"
+                    : "bg-white border-slate-200 dark:bg-foundation dark:border-teal-800 hover:border-amber-300 dark:hover:border-amber-700"
                 )}
               >
                 <div className="flex items-start gap-3">
@@ -141,7 +141,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     "p-2 rounded-lg",
                     isComplete 
                       ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400"
-                      : "bg-slate-100 text-black dark:bg-[#0a6969] dark:text-[#67E8F9]"
+                      : "bg-slate-100 text-black dark:bg-teal-800 dark:text-cyan-300"
                   )}>
                     {challengeIcons[challenge.type] || <Trophy className="h-5 w-5" />}
                   </div>
@@ -156,7 +156,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                       )}
                     </div>
                     
-                    <p className="text-sm text-black dark:text-[#67E8F9] mb-3 line-clamp-1">
+                    <p className="text-sm text-black dark:text-cyan-300 mb-3 line-clamp-1">
                       {language === "fr" && challenge.descriptionFr ? challenge.descriptionFr : challenge.description}
                     </p>
                     

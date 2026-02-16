@@ -260,7 +260,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] rounded-2xl p-8 border border-[#FFE4D6]/50">
+          <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] rounded-2xl p-8 border border-orange-100/50">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center flex-shrink-0">
                 <Zap className="w-6 h-6 text-white" />
@@ -851,7 +851,7 @@ function TestimonialsSection({ language }: { language: string }) {
                   <img
                     loading="lazy" src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-28 h-28 rounded-full object-cover object-top border-4 border-[#D97B3D] shadow-lg ring-4 ring-amber-100"
+                    className="w-28 h-28 rounded-full object-cover object-top border-4 border-cta-2 shadow-lg ring-4 ring-amber-100"
                   />
                 ) : (
                   <div className="w-28 h-28 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center border-4 border-slate-300 ring-4 ring-slate-100">
@@ -867,7 +867,7 @@ function TestimonialsSection({ language }: { language: string }) {
                   href={testimonial.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#0077B5] flex items-center justify-center hover:bg-[#006097] transition-colors shadow-sm"
+                  className="w-10 h-10 rounded-full bg-sky-700 flex items-center justify-center hover:bg-sky-800 transition-colors shadow-sm"
                   aria-label={`${testimonial.name}'s LinkedIn profile`}
                 >
                   <Linkedin className="w-5 h-5 text-white" />
@@ -1831,7 +1831,7 @@ function ProofGallerySection({ language }: { language: string }) {
             
             {/* Scroll Hint */}
             <div className="flex justify-center mt-4">
-              <div className="flex items-center gap-2 text-[#67E8F9] text-sm">
+              <div className="flex items-center gap-2 text-cyan-300 text-sm">
                 <ChevronRight className="w-4 h-4 animate-pulse" />
                 <span>{language === "en" ? "Scroll to explore more" : "Faites défiler pour explorer"}</span>
                 <ChevronRight className="w-4 h-4 animate-pulse" />
@@ -1892,7 +1892,7 @@ function ProofGallerySection({ language }: { language: string }) {
                   <h3 className="font-bold text-white text-base mb-1">
                     {language === "en" ? capsule.titleEn : capsule.titleFr}
                   </h3>
-                  <p className="text-[#67E8F9] text-sm line-clamp-2 mb-3">
+                  <p className="text-cyan-300 text-sm line-clamp-2 mb-3">
                     {language === "en" ? capsule.descEn : capsule.descFr}
                   </p>
                   

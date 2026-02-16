@@ -70,7 +70,7 @@ export function StreakTracker({
   };
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-obsidian p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-obsidian p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export function StreakTracker({
           </div>
           <div>
             <h3 className="font-semibold text-black dark:text-white">{l.title}</h3>
-            <p className="text-sm text-black dark:text-[#67E8F9]">{getStreakMessage()}</p>
+            <p className="text-sm text-black dark:text-cyan-300">{getStreakMessage()}</p>
           </div>
         </div>
       </div>
@@ -98,14 +98,14 @@ export function StreakTracker({
           <Flame className={cn("h-8 w-8", getFlameColor())} />
           <span className="text-5xl font-bold text-black dark:text-white">{currentStreak}</span>
         </div>
-        <p className="text-black dark:text-[#67E8F9]">
+        <p className="text-black dark:text-cyan-300">
           {currentStreak === 1 ? l.day : l.days}
         </p>
       </div>
 
       {/* Weekly Progress */}
       <div className="mb-6">
-        <p className="text-sm font-medium text-black dark:text-[#67E8F9] mb-3">{l.thisWeek}</p>
+        <p className="text-sm font-medium text-black dark:text-cyan-300 mb-3">{l.thisWeek}</p>
         <div className="flex justify-between gap-2">
           {weeklyProgress.map((completed, index) => (
             <div key={index} className="flex flex-col items-center gap-1">
@@ -120,12 +120,12 @@ export function StreakTracker({
                 {completed ? (
                   <Flame className="h-5 w-5 text-white" />
                 ) : (
-                  <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-[#0a6969]" />
+                  <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-teal-800" />
                 )}
               </div>
               <span className={cn(
                 "text-xs font-medium",
-                completed ? "text-amber-600 dark:text-amber-400" : "text-[#67E8F9]"
+                completed ? "text-amber-600 dark:text-amber-400" : "text-cyan-300"
               )}>
                 {l.weekDays[index]}
               </span>
@@ -139,7 +139,7 @@ export function StreakTracker({
         <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <Trophy className="h-4 w-4 text-amber-500" />
-            <span className="text-xs text-black dark:text-[#67E8F9]">{l.longestStreak}</span>
+            <span className="text-xs text-black dark:text-cyan-300">{l.longestStreak}</span>
           </div>
           <p className="text-xl font-bold text-black dark:text-white">
             {longestStreak} <span className="text-sm font-normal text-black">{l.days}</span>
@@ -150,7 +150,7 @@ export function StreakTracker({
           <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-blue-500" />
-              <span className="text-xs text-black dark:text-[#67E8F9]">{l.nextMilestone}</span>
+              <span className="text-xs text-black dark:text-cyan-300">{l.nextMilestone}</span>
             </div>
             <p className="text-xl font-bold text-black dark:text-white">
               {nextMilestone} <span className="text-sm font-normal text-black">{l.days}</span>

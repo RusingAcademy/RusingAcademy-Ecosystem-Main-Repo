@@ -98,7 +98,7 @@ export function BrandCard({
         </h3>
 
         {/* Description */}
-        <p className="text-[#67E8F9] text-sm leading-relaxed">
+        <p className="text-cyan-300 text-sm leading-relaxed">
           {description}
         </p>
 

@@ -135,7 +135,7 @@ export default function RecurringTransactions() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Recurring Transactions</h1>
-        <Button className="bg-[#2CA01C] hover:bg-[#248a17]" onClick={() => {
+        <Button className="bg-green-600 hover:bg-green-700" onClick={() => {
           setForm({
             templateName: "", transactionType: "", frequency: "", intervalCount: 1,
             startDate: new Date().toISOString().split("T")[0], endDate: "",
@@ -169,11 +169,11 @@ export default function RecurringTransactions() {
 
       {/* Tabs */}
       <div className="flex border-b border-gray-200 mb-4">
-        <button className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${activeTab === "templates" ? "border-[#2CA01C] text-[#2CA01C]" : "border-transparent text-gray-500 hover:text-gray-700"}`}
+        <button className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${activeTab === "templates" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => setActiveTab("templates")}>
           <RefreshCw size={14} className="inline mr-1.5" />Templates
         </button>
-        <button className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${activeTab === "log" ? "border-[#2CA01C] text-[#2CA01C]" : "border-transparent text-gray-500 hover:text-gray-700"}`}
+        <button className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${activeTab === "log" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => setActiveTab("log")}>
           <Clock size={14} className="inline mr-1.5" />Generation Log
         </button>
@@ -184,11 +184,11 @@ export default function RecurringTransactions() {
           {/* Summary Cards */}
           <div className="grid grid-cols-4 gap-4 mb-6">
             <div className="qb-card"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Total Templates</div><div className="text-2xl font-bold text-gray-800">{(recurring || []).length}</div></div>
-            <div className="qb-card"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Active</div><div className="text-2xl font-bold text-[#2CA01C]">{(recurring || []).filter((r: any) => r.isActive).length}</div></div>
+            <div className="qb-card"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Active</div><div className="text-2xl font-bold text-green-600">{(recurring || []).filter((r: any) => r.isActive).length}</div></div>
             <div className="qb-card"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Paused</div><div className="text-2xl font-bold text-gray-500">{(recurring || []).filter((r: any) => !r.isActive).length}</div></div>
             <div className="qb-card">
               <div className="text-xs font-bold text-gray-500 uppercase mb-1">Due This Week</div>
-              <div className="text-2xl font-bold text-[#0077C5]">
+              <div className="text-2xl font-bold text-sky-600">
                 {(recurring || []).filter((r: any) => {
                   if (!r.nextDate || !r.isActive) return false;
                   const next = new Date(r.nextDate);
@@ -335,7 +335,7 @@ export default function RecurringTransactions() {
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {log.generatedEntityId ? (
-                        <Link href={`/invoices/${log.generatedEntityId}`} className="text-[#0077C5] hover:underline flex items-center gap-1">
+                        <Link href={`/invoices/${log.generatedEntityId}`} className="text-sky-600 hover:underline flex items-center gap-1">
                           #{log.generatedEntityId} <ChevronRight size={12} />
                         </Link>
                       ) : "—"}
@@ -446,7 +446,7 @@ export default function RecurringTransactions() {
                       </div>
                     ))}
                   </div>
-                  <button className="text-sm text-[#0077C5] hover:underline mt-2" onClick={addLineItem}>+ Add line item</button>
+                  <button className="text-sm text-sky-600 hover:underline mt-2" onClick={addLineItem}>+ Add line item</button>
                   <div className="flex justify-end mt-2 text-sm font-semibold text-gray-700">Total: ${lineItemsTotal.toFixed(2)} {form.currency}</div>
                 </div>
                 <div>
@@ -461,7 +461,7 @@ export default function RecurringTransactions() {
             <Button variant="outline" onClick={() => setShowCreate(false)}>Cancel</Button>
             <Button onClick={handleCreate}
               disabled={createMutation.isPending || !form.templateName || !form.transactionType || !form.frequency}
-              className="bg-[#2CA01C] hover:bg-[#248a17]">
+              className="bg-green-600 hover:bg-green-700">
               {createMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : null}
               Create Template
             </Button>

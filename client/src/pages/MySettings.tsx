@@ -10,7 +10,7 @@ export default function MySettings() {
     <DashboardLayout>
       <div className="max-w-[900px]">
         <div className="flex items-center gap-2 mb-4">
-          <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+          <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
             <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>My Settings</h1>
@@ -63,7 +63,7 @@ export default function MySettings() {
 
           {/* Save Button */}
           <div className="mt-8 flex justify-end">
-            <button className="bg-[#008090] text-white text-sm font-medium py-2 px-8 rounded hover:bg-[#006d7a] transition-colors">
+            <button className="bg-teal-700 text-white text-sm font-medium py-2 px-8 rounded hover:bg-teal-800 transition-colors">
               Save
             </button>
           </div>

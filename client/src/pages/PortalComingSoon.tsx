@@ -206,7 +206,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
           {/* Back button */}
           <button
             onClick={() => setLocation("/")}
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#008090] hover:text-[#006d7a] transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-teal-700 hover:text-[#006d7a] transition-colors"
           >
             <span className="material-icons text-lg">arrow_back</span>
             {lang === "fr" ? "Retour au portail d'apprentissage" : "Back to Learning Portal"}

@@ -206,7 +206,7 @@ export default function BookingConfirmation() {
               </Card>
 
               {/* Email Not Received */}
-              <Card className="bg-amber-50 border-[#FFE4D6] mb-8">
+              <Card className="bg-amber-50 border-orange-100 mb-8">
                 <CardContent className="pt-6">
                   <p className="font-semibold text-amber-900 mb-2">{l.emailNotReceived}</p>
                   <p className="text-sm text-amber-800">{l.checkSpam}</p>

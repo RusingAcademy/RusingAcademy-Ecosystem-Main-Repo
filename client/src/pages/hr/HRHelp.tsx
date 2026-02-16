@@ -56,7 +56,7 @@ export default function HRHelp() {
         {/* FAQ */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="material-icons text-[#2563eb]">help_outline</span>
+            <span className="material-icons text-blue-600">help_outline</span>
             {ui.faq}
           </h3>
           <div className="space-y-2">
@@ -84,18 +84,18 @@ export default function HRHelp() {
         {/* Contact Support */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
-            <span className="material-icons text-[#2563eb]">support_agent</span>
+            <span className="material-icons text-blue-600">support_agent</span>
             {ui.contactSupport}
           </h3>
           <p className="text-sm text-gray-500 mb-4">{ui.contactSub}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a href="mailto:support@rusingacademy.com" className="flex items-center gap-3 p-4 rounded-lg border border-gray-100 hover:bg-[#2563eb]/5 hover:border-[#2563eb]/20 transition-all">
-              <div className="w-10 h-10 rounded-lg bg-[#2563eb]/10 flex items-center justify-center">
-                <span className="material-icons text-[#2563eb]">email</span>
+            <a href="mailto:support@rusingacademy.com" className="flex items-center gap-3 p-4 rounded-lg border border-gray-100 hover:bg-blue-600/5 hover:border-blue-600/20 transition-all">
+              <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
+                <span className="material-icons text-blue-600">email</span>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-900">{ui.email}</p>
-                <p className="text-xs text-[#2563eb]">support@rusingacademy.com</p>
+                <p className="text-xs text-blue-600">support@rusingacademy.com</p>
               </div>
             </a>
             <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-100">
@@ -113,7 +113,7 @@ export default function HRHelp() {
         {/* Resources */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="material-icons text-[#2563eb]">menu_book</span>
+            <span className="material-icons text-blue-600">menu_book</span>
             {ui.resources}
           </h3>
           <div className="space-y-3">
@@ -124,8 +124,8 @@ export default function HRHelp() {
             ].map((res, i) => (
               <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#2563eb]/10 flex items-center justify-center">
-                    <span className="material-icons text-[#2563eb]">{res.icon}</span>
+                  <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
+                    <span className="material-icons text-blue-600">{res.icon}</span>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">{res.label}</p>

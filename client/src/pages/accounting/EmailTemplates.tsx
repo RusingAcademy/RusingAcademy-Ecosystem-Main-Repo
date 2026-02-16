@@ -295,7 +295,7 @@ export default function EmailTemplates() {
                   <label className="text-sm font-medium text-gray-700">Email Body</label>
                   <div className="relative">
                     <button
-                      className="text-xs text-[#0077C5] hover:underline flex items-center gap-1"
+                      className="text-xs text-sky-600 hover:underline flex items-center gap-1"
                       onClick={() => setShowMergeFields(!showMergeFields)}
                     >
                       <Copy size={12} /> Insert merge field
@@ -308,7 +308,7 @@ export default function EmailTemplates() {
                             className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 flex items-center justify-between"
                             onClick={() => insertMergeField(mf.field)}
                           >
-                            <code className="text-xs text-[#0077C5] bg-blue-50 px-1 rounded">{mf.field}</code>
+                            <code className="text-xs text-sky-600 bg-blue-50 px-1 rounded">{mf.field}</code>
                             <span className="text-xs text-gray-400 ml-2">{mf.description}</span>
                           </button>
                         ))}
@@ -386,7 +386,7 @@ export default function EmailTemplates() {
       <div className="flex items-center gap-2 mb-4">
         <button
           className={`px-3 py-1 rounded-full text-xs font-medium border ${
-            typeFilter === "all" ? "bg-[#2CA01C] text-white border-[#2CA01C]" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"
+            typeFilter === "all" ? "bg-green-600 text-white border-green-600" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"
           }`}
           onClick={() => setTypeFilter("all")}
         >
@@ -396,7 +396,7 @@ export default function EmailTemplates() {
           <button
             key={t.value}
             className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 ${
-              typeFilter === t.value ? "bg-[#2CA01C] text-white border-[#2CA01C]" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"
+              typeFilter === t.value ? "bg-green-600 text-white border-green-600" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"
             }`}
             onClick={() => setTypeFilter(t.value)}
           >
@@ -450,7 +450,7 @@ export default function EmailTemplates() {
                       <div className="flex items-center gap-2">
                         <h4 className="font-medium text-gray-800">{template.name}</h4>
                         {template.isDefault && (
-                          <span className="text-[10px] font-bold text-[#2CA01C] bg-green-50 px-1.5 py-0.5 rounded">DEFAULT</span>
+                          <span className="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded">DEFAULT</span>
                         )}
                       </div>
                       <p className="text-sm text-gray-500 mt-0.5">{template.subject}</p>
@@ -488,7 +488,7 @@ export default function EmailTemplates() {
         <div className="grid grid-cols-2 gap-2">
           {MERGE_FIELDS.map(mf => (
             <div key={mf.field} className="flex items-center gap-2 text-sm">
-              <code className="text-xs text-[#0077C5] bg-blue-50 px-1.5 py-0.5 rounded font-mono">{mf.field}</code>
+              <code className="text-xs text-sky-600 bg-blue-50 px-1.5 py-0.5 rounded font-mono">{mf.field}</code>
               <span className="text-gray-500">{mf.description}</span>
             </div>
           ))}

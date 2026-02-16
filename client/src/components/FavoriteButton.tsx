@@ -82,7 +82,7 @@ export function FavoriteButton({
           "p-2 rounded-full transition-all duration-200",
           isFavorited 
             ? "bg-red-500/10 text-red-500 hover:bg-red-500/20" 
-            : "bg-white/80 text-[#67E8F9] hover:text-red-500 hover:bg-white",
+            : "bg-white/80 text-cyan-300 hover:text-red-500 hover:bg-white",
           isLoading && "opacity-50 cursor-not-allowed",
           className
         )}

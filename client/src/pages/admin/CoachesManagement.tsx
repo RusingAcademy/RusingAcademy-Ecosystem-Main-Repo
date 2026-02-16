@@ -179,12 +179,12 @@ export default function CoachesManagement() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
-                    (e.target as HTMLImageElement).parentElement!.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-lg font-semibold text-[#67E8F9]">${name.charAt(0).toUpperCase()}</span></div>`;
+                    (e.target as HTMLImageElement).parentElement!.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-lg font-semibold text-cyan-300">${name.charAt(0).toUpperCase()}</span></div>`;
                   }}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <User className="w-6 h-6 text-[#67E8F9]" />
+                  <User className="w-6 h-6 text-cyan-300" />
                 </div>
               )}
             </div>
@@ -440,7 +440,7 @@ export default function CoachesManagement() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <User className="w-10 h-10 text-[#67E8F9]" />
+                      <User className="w-10 h-10 text-cyan-300" />
                     </div>
                   )}
                 </div>

@@ -216,7 +216,7 @@ export default function VideoSession() {
   return (
     <div className="min-h-screen bg-obsidian">
       {/* Header */}
-      <header className="bg-foundation border-b border-[#0a6969] py-3 px-4">
+      <header className="bg-foundation border-b border-teal-800 py-3 px-4">
         <div className="container mx-auto flex items-center justify-between">
           <Button
             variant="ghost"

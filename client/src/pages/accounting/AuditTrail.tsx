@@ -218,7 +218,7 @@ export default function AuditTrail() {
             />
           </div>
           {hasFilters && (
-            <button className="text-sm text-[#0077C5] hover:underline" onClick={clearFilters}>
+            <button className="text-sm text-sky-600 hover:underline" onClick={clearFilters}>
               Clear all filters
             </button>
           )}

@@ -55,7 +55,7 @@ const RankBadge = ({ rank }: { rank: number }) => {
   }
   return (
     <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center">
-      <span className="text-sm font-bold text-black dark:text-[#67E8F9]">{rank}</span>
+      <span className="text-sm font-bold text-black dark:text-cyan-300">{rank}</span>
     </div>
   );
 };
@@ -63,7 +63,7 @@ const RankBadge = ({ rank }: { rank: number }) => {
 // Trend indicator
 const TrendIndicator = ({ trend }: { trend?: "up" | "down" | "same" }) => {
   if (!trend || trend === "same") {
-    return <Minus className="h-3 w-3 text-[#67E8F9]" />;
+    return <Minus className="h-3 w-3 text-cyan-300" />;
   }
   if (trend === "up") {
     return <TrendingUp className="h-3 w-3 text-emerald-500" />;
@@ -129,7 +129,7 @@ export function MiniLeaderboard({
             <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mx-auto mb-3">
               <Trophy className="h-6 w-6 text-amber-500" />
             </div>
-            <p className="text-sm text-black dark:text-[#67E8F9]">{l.noData}</p>
+            <p className="text-sm text-black dark:text-cyan-300">{l.noData}</p>
             <p className="text-xs text-black mt-1">{l.beFirst}</p>
           </motion.div>
         ) : (
@@ -171,7 +171,7 @@ export function MiniLeaderboard({
                         </span>
                       )}
                     </p>
-                    <p className="text-xs text-black dark:text-[#67E8F9]">
+                    <p className="text-xs text-black dark:text-cyan-300">
                       {l.level} {entry.level}
                     </p>
                   </div>

@@ -64,7 +64,7 @@ export default function HRCalendar() {
                 key={mode}
                 onClick={() => setViewMode(mode)}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                  viewMode === mode ? "bg-white text-[#2563eb] shadow-sm" : "text-gray-500 hover:text-gray-700"
+                  viewMode === mode ? "bg-white text-blue-600 shadow-sm" : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {ui[mode]}
@@ -103,12 +103,12 @@ export default function HRCalendar() {
               return (
                 <div
                   key={day}
-                  className={`p-2 min-h-[80px] border-b border-r border-gray-50 hover:bg-[#2563eb]/5 transition-colors cursor-pointer ${
-                    isToday ? "bg-[#2563eb]/5" : ""
+                  className={`p-2 min-h-[80px] border-b border-r border-gray-50 hover:bg-blue-600/5 transition-colors cursor-pointer ${
+                    isToday ? "bg-blue-600/5" : ""
                   }`}
                 >
                   <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-sm ${
-                    isToday ? "bg-[#2563eb] text-white font-bold" : "text-gray-700"
+                    isToday ? "bg-blue-600 text-white font-bold" : "text-gray-700"
                   }`}>
                     {day}
                   </span>
@@ -121,11 +121,11 @@ export default function HRCalendar() {
         {/* Legend */}
         <div className="flex flex-wrap gap-4 text-xs text-gray-500">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#2563eb]" />
+            <div className="w-3 h-3 rounded-full bg-blue-600" />
             {ui.upcomingSessions}
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#dc2626]" />
+            <div className="w-3 h-3 rounded-full bg-red-600" />
             {ui.examDates}
           </div>
           <div className="flex items-center gap-2">
@@ -136,8 +136,8 @@ export default function HRCalendar() {
 
         {/* Empty State */}
         <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
-          <div className="w-16 h-16 rounded-full bg-[#2563eb]/10 flex items-center justify-center mx-auto mb-4">
-            <span className="material-icons text-3xl text-[#2563eb]">event_note</span>
+          <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
+            <span className="material-icons text-3xl text-blue-600">event_note</span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">{ui.noEvents}</h3>
           <p className="text-sm text-gray-500 max-w-md mx-auto">{ui.noEventsSub}</p>

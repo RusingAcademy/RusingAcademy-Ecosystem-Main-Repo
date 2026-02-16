@@ -1000,7 +1000,7 @@ export default function Home() {
                   gradient: "from-[#D97B3D] via-[#C65A1E] to-[#C65A1E]",
                   shadow: "shadow-amber-500/40",
                   bgGlow: "bg-amber-50",
-                  borderColor: "border-[#FFE4D6]",
+                  borderColor: "border-orange-100",
                   icon: "🌟",
                 },
                 {

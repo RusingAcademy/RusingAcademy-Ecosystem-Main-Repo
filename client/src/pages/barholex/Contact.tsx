@@ -104,7 +104,7 @@ export default function BarholexContact() {
                 }
               </p>
               
-              <div className="p-4 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 inline-flex items-center gap-3">
+              <div className="p-4 rounded-xl bg-barholex-gold/10 border border-barholex-gold/30 inline-flex items-center gap-3">
                 <Clock className="w-5 h-5 text-barholex-gold" />
                 <span className="text-barholex-gold font-medium">
                   {language === "en" ? "Expected response: Within 24 hours" : "Réponse attendue: Dans les 24 heures"}
@@ -125,7 +125,7 @@ export default function BarholexContact() {
         <section className="relative pt-20 pb-12 px-4 overflow-hidden">
           {/* Background Effects */}
           <div className="absolute inset-0">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-barholex-gold/10 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-foundation-soft/10 rounded-full blur-[120px]" />
           </div>
           
@@ -140,7 +140,7 @@ export default function BarholexContact() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-6"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-[#D4AF37]/30 text-barholex-gold font-medium">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-barholex-gold/30 text-barholex-gold font-medium">
                   <MessageSquare className="w-4 h-4" />
                   {language === "en" ? "Start a Conversation" : "Démarrer une conversation"}
                 </span>
@@ -312,7 +312,7 @@ export default function BarholexContact() {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder={language === "en" ? "John Doe" : "Jean Dupont"}
                         />
                       </div>
@@ -328,7 +328,7 @@ export default function BarholexContact() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder="email@company.com"
                         />
                       </div>
@@ -343,7 +343,7 @@ export default function BarholexContact() {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder={language === "en" ? "Company name" : "Nom de l'entreprise"}
                         />
                       </div>
@@ -358,7 +358,7 @@ export default function BarholexContact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder="+1 (613) 555-1234"
                         />
                       </div>
@@ -373,7 +373,7 @@ export default function BarholexContact() {
                           required
                           value={formData.projectType}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white focus:border-barholex-gold focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                         >
                           <option value="" className="bg-obsidian">{language === "en" ? "Select type" : "Sélectionnez le type"}</option>
                           {projectTypes.map((type) => (
@@ -393,7 +393,7 @@ export default function BarholexContact() {
                           name="budget"
                           value={formData.budget}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white focus:border-barholex-gold focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                         >
                           <option value="" className="bg-obsidian">{language === "en" ? "Select budget" : "Sélectionnez le budget"}</option>
                           {budgets.map((budget) => (
@@ -418,7 +418,7 @@ export default function BarholexContact() {
                               aria-pressed={formData.timeline === timeline.value}
                               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                                 formData.timeline === timeline.value
-                                  ? "bg-[#D4AF37] text-black"
+                                  ? "bg-barholex-gold text-black"
                                   : "bg-white/5 text-white hover:bg-white/10 border border-white/60"
                               }`}
                             >
@@ -439,7 +439,7 @@ export default function BarholexContact() {
                           required
                           value={formData.message}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none"
                           placeholder={language === "en" 
                             ? "Tell us about your project, goals, and any specific requirements..."
                             : "Parlez-nous de votre projet, vos objectifs et toute exigence spécifique..."

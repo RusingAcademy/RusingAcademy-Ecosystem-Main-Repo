@@ -87,7 +87,7 @@ export default function GeneralLedgerReport() {
                       <td className="px-4 py-2 text-sm text-gray-600">
                         {line.entryDate ? new Date(line.entryDate).toLocaleDateString("en-CA") : "-"}
                       </td>
-                      <td className="px-4 py-2 text-sm text-[#0077C5]">{line.entryNumber || "-"}</td>
+                      <td className="px-4 py-2 text-sm text-sky-600">{line.entryNumber || "-"}</td>
                       <td className="px-4 py-2 text-sm text-gray-600">{line.memo || line.line?.description || "-"}</td>
                       <td className="px-4 py-2 text-sm text-right text-gray-700">
                         {parseFloat(line.line?.debit || "0") > 0 ? fmt(line.line?.debit) : ""}

@@ -219,7 +219,7 @@ export function LevelUpCelebration({
 
           {/* Modal content */}
           <motion.div
-            className="relative bg-gradient-to-b from-[#062b2b] to-[#041e1e] rounded-2xl p-8 max-w-sm w-full mx-4 border border-[#0a6969] shadow-2xl"
+            className="relative bg-gradient-to-b from-[#062b2b] to-[#041e1e] rounded-2xl p-8 max-w-sm w-full mx-4 border border-teal-800 shadow-2xl"
             initial={{ scale: 0.5, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.5, y: 50 }}
@@ -253,7 +253,7 @@ export function LevelUpCelebration({
             </motion.h2>
 
             <motion.p
-              className="text-[#67E8F9] text-center mb-6"
+              className="text-cyan-300 text-center mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}

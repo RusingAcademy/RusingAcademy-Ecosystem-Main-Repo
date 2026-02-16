@@ -445,7 +445,7 @@ export default function LearnPortal() {
               {/* Decorative orbs */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute -top-20 -right-20 w-80 h-80 bg-cta/20 rounded-full blur-3xl" />
-                <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#17E2C6]/10 rounded-full blur-3xl" />
+                <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
               </div>
               <div className="relative z-10 max-w-4xl mx-auto px-6 py-12 md:py-16">

@@ -74,7 +74,7 @@ export default function Organizations() {
             </p>
 
             {/* Access Reserved Message */}
-            <div className="inline-flex items-center gap-3 px-6 py-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-[#FFE4D6] dark:border-amber-800/50 backdrop-blur-sm mb-8">
+            <div className="inline-flex items-center gap-3 px-6 py-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-orange-100 dark:border-amber-800/50 backdrop-blur-sm mb-8">
               <Lock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               <p className="text-amber-800 dark:text-amber-200 font-medium">
                 {language === "fr"
@@ -93,7 +93,7 @@ export default function Organizations() {
                 : "Sign in via RusingAcademy"}
             </Button>
 
-            <p className="text-sm text-black dark:text-[#67E8F9] mt-4">
+            <p className="text-sm text-black dark:text-cyan-300 mt-4">
               {language === "fr"
                 ? "Intégration SSO à venir"
                 : "SSO integration coming soon"}

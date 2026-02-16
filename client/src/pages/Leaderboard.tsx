@@ -76,7 +76,7 @@ export default function Leaderboard() {
       case 1:
         return <Crown className="w-7 h-7 text-yellow-500 drop-shadow-md" />;
       case 2:
-        return <Medal className="w-6 h-6 text-[#67E8F9]" />;
+        return <Medal className="w-6 h-6 text-cyan-300" />;
       case 3:
         return <Medal className="w-6 h-6 text-amber-600" />;
       default:
@@ -104,7 +104,7 @@ export default function Leaderboard() {
     if (level >= 6) return "bg-blue-500";
     if (level >= 4) return "bg-green-500";
     if (level >= 2) return "bg-yellow-500";
-    return "bg-[#0a6969]";
+    return "bg-teal-800";
   };
 
   const totalPages = leaderboardData?.total ? Math.ceil(leaderboardData.total / pageSize) : 1;

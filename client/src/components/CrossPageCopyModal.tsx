@@ -88,7 +88,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                   mode === "copy" ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-200 hover:border-gray-300"
                 }`}
               >
-                <Copy className={`h-4 w-4 ${mode === "copy" ? "text-indigo-500" : "text-[#67E8F9]"}`} />
+                <Copy className={`h-4 w-4 ${mode === "copy" ? "text-indigo-500" : "text-cyan-300"}`} />
                 <div className="text-left">
                   <p className="font-medium">Copy</p>
                   <p className="text-[10px] text-black">Duplicate to target</p>
@@ -100,7 +100,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                   mode === "move" ? "border-orange-500 bg-orange-50 ring-1 ring-orange-200" : "border-gray-200 hover:border-gray-300"
                 }`}
               >
-                <ArrowRight className={`h-4 w-4 ${mode === "move" ? "text-orange-500" : "text-[#67E8F9]"}`} />
+                <ArrowRight className={`h-4 w-4 ${mode === "move" ? "text-orange-500" : "text-cyan-300"}`} />
                 <div className="text-left">
                   <p className="font-medium">Move</p>
                   <p className="text-[10px] text-black">Remove from current</p>
@@ -113,7 +113,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
           <div className="space-y-1.5">
             <Label className="text-xs font-medium">Target Page</Label>
             {pagesQuery.isLoading ? (
-              <div className="flex items-center gap-2 p-3 text-sm text-[#67E8F9]">
+              <div className="flex items-center gap-2 p-3 text-sm text-cyan-300">
                 <Loader2 className="h-4 w-4 animate-spin" /> Loading pages...
               </div>
             ) : availablePages.length === 0 ? (
@@ -129,9 +129,9 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                   {availablePages.map((page: any) => (
                     <SelectItem key={page.id} value={page.id.toString()}>
                       <div className="flex items-center gap-2">
-                        <FileText className="h-3.5 w-3.5 text-[#67E8F9]" />
+                        <FileText className="h-3.5 w-3.5 text-cyan-300" />
                         <span>{page.title || page.slug}</span>
-                        <span className="text-[10px] text-[#67E8F9] ml-1">({page.status})</span>
+                        <span className="text-[10px] text-cyan-300 ml-1">({page.status})</span>
                       </div>
                     </SelectItem>
                   ))}

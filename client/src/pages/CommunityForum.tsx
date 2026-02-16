@@ -76,7 +76,7 @@ export default function CommunityForum() {
               ))}
             </div>
             <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-[#008090] hover:brightness-105 transition-all flex items-center gap-1.5">
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-teal-700 hover:brightness-105 transition-all flex items-center gap-1.5">
               <span className="material-icons" style={{ fontSize: "14px" }}>add</span>
               {t("community.newPost")}
             </button>
@@ -93,8 +93,8 @@ export default function CommunityForum() {
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
               className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === tab.key
-                  ? "bg-[#008090] text-white shadow-sm"
-                  : "text-gray-500 hover:text-[#008090] hover:bg-gray-50"
+                  ? "bg-teal-700 text-white shadow-sm"
+                  : "text-gray-500 hover:text-teal-700 hover:bg-gray-50"
               }`}>
               <span className="material-icons" style={{ fontSize: "16px" }}>{tab.icon}</span>
               {tab.label}
@@ -106,13 +106,13 @@ export default function CommunityForum() {
         {activeTab === "categories" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {forumCategories.map((cat, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-[#008090]/20 transition-all cursor-pointer group">
+              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-teal-700/20 transition-all cursor-pointer group">
                 <div className="flex items-start gap-4">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${cat.color}10` }}>
                     <span className="material-icons" style={{ color: cat.color, fontSize: "22px" }}>{cat.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-gray-900 group-hover:text-[#008090] transition-colors">
+                    <h3 className="text-sm font-bold text-gray-900 group-hover:text-teal-700 transition-colors">
                       {lang === "fr" ? cat.nameFr : cat.name}
                     </h3>
                     <p className="text-[11px] text-gray-400 mt-1 line-clamp-2">
@@ -127,7 +127,7 @@ export default function CommunityForum() {
                       </span>
                     </div>
                   </div>
-                  <span className="material-icons text-gray-300 group-hover:text-[#008090] transition-colors" style={{ fontSize: "18px" }}>chevron_right</span>
+                  <span className="material-icons text-gray-300 group-hover:text-teal-700 transition-colors" style={{ fontSize: "18px" }}>chevron_right</span>
                 </div>
               </div>
             ))}
@@ -140,8 +140,8 @@ export default function CommunityForum() {
             {studyGroups.map((group, i) => (
               <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${group.active ? "bg-[#10b981]/10" : "bg-gray-100"}`}>
-                    <span className={`material-icons ${group.active ? "text-[#10b981]" : "text-gray-400"}`} style={{ fontSize: "20px" }}>groups</span>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${group.active ? "bg-emerald-500/10" : "bg-gray-100"}`}>
+                    <span className={`material-icons ${group.active ? "text-emerald-500" : "text-gray-400"}`} style={{ fontSize: "20px" }}>groups</span>
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-gray-900">{group.name}</h3>
@@ -149,8 +149,8 @@ export default function CommunityForum() {
                       <span className="text-[10px] text-gray-400">{group.members} {lang === "fr" ? "membres" : "members"}</span>
                       <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">{group.language}</span>
                       {group.active && (
-                        <span className="text-[10px] text-[#10b981] flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
+                        <span className="text-[10px] text-emerald-500 flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                           {lang === "fr" ? "Actif" : "Active"}
                         </span>
                       )}
@@ -161,14 +161,14 @@ export default function CommunityForum() {
                   <p className="text-[10px] text-gray-400">{lang === "fr" ? "Prochaine séance" : "Next session"}</p>
                   <p className="text-xs font-medium text-gray-700">{group.nextSession}</p>
                   <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-                    className="mt-1 px-3 py-1 rounded-lg text-[10px] font-semibold text-[#008090] border border-[#008090]/20 hover:bg-[#008090]/5 transition-all">
+                    className="mt-1 px-3 py-1 rounded-lg text-[10px] font-semibold text-teal-700 border border-teal-700/20 hover:bg-teal-700/5 transition-all">
                     {t("community.joinGroup")}
                   </button>
                 </div>
               </div>
             ))}
             <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-              className="w-full py-3 rounded-xl border-2 border-dashed border-gray-200 text-sm font-medium text-gray-400 hover:text-[#008090] hover:border-[#008090]/30 transition-all flex items-center justify-center gap-2">
+              className="w-full py-3 rounded-xl border-2 border-dashed border-gray-200 text-sm font-medium text-gray-400 hover:text-teal-700 hover:border-teal-700/30 transition-all flex items-center justify-center gap-2">
               <span className="material-icons" style={{ fontSize: "18px" }}>add</span>
               {t("community.createGroup")}
             </button>
@@ -185,10 +185,10 @@ export default function CommunityForum() {
                     {post.avatar}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-gray-900 group-hover:text-[#008090] transition-colors">{post.title}</h3>
+                    <h3 className="text-sm font-bold text-gray-900 group-hover:text-teal-700 transition-colors">{post.title}</h3>
                     <div className="flex items-center gap-3 mt-1.5">
                       <span className="text-[10px] text-gray-500">{post.author}</span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#008090]/8 text-[#008090] font-medium">{post.category}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-teal-700/8 text-teal-700 font-medium">{post.category}</span>
                       <span className="text-[10px] text-gray-400">{post.time}</span>
                     </div>
                   </div>

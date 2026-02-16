@@ -36,7 +36,7 @@ export default function CouponsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card><CardContent className="p-4 flex items-center gap-3"><Tag className="h-5 w-5 text-purple-600" /><div><p className="text-xl font-bold">{allCoupons.length}</p><p className="text-xs text-muted-foreground">Total Coupons</p></div></CardContent></Card>
         <Card><CardContent className="p-4 flex items-center gap-3"><Tag className="h-5 w-5 text-green-600" /><div><p className="text-xl font-bold">{allCoupons.filter((c: any) => c.isActive !== false).length}</p><p className="text-xs text-muted-foreground">Active</p></div></CardContent></Card>
-        <Card><CardContent className="p-4 flex items-center gap-3"><Tag className="h-5 w-5 text-[#67E8F9]" /><div><p className="text-xl font-bold">{allCoupons.filter((c: any) => c.isActive === false).length}</p><p className="text-xs text-muted-foreground">Expired</p></div></CardContent></Card>
+        <Card><CardContent className="p-4 flex items-center gap-3"><Tag className="h-5 w-5 text-cyan-300" /><div><p className="text-xl font-bold">{allCoupons.filter((c: any) => c.isActive === false).length}</p><p className="text-xs text-muted-foreground">Expired</p></div></CardContent></Card>
       </div>
 
       <Card><CardContent className="p-0">

@@ -279,7 +279,7 @@ function PulsingMicRing({ isRecording, level = 0 }: { isRecording: boolean; leve
           "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200",
           isRecording
             ? "bg-red-500 text-white shadow-lg shadow-red-500/30"
-            : "bg-slate-200 dark:bg-[#0a6969] text-black dark:text-white/90"
+            : "bg-slate-200 dark:bg-teal-800 text-black dark:text-white/90"
         )}
       >
         {isRecording ? <Radio className="h-7 w-7 animate-pulse" /> : <Mic className="h-7 w-7" />}
@@ -304,12 +304,12 @@ function PhaseProgressBar({ currentPhase, phases }: { currentPhase: ExamPhase; p
             <div
               className={cn(
                 "w-full h-2 rounded-full transition-all duration-500",
-                isComplete ? "bg-emerald-500" : isActive ? "bg-blue-500" : "bg-slate-200 dark:bg-[#0a6969]"
+                isComplete ? "bg-emerald-500" : isActive ? "bg-blue-500" : "bg-slate-200 dark:bg-teal-800"
               )}
             />
             <div className="flex items-center gap-1">
-              <Icon className={cn("h-3 w-3", isActive ? "text-blue-500" : isComplete ? "text-emerald-500" : "text-[#67E8F9]")} />
-              <span className={cn("text-[10px] font-medium", isActive ? "text-blue-500" : isComplete ? "text-emerald-500" : "text-[#67E8F9]")}>
+              <Icon className={cn("h-3 w-3", isActive ? "text-blue-500" : isComplete ? "text-emerald-500" : "text-cyan-300")} />
+              <span className={cn("text-[10px] font-medium", isActive ? "text-blue-500" : isComplete ? "text-emerald-500" : "text-cyan-300")}>
                 {phase.replace("part", "")}
               </span>
             </div>
@@ -362,7 +362,7 @@ function CriteriaRadar({ criteria, l }: { criteria: PhaseResult["criteria"]; l: 
                 {pct}
               </span>
             </div>
-            <span className="text-[10px] text-black dark:text-[#67E8F9] text-center leading-tight">
+            <span className="text-[10px] text-black dark:text-cyan-300 text-center leading-tight">
               {item.label}
             </span>
           </div>
@@ -720,7 +720,7 @@ export default function SLEExamSimulation() {
               <Trophy className="h-10 w-10 text-white" />
             </div>
             <h1 className="text-3xl font-bold mb-3">{l.title}</h1>
-            <p className="text-[#67E8F9] text-lg">{l.subtitle}</p>
+            <p className="text-cyan-300 text-lg">{l.subtitle}</p>
           </motion.div>
 
           {/* Coach Selection */}
@@ -730,7 +730,7 @@ export default function SLEExamSimulation() {
             transition={{ delay: 0.1 }}
             className="mb-8"
           >
-            <h3 className="text-sm font-medium text-[#67E8F9] mb-4 text-center">{l.selectCoach}</h3>
+            <h3 className="text-sm font-medium text-cyan-300 mb-4 text-center">{l.selectCoach}</h3>
             <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
               {(["STEVEN", "PRECIOSA"] as CoachKey[]).map((key) => {
                 const c = coachData[key];
@@ -743,14 +743,14 @@ export default function SLEExamSimulation() {
                       "relative p-4 rounded-xl border-2 transition-all duration-300 text-left",
                       isSelected
                         ? "border-blue-500 bg-blue-500/10 shadow-lg shadow-blue-500/10"
-                        : "border-[#0a6969] bg-foundation/50 hover:border-slate-600"
+                        : "border-teal-800 bg-foundation/50 hover:border-slate-600"
                     )}
                   >
                     <div className="flex items-center gap-3">
                       <img src={c.image} alt={c.name} className="w-12 h-12 rounded-full object-cover" />
                       <div>
                         <p className="font-semibold text-white">{c.name}</p>
-                        <p className="text-xs text-[#67E8F9]">{c.flag} {c.specialty}</p>
+                        <p className="text-xs text-cyan-300">{c.flag} {c.specialty}</p>
                       </div>
                     </div>
                     {isSelected && (
@@ -771,7 +771,7 @@ export default function SLEExamSimulation() {
             transition={{ delay: 0.2 }}
             className="mb-8"
           >
-            <h3 className="text-sm font-medium text-[#67E8F9] mb-4 text-center">{l.selectLevel}</h3>
+            <h3 className="text-sm font-medium text-cyan-300 mb-4 text-center">{l.selectLevel}</h3>
             <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
               {(["B", "C"] as ExamLevel[]).map((level) => (
                 <button
@@ -781,14 +781,14 @@ export default function SLEExamSimulation() {
                     "p-6 rounded-xl border-2 transition-all duration-300 text-left",
                     config.level === level
                       ? "border-blue-500 bg-blue-500/10 shadow-lg shadow-blue-500/10"
-                      : "border-[#0a6969] bg-foundation/50 hover:border-slate-600"
+                      : "border-teal-800 bg-foundation/50 hover:border-slate-600"
                   )}
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <Target className={cn("h-5 w-5", config.level === level ? "text-blue-400" : "text-white/90")} />
                     <span className="font-bold text-lg">{level === "B" ? l.levelB : l.levelC}</span>
                   </div>
-                  <p className="text-sm text-[#67E8F9]">
+                  <p className="text-sm text-cyan-300">
                     {level === "B" ? l.levelBDesc : l.levelCDesc}
                   </p>
                 </button>
@@ -815,11 +815,11 @@ export default function SLEExamSimulation() {
                 };
                 const pl = phaseLabels[p as keyof typeof phaseLabels];
                 return (
-                  <div key={p} className="p-4 rounded-xl bg-foundation/50 border border-[#0a6969]">
-                    <Icon className="h-5 w-5 text-[#67E8F9] mb-2" />
+                  <div key={p} className="p-4 rounded-xl bg-foundation/50 border border-teal-800">
+                    <Icon className="h-5 w-5 text-cyan-300 mb-2" />
                     <p className="text-sm font-semibold text-white mb-1">{pl.title}</p>
                     <p className="text-[11px] text-white/90 leading-tight">{pl.desc}</p>
-                    <p className="text-[10px] text-[#67E8F9] mt-2">
+                    <p className="text-[10px] text-cyan-300 mt-2">
                       {Math.floor(cfg.duration / 60)} {l.minutes}
                     </p>
                   </div>
@@ -916,8 +916,8 @@ export default function SLEExamSimulation() {
 
           {/* Overall Score */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="grid grid-cols-3 gap-4 mb-8">
-            <div className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969] text-center">
-              <p className="text-sm text-[#67E8F9] mb-2">{l.overallLevel}</p>
+            <div className="p-6 rounded-xl bg-foundation/50 border border-teal-800 text-center">
+              <p className="text-sm text-cyan-300 mb-2">{l.overallLevel}</p>
               <p className={cn(
                 "text-5xl font-bold",
                 levelColor === "emerald" && "text-emerald-400",
@@ -927,12 +927,12 @@ export default function SLEExamSimulation() {
                 {examResults.overallLevel}
               </p>
             </div>
-            <div className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969] text-center">
-              <p className="text-sm text-[#67E8F9] mb-2">{l.overallScore}</p>
+            <div className="p-6 rounded-xl bg-foundation/50 border border-teal-800 text-center">
+              <p className="text-sm text-cyan-300 mb-2">{l.overallScore}</p>
               <p className="text-5xl font-bold text-white">{examResults.overallScore}%</p>
             </div>
-            <div className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969] text-center">
-              <p className="text-sm text-[#67E8F9] mb-2">{l.duration}</p>
+            <div className="p-6 rounded-xl bg-foundation/50 border border-teal-800 text-center">
+              <p className="text-sm text-cyan-300 mb-2">{l.duration}</p>
               <p className="text-5xl font-bold text-white">{Math.round(examResults.totalDuration / 60)}</p>
               <p className="text-sm text-white/90">{l.minutes}</p>
             </div>
@@ -946,10 +946,10 @@ export default function SLEExamSimulation() {
                 if (!cfg) return null;
                 const Icon = cfg.icon;
                 return (
-                  <div key={pr.phase} className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
+                  <div key={pr.phase} className="p-5 rounded-xl bg-foundation/50 border border-teal-800">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
-                        <Icon className="h-4 w-4 text-[#67E8F9]" />
+                        <Icon className="h-4 w-4 text-cyan-300" />
                         <span className="font-semibold text-white">{cfg.label}</span>
                       </div>
                       <Badge variant="outline" className={cn(
@@ -1051,12 +1051,12 @@ export default function SLEExamSimulation() {
       )}
     >
       {/* Top Bar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#0a6969] bg-obsidian/80 backdrop-blur-sm">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-teal-800 bg-obsidian/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <img src={coach.image} alt={coach.name} className="w-8 h-8 rounded-full object-cover" />
           <div>
             <p className="text-sm font-semibold text-white">{coach.name}</p>
-            <p className="text-[10px] text-[#67E8F9]">{phaseLabels[phase as keyof typeof phaseLabels]}</p>
+            <p className="text-[10px] text-cyan-300">{phaseLabels[phase as keyof typeof phaseLabels]}</p>
           </div>
         </div>
 
@@ -1077,7 +1077,7 @@ export default function SLEExamSimulation() {
             variant="ghost"
             size="icon"
             onClick={() => setIsPaused(!isPaused)}
-            className="h-8 w-8 text-[#67E8F9] hover:text-white"
+            className="h-8 w-8 text-cyan-300 hover:text-white"
           >
             {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
           </Button>
@@ -1085,7 +1085,7 @@ export default function SLEExamSimulation() {
             variant="ghost"
             size="icon"
             onClick={toggleFullscreen}
-            className="h-8 w-8 text-[#67E8F9] hover:text-white"
+            className="h-8 w-8 text-cyan-300 hover:text-white"
           >
             {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
           </Button>
@@ -1093,7 +1093,7 @@ export default function SLEExamSimulation() {
       </div>
 
       {/* Phase Progress */}
-      <div className="px-4 py-2 border-b border-[#0a6969]/50">
+      <div className="px-4 py-2 border-b border-teal-800/50">
         <PhaseProgressBar currentPhase={phase} phases={examPhases} />
       </div>
 
@@ -1107,9 +1107,9 @@ export default function SLEExamSimulation() {
             className="absolute inset-0 z-40 bg-obsidian/90 backdrop-blur-md flex items-center justify-center"
           >
             <div className="text-center">
-              <Pause className="h-16 w-16 text-[#67E8F9] mx-auto mb-4" />
+              <Pause className="h-16 w-16 text-cyan-300 mx-auto mb-4" />
               <p className="text-xl font-semibold text-white mb-2">{l.pause}</p>
-              <p className="text-sm text-[#67E8F9] mb-6">{l.examInProgress}</p>
+              <p className="text-sm text-cyan-300 mb-6">{l.examInProgress}</p>
               <Button onClick={() => setIsPaused(false)} size="lg">
                 <Play className="h-5 w-5 mr-2" />
                 {l.resume}
@@ -1139,13 +1139,13 @@ export default function SLEExamSimulation() {
                 "max-w-[75%] rounded-2xl px-4 py-3",
                 msg.role === "user"
                   ? "bg-blue-500/20 border border-blue-500/30 text-blue-100"
-                  : "bg-foundation border border-[#0a6969] text-white/90"
+                  : "bg-foundation border border-teal-800 text-white/90"
               )}>
                 <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
                 {msg.audioUrl && (
                   <button
                     onClick={() => playAudio(msg.audioUrl!)}
-                    className="mt-2 flex items-center gap-1.5 text-xs text-[#67E8F9] hover:text-white transition"
+                    className="mt-2 flex items-center gap-1.5 text-xs text-cyan-300 hover:text-white transition"
                   >
                     <Volume2 className="h-3 w-3" />
                     {l.listening}
@@ -1160,10 +1160,10 @@ export default function SLEExamSimulation() {
         {isProcessing && (
           <div className="flex items-center gap-3">
             <img src={coach.image} alt="" className="w-8 h-8 rounded-full object-cover" />
-            <div className="bg-foundation border border-[#0a6969] rounded-2xl px-4 py-3">
+            <div className="bg-foundation border border-teal-800 rounded-2xl px-4 py-3">
               <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin text-[#67E8F9]" />
-                <span className="text-sm text-[#67E8F9]">{l.processing}</span>
+                <Loader2 className="h-4 w-4 animate-spin text-cyan-300" />
+                <span className="text-sm text-cyan-300">{l.processing}</span>
               </div>
             </div>
           </div>
@@ -1181,7 +1181,7 @@ export default function SLEExamSimulation() {
       </div>
 
       {/* Bottom Controls */}
-      <div className="border-t border-[#0a6969] bg-obsidian/80 backdrop-blur-sm px-4 py-4">
+      <div className="border-t border-teal-800 bg-obsidian/80 backdrop-blur-sm px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Record Button */}
           <div className="flex-1 flex justify-center">
@@ -1191,7 +1191,7 @@ export default function SLEExamSimulation() {
               className="focus:outline-none disabled:opacity-50"
             >
               <PulsingMicRing isRecording={isRecording} level={audioLevel} />
-              <p className="text-[11px] text-[#67E8F9] mt-2 text-center">
+              <p className="text-[11px] text-cyan-300 mt-2 text-center">
                 {isRecording ? l.recording : isProcessing ? l.processing : l.tapToSpeak}
               </p>
             </button>

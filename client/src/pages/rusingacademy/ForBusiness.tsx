@@ -174,7 +174,7 @@ export default function ForBusiness() {
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
           {/* Background decorations */}
           <div className="absolute top-20 left-10 w-72 h-72 bg-cta-2/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#2DD4BF]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
           <div className="absolute top-40 right-20 w-64 h-64 bg-cta-2/5 rounded-full blur-2xl" />
           
           <div className="container mx-auto relative z-10">
@@ -185,8 +185,8 @@ export default function ForBusiness() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-[#E07B39]/20 text-black">
-                  <Building2 className="w-4 h-4 text-[#E07B39]" />
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black">
+                  <Building2 className="w-4 h-4 text-cta-2" />
                   {t.badge}
                 </span>
               </motion.div>
@@ -196,7 +196,7 @@ export default function ForBusiness() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black"
               >
                 {t.title}{" "}
-                <span className="text-[#E07B39]">{t.highlight}</span>
+                <span className="text-cta-2">{t.highlight}</span>
               </motion.h1>
               
               <motion.p 
@@ -209,7 +209,7 @@ export default function ForBusiness() {
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-cta-2 hover:bg-[#C45E1A] text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full"
+                  className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full"
                   onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {t.cta}
@@ -232,19 +232,19 @@ export default function ForBusiness() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={clients.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{clients.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{clients.count}+</div>
                 <div className="text-sm text-black">{t.stats[0].label}</div>
               </div>
               <div ref={employees.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{employees.count.toLocaleString()}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{employees.count.toLocaleString()}+</div>
                 <div className="text-sm text-black">{t.stats[1].label}</div>
               </div>
               <div ref={completion.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{completion.count}%</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{completion.count}%</div>
                 <div className="text-sm text-black">{t.stats[2].label}</div>
               </div>
               <div ref={satisfaction.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
                 <div className="text-sm text-black">{t.stats[3].label}</div>
               </div>
             </div>
@@ -290,7 +290,7 @@ export default function ForBusiness() {
                   className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="w-12 h-12 rounded-xl bg-cta-2/10 flex items-center justify-center mb-4">
-                    <benefit.icon className="w-6 h-6 text-[#E07B39]" />
+                    <benefit.icon className="w-6 h-6 text-cta-2" />
                   </div>
                   <h3 className="font-bold text-black mb-2">{benefit.title}</h3>
                   <p className="text-sm text-black">{benefit.desc}</p>
@@ -321,7 +321,7 @@ export default function ForBusiness() {
                   transition={{ delay: index * 0.1 }}
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
-                      ? "border-[#E07B39] bg-gradient-to-br from-[#FFF8F3] to-white shadow-xl scale-105" 
+                      ? "border-cta-2 bg-gradient-to-br from-[#FFF8F3] to-white shadow-xl scale-105" 
                       : "border-gray-200 bg-white/80"
                   }`}
                 >
@@ -343,7 +343,7 @@ export default function ForBusiness() {
                     <ul className="space-y-3 mb-6">
                       {pkg.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-black">
-                          <CheckCircle2 className="w-5 h-5 text-[#2DD4BF] flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" />
                           {feature}
                         </li>
                       ))}
@@ -351,7 +351,7 @@ export default function ForBusiness() {
                     <Button 
                       className={`w-full rounded-full ${
                         pkg.popular 
-                          ? "bg-cta-2 hover:bg-[#C45E1A] text-white" 
+                          ? "bg-cta-2 hover:bg-cta text-white" 
                           : "bg-gray-100 hover:bg-gray-200 text-black"
                       }`}
                       onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -383,11 +383,11 @@ export default function ForBusiness() {
                   transition={{ delay: index * 0.1 }}
                   className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg"
                 >
-                  <Quote className="w-8 h-8 text-[#E07B39]/30 mb-4" />
+                  <Quote className="w-8 h-8 text-cta-2/30 mb-4" />
                   <p className="text-black mb-6 italic">"{testimonial.quote}"</p>
                   <div>
                     <p className="font-semibold text-black">{testimonial.author}</p>
-                    <p className="text-sm text-[#E07B39]">{testimonial.company}</p>
+                    <p className="text-sm text-cta-2">{testimonial.company}</p>
                   </div>
                 </motion.div>
               ))}
@@ -404,8 +404,8 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                 >
-                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 text-black">
-                    <Sparkles className="w-4 h-4 text-[#2DD4BF]" />
+                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-teal-400/10 border border-teal-400/20 text-black">
+                    <Sparkles className="w-4 h-4 text-teal-400" />
                     {isEn ? "Get Started Today" : "Commencez aujourd'hui"}
                   </span>
                 </motion.div>
@@ -427,8 +427,8 @@ export default function ForBusiness() {
 
                 {formSubmitted ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 rounded-full bg-[#2DD4BF]/10 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="w-8 h-8 text-[#2DD4BF]" />
+                    <div className="w-16 h-16 rounded-full bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle2 className="w-8 h-8 text-teal-400" />
                     </div>
                     <p className="text-lg font-semibold text-black">{t.formSuccess}</p>
                   </div>
@@ -437,36 +437,36 @@ export default function ForBusiness() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#E07B39] focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#E07B39] focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.company} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#E07B39] focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.employees} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#E07B39] focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-[#E07B39] focus:ring-[#E07B39]"
+                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
                       rows={4}
                     />
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="w-full bg-cta-2 hover:bg-[#C45E1A] text-white h-12 rounded-full shadow-lg shadow-[#E07B39]/20"
+                      className="w-full bg-cta-2 hover:bg-cta text-white h-12 rounded-full shadow-lg shadow-[#E07B39]/20"
                     >
                       {t.formFields.submit}
                       <Send className="w-5 h-5 ml-2" />

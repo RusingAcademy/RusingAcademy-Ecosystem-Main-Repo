@@ -188,7 +188,7 @@ export default function GrammarDrillsPage() {
 
   if (authLoading) return (
     <div className="flex h-screen items-center justify-center" role="status" aria-label={t("skillLabs.loading")}>
-      <div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" />
+      <div className="animate-spin w-8 h-8 border-4 border-teal-700 border-t-transparent rounded-full" />
       <span className="sr-only">{t("skillLabs.loading")}</span>
     </div>
   );
@@ -203,13 +203,13 @@ export default function GrammarDrillsPage() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                <span className="material-icons text-[#008090]" aria-hidden="true">spellcheck</span>
+                <span className="material-icons text-teal-700" aria-hidden="true">spellcheck</span>
                 {t("grammar.title")}
               </h1>
               <p className="text-gray-500 mt-1">{t("grammar.subtitle")}</p>
             </div>
             <button onClick={() => setShowHistory(!showHistory)}
-              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+              className="px-4 py-2 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 flex items-center gap-2 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
               aria-label={showHistory ? t("grammar.practice") : t("grammar.history")}>
               <span className="material-icons text-base" aria-hidden="true">{showHistory ? "play_circle" : "history"}</span>
               {showHistory ? t("grammar.practice") : t("grammar.history")}
@@ -239,7 +239,7 @@ export default function GrammarDrillsPage() {
               {!history?.length ? (
                 <div className="text-center py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                    <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">spellcheck</span>
+                    <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">spellcheck</span>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("grammar.emptyTitle")}</h3>
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("grammar.emptyDesc")}</p>
@@ -249,7 +249,7 @@ export default function GrammarDrillsPage() {
                   <div>
                     <div className="font-semibold text-gray-900">{h.topic}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
-                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#008090]/10 text-[#008090]">{h.cefrLevel}</span>
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-teal-700/10 text-teal-700">{h.cefrLevel}</span>
                       <span>{drillTypeLabel(h.drillType)}</span>
                       <span>{h.correctAnswers}/{h.totalQuestions}</span>
                     </div>
@@ -265,7 +265,7 @@ export default function GrammarDrillsPage() {
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => setSelectedLevel(level)}
                     role="radio" aria-checked={selectedLevel === level}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-teal-700"}`}>
                     {level}
                   </button>
                 ))}
@@ -296,15 +296,15 @@ export default function GrammarDrillsPage() {
                     aria-label={`${drill.topic} — ${drillTypeLabel(drill.type)} — ${drill.questions.length} questions`}>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-[#008090]/10 flex items-center justify-center">
-                          <span className="material-icons text-[#008090]" aria-hidden="true">{drillTypeIcon(drill.type)}</span>
+                        <div className="w-12 h-12 rounded-xl bg-teal-700/10 flex items-center justify-center">
+                          <span className="material-icons text-teal-700" aria-hidden="true">{drillTypeIcon(drill.type)}</span>
                         </div>
                         <div>
                           <h3 className="font-semibold text-gray-900">{drill.topic}</h3>
                           <div className="text-sm text-gray-500 mt-0.5">{drillTypeLabel(drill.type)} · {drill.questions.length} questions</div>
                         </div>
                       </div>
-                      <span className="material-icons text-[#008090] text-2xl" aria-hidden="true">play_circle</span>
+                      <span className="material-icons text-teal-700 text-2xl" aria-hidden="true">play_circle</span>
                     </div>
                   </div>
                 ))}
@@ -338,7 +338,7 @@ export default function GrammarDrillsPage() {
 
               {/* Progress bar */}
               <div className="w-full h-2 bg-gray-200 rounded-full mb-8" role="progressbar" aria-valuenow={currentQ + 1} aria-valuemin={1} aria-valuemax={selectedDrill.questions.length}>
-                <div className="h-2 bg-[#008090] rounded-full transition-all" style={{ width: `${((currentQ + 1) / selectedDrill.questions.length) * 100}%` }} />
+                <div className="h-2 bg-teal-700 rounded-full transition-all" style={{ width: `${((currentQ + 1) / selectedDrill.questions.length) * 100}%` }} />
               </div>
 
               {/* Current Question */}
@@ -350,7 +350,7 @@ export default function GrammarDrillsPage() {
                     {selectedDrill.questions[currentQ].options!.map((opt, oi) => (
                       <button key={oi} onClick={() => answerCurrent(opt)}
                         role="radio" aria-checked={answers[currentQ] === opt}
-                        className={`p-4 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[currentQ] === opt ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
+                        className={`p-4 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[currentQ] === opt ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
                         {opt}
                       </button>
                     ))}
@@ -364,7 +364,7 @@ export default function GrammarDrillsPage() {
                       className="w-full p-4 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                       autoFocus />
                     <button onClick={() => { if (reorderInput.trim()) answerCurrent(reorderInput.trim()); }}
-                      className="mt-3 px-4 py-2 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                      className="mt-3 px-4 py-2 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                       {isFr ? "Confirmer" : "Confirm"}
                     </button>
                   </div>
@@ -388,12 +388,12 @@ export default function GrammarDrillsPage() {
                 {currentQ === selectedDrill.questions.length - 1 ? (
                   <button onClick={submitDrill}
                     disabled={answers.filter(a => a).length < selectedDrill.questions.length}
-                    className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                    className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                     {t("grammar.submit")}
                   </button>
                 ) : (
                   <button onClick={() => { setCurrentQ(currentQ + 1); setReorderInput(""); }}
-                    className="px-4 py-2 rounded-xl text-sm text-[#008090] hover:text-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                    className="px-4 py-2 rounded-xl text-sm text-teal-700 hover:text-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                     aria-label={t("grammar.next")}>
                     {t("grammar.next")} →
                   </button>
@@ -455,12 +455,12 @@ export default function GrammarDrillsPage() {
 
               <div className="flex gap-3 justify-center">
                 <button onClick={() => setPhase("select")}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                   {t("grammar.chooseAnother")}
                 </button>
                 {selectedDrill && (
                   <button onClick={() => startDrill(selectedDrill)}
-                    className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                    className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                     {t("grammar.tryAgain")}
                   </button>
                 )}

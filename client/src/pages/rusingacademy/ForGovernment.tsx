@@ -207,9 +207,9 @@ export default function ForGovernment() {
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
           {/* Background decorations */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#2DD4BF]/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-400/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta-2/10 rounded-full blur-3xl" />
-          <div className="absolute top-40 right-20 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-2xl" />
+          <div className="absolute top-40 right-20 w-64 h-64 bg-barholex-gold/5 rounded-full blur-2xl" />
           
           <div className="container mx-auto relative z-10">
             <motion.div 
@@ -219,8 +219,8 @@ export default function ForGovernment() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-[#2DD4BF]/10 border border-[#2DD4BF]/20 text-black">
-                  <Landmark className="w-4 h-4 text-[#2DD4BF]" />
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-teal-400/10 border border-teal-400/20 text-black">
+                  <Landmark className="w-4 h-4 text-teal-400" />
                   {t.badge}
                 </span>
               </motion.div>
@@ -230,7 +230,7 @@ export default function ForGovernment() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black"
               >
                 {t.title}{" "}
-                <span className="text-[#2DD4BF]">{t.highlight}</span>
+                <span className="text-teal-400">{t.highlight}</span>
               </motion.h1>
               
               <motion.p 
@@ -243,7 +243,7 @@ export default function ForGovernment() {
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-[#2DD4BF] hover:bg-[#14b8a6] text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#2DD4BF]/20 rounded-full"
+                  className="bg-teal-400 hover:bg-teal-500 text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#2DD4BF]/20 rounded-full"
                   onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {t.cta}
@@ -266,19 +266,19 @@ export default function ForGovernment() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={departments.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{departments.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{departments.count}+</div>
                 <div className="text-sm text-black">{t.stats[0].label}</div>
               </div>
               <div ref={passRate.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{passRate.count}%</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{passRate.count}%</div>
                 <div className="text-sm text-black">{t.stats[1].label}</div>
               </div>
               <div ref={servants.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{servants.count.toLocaleString()}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{servants.count.toLocaleString()}+</div>
                 <div className="text-sm text-black">{t.stats[2].label}</div>
               </div>
               <div ref={satisfaction.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
                 <div className="text-sm text-black">{t.stats[3].label}</div>
               </div>
             </div>
@@ -291,18 +291,18 @@ export default function ForGovernment() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="max-w-4xl mx-auto p-6 rounded-2xl bg-gradient-to-r from-[#2DD4BF]/5 to-[#E07B39]/5 border border-[#2DD4BF]/20"
+              className="max-w-4xl mx-auto p-6 rounded-2xl bg-gradient-to-r from-[#2DD4BF]/5 to-[#E07B39]/5 border border-teal-400/20"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#2DD4BF]/10 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-[#2DD4BF]" />
+                <div className="w-10 h-10 rounded-xl bg-teal-400/10 flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-teal-400" />
                 </div>
                 <h3 className="text-lg font-bold text-black">{t.complianceTitle}</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {t.complianceItems.map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-sm text-black">
-                    <CheckCircle2 className="w-4 h-4 text-[#2DD4BF] flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0" />
                     {item}
                   </div>
                 ))}
@@ -329,8 +329,8 @@ export default function ForGovernment() {
                   transition={{ delay: index * 0.1 }}
                   className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#2DD4BF]/10 flex items-center justify-center mb-4">
-                    <benefit.icon className="w-6 h-6 text-[#2DD4BF]" />
+                  <div className="w-12 h-12 rounded-xl bg-teal-400/10 flex items-center justify-center mb-4">
+                    <benefit.icon className="w-6 h-6 text-teal-400" />
                   </div>
                   <h3 className="font-bold text-black mb-2">{benefit.title}</h3>
                   <p className="text-sm text-black">{benefit.desc}</p>
@@ -368,7 +368,7 @@ export default function ForGovernment() {
                     {index + 1}
                   </div>
                   <h3 className="font-bold text-black mb-1">{path.path}</h3>
-                  <p className="text-sm text-[#E07B39] font-medium mb-1">{path.level}</p>
+                  <p className="text-sm text-cta-2 font-medium mb-1">{path.level}</p>
                   <p className="text-xs text-black">{path.duration}</p>
                 </motion.div>
               ))}
@@ -403,13 +403,13 @@ export default function ForGovernment() {
                   transition={{ delay: index * 0.1 }}
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
-                      ? "border-[#2DD4BF] bg-gradient-to-br from-[#F0FDFA] to-white shadow-xl scale-105" 
+                      ? "border-teal-400 bg-gradient-to-br from-[#F0FDFA] to-white shadow-xl scale-105" 
                       : "border-gray-200 bg-white/80"
                   }`}
                 >
                   {pkg.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="px-4 py-1 text-xs font-bold rounded-full bg-[#2DD4BF] text-white flex items-center gap-1">
+                      <span className="px-4 py-1 text-xs font-bold rounded-full bg-teal-400 text-white flex items-center gap-1">
                         <Star className="w-3 h-3" />
                         {isEn ? "RECOMMENDED" : "RECOMMANDÉ"}
                       </span>
@@ -425,7 +425,7 @@ export default function ForGovernment() {
                     <ul className="space-y-3 mb-6">
                       {pkg.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-black">
-                          <CheckCircle2 className="w-5 h-5 text-[#2DD4BF] flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" />
                           {feature}
                         </li>
                       ))}
@@ -433,7 +433,7 @@ export default function ForGovernment() {
                     <Button 
                       className={`w-full rounded-full ${
                         pkg.popular 
-                          ? "bg-[#2DD4BF] hover:bg-[#14b8a6] text-white" 
+                          ? "bg-teal-400 hover:bg-teal-500 text-white" 
                           : "bg-gray-100 hover:bg-gray-200 text-black"
                       }`}
                       onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -465,11 +465,11 @@ export default function ForGovernment() {
                   transition={{ delay: index * 0.1 }}
                   className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg"
                 >
-                  <Quote className="w-8 h-8 text-[#2DD4BF]/30 mb-4" />
+                  <Quote className="w-8 h-8 text-teal-400/30 mb-4" />
                   <p className="text-black mb-6 italic">"{testimonial.quote}"</p>
                   <div>
                     <p className="font-semibold text-black">{testimonial.author}</p>
-                    <p className="text-sm text-[#2DD4BF]">{testimonial.company}</p>
+                    <p className="text-sm text-teal-400">{testimonial.company}</p>
                   </div>
                 </motion.div>
               ))}
@@ -486,8 +486,8 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                 >
-                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-[#E07B39]/20 text-black">
-                    <Sparkles className="w-4 h-4 text-[#E07B39]" />
+                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black">
+                    <Sparkles className="w-4 h-4 text-cta-2" />
                     {isEn ? "Get Started Today" : "Commencez aujourd'hui"}
                   </span>
                 </motion.div>
@@ -509,8 +509,8 @@ export default function ForGovernment() {
 
                 {formSubmitted ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 rounded-full bg-[#2DD4BF]/10 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="w-8 h-8 text-[#2DD4BF]" />
+                    <div className="w-16 h-16 rounded-full bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle2 className="w-8 h-8 text-teal-400" />
                     </div>
                     <p className="text-lg font-semibold text-black">{t.formSuccess}</p>
                   </div>
@@ -519,36 +519,36 @@ export default function ForGovernment() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#2DD4BF] focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#2DD4BF] focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.department} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#2DD4BF] focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.learners} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-[#2DD4BF] focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-[#2DD4BF] focus:ring-[#2DD4BF]"
+                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
                       rows={4}
                     />
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="w-full bg-[#2DD4BF] hover:bg-[#14b8a6] text-white h-12 rounded-full shadow-lg shadow-[#2DD4BF]/20"
+                      className="w-full bg-teal-400 hover:bg-teal-500 text-white h-12 rounded-full shadow-lg shadow-[#2DD4BF]/20"
                     >
                       {t.formFields.submit}
                       <Send className="w-5 h-5 ml-2" />

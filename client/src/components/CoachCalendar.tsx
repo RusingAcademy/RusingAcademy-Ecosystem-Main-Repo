@@ -149,7 +149,7 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
       case "pending": return "bg-yellow-500";
       case "cancelled": return "bg-red-500";
       case "completed": return "bg-blue-500";
-      default: return "bg-[#0a6969]";
+      default: return "bg-teal-800";
     }
   };
 

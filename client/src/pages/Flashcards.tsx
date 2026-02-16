@@ -11,7 +11,7 @@ import { getLoginUrl } from "@/const";
 
 const DECK_COLORS = ["teal", "blue", "amber", "rose", "purple", "green", "orange"];
 const COLOR_MAP: Record<string, { bg: string; text: string; light: string }> = {
-  teal: { bg: "bg-[#008090]", text: "text-[#008090]", light: "bg-teal-50" },
+  teal: { bg: "bg-teal-700", text: "text-teal-700", light: "bg-teal-50" },
   blue: { bg: "bg-blue-600", text: "text-blue-600", light: "bg-blue-50" },
   amber: { bg: "bg-amber-500", text: "text-amber-600", light: "bg-amber-50" },
   rose: { bg: "bg-rose-500", text: "text-rose-600", light: "bg-rose-50" },
@@ -160,7 +160,7 @@ export default function Flashcards() {
 
   if (authLoading) return (
     <div className="flex items-center justify-center h-screen" role="status" aria-label={t("skillLabs.loading")}>
-      <div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full" />
+      <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full" />
       <span className="sr-only">{t("skillLabs.loading")}</span>
     </div>
   );
@@ -230,7 +230,7 @@ export default function Flashcards() {
           {viewMode === "decks" && stats && (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
               {[
-                { label: t("flashcards.totalDecks"), value: stats.totalDecks, icon: "style", color: "text-[#008090]", bg: "bg-teal-50" },
+                { label: t("flashcards.totalDecks"), value: stats.totalDecks, icon: "style", color: "text-teal-700", bg: "bg-teal-50" },
                 { label: t("flashcards.totalCards"), value: stats.totalCards, icon: "content_copy", color: "text-blue-600", bg: "bg-blue-50" },
                 { label: t("flashcards.dueToday"), value: stats.dueCards, icon: "schedule", color: "text-amber-600", bg: "bg-amber-50" },
                 { label: t("flashcards.mastered"), value: stats.mastered, icon: "verified", color: "text-green-600", bg: "bg-green-50" },
@@ -310,13 +310,13 @@ export default function Flashcards() {
           {viewMode === "decks" && (
             decksLoading ? (
               <div className="text-center py-16" role="status">
-                <div className="animate-spin w-8 h-8 mx-auto border-2 border-[#008090] border-t-transparent rounded-full" />
+                <div className="animate-spin w-8 h-8 mx-auto border-2 border-teal-700 border-t-transparent rounded-full" />
                 <span className="sr-only">{t("skillLabs.loading")}</span>
               </div>
             ) : decks.length === 0 ? (
               <div className="text-center py-16" role="status">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">style</span>
+                  <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">style</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("flashcards.emptyTitle")}</h3>
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("flashcards.emptyDesc")}</p>
@@ -371,7 +371,7 @@ export default function Flashcards() {
             cards.length === 0 ? (
               <div className="text-center py-16" role="status">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">content_copy</span>
+                  <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">content_copy</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("flashcards.emptyCards")}</h3>
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("flashcards.emptyCardsDesc")}</p>
@@ -450,7 +450,7 @@ export default function Flashcards() {
                 {/* Progress + Timer */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow={reviewIndex + 1} aria-valuemin={1} aria-valuemax={dueCards.length}>
-                    <div className="h-full bg-[#008090] rounded-full transition-all duration-300" style={{ width: `${((reviewIndex) / dueCards.length) * 100}%` }} />
+                    <div className="h-full bg-teal-700 rounded-full transition-all duration-300" style={{ width: `${((reviewIndex) / dueCards.length) * 100}%` }} />
                   </div>
                   <span className="text-xs text-gray-500 font-medium" aria-live="polite">{reviewIndex + 1}/{dueCards.length}</span>
                 </div>
@@ -487,7 +487,7 @@ export default function Flashcards() {
                     </>
                   ) : (
                     <>
-                      <span className="text-[10px] text-[#008090] uppercase tracking-wider mb-4">{t("flashcards.back").split(" ")[0]}</span>
+                      <span className="text-[10px] text-teal-700 uppercase tracking-wider mb-4">{t("flashcards.back").split(" ")[0]}</span>
                       <p className="text-xl font-semibold text-gray-900 text-center">{dueCards[reviewIndex]?.back}</p>
                     </>
                   )}

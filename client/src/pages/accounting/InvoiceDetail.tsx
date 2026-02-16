@@ -286,7 +286,7 @@ export default function InvoiceDetail() {
               <button className="qb-btn-outline flex items-center gap-1" onClick={() => handleStatusChange("Sent")}>
                 <Send size={14} /> Mark as Sent
               </button>
-              <button className="qb-btn flex items-center gap-1 bg-[#0077C5] text-white" onClick={() => {
+              <button className="qb-btn flex items-center gap-1 bg-sky-600 text-white" onClick={() => {
                 const customer = customers?.find((c: any) => c.id === inv?.customerId);
                 setEmailRecipient(customer?.email || "");
                 setEmailMessage("");
@@ -562,7 +562,7 @@ export default function InvoiceDetail() {
 
           {isEditing && (
             <button
-              className="mt-3 text-sm text-[#0077C5] hover:underline flex items-center gap-1"
+              className="mt-3 text-sm text-sky-600 hover:underline flex items-center gap-1"
               onClick={addLineItem}
             >
               <Plus size={14} /> Add a line
@@ -594,8 +594,8 @@ export default function InvoiceDetail() {
                   <span className="text-gray-800">${Number(inv.amountPaid || 0).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200">
-                  <span className="text-[#2CA01C]">Amount Due</span>
-                  <span className="text-[#2CA01C]">${Number(inv.amountDue || total).toFixed(2)}</span>
+                  <span className="text-green-600">Amount Due</span>
+                  <span className="text-green-600">${Number(inv.amountDue || total).toFixed(2)}</span>
                 </div>
               </>
             )}
@@ -718,7 +718,7 @@ export default function InvoiceDetail() {
           <div className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <Send size={20} className="text-[#0077C5]" />
+                <Send size={20} className="text-sky-600" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-gray-800">Email Invoice</h3>
@@ -791,7 +791,7 @@ export default function InvoiceDetail() {
             <div className="flex justify-end gap-2 mt-6">
               <button className="qb-btn-outline" onClick={() => setShowEmailDialog(false)}>Cancel</button>
               <button
-                className="px-4 py-2 bg-[#0077C5] text-white rounded-lg text-sm font-medium hover:bg-[#005fa3] flex items-center gap-2"
+                className="px-4 py-2 bg-sky-600 text-white rounded-lg text-sm font-medium hover:bg-[#005fa3] flex items-center gap-2"
                 disabled={sendEmailMutation.isPending || !emailRecipient}
                 onClick={() => sendEmailMutation.mutate({
                   invoiceId,

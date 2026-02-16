@@ -933,7 +933,7 @@ function TestimonialsSection({ language }: { language: string }) {
                   href={testimonial.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#0077B5] flex items-center justify-center hover:bg-[#006097] transition-colors"
+                  className="w-10 h-10 rounded-full bg-sky-700 flex items-center justify-center hover:bg-sky-800 transition-colors"
                 >
                   <Linkedin className="w-5 h-5 text-white" />
                 </a>

@@ -107,9 +107,9 @@ export default function PronunciationLab() {
             <h1 className="text-2xl font-bold text-gray-900">Pronunciation Lab</h1>
             <p className="text-sm text-gray-500 mt-1">Listen, practice, and perfect your French pronunciation</p>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#008090]/10 rounded-full">
-            <span className="material-icons text-[#008090] text-base">mic</span>
-            <span className="text-xs font-semibold text-[#008090]">{practiceCount} practices</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-teal-700/10 rounded-full">
+            <span className="material-icons text-teal-700 text-base">mic</span>
+            <span className="text-xs font-semibold text-teal-700">{practiceCount} practices</span>
           </div>
         </div>
 
@@ -121,7 +121,7 @@ export default function PronunciationLab() {
               onClick={() => { setLevel(l); setCurrentIndex(0); setRecordedUrl(null); }}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 level === l
-                  ? "bg-[#008090] text-white shadow-sm"
+                  ? "bg-teal-700 text-white shadow-sm"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -134,14 +134,14 @@ export default function PronunciationLab() {
         <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm mb-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[10px] text-gray-400 uppercase tracking-wider">Exercise {currentIndex + 1} of {exercises.length}</span>
-            <span className="px-2 py-0.5 bg-[#008090]/10 text-[#008090] rounded-full text-[10px] font-semibold">Level {level}</span>
+            <span className="px-2 py-0.5 bg-teal-700/10 text-teal-700 rounded-full text-[10px] font-semibold">Level {level}</span>
           </div>
 
           {/* Phrase */}
           <div className="text-center py-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-3">{current.phrase}</h2>
             <p className="text-sm text-gray-500 mb-1">{current.translation}</p>
-            <p className="text-xs text-[#008090] font-mono">{current.ipa}</p>
+            <p className="text-xs text-teal-700 font-mono">{current.ipa}</p>
           </div>
 
           {/* Controls */}
@@ -159,7 +159,7 @@ export default function PronunciationLab() {
               className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all shadow-sm ${
                 isRecording
                   ? "bg-red-500 text-white animate-pulse"
-                  : "bg-white border-2 border-[#008090] text-[#008090] hover:bg-[#008090]/5"
+                  : "bg-white border-2 border-teal-700 text-teal-700 hover:bg-teal-700/5"
               }`}
             >
               <span className="material-icons">{isRecording ? "stop" : "mic"}</span>
@@ -171,12 +171,12 @@ export default function PronunciationLab() {
           {recordedUrl && (
             <div className="bg-gray-50 rounded-xl p-4 mb-4">
               <div className="flex items-center gap-3">
-                <span className="material-icons text-[#008090]">headphones</span>
+                <span className="material-icons text-teal-700">headphones</span>
                 <span className="text-sm text-gray-600 flex-1">Your recording</span>
                 <audio src={recordedUrl} controls className="h-8" />
               </div>
               <div className="mt-3 flex gap-2">
-                <button onClick={speakPhrase} className="flex-1 text-xs text-[#008090] bg-[#008090]/5 rounded-lg py-2 hover:bg-[#008090]/10 transition-colors">
+                <button onClick={speakPhrase} className="flex-1 text-xs text-teal-700 bg-teal-700/5 rounded-lg py-2 hover:bg-teal-700/10 transition-colors">
                   <span className="material-icons text-sm align-middle mr-1">compare_arrows</span>Compare with model
                 </button>
                 <button onClick={startRecording} className="flex-1 text-xs text-gray-600 bg-gray-100 rounded-lg py-2 hover:bg-gray-200 transition-colors">
@@ -188,23 +188,23 @@ export default function PronunciationLab() {
 
           {/* Navigation */}
           <div className="flex items-center justify-between">
-            <button onClick={prevExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] transition-colors">
+            <button onClick={prevExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 transition-colors">
               <span className="material-icons text-lg">chevron_left</span> Previous
             </button>
             <div className="flex gap-1">
               {exercises.map((_, i) => (
-                <div key={i} className={`w-2 h-2 rounded-full transition-colors ${i === currentIndex ? "bg-[#008090]" : "bg-gray-200"}`} />
+                <div key={i} className={`w-2 h-2 rounded-full transition-colors ${i === currentIndex ? "bg-teal-700" : "bg-gray-200"}`} />
               ))}
             </div>
-            <button onClick={nextExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] transition-colors">
+            <button onClick={nextExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 transition-colors">
               Next <span className="material-icons text-lg">chevron_right</span>
             </button>
           </div>
         </div>
 
         {/* Tips */}
-        <div className="bg-gradient-to-r from-[#008090]/5 to-[#006d7a]/5 border border-[#008090]/20 rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-[#008090] mb-2 flex items-center gap-1">
+        <div className="bg-gradient-to-r from-[#008090]/5 to-[#006d7a]/5 border border-teal-700/20 rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-teal-700 mb-2 flex items-center gap-1">
             <span className="material-icons text-base">tips_and_updates</span> Pronunciation Tips
           </h3>
           <ul className="space-y-1 text-xs text-gray-600">

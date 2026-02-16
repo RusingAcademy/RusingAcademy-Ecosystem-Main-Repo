@@ -217,7 +217,7 @@ export default function MyProfile() {
       <DashboardLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center space-y-3">
-            <div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full mx-auto" />
+            <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
             <p className="text-sm text-gray-500">{t.loading}</p>
           </div>
         </div>
@@ -230,10 +230,10 @@ export default function MyProfile() {
       <DashboardLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center space-y-4 max-w-md">
-            <span className="material-icons text-[#008090] text-5xl">person_add</span>
+            <span className="material-icons text-teal-700 text-5xl">person_add</span>
             <h2 className="text-xl font-bold text-gray-900">{t.noProfile}</h2>
             <Link href="/onboarding">
-              <button className="bg-[#008090] text-white px-6 py-2 rounded-lg hover:bg-[#006d7a] transition-colors">
+              <button className="bg-teal-700 text-white px-6 py-2 rounded-lg hover:bg-teal-800 transition-colors">
                 {t.startOnboarding}
               </button>
             </Link>
@@ -252,7 +252,7 @@ export default function MyProfile() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
-            <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors" aria-label={t.back}>
+            <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors" aria-label={t.back}>
               <span className="material-icons text-xl">navigate_before</span>
             </Link>
             <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -264,7 +264,7 @@ export default function MyProfile() {
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               isEditing
                 ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                : "bg-[#008090]/10 text-[#008090] hover:bg-[#008090]/20"
+                : "bg-teal-700/10 text-teal-700 hover:bg-teal-700/20"
             }`}
             aria-label={isEditing ? t.viewMode : t.editMode}
           >
@@ -278,7 +278,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-personal">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-personal" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">person</span>
+                <span className="material-icons text-teal-700 text-lg">person</span>
                 {t.personal}
               </h2>
             </div>
@@ -290,7 +290,7 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.name}</label>
                       {isEditing ? (
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                           aria-label={t.name} />
                       ) : (
                         <p className="text-sm text-gray-800 py-2">{name || t.notSet}</p>
@@ -306,7 +306,7 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.department}</label>
                       {isEditing ? (
                         <select value={department} onChange={(e) => setDepartment(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                           aria-label={t.department}>
                           <option value="">—</option>
                           {DEPARTMENTS.map((d) => <option key={d} value={d}>{d}</option>)}
@@ -319,7 +319,7 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.position}</label>
                       {isEditing ? (
                         <input type="text" value={position} onChange={(e) => setPosition(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                           aria-label={t.position} />
                       ) : (
                         <p className="text-sm text-gray-800 py-2">{position || t.notSet}</p>
@@ -329,11 +329,11 @@ export default function MyProfile() {
                 </div>
                 {/* Avatar */}
                 <div className="w-full lg:w-[160px] flex flex-col items-center">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#008090]/20 to-[#008090]/5 flex items-center justify-center mb-2 border-2 border-[#008090]/20">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#008090]/20 to-[#008090]/5 flex items-center justify-center mb-2 border-2 border-teal-700/20">
                     {profile?.avatarUrl ? (
                       <img src={profile.avatarUrl} alt={name} className="w-full h-full rounded-full object-cover" />
                     ) : (
-                      <span className="material-icons text-[#008090] text-4xl">person</span>
+                      <span className="material-icons text-teal-700 text-4xl">person</span>
                     )}
                   </div>
                   <p className="text-xs text-gray-500 text-center mt-1">{profile?.email}</p>
@@ -346,7 +346,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-sle">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-sle" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">assessment</span>
+                <span className="material-icons text-teal-700 text-lg">assessment</span>
                 {t.sleLevels}
               </h2>
             </div>
@@ -366,7 +366,7 @@ export default function MyProfile() {
                             {SLE_LEVELS.map((lvl) => (
                               <button key={lvl} onClick={() => (setter as (v: string) => void)(lvl)}
                                 className={`w-8 h-8 rounded-full text-xs font-bold border transition-all ${
-                                  val === lvl ? "bg-[#008090] text-white border-[#008090]" : "bg-white text-gray-500 border-gray-300 hover:border-[#008090]"
+                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white text-gray-500 border-gray-300 hover:border-teal-700"
                                 }`} aria-label={`${label}: ${lvl}`}>
                                 {lvl}
                               </button>
@@ -393,7 +393,7 @@ export default function MyProfile() {
                             {SLE_LEVELS.map((lvl) => (
                               <button key={lvl} onClick={() => (setter as (v: string) => void)(lvl)}
                                 className={`w-8 h-8 rounded-full text-xs font-bold border transition-all ${
-                                  val === lvl ? "bg-[#008090] text-white border-[#008090]" : "bg-white text-gray-500 border-gray-300 hover:border-[#008090]"
+                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white text-gray-500 border-gray-300 hover:border-teal-700"
                                 }`} aria-label={`${label}: ${lvl}`}>
                                 {lvl}
                               </button>
@@ -414,7 +414,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-goals">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-goals" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">flag</span>
+                <span className="material-icons text-teal-700 text-lg">flag</span>
                 {t.learningGoals}
               </h2>
             </div>
@@ -424,7 +424,7 @@ export default function MyProfile() {
                 {isEditing ? (
                   <textarea value={learningGoals} onChange={(e) => setLearningGoals(e.target.value)}
                     rows={3} placeholder={t.goalsPlaceholder}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090] resize-none"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700 resize-none"
                     aria-label={t.goals} />
                 ) : (
                   <p className="text-sm text-gray-800 py-2 whitespace-pre-wrap">{learningGoals || t.notSet}</p>
@@ -435,7 +435,7 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.primaryFocus}</label>
                   {isEditing ? (
                     <select value={primaryFocus} onChange={(e) => setPrimaryFocus(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                       aria-label={t.primaryFocus}>
                       {FOCUS_OPTIONS.map((f) => (
                         <option key={f} value={f}>{t.focusLabels[f]}</option>
@@ -449,7 +449,7 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.targetLanguage}</label>
                   {isEditing ? (
                     <select value={targetLanguage} onChange={(e) => setTargetLanguage(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                       aria-label={t.targetLanguage}>
                       <option value="french">{t.french}</option>
                       <option value="english">{t.english}</option>
@@ -463,7 +463,7 @@ export default function MyProfile() {
                   {isEditing ? (
                     <input type="number" min={1} max={40} value={weeklyStudyHours}
                       onChange={(e) => setWeeklyStudyHours(Number(e.target.value))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                       aria-label={t.weeklyHours} />
                   ) : (
                     <p className="text-sm text-gray-800 py-2">{weeklyStudyHours} {t.hoursPerWeek}</p>
@@ -474,7 +474,7 @@ export default function MyProfile() {
                 <label className="text-xs font-medium text-gray-500 mb-1 block">{t.examDate}</label>
                 {isEditing ? (
                   <input type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)}
-                    className="w-full sm:w-auto border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                    className="w-full sm:w-auto border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                     aria-label={t.examDate} />
                 ) : (
                   <p className="text-sm text-gray-800 py-2">{examDate || t.notSet}</p>
@@ -487,7 +487,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-cert">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-cert" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">verified</span>
+                <span className="material-icons text-teal-700 text-lg">verified</span>
                 {t.certification}
               </h2>
             </div>
@@ -541,7 +541,7 @@ export default function MyProfile() {
           <section className="bg-white rounded-xl border border-gray-200 overflow-hidden" aria-labelledby="section-prefs">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-prefs" className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">settings</span>
+                <span className="material-icons text-teal-700 text-lg">settings</span>
                 {t.preferences}
               </h2>
             </div>
@@ -551,7 +551,7 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.prefLang}</label>
                   {isEditing ? (
                     <select value={preferredLanguage} onChange={(e) => setPreferredLanguage(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-[#008090]"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
                       aria-label={t.prefLang}>
                       <option value="en">English</option>
                       <option value="fr">Français</option>
@@ -572,7 +572,7 @@ export default function MyProfile() {
                 {t.viewMode}
               </button>
               <button onClick={handleSave} disabled={updateProfile.isPending}
-                className="px-8 py-2.5 rounded-lg text-sm font-medium text-white bg-[#008090] hover:bg-[#006d7a] transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-8 py-2.5 rounded-lg text-sm font-medium text-white bg-teal-700 hover:bg-teal-800 transition-colors disabled:opacity-50 flex items-center gap-2"
                 aria-label={t.save}>
                 {updateProfile.isPending && <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />}
                 {updateProfile.isPending ? t.saving : t.save}

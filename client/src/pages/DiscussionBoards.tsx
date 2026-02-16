@@ -69,7 +69,7 @@ export default function DiscussionBoards() {
     return (
       <DashboardLayout>
         <div className="max-w-4xl mx-auto px-4 py-6">
-          <button onClick={() => setSelectedThread(null)} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors">
+          <button onClick={() => setSelectedThread(null)} className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 mb-4 transition-colors">
             <span className="material-icons text-lg">arrow_back</span> Back to Discussions
           </button>
           {thread.isLoading ? (
@@ -100,8 +100,8 @@ export default function DiscussionBoards() {
                 {r.map((reply) => (
                   <div key={reply.id} className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-7 h-7 rounded-full bg-[#008090]/10 flex items-center justify-center">
-                        <span className="material-icons text-[#008090] text-sm">person</span>
+                      <div className="w-7 h-7 rounded-full bg-teal-700/10 flex items-center justify-center">
+                        <span className="material-icons text-teal-700 text-sm">person</span>
                       </div>
                       <span className="text-[11px] text-gray-500">User #{reply.userId}</span>
                       <span className="text-[10px] text-gray-400">{new Date(reply.createdAt).toLocaleDateString()}</span>
@@ -126,7 +126,7 @@ export default function DiscussionBoards() {
                     <button
                       onClick={() => createReply.mutate({ threadId: selectedThread, content: replyContent })}
                       disabled={!replyContent.trim() || createReply.isPending}
-                      className="px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] disabled:opacity-50 transition-colors"
+                      className="px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 disabled:opacity-50 transition-colors"
                     >
                       {createReply.isPending ? "Posting..." : "Post Reply"}
                     </button>
@@ -151,7 +151,7 @@ export default function DiscussionBoards() {
             <p className="text-sm text-gray-500 mt-1">Connect with fellow learners and share your journey</p>
           </div>
           {user && (
-            <button onClick={() => setShowNewThread(true)} className="flex items-center gap-2 px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] transition-colors shadow-sm">
+            <button onClick={() => setShowNewThread(true)} className="flex items-center gap-2 px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 transition-colors shadow-sm">
               <span className="material-icons text-lg">add</span> New Thread
             </button>
           )}
@@ -212,7 +212,7 @@ export default function DiscussionBoards() {
                 <button
                   onClick={() => createThread.mutate({ title: newTitle, content: newContent, category: newCategory as any })}
                   disabled={!newTitle.trim() || !newContent.trim() || createThread.isPending}
-                  className="px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] disabled:opacity-50 transition-colors"
+                  className="px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 disabled:opacity-50 transition-colors"
                 >
                   {createThread.isPending ? "Creating..." : "Post Thread"}
                 </button>
@@ -238,7 +238,7 @@ export default function DiscussionBoards() {
                 <button
                   key={t.id}
                   onClick={() => setSelectedThread(t.id)}
-                  className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-[#008090]/30 transition-all"
+                  className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all"
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: catInfo.color + "15" }}>
@@ -246,7 +246,7 @@ export default function DiscussionBoards() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        {t.isPinned && <span className="material-icons text-[#f59e0b] text-sm">push_pin</span>}
+                        {t.isPinned && <span className="material-icons text-amber-500 text-sm">push_pin</span>}
                         <h3 className="text-sm font-semibold text-gray-900 truncate">{t.title}</h3>
                       </div>
                       <p className="text-xs text-gray-500 line-clamp-2">{t.content}</p>

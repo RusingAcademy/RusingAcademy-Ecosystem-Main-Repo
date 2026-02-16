@@ -110,7 +110,7 @@ export default function Notes() {
   const pinnedNotes = filteredNotes.filter(n => n.isPinned);
   const unpinnedNotes = filteredNotes.filter(n => !n.isPinned);
 
-  if (authLoading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full" /></div>;
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
@@ -130,7 +130,7 @@ export default function Notes() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                <span className="material-icons text-[#008090]">note_alt</span>
+                <span className="material-icons text-teal-700">note_alt</span>
                 Study Notes
               </h1>
               <p className="text-sm text-gray-500 mt-1">{notes.length} notes total</p>
@@ -154,13 +154,13 @@ export default function Notes() {
                 placeholder="Search notes..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setSelectedTag(null)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${!selectedTag ? "bg-[#008090] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${!selectedTag ? "bg-teal-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
               >
                 All
               </button>
@@ -168,7 +168,7 @@ export default function Notes() {
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${selectedTag === tag ? "bg-[#008090] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${selectedTag === tag ? "bg-teal-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
                 >
                   #{tag}
                 </button>
@@ -195,7 +195,7 @@ export default function Notes() {
                     placeholder="Note title..."
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
                   />
 
                   <textarea
@@ -203,14 +203,14 @@ export default function Notes() {
                     value={content}
                     onChange={e => setContent(e.target.value)}
                     rows={10}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090] resize-none font-mono"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700 resize-none font-mono"
                   />
 
                   {/* Tags */}
                   <div className="mb-3">
                     <div className="flex gap-2 flex-wrap mb-2">
                       {tags.map(tag => (
-                        <span key={tag} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#008090]/10 text-[#008090] text-xs font-medium">
+                        <span key={tag} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-teal-700/10 text-teal-700 text-xs font-medium">
                           #{tag}
                           <button onClick={() => handleRemoveTag(tag)} className="hover:text-red-500">
                             <span className="material-icons text-xs">close</span>
@@ -240,7 +240,7 @@ export default function Notes() {
                       <button
                         key={c.id}
                         onClick={() => setNoteColor(c.id)}
-                        className={`w-6 h-6 rounded-full border-2 transition-all ${c.bg} ${noteColor === c.id ? "border-[#008090] ring-2 ring-[#008090]/20" : "border-gray-300"}`}
+                        className={`w-6 h-6 rounded-full border-2 transition-all ${c.bg} ${noteColor === c.id ? "border-teal-700 ring-2 ring-[#008090]/20" : "border-gray-300"}`}
                         title={c.label}
                       />
                     ))}
@@ -333,7 +333,7 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }: {
       {/* Actions */}
       <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
         <button onClick={() => onTogglePin(note.id, note.isPinned)} className="p-1.5 rounded-lg hover:bg-white/80" title={note.isPinned ? "Unpin" : "Pin"}>
-          <span className={`material-icons text-sm ${note.isPinned ? "text-[#008090]" : "text-gray-400"}`}>push_pin</span>
+          <span className={`material-icons text-sm ${note.isPinned ? "text-teal-700" : "text-gray-400"}`}>push_pin</span>
         </button>
         <button onClick={() => onEdit(note)} className="p-1.5 rounded-lg hover:bg-white/80" title="Edit">
           <span className="material-icons text-sm text-gray-400">edit</span>
@@ -344,7 +344,7 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }: {
       </div>
 
       {note.isPinned && (
-        <span className="material-icons text-xs text-[#008090] absolute top-3 left-4">push_pin</span>
+        <span className="material-icons text-xs text-teal-700 absolute top-3 left-4">push_pin</span>
       )}
 
       <h3 className="text-sm font-bold text-gray-900 mb-2 pr-16 mt-1">{note.title}</h3>
@@ -354,7 +354,7 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }: {
       {noteTags.length > 0 && (
         <div className="flex gap-1.5 flex-wrap mb-3">
           {noteTags.map(tag => (
-            <span key={tag} className="px-2 py-0.5 rounded-full bg-[#008090]/10 text-[#008090] text-[10px] font-medium">
+            <span key={tag} className="px-2 py-0.5 rounded-full bg-teal-700/10 text-teal-700 text-[10px] font-medium">
               #{tag}
             </span>
           ))}

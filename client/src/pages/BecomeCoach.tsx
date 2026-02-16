@@ -526,7 +526,7 @@ export default function BecomeCoach() {
           <div className="container">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
-                <Badge className="mb-4 bg-amber-100 text-amber-700 border-[#FFE4D6]">
+                <Badge className="mb-4 bg-amber-100 text-amber-700 border-orange-100">
                   {isEn ? "Requirements" : "Exigences"}
                 </Badge>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.requirements}</h2>

@@ -121,7 +121,7 @@ function CalendlyEmbed({ url, onClose }: { url: string; onClose: () => void }) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div className="flex items-center gap-3">
-            <span className="material-icons text-[#008090]">calendar_month</span>
+            <span className="material-icons text-teal-700">calendar_month</span>
             <h3 className="text-lg font-semibold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
               Schedule Your Session
             </h3>
@@ -170,7 +170,7 @@ export default function TutoringSessions() {
       <div className="max-w-[1200px]">
         {/* Header */}
         <div className="flex items-center gap-2 mb-2">
-          <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+          <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
             <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -189,7 +189,7 @@ export default function TutoringSessions() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-5 py-3 text-sm font-medium transition-colors relative
                 ${activeTab === tab.id
-                  ? "text-[#008090] border-b-2 border-[#008090]"
+                  ? "text-teal-700 border-b-2 border-teal-700"
                   : "text-gray-500 hover:text-gray-700"
                 }`}
             >
@@ -215,7 +215,7 @@ export default function TutoringSessions() {
                 </div>
                 <button
                   onClick={() => handleBook("https://calendly.com/steven-barholere/30min")}
-                  className="bg-white text-[#008090] px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors flex items-center gap-2 whitespace-nowrap"
+                  className="bg-white text-teal-700 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors flex items-center gap-2 whitespace-nowrap"
                 >
                   <span className="material-icons text-lg">phone_in_talk</span>
                   Book Free Discovery Call
@@ -301,9 +301,9 @@ export default function TutoringSessions() {
                 ].map((s) => (
                   <div key={s.step} className="text-center">
                     <div className="w-10 h-10 rounded-full bg-[rgba(0,128,144,0.1)] flex items-center justify-center mx-auto mb-3">
-                      <span className="text-sm font-bold text-[#008090]">{s.step}</span>
+                      <span className="text-sm font-bold text-teal-700">{s.step}</span>
                     </div>
-                    <span className="material-icons text-[1.75rem] text-[#008090] mb-2 block">{s.icon}</span>
+                    <span className="material-icons text-[1.75rem] text-teal-700 mb-2 block">{s.icon}</span>
                     <h4 className="font-semibold text-gray-900 text-sm mb-1">{s.title}</h4>
                     <p className="text-xs text-gray-500">{s.desc}</p>
                   </div>
@@ -344,13 +344,13 @@ export default function TutoringSessions() {
                           </svg>
                         </a>
                       </div>
-                      <p className="text-sm text-[#008090] font-medium mb-1">{coach.role}</p>
+                      <p className="text-sm text-teal-700 font-medium mb-1">{coach.role}</p>
                       <p className="text-xs text-gray-500 mb-2">{coach.bio}</p>
                       <div className="flex items-center gap-3 flex-wrap">
                         <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-600">
                           {coach.specialty}
                         </span>
-                        <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-[rgba(0,128,144,0.1)] text-[#008090]">
+                        <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-[rgba(0,128,144,0.1)] text-teal-700">
                           {coach.languages}
                         </span>
                       </div>
@@ -358,7 +358,7 @@ export default function TutoringSessions() {
                   </div>
                   <button
                     onClick={() => handleBook("https://calendly.com/rusingacademy")}
-                    className="w-full mt-4 py-2.5 rounded-xl text-sm font-semibold bg-[rgba(0,128,144,0.08)] text-[#008090] hover:bg-[#008090] hover:text-white transition-colors flex items-center justify-center gap-2"
+                    className="w-full mt-4 py-2.5 rounded-xl text-sm font-semibold bg-[rgba(0,128,144,0.08)] text-teal-700 hover:bg-teal-700 hover:text-white transition-colors flex items-center justify-center gap-2"
                   >
                     <span className="material-icons text-base">calendar_today</span>
                     Book with {coach.name.split(" ")[0]}
@@ -400,7 +400,7 @@ export default function TutoringSessions() {
                       </p>
                       <button
                         onClick={() => setActiveTab("book")}
-                        className="text-sm font-semibold text-[#008090] hover:underline"
+                        className="text-sm font-semibold text-teal-700 hover:underline"
                       >
                         Book your first session →
                       </button>
@@ -412,7 +412,7 @@ export default function TutoringSessions() {
 
             {/* Info Card */}
             <div className="mt-4 glass-card rounded-xl p-4 flex items-start gap-3">
-              <span className="material-icons text-[#008090] text-xl mt-0.5">info</span>
+              <span className="material-icons text-teal-700 text-xl mt-0.5">info</span>
               <div>
                 <p className="text-sm text-gray-700 font-medium">Session tracking coming soon</p>
                 <p className="text-xs text-gray-500 mt-1">

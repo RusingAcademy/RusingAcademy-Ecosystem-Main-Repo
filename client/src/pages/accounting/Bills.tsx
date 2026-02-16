@@ -75,7 +75,7 @@ export default function Bills() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Bills</h1>
         <Link href="/bills/new">
-          <Button className="bg-[#2CA01C] hover:bg-[#248a17]">
+          <Button className="bg-green-600 hover:bg-green-700">
             <Plus size={16} className="mr-1" /> Create bill
           </Button>
         </Link>
@@ -129,7 +129,7 @@ export default function Bills() {
                   <FileText size={40} className="mx-auto text-gray-300 mb-3" />
                   <p className="text-gray-500 text-sm">No bills yet</p>
                   <Link href="/bills/new">
-                    <button className="mt-3 text-sm text-[#2CA01C] font-medium hover:underline">Create your first bill</button>
+                    <button className="mt-3 text-sm text-green-600 font-medium hover:underline">Create your first bill</button>
                   </Link>
                 </td>
               </tr>
@@ -140,7 +140,7 @@ export default function Bills() {
                     {bill.billDate ? new Date(bill.billDate).toLocaleDateString("en-CA") : "-"}
                   </td>
                   <td className="px-4 py-3">
-                    <Link href={`/bills/${bill.id}`} className="text-sm text-[#0077C5] hover:underline font-medium">
+                    <Link href={`/bills/${bill.id}`} className="text-sm text-sky-600 hover:underline font-medium">
                       {bill.billNumber || `Bill-${bill.id}`}
                     </Link>
                   </td>
@@ -160,7 +160,7 @@ export default function Bills() {
                       {(bill.status === "Open" || bill.status === "Partial" || bill.status === "Overdue") && (
                         <button
                           onClick={() => openPayDialog(bill)}
-                          className="text-xs text-[#2CA01C] hover:underline font-medium flex items-center gap-1"
+                          className="text-xs text-green-600 hover:underline font-medium flex items-center gap-1"
                         >
                           <DollarSign size={12} /> Pay
                         </button>
@@ -168,7 +168,7 @@ export default function Bills() {
                       {bill.status === "Draft" && (
                         <button
                           onClick={() => updateMutation.mutate({ id: bill.id, status: "Open" })}
-                          className="text-xs text-[#0077C5] hover:underline font-medium"
+                          className="text-xs text-sky-600 hover:underline font-medium"
                         >
                           Open
                         </button>
@@ -252,7 +252,7 @@ export default function Bills() {
                 paymentDate: new Date(payDate),
               })}
               disabled={payMutation.isPending || !payAmount}
-              className="bg-[#2CA01C] hover:bg-[#248a17]"
+              className="bg-green-600 hover:bg-green-700"
             >
               {payMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : <DollarSign size={14} className="mr-1" />}
               Record Payment

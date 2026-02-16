@@ -173,7 +173,7 @@ export default function WritingPortfolio() {
       <DashboardLayout>
         <div className="max-w-4xl mx-auto px-4 py-6">
           <button onClick={resetEditor}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
             aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
             <span className="material-icons text-lg" aria-hidden="true">arrow_back</span>
             {isFr ? "Retour au portfolio" : "Back to Portfolio"}
@@ -199,7 +199,7 @@ export default function WritingPortfolio() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3 mb-4 text-[11px] text-gray-400">
-                    {s.cefrLevel && <span className="px-2 py-0.5 bg-[#008090]/10 text-[#008090] rounded-full font-medium">{s.cefrLevel}</span>}
+                    {s.cefrLevel && <span className="px-2 py-0.5 bg-teal-700/10 text-teal-700 rounded-full font-medium">{s.cefrLevel}</span>}
                     <span>{s.wordCount} {isFr ? "mots" : "words"}</span>
                     <span>{new Date(s.createdAt).toLocaleDateString(isFr ? "fr-CA" : "en-CA")}</span>
                   </div>
@@ -222,7 +222,7 @@ export default function WritingPortfolio() {
                 <div className="space-y-4" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
                   <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
                     <div className="text-center mb-4">
-                      <div className="text-3xl font-bold text-[#008090]">{fb.score}</div>
+                      <div className="text-3xl font-bold text-teal-700">{fb.score}</div>
                       <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "Score global" : "Overall Score"}</div>
                     </div>
                     <ScoreBar label={isFr ? "Grammaire" : "Grammar"} score={fb.grammar.score} color="#3b82f6" />
@@ -264,7 +264,7 @@ export default function WritingPortfolio() {
       <DashboardLayout>
         <div className="max-w-3xl mx-auto px-4 py-6">
           <button onClick={resetEditor}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
             aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
             <span className="material-icons text-lg" aria-hidden="true">arrow_back</span>
             {isFr ? "Retour au portfolio" : "Back to Portfolio"}
@@ -335,7 +335,7 @@ export default function WritingPortfolio() {
                 <button
                   onClick={handleSave}
                   disabled={!title.trim() || !content.trim() || createMutation.isPending || updateMutation.isPending}
-                  className="px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] disabled:opacity-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  className="px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 disabled:opacity-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                 >
                   {createMutation.isPending || updateMutation.isPending
                     ? (isFr ? "Enregistrement..." : "Saving...")
@@ -348,10 +348,10 @@ export default function WritingPortfolio() {
           {feedback && (
             <div className="mt-4 bg-white border border-gray-200 rounded-xl p-6 shadow-sm" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
               <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#008090]" aria-hidden="true">auto_awesome</span> {isFr ? "Retour IA" : "AI Feedback"}
+                <span className="material-icons text-teal-700" aria-hidden="true">auto_awesome</span> {isFr ? "Retour IA" : "AI Feedback"}
               </h3>
               <div className="text-center mb-4">
-                <div className="text-4xl font-bold text-[#008090]">{feedback.score}</div>
+                <div className="text-4xl font-bold text-teal-700">{feedback.score}</div>
                 <div className="text-xs text-gray-400">{isFr ? "Score global" : "Overall Score"}</div>
               </div>
               <p className="text-sm text-gray-700 mb-4">{feedback.overallFeedback}</p>
@@ -372,7 +372,7 @@ export default function WritingPortfolio() {
             <p className="text-sm text-gray-500 mt-1">{isFr ? "Pratiquez l'écriture et obtenez un retour IA" : "Practice writing and get AI-powered feedback"}</p>
           </div>
           <button onClick={() => openEditor()}
-            className="flex items-center gap-2 px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+            className="flex items-center gap-2 px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
             aria-label={t("writing.newEntry")}>
             <span className="material-icons text-lg" aria-hidden="true">edit_note</span> {t("writing.newEntry")}
           </button>
@@ -387,10 +387,10 @@ export default function WritingPortfolio() {
                 key={i}
                 role="listitem"
                 onClick={() => openEditor(prompt)}
-                className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-[#008090]/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                 aria-label={`${prompt.level}: ${language === "fr" ? prompt.fr : prompt.en}`}
               >
-                <span className="px-2 py-0.5 bg-[#008090]/10 text-[#008090] rounded-full text-[10px] font-semibold">{prompt.level}</span>
+                <span className="px-2 py-0.5 bg-teal-700/10 text-teal-700 rounded-full text-[10px] font-semibold">{prompt.level}</span>
                 <p className="text-xs text-gray-700 mt-2 line-clamp-2">{language === "fr" ? prompt.fr : prompt.en}</p>
               </button>
             ))}
@@ -407,7 +407,7 @@ export default function WritingPortfolio() {
         ) : (submissions.data || []).length === 0 ? (
           <div className="text-center py-12" role="status">
             <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-              <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">edit_note</span>
+              <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">edit_note</span>
             </div>
             <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("writing.emptyTitle")}</h3>
             <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("writing.emptyDesc")}</p>
@@ -419,7 +419,7 @@ export default function WritingPortfolio() {
                 key={s.id}
                 role="listitem"
                 onClick={() => openDetail(s.id)}
-                className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-[#008090]/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
               >
                 <div className="flex items-start justify-between">
                   <div className="min-w-0 flex-1">
@@ -429,14 +429,14 @@ export default function WritingPortfolio() {
                     </div>
                     <p className="text-xs text-gray-500 line-clamp-1">{s.content.slice(0, 120)}...</p>
                     <div className="flex items-center gap-3 mt-2 text-[10px] text-gray-400">
-                      {s.cefrLevel && <span className="px-1.5 py-0.5 bg-[#008090]/10 text-[#008090] rounded-full font-medium">{s.cefrLevel}</span>}
+                      {s.cefrLevel && <span className="px-1.5 py-0.5 bg-teal-700/10 text-teal-700 rounded-full font-medium">{s.cefrLevel}</span>}
                       <span>{s.wordCount} {isFr ? "mots" : "words"}</span>
                       <span>{new Date(s.updatedAt).toLocaleDateString(isFr ? "fr-CA" : "en-CA")}</span>
                     </div>
                   </div>
                   {s.aiScore !== null && (
                     <div className="text-center ml-4" role="status" aria-label={`Score: ${s.aiScore}`}>
-                      <div className="text-xl font-bold text-[#008090]">{s.aiScore}</div>
+                      <div className="text-xl font-bold text-teal-700">{s.aiScore}</div>
                       <div className="text-[9px] text-gray-400">Score</div>
                     </div>
                   )}

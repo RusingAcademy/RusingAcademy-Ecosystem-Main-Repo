@@ -100,7 +100,7 @@ export default function HRBudget() {
             </h2>
             <div className="h-6 bg-gray-100 rounded-full overflow-hidden flex">
               <div className="h-full bg-[#059669] transition-all" style={{ width: `${(stats.totalPaid / stats.totalInvoiced) * 100}%` }} />
-              <div className="h-full bg-[#dc2626] transition-all" style={{ width: `${(stats.totalOverdue / stats.totalInvoiced) * 100}%` }} />
+              <div className="h-full bg-red-600 transition-all" style={{ width: `${(stats.totalOverdue / stats.totalInvoiced) * 100}%` }} />
             </div>
             <div className="flex gap-6 mt-2 text-xs">
               <span className="flex items-center gap-1">
@@ -108,7 +108,7 @@ export default function HRBudget() {
                 {lang === "fr" ? "Payé" : "Paid"} ({Math.round((stats.totalPaid / stats.totalInvoiced) * 100)}%)
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-3 h-3 rounded-sm bg-[#dc2626]" />
+                <span className="w-3 h-3 rounded-sm bg-red-600" />
                 {lang === "fr" ? "En souffrance" : "Overdue"} ({Math.round((stats.totalOverdue / stats.totalInvoiced) * 100)}%)
               </span>
               <span className="flex items-center gap-1">

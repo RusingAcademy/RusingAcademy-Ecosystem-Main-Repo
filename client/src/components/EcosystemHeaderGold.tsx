@@ -381,7 +381,7 @@ export default function EcosystemHeaderGold() {
               <SheetContent side="right" className="w-80">
                 <nav className="flex flex-col gap-4 mt-8" aria-label="Mobile navigation">
                   {/* Theme Toggle for Mobile */}
-                  <div className="flex items-center justify-between p-4 rounded-xl border border-[#FFE4D6]/50 bg-gradient-to-r from-[#FFF8F3]/50 to-transparent">
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-orange-100/50 bg-gradient-to-r from-[#FFF8F3]/50 to-transparent">
                     <div className="flex items-center gap-3">
                       {isDark ? (
                         <Moon className="h-5 w-5 text-amber-600" />
@@ -431,7 +431,7 @@ export default function EcosystemHeaderGold() {
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
                       <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-foundation transition-colors">
                         <div className="font-semibold">{brand.name}</div>
-                        <div className="text-sm text-black dark:text-[#67E8F9]">
+                        <div className="text-sm text-black dark:text-cyan-300">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
                         </div>
                       </div>

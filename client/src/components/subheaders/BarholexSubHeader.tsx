@@ -54,7 +54,7 @@ export default function BarholexSubHeader() {
         >
           {/* Home Button - Left */}
           <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-foundation dark:hover:bg-foundation-2" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
-            <Home className="h-5 w-5 text-black dark:text-[#67E8F9]" />
+            <Home className="h-5 w-5 text-black dark:text-cyan-300" />
           </Link>
 
           {/* Logo/Brand */}

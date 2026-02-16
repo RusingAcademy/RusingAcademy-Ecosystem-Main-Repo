@@ -142,7 +142,7 @@ export default function PostCard({ post }: { post: Post }) {
       <div className="flex gap-4">
         <div className="flex-1 min-w-0">
           <h3
-            className="text-[15px] font-bold text-foreground mb-2 leading-snug cursor-pointer transition-colors duration-200 hover:text-[#1B1464] line-clamp-2"
+            className="text-[15px] font-bold text-foreground mb-2 leading-snug cursor-pointer transition-colors duration-200 hover:text-indigo-900 line-clamp-2"
             onClick={() => {
               const numericId = Number(post.id);
               if (!isNaN(numericId) && numericId > 0) {
@@ -159,7 +159,7 @@ export default function PostCard({ post }: { post: Post }) {
                 {"... "}
                 <button
                   onClick={() => setExpanded(true)}
-                  className="text-[#1B1464] font-semibold hover-underline text-xs"
+                  className="text-indigo-900 font-semibold hover-underline text-xs"
                 >
                   Read more
                 </button>

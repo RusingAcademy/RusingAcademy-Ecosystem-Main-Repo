@@ -61,7 +61,7 @@ export default function CoachDashboardHome() {
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
             {lang === "fr" ? "Tableau de bord" : "Dashboard"}
-            {profile?.firstName && <span className="text-[#7c3aed]"> — {profile.firstName}</span>}
+            {profile?.firstName && <span className="text-violet-600"> — {profile.firstName}</span>}
           </h1>
           <p className="text-sm text-gray-500 capitalize">{dateStr}</p>
         </div>
@@ -102,7 +102,7 @@ export default function CoachDashboardHome() {
                 <h2 className="text-base font-semibold text-gray-900">
                   {lang === "fr" ? "Sessions à venir" : "Upcoming Sessions"}
                 </h2>
-                <Link href="/coach/sessions" className="text-xs text-[#7c3aed] font-medium hover:underline">
+                <Link href="/coach/sessions" className="text-xs text-violet-600 font-medium hover:underline">
                   {lang === "fr" ? "Voir tout" : "View All"} →
                 </Link>
               </div>
@@ -131,11 +131,11 @@ export default function CoachDashboardHome() {
                         <p className="text-xs text-gray-500">{session.sessionType || "Session"} · {session.level || ""}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-xs font-semibold text-[#7c3aed]">
+                        <p className="text-xs font-semibold text-violet-600">
                           {session.scheduledAt ? new Date(session.scheduledAt).toLocaleTimeString(lang === "fr" ? "fr-CA" : "en-CA", { hour: "2-digit", minute: "2-digit" }) : "—"}
                         </p>
                         {session.meetingUrl && (
-                          <a href={session.meetingUrl} target="_blank" rel="noopener noreferrer" className="text-[10px] text-gray-400 hover:text-[#7c3aed] mt-0.5 transition-colors">
+                          <a href={session.meetingUrl} target="_blank" rel="noopener noreferrer" className="text-[10px] text-gray-400 hover:text-violet-600 mt-0.5 transition-colors">
                             <span className="material-icons text-sm">videocam</span>
                           </a>
                         )}
@@ -201,7 +201,7 @@ export default function CoachDashboardHome() {
                     </div>
                   ))}
                   {learners.length > 5 && (
-                    <Link href="/coach/students" className="block text-center text-xs text-[#7c3aed] font-medium mt-3 hover:underline">
+                    <Link href="/coach/students" className="block text-center text-xs text-violet-600 font-medium mt-3 hover:underline">
                       {lang === "fr" ? `Voir les ${learners.length} étudiants` : `View all ${learners.length} students`}
                     </Link>
                   )}

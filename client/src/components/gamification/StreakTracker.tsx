@@ -36,7 +36,7 @@ export function StreakDisplay({ streak, size = 'default' }: { streak: StreakData
       <span className={flameSize}>{isActive ? '🔥' : '❄️'}</span>
       <div>
         <p className="text-2xl font-bold text-white">{streak.currentStreak}</p>
-        <p className="text-xs text-[#67E8F9]">jours consécutifs</p>
+        <p className="text-xs text-cyan-300">jours consécutifs</p>
       </div>
     </motion.div>
   );
@@ -47,7 +47,7 @@ export function WeeklyCalendar({ weeklyActivity }: { weeklyActivity: boolean[] }
   return (
     <div className="flex gap-1">
       {days.map((day, i) => (
-        <div key={i} className={`w-8 h-8 rounded flex items-center justify-center text-xs ${weeklyActivity[i] ? 'bg-green-500 text-white' : 'bg-[#0a6969] text-[#67E8F9]'}`}>
+        <div key={i} className={`w-8 h-8 rounded flex items-center justify-center text-xs ${weeklyActivity[i] ? 'bg-green-500 text-white' : 'bg-teal-800 text-cyan-300'}`}>
           {day}
         </div>
       ))}
@@ -62,10 +62,10 @@ export function StreakMilestoneProgress({ currentStreak }: { currentStreak: numb
   return (
     <div className="space-y-2">
       <div className="flex justify-between text-sm">
-        <span className="text-[#67E8F9]">Prochain objectif</span>
+        <span className="text-cyan-300">Prochain objectif</span>
         <span className="text-foundation">{nextMilestone.label} ({nextMilestone.days}j)</span>
       </div>
-      <div className="h-2 bg-[#0a6969] rounded-full overflow-hidden">
+      <div className="h-2 bg-teal-800 rounded-full overflow-hidden">
         <motion.div className="h-full bg-gradient-to-r from-[#C65A1E] to-red-500" initial={{ width: 0 }} animate={{ width: `${Math.min(progress, 100)}%` }} />
       </div>
       <p className="text-xs text-black">+{nextMilestone.reward} XP à débloquer</p>
@@ -75,7 +75,7 @@ export function StreakMilestoneProgress({ currentStreak }: { currentStreak: numb
 
 export function StreakFreezeButton({ available, onUse }: { available: boolean; onUse: () => void }) {
   return (
-    <button onClick={onUse} disabled={!available} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${available ? 'bg-blue-500 hover:bg-blue-600' : 'bg-[#0a6969] cursor-not-allowed'}`}>
+    <button onClick={onUse} disabled={!available} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${available ? 'bg-blue-500 hover:bg-blue-600' : 'bg-teal-800 cursor-not-allowed'}`}>
       <span>❄️</span>
       <span>{available ? 'Utiliser Streak Freeze' : 'Aucun freeze disponible'}</span>
     </button>

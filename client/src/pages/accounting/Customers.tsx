@@ -93,7 +93,7 @@ export default function Customers() {
           <div>
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Open Balance</h3>
             <div className="qb-money-bar mb-2">
-              <div className="bg-[#E8A317]" style={{ flex: Math.max(totalOpenBalance, 0.1) }} />
+              <div className="bg-amber-500" style={{ flex: Math.max(totalOpenBalance, 0.1) }} />
               <div className="bg-gray-300" style={{ flex: 0.1 }} />
             </div>
             <div className="flex items-center gap-6">
@@ -136,14 +136,14 @@ export default function Customers() {
               <th className="w-8"><input type="checkbox" className="rounded" /></th>
               <th>
                 <button className="flex items-center gap-1 hover:text-gray-900" onClick={() => toggleSort("name")}>
-                  Customer <ArrowUpDown size={12} className={sortField === "name" ? "text-[#2CA01C]" : "text-gray-400"} />
+                  Customer <ArrowUpDown size={12} className={sortField === "name" ? "text-green-600" : "text-gray-400"} />
                 </button>
               </th>
               <th>Company</th>
               <th>Phone</th>
               <th className="text-right">
                 <button className="flex items-center gap-1 ml-auto hover:text-gray-900" onClick={() => toggleSort("balance")}>
-                  Open Balance <ArrowUpDown size={12} className={sortField === "balance" ? "text-[#2CA01C]" : "text-gray-400"} />
+                  Open Balance <ArrowUpDown size={12} className={sortField === "balance" ? "text-green-600" : "text-gray-400"} />
                 </button>
               </th>
               <th className="w-10"></th>
@@ -153,11 +153,11 @@ export default function Customers() {
             {paginated.map((cust: any) => (
               <tr key={cust.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/customers/${cust.id}`)}>
                 <td onClick={(e) => e.stopPropagation()}><input type="checkbox" className="rounded" /></td>
-                <td className="text-[#0077C5] font-medium">{cust.displayName}</td>
+                <td className="text-sky-600 font-medium">{cust.displayName}</td>
                 <td className="text-gray-600">{cust.company || "—"}</td>
                 <td className="text-gray-600">{cust.phone || cust.mobile || "—"}</td>
                 <td className="text-right font-medium">
-                  <span className={cust.computedBalance > 0 ? "text-[#D4380D]" : "text-gray-800"}>
+                  <span className={cust.computedBalance > 0 ? "text-red-700" : "text-gray-800"}>
                     ${cust.computedBalance.toFixed(2)}
                   </span>
                 </td>
@@ -197,7 +197,7 @@ export default function Customers() {
                 return (
                   <button
                     key={pageNum}
-                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-[#2CA01C] text-white" : "hover:bg-gray-200 text-gray-700"}`}
+                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-green-600 text-white" : "hover:bg-gray-200 text-gray-700"}`}
                     onClick={() => setPage(pageNum)}
                   >
                     {pageNum}

@@ -79,7 +79,7 @@ function CohortCard({ cohort, lang }: { cohort: any; lang: string }) {
       )}
 
       <div className="mt-3 flex items-center justify-end">
-        <span className="material-icons text-gray-300 group-hover:text-[#2563eb] text-lg transition-colors">arrow_forward</span>
+        <span className="material-icons text-gray-300 group-hover:text-blue-600 text-lg transition-colors">arrow_forward</span>
       </div>
     </div>
   );
@@ -132,7 +132,7 @@ export default function HRCohorts() {
           </div>
           <button
             onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#2563eb] text-white text-sm font-medium rounded-lg hover:bg-[#1d4ed8] transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
           >
             <span className="material-icons text-lg">add</span>
             {lang === "fr" ? "Demander une cohorte" : "Request a Cohort"}

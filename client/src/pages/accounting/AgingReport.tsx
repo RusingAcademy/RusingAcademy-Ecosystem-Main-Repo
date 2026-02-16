@@ -106,7 +106,7 @@ export default function AgingReport() {
             </p>
           </div>
         ))}
-        <div className="bg-[#2CA01C] rounded-lg p-4 text-center text-white">
+        <div className="bg-green-600 rounded-lg p-4 text-center text-white">
           <p className="text-xs opacity-80 mb-1">Total</p>
           <p className="text-lg font-bold">
             ${grandTotal.toLocaleString("en-CA", { minimumFractionDigits: 2 })}

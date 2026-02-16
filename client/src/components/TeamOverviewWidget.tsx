@@ -122,21 +122,21 @@ export function TeamOverviewWidget({
         <p className="text-2xl font-bold text-black dark:text-white">
           {value}{suffix}
         </p>
-        <p className="text-sm text-black dark:text-[#67E8F9]">{label}</p>
+        <p className="text-sm text-black dark:text-cyan-300">{label}</p>
       </div>
     );
   };
 
   return (
     <Card className={cn("overflow-hidden", className)}>
-      <CardHeader className="bg-gradient-to-r from-slate-500/10 to-slate-600/10 dark:from-slate-500/20 dark:to-slate-600/20 border-b border-slate-200/50 dark:border-[#0a6969]/50">
+      <CardHeader className="bg-gradient-to-r from-slate-500/10 to-slate-600/10 dark:from-slate-500/20 dark:to-slate-600/20 border-b border-slate-200/50 dark:border-teal-800/50">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-[#0a6969]/20 dark:bg-[#0a6969]/30">
-            <Users className="h-5 w-5 text-black dark:text-[#67E8F9]" />
+          <div className="p-2 rounded-lg bg-teal-800/20 dark:bg-teal-800/30">
+            <Users className="h-5 w-5 text-black dark:text-cyan-300" />
           </div>
           <div>
             <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
-            <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
+            <p className="text-sm text-black dark:text-cyan-300">{l.subtitle}</p>
           </div>
         </div>
       </CardHeader>
@@ -195,7 +195,7 @@ export function TeamOverviewWidget({
               value={stats.targetCompletionRate} 
               className="h-2 [&>div]:bg-emerald-500"
             />
-            <p className="text-sm text-black dark:text-[#67E8F9] mt-1">{l.targetRate}</p>
+            <p className="text-sm text-black dark:text-cyan-300 mt-1">{l.targetRate}</p>
           </div>
         </div>
       </CardContent>

@@ -645,7 +645,7 @@ function CoachCard({
             {coach.languages.map((lang) => (
               <span 
                 key={lang}
-                className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-[#0a6969]/50 rounded-full text-xs font-medium text-black dark:text-white/90"
+                className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-teal-800/50 rounded-full text-xs font-medium text-black dark:text-white/90"
               >
                 <Globe className="w-3 h-3" />
                 {lang === 'french' ? 'French' : 'English'}

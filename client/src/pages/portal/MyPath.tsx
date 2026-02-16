@@ -115,7 +115,7 @@ const pathUnits: PathUnit[] = [
 
 const levelColors = {
   A: { bg: "bg-emerald-500", light: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-200" },
-  B: { bg: "bg-cta", light: "bg-amber-50", text: "text-amber-600", border: "border-[#FFE4D6]" },
+  B: { bg: "bg-cta", light: "bg-amber-50", text: "text-amber-600", border: "border-orange-100" },
   C: { bg: "bg-blue-500", light: "bg-blue-50", text: "text-blue-600", border: "border-blue-200" },
 };
 
@@ -235,7 +235,7 @@ export default function MyPath() {
                         const isModuleCompleted = module.status === "completed";
                         const isModuleActive = module.status === "in-progress";
                         return (
-                          <div key={module.id} className={cn("flex items-center gap-4 p-3 rounded-lg transition-all", isModuleActive && "bg-amber-50 border border-[#FFE4D6]", isModuleCompleted && "bg-white", !isModuleLocked && !isModuleCompleted && !isModuleActive && "hover:bg-white cursor-pointer", isModuleLocked && "opacity-50")}>
+                          <div key={module.id} className={cn("flex items-center gap-4 p-3 rounded-lg transition-all", isModuleActive && "bg-amber-50 border border-orange-100", isModuleCompleted && "bg-white", !isModuleLocked && !isModuleCompleted && !isModuleActive && "hover:bg-white cursor-pointer", isModuleLocked && "opacity-50")}>
                             <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isModuleCompleted ? "bg-emerald-100 text-emerald-600" : isModuleActive ? "bg-amber-100 text-amber-600" : isModuleLocked ? "bg-slate-200 text-slate-400" : "bg-blue-100 text-blue-600")}>
                               {isModuleLocked ? <Lock className="h-4 w-4" /> : <Icon className="h-5 w-5" />}
                             </div>

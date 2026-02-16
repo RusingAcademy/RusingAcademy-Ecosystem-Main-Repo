@@ -207,7 +207,7 @@ export default function RusingAcademyHome() {
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-cta-2/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#2DD4BF]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
           
           <div className="container mx-auto relative z-10">
             <motion.div 
@@ -217,8 +217,8 @@ export default function RusingAcademyHome() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-[#E07B39]/20 text-black">
-                  <Sparkles className="w-4 h-4 text-[#E07B39]" />
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black">
+                  <Sparkles className="w-4 h-4 text-cta-2" />
                   {language === "en" ? "B2B/B2G Training Excellence" : "Excellence en formation B2B/B2G"}
                 </span>
               </motion.div>
@@ -228,7 +228,7 @@ export default function RusingAcademyHome() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black"
               >
                 {language === "en" ? "Build a Bilingual Workforce" : "Bâtissez une main-d'œuvre bilingue"}{" "}
-                <span className="text-[#E07B39]">
+                <span className="text-cta-2">
                   {language === "en" ? "At Scale" : "À grande échelle"}
                 </span>
               </motion.h1>
@@ -245,7 +245,7 @@ export default function RusingAcademyHome() {
               
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Link href="/rusingacademy/contact">
-                  <Button size="lg" className="bg-cta-2 hover:bg-[#C45E1A] text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full">
+                  <Button size="lg" className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full">
                     {language === "en" ? "Request a Proposal" : "Demander une proposition"}
                     <ArrowRight className="w-5 h-5" />
                   </Button>
@@ -265,19 +265,19 @@ export default function RusingAcademyHome() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={successRate.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{successRate.count}%</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{successRate.count}%</div>
                 <div className="text-sm text-black">{language === "en" ? "Success Rate" : "Taux de réussite"}</div>
               </div>
               <div ref={coaches.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{coaches.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{coaches.count}+</div>
                 <div className="text-sm text-black">{language === "en" ? "Expert Coaches" : "Coachs experts"}</div>
               </div>
               <div ref={organizations.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{organizations.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{organizations.count}+</div>
                 <div className="text-sm text-black">{language === "en" ? "Organizations" : "Organisations"}</div>
               </div>
               <div ref={learners.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#E07B39] mb-1">{learners.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{learners.count}+</div>
                 <div className="text-sm text-black">{language === "en" ? "Learners Trained" : "Apprenants formés"}</div>
               </div>
             </div>
@@ -315,7 +315,7 @@ export default function RusingAcademyHome() {
                     {index + 1}
                   </div>
                   <h3 className="font-bold text-black mb-1">{path.path}</h3>
-                  <p className="text-sm text-[#E07B39] font-medium mb-1">{path.level}</p>
+                  <p className="text-sm text-cta-2 font-medium mb-1">{path.level}</p>
                   <p className="text-xs text-black">{path.duration}</p>
                 </motion.div>
               ))}
@@ -350,7 +350,7 @@ export default function RusingAcademyHome() {
                   className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg"
                 >
                   <div className="w-12 h-12 rounded-xl bg-cta-2/10 flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-[#E07B39]" />
+                    <feature.icon className="w-6 h-6 text-cta-2" />
                   </div>
                   <h3 className="font-bold text-black mb-2">
                     {language === "en" ? feature.titleEn : feature.titleFr}
@@ -388,7 +388,7 @@ export default function RusingAcademyHome() {
                   transition={{ delay: index * 0.1 }}
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
-                      ? "border-[#E07B39] bg-gradient-to-br from-[#FFF8F3] to-white shadow-xl" 
+                      ? "border-cta-2 bg-gradient-to-br from-[#FFF8F3] to-white shadow-xl" 
                       : "border-gray-200 bg-white/80"
                   }`}
                 >
@@ -409,7 +409,7 @@ export default function RusingAcademyHome() {
                   <ul className="space-y-3 mb-6">
                     {(language === "en" ? pkg.featuresEn : pkg.featuresFr).map((feature, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-black">
-                        <CheckCircle2 className="w-4 h-4 text-[#E07B39] flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-cta-2 flex-shrink-0 mt-0.5" />
                         {feature}
                       </li>
                     ))}
@@ -418,7 +418,7 @@ export default function RusingAcademyHome() {
                     <Button 
                       className={`w-full rounded-full ${
                         pkg.popular 
-                          ? "bg-cta-2 hover:bg-[#C45E1A] text-white" 
+                          ? "bg-cta-2 hover:bg-cta text-white" 
                           : "bg-gray-100 hover:bg-gray-200 text-black"
                       }`}
                     >
@@ -449,7 +449,7 @@ export default function RusingAcademyHome() {
                   transition={{ delay: index * 0.1 }}
                   className="p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/60"
                 >
-                  <Quote className="w-8 h-8 text-[#E07B39] mb-4" />
+                  <Quote className="w-8 h-8 text-cta-2 mb-4" />
                   <p className="text-white/90 mb-4 italic">
                     "{language === "en" ? testimonial.quoteEn : testimonial.quoteFr}"
                   </p>
@@ -483,7 +483,7 @@ export default function RusingAcademyHome() {
               <Link href="/rusingacademy/contact">
                 <Button 
                   size="lg" 
-                  className="rounded-full px-8 h-14 text-lg font-semibold bg-white text-[#E07B39] hover:bg-orange-50"
+                  className="rounded-full px-8 h-14 text-lg font-semibold bg-white text-cta-2 hover:bg-orange-50"
                 >
                   {language === "en" ? "Request a Proposal" : "Demander une proposition"}
                   <ArrowRight className="ml-2 h-5 w-5" />

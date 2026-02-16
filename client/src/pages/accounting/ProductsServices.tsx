@@ -56,7 +56,7 @@ export default function ProductsServices() {
             {filteredProducts.map((prod: any) => (
               <tr key={prod.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/products-services/${prod.id}`)}>
                 <td onClick={(e) => e.stopPropagation()}><input type="checkbox" className="rounded" /></td>
-                <td className="text-[#0077C5] font-medium">{prod.name}</td>
+                <td className="text-sky-600 font-medium">{prod.name}</td>
                 <td className="text-gray-600 text-xs max-w-[200px] truncate">{prod.description || "—"}</td>
                 <td className="text-gray-600">{prod.category || "—"}</td>
                 <td>

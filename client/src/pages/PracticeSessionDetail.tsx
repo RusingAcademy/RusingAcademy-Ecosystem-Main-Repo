@@ -155,7 +155,7 @@ Score moyen: ${stats.avgScore}/100
             <CardTitle className="text-white">Session introuvable</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-[#67E8F9] mb-4">
+            <p className="text-cyan-300 mb-4">
               Cette session n'existe pas ou vous n'y avez pas accès.
             </p>
             <Link href="/practice-history">
@@ -187,7 +187,7 @@ Score moyen: ${stats.avgScore}/100
             </Link>
             <div>
               <h1 className="text-2xl font-bold text-white">Détail de la session</h1>
-              <p className="text-[#67E8F9] text-sm">
+              <p className="text-cyan-300 text-sm">
                 {session.createdAt
                   ? format(new Date(session.createdAt), "d MMMM yyyy 'à' HH:mm", { locale: fr })
                   : ""}
@@ -240,17 +240,17 @@ Score moyen: ${stats.avgScore}/100
                 <div className="flex flex-col items-center gap-1">
                   <Clock className="w-5 h-5 text-blue-400" />
                   <p className="text-lg font-semibold text-white">{formatDuration(stats.duration)}</p>
-                  <p className="text-xs text-[#67E8F9]">Durée</p>
+                  <p className="text-xs text-cyan-300">Durée</p>
                 </div>
                 <div className="flex flex-col items-center gap-1">
                   <MessageSquare className="w-5 h-5 text-green-400" />
                   <p className="text-lg font-semibold text-white">{messages.length}</p>
-                  <p className="text-xs text-[#67E8F9]">Messages</p>
+                  <p className="text-xs text-cyan-300">Messages</p>
                 </div>
                 <div className="flex flex-col items-center gap-1">
                   <TrendingUp className="w-5 h-5 text-amber-400" />
                   <p className="text-lg font-semibold text-white">{stats.avgScore}/100</p>
-                  <p className="text-xs text-[#67E8F9]">Score</p>
+                  <p className="text-xs text-cyan-300">Score</p>
                 </div>
               </div>
             </div>
@@ -259,7 +259,7 @@ Score moyen: ${stats.avgScore}/100
             {stats.avgScore > 0 && (
               <div className="mt-4">
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-[#67E8F9]">Performance globale</span>
+                  <span className="text-cyan-300">Performance globale</span>
                   <span
                     className={
                       stats.avgScore >= 80
@@ -285,7 +285,7 @@ Score moyen: ${stats.avgScore}/100
           </CardHeader>
           <CardContent className="space-y-4 max-h-[600px] overflow-y-auto">
             {messages.length === 0 ? (
-              <p className="text-[#67E8F9] text-center py-8">Aucun message dans cette session.</p>
+              <p className="text-cyan-300 text-center py-8">Aucun message dans cette session.</p>
             ) : (
               messages.map((msg, idx) => {
                 const isUser = msg.role === "user";

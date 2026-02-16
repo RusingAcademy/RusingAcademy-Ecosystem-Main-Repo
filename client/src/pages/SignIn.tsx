@@ -15,7 +15,7 @@ export default function SignIn() {
       <div className="relative z-10 w-full max-w-md">
         {/* Logo and branding */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#0A2540] mb-2">
+          <h1 className="text-3xl font-bold text-slate-900 mb-2">
             Welcome Back
           </h1>
           <p className="text-black">
@@ -24,7 +24,7 @@ export default function SignIn() {
         </div>
 
         {/* Clerk Sign-In component */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-[#0A2540]/10 p-2">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
           <ClerkSignIn
             routing="path"
             path="/sign-in"
@@ -45,7 +45,7 @@ export default function SignIn() {
             Don't have an account?{' '}
             <button
               onClick={() => setLocation('/sign-up')}
-              className="text-[#0A2540] font-semibold hover:underline"
+              className="text-slate-900 font-semibold hover:underline"
             >
               Create one now
             </button>

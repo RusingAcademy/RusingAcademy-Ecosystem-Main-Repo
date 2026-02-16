@@ -263,7 +263,7 @@ export default function Reports() {
       <div className="max-w-[1200px]">
         {/* Header */}
         <div className="flex items-center gap-2 mb-2">
-          <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+          <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
             <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -282,7 +282,7 @@ export default function Reports() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-5 py-3 text-sm font-medium transition-colors relative
                 ${activeTab === tab.id
-                  ? "text-[#008090] border-b-2 border-[#008090]"
+                  ? "text-teal-700 border-b-2 border-teal-700"
                   : "text-gray-500 hover:text-gray-700"
                 }`}
             >
@@ -314,7 +314,7 @@ export default function Reports() {
             {/* XP Over Time */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">show_chart</span>
+                <span className="material-icons text-teal-700 text-lg">show_chart</span>
                 XP Earned Over Time
               </h3>
               <LineChart data={xpData} color="#008090" label="Last 12 weeks" />
@@ -323,7 +323,7 @@ export default function Reports() {
             {/* Quiz Scores */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#6366f1] text-lg">quiz</span>
+                <span className="material-icons text-indigo-500 text-lg">quiz</span>
                 Recent Quiz Scores
               </h3>
               <BarChart data={quizScores} labels={["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8"]} color="#6366f1" />
@@ -341,7 +341,7 @@ export default function Reports() {
           <div className="space-y-6">
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">route</span>
+                <span className="material-icons text-teal-700 text-lg">route</span>
                 Path Completion Progress
               </h3>
               <div className="space-y-4">
@@ -371,7 +371,7 @@ export default function Reports() {
             {/* Lessons per Path Bar Chart */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#f59e0b] text-lg">bar_chart</span>
+                <span className="material-icons text-amber-500 text-lg">bar_chart</span>
                 Lessons Completed per Path
               </h3>
               <BarChart
@@ -384,7 +384,7 @@ export default function Reports() {
             {/* Milestones */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#10b981] text-lg">emoji_events</span>
+                <span className="material-icons text-emerald-500 text-lg">emoji_events</span>
                 Milestones
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -404,11 +404,11 @@ export default function Reports() {
                       m.done ? "bg-[rgba(0,128,144,0.08)] border border-[rgba(0,128,144,0.2)]" : "bg-gray-50 border border-gray-100 opacity-50"
                     }`}
                   >
-                    <span className={`material-icons text-2xl mb-1 ${m.done ? "text-[#008090]" : "text-gray-300"}`}>
+                    <span className={`material-icons text-2xl mb-1 ${m.done ? "text-teal-700" : "text-gray-300"}`}>
                       {m.icon}
                     </span>
                     <p className={`text-[10px] font-medium ${m.done ? "text-gray-700" : "text-gray-400"}`}>{m.name}</p>
-                    {m.done && <span className="material-icons text-xs text-[#10b981]">check_circle</span>}
+                    {m.done && <span className="material-icons text-xs text-emerald-500">check_circle</span>}
                   </div>
                 ))}
               </div>
@@ -451,7 +451,7 @@ export default function Reports() {
             {/* Radar Chart */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">radar</span>
+                <span className="material-icons text-teal-700 text-lg">radar</span>
                 Skills Breakdown
               </h3>
               <RadarChart skills={sleSkills} />
@@ -493,7 +493,7 @@ export default function Reports() {
             {/* Activity Heatmap */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-lg">calendar_today</span>
+                <span className="material-icons text-teal-700 text-lg">calendar_today</span>
                 Activity Heatmap (Last 12 Weeks)
               </h3>
               <ActivityHeatmap data={activityData} weeks={12} />
@@ -509,7 +509,7 @@ export default function Reports() {
             {/* Weekly Summary */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#f59e0b] text-lg">insights</span>
+                <span className="material-icons text-amber-500 text-lg">insights</span>
                 Weekly Activity Summary
               </h3>
               <div className="grid grid-cols-7 gap-2">
@@ -537,7 +537,7 @@ export default function Reports() {
             {/* Recent Activity Log */}
             <div className="glass-card rounded-xl p-5">
               <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-icons text-[#6366f1] text-lg">history</span>
+                <span className="material-icons text-indigo-500 text-lg">history</span>
                 Recent Activity
               </h3>
               <div className="space-y-3">
@@ -550,9 +550,9 @@ export default function Reports() {
                 ].map((activity, i) => (
                   <div key={i} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0">
                     <span className={`material-icons text-lg ${
-                      activity.type === "streak" ? "text-[#ef4444]" :
-                      activity.type === "quiz" ? "text-[#6366f1]" :
-                      "text-[#008090]"
+                      activity.type === "streak" ? "text-red-500" :
+                      activity.type === "quiz" ? "text-indigo-500" :
+                      "text-teal-700"
                     }`}>
                       {activity.type === "lesson" ? "school" :
                        activity.type === "quiz" ? "quiz" :
@@ -563,7 +563,7 @@ export default function Reports() {
                       <p className="text-sm text-gray-800">{activity.action}</p>
                       <p className="text-[10px] text-gray-400">{activity.time}</p>
                     </div>
-                    <span className="text-xs font-semibold text-[#008090]">{activity.xp}</span>
+                    <span className="text-xs font-semibold text-teal-700">{activity.xp}</span>
                   </div>
                 ))}
               </div>

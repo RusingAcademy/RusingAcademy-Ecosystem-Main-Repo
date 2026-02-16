@@ -211,7 +211,7 @@ export default function GifPicker({ isOpen, onClose, onSelect }: GifPickerProps)
                   onClick={() => handleCategoryClick(cat)}
                   className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                     activeCategory === cat.query
-                      ? "bg-[#1B1464] text-white"
+                      ? "bg-indigo-900 text-white"
                       : "bg-muted/50 text-muted-foreground hover:bg-muted"
                   }`}
                 >
@@ -238,7 +238,7 @@ export default function GifPicker({ isOpen, onClose, onSelect }: GifPickerProps)
                 <p className="text-sm text-red-500">{error}</p>
                 <button
                   onClick={() => loadGifs(query.trim() || activeCategory)}
-                  className="mt-2 text-xs text-[#1B1464] font-semibold hover:underline"
+                  className="mt-2 text-xs text-indigo-900 font-semibold hover:underline"
                 >
                   Try again
                 </button>
@@ -275,7 +275,7 @@ export default function GifPicker({ isOpen, onClose, onSelect }: GifPickerProps)
 
             {loading && (
               <div className="flex justify-center py-4">
-                <Loader2 className="w-5 h-5 animate-spin text-[#1B1464]" />
+                <Loader2 className="w-5 h-5 animate-spin text-indigo-900" />
               </div>
             )}
           </div>

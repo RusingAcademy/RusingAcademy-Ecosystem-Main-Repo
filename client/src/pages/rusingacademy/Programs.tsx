@@ -261,7 +261,7 @@ export default function Programs() {
 
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta border-[#FFE4D6]">
+            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta border-orange-100">
               <Sparkles className="w-4 h-4 mr-2" />
               Exclusive Professional Training
             </Badge>
@@ -368,7 +368,7 @@ export default function Programs() {
           <div className="mt-16 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-center mb-8">Double-Modality Learning Architecture</h3>
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="border-2 border-[#FFE4D6] bg-orange-50/50">
+              <Card className="border-2 border-orange-100 bg-orange-50/50">
                 <CardHeader>
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C65A1E] to-[#D97B3D] flex items-center justify-center text-white font-bold text-xl">

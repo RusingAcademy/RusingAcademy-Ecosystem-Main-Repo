@@ -242,7 +242,7 @@ export default function BarholexServices() {
         <section className="relative pt-20 pb-24 px-4 overflow-hidden">
           {/* Background Effects */}
           <div className="absolute inset-0">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-barholex-gold/10 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-foundation-soft/10 rounded-full blur-[120px]" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-[#D4AF37]/5 to-transparent rounded-full" />
           </div>
@@ -258,7 +258,7 @@ export default function BarholexServices() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-8"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-[#D4AF37]/30 text-barholex-gold font-medium">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-barholex-gold/30 text-barholex-gold font-medium">
                   <Zap className="w-4 h-4" />
                   {language === "en" ? "Full-Service Creative Agency" : "Agence créative à service complet"}
                 </span>
@@ -343,7 +343,7 @@ export default function BarholexServices() {
         <section className="py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-barholex-gold text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-barholex-gold/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "Our Expertise" : "Notre expertise"}
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -421,7 +421,7 @@ export default function BarholexServices() {
                   </div>
 
                   {/* Outcome */}
-                  <div className="p-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20">
+                  <div className="p-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/10 to-transparent border border-barholex-gold/20">
                     <div className="flex items-center gap-2 text-sm font-medium text-barholex-gold mb-2">
                       <TrendingUp className="w-4 h-4" />
                       {language === "en" ? "Expected Outcome" : "Résultat attendu"}
@@ -478,7 +478,7 @@ export default function BarholexServices() {
           
           <div className="container mx-auto">
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-barholex-gold text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-barholex-gold/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "How We Work" : "Comment nous travaillons"}
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -542,7 +542,7 @@ export default function BarholexServices() {
                 {CLIENTS.map((client, index) => (
                   <div
                     key={index}
-                    className="p-6 rounded-2xl bg-white/5 border border-white/60 text-center hover:border-[#D4AF37]/30 transition-colors"
+                    className="p-6 rounded-2xl bg-white/5 border border-white/60 text-center hover:border-barholex-gold/30 transition-colors"
                   >
                     <client.icon className="w-8 h-8 text-barholex-gold mx-auto mb-3" />
                     <p className="text-sm text-white/90">

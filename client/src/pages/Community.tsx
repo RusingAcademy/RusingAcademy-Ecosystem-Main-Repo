@@ -210,7 +210,7 @@ export default function Community() {
       <section className="relative pt-32 pb-20 overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#17E2C6]/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-1/4 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#1E9B8A]/10 rounded-full blur-3xl" />
         </div>
 
@@ -222,7 +222,7 @@ export default function Community() {
             className="text-center max-w-3xl mx-auto"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/60 mb-6">
-              <Users className="w-4 h-4 text-[#17E2C6]" />
+              <Users className="w-4 h-4 text-teal-400" />
               <span className="text-sm font-medium text-white/90">
                 {language === "en" ? "Join 5,200+ members" : "Rejoignez 5 200+ membres"}
               </span>
@@ -231,11 +231,11 @@ export default function Community() {
             <h1 className="text-4xl md:text-6xl font-black mb-6">
               {language === "en" ? (
                 <>
-                  Your <span className="text-[#17E2C6]">Bilingual</span> Community
+                  Your <span className="text-teal-400">Bilingual</span> Community
                 </>
               ) : (
                 <>
-                  Votre communauté <span className="text-[#17E2C6]">bilingue</span>
+                  Votre communauté <span className="text-teal-400">bilingue</span>
                 </>
               )}
             </h1>
@@ -277,7 +277,7 @@ export default function Community() {
                 key={index}
                 className="text-center p-6 rounded-2xl bg-white/5 border border-white/60"
               >
-                <div className="text-3xl md:text-4xl font-black text-[#17E2C6] mb-2">
+                <div className="text-3xl md:text-4xl font-black text-teal-400 mb-2">
                   {stat.value}
                 </div>
                 <div className="text-sm text-white/90">
@@ -304,7 +304,7 @@ export default function Community() {
                 aria-pressed={activeTab === tab.id}
                 className={`flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   activeTab === tab.id
-                    ? "bg-[#17E2C6] text-black"
+                    ? "bg-teal-400 text-black"
                     : "text-white/90 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -328,7 +328,7 @@ export default function Community() {
               <h2 className="text-2xl md:text-3xl font-black">
                 {language === "en" ? "Upcoming Events" : "Événements à venir"}
               </h2>
-              <Button variant="ghost" className="text-[#17E2C6] hover:text-[#17E2C6]/80">
+              <Button variant="ghost" className="text-teal-400 hover:text-teal-400/80">
                 {language === "en" ? "View All Events" : "Voir tous les événements"}
                 <ChevronRight className="ml-1 w-4 h-4" />
               </Button>
@@ -336,7 +336,7 @@ export default function Community() {
 
             {eventsLoading ? (
               <div className="flex items-center justify-center py-20">
-                <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
+                <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
               </div>
             ) : events && events.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -348,7 +348,7 @@ export default function Community() {
                     <motion.div
                       key={event.id}
                       whileHover={{ y: -5 }}
-                      className="group relative p-6 rounded-2xl bg-white/5 border border-white/60 hover:border-[#17E2C6]/30 transition-all"
+                      className="group relative p-6 rounded-2xl bg-white/5 border border-white/60 hover:border-teal-400/30 transition-all"
                     >
                       {/* Event type badge */}
                       <div 
@@ -358,7 +358,7 @@ export default function Community() {
                         {getEventTypeLabel(event.eventType || "other")}
                       </div>
 
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-[#17E2C6] transition-colors">
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-teal-400 transition-colors">
                         {language === "en" ? event.title : event.titleFr}
                       </h3>
 
@@ -388,7 +388,7 @@ export default function Community() {
 
                       <div className="flex items-center justify-between">
                         <div className="text-sm">
-                          <span className="text-[#17E2C6] font-bold">{spotsLeft > 0 ? spotsLeft : 0}</span>
+                          <span className="text-teal-400 font-bold">{spotsLeft > 0 ? spotsLeft : 0}</span>
                           <span className="text-white/90"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
                         </div>
                         <Button
@@ -400,7 +400,7 @@ export default function Community() {
                               ? "bg-green-500 text-white hover:bg-green-500" 
                               : status === "error"
                               ? "bg-red-500 text-white hover:bg-red-500"
-                              : "bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90"
+                              : "bg-teal-400 text-black hover:bg-teal-400/90"
                           }`}
                         >
                           {status === "loading" ? (
@@ -427,7 +427,7 @@ export default function Community() {
                       {event.maxCapacity && (
                         <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5 rounded-b-2xl overflow-hidden">
                           <div 
-                            className="h-full bg-[#17E2C6]/50 transition-all"
+                            className="h-full bg-teal-400/50 transition-all"
                             style={{ width: `${((event.currentRegistrations || 0) / event.maxCapacity) * 100}%` }}
                           />
                         </div>
@@ -466,7 +466,7 @@ export default function Community() {
                   }
                   setShowNewThreadModal(true);
                 }}
-                className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold"
+                className="bg-teal-400 text-black hover:bg-teal-400/90 font-bold"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {language === "en" ? "New Discussion" : "Nouvelle discussion"}
@@ -475,7 +475,7 @@ export default function Community() {
 
             {categoriesLoading ? (
               <div className="flex items-center justify-center py-20">
-                <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
+                <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
               </div>
             ) : forumCategories && forumCategories.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -496,7 +496,7 @@ export default function Community() {
                           <IconComponent className="w-6 h-6" style={{ color: categoryColor }} />
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-lg font-bold mb-1 group-hover:text-[#17E2C6] transition-colors">
+                          <h3 className="text-lg font-bold mb-1 group-hover:text-teal-400 transition-colors">
                             {language === "en" ? category.name : category.nameFr}
                           </h3>
                           <p className="text-white/90 text-sm mb-3">
@@ -507,7 +507,7 @@ export default function Community() {
                             <span>{category.postCount || 0} {language === "en" ? "posts" : "messages"}</span>
                           </div>
                         </div>
-                        <ChevronRight className="w-5 h-5 text-white/90 group-hover:text-[#17E2C6] transition-colors" />
+                        <ChevronRight className="w-5 h-5 text-white/90 group-hover:text-teal-400 transition-colors" />
                       </div>
                     </motion.div>
                     </Link>
@@ -526,27 +526,27 @@ export default function Community() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-[#17E2C6]/10 to-[#1E9B8A]/10 border border-[#17E2C6]/20"
+              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-[#17E2C6]/10 to-[#1E9B8A]/10 border border-teal-400/20"
             >
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <Globe className="w-5 h-5 text-[#17E2C6]" />
+                <Globe className="w-5 h-5 text-teal-400" />
                 {language === "en" ? "Community Guidelines" : "Lignes directrices de la communauté"}
               </h3>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm text-white/90">
                 <li className="flex items-start gap-2">
-                  <span className="text-[#17E2C6]">•</span>
+                  <span className="text-teal-400">•</span>
                   {language === "en" ? "Be respectful and supportive of fellow learners" : "Soyez respectueux et soutenez les autres apprenants"}
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#17E2C6]">•</span>
+                  <span className="text-teal-400">•</span>
                   {language === "en" ? "Share your experiences and tips freely" : "Partagez librement vos expériences et conseils"}
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#17E2C6]">•</span>
+                  <span className="text-teal-400">•</span>
                   {language === "en" ? "Practice both official languages when possible" : "Pratiquez les deux langues officielles quand possible"}
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#17E2C6]">•</span>
+                  <span className="text-teal-400">•</span>
                   {language === "en" ? "Keep discussions professional and on-topic" : "Gardez les discussions professionnelles et pertinentes"}
                 </li>
               </ul>
@@ -567,7 +567,7 @@ export default function Community() {
               <h2 className="text-2xl md:text-3xl font-black">
                 {language === "en" ? "Learning Resources" : "Ressources d'apprentissage"}
               </h2>
-              <Button variant="ghost" className="text-[#17E2C6] hover:text-[#17E2C6]/80">
+              <Button variant="ghost" className="text-teal-400 hover:text-teal-400/80">
                 {language === "en" ? "Browse All" : "Parcourir tout"}
                 <ChevronRight className="ml-1 w-4 h-4" />
               </Button>
@@ -599,7 +599,7 @@ export default function Community() {
                         {resource.duration && <span className="text-xs text-white/90">{resource.duration}</span>}
                         {resource.episodes && <span className="text-xs text-white/90">{resource.episodes} {language === "en" ? "episodes" : "épisodes"}</span>}
                       </div>
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-[#17E2C6] transition-colors">
+                      <h3 className="text-lg font-bold mb-2 group-hover:text-teal-400 transition-colors">
                         {resource.title[language]}
                       </h3>
                       <p className="text-white/90 text-sm mb-4">
@@ -614,7 +614,7 @@ export default function Community() {
                         <Button
                           size="sm"
                           variant="ghost"
-                          className="text-[#17E2C6] hover:text-[#17E2C6]/80 hover:bg-[#17E2C6]/10"
+                          className="text-teal-400 hover:text-teal-400/80 hover:bg-teal-400/10"
                         >
                           {resource.type === "guide" || resource.type === "template" ? (
                             <>
@@ -640,11 +640,11 @@ export default function Community() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-[#17E2C6]/20 to-[#1E9B8A]/20 border border-[#17E2C6]/30"
+              className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-[#17E2C6]/20 to-[#1E9B8A]/20 border border-teal-400/30"
             >
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="flex-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#17E2C6]/20 text-[#17E2C6] text-xs font-bold mb-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-400/20 text-teal-400 text-xs font-bold mb-3">
                     <Star className="w-3 h-3" />
                     {language === "en" ? "Featured Resource" : "Ressource vedette"}
                   </div>
@@ -656,13 +656,13 @@ export default function Community() {
                       ? "Our comprehensive toolkit includes study guides, practice tests, vocabulary lists, and exam strategies - everything you need to succeed."
                       : "Notre trousse complète comprend des guides d'étude, des tests pratiques, des listes de vocabulaire et des stratégies d'examen - tout ce dont vous avez besoin pour réussir."}
                   </p>
-                  <Button className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold">
+                  <Button className="bg-teal-400 text-black hover:bg-teal-400/90 font-bold">
                     {language === "en" ? "Get Free Access" : "Obtenir un accès gratuit"}
                     <ChevronRight className="ml-1 w-4 h-4" />
                   </Button>
                 </div>
-                <div className="w-32 h-32 rounded-2xl bg-[#17E2C6]/20 flex items-center justify-center">
-                  <BookOpen className="w-16 h-16 text-[#17E2C6]" />
+                <div className="w-32 h-32 rounded-2xl bg-teal-400/20 flex items-center justify-center">
+                  <BookOpen className="w-16 h-16 text-teal-400" />
                 </div>
               </div>
             </motion.div>
@@ -679,7 +679,7 @@ export default function Community() {
           transition={{ duration: 0.6 }}
           className="text-center p-12 rounded-3xl bg-gradient-to-r from-white/5 to-white/10 border border-white/60"
         >
-          <Heart className="w-12 h-12 text-[#17E2C6] mx-auto mb-4" />
+          <Heart className="w-12 h-12 text-teal-400 mx-auto mb-4" />
           <h2 className="text-3xl font-black mb-4">
             {language === "en" ? "Ready to Join Our Community?" : "Prêt à rejoindre notre communauté?"}
           </h2>
@@ -753,7 +753,7 @@ export default function Community() {
                         aria-pressed={selectedCategoryId === category.id}
                         className={`p-3 rounded-xl text-left text-sm transition-all ${
                           selectedCategoryId === category.id
-                            ? "bg-[#17E2C6]/20 border-[#17E2C6] border"
+                            ? "bg-teal-400/20 border-teal-400 border"
                             : "bg-white/5 border border-white/60 hover:border-white/60"
                         }`}
                       >
@@ -775,7 +775,7 @@ export default function Community() {
                     value={newThreadTitle}
                     onChange={(e) => setNewThreadTitle(e.target.value)}
                     placeholder={language === "en" ? "What's your question or topic?" : "Quelle est votre question ou sujet?"}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/60 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/60 focus:border-teal-400 focus:outline-none text-white placeholder-white/40"
                   />
                 </div>
 
@@ -789,7 +789,7 @@ export default function Community() {
                     onChange={(e) => setNewThreadContent(e.target.value)}
                     placeholder={language === "en" ? "Share more details..." : "Partagez plus de détails..."}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/60 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40 resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/60 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none"
                   />
                 </div>
 
@@ -805,7 +805,7 @@ export default function Community() {
                   <Button
                     onClick={handleCreateThread}
                     disabled={!selectedCategoryId || !newThreadTitle.trim() || !newThreadContent.trim() || createThreadMutation.isPending}
-                    className="flex-1 bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold disabled:opacity-50"
+                    className="flex-1 bg-teal-400 text-black hover:bg-teal-400/90 font-bold disabled:opacity-50"
                   >
                     {createThreadMutation.isPending ? (
                       <Loader2 className="w-4 h-4 animate-spin" />

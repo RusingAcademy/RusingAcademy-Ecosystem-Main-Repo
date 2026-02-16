@@ -291,7 +291,7 @@ export default function CRMDashboardWidget({ onNavigateToCRM }: CRMDashboardWidg
 
                     {/* Conversion funnel mini-visualization */}
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <div className="flex-1 h-2 rounded-full bg-slate-200 dark:bg-[#0a6969] overflow-hidden">
+                      <div className="flex-1 h-2 rounded-full bg-slate-200 dark:bg-teal-800 overflow-hidden">
                         <div 
                           className="h-full bg-gradient-to-r from-primary to-emerald-500 transition-all"
                           style={{ width: `${outcomeData.conversionRate}%` }}

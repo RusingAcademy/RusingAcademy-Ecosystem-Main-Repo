@@ -27,7 +27,7 @@ export default function Progress() {
     <DashboardLayout>
       <div className="max-w-[1200px]">
         <div className="flex items-center gap-2 mb-4">
-          <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+          <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
             <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>Progress</h1>
@@ -36,15 +36,15 @@ export default function Progress() {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           <div className="glass-card rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold text-[#008090]">1</p>
+            <p className="text-2xl font-bold text-teal-700">1</p>
             <p className="text-xs text-gray-500 mt-1">Modules Accessed</p>
           </div>
           <div className="glass-card rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold text-[#008090]">1</p>
+            <p className="text-2xl font-bold text-teal-700">1</p>
             <p className="text-xs text-gray-500 mt-1">Activities Completed</p>
           </div>
           <div className="glass-card rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold text-[#008090]">3%</p>
+            <p className="text-2xl font-bold text-teal-700">3%</p>
             <p className="text-xs text-gray-500 mt-1">Overall Progress</p>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function Progress() {
             </thead>
             <tbody>
               {progressData.map((item, i) => (
-                <tr key={i} className={`border-t border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-[#eef9f7]`}>
+                <tr key={i} className={`border-t border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
                   <td className="px-4 py-3 text-sm text-gray-800">{item.module}</td>
                   <td className="px-4 py-3 text-sm text-gray-600">{item.totalActivities}</td>
                   <td className="px-4 py-3 text-sm text-gray-600">{item.completed}</td>
@@ -71,7 +71,7 @@ export default function Progress() {
                     <div className="flex items-center gap-2">
                       <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-[#008090] rounded-full"
+                          className="h-full bg-teal-700 rounded-full"
                           style={{ width: `${item.percentage}%` }}
                         />
                       </div>

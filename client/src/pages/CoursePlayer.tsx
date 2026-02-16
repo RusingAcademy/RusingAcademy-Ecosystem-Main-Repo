@@ -132,7 +132,7 @@ export default function CoursePlayer() {
   if (courseLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
       </div>
     );
   }
@@ -234,14 +234,14 @@ export default function CoursePlayer() {
                         }}
                         className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm transition-colors mb-1 ${
                           isActive
-                            ? "bg-[#1B1464]/10 text-[#1B1464] font-medium"
+                            ? "bg-indigo-900/10 text-indigo-900 font-medium"
                             : "hover:bg-muted text-foreground"
                         }`}
                       >
                         {isCompleted ? (
-                          <CheckCircle2 className="w-4 h-4 text-[#2EC4B6] flex-shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0" />
                         ) : isActive ? (
-                          <Play className="w-4 h-4 text-[#1B1464] flex-shrink-0" />
+                          <Play className="w-4 h-4 text-indigo-900 flex-shrink-0" />
                         ) : (
                           <Circle className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                         )}
@@ -267,7 +267,7 @@ export default function CoursePlayer() {
             /* Enrollment CTA */
             <div className="max-w-3xl mx-auto px-6 py-12">
               <div className="text-center mb-8">
-                <GraduationCap className="w-16 h-16 text-[#1B1464] mx-auto mb-4" />
+                <GraduationCap className="w-16 h-16 text-indigo-900 mx-auto mb-4" />
                 <h2 className="text-3xl font-extrabold text-foreground mb-3">{courseTitle}</h2>
                 <p className="text-muted-foreground max-w-xl mx-auto">
                   {locale === "fr" && course.descriptionFr
@@ -286,7 +286,7 @@ export default function CoursePlayer() {
                   {course.totalDurationMinutes ?? 0} min
                 </span>
                 {course.hasCertificate && (
-                  <span className="flex items-center gap-1.5 text-[#2EC4B6]">
+                  <span className="flex items-center gap-1.5 text-teal-400">
                     <Award className="w-4 h-4" />
                     {t.coursePlayer.certificate}
                   </span>
@@ -375,7 +375,7 @@ export default function CoursePlayer() {
               {activeLesson.contentType === "audio" && activeLesson.audioUrl && (
                 <div className="mb-8 p-6 bg-gradient-to-r from-[#1B1464]/10 to-[#2EC4B6]/10 rounded-xl">
                   <div className="flex items-center gap-4 mb-4">
-                    <Headphones className="w-8 h-8 text-[#1B1464]" />
+                    <Headphones className="w-8 h-8 text-indigo-900" />
                     <span className="font-medium text-foreground">Audio Lesson</span>
                   </div>
                   <audio src={activeLesson.audioUrl} controls className="w-full" />
@@ -434,7 +434,7 @@ export default function CoursePlayer() {
                   )}
 
                   {completedLessonIds.has(activeLessonId!) && (
-                    <span className="flex items-center gap-1.5 text-sm text-[#2EC4B6] font-medium">
+                    <span className="flex items-center gap-1.5 text-sm text-teal-400 font-medium">
                       <CheckCircle2 className="w-4 h-4" />
                       {t.coursePlayer.completed}
                     </span>
@@ -457,7 +457,7 @@ export default function CoursePlayer() {
             </div>
           ) : lessonLoading ? (
             <div className="flex items-center justify-center py-16">
-              <Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" />
+              <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 gap-4">

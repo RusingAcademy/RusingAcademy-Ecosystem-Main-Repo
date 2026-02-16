@@ -163,7 +163,7 @@ const coachNames: Record<string, string> = {
 
 // ─── Level Colors ────────────────────────────────────────────────────
 const levelConfig = {
-  X: { bg: "bg-[#0a6969]/20", text: "text-[#67E8F9]", border: "border-slate-500/30", label: "Not Assessed" },
+  X: { bg: "bg-teal-800/20", text: "text-cyan-300", border: "border-slate-500/30", label: "Not Assessed" },
   A: { bg: "bg-emerald-500/20", text: "text-emerald-400", border: "border-emerald-500/30", label: "Level A" },
   B: { bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30", label: "Level B" },
   C: { bg: "bg-violet-500/20", text: "text-violet-400", border: "border-violet-500/30", label: "Level C" },
@@ -281,7 +281,7 @@ export default function SLEProgressDashboard() {
             <BarChart3 className="h-10 w-10 text-white/90" />
           </div>
           <h2 className="text-2xl font-bold mb-3">{l.noSessions}</h2>
-          <p className="text-[#67E8F9] mb-8">{l.noSessionsDesc}</p>
+          <p className="text-cyan-300 mb-8">{l.noSessionsDesc}</p>
           <Link href="/sle-practice">
             <Button className="bg-gradient-to-r from-blue-500 to-violet-600 hover:from-blue-600 hover:to-violet-700">
               <Mic className="h-4 w-4 mr-2" />
@@ -296,7 +296,7 @@ export default function SLEProgressDashboard() {
   // ─── Level Config ──────────────────────────────────────────────────
   const lvl = levelConfig[summary.overallLevel as keyof typeof levelConfig] || levelConfig.X;
   const TrendIcon = summary.recentTrend === "improving" ? TrendingUp : summary.recentTrend === "declining" ? TrendingDown : Minus;
-  const trendColor = summary.recentTrend === "improving" ? "text-emerald-400" : summary.recentTrend === "declining" ? "text-red-400" : "text-[#67E8F9]";
+  const trendColor = summary.recentTrend === "improving" ? "text-emerald-400" : summary.recentTrend === "declining" ? "text-red-400" : "text-cyan-300";
   const trendLabel = summary.recentTrend === "improving" ? l.improving : summary.recentTrend === "declining" ? l.declining : l.stable;
 
   return (
@@ -305,7 +305,7 @@ export default function SLEProgressDashboard() {
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-2xl font-bold mb-1">{l.title}</h1>
-          <p className="text-[#67E8F9]">{l.subtitle}</p>
+          <p className="text-cyan-300">{l.subtitle}</p>
         </motion.div>
 
         {/* ─── Top Stats Row ──────────────────────────────────────── */}
@@ -320,34 +320,34 @@ export default function SLEProgressDashboard() {
             "col-span-2 md:col-span-1 p-6 rounded-xl border text-center",
             lvl.bg, lvl.border
           )}>
-            <p className="text-xs text-[#67E8F9] mb-2">{l.overallLevel}</p>
+            <p className="text-xs text-cyan-300 mb-2">{l.overallLevel}</p>
             <p className={cn("text-6xl font-black", lvl.text)}>{summary.overallLevel}</p>
             <p className="text-[10px] text-white/90 mt-1">{l.basedOnLast5}</p>
           </div>
 
           {/* Total Sessions */}
-          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-teal-800">
             <div className="flex items-center gap-2 mb-3">
-              <Calendar className="h-4 w-4 text-[#67E8F9]" />
-              <span className="text-xs text-[#67E8F9]">{l.totalSessions}</span>
+              <Calendar className="h-4 w-4 text-cyan-300" />
+              <span className="text-xs text-cyan-300">{l.totalSessions}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.totalSessions}</p>
           </div>
 
           {/* Total Minutes */}
-          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-teal-800">
             <div className="flex items-center gap-2 mb-3">
-              <Clock className="h-4 w-4 text-[#67E8F9]" />
-              <span className="text-xs text-[#67E8F9]">{l.totalMinutes}</span>
+              <Clock className="h-4 w-4 text-cyan-300" />
+              <span className="text-xs text-cyan-300">{l.totalMinutes}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.totalMinutes}</p>
           </div>
 
           {/* Average Score */}
-          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-teal-800">
             <div className="flex items-center gap-2 mb-3">
-              <Target className="h-4 w-4 text-[#67E8F9]" />
-              <span className="text-xs text-[#67E8F9]">{l.averageScore}</span>
+              <Target className="h-4 w-4 text-cyan-300" />
+              <span className="text-xs text-cyan-300">{l.averageScore}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.averageScore}%</p>
             <div className="flex items-center gap-1 mt-1">
@@ -357,10 +357,10 @@ export default function SLEProgressDashboard() {
           </div>
 
           {/* Streak */}
-          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-teal-800">
             <div className="flex items-center gap-2 mb-3">
               <Flame className="h-4 w-4 text-orange-400" />
-              <span className="text-xs text-[#67E8F9]">{l.streak}</span>
+              <span className="text-xs text-cyan-300">{l.streak}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.streakDays}</p>
             <p className="text-[10px] text-white/90">{l.days}</p>
@@ -374,10 +374,10 @@ export default function SLEProgressDashboard() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969]"
+            className="p-6 rounded-xl bg-foundation/50 border border-teal-800"
           >
             <h3 className="font-semibold text-white mb-1">{l.criteriaTitle}</h3>
-            <p className="text-xs text-[#67E8F9] mb-4">{l.criteriaSubtitle}</p>
+            <p className="text-xs text-cyan-300 mb-4">{l.criteriaSubtitle}</p>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData}>
@@ -429,10 +429,10 @@ export default function SLEProgressDashboard() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969]"
+            className="p-6 rounded-xl bg-foundation/50 border border-teal-800"
           >
             <h3 className="font-semibold text-white mb-1">{l.trendTitle}</h3>
-            <p className="text-xs text-[#67E8F9] mb-4">{l.trendSubtitle}</p>
+            <p className="text-xs text-cyan-300 mb-4">{l.trendSubtitle}</p>
             <div className="h-64">
               {trendData && trendData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
@@ -505,11 +505,11 @@ export default function SLEProgressDashboard() {
                     <div className="flex items-center gap-2">
                       <span className={cn(
                         "text-2xl font-black",
-                        levelConfig[prediction.level as keyof typeof levelConfig]?.text || "text-[#67E8F9]"
+                        levelConfig[prediction.level as keyof typeof levelConfig]?.text || "text-cyan-300"
                       )}>
                         {prediction.level}
                       </span>
-                      <span className="text-sm text-[#67E8F9]">
+                      <span className="text-sm text-cyan-300">
                         {l.confidence}: {prediction.confidence}%
                       </span>
                     </div>
@@ -569,11 +569,11 @@ export default function SLEProgressDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="rounded-xl bg-foundation/50 border border-[#0a6969] overflow-hidden"
+          className="rounded-xl bg-foundation/50 border border-teal-800 overflow-hidden"
         >
-          <div className="px-6 py-4 border-b border-[#0a6969]">
+          <div className="px-6 py-4 border-b border-teal-800">
             <h3 className="font-semibold text-white">{l.historyTitle}</h3>
-            <p className="text-xs text-[#67E8F9]">{l.historySubtitle}</p>
+            <p className="text-xs text-cyan-300">{l.historySubtitle}</p>
           </div>
 
           {history && history.sessions.length > 0 ? (
@@ -615,7 +615,7 @@ export default function SLEProgressDashboard() {
                             </Badge>
                           )}
                         </div>
-                        <p className="text-xs text-[#67E8F9]">
+                        <p className="text-xs text-cyan-300">
                           {(() => {
                             try {
                               return format(new Date(session.createdAt), "PPp", { locale: language === "fr" ? fr : undefined });
@@ -644,7 +644,7 @@ export default function SLEProgressDashboard() {
 
                       {/* Duration */}
                       <div className="text-right flex-shrink-0 w-16">
-                        <span className="text-sm text-[#67E8F9]">
+                        <span className="text-sm text-cyan-300">
                           {Math.round(session.duration / 60)} {l.min}
                         </span>
                       </div>
@@ -711,12 +711,12 @@ export default function SLEProgressDashboard() {
 
           {/* Load More */}
           {history && history.total > (historyPage + 1) * 10 && (
-            <div className="px-6 py-4 border-t border-[#0a6969] text-center">
+            <div className="px-6 py-4 border-t border-teal-800 text-center">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setHistoryPage((p) => p + 1)}
-                className="text-[#67E8F9] hover:text-white"
+                className="text-cyan-300 hover:text-white"
               >
                 {l.loadMore}
                 <ChevronDown className="h-3 w-3 ml-1" />

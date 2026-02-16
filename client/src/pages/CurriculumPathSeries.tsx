@@ -133,7 +133,7 @@ const pathSeriesData = [
     originalPrice: PATH_SERIES_PRICES.PATH_III.originalPriceInCents / 100,
     color: "from-amber-500 to-orange-600",
     bgColor: "bg-amber-50",
-    borderColor: "border-[#FFE4D6]",
+    borderColor: "border-orange-100",
     icon: "📊",
     sleBadge: "BBB",
     learningOutcomes: [
@@ -718,7 +718,7 @@ export default function CurriculumPathSeries() {
   const currentPath = activePathData.find(p => p.id === selectedPath) || activePathData[0];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDF8F3]">
+    <div className="min-h-screen flex flex-col bg-orange-50">
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E]">
@@ -796,7 +796,7 @@ export default function CurriculumPathSeries() {
                 </h2>
               </div>
 
-              <div className="bg-[#FDF8F3] rounded-2xl p-8 md:p-10 shadow-sm">
+              <div className="bg-orange-50 rounded-2xl p-8 md:p-10 shadow-sm">
                 <p className="text-lg text-foundation leading-relaxed mb-6">
                   {isEn 
                     ? "The GC Bilingual Mastery Series represents a paradigm shift in professional language training for Canada's federal public service. Developed by RusingAcademy in collaboration with leading language acquisition specialists, this program combines cutting-edge pedagogical research with the practical realities of public service communication requirements."
@@ -815,7 +815,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Path Series Methodology Section */}
-        <section className="py-16 bg-[#FDF8F3]">
+        <section className="py-16 bg-orange-50">
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
@@ -894,7 +894,7 @@ export default function CurriculumPathSeries() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {designPrinciples.map((principle, index) => (
-                  <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow bg-[#FDF8F3]">
+                  <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow bg-orange-50">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-full bg-cta flex items-center justify-center text-white font-bold flex-shrink-0">
@@ -918,7 +918,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Double-Modality Learning Architecture Section */}
-        <section className="py-16 bg-[#FDF8F3]">
+        <section className="py-16 bg-orange-50">
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
@@ -1083,7 +1083,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Our Crash Courses Section Header */}
-        <section className="py-8 bg-[#FDF8F3]">
+        <section className="py-8 bg-orange-50">
           <div className="container">
             <div className="text-center">
               <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
@@ -1103,7 +1103,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Path Selection Section */}
-        <section id="paths-section" className="py-8 pb-16 bg-[#FDF8F3]">
+        <section id="paths-section" className="py-8 pb-16 bg-orange-50">
           <div className="container">
             {/* FSL / ESL Program Toggle */}
             <div className="flex justify-center mb-8">

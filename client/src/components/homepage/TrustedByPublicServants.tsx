@@ -113,7 +113,7 @@ export default function TrustedByPublicServants() {
                       href={testimonial.linkedIn}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-[#0077B5] flex items-center justify-center shadow-md hover:scale-110 transition-transform"
+                      className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-sky-700 flex items-center justify-center shadow-md hover:scale-110 transition-transform"
                       aria-label={`${testimonial.name} LinkedIn`}
                     >
                       <Linkedin className="h-4 w-4 text-white" />

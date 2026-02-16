@@ -134,7 +134,7 @@ export default function Vocabulary() {
 
   if (authLoading) return (
     <div className="flex items-center justify-center h-screen" role="status" aria-label={t("skillLabs.loading")}>
-      <div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full" />
+      <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full" />
       <span className="sr-only">{t("skillLabs.loading")}</span>
     </div>
   );
@@ -163,7 +163,7 @@ export default function Vocabulary() {
                 )}
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                    <span className="material-icons text-[#008090]" aria-hidden="true">translate</span>
+                    <span className="material-icons text-teal-700" aria-hidden="true">translate</span>
                     {viewMode === "list" ? t("vocab.title") : (isFr ? "Quiz de vocabulaire" : "Vocabulary Quiz")}
                   </h1>
                   <p className="text-sm text-gray-500 mt-1">
@@ -175,14 +175,14 @@ export default function Vocabulary() {
             {viewMode === "list" && (
               <div className="flex gap-2" role="toolbar" aria-label={t("vocab.title")}>
                 <button onClick={startQuiz} disabled={items.filter(i => i.mastery !== "mastered").length === 0}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 flex items-center gap-2 hover:bg-teal-700/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                   aria-label={isFr ? "Mode quiz" : "Quiz Mode"}>
                   <span className="material-icons text-base" aria-hidden="true">quiz</span>
                   {isFr ? "Mode quiz" : "Quiz Mode"}
                 </button>
                 <button onClick={() => aiSuggest.mutate({ topic: "public service bilingualism", level: "B2", count: 5 })}
                   disabled={aiSuggest.isPending}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#8b5cf6] border border-[#8b5cf6] flex items-center gap-2 hover:bg-[#8b5cf6]/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-violet-500 border border-violet-500 flex items-center gap-2 hover:bg-violet-500/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]/30"
                   aria-label={t("vocab.aiSuggest")}>
                   <span className="material-icons text-base" aria-hidden="true">{aiSuggest.isPending ? "hourglass_empty" : "auto_awesome"}</span>
                   {aiSuggest.isPending ? t("skillLabs.loading") : t("vocab.aiSuggest")}
@@ -202,7 +202,7 @@ export default function Vocabulary() {
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6" role="region" aria-label={t("grammar.stats")}>
               {Object.entries(MASTERY_CONFIG).map(([key, config]) => (
                 <button key={key} onClick={() => setFilterMastery(filterMastery === key ? null : key)}
-                  className={`bg-white rounded-xl border p-4 text-center transition-all hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${filterMastery === key ? "border-[#008090] ring-1 ring-[#008090]/20" : "border-gray-100"}`}
+                  className={`bg-white rounded-xl border p-4 text-center transition-all hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${filterMastery === key ? "border-teal-700 ring-1 ring-[#008090]/20" : "border-gray-100"}`}
                   aria-pressed={filterMastery === key}
                   aria-label={`${isFr ? config.labelFr : config.label}: ${(stats as any)[key] ?? 0}`}>
                   <span className="material-icons text-lg mb-1" style={{ color: config.color }} aria-hidden="true">{config.icon}</span>
@@ -211,7 +211,7 @@ export default function Vocabulary() {
                 </button>
               ))}
               <div className="bg-white rounded-xl border border-gray-100 p-4 text-center" role="status">
-                <span className="material-icons text-lg mb-1 text-[#008090]" aria-hidden="true">analytics</span>
+                <span className="material-icons text-lg mb-1 text-teal-700" aria-hidden="true">analytics</span>
                 <div className="text-xl font-bold text-gray-900">{stats.total}</div>
                 <div className="text-[10px] text-gray-500 uppercase tracking-wider">{t("vocab.totalWords")}</div>
               </div>
@@ -227,7 +227,7 @@ export default function Vocabulary() {
                 <div className="relative">
                   <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" aria-hidden="true">search</span>
                   <input id="vocab-search" type="text" placeholder={isFr ? "Rechercher des mots..." : "Search words..."} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]" />
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700" />
                 </div>
               </div>
 
@@ -239,7 +239,7 @@ export default function Vocabulary() {
               ) : filteredItems.length === 0 ? (
                 <div className="text-center py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                    <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">translate</span>
+                    <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">translate</span>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-700 mb-2">
                     {items.length === 0 ? t("vocab.emptyTitle") : (isFr ? "Aucun mot correspondant" : "No matching words")}
@@ -268,7 +268,7 @@ export default function Vocabulary() {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-3 mb-1 flex-wrap">
                               <span className="text-sm font-bold text-gray-900">{item.word}</span>
-                              <span className="text-sm text-[#008090] font-medium">→ {item.translation}</span>
+                              <span className="text-sm text-teal-700 font-medium">→ {item.translation}</span>
                               {item.partOfSpeech && (
                                 <span className="px-2 py-0.5 rounded-full bg-gray-100 text-[10px] text-gray-500 font-medium italic">{item.partOfSpeech}</span>
                               )}
@@ -324,7 +324,7 @@ export default function Vocabulary() {
                 </h3>
                 {quizScore.total > 0 && (
                   <div className="mb-4">
-                    <div className="text-4xl font-bold text-[#008090] mb-1">{Math.round((quizScore.correct / quizScore.total) * 100)}%</div>
+                    <div className="text-4xl font-bold text-teal-700 mb-1">{Math.round((quizScore.correct / quizScore.total) * 100)}%</div>
                     <p className="text-sm text-gray-500">{quizScore.correct}/{quizScore.total} {isFr ? "correct" : "correct"}</p>
                   </div>
                 )}
@@ -344,7 +344,7 @@ export default function Vocabulary() {
                 {/* Progress */}
                 <div className="flex items-center gap-3 mb-6">
                   <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow={quizIndex + 1} aria-valuemin={1} aria-valuemax={quizItems.length}>
-                    <div className="h-full bg-[#008090] rounded-full transition-all duration-300" style={{ width: `${(quizIndex / quizItems.length) * 100}%` }} />
+                    <div className="h-full bg-teal-700 rounded-full transition-all duration-300" style={{ width: `${(quizIndex / quizItems.length) * 100}%` }} />
                   </div>
                   <span className="text-xs text-gray-500 font-medium" aria-live="polite">{quizIndex + 1}/{quizItems.length}</span>
                 </div>
@@ -374,7 +374,7 @@ export default function Vocabulary() {
                     <>
                       <div className="p-4 rounded-xl bg-gray-50 mb-4">
                         <p className="text-xs text-gray-500 mb-1">{isFr ? "Bonne réponse :" : "Correct answer:"}</p>
-                        <p className="text-lg font-bold text-[#008090]">{quizItems[quizIndex]?.translation}</p>
+                        <p className="text-lg font-bold text-teal-700">{quizItems[quizIndex]?.translation}</p>
                         {quizAnswer && (
                           <p className="text-xs text-gray-400 mt-2">{isFr ? "Votre réponse" : "Your answer"}: <span className="font-medium">{quizAnswer}</span></p>
                         )}
@@ -418,13 +418,13 @@ export default function Vocabulary() {
                   <div>
                     <label htmlFor="vocab-word" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.word")} *</label>
                     <input id="vocab-word" type="text" placeholder={isFr ? "ex. néanmoins" : "e.g., néanmoins"} value={word} onChange={e => setWord(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
                       aria-required="true" autoFocus />
                   </div>
                   <div>
                     <label htmlFor="vocab-translation" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.translation")} *</label>
                     <input id="vocab-translation" type="text" placeholder={isFr ? "ex. nevertheless" : "e.g., nevertheless"} value={translation} onChange={e => setTranslation(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
                       aria-required="true" />
                   </div>
                   <div>

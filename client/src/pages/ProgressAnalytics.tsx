@@ -62,7 +62,7 @@ export default function ProgressAnalytics() {
     return recent.map((r: any, i: number) => ({ index: i, score: r.score ?? 0, wpm: r.wordsPerMinute ?? 0 }));
   }, [readingHistory]);
 
-  if (authLoading) return <div className="flex h-screen items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return <div className="flex h-screen items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-teal-700 border-t-transparent rounded-full" /></div>;
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
@@ -73,7 +73,7 @@ export default function ProgressAnalytics() {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-              <span className="material-icons text-[#008090]">insights</span>
+              <span className="material-icons text-teal-700">insights</span>
               Progress Analytics
             </h1>
             <p className="text-gray-500 mt-1">Track your learning journey across all skills</p>
@@ -83,7 +83,7 @@ export default function ProgressAnalytics() {
           <div className="flex gap-1 mb-8 bg-white rounded-xl p-1 border border-gray-100 shadow-sm w-fit">
             {(["overview", "skills", "trends"] as const).map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${activeTab === tab ? "bg-[#008090] text-white shadow-md" : "text-gray-500 hover:text-gray-700"}`}>
+                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${activeTab === tab ? "bg-teal-700 text-white shadow-md" : "text-gray-500 hover:text-gray-700"}`}>
                 {tab}
               </button>
             ))}
@@ -105,7 +105,7 @@ export default function ProgressAnalytics() {
                     </div>
                   </div>
                   <div className="text-sm text-gray-500">Overall Proficiency</div>
-                  <div className="mt-2 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#008090]/10 text-[#008090] text-sm font-semibold">
+                  <div className="mt-2 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-teal-700/10 text-teal-700 text-sm font-semibold">
                     Estimated: {estimatedCEFR}
                   </div>
                 </div>
@@ -210,7 +210,7 @@ export default function ProgressAnalytics() {
                             <span className="text-sm text-gray-700">{ts.topic}</span>
                             <div className="flex items-center gap-2">
                               <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                                <div className="h-2 rounded-full bg-[#f5a623]" style={{ width: `${ts.avgScore}%` }} />
+                                <div className="h-2 rounded-full bg-amber-500" style={{ width: `${ts.avgScore}%` }} />
                               </div>
                               <span className="text-sm font-bold text-gray-700 w-10 text-right">{ts.avgScore}%</span>
                             </div>

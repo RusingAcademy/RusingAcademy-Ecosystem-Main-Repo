@@ -253,7 +253,7 @@ export default function CustomerDetail() {
                       >
                         <td className="py-2 text-sm text-gray-800">{new Date(inv.invoiceDate).toLocaleDateString("en-CA")}</td>
                         <td className="py-2 text-sm text-gray-600">Invoice</td>
-                        <td className="py-2 text-sm text-[#0077C5]">{inv.invoiceNumber}</td>
+                        <td className="py-2 text-sm text-sky-600">{inv.invoiceNumber}</td>
                         <td className="py-2">
                           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                             inv.status === "Overdue" ? "bg-orange-100 text-orange-700" :

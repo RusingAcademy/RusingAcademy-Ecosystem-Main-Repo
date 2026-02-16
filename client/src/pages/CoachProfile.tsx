@@ -534,14 +534,14 @@ export default function CoachProfile() {
 
               {/* Tabs - Custom Implementation */}
               <div className="w-full">
-                <div className="bg-white dark:bg-foundation inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-[#0a6969] mb-6">
+                <div className="bg-white dark:bg-foundation inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-teal-800 mb-6">
                   <button
                     onClick={() => setActiveTab("about")}
                     aria-pressed={activeTab === "about"}
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "about"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-black dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-black dark:text-cyan-300 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "About" : "À propos"}
@@ -552,7 +552,7 @@ export default function CoachProfile() {
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "reviews"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-black dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-black dark:text-cyan-300 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "Reviews" : "Avis"} {reviews && reviews.length > 0 ? `(${reviews.length})` : ""}
@@ -563,7 +563,7 @@ export default function CoachProfile() {
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "gallery"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-black dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-black dark:text-cyan-300 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "Gallery" : "Galerie"}
@@ -715,7 +715,7 @@ export default function CoachProfile() {
                     <Card className="border-0 shadow-lg">
                       <CardContent className="pt-8 pb-8 text-center">
                         <div className="w-16 h-16 bg-slate-100 dark:bg-foundation rounded-full flex items-center justify-center mx-auto mb-4">
-                          <MessageSquare className="h-8 w-8 text-[#67E8F9]" />
+                          <MessageSquare className="h-8 w-8 text-cyan-300" />
                         </div>
                         <p className="text-black dark:text-white">
                           {isEn ? "No reviews yet. Be the first to leave a review!" : "Aucun avis pour le moment. Soyez le premier à laisser un avis!"}
@@ -749,7 +749,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "trial" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-foundation border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
+                            : "bg-white dark:bg-foundation border-slate-200 dark:border-teal-800 hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("trial")}
                       >
@@ -768,7 +768,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "single" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-foundation border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
+                            : "bg-white dark:bg-foundation border-slate-200 dark:border-teal-800 hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("single")}
                       >
@@ -1085,7 +1085,7 @@ export default function CoachProfile() {
       </main>
 
       {/* Mobile Sticky Booking Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-obsidian border-t border-slate-200 dark:border-[#0a6969] shadow-2xl p-3">
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-obsidian border-t border-slate-200 dark:border-teal-800 shadow-2xl p-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-black dark:text-white truncate">{coach.name}</p>

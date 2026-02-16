@@ -208,7 +208,7 @@ export default function Paths() {
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex items-center gap-4 w-full md:w-auto">
               <div className="relative flex-1 md:w-80">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-300" />
                 <Input
                   placeholder={t ? "Rechercher un parcours..." : "Search paths..."}
                   value={searchQuery}
@@ -313,7 +313,7 @@ export default function Paths() {
                                 )}
                               </div>
                             </div>
-                            <ChevronRight className="w-5 h-5 text-[#67E8F9] group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                            <ChevronRight className="w-5 h-5 text-cyan-300 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
                           </div>
                         )}
                         
@@ -377,7 +377,7 @@ export default function Paths() {
                             ) : (
                               <>
                                 {path.originalPrice && path.originalPrice > path.price && (
-                                  <span className="text-sm text-[#67E8F9] line-through mr-2">
+                                  <span className="text-sm text-cyan-300 line-through mr-2">
                                     {formatPrice(path.originalPrice)}
                                   </span>
                                 )}

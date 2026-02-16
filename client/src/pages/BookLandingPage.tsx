@@ -135,12 +135,12 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
       <motion.div
         animate={{ x: [0, 15, 0], y: [0, -10, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-10 right-10 w-72 h-72 bg-[#F97316]/10 rounded-full blur-3xl"
+        className="absolute top-10 right-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl"
       />
       <motion.div
         animate={{ x: [0, -15, 0], y: [0, 15, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-10 left-10 w-96 h-96 bg-[#14B8A6]/10 rounded-full blur-3xl"
+        className="absolute bottom-10 left-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"
       />
       <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-white/[0.02] rounded-full blur-3xl" />
 
@@ -178,7 +178,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
               {/* Badges */}
               <div className="absolute top-3 left-3 flex flex-col gap-2">
                 {item.is_new && (
-                  <Badge className="bg-[#F97316] text-white border-0 text-xs font-semibold shadow-lg">
+                  <Badge className="bg-orange-500 text-white border-0 text-xs font-semibold shadow-lg">
                     <Sparkles className="w-3 h-3 mr-1" />
                     {language === "fr" ? "Nouveau" : "New"}
                   </Badge>
@@ -218,7 +218,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
                   </Badge>
                 )}
                 {item.audience === "coach" && (
-                  <Badge className="bg-[#14B8A6]/30 text-[#14B8A6] border border-[#14B8A6]/20 text-xs">
+                  <Badge className="bg-teal-500/30 text-teal-500 border border-teal-500/20 text-xs">
                     <UserCheck className="w-3 h-3 mr-1" />
                     {language === "fr" ? "Pour Coachs" : "For Coaches"}
                   </Badge>
@@ -258,7 +258,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   size="lg"
-                  className="rounded-full bg-[#F97316] hover:bg-[#ea6c10] text-white font-semibold gap-2 text-base px-8 shadow-lg hover:shadow-xl hover:shadow-[#F97316]/20 transition-all duration-300"
+                  className="rounded-full bg-orange-500 hover:bg-cta-2 text-white font-semibold gap-2 text-base px-8 shadow-lg hover:shadow-xl hover:shadow-[#F97316]/20 transition-all duration-300"
                   onClick={() => window.open(item.cta_url, "_blank")}
                 >
                   {item.price_type === "free" ? (
@@ -313,14 +313,14 @@ function WhySection({ item, language }: { item: LibraryItem; language: string })
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
       variants={fadeInUp}
-      className="relative bg-gradient-to-r from-[#F97316]/5 via-[#F97316]/10 to-[#F97316]/5 border-y border-[#F97316]/10 overflow-hidden"
+      className="relative bg-gradient-to-r from-[#F97316]/5 via-[#F97316]/10 to-[#F97316]/5 border-y border-orange-500/10 overflow-hidden"
     >
       {/* Subtle decorative element */}
       <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#F97316] via-[#fb923c] to-[#F97316]/30" />
 
       <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F97316]/10 text-[#F97316] text-sm font-semibold mb-6 border border-[#F97316]/15">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-orange-500/10 text-orange-500 text-sm font-semibold mb-6 border border-orange-500/15">
             <Zap className="w-4 h-4" />
             {language === "fr" ? "Pourquoi ce produit existe" : "Why This Product Exists"}
           </div>
@@ -365,8 +365,8 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
           {/* Benefits */}
           <div className="mt-12">
             <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#F97316]/10 flex items-center justify-center">
-                <Award className="w-4 h-4 text-[#F97316]" />
+              <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center">
+                <Award className="w-4 h-4 text-orange-500" />
               </div>
               {language === "fr" ? "Ce que vous allez apprendre" : "What You'll Learn"}
             </h3>
@@ -381,10 +381,10 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
                 <motion.li
                   key={i}
                   variants={cardVariant}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-slate-100 hover:border-[#14B8A6]/30 hover:shadow-sm transition-all duration-300 group"
+                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-slate-100 hover:border-teal-500/30 hover:shadow-sm transition-all duration-300 group"
                 >
-                  <div className="w-6 h-6 rounded-full bg-[#14B8A6]/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#14B8A6]/20 transition-colors">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#14B8A6]" />
+                  <div className="w-6 h-6 rounded-full bg-teal-500/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-teal-500/20 transition-colors">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-500" />
                   </div>
                   <span className="text-slate-700 text-sm leading-relaxed">{benefit}</span>
                 </motion.li>
@@ -407,7 +407,7 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
               {/* Card header */}
               <div className="bg-gradient-to-r from-[#0F3D3E] to-[#1a5c5e] p-5">
                 <h3 className="font-semibold text-white text-lg flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-[#F97316]" />
+                  <BookOpen className="w-5 h-5 text-orange-500" />
                   {language === "fr" ? "Détails du produit" : "Product Details"}
                 </h3>
               </div>
@@ -467,7 +467,7 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
                 {/* CTA */}
                 <Button
                   size="lg"
-                  className="w-full rounded-full bg-[#F97316] hover:bg-[#ea6c10] text-white font-semibold gap-2 mt-4 shadow-md hover:shadow-lg hover:shadow-[#F97316]/20 transition-all duration-300"
+                  className="w-full rounded-full bg-orange-500 hover:bg-cta-2 text-white font-semibold gap-2 mt-4 shadow-md hover:shadow-lg hover:shadow-[#F97316]/20 transition-all duration-300"
                   onClick={() => window.open(item.cta_url, "_blank")}
                 >
                   {item.price_type === "free" ? (
@@ -531,8 +531,8 @@ function RelatedProducts({
     <section className="bg-slate-50 border-t border-slate-200">
       <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center flex items-center justify-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#F97316]/10 flex items-center justify-center">
-            <Heart className="w-4 h-4 text-[#F97316]" />
+          <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center">
+            <Heart className="w-4 h-4 text-orange-500" />
           </div>
           {language === "fr" ? "Vous pourriez aussi aimer" : "You Might Also Like"}
         </h2>
@@ -552,7 +552,7 @@ function RelatedProducts({
                 className="group cursor-pointer"
                 onClick={() => navigate(`/library/books/${rel.slug}`)}
               >
-                <Card className="overflow-hidden border border-slate-200 hover:border-[#F97316]/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.1)] transition-all duration-500 h-full rounded-2xl">
+                <Card className="overflow-hidden border border-slate-200 hover:border-orange-500/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.1)] transition-all duration-500 h-full rounded-2xl">
                   <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50">
                     <img
                       src={rel.cover_image_url}
@@ -628,7 +628,7 @@ function BookNotFound({ language }: { language: string }) {
         </p>
         <Button
           size="lg"
-          className="rounded-full bg-[#F97316] hover:bg-[#ea6c10] text-white gap-2 shadow-md"
+          className="rounded-full bg-orange-500 hover:bg-cta-2 text-white gap-2 shadow-md"
           onClick={() => navigate("/library")}
         >
           <ArrowLeft className="w-4 h-4" />

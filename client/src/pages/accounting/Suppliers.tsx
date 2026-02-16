@@ -95,7 +95,7 @@ export default function Suppliers() {
           </div>
           <div>
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Status</h3>
-            <div className="text-lg font-bold text-[#2CA01C]">{allSuppliers.length} Active</div>
+            <div className="text-lg font-bold text-green-600">{allSuppliers.length} Active</div>
           </div>
         </div>
       </div>
@@ -125,14 +125,14 @@ export default function Suppliers() {
               <th className="w-8"><input type="checkbox" className="rounded" /></th>
               <th>
                 <button className="flex items-center gap-1 hover:text-gray-900" onClick={() => toggleSort("name")}>
-                  Supplier <ArrowUpDown size={12} className={sortField === "name" ? "text-[#2CA01C]" : "text-gray-400"} />
+                  Supplier <ArrowUpDown size={12} className={sortField === "name" ? "text-green-600" : "text-gray-400"} />
                 </button>
               </th>
               <th>Company</th>
               <th>Phone</th>
               <th className="text-right">
                 <button className="flex items-center gap-1 ml-auto hover:text-gray-900" onClick={() => toggleSort("balance")}>
-                  Open Balance <ArrowUpDown size={12} className={sortField === "balance" ? "text-[#2CA01C]" : "text-gray-400"} />
+                  Open Balance <ArrowUpDown size={12} className={sortField === "balance" ? "text-green-600" : "text-gray-400"} />
                 </button>
               </th>
               <th className="w-10"></th>
@@ -142,11 +142,11 @@ export default function Suppliers() {
             {paginated.map((sup: any) => (
               <tr key={sup.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/suppliers/${sup.id}`)}>
                 <td onClick={(e) => e.stopPropagation()}><input type="checkbox" className="rounded" /></td>
-                <td className="text-[#0077C5] font-medium">{sup.displayName}</td>
+                <td className="text-sky-600 font-medium">{sup.displayName}</td>
                 <td className="text-gray-600">{sup.company || "—"}</td>
                 <td className="text-gray-600">{sup.phone || sup.mobile || "—"}</td>
                 <td className="text-right font-medium">
-                  <span className={sup.computedBalance > 0 ? "text-[#D4380D]" : "text-gray-800"}>
+                  <span className={sup.computedBalance > 0 ? "text-red-700" : "text-gray-800"}>
                     ${sup.computedBalance.toFixed(2)}
                   </span>
                 </td>
@@ -186,7 +186,7 @@ export default function Suppliers() {
                 return (
                   <button
                     key={pageNum}
-                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-[#2CA01C] text-white" : "hover:bg-gray-200 text-gray-700"}`}
+                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-green-600 text-white" : "hover:bg-gray-200 text-gray-700"}`}
                     onClick={() => setPage(pageNum)}
                   >
                     {pageNum}

@@ -687,7 +687,7 @@ export default function CoursesPage() {
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
               {federalOrgs.map((org, index) => (
-                <div key={index} className="flex items-center gap-2 text-[#67E8F9] hover:text-black transition-colors">
+                <div key={index} className="flex items-center gap-2 text-cyan-300 hover:text-black transition-colors">
                   <Building2 className="w-5 h-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>

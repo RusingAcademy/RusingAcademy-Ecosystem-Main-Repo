@@ -997,7 +997,7 @@ export default function BecomeCoachNew() {
         <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative">
           <div className="container">
             <div className="text-center mb-16">
-              <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta700 border-[#FFE4D6]">
+              <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta700 border-orange-100">
                 <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>

@@ -618,7 +618,7 @@ export default function CoachGuide() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-[#FFE4D6] bg-amber-50/50 dark:bg-amber-950/20">
+                <Card className="border-orange-100 bg-amber-50/50 dark:bg-amber-950/20">
                   <CardHeader>
                     <CardTitle className="text-amber-800 dark:text-amber-200">
                       {c.sessions.cancellation.title}

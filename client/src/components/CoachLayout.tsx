@@ -26,9 +26,9 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
   }, [sidebarCollapsed]);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fb]">
+    <div className="min-h-screen bg-slate-50">
       <a href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-[#7c3aed] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-violet-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg"
         aria-label="Skip to main content">
         Skip to main content
       </a>
@@ -63,7 +63,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
           <SocialLinks size={14} color="#9ca3af" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">
             © 2026 RusingAcademy — A Division of{" "}
-            <span className="font-medium text-[#7c3aed]">Rusinga International Consulting Ltd.</span>
+            <span className="font-medium text-violet-600">Rusinga International Consulting Ltd.</span>
           </p>
           <p className="text-[10px] text-gray-400 mt-0.5">
             Version 2.0.0 — Coach Portal

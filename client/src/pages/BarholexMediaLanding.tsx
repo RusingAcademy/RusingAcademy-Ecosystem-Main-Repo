@@ -393,7 +393,7 @@ export default function BarholexMediaLanding() {
   const t = labels[lang];
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8]">
+    <div className="min-h-screen bg-stone-50">
       <SEO
         title="Barholex Media - EdTech Innovation & Strategic Consulting"
         description="Strategic consulting, content innovation, and EdTech solutions for organizations ready to transform how they learn and communicate."

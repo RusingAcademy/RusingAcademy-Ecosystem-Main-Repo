@@ -65,7 +65,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 w-64 bg-obsidian text-white flex flex-col z-20">
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-[#0a6969]">
+        <div className="h-16 flex items-center px-6 border-b border-teal-800">
           <Link href="/portal/overview" className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center">
               <BookOpen className="h-4 w-4 text-white" />
@@ -75,7 +75,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         </div>
 
         {/* User Info */}
-        <div className="px-4 py-4 border-b border-[#0a6969]">
+        <div className="px-4 py-4 border-b border-teal-800">
           <div className="flex items-center gap-3 p-3 rounded-lg bg-foundation/50">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center text-white font-semibold">
               {userInitial}
@@ -84,7 +84,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
               <p className="text-sm font-medium text-white truncate">
                 {userName}
               </p>
-              <p className="text-xs text-[#67E8F9] truncate">
+              <p className="text-xs text-cyan-300 truncate">
                 Niveau B en cours
               </p>
             </div>
@@ -106,7 +106,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
                     : "text-white/90 hover:bg-foundation hover:text-white"
                 )}
               >
-                <item.icon className={cn("h-5 w-5", isActive ? "text-white" : "text-[#67E8F9]")} />
+                <item.icon className={cn("h-5 w-5", isActive ? "text-white" : "text-cyan-300")} />
                 <div className="flex-1">
                   <span>{item.name}</span>
                   {!isActive && (
@@ -120,27 +120,27 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         </nav>
 
         {/* Progress Summary */}
-        <div className="px-4 py-4 border-t border-[#0a6969]">
+        <div className="px-4 py-4 border-t border-teal-800">
           <div className="p-3 rounded-lg bg-foundation/50">
             <div className="flex items-center gap-2 mb-2">
               <Target className="h-4 w-4 text-blue-400" />
               <span className="text-xs font-medium text-white/90">Progression Globale</span>
             </div>
-            <div className="w-full h-2 bg-[#0a6969] rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-teal-800 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-blue-500 to-[#145A5B] rounded-full transition-all duration-500"
                 style={{ width: "45%" }}
               />
             </div>
-            <p className="text-xs text-[#67E8F9] mt-2">45% vers le niveau B</p>
+            <p className="text-xs text-cyan-300 mt-2">45% vers le niveau B</p>
           </div>
         </div>
 
         {/* Lingueefy Branding */}
-        <div className="px-4 py-3 border-t border-[#0a6969]">
+        <div className="px-4 py-3 border-t border-teal-800">
           <div className="flex items-center gap-2 text-xs text-slate-400">
             <span>Propulsé par</span>
-            <span className="font-semibold text-[#67E8F9]">Lingueefy</span>
+            <span className="font-semibold text-cyan-300">Lingueefy</span>
           </div>
         </div>
       </aside>

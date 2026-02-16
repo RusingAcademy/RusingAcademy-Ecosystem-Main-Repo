@@ -20,7 +20,7 @@ const dashboardRoutes: Record<UserRole, string> = {
 const LoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center bg-white">
     <div className="text-center">
-      <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-[#b91c1c] border-t-transparent"></div>
+      <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-red-700 border-t-transparent"></div>
       <p className="mt-4 text-gray-600">Vérification des permissions...</p>
     </div>
   </div>
@@ -35,7 +35,7 @@ const AccessDenied = ({ userRole, requiredRole }: { userRole: UserRole; required
         Cette page nécessite un accès de niveau <strong>{requiredRole}</strong>.
         Votre rôle actuel est <strong>{userRole}</strong>.
       </p>
-      <a href={dashboardRoutes[userRole]} className="inline-block px-6 py-3 bg-[#b91c1c] text-white rounded-lg hover:bg-[#991b1b] transition-colors font-medium">
+      <a href={dashboardRoutes[userRole]} className="inline-block px-6 py-3 bg-red-700 text-white rounded-lg hover:bg-red-800 transition-colors font-medium">
         Retour à mon tableau de bord
       </a>
     </div>

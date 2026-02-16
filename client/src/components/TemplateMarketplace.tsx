@@ -65,7 +65,7 @@ const SECTION_TYPE_ICONS: Record<string, typeof Layout> = {
 
 const SECTION_TYPE_COLORS: Record<string, string> = {
   hero: "bg-blue-500",
-  text_block: "bg-[#0a6969]",
+  text_block: "bg-teal-800",
   features: "bg-emerald-500",
   testimonials: "bg-violet-500",
   cta: "bg-amber-500",
@@ -79,7 +79,7 @@ const SECTION_TYPE_COLORS: Record<string, string> = {
   newsletter: "bg-rose-500",
   custom_html: "bg-fuchsia-500",
   divider: "bg-stone-500",
-  spacer: "bg-[#0a6969]",
+  spacer: "bg-teal-800",
 };
 
 const BRAND_COLORS: Record<string, string> = {
@@ -112,7 +112,7 @@ interface TemplateMarketplaceProps {
 // ─── Quick Add Section Types (for blank sections) ───
 const QUICK_ADD_TYPES = [
   { type: "hero", label: "Hero Banner", icon: Layout, color: "bg-blue-500" },
-  { type: "text_block", label: "Text Block", icon: Type, color: "bg-[#0a6969]" },
+  { type: "text_block", label: "Text Block", icon: Type, color: "bg-teal-800" },
   { type: "features", label: "Features Grid", icon: LayoutGrid, color: "bg-emerald-500" },
   { type: "testimonials", label: "Testimonials", icon: MessageSquare, color: "bg-violet-500" },
   { type: "cta", label: "Call to Action", icon: Star, color: "bg-amber-500" },
@@ -126,7 +126,7 @@ const QUICK_ADD_TYPES = [
   { type: "newsletter", label: "Newsletter", icon: Mail, color: "bg-rose-500" },
   { type: "custom_html", label: "Custom HTML", icon: Sparkles, color: "bg-fuchsia-500" },
   { type: "divider", label: "Divider", icon: Minus, color: "bg-stone-500" },
-  { type: "spacer", label: "Spacer", icon: Box, color: "bg-[#0a6969]" },
+  { type: "spacer", label: "Spacer", icon: Box, color: "bg-teal-800" },
 ];
 
 export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUsed, onAddBlankSection }: TemplateMarketplaceProps) {
@@ -217,7 +217,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
         /* ─── Blank Section List (original Add Block) ─── */
         <ScrollArea className="flex-1">
           <div className="p-3 space-y-1.5">
-            <p className="text-[10px] text-[#67E8F9] uppercase tracking-wider font-medium px-1 mb-2">
+            <p className="text-[10px] text-cyan-300 uppercase tracking-wider font-medium px-1 mb-2">
               Click to add an empty section block
             </p>
             {QUICK_ADD_TYPES.map(st => (
@@ -242,7 +242,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
           {/* Search & Filters */}
           <div className="p-2 space-y-2 border-b border-gray-100">
             <div className="relative">
-              <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#67E8F9]" />
+              <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-cyan-300" />
               <Input
                 placeholder="Search templates..."
                 value={searchQuery}
@@ -317,12 +317,12 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
             <div className="p-2 space-y-1.5">
               {templatesQuery.isLoading ? (
                 <div className="flex items-center justify-center py-8">
-                  <Loader2 className="h-5 w-5 animate-spin text-[#67E8F9]" />
+                  <Loader2 className="h-5 w-5 animate-spin text-cyan-300" />
                 </div>
               ) : filteredTemplates.length === 0 ? (
                 <div className="text-center py-8">
                   <Package className="h-8 w-8 mx-auto mb-2 text-white/90" />
-                  <p className="text-xs text-[#67E8F9] mb-1">No templates found</p>
+                  <p className="text-xs text-cyan-300 mb-1">No templates found</p>
                   <p className="text-[10px] text-white/90">
                     {searchQuery ? "Try a different search" : "Templates will appear here once created"}
                   </p>
@@ -338,7 +338,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
               ) : (
                 filteredTemplates.map(template => {
                   const Icon = SECTION_TYPE_ICONS[template.sectionType] || Box;
-                  const color = SECTION_TYPE_COLORS[template.sectionType] || "bg-[#0a6969]";
+                  const color = SECTION_TYPE_COLORS[template.sectionType] || "bg-teal-800";
                   return (
                     <div
                       key={template.id}
@@ -357,7 +357,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                           <div className="min-w-0 flex-1">
                             <p className="text-xs font-medium leading-tight truncate">{template.name}</p>
                             {template.description && (
-                              <p className="text-[10px] text-[#67E8F9] mt-0.5 line-clamp-2">{template.description}</p>
+                              <p className="text-[10px] text-cyan-300 mt-0.5 line-clamp-2">{template.description}</p>
                             )}
                             <div className="flex items-center gap-1 mt-1.5 flex-wrap">
                               <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200">
@@ -389,7 +389,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                               deleteTemplateMut.mutate({ id: template.id });
                             }
                           }}
-                          className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-red-50 text-[#67E8F9] hover:text-red-500 transition-all"
+                          className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-red-50 text-cyan-300 hover:text-red-500 transition-all"
                         >
                           <Trash2 className="h-3 w-3" />
                         </button>

@@ -26,7 +26,7 @@ export default function Authorizations() {
     <DashboardLayout>
       <div className="max-w-[1200px]">
         <div className="flex items-center gap-2 mb-4">
-          <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+          <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
             <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>Authorizations</h1>
@@ -40,7 +40,7 @@ export default function Authorizations() {
               onClick={() => setActiveTab(i)}
               className={`px-6 py-3 text-sm font-medium transition-colors relative
                 ${activeTab === i
-                  ? "text-[#008090] border-b-2 border-[#008090]"
+                  ? "text-teal-700 border-b-2 border-teal-700"
                   : "text-gray-500 hover:text-gray-700"
                 }`}
             >
@@ -64,7 +64,7 @@ export default function Authorizations() {
               </thead>
               <tbody>
                 {moduleAuths.map((auth, i) => (
-                  <tr key={i} className={`border-t border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-[#eef9f7]`}>
+                  <tr key={i} className={`border-t border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
                     <td className="px-4 py-3 text-sm text-gray-800">{auth.module}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{auth.startDate}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{auth.endDate}</td>

@@ -365,8 +365,8 @@ export default function BadgesCatalog() {
           <div className="h-1 w-full bg-gradient-to-r from-[#D97B3D] to-[#C65A1E]" />
           <CardContent className="pt-5 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[#D97B3D]/10 flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-[#D97B3D]" />
+              <div className="w-12 h-12 rounded-full bg-cta-2/10 flex items-center justify-center">
+                <TrendingUp className="w-6 h-6 text-cta-2" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">
@@ -421,7 +421,7 @@ export default function BadgesCatalog() {
           className="mb-8"
         >
           <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-            <Target className="w-5 h-5 text-[#D97B3D]" />
+            <Target className="w-5 h-5 text-cta-2" />
             {isEn ? "Almost There" : "Presque Là"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

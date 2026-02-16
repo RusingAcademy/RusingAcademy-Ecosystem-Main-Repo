@@ -58,7 +58,7 @@ export default function Deposits() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Payments & Transfers</h1>
-        <Button className="bg-[#2CA01C] hover:bg-[#248a17]" onClick={() => {
+        <Button className="bg-green-600 hover:bg-green-700" onClick={() => {
           setTransferForm({ fromAccountId: "", toAccountId: "", amount: "", memo: "", transferDate: new Date().toISOString().split("T")[0] });
           setShowTransfer(true);
         }}>
@@ -69,13 +69,13 @@ export default function Deposits() {
       {/* Tabs */}
       <div className="flex items-center gap-4 mb-4 border-b border-gray-200">
         <button
-          className={`pb-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "payments" ? "border-[#2CA01C] text-[#2CA01C]" : "border-transparent text-gray-500 hover:text-gray-700"}`}
+          className={`pb-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "payments" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => { setActiveTab("payments"); setPage(1); }}
         >
           Payments ({(payments || []).length})
         </button>
         <button
-          className={`pb-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "transfers" ? "border-[#2CA01C] text-[#2CA01C]" : "border-transparent text-gray-500 hover:text-gray-700"}`}
+          className={`pb-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "transfers" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => { setActiveTab("transfers"); setPage(1); }}
         >
           Transfers ({(transfers || []).length})
@@ -123,7 +123,7 @@ export default function Deposits() {
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {p.paymentDate ? new Date(p.paymentDate).toLocaleDateString("en-CA") : "-"}
                     </td>
-                    <td className="px-4 py-3 text-sm text-[#0077C5] font-medium">{p.referenceNumber || "-"}</td>
+                    <td className="px-4 py-3 text-sm text-sky-600 font-medium">{p.referenceNumber || "-"}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{p.paymentMethod || "-"}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{p.memo || "-"}</td>
                     <td className="px-4 py-3 text-sm text-right font-medium text-gray-800">{fmt(p.amount)}</td>
@@ -246,7 +246,7 @@ export default function Deposits() {
                 memo: transferForm.memo || undefined,
               })}
               disabled={transferMutation.isPending || !transferForm.fromAccountId || !transferForm.toAccountId || !transferForm.amount}
-              className="bg-[#2CA01C] hover:bg-[#248a17]"
+              className="bg-green-600 hover:bg-green-700"
             >
               {transferMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : <ArrowRightLeft size={14} className="mr-1" />}
               Transfer

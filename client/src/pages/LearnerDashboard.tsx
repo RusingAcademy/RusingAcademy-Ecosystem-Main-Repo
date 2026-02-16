@@ -143,7 +143,7 @@ const GlassCard = ({ children, className = "", hover = true }: { children: React
   <div className={`
     relative overflow-hidden rounded-xl
     bg-white dark:bg-obsidian
-    border border-slate-200 dark:border-[#0a6969]
+    border border-slate-200 dark:border-teal-800
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
     ${className}
@@ -188,7 +188,7 @@ const GlassStatCard = ({
         </div>
         <p className="text-3xl font-bold text-black dark:text-white">{value}</p>
         <p className="text-sm font-medium text-black dark:text-white/90">{label}</p>
-        {sublabel && <p className="text-xs text-black dark:text-[#67E8F9] mt-1">{sublabel}</p>}
+        {sublabel && <p className="text-xs text-black dark:text-cyan-300 mt-1">{sublabel}</p>}
       </div>
     </GlassCard>
   );
@@ -419,7 +419,7 @@ export default function LearnerDashboard() {
               <div className="absolute inset-0 rounded-full border-4 border-emerald-200 dark:border-emerald-800" />
               <div className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-black dark:text-[#67E8F9] font-medium">
+            <p className="text-black dark:text-cyan-300 font-medium">
               {language === "fr" ? "Chargement de votre portail..." : "Loading your portal..."}
             </p>
           </div>
@@ -440,7 +440,7 @@ export default function LearnerDashboard() {
             <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-black dark:text-[#67E8F9] mb-6">
+            <p className="text-black dark:text-cyan-300 mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à votre portail d'apprentissage"
                 : "Sign in to access your learning portal"}
@@ -469,7 +469,7 @@ export default function LearnerDashboard() {
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           
           {/* Hero Section - Welcome Banner - Professional & Accessible */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-[#0a6969]/50">
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-teal-800/50">
             <div className="absolute inset-0 bg-gradient-to-br from-[#0a6969]/50 to-[#062b2b]/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
@@ -583,9 +583,9 @@ export default function LearnerDashboard() {
                     />
                   </div>
                   <div className="flex-1 grid grid-cols-3 gap-4 w-full">
-                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50">
+                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50">
                       <p className="text-3xl font-bold bg-gradient-to-r from-[#0a6969] to-[#062b2b] dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
-                      <p className="text-sm text-black dark:text-[#67E8F9] mt-1">{l.currentLevel}</p>
+                      <p className="text-sm text-black dark:text-cyan-300 mt-1">{l.currentLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
                       <p className="text-3xl font-bold text-emerald-600">{displayTargetLevel}</p>
@@ -678,7 +678,7 @@ export default function LearnerDashboard() {
                   <div className="grid md:grid-cols-2 gap-4">
                     {courses.slice(0, 2).map((course: any) => (
                       <Link key={course.id} href={`/courses/${course.id}`}>
-                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
                           <div className="flex items-start gap-4">
                             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
                               <BookOpen className="h-7 w-7 text-white" />
@@ -687,7 +687,7 @@ export default function LearnerDashboard() {
                               <h3 className="font-semibold text-black dark:text-white truncate group-hover:text-blue-600 transition-colors">
                                 {course.title}
                               </h3>
-                              <p className="text-sm text-black dark:text-[#67E8F9] mt-1">
+                              <p className="text-sm text-black dark:text-cyan-300 mt-1">
                                 {course.completedLessons || 0}/{course.totalLessons || 10} {language === "fr" ? "leçons" : "lessons"}
                               </p>
                               <div className="mt-3">
@@ -695,7 +695,7 @@ export default function LearnerDashboard() {
                               </div>
                             </div>
                           </div>
-                          <ArrowRight className="absolute top-5 right-5 h-5 w-5 text-[#67E8F9] group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="absolute top-5 right-5 h-5 w-5 text-cyan-300 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </Link>
                     ))}
@@ -705,7 +705,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4">
                       <BookOpen className="h-8 w-8 text-blue-600" />
                     </div>
-                    <p className="text-black dark:text-[#67E8F9] mb-4">{l.noCourses}</p>
+                    <p className="text-black dark:text-cyan-300 mb-4">{l.noCourses}</p>
                     <Link href="/courses">
                       <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                         {l.exploreCourses}
@@ -741,7 +741,7 @@ export default function LearnerDashboard() {
                     {upcomingSessions.slice(0, 3).map((session: any) => (
                       <div
                         key={session.id}
-                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-md transition-all duration-300"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-md transition-all duration-300"
                       >
                         <div className="flex items-center gap-4">
                           <Avatar className="h-12 w-12 ring-2 ring-purple-200 dark:ring-purple-800">
@@ -754,7 +754,7 @@ export default function LearnerDashboard() {
                           </Avatar>
                           <div>
                             <p className="font-semibold text-black dark:text-white">{session.coachName || "Coach"}</p>
-                            <p className="text-sm text-black dark:text-[#67E8F9]">
+                            <p className="text-sm text-black dark:text-cyan-300">
                               {new Date(session.scheduledAt).toLocaleDateString(
                                 language === "fr" ? "fr-CA" : "en-CA",
                                 { weekday: "short", month: "short", day: "numeric" }
@@ -789,7 +789,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
                       <Calendar className="h-8 w-8 text-purple-600" />
                     </div>
-                    <p className="text-black dark:text-[#67E8F9] mb-4">{l.noSessions}</p>
+                    <p className="text-black dark:text-cyan-300 mb-4">{l.noSessions}</p>
                     <Link href="/coaches">
                       <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                         {l.viewCoaches}

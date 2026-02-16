@@ -20,7 +20,7 @@ export default function PathList() {
         <div className="text-center py-20">
           <span className="material-icons text-6xl text-gray-300">error_outline</span>
           <p className="text-gray-500 mt-4">Program not found.</p>
-          <Link href="/programs" className="text-[#008090] text-sm mt-2 inline-block hover:underline">← Back to Programs</Link>
+          <Link href="/programs" className="text-teal-700 text-sm mt-2 inline-block hover:underline">← Back to Programs</Link>
         </div>
       </DashboardLayout>
     );
@@ -33,7 +33,7 @@ export default function PathList() {
       <div className="space-y-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-500">
-          <Link href="/programs" className="hover:text-[#008090] transition-colors">Programs</Link>
+          <Link href="/programs" className="hover:text-teal-700 transition-colors">Programs</Link>
           <span>/</span>
           <span className="text-gray-900 font-medium">{program.title}</span>
         </div>
@@ -128,7 +128,7 @@ export default function PathList() {
                     <div className="flex-1 p-5">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h2 className="text-xl font-bold text-gray-900 group-hover:text-[#008090] transition-colors" style={{
+                          <h2 className="text-xl font-bold text-gray-900 group-hover:text-teal-700 transition-colors" style={{
                             fontFamily: "'Playfair Display', serif",
                           }}>
                             {path.title}
@@ -139,8 +139,8 @@ export default function PathList() {
                           <div className="flex items-center gap-1 px-3 py-1 rounded-full" style={{
                             background: "rgba(245,166,35,0.1)",
                           }}>
-                            <span className="material-icons text-[#f5a623]" style={{ fontSize: "16px" }}>emoji_events</span>
-                            <span className="text-xs font-bold text-[#f5a623]">Complete</span>
+                            <span className="material-icons text-amber-500" style={{ fontSize: "16px" }}>emoji_events</span>
+                            <span className="text-xs font-bold text-amber-500">Complete</span>
                           </div>
                         )}
                       </div>

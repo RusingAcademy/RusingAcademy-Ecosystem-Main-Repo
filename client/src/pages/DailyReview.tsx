@@ -259,7 +259,7 @@ export default function DailyReview() {
         <Card>
           <CardContent className="py-16 text-center space-y-4" role="status">
             <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-              <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">event_available</span>
+              <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">event_available</span>
             </div>
             <h2 className="text-2xl font-bold">{t("daily.emptyTitle")}</h2>
             <p className="text-muted-foreground max-w-sm mx-auto">{t("daily.emptyDesc")}</p>

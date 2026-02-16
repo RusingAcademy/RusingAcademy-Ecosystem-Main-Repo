@@ -95,7 +95,7 @@ export default function InvoicePdf() {
               )}
             </div>
             <div className="text-right">
-              <h2 className="text-2xl font-bold text-[#2CA01C] uppercase tracking-wider">Invoice</h2>
+              <h2 className="text-2xl font-bold text-green-600 uppercase tracking-wider">Invoice</h2>
               <p className="text-lg font-semibold text-gray-700 mt-1">#{invoice.invoiceNumber}</p>
               <div className="mt-2 text-sm text-gray-500">
                 <p>Date: {invoice.invoiceDate ? new Date(invoice.invoiceDate).toLocaleDateString("en-CA") : "—"}</p>
