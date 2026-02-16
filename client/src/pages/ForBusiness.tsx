@@ -244,9 +244,9 @@ export default function ForBusiness() {
     teal: "bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300",
     blue: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
     emerald: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300",
-    orange: "bg-orange-100 dark:bg-orange-900/30 text-[#C65A1E]700 dark:text-[#C65A1E]300",
-    copper: "bg-[#FFF1E8] dark:bg-[#FFF1E8]/30 text-[#C65A1E] dark:text-[#C65A1E]",
-    amber: "bg-amber-100 dark:bg-amber-900/30 text-[#C65A1E]700 dark:text-[#C65A1E]300",
+    orange: "bg-orange-100 dark:bg-orange-900/30 text-cta700 dark:text-cta300",
+    copper: "bg-cta-soft dark:bg-cta-soft/30 text-cta dark:text-cta",
+    amber: "bg-amber-100 dark:bg-amber-900/30 text-cta700 dark:text-cta300",
   };
 
   return (
@@ -279,7 +279,7 @@ export default function ForBusiness() {
                 {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-white dark:hover:bg-[#0a4040]">
+              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-white dark:hover:bg-foundation">
                 <FileText className="w-5 h-5 mr-2" />
                 {t.ctaSecondary}
               </Button>
@@ -304,7 +304,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Benefits Section */}
-      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-[#062b2b]">
+      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-obsidian">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.benefitsTitle}</h2>
@@ -374,7 +374,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Industries Section */}
-      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-[#062b2b]">
+      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-obsidian">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.industriesTitle}</h2>
@@ -406,7 +406,7 @@ export default function ForBusiness() {
           
           <div className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {t.testimonials.map((testimonial, i) => (
-              <Card key={i} className="border-slate-200 dark:border-[#0a6969] bg-white dark:bg-[#0a4040]">
+              <Card key={i} className="border-slate-200 dark:border-[#0a6969] bg-white dark:bg-foundation">
                 <CardContent className="p-6">
                   <Quote className="w-10 h-10 text-teal-200 dark:text-teal-800 mb-4" />
                   <p className="text-black dark:text-white/90 mb-6 italic">"{testimonial.quote}"</p>
@@ -427,7 +427,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Contact Form Section */}
-      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-[#062b2b]">
+      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-obsidian">
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">

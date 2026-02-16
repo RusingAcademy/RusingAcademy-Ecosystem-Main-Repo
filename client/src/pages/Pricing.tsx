@@ -340,7 +340,7 @@ export default function Pricing() {
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#C65A1E]/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cta/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
           </div>
           
@@ -551,7 +551,7 @@ export default function Pricing() {
                   </ul>
                   
                   <Link href="/coaches">
-                    <Button variant="outline" className="w-full border-2 border-orange-300 text-[#C65A1E]600 hover:bg-orange-50">
+                    <Button variant="outline" className="w-full border-2 border-orange-300 text-cta600 hover:bg-orange-50">
                       {l.findCoach}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
@@ -573,8 +573,8 @@ export default function Pricing() {
               visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 mb-4">
-                <Quote className="h-4 w-4 text-[#C65A1E]600" />
-                <span className="text-sm font-medium text-[#C65A1E]700">
+                <Quote className="h-4 w-4 text-cta600" />
+                <span className="text-sm font-medium text-cta700">
                   {language === "fr" ? "Témoignages" : "Success Stories"}
                 </span>
               </div>
@@ -594,12 +594,12 @@ export default function Pricing() {
                   {/* Stars */}
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, j) => (
-                      <Star key={j} className="h-5 w-5 fill-orange-400 text-[#C65A1E]400" />
+                      <Star key={j} className="h-5 w-5 fill-orange-400 text-cta400" />
                     ))}
                   </div>
                   
                   {/* Quote icon */}
-                  <div className="text-4xl text-[#C65A1E]200 font-serif mb-2">"</div>
+                  <div className="text-4xl text-cta200 font-serif mb-2">"</div>
                   
                   <p className="text-black mb-6 italic">{testimonial.quote}</p>
                   
@@ -684,12 +684,12 @@ export default function Pricing() {
                     {/* Referral Bonus */}
                     <div className="p-6 rounded-2xl bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 border border-[#FFE4D6]/50 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="h-12 w-12 rounded-xl bg-[#C65A1E] flex items-center justify-center shadow-lg shadow-[#C65A1E]/25">
+                        <div className="h-12 w-12 rounded-xl bg-cta flex items-center justify-center shadow-lg shadow-[#C65A1E]/25">
                           <Star className="h-6 w-6 text-white" />
                         </div>
                         <h4 className="font-semibold text-lg">{l.referralBonus}</h4>
                       </div>
-                      <p className="text-3xl font-bold text-[#C65A1E]600 mb-2">
+                      <p className="text-3xl font-bold text-cta600 mb-2">
                         {l.referralCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.referralDesc}</p>
@@ -771,7 +771,7 @@ export default function Pricing() {
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#C65A1E]/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cta/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
           </div>
           
           <div className="container relative z-10">

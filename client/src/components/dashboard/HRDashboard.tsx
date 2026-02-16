@@ -562,8 +562,8 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
               <tr key={assignment.id} className="hover:bg-white">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#E7F2F2] flex items-center justify-center">
-                      <GraduationCap className="w-5 h-5 text-[#0F3D3E]" />
+                    <div className="w-10 h-10 rounded-lg bg-foundation-soft flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-foundation" />
                     </div>
                     <div>
                       <p className="font-medium text-black">{assignment.courseName}</p>

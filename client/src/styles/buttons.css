@@ -1,0 +1,376 @@
+/* ============================================
+   BUTTON SYSTEM — RusingAcademy Ecosystem
+   ============================================
+   Version: 3.0.0 (Wave 3)
+   
+   Hierarchy (4 tiers):
+   1. CTA (Electric Copper) — primary conversion actions
+   2. Foundation (Deep Forest Teal) — secondary important actions
+   3. Outline — tertiary, low-emphasis actions
+   4. Ghost — minimal, inline actions
+   
+   Sizes: sm, md (default), lg, xl
+   Shapes: rounded-full (default for CTA), rounded-lg (default for others)
+   
+   Special variants:
+   - Glass buttons (for dark/gradient backgrounds)
+   - Brand accent buttons (per-brand theming)
+   - Premium gradient buttons (hero sections)
+   - QuickBooks-style buttons (accounting pages)
+   ============================================ */
+
+/* === BASE BUTTON RESET === */
+@layer components {
+  /* Shared base for all ecosystem buttons */
+  [class*="eco-btn"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-ui, 'Inter', sans-serif);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  [class*="eco-btn"]:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  [class*="eco-btn"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.3);
+  }
+}
+
+/* === 1. CTA BUTTON (Electric Copper) === */
+/* Primary conversion: "Enroll Now", "Start Free Trial", "Book Session" */
+@layer components {
+  .eco-btn-cta {
+    background-color: var(--brand-cta, #C65A1E);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 14px -2px rgba(198, 90, 30, 0.4);
+  }
+  .eco-btn-cta:hover {
+    background-color: var(--brand-cta-2, #E06B2D);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px -2px rgba(198, 90, 30, 0.5);
+  }
+  .eco-btn-cta:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(198, 90, 30, 0.3);
+  }
+
+  /* CTA sizes */
+  .eco-btn-cta.eco-btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+  .eco-btn-cta.eco-btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+  .eco-btn-cta.eco-btn-xl {
+    padding: 1.125rem 2.5rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* === 2. FOUNDATION BUTTON (Deep Forest Teal) === */
+/* Secondary important: "Learn More", "View Details", "Continue" */
+@layer components {
+  .eco-btn-foundation {
+    background-color: var(--brand-foundation, #0F3D3E);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(15, 61, 62, 0.2);
+  }
+  .eco-btn-foundation:hover {
+    background-color: var(--brand-foundation-2, #145A5B);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 61, 62, 0.3);
+  }
+  .eco-btn-foundation:active {
+    transform: translateY(0);
+  }
+
+  .eco-btn-foundation.eco-btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+  .eco-btn-foundation.eco-btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+/* === 3. OUTLINE BUTTON === */
+/* Tertiary: "Cancel", "Back", "Filter", "Export" */
+@layer components {
+  .eco-btn-outline {
+    background-color: transparent;
+    color: var(--brand-foundation, #0F3D3E);
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    border: 2px solid var(--brand-foundation, #0F3D3E);
+    border-radius: 0.5rem;
+  }
+  .eco-btn-outline:hover {
+    background-color: var(--brand-foundation, #0F3D3E);
+    color: #ffffff;
+  }
+  .eco-btn-outline:active {
+    background-color: var(--brand-foundation-2, #145A5B);
+    color: #ffffff;
+  }
+
+  .eco-btn-outline.eco-btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    border-width: 1.5px;
+  }
+  .eco-btn-outline.eco-btn-lg {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+
+  /* Outline CTA variant (copper border) */
+  .eco-btn-outline-cta {
+    background-color: transparent;
+    color: var(--brand-cta, #C65A1E);
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    border: 2px solid var(--brand-cta, #C65A1E);
+    border-radius: 9999px;
+  }
+  .eco-btn-outline-cta:hover {
+    background-color: var(--brand-cta, #C65A1E);
+    color: #ffffff;
+  }
+}
+
+/* === 4. GHOST BUTTON === */
+/* Minimal: inline actions, "See all", icon buttons */
+@layer components {
+  .eco-btn-ghost {
+    background-color: transparent;
+    color: var(--muted, #6B7280);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+  }
+  .eco-btn-ghost:hover {
+    background-color: var(--sand, #F5F1D6);
+    color: var(--text, #1A1A1A);
+  }
+
+  .eco-btn-ghost.eco-btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+}
+
+/* === GLASS BUTTONS (for dark/gradient backgrounds) === */
+@layer components {
+  .eco-btn-glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 9999px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  .eco-btn-glass:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .eco-btn-glass-outline {
+    background: transparent;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 9999px;
+  }
+  .eco-btn-glass-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* === PREMIUM GRADIENT BUTTONS (hero sections) === */
+@layer components {
+  .eco-btn-premium-cta {
+    background: linear-gradient(135deg, var(--brand-cta, #C65A1E) 0%, #E07B39 50%, #FF9A5C 100%);
+    color: #ffffff;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: 
+      0 10px 25px -5px rgba(198, 90, 30, 0.45),
+      0 4px 8px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .eco-btn-premium-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 15px 35px -5px rgba(198, 90, 30, 0.5),
+      0 6px 12px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .eco-btn-premium-teal {
+    background: linear-gradient(135deg, var(--brand-foundation, #0F3D3E) 0%, #145A5B 50%, #1A7070 100%);
+    color: #ffffff;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: 
+      0 10px 25px -5px rgba(15, 61, 62, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  .eco-btn-premium-teal:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 15px 35px -5px rgba(15, 61, 62, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* === QUICKBOOKS-STYLE BUTTONS (accounting pages) === */
+@layer components {
+  .qb-btn-primary {
+    background-color: #2CA01C;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    border: none;
+  }
+  .qb-btn-primary:hover {
+    background-color: #248a17;
+  }
+
+  .qb-btn-outline {
+    background-color: transparent;
+    color: var(--text, #1A1A1A);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.375rem;
+  }
+  .qb-btn-outline:hover {
+    background-color: #F3F4F6;
+    border-color: #9CA3AF;
+  }
+
+  .qb-btn-green {
+    background-color: #2CA01C;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    border: none;
+  }
+  .qb-btn-green:hover {
+    background-color: #248a17;
+  }
+}
+
+/* === ICON BUTTON === */
+@layer components {
+  .eco-btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    background-color: transparent;
+    color: var(--muted, #6B7280);
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .eco-btn-icon:hover {
+    background-color: var(--sand, #F5F1D6);
+    color: var(--text, #1A1A1A);
+  }
+
+  .eco-btn-icon.eco-btn-sm {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  .eco-btn-icon.eco-btn-lg {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+/* === DARK MODE OVERRIDES === */
+.dark [class*="eco-btn-outline"] {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+}
+.dark [class*="eco-btn-outline"]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.dark .eco-btn-ghost {
+  color: rgba(255, 255, 255, 0.6);
+}
+.dark .eco-btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* === BUTTON GROUP === */
+@layer components {
+  .eco-btn-group {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .eco-btn-group.eco-btn-group-sm {
+    gap: 0.5rem;
+  }
+}
+
+/* === ACCESSIBILITY: MINIMUM TOUCH TARGET === */
+@media (pointer: coarse) {
+  [class*="eco-btn"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

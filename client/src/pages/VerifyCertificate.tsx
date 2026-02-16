@@ -222,7 +222,7 @@ export default function VerifyCertificate() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-[#062b2b] text-white mt-16">
+        <footer className="bg-obsidian text-white mt-16">
           <div className="max-w-4xl mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">

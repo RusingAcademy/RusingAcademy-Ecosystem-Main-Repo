@@ -150,7 +150,7 @@ export default function SLEPractice() {
       
       <main className="flex-1 container py-8">
         {/* Back Link */}
-        <Link href="/rusingacademy" className="inline-flex items-center text-[#0F3D3E] hover:underline mb-6">
+        <Link href="/rusingacademy" className="inline-flex items-center text-foundation hover:underline mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
           {isEn ? "Back to RusingAcademy" : "Retour à RusingAcademy"}
         </Link>
@@ -201,8 +201,8 @@ export default function SLEPractice() {
               }}
               className={`p-6 rounded-2xl border-2 transition-all ${
                 selectedLevel === level
-                  ? "border-[#0F3D3E] bg-[#E7F2F2] dark:bg-[#0F3D3E]/20"
-                  : "border-gray-200 hover:border-[#0F3D3E]/50"
+                  ? "border-foundation bg-foundation-soft dark:bg-foundation/20"
+                  : "border-gray-200 hover:border-foundation/50"
               }`}
             >
               <div className="flex items-center gap-3 mb-2">
@@ -239,7 +239,7 @@ export default function SLEPractice() {
           <TabsContent value="listening" className="mt-6">
             {isLoading ? (
               <div className="flex items-center justify-center py-12">
-                <Loader2 className="h-8 w-8 animate-spin text-[#0F3D3E]" />
+                <Loader2 className="h-8 w-8 animate-spin text-foundation" />
               </div>
             ) : phrases.length === 0 ? (
               <Card>
@@ -256,7 +256,7 @@ export default function SLEPractice() {
                   <div className="flex items-center justify-between">
                     <div>
                       <CardTitle className="flex items-center gap-2">
-                        <Headphones className="h-5 w-5 text-[#0F3D3E]" />
+                        <Headphones className="h-5 w-5 text-foundation" />
                         {isEn ? "Listening Exercise" : "Exercice d'écoute"}
                       </CardTitle>
                       <CardDescription>
@@ -283,8 +283,8 @@ export default function SLEPractice() {
                           onClick={playAudio}
                           className={`w-24 h-24 rounded-full flex items-center justify-center transition-all ${
                             isPlaying
-                              ? "bg-[#0F3D3E] text-white"
-                              : "bg-[#E7F2F2] text-[#0F3D3E] hover:bg-[#0F3D3E] hover:text-white"
+                              ? "bg-foundation text-white"
+                              : "bg-foundation-soft text-foundation hover:bg-foundation hover:text-white"
                           }`}
                         >
                           {isPlaying ? (
@@ -347,7 +347,7 @@ export default function SLEPractice() {
                         
                         <div className="flex items-center gap-2">
                           {!completedPhrases.has(currentPhrase.id) ? (
-                            <Button onClick={markComplete} className="bg-[#0F3D3E] hover:bg-[#0F3D3E]/90">
+                            <Button onClick={markComplete} className="bg-foundation hover:bg-foundation/90">
                               <CheckCircle2 className="h-4 w-4 mr-2" />
                               {isEn ? "Mark Complete" : "Marquer terminé"}
                             </Button>
@@ -379,7 +379,7 @@ export default function SLEPractice() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Mic className="h-5 w-5 text-[#0F3D3E]" />
+                  <Mic className="h-5 w-5 text-foundation" />
                   {isEn ? "Repetition Exercise" : "Exercice de répétition"}
                 </CardTitle>
                 <CardDescription>
@@ -389,8 +389,8 @@ export default function SLEPractice() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="py-12 text-center">
-                <div className="w-20 h-20 rounded-full bg-[#E7F2F2] flex items-center justify-center mx-auto mb-4">
-                  <Mic className="h-10 w-10 text-[#0F3D3E]" />
+                <div className="w-20 h-20 rounded-full bg-foundation-soft flex items-center justify-center mx-auto mb-4">
+                  <Mic className="h-10 w-10 text-foundation" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
                   {isEn ? "Coming Soon" : "Bientôt disponible"}
@@ -409,7 +409,7 @@ export default function SLEPractice() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-[#0F3D3E]" />
+                  <MessageSquare className="h-5 w-5 text-foundation" />
                   {isEn ? "Comprehension Exercise" : "Exercice de compréhension"}
                 </CardTitle>
                 <CardDescription>
@@ -419,8 +419,8 @@ export default function SLEPractice() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="py-12 text-center">
-                <div className="w-20 h-20 rounded-full bg-[#E7F2F2] flex items-center justify-center mx-auto mb-4">
-                  <MessageSquare className="h-10 w-10 text-[#0F3D3E]" />
+                <div className="w-20 h-20 rounded-full bg-foundation-soft flex items-center justify-center mx-auto mb-4">
+                  <MessageSquare className="h-10 w-10 text-foundation" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
                   {isEn ? "Coming Soon" : "Bientôt disponible"}
@@ -437,11 +437,11 @@ export default function SLEPractice() {
         
         {/* Session Summary */}
         {completedPhrases.size > 0 && (
-          <Card className="bg-gradient-to-r from-[#E7F2F2] to-[#F0F7F7] dark:from-[#0F3D3E]/20 dark:to-[#0F3D3E]/10 border-[#0F3D3E]/20">
+          <Card className="bg-gradient-to-r from-[#E7F2F2] to-[#F0F7F7] dark:from-[#0F3D3E]/20 dark:to-[#0F3D3E]/10 border-foundation/20">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#0F3D3E] text-white flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-foundation text-white flex items-center justify-center">
                     <Award className="h-6 w-6" />
                   </div>
                   <div>

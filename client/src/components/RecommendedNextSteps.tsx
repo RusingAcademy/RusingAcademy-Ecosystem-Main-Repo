@@ -30,7 +30,7 @@ const TYPE_ICONS: Record<string, typeof BookOpen> = {
 const PRIORITY_COLORS: Record<string, string> = {
   high: "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300",
   medium: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  low: "bg-slate-100 text-black dark:bg-[#0a4040] dark:text-[#67E8F9]",
+  low: "bg-slate-100 text-black dark:bg-foundation dark:text-[#67E8F9]",
 };
 
 export function RecommendedNextSteps({ language, className }: RecommendedNextStepsProps) {
@@ -93,7 +93,7 @@ export function RecommendedNextSteps({ language, className }: RecommendedNextSte
           return (
             <div
               key={idx}
-              className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50 hover:bg-slate-100 dark:hover:bg-[#0a4040] transition-colors"
+              className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 hover:bg-slate-100 dark:hover:bg-foundation transition-colors"
             >
               <div className="mt-0.5 p-2 rounded-lg bg-white dark:bg-[#0a6969] shadow-sm">
                 <Icon className="h-4 w-4 text-black dark:text-white/90" />

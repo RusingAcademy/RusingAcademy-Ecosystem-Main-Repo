@@ -256,13 +256,13 @@ export default function SLEProgressDashboard() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#041e1e] via-[#062b2b] to-[#041e1e] text-white p-6">
         <div className="max-w-6xl mx-auto space-y-6">
-          <Skeleton className="h-10 w-64 bg-[#0a4040]" />
+          <Skeleton className="h-10 w-64 bg-foundation" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <Skeleton key={i} className="h-32 bg-[#0a4040] rounded-xl" />
+              <Skeleton key={i} className="h-32 bg-foundation rounded-xl" />
             ))}
           </div>
-          <Skeleton className="h-64 bg-[#0a4040] rounded-xl" />
+          <Skeleton className="h-64 bg-foundation rounded-xl" />
         </div>
       </div>
     );
@@ -277,7 +277,7 @@ export default function SLEProgressDashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-md"
         >
-          <div className="w-20 h-20 rounded-2xl bg-[#0a4040] flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 rounded-2xl bg-foundation flex items-center justify-center mx-auto mb-6">
             <BarChart3 className="h-10 w-10 text-white/90" />
           </div>
           <h2 className="text-2xl font-bold mb-3">{l.noSessions}</h2>
@@ -326,7 +326,7 @@ export default function SLEProgressDashboard() {
           </div>
 
           {/* Total Sessions */}
-          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
               <Calendar className="h-4 w-4 text-[#67E8F9]" />
               <span className="text-xs text-[#67E8F9]">{l.totalSessions}</span>
@@ -335,7 +335,7 @@ export default function SLEProgressDashboard() {
           </div>
 
           {/* Total Minutes */}
-          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="h-4 w-4 text-[#67E8F9]" />
               <span className="text-xs text-[#67E8F9]">{l.totalMinutes}</span>
@@ -344,7 +344,7 @@ export default function SLEProgressDashboard() {
           </div>
 
           {/* Average Score */}
-          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
               <Target className="h-4 w-4 text-[#67E8F9]" />
               <span className="text-xs text-[#67E8F9]">{l.averageScore}</span>
@@ -357,7 +357,7 @@ export default function SLEProgressDashboard() {
           </div>
 
           {/* Streak */}
-          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
+          <div className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
               <Flame className="h-4 w-4 text-orange-400" />
               <span className="text-xs text-[#67E8F9]">{l.streak}</span>
@@ -374,7 +374,7 @@ export default function SLEProgressDashboard() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]"
+            className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969]"
           >
             <h3 className="font-semibold text-white mb-1">{l.criteriaTitle}</h3>
             <p className="text-xs text-[#67E8F9] mb-4">{l.criteriaSubtitle}</p>
@@ -429,7 +429,7 @@ export default function SLEProgressDashboard() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]"
+            className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969]"
           >
             <h3 className="font-semibold text-white mb-1">{l.trendTitle}</h3>
             <p className="text-xs text-[#67E8F9] mb-4">{l.trendSubtitle}</p>
@@ -569,7 +569,7 @@ export default function SLEProgressDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="rounded-xl bg-[#0a4040]/50 border border-[#0a6969] overflow-hidden"
+          className="rounded-xl bg-foundation/50 border border-[#0a6969] overflow-hidden"
         >
           <div className="px-6 py-4 border-b border-[#0a6969]">
             <h3 className="font-semibold text-white">{l.historyTitle}</h3>
@@ -587,7 +587,7 @@ export default function SLEProgressDashboard() {
                   <div key={session.id}>
                     <button
                       onClick={() => setExpandedSession(isExpanded ? null : session.id)}
-                      className="w-full px-6 py-4 flex items-center gap-4 hover:bg-[#0a4040]/50 transition text-left"
+                      className="w-full px-6 py-4 flex items-center gap-4 hover:bg-foundation/50 transition text-left"
                     >
                       {/* Coach Avatar */}
                       <img
@@ -666,7 +666,7 @@ export default function SLEProgressDashboard() {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 py-4 bg-[#062b2b]/50 grid grid-cols-2 md:grid-cols-4 gap-4">
+                          <div className="px-6 py-4 bg-obsidian/50 grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
                               <p className="text-[10px] text-white/90 mb-1">{l.status}</p>
                               <p className={cn("text-sm font-medium", statusColor)}>{statusLabel}</p>

@@ -236,7 +236,7 @@ export default function CoachTerms() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#062b2b]/80 backdrop-blur-md border-b border-slate-200 dark:border-[#0a6969]">
+      <header className="sticky top-0 z-50 bg-white/80 dark:bg-obsidian/80 backdrop-blur-md border-b border-slate-200 dark:border-[#0a6969]">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/coach/dashboard">
@@ -267,7 +267,7 @@ export default function CoachTerms() {
 
       {/* Content */}
       <main className="container mx-auto px-4 py-12 max-w-4xl">
-        <div className="bg-white dark:bg-[#0a4040] rounded-2xl shadow-xl border border-slate-200 dark:border-[#0a6969] overflow-hidden">
+        <div className="bg-white dark:bg-foundation rounded-2xl shadow-xl border border-slate-200 dark:border-[#0a6969] overflow-hidden">
           {/* Title Section */}
           <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-8 py-8 text-white">
             <div className="flex items-center gap-3 mb-4">
@@ -316,14 +316,14 @@ export default function CoachTerms() {
                 {t.s2.title[l]}
               </h2>
               <div className="space-y-6">
-                <div className="bg-white dark:bg-[#0a4040] rounded-lg p-4 border border-amber-300 dark:border-amber-600">
+                <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-amber-300 dark:border-amber-600">
                   <p className="text-lg font-semibold text-black dark:text-white mb-2">
                     {t.s2.rate[l]} <span className="text-amber-600 text-2xl">{t.s2.rateValue}</span>
                   </p>
                   <p className="text-black dark:text-white/90" dangerouslySetInnerHTML={{ __html: t.s2.desc[l] }} />
                 </div>
 
-                <div className="bg-white dark:bg-[#0a4040] rounded-lg p-5 border border-slate-200 dark:border-slate-600">
+                <div className="bg-white dark:bg-foundation rounded-lg p-5 border border-slate-200 dark:border-slate-600">
                   <h3 className="font-bold text-black dark:text-white mb-4 text-center">{t.s2.breakdownTitle[l]}</h3>
                   <p className="text-sm text-black dark:text-[#67E8F9] mb-4 text-center">{t.s2.breakdownDesc[l]}</p>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -342,7 +342,7 @@ export default function CoachTerms() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-[#0a4040] rounded-lg p-4 border border-slate-200 dark:border-slate-600">
+                  <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
                     <h4 className="font-semibold text-black dark:text-white mb-2">{t.s2.example.title[l]}</h4>
                     <ul className="text-sm text-black dark:text-[#67E8F9] space-y-1">
                       {t.s2.example.lines[l].map((line, i) => (
@@ -350,7 +350,7 @@ export default function CoachTerms() {
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-white dark:bg-[#0a4040] rounded-lg p-4 border border-slate-200 dark:border-slate-600">
+                  <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
                     <h4 className="font-semibold text-black dark:text-white mb-2">{t.s2.benefits.title[l]}</h4>
                     <ul className="text-sm text-black dark:text-[#67E8F9] space-y-1">
                       {t.s2.benefits.lines[l].map((line, i) => (

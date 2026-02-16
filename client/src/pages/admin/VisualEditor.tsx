@@ -582,7 +582,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
       </div>
       {/* Hidden sections overlay */}
       {(section.isVisible === false || section.isVisible === 0) && (
-        <div className="absolute inset-0 z-10 bg-[#062b2b]/50 flex items-center justify-center">
+        <div className="absolute inset-0 z-10 bg-obsidian/50 flex items-center justify-center">
           <Badge variant="outline" className="bg-white text-black"><EyeOff className="h-3 w-3 mr-1" /> Hidden</Badge>
         </div>
       )}

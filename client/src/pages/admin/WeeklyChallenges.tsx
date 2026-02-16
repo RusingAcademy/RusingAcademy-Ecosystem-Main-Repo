@@ -253,7 +253,7 @@ export default function WeeklyChallenges() {
             Create and manage weekly challenges to boost learner engagement
           </p>
         </div>
-        <Button className="bg-[#C65A1E] hover:bg-[#A84A15] text-white" onClick={() => { setForm(defaultForm); setShowCreateDialog(true); }}>
+        <Button className="bg-cta hover:bg-cta hover:bg-cta-2 text-white" onClick={() => { setForm(defaultForm); setShowCreateDialog(true); }}>
           <Plus className="h-4 w-4 mr-2" />
           New Challenge
         </Button>
@@ -450,7 +450,7 @@ export default function WeeklyChallenges() {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button className="bg-[#C65A1E] hover:bg-[#A84A15] text-white" onClick={handleCreate}>
+            <Button className="bg-cta hover:bg-cta hover:bg-cta-2 text-white" onClick={handleCreate}>
               Create Challenge
             </Button>
           </DialogFooter>
@@ -468,7 +468,7 @@ export default function WeeklyChallenges() {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button className="bg-[#C65A1E] hover:bg-[#A84A15] text-white" onClick={handleSaveEdit}>
+            <Button className="bg-cta hover:bg-cta hover:bg-cta-2 text-white" onClick={handleSaveEdit}>
               Save Changes
             </Button>
           </DialogFooter>

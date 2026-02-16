@@ -676,8 +676,8 @@ export default function LessonViewer() {
                     {/* Speaking Exercise Content */}
                     {isSpeakingLesson && !showSpeaking && (
                       <div className="p-8 text-center">
-                        <div className="w-20 h-20 rounded-full bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 flex items-center justify-center mx-auto mb-4">
-                          <Mic className="h-10 w-10 text-[#0F3D3E] dark:text-[#0F3D3E]" />
+                        <div className="w-20 h-20 rounded-full bg-foundation-soft dark:bg-foundation-soft/30 flex items-center justify-center mx-auto mb-4">
+                          <Mic className="h-10 w-10 text-foundation dark:text-foundation" />
                         </div>
                         <h3 className="text-xl font-semibold mb-2">
                           {isEn ? "Speaking Exercise" : "Exercice d'expression orale"}
@@ -687,7 +687,7 @@ export default function LessonViewer() {
                             ? "Practice your French speaking skills. Record yourself and listen back." 
                             : "Pratiquez vos compétences orales en français. Enregistrez-vous et réécoutez."}
                         </p>
-                        <Button size="lg" onClick={() => setShowSpeaking(true)} className="bg-[#E7F2F2] hover:bg-[#E7F2F2]">
+                        <Button size="lg" onClick={() => setShowSpeaking(true)} className="bg-foundation-soft hover:bg-foundation-soft">
                           <Mic className="h-4 w-4 mr-2" aria-hidden="true" />
                           {isEn ? "Start Speaking" : "Commencer l'exercice"}
                         </Button>

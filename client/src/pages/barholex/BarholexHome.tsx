@@ -157,7 +157,7 @@ export default function BarholexHome() {
       <main id="main-content">
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#E7F2F2]/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-foundation-soft/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl" />
           
           <div className="container mx-auto relative z-10">
@@ -169,7 +169,7 @@ export default function BarholexHome() {
             >
               <motion.div variants={fadeInUp}>
                 <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-white/10 border border-white/60 text-white">
-                  <Clapperboard className="w-4 h-4 text-[#D4AF37]" />
+                  <Clapperboard className="w-4 h-4 text-barholex-gold" />
                   {language === "en" ? "Creative Production & EdTech" : "Production créative & EdTech"}
                 </span>
               </motion.div>
@@ -217,19 +217,19 @@ export default function BarholexHome() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={projects.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{projects.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{projects.count}+</div>
                 <div className="text-sm text-[#67E8F9]">{language === "en" ? "Projects Delivered" : "Projets livrés"}</div>
               </div>
               <div ref={clients.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{clients.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{clients.count}+</div>
                 <div className="text-sm text-[#67E8F9]">{language === "en" ? "Happy Clients" : "Clients satisfaits"}</div>
               </div>
               <div ref={awards.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{awards.count}</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{awards.count}</div>
                 <div className="text-sm text-[#67E8F9]">{language === "en" ? "Industry Awards" : "Prix de l'industrie"}</div>
               </div>
               <div ref={years.ref} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-1">{years.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{years.count}+</div>
                 <div className="text-sm text-[#67E8F9]">{language === "en" ? "Years Experience" : "Années d'expérience"}</div>
               </div>
             </div>
@@ -261,7 +261,7 @@ export default function BarholexHome() {
                   className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/60 hover:border-[#D4AF37]/50 transition-all group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-colors">
-                    <service.icon className="w-6 h-6 text-[#D4AF37]" />
+                    <service.icon className="w-6 h-6 text-barholex-gold" />
                   </div>
                   <h3 className="font-bold text-white mb-2">
                     {language === "en" ? service.titleEn : service.titleFr}
@@ -305,7 +305,7 @@ export default function BarholexHome() {
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                    <span className="text-xs text-[#D4AF37] font-medium mb-1">
+                    <span className="text-xs text-barholex-gold font-medium mb-1">
                       {language === "en" ? item.categoryEn : item.categoryFr}
                     </span>
                     <h3 className="text-xl font-bold text-white">
@@ -368,7 +368,7 @@ export default function BarholexHome() {
               <Link href="/barholex/contact">
                 <Button 
                   size="lg" 
-                  className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-[#062b2b]"
+                  className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-barholex-gold hover:bg-obsidian"
                 >
                   {language === "en" ? "Get in Touch" : "Nous contacter"}
                   <ArrowRight className="ml-2 h-5 w-5" />

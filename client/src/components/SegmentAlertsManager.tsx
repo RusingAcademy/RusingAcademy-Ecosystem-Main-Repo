@@ -389,7 +389,7 @@ export default function SegmentAlertsManager() {
               {logs.map((log) => (
                 <div
                   key={log.id}
-                  className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-[#0a4040]"
+                  className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-foundation"
                 >
                   <div className="flex items-center gap-3">
                     {log.eventType === "entered" && <ArrowRightCircle className="h-5 w-5 text-green-500" />}

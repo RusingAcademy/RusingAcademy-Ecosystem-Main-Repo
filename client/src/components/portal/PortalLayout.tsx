@@ -63,7 +63,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
   return (
     <div className="min-h-screen bg-white flex">
       {/* Sidebar */}
-      <aside className="fixed inset-y-0 left-0 w-64 bg-[#062b2b] text-white flex flex-col z-20">
+      <aside className="fixed inset-y-0 left-0 w-64 bg-obsidian text-white flex flex-col z-20">
         {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-[#0a6969]">
           <Link href="/portal/overview" className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
 
         {/* User Info */}
         <div className="px-4 py-4 border-b border-[#0a6969]">
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-[#0a4040]/50">
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-foundation/50">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center text-white font-semibold">
               {userInitial}
             </div>
@@ -103,7 +103,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
                   "flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200",
                   isActive
                     ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                    : "text-white/90 hover:bg-[#0a4040] hover:text-white"
+                    : "text-white/90 hover:bg-foundation hover:text-white"
                 )}
               >
                 <item.icon className={cn("h-5 w-5", isActive ? "text-white" : "text-[#67E8F9]")} />
@@ -121,7 +121,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
 
         {/* Progress Summary */}
         <div className="px-4 py-4 border-t border-[#0a6969]">
-          <div className="p-3 rounded-lg bg-[#0a4040]/50">
+          <div className="p-3 rounded-lg bg-foundation/50">
             <div className="flex items-center gap-2 mb-2">
               <Target className="h-4 w-4 text-blue-400" />
               <span className="text-xs font-medium text-white/90">Progression Globale</span>

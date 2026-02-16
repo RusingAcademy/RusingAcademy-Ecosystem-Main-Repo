@@ -203,9 +203,9 @@ const translations = {
 
 const sourceColors: Record<string, string> = {
   lingueefy: "bg-teal-500",
-  rusingacademy: "bg-[#C65A1E]",
-  barholex: "bg-[#C65A1E]",
-  ecosystem_hub: "bg-[#E7F2F2]",
+  rusingacademy: "bg-cta",
+  barholex: "bg-cta",
+  ecosystem_hub: "bg-foundation-soft",
   external: "bg-white0",
 };
 
@@ -214,10 +214,10 @@ const statusColors: Record<string, string> = {
   contacted: "bg-cyan-500",
   qualified: "bg-green-500",
   proposal_sent: "bg-yellow-500",
-  negotiating: "bg-[#C65A1E]",
+  negotiating: "bg-cta",
   won: "bg-emerald-500",
   lost: "bg-red-500",
-  nurturing: "bg-[#E7F2F2]",
+  nurturing: "bg-foundation-soft",
 };
 
 export default function CRMDashboard() {
@@ -492,7 +492,7 @@ export default function CRMDashboard() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-[#0a4040] rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+              className="bg-foundation rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between mb-6">

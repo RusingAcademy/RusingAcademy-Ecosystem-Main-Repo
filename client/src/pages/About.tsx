@@ -170,11 +170,11 @@ export default function About() {
   const getColorClasses = (color: string) => {
     const colors: Record<string, { bg: string; icon: string; iconBg: string }> = {
       teal: { bg: "from-teal-50 to-teal-100/50", icon: "text-teal-600", iconBg: "bg-teal-500" },
-      copper: { bg: "from-[#C65A1E]-50 to-[#E06B2D]/50", icon: "text-[#C65A1E]", iconBg: "bg-[#FFF1E8]" },
+      copper: { bg: "from-[#C65A1E]-50 to-[#E06B2D]/50", icon: "text-cta", iconBg: "bg-cta-soft" },
       blue: { bg: "from-blue-50 to-blue-100/50", icon: "text-blue-600", iconBg: "bg-blue-500" },
-      amber: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-[#C65A1E]600", iconBg: "bg-[#C65A1E]" },
+      amber: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-cta600", iconBg: "bg-cta" },
       emerald: { bg: "from-emerald-50 to-emerald-100/50", icon: "text-emerald-600", iconBg: "bg-emerald-500" },
-      orange: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-[#C65A1E]600", iconBg: "bg-[#C65A1E]" },
+      orange: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-cta600", iconBg: "bg-cta" },
     };
     return colors[color] || colors.teal;
   };
@@ -269,7 +269,7 @@ export default function About() {
                 <div className="glass-card p-6 hover-lift" style={{ transitionDelay: '100ms' }}>
                   <div className="flex gap-4">
                     <div className="h-10 w-10 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
-                      <Lightbulb className="h-5 w-5 text-[#C65A1E]600" />
+                      <Lightbulb className="h-5 w-5 text-cta600" />
                     </div>
                     <p className="text-muted-foreground leading-relaxed">{l.storyP2}</p>
                   </div>
@@ -375,7 +375,7 @@ export default function About() {
               
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#C65A1E]/20 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-cta/20 rounded-full blur-3xl" />
               
               <div className="relative p-12 md:p-16 text-center text-white">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.ctaTitle}</h2>

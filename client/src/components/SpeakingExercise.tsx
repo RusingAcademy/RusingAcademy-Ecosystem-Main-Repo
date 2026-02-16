@@ -200,8 +200,8 @@ export function SpeakingExercise({
       {/* Content */}
       <div className="p-6">
         {/* Prompt */}
-        <div className="bg-[#E7F2F2] rounded-xl p-4 mb-6">
-          <p className="text-sm text-[#0F3D3E] mb-1">
+        <div className="bg-foundation-soft rounded-xl p-4 mb-6">
+          <p className="text-sm text-foundation mb-1">
             {language === "fr" ? "Consigne :" : "Prompt:"}
           </p>
           <p className="text-black font-medium">{displayPrompt}</p>
@@ -371,7 +371,7 @@ export function SpeakingExercise({
                   setAudioUrl(null);
                   setRecordingTime(0);
                 }}
-                className="text-[#0F3D3E] hover:text-[#145A5B] text-sm font-medium"
+                className="text-foundation hover:text-[#145A5B] text-sm font-medium"
               >
                 🔄 {language === "fr" ? "Réenregistrer" : "Re-record"}
               </button>
@@ -402,7 +402,7 @@ export function SpeakingExercise({
               <ul className="mt-3 space-y-2">
                 {displayTips.map((tip, index) => (
                   <li key={index} className="flex items-start gap-2 text-sm text-black">
-                    <span className="text-[#0F3D3E]">•</span>
+                    <span className="text-foundation">•</span>
                     <span>{tip}</span>
                   </li>
                 ))}

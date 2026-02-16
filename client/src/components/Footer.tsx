@@ -156,7 +156,7 @@ export default function Footer() {
 
   return (
     <footer 
-      className="relative bg-[#062b2b] text-white overflow-visible"
+      className="relative bg-obsidian text-white overflow-visible"
       role="contentinfo"
       aria-label={language === "fr" ? "Pied de page" : "Footer"}
     >
@@ -261,13 +261,13 @@ export default function Footer() {
                 href="mailto:admin@rusingacademy.ca" 
                 className="flex items-center gap-3 text-white/90 hover:text-teal-400 transition-colors group"
               >
-                <div className="h-10 w-10 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
+                <div className="h-10 w-10 rounded-xl bg-foundation/80 border border-[#0a6969] flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
                   <Mail className="h-5 w-5" />
                 </div>
                 <span className="text-sm font-medium">admin@rusingacademy.ca</span>
               </a>
               <div className="flex items-center gap-3 text-white/90">
-                <div className="h-10 w-10 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center">
+                <div className="h-10 w-10 rounded-xl bg-foundation/80 border border-[#0a6969] flex items-center justify-center">
                   <MapPin className="h-5 w-5" />
                 </div>
                 <span className="text-sm font-medium">Ottawa, Ontario, Canada</span>
@@ -278,7 +278,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-white/90 hover:text-teal-400 transition-colors group"
               >
-                <div className="h-10 w-10 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
+                <div className="h-10 w-10 rounded-xl bg-foundation/80 border border-[#0a6969] flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
                   <Globe className="h-5 w-5" />
                 </div>
                 <span className="text-sm font-medium">www.rusingacademy.com</span>
@@ -293,7 +293,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-11 w-11 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center text-white/90 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-300"
+                  className="h-11 w-11 rounded-xl bg-foundation/80 border border-[#0a6969] flex items-center justify-center text-white/90 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" aria-hidden="true" />
@@ -339,7 +339,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar — always static (copyright is non-negotiable) */}
-      <div className="border-t border-[#0a6969]/50 bg-[#041e1e]/50">
+      <div className="border-t border-[#0a6969]/50 bg-obsidian/50">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company Link */}

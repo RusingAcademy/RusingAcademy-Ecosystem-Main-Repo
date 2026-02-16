@@ -766,7 +766,7 @@ export default function CourseBuilder() {
           <Card>
             <CardHeader>
               <CardTitle className="text-xl flex items-center gap-2">
-                <Rocket className="w-5 h-5 text-[#D4AF37]" />
+                <Rocket className="w-5 h-5 text-barholex-gold" />
                 {t.courseBuilder.review}
               </CardTitle>
               <CardDescription>Review your course before publishing.</CardDescription>

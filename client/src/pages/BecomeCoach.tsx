@@ -451,10 +451,10 @@ export default function BecomeCoach() {
                 const colors = [
                   "bg-blue-100 text-blue-600",
                   "bg-emerald-100 text-emerald-600",
-                  "bg-[#E7F2F2] text-[#0F3D3E]",
+                  "bg-foundation-soft text-foundation",
                   "bg-amber-100 text-amber-600",
                   "bg-teal-100 text-teal-600",
-                  "bg-[#FFF1E8] text-[#C65A1E]",
+                  "bg-cta-soft text-cta",
                 ];
                 return (
                   <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
@@ -665,7 +665,7 @@ export default function BecomeCoach() {
         <section className="py-20 bg-white">
           <div className="container">
             <div className="text-center mb-12">
-              <Badge className="mb-4 bg-[#E7F2F2] text-[#0F3D3E] border-[#0F3D3E]">
+              <Badge className="mb-4 bg-foundation-soft text-foundation border-foundation">
                 FAQ
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.faq}</h2>

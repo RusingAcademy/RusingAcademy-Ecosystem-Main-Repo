@@ -269,7 +269,7 @@ export default function PinchZoomImage({ src, alt, onClose, language = "en" }: P
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#062b2b]/95 backdrop-blur-xl touch-none"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-obsidian/95 backdrop-blur-xl touch-none"
       onClick={(e) => {
         if (e.target === containerRef.current) onClose();
       }}

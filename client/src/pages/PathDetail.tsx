@@ -264,7 +264,7 @@ const getFallbackPath = (slug: string) => {
       "bg-emerald-50",
       "bg-blue-50",
       "bg-amber-50",
-      "bg-[#E7F2F2]",
+      "bg-foundation-soft",
       "bg-purple-50",
       "bg-rose-50",
     ][index],

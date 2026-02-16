@@ -81,9 +81,9 @@ function HeroSection({ language }: { language: string }) {
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C65A1E]/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cta/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -96,7 +96,7 @@ function HeroSection({ language }: { language: string }) {
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-8">
             <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 text-white text-sm font-medium">
-              <Globe className="w-4 h-4 text-[#C65A1E]400" />
+              <Globe className="w-4 h-4 text-cta400" />
               {language === "en" ? "Canada's Premier Bilingual Training Ecosystem" : "L'écosystème de formation bilingue de référence au Canada"}
             </span>
           </motion.div>
@@ -270,12 +270,12 @@ function TrilemmeSection({ language }: { language: string }) {
                   {language === "en" ? (
                     <>
                       <strong className="text-black">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
-                      <strong className="text-[#C65A1E]600">3 to 4 times faster</strong> than traditional approaches.
+                      <strong className="text-cta600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
                       <strong className="text-black">RusingAcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
-                      <strong className="text-[#C65A1E]600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
+                      <strong className="text-cta600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
                 </p>
@@ -406,7 +406,7 @@ function EcosystemSection({ language }: { language: string }) {
                 <Link href={pillar.link}>
                   <Button
                     variant="outline"
-                    className="w-full group-hover:bg-[#062b2b] group-hover:text-white transition-colors duration-300"
+                    className="w-full group-hover:bg-obsidian group-hover:text-white transition-colors duration-300"
                   >
                     {language === "en" ? "Learn more" : "En savoir plus"}
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -629,7 +629,7 @@ function OffersSection({ language }: { language: string }) {
                   {language === "en" ? offer.descEn : offer.descFr}
                 </p>
                 <Link href={offer.link}>
-                  <Button className="w-full bg-[#062b2b] hover:bg-[#0a4040] text-white">
+                  <Button className="w-full bg-obsidian hover:bg-foundation text-white">
                     {language === "en" ? offer.ctaEn : offer.ctaFr}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -876,7 +876,7 @@ function TestimonialsSection({ language }: { language: string }) {
 
               {/* Quote */}
               <div className="p-6">
-                <div className="text-5xl text-[#C65A1E]400 leading-none mb-3">“</div>
+                <div className="text-5xl text-cta400 leading-none mb-3">“</div>
                 <p className="text-black leading-relaxed text-lg italic">
                   {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
                 </p>
@@ -1009,7 +1009,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C65A1E]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta/5 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-slate-100/50 to-transparent rounded-full" />
         </div>
 
@@ -1814,7 +1814,7 @@ function ProofGallerySection({ language }: { language: string }) {
                           {language === "en" ? short.descriptionEn : short.descriptionFr}
                         </p>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs px-3 py-1 rounded-full bg-[#C65A1E]/20 text-[#C65A1E]300 font-medium backdrop-blur-sm">
+                          <span className="text-xs px-3 py-1 rounded-full bg-cta/20 text-cta300 font-medium backdrop-blur-sm">
                             {short.category === "learning" ? (language === "en" ? "Learning" : "Apprentissage") :
                              short.category === "grammar" ? (language === "en" ? "Grammar" : "Grammaire") :
                              short.category === "career" ? (language === "en" ? "Career" : "Carrière") :
@@ -1879,7 +1879,7 @@ function ProofGallerySection({ language }: { language: string }) {
                       />
                       {/* Play Button Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                        <div className="w-16 h-16 rounded-full bg-[#C65A1E] flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-orange-500/50">
+                        <div className="w-16 h-16 rounded-full bg-cta flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-orange-500/50">
                           <Play className="w-8 h-8 text-white ml-1" fill="white" />
                         </div>
                       </div>
@@ -1900,7 +1900,7 @@ function ProofGallerySection({ language }: { language: string }) {
                   <div className="flex gap-2">
                     <button
                       onClick={() => setPlayingVideo(capsule.id)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#C65A1E] hover:bg-orange-600 text-white text-xs font-medium rounded-full transition-colors"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-cta hover:bg-orange-600 text-white text-xs font-medium rounded-full transition-colors"
                     >
                       <Play className="w-3 h-3" fill="white" />
                       {language === "en" ? "Watch" : "Regarder"}

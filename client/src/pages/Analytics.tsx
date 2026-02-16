@@ -128,7 +128,7 @@ export default function AnalyticsPage() {
               color="bg-[#1B1464]/10"
             />
             <StatCard
-              icon={<FileText className="w-5 h-5 text-[#D4AF37]" />}
+              icon={<FileText className="w-5 h-5 text-barholex-gold" />}
               label="Total Posts"
               value={overview.data?.totalPosts ?? 0}
               subValue={`+${overview.data?.postsThisWeek ?? 0} this week`}
@@ -205,7 +205,7 @@ export default function AnalyticsPage() {
           {topContributors.data && topContributors.data.length > 0 && (
             <div className="mb-8">
               <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                <Award className="w-5 h-5 text-[#D4AF37]" />
+                <Award className="w-5 h-5 text-barholex-gold" />
                 Top Contributors
               </h2>
               <div className="rounded-2xl border border-border overflow-hidden">
@@ -263,7 +263,7 @@ export default function AnalyticsPage() {
                           </div>
                         </td>
                         <td className="px-4 py-3 text-right">
-                          <span className="font-bold text-[#D4AF37]">
+                          <span className="font-bold text-barholex-gold">
                             {Number(entry.totalXp).toLocaleString()} XP
                           </span>
                         </td>

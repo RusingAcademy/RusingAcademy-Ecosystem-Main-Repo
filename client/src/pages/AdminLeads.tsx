@@ -258,7 +258,7 @@ export default function AdminLeads() {
                   </TableHeader>
                   <TableBody>
                     {leads.map((lead: any) => (
-                      <TableRow key={lead.id} className="cursor-pointer hover:bg-slate-50 dark:hover:bg-[#0a4040]" onClick={() => setSelectedLead(lead)}>
+                      <TableRow key={lead.id} className="cursor-pointer hover:bg-slate-50 dark:hover:bg-foundation" onClick={() => setSelectedLead(lead)}>
                         <TableCell>
                           <div className="flex flex-col">
                             <span className="font-medium text-black dark:text-white">
@@ -373,7 +373,7 @@ export default function AdminLeads() {
                 {/* Message */}
                 <div>
                   <h4 className="text-sm font-medium text-black dark:text-white/90 mb-2">Message</h4>
-                  <div className="p-4 bg-slate-50 dark:bg-[#0a4040] rounded-lg">
+                  <div className="p-4 bg-slate-50 dark:bg-foundation rounded-lg">
                     <p className="text-sm text-black dark:text-[#67E8F9] whitespace-pre-wrap">
                       {selectedLead.message}
                     </p>

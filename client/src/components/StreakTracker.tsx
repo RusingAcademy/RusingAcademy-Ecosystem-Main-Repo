@@ -70,7 +70,7 @@ export function StreakTracker({
   };
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-[#062b2b] p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-obsidian p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -114,7 +114,7 @@ export function StreakTracker({
                   "w-10 h-10 rounded-full flex items-center justify-center transition-all",
                   completed
                     ? "bg-gradient-to-br from-amber-400 to-orange-500 shadow-md"
-                    : "bg-slate-100 dark:bg-[#0a4040]"
+                    : "bg-slate-100 dark:bg-foundation"
                 )}
               >
                 {completed ? (
@@ -136,7 +136,7 @@ export function StreakTracker({
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
+        <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <Trophy className="h-4 w-4 text-amber-500" />
             <span className="text-xs text-black dark:text-[#67E8F9]">{l.longestStreak}</span>
@@ -147,7 +147,7 @@ export function StreakTracker({
         </div>
         
         {nextMilestone && (
-          <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
+          <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-blue-500" />
               <span className="text-xs text-black dark:text-[#67E8F9]">{l.nextMilestone}</span>

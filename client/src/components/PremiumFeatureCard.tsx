@@ -46,8 +46,8 @@ export default function PremiumFeatureCard({
     purple: {
       iconBg: "from-[#0F3D3E] to-[#145A5B]",
       iconShadow: "shadow-purple-500/25",
-      border: "border-[#0F3D3E]/20",
-      badge: "bg-[#E7F2F2] text-[#0F3D3E]",
+      border: "border-foundation/20",
+      badge: "bg-foundation-soft text-foundation",
     },
     gold: {
       iconBg: "from-[#C65A1E] to-yellow-600",
@@ -64,8 +64,8 @@ export default function PremiumFeatureCard({
     copper: {
       iconBg: "from-[#C65A1E] to-[#E06B2D]",
       iconShadow: "shadow-rose-500/25",
-      border: "border-[#C65A1E]/20",
-      badge: "bg-[#FFF1E8] text-[#C65A1E]",
+      border: "border-cta/20",
+      badge: "bg-cta-soft text-cta",
     },
     emerald: {
       iconBg: "from-emerald-500 to-emerald-600",

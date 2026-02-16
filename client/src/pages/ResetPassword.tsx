@@ -91,7 +91,7 @@ export default function ResetPassword() {
   if (tokenValid === null) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <Loader2 className="w-12 h-12 text-teal-400 mx-auto animate-spin" />
@@ -107,7 +107,7 @@ export default function ResetPassword() {
   if (!tokenValid) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <AlertCircle className="w-16 h-16 text-red-500 mx-auto" />
@@ -123,7 +123,7 @@ export default function ResetPassword() {
                   </Button>
                 </Link>
                 <Link to="/login">
-                  <Button variant="outline" className="w-full bg-[#0a6969]/50 border-slate-600 text-white hover:bg-[#0a6969]">
+                  <Button variant="outline" className="w-full bg-[#0a6969]/50 border-slate-600 text-white hover:bg-foundation-2">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Login
                   </Button>
@@ -140,7 +140,7 @@ export default function ResetPassword() {
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
@@ -160,7 +160,7 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-      <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img

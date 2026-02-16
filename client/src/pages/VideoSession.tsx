@@ -214,14 +214,14 @@ export default function VideoSession() {
   }
 
   return (
-    <div className="min-h-screen bg-[#062b2b]">
+    <div className="min-h-screen bg-obsidian">
       {/* Header */}
-      <header className="bg-[#0a4040] border-b border-[#0a6969] py-3 px-4">
+      <header className="bg-foundation border-b border-[#0a6969] py-3 px-4">
         <div className="container mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
             size="sm"
-            className="text-white hover:bg-[#0a6969]"
+            className="text-white hover:bg-foundation-2"
             onClick={() => window.history.back()}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />

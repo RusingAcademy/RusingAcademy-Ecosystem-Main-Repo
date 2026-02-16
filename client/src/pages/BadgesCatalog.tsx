@@ -344,8 +344,8 @@ export default function BadgesCatalog() {
           <div className="h-1 w-full bg-gradient-to-r from-[#0F3D3E] to-[#145A5B]" />
           <CardContent className="pt-5 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[#0F3D3E]/10 flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-[#0F3D3E]" />
+              <div className="w-12 h-12 rounded-full bg-foundation/10 flex items-center justify-center">
+                <Trophy className="w-6 h-6 text-foundation" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">

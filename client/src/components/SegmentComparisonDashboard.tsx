@@ -288,11 +288,11 @@ export default function SegmentComparisonDashboard() {
       "bg-primary",
       "bg-blue-500",
       "bg-green-500",
-      "bg-[#C65A1E]",
-      "bg-[#E7F2F2]",
-      "bg-[#FFF1E8]",
+      "bg-cta",
+      "bg-foundation-soft",
+      "bg-cta-soft",
       "bg-cyan-500",
-      "bg-[#C65A1E]",
+      "bg-cta",
     ];
     return colors[index % colors.length];
   };
@@ -415,7 +415,7 @@ export default function SegmentComparisonDashboard() {
                         </div>
                         <span className="font-semibold">{formatMetricValue(value)}</span>
                       </div>
-                      <div className="h-8 bg-slate-100 dark:bg-[#0a4040] rounded-full overflow-hidden">
+                      <div className="h-8 bg-slate-100 dark:bg-foundation rounded-full overflow-hidden">
                         <div
                           className={`h-full ${getBarColor(index)} rounded-full transition-all duration-500`}
                           style={{ width: `${Math.max(percentage, 2)}%` }}
@@ -500,7 +500,7 @@ export default function SegmentComparisonDashboard() {
                         <p className="text-xs text-muted-foreground">{l.qualified}</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-[#0F3D3E] font-semibold">{metric.contactedLeads}</p>
+                        <p className="text-foundation font-semibold">{metric.contactedLeads}</p>
                         <p className="text-xs text-muted-foreground">{l.contacted}</p>
                       </div>
                       <div className="text-center">
@@ -541,7 +541,7 @@ export default function SegmentComparisonDashboard() {
               </thead>
               <tbody>
                 {segmentMetrics.map((metric, index) => (
-                  <tr key={metric.id} className="border-b hover:bg-white dark:hover:bg-[#0a4040]">
+                  <tr key={metric.id} className="border-b hover:bg-white dark:hover:bg-foundation">
                     <td className="py-2 px-3">
                       <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-full ${getBarColor(index)}`} />

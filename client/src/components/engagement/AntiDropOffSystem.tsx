@@ -21,7 +21,7 @@ interface LearnerRiskProfile {
 }
 
 function StatCard({ label, value, color }: { label: string; value: number; color: string }) {
-  const colors = { red: 'bg-red-500/20 text-red-400', orange: 'bg-[#C65A1E]/20 text-orange-400', amber: 'bg-[#C65A1E]/20 text-amber-400' };
+  const colors = { red: 'bg-red-500/20 text-red-400', orange: 'bg-cta/20 text-orange-400', amber: 'bg-cta/20 text-amber-400' };
   return <div className={`px-4 py-2 rounded-lg ${colors[color as keyof typeof colors]}`}><span className="text-2xl font-bold">{value}</span><span className="text-xs ml-1">{label}</span></div>;
 }
 
@@ -57,7 +57,7 @@ export function RiskDashboard({ role }: { role: 'admin' | 'coach' }) {
         </div>
         <div className="flex gap-2 mb-6">
           {['all', 'critical', 'high', 'medium'].map((f) => (
-            <button key={f} onClick={() => setFilter(f as any)} className={`px-4 py-2 rounded-lg text-sm font-medium ${filter === f ? 'bg-[#E7F2F2] text-white' : 'bg-white/5 text-white/60'}`}>
+            <button key={f} onClick={() => setFilter(f as any)} className={`px-4 py-2 rounded-lg text-sm font-medium ${filter === f ? 'bg-foundation-soft text-white' : 'bg-white/5 text-white/60'}`}>
               {f === 'all' ? 'Tous' : f.charAt(0).toUpperCase() + f.slice(1)}
             </button>
           ))}
@@ -97,8 +97,8 @@ function LearnerRiskCard({ learner, onIntervene, getRiskColor }: { learner: Lear
               </div>
               <div className="flex gap-2">
                 <button onClick={() => onIntervene('nudge')} className="px-3 py-1.5 bg-blue-500/20 text-blue-400 rounded-lg text-sm">Nudge</button>
-                <button onClick={() => onIntervene('ai_outreach')} className="px-3 py-1.5 bg-[#E7F2F2]/20 text-[#0F3D3E] rounded-lg text-sm">Steven AI</button>
-                <button onClick={() => onIntervene('coach_alert')} className="px-3 py-1.5 bg-[#C65A1E]/20 text-amber-400 rounded-lg text-sm">Alerter Coach</button>
+                <button onClick={() => onIntervene('ai_outreach')} className="px-3 py-1.5 bg-foundation-soft/20 text-foundation rounded-lg text-sm">Steven AI</button>
+                <button onClick={() => onIntervene('coach_alert')} className="px-3 py-1.5 bg-cta/20 text-amber-400 rounded-lg text-sm">Alerter Coach</button>
               </div>
             </div>
           </motion.div>
@@ -115,8 +115,8 @@ export function NudgeModal({ isOpen, onClose, message, incentive }: { isOpen: bo
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
       <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-[#1A1A2E] rounded-2xl p-6 max-w-md w-full border border-white/10">
         <div className="text-center"><span className="text-5xl mb-4 block">👋</span><h2 className="text-xl font-bold text-white mb-2">On vous attend!</h2><p className="text-white/60 mb-6">{message}</p></div>
-        {incentive && <div className="bg-[#E7F2F2]/10 rounded-xl p-4 mb-6 text-center"><p className="text-[#0F3D3E] font-medium">🎁 Bonus de retour: +{incentive.value} XP</p></div>}
-        <div className="flex gap-3"><button onClick={onClose} className="flex-1 py-3 bg-white/10 rounded-xl text-white">Plus tard</button><button onClick={onClose} className="flex-1 py-3 bg-[#E7F2F2] rounded-xl text-white font-medium">Reprendre</button></div>
+        {incentive && <div className="bg-foundation-soft/10 rounded-xl p-4 mb-6 text-center"><p className="text-foundation font-medium">🎁 Bonus de retour: +{incentive.value} XP</p></div>}
+        <div className="flex gap-3"><button onClick={onClose} className="flex-1 py-3 bg-white/10 rounded-xl text-white">Plus tard</button><button onClick={onClose} className="flex-1 py-3 bg-foundation-soft rounded-xl text-white font-medium">Reprendre</button></div>
       </motion.div>
     </motion.div>
   );

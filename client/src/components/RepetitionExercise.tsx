@@ -173,7 +173,7 @@ export default function RepetitionExercise({
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
-              <Mic className="h-5 w-5 text-[#0F3D3E]" />
+              <Mic className="h-5 w-5 text-foundation" />
               {isEn ? title : titleFr}
             </CardTitle>
             <CardDescription>
@@ -202,12 +202,12 @@ export default function RepetitionExercise({
         
         {/* Step 1: Listen to Original */}
         <div className={`p-4 rounded-xl border-2 transition-all ${
-          hasListened ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-[#0F3D3E]"
+          hasListened ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-foundation"
         }`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                hasListened ? "bg-green-500 text-white" : "bg-[#0F3D3E] text-white"
+                hasListened ? "bg-green-500 text-white" : "bg-foundation text-white"
               }`}>
                 1
               </div>
@@ -224,7 +224,7 @@ export default function RepetitionExercise({
             <Button
               variant={hasListened ? "outline" : "default"}
               onClick={playOriginal}
-              className={!hasListened ? "bg-[#0F3D3E] hover:bg-[#0F3D3E]/90" : ""}
+              className={!hasListened ? "bg-foundation hover:bg-foundation/90" : ""}
             >
               {isPlayingOriginal ? (
                 <>
@@ -243,12 +243,12 @@ export default function RepetitionExercise({
         
         {/* Step 2: Record Yourself */}
         <div className={`p-4 rounded-xl border-2 transition-all ${
-          !hasListened ? "opacity-50 border-gray-200" : recordedAudioUrl ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-[#0F3D3E]"
+          !hasListened ? "opacity-50 border-gray-200" : recordedAudioUrl ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-foundation"
         }`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                recordedAudioUrl ? "bg-green-500 text-white" : hasListened ? "bg-[#0F3D3E] text-white" : "bg-gray-300 text-gray-600"
+                recordedAudioUrl ? "bg-green-500 text-white" : hasListened ? "bg-foundation text-white" : "bg-gray-300 text-gray-600"
               }`}>
                 2
               </div>
@@ -267,7 +267,7 @@ export default function RepetitionExercise({
                 variant={recordedAudioUrl ? "outline" : "default"}
                 onClick={startRecording}
                 disabled={!hasListened}
-                className={hasListened && !recordedAudioUrl ? "bg-[#0F3D3E] hover:bg-[#0F3D3E]/90" : ""}
+                className={hasListened && !recordedAudioUrl ? "bg-foundation hover:bg-foundation/90" : ""}
               >
                 <Mic className="h-4 w-4 mr-2" />
                 {recordedAudioUrl ? (isEn ? "Re-record" : "Ré-enregistrer") : (isEn ? "Record" : "Enregistrer")}
@@ -303,10 +303,10 @@ export default function RepetitionExercise({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="p-4 rounded-xl border-2 border-[#0F3D3E] bg-[#E7F2F2] dark:bg-[#0F3D3E]/20"
+              className="p-4 rounded-xl border-2 border-foundation bg-foundation-soft dark:bg-foundation/20"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-[#0F3D3E] text-white flex items-center justify-center text-sm font-bold">
+                <div className="w-8 h-8 rounded-full bg-foundation text-white flex items-center justify-center text-sm font-bold">
                   3
                 </div>
                 <div>
@@ -385,7 +385,7 @@ export default function RepetitionExercise({
               </Badge>
             )}
             
-            <Button onClick={nextPhrase} className="bg-[#0F3D3E] hover:bg-[#0F3D3E]/90">
+            <Button onClick={nextPhrase} className="bg-foundation hover:bg-foundation/90">
               {currentPhraseIndex < phrases.length - 1
                 ? (isEn ? "Next Phrase" : "Phrase suivante")
                 : (isEn ? "Finish" : "Terminer")}

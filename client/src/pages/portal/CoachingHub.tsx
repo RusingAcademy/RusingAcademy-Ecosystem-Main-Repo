@@ -121,11 +121,11 @@ export default function CoachingHub() {
           <div>
             <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
               Coaching
-              <span className="px-3 py-1 bg-[#E7F2F2] text-[#0F3D3E] text-sm font-medium rounded-full">Lingueefy</span>
+              <span className="px-3 py-1 bg-foundation-soft text-foundation text-sm font-medium rounded-full">Lingueefy</span>
             </h1>
             <p className="text-slate-500 mt-1">Vos sessions de coaching personnalisé avec nos experts linguistiques</p>
           </div>
-          <Button className="bg-[#E7F2F2] hover:bg-[#E7F2F2] gap-2">
+          <Button className="bg-foundation-soft hover:bg-foundation-soft gap-2">
             <CalendarPlus className="h-4 w-4" />
             Réserver une session
           </Button>
@@ -135,8 +135,8 @@ export default function CoachingHub() {
           <Card className="border-slate-200">
             <CardContent className="pt-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#E7F2F2] flex items-center justify-center">
-                  <Video className="h-5 w-5 text-[#0F3D3E]" />
+                <div className="w-10 h-10 rounded-lg bg-foundation-soft flex items-center justify-center">
+                  <Video className="h-5 w-5 text-foundation" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-slate-900">{completedSessions}</p>
@@ -217,10 +217,10 @@ export default function CoachingHub() {
             )}
 
             <div className="flex items-center gap-2 border-b border-slate-200">
-              <button onClick={() => setActiveTab("upcoming")} className={cn("px-4 py-2 text-sm font-medium border-b-2 transition-colors", activeTab === "upcoming" ? "border-[#0F3D3E] text-[#0F3D3E]" : "border-transparent text-slate-500 hover:text-slate-700")}>
+              <button onClick={() => setActiveTab("upcoming")} className={cn("px-4 py-2 text-sm font-medium border-b-2 transition-colors", activeTab === "upcoming" ? "border-foundation text-foundation" : "border-transparent text-slate-500 hover:text-slate-700")}>
                 À venir ({upcomingSessions.length})
               </button>
-              <button onClick={() => setActiveTab("past")} className={cn("px-4 py-2 text-sm font-medium border-b-2 transition-colors", activeTab === "past" ? "border-[#0F3D3E] text-[#0F3D3E]" : "border-transparent text-slate-500 hover:text-slate-700")}>
+              <button onClick={() => setActiveTab("past")} className={cn("px-4 py-2 text-sm font-medium border-b-2 transition-colors", activeTab === "past" ? "border-foundation text-foundation" : "border-transparent text-slate-500 hover:text-slate-700")}>
                 Historique ({pastSessions.length})
               </button>
             </div>
@@ -230,8 +230,8 @@ export default function CoachingHub() {
                 <Card key={session.id} className={cn("border-2 transition-all", session.status === "live" && "border-emerald-200 bg-emerald-50/50", session.status === "completed" && "border-slate-200 bg-white/50")}>
                   <CardContent className="py-4">
                     <div className="flex items-start gap-4">
-                      <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center", session.platform === "zoom" ? "bg-blue-100" : "bg-[#E7F2F2]")}>
-                        <Video className={cn("h-6 w-6", session.platform === "zoom" ? "text-blue-600" : "text-[#0F3D3E]")} />
+                      <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center", session.platform === "zoom" ? "bg-blue-100" : "bg-foundation-soft")}>
+                        <Video className={cn("h-6 w-6", session.platform === "zoom" ? "text-blue-600" : "text-foundation")} />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
@@ -253,7 +253,7 @@ export default function CoachingHub() {
                         <div className="flex items-center gap-4 text-xs text-slate-500">
                           <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{session.date}</span>
                           <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{session.time} ({session.duration})</span>
-                          <span className={cn("px-2 py-0.5 rounded text-xs font-medium", session.platform === "zoom" ? "bg-blue-100 text-blue-700" : "bg-[#E7F2F2] text-[#0F3D3E]")}>{session.platform === "zoom" ? "Zoom" : "Teams"}</span>
+                          <span className={cn("px-2 py-0.5 rounded text-xs font-medium", session.platform === "zoom" ? "bg-blue-100 text-blue-700" : "bg-foundation-soft text-foundation")}>{session.platform === "zoom" ? "Zoom" : "Teams"}</span>
                         </div>
                         {session.notes && <div className="mt-3 p-3 bg-slate-100 rounded-lg"><p className="text-sm text-slate-600"><strong>Notes:</strong> {session.notes}</p></div>}
                         {session.materials && session.materials.length > 0 && (
@@ -295,7 +295,7 @@ export default function CoachingHub() {
                   </div>
                   <div className="flex flex-wrap justify-center gap-2 mb-4">
                     {myCoach.specialties.map((s, i) => (
-                      <span key={i} className="px-2 py-1 bg-[#E7F2F2] text-[#0F3D3E] text-xs rounded-full">{s}</span>
+                      <span key={i} className="px-2 py-1 bg-foundation-soft text-foundation text-xs rounded-full">{s}</span>
                     ))}
                   </div>
                   <Button variant="outline" className="w-full gap-2"><MessageSquare className="h-4 w-4" />Envoyer un message</Button>
@@ -306,12 +306,12 @@ export default function CoachingHub() {
             <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-[#0F3D3E]-50 to-blue-50">
               <CardContent className="pt-4">
                 <div className="text-center">
-                  <div className="w-12 h-12 mx-auto rounded-full bg-[#E7F2F2] flex items-center justify-center mb-3">
-                    <CalendarPlus className="h-6 w-6 text-[#0F3D3E]" />
+                  <div className="w-12 h-12 mx-auto rounded-full bg-foundation-soft flex items-center justify-center mb-3">
+                    <CalendarPlus className="h-6 w-6 text-foundation" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-1">Besoin d'aide?</h3>
                   <p className="text-sm text-slate-500 mb-4">Réservez une session supplémentaire avec votre coach</p>
-                  <Button className="w-full bg-[#E7F2F2] hover:bg-[#E7F2F2]">Réserver maintenant</Button>
+                  <Button className="w-full bg-foundation-soft hover:bg-foundation-soft">Réserver maintenant</Button>
                 </div>
               </CardContent>
             </Card>

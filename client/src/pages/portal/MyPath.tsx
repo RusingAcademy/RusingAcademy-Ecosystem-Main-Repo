@@ -115,7 +115,7 @@ const pathUnits: PathUnit[] = [
 
 const levelColors = {
   A: { bg: "bg-emerald-500", light: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-200" },
-  B: { bg: "bg-[#C65A1E]", light: "bg-amber-50", text: "text-amber-600", border: "border-[#FFE4D6]" },
+  B: { bg: "bg-cta", light: "bg-amber-50", text: "text-amber-600", border: "border-[#FFE4D6]" },
   C: { bg: "bg-blue-500", light: "bg-blue-50", text: "text-blue-600", border: "border-blue-200" },
 };
 
@@ -141,7 +141,7 @@ export default function MyPath() {
           <div>
             <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
               Mon Parcours
-              <span className="px-3 py-1 bg-[#E7F2F2] text-[#0F3D3E] text-sm font-medium rounded-full">
+              <span className="px-3 py-1 bg-foundation-soft text-foundation text-sm font-medium rounded-full">
                 Path Series™
               </span>
             </h1>
@@ -249,7 +249,7 @@ export default function MyPath() {
                             <div className="flex items-center gap-3">
                               <span className="text-xs text-slate-500 flex items-center gap-1"><Clock className="h-3 w-3" />{module.duration}</span>
                               {isModuleCompleted && <CheckCircle2 className="h-5 w-5 text-emerald-500" />}
-                              {isModuleActive && <Button size="sm" className="bg-[#C65A1E] hover:bg-amber-600">Continuer</Button>}
+                              {isModuleActive && <Button size="sm" className="bg-cta hover:bg-amber-600">Continuer</Button>}
                               {!isModuleLocked && !isModuleCompleted && !isModuleActive && <Button size="sm" variant="outline">Commencer</Button>}
                             </div>
                           </div>

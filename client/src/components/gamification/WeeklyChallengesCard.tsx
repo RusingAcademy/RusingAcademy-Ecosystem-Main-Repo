@@ -102,7 +102,7 @@ function ChallengeItem({
         "relative p-4 rounded-xl border transition-all cursor-pointer",
         challenge.isCompleted
           ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800"
-          : "bg-white dark:bg-[#062b2b] border-slate-200 dark:border-[#0a6969] hover:border-slate-300 dark:hover:border-slate-600"
+          : "bg-white dark:bg-obsidian border-slate-200 dark:border-[#0a6969] hover:border-slate-300 dark:hover:border-slate-600"
       )}
       onClick={onClick}
       whileHover={{ scale: 1.02 }}

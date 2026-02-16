@@ -243,7 +243,7 @@ export default function BarholexServices() {
           {/* Background Effects */}
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#E7F2F2]/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-foundation-soft/10 rounded-full blur-[120px]" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-[#D4AF37]/5 to-transparent rounded-full" />
           </div>
           
@@ -258,7 +258,7 @@ export default function BarholexServices() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-8"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] font-medium">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-[#D4AF37]/30 text-barholex-gold font-medium">
                   <Zap className="w-4 h-4" />
                   {language === "en" ? "Full-Service Creative Agency" : "Agence créative à service complet"}
                 </span>
@@ -302,7 +302,7 @@ export default function BarholexServices() {
                     key={index}
                     className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/60 text-center"
                   >
-                    <div className="text-2xl md:text-3xl font-bold text-[#D4AF37] mb-1">{stat.value}</div>
+                    <div className="text-2xl md:text-3xl font-bold text-barholex-gold mb-1">{stat.value}</div>
                     <div className="text-sm text-white/90">{language === "en" ? stat.labelEn : stat.labelFr}</div>
                   </div>
                 ))}
@@ -343,7 +343,7 @@ export default function BarholexServices() {
         <section className="py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "Our Expertise" : "Notre expertise"}
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -411,7 +411,7 @@ export default function BarholexServices() {
 
                   {/* For Who */}
                   <div className="mb-6 p-4 rounded-xl bg-white/5 border border-white/60">
-                    <div className="flex items-center gap-2 text-sm font-medium text-[#D4AF37] mb-2">
+                    <div className="flex items-center gap-2 text-sm font-medium text-barholex-gold mb-2">
                       <Users className="w-4 h-4" />
                       {language === "en" ? "Ideal For" : "Idéal pour"}
                     </div>
@@ -422,7 +422,7 @@ export default function BarholexServices() {
 
                   {/* Outcome */}
                   <div className="p-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20">
-                    <div className="flex items-center gap-2 text-sm font-medium text-[#D4AF37] mb-2">
+                    <div className="flex items-center gap-2 text-sm font-medium text-barholex-gold mb-2">
                       <TrendingUp className="w-4 h-4" />
                       {language === "en" ? "Expected Outcome" : "Résultat attendu"}
                     </div>
@@ -478,7 +478,7 @@ export default function BarholexServices() {
           
           <div className="container mx-auto">
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "How We Work" : "Comment nous travaillons"}
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -511,7 +511,7 @@ export default function BarholexServices() {
                     </div>
                     
                     <div className="p-6 rounded-2xl bg-white/5 border border-white/60 backdrop-blur-sm">
-                      <div className="text-sm text-[#D4AF37] font-medium mb-2">
+                      <div className="text-sm text-barholex-gold font-medium mb-2">
                         {language === "en" ? `Step ${index + 1}` : `Étape ${index + 1}`}
                       </div>
                       <h3 className="font-bold text-white text-lg mb-2">
@@ -544,7 +544,7 @@ export default function BarholexServices() {
                     key={index}
                     className="p-6 rounded-2xl bg-white/5 border border-white/60 text-center hover:border-[#D4AF37]/30 transition-colors"
                   >
-                    <client.icon className="w-8 h-8 text-[#D4AF37] mx-auto mb-3" />
+                    <client.icon className="w-8 h-8 text-barholex-gold mx-auto mb-3" />
                     <p className="text-sm text-white/90">
                       {language === "en" ? client.nameEn : client.nameFr}
                     </p>
@@ -597,7 +597,7 @@ export default function BarholexServices() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-[#062b2b]"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-barholex-gold hover:bg-obsidian"
                   >
                     {language === "en" ? "Start Your Project" : "Démarrer votre projet"}
                     <ArrowRight className="ml-2 h-5 w-5" />

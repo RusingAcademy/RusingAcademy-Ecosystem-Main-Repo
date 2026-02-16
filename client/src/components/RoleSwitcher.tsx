@@ -57,7 +57,7 @@ const roleOptions: RoleOption[] = [
     icon: <Building2 className="h-4 w-4" />,
     href: "/dashboard/hr",
     roles: ["hr", "admin", "owner"],
-    color: "bg-[#E7F2F2] text-[#0F3D3E]",
+    color: "bg-foundation-soft text-foundation",
   },
   {
     id: "admin",

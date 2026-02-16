@@ -166,7 +166,7 @@ export default function ListeningExercise({
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
-              <Headphones className="h-5 w-5 text-[#0F3D3E]" />
+              <Headphones className="h-5 w-5 text-foundation" />
               {isEn ? title : titleFr}
             </CardTitle>
             <CardDescription>
@@ -192,8 +192,8 @@ export default function ListeningExercise({
               onClick={playAudio}
               className={`w-16 h-16 rounded-full flex items-center justify-center transition-all ${
                 isPlaying
-                  ? "bg-[#0F3D3E] text-white"
-                  : "bg-[#E7F2F2] text-[#0F3D3E] hover:bg-[#0F3D3E] hover:text-white"
+                  ? "bg-foundation text-white"
+                  : "bg-foundation-soft text-foundation hover:bg-foundation hover:text-white"
               }`}
             >
               {isPlaying ? (
@@ -260,8 +260,8 @@ export default function ListeningExercise({
                       ? "border-red-500 bg-red-50 dark:bg-red-900/20"
                       : "border-gray-200"
                     : selectedAnswer === index
-                    ? "border-[#0F3D3E] bg-[#E7F2F2] dark:bg-[#0F3D3E]/20"
-                    : "border-gray-200 hover:border-[#0F3D3E]/50"
+                    ? "border-foundation bg-foundation-soft dark:bg-foundation/20"
+                    : "border-gray-200 hover:border-foundation/50"
                 }`}
               >
                 <RadioGroupItem value={index.toString()} id={`option-${index}`} />
@@ -304,12 +304,12 @@ export default function ListeningExercise({
             <Button
               onClick={checkAnswer}
               disabled={selectedAnswer === null}
-              className="bg-[#0F3D3E] hover:bg-[#0F3D3E]/90"
+              className="bg-foundation hover:bg-foundation/90"
             >
               {isEn ? "Check Answer" : "Vérifier la réponse"}
             </Button>
           ) : (
-            <Button onClick={nextQuestion} className="bg-[#0F3D3E] hover:bg-[#0F3D3E]/90">
+            <Button onClick={nextQuestion} className="bg-foundation hover:bg-foundation/90">
               {currentQuestionIndex < questions.length - 1
                 ? (isEn ? "Next Question" : "Question suivante")
                 : (isEn ? "See Results" : "Voir les résultats")}

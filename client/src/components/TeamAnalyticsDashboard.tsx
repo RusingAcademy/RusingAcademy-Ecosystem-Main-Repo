@@ -189,9 +189,9 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
                 <p className="text-sm text-gray-600">{isEn ? "Performance Score" : "Score de performance"}</p>
                 <p className="text-3xl font-bold text-green-600">{selectedTeam.performanceScore}</p>
               </div>
-              <div className="bg-[#E7F2F2] rounded-lg p-4">
+              <div className="bg-foundation-soft rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Applications Reviewed" : "Candidatures examinées"}</p>
-                <p className="text-3xl font-bold text-[#0F3D3E]">{selectedTeam.totalApplicationsReviewed}</p>
+                <p className="text-3xl font-bold text-foundation">{selectedTeam.totalApplicationsReviewed}</p>
               </div>
               <div className="bg-orange-50 rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>

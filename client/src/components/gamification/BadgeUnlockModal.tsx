@@ -149,7 +149,7 @@ export function BadgeUnlockModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-[#0a4040]/50 hover:bg-[#0a6969]/50 transition-colors"
+          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-foundation/50 hover:bg-foundation-2/50 transition-colors"
         >
           <X className="h-4 w-4 text-[#67E8F9]" />
         </button>
@@ -211,7 +211,7 @@ export function BadgeUnlockModal({
 
           {/* Rarity badge */}
           <motion.div
-            className="mt-4 px-3 py-1 rounded-full bg-[#0a4040]/50 border border-[#0a6969]"
+            className="mt-4 px-3 py-1 rounded-full bg-foundation/50 border border-[#0a6969]"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -253,7 +253,7 @@ export function BadgeUnlockModal({
             {onShare && (
               <Button
                 variant="outline"
-                className="flex-1 border-slate-600 text-white/90 hover:bg-[#0a4040]"
+                className="flex-1 border-slate-600 text-white/90 hover:bg-foundation"
                 onClick={onShare}
               >
                 <Share2 className="h-4 w-4 mr-2" />

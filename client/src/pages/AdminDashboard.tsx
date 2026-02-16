@@ -1002,8 +1002,8 @@ export default function AdminDashboard() {
                   title={l.sessionsThisMonth}
                   value={analytics.sessionsThisMonth}
                   icon={Calendar}
-                  iconColor="text-[#0F3D3E]"
-                  iconBgColor="bg-[#E7F2F2]"
+                  iconColor="text-foundation"
+                  iconBgColor="bg-foundation-soft"
                   trend={analytics.sessionGrowth}
                   trendLabel={language === "fr" ? "vs mois dernier" : "vs last month"}
                 />

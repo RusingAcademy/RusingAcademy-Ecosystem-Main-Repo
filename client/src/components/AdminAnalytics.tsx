@@ -242,8 +242,8 @@ export default function AdminAnalytics() {
                 <p className="text-3xl font-bold">{analytics.sessionsThisMonth}</p>
                 <GrowthIndicator value={analytics.sessionGrowth} />
               </div>
-              <div className="h-12 w-12 rounded-full bg-[#E7F2F2] flex items-center justify-center">
-                <Calendar className="h-6 w-6 text-[#0F3D3E]" />
+              <div className="h-12 w-12 rounded-full bg-foundation-soft flex items-center justify-center">
+                <Calendar className="h-6 w-6 text-foundation" />
               </div>
             </div>
           </CardContent>
@@ -297,7 +297,7 @@ export default function AdminAnalytics() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <SimpleBarChart data={monthlyData} dataKey="sessions" color="bg-[#E7F2F2]" />
+            <SimpleBarChart data={monthlyData} dataKey="sessions" color="bg-foundation-soft" />
           </CardContent>
         </Card>
 

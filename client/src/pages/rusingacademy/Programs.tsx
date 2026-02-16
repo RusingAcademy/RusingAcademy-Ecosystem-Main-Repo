@@ -261,7 +261,7 @@ export default function Programs() {
 
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-[#C65A1E] border-[#FFE4D6]">
+            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta border-[#FFE4D6]">
               <Sparkles className="w-4 h-4 mr-2" />
               Exclusive Professional Training
             </Badge>
@@ -289,7 +289,7 @@ export default function Programs() {
                 Explore the Program
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-orange-300 text-[#C65A1E] hover:bg-orange-50">
+              <Button size="lg" variant="outline" className="border-2 border-orange-300 text-cta hover:bg-orange-50">
                 View All Paths
               </Button>
             </div>
@@ -407,7 +407,7 @@ export default function Programs() {
       <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-orange-100 text-[#C65A1E]">Our Crash Courses</Badge>
+            <Badge className="mb-4 bg-orange-100 text-cta">Our Crash Courses</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               The Six Paths to Bilingual Mastery
             </h2>
@@ -514,7 +514,7 @@ export default function Programs() {
       <section className="py-16 bg-white">
         <div className="container">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-[#C65A1E]">
+            <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta">
               Save Up to $500
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Bundle Packages</h2>

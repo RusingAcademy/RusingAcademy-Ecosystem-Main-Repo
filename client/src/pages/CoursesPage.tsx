@@ -627,7 +627,7 @@ export default function CoursesPage() {
               <div className="flex flex-wrap justify-center gap-4 mt-10">
                 <a
                   href="#courses"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white text-[#0F3D3E] hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white text-foundation hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
                 >
                   <BookOpen className="w-5 h-5" />
                   Browse Courses
@@ -791,7 +791,7 @@ export default function CoursesPage() {
                     {/* Popular Badge */}
                     {course.popular && (
                       <div className="absolute top-4 right-4 z-10">
-                        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#C65A1E] text-white text-xs font-bold shadow-lg">
+                        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-cta text-white text-xs font-bold shadow-lg">
                           <Star className="w-3 h-3 fill-current" />
                           {ui.popular}
                         </div>
@@ -916,7 +916,7 @@ export default function CoursesPage() {
         <section className="py-16 lg:py-20 bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-[#C65A1E]700 text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-cta700 text-sm font-medium mb-4">
                 <MessageCircle className="w-4 h-4" />
                 {ui.successStories}
               </div>
@@ -941,7 +941,7 @@ export default function CoursesPage() {
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-[#C65A1E]400 fill-current" />
+                      <Star key={i} className="w-5 h-5 text-cta400 fill-current" />
                     ))}
                   </div>
                   
@@ -986,7 +986,7 @@ export default function CoursesPage() {
                     href="https://calendly.com/steven-barholere/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white text-[#0F3D3E] hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white text-foundation hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
                   >
                     {ui.bookDiagnostic}
                     <ArrowRight className="w-5 h-5" />

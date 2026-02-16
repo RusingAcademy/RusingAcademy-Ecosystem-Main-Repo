@@ -225,7 +225,7 @@ export function NotificationSettings() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Calendar className="h-4 w-4 text-[#0F3D3E]" />
+                  <Calendar className="h-4 w-4 text-foundation" />
                   <Label htmlFor="reminders" className="cursor-pointer">
                     {isEn ? "Session Reminders" : "Rappels de session"}
                   </Label>

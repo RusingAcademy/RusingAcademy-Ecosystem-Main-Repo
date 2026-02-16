@@ -159,7 +159,7 @@ export default function CoachInviteClaim() {
         
         <CardContent className="space-y-6">
           {/* Coach Profile Preview */}
-          <div className="bg-slate-50 dark:bg-[#0a4040]/50 rounded-lg p-4 border">
+          <div className="bg-slate-50 dark:bg-foundation/50 rounded-lg p-4 border">
             <h3 className="font-semibold text-lg text-black dark:text-white">
               {invitation.coachName}
             </h3>
@@ -211,7 +211,7 @@ export default function CoachInviteClaim() {
           </div>
 
           {/* Terms Acceptance Checkbox */}
-          <div className="bg-slate-50 dark:bg-[#0a4040]/50 border border-slate-200 dark:border-[#0a6969] rounded-lg p-4">
+          <div className="bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-[#0a6969] rounded-lg p-4">
             <div className="flex items-start gap-3">
               <Checkbox 
                 id="terms" 

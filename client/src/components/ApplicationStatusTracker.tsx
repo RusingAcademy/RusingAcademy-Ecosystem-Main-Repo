@@ -197,7 +197,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
 
       {/* Timeline */}
       {timeline && timeline.length > 0 && (
-        <div className="bg-white dark:bg-[#062b2b] rounded-lg border border-slate-200 dark:border-[#0a6969] p-6">
+        <div className="bg-white dark:bg-obsidian rounded-lg border border-slate-200 dark:border-[#0a6969] p-6">
           <h3 className="text-lg font-bold mb-6 text-black dark:text-white">
             {language === 'fr' ? 'Historique de candidature' : 'Application Timeline'}
           </h3>
@@ -210,7 +210,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
             {timeline.map((event, index) => (
               <div key={event.id} className="relative pl-20">
                 {/* Timeline dot */}
-                <div className="absolute left-0 top-1 w-12 h-12 bg-white dark:bg-[#062b2b] border-4 border-teal-500 rounded-full flex items-center justify-center">
+                <div className="absolute left-0 top-1 w-12 h-12 bg-white dark:bg-obsidian border-4 border-teal-500 rounded-full flex items-center justify-center">
                   <div className="text-teal-600 dark:text-teal-400">
                     {event.icon === 'check' && <CheckCircle2 className="w-5 h-5" />}
                     {event.icon === 'clock' && <Clock className="w-5 h-5 animate-spin" />}
@@ -220,7 +220,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
                 </div>
 
                 {/* Event content */}
-                <div className="bg-white dark:bg-[#0a4040] rounded-lg p-4 border border-slate-200 dark:border-[#0a6969]">
+                <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-[#0a6969]">
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-black dark:text-white">
                       {event.message}

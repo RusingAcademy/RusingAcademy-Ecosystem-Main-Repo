@@ -93,8 +93,8 @@ function ProfileContent() {
                                         <p className="text-xs text-black">Cours</p>
                                     </div>
                                     <div className="text-center">
-                                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#E7F2F2] mx-auto mb-2">
-                                            <Users className="h-5 w-5 text-[#0F3D3E]" />
+                                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-foundation-soft mx-auto mb-2">
+                                            <Users className="h-5 w-5 text-foundation" />
                                         </div>
                                         <p className="text-2xl font-bold text-black">0</p>
                                         <p className="text-xs text-black">Sessions</p>

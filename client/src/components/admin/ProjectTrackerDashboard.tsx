@@ -132,7 +132,7 @@ const PathCard = ({ path }: { path: PathProgress }) => {
     <div className={`bg-white/5 backdrop-blur-sm rounded-xl p-4 ${path.priority ? 'border border-amber-500/50' : 'border border-white/60'}`}>
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-semibold text-white">{path.name}</h3>
-        <span className={`text-xs px-2 py-1 rounded ${path.level.startsWith('B') ? 'bg-blue-500/20 text-blue-400' : path.level.startsWith('C') ? 'bg-[#E7F2F2]/20 text-[#0F3D3E]' : 'bg-emerald-500/20 text-emerald-400'}`}>
+        <span className={`text-xs px-2 py-1 rounded ${path.level.startsWith('B') ? 'bg-blue-500/20 text-blue-400' : path.level.startsWith('C') ? 'bg-foundation-soft/20 text-foundation' : 'bg-emerald-500/20 text-emerald-400'}`}>
           {path.level} {path.priority && '⭐'}
         </span>
       </div>
@@ -260,7 +260,7 @@ export default function ProjectTrackerDashboard() {
           <div className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><AlertTriangle className="w-6 h-6 text-amber-400" /> Éléments Manquants</h2>
             <div className="space-y-3">
-              {data.missingItems.map((item, index) => (<div key={index} className={`flex items-center justify-between rounded-lg p-3 border ${item.severity === 'critical' ? 'bg-red-500/10 border-red-500/30' : item.severity === 'warning' ? 'bg-[#C65A1E]/10 border-amber-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}><span className="text-white/90">{item.item}</span><span className={item.severity === 'critical' ? 'text-red-400' : item.severity === 'warning' ? 'text-amber-400' : 'text-blue-400'}>{item.count ? `${item.count} à produire` : 'À développer'}</span></div>))}
+              {data.missingItems.map((item, index) => (<div key={index} className={`flex items-center justify-between rounded-lg p-3 border ${item.severity === 'critical' ? 'bg-red-500/10 border-red-500/30' : item.severity === 'warning' ? 'bg-cta/10 border-amber-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}><span className="text-white/90">{item.item}</span><span className={item.severity === 'critical' ? 'text-red-400' : item.severity === 'warning' ? 'text-amber-400' : 'text-blue-400'}>{item.count ? `${item.count} à produire` : 'À développer'}</span></div>))}
             </div>
           </div>
         </div>
@@ -270,11 +270,11 @@ export default function ProjectTrackerDashboard() {
           <div className="space-y-4">
             {data.sprints.slice(0, 6).map((sprint) => (
               <div key={sprint.id} className="flex items-start gap-4">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold shrink-0 ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-[#C65A1E]/20 text-amber-400' : 'bg-white0/20 text-[#67E8F9]'}`}>{sprint.id > 0 ? sprint.id : sprint.id === 0 ? 'SP' : 'PF'}</div>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold shrink-0 ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-cta/20 text-amber-400' : 'bg-white0/20 text-[#67E8F9]'}`}>{sprint.id > 0 ? sprint.id : sprint.id === 0 ? 'SP' : 'PF'}</div>
                 <div className="flex-1 bg-white/5 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="font-semibold text-white">{sprint.name}</h3>
-                    <span className={`text-xs px-2 py-1 rounded ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-[#C65A1E]/20 text-amber-400' : 'bg-white0/20 text-[#67E8F9]'}`}>{sprint.status === 'completed' ? 'Complété' : sprint.status === 'in-progress' ? 'En cours' : 'Planifié'}</span>
+                    <span className={`text-xs px-2 py-1 rounded ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-cta/20 text-amber-400' : 'bg-white0/20 text-[#67E8F9]'}`}>{sprint.status === 'completed' ? 'Complété' : sprint.status === 'in-progress' ? 'En cours' : 'Planifié'}</span>
                   </div>
                   <p className="text-sm text-[#67E8F9]">{sprint.description}</p>
                 </div>
@@ -288,7 +288,7 @@ export default function ProjectTrackerDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center"><div className="text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-[#67E8F9] mt-2">Assets Média Total</p><p className="text-xs text-black">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
             <div className="text-center"><div className="text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-[#67E8F9] mt-2">Mois de Production</p><p className="text-xs text-black">Avec équipe dédiée</p></div>
-            <div className="text-center"><div className="text-4xl font-bold text-[#0F3D3E]">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-[#67E8F9] mt-2">Budget Estimé (CAD)</p><p className="text-xs text-black">Incluant AI-assisted production</p></div>
+            <div className="text-center"><div className="text-4xl font-bold text-foundation">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-[#67E8F9] mt-2">Budget Estimé (CAD)</p><p className="text-xs text-black">Incluant AI-assisted production</p></div>
           </div>
         </section>
       </main>

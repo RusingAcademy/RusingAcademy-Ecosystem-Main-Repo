@@ -168,7 +168,7 @@ function LoginContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-      <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -224,7 +224,7 @@ function LoginContent() {
               <span className="w-full border-t border-slate-600" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-[#0a4040]/50 px-2 text-[#67E8F9]">
+              <span className="bg-foundation/50 px-2 text-[#67E8F9]">
                 Or continue with email
               </span>
             </div>
@@ -325,7 +325,7 @@ function LoginContent() {
 
           {/* Debug panel - only in development */}
           {AUTH_DEBUG && (
-            <div className="mt-4 p-3 bg-[#062b2b]/80 border border-[#0a6969] rounded-lg text-xs font-mono">
+            <div className="mt-4 p-3 bg-obsidian/80 border border-[#0a6969] rounded-lg text-xs font-mono">
               <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug</div>
               <div className="text-white/90">
                 <div>Redirect to: {redirectTo}</div>

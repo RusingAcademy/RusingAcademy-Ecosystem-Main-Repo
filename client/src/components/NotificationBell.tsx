@@ -19,7 +19,7 @@ const notificationIcons = {
 
 const notificationColors = {
   message: "bg-blue-500",
-  session_reminder: "bg-[#C65A1E]",
+  session_reminder: "bg-cta",
   booking: "bg-green-500",
   review: "bg-yellow-500",
   system: "bg-white0",

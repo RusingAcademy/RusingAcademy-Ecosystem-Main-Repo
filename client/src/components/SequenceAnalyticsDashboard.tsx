@@ -398,8 +398,8 @@ export default function SequenceAnalyticsDashboard() {
               
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-[#E7F2F2]/20 rounded-lg">
-                    <Mail className="w-5 h-5 text-[#0F3D3E]" />
+                  <div className="p-2 bg-foundation-soft/20 rounded-lg">
+                    <Mail className="w-5 h-5 text-foundation" />
                   </div>
                   <span className="text-[#67E8F9] text-sm">{t.totalEmailsSent}</span>
                 </div>
@@ -408,7 +408,7 @@ export default function SequenceAnalyticsDashboard() {
               
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-[#C65A1E]/20 rounded-lg">
+                  <div className="p-2 bg-cta/20 rounded-lg">
                     <Target className="w-5 h-5 text-orange-400" />
                   </div>
                   <span className="text-[#67E8F9] text-sm">{t.avgConversionRate}</span>
@@ -472,7 +472,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-4xl font-bold mb-2">{analytics.averageConversionRate}%</div>
                 <div className="w-full bg-white/10 rounded-full h-2">
                   <div
-                    className="bg-[#C65A1E] h-2 rounded-full transition-all"
+                    className="bg-cta h-2 rounded-full transition-all"
                     style={{ width: `${Math.min(analytics.averageConversionRate * 5, 100)}%` }}
                   />
                 </div>
@@ -519,7 +519,7 @@ export default function SequenceAnalyticsDashboard() {
                   <div key={day.date} className="flex-1 flex flex-col items-center gap-1">
                     <div className="w-full flex flex-col gap-1" style={{ height: "160px" }}>
                       <div
-                        className="w-full bg-[#E7F2F2]/60 rounded-t transition-all"
+                        className="w-full bg-foundation-soft/60 rounded-t transition-all"
                         style={{ height: `${(day.emailsSent / maxEmailsSent) * 100}%` }}
                         title={`${t.emailsSent}: ${day.emailsSent}`}
                       />
@@ -532,7 +532,7 @@ export default function SequenceAnalyticsDashboard() {
               </div>
               <div className="flex items-center justify-center gap-6 mt-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#E7F2F2] rounded" />
+                  <div className="w-3 h-3 bg-foundation-soft rounded" />
                   <span className="text-[#67E8F9]">{t.emailsSent}</span>
                 </div>
               </div>
@@ -627,14 +627,14 @@ export default function SequenceAnalyticsDashboard() {
                           </div>
                           <div className="text-black">→</div>
                           <div className="flex-1">
-                            <div className="bg-[#E7F2F2]/20 rounded-lg p-3 text-center">
+                            <div className="bg-foundation-soft/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalClicked}</div>
                               <div className="text-xs text-[#67E8F9]">{t.clicked}</div>
                             </div>
                           </div>
                           <div className="text-black">→</div>
                           <div className="flex-1">
-                            <div className="bg-[#C65A1E]/20 rounded-lg p-3 text-center">
+                            <div className="bg-cta/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.conversions}</div>
                               <div className="text-xs text-[#67E8F9]">{t.converted}</div>
                             </div>

@@ -216,7 +216,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                 <p className="text-xs font-medium text-black truncate">{badge.title}</p>
                 
                 {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-[#062b2b] text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-obsidian text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
                   <p className="font-medium">{badge.title}</p>
                   {badge.description && <p className="text-white/90">{badge.description}</p>}
                 </div>

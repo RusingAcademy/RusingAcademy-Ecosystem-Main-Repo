@@ -41,7 +41,7 @@ import { Input } from "@/components/ui/input";
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
     relative overflow-hidden rounded-xl
-    bg-white dark:bg-[#062b2b]
+    bg-white dark:bg-obsidian
     border border-slate-200 dark:border-[#0a6969]
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
@@ -151,7 +151,7 @@ export default function LearnerCourses() {
   // Loading state
   if (authLoading) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
@@ -171,7 +171,7 @@ export default function LearnerCourses() {
   // Not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
         <Header />
         <main className="flex-1 flex items-center justify-center px-4">
           <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
@@ -198,7 +198,7 @@ export default function LearnerCourses() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
       <Header />
 
       {/* Background decoration */}
@@ -336,7 +336,7 @@ export default function LearnerCourses() {
             {coursesLoading ? (
               <div className={viewMode === "grid" ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}>
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="h-48 rounded-xl bg-slate-100 dark:bg-[#0a4040] animate-pulse" />
+                  <div key={i} className="h-48 rounded-xl bg-slate-100 dark:bg-foundation animate-pulse" />
                 ))}
               </div>
             ) : filteredCourses.length > 0 ? (
@@ -383,7 +383,7 @@ export default function LearnerCourses() {
             {plansLoading ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2].map((i) => (
-                  <div key={i} className="h-40 rounded-xl bg-slate-100 dark:bg-[#0a4040] animate-pulse" />
+                  <div key={i} className="h-40 rounded-xl bg-slate-100 dark:bg-foundation animate-pulse" />
                 ))}
               </div>
             ) : plans.length > 0 ? (

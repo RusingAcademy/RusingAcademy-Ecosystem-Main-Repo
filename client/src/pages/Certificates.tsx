@@ -63,7 +63,7 @@ export default function Certificates() {
                     <div className="absolute inset-2 border-2 border-[#D4AF37]/30 rounded-lg pointer-events-none" />
 
                     <img src={RA_LOGO} alt="RusingAcademy" className="w-12 h-12 mx-auto mb-3 rounded-lg" />
-                    <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold mb-2">Certificate of Completion</p>
+                    <p className="text-xs uppercase tracking-widest text-barholex-gold font-bold mb-2">Certificate of Completion</p>
                     <h3 className="text-xl font-bold mb-1">{certificate.title}</h3>
                     <p className="text-sm text-white/70 mb-3">Awarded to <strong className="text-white">{certificate.recipientName}</strong></p>
                     <div className="flex items-center justify-center gap-4 text-xs text-white/60">
@@ -89,7 +89,7 @@ export default function Certificates() {
                     <div className="flex items-center gap-2">
                       <Badge variant="outline" className="text-xs font-mono">{certificate.certificateNumber}</Badge>
                       {certificate.certificateUrl && (
-                        <a href={certificate.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-[#1B1464] hover:text-[#D4AF37] transition-colors">
+                        <a href={certificate.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-[#1B1464] hover:text-barholex-gold transition-colors">
                           <ExternalLink className="w-4 h-4" />
                         </a>
                       )}

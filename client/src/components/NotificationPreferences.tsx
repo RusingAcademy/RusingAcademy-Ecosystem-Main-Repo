@@ -102,7 +102,7 @@ export function NotificationPreferences() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Bell className="h-5 w-5 text-[#C65A1E]" />
+          <Bell className="h-5 w-5 text-cta" />
           {isFr ? "Préférences de notification" : "Notification Preferences"}
         </CardTitle>
         <CardDescription>
@@ -120,8 +120,8 @@ export function NotificationPreferences() {
               className="flex items-center justify-between p-3 rounded-lg border bg-card hover:bg-muted/50 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-[#C65A1E]/10">
-                  <Icon className="h-4 w-4 text-[#C65A1E]" />
+                <div className="p-2 rounded-lg bg-cta/10">
+                  <Icon className="h-4 w-4 text-cta" />
                 </div>
                 <div>
                   <p className="font-medium text-sm">

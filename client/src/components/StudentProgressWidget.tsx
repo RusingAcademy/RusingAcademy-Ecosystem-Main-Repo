@@ -95,15 +95,15 @@ export function StudentProgressWidget({
         
         {/* Summary Stats */}
         <div className="grid grid-cols-3 gap-4 mt-4">
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{avgProgress}%</p>
             <p className="text-xs text-black dark:text-[#67E8F9]">{l.avgProgress}</p>
           </div>
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-black dark:text-white">{students.length}</p>
             <p className="text-xs text-black dark:text-[#67E8F9]">{l.totalStudents}</p>
           </div>
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{onTrackCount}</p>
             <p className="text-xs text-black dark:text-[#67E8F9]">{l.onTrack}</p>
           </div>
@@ -122,7 +122,7 @@ export function StudentProgressWidget({
               key={student.id}
               onClick={() => onViewStudent?.(student.id)}
               className={cn(
-                "p-4 rounded-xl border bg-white dark:bg-[#0a4040] border-slate-200 dark:border-[#0a6969]",
+                "p-4 rounded-xl border bg-white dark:bg-foundation border-slate-200 dark:border-[#0a6969]",
                 "hover:border-blue-300 dark:hover:border-blue-700 transition-all",
                 onViewStudent && "cursor-pointer"
               )}

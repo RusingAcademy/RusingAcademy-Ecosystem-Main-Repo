@@ -40,7 +40,7 @@ export default function VerifyEmail() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-      <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -86,7 +86,7 @@ export default function VerifyEmail() {
                   <Button
                     asChild
                     variant="outline"
-                    className="w-full border-slate-600 text-white/90 hover:bg-[#0a6969]"
+                    className="w-full border-slate-600 text-white/90 hover:bg-foundation-2"
                   >
                     <Link to="/signup">Create New Account</Link>
                   </Button>

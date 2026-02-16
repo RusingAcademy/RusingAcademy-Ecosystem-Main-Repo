@@ -165,8 +165,8 @@ const pathSeriesData = [
     price: PATH_SERIES_PRICES.PATH_IV.priceInCents / 100,
     originalPrice: PATH_SERIES_PRICES.PATH_IV.originalPriceInCents / 100,
     color: "from-[#0F3D3E] to-[#145A5B]",
-    bgColor: "bg-[#E7F2F2]",
-    borderColor: "border-[#0F3D3E]",
+    bgColor: "bg-foundation-soft",
+    borderColor: "border-foundation",
     icon: "🎯",
     sleBadge: "CBC",
     learningOutcomes: [
@@ -606,10 +606,10 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
       <div className="space-y-2">
         {placeholderModules.map((mod, i) => (
           <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-            <div className="w-8 h-8 rounded-full bg-[#C65A1E]/10 text-[#C65A1E] flex items-center justify-center font-bold text-sm">
+            <div className="w-8 h-8 rounded-full bg-cta/10 text-cta flex items-center justify-center font-bold text-sm">
               {i + 1}
             </div>
-            <span className="text-sm font-medium text-[#0F3D3E]">{isEn ? mod.en : mod.fr}</span>
+            <span className="text-sm font-medium text-foundation">{isEn ? mod.en : mod.fr}</span>
             <Lock className="h-4 w-4 text-muted-foreground ml-auto" />
           </div>
         ))}
@@ -630,12 +630,12 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
                 <img src={mod.thumbnailUrl} alt={mod.title} className="w-full h-full object-cover" />
               </div>
             ) : (
-              <div className="w-8 h-8 rounded-full bg-[#C65A1E]/10 text-[#C65A1E] flex items-center justify-center font-bold text-sm">
+              <div className="w-8 h-8 rounded-full bg-cta/10 text-cta flex items-center justify-center font-bold text-sm">
                 {index + 1}
               </div>
             )}
             <div className="flex-1">
-              <span className="text-sm font-medium text-[#0F3D3E]">{mod.title}</span>
+              <span className="text-sm font-medium text-foundation">{mod.title}</span>
               <span className="text-xs text-muted-foreground ml-2">
                 {mod.lessons?.length || mod.totalLessons || 0} {isEn ? "lessons" : "leçons"}
               </span>
@@ -651,7 +651,7 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
               {mod.lessons.map((lesson: any) => (
                 <div key={lesson.id} className="flex items-center gap-2 py-1.5 px-3 rounded text-xs">
                   {lesson.contentType === "video" ? (
-                    <Play className="h-3 w-3 text-[#C65A1E]" />
+                    <Play className="h-3 w-3 text-cta" />
                   ) : lesson.contentType === "quiz" ? (
                     <Target className="h-3 w-3 text-purple-500" />
                   ) : (
@@ -726,7 +726,7 @@ export default function CurriculumPathSeries() {
           
           <div className="container relative z-10">
             <div className="max-w-4xl mx-auto text-center space-y-6">
-              <Badge className="bg-[#C65A1E] text-white px-4 py-1.5 text-sm font-medium">
+              <Badge className="bg-cta text-white px-4 py-1.5 text-sm font-medium">
                 <Sparkles className="h-4 w-4 mr-2" />
                 {isEn ? "GC Bilingual Mastery Series" : "Série Maîtrise Bilingue GC"}
               </Badge>
@@ -734,7 +734,7 @@ export default function CurriculumPathSeries() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
                 <span className="italic font-serif">{isEn ? "The Six Paths to" : "Les Six Parcours vers"}</span>
                 <br />
-                <span className="text-[#C65A1E]">{isEn ? "Bilingual Mastery" : "la Maîtrise Bilingue"}</span>
+                <span className="text-cta">{isEn ? "Bilingual Mastery" : "la Maîtrise Bilingue"}</span>
               </h1>
               
               <p className="text-xl text-white/90 max-w-3xl mx-auto" style={{color: '#f7f9fd'}}>
@@ -747,19 +747,19 @@ export default function CurriculumPathSeries() {
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-[#C65A1E]">6</div>
+                  <div className="text-3xl font-bold text-cta">6</div>
                   <div className="text-sm text-white/90">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-[#C65A1E]">180</div>
+                  <div className="text-3xl font-bold text-cta">180</div>
                   <div className="text-sm text-white/90">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-[#C65A1E]">3-4x</div>
+                  <div className="text-3xl font-bold text-cta">3-4x</div>
                   <div className="text-sm text-white/90">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-[#C65A1E]">94%</div>
+                  <div className="text-3xl font-bold text-cta">94%</div>
                   <div className="text-sm text-white/90">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
                 </div>
               </div>
@@ -767,7 +767,7 @@ export default function CurriculumPathSeries() {
               <div className="flex flex-wrap justify-center gap-4 pt-4">
                 <Button 
                   size="lg" 
-                  className="bg-[#C65A1E] hover:bg-[#A84A15] text-white"
+                  className="bg-cta hover:bg-cta hover:bg-cta-2 text-white"
                   onClick={() => document.getElementById('paths-section')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {isEn ? "Explore Paths" : "Explorer les Parcours"}
@@ -788,22 +788,22 @@ export default function CurriculumPathSeries() {
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
-                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "About the Program" : "À Propos du Programme"}
                 </p>
-                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                <h2 className="text-3xl font-bold text-foundation mb-6">
                   {isEn ? "The GC Bilingual Mastery Series" : "La Série Maîtrise Bilingue GC"}
                 </h2>
               </div>
 
               <div className="bg-[#FDF8F3] rounded-2xl p-8 md:p-10 shadow-sm">
-                <p className="text-lg text-[#0F3D3E] leading-relaxed mb-6">
+                <p className="text-lg text-foundation leading-relaxed mb-6">
                   {isEn 
                     ? "The GC Bilingual Mastery Series represents a paradigm shift in professional language training for Canada's federal public service. Developed by RusingAcademy in collaboration with leading language acquisition specialists, this program combines cutting-edge pedagogical research with the practical realities of public service communication requirements."
                     : "La Série Maîtrise Bilingue GC représente un changement de paradigme dans la formation linguistique professionnelle pour la fonction publique fédérale du Canada. Développé par RusingAcademy en collaboration avec des spécialistes de premier plan en acquisition des langues, ce programme combine la recherche pédagogique de pointe avec les réalités pratiques des exigences de communication du service public."
                   }
                 </p>
-                <p className="text-lg text-[#0F3D3E] leading-relaxed">
+                <p className="text-lg text-foundation leading-relaxed">
                   {isEn 
                     ? "Unlike traditional language programs that follow a one-size-fits-all approach, the GC Bilingual Mastery Series is built on the proprietary Path Series™ methodology — a structured, progressive learning framework that recognizes the unique challenges faced by working professionals who must balance career responsibilities with intensive language acquisition."
                     : "Contrairement aux programmes linguistiques traditionnels qui suivent une approche universelle, la Série Maîtrise Bilingue GC est construite sur la méthodologie propriétaire Path Series™ — un cadre d'apprentissage structuré et progressif qui reconnaît les défis uniques auxquels font face les professionnels en activité qui doivent équilibrer leurs responsabilités professionnelles avec l'acquisition intensive d'une langue."
@@ -819,10 +819,10 @@ export default function CurriculumPathSeries() {
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
-                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "Our Approach" : "Notre Approche"}
                 </p>
-                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                <h2 className="text-3xl font-bold text-foundation mb-6">
                   {isEn ? "The Path Series™ Methodology" : "La Méthodologie Path Series™"}
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -834,7 +834,7 @@ export default function CurriculumPathSeries() {
               </div>
 
               <div className="bg-white rounded-2xl p-8 md:p-10 shadow-lg mb-12">
-                <p className="text-lg text-[#0F3D3E] leading-relaxed">
+                <p className="text-lg text-foundation leading-relaxed">
                   {isEn 
                     ? "Each Path (I through VI) corresponds to a specific CEFR level and is designed as a self-contained, intensive learning experience that builds systematically on previous competencies. This ensures that every learner progresses at the optimal pace while maintaining the depth of understanding required for true bilingual proficiency."
                     : "Chaque Path (I à VI) correspond à un niveau CEFR spécifique et est conçu comme une expérience d'apprentissage intensive et autonome qui s'appuie systématiquement sur les compétences précédentes. Cela garantit que chaque apprenant progresse au rythme optimal tout en maintenant la profondeur de compréhension requise pour une véritable maîtrise bilingue."
@@ -843,7 +843,7 @@ export default function CurriculumPathSeries() {
               </div>
 
               {/* What Makes Path Series Different */}
-              <div className="bg-[#0F3D3E] rounded-2xl p-8 md:p-10 text-white">
+              <div className="bg-foundation rounded-2xl p-8 md:p-10 text-white">
                 <h3 className="text-2xl font-bold mb-6 text-center" style={{color: '#fdfcfc'}}>
                   {isEn ? "What Makes Path Series™ Different?" : "Qu'est-ce qui Rend Path Series™ Différent?"}
                 </h3>
@@ -856,10 +856,10 @@ export default function CurriculumPathSeries() {
                 <div className="grid md:grid-cols-3 gap-6">
                   {pathDifferentiators.map((diff, index) => (
                     <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
-                      <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#C65A1E] flex items-center justify-center text-white font-bold text-xl">
+                      <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-cta flex items-center justify-center text-white font-bold text-xl">
                         {index + 1}
                       </div>
-                      <h4 className="font-semibold text-lg mb-3 text-[#C65A1E]">
+                      <h4 className="font-semibold text-lg mb-3 text-cta">
                         {isEn ? diff.title : diff.titleFr}
                       </h4>
                       <p className="text-sm text-white/90" style={{color: '#ffffff'}}>
@@ -878,10 +878,10 @@ export default function CurriculumPathSeries() {
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
-                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "Design Philosophy" : "Philosophie de Conception"}
                 </p>
-                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                <h2 className="text-3xl font-bold text-foundation mb-6">
                   {isEn ? "Curriculum Design Philosophy" : "Philosophie de Conception du Curriculum"}
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -897,11 +897,11 @@ export default function CurriculumPathSeries() {
                   <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow bg-[#FDF8F3]">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-full bg-[#C65A1E] flex items-center justify-center text-white font-bold flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-cta flex items-center justify-center text-white font-bold flex-shrink-0">
                           {principle.number}
                         </div>
                         <div>
-                          <h3 className="font-semibold text-lg mb-2 text-[#0F3D3E]">
+                          <h3 className="font-semibold text-lg mb-2 text-foundation">
                             {isEn ? principle.title : principle.titleFr}
                           </h3>
                           <p className="text-sm text-muted-foreground">
@@ -922,10 +922,10 @@ export default function CurriculumPathSeries() {
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
-                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "Learning Architecture" : "Architecture d'Apprentissage"}
                 </p>
-                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                <h2 className="text-3xl font-bold text-foundation mb-6">
                   {isEn ? "Double-Modality Learning Architecture" : "Architecture d'Apprentissage à Double Modalité"}
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -951,7 +951,7 @@ export default function CurriculumPathSeries() {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <h4 className="font-semibold text-lg mb-3 text-[#0F3D3E]">
+                    <h4 className="font-semibold text-lg mb-3 text-foundation">
                       {isEn ? "RusingAcademy Learning Platform" : "Plateforme d'Apprentissage RusingAcademy"}
                     </h4>
                     <p className="text-muted-foreground mb-4">
@@ -995,7 +995,7 @@ export default function CurriculumPathSeries() {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <h4 className="font-semibold text-lg mb-3 text-[#0F3D3E]">
+                    <h4 className="font-semibold text-lg mb-3 text-foundation">
                       {isEn ? "Live Coaching Sessions" : "Séances de Coaching en Direct"}
                     </h4>
                     <p className="text-muted-foreground mb-4">
@@ -1033,10 +1033,10 @@ export default function CurriculumPathSeries() {
         <section className="py-16 bg-white">
           <div className="container">
             <div className="text-center mb-12">
-              <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+              <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                 {isEn ? "Why Path Series™" : "Pourquoi Path Series™"}
               </p>
-              <h2 className="text-3xl font-bold text-[#0F3D3E]">
+              <h2 className="text-3xl font-bold text-foundation">
                 {isEn ? "Built for Federal Success" : "Conçu pour la Réussite Fédérale"}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
@@ -1051,10 +1051,10 @@ export default function CurriculumPathSeries() {
               {valueProps.map((prop, index) => (
                 <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow">
                   <CardContent className="p-6 text-center">
-                    <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#C65A1E]/10 flex items-center justify-center">
-                      <prop.icon className="h-7 w-7 text-[#C65A1E]" />
+                    <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-cta/10 flex items-center justify-center">
+                      <prop.icon className="h-7 w-7 text-cta" />
                     </div>
-                    <h3 className="font-semibold text-lg mb-2 text-[#0F3D3E]">
+                    <h3 className="font-semibold text-lg mb-2 text-foundation">
                       {isEn ? prop.title : prop.titleFr}
                     </h3>
                     <p className="text-sm text-muted-foreground">
@@ -1086,10 +1086,10 @@ export default function CurriculumPathSeries() {
         <section className="py-8 bg-[#FDF8F3]">
           <div className="container">
             <div className="text-center">
-              <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+              <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                 {isEn ? "Our Crash Courses" : "Nos Cours Intensifs"}
               </p>
-              <h2 className="text-3xl font-bold text-[#0F3D3E] mb-4">
+              <h2 className="text-3xl font-bold text-foundation mb-4">
                 {isEn ? "The Six Paths to Bilingual Mastery" : "Les Six Parcours vers la Maîtrise Bilingue"}
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -1112,7 +1112,7 @@ export default function CurriculumPathSeries() {
                   onClick={() => { setProgramTab('fsl'); setSelectedPath('path-i'); }}
                   className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
                     programTab === 'fsl'
-                      ? 'bg-[#0F3D3E] text-white shadow-lg scale-105'
+                      ? 'bg-foundation text-white shadow-lg scale-105'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -1141,8 +1141,8 @@ export default function CurriculumPathSeries() {
                   onClick={() => setSelectedPath(path.id)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedPath === path.id
-                      ? "bg-[#C65A1E] text-white shadow-lg"
-                      : "bg-white text-[#0F3D3E] hover:bg-[#C65A1E]/10 border border-gray-200"
+                      ? "bg-cta text-white shadow-lg"
+                      : "bg-white text-foundation hover:bg-cta/10 border border-gray-200"
                   }`}
                 >
                   <span className="mr-2">{path.icon}</span>
@@ -1169,17 +1169,17 @@ export default function CurriculumPathSeries() {
                       {currentPath.level}
                     </Badge>
                     {currentPath.sleBadge && (
-                      <Badge variant="outline" className="border-[#C65A1E] text-[#C65A1E]">
+                      <Badge variant="outline" className="border-cta text-cta">
                         SLE {currentPath.sleBadge}
                       </Badge>
                     )}
                   </div>
 
                   <div>
-                    <h2 className="text-3xl font-bold text-[#0F3D3E] mb-2">
+                    <h2 className="text-3xl font-bold text-foundation mb-2">
                       {isEn ? currentPath.title : currentPath.titleFr}
                     </h2>
-                    <p className="text-lg text-[#C65A1E] font-medium">
+                    <p className="text-lg text-cta font-medium">
                       {isEn ? currentPath.subtitle : currentPath.subtitleFr}
                     </p>
                   </div>
@@ -1191,31 +1191,31 @@ export default function CurriculumPathSeries() {
                   {/* Course Stats */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-white rounded-lg p-4 shadow-sm">
-                      <Calendar className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <Calendar className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "Duration" : "Durée"}</div>
-                      <div className="font-semibold text-[#0F3D3E]">{currentPath.duration}</div>
+                      <div className="font-semibold text-foundation">{currentPath.duration}</div>
                     </div>
                     <div className="bg-white rounded-lg p-4 shadow-sm">
-                      <Clock className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <Clock className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
-                      <div className="font-semibold text-[#0F3D3E]">{currentPath.structuredHours}</div>
+                      <div className="font-semibold text-foundation">{currentPath.structuredHours}</div>
                     </div>
                     <div className="bg-white rounded-lg p-4 shadow-sm">
-                      <Brain className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <Brain className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "Practice" : "Pratique"}</div>
-                      <div className="font-semibold text-[#0F3D3E]">{currentPath.autonomousPractice || currentPath.practiceExams}</div>
+                      <div className="font-semibold text-foundation">{currentPath.autonomousPractice || currentPath.practiceExams}</div>
                     </div>
                     <div className="bg-white rounded-lg p-4 shadow-sm">
-                      <BookMarked className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <BookMarked className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "PFL2 Level" : "Niveau PFL2"}</div>
-                      <div className="font-semibold text-[#0F3D3E]">{currentPath.pfl2Level || currentPath.coachingSessions}</div>
+                      <div className="font-semibold text-foundation">{currentPath.pfl2Level || currentPath.coachingSessions}</div>
                     </div>
                   </div>
 
                   {/* Learning Outcomes */}
                   <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h3 className="font-semibold text-lg text-[#0F3D3E] mb-4 flex items-center gap-2">
-                      <Target className="h-5 w-5 text-[#C65A1E]" />
+                    <h3 className="font-semibold text-lg text-foundation mb-4 flex items-center gap-2">
+                      <Target className="h-5 w-5 text-cta" />
                       {isEn ? "Key Learning Outcomes" : "Résultats d'Apprentissage Clés"}
                     </h3>
                     <div className="grid md:grid-cols-2 gap-3">
@@ -1231,10 +1231,10 @@ export default function CurriculumPathSeries() {
                   </div>
 
                   {/* Target Audience */}
-                  <div className="bg-[#0F3D3E]/5 rounded-xl p-4 flex items-center gap-3">
-                    <Users className="h-5 w-5 text-[#0F3D3E]" />
+                  <div className="bg-foundation/5 rounded-xl p-4 flex items-center gap-3">
+                    <Users className="h-5 w-5 text-foundation" />
                     <div>
-                      <span className="text-sm font-medium text-[#0F3D3E]">
+                      <span className="text-sm font-medium text-foundation">
                         {isEn ? "Target Audience: " : "Public Cible: "}
                       </span>
                       <span className="text-sm text-muted-foreground">
@@ -1245,14 +1245,14 @@ export default function CurriculumPathSeries() {
 
                   {/* Course Modules Preview */}
                   <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h3 className="font-semibold text-lg text-[#0F3D3E] mb-4 flex items-center gap-2">
-                      <Layers className="h-5 w-5 text-[#C65A1E]" />
+                    <h3 className="font-semibold text-lg text-foundation mb-4 flex items-center gap-2">
+                      <Layers className="h-5 w-5 text-cta" />
                       {isEn ? "Course Modules" : "Modules du Cours"}
                     </h3>
                     <CurriculumModulePreview slug={currentPath.slug} isEn={isEn} />
                     <div className="mt-4 text-center">
                       <Link href={`/courses/${currentPath.slug}`}>
-                        <Button variant="outline" className="border-[#0F3D3E] text-[#0F3D3E] hover:bg-[#0F3D3E]/5">
+                        <Button variant="outline" className="border-foundation text-foundation hover:bg-foundation/5">
                           {isEn ? "View Full Course Details" : "Voir les Détails Complets du Cours"}
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
@@ -1314,7 +1314,7 @@ export default function CurriculumPathSeries() {
                       </ul>
 
                       <Button 
-                        className="w-full bg-[#C65A1E] hover:bg-[#A84A15] text-white"
+                        className="w-full bg-cta hover:bg-cta hover:bg-cta-2 text-white"
                         size="lg"
                         onClick={() => handlePurchase(currentPath.slug)}
                         disabled={isPurchasing}
@@ -1342,10 +1342,10 @@ export default function CurriculumPathSeries() {
         <section className="py-16 bg-white">
           <div className="container">
             <div className="text-center mb-12">
-              <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+              <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                 {isEn ? "Success Stories" : "Témoignages de Réussite"}
               </p>
-              <h2 className="text-3xl font-bold text-[#0F3D3E]">
+              <h2 className="text-3xl font-bold text-foundation">
                 {isEn ? "What Our Students Say" : "Ce Que Disent Nos Étudiants"}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
@@ -1362,10 +1362,10 @@ export default function CurriculumPathSeries() {
                   <CardContent className="p-6">
                     <div className="flex gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-[#C65A1E] text-[#C65A1E]" />
+                        <Star key={i} className="h-5 w-5 fill-[#C65A1E] text-cta" />
                       ))}
                     </div>
-                    <Quote className="h-8 w-8 text-[#C65A1E]/20 mb-2" />
+                    <Quote className="h-8 w-8 text-cta/20 mb-2" />
                     <p className="text-muted-foreground mb-4 italic">
                       "{isEn ? testimonial.quote : testimonial.quoteFr}"
                     </p>
@@ -1374,7 +1374,7 @@ export default function CurriculumPathSeries() {
                         {testimonial.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-[#0F3D3E]">{testimonial.name}</div>
+                        <div className="font-semibold text-foundation">{testimonial.name}</div>
                         <div className="text-xs text-muted-foreground">{testimonial.role}, {testimonial.org}</div>
                       </div>
                     </div>
@@ -1399,7 +1399,7 @@ export default function CurriculumPathSeries() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/courses">
-                <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A15] text-white">
+                <Button size="lg" className="bg-cta hover:bg-cta hover:bg-cta-2 text-white">
                   {isEn ? "Browse All Courses" : "Parcourir Tous les Cours"}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>

@@ -208,7 +208,7 @@ export default function BundlesAndPaths() {
         <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E]">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
           <div className="container relative z-10 text-center">
-            <Badge className="bg-[#C65A1E]/20 text-[#C65A1E] border-[#C65A1E]/30 mb-4">
+            <Badge className="bg-cta/20 text-cta border-cta/30 mb-4">
               <Package className="h-3 w-3 mr-1" />
               {isEn ? "Save Up to 26% with Bundles" : "Économisez Jusqu'à 26% avec les Forfaits"}
             </Badge>
@@ -253,7 +253,7 @@ export default function BundlesAndPaths() {
                     >
                       {bundle.popular && (
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                          <Badge className="bg-[#C65A1E] text-white px-4 py-1 shadow-lg">
+                          <Badge className="bg-cta text-white px-4 py-1 shadow-lg">
                             <Star className="h-3 w-3 mr-1 fill-white" />
                             {isEn ? "Most Popular" : "Le Plus Populaire"}
                           </Badge>
@@ -281,7 +281,7 @@ export default function BundlesAndPaths() {
                             {isEn ? bundle.duration : bundle.durationFr}
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-[#0F3D3E] mb-2">
+                            <p className="text-sm font-medium text-foundation mb-2">
                               {isEn ? "Included Paths:" : "Paths Inclus:"}
                             </p>
                             <ul className="space-y-1">
@@ -300,14 +300,14 @@ export default function BundlesAndPaths() {
                             <ul className="space-y-1">
                               {(isEn ? bundle.features : bundle.featuresFr).map((feature, i) => (
                                 <li key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
-                                  <Sparkles className="h-3 w-3 text-[#C65A1E] flex-shrink-0" />
+                                  <Sparkles className="h-3 w-3 text-cta flex-shrink-0" />
                                   {feature}
                                 </li>
                               ))}
                             </ul>
                           </div>
                           <Button
-                            className={`w-full ${bundle.popular ? "bg-[#C65A1E] hover:bg-[#A84A15]" : "bg-[#0F3D3E] hover:bg-[#0F3D3E]/90"} text-white`}
+                            className={`w-full ${bundle.popular ? "bg-cta hover:bg-cta hover:bg-cta-2" : "bg-foundation hover:bg-foundation/90"} text-white`}
                             size="lg"
                             onClick={() => handleBundlePurchase(bundle.id)}
                           >
@@ -328,7 +328,7 @@ export default function BundlesAndPaths() {
                       : "Tous les forfaits incluent un accès à vie, des certificats et l'adhésion à la communauté."}
                   </p>
                   <Link href="/curriculum">
-                    <Button variant="link" className="text-[#C65A1E]">
+                    <Button variant="link" className="text-cta">
                       {isEn ? "Or purchase individual courses →" : "Ou achetez des cours individuels →"}
                     </Button>
                   </Link>
@@ -339,7 +339,7 @@ export default function BundlesAndPaths() {
               <TabsContent value="paths">
                 <div className="max-w-4xl mx-auto space-y-6">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold text-[#0F3D3E] mb-2">
+                    <h2 className="text-2xl font-bold text-foundation mb-2">
                       {isEn ? "Structured Learning Paths" : "Parcours d'Apprentissage Structurés"}
                     </h2>
                     <p className="text-muted-foreground">
@@ -366,7 +366,7 @@ export default function BundlesAndPaths() {
                               </div>
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 flex-wrap mb-1">
-                                  <h3 className="text-lg font-bold text-[#0F3D3E]">
+                                  <h3 className="text-lg font-bold text-foundation">
                                     {isEn ? pathway.name : pathway.nameFr}
                                   </h3>
                                   <Badge variant="outline" className="text-xs">
@@ -396,7 +396,7 @@ export default function BundlesAndPaths() {
                                 </div>
                               </div>
                               <Link href="/curriculum">
-                                <Button variant="outline" size="sm" className="border-[#0F3D3E] text-[#0F3D3E] hover:bg-[#0F3D3E]/5 flex-shrink-0">
+                                <Button variant="outline" size="sm" className="border-foundation text-foundation hover:bg-foundation/5 flex-shrink-0">
                                   {isEn ? "View" : "Voir"}
                                   <ArrowRight className="ml-1 h-3 w-3" />
                                 </Button>
@@ -426,7 +426,7 @@ export default function BundlesAndPaths() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/sle-diagnostic">
-                <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A15] text-white">
+                <Button size="lg" className="bg-cta hover:bg-cta hover:bg-cta-2 text-white">
                   {isEn ? "Take Free Assessment" : "Passer l'Évaluation Gratuite"}
                   <Target className="ml-2 h-5 w-5" />
                 </Button>

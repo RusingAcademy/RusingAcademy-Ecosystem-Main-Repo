@@ -143,9 +143,9 @@ const courses: Course[] = [
     priceCAD: 1099,
     originalPriceCAD: 1299,
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/curriculum/path_b2_strategic.jpg",
-    color: "text-[#0F3D3E]",
-    bgColor: "bg-[#E7F2F2]",
-    borderColor: "border-[#0F3D3E]",
+    color: "text-foundation",
+    bgColor: "bg-foundation-soft",
+    borderColor: "border-foundation",
     sleBadge: "CBC",
   },
   {
@@ -167,9 +167,9 @@ const courses: Course[] = [
     priceCAD: 1199,
     originalPriceCAD: 1499,
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/curriculum/path_c1_mastery.jpg",
-    color: "text-[#C65A1E]",
-    bgColor: "bg-[#FFF1E8]",
-    borderColor: "border-[#C65A1E]",
+    color: "text-cta",
+    bgColor: "bg-cta-soft",
+    borderColor: "border-cta",
     sleBadge: "CCC",
   },
   {
@@ -363,7 +363,7 @@ export default function Curriculum() {
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 lg:py-24 mesh-gradient">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" aria-hidden="true" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" aria-hidden="true" />
           
           <div className="container relative z-10">
             <div className="max-w-4xl mx-auto text-center space-y-6">

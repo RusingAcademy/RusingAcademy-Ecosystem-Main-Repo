@@ -83,20 +83,20 @@ export default function B2BSection() {
       {/* Hero */}
       <div className="bg-gradient-to-br from-[#0F3D3E] to-[#1a5a5c] py-20">
         <div className="container mx-auto px-6 text-center">
-          <Badge className="mb-6 bg-[#C65A1E]/20 text-[#C65A1E] border-[#C65A1E]/30">
+          <Badge className="mb-6 bg-cta/20 text-cta border-cta/30">
             <Building2 className="w-4 h-4 mr-2" aria-hidden="true" />{t.badge}
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            {t.title} <span className="text-[#C65A1E]">{t.highlight}</span>
+            {t.title} <span className="text-cta">{t.highlight}</span>
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{t.subtitle}</p>
-          <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A18]">
+          <Button size="lg" className="bg-cta hover:bg-[#A84A18]">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto">
             {t.stats.map((stat, i) => (
               <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/60">
-                <div className="text-3xl font-bold text-[#C65A1E]">{stat.value}</div>
+                <div className="text-3xl font-bold text-cta">{stat.value}</div>
                 <div className="text-sm text-white/90">{stat.label}</div>
               </div>
             ))}
@@ -107,15 +107,15 @@ export default function B2BSection() {
       {/* Benefits */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <h3 className="text-3xl font-bold text-[#0F3D3E] text-center mb-12">{t.benefitsTitle}</h3>
+          <h3 className="text-3xl font-bold text-foundation text-center mb-12">{t.benefitsTitle}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.benefits.map((benefit, i) => (
               <Card key={i} className="border-gray-200 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#0F3D3E]/10 flex items-center justify-center mb-4">
-                    <benefit.icon className="w-6 h-6 text-[#0F3D3E]" aria-hidden="true" />
+                  <div className="w-12 h-12 rounded-xl bg-foundation/10 flex items-center justify-center mb-4">
+                    <benefit.icon className="w-6 h-6 text-foundation" aria-hidden="true" />
                   </div>
-                  <h4 className="text-lg font-semibold text-[#0F3D3E] mb-2">{benefit.title}</h4>
+                  <h4 className="text-lg font-semibold text-foundation mb-2">{benefit.title}</h4>
                   <p className="text-black text-sm">{benefit.desc}</p>
                 </CardContent>
               </Card>
@@ -127,27 +127,27 @@ export default function B2BSection() {
       {/* Packages */}
       <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
-          <h3 className="text-3xl font-bold text-[#0F3D3E] text-center mb-12">{t.packagesTitle}</h3>
+          <h3 className="text-3xl font-bold text-foundation text-center mb-12">{t.packagesTitle}</h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {t.packages.map((pkg, i) => (
-              <Card key={i} className={`border-2 ${pkg.popular ? 'border-[#C65A1E] shadow-xl' : 'border-gray-200'} relative`}>
+              <Card key={i} className={`border-2 ${pkg.popular ? 'border-cta shadow-xl' : 'border-gray-200'} relative`}>
                 {pkg.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Badge className="bg-[#C65A1E] text-white"><Star className="w-3 h-3 mr-1" />Popular</Badge>
+                    <Badge className="bg-cta text-white"><Star className="w-3 h-3 mr-1" />Popular</Badge>
                   </div>
                 )}
                 <CardContent className="p-6 pt-8">
-                  <h4 className="text-xl font-bold text-[#0F3D3E]">{pkg.name}</h4>
+                  <h4 className="text-xl font-bold text-foundation">{pkg.name}</h4>
                   <p className="text-sm text-black mb-4">{pkg.size}</p>
-                  <div className="text-2xl font-bold text-[#0F3D3E] mb-4">{pkg.price}</div>
+                  <div className="text-2xl font-bold text-foundation mb-4">{pkg.price}</div>
                   <ul className="space-y-2 mb-6">
                     {pkg.features.map((f, j) => (
                       <li key={j} className="flex items-center gap-2 text-sm text-black">
-                        <CheckCircle2 className="w-4 h-4 text-[#0F3D3E]" aria-hidden="true" />{f}
+                        <CheckCircle2 className="w-4 h-4 text-foundation" aria-hidden="true" />{f}
                       </li>
                     ))}
                   </ul>
-                  <Button className={`w-full ${pkg.popular ? 'bg-[#C65A1E] hover:bg-[#A84A18]' : 'bg-[#0F3D3E] hover:bg-[#0a2a2b]'}`}>
+                  <Button className={`w-full ${pkg.popular ? 'bg-cta hover:bg-[#A84A18]' : 'bg-foundation hover:bg-[#0a2a2b]'}`}>
                     {t.cta}
                   </Button>
                 </CardContent>
@@ -160,17 +160,17 @@ export default function B2BSection() {
       {/* Testimonials */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <h3 className="text-3xl font-bold text-[#0F3D3E] text-center mb-12">{t.testimonialsTitle}</h3>
+          <h3 className="text-3xl font-bold text-foundation text-center mb-12">{t.testimonialsTitle}</h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {t.testimonials.map((testimonial, i) => (
               <Card key={i} className="border-gray-200">
                 <CardContent className="p-6">
                   <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[#C65A1E] text-[#C65A1E]" />)}
+                    {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[#C65A1E] text-cta" />)}
                   </div>
                   <p className="text-black italic mb-4">"{testimonial.quote}"</p>
-                  <p className="font-semibold text-[#0F3D3E]">{testimonial.author}</p>
-                  <p className="text-sm text-[#C65A1E]">{testimonial.company}</p>
+                  <p className="font-semibold text-foundation">{testimonial.author}</p>
+                  <p className="text-sm text-cta">{testimonial.company}</p>
                 </CardContent>
               </Card>
             ))}
@@ -183,7 +183,7 @@ export default function B2BSection() {
         <div className="container mx-auto px-6 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">{t.ctaTitle}</h3>
           <p className="text-white/90 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>
-          <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A18]">
+          <Button size="lg" className="bg-cta hover:bg-[#A84A18]">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>
         </div>

@@ -208,7 +208,7 @@ export default function EcosystemLanding() {
   // Theme-based styles
   const themeStyles = {
     glass: {
-      bg: "bg-[#062b2b]",
+      bg: "bg-obsidian",
       text: "text-white",
       textSecondary: "text-white/90",
       surface: "bg-white/5 backdrop-blur-xl border border-white/60",

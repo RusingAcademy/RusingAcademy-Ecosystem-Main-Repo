@@ -743,7 +743,7 @@ export default function SLEExamSimulation() {
                       "relative p-4 rounded-xl border-2 transition-all duration-300 text-left",
                       isSelected
                         ? "border-blue-500 bg-blue-500/10 shadow-lg shadow-blue-500/10"
-                        : "border-[#0a6969] bg-[#0a4040]/50 hover:border-slate-600"
+                        : "border-[#0a6969] bg-foundation/50 hover:border-slate-600"
                     )}
                   >
                     <div className="flex items-center gap-3">
@@ -781,7 +781,7 @@ export default function SLEExamSimulation() {
                     "p-6 rounded-xl border-2 transition-all duration-300 text-left",
                     config.level === level
                       ? "border-blue-500 bg-blue-500/10 shadow-lg shadow-blue-500/10"
-                      : "border-[#0a6969] bg-[#0a4040]/50 hover:border-slate-600"
+                      : "border-[#0a6969] bg-foundation/50 hover:border-slate-600"
                   )}
                 >
                   <div className="flex items-center gap-3 mb-2">
@@ -815,7 +815,7 @@ export default function SLEExamSimulation() {
                 };
                 const pl = phaseLabels[p as keyof typeof phaseLabels];
                 return (
-                  <div key={p} className="p-4 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
+                  <div key={p} className="p-4 rounded-xl bg-foundation/50 border border-[#0a6969]">
                     <Icon className="h-5 w-5 text-[#67E8F9] mb-2" />
                     <p className="text-sm font-semibold text-white mb-1">{pl.title}</p>
                     <p className="text-[11px] text-white/90 leading-tight">{pl.desc}</p>
@@ -916,7 +916,7 @@ export default function SLEExamSimulation() {
 
           {/* Overall Score */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="grid grid-cols-3 gap-4 mb-8">
-            <div className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969] text-center">
+            <div className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969] text-center">
               <p className="text-sm text-[#67E8F9] mb-2">{l.overallLevel}</p>
               <p className={cn(
                 "text-5xl font-bold",
@@ -927,11 +927,11 @@ export default function SLEExamSimulation() {
                 {examResults.overallLevel}
               </p>
             </div>
-            <div className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969] text-center">
+            <div className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969] text-center">
               <p className="text-sm text-[#67E8F9] mb-2">{l.overallScore}</p>
               <p className="text-5xl font-bold text-white">{examResults.overallScore}%</p>
             </div>
-            <div className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969] text-center">
+            <div className="p-6 rounded-xl bg-foundation/50 border border-[#0a6969] text-center">
               <p className="text-sm text-[#67E8F9] mb-2">{l.duration}</p>
               <p className="text-5xl font-bold text-white">{Math.round(examResults.totalDuration / 60)}</p>
               <p className="text-sm text-white/90">{l.minutes}</p>
@@ -946,7 +946,7 @@ export default function SLEExamSimulation() {
                 if (!cfg) return null;
                 const Icon = cfg.icon;
                 return (
-                  <div key={pr.phase} className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
+                  <div key={pr.phase} className="p-5 rounded-xl bg-foundation/50 border border-[#0a6969]">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
                         <Icon className="h-4 w-4 text-[#67E8F9]" />
@@ -1017,7 +1017,7 @@ export default function SLEExamSimulation() {
           {/* Actions */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex gap-4 justify-center">
             <Link href="/sle-practice">
-              <Button variant="outline" className="border-slate-600 text-white/90 hover:bg-[#0a4040]">
+              <Button variant="outline" className="border-slate-600 text-white/90 hover:bg-foundation">
                 <ChevronLeft className="h-4 w-4 mr-2" />
                 {l.backToMenu}
               </Button>
@@ -1046,12 +1046,12 @@ export default function SLEExamSimulation() {
     <div
       ref={containerRef}
       className={cn(
-        "flex flex-col bg-[#041e1e] text-white",
+        "flex flex-col bg-obsidian text-white",
         isFullscreen ? "fixed inset-0 z-50" : "min-h-screen"
       )}
     >
       {/* Top Bar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#0a6969] bg-[#062b2b]/80 backdrop-blur-sm">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#0a6969] bg-obsidian/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <img src={coach.image} alt={coach.name} className="w-8 h-8 rounded-full object-cover" />
           <div>
@@ -1066,7 +1066,7 @@ export default function SLEExamSimulation() {
             "flex items-center gap-1.5 px-3 py-1.5 rounded-full font-mono text-sm",
             timeRemaining <= 60
               ? "bg-red-500/20 text-red-400 animate-pulse"
-              : "bg-[#0a4040] text-white/90"
+              : "bg-foundation text-white/90"
           )}>
             <Clock className="h-3.5 w-3.5" />
             {formatTime(timeRemaining)}
@@ -1104,7 +1104,7 @@ export default function SLEExamSimulation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 z-40 bg-[#041e1e]/90 backdrop-blur-md flex items-center justify-center"
+            className="absolute inset-0 z-40 bg-obsidian/90 backdrop-blur-md flex items-center justify-center"
           >
             <div className="text-center">
               <Pause className="h-16 w-16 text-[#67E8F9] mx-auto mb-4" />
@@ -1139,7 +1139,7 @@ export default function SLEExamSimulation() {
                 "max-w-[75%] rounded-2xl px-4 py-3",
                 msg.role === "user"
                   ? "bg-blue-500/20 border border-blue-500/30 text-blue-100"
-                  : "bg-[#0a4040] border border-[#0a6969] text-white/90"
+                  : "bg-foundation border border-[#0a6969] text-white/90"
               )}>
                 <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
                 {msg.audioUrl && (
@@ -1160,7 +1160,7 @@ export default function SLEExamSimulation() {
         {isProcessing && (
           <div className="flex items-center gap-3">
             <img src={coach.image} alt="" className="w-8 h-8 rounded-full object-cover" />
-            <div className="bg-[#0a4040] border border-[#0a6969] rounded-2xl px-4 py-3">
+            <div className="bg-foundation border border-[#0a6969] rounded-2xl px-4 py-3">
               <div className="flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin text-[#67E8F9]" />
                 <span className="text-sm text-[#67E8F9]">{l.processing}</span>
@@ -1181,7 +1181,7 @@ export default function SLEExamSimulation() {
       </div>
 
       {/* Bottom Controls */}
-      <div className="border-t border-[#0a6969] bg-[#062b2b]/80 backdrop-blur-sm px-4 py-4">
+      <div className="border-t border-[#0a6969] bg-obsidian/80 backdrop-blur-sm px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Record Button */}
           <div className="flex-1 flex justify-center">
@@ -1202,7 +1202,7 @@ export default function SLEExamSimulation() {
             onClick={advancePhase}
             variant="outline"
             size="sm"
-            className="border-slate-600 text-white/90 hover:bg-[#0a4040]"
+            className="border-slate-600 text-white/90 hover:bg-foundation"
           >
             {examPhases.indexOf(phase as ExamPhase) === examPhases.length - 1 ? (
               <>
