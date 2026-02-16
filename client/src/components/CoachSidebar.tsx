@@ -1,6 +1,7 @@
 /**
- * CoachSidebar — RusingAcademy Coach Portal
- * Design: White sidebar with violet (var(--color-violet-600, var(--color-violet-600, #7c3aed))) accents, matching Learner Portal pattern
+ * CoachSidebar — RusingÂcademy Coach Portal
+ * Design: White sidebar with violet accents, "Institutional Elegance" theme
+ * Portal design merge — feat/portal-design-merge
  */
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -56,7 +57,7 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
       <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
         isActive(item.path)
           ? "bg-violet-600/8 text-violet-600 font-semibold border-l-[3px] border-violet-600"
-          : "text-gray-600 hover:text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:bg-slate-900 border-l-[3px] border-transparent"
+          : "text-gray-600 hover:text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-slate-800 border-l-[3px] border-transparent"
       }`}>
         <span className={`material-icons text-lg ${isActive(item.path) ? "text-violet-600" : "text-gray-400 group-hover:text-gray-600"}`}>
           {item.icon}
@@ -77,16 +78,16 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
         <div className="fixed inset-0 bg-black/20 z-40 lg:hidden" onClick={onToggle} />
       )}
 
-      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-transform duration-200 w-[240px] bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 ${collapsed ? "-translate-x-full lg:translate-x-0" : "translate-x-0"}`}
+      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-transform duration-200 w-[240px] bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-700 ${collapsed ? "-translate-x-full lg:translate-x-0" : "translate-x-0"}`}
         role="navigation" aria-label="Coach portal navigation">
 
         {/* Logo Section */}
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
           <Link href="/coach/portal/dashboard" className="flex items-center gap-3 group">
-            <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
+            <img src={LOGO_ICON} alt="RusingÂcademy" className="w-8 h-8 rounded-lg" loading="lazy" />
             <div>
-              <span className="text-gray-900 dark:text-gray-100 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
-                RusingAcademy
+              <span className="text-gray-900 dark:text-gray-100 font-semibold text-sm tracking-wide" style={{ fontFamily: "var(--font-display)" }}>
+                RusingÂcademy
               </span>
               <span className="block text-[10px] text-violet-600 tracking-wider uppercase font-medium">
                 {lang === "fr" ? "Portail Coach" : "Coach Portal"}
@@ -134,8 +135,8 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
 
         {/* User Profile Section */}
         <div className="p-4 border-t border-gray-100">
-          <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 dark:bg-slate-900 transition-all cursor-pointer group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, var(--color-purple-600, #9333ea))] flex items-center justify-center text-white font-bold text-sm shadow-sm">
+          <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-all cursor-pointer group">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
               {user?.name?.charAt(0) || "C"}
             </div>
             <div className="flex-1 min-w-0">
@@ -159,13 +160,13 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
             {lang === "fr" ? "Portail Apprenant" : "Learner Portal"}
           </button>
 
-          <button onClick={handleLogout} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:bg-slate-900 transition-all flex items-center justify-center gap-1.5">
+          <button onClick={handleLogout} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-1.5">
             <span className="material-icons text-sm">logout</span>
             {t("common.signOut")}
           </button>
 
           <div className="text-center mt-2">
-            <span className="text-[9px] text-gray-400">v2.0.0 — RusingAcademy</span>
+            <span className="text-[9px] text-gray-400">v2.0.0 — RusingÂcademy</span>
           </div>
         </div>
       </aside>
