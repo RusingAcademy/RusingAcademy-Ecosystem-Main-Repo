@@ -4,8 +4,14 @@ import { getDb } from "../db";
 import { membershipTiers, userSubscriptions, paymentHistory, users } from "../../drizzle/schema";
 import { eq, desc, and, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
-import { getStripe } from "../stripe/client";
-import { STRIPE_SUCCESS_PATH, STRIPE_CANCEL_PATH } from "../stripe/products";
+import Stripe from "stripe";
+
+function getStripe(): Stripe {
+  return new Stripe(process.env.STRIPE_SECRET_KEY || "", { apiVersion: "2024-11-20.acacia" as any });
+}
+
+const STRIPE_SUCCESS_PATH = "/membership/success";
+const STRIPE_CANCEL_PATH = "/membership/cancel";
 
 export const membershipRouter = router({
   // List all active membership tiers

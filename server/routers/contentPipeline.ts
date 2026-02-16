@@ -3,7 +3,7 @@
  * Provides content pipeline metrics and management for the ContentPipeline admin page
  */
 import { router, protectedProcedure } from "../_core/trpc";
-import { db } from "../db";
+import { getDb } from "../db";
 import { sql } from "drizzle-orm";
 
 export const contentPipelineRouter = router({
@@ -14,7 +14,7 @@ export const contentPipelineRouter = router({
   getPipelineOverview: protectedProcedure.query(async () => {
     try {
       // Course counts by status
-      const statusRows = await db.execute(
+      const statusRows = await (await getDb())!.execute(
         sql`SELECT status, COUNT(*) as count FROM courses GROUP BY status`
       );
       const statusMap: Record<string, number> = {};
@@ -23,15 +23,15 @@ export const contentPipelineRouter = router({
       }
 
       // Lesson counts
-      const [lessonResult] = await db.execute(sql`SELECT COUNT(*) as count FROM lessons`);
+      const [lessonResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM lessons`);
       const totalLessons = Number((lessonResult as any)?.count || 0);
 
       // Module counts
-      const [moduleResult] = await db.execute(sql`SELECT COUNT(*) as count FROM course_modules`);
+      const [moduleResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM course_modules`);
       const totalModules = Number((moduleResult as any)?.count || 0);
 
       // Learning paths
-      const [pathResult] = await db.execute(sql`SELECT COUNT(*) as count FROM learning_paths`);
+      const [pathResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM learning_paths`);
       const totalPaths = Number((pathResult as any)?.count || 0);
 
       return {
@@ -69,7 +69,7 @@ export const contentPipelineRouter = router({
    */
   getContentCalendar: protectedProcedure.query(async () => {
     try {
-      const rows = await db.execute(
+      const rows = await (await getDb())!.execute(
         sql`SELECT id, title, status, created_at, updated_at 
             FROM courses 
             ORDER BY updated_at DESC 
@@ -152,19 +152,19 @@ export const contentPipelineRouter = router({
   getQualityMetrics: protectedProcedure.query(async () => {
     try {
       // Average course rating
-      const [ratingResult] = await db.execute(
+      const [ratingResult] = await (await getDb())!.execute(
         sql`SELECT AVG(rating) as avg_rating, COUNT(*) as count FROM course_reviews`
       );
       const avgRating = Number((ratingResult as any)?.avg_rating || 0);
       const totalReviews = Number((ratingResult as any)?.count || 0);
 
       // Completion rates
-      const [enrolledResult] = await db.execute(
+      const [enrolledResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM course_enrollments`
       );
       const totalEnrolled = Number((enrolledResult as any)?.count || 0);
 
-      const [completedResult] = await db.execute(
+      const [completedResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM course_enrollments WHERE progress >= 100`
       );
       const totalCompleted = Number((completedResult as any)?.count || 0);
@@ -195,7 +195,7 @@ export const contentPipelineRouter = router({
    */
   getRecentActivity: protectedProcedure.query(async () => {
     try {
-      const rows = await db.execute(
+      const rows = await (await getDb())!.execute(
         sql`SELECT id, title, status, updated_at 
             FROM courses 
             WHERE updated_at > DATE_SUB(NOW(), INTERVAL 30 DAY) 

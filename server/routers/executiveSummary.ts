@@ -3,7 +3,7 @@
  * Provides high-level platform metrics for the ExecutiveSummary admin page
  */
 import { router, protectedProcedure } from "../_core/trpc";
-import { db } from "../db";
+import { getDb } from "../db";
 import { sql } from "drizzle-orm";
 
 export const executiveSummaryRouter = router({
@@ -14,61 +14,61 @@ export const executiveSummaryRouter = router({
   getExecutiveSummary: protectedProcedure.query(async () => {
     try {
       // Total users
-      const [usersResult] = await db.execute(sql`SELECT COUNT(*) as count FROM users`);
+      const [usersResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM users`);
       const totalUsers = Number((usersResult as any)?.count || 0);
 
       // Active users (logged in within last 30 days)
-      const [activeResult] = await db.execute(
+      const [activeResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM users WHERE updated_at > DATE_SUB(NOW(), INTERVAL 30 DAY)`
       );
       const activeUsers = Number((activeResult as any)?.count || 0);
 
       // Total courses
-      const [coursesResult] = await db.execute(sql`SELECT COUNT(*) as count FROM courses`);
+      const [coursesResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM courses`);
       const totalCourses = Number((coursesResult as any)?.count || 0);
 
       // Published courses
-      const [publishedResult] = await db.execute(
+      const [publishedResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM courses WHERE status = 'published'`
       );
       const publishedCourses = Number((publishedResult as any)?.count || 0);
 
       // Total enrollments
-      const [enrollResult] = await db.execute(sql`SELECT COUNT(*) as count FROM course_enrollments`);
+      const [enrollResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM course_enrollments`);
       const totalEnrollments = Number((enrollResult as any)?.count || 0);
 
       // Active coaches
-      const [coachResult] = await db.execute(
+      const [coachResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM coach_profiles WHERE status = 'active'`
       );
       const activeCoaches = Number((coachResult as any)?.count || 0);
 
       // Total sessions
-      const [sessionsResult] = await db.execute(sql`SELECT COUNT(*) as count FROM sessions`);
+      const [sessionsResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM sessions`);
       const totalSessions = Number((sessionsResult as any)?.count || 0);
 
       // Completed sessions
-      const [completedResult] = await db.execute(
+      const [completedResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM sessions WHERE status = 'completed'`
       );
       const completedSessions = Number((completedResult as any)?.count || 0);
 
       // Certificates issued
-      const [certsResult] = await db.execute(sql`SELECT COUNT(*) as count FROM certificates`);
+      const [certsResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM certificates`);
       const certificatesIssued = Number((certsResult as any)?.count || 0);
 
       // Learning paths
-      const [pathsResult] = await db.execute(sql`SELECT COUNT(*) as count FROM learning_paths`);
+      const [pathsResult] = await (await getDb())!.execute(sql`SELECT COUNT(*) as count FROM learning_paths`);
       const totalPaths = Number((pathsResult as any)?.count || 0);
 
       // New users this month
-      const [newUsersResult] = await db.execute(
+      const [newUsersResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM users WHERE created_at > DATE_SUB(NOW(), INTERVAL 30 DAY)`
       );
       const newUsersThisMonth = Number((newUsersResult as any)?.count || 0);
 
       // New enrollments this month
-      const [newEnrollResult] = await db.execute(
+      const [newEnrollResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM course_enrollments WHERE enrolled_at > DATE_SUB(NOW(), INTERVAL 30 DAY)`
       );
       const newEnrollmentsThisMonth = Number((newEnrollResult as any)?.count || 0);
@@ -120,17 +120,17 @@ export const executiveSummaryRouter = router({
   getPlatformHealth: protectedProcedure.query(async () => {
     try {
       // Check database connectivity
-      const [dbCheck] = await db.execute(sql`SELECT 1 as ok`);
+      const [dbCheck] = await (await getDb())!.execute(sql`SELECT 1 as ok`);
       const dbHealthy = Boolean((dbCheck as any)?.ok);
 
       // Recent error rate (sessions with issues)
-      const [errorResult] = await db.execute(
+      const [errorResult] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM sessions WHERE status = 'cancelled' AND updated_at > DATE_SUB(NOW(), INTERVAL 7 DAY)`
       );
       const recentCancellations = Number((errorResult as any)?.count || 0);
 
       // Recent sessions total
-      const [recentTotal] = await db.execute(
+      const [recentTotal] = await (await getDb())!.execute(
         sql`SELECT COUNT(*) as count FROM sessions WHERE updated_at > DATE_SUB(NOW(), INTERVAL 7 DAY)`
       );
       const recentSessionsTotal = Number((recentTotal as any)?.count || 0);
