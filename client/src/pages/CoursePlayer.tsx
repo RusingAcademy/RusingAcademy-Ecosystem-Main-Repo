@@ -67,6 +67,27 @@ export default function CoursePlayer() {
     },
   });
 
+  // Checkout-aware enrollment (handles both free and paid)
+  const checkoutMutation = trpc.courses.createCheckoutSession.useMutation({
+    onSuccess: (data) => {
+      if (data.enrolledDirectly) {
+        toast.success(t.coursePlayer.enrollSuccess);
+        refetchProgress();
+      } else if (data.checkoutUrl) {
+        toast.info(locale === 'en' ? "Redirecting to checkout..." : "Redirection vers le paiement...");
+        window.open(data.checkoutUrl, '_blank');
+      }
+    },
+    onError: (error) => {
+      if (error.message === "Already enrolled in this course") {
+        toast.info(locale === 'en' ? "You're already enrolled!" : "Vous \u00eates d\u00e9j\u00e0 inscrit(e) !");
+        refetchProgress();
+      } else {
+        toast.error(error.message || "Failed to enroll. Please try again.");
+      }
+    },
+  });
+
   const completeMutation = trpc.coursePlayer.completeLesson.useMutation({
     onSuccess: (data) => {
       refetchProgress();
@@ -277,10 +298,10 @@ export default function CoursePlayer() {
                   size="lg"
                   className="rounded-xl px-8 font-bold text-base"
                   style={{ backgroundColor: "#FF4B2B" }}
-                  onClick={() => enrollMutation.mutate({ courseId })}
-                  disabled={enrollMutation.isPending || !isAuthenticated}
+                  onClick={() => checkoutMutation.mutate({ courseId })}
+                  disabled={checkoutMutation.isPending || !isAuthenticated}
                 >
-                  {enrollMutation.isPending ? (
+                  {checkoutMutation.isPending ? (
                     <Loader2 className="w-5 h-5 animate-spin mr-2" />
                   ) : (
                     <GraduationCap className="w-5 h-5 mr-2" />

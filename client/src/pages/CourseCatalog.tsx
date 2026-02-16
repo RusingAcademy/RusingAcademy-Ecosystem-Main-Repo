@@ -4,7 +4,7 @@ import { useLocale } from "@/i18n/LocaleContext";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import {
   BookOpen,
   Clock,
@@ -55,6 +55,10 @@ export default function CourseCatalog() {
 
   const enrolledCourseIds = new Set(enrollments?.map((e) => e.enrollment.courseId) ?? []);
 
+  const [, setLocation] = useLocation();
+  const utils = trpc.useUtils();
+
+  // Legacy direct enrollment (kept for backward compat)
   const enrollMutation = trpc.coursePlayer.enroll.useMutation({
     onSuccess: (data) => {
       if (data.alreadyEnrolled) {
@@ -64,6 +68,27 @@ export default function CourseCatalog() {
       }
     },
     onError: () => toast.error("Failed to enroll. Please try again."),
+  });
+
+  // Checkout-aware enrollment (handles both free and paid)
+  const checkoutMutation = trpc.courses.createCheckoutSession.useMutation({
+    onSuccess: (data) => {
+      if (data.enrolledDirectly) {
+        toast.success(t.coursePlayer.enrollSuccess);
+        utils.coursePlayer.myEnrollments.invalidate();
+      } else if (data.checkoutUrl) {
+        toast.info(locale === 'en' ? "Redirecting to checkout..." : "Redirection vers le paiement...");
+        window.open(data.checkoutUrl, '_blank');
+      }
+    },
+    onError: (error) => {
+      if (error.message === "Already enrolled in this course") {
+        toast.info("You're already enrolled in this course.");
+        utils.coursePlayer.myEnrollments.invalidate();
+      } else {
+        toast.error(error.message || "Failed to enroll. Please try again.");
+      }
+    },
   });
 
   const categories = Array.from(new Set(courses?.map((c) => c.category).filter(Boolean) ?? []));
@@ -264,14 +289,15 @@ export default function CourseCatalog() {
                         style={{ backgroundColor: "#FF4B2B" }}
                         onClick={() => {
                           if (!isAuthenticated) {
-                            toast.error("Please sign in to enroll.");
+                            toast.error(locale === 'en' ? "Please sign in to enroll." : "Veuillez vous connecter pour vous inscrire.");
+                            setLocation('/signup');
                             return;
                           }
-                          enrollMutation.mutate({ courseId: course.id });
+                          checkoutMutation.mutate({ courseId: course.id, courseSlug: course.slug });
                         }}
-                        disabled={enrollMutation.isPending}
+                        disabled={checkoutMutation.isPending}
                       >
-                        {enrollMutation.isPending ? (
+                        {checkoutMutation.isPending ? (
                           <Loader2 className="w-4 h-4 animate-spin mr-2" />
                         ) : (
                           <GraduationCap className="w-4 h-4 mr-2" />
