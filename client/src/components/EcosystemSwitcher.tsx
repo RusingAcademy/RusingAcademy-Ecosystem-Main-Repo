@@ -262,7 +262,7 @@ export function EcosystemSwitcher({
         style={{
           background: isOpen
             ? "rgba(255, 255, 255, 0.9)"
-            : "linear-gradient(135deg, #E07B39 0%, #D4AF37 50%, #2DD4BF 100%)",
+            : "linear-gradient(135deg, #E07B39 0%, var(--brand-gold, #D4AF37) 50%, #2DD4BF 100%)",
         }}
         aria-expanded={isOpen}
         aria-label={language === "fr" ? "Ouvrir le menu de l'écosystème" : "Open ecosystem menu"}

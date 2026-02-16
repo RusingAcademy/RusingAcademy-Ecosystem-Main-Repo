@@ -173,7 +173,7 @@ export const PLATFORM_CONFIG: Record<EcosystemPlatform, {
   barholex: {
     name: "Barholex Media",
     nameFr: "Barholex Media",
-    color: "#D4AF37",
+    color: "var(--brand-gold, #D4AF37)",
     icon: "🎬",
     description: "Creative Production & EdTech",
     descriptionFr: "Production créative & EdTech",

@@ -42,7 +42,7 @@ export default function RealtimeNotificationBell({ onClick }: RealtimeNotificati
             exit={{ scale: 0, opacity: 0 }}
             className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-bold rounded-full text-white"
             style={{
-              background: "linear-gradient(135deg, #D4AF37, #E8CB6A)",
+              background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)",
               boxShadow: "0 2px 6px rgba(212, 175, 55, 0.3)",
               animation: wsUnread > 0 ? "pulse-glow 2s ease-in-out infinite" : undefined,
             }}

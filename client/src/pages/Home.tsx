@@ -675,7 +675,7 @@ export default function Home() {
             <div className="absolute bottom-0 right-0 w-60 h-60 bg-white dark:bg-slate-900 rounded-full translate-x-1/3 translate-y-1/3" />
           </div>
           
-          <div className="container mx-auto px-4 relative z-10" style={{backgroundColor: '#ffffff'}}>
+          <div className="container mx-auto px-4 relative z-10" style={{backgroundColor: 'var(--color-white, #ffffff)'}}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {statistics.map((stat, index) => (
                 <div key={index} className="text-center">

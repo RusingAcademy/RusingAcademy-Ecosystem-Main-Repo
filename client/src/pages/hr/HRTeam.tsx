@@ -170,7 +170,7 @@ export default function HRTeam() {
                       <tr key={p.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 cursor-pointer">
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-[#1d4ed8] flex items-center justify-center text-white text-xs font-bold shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-[var(--color-blue-700, #1d4ed8)] flex items-center justify-center text-white text-xs font-bold shrink-0">
                               {(p.firstName?.[0] ?? "")}{(p.lastName?.[0] ?? "")}
                             </div>
                             <div>

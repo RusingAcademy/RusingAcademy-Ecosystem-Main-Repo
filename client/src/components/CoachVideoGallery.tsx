@@ -290,7 +290,7 @@ export default function CoachVideoGallery() {
     <section 
       className="py-24 relative overflow-hidden"
       style={{ 
-        background: "linear-gradient(180deg, #0B1220 0%, #0F3D3E 50%, #0B1220 100%)",
+        background: "linear-gradient(180deg, #0B1220 0%, var(--brand-foundation, #0F3D3E) 50%, #0B1220 100%)",
       }}
       aria-labelledby="coach-gallery-title"
     >

@@ -18,25 +18,25 @@ const roleBadgeStyles: Record<string, { bg: string; text: string; border: string
   },
   "Professional Teacher": {
     bg: "rgba(27, 20, 100, 0.06)",
-    text: "#1B1464",
+    text: "var(--brand-obsidian, #1B1464)",
     border: "rgba(27, 20, 100, 0.12)",
   },
   Student: {
     bg: "rgba(45, 37, 128, 0.05)",
-    text: "#2D2580",
+    text: "var(--brand-obsidian, #2D2580)",
     border: "rgba(45, 37, 128, 0.1)",
   },
   Official: {
     bg: "rgba(27, 20, 100, 0.08)",
-    text: "#1B1464",
+    text: "var(--brand-obsidian, #1B1464)",
     border: "rgba(27, 20, 100, 0.15)",
   },
 };
 
 const typeIcons: Record<string, { icon: typeof Mic; label: string; color: string; bg: string }> = {
-  podcast: { icon: Mic, label: "Podcast", color: "#1B1464", bg: "rgba(27, 20, 100, 0.06)" },
-  exercise: { icon: BookOpen, label: "Exercise", color: "#D4AF37", bg: "rgba(212, 175, 55, 0.08)" },
-  question: { icon: HelpCircle, label: "Question", color: "#2D2580", bg: "rgba(45, 37, 128, 0.06)" },
+  podcast: { icon: Mic, label: "Podcast", color: "var(--brand-obsidian, #1B1464)", bg: "rgba(27, 20, 100, 0.06)" },
+  exercise: { icon: BookOpen, label: "Exercise", color: "var(--brand-gold, #D4AF37)", bg: "rgba(212, 175, 55, 0.08)" },
+  question: { icon: HelpCircle, label: "Question", color: "var(--brand-obsidian, #2D2580)", bg: "rgba(45, 37, 128, 0.06)" },
 };
 
 export default function PostCard({ post }: { post: Post }) {
@@ -201,7 +201,7 @@ export default function PostCard({ post }: { post: Post }) {
               <button
                 className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-105 active:scale-95"
                 style={{
-                  background: "linear-gradient(135deg, #1B1464, #2D2580)",
+                  background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))",
                   boxShadow: "0 2px 8px rgba(27, 20, 100, 0.2)",
                 }}
               >
@@ -216,7 +216,7 @@ export default function PostCard({ post }: { post: Post }) {
                     className="h-full rounded-full"
                     style={{
                       width: "0%",
-                      background: "linear-gradient(90deg, #1B1464, #D4AF37)",
+                      background: "linear-gradient(90deg, var(--brand-obsidian, #1B1464), var(--brand-gold, #D4AF37))",
                     }}
                   />
                 </div>
@@ -287,7 +287,7 @@ export default function PostCard({ post }: { post: Post }) {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "rgba(27, 20, 100, 0.08)";
-                e.currentTarget.style.color = "#1B1464";
+                e.currentTarget.style.color = "var(--brand-obsidian, #1B1464)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "rgba(27, 20, 100, 0.04)";
@@ -314,7 +314,7 @@ export default function PostCard({ post }: { post: Post }) {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
             style={{
               background: liked ? "rgba(212, 175, 55, 0.08)" : "transparent",
-              color: liked ? "#D4AF37" : undefined,
+              color: liked ? "var(--brand-gold, #D4AF37)" : undefined,
             }}
             whileTap={{ scale: 0.92 }}
           >

@@ -31,7 +31,7 @@ export default function Certificates() {
         </button>
 
         <div className="text-center mb-10">
-          <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#D4AF37" + "20" }}>
+          <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "var(--brand-gold, #D4AF37)" + "20" }}>
             <Award className="w-8 h-8"  />
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
@@ -55,7 +55,7 @@ export default function Certificates() {
         ) : (
           <div className="space-y-6">
             {certs.map(({ certificate, course }) => (
-              <Card key={certificate.id} className="border-2 overflow-hidden hover:shadow-lg transition-shadow" style={{ borderColor: "#D4AF37" + "30" }}>
+              <Card key={certificate.id} className="border-2 overflow-hidden hover:shadow-lg transition-shadow" style={{ borderColor: "var(--brand-gold, #D4AF37)" + "30" }}>
                 <CardContent className="p-0">
                   {/* Certificate Preview */}
                   <div className="bg-gradient-to-br from-indigo-900 to-[#2D2380] p-8 text-white text-center relative overflow-hidden">

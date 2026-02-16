@@ -147,7 +147,7 @@ export default function EcosystemHeaderGold() {
             height: isScrolled ? "3rem" : "4rem",
             background: "linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%)",
             borderBottom: "2px solid",
-            borderImage: "linear-gradient(90deg, #D4AF37 0%, #F4E4BC 25%, #D4AF37 50%, #F4E4BC 75%, #D4AF37 100%) 1",
+            borderImage: "linear-gradient(90deg, var(--brand-gold, #D4AF37) 0%, #F4E4BC 25%, var(--brand-gold, #D4AF37) 50%, #F4E4BC 75%, var(--brand-gold, #D4AF37) 100%) 1",
             transition: "height 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
@@ -174,7 +174,7 @@ export default function EcosystemHeaderGold() {
                 style={{ 
                   width: isScrolled ? "1rem" : "1.25rem",
                   height: isScrolled ? "1rem" : "1.25rem",
-                  color: homeHovered ? "#B8860B" : "#000000", 
+                  color: homeHovered ? "#B8860B" : "var(--color-black, #000000)", 
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                 }} 
                 aria-hidden="true"
@@ -231,7 +231,7 @@ export default function EcosystemHeaderGold() {
                 style={{ 
                   width: isScrolled ? "0.875rem" : "1rem",
                   height: isScrolled ? "0.875rem" : "1rem",
-                  color: searchHovered ? "#B8860B" : "#000000", 
+                  color: searchHovered ? "#B8860B" : "var(--color-black, #000000)", 
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                 }} 
                 aria-hidden="true"
@@ -294,7 +294,7 @@ export default function EcosystemHeaderGold() {
                   style={{ 
                     width: isScrolled ? "0.875rem" : "1rem",
                     height: isScrolled ? "0.875rem" : "1rem",
-                    color: themeHovered ? "#D4AF37" : "#F59E0B", 
+                    color: themeHovered ? "var(--brand-gold, #D4AF37)" : "#F59E0B", 
                     transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                   }} 
                   aria-hidden="true"
@@ -304,7 +304,7 @@ export default function EcosystemHeaderGold() {
                   style={{ 
                     width: isScrolled ? "0.875rem" : "1rem",
                     height: isScrolled ? "0.875rem" : "1rem",
-                    color: themeHovered ? "#B8860B" : "#000000", 
+                    color: themeHovered ? "#B8860B" : "var(--color-black, #000000)", 
                     transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                   }} 
                   aria-hidden="true"
@@ -356,8 +356,8 @@ export default function EcosystemHeaderGold() {
                       : "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 246, 240, 0.92) 100%)",
                     backdropFilter: "blur(20px)",
                     border: "2px solid",
-                    borderColor: loginHovered ? "#D4AF37" : "rgba(212, 175, 55, 0.5)",
-                    color: loginHovered ? "#8B6914" : "#000000",
+                    borderColor: loginHovered ? "var(--brand-gold, #D4AF37)" : "rgba(212, 175, 55, 0.5)",
+                    color: loginHovered ? "#8B6914" : "var(--color-black, #000000)",
                     boxShadow: loginHovered 
                       ? "0 0 24px rgba(212, 175, 55, 0.4), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)" 
                       : "0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
@@ -397,7 +397,7 @@ export default function EcosystemHeaderGold() {
                       className="relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-300"
                       style={{
                         background: isDark 
-                          ? "linear-gradient(135deg, #0F3D3E 0%, #145A5B 100%)" 
+                          ? "linear-gradient(135deg, var(--brand-foundation, #0F3D3E) 0%, #145A5B 100%)" 
                           : "linear-gradient(135deg, #F7F6F3 0%, #EEE9DF 100%)",
                         border: "2px solid rgba(212, 175, 55, 0.4)",
                         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
@@ -520,7 +520,7 @@ export default function EcosystemHeaderGold() {
                       <div 
                         className="text-sm"
                         style={{
-                          color: "#000000",
+                          color: "var(--color-black, #000000)",
                         }}
                       >
                         {language === "en" ? brand.subtitle.en : brand.subtitle.fr}

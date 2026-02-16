@@ -41,12 +41,12 @@ export default function PathList() {
         {/* Program Hero */}
         <div className="relative rounded-2xl overflow-hidden p-8" style={{
           background: isESL
-            ? "linear-gradient(135deg, #1a365d 0%, #2563eb 100%)"
-            : "linear-gradient(135deg, #7c2d12 0%, #dc2626 100%)",
+            ? "linear-gradient(135deg, #1a365d 0%, var(--color-blue-600, #2563eb) 100%)"
+            : "linear-gradient(135deg, #7c2d12 0%, var(--semantic-danger, #dc2626) 100%)",
           minHeight: "160px",
         }}>
           <div className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-10" style={{
-            background: "radial-gradient(circle, #f5a623, transparent)",
+            background: "radial-gradient(circle, var(--semantic-warning, #f5a623), transparent)",
             transform: "translate(20%, -20%)",
           }} />
           <div className="relative z-10">
@@ -156,7 +156,7 @@ export default function PathList() {
                           return (
                             <span key={mod.id} className="text-[10px] px-2 py-1 rounded-full font-medium" style={{
                               background: modPct === 100 ? "rgba(245,166,35,0.1)" : "rgba(0,128,144,0.06)",
-                              color: modPct === 100 ? "#f5a623" : "#008090",
+                              color: modPct === 100 ? "var(--semantic-warning, #f5a623)" : "var(--brand-teal, #008090)",
                             }}>
                               M{mod.id}: {mod.title.substring(0, 20)}{mod.title.length > 20 ? "..." : ""} ({modPct}%)
                             </span>
@@ -169,10 +169,10 @@ export default function PathList() {
                         <div className="flex-1 h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(0,128,144,0.06)" }}>
                           <div className="h-full rounded-full transition-all duration-700" style={{
                             width: `${progressPct}%`,
-                            background: isComplete ? "linear-gradient(90deg, #f5a623, #ffd700)" : "linear-gradient(90deg, #008090, #00a0b0)",
+                            background: isComplete ? "linear-gradient(90deg, var(--semantic-warning, #f5a623), #ffd700)" : "linear-gradient(90deg, var(--brand-teal, #008090), #00a0b0)",
                           }} />
                         </div>
-                        <span className="text-sm font-bold" style={{ color: isComplete ? "#f5a623" : "#008090" }}>
+                        <span className="text-sm font-bold" style={{ color: isComplete ? "var(--semantic-warning, #f5a623)" : "var(--brand-teal, #008090)" }}>
                           {progressPct}%
                         </span>
                       </div>
@@ -182,7 +182,7 @@ export default function PathList() {
                           {completedCount}/{allLessonKeys.length} lessons completed
                         </span>
                         {!isLocked && (
-                          <span className="text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: "#008090" }}>
+                          <span className="text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: "var(--brand-teal, #008090)" }}>
                             {progressPct > 0 ? "Continue" : "Start"}
                             <span className="material-icons" >arrow_forward</span>
                           </span>

@@ -8,13 +8,13 @@ import { useState, useMemo } from "react";
 import { toast } from "sonner";
 
 const CATEGORIES = [
-  { id: "all", label: "All Topics", icon: "forum", color: "#008090" },
-  { id: "grammar", label: "Grammar", icon: "spellcheck", color: "#3b82f6" },
-  { id: "vocabulary", label: "Vocabulary", icon: "translate", color: "#8b5cf6" },
-  { id: "sle_prep", label: "SLE Prep", icon: "quiz", color: "#f59e0b" },
-  { id: "study_tips", label: "Study Tips", icon: "lightbulb", color: "#10b981" },
-  { id: "resources", label: "Resources", icon: "library_books", color: "#ef4444" },
-  { id: "general", label: "General", icon: "chat", color: "#6b7280" },
+  { id: "all", label: "All Topics", icon: "forum", color: "var(--brand-teal, #008090)" },
+  { id: "grammar", label: "Grammar", icon: "spellcheck", color: "var(--color-blue-500, #3b82f6)" },
+  { id: "vocabulary", label: "Vocabulary", icon: "translate", color: "var(--color-violet-500, #8b5cf6)" },
+  { id: "sle_prep", label: "SLE Prep", icon: "quiz", color: "var(--semantic-warning, #f59e0b)" },
+  { id: "study_tips", label: "Study Tips", icon: "lightbulb", color: "var(--semantic-success, #10b981)" },
+  { id: "resources", label: "Resources", icon: "library_books", color: "var(--semantic-danger, #ef4444)" },
+  { id: "general", label: "General", icon: "chat", color: "var(--color-gray-500, #6b7280)" },
 ];
 
 export default function DiscussionBoards() {

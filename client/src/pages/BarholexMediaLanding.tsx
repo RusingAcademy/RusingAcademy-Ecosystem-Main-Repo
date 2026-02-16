@@ -809,7 +809,7 @@ export default function BarholexMediaLanding() {
                 <h3 className="text-xl font-bold mb-4 text-white leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-white/90 mb-6 leading-relaxed" style={{color: '#ffffff'}}>
+                <p className="text-white/90 mb-6 leading-relaxed" style={{color: 'var(--color-white, #ffffff)'}}>
                   {item.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
@@ -1049,7 +1049,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.cta.title}
             </h2>
-            <p className="text-xl mb-10 text-white/90 max-w-2xl mx-auto" style={{color: '#ffffff'}}>
+            <p className="text-xl mb-10 text-white/90 max-w-2xl mx-auto" style={{color: 'var(--color-white, #ffffff)'}}>
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">

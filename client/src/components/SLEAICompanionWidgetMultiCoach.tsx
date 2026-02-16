@@ -830,7 +830,7 @@ export default function SLEAICompanionWidget() {
                       <div className="relative">
                         {userSpeaking && <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-20" />}
                         <svg className="w-4 h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#ffffff' }}>
+                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : 'var(--color-white, #ffffff)' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                         </svg>
                       </div>
@@ -846,7 +846,7 @@ export default function SLEAICompanionWidget() {
                       </div>
                       {/* Status text */}
                       <span className="text-xs font-semibold tracking-wide" style={{
-                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#ffffff',
+                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : 'var(--color-white, #ffffff)',
                       }}>
                         {vadState === "closed"
                           ? (selectedCoach?.lang === "fr" ? "Micro fermé" : "Mic off")

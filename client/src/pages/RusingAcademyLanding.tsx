@@ -531,7 +531,7 @@ function PromoBanner({ lang }: { lang: 'en' | 'fr' }) {
     >
       <div 
         className="relative py-3 px-4"
-        style={{ background: 'linear-gradient(135deg, #059669 0%, #0D9488 50%, #0891B2 100%)' }}
+        style={{ background: 'linear-gradient(135deg, var(--semantic-success, #059669) 0%, #0D9488 50%, #0891B2 100%)' }}
       >
         {/* Animated shimmer */}
         <div className="absolute inset-0 overflow-hidden">
@@ -1149,7 +1149,7 @@ export default function RusingAcademyLanding() {
                       onClick={() => handleEnroll(currentPath.id)}
                       disabled={enrollingCourse === currentPath.id}
                       className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white transition-all hover:scale-[1.02] shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg"
-                      style={{ background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, #059669 0%, #0D9488 100%)' : premiumGradient }}
+                      style={{ background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, var(--semantic-success, #059669) 0%, #0D9488 100%)' : premiumGradient }}
                     >
                       {enrollingCourse === currentPath.id ? (
                         <>
@@ -1483,7 +1483,7 @@ export default function RusingAcademyLanding() {
                           ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
                           : 'bg-gray-100 text-slate-900 hover:bg-gray-200'
                       }`}
-                      style={bundle.featured ? { background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, #059669 0%, #0D9488 100%)' : premiumGradient } : {}}
+                      style={bundle.featured ? { background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, var(--semantic-success, #059669) 0%, #0D9488 100%)' : premiumGradient } : {}}
                     >
                       {FREE_ACCESS_MODE ? (
                         <>

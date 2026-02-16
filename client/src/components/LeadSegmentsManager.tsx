@@ -80,9 +80,9 @@ const SOURCE_OPTIONS = ["lingueefy", "rusingacademy", "barholex", "ecosystem_hub
 const LEAD_TYPE_OPTIONS = ["individual", "organization", "government", "enterprise"];
 
 const COLORS = [
-  "#ef4444", "#f97316", "#f59e0b", "#eab308", "#84cc16",
-  "#22c55e", "#10b981", "#14b8a6", "#06b6d4", "#0ea5e9",
-  "#3b82f6", "#6366f1", "#8b5cf6", "#a855f7", "#d946ef",
+  "var(--semantic-danger, #ef4444)", "#f97316", "var(--semantic-warning, #f59e0b)", "#eab308", "#84cc16",
+  "var(--semantic-success, #22c55e)", "var(--semantic-success, #10b981)", "#14b8a6", "#06b6d4", "#0ea5e9",
+  "var(--color-blue-500, #3b82f6)", "#6366f1", "var(--color-violet-500, #8b5cf6)", "var(--color-purple-500, #a855f7)", "#d946ef",
   "#ec4899", "#f43f5e",
 ];
 
@@ -95,7 +95,7 @@ export default function LeadSegmentsManager() {
     description: "",
     filters: [{ field: "status", operator: "equals" as const, value: "" }] as FilterCondition[],
     filterLogic: "and" as "and" | "or",
-    color: "#3b82f6",
+    color: "var(--color-blue-500, #3b82f6)",
   });
   const [previewLeads, setPreviewLeads] = useState<any[]>([]);
   const [showPreview, setShowPreview] = useState(false);
@@ -208,7 +208,7 @@ export default function LeadSegmentsManager() {
       description: "",
       filters: [{ field: "status", operator: "equals", value: "" }],
       filterLogic: "and",
-      color: "#3b82f6",
+      color: "var(--color-blue-500, #3b82f6)",
     });
     setEditingSegment(null);
     setPreviewLeads([]);
@@ -222,7 +222,7 @@ export default function LeadSegmentsManager() {
       description: segment.description || "",
       filters: segment.filters,
       filterLogic: segment.filterLogic,
-      color: segment.color || "#3b82f6",
+      color: segment.color || "var(--color-blue-500, #3b82f6)",
     });
     setShowDialog(true);
   };
@@ -379,7 +379,7 @@ export default function LeadSegmentsManager() {
             <Card key={segment.id} className="relative overflow-hidden">
               <div
                 className="absolute top-0 left-0 w-full h-1"
-                style={{ backgroundColor: segment.color || "#3b82f6" }}
+                style={{ backgroundColor: segment.color || "var(--color-blue-500, #3b82f6)" }}
               />
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">

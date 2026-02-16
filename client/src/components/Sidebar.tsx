@@ -195,7 +195,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 </span>
                 <span className="font-medium">{item.label}</span>
                 {item.badge && item.badge > 0 && (
-                  <span className="ml-auto bg-[#e74c3c] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
+                  <span className="ml-auto bg-[var(--semantic-danger, #e74c3c)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
                     {item.badge}
                   </span>
                 )}

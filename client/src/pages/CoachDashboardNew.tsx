@@ -77,7 +77,7 @@ const SessionCard = ({ session }: { session: Session }) => {
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div className="flex items-center">
-          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#b91c1c] to-[#991b1b] flex items-center justify-center text-white font-medium text-lg">
+          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[var(--semantic-danger, #b91c1c)] to-[#991b1b] flex items-center justify-center text-white font-medium text-lg">
             {session.learnerName.charAt(0)}
           </div>
           <div className="ml-4">
@@ -118,7 +118,7 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
   <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center">
-        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#b91c1c] to-[#991b1b] flex items-center justify-center text-white font-medium text-lg">
+        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[var(--semantic-danger, #b91c1c)] to-[#991b1b] flex items-center justify-center text-white font-medium text-lg">
           {learner.name.charAt(0)}
         </div>
         <div className="ml-4">

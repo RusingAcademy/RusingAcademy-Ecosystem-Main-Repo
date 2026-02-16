@@ -24,7 +24,7 @@ const SOCIAL_LINKS = [
 interface SocialLinksProps {
   /** Icon size in pixels (default: 16) */
   size?: number;
-  /** Icon fill color (default: #6b7280) */
+  /** Icon fill color (default: var(--color-gray-500, #6b7280)) */
   color?: string;
   /** Container className override */
   className?: string;
@@ -34,7 +34,7 @@ interface SocialLinksProps {
 
 export default function SocialLinks({
   size = 16,
-  color = "#6b7280",
+  color = "var(--color-gray-500, #6b7280)",
   className,
   variant = "inline",
 }: SocialLinksProps) {

@@ -418,7 +418,7 @@ export default function LearnPortal() {
                   className="w-full h-full object-cover"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-foundation via-[#0F3D3E]/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foundation via-[var(--brand-foundation, #0F3D3E)]/70 to-transparent" />
               </div>
               {/* Content overlay */}
               <div className="absolute bottom-0 left-0 right-0 z-10">
@@ -784,7 +784,7 @@ export default function LearnPortal() {
                   icon={Layers}
                   value={course.modules.length}
                   label={isEn ? "Modules" : "Modules"}
-                  color="#0F3D3E"
+                  color="var(--brand-foundation, #0F3D3E)"
                 />
                 <StatCard
                   icon={BookOpen}

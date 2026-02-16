@@ -217,8 +217,8 @@ export default function BalanceSheetReport() {
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" tick={{ fontSize: 11 }} stroke="#9ca3af" />
-                    <YAxis tick={{ fontSize: 11 }} stroke="#9ca3af" tickFormatter={fmtShort} />
+                    <XAxis dataKey="month" tick={{ fontSize: 11 }} stroke="var(--color-gray-400, #9ca3af)" />
+                    <YAxis tick={{ fontSize: 11 }} stroke="var(--color-gray-400, #9ca3af)" tickFormatter={fmtShort} />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend wrapperStyle={{ fontSize: 12 }} />
                     <Area type="monotone" dataKey="assets" name="Assets" stroke="#0077C5" fill="#0077C5" fillOpacity={0.15} strokeWidth={2} />

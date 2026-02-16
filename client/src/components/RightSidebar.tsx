@@ -47,7 +47,7 @@ export default function RightSidebar() {
             onClick={() => toast("Feature coming soon")}
             className="w-full rounded-xl font-semibold text-sm text-white border-0 transition-all duration-300 hover:shadow-md active:scale-[0.97]"
             style={{
-              background: "linear-gradient(135deg, #1B1464, #2D2580)",
+              background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))",
               boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)",
             }}
           >
@@ -109,7 +109,7 @@ export default function RightSidebar() {
                   {teacher.name}
                 </p>
                 <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
-                  <Star className="w-3 h-3" style={{ fill: "#D4AF37", color: "#D4AF37" }} />
+                  <Star className="w-3 h-3" style={{ fill: "var(--brand-gold, #D4AF37)", color: "var(--brand-gold, #D4AF37)" }} />
                   <span className="font-semibold" >{teacher.rating.toFixed(1)}</span>
                   <span className="mx-0.5 opacity-40">&middot;</span>
                   <span>{teacher.lessons.toLocaleString()} lessons</span>
@@ -134,7 +134,7 @@ export default function RightSidebar() {
           onClick={() => toast("Feature coming soon")}
           className="flex items-center gap-2 mt-3 text-sm font-semibold w-full justify-center py-2 rounded-xl transition-all duration-200"
           style={{
-            color: "#1B1464",
+            color: "var(--brand-obsidian, #1B1464)",
             background: "rgba(27, 20, 100, 0.03)",
           }}
           onMouseEnter={(e) => {
@@ -164,7 +164,7 @@ export default function RightSidebar() {
         {/* Subtle accent line at top */}
         <div
           className="absolute top-0 left-4 right-4 h-[2px] rounded-full"
-          style={{ background: "linear-gradient(90deg, #D4AF37, #E8CB6A, transparent)" }}
+          style={{ background: "linear-gradient(90deg, var(--brand-gold, #D4AF37), #E8CB6A, transparent)" }}
         />
 
         <div className="flex items-center justify-between mb-4 mt-1">
@@ -209,7 +209,7 @@ export default function RightSidebar() {
           onClick={() => toast("Feature coming soon")}
           className="flex items-center gap-1.5 text-sm font-semibold mt-3 w-full justify-center py-2 rounded-xl transition-all duration-200"
           style={{
-            color: "#D4AF37",
+            color: "var(--brand-gold, #D4AF37)",
             background: "rgba(212, 175, 55, 0.04)",
           }}
           onMouseEnter={(e) => {
@@ -239,7 +239,7 @@ export default function RightSidebar() {
         {/* Decorative gradient orb */}
         <div
           className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-20 blur-2xl"
-          style={{ background: "linear-gradient(135deg, #D4AF37, #1B1464)" }}
+          style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), var(--brand-obsidian, #1B1464))" }}
         />
 
         <div
@@ -263,7 +263,7 @@ export default function RightSidebar() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-xs font-bold px-5 py-2.5 rounded-xl text-white transition-all duration-300 hover:shadow-md active:scale-[0.97]"
           style={{
-            background: "linear-gradient(135deg, #D4AF37, #E8CB6A)",
+            background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)",
             boxShadow: "0 2px 8px rgba(212, 175, 55, 0.2)",
           }}
         >

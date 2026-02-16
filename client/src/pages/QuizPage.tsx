@@ -216,7 +216,7 @@ export default function QuizPage() {
             <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center mb-4" style={{
               background: "linear-gradient(135deg, rgba(0,128,144,0.1), rgba(245,166,35,0.1))",
             }}>
-              <span className="material-icons text-4xl" style={{ color: "#008090" }}>quiz</span>
+              <span className="material-icons text-4xl" style={{ color: "var(--brand-teal, #008090)" }}>quiz</span>
             </div>
 
             <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -227,7 +227,7 @@ export default function QuizPage() {
 
             {isDbQuiz && (
               <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium" style={{
-                background: "rgba(0,128,144,0.08)", color: "#008090",
+                background: "rgba(0,128,144,0.08)", color: "var(--brand-teal, #008090)",
               }}>
                 <span className="material-icons" >verified</span>
                 Official Assessment
@@ -236,7 +236,7 @@ export default function QuizPage() {
 
             {alreadyPassed && (
               <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full" style={{
-                background: "rgba(245,166,35,0.1)", color: "#f5a623",
+                background: "rgba(245,166,35,0.1)", color: "var(--semantic-warning, #f5a623)",
               }}>
                 <span className="material-icons" >check_circle</span>
                 <span className="text-sm font-semibold">Already Passed</span>
@@ -273,7 +273,7 @@ export default function QuizPage() {
 
             <button onClick={() => setStarted(true)}
               className="mt-6 px-8 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:shadow-lg"
-              style={{ background: "linear-gradient(135deg, #008090, #00a0b0)" }}>
+              style={{ background: "linear-gradient(135deg, var(--brand-teal, #008090), #00a0b0)" }}>
               <span className="material-icons align-middle mr-1" >play_arrow</span>
               {alreadyPassed ? "Retake Quiz" : "Start Quiz"}
             </button>
@@ -300,10 +300,10 @@ export default function QuizPage() {
             border: passed ? "1px solid rgba(245,166,35,0.3)" : "1px solid rgba(231,76,60,0.2)",
           }}>
             <div className="w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-4" style={{
-              background: passed ? "linear-gradient(135deg, #f5a623, #ffd700)" : "rgba(231,76,60,0.1)",
+              background: passed ? "linear-gradient(135deg, var(--semantic-warning, #f5a623), #ffd700)" : "rgba(231,76,60,0.1)",
               boxShadow: passed ? "0 8px 32px rgba(245,166,35,0.3)" : "none",
             }}>
-              <span className="material-icons text-4xl" style={{ color: passed ? "white" : "#e74c3c" }}>
+              <span className="material-icons text-4xl" style={{ color: passed ? "white" : "var(--semantic-danger, #e74c3c)" }}>
                 {passed ? "emoji_events" : "replay"}
               </span>
             </div>
@@ -311,7 +311,7 @@ export default function QuizPage() {
             <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
               {passed ? "Congratulations!" : "Keep Going!"}
             </h2>
-            <p className="text-5xl font-bold mt-3" style={{ color: passed ? "#f5a623" : "#e74c3c" }}>{pct}%</p>
+            <p className="text-5xl font-bold mt-3" style={{ color: passed ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }}>{pct}%</p>
             
             {!isDbQuiz && (
               <p className="text-sm text-gray-500 mt-2">{clientScore}/{questions.length} correct answers</p>
@@ -346,7 +346,7 @@ export default function QuizPage() {
                   }}>
                     <span className="material-icons flex-shrink-0 mt-0.5" style={{
                       fontSize: "14px",
-                      color: answers[i] === q.correct ? "#008090" : "#e74c3c",
+                      color: answers[i] === q.correct ? "var(--brand-teal, #008090)" : "var(--semantic-danger, #e74c3c)",
                     }}>
                       {answers[i] === q.correct ? "check_circle" : "cancel"}
                     </span>
@@ -383,7 +383,7 @@ export default function QuizPage() {
             <div className="mt-6 flex items-center justify-center gap-3">
               <Link href={`/programs/${programId}/${pathId}`}
                 className="px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all" style={{
-                  borderColor: "rgba(0,128,144,0.2)", color: "#008090",
+                  borderColor: "rgba(0,128,144,0.2)", color: "var(--brand-teal, #008090)",
                 }}>
                 Back to Path
               </Link>
@@ -417,7 +417,7 @@ export default function QuizPage() {
           {questions.map((_, i) => (
             <div key={i} className="flex-1 h-2 rounded-full transition-all duration-500" style={{
               background: i < currentQ
-                ? (isDbQuiz ? "#008090" : (answers[i] === questions[i].correct ? "#008090" : "#e74c3c"))
+                ? (isDbQuiz ? "var(--brand-teal, #008090)" : (answers[i] === questions[i].correct ? "var(--brand-teal, #008090)" : "var(--semantic-danger, #e74c3c)"))
                 : i === currentQ ? "rgba(0,128,144,0.3)" : "rgba(0,128,144,0.06)",
             }} />
           ))}
@@ -431,13 +431,13 @@ export default function QuizPage() {
         }}>
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{
-              background: "rgba(0,128,144,0.1)", color: "#008090",
+              background: "rgba(0,128,144,0.1)", color: "var(--brand-teal, #008090)",
             }}>
               Question {currentQ + 1}
             </span>
             {isDbQuiz && (
               <span className="text-xs px-2 py-0.5 rounded-full" style={{
-                background: "rgba(139,92,246,0.1)", color: "#8b5cf6",
+                background: "rgba(139,92,246,0.1)", color: "var(--color-violet-500, #8b5cf6)",
               }}>
                 Official
               </span>
@@ -462,17 +462,17 @@ export default function QuizPage() {
                       : (showFeedback && isSelected && isDbQuiz) ? "rgba(0,128,144,0.08)"
                       : showFeedback && isCorrect ? "rgba(0,128,144,0.06)" : "rgba(255,255,255,0.9)",
                     border: showCorrectness
-                      ? isCorrect ? "1px solid #008090" : "1px solid #e74c3c"
-                      : (showFeedback && isSelected && isDbQuiz) ? "1px solid #008090"
+                      ? isCorrect ? "1px solid var(--brand-teal, #008090)" : "1px solid var(--semantic-danger, #e74c3c)"
+                      : (showFeedback && isSelected && isDbQuiz) ? "1px solid var(--brand-teal, #008090)"
                       : showFeedback && isCorrect ? "1px solid rgba(0,128,144,0.3)" : "1px solid rgba(0,128,144,0.08)",
                     transform: isSelected ? "scale(0.99)" : "scale(1)",
                   }}>
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold" style={{
                     background: showCorrectness
-                      ? isCorrect ? "#008090" : "#e74c3c"
-                      : (showFeedback && isSelected && isDbQuiz) ? "#008090"
+                      ? isCorrect ? "var(--brand-teal, #008090)" : "var(--semantic-danger, #e74c3c)"
+                      : (showFeedback && isSelected && isDbQuiz) ? "var(--brand-teal, #008090)"
                       : "rgba(0,128,144,0.08)",
-                    color: (showCorrectness || (showFeedback && isSelected && isDbQuiz)) ? "white" : "#008090",
+                    color: (showCorrectness || (showFeedback && isSelected && isDbQuiz)) ? "white" : "var(--brand-teal, #008090)",
                   }}>
                     {showCorrectness ? (
                       <span className="material-icons" >{isCorrect ? "check" : "close"}</span>

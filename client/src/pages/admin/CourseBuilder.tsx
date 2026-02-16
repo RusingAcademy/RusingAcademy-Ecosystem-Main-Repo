@@ -78,10 +78,10 @@ function ProgressRing({ value, size = 32, strokeWidth = 3, className = "" }: { v
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (value / 100) * circumference;
-  const color = value === 100 ? "var(--semantic-success, #10b981)" : value >= 50 ? "var(--semantic-warning, #f59e0b)" : "var(--semantic-danger, #ef4444)";
+  const color = value === 100 ? "var(--semantic-success, var(--semantic-success, #10b981))" : value >= 50 ? "var(--semantic-warning, var(--semantic-warning, #f59e0b))" : "var(--semantic-danger, var(--semantic-danger, #ef4444))";
   return (
     <svg width={size} height={size} className={className}>
-      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#e5e7eb" strokeWidth={strokeWidth} />
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="var(--color-gray-200, #e5e7eb)" strokeWidth={strokeWidth} />
       <circle
         cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={strokeWidth}
         strokeDasharray={circumference} strokeDashoffset={offset}

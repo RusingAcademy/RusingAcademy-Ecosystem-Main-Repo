@@ -48,9 +48,9 @@ function ChallengeCard({ challenge, onSelect }: { challenge: DisplayChallenge; o
   const TypeIcon = typeIcons[challenge.type] || Zap;
 
   const statusConfig = {
-    active: { bg: "rgba(34, 197, 94, 0.08)", border: "rgba(34, 197, 94, 0.15)", text: "#16a34a", label: "Active" },
-    upcoming: { bg: "rgba(59, 130, 246, 0.08)", border: "rgba(59, 130, 246, 0.15)", text: "#2563eb", label: "Upcoming" },
-    completed: { bg: "rgba(212, 175, 55, 0.08)", border: "rgba(212, 175, 55, 0.15)", text: "#D4AF37", label: "Completed" },
+    active: { bg: "rgba(34, 197, 94, 0.08)", border: "rgba(34, 197, 94, 0.15)", text: "var(--semantic-success, #16a34a)", label: "Active" },
+    upcoming: { bg: "rgba(59, 130, 246, 0.08)", border: "rgba(59, 130, 246, 0.15)", text: "var(--color-blue-600, #2563eb)", label: "Upcoming" },
+    completed: { bg: "rgba(212, 175, 55, 0.08)", border: "rgba(212, 175, 55, 0.15)", text: "var(--brand-gold, #D4AF37)", label: "Completed" },
   };
   const status = statusConfig[challenge.status];
 
@@ -67,7 +67,7 @@ function ChallengeCard({ challenge, onSelect }: { challenge: DisplayChallenge; o
       }}
       onClick={() => onSelect(challenge)}
     >
-      <div className="relative h-36 overflow-hidden flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1B1464, #2D2580, rgba(212, 175, 55, 0.4))" }}>
+      <div className="relative h-36 overflow-hidden flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580), rgba(212, 175, 55, 0.4))" }}>
         {challenge.imageUrl ? (
           <img src={challenge.imageUrl} alt={challenge.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         ) : (
@@ -102,12 +102,12 @@ function ChallengeCard({ challenge, onSelect }: { challenge: DisplayChallenge; o
           <div>
             <div className="flex items-center justify-between text-[11px] mb-1.5">
               <span className="text-muted-foreground font-medium">{challenge.currentProgress}/{challenge.targetCount}</span>
-              <span className="font-bold" style={{ color: progress === 100 ? "#D4AF37" : "#1B1464" }}>{progress}%</span>
+              <span className="font-bold" style={{ color: progress === 100 ? "var(--brand-gold, #D4AF37)" : "var(--brand-obsidian, #1B1464)" }}>{progress}%</span>
             </div>
             <div className="h-2 rounded-full overflow-hidden" >
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: progress === 100 ? "linear-gradient(90deg, #D4AF37, #E8CB6A)" : "linear-gradient(90deg, #1B1464, #2D2580)" }}
+                style={{ background: progress === 100 ? "linear-gradient(90deg, var(--brand-gold, #D4AF37), #E8CB6A)" : "linear-gradient(90deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" }}
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -142,7 +142,7 @@ function ChallengeDetail({ challenge, onBack }: { challenge: DisplayChallenge; o
       </button>
 
       <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: "var(--shadow-card)" }}>
-        <div className="w-full h-48 flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1B1464, #2D2580, rgba(212, 175, 55, 0.4))" }}>
+        <div className="w-full h-48 flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580), rgba(212, 175, 55, 0.4))" }}>
           {challenge.imageUrl ? (
             <img src={challenge.imageUrl} alt={challenge.name} className="w-full h-full object-cover" />
           ) : (
@@ -171,18 +171,18 @@ function ChallengeDetail({ challenge, onBack }: { challenge: DisplayChallenge; o
             boxShadow: "var(--shadow-card)",
           }}
         >
-          <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-10 blur-2xl" style={{ background: "linear-gradient(135deg, #D4AF37, #1B1464)" }} />
+          <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-10 blur-2xl" style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), var(--brand-obsidian, #1B1464))" }} />
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <Flame className="w-5 h-5"  />
               <span className="font-bold text-foreground">Your Progress</span>
             </div>
-            <span className="text-lg font-bold" style={{ color: progress === 100 ? "#D4AF37" : "#1B1464" }}>{progress}%</span>
+            <span className="text-lg font-bold" style={{ color: progress === 100 ? "var(--brand-gold, #D4AF37)" : "var(--brand-obsidian, #1B1464)" }}>{progress}%</span>
           </div>
           <div className="h-3 rounded-full overflow-hidden mb-2" >
             <motion.div
               className="h-full rounded-full"
-              style={{ background: progress === 100 ? "linear-gradient(90deg, #D4AF37, #E8CB6A)" : "linear-gradient(90deg, #1B1464, #2D2580)" }}
+              style={{ background: progress === 100 ? "linear-gradient(90deg, var(--brand-gold, #D4AF37), #E8CB6A)" : "linear-gradient(90deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" }}
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -199,7 +199,7 @@ function ChallengeDetail({ challenge, onBack }: { challenge: DisplayChallenge; o
           border: "1px solid rgba(212, 175, 55, 0.1)",
         }}
       >
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #D4AF37, #E8CB6A)" }}>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)" }}>
           <Trophy className="w-5 h-5 text-white" />
         </div>
         <div>
@@ -225,7 +225,7 @@ function ChallengeDetail({ challenge, onBack }: { challenge: DisplayChallenge; o
           }}
           disabled={joinMutation.isPending}
           className="w-full rounded-xl font-bold text-white border-0 transition-all duration-300 hover:shadow-md active:scale-[0.97]"
-          style={{ background: "linear-gradient(135deg, #1B1464, #2D2580)", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
+          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
         >
           {joinMutation.isPending ? "Joining..." : "Join This Challenge"}
         </Button>
@@ -304,7 +304,7 @@ export default function Challenges() {
             onClick={() => setFilter(f)}
             className="px-3.5 py-1.5 rounded-lg text-[11px] font-semibold transition-all duration-200"
             style={{
-              background: filter === f ? "linear-gradient(135deg, #1B1464, #2D2580)" : "transparent",
+              background: filter === f ? "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" : "transparent",
               color: filter === f ? "white" : undefined,
               boxShadow: filter === f ? "0 2px 6px rgba(27, 20, 100, 0.15)" : "none",
             }}

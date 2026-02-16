@@ -41,17 +41,17 @@ interface LeadTag {
 }
 
 const PRESET_COLORS = [
-  "#ef4444", // red
+  "var(--semantic-danger, #ef4444)", // red
   "#f97316", // orange
-  "#f59e0b", // amber
+  "var(--semantic-warning, #f59e0b)", // amber
   "#84cc16", // lime
-  "#22c55e", // green
+  "var(--semantic-success, #22c55e)", // green
   "#14b8a6", // teal
   "#06b6d4", // cyan
-  "#3b82f6", // blue
+  "var(--color-blue-500, #3b82f6)", // blue
   "#6366f1", // indigo
-  "#8b5cf6", // violet
-  "#a855f7", // purple
+  "var(--color-violet-500, #8b5cf6)", // violet
+  "var(--color-purple-500, #a855f7)", // purple
   "#ec4899", // pink
 ];
 

@@ -99,10 +99,10 @@ export function GovernmentComplianceReport() {
           {/* Platform Overview */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { label: isFr ? "Utilisateurs" : "Total Users", value: report.overview.totalUsers, icon: Users, color: "#2563eb" },
-              { label: isFr ? "Cours" : "Courses", value: report.overview.totalCourses, icon: BookOpen, color: "#059669" },
-              { label: isFr ? "Parcours" : "Learning Paths", value: report.overview.totalLearningPaths, icon: Target, color: "#7c3aed" },
-              { label: isFr ? "Certificats" : "Certificates", value: report.certificates.totalIssued, icon: Award, color: "#dc2626" },
+              { label: isFr ? "Utilisateurs" : "Total Users", value: report.overview.totalUsers, icon: Users, color: "var(--color-blue-600, #2563eb)" },
+              { label: isFr ? "Cours" : "Courses", value: report.overview.totalCourses, icon: BookOpen, color: "var(--semantic-success, #059669)" },
+              { label: isFr ? "Parcours" : "Learning Paths", value: report.overview.totalLearningPaths, icon: Target, color: "var(--color-violet-600, #7c3aed)" },
+              { label: isFr ? "Certificats" : "Certificates", value: report.certificates.totalIssued, icon: Award, color: "var(--semantic-danger, #dc2626)" },
             ].map((s) => (
               <Card key={s.label}>
                 <CardContent className="p-4">
@@ -188,7 +188,7 @@ export function GovernmentComplianceReport() {
                       className="h-full rounded-full transition-all"
                       style={{
                         width: `${sleMetrics.readinessRate}%`,
-                        backgroundColor: sleMetrics.readinessRate >= 70 ? "#059669" : sleMetrics.readinessRate >= 40 ? "#d97706" : "#dc2626",
+                        backgroundColor: sleMetrics.readinessRate >= 70 ? "var(--semantic-success, #059669)" : sleMetrics.readinessRate >= 40 ? "var(--semantic-warning, #d97706)" : "var(--semantic-danger, #dc2626)",
                       }}
                     />
                   </div>

@@ -38,7 +38,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
     bronze: { bg: "#cd7f32", light: "#f5e6d3" },
     silver: { bg: "#c0c0c0", light: "#f0f0f0" },
     gold: { bg: "#fbbf24", light: "#fef3c7" },
-    platinum: { bg: "#e5e7eb", light: "#f9fafb" },
+    platinum: { bg: "var(--color-gray-200, #e5e7eb)", light: "var(--color-gray-50, #f9fafb)" },
   };
 
   if (loading) {

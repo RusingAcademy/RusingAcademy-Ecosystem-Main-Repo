@@ -118,7 +118,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
               max={duration || 100}
               value={currentTime}
               onChange={handleSeek}
-              className="flex-1 h-1 accent-[#008090] cursor-pointer"
+              className="flex-1 h-1 accent-[var(--brand-teal, #008090)] cursor-pointer"
             />
             <span className="text-[10px] text-gray-500 w-8">{formatTime(duration)}</span>
           </div>
@@ -163,7 +163,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
                 max={duration || 100}
                 value={currentTime}
                 onChange={handleSeek}
-                className="w-full h-1.5 accent-[#008090] cursor-pointer"
+                className="w-full h-1.5 accent-[var(--brand-teal, #008090)] cursor-pointer"
               />
               <div className="flex justify-between mt-1">
                 <span className="text-[10px] text-gray-500">{formatTime(currentTime)}</span>
