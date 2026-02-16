@@ -1,0 +1,222 @@
+/**
+ * Micro-Animations & Scroll Transitions — Wave 18
+ * 
+ * Subtle, professional animations that enhance UX
+ * without overwhelming the user. All animations
+ * respect prefers-reduced-motion.
+ */
+
+/* ============================================
+   SCROLL-TRIGGERED ANIMATIONS
+   ============================================ */
+
+/* Elements with these classes start invisible and animate in
+   when they enter the viewport via IntersectionObserver */
+
+.scroll-fade-in {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.scroll-fade-in.is-visible {
+  opacity: 1;
+}
+
+.scroll-slide-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-slide-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-slide-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-slide-right {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.scroll-scale-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger delays for lists */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+.stagger-6 { transition-delay: 0.3s; }
+.stagger-7 { transition-delay: 0.35s; }
+.stagger-8 { transition-delay: 0.4s; }
+
+/* ============================================
+   HOVER MICRO-INTERACTIONS
+   ============================================ */
+
+/* Subtle lift on hover */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Gentle scale on hover */
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Glow on hover */
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 128, 144, 0.15);
+}
+
+/* Brand gold glow */
+.hover-glow-gold:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* ============================================
+   PARALLAX UTILITIES
+   ============================================ */
+
+.parallax-slow {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.parallax-orb {
+  will-change: transform;
+  animation: float-slow 20s ease-in-out infinite;
+}
+
+/* ============================================
+   PAGE TRANSITION
+   ============================================ */
+
+.page-enter {
+  animation: fade-in-page 0.3s ease-out;
+}
+
+@keyframes fade-in-page {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   LOADING SHIMMER
+   ============================================ */
+
+.shimmer-line {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-sweep 1.5s ease-in-out infinite;
+  border-radius: 0.25rem;
+}
+
+.dark .shimmer-line {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   REDUCED MOTION SAFETY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade-in,
+  .scroll-slide-up,
+  .scroll-slide-left,
+  .scroll-slide-right,
+  .scroll-scale-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hover-lift:hover,
+  .hover-scale:hover {
+    transform: none;
+  }
+
+  .parallax-orb {
+    animation: none;
+  }
+
+  .page-enter {
+    animation: none;
+  }
+
+  .shimmer-line {
+    animation: none;
+  }
+
+  .stagger-1,
+  .stagger-2,
+  .stagger-3,
+  .stagger-4,
+  .stagger-5,
+  .stagger-6,
+  .stagger-7,
+  .stagger-8 {
+    transition-delay: 0s;
+  }
+}

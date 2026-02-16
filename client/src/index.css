@@ -13,6 +13,7 @@
 @import "./styles/accessibility.css";
 @import "./styles/admin-tokens.css";
 @import "./styles/forms.css";
+@import "./styles/micro-animations.css";
 
 @custom-variant dark (&:is(.dark *));
 
