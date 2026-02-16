@@ -47,7 +47,7 @@ export default function AdminPeerReview() {
 
         <TabsContent value="overview" className="space-y-4 mt-4">
           <Card><CardHeader><CardTitle className="text-base">Review Activity (Last 30 Days)</CardTitle></CardHeader><CardContent>
-            <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
               <div><p className="text-2xl font-bold">89</p><p className="text-xs text-muted-foreground">Reviews Completed</p></div>
               <div><p className="text-2xl font-bold">2.3 days</p><p className="text-xs text-muted-foreground">Avg Turnaround</p></div>
               <div><p className="text-2xl font-bold">2,225 XP</p><p className="text-xs text-muted-foreground">XP Awarded</p></div>

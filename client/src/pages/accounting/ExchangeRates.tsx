@@ -87,7 +87,7 @@ export default function ExchangeRates() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
         <div className="qb-card">
           <div className="flex items-center gap-2 mb-2">
             <Globe size={16} className="text-sky-600" />
@@ -161,7 +161,7 @@ export default function ExchangeRates() {
       {showCreate && (
         <div className="qb-card mb-6 border-2 border-green-600">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Add Exchange Rate</h3>
-          <div className="grid grid-cols-4 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">From</label>
               <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" value={fromCurrency} onChange={e => setFromCurrency(e.target.value)}>

@@ -226,7 +226,7 @@ export default function StripeTesting() {
                   </Button>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                 <div className="bg-muted/30 rounded p-3">
                   <p className="text-muted-foreground">Expiry</p>
                   <p className="font-medium">{instructions?.expiry ?? "Any future date"}</p>

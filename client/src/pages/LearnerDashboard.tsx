@@ -582,7 +582,7 @@ export default function LearnerDashboard() {
                       sublabel={`${displayCurrentLevel} → ${displayTargetLevel}`}
                     />
                   </div>
-                  <div className="flex-1 grid grid-cols-3 gap-4 w-full">
+                  <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50">
                       <p className="text-3xl font-bold bg-gradient-to-r from-teal-800 to-obsidian dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
                       <p className="text-sm text-black dark:text-cyan-300 mt-1">{l.currentLevel}</p>
@@ -949,7 +949,7 @@ export default function LearnerDashboard() {
                     ))}
                   </div>
                   {/* Quick Stats */}
-                  <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-white/10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-4 pt-4 border-t border-white/10">
                     <div className="text-center">
                       <p className="text-lg font-bold text-foreground">{recentPracticeSessions.length}</p>
                       <p className="text-[10px] text-muted-foreground">{language === "fr" ? "Sessions" : "Sessions"}</p>

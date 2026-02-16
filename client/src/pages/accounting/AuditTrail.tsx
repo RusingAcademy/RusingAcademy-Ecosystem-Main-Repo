@@ -154,7 +154,7 @@ export default function AuditTrail() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-5 gap-3 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 mb-6">
         <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
           <div className="text-2xl font-bold text-gray-800">{stats.total}</div>
           <div className="text-xs text-gray-500">Total Events</div>

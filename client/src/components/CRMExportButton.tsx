@@ -252,7 +252,7 @@ export default function CRMExportButton() {
               {/* Format */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-slate-300 mb-2">{t.format}</label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                   <button
                     onClick={() => setFilters(prev => ({ ...prev, format: "csv" }))}
                     className={`px-4 py-2 rounded-lg text-sm transition-colors ${

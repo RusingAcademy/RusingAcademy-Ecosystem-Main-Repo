@@ -79,7 +79,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
                 How confident do you feel about <span className="font-medium">"{lessonTitle}"</span>?
               </p>
               
-              <div className="grid grid-cols-5 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2">
                 {CONFIDENCE_LEVELS.map((level) => (
                   <button
                     key={level.level}

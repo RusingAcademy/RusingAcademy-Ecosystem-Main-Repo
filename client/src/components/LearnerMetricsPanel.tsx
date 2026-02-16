@@ -161,7 +161,7 @@ export function LearnerMetricsPanel({ language, className }: LearnerMetricsPanel
 
           {/* Secondary stats row */}
           {cohort && (
-            <div className="grid grid-cols-3 gap-3 mt-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
               <div className="flex items-center gap-2 p-2 rounded-md bg-muted/50">
                 <Zap className="h-4 w-4 text-yellow-500" />
                 <div>

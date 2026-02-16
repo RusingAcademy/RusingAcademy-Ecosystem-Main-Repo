@@ -231,7 +231,7 @@ export default function Coaches() {
                         <Globe className="w-4 h-4 text-teal-600" />
                         {language === 'fr' ? 'Langue' : 'Language'}
                       </Label>
-                      <div className="grid grid-cols-3 gap-2 mt-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-2">
                         {['all', 'french', 'english'].map((lang) => (
                           <button
                             key={lang}

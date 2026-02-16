@@ -687,7 +687,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
         <div className="p-4 space-y-5">
           {/* Content Tab */}
           <Tabs defaultValue="content" className="w-full">
-            <TabsList className="w-full grid grid-cols-3 h-8">
+            <TabsList className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 h-8">
               <TabsTrigger value="content" className="text-xs h-7"><Pencil className="h-3 w-3 mr-1" /> Content</TabsTrigger>
               <TabsTrigger value="style" className="text-xs h-7"><Palette className="h-3 w-3 mr-1" /> Style</TabsTrigger>
               <TabsTrigger value="advanced" className="text-xs h-7"><Settings className="h-3 w-3 mr-1" /> Advanced</TabsTrigger>
@@ -831,7 +831,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
                   {(localData.content.items || []).map((item: any, i: number) => (
                     <div key={i} className="p-3 bg-gray-50 rounded-lg space-y-2 relative">
                       <button onClick={() => removeContentItem("items", i)} className="absolute top-2 right-2 p-1 rounded hover:bg-red-100"><Trash2 className="h-3 w-3 text-red-400" /></button>
-                      <div className="grid grid-cols-3 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                         <Input value={item.icon || ""} onChange={(e) => updateContentItem("items", i, "icon", e.target.value)} placeholder="Icon" className="text-sm" />
                         <Input value={item.value || ""} onChange={(e) => updateContentItem("items", i, "value", e.target.value)} placeholder="Value" className="text-sm" />
                         <Input value={item.label || ""} onChange={(e) => updateContentItem("items", i, "label", e.target.value)} placeholder="Label" className="text-sm" />

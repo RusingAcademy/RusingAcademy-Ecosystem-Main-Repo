@@ -105,7 +105,7 @@ export default function BlogAdmin() {
           <DialogHeader><DialogTitle>Create Blog Post</DialogTitle></DialogHeader>
           <div className="space-y-4">
             <div><Label>Title</Label><Input value={title} onChange={e => setTitle(e.target.value)} placeholder="Your blog post title" /></div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div><Label>Category</Label><Select value={category} onValueChange={setCategory}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="general">General</SelectItem><SelectItem value="sle">SLE Preparation</SelectItem><SelectItem value="tips">Language Tips</SelectItem><SelectItem value="career">Career Development</SelectItem><SelectItem value="bilingualism">Bilingualism</SelectItem></SelectContent></Select></div>
               <div><Label>Language</Label><Select value={language} onValueChange={setLanguage}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="en">English</SelectItem><SelectItem value="fr">Français</SelectItem><SelectItem value="both">Bilingual</SelectItem></SelectContent></Select></div>
               <div><Label>Status</Label><Select value={status} onValueChange={setStatus}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="draft">Draft</SelectItem><SelectItem value="published">Published</SelectItem></SelectContent></Select></div>

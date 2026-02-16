@@ -40,7 +40,7 @@ export default function PaymentsAdmin() {
         <Card className="border-l-4 border-l-purple-500"><CardContent className="p-4"><p className="text-xs font-medium text-muted-foreground uppercase">Total Revenue</p><p className="text-2xl font-bold mt-1">${(kpi.totalRevenue / 100).toLocaleString()}</p><div className="flex items-center gap-1 mt-1"><DollarSign className="h-3 w-3 text-purple-600" /><span className="text-xs text-purple-600">All time</span></div></CardContent></Card>
         <Card className="border-l-4 border-l-amber-500"><CardContent className="p-4"><p className="text-xs font-medium text-muted-foreground uppercase">Active Subs</p><p className="text-2xl font-bold mt-1">{kpi.subscriptionCount}</p><div className="flex items-center gap-1 mt-1"><Users className="h-3 w-3 text-amber-600" /><span className="text-xs text-amber-600">Paying customers</span></div></CardContent></Card>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <Card><CardContent className="p-4"><p className="text-xs text-muted-foreground uppercase">Invoices</p><p className="text-lg font-bold">{kpi.invoiceCount}</p></CardContent></Card>
         <Card><CardContent className="p-4"><p className="text-xs text-muted-foreground uppercase">Enrollments</p><p className="text-lg font-bold">{kpi.enrollmentCount}</p></CardContent></Card>
         <Card><CardContent className="p-4"><p className="text-xs text-muted-foreground uppercase">Churn Rate</p><p className="text-lg font-bold">{((stripeKpi as any)?.churnRate ?? 0).toFixed(1)}%</p></CardContent></Card>

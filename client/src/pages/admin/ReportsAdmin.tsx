@@ -51,7 +51,7 @@ export default function ReportsAdmin() {
           <div className="p-3 bg-purple-50 rounded-lg"><p className="text-xl font-bold text-purple-700">${(revenue?.arr ?? 0).toLocaleString()}</p><p className="text-xs text-purple-600">ARR</p></div>
           <div className="p-3 bg-amber-50 rounded-lg"><p className="text-xl font-bold text-amber-700">${(revenue?.ltv ?? 0).toFixed(0)}</p><p className="text-xs text-amber-600">Avg LTV</p></div>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           <div className="text-center p-2 border rounded"><p className="text-lg font-semibold">{revenue?.totalTransactions ?? 0}</p><p className="text-xs text-muted-foreground">Transactions</p></div>
           <div className="text-center p-2 border rounded"><p className="text-lg font-semibold">{revenue?.refundCount ?? 0}</p><p className="text-xs text-muted-foreground">Refunds</p></div>
           <div className="text-center p-2 border rounded"><p className="text-lg font-semibold">${(revenue?.refundAmount ?? 0).toLocaleString()}</p><p className="text-xs text-muted-foreground">Refund Amount</p></div>

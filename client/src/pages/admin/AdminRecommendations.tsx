@@ -51,7 +51,7 @@ export default function AdminRecommendations() {
 
         <TabsContent value="overview" className="space-y-4 mt-4">
           <Card><CardHeader><CardTitle className="text-base">Recommendation Effectiveness</CardTitle></CardHeader><CardContent>
-            <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
               <div><p className="text-2xl font-bold text-green-500">+23%</p><p className="text-xs text-muted-foreground">Engagement Lift</p></div>
               <div><p className="text-2xl font-bold text-blue-500">+15%</p><p className="text-xs text-muted-foreground">Completion Rate</p></div>
               <div><p className="text-2xl font-bold text-purple-500">+8%</p><p className="text-xs text-muted-foreground">Retention Improvement</p></div>

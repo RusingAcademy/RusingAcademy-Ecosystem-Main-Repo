@@ -67,7 +67,7 @@ export default function Achievements() {
               <span className="material-icons text-3xl">emoji_events</span>
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-white/10 rounded-xl p-3 text-center">
               <div className="text-2xl font-bold">{totalXp.toLocaleString()}</div>
               <div className="text-[10px] text-white/60 uppercase tracking-wider">XP {isFr ? "total" : "Total"}</div>
@@ -260,7 +260,7 @@ export default function Achievements() {
                 <span className="material-icons text-violet-500 text-base">trending_up</span>
                 {isFr ? "Aperçu de la progression" : "Progress Overview"}
               </h3>
-              <div className="grid grid-cols-3 gap-4 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
                 <div className="bg-gray-50 rounded-xl p-4">
                   <div className="text-2xl font-bold text-teal-700">{earnedBadgeIds.size}/{ALL_BADGES.length}</div>
                   <div className="text-[10px] text-gray-400 mt-1">{isFr ? "Badges obtenus" : "Badges Earned"}</div>

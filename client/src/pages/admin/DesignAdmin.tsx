@@ -97,7 +97,7 @@ export default function DesignAdmin() {
         <TabsContent value="layout" className="mt-4">
           <Card><CardContent className="p-6 space-y-4">
             <h3 className="font-medium">Layout Settings</h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[{ name: "Full Width", icon: Monitor, active: true },{ name: "Boxed", icon: Layout, active: false },{ name: "Sidebar", icon: Layers, active: false }].map(l => (
                 <button key={l.name} className={`p-4 border rounded-lg text-center transition-colors ${l.active ? "ring-2 ring-primary" : "hover:bg-accent"}`} onClick={() => toast("Layout switching coming soon")}>
                   <l.icon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" /><p className="text-sm font-medium">{l.name}</p>

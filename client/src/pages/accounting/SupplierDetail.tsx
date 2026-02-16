@@ -114,7 +114,7 @@ export default function SupplierDetail() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div className="col-span-2">
           <div className="qb-card">
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Supplier Information</h3>

@@ -497,7 +497,7 @@ export default function Flashcards() {
                 {isFlipped && (
                   <div className="mt-6 space-y-3" role="group" aria-label={t("flashcards.howWell")}>
                     <p className="text-xs text-gray-500 text-center font-medium">{t("flashcards.howWell")}</p>
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
                       <button onClick={() => handleReview(1)} className="py-3 rounded-xl text-xs font-semibold bg-red-50 text-red-600 hover:bg-red-100 transition-all focus:outline-none focus:ring-2 focus:ring-red-300">
                         <span className="block">1</span>
                         {t("flashcards.again")}
@@ -535,7 +535,7 @@ export default function Flashcards() {
               <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("flashcards.sessionSummary")}</h2>
               <p className="text-sm text-gray-500 mb-8">{t("flashcards.greatSession")}</p>
 
-              <div className="grid grid-cols-3 gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
                 <div className="bg-white rounded-xl border border-gray-100 p-5">
                   <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-blue-50 flex items-center justify-center">
                     <span className="material-icons text-lg text-blue-600" aria-hidden="true">content_copy</span>

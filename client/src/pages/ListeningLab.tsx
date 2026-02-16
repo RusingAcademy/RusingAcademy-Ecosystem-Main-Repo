@@ -214,7 +214,7 @@ export default function ListeningLab() {
 
           {/* Stats Bar */}
           {stats && (
-            <div className="grid grid-cols-3 gap-4 mb-8" role="region" aria-label={t("listening.stats")}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" role="region" aria-label={t("listening.stats")}>
               {[
                 { label: t("listening.totalExercises"), value: stats.totalExercises ?? 0, icon: "headphones", color: "#008090" },
                 { label: t("listening.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },

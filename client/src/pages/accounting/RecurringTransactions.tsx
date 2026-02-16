@@ -182,7 +182,7 @@ export default function RecurringTransactions() {
       {activeTab === "templates" && (
         <>
           {/* Summary Cards */}
-          <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="qb-card"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Total Templates</div><div className="text-2xl font-bold text-gray-800">{(recurring || []).length}</div></div>
             <div className="qb-card"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Active</div><div className="text-2xl font-bold text-green-600">{(recurring || []).filter((r: any) => r.isActive).length}</div></div>
             <div className="qb-card"><div className="text-xs font-bold text-gray-500 uppercase mb-1">Paused</div><div className="text-2xl font-bold text-gray-500">{(recurring || []).filter((r: any) => !r.isActive).length}</div></div>
@@ -385,7 +385,7 @@ export default function RecurringTransactions() {
                 </Select>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div>
                 <label className="text-sm font-medium text-gray-700 mb-1 block">Interval</label>
                 <input type="number" min={1} value={form.intervalCount} onChange={e => setForm({ ...form, intervalCount: parseInt(e.target.value) || 1 })}
@@ -407,7 +407,7 @@ export default function RecurringTransactions() {
             {form.transactionType === "Invoice" && (
               <div className="border-t border-gray-200 pt-4 space-y-4">
                 <h3 className="text-sm font-semibold text-gray-700 flex items-center gap-2"><FileText size={14} /> Invoice Template Details</h3>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                   <div>
                     <label className="text-sm font-medium text-gray-700 mb-1 block">Customer</label>
                     <select value={form.customerId} onChange={e => setForm({ ...form, customerId: e.target.value })}

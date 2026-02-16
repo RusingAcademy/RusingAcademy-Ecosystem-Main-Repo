@@ -110,7 +110,7 @@ export default function ContentPipeline() {
 
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-grid">
+        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:w-auto lg:inline-grid">
           <TabsTrigger value="overview" className="gap-1.5">
             <BarChart3 className="h-4 w-4" /> Overview
           </TabsTrigger>

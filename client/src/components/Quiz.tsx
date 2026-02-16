@@ -187,7 +187,7 @@ export function Quiz({
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
             <div className="bg-green-50 rounded-xl p-3 text-center">
               <p className="text-2xl font-bold text-green-600">
                 {Object.values(answers).filter((a, i) => a === questions[i]?.correctAnswer).length}

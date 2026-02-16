@@ -331,7 +331,7 @@ function CriteriaRadar({ criteria, l }: { criteria: PhaseResult["criteria"]; l: 
   ];
 
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2">
       {items.map((item) => {
         const pct = item.value;
         const color = pct >= 75 ? "emerald" : pct >= 50 ? "amber" : "red";
@@ -915,7 +915,7 @@ export default function SLEExamSimulation() {
           </motion.div>
 
           {/* Overall Score */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="grid grid-cols-3 gap-4 mb-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <div className="p-6 rounded-xl bg-foundation/50 border border-teal-800 text-center">
               <p className="text-sm text-cyan-300 mb-2">{l.overallLevel}</p>
               <p className={cn(

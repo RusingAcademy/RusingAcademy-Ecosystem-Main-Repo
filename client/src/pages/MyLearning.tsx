@@ -302,7 +302,7 @@ export default function MyLearning() {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3 mb-6">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-6">
             <TabsTrigger value="overview" className="gap-2">
               <BookOpen className="h-4 w-4" />
               <span className="hidden sm:inline">{isEn ? "My Courses" : "Mes cours"}</span>

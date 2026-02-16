@@ -85,7 +85,7 @@ export default function Customers() {
 
       {/* Summary Bar */}
       <div className="qb-card mb-6">
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           <div>
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Total Customers</h3>
             <div className="text-2xl font-bold text-gray-900">{allCustomers.length}</div>

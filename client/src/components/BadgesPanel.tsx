@@ -579,7 +579,7 @@ export default function BadgesPanel({
                 
                 {/* Recent earned badges */}
                 <TooltipProvider delayDuration={200}>
-                  <div className="grid grid-cols-6 gap-1.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-1.5">
                     {recentEarned.map((badge: any, i: number) => (
                       <Tooltip key={badge.id || i}>
                         <TooltipTrigger asChild>

@@ -59,7 +59,7 @@ function CohortCard({ cohort, lang }: { cohort: any; lang: string }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center">
         <div className="bg-gray-50 rounded-lg py-2">
           <p className="text-sm font-bold text-gray-900">{enrolled}/{capacity}</p>
           <p className="text-[9px] text-gray-500">{lang === "fr" ? "Inscrits" : "Enrolled"}</p>

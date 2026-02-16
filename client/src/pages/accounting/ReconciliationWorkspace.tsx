@@ -120,7 +120,7 @@ export default function ReconciliationWorkspace() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
         <div className="qb-card text-center">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Cleared</p>
           <p className="text-xl font-bold text-green-600">{fmt(clearedTotal)}</p>

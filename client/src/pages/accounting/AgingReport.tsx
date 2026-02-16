@@ -97,7 +97,7 @@ export default function AgingReport() {
       </div>
 
       {/* Summary Buckets */}
-      <div className="grid grid-cols-6 gap-3 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 mb-6">
         {buckets.map((b) => (
           <div key={b} className="bg-white rounded-lg border border-gray-200 p-4 text-center">
             <p className="text-xs text-gray-500 mb-1">{b === "Current" ? "Current" : `${b} days`}</p>

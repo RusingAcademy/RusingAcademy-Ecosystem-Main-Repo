@@ -89,7 +89,7 @@ export default function AdminExecutiveSummary() {
 
         {/* Tabbed Detail Sections */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             <TabsTrigger value="overview">Revenue Trend</TabsTrigger>
             <TabsTrigger value="performers">Top Performers</TabsTrigger>
             <TabsTrigger value="activity">Recent Activity</TabsTrigger>

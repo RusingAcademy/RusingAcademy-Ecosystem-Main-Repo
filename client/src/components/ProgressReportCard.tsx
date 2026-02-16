@@ -139,7 +139,7 @@ export function ProgressReportCard() {
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Stats Grid */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           <div className="bg-muted/50 rounded-lg p-3 text-center">
             <div className="flex items-center justify-center gap-1 text-2xl font-bold text-primary">
               <Users className="h-5 w-5" />
@@ -205,7 +205,7 @@ export function ProgressReportCard() {
             <p className="text-sm font-medium mb-3">
               {language === "fr" ? "Détail des sessions AI" : "AI Session Breakdown"}
             </p>
-            <div className="grid grid-cols-3 gap-2 text-center text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center text-xs">
               <div className="p-2 bg-muted/30 rounded">
                 <p className="font-semibold">{progressData.aiSessionBreakdown.practice}</p>
                 <p className="text-muted-foreground">

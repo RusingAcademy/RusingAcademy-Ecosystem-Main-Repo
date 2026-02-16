@@ -228,7 +228,7 @@ export default function UserProfile() {
             </CardHeader>
             <CardContent>
               {badgesLoading ? (
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                   {[...Array(4)].map((_, i) => (
                     <Skeleton key={i} className="w-16 h-16 rounded-full" />
                   ))}
@@ -236,7 +236,7 @@ export default function UserProfile() {
               ) : badges?.length === 0 ? (
                 <p className="text-center text-muted-foreground py-8">No badges earned yet</p>
               ) : (
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                   {badges?.slice(0, 8).map((badge, i) => (
                     <div key={i} className="text-center">
                       <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white text-2xl mb-2">

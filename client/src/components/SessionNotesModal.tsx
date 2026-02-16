@@ -216,7 +216,7 @@ export default function SessionNotesModal({
               <GraduationCap className="h-4 w-4" />
               {t.sleAssessment}
             </Label>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label className="text-sm text-muted-foreground">{t.oral}</Label>
                 <Select value={oralLevel} onValueChange={setOralLevel}>

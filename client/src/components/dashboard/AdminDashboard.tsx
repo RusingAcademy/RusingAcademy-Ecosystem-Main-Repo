@@ -305,7 +305,7 @@ export default function AdminDashboardContent({ user }: AdminDashboardProps) {
                     </TabsList>
 
                     <TabsContent value="overview">
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="p-4 rounded-lg bg-muted/50 text-center">
                           <p className="text-3xl font-bold text-green-600">{orgStats?.levelBBB || 0}</p>
                           <p className="text-sm text-muted-foreground">BBB Level</p>

@@ -202,7 +202,7 @@ export function LearnerBadges({ language = "en", compact = false }: LearnerBadge
             <p className="text-muted-foreground">{t.noBadges}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
             {badges.map((badge) => {
               const Icon = BADGE_ICONS[badge.badgeType || "default"] || BADGE_ICONS.default;
               const colorClass = BADGE_COLORS["milestone"];

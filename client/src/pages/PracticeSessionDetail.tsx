@@ -236,7 +236,7 @@ Score moyen: ${stats.avgScore}/100
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
                 <div className="flex flex-col items-center gap-1">
                   <Clock className="w-5 h-5 text-blue-400" />
                   <p className="text-lg font-semibold text-white">{formatDuration(stats.duration)}</p>

@@ -271,7 +271,7 @@ export default function AICompanionPanel() {
             </div>
           ) : (
             <div className="space-y-1">
-              <div className="grid grid-cols-6 gap-4 px-3 py-2 text-xs font-medium text-muted-foreground uppercase tracking-wider border-b">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 px-3 py-2 text-xs font-medium text-muted-foreground uppercase tracking-wider border-b">
                 <span className="col-span-2">User</span>
                 <span>Sessions</span>
                 <span>Avg Score</span>
@@ -280,7 +280,7 @@ export default function AICompanionPanel() {
               </div>
               {(aiUsersQuery.data as any[]).map((user: any) => (
                 <button key={user.userId} onClick={() => { setSelectedUserId(user.userId); setActiveTab("drilldown"); }}
-                  className="w-full grid grid-cols-6 gap-4 px-3 py-3 text-sm text-left rounded-lg hover:bg-muted/50 transition-colors items-center">
+                  className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 px-3 py-3 text-sm text-left rounded-lg hover:bg-muted/50 transition-colors items-center">
                   <div className="col-span-2 min-w-0">
                     <p className="font-medium truncate">{user.name || user.email || "Unknown"}</p>
                     <p className="text-xs text-muted-foreground truncate">{user.email}</p>
@@ -361,11 +361,11 @@ export default function AICompanionPanel() {
               <p className="text-sm text-muted-foreground text-center py-4">No sessions recorded.</p>
             ) : (
               <div className="space-y-1 max-h-[400px] overflow-y-auto">
-                <div className="grid grid-cols-6 gap-3 px-2 py-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider border-b sticky top-0 bg-background">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 px-2 py-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider border-b sticky top-0 bg-background">
                   <span>Type</span><span>Level</span><span>Score</span><span>Duration</span><span className="col-span-2">Date</span>
                 </div>
                 {sessions.map((s: any) => (
-                  <div key={s.id} className="grid grid-cols-6 gap-3 px-2 py-2 text-sm rounded hover:bg-muted/30">
+                  <div key={s.id} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 px-2 py-2 text-sm rounded hover:bg-muted/30">
                     <span><Badge variant="outline" className="text-xs">{s.practiceType || "—"}</Badge></span>
                     <span><Badge className="text-xs">{s.targetLevel || "—"}</Badge></span>
                     <span>
@@ -528,7 +528,7 @@ export default function AICompanionPanel() {
       <Card>
         <CardHeader><CardTitle>Oral Simulation Tracking</CardTitle><CardDescription>Monitor oral practice sessions, pronunciation scores, and SLE oral exam preparation.</CardDescription></CardHeader>
         <CardContent>
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
             <div className="p-4 bg-muted/50 rounded-lg text-center"><Mic className="h-6 w-6 mx-auto mb-2 text-violet-600" /><p className="text-xl font-bold">{overview?.totalAiSessions ?? 0}</p><p className="text-xs text-muted-foreground">Oral Sessions</p></div>
             <div className="p-4 bg-muted/50 rounded-lg text-center"><Target className="h-6 w-6 mx-auto mb-2 text-amber-600" /><p className="text-xl font-bold">{overview?.avgScore ?? 0}%</p><p className="text-xs text-muted-foreground">Avg Oral Score</p></div>
             <div className="p-4 bg-muted/50 rounded-lg text-center"><Users className="h-6 w-6 mx-auto mb-2 text-blue-600" /><p className="text-xl font-bold">{(topUsersQuery.data as any[] || []).length}</p><p className="text-xs text-muted-foreground">Active Speakers</p></div>

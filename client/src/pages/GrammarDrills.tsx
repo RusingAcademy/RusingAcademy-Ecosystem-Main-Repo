@@ -218,7 +218,7 @@ export default function GrammarDrillsPage() {
 
           {/* Stats */}
           {stats && (
-            <div className="grid grid-cols-3 gap-4 mb-8" role="region" aria-label={t("grammar.stats")}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" role="region" aria-label={t("grammar.stats")}>
               {[
                 { label: t("grammar.drills"), value: stats.totalDrills ?? 0, icon: "assignment", color: "#008090" },
                 { label: t("grammar.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },

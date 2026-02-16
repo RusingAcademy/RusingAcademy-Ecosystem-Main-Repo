@@ -82,7 +82,7 @@ export default function PeerReview() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
               <span className="material-icons text-2xl mb-1 text-amber-500">pending</span>
               <div className="text-xl font-bold text-gray-900">{pendingReviews?.length ?? 0}</div>
@@ -255,7 +255,7 @@ export default function PeerReview() {
                       {review.overallScore}%
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-3 mb-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-3">
                     {[
                       { label: "Grammar", value: review.grammarScore, color: "#008090" },
                       { label: "Vocabulary", value: review.vocabularyScore, color: "#8b5cf6" },

@@ -520,7 +520,7 @@ export function SLEWrittenExamScreen({
           </div>
 
           {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 text-center">
               <CheckCircle className="w-5 h-5 mx-auto mb-1 text-emerald-400" />
               <div className="text-lg font-bold text-emerald-300">{results.correctAnswers}</div>
