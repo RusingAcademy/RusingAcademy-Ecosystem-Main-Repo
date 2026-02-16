@@ -5352,7 +5352,7 @@ export const appRouter = router({
       }),
     
     // Update course (inline editing)
-    updateCourse: protectedProcedure
+    updateCourseInline: protectedProcedure
       .input(z.object({
         id: z.number(),
         title: z.string().optional(),
@@ -5406,7 +5406,7 @@ export const appRouter = router({
       }),
     
     // Update lesson (inline editing)
-    updateLesson: protectedProcedure
+    updateLessonInline: protectedProcedure
       .input(z.object({
         id: z.number(),
         title: z.string().optional(),
@@ -5994,7 +5994,6 @@ export const appRouter = router({
       }),
     
     // Update a course
-    // @ts-ignore - duplicate property handled at runtime
     updateCourse: protectedProcedure
       .input(z.object({
         courseId: z.number(),
@@ -6225,7 +6224,6 @@ export const appRouter = router({
       }),
     
     // Update a lesson
-    // @ts-ignore - duplicate property handled at runtime
     updateLesson: protectedProcedure
       .input(z.object({
         lessonId: z.number(),
@@ -6374,7 +6372,6 @@ export const appRouter = router({
         return { success: true, lessonId: newLesson.id };
       }),
     
-    // @ts-ignore - duplicate property handled at runtime
     createLesson: protectedProcedure
       .input(z.object({
         moduleId: z.number(),

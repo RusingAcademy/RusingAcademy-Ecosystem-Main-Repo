@@ -3,7 +3,7 @@
  * daily review configuration, and study groups.
  * Sprint F4: Wire admin pages to real backend data.
  */
-import { router, protectedProcedure } from "../trpc";
+import { router, protectedProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";

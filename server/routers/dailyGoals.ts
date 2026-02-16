@@ -3,7 +3,7 @@
  * Bridges flashcard/vocabulary reviews with the gamification streak system.
  * Provides daily goal tracking, streak info, and review completion rewards.
  */
-import { router, protectedProcedure } from "../trpc";
+import { router, protectedProcedure } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { eq, and, sql, desc, gte } from "drizzle-orm";

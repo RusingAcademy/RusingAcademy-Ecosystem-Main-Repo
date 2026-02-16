@@ -4,7 +4,7 @@
  * Uses in-memory data stores with database-ready architecture
  */
 import { z } from "zod";
-import { router, protectedProcedure } from "../trpc";
+import { router, protectedProcedure } from "../_core/trpc";
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // IN-MEMORY DATA STORES (database-ready — swap with Drizzle when tables exist)

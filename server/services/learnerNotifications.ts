@@ -6,7 +6,7 @@
  * Uses the existing `notifications` table and `createNotification` function.
  */
 import { createNotification } from "../db";
-import { createLogger } from "../_core/logger";
+import { createLogger } from "../logger";
 
 const log = createLogger("learner-notifications");
 
