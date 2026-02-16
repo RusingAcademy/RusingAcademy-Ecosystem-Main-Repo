@@ -1,0 +1,391 @@
+/* ============================================
+   SECTION & LAYOUT SYSTEM — RusingAcademy Ecosystem
+   ============================================
+   Version: 5.0.0 (Wave 5)
+   
+   Section Spacing Scale (4px base):
+   - xs: py-8 (32px)   — sub-sections, dividers
+   - sm: py-12 (48px)  — compact sections
+   - md: py-16 (64px)  — standard sections (DEFAULT)
+   - lg: py-20 (80px)  — hero sub-sections
+   - xl: py-24 (96px)  — major sections
+   - 2xl: py-28 (112px) — hero sections
+   
+   Container Width: max-w-7xl (1280px) for main content
+   Horizontal Padding: px-4 sm:px-6 lg:px-8
+   
+   Alternating Backgrounds:
+   - White (#FFFFFF)
+   - Surface (#FEFEF8)
+   - Sand (#F5F1D6)
+   - Foundation Soft (#E7F2F2)
+   - Obsidian (#062B2B) for dark sections
+   ============================================ */
+
+/* === SECTION BASE === */
+@layer components {
+  /* Standard section with consistent vertical rhythm */
+  .eco-section {
+    padding-top: 4rem;     /* py-16 */
+    padding-bottom: 4rem;
+    padding-left: 1rem;    /* px-4 */
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .eco-section {
+      padding-left: 1.5rem;  /* sm:px-6 */
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .eco-section {
+      padding-left: 2rem;    /* lg:px-8 */
+      padding-right: 2rem;
+    }
+  }
+
+  /* Section size variants */
+  .eco-section-xs {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .eco-section-sm {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .eco-section-lg {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  .eco-section-xl {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  .eco-section-2xl {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* === SECTION BACKGROUNDS === */
+@layer components {
+  .eco-bg-white {
+    background-color: #ffffff;
+  }
+  .eco-bg-surface {
+    background-color: var(--surface, #FEFEF8);
+  }
+  .eco-bg-sand {
+    background-color: var(--sand, #F5F1D6);
+  }
+  .eco-bg-foundation-soft {
+    background-color: var(--brand-foundation-soft, #E7F2F2);
+  }
+  .eco-bg-dark {
+    background-color: var(--obsidian, #062B2B);
+    color: #ffffff;
+  }
+  .eco-bg-gradient-teal {
+    background: linear-gradient(135deg, var(--brand-foundation, #0F3D3E) 0%, var(--obsidian, #062B2B) 100%);
+    color: #ffffff;
+  }
+  .eco-bg-gradient-warm {
+    background: linear-gradient(135deg, #FFF8F0 0%, var(--surface, #FEFEF8) 100%);
+  }
+}
+
+/* === CONTAINER === */
+@layer components {
+  /* Standard content container */
+  .eco-container {
+    width: 100%;
+    max-width: 80rem;  /* max-w-7xl = 1280px */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .eco-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .eco-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Narrow container for text-heavy content */
+  .eco-container-narrow {
+    width: 100%;
+    max-width: 48rem;  /* max-w-3xl = 768px */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .eco-container-narrow {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  /* Wide container for dashboards */
+  .eco-container-wide {
+    width: 100%;
+    max-width: 96rem;  /* max-w-8xl = 1536px */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .eco-container-wide {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .eco-container-wide {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}
+
+/* === SECTION HEADER (Title + Subtitle) === */
+@layer components {
+  .eco-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .eco-section-header .eco-section-title {
+    font-family: var(--font-display, 'Merriweather', serif);
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 1.2;
+    color: var(--text, #1A1A1A);
+    margin-bottom: 0.75rem;
+  }
+  @media (min-width: 768px) {
+    .eco-section-header .eco-section-title {
+      font-size: 2.25rem;
+    }
+  }
+  .eco-section-header .eco-section-subtitle {
+    font-family: var(--font-ui, 'Inter', sans-serif);
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--muted, #6B7280);
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Left-aligned variant */
+  .eco-section-header-left {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  .eco-section-header-left .eco-section-title {
+    font-family: var(--font-display, 'Merriweather', serif);
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--text, #1A1A1A);
+    margin-bottom: 0.5rem;
+  }
+  .eco-section-header-left .eco-section-subtitle {
+    font-family: var(--font-ui, 'Inter', sans-serif);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted, #6B7280);
+  }
+
+  /* Dark section header */
+  .eco-bg-dark .eco-section-header .eco-section-title,
+  .eco-bg-gradient-teal .eco-section-header .eco-section-title {
+    color: #ffffff;
+  }
+  .eco-bg-dark .eco-section-header .eco-section-subtitle,
+  .eco-bg-gradient-teal .eco-section-header .eco-section-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* === PAGE LAYOUT === */
+@layer components {
+  /* Standard page wrapper with header offset */
+  .eco-page {
+    min-height: 100vh;
+    padding-top: 4rem;  /* Header height offset */
+  }
+
+  /* Dashboard layout */
+  .eco-dashboard {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    .eco-dashboard {
+      grid-template-columns: 280px 1fr;
+    }
+  }
+
+  /* Two-column layout */
+  .eco-two-col {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .eco-two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Three-column layout */
+  .eco-three-col {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .eco-three-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .eco-three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+/* === SPACING UTILITIES === */
+@layer components {
+  /* Consistent vertical spacing between sections */
+  .eco-space-section > * + * {
+    margin-top: 4rem;
+  }
+  .eco-space-content > * + * {
+    margin-top: 2rem;
+  }
+  .eco-space-compact > * + * {
+    margin-top: 1rem;
+  }
+}
+
+/* === DIVIDER === */
+@layer components {
+  .eco-divider {
+    height: 1px;
+    background-color: var(--sand, #E8E4CC);
+    border: none;
+    margin: 2rem 0;
+  }
+  .eco-divider-lg {
+    margin: 3rem 0;
+  }
+  .dark .eco-divider {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* === EMPTY STATE === */
+@layer components {
+  .eco-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  .eco-empty-state .empty-icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--muted, #6B7280);
+    opacity: 0.5;
+    margin-bottom: 1rem;
+  }
+  .eco-empty-state .empty-title {
+    font-family: var(--font-display, 'Merriweather', serif);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--text, #1A1A1A);
+    margin-bottom: 0.5rem;
+  }
+  .eco-empty-state .empty-description {
+    font-size: 0.875rem;
+    color: var(--muted, #6B7280);
+    max-width: 24rem;
+    line-height: 1.5;
+  }
+}
+
+/* === LOADING STATE === */
+@layer components {
+  .eco-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    gap: 1rem;
+  }
+  .eco-loading-spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 3px solid var(--sand, #E8E4CC);
+    border-top-color: var(--brand-foundation, #0F3D3E);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .eco-loading-text {
+    font-size: 0.875rem;
+    color: var(--muted, #6B7280);
+  }
+}
+
+/* === ERROR STATE === */
+@layer components {
+  .eco-error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  .eco-error-state .error-icon {
+    width: 3rem;
+    height: 3rem;
+    color: #dc2626;
+    margin-bottom: 1rem;
+  }
+  .eco-error-state .error-title {
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--text, #1A1A1A);
+    margin-bottom: 0.5rem;
+  }
+  .eco-error-state .error-description {
+    font-size: 0.875rem;
+    color: var(--muted, #6B7280);
+    max-width: 24rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+}
