@@ -66,6 +66,7 @@ USER rusingacademy
 # Environment defaults
 ENV NODE_ENV=production
 ENV PORT=5000
+ENV NODE_OPTIONS="--max-old-space-size=512"
 
 # Expose the application port
 EXPOSE 5000
