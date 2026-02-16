@@ -37,7 +37,7 @@ export default function RevenueDashboard() {
         </button>
 
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: "#1B1464" }}>
+          <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
             {t.revenue.title}
           </h1>
           <p className="text-muted-foreground">{t.revenue.subtitle}</p>
@@ -99,7 +99,7 @@ export default function RevenueDashboard() {
               <Card className="border">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <DollarSign className="w-5 h-5" style={{ color: "#D4AF37" }} />
+                    <DollarSign className="w-5 h-5"  />
                     Subscription Tiers
                   </CardTitle>
                 </CardHeader>
@@ -128,7 +128,7 @@ export default function RevenueDashboard() {
               <Card className="border">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5" style={{ color: "#1B1464" }} />
+                    <TrendingUp className="w-5 h-5"  />
                     Referral Program
                   </CardTitle>
                 </CardHeader>
@@ -159,7 +159,7 @@ export default function RevenueDashboard() {
               <Card className="border">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <BookOpen className="w-5 h-5" style={{ color: "#D4AF37" }} />
+                    <BookOpen className="w-5 h-5"  />
                     Top Courses
                   </CardTitle>
                 </CardHeader>
@@ -186,7 +186,7 @@ export default function RevenueDashboard() {
               <Card className="border">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5" style={{ color: "#1B1464" }} />
+                    <BarChart3 className="w-5 h-5"  />
                     Top Threads
                   </CardTitle>
                 </CardHeader>

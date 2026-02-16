@@ -55,7 +55,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.language}</p>
                 <p className="text-xs text-gray-500">{ui.languageSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-[#2563eb]/20 focus:border-blue-600">
+              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
                 <option value="en">English</option>
                 <option value="fr">Français</option>
               </select>
@@ -65,7 +65,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.timezone}</p>
                 <p className="text-xs text-gray-500">{ui.timezoneSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-[#2563eb]/20 focus:border-blue-600">
+              <select className="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
                 <option value="America/Toronto">Eastern Time (ET)</option>
                 <option value="America/Winnipeg">Central Time (CT)</option>
                 <option value="America/Edmonton">Mountain Time (MT)</option>

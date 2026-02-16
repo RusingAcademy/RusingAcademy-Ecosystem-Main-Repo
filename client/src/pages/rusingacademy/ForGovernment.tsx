@@ -243,7 +243,7 @@ export default function ForGovernment() {
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-teal-400 hover:bg-teal-500 text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#2DD4BF]/20 rounded-full"
+                  className="bg-teal-400 hover:bg-teal-500 text-white gap-2 px-8 h-12 text-base shadow-lg shadow-teal-400/20 rounded-full"
                   onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {t.cta}
@@ -519,36 +519,36 @@ export default function ForGovernment() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.department} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.learners} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-teal-400 focus:ring-[#2DD4BF]"
+                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
                       rows={4}
                     />
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="w-full bg-teal-400 hover:bg-teal-500 text-white h-12 rounded-full shadow-lg shadow-[#2DD4BF]/20"
+                      className="w-full bg-teal-400 hover:bg-teal-500 text-white h-12 rounded-full shadow-lg shadow-teal-400/20"
                     >
                       {t.formFields.submit}
                       <Send className="w-5 h-5 ml-2" />

@@ -81,7 +81,7 @@ function CourseCard({ course, onSelect }: { course: DisplayCourse; onSelect: (c:
           <span className="flex items-center gap-1"><BookOpen className="w-3.5 h-3.5" />{course.totalLessons || 0} lessons</span>
           <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5" />{(course.totalEnrollments || 0).toLocaleString()}</span>
           {course.averageRating && (
-            <span className="flex items-center gap-1 font-bold" style={{ color: "#D4AF37" }}><Star className="w-3.5 h-3.5 fill-current" />{course.averageRating}</span>
+            <span className="flex items-center gap-1 font-bold" ><Star className="w-3.5 h-3.5 fill-current" />{course.averageRating}</span>
           )}
         </div>
         {course.progress > 0 && (
@@ -89,7 +89,7 @@ function CourseCard({ course, onSelect }: { course: DisplayCourse; onSelect: (c:
             <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(212, 175, 55, 0.1)" }}>
               <div className="h-full rounded-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, #D4AF37, #E8CB6A)" }} />
             </div>
-            <span className="text-[11px] font-bold" style={{ color: "#D4AF37" }}>{course.progress}%</span>
+            <span className="text-[11px] font-bold" >{course.progress}%</span>
           </div>
         )}
       </div>
@@ -151,7 +151,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
           </div>
           {course.averageRating && (
             <div className="text-center">
-              <p className="font-bold flex items-center gap-1" style={{ color: "#D4AF37" }}><Star className="w-3.5 h-3.5 fill-current" />{course.averageRating}</p>
+              <p className="font-bold flex items-center gap-1" ><Star className="w-3.5 h-3.5 fill-current" />{course.averageRating}</p>
               <p className="text-[11px] text-muted-foreground">{course.totalReviews} reviews</p>
             </div>
           )}
@@ -165,7 +165,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
         <div className="rounded-xl p-4" style={{ background: "rgba(212, 175, 55, 0.04)", border: "1px solid rgba(212, 175, 55, 0.08)" }}>
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-bold text-foreground">Your Progress</span>
-            <span className="text-sm font-bold" style={{ color: "#D4AF37" }}>{course.progress}%</span>
+            <span className="text-sm font-bold" >{course.progress}%</span>
           </div>
           <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(212, 175, 55, 0.1)" }}>
             <div className="h-full rounded-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, #D4AF37, #E8CB6A)" }} />
@@ -248,8 +248,8 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
           <h3 className="font-bold text-foreground tracking-tight">Course Content</h3>
           {[1, 2, 3].map(i => (
             <div key={i} className="rounded-xl p-4 animate-pulse" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)" }}>
-              <div className="h-4 rounded w-3/4 mb-2" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-              <div className="h-3 rounded w-1/2" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+              <div className="h-4 rounded w-3/4 mb-2"  />
+              <div className="h-3 rounded w-1/2"  />
             </div>
           ))}
         </div>
@@ -322,11 +322,11 @@ export default function Classroom() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[1, 2, 3, 4].map(i => (
               <div key={i} className="rounded-2xl overflow-hidden animate-pulse" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)" }}>
-                <div className="h-40" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+                <div className="h-40"  />
                 <div className="p-4 space-y-2">
-                  <div className="h-4 rounded w-3/4" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-                  <div className="h-3 rounded w-1/2" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-                  <div className="h-3 rounded w-full" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+                  <div className="h-4 rounded w-3/4"  />
+                  <div className="h-3 rounded w-1/2"  />
+                  <div className="h-3 rounded w-full"  />
                 </div>
               </div>
             ))}

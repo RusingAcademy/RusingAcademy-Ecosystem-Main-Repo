@@ -276,7 +276,7 @@ export default function CourseCatalog() {
                       <Link href={`/courses/${course.id}`}>
                         <Button
                           className="w-full rounded-xl font-semibold"
-                          style={{ backgroundColor: "#1B1464" }}
+                          
                         >
                           <Play className="w-4 h-4 mr-2" />
                           {t.coursePlayer.continueLearning}

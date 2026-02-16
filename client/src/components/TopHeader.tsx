@@ -80,8 +80,8 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
             />
           </div>
           <span className="text-base font-extrabold tracking-tight">
-            <span style={{ color: "#1B1464" }}>Rusing</span>
-            <span style={{ color: "#D4AF37" }}>Academy</span>
+            <span >Rusing</span>
+            <span >Academy</span>
           </span>
         </div>
 
@@ -189,7 +189,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
                   background: "linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(232, 203, 106, 0.05))",
                 }}
               >
-                <Plus className="w-5 h-5" style={{ color: "#D4AF37" }} strokeWidth={2.5} />
+                <Plus className="w-5 h-5"  strokeWidth={2.5} />
               </button>
 
               {/* Notifications bell — real-time WebSocket + tRPC */}

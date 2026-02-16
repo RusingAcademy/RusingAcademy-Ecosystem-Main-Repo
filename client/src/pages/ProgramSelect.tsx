@@ -99,14 +99,14 @@ export default function ProgramSelect() {
                     <div className="flex items-center justify-between">
                       <div className="flex gap-1">
                         {["A1", "A2", "B1", "B2", "C1", "C1+"].map((lvl) => (
-                          <span key={lvl} className="text-[9px] px-1.5 py-0.5 rounded-full font-medium text-white" style={{ background: "#008090" }}>
+                          <span key={lvl} className="text-[9px] px-1.5 py-0.5 rounded-full font-medium text-white" >
                             {lvl}
                           </span>
                         ))}
                       </div>
                       <div className="flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all duration-300 text-teal-700">
                         Explore
-                        <span className="material-icons" style={{ fontSize: "18px" }}>arrow_forward</span>
+                        <span className="material-icons" >arrow_forward</span>
                       </div>
                     </div>
                   </div>

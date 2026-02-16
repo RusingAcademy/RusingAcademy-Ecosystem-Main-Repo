@@ -138,7 +138,7 @@ export default function Notes() {
             <button
               onClick={() => { resetForm(); setShowEditor(true); }}
               className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 transition-all hover:shadow-md"
-              style={{ background: "#008090" }}
+              
             >
               <span className="material-icons text-base">add</span>
               New Note
@@ -154,7 +154,7 @@ export default function Notes() {
                 placeholder="Search notes..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
@@ -195,7 +195,7 @@ export default function Notes() {
                     placeholder="Note title..."
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
                   />
 
                   <textarea
@@ -203,7 +203,7 @@ export default function Notes() {
                     value={content}
                     onChange={e => setContent(e.target.value)}
                     rows={10}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700 resize-none font-mono"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700 resize-none font-mono"
                   />
 
                   {/* Tags */}
@@ -225,7 +225,7 @@ export default function Notes() {
                         value={tagInput}
                         onChange={e => setTagInput(e.target.value)}
                         onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); handleAddTag(); } }}
-                        className="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20"
+                        className="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700/20"
                       />
                       <button onClick={handleAddTag} className="px-3 py-2 rounded-lg bg-gray-100 text-gray-600 text-sm hover:bg-gray-200">
                         Add
@@ -240,7 +240,7 @@ export default function Notes() {
                       <button
                         key={c.id}
                         onClick={() => setNoteColor(c.id)}
-                        className={`w-6 h-6 rounded-full border-2 transition-all ${c.bg} ${noteColor === c.id ? "border-teal-700 ring-2 ring-[#008090]/20" : "border-gray-300"}`}
+                        className={`w-6 h-6 rounded-full border-2 transition-all ${c.bg} ${noteColor === c.id ? "border-teal-700 ring-2 ring-teal-700/20" : "border-gray-300"}`}
                         title={c.label}
                       />
                     ))}
@@ -254,7 +254,7 @@ export default function Notes() {
                       onClick={handleSave}
                       disabled={!title.trim() || !content.trim() || createNote.isPending || updateNote.isPending}
                       className="px-5 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50 transition-all hover:shadow-md"
-                      style={{ background: "#008090" }}
+                      
                     >
                       {createNote.isPending || updateNote.isPending ? "Saving..." : editingNote ? "Update" : "Save"}
                     </button>
@@ -279,7 +279,7 @@ export default function Notes() {
               <button
                 onClick={() => { resetForm(); setShowEditor(true); }}
                 className="px-4 py-2 rounded-xl text-sm font-semibold text-white"
-                style={{ background: "#008090" }}
+                
               >
                 Create Note
               </button>

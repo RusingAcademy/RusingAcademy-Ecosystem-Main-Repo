@@ -528,7 +528,7 @@ export default function Pricing() {
                 <div className="absolute inset-0 bg-gradient-to-br from-cta-2/5 to-teal-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative">
-                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-6 shadow-lg shadow-[#C65A1E]/25">
+                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-6 shadow-lg shadow-orange-700/25">
                     <Users className="h-8 w-8 text-white" />
                   </div>
                   
@@ -684,7 +684,7 @@ export default function Pricing() {
                     {/* Referral Bonus */}
                     <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-50/50 border border-orange-100/50 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="h-12 w-12 rounded-xl bg-cta flex items-center justify-center shadow-lg shadow-[#C65A1E]/25">
+                        <div className="h-12 w-12 rounded-xl bg-cta flex items-center justify-center shadow-lg shadow-orange-700/25">
                           <Star className="h-6 w-6 text-white" />
                         </div>
                         <h4 className="font-semibold text-lg">{l.referralBonus}</h4>
@@ -698,7 +698,7 @@ export default function Pricing() {
 
                   <div className="mt-10 text-center">
                     <Link href="/become-a-coach">
-                      <Button size="lg" className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-[#9A3412] text-white shadow-lg shadow-[#C65A1E]/25 px-8">
+                      <Button size="lg" className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-[#9A3412] text-white shadow-lg shadow-orange-700/25 px-8">
                         {l.applyNow}
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>

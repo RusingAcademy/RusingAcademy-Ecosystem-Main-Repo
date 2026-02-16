@@ -32,9 +32,9 @@ export default function Certificates() {
 
         <div className="text-center mb-10">
           <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#D4AF37" + "20" }}>
-            <Award className="w-8 h-8" style={{ color: "#D4AF37" }} />
+            <Award className="w-8 h-8"  />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: "#1B1464" }}>
+          <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
             {t.certificates.title}
           </h1>
           <p className="text-muted-foreground">

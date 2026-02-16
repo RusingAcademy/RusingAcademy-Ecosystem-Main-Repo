@@ -96,7 +96,7 @@ export default function Notifications() {
                   : "bg-white border border-gray-200 text-gray-600 hover:border-teal-700/30"
               }`}
             >
-              <span className="material-icons" style={{ fontSize: "14px" }}>{tab.icon}</span>
+              <span className="material-icons" >{tab.icon}</span>
               {tab.label}
             </button>
           ))}

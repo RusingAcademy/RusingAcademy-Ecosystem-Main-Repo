@@ -140,7 +140,7 @@ export default function Settings() {
                       {isEditing ? (
                         <input
                           type="text"
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                           value={field.value}
                           onChange={(e) => field.setter(e.target.value)}
                         />
@@ -153,7 +153,7 @@ export default function Settings() {
                     <label className="block text-xs text-gray-500 mb-1">Address</label>
                     {isEditing ? (
                       <textarea
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                         rows={2}
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}

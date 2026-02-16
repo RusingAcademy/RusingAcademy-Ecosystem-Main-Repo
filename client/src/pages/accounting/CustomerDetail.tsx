@@ -148,7 +148,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Display Name *</label>
                 {isEditing ? (
-                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800 font-medium">{c?.displayName}</p>
                 )}
@@ -156,7 +156,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Company</label>
                 {isEditing ? (
-                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={company} onChange={(e) => setCompany(e.target.value)} />
+                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={company} onChange={(e) => setCompany(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800">{c?.company || "—"}</p>
                 )}
@@ -164,7 +164,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">First Name</label>
                 {isEditing ? (
-                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800">{c?.firstName || "—"}</p>
                 )}
@@ -172,7 +172,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Last Name</label>
                 {isEditing ? (
-                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                  <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800">{c?.lastName || "—"}</p>
                 )}
@@ -180,7 +180,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Email</label>
                 {isEditing ? (
-                  <input type="email" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <input type="email" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={email} onChange={(e) => setEmail(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800 flex items-center gap-1">{c?.email ? <><Mail size={12} className="text-gray-400" />{c.email}</> : "—"}</p>
                 )}
@@ -188,7 +188,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Phone</label>
                 {isEditing ? (
-                  <input type="tel" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                  <input type="tel" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={phone} onChange={(e) => setPhone(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800 flex items-center gap-1">{c?.phone ? <><Phone size={12} className="text-gray-400" />{c.phone}</> : "—"}</p>
                 )}
@@ -196,7 +196,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Mobile</label>
                 {isEditing ? (
-                  <input type="tel" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+                  <input type="tel" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={mobile} onChange={(e) => setMobile(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800">{c?.mobile || "—"}</p>
                 )}
@@ -204,7 +204,7 @@ export default function CustomerDetail() {
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Website</label>
                 {isEditing ? (
-                  <input type="url" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={website} onChange={(e) => setWebsite(e.target.value)} />
+                  <input type="url" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={website} onChange={(e) => setWebsite(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800 flex items-center gap-1">{c?.website ? <><Globe size={12} className="text-gray-400" />{c.website}</> : "—"}</p>
                 )}
@@ -212,7 +212,7 @@ export default function CustomerDetail() {
               <div className="col-span-2">
                 <label className="block text-xs text-gray-500 mb-1">Billing Address</label>
                 {isEditing ? (
-                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" rows={2} value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)} />
+                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" rows={2} value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800 flex items-start gap-1">{c?.billingAddress ? <><MapPin size={12} className="text-gray-400 mt-0.5" />{c.billingAddress}</> : "—"}</p>
                 )}
@@ -220,7 +220,7 @@ export default function CustomerDetail() {
               <div className="col-span-2">
                 <label className="block text-xs text-gray-500 mb-1">Notes</label>
                 {isEditing ? (
-                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} />
+                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-600">{c?.notes || "—"}</p>
                 )}

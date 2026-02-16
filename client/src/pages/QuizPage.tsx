@@ -204,7 +204,7 @@ export default function QuizPage() {
         <div className="max-w-2xl mx-auto py-10 space-y-6">
           <Link href={`/programs/${programId}/${pathId}`}
             className="text-sm text-gray-500 hover:text-teal-700 flex items-center gap-1">
-            <span className="material-icons" style={{ fontSize: "16px" }}>arrow_back</span>
+            <span className="material-icons" >arrow_back</span>
             Back to Path {path.number}
           </Link>
 
@@ -229,7 +229,7 @@ export default function QuizPage() {
               <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium" style={{
                 background: "rgba(0,128,144,0.08)", color: "#008090",
               }}>
-                <span className="material-icons" style={{ fontSize: "14px" }}>verified</span>
+                <span className="material-icons" >verified</span>
                 Official Assessment
               </div>
             )}
@@ -238,7 +238,7 @@ export default function QuizPage() {
               <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full" style={{
                 background: "rgba(245,166,35,0.1)", color: "#f5a623",
               }}>
-                <span className="material-icons" style={{ fontSize: "16px" }}>check_circle</span>
+                <span className="material-icons" >check_circle</span>
                 <span className="text-sm font-semibold">Already Passed</span>
               </div>
             )}
@@ -274,7 +274,7 @@ export default function QuizPage() {
             <button onClick={() => setStarted(true)}
               className="mt-6 px-8 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:shadow-lg"
               style={{ background: "linear-gradient(135deg, #008090, #00a0b0)" }}>
-              <span className="material-icons align-middle mr-1" style={{ fontSize: "18px" }}>play_arrow</span>
+              <span className="material-icons align-middle mr-1" >play_arrow</span>
               {alreadyPassed ? "Retake Quiz" : "Start Quiz"}
             </button>
           </div>
@@ -324,7 +324,7 @@ export default function QuizPage() {
               <div className="mt-4 space-y-2">
                 <p className="text-sm font-semibold text-teal-700">+200 XP earned!</p>
                 <p className="text-sm text-amber-500 font-medium flex items-center justify-center gap-1">
-                  <span className="material-icons" style={{ fontSize: "16px" }}>workspace_premium</span>
+                  <span className="material-icons" >workspace_premium</span>
                   Module {currentModule.id} Badge Unlocked!
                 </p>
               </div>
@@ -368,7 +368,7 @@ export default function QuizPage() {
                 <h4 className="text-sm font-semibold text-gray-600 mb-3">Questions Reviewed:</h4>
                 {questions.map((q, i) => (
                   <div key={i} className="flex items-start gap-2 text-xs p-2 rounded-lg bg-muted/30">
-                    <span className="material-icons flex-shrink-0 mt-0.5 text-gray-400" style={{ fontSize: "14px" }}>
+                    <span className="material-icons flex-shrink-0 mt-0.5 text-gray-400" >
                       help_outline
                     </span>
                     <div>
@@ -389,7 +389,7 @@ export default function QuizPage() {
               </Link>
               {!passed && (
                 <button onClick={() => { setCurrentQ(0); setAnswers([]); setShowResult(false); setStarted(true); setServerScore(null); }}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: "#008090" }}>
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white" >
                   Retry Quiz
                 </button>
               )}
@@ -475,9 +475,9 @@ export default function QuizPage() {
                     color: (showCorrectness || (showFeedback && isSelected && isDbQuiz)) ? "white" : "#008090",
                   }}>
                     {showCorrectness ? (
-                      <span className="material-icons" style={{ fontSize: "16px" }}>{isCorrect ? "check" : "close"}</span>
+                      <span className="material-icons" >{isCorrect ? "check" : "close"}</span>
                     ) : (showFeedback && isSelected && isDbQuiz) ? (
-                      <span className="material-icons" style={{ fontSize: "16px" }}>check</span>
+                      <span className="material-icons" >check</span>
                     ) : (
                       String.fromCharCode(65 + idx)
                     )}

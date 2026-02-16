@@ -445,7 +445,7 @@ export default function CoursePlayer() {
                   <Button
                     onClick={() => setActiveLessonId(nextLessonNav.id)}
                     className="rounded-xl font-semibold"
-                    style={{ backgroundColor: "#1B1464" }}
+                    
                   >
                     {t.coursePlayer.nextLesson}
                     <ChevronRight className="w-4 h-4 ml-1" />

@@ -132,8 +132,8 @@ export default function MobileNav({ isOpen, onClose, activePage, onPageChange }:
                   <img src={RA_LOGO} alt="RusingAcademy" className="w-8 h-8 rounded-lg object-contain" />
                 </div>
                 <div className="leading-tight">
-                  <span className="text-sm font-extrabold" style={{ color: "#1B1464" }}>Rusing</span>
-                  <span className="text-sm font-extrabold" style={{ color: "#D4AF37" }}>Academy</span>
+                  <span className="text-sm font-extrabold" >Rusing</span>
+                  <span className="text-sm font-extrabold" >Academy</span>
                   <p className="text-[8px] text-muted-foreground font-bold tracking-[0.1em] uppercase">{t.nav.communityHub}</p>
                 </div>
               </div>

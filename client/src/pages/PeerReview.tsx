@@ -185,19 +185,19 @@ export default function PeerReview() {
                       <label className="text-sm font-medium text-gray-700 mb-1 block">Detailed Feedback *</label>
                       <textarea value={feedback} onChange={e => setFeedback(e.target.value)} rows={4}
                         placeholder="Provide specific, constructive feedback on the writing..."
-                        className="w-full p-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30 resize-none" />
+                        className="w-full p-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30 resize-none" />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-700 mb-1 block">Strengths</label>
                       <textarea value={strengths} onChange={e => setStrengths(e.target.value)} rows={2}
                         placeholder="What did the writer do well?"
-                        className="w-full p-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30 resize-none" />
+                        className="w-full p-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30 resize-none" />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-700 mb-1 block">Areas for Improvement</label>
                       <textarea value={improvements} onChange={e => setImprovements(e.target.value)} rows={2}
                         placeholder="What could be improved?"
-                        className="w-full p-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30 resize-none" />
+                        className="w-full p-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30 resize-none" />
                     </div>
                     <div className="flex justify-end">
                       <button onClick={handleSubmitReview}

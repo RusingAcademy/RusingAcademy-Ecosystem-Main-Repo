@@ -216,7 +216,7 @@ export default function ExpenseDetail() {
             {isEditing ? (
               <input
                 type="text"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                 value={payeeName}
                 onChange={(e) => setPayeeName(e.target.value)}
                 placeholder="Payee name..."
@@ -236,7 +236,7 @@ export default function ExpenseDetail() {
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Type</label>
               {isEditing ? (
                 <select
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                   value={expenseType}
                   onChange={(e) => setExpenseType(e.target.value as any)}
                 >
@@ -252,7 +252,7 @@ export default function ExpenseDetail() {
               {isEditing ? (
                 <input
                   type="date"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                   value={expenseDate}
                   onChange={(e) => setExpenseDate(e.target.value)}
                 />
@@ -264,7 +264,7 @@ export default function ExpenseDetail() {
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Payment Method</label>
               {isEditing ? (
                 <select
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 >
@@ -284,7 +284,7 @@ export default function ExpenseDetail() {
               {isEditing ? (
                 <input
                   type="text"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                   value={referenceNumber}
                   onChange={(e) => setReferenceNumber(e.target.value)}
                 />
@@ -414,7 +414,7 @@ export default function ExpenseDetail() {
           <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Memo</label>
           {isEditing ? (
             <textarea
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
               rows={2}
               value={memo}
               onChange={(e) => setMemo(e.target.value)}

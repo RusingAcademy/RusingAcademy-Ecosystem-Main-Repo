@@ -185,7 +185,7 @@ export default function ReadingLab() {
               <p className="text-gray-500 mt-1">{isFr ? "Améliorez votre vitesse de lecture et votre compréhension" : "Improve your reading speed and comprehension"}</p>
             </div>
             <button onClick={() => setShowHistory(!showHistory)}
-              className="px-4 py-2 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 flex items-center gap-2 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+              className="px-4 py-2 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 flex items-center gap-2 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
               aria-label={showHistory ? t("grammar.practice") : t("reading.history")}>
               <span className="material-icons text-base" aria-hidden="true">{showHistory ? "play_circle" : "history"}</span>
               {showHistory ? t("grammar.practice") : t("reading.history")}
@@ -245,7 +245,7 @@ export default function ReadingLab() {
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => { setSelectedLevel(level); setPassageIndex(0); }}
                     role="radio" aria-checked={selectedLevel === level}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-teal-700"}`}>
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-teal-700"}`}>
                     {level}
                   </button>
                 ))}
@@ -253,7 +253,7 @@ export default function ReadingLab() {
               <div className="space-y-4" role="list" aria-label={t("reading.passage")}>
                 {PASSAGES[selectedLevel]?.map((p, i) => (
                   <div key={i} role="listitem"
-                    className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-[#008090]/30"
+                    className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
                     onClick={() => { setPassageIndex(i); startReading(); }}
                     onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setPassageIndex(i); startReading(); }}}
                     tabIndex={0}
@@ -285,7 +285,7 @@ export default function ReadingLab() {
                     {formatTime(elapsedSeconds)}
                   </div>
                   <button onClick={finishReading}
-                    className="px-4 py-2 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                    className="px-4 py-2 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                     {isFr ? "Lecture terminée" : "Done Reading"}
                   </button>
                 </div>
@@ -313,7 +313,7 @@ export default function ReadingLab() {
                       {q.options.map((opt, oi) => (
                         <button key={oi} onClick={() => answerQuestion(qi, oi)}
                           role="radio" aria-checked={answers[qi] === oi}
-                          className={`p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[qi] === oi ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
+                          className={`p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${answers[qi] === oi ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
                           <span className="font-semibold mr-2">{String.fromCharCode(65 + oi)}.</span> {opt}
                         </button>
                       ))}
@@ -328,7 +328,7 @@ export default function ReadingLab() {
               <div className="mt-4 flex justify-end">
                 <button onClick={submitAnswers}
                   disabled={answers.filter(a => a !== undefined).length < (passage?.questions.length ?? 0)}
-                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 disabled:opacity-40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 disabled:opacity-40 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   {t("grammar.submit")}
                 </button>
               </div>
@@ -387,11 +387,11 @@ export default function ReadingLab() {
 
               <div className="flex gap-3 justify-center">
                 <button onClick={() => { setPhase("select"); }}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   {t("grammar.chooseAnother")}
                 </button>
                 <button onClick={startReading}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   {t("grammar.tryAgain")}
                 </button>
               </div>

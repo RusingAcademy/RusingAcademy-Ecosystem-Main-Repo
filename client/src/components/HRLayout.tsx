@@ -27,7 +27,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
       </a>
       <HRSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
       <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white border-b border-gray-200">
-        <button onClick={() => setSidebarCollapsed(false)} className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:ring-offset-2">
+        <button onClick={() => setSidebarCollapsed(false)} className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
           <span className="material-icons text-gray-700">menu</span>
         </button>
         <img src={LOGO_ICON} alt="" className="h-8 ml-3 rounded-lg" />

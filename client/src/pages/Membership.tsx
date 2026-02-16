@@ -91,7 +91,7 @@ export default function Membership() {
         </button>
 
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight mb-3" style={{ color: "#1B1464" }}>
+          <h1 className="text-4xl font-extrabold tracking-tight mb-3" >
             {t.membership.title}
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -234,7 +234,7 @@ export default function Membership() {
 
         {/* FAQ Section */}
         <div className="mt-16 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "#1B1464" }}>
+          <h2 className="text-2xl font-bold text-center mb-8" >
             {t.membership.faq}
           </h2>
           <div className="space-y-4">
@@ -272,7 +272,7 @@ function PaymentHistory() {
 
   return (
     <div className="mt-12 max-w-3xl mx-auto">
-      <h2 className="text-xl font-bold mb-4" style={{ color: "#1B1464" }}>{t.membership.recentPayments}</h2>
+      <h2 className="text-xl font-bold mb-4" >{t.membership.recentPayments}</h2>
       <div className="bg-card rounded-xl border overflow-hidden">
         <table className="w-full text-sm">
           <thead>

@@ -148,7 +148,7 @@ function CelebrationModal({
                 animation: "celebrationSlideUp 0.5s ease-out 0.6s both",
               }}
             >
-              <span className="material-icons text-amber-500" style={{ fontSize: "18px" }}>
+              <span className="material-icons text-amber-500" >
                 auto_awesome
               </span>
               <span className="text-amber-500 font-bold text-sm">+{config.xpReward} XP</span>

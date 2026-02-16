@@ -20,7 +20,7 @@ export default function TopicCarousel() {
         <h3 className="text-xs font-bold uppercase tracking-[0.12em]" style={{ color: "rgba(27, 20, 100, 0.4)" }}>
           Topics for You
         </h3>
-        <button className="text-[11px] font-semibold hover-underline transition-colors" style={{ color: "#1B1464" }}>
+        <button className="text-[11px] font-semibold hover-underline transition-colors" >
           See all
         </button>
       </div>
@@ -36,7 +36,7 @@ export default function TopicCarousel() {
             boxShadow: "0 4px 12px rgba(15, 10, 60, 0.08)",
           }}
         >
-          <ChevronLeft className="w-4 h-4" style={{ color: "#1B1464" }} />
+          <ChevronLeft className="w-4 h-4"  />
         </button>
 
         {/* Scrollable container */}
@@ -86,7 +86,7 @@ export default function TopicCarousel() {
             boxShadow: "0 4px 12px rgba(15, 10, 60, 0.08)",
           }}
         >
-          <ChevronRight className="w-4 h-4" style={{ color: "#1B1464" }} />
+          <ChevronRight className="w-4 h-4"  />
         </button>
       </div>
     </div>

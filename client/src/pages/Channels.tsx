@@ -67,7 +67,7 @@ export default function Channels() {
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: "#1B1464" }}>
+            <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
               {t.channels.title}
             </h1>
             <p className="text-muted-foreground">
@@ -75,7 +75,7 @@ export default function Channels() {
             </p>
           </div>
           {user?.role === "admin" && (
-            <Button className="rounded-xl" style={{ backgroundColor: "#1B1464" }} onClick={() => toast("Channel creation coming soon")}>
+            <Button className="rounded-xl"  onClick={() => toast("Channel creation coming soon")}>
               <Plus className="w-4 h-4 mr-2" /> {t.channels.createChannel}
             </Button>
           )}
@@ -85,7 +85,7 @@ export default function Channels() {
         {myChannels && myChannels.length > 0 && (
           <div className="mb-10">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <MessageSquare className="w-5 h-5" style={{ color: "#D4AF37" }} />
+              <MessageSquare className="w-5 h-5"  />
               {t.channels.myChannels}
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -132,7 +132,7 @@ export default function Channels() {
         {/* All Channels */}
         <div>
           <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-            <Hash className="w-5 h-5" style={{ color: "#1B1464" }} />
+            <Hash className="w-5 h-5"  />
             {t.channels.allChannels}
           </h2>
           {!allChannels || allChannels.length === 0 ? (
@@ -170,7 +170,7 @@ export default function Channels() {
                           <Button
                             size="sm"
                             className="rounded-lg text-xs"
-                            style={{ backgroundColor: "#1B1464" }}
+                            
                             onClick={() => joinMutation.mutate({ channelId: channel.id })}
                             disabled={joinMutation.isPending}
                           >

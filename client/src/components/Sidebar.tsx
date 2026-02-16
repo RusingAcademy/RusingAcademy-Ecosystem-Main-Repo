@@ -112,7 +112,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         {/* Book a Session CTA */}
         <div className="px-4 py-3">
           <button className="w-full py-2.5 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-md hover:brightness-105"
-            style={{ background: "#008090" }}>
+            >
             <span className="material-icons text-base">event</span>
             Book a Session
           </button>

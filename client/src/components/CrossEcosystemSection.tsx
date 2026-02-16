@@ -112,7 +112,7 @@ const learningCapsules = [
     descFr: "Approche centrée sur l'apprenant axée sur la croissance personnelle",
     icon: Heart,
     color: "from-cta to-orange-600",
-    ringColor: "ring-[#C65A1E]/30 hover:ring-[#C65A1E]",
+    ringColor: "ring-cta/30 hover:ring-cta",
     accentColor: "text-orange-300"
   },
   {
@@ -479,7 +479,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
 
     return (
       <div
-        className="relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.4)] ring-1 ring-white/10 hover:ring-[#C65A1E]/50 group bg-gradient-to-b from-teal-900 to-obsidian"
+        className="relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.4)] ring-1 ring-white/10 hover:ring-cta/50 group bg-gradient-to-b from-teal-900 to-obsidian"
         style={{ aspectRatio: '9/16' }}
       >
         {isPlaying ? (
@@ -989,7 +989,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             <Link href="/#videos">
               <motion.button 
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-cta/50 hover:bg-white/10 hover:shadow-xl hover:shadow-[#C65A1E]/10 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-cta/50 hover:bg-white/10 hover:shadow-xl hover:shadow-orange-700/10 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >

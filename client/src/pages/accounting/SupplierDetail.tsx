@@ -134,7 +134,7 @@ export default function SupplierDetail() {
                   {isEditing ? (
                     <input
                       type={field.type || "text"}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                       value={field.value}
                       onChange={(e) => field.setter(e.target.value)}
                     />
@@ -146,7 +146,7 @@ export default function SupplierDetail() {
               <div className="col-span-2">
                 <label className="block text-xs text-gray-500 mb-1">Address</label>
                 {isEditing ? (
-                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" rows={2} value={address} onChange={(e) => setAddress(e.target.value)} />
+                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" rows={2} value={address} onChange={(e) => setAddress(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-800">{s?.address || "—"}</p>
                 )}
@@ -154,7 +154,7 @@ export default function SupplierDetail() {
               <div className="col-span-2">
                 <label className="block text-xs text-gray-500 mb-1">Notes</label>
                 {isEditing ? (
-                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} />
+                  <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} />
                 ) : (
                   <p className="text-sm text-gray-600">{s?.notes || "—"}</p>
                 )}

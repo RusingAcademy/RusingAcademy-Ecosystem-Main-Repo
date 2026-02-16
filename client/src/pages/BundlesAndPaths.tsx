@@ -259,7 +259,7 @@ export default function BundlesAndPaths() {
                           </Badge>
                         </div>
                       )}
-                      <Card className={`h-full shadow-xl border-none overflow-hidden ${bundle.popular ? "ring-2 ring-[#C65A1E]" : ""}`}>
+                      <Card className={`h-full shadow-xl border-none overflow-hidden ${bundle.popular ? "ring-2 ring-cta" : ""}`}>
                         <div className={`bg-gradient-to-r ${bundle.color} p-6 text-white text-center`}>
                           <span className="text-3xl mb-2 block">{bundle.icon}</span>
                           <h3 className="text-xl font-bold mb-1">

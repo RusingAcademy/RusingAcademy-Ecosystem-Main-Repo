@@ -185,12 +185,12 @@ export default function Flashcards() {
             <div className="flex items-center gap-3">
               {viewMode === "decks" && (
                 <>
-                  <button onClick={() => startReview()} className="px-4 py-2 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}
+                  <button onClick={() => startReview()} className="px-4 py-2 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30" 
                     aria-label={t("flashcards.startReview")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">play_arrow</span>
                     {t("flashcards.startReview")}
                   </button>
-                  <button onClick={() => setShowDeckForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  <button onClick={() => setShowDeckForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                     aria-label={t("flashcards.newDeck")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
                     {t("flashcards.newDeck")}
@@ -199,17 +199,17 @@ export default function Flashcards() {
               )}
               {viewMode === "cards" && (
                 <>
-                  <button onClick={() => startReview(selectedDeckId ?? undefined)} className="px-4 py-2 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}
+                  <button onClick={() => startReview(selectedDeckId ?? undefined)} className="px-4 py-2 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30" 
                     aria-label={t("flashcards.startReview")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">play_arrow</span>
                     {t("flashcards.startReview")}
                   </button>
-                  <button onClick={() => setShowCardForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  <button onClick={() => setShowCardForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                     aria-label={t("flashcards.addCard")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
                     {t("flashcards.addCard")}
                   </button>
-                  <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                     aria-label={t("flashcards.backToDecks")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">arrow_back</span>
                     {t("flashcards.backToDecks")}
@@ -217,7 +217,7 @@ export default function Flashcards() {
                 </>
               )}
               {(viewMode === "review" || viewMode === "summary") && (
-                <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); if (timerRef.current) clearInterval(timerRef.current); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); if (timerRef.current) clearInterval(timerRef.current); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                   aria-label={t("flashcards.backToDecks")}>
                   <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">arrow_back</span>
                   {t("flashcards.backToDecks")}
@@ -256,23 +256,23 @@ export default function Flashcards() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.deckName")}</label>
-                    <input value={deckName} onChange={e => setDeckName(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30" />
+                    <input value={deckName} onChange={e => setDeckName(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.color")}</label>
                     <div className="flex gap-2" role="radiogroup" aria-label={t("flashcards.color")}>
                       {DECK_COLORS.map(c => (
                         <button key={c} onClick={() => setDeckColor(c)}
-                          className={`w-8 h-8 rounded-full ${getColor(c).bg} ${deckColor === c ? "ring-2 ring-offset-2 ring-gray-400" : ""} focus:outline-none focus:ring-2 focus:ring-[#008090]/30`}
+                          className={`w-8 h-8 rounded-full ${getColor(c).bg} ${deckColor === c ? "ring-2 ring-offset-2 ring-gray-400" : ""} focus:outline-none focus:ring-2 focus:ring-teal-700/30`}
                           role="radio" aria-checked={deckColor === c} aria-label={c} />
                       ))}
                     </div>
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 mt-6">
-                  <button onClick={() => setShowDeckForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">{t("flashcards.cancel")}</button>
+                  <button onClick={() => setShowDeckForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-700/30">{t("flashcards.cancel")}</button>
                   <button onClick={() => createDeck.mutate({ title: deckName, description: deckDesc })} disabled={!deckName.trim()}
-                    className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>{t("flashcards.create")}</button>
+                    className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-700/30" >{t("flashcards.create")}</button>
                 </div>
               </div>
             </div>
@@ -286,21 +286,21 @@ export default function Flashcards() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.front")}</label>
-                    <input value={cardFront} onChange={e => setCardFront(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30" />
+                    <input value={cardFront} onChange={e => setCardFront(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.back")}</label>
-                    <input value={cardBack} onChange={e => setCardBack(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30" />
+                    <input value={cardBack} onChange={e => setCardBack(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.hint")}</label>
-                    <input value={cardHint} onChange={e => setCardHint(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30" />
+                    <input value={cardHint} onChange={e => setCardHint(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 mt-6">
-                  <button onClick={() => setShowCardForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">{t("flashcards.cancel")}</button>
+                  <button onClick={() => setShowCardForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-700/30">{t("flashcards.cancel")}</button>
                   <button onClick={() => { if (selectedDeckId) createCard.mutate({ deckId: selectedDeckId, front: cardFront, back: cardBack, hint: cardHint || undefined }); }} disabled={!cardFront.trim() || !cardBack.trim()}
-                    className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>{t("flashcards.save")}</button>
+                    className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-700/30" >{t("flashcards.save")}</button>
                 </div>
               </div>
             </div>
@@ -321,7 +321,7 @@ export default function Flashcards() {
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("flashcards.emptyTitle")}</h3>
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("flashcards.emptyDesc")}</p>
                 <button onClick={() => setShowDeckForm(true)}
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30" >
                   <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
                   {t("flashcards.newDeck")}
                 </button>
@@ -331,7 +331,7 @@ export default function Flashcards() {
                 {decks.map((deck: any) => {
                   const color = getColor(deck.category || "teal");
                   return (
-                    <div key={deck.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden cursor-pointer group hover:shadow-md transition-all focus-within:ring-2 focus-within:ring-[#008090]/30"
+                    <div key={deck.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden cursor-pointer group hover:shadow-md transition-all focus-within:ring-2 focus-within:ring-teal-700/30"
                       onClick={() => { setSelectedDeckId(deck.id); setViewMode("cards"); }}
                       role="listitem"
                       aria-label={`${deck.title} — ${deck.cardCount} ${t("flashcards.cards")}`}
@@ -353,7 +353,7 @@ export default function Flashcards() {
                         <div className="flex items-center justify-between">
                           <span className="text-xs text-gray-400">{deck.cardCount} {t("flashcards.cards")}</span>
                           <button onClick={(e) => { e.stopPropagation(); startReview(deck.id); }}
-                            className={`px-3 py-1 rounded-lg text-xs font-medium ${color.text} ${color.light} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#008090]/30`}
+                            className={`px-3 py-1 rounded-lg text-xs font-medium ${color.text} ${color.light} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-teal-700/30`}
                             aria-label={`${t("flashcards.startReview")} ${deck.title}`}>
                             {t("flashcards.startReview")}
                           </button>
@@ -377,8 +377,8 @@ export default function Flashcards() {
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("flashcards.emptyCardsDesc")}</p>
                 <button
                   onClick={() => setShowCardForm(true)}
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
-                  style={{ background: "#008090" }}
+                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                  
                 >
                   <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
                   {t("flashcards.addCard")}
@@ -441,7 +441,7 @@ export default function Flashcards() {
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("daily.emptyTitle")}</h3>
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("daily.emptyDesc")}</p>
                 <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); }}
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30" >
                   {t("flashcards.backToDecks")}
                 </button>
               </div>
@@ -469,7 +469,7 @@ export default function Flashcards() {
 
                 {/* Card */}
                 <div
-                  className="bg-white rounded-2xl border border-gray-200 shadow-sm min-h-[300px] flex flex-col items-center justify-center p-8 cursor-pointer transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  className="bg-white rounded-2xl border border-gray-200 shadow-sm min-h-[300px] flex flex-col items-center justify-center p-8 cursor-pointer transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                   onClick={() => setIsFlipped(!isFlipped)}
                   onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setIsFlipped(!isFlipped); }}}
                   tabIndex={0}
@@ -574,12 +574,12 @@ export default function Flashcards() {
 
               <div className="flex items-center justify-center gap-3">
                 <button onClick={() => startReview(selectedDeckId ?? undefined)}
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30" >
                   <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">play_arrow</span>
                   {t("flashcards.studyMore")}
                 </button>
                 <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); }}
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-6 py-2.5 rounded-xl text-sm font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   {t("flashcards.backToDecks")}
                 </button>
               </div>

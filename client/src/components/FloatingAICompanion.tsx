@@ -91,7 +91,7 @@ export default function FloatingAICompanion() {
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white flex-shrink-0">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="material-icons" style={{ fontSize: "18px" }}>smart_toy</span>
+                <span className="material-icons" >smart_toy</span>
               </div>
               <div>
                 <p className="text-sm font-semibold leading-tight">SLE AI Companion</p>
@@ -106,14 +106,14 @@ export default function FloatingAICompanion() {
                 className="w-7 h-7 rounded-lg hover:bg-white/15 flex items-center justify-center transition-colors"
                 title="New conversation"
               >
-                <span className="material-icons" style={{ fontSize: "16px" }}>refresh</span>
+                <span className="material-icons" >refresh</span>
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 className="w-7 h-7 rounded-lg hover:bg-white/15 flex items-center justify-center transition-colors"
                 title="Close"
               >
-                <span className="material-icons" style={{ fontSize: "18px" }}>close</span>
+                <span className="material-icons" >close</span>
               </button>
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function FloatingAICompanion() {
                       onClick={() => handleSend(qp.prompt)}
                       className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-white hover:border-teal-700/30 hover:bg-teal-700/5 transition-all text-left"
                     >
-                      <span className="material-icons text-teal-700" style={{ fontSize: "16px" }}>{qp.icon}</span>
+                      <span className="material-icons text-teal-700" >{qp.icon}</span>
                       <span className="text-[11px] font-medium text-gray-700">{qp.label}</span>
                     </button>
                   ))}
@@ -148,7 +148,7 @@ export default function FloatingAICompanion() {
                   <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                     {msg.role === "assistant" && (
                       <div className="w-6 h-6 rounded-full bg-teal-700/10 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
-                        <span className="material-icons text-teal-700" style={{ fontSize: "14px" }}>smart_toy</span>
+                        <span className="material-icons text-teal-700" >smart_toy</span>
                       </div>
                     )}
                     <div
@@ -171,7 +171,7 @@ export default function FloatingAICompanion() {
                 {chatMutation.isPending && (
                   <div className="flex justify-start">
                     <div className="w-6 h-6 rounded-full bg-teal-700/10 flex items-center justify-center mr-2 flex-shrink-0">
-                      <span className="material-icons text-teal-700" style={{ fontSize: "14px" }}>smart_toy</span>
+                      <span className="material-icons text-teal-700" >smart_toy</span>
                     </div>
                     <div className="bg-white border border-gray-200 rounded-xl rounded-bl-sm px-4 py-3 shadow-sm">
                       <div className="flex gap-1.5">
@@ -202,14 +202,14 @@ export default function FloatingAICompanion() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything..."
                 rows={1}
-                className="flex-1 resize-none rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700/40 max-h-20 bg-gray-50"
+                className="flex-1 resize-none rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700/40 max-h-20 bg-gray-50"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || chatMutation.isPending}
                 className="w-9 h-9 rounded-xl bg-teal-700 hover:bg-teal-800 disabled:bg-gray-200 disabled:cursor-not-allowed flex items-center justify-center transition-colors flex-shrink-0"
               >
-                <span className="material-icons text-white" style={{ fontSize: "18px" }}>
+                <span className="material-icons text-white" >
                   {chatMutation.isPending ? "hourglass_empty" : "send"}
                 </span>
               </button>

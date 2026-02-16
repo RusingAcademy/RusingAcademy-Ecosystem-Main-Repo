@@ -77,7 +77,7 @@ export default function CommunityForum() {
             </div>
             <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
               className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-teal-700 hover:brightness-105 transition-all flex items-center gap-1.5">
-              <span className="material-icons" style={{ fontSize: "14px" }}>add</span>
+              <span className="material-icons" >add</span>
               {t("community.newPost")}
             </button>
           </div>
@@ -96,7 +96,7 @@ export default function CommunityForum() {
                   ? "bg-teal-700 text-white shadow-sm"
                   : "text-gray-500 hover:text-teal-700 hover:bg-gray-50"
               }`}>
-              <span className="material-icons" style={{ fontSize: "16px" }}>{tab.icon}</span>
+              <span className="material-icons" >{tab.icon}</span>
               {tab.label}
             </button>
           ))}
@@ -127,7 +127,7 @@ export default function CommunityForum() {
                       </span>
                     </div>
                   </div>
-                  <span className="material-icons text-gray-300 group-hover:text-teal-700 transition-colors" style={{ fontSize: "18px" }}>chevron_right</span>
+                  <span className="material-icons text-gray-300 group-hover:text-teal-700 transition-colors" >chevron_right</span>
                 </div>
               </div>
             ))}
@@ -169,7 +169,7 @@ export default function CommunityForum() {
             ))}
             <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
               className="w-full py-3 rounded-xl border-2 border-dashed border-gray-200 text-sm font-medium text-gray-400 hover:text-teal-700 hover:border-teal-700/30 transition-all flex items-center justify-center gap-2">
-              <span className="material-icons" style={{ fontSize: "18px" }}>add</span>
+              <span className="material-icons" >add</span>
               {t("community.createGroup")}
             </button>
           </div>
@@ -194,11 +194,11 @@ export default function CommunityForum() {
                   </div>
                   <div className="flex items-center gap-4 flex-shrink-0">
                     <div className="flex items-center gap-1 text-gray-400">
-                      <span className="material-icons" style={{ fontSize: "14px" }}>chat_bubble_outline</span>
+                      <span className="material-icons" >chat_bubble_outline</span>
                       <span className="text-xs">{post.replies}</span>
                     </div>
                     <div className="flex items-center gap-1 text-gray-400">
-                      <span className="material-icons" style={{ fontSize: "14px" }}>favorite_border</span>
+                      <span className="material-icons" >favorite_border</span>
                       <span className="text-xs">{post.likes}</span>
                     </div>
                   </div>

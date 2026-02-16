@@ -209,7 +209,7 @@ export default function ForBusiness() {
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full"
+                  className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-orange-500/20 rounded-full"
                   onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {t.cta}
@@ -437,36 +437,36 @@ export default function ForBusiness() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.company} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.employees} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
+                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-cta-2 focus:ring-[#E07B39]"
+                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
                       rows={4}
                     />
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="w-full bg-cta-2 hover:bg-cta text-white h-12 rounded-full shadow-lg shadow-[#E07B39]/20"
+                      className="w-full bg-cta-2 hover:bg-cta text-white h-12 rounded-full shadow-lg shadow-orange-500/20"
                     >
                       {t.formFields.submit}
                       <Send className="w-5 h-5 ml-2" />

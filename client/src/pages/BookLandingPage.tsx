@@ -258,7 +258,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   size="lg"
-                  className="rounded-full bg-orange-500 hover:bg-cta-2 text-white font-semibold gap-2 text-base px-8 shadow-lg hover:shadow-xl hover:shadow-[#F97316]/20 transition-all duration-300"
+                  className="rounded-full bg-orange-500 hover:bg-cta-2 text-white font-semibold gap-2 text-base px-8 shadow-lg hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300"
                   onClick={() => window.open(item.cta_url, "_blank")}
                 >
                   {item.price_type === "free" ? (
@@ -467,7 +467,7 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
                 {/* CTA */}
                 <Button
                   size="lg"
-                  className="w-full rounded-full bg-orange-500 hover:bg-cta-2 text-white font-semibold gap-2 mt-4 shadow-md hover:shadow-lg hover:shadow-[#F97316]/20 transition-all duration-300"
+                  className="w-full rounded-full bg-orange-500 hover:bg-cta-2 text-white font-semibold gap-2 mt-4 shadow-md hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-300"
                   onClick={() => window.open(item.cta_url, "_blank")}
                 >
                   {item.price_type === "free" ? (

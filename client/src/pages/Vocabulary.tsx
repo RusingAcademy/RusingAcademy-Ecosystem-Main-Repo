@@ -157,7 +157,7 @@ export default function Vocabulary() {
             <div>
               <div className="flex items-center gap-3">
                 {viewMode === "quiz" && (
-                  <button onClick={() => setViewMode("list")} className="p-1.5 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#008090]/30" aria-label={t("flashcards.backToDecks")}>
+                  <button onClick={() => setViewMode("list")} className="p-1.5 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-700/30" aria-label={t("flashcards.backToDecks")}>
                     <span className="material-icons text-gray-500" aria-hidden="true">arrow_back</span>
                   </button>
                 )}
@@ -175,7 +175,7 @@ export default function Vocabulary() {
             {viewMode === "list" && (
               <div className="flex gap-2" role="toolbar" aria-label={t("vocab.title")}>
                 <button onClick={startQuiz} disabled={items.filter(i => i.mastery !== "mastered").length === 0}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 flex items-center gap-2 hover:bg-teal-700/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 flex items-center gap-2 hover:bg-teal-700/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                   aria-label={isFr ? "Mode quiz" : "Quiz Mode"}>
                   <span className="material-icons text-base" aria-hidden="true">quiz</span>
                   {isFr ? "Mode quiz" : "Quiz Mode"}
@@ -188,7 +188,7 @@ export default function Vocabulary() {
                   {aiSuggest.isPending ? t("skillLabs.loading") : t("vocab.aiSuggest")}
                 </button>
                 <button onClick={() => setShowForm(true)}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-700/30" 
                   aria-label={t("vocab.addWord")}>
                   <span className="material-icons text-base" aria-hidden="true">add</span>
                   {t("vocab.addWord")}
@@ -202,7 +202,7 @@ export default function Vocabulary() {
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6" role="region" aria-label={t("grammar.stats")}>
               {Object.entries(MASTERY_CONFIG).map(([key, config]) => (
                 <button key={key} onClick={() => setFilterMastery(filterMastery === key ? null : key)}
-                  className={`bg-white rounded-xl border p-4 text-center transition-all hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${filterMastery === key ? "border-teal-700 ring-1 ring-[#008090]/20" : "border-gray-100"}`}
+                  className={`bg-white rounded-xl border p-4 text-center transition-all hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${filterMastery === key ? "border-teal-700 ring-1 ring-teal-700/20" : "border-gray-100"}`}
                   aria-pressed={filterMastery === key}
                   aria-label={`${isFr ? config.labelFr : config.label}: ${(stats as any)[key] ?? 0}`}>
                   <span className="material-icons text-lg mb-1" style={{ color: config.color }} aria-hidden="true">{config.icon}</span>
@@ -227,7 +227,7 @@ export default function Vocabulary() {
                 <div className="relative">
                   <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" aria-hidden="true">search</span>
                   <input id="vocab-search" type="text" placeholder={isFr ? "Rechercher des mots..." : "Search words..."} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700" />
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700" />
                 </div>
               </div>
 
@@ -249,7 +249,7 @@ export default function Vocabulary() {
                   </p>
                   {items.length === 0 && (
                     <button onClick={() => setShowForm(true)}
-                      className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                      className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30" >
                       <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
                       {t("vocab.addWord")}
                     </button>
@@ -333,7 +333,7 @@ export default function Vocabulary() {
                     {isFr ? "Retour à la liste" : "Back to List"}
                   </button>
                   {quizItems.length > 0 && (
-                    <button onClick={startQuiz} className="px-4 py-2 rounded-xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                    <button onClick={startQuiz} className="px-4 py-2 rounded-xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-teal-700/30" >
                       {isFr ? "Réessayer" : "Try Again"}
                     </button>
                   )}
@@ -363,10 +363,10 @@ export default function Vocabulary() {
                       <input id="quiz-answer" type="text" placeholder={isFr ? "Tapez votre réponse..." : "Type your answer..."} value={quizAnswer}
                         onChange={e => setQuizAnswer(e.target.value)}
                         onKeyDown={e => { if (e.key === "Enter") setQuizRevealed(true); }}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-center text-gray-900 text-base mb-4 focus:outline-none focus:ring-2 focus:ring-[#008090]/20"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-center text-gray-900 text-base mb-4 focus:outline-none focus:ring-2 focus:ring-teal-700/20"
                         autoFocus />
                       <button onClick={() => setQuizRevealed(true)}
-                        className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                        className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-teal-700/30" >
                         {t("grammar.checkAnswer")}
                       </button>
                     </>
@@ -418,19 +418,19 @@ export default function Vocabulary() {
                   <div>
                     <label htmlFor="vocab-word" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.word")} *</label>
                     <input id="vocab-word" type="text" placeholder={isFr ? "ex. néanmoins" : "e.g., néanmoins"} value={word} onChange={e => setWord(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
                       aria-required="true" autoFocus />
                   </div>
                   <div>
                     <label htmlFor="vocab-translation" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.translation")} *</label>
                     <input id="vocab-translation" type="text" placeholder={isFr ? "ex. nevertheless" : "e.g., nevertheless"} value={translation} onChange={e => setTranslation(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
                       aria-required="true" />
                   </div>
                   <div>
                     <label htmlFor="vocab-pos" className="text-xs font-medium text-gray-500 mb-1 block">{isFr ? "Partie du discours" : "Part of Speech"}</label>
                     <select id="vocab-pos" value={partOfSpeech} onChange={e => setPartOfSpeech(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20">
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20">
                       <option value="">{isFr ? "Sélectionner..." : "Select..."}</option>
                       {POS_OPTIONS.map(pos => <option key={pos} value={pos}>{pos}</option>)}
                     </select>
@@ -438,17 +438,17 @@ export default function Vocabulary() {
                   <div>
                     <label htmlFor="vocab-def" className="text-xs font-medium text-gray-500 mb-1 block">Definition</label>
                     <textarea id="vocab-def" placeholder={isFr ? "Définition optionnelle..." : "Optional definition..."} value={definition} onChange={e => setDefinition(e.target.value)} rows={2}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 resize-none" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20 resize-none" />
                   </div>
                   <div>
                     <label htmlFor="vocab-example" className="text-xs font-medium text-gray-500 mb-1 block">{t("vocab.context")}</label>
                     <textarea id="vocab-example" placeholder={isFr ? "Utilisez le mot dans une phrase..." : "Use the word in a sentence..."} value={example} onChange={e => setExample(e.target.value)} rows={2}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20 resize-none" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20 resize-none" />
                   </div>
                   <div>
                     <label htmlFor="vocab-pron" className="text-xs font-medium text-gray-500 mb-1 block">{isFr ? "Prononciation" : "Pronunciation"}</label>
                     <input id="vocab-pron" type="text" placeholder="e.g., ne.ɑ̃.mwɛ̃" value={pronunciation} onChange={e => setPronunciation(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20" />
                   </div>
                 </div>
 
@@ -456,7 +456,7 @@ export default function Vocabulary() {
                   <button onClick={resetForm} className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">{t("flashcards.cancel")}</button>
                   <button onClick={handleAdd}
                     disabled={!word.trim() || !translation.trim() || addItem.isPending}
-                    className="px-5 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#008090]/30" style={{ background: "#008090" }}>
+                    className="px-5 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-700/30" >
                     {addItem.isPending ? t("skillLabs.loading") : t("vocab.addWord")}
                   </button>
                 </div>
