@@ -2790,6 +2790,33 @@ export type Lesson = typeof lessons.$inferSelect;
 export type InsertLesson = typeof lessons.$inferInsert;
 
 // ============================================================================
+// CONTENT VERSIONS (Sprint K5 — Version History & Rollback)
+// ============================================================================
+export const contentVersions = mysqlTable("content_versions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // What entity this version belongs to
+  entityType: mysqlEnum("entityType", ["course", "lesson", "module", "quiz"]).notNull(),
+  entityId: int("entityId").notNull(),
+  
+  // Version metadata
+  versionNumber: int("versionNumber").notNull().default(1),
+  changeType: mysqlEnum("changeType", ["create", "update", "publish", "unpublish", "archive", "restore"]).default("update"),
+  changeSummary: varchar("changeSummary", { length: 500 }),
+  
+  // Snapshot of the entity at this version (JSON blob)
+  snapshot: json("snapshot").notNull(),
+  
+  // Who made the change
+  authorId: int("authorId").notNull(),
+  authorName: varchar("authorName", { length: 255 }),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type ContentVersion = typeof contentVersions.$inferSelect;
+export type InsertContentVersion = typeof contentVersions.$inferInsert;
+
+// ============================================================================
 // QUIZZES (Assessment within lessons or standalone)
 // ============================================================================
 export const quizzes = mysqlTable("quizzes", {

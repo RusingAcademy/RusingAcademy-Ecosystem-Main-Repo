@@ -135,6 +135,7 @@ import { adminCoursesRouter } from "./routers/adminCourses";
 import { adminCommissionRouter } from "./routers/adminCommission";
 import { adminPayoutsRouter } from "./routers/adminPayouts";
 import { courseAdminRouter } from "./routers/courseAdmin";
+import { contentVersionsRouter } from "./routers/contentVersions";
 import { analyticsRouter } from "./routers/analytics";
 import { advancedAnalyticsRouter } from "./routers/advancedAnalytics";
 import { certificateRouter } from "./routers/certificate";
@@ -9135,6 +9136,7 @@ export const appRouter = router({
   adminCommission: adminCommissionRouter,
   adminPayouts: adminPayoutsRouter,
   courseAdmin: courseAdminRouter,
+  contentVersions: contentVersionsRouter,
   analytics: analyticsRouter,
   advancedAnalytics: advancedAnalyticsRouter,
   certificate: certificateRouter,
