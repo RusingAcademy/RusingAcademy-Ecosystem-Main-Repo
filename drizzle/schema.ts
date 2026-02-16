@@ -2738,8 +2738,9 @@ export const lessons = mysqlTable("lessons", {
   videoDurationSeconds: int("videoDurationSeconds"),
   videoThumbnailUrl: text("videoThumbnailUrl"),
   
-  // Text Content
-  textContent: text("textContent"), // Rich text / Markdown
+  // Text Content (Bilingual)
+  textContent: text("textContent"), // Rich text / Markdown (EN)
+  textContentFr: text("textContentFr"), // Rich text / Markdown (FR)
   
   // Audio Content
   audioUrl: text("audioUrl"),
