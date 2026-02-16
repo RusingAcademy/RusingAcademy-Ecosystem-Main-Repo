@@ -268,7 +268,7 @@ function PodcastPlayerUI({
                 setVolume(parseFloat(e.target.value));
                 setIsMuted(false);
               }}
-              className="w-20 accent-[#D4AF37]"
+              className="w-20 accent-[var(--brand-gold, #D4AF37)]"
             />
           </div>
 

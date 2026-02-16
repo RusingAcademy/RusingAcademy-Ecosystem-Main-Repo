@@ -17,7 +17,7 @@ const VISIBILITY_ICONS = {
 const VISIBILITY_COLORS = {
   public: "#22C55E",
   private: "#EF4444",
-  premium: "#D4AF37",
+  premium: "var(--brand-gold, #D4AF37)",
 };
 
 export default function Channels() {

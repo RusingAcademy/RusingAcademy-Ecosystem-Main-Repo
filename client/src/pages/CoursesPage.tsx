@@ -577,7 +577,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Hero Section */}
-        <section className={`relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-foundation via-[#1a4a4b] to-[#0D9488]'} transition-colors duration-500`}>
+        <section className={`relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[var(--color-blue-500, #3b82f6)]' : 'from-foundation via-[#1a4a4b] to-[#0D9488]'} transition-colors duration-500`}>
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -810,7 +810,7 @@ export default function CoursesPage() {
                       />
                       <div 
                         className="absolute inset-0 opacity-60"
-                        style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? '#10b981' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? '#3b82f6' : course.color.includes('teal') ? '#8b5cf6' : course.color.includes('teal') ? '#a855f7' : '#f59e0b'} 0%, transparent 100%)` }}
+                        style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? 'var(--semantic-success, #10b981)' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? 'var(--color-blue-500, #3b82f6)' : course.color.includes('teal') ? 'var(--color-violet-500, #8b5cf6)' : course.color.includes('teal') ? 'var(--color-purple-500, #a855f7)' : 'var(--semantic-warning, #f59e0b)'} 0%, transparent 100%)` }}
                       />
                       <div className="absolute bottom-4 left-4">
                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white dark:bg-slate-900/90 backdrop-blur-sm text-sm font-bold text-black dark:text-white">
@@ -964,7 +964,7 @@ export default function CoursesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-foundation via-[#1a4a4b] to-[#0D9488]'}`}>
+        <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[var(--color-blue-500, #3b82f6)]' : 'from-foundation via-[#1a4a4b] to-[#0D9488]'}`}>
           <div className="container">
             <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white dark:bg-slate-900/5 backdrop-blur-sm border border-white/60">
               <div className="relative z-10 text-center max-w-3xl mx-auto">

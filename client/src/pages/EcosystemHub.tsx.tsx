@@ -337,7 +337,7 @@ function EcosystemSection({ language }: { language: string }) {
       descEn: "Cutting-edge educational content production and custom solutions for ministries and organizations.",
       descFr: "Production de contenu pédagogique de pointe et solutions sur mesure pour les ministères et organisations.",
       icon: Clapperboard,
-      color: "#D4AF37",
+      color: "var(--brand-gold, #D4AF37)",
       gradient: "from-amber-500 to-amber-600",
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-barholex.jpg",
       link: "/barholex",

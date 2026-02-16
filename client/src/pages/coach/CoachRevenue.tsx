@@ -6,7 +6,7 @@ import CoachLayout from "@/components/CoachLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 
-const ACCENT = "var(--color-violet-600, #7c3aed)";
+const ACCENT = "var(--color-violet-600, var(--color-violet-600, #7c3aed))";
 
 function PayoutStatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
@@ -148,7 +148,7 @@ export default function CoachRevenue() {
           {/* Right Column */}
           <div className="space-y-6">
             {/* Commission Tier */}
-            <div className="bg-gradient-to-br from-violet-600 to-[var(--color-violet-700, #6d28d9)] rounded-xl p-5 text-white">
+            <div className="bg-gradient-to-br from-violet-600 to-[var(--color-violet-700, var(--color-violet-700, #6d28d9))] rounded-xl p-5 text-white">
               <div className="flex items-center gap-2 mb-3">
                 <span className="material-icons text-amber-300">emoji_events</span>
                 <h3 className="text-sm font-semibold">{lang === "fr" ? "Niveau de commission" : "Commission Tier"}</h3>

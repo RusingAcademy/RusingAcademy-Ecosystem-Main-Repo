@@ -167,7 +167,7 @@ export default function AICompanionPanel() {
                     <line key={pct} x1={padL} y1={padT + innerH * (1 - pct)} x2={chartW - padR} y2={padT + innerH * (1 - pct)} stroke="currentColor" strokeOpacity={0.1} />
                   ))}
                   {/* Sessions line */}
-                  <polyline fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinejoin="round" points={sessionPoints} />
+                  <polyline fill="none" stroke="var(--color-violet-500, #8b5cf6)" strokeWidth="2" strokeLinejoin="round" points={sessionPoints} />
                   {/* Score line */}
                   <polyline fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinejoin="round" strokeDasharray="6 3" points={scorePoints} />
                   {/* X-axis labels (every 5th) */}

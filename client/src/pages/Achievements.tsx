@@ -8,20 +8,20 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 
 const ALL_BADGES = [
-  { id: "first_lesson", name: "First Steps", nameFr: "Premiers pas", description: "Complete your first lesson", descFr: "Complétez votre première leçon", icon: "school", color: "#008090", xp: 50 },
-  { id: "five_lessons", name: "Dedicated Learner", nameFr: "Apprenant dévoué", description: "Complete 5 lessons", descFr: "Complétez 5 leçons", icon: "auto_stories", color: "#f5a623", xp: 100 },
-  { id: "ten_lessons", name: "Knowledge Seeker", nameFr: "Chercheur de savoir", description: "Complete 10 lessons", descFr: "Complétez 10 leçons", icon: "psychology", color: "#e74c3c", xp: 200 },
+  { id: "first_lesson", name: "First Steps", nameFr: "Premiers pas", description: "Complete your first lesson", descFr: "Complétez votre première leçon", icon: "school", color: "var(--brand-teal, #008090)", xp: 50 },
+  { id: "five_lessons", name: "Dedicated Learner", nameFr: "Apprenant dévoué", description: "Complete 5 lessons", descFr: "Complétez 5 leçons", icon: "auto_stories", color: "var(--semantic-warning, #f5a623)", xp: 100 },
+  { id: "ten_lessons", name: "Knowledge Seeker", nameFr: "Chercheur de savoir", description: "Complete 10 lessons", descFr: "Complétez 10 leçons", icon: "psychology", color: "var(--semantic-danger, #e74c3c)", xp: 200 },
   { id: "twenty_five_lessons", name: "Scholar", nameFr: "Érudit", description: "Complete 25 lessons", descFr: "Complétez 25 leçons", icon: "workspace_premium", color: "#9b59b6", xp: 500 },
   { id: "first_quiz", name: "Quiz Taker", nameFr: "Testeur de quiz", description: "Complete your first quiz", descFr: "Complétez votre premier quiz", icon: "quiz", color: "#3498db", xp: 50 },
-  { id: "perfect_quiz", name: "Perfectionist", nameFr: "Perfectionniste", description: "Score 100% on a quiz", descFr: "Obtenez 100% à un quiz", icon: "emoji_events", color: "#f5a623", xp: 150 },
-  { id: "five_perfect", name: "Quiz Master", nameFr: "Maître des quiz", description: "Score 100% on 5 quizzes", descFr: "Obtenez 100% à 5 quiz", icon: "military_tech", color: "#e74c3c", xp: 300 },
+  { id: "perfect_quiz", name: "Perfectionist", nameFr: "Perfectionniste", description: "Score 100% on a quiz", descFr: "Obtenez 100% à un quiz", icon: "emoji_events", color: "var(--semantic-warning, #f5a623)", xp: 150 },
+  { id: "five_perfect", name: "Quiz Master", nameFr: "Maître des quiz", description: "Score 100% on 5 quizzes", descFr: "Obtenez 100% à 5 quiz", icon: "military_tech", color: "var(--semantic-danger, #e74c3c)", xp: 300 },
   { id: "streak_3", name: "On Fire", nameFr: "En feu", description: "3-day learning streak", descFr: "Série de 3 jours", icon: "local_fire_department", color: "#e67e22", xp: 75 },
-  { id: "streak_7", name: "Week Warrior", nameFr: "Guerrier de la semaine", description: "7-day learning streak", descFr: "Série de 7 jours", icon: "whatshot", color: "#e74c3c", xp: 200 },
-  { id: "streak_30", name: "Monthly Champion", nameFr: "Champion du mois", description: "30-day learning streak", descFr: "Série de 30 jours", icon: "diamond", color: "#f5a623", xp: 1000 },
+  { id: "streak_7", name: "Week Warrior", nameFr: "Guerrier de la semaine", description: "7-day learning streak", descFr: "Série de 7 jours", icon: "whatshot", color: "var(--semantic-danger, #e74c3c)", xp: 200 },
+  { id: "streak_30", name: "Monthly Champion", nameFr: "Champion du mois", description: "30-day learning streak", descFr: "Série de 30 jours", icon: "diamond", color: "var(--semantic-warning, #f5a623)", xp: 1000 },
   { id: "path_complete", name: "Path Pioneer", nameFr: "Pionnier du parcours", description: "Complete an entire Path", descFr: "Complétez un parcours entier", icon: "flag", color: "#27ae60", xp: 500 },
-  { id: "first_enrollment", name: "Adventurer", nameFr: "Aventurier", description: "Enroll in your first Path", descFr: "Inscrivez-vous à votre premier parcours", icon: "explore", color: "#008090", xp: 25 },
-  { id: "challenge_champion", name: "Challenge Champion", nameFr: "Champion des défis", description: "Complete a weekly challenge", descFr: "Complétez un défi hebdomadaire", icon: "emoji_events", color: "#f59e0b", xp: 250 },
-  { id: "five_challenges", name: "Challenge Master", nameFr: "Maître des défis", description: "Complete 5 weekly challenges", descFr: "Complétez 5 défis hebdomadaires", icon: "military_tech", color: "#8b5cf6", xp: 500 },
+  { id: "first_enrollment", name: "Adventurer", nameFr: "Aventurier", description: "Enroll in your first Path", descFr: "Inscrivez-vous à votre premier parcours", icon: "explore", color: "var(--brand-teal, #008090)", xp: 25 },
+  { id: "challenge_champion", name: "Challenge Champion", nameFr: "Champion des défis", description: "Complete a weekly challenge", descFr: "Complétez un défi hebdomadaire", icon: "emoji_events", color: "var(--semantic-warning, #f59e0b)", xp: 250 },
+  { id: "five_challenges", name: "Challenge Master", nameFr: "Maître des défis", description: "Complete 5 weekly challenges", descFr: "Complétez 5 défis hebdomadaires", icon: "military_tech", color: "var(--color-violet-500, #8b5cf6)", xp: 500 },
 ];
 
 const MILESTONES = [
@@ -131,7 +131,7 @@ export default function Achievements() {
                   >
                     <span
                       className="material-icons text-2xl"
-                      style={{ color: earned ? badge.color : "#d1d5db" }}
+                      style={{ color: earned ? badge.color : "var(--color-gray-300, #d1d5db)" }}
                     >
                       {badge.icon}
                     </span>
@@ -142,7 +142,7 @@ export default function Achievements() {
                   <p className="text-[10px] text-gray-400 leading-tight">
                     {isFr ? badge.descFr : badge.description}
                   </p>
-                  <div className="mt-2 text-[10px] font-semibold" style={{ color: earned ? badge.color : "#d1d5db" }}>+{badge.xp} XP</div>
+                  <div className="mt-2 text-[10px] font-semibold" style={{ color: earned ? badge.color : "var(--color-gray-300, #d1d5db)" }}>+{badge.xp} XP</div>
                   {earned && earnedBadge && (
                     <div className="absolute top-2 right-2">
                       <span className="material-icons text-green-500 text-sm">verified</span>
@@ -184,7 +184,7 @@ export default function Achievements() {
                     <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full transition-all duration-700"
-                        style={{ width: `${progress}%`, background: reached ? "#008090" : "#d1d5db" }}
+                        style={{ width: `${progress}%`, background: reached ? "var(--brand-teal, #008090)" : "var(--color-gray-300, #d1d5db)" }}
                       />
                     </div>
                     {!reached && (

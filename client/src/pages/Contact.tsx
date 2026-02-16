@@ -514,7 +514,7 @@ export default function Contact() {
               <h2 className="text-3xl font-bold text-white mb-3" >
                 {language === 'en' ? 'Book a Free Consultation' : 'Réservez une Consultation Gratuite'}
               </h2>
-              <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{ color: '#ffffff' }}>
+              <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{ color: 'var(--color-white, #ffffff)' }}>
                 {language === 'en'
                   ? 'Schedule a 30-minute discovery call with our team to discuss your bilingual training needs and find the right program for you.'
                   : 'Planifiez un appel découverte de 30 minutes avec notre équipe pour discuter de vos besoins en formation bilingue et trouver le bon programme pour vous.'}

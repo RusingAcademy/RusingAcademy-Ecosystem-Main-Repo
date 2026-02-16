@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 
-const ACCENT = "var(--color-violet-600, #7c3aed)";
+const ACCENT = "var(--color-violet-600, var(--color-violet-600, #7c3aed))";
 
 function KPICard({ icon, value, label, trend, trendUp, loading }: { icon: string; value: string; label: string; trend?: string; trendUp?: boolean; loading?: boolean }) {
   return (
@@ -123,7 +123,7 @@ export default function CoachDashboardHome() {
                 <div className="space-y-3">
                   {upcomingSessions.map((session: any) => (
                     <div key={session.id} className="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, #9333ea)] flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, var(--color-purple-600, #9333ea))] flex items-center justify-center text-white font-bold text-sm">
                         {(session.learnerName || "?").charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -149,10 +149,10 @@ export default function CoachDashboardHome() {
             {/* Quick Actions */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { icon: "people", label: lang === "fr" ? "Mes étudiants" : "My Students", href: "/coach/students", color: "var(--color-violet-600, #7c3aed)" },
-                { icon: "event_note", label: lang === "fr" ? "Mes sessions" : "My Sessions", href: "/coach/sessions", color: "var(--color-blue-600, #2563eb)" },
-                { icon: "bar_chart", label: lang === "fr" ? "Performance" : "Performance", href: "/coach/performance", color: "var(--semantic-success, #059669)" },
-                { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "var(--semantic-warning, #d97706)" },
+                { icon: "people", label: lang === "fr" ? "Mes étudiants" : "My Students", href: "/coach/students", color: "var(--color-violet-600, var(--color-violet-600, #7c3aed))" },
+                { icon: "event_note", label: lang === "fr" ? "Mes sessions" : "My Sessions", href: "/coach/sessions", color: "var(--color-blue-600, var(--color-blue-600, #2563eb))" },
+                { icon: "bar_chart", label: lang === "fr" ? "Performance" : "Performance", href: "/coach/performance", color: "var(--semantic-success, var(--semantic-success, #059669))" },
+                { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "var(--semantic-warning, var(--semantic-warning, #d97706))" },
               ].map((action) => (
                 <Link key={action.label} href={action.href}>
                   <button className="w-full flex flex-col items-center gap-2 p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 hover:shadow-md transition-all group">
@@ -210,7 +210,7 @@ export default function CoachDashboardHome() {
             </div>
 
             {/* Earnings Summary */}
-            <div className="bg-gradient-to-br from-violet-600 to-[var(--color-violet-700, #6d28d9)] rounded-xl p-5 text-white">
+            <div className="bg-gradient-to-br from-violet-600 to-[var(--color-violet-700, var(--color-violet-700, #6d28d9))] rounded-xl p-5 text-white">
               <h3 className="text-sm font-semibold mb-3 opacity-90">
                 {lang === "fr" ? "Résumé des revenus" : "Earnings Summary"}
               </h3>

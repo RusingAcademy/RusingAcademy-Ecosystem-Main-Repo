@@ -186,10 +186,10 @@ export default function WebhookHealthDashboard() {
       {/* Overview Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: ui.total, value: s.total ?? 0, icon: Activity, color: "var(--color-blue-600, var(--color-blue-600, #2563eb))" },
-          { label: ui.processed, value: s.processed ?? 0, icon: CheckCircle2, color: "var(--semantic-success, var(--semantic-success, #059669))" },
-          { label: ui.failed, value: s.failed ?? 0, icon: AlertTriangle, color: "var(--semantic-danger, #dc2626)" },
-          { label: ui.processing, value: s.processing ?? 0, icon: Clock, color: "var(--color-violet-600, var(--color-violet-600, #7c3aed))" },
+          { label: ui.total, value: s.total ?? 0, icon: Activity, color: "var(--color-blue-600, var(--color-blue-600, var(--color-blue-600, #2563eb)))" },
+          { label: ui.processed, value: s.processed ?? 0, icon: CheckCircle2, color: "var(--semantic-success, var(--semantic-success, var(--semantic-success, #059669)))" },
+          { label: ui.failed, value: s.failed ?? 0, icon: AlertTriangle, color: "var(--semantic-danger, var(--semantic-danger, #dc2626))" },
+          { label: ui.processing, value: s.processing ?? 0, icon: Clock, color: "var(--color-violet-600, var(--color-violet-600, var(--color-violet-600, #7c3aed)))" },
         ].map((stat) => (
           <Card key={stat.label}>
             <CardContent className="p-4">

@@ -47,7 +47,7 @@ export default function Referrals() {
 
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#D4AF37" + "20" }}>
+          <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "var(--brand-gold, #D4AF37)" + "20" }}>
             <Gift className="w-8 h-8"  />
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
@@ -59,7 +59,7 @@ export default function Referrals() {
         </div>
 
         {/* Referral Link Card */}
-        <Card className="mb-8 border-2" style={{ borderColor: "#D4AF37" + "40" }}>
+        <Card className="mb-8 border-2" style={{ borderColor: "var(--brand-gold, #D4AF37)" + "40" }}>
           <CardContent className="p-6">
             <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
               <Share2 className="w-5 h-5"  />
@@ -72,7 +72,7 @@ export default function Referrals() {
               <Button
                 onClick={copyLink}
                 className="rounded-xl shrink-0"
-                style={{ backgroundColor: "#D4AF37" }}
+                style={{ backgroundColor: "var(--brand-gold, #D4AF37)" }}
               >
                 <Copy className="w-4 h-4 mr-2" />
                 {copied ? t.referrals.copied : t.referrals.copyLink}
@@ -87,9 +87,9 @@ export default function Referrals() {
         {/* Stats Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { icon: MousePointerClick, label: "Total Clicks", value: stats?.totalClicks ?? 0, color: "#1B1464" },
+            { icon: MousePointerClick, label: "Total Clicks", value: stats?.totalClicks ?? 0, color: "var(--brand-obsidian, #1B1464)" },
             { icon: Users, label: "Referrals", value: stats?.totalReferrals ?? 0, color: "#2EC4B6" },
-            { icon: TrendingUp, label: "Conversions", value: stats?.conversions ?? 0, color: "#D4AF37" },
+            { icon: TrendingUp, label: "Conversions", value: stats?.conversions ?? 0, color: "var(--brand-gold, #D4AF37)" },
             { icon: DollarSign, label: "Total Earned", value: `$${(stats?.totalCommission ?? 0).toFixed(2)}`, color: "#22C55E" },
           ].map((stat) => (
             <Card key={stat.label} className="border">
@@ -181,7 +181,7 @@ export default function Referrals() {
               { step: "3", title: "Earn Rewards", desc: "Earn 20% commission when your referrals subscribe to a paid plan. Payouts are monthly." },
             ].map((item) => (
               <div key={item.step} className="text-center p-6 bg-card rounded-2xl border">
-                <div className="w-10 h-10 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-bold" style={{ backgroundColor: "#D4AF37" }}>
+                <div className="w-10 h-10 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-bold" style={{ backgroundColor: "var(--brand-gold, #D4AF37)" }}>
                   {item.step}
                 </div>
                 <h3 className="font-semibold mb-1">{item.title}</h3>

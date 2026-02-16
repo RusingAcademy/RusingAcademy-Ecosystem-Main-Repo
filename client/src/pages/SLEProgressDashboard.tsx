@@ -485,8 +485,8 @@ export default function SLEProgressDashboard() {
                       activeDot={{ r: 5, fill: "#818cf8" }}
                     />
                     {/* Level threshold lines */}
-                    <Line type="monotone" dataKey={() => 55} stroke="#3b82f6" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level B" />
-                    <Line type="monotone" dataKey={() => 75} stroke="#8b5cf6" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level C" />
+                    <Line type="monotone" dataKey={() => 55} stroke="var(--color-blue-500, #3b82f6)" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level B" />
+                    <Line type="monotone" dataKey={() => 75} stroke="var(--color-violet-500, #8b5cf6)" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level C" />
                   </AreaChart>
                 </ResponsiveContainer>
               ) : (

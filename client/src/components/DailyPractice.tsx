@@ -4,12 +4,12 @@ import { useRef } from "react";
 import { ChevronLeft, ChevronRight, Pen } from "lucide-react";
 
 const gradients = [
-  "linear-gradient(135deg, #1B1464, #2D2580)",
-  "linear-gradient(135deg, #D4AF37, #B8962E)",
-  "linear-gradient(135deg, #2C2494, #1B1464)",
-  "linear-gradient(135deg, #8B7425, #D4AF37)",
+  "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))",
+  "linear-gradient(135deg, var(--brand-gold, #D4AF37), #B8962E)",
+  "linear-gradient(135deg, #2C2494, var(--brand-obsidian, #1B1464))",
+  "linear-gradient(135deg, #8B7425, var(--brand-gold, #D4AF37))",
   "linear-gradient(135deg, #3D35B5, #2C2494)",
-  "linear-gradient(135deg, #1B1464, #3D35B5)",
+  "linear-gradient(135deg, var(--brand-obsidian, #1B1464), #3D35B5)",
 ];
 
 export default function DailyPractice() {

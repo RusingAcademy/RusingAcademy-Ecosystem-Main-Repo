@@ -24,12 +24,12 @@ function fireConfetti(type: "standard" | "gold" | "stars" | "fireworks" = "stand
 
   switch (type) {
     case "gold":
-      confetti({ ...defaults, particleCount: 100, colors: ["#f5a623", "#ffd700", "#ffec8b", "#daa520"], origin: { x: 0.5, y: 0.4 } });
-      setTimeout(() => confetti({ ...defaults, particleCount: 50, colors: ["#f5a623", "#ffd700"], origin: { x: 0.3, y: 0.5 } }), 200);
+      confetti({ ...defaults, particleCount: 100, colors: ["var(--semantic-warning, #f5a623)", "#ffd700", "#ffec8b", "#daa520"], origin: { x: 0.5, y: 0.4 } });
+      setTimeout(() => confetti({ ...defaults, particleCount: 50, colors: ["var(--semantic-warning, #f5a623)", "#ffd700"], origin: { x: 0.3, y: 0.5 } }), 200);
       setTimeout(() => confetti({ ...defaults, particleCount: 50, colors: ["#ffd700", "#ffec8b"], origin: { x: 0.7, y: 0.5 } }), 400);
       break;
     case "stars":
-      confetti({ ...defaults, particleCount: 80, shapes: ["star"], colors: ["#008090", "#f5a623", "#8b5cf6", "#e74c3c"], origin: { x: 0.5, y: 0.3 } });
+      confetti({ ...defaults, particleCount: 80, shapes: ["star"], colors: ["var(--brand-teal, #008090)", "var(--semantic-warning, #f5a623)", "var(--color-violet-500, #8b5cf6)", "var(--semantic-danger, #e74c3c)"], origin: { x: 0.5, y: 0.3 } });
       break;
     case "fireworks":
       const end = Date.now() + 1500;
@@ -40,13 +40,13 @@ function fireConfetti(type: "standard" | "gold" | "stars" | "fireworks" = "stand
           startVelocity: 25,
           spread: 120,
           origin: { x: Math.random(), y: Math.random() * 0.4 },
-          colors: ["#f5a623", "#008090", "#e74c3c", "#8b5cf6", "#10b981"],
+          colors: ["var(--semantic-warning, #f5a623)", "var(--brand-teal, #008090)", "var(--semantic-danger, #e74c3c)", "var(--color-violet-500, #8b5cf6)", "var(--semantic-success, #10b981)"],
           zIndex: 10000,
         });
       }, 150);
       break;
     default:
-      confetti({ ...defaults, particleCount: 80, colors: ["#008090", "#f5a623", "#e74c3c", "#8b5cf6"], origin: { x: 0.5, y: 0.5 } });
+      confetti({ ...defaults, particleCount: 80, colors: ["var(--brand-teal, #008090)", "var(--semantic-warning, #f5a623)", "var(--semantic-danger, #e74c3c)", "var(--color-violet-500, #8b5cf6)"], origin: { x: 0.5, y: 0.5 } });
   }
 }
 
@@ -160,7 +160,7 @@ function CelebrationModal({
             onClick={handleDismiss}
             className="mt-2 px-6 py-2 rounded-xl text-sm font-semibold text-[#0c1929] transition-all hover:scale-105"
             style={{
-              background: "linear-gradient(135deg, #f5a623, #ffd700)",
+              background: "linear-gradient(135deg, var(--semantic-warning, #f5a623), #ffd700)",
               animation: "celebrationSlideUp 0.5s ease-out 0.8s both",
             }}
           >
@@ -182,7 +182,7 @@ function getCelebrationConfig(eventType: string, meta: Record<string, unknown>) 
         icon: "trending_up",
         title: `Level Up! → Lv.${newLevel}`,
         subtitle: `You've reached ${levelName}! Keep up the amazing work.`,
-        color: "#f5a623",
+        color: "var(--semantic-warning, #f5a623)",
         xpReward: null,
       };
     case "badge_earned":
@@ -190,7 +190,7 @@ function getCelebrationConfig(eventType: string, meta: Record<string, unknown>) 
         icon: (meta.badgeIcon as string) || "emoji_events",
         title: `Badge Unlocked!`,
         subtitle: `You earned "${(meta.badgeName as string) || "Achievement"}"`,
-        color: (meta.badgeColor as string) || "#8b5cf6",
+        color: (meta.badgeColor as string) || "var(--color-violet-500, #8b5cf6)",
         xpReward: null,
       };
     case "challenge_completed":
@@ -198,7 +198,7 @@ function getCelebrationConfig(eventType: string, meta: Record<string, unknown>) 
         icon: "flag",
         title: "Challenge Complete!",
         subtitle: (meta.title as string) || "You completed a weekly challenge!",
-        color: "#10b981",
+        color: "var(--semantic-success, #10b981)",
         xpReward: (meta.xpReward as number) || 200,
       };
     case "streak_milestone":
@@ -207,7 +207,7 @@ function getCelebrationConfig(eventType: string, meta: Record<string, unknown>) 
         icon: "local_fire_department",
         title: `${days}-Day Streak!`,
         subtitle: `You've been learning for ${days} days straight. Incredible!`,
-        color: "#e74c3c",
+        color: "var(--semantic-danger, #e74c3c)",
         xpReward: null,
       };
     case "path_completed":
@@ -223,7 +223,7 @@ function getCelebrationConfig(eventType: string, meta: Record<string, unknown>) 
         icon: "emoji_events",
         title: "Perfect Score!",
         subtitle: "100% on your quiz! You're mastering this material.",
-        color: "#f5a623",
+        color: "var(--semantic-warning, #f5a623)",
         xpReward: 100,
       };
     case "first_lesson":
@@ -231,7 +231,7 @@ function getCelebrationConfig(eventType: string, meta: Record<string, unknown>) 
         icon: "school",
         title: "First Lesson Complete!",
         subtitle: "Your bilingual journey has officially begun. Welcome!",
-        color: "#008090",
+        color: "var(--brand-teal, #008090)",
         xpReward: 50,
       };
     default:
@@ -239,7 +239,7 @@ function getCelebrationConfig(eventType: string, meta: Record<string, unknown>) 
         icon: "celebration",
         title: "Congratulations!",
         subtitle: "You've achieved something great!",
-        color: "#008090",
+        color: "var(--brand-teal, #008090)",
         xpReward: null,
       };
   }

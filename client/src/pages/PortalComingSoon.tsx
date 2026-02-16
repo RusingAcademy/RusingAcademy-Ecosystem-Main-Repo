@@ -28,7 +28,7 @@ const portalConfigs: Record<string, PortalConfig> = {
     description: "A dedicated workspace for RusingAcademy language coaches to manage their teaching practice, track student progress, schedule sessions, and monitor earnings.",
     descriptionFr: "Un espace dédié aux coachs linguistiques de RusingAcademy pour gérer leur pratique d'enseignement, suivre les progrès des étudiants, planifier des sessions et surveiller les revenus.",
     icon: "person",
-    color: "#7c3aed",
+    color: "var(--color-violet-600, #7c3aed)",
     bgGradient: "linear-gradient(160deg, #f5f3ff 0%, #ede9fe 40%, #ddd6fe 100%)",
     features: [
       { en: "Student Management", fr: "Gestion des étudiants" },
@@ -47,7 +47,7 @@ const portalConfigs: Record<string, PortalConfig> = {
     description: "A comprehensive HR management portal for organizational administrators to oversee team language training, track budgets, monitor SLE compliance, and generate reports.",
     descriptionFr: "Un portail complet de gestion RH pour les administrateurs organisationnels afin de superviser la formation linguistique de l'équipe, suivre les budgets, surveiller la conformité ELS et générer des rapports.",
     icon: "business",
-    color: "#2563eb",
+    color: "var(--color-blue-600, #2563eb)",
     bgGradient: "linear-gradient(160deg, #eff6ff 0%, #dbeafe 40%, #bfdbfe 100%)",
     features: [
       { en: "Team Overview", fr: "Aperçu de l'équipe" },
@@ -66,7 +66,7 @@ const portalConfigs: Record<string, PortalConfig> = {
     description: "The central command center for RusingAcademy platform administrators. Manage users, content, commerce, marketing, analytics, and all system configurations from a single unified interface.",
     descriptionFr: "Le centre de commande central pour les administrateurs de la plateforme RusingAcademy. Gérez les utilisateurs, le contenu, le commerce, le marketing, l'analytique et toutes les configurations système depuis une interface unifiée.",
     icon: "admin_panel_settings",
-    color: "#dc2626",
+    color: "var(--semantic-danger, #dc2626)",
     bgGradient: "linear-gradient(160deg, #fef2f2 0%, #fee2e2 40%, #fecaca 100%)",
     features: [
       { en: "User & Role Management", fr: "Gestion des utilisateurs et rôles" },

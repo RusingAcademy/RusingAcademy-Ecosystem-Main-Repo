@@ -28,8 +28,8 @@ interface DisplayEntry {
 }
 
 const statusConfig: Record<string, { icon: typeof CheckCircle2; label: string; color: string; bg: string; border: string }> = {
-  corrected: { icon: CheckCircle2, label: "Corrected", color: "#D4AF37", bg: "rgba(212, 175, 55, 0.06)", border: "rgba(212, 175, 55, 0.12)" },
-  perfect: { icon: Sparkles, label: "Perfect!", color: "#16a34a", bg: "rgba(34, 197, 94, 0.06)", border: "rgba(34, 197, 94, 0.12)" },
+  corrected: { icon: CheckCircle2, label: "Corrected", color: "var(--brand-gold, #D4AF37)", bg: "rgba(212, 175, 55, 0.06)", border: "rgba(212, 175, 55, 0.12)" },
+  perfect: { icon: Sparkles, label: "Perfect!", color: "var(--semantic-success, #16a34a)", bg: "rgba(34, 197, 94, 0.06)", border: "rgba(34, 197, 94, 0.12)" },
   pending: { icon: Clock, label: "Awaiting Correction", color: "#94a3b8", bg: "rgba(148, 163, 184, 0.06)", border: "rgba(148, 163, 184, 0.12)" },
 };
 
@@ -51,7 +51,7 @@ function CorrectionHighlight({ correction }: { correction: Correction }) {
           <p className="text-sm leading-relaxed">
             <span className="line-through text-red-400 px-1 rounded" style={{ background: "rgba(239, 68, 68, 0.06)" }}>{correction.original}</span>
             <span className="mx-2 text-muted-foreground/40">→</span>
-            <span className="font-semibold px-1 rounded" style={{ color: "#D4AF37", background: "rgba(212, 175, 55, 0.06)" }}>{correction.corrected}</span>
+            <span className="font-semibold px-1 rounded" style={{ color: "var(--brand-gold, #D4AF37)", background: "rgba(212, 175, 55, 0.06)" }}>{correction.corrected}</span>
           </p>
           <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed italic">{correction.explanation}</p>
         </div>
@@ -81,7 +81,7 @@ function EntryCard({ entry, onSelect }: { entry: DisplayEntry; onSelect: (e: Dis
         <div className="flex items-center gap-3">
           <div
             className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-xs"
-            style={{ background: "linear-gradient(135deg, #1B1464, #2D2580)" }}
+            style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" }}
           >
             {(entry.authorName || "?").split(" ").map(n => n[0]).join("").slice(0, 2)}
           </div>
@@ -106,7 +106,7 @@ function EntryCard({ entry, onSelect }: { entry: DisplayEntry; onSelect: (e: Dis
 
       {entry.correctionCount > 0 && (
         <div className="flex items-center gap-2 mb-3 text-[11px]">
-          <span className="px-2 py-0.5 rounded-lg font-bold" style={{ background: "rgba(239, 68, 68, 0.05)", color: "#ef4444" }}>
+          <span className="px-2 py-0.5 rounded-lg font-bold" style={{ background: "rgba(239, 68, 68, 0.05)", color: "var(--semantic-danger, #ef4444)" }}>
             {entry.correctionCount} correction{entry.correctionCount > 1 ? "s" : ""}
           </span>
           {entry.correctedByName && (
@@ -160,11 +160,11 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
         }}
       >
         {/* Paper texture accent */}
-        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, #1B1464, #D4AF37)" }} />
+        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, var(--brand-obsidian, #1B1464), var(--brand-gold, #D4AF37))" }} />
 
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-sm" style={{ background: "linear-gradient(135deg, #1B1464, #2D2580)" }}>
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-sm" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" }}>
               {(entry.authorName || "?").split(" ").map(n => n[0]).join("").slice(0, 2)}
             </div>
             <div>
@@ -201,7 +201,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
           {corrections.map((c: any) => (
             <div key={c.id} className="rounded-xl p-4 space-y-2" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)", boxShadow: "0 1px 4px rgba(27, 20, 100, 0.03)" }}>
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-lg flex items-center justify-center text-white font-bold text-[10px]" style={{ background: "linear-gradient(135deg, #D4AF37, #E8CB6A)" }}>
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center text-white font-bold text-[10px]" style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)" }}>
                   {(c.correctorName || "?")[0]}
                 </div>
                 <span className="text-xs font-bold text-foreground">{c.correctorName || "Anonymous"}</span>
@@ -227,7 +227,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
 
       {entry.status === "perfect" && (
         <div className="rounded-2xl p-5 text-center" style={{ background: "rgba(34, 197, 94, 0.04)", border: "1px solid rgba(34, 197, 94, 0.08)" }}>
-          <Sparkles className="w-8 h-8 mx-auto mb-2" style={{ color: "#16a34a" }} />
+          <Sparkles className="w-8 h-8 mx-auto mb-2" style={{ color: "var(--semantic-success, #16a34a)" }} />
           <p className="font-bold text-foreground">No corrections needed!</p>
           <p className="text-xs text-muted-foreground mt-1">This writing is grammatically correct. Great job!</p>
         </div>
@@ -244,7 +244,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
               setShowCorrectionForm(true);
             }}
             className="mt-3 rounded-xl text-sm font-bold text-white border-0"
-            style={{ background: "linear-gradient(135deg, #D4AF37, #E8CB6A)", boxShadow: "0 2px 8px rgba(212, 175, 55, 0.2)" }}
+            style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)", boxShadow: "0 2px 8px rgba(212, 175, 55, 0.2)" }}
           >
             Correct This Writing
           </Button>
@@ -283,7 +283,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
               }}
               disabled={addCorrectionMutation.isPending}
               className="rounded-xl text-sm flex-1 font-bold text-white border-0"
-              style={{ background: "linear-gradient(135deg, #1B1464, #2D2580)", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
+              style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
             >
               <Send className="w-4 h-4 mr-2" />
               {addCorrectionMutation.isPending ? "Submitting..." : "Submit Correction"}
@@ -335,7 +335,7 @@ function WriteEntryForm({ onClose }: { onClose: () => void }) {
       </button>
 
       <div className="rounded-2xl p-6 space-y-4 relative overflow-hidden" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)", boxShadow: "var(--shadow-card)" }}>
-        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, #1B1464, #D4AF37)" }} />
+        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, var(--brand-obsidian, #1B1464), var(--brand-gold, #D4AF37))" }} />
         <h2 className="text-lg font-bold text-foreground tracking-tight">Write a New Entry</h2>
         <p className="text-sm text-muted-foreground">Write in your target language and get corrections from the community.</p>
 
@@ -346,7 +346,7 @@ function WriteEntryForm({ onClose }: { onClose: () => void }) {
               onClick={() => setLanguage(lang)}
               className="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200"
               style={{
-                background: language === lang ? "linear-gradient(135deg, #1B1464, #2D2580)" : "rgba(27, 20, 100, 0.03)",
+                background: language === lang ? "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" : "rgba(27, 20, 100, 0.03)",
                 color: language === lang ? "white" : undefined,
                 boxShadow: language === lang ? "0 2px 8px rgba(27, 20, 100, 0.15)" : "none",
               }}
@@ -384,7 +384,7 @@ function WriteEntryForm({ onClose }: { onClose: () => void }) {
           }}
           disabled={createMutation.isPending}
           className="w-full rounded-xl font-bold text-white border-0"
-          style={{ background: "linear-gradient(135deg, #1B1464, #2D2580)", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
+          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
         >
           <Send className="w-4 h-4 mr-2" />
           {createMutation.isPending ? "Publishing..." : "Publish Entry"}
@@ -442,7 +442,7 @@ export default function Notebook() {
             setShowWriteForm(true);
           }}
           className="rounded-xl text-sm font-bold text-white border-0"
-          style={{ background: "linear-gradient(135deg, #1B1464, #2D2580)", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
+          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
         >
           <PenLine className="w-4 h-4 mr-2" /> Write Entry
         </Button>
@@ -455,7 +455,7 @@ export default function Notebook() {
             onClick={() => setFilter(f)}
             className="px-3.5 py-1.5 rounded-lg text-[11px] font-semibold transition-all duration-200"
             style={{
-              background: filter === f ? "linear-gradient(135deg, #1B1464, #2D2580)" : "transparent",
+              background: filter === f ? "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" : "transparent",
               color: filter === f ? "white" : undefined,
               boxShadow: filter === f ? "0 2px 6px rgba(27, 20, 100, 0.15)" : "none",
             }}

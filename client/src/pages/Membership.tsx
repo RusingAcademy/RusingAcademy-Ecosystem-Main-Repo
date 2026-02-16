@@ -17,8 +17,8 @@ const TIER_ICONS: Record<string, typeof Crown> = {
 };
 
 const TIER_COLORS: Record<string, string> = {
-  free: "#1B1464",
-  pro: "#D4AF37",
+  free: "var(--brand-obsidian, #1B1464)",
+  pro: "var(--brand-gold, #D4AF37)",
   enterprise: "#8B5CF6",
 };
 
@@ -122,7 +122,7 @@ export default function Membership() {
         <div className="grid md:grid-cols-3 gap-6">
           {(tiers ?? []).map((tier) => {
             const Icon = TIER_ICONS[tier.slug] ?? Star;
-            const color = TIER_COLORS[tier.slug] ?? "#1B1464";
+            const color = TIER_COLORS[tier.slug] ?? "var(--brand-obsidian, #1B1464)";
             const isCurrentTier = mySub?.tier?.id === tier.id;
             const features = (tier.features as string[]) ?? [];
             const isPopular = tier.slug === "pro";

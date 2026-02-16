@@ -57,7 +57,7 @@ interface ApplicationAnalyticsDashboardProps {
   onDateRangeChange?: (startDate: Date, endDate: Date) => void;
 }
 
-const COLORS = ["#0ea5a5", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
+const COLORS = ["#0ea5a5", "var(--semantic-success, #10b981)", "var(--semantic-warning, #f59e0b)", "var(--semantic-danger, #ef4444)", "var(--color-violet-500, #8b5cf6)"];
 
 export function ApplicationAnalyticsDashboard({
   data,
@@ -241,9 +241,9 @@ export function ApplicationAnalyticsDashboard({
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="submitted" stroke="#f59e0b" name={isEn ? "Submitted" : "Soumises"} />
-            <Line type="monotone" dataKey="approved" stroke="#10b981" name={isEn ? "Approved" : "Approuvées"} />
-            <Line type="monotone" dataKey="rejected" stroke="#ef4444" name={isEn ? "Rejected" : "Rejetées"} />
+            <Line type="monotone" dataKey="submitted" stroke="var(--semantic-warning, #f59e0b)" name={isEn ? "Submitted" : "Soumises"} />
+            <Line type="monotone" dataKey="approved" stroke="var(--semantic-success, #10b981)" name={isEn ? "Approved" : "Approuvées"} />
+            <Line type="monotone" dataKey="rejected" stroke="var(--semantic-danger, #ef4444)" name={isEn ? "Rejected" : "Rejetées"} />
           </LineChart>
         </ResponsiveContainer>
       </div>
@@ -264,7 +264,7 @@ export function ApplicationAnalyticsDashboard({
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="count" fill="#8b5cf6" />
+            <Bar dataKey="count" fill="var(--color-violet-500, #8b5cf6)" />
           </BarChart>
         </ResponsiveContainer>
       </div>

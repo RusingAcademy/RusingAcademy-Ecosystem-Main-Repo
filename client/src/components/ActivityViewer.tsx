@@ -68,7 +68,7 @@ function renderMarkdown(content: string): string {
 
 // ─── Slot Configuration ───
 const SLOT_CONFIG = [
-  { index: 1, type: "introduction", label: "Introduction", labelFr: "Introduction", icon: BookOpen, color: "#0F3D3E", bg: "rgba(15,61,62,0.12)" },
+  { index: 1, type: "introduction", label: "Introduction", labelFr: "Introduction", icon: BookOpen, color: "var(--brand-foundation, #0F3D3E)", bg: "rgba(15,61,62,0.12)" },
   { index: 2, type: "video", label: "Video", labelFr: "Vidéo", icon: Video, color: "#C65A1E", bg: "rgba(198,90,30,0.12)" },
   { index: 3, type: "grammar", label: "Grammar", labelFr: "Grammaire", icon: PenTool, color: "#1E6B4F", bg: "rgba(30,107,79,0.12)" },
   { index: 4, type: "written_practice", label: "Written", labelFr: "Écrit", icon: FileText, color: "#2563EB", bg: "rgba(37,99,235,0.12)" },
@@ -202,7 +202,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
         // Fire confetti burst
         const duration = 2500;
         const end = Date.now() + duration;
-        const colors = ['#0F3D3E', '#C65A1E', '#17E2C6', '#F59E0B', '#10B981'];
+        const colors = ['var(--brand-foundation, #0F3D3E)', '#C65A1E', '#17E2C6', '#F59E0B', '#10B981'];
         (function frame() {
           confetti({
             particleCount: 3,
@@ -349,7 +349,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
           <div className="h-1.5 rounded-full bg-muted overflow-hidden">
             <motion.div
               className="h-full rounded-full"
-              style={{ background: "linear-gradient(90deg, #0F3D3E, #1E6B4F, #C65A1E)" }}
+              style={{ background: "linear-gradient(90deg, var(--brand-foundation, #0F3D3E), #1E6B4F, #C65A1E)" }}
               initial={{ width: 0 }}
               animate={{ width: `${progressPercent}%` }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -515,7 +515,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                 <div 
                   className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 relative"
                   style={{ 
-                    backgroundColor: isCurrentCompleted ? '#10B981' : (currentSlotConfig?.color || '#0F3D3E'),
+                    backgroundColor: isCurrentCompleted ? '#10B981' : (currentSlotConfig?.color || 'var(--brand-foundation, #0F3D3E)'),
                     color: 'white'
                   }}
                 >
@@ -532,7 +532,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                     <Badge 
                       variant="outline" 
                       className="text-[10px] px-1.5 py-0 border-current"
-                      style={{ color: isCurrentCompleted ? '#10B981' : (currentSlotConfig?.color || '#0F3D3E') }}
+                      style={{ color: isCurrentCompleted ? '#10B981' : (currentSlotConfig?.color || 'var(--brand-foundation, #0F3D3E)') }}
                     >
                       {currentSlotConfig 
                         ? `Slot ${currentSlotConfig.index}` 
@@ -641,7 +641,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                     : 'w-2.5 h-2.5 hover:scale-125 bg-border hover:bg-muted-foreground'
                   }
                 `}
-                style={idx === activeSlotIndex ? { backgroundColor: slotConf?.color || '#0F3D3E' } : undefined}
+                style={idx === activeSlotIndex ? { backgroundColor: slotConf?.color || 'var(--brand-foundation, #0F3D3E)' } : undefined}
                 aria-label={`Go to slot ${idx}`}
               />
             );

@@ -546,9 +546,9 @@ export default function AdminContentManagement() {
       counts[q.difficulty as keyof typeof counts]++;
     });
     return [
-      { name: 'Easy', value: counts.easy, fill: '#22c55e' },
+      { name: 'Easy', value: counts.easy, fill: 'var(--semantic-success, #22c55e)' },
       { name: 'Medium', value: counts.medium, fill: '#eab308' },
-      { name: 'Hard', value: counts.hard, fill: '#ef4444' },
+      { name: 'Hard', value: counts.hard, fill: 'var(--semantic-danger, #ef4444)' },
     ];
   }, [questionStats]);
   
@@ -1339,7 +1339,7 @@ export default function AdminContentManagement() {
                         <XAxis dataKey="name" />
                         <YAxis domain={[0, 100]} />
                         <Tooltip formatter={(value) => `${value}%`} />
-                        <Bar dataKey="rate" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="rate" fill="var(--color-blue-500, #3b82f6)" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </CardContent>

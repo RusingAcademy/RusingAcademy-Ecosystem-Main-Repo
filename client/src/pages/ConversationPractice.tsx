@@ -260,7 +260,7 @@ export default function ConversationPractice() {
                 <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4" style={{ color: "#f8f7f7" }}>
                   {isEn ? "Conversation Practice Mode" : "Mode Pratique de Conversation"}
                 </h1>
-                <p className="text-lg text-white/90 max-w-3xl mx-auto" style={{ color: "#ffffff" }}>
+                <p className="text-lg text-white/90 max-w-3xl mx-auto" style={{ color: "var(--color-white, #ffffff)" }}>
                   {isEn
                     ? "Practice speaking and writing with AI coaches who provide real-time feedback, corrections, and encouragement."
                     : "Pratiquez l'expression orale et écrite avec des coachs IA qui fournissent des commentaires, corrections et encouragements en temps réel."}

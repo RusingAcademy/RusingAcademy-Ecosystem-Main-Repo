@@ -332,7 +332,7 @@ function EcosystemSection({ language }: { language: string }) {
       descEn: "Cutting-edge educational content production and custom solutions for ministries and organizations.",
       descFr: "Production de contenu pédagogique de pointe et solutions sur mesure pour les ministères et organisations.",
       icon: Clapperboard,
-      color: "#D4AF37",
+      color: "var(--brand-gold, #D4AF37)",
       gradient: "from-cta to-cta",
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-barholex.jpg",
       logo: "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-light.png",
@@ -617,7 +617,7 @@ function OffersSection({ language }: { language: string }) {
                     <offer.icon className="w-4 h-4" />
                     {language === "en" ? offer.subtitleEn : offer.subtitleFr}
                   </div>
-                  <h3 className="text-xl font-bold" style={{color: '#ffffff'}}>
+                  <h3 className="text-xl font-bold" style={{color: 'var(--color-white, #ffffff)'}}>
                     {language === "en" ? offer.titleEn : offer.titleFr}
                   </h3>
                 </div>
@@ -956,7 +956,7 @@ function LeadershipSection({ language }: { language: string }) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
                     style={{
-                      background: "linear-gradient(135deg, #D4AF37 0%, #B8860B 50%, #8B6914 100%)",
+                      background: "linear-gradient(135deg, var(--brand-gold, #D4AF37) 0%, #B8860B 50%, #8B6914 100%)",
                       boxShadow: "0 4px 20px rgba(212, 175, 55, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1)",
                     }}
                   >

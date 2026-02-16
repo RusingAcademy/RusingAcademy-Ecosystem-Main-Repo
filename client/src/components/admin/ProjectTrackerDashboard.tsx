@@ -231,7 +231,7 @@ export default function ProjectTrackerDashboard() {
                 <svg className="w-full h-full transform -rotate-90">
                   <circle cx="96" cy="96" r="80" stroke="#0a6969" strokeWidth="16" fill="none" />
                   <circle cx="96" cy="96" r="80" stroke="url(#gradient)" strokeWidth="16" fill="none" strokeDasharray={`${sprintProgress * 5.03} 503`} strokeLinecap="round" />
-                  <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#10b981" /><stop offset="100%" stopColor="#14b8a6" /></linearGradient></defs>
+                  <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="var(--semantic-success, #10b981)" /><stop offset="100%" stopColor="#14b8a6" /></linearGradient></defs>
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-4xl font-bold">{sprintProgress.toFixed(0)}%</span>

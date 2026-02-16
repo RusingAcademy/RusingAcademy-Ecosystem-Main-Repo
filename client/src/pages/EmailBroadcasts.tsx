@@ -92,8 +92,8 @@ export default function EmailBroadcasts() {
             {[
               { label: "Total Sent", value: stats.totalSent, icon: Send, color: "#22C55E" },
               { label: "Drafts", value: stats.totalDrafts, icon: Edit, color: "#6B7280" },
-              { label: "Recipients", value: stats.totalRecipients, icon: Users, color: "#1B1464" },
-              { label: "Avg Open Rate", value: `${stats.avgOpenRate}%`, icon: Eye, color: "#D4AF37" },
+              { label: "Recipients", value: stats.totalRecipients, icon: Users, color: "var(--brand-obsidian, #1B1464)" },
+              { label: "Avg Open Rate", value: `${stats.avgOpenRate}%`, icon: Eye, color: "var(--brand-gold, #D4AF37)" },
             ].map((stat) => (
               <Card key={stat.label} className="border">
                 <CardContent className="p-4 flex items-center gap-3">
@@ -112,7 +112,7 @@ export default function EmailBroadcasts() {
 
         {/* Create Form */}
         {showCreate && (
-          <Card className="mb-8 border-2" style={{ borderColor: "#1B1464" + "30" }}>
+          <Card className="mb-8 border-2" style={{ borderColor: "var(--brand-obsidian, #1B1464)" + "30" }}>
             <CardHeader>
               <CardTitle className="text-lg">Create New Broadcast</CardTitle>
             </CardHeader>

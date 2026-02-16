@@ -355,7 +355,7 @@ export default function HeroGoldStandard() {
                               style={{
                                 background: "rgba(255, 255, 255, 0.9)",
                                 border: "2px solid rgba(212, 175, 105, 0.5)",
-                                color: "#000000",
+                                color: "var(--color-black, #000000)",
                                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.04)",
                               }}
                             >

@@ -14,12 +14,12 @@ const FORUM_IMG = "https://files.manuscdn.com/user_upload_by_module/session_file
 type Tab = "categories" | "groups" | "recent";
 
 const forumCategories = [
-  { name: "SLE Preparation", nameFr: "Préparation ELS", icon: "school", description: "Discuss SLE exam strategies, share tips, and support each other.", descFr: "Discutez des stratégies d'examen ELS, partagez des conseils.", topics: 24, posts: 156, color: "#008090" },
-  { name: "Grammar & Vocabulary", nameFr: "Grammaire et vocabulaire", icon: "spellcheck", description: "Ask grammar questions, share vocabulary exercises, and learn together.", descFr: "Posez des questions de grammaire, partagez des exercices de vocabulaire.", topics: 18, posts: 89, color: "#8b5cf6" },
-  { name: "Study Tips & Resources", nameFr: "Conseils et ressources", icon: "lightbulb", description: "Share useful resources, study tips, and learning materials.", descFr: "Partagez des ressources utiles et des conseils d'étude.", topics: 15, posts: 67, color: "#f5a623" },
-  { name: "Technical Support", nameFr: "Support technique", icon: "build", description: "Get help with portal features and technical issues.", descFr: "Obtenez de l'aide avec les fonctionnalités du portail.", topics: 8, posts: 31, color: "#e74c3c" },
-  { name: "General Discussion", nameFr: "Discussion générale", icon: "forum", description: "Connect with other learners, share experiences, and ask questions.", descFr: "Connectez-vous avec d'autres apprenants, partagez vos expériences.", topics: 22, posts: 134, color: "#059669" },
-  { name: "Success Stories", nameFr: "Histoires de réussite", icon: "emoji_events", description: "Celebrate achievements and inspire others with your bilingual journey.", descFr: "Célébrez vos réussites et inspirez les autres.", topics: 6, posts: 28, color: "#f59e0b" },
+  { name: "SLE Preparation", nameFr: "Préparation ELS", icon: "school", description: "Discuss SLE exam strategies, share tips, and support each other.", descFr: "Discutez des stratégies d'examen ELS, partagez des conseils.", topics: 24, posts: 156, color: "var(--brand-teal, #008090)" },
+  { name: "Grammar & Vocabulary", nameFr: "Grammaire et vocabulaire", icon: "spellcheck", description: "Ask grammar questions, share vocabulary exercises, and learn together.", descFr: "Posez des questions de grammaire, partagez des exercices de vocabulaire.", topics: 18, posts: 89, color: "var(--color-violet-500, #8b5cf6)" },
+  { name: "Study Tips & Resources", nameFr: "Conseils et ressources", icon: "lightbulb", description: "Share useful resources, study tips, and learning materials.", descFr: "Partagez des ressources utiles et des conseils d'étude.", topics: 15, posts: 67, color: "var(--semantic-warning, #f5a623)" },
+  { name: "Technical Support", nameFr: "Support technique", icon: "build", description: "Get help with portal features and technical issues.", descFr: "Obtenez de l'aide avec les fonctionnalités du portail.", topics: 8, posts: 31, color: "var(--semantic-danger, #e74c3c)" },
+  { name: "General Discussion", nameFr: "Discussion générale", icon: "forum", description: "Connect with other learners, share experiences, and ask questions.", descFr: "Connectez-vous avec d'autres apprenants, partagez vos expériences.", topics: 22, posts: 134, color: "var(--semantic-success, #059669)" },
+  { name: "Success Stories", nameFr: "Histoires de réussite", icon: "emoji_events", description: "Celebrate achievements and inspire others with your bilingual journey.", descFr: "Célébrez vos réussites et inspirez les autres.", topics: 6, posts: 28, color: "var(--semantic-warning, #f59e0b)" },
 ];
 
 const studyGroups = [
@@ -66,10 +66,10 @@ export default function CommunityForum() {
                 { label: lang === "fr" ? "Sujets" : "Topics", value: "93", icon: "topic" },
                 { label: lang === "fr" ? "Publications" : "Posts", value: "505", icon: "chat_bubble" },
                 { label: lang === "fr" ? "Membres" : "Members", value: "142", icon: "people" },
-                { label: lang === "fr" ? "En ligne" : "Online", value: "18", icon: "circle", color: "#10b981" },
+                { label: lang === "fr" ? "En ligne" : "Online", value: "18", icon: "circle", color: "var(--semantic-success, #10b981)" },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-center gap-1.5">
-                  <span className="material-icons" style={{ fontSize: "14px", color: stat.color ?? "#9ca3af" }}>{stat.icon}</span>
+                  <span className="material-icons" style={{ fontSize: "14px", color: stat.color ?? "var(--color-gray-400, #9ca3af)" }}>{stat.icon}</span>
                   <span className="text-sm font-bold text-gray-900">{stat.value}</span>
                   <span className="text-[10px] text-gray-400">{stat.label}</span>
                 </div>

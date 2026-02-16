@@ -194,8 +194,8 @@ export default function RusingAcademyHome() {
     { path: "Path I", level: "A1→A2", duration: "4 weeks", color: "#E07B39" },
     { path: "Path II", level: "A2→B1", duration: "4 weeks", color: "#E07B39" },
     { path: "Path III", level: "B1→B1+", duration: "4 weeks", color: "#E07B39" },
-    { path: "Path IV", level: "B1+→B2", duration: "4 weeks", color: "#D4AF37" },
-    { path: "Path V", level: "B2→C1", duration: "4 weeks", color: "#D4AF37" },
+    { path: "Path IV", level: "B1+→B2", duration: "4 weeks", color: "var(--brand-gold, #D4AF37)" },
+    { path: "Path V", level: "B2→C1", duration: "4 weeks", color: "var(--brand-gold, #D4AF37)" },
     { path: "Path VI", level: "SLE Prep", duration: "4 weeks", color: "#2DD4BF" },
   ];
 

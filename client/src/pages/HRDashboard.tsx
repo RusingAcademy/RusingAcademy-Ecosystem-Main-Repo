@@ -253,12 +253,12 @@ export default function HRDashboard() {
             <title>${language === "fr" ? "Rapport de Progression" : "Progress Report"}</title>
             <style>
               body { font-family: Arial, sans-serif; padding: 20px; }
-              h1 { color: #0F3D3E; border-bottom: 2px solid #0F3D3E; padding-bottom: 10px; }
+              h1 { color: var(--brand-foundation, #0F3D3E); border-bottom: 2px solid var(--brand-foundation, #0F3D3E); padding-bottom: 10px; }
               .header { margin-bottom: 20px; }
               .company { font-size: 12px; color: #666; }
               table { width: 100%; border-collapse: collapse; margin-top: 20px; }
               th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-              th { background-color: #0F3D3E; color: white; }
+              th { background-color: var(--brand-foundation, #0F3D3E); color: white; }
               tr:nth-child(even) { background-color: #f9f9f9; }
               .status-on-track { color: green; }
               .status-needs-attention { color: orange; }

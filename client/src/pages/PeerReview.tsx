@@ -170,12 +170,12 @@ export default function PeerReview() {
                   <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 shadow-sm">
                     <h3 className="font-semibold text-gray-900 mb-4">Your Evaluation</h3>
                     <div className="space-y-5">
-                      <ScoreSlider label="Grammar" value={grammarScore} onChange={setGrammarScore} color="#008090" />
-                      <ScoreSlider label="Vocabulary" value={vocabularyScore} onChange={setVocabularyScore} color="#8b5cf6" />
-                      <ScoreSlider label="Coherence" value={coherenceScore} onChange={setCoherenceScore} color="#f5a623" />
+                      <ScoreSlider label="Grammar" value={grammarScore} onChange={setGrammarScore} color="var(--brand-teal, #008090)" />
+                      <ScoreSlider label="Vocabulary" value={vocabularyScore} onChange={setVocabularyScore} color="var(--color-violet-500, #8b5cf6)" />
+                      <ScoreSlider label="Coherence" value={coherenceScore} onChange={setCoherenceScore} color="var(--semantic-warning, #f5a623)" />
                       <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
                         <span className="text-sm font-semibold text-gray-700">Overall Score</span>
-                        <span className="text-lg font-bold" style={{ color: overallScore >= 80 ? "#22c55e" : overallScore >= 60 ? "#f5a623" : "#e74c3c" }}>{overallScore}%</span>
+                        <span className="text-lg font-bold" style={{ color: overallScore >= 80 ? "var(--semantic-success, #22c55e)" : overallScore >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }}>{overallScore}%</span>
                       </div>
                     </div>
                   </div>
@@ -251,15 +251,15 @@ export default function PeerReview() {
                 <div key={review.id} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-gray-100 shadow-sm">
                   <div className="flex items-center justify-between mb-3">
                     <div className="font-semibold text-gray-900">Submission #{review.submissionId}</div>
-                    <div className="text-lg font-bold" style={{ color: (review.overallScore ?? 0) >= 80 ? "#22c55e" : (review.overallScore ?? 0) >= 60 ? "#f5a623" : "#e74c3c" }}>
+                    <div className="text-lg font-bold" style={{ color: (review.overallScore ?? 0) >= 80 ? "var(--semantic-success, #22c55e)" : (review.overallScore ?? 0) >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }}>
                       {review.overallScore}%
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-3">
                     {[
-                      { label: "Grammar", value: review.grammarScore, color: "#008090" },
-                      { label: "Vocabulary", value: review.vocabularyScore, color: "#8b5cf6" },
-                      { label: "Coherence", value: review.coherenceScore, color: "#f5a623" },
+                      { label: "Grammar", value: review.grammarScore, color: "var(--brand-teal, #008090)" },
+                      { label: "Vocabulary", value: review.vocabularyScore, color: "var(--color-violet-500, #8b5cf6)" },
+                      { label: "Coherence", value: review.coherenceScore, color: "var(--semantic-warning, #f5a623)" },
                     ].map((s, i) => (
                       <div key={i} className="text-center">
                         <div className="text-sm font-bold" style={{ color: s.color }}>{s.value}%</div>

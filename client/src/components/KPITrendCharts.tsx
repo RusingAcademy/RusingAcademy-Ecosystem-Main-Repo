@@ -348,7 +348,7 @@ export default function KPITrendCharts() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {metrics.map((metric) => {
           const change = getChangePercentage(metric.currentValue, metric.previousValue);
-          const trendColor = change > 2 ? "#22c55e" : change < -2 ? "#ef4444" : "#6b7280";
+          const trendColor = change > 2 ? "var(--semantic-success, #22c55e)" : change < -2 ? "var(--semantic-danger, #ef4444)" : "var(--color-gray-500, #6b7280)";
 
           return (
             <Card key={metric.id}>

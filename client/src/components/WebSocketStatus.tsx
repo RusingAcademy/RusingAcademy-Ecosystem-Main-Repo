@@ -19,8 +19,8 @@ export default function WebSocketStatus({ compact = false }: WebSocketStatusProp
           className="w-2 h-2 rounded-full"
           style={{
             background: connected
-              ? "linear-gradient(135deg, #22c55e, #16a34a)"
-              : "linear-gradient(135deg, #ef4444, #dc2626)",
+              ? "linear-gradient(135deg, var(--semantic-success, #22c55e), var(--semantic-success, #16a34a))"
+              : "linear-gradient(135deg, var(--semantic-danger, #ef4444), var(--semantic-danger, #dc2626))",
             boxShadow: connected
               ? "0 0 4px rgba(34, 197, 94, 0.3)"
               : "0 0 4px rgba(239, 68, 68, 0.3)",

@@ -18,10 +18,10 @@ type ProductType = "all" | "courses" | "coaching" | "podcasts" | "newsletters" |
 
 const productTypes: { key: ProductType; label: string; icon: React.ElementType; color: string }[] = [
   { key: "all", label: "All", icon: Package, color: "#6366f1" },
-  { key: "courses", label: "Courses", icon: BookOpen, color: "var(--color-blue-600, #2563eb)" },
-  { key: "coaching", label: "Coaching", icon: GraduationCap, color: "var(--semantic-success, #059669)" },
-  { key: "podcasts", label: "Podcasts", icon: Headphones, color: "var(--color-violet-600, #7c3aed)" },
-  { key: "newsletters", label: "Newsletters", icon: Newspaper, color: "var(--semantic-danger, #dc2626)" },
+  { key: "courses", label: "Courses", icon: BookOpen, color: "var(--color-blue-600, var(--color-blue-600, #2563eb))" },
+  { key: "coaching", label: "Coaching", icon: GraduationCap, color: "var(--semantic-success, var(--semantic-success, #059669))" },
+  { key: "podcasts", label: "Podcasts", icon: Headphones, color: "var(--color-violet-600, var(--color-violet-600, #7c3aed))" },
+  { key: "newsletters", label: "Newsletters", icon: Newspaper, color: "var(--semantic-danger, var(--semantic-danger, #dc2626))" },
   { key: "downloads", label: "Downloads", icon: FolderDown, color: "#ea580c" },
   { key: "community", label: "Community", icon: MessageCircle, color: "#0891b2" },
 ];

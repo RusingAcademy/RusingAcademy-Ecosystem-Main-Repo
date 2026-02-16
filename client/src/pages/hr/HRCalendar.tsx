@@ -129,7 +129,7 @@ export default function HRCalendar() {
             {ui.examDates}
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#16a34a]" />
+            <div className="w-3 h-3 rounded-full bg-[var(--semantic-success, #16a34a)]" />
             {ui.cohortMilestones}
           </div>
         </div>

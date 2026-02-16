@@ -115,7 +115,7 @@ export default function Results() {
                   <XAxis dataKey="module" tick={{ fontSize: 11 }} label={{ value: "Module", position: "insideBottom", offset: -5, fontSize: 12 }} />
                   <YAxis tick={{ fontSize: 11 }} domain={[0, 100]} tickFormatter={(v) => `${v}%`} label={{ value: "Score (%)", angle: -90, position: "insideLeft", fontSize: 12 }} />
                   <Tooltip formatter={(value: number) => [`${value}%`, "Score"]} />
-                  <Bar dataKey="score" fill="#008090" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="score" fill="var(--brand-teal, #008090)" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
