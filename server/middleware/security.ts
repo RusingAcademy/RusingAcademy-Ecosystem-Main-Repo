@@ -86,7 +86,11 @@ export const helmetMiddleware = helmet({
         "'self'", "'unsafe-inline'", "'unsafe-eval'",
         "https://cdn.jsdelivr.net", "https://js.stripe.com",
         "https://www.googletagmanager.com", "https://www.google-analytics.com",
+        "https://cloud.umami.is",
       ],
+      // Allow inline event handlers required by some UI libraries;
+      // removing 'none' prevents Vite module scripts from being blocked.
+      scriptSrcAttr: ["'unsafe-inline'"],
       styleSrc: [
         "'self'", "'unsafe-inline'",
         "https://fonts.googleapis.com", "https://cdn.jsdelivr.net",
@@ -99,6 +103,7 @@ export const helmetMiddleware = helmet({
         "https://*.manus.computer", "https://*.manus.space",
         "wss://*.manus.computer", "wss://*.manus.space",
         "https://www.google-analytics.com",
+        "https://cloud.umami.is",
         process.env.VITE_APP_URL || "",
         process.env.BUILT_IN_FORGE_API_URL || "",
         process.env.VITE_FRONTEND_FORGE_API_URL || "",
@@ -137,7 +142,14 @@ export function sanitizeRequest(req: Request, _res: Response, next: NextFunction
 // ─── Register All Security Middleware ────────────────────────────────────────
 
 export function registerSecurityMiddleware(app: Express) {
-  app.use(helmetMiddleware);
+  // Skip helmet for static assets — CSP headers on JS/CSS files
+  // can block Vite's dynamic import() module loading.
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    if (req.path.startsWith("/assets/") || req.path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|map)$/)) {
+      return next();
+    }
+    return helmetMiddleware(req, res, next);
+  });
   app.use(corsMiddleware);
   app.use(sanitizeRequest);
   app.use("/api/", apiRateLimiter);
