@@ -8,7 +8,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { eq, and, sql, desc, gte } from "drizzle-orm";
 import { getDb } from "../db";
-import { learnerXp } from "@shared/schema";
+import { learnerXp } from "../../drizzle/schema";
 
 export const dailyGoalsRouter = router({
   /**
