@@ -580,7 +580,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
         </Sheet>
 
         {/* ─── MAIN CONTENT AREA ─── */}
-        <main className="flex-1 overflow-y-auto" role="main" style={{ fontSize: "18px" }}>
+        <main className="flex-1 overflow-y-auto" role="main" >
           <LearnLayoutProvider
             courseSlug={slug || ""}
             navigateToLesson={navigateToLesson}
@@ -770,7 +770,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                 className={`gap-2 transition-all duration-300 ${
                   isCurrentLessonCompleted
                     ? "border-green-500/50 text-green-600 hover:bg-green-50 dark:hover:bg-green-950/20 shadow-sm"
-                    : "bg-gradient-to-r from-foundation to-teal-700 hover:opacity-90 text-white shadow-md shadow-[#0F3D3E]/20"
+                    : "bg-gradient-to-r from-foundation to-teal-700 hover:opacity-90 text-white shadow-md shadow-teal-800/20"
                 }`}
               >
                 {markCompleteMutation.isPending ? (
@@ -802,7 +802,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
             onClick={() => nextLesson && navigateToLesson(nextLesson.id)}
             className={`gap-1 min-w-[100px] justify-end transition-all duration-300 ${
               isCurrentLessonCompleted && nextLesson 
-                ? "bg-gradient-to-r from-cta to-orange-600 hover:opacity-90 text-white shadow-md shadow-[#C65A1E]/20" 
+                ? "bg-gradient-to-r from-cta to-orange-600 hover:opacity-90 text-white shadow-md shadow-orange-700/20" 
                 : ""
             }`}
             aria-label={isEn ? "Next lesson" : "Leçon suivante"}

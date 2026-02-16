@@ -76,7 +76,7 @@ export default function RightSidebar() {
           <button
             onClick={() => toast("Feature coming soon")}
             className="text-[10px] font-semibold transition-colors hover-underline"
-            style={{ color: "#1B1464" }}
+            
           >
             See all
           </button>
@@ -110,7 +110,7 @@ export default function RightSidebar() {
                 </p>
                 <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
                   <Star className="w-3 h-3" style={{ fill: "#D4AF37", color: "#D4AF37" }} />
-                  <span className="font-semibold" style={{ color: "#D4AF37" }}>{teacher.rating.toFixed(1)}</span>
+                  <span className="font-semibold" >{teacher.rating.toFixed(1)}</span>
                   <span className="mx-0.5 opacity-40">&middot;</span>
                   <span>{teacher.lessons.toLocaleString()} lessons</span>
                 </div>
@@ -249,7 +249,7 @@ export default function RightSidebar() {
             border: "1px solid rgba(27, 20, 100, 0.06)",
           }}
         >
-          <GraduationCap className="w-6 h-6" style={{ color: "#1B1464" }} />
+          <GraduationCap className="w-6 h-6"  />
         </div>
         <h3 className="text-sm font-bold text-foreground mb-1">
           Explore RusingAcademy

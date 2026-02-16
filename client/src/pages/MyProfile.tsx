@@ -290,7 +290,7 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.name}</label>
                       {isEditing ? (
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                           aria-label={t.name} />
                       ) : (
                         <p className="text-sm text-gray-800 py-2">{name || t.notSet}</p>
@@ -306,7 +306,7 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.department}</label>
                       {isEditing ? (
                         <select value={department} onChange={(e) => setDepartment(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                           aria-label={t.department}>
                           <option value="">—</option>
                           {DEPARTMENTS.map((d) => <option key={d} value={d}>{d}</option>)}
@@ -319,7 +319,7 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.position}</label>
                       {isEditing ? (
                         <input type="text" value={position} onChange={(e) => setPosition(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                           aria-label={t.position} />
                       ) : (
                         <p className="text-sm text-gray-800 py-2">{position || t.notSet}</p>
@@ -424,7 +424,7 @@ export default function MyProfile() {
                 {isEditing ? (
                   <textarea value={learningGoals} onChange={(e) => setLearningGoals(e.target.value)}
                     rows={3} placeholder={t.goalsPlaceholder}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700 resize-none"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700 resize-none"
                     aria-label={t.goals} />
                 ) : (
                   <p className="text-sm text-gray-800 py-2 whitespace-pre-wrap">{learningGoals || t.notSet}</p>
@@ -435,7 +435,7 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.primaryFocus}</label>
                   {isEditing ? (
                     <select value={primaryFocus} onChange={(e) => setPrimaryFocus(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.primaryFocus}>
                       {FOCUS_OPTIONS.map((f) => (
                         <option key={f} value={f}>{t.focusLabels[f]}</option>
@@ -449,7 +449,7 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.targetLanguage}</label>
                   {isEditing ? (
                     <select value={targetLanguage} onChange={(e) => setTargetLanguage(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.targetLanguage}>
                       <option value="french">{t.french}</option>
                       <option value="english">{t.english}</option>
@@ -463,7 +463,7 @@ export default function MyProfile() {
                   {isEditing ? (
                     <input type="number" min={1} max={40} value={weeklyStudyHours}
                       onChange={(e) => setWeeklyStudyHours(Number(e.target.value))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.weeklyHours} />
                   ) : (
                     <p className="text-sm text-gray-800 py-2">{weeklyStudyHours} {t.hoursPerWeek}</p>
@@ -474,7 +474,7 @@ export default function MyProfile() {
                 <label className="text-xs font-medium text-gray-500 mb-1 block">{t.examDate}</label>
                 {isEditing ? (
                   <input type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)}
-                    className="w-full sm:w-auto border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                    className="w-full sm:w-auto border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                     aria-label={t.examDate} />
                 ) : (
                   <p className="text-sm text-gray-800 py-2">{examDate || t.notSet}</p>
@@ -551,7 +551,7 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.prefLang}</label>
                   {isEditing ? (
                     <select value={preferredLanguage} onChange={(e) => setPreferredLanguage(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-[#008090]/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.prefLang}>
                       <option value="en">English</option>
                       <option value="fr">Français</option>

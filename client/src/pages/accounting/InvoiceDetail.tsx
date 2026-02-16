@@ -355,7 +355,7 @@ export default function InvoiceDetail() {
             <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Customer</label>
             {isEditing ? (
               <select
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 value={customerId || ""}
                 onChange={(e) => setCustomerId(Number(e.target.value))}
               >
@@ -374,7 +374,7 @@ export default function InvoiceDetail() {
               {isEditing ? (
                 <input
                   type="text"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   value={invoiceNumber}
                   onChange={(e) => setInvoiceNumber(e.target.value)}
                   placeholder="INV-001"
@@ -387,7 +387,7 @@ export default function InvoiceDetail() {
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Terms</label>
               {isEditing ? (
                 <select
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   value={terms}
                   onChange={(e) => setTerms(e.target.value)}
                 >
@@ -404,7 +404,7 @@ export default function InvoiceDetail() {
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Currency</label>
               {isEditing ? (
                 <select
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   value={currency}
                   onChange={(e) => setCurrency(e.target.value)}
                 >
@@ -427,7 +427,7 @@ export default function InvoiceDetail() {
               {isEditing ? (
                 <input
                   type="date"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   value={invoiceDate}
                   onChange={(e) => setInvoiceDate(e.target.value)}
                 />
@@ -440,7 +440,7 @@ export default function InvoiceDetail() {
               {isEditing ? (
                 <input
                   type="date"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
                 />
@@ -473,7 +473,7 @@ export default function InvoiceDetail() {
                   <td className="py-2">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#2CA01C]"
+                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.productId || ""}
                         onChange={(e) => selectProduct(index, Number(e.target.value))}
                       >
@@ -492,7 +492,7 @@ export default function InvoiceDetail() {
                     {isEditing ? (
                       <input
                         type="text"
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#2CA01C]"
+                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.description}
                         onChange={(e) => updateLineItem(index, "description", e.target.value)}
                         placeholder="Description"
@@ -505,7 +505,7 @@ export default function InvoiceDetail() {
                     {isEditing ? (
                       <input
                         type="number"
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-[#2CA01C]"
+                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.quantity}
                         onChange={(e) => updateLineItem(index, "quantity", e.target.value)}
                       />
@@ -518,7 +518,7 @@ export default function InvoiceDetail() {
                       <input
                         type="number"
                         step="0.01"
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-[#2CA01C]"
+                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.rate}
                         onChange={(e) => updateLineItem(index, "rate", e.target.value)}
                       />
@@ -532,7 +532,7 @@ export default function InvoiceDetail() {
                   <td className="py-2 text-right">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 rounded px-1 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-[#2CA01C]"
+                        className="w-full border border-gray-200 rounded px-1 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.taxCode || ""}
                         onChange={(e) => updateLineItem(index, "taxCode", e.target.value)}
                       >
@@ -607,7 +607,7 @@ export default function InvoiceDetail() {
           <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Notes / Memo</label>
           {isEditing ? (
             <textarea
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               rows={3}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -639,7 +639,7 @@ export default function InvoiceDetail() {
                   <input
                     type="number"
                     step="0.01"
-                    className="w-full pl-7 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]"
+                    className="w-full pl-7 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                     value={paymentAmount}
                     onChange={(e) => setPaymentAmount(e.target.value)}
                   />
@@ -731,7 +731,7 @@ export default function InvoiceDetail() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Use Template</label>
                   <select
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#0077C5] focus:border-transparent"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-sky-600 focus:border-transparent"
                     value={selectedTemplateId ?? ""}
                     onChange={(e) => {
                       const id = e.target.value ? Number(e.target.value) : null;
@@ -766,7 +766,7 @@ export default function InvoiceDetail() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Recipient Email *</label>
                 <input
                   type="email"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#0077C5] focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-sky-600 focus:border-transparent"
                   placeholder="customer@example.com"
                   value={emailRecipient}
                   onChange={(e) => setEmailRecipient(e.target.value)}
@@ -775,7 +775,7 @@ export default function InvoiceDetail() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Message {selectedTemplateId ? "(from template)" : "(optional)"}</label>
                 <textarea
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#0077C5] focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-sky-600 focus:border-transparent"
                   rows={selectedTemplateId ? 8 : 3}
                   placeholder="Please find your invoice attached."
                   value={emailMessage}

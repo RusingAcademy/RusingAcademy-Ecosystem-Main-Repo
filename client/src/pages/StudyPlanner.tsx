@@ -157,7 +157,7 @@ export default function StudyPlanner() {
               </h1>
               <p className="text-sm text-gray-500 mt-1">{sessions.length} sessions planned · {upcoming.length} upcoming</p>
             </div>
-            <button onClick={() => openNewSession()} className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 hover:shadow-md" style={{ background: "#008090" }}>
+            <button onClick={() => openNewSession()} className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 hover:shadow-md" >
               <span className="material-icons text-base">add</span>
               New Session
             </button>
@@ -205,7 +205,7 @@ export default function StudyPlanner() {
                     return (
                       <div
                         key={day}
-                        className={`h-20 border-b border-r border-gray-50 p-1.5 cursor-pointer transition-all hover:bg-teal-700/5 ${isSelected ? "bg-teal-700/10 ring-1 ring-[#008090]/30" : ""}`}
+                        className={`h-20 border-b border-r border-gray-50 p-1.5 cursor-pointer transition-all hover:bg-teal-700/5 ${isSelected ? "bg-teal-700/10 ring-1 ring-teal-700/30" : ""}`}
                         onClick={() => setSelectedDate(dateStr)}
                         onDoubleClick={() => openNewSession(dateStr)}
                       >
@@ -342,10 +342,10 @@ export default function StudyPlanner() {
                 <h2 className="text-lg font-bold text-gray-900 mb-4">{editingId ? "Edit Session" : "New Study Session"}</h2>
 
                 <input type="text" placeholder="Session title..." value={formTitle} onChange={e => setFormTitle(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700" />
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700" />
 
                 <textarea placeholder="Description (optional)..." value={formDesc} onChange={e => setFormDesc(e.target.value)} rows={2}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 resize-none" />
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 resize-none" />
 
                 {/* Type selector */}
                 <div className="mb-3">
@@ -366,12 +366,12 @@ export default function StudyPlanner() {
                   <div>
                     <label className="text-xs font-medium text-gray-500 mb-1 block">Date</label>
                     <input type="date" value={formDate} onChange={e => setFormDate(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20" />
+                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20" />
                   </div>
                   <div>
                     <label className="text-xs font-medium text-gray-500 mb-1 block">Time (optional)</label>
                     <input type="time" value={formTime} onChange={e => setFormTime(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/20" />
+                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20" />
                   </div>
                 </div>
 
@@ -389,7 +389,7 @@ export default function StudyPlanner() {
                   <button onClick={resetForm} className="px-4 py-2 rounded-xl text-sm text-gray-600 hover:bg-gray-100">Cancel</button>
                   <button onClick={handleSave}
                     disabled={!formTitle.trim() || !formDate || createSession.isPending || updateSession.isPending}
-                    className="px-5 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50" style={{ background: "#008090" }}>
+                    className="px-5 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50" >
                     {createSession.isPending || updateSession.isPending ? "Saving..." : editingId ? "Update" : "Create"}
                   </button>
                 </div>

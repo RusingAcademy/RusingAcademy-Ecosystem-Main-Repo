@@ -61,15 +61,15 @@ export default function PathList() {
             <p className="text-white/70 mt-1 text-sm max-w-lg">{program.description}</p>
             <div className="mt-4 flex items-center gap-4 text-xs text-white/60">
               <span className="flex items-center gap-1">
-                <span className="material-icons" style={{ fontSize: "14px" }}>route</span>
+                <span className="material-icons" >route</span>
                 {program.paths.length} Paths
               </span>
               <span className="flex items-center gap-1">
-                <span className="material-icons" style={{ fontSize: "14px" }}>school</span>
+                <span className="material-icons" >school</span>
                 {program.paths.reduce((s, p) => s + p.totalLessons, 0)} Lessons
               </span>
               <span className="flex items-center gap-1">
-                <span className="material-icons" style={{ fontSize: "14px" }}>stars</span>
+                <span className="material-icons" >stars</span>
                 {totalXP.toLocaleString()} XP
               </span>
             </div>
@@ -139,7 +139,7 @@ export default function PathList() {
                           <div className="flex items-center gap-1 px-3 py-1 rounded-full" style={{
                             background: "rgba(245,166,35,0.1)",
                           }}>
-                            <span className="material-icons text-amber-500" style={{ fontSize: "16px" }}>emoji_events</span>
+                            <span className="material-icons text-amber-500" >emoji_events</span>
                             <span className="text-xs font-bold text-amber-500">Complete</span>
                           </div>
                         )}
@@ -184,7 +184,7 @@ export default function PathList() {
                         {!isLocked && (
                           <span className="text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: "#008090" }}>
                             {progressPct > 0 ? "Continue" : "Start"}
-                            <span className="material-icons" style={{ fontSize: "16px" }}>arrow_forward</span>
+                            <span className="material-icons" >arrow_forward</span>
                           </span>
                         )}
                       </div>

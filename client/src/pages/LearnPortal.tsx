@@ -669,7 +669,7 @@ export default function LearnPortal() {
                                   : isCompleted
                                   ? "hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20"
                                   : isInProgress
-                                  ? "bg-cta/5 hover:bg-cta/10 ring-1 ring-[#C65A1E]/10"
+                                  ? "bg-cta/5 hover:bg-cta/10 ring-1 ring-cta/10"
                                   : "hover:bg-muted/60 hover:shadow-sm"
                               }`}
                             >
@@ -964,7 +964,7 @@ function HeroContent({
                 isComplete
                   ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/25 hover:shadow-emerald-600/30"
                   : hasStarted
-                  ? "bg-cta hover:bg-[#E06B2D] text-white shadow-[#C65A1E]/25 hover:shadow-[#C65A1E]/30"
+                  ? "bg-cta hover:bg-[#E06B2D] text-white shadow-orange-700/25 hover:shadow-orange-700/30"
                   : "bg-white text-foundation hover:bg-white/90 shadow-white/25 hover:shadow-white/30"
               }`}
               onClick={() =>

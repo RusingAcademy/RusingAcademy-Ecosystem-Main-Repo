@@ -291,7 +291,7 @@ function FilterBar({
               placeholder={language === "fr" ? "Rechercher un livre, un cours..." : "Search a book, a course..."}
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-              className="pl-11 h-11 rounded-full border-slate-200 focus:border-orange-500 focus:ring-[#F97316]/20 shadow-sm"
+              className="pl-11 h-11 rounded-full border-slate-200 focus:border-orange-500 focus:ring-orange-500/20 shadow-sm"
             />
             {filters.search && (
               <button
@@ -346,7 +346,7 @@ function FilterBar({
                     key={filter.key}
                     value={filter.value}
                     onChange={(e) => setFilters({ ...filters, [filter.key]: e.target.value })}
-                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:border-orange-500 focus:ring-1 focus:ring-[#F97316]/20 outline-none transition-all duration-200 hover:border-slate-300"
+                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20 outline-none transition-all duration-200 hover:border-slate-300"
                   >
                     {filter.options.map((o) => (
                       <option key={o.value} value={o.value}>{o.label}</option>
@@ -758,7 +758,7 @@ function CategoryPills({
             onClick={() => setActiveCategory(cat.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               isActive
-                ? "bg-foundation text-white shadow-md shadow-[#0F3D3E]/20"
+                ? "bg-foundation text-white shadow-md shadow-teal-800/20"
                 : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:shadow-sm"
             }`}
           >

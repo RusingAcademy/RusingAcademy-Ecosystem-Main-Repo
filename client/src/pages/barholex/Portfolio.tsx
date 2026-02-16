@@ -335,7 +335,7 @@ export default function BarholexPortfolio() {
                   aria-label={`Filter by ${language === "en" ? filter.labelEn : filter.labelFr}`}
                   className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                     activeFilter === filter.id
-                      ? "bg-gradient-to-r from-barholex-gold to-amber-600 text-white shadow-lg shadow-[#D4AF37]/25"
+                      ? "bg-gradient-to-r from-barholex-gold to-amber-600 text-white shadow-lg shadow-amber-500/25"
                       : "bg-white text-slate-600 hover:bg-[#F0EDE8] border border-stone-200 hover:border-barholex-gold/30"
                   }`}
                 >
@@ -423,7 +423,7 @@ export default function BarholexPortfolio() {
                       {project.link && (
                         <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                           <Link href={project.link}>
-                            <Button size="sm" className="bg-barholex-gold hover:bg-amber-600 text-slate-900 font-semibold rounded-full shadow-lg shadow-[#D4AF37]/30">
+                            <Button size="sm" className="bg-barholex-gold hover:bg-amber-600 text-slate-900 font-semibold rounded-full shadow-lg shadow-amber-500/30">
                               {language === "en" ? "Explore" : "Explorer"}
                               <ExternalLink className="ml-2 h-4 w-4" />
                             </Button>
@@ -602,7 +602,7 @@ export default function BarholexPortfolio() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-slate-900 hover:from-[#F7DC6F] hover:to-barholex-gold shadow-lg shadow-[#D4AF37]/25 transition-all duration-300"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-slate-900 hover:from-[#F7DC6F] hover:to-barholex-gold shadow-lg shadow-amber-500/25 transition-all duration-300"
                   >
                     {language === "en" ? "Start a Conversation" : "Démarrer une conversation"}
                     <ArrowRight className="ml-2 h-5 w-5" />

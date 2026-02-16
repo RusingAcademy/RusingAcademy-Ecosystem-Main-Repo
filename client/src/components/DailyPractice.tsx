@@ -25,7 +25,7 @@ export default function DailyPractice() {
   return (
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-3 px-1">
-        <Pen className="w-3.5 h-3.5" style={{ color: "#D4AF37" }} />
+        <Pen className="w-3.5 h-3.5"  />
         <h3 className="text-xs font-bold uppercase tracking-[0.1em]" style={{ color: "rgba(27, 20, 100, 0.4)" }}>
           Daily Practice
         </h3>

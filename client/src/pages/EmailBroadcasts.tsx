@@ -76,12 +76,12 @@ export default function EmailBroadcasts() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: "#1B1464" }}>
+            <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
               {t.emailBroadcasts.title}
             </h1>
             <p className="text-muted-foreground">{t.emailBroadcasts.subtitle}</p>
           </div>
-          <Button className="rounded-xl" style={{ backgroundColor: "#1B1464" }} onClick={() => setShowCreate(!showCreate)}>
+          <Button className="rounded-xl"  onClick={() => setShowCreate(!showCreate)}>
             <Plus className="w-4 h-4 mr-2" /> {t.emailBroadcasts.compose}
           </Button>
         </div>
@@ -124,7 +124,7 @@ export default function EmailBroadcasts() {
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                     placeholder="Email subject line..."
-                    className="w-full px-4 py-2.5 rounded-xl border bg-muted/30 text-sm focus:outline-none focus:ring-2 focus:ring-[#1B1464]/30"
+                    className="w-full px-4 py-2.5 rounded-xl border bg-muted/30 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-900/30"
                   />
                 </div>
                 <div>
@@ -133,7 +133,7 @@ export default function EmailBroadcasts() {
                     value={subjectFr}
                     onChange={(e) => setSubjectFr(e.target.value)}
                     placeholder="Objet du courriel..."
-                    className="w-full px-4 py-2.5 rounded-xl border bg-muted/30 text-sm focus:outline-none focus:ring-2 focus:ring-[#1B1464]/30"
+                    className="w-full px-4 py-2.5 rounded-xl border bg-muted/30 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-900/30"
                   />
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function EmailBroadcasts() {
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
                   placeholder="Write your email content..."
-                  className="w-full h-32 px-4 py-3 rounded-xl border bg-muted/30 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#1B1464]/30"
+                  className="w-full h-32 px-4 py-3 rounded-xl border bg-muted/30 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-900/30"
                 />
               </div>
               <div>
@@ -152,14 +152,14 @@ export default function EmailBroadcasts() {
                   value={bodyFr}
                   onChange={(e) => setBodyFr(e.target.value)}
                   placeholder="Rédigez le contenu du courriel..."
-                  className="w-full h-32 px-4 py-3 rounded-xl border bg-muted/30 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#1B1464]/30"
+                  className="w-full h-32 px-4 py-3 rounded-xl border bg-muted/30 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-900/30"
                 />
               </div>
               <div className="flex justify-end gap-3">
                 <Button variant="outline" className="rounded-xl" onClick={() => setShowCreate(false)}>{t.common.cancel}</Button>
                 <Button
                   className="rounded-xl"
-                  style={{ backgroundColor: "#1B1464" }}
+                  
                   onClick={() => createMutation.mutate({ subject, subjectFr, body, bodyFr })}
                   disabled={createMutation.isPending || !subject || !body}
                 >

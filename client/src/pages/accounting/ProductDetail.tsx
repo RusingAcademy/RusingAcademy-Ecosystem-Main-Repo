@@ -115,7 +115,7 @@ export default function ProductDetail() {
           <div>
             <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name *</label>
             {isEditing ? (
-              <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={name} onChange={(e) => setName(e.target.value)} />
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={name} onChange={(e) => setName(e.target.value)} />
             ) : (
               <p className="text-gray-800 font-medium">{p?.name}</p>
             )}
@@ -125,7 +125,7 @@ export default function ProductDetail() {
             <div>
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Type</label>
               {isEditing ? (
-                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={type} onChange={(e) => setType(e.target.value as any)}>
+                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={type} onChange={(e) => setType(e.target.value as any)}>
                   <option>Service</option>
                   <option>Inventory</option>
                   <option>Non-Inventory</option>
@@ -137,7 +137,7 @@ export default function ProductDetail() {
             <div>
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Category</label>
               {isEditing ? (
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={category} onChange={(e) => setCategory(e.target.value)} />
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={category} onChange={(e) => setCategory(e.target.value)} />
               ) : (
                 <p className="text-gray-800">{p?.category || "—"}</p>
               )}
@@ -147,7 +147,7 @@ export default function ProductDetail() {
           <div>
             <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Description</label>
             {isEditing ? (
-              <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
+              <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
             ) : (
               <p className="text-sm text-gray-600">{p?.description || "—"}</p>
             )}
@@ -157,7 +157,7 @@ export default function ProductDetail() {
             <div>
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Sales Price</label>
               {isEditing ? (
-                <input type="number" step="0.01" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={price} onChange={(e) => setPrice(e.target.value)} />
+                <input type="number" step="0.01" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={price} onChange={(e) => setPrice(e.target.value)} />
               ) : (
                 <p className="text-gray-800 font-medium">${Number(p?.price || 0).toFixed(2)}</p>
               )}
@@ -165,7 +165,7 @@ export default function ProductDetail() {
             <div>
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Cost</label>
               {isEditing ? (
-                <input type="number" step="0.01" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={cost} onChange={(e) => setCost(e.target.value)} />
+                <input type="number" step="0.01" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={cost} onChange={(e) => setCost(e.target.value)} />
               ) : (
                 <p className="text-gray-800">${Number(p?.cost || 0).toFixed(2)}</p>
               )}
@@ -173,7 +173,7 @@ export default function ProductDetail() {
             <div>
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">SKU</label>
               {isEditing ? (
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2CA01C]" value={sku} onChange={(e) => setSku(e.target.value)} />
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={sku} onChange={(e) => setSku(e.target.value)} />
               ) : (
                 <p className="text-gray-800">{p?.sku || "—"}</p>
               )}

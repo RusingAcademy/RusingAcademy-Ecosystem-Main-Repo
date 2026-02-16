@@ -87,14 +87,14 @@ export default function AIAssistant() {
             {/* Recommendations */}
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-teal-700" style={{ fontSize: "18px" }}>auto_awesome</span>
+                <span className="material-icons text-teal-700" >auto_awesome</span>
                 {t("dashboard.recommended")}
               </h2>
               <div className="space-y-2">
                 {recommendationsQuery.data?.map((rec, idx) => (
                   <Link key={idx} href={rec.link}>
                     <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer group">
-                      <span className="material-icons text-teal-700 mt-0.5" style={{ fontSize: "18px" }}>{rec.icon}</span>
+                      <span className="material-icons text-teal-700 mt-0.5" >{rec.icon}</span>
                       <div>
                         <p className="text-sm font-medium text-gray-900 group-hover:text-teal-700 transition-colors">{rec.title}</p>
                         <p className="text-[11px] text-gray-400 mt-0.5">{rec.description}</p>
@@ -113,7 +113,7 @@ export default function AIAssistant() {
             {/* Quick Topics */}
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-amber-500" style={{ fontSize: "18px" }}>tips_and_updates</span>
+                <span className="material-icons text-amber-500" >tips_and_updates</span>
                 {lang === "fr" ? "Sujets rapides" : "Quick Topics"}
               </h2>
               <div className="flex flex-wrap gap-2">

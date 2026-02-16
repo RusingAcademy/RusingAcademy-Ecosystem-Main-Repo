@@ -352,13 +352,13 @@ export default function CourseBuilder() {
 
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-3xl font-extrabold" style={{ color: "#1B1464" }}>{t.courseBuilder.title}</h1>
+              <h1 className="text-3xl font-extrabold" >{t.courseBuilder.title}</h1>
               <p className="text-muted-foreground mt-1">{t.courseBuilder.subtitle}</p>
             </div>
             <Button
               onClick={() => { setCourseId(null); setStep(1); setTitle(""); setModules([]); navigate("/admin/courses/new"); }}
               className="rounded-xl font-semibold text-white gap-2"
-              style={{ backgroundColor: "#1B1464" }}
+              
             >
               <Plus className="w-4 h-4" /> {t.courseBuilder.newCourse}
             </Button>
@@ -548,7 +548,7 @@ export default function CourseBuilder() {
                   onClick={handleSaveCourseDetails}
                   disabled={!title.trim() || isSaving}
                   className="rounded-xl font-semibold text-white gap-2 px-8"
-                  style={{ backgroundColor: "#1B1464" }}
+                  
                 >
                   {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
                   {t.common.next}: {t.courseBuilder.content}
@@ -752,7 +752,7 @@ export default function CourseBuilder() {
                 onClick={handleSaveModulesAndLessons}
                 disabled={modules.length === 0 || isSaving}
                 className="rounded-xl font-semibold text-white gap-2 px-8"
-                style={{ backgroundColor: "#1B1464" }}
+                
               >
                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
                 {t.common.next}: {t.courseBuilder.review}

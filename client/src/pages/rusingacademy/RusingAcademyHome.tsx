@@ -245,7 +245,7 @@ export default function RusingAcademyHome() {
               
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Link href="/rusingacademy/contact">
-                  <Button size="lg" className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full">
+                  <Button size="lg" className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-orange-500/20 rounded-full">
                     {language === "en" ? "Request a Proposal" : "Demander une proposition"}
                     <ArrowRight className="w-5 h-5" />
                   </Button>

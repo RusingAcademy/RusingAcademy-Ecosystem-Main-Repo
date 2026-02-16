@@ -196,7 +196,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
       {corrections.length > 0 && (
         <div className="space-y-3">
           <h3 className="font-bold text-foreground flex items-center gap-2 text-sm">
-            <PenLine className="w-4 h-4" style={{ color: "#D4AF37" }} /> Corrections ({corrections.length})
+            <PenLine className="w-4 h-4"  /> Corrections ({corrections.length})
           </h3>
           {corrections.map((c: any) => (
             <div key={c.id} className="rounded-xl p-4 space-y-2" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)", boxShadow: "0 1px 4px rgba(27, 20, 100, 0.03)" }}>
@@ -217,7 +217,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
       {corrections.length === 0 && entry.corrections.length > 0 && (
         <div className="space-y-3">
           <h3 className="font-bold text-foreground flex items-center gap-2 text-sm">
-            <PenLine className="w-4 h-4" style={{ color: "#D4AF37" }} /> Corrections ({entry.corrections.length})
+            <PenLine className="w-4 h-4"  /> Corrections ({entry.corrections.length})
           </h3>
           {entry.corrections.map((correction, i) => (
             <CorrectionHighlight key={i} correction={correction} />
@@ -255,7 +255,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
       {showCorrectionForm && (
         <div className="rounded-2xl p-5 space-y-3" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)", boxShadow: "var(--shadow-card)" }}>
           <h3 className="font-bold text-foreground flex items-center gap-2 text-sm">
-            <PenLine className="w-4 h-4" style={{ color: "#D4AF37" }} /> Submit Your Correction
+            <PenLine className="w-4 h-4"  /> Submit Your Correction
           </h3>
           <textarea
             value={correctionText}
@@ -470,15 +470,15 @@ export default function Notebook() {
           {[1, 2, 3].map(i => (
             <div key={i} className="rounded-2xl p-5 animate-pulse space-y-3" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)" }}>
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+                <div className="w-9 h-9 rounded-xl"  />
                 <div className="space-y-1.5">
-                  <div className="h-3 rounded w-24" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-                  <div className="h-2 rounded w-32" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+                  <div className="h-3 rounded w-24"  />
+                  <div className="h-2 rounded w-32"  />
                 </div>
               </div>
-              <div className="h-4 rounded w-3/4" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-              <div className="h-3 rounded w-full" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-              <div className="h-3 rounded w-2/3" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+              <div className="h-4 rounded w-3/4"  />
+              <div className="h-3 rounded w-full"  />
+              <div className="h-3 rounded w-2/3"  />
             </div>
           ))}
         </div>

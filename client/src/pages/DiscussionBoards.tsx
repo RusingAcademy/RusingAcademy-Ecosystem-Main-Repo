@@ -120,7 +120,7 @@ export default function DiscussionBoards() {
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
                     placeholder="Write your reply..."
-                    className="w-full border border-gray-200 rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#008090]/30 min-h-[80px]"
+                    className="w-full border border-gray-200 rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[80px]"
                   />
                   <div className="flex justify-end mt-2">
                     <button
@@ -190,12 +190,12 @@ export default function DiscussionBoards() {
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 placeholder="Thread title..."
-                className="w-full border border-gray-200 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                className="w-full border border-gray-200 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
               />
               <select
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                className="w-full border border-gray-200 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
               >
                 {CATEGORIES.filter(c => c.id !== "all").map(c => (
                   <option key={c.id} value={c.id}>{c.label}</option>
@@ -205,7 +205,7 @@ export default function DiscussionBoards() {
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
                 placeholder="Share your thoughts, questions, or insights..."
-                className="w-full border border-gray-200 rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#008090]/30 min-h-[120px]"
+                className="w-full border border-gray-200 rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[120px]"
               />
               <div className="flex justify-end gap-2 mt-4">
                 <button onClick={() => setShowNewThread(false)} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800">Cancel</button>

@@ -92,7 +92,7 @@ function EventCard({ event }: { event: CommunityEvent }) {
             <span className="flex items-center gap-1 font-medium"><Users className="w-3 h-3" />{event.attendees} attending</span>
             <span className="font-medium" style={{ color: spotsLeft < 10 ? "#ef4444" : undefined }}>{spotsLeft} spots left</span>
           </div>
-          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(27, 20, 100, 0.04)" }}>
+          <div className="h-1.5 rounded-full overflow-hidden" >
             <div className="h-full rounded-full transition-all duration-500" style={{ width: `${fillPercent}%`, background: fillPercent > 80 ? "linear-gradient(90deg, #ef4444, #f87171)" : `linear-gradient(90deg, ${config.color}, ${config.color}80)` }} />
           </div>
         </div>
@@ -189,11 +189,11 @@ export default function EventsCalendar() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="rounded-2xl overflow-hidden animate-pulse" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)" }}>
-              <div className="h-40" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+              <div className="h-40"  />
               <div className="p-4 space-y-2">
-                <div className="h-4 rounded w-3/4" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-                <div className="h-3 rounded w-full" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-                <div className="h-8 rounded-xl w-full mt-2" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+                <div className="h-4 rounded w-3/4"  />
+                <div className="h-3 rounded w-full"  />
+                <div className="h-8 rounded-xl w-full mt-2"  />
               </div>
             </div>
           ))}

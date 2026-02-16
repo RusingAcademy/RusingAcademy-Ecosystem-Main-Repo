@@ -48,9 +48,9 @@ export default function Referrals() {
         {/* Header */}
         <div className="text-center mb-10">
           <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#D4AF37" + "20" }}>
-            <Gift className="w-8 h-8" style={{ color: "#D4AF37" }} />
+            <Gift className="w-8 h-8"  />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: "#1B1464" }}>
+          <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
             {t.referrals.title}
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
@@ -62,7 +62,7 @@ export default function Referrals() {
         <Card className="mb-8 border-2" style={{ borderColor: "#D4AF37" + "40" }}>
           <CardContent className="p-6">
             <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-              <Share2 className="w-5 h-5" style={{ color: "#D4AF37" }} />
+              <Share2 className="w-5 h-5"  />
               {t.referrals.yourLink}
             </h3>
             <div className="flex items-center gap-3">
@@ -125,7 +125,7 @@ export default function Referrals() {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Users className="w-5 h-5" style={{ color: "#1B1464" }} />
+              <Users className="w-5 h-5"  />
 {t.referrals.recentReferrals}
           </CardTitle>
           </CardHeader>
@@ -143,7 +143,7 @@ export default function Referrals() {
                       {ref.referredUser?.avatarUrl ? (
                         <img src={ref.referredUser.avatarUrl} alt="" className="w-9 h-9 rounded-full" />
                       ) : (
-                        <div className="w-9 h-9 rounded-full bg-indigo-900/10 flex items-center justify-center text-sm font-bold" style={{ color: "#1B1464" }}>
+                        <div className="w-9 h-9 rounded-full bg-indigo-900/10 flex items-center justify-center text-sm font-bold" >
                           {(ref.referredUser?.name ?? "?")[0]}
                         </div>
                       )}
@@ -173,7 +173,7 @@ export default function Referrals() {
 
         {/* How it works */}
         <div className="mt-12">
-          <h2 className="text-xl font-bold text-center mb-6" style={{ color: "#1B1464" }}>How It Works</h2>
+          <h2 className="text-xl font-bold text-center mb-6" >How It Works</h2>
           <div className="grid sm:grid-cols-3 gap-6">
             {[
               { step: "1", title: "Share Your Link", desc: "Copy your unique referral link and share it with friends, colleagues, or on social media." },

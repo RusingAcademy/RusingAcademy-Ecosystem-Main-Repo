@@ -257,7 +257,7 @@ export default function CreatePostDialog({
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(Number(e.target.value))}
-                  className="flex-1 px-4 py-2.5 rounded-xl border border-border text-sm font-medium bg-transparent hover:border-indigo-900/30 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/30"
+                  className="flex-1 px-4 py-2.5 rounded-xl border border-border text-sm font-medium bg-transparent hover:border-indigo-900/30 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/30"
                 >
                   {categories.map((cat) => (
                     <option key={cat.id} value={cat.id}>
@@ -430,7 +430,7 @@ export default function CreatePostDialog({
                   isUploading
                 }
                 className="rounded-full px-6 py-2.5 font-semibold text-sm text-white"
-                style={{ backgroundColor: "#1B1464" }}
+                
               >
                 {createThread.isPending ? (
                   <>

@@ -318,7 +318,7 @@ export default function BarholexServices() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-black hover:from-[#B8962E] hover:to-barholex-gold shadow-lg shadow-[#D4AF37]/20"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-black hover:from-[#B8962E] hover:to-barholex-gold shadow-lg shadow-amber-500/20"
                   >
                     {language === "en" ? "Start Your Project" : "Démarrer votre projet"}
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -506,7 +506,7 @@ export default function BarholexServices() {
                     className="relative text-center"
                   >
                     {/* Step Number */}
-                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-barholex-gold to-amber-600 text-black font-bold text-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#D4AF37]/20">
+                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-barholex-gold to-amber-600 text-black font-bold text-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-amber-500/20">
                       <step.icon className="w-10 h-10" />
                     </div>
                     

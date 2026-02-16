@@ -75,12 +75,12 @@ function ChallengeCard({ challenge, isFr }: { challenge: {
       <div className="flex items-center justify-between mt-3">
         {challenge.isCompleted ? (
           <div className="flex items-center gap-1 text-[10px] text-emerald-500 font-semibold">
-            <span className="material-icons" style={{ fontSize: "14px" }} aria-hidden="true">verified</span>
+            <span className="material-icons"  aria-hidden="true">verified</span>
             {isFr ? "Défi complété" : "Challenge Complete"}
           </div>
         ) : (
           <div className="flex items-center gap-1 text-[10px] text-gray-400">
-            <span className="material-icons" style={{ fontSize: "14px" }} aria-hidden="true">schedule</span>
+            <span className="material-icons"  aria-hidden="true">schedule</span>
             {daysLeft} {isFr ? (daysLeft !== 1 ? "jours restants" : "jour restant") : (daysLeft !== 1 ? "days remaining" : "day remaining")}
           </div>
         )}
@@ -138,17 +138,17 @@ export default function WeeklyChallenges() {
         {/* Tab Switcher */}
         <div className="flex gap-2" role="tablist" aria-label={isFr ? "Filtrer les défis" : "Filter challenges"}>
           <button onClick={() => setTab("active")} role="tab" aria-selected={tab === "active"}
-            className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${
+            className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${
               tab === "active" ? "bg-teal-700 text-white border-teal-700" : "bg-white text-gray-500 border-gray-200 hover:border-teal-700 hover:text-teal-700"
             }`}>
-            <span className="material-icons align-middle mr-1" style={{ fontSize: "14px" }} aria-hidden="true">flag</span>
+            <span className="material-icons align-middle mr-1"  aria-hidden="true">flag</span>
             {isFr ? "Actifs" : "Active"} ({activeChallenges.length})
           </button>
           <button onClick={() => setTab("completed")} role="tab" aria-selected={tab === "completed"}
             className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-[#10b981]/30 ${
               tab === "completed" ? "bg-emerald-500 text-white border-emerald-500" : "bg-white text-gray-500 border-gray-200 hover:border-emerald-500 hover:text-emerald-500"
             }`}>
-            <span className="material-icons align-middle mr-1" style={{ fontSize: "14px" }} aria-hidden="true">check_circle</span>
+            <span className="material-icons align-middle mr-1"  aria-hidden="true">check_circle</span>
             {isFr ? "Complétés" : "Completed"} ({completedChallenges.length})
           </button>
         </div>
@@ -186,7 +186,7 @@ export default function WeeklyChallenges() {
         {/* How It Works */}
         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
           <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <span className="material-icons text-teal-700" style={{ fontSize: "18px" }} aria-hidden="true">help_outline</span>
+            <span className="material-icons text-teal-700"  aria-hidden="true">help_outline</span>
             {isFr ? "Comment fonctionnent les défis hebdomadaires" : "How Weekly Challenges Work"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

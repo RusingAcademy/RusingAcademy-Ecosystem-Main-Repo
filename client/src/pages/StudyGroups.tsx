@@ -57,7 +57,7 @@ export default function StudyGroups() {
         </div>
         <Button onClick={() => setShowCreate(!showCreate)}
           aria-expanded={showCreate}
-          className="focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+          className="focus:outline-none focus:ring-2 focus:ring-teal-700/30">
           {showCreate
             ? (isFr ? "Annuler" : "Cancel")
             : (isFr ? "+ Créer un groupe" : "+ Create Group")}
@@ -84,7 +84,7 @@ export default function StudyGroups() {
               </label>
               <textarea
                 id="group-desc"
-                className="w-full mt-1 p-3 border rounded-lg bg-background resize-none h-24 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                className="w-full mt-1 p-3 border rounded-lg bg-background resize-none h-24 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 placeholder={isFr ? "Décrivez le focus et les objectifs de votre groupe..." : "Describe your group's focus and goals..."}
@@ -98,7 +98,7 @@ export default function StudyGroups() {
                     <Button key={l} size="sm" variant={cefrLevel === l ? "default" : "outline"}
                       onClick={() => setCefrLevel(l)}
                       role="radio" aria-checked={cefrLevel === l}
-                      className="focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                      className="focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                       {l}
                     </Button>
                   ))}
@@ -114,7 +114,7 @@ export default function StudyGroups() {
             </div>
             <Button onClick={() => createGroup.mutate({ name, description, cefrLevel, maxMembers })}
               disabled={!name.trim() || createGroup.isPending}
-              className="focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+              className="focus:outline-none focus:ring-2 focus:ring-teal-700/30">
               {createGroup.isPending
                 ? (isFr ? "Création..." : "Creating...")
                 : (isFr ? "Créer le groupe" : "Create Group")}
@@ -184,7 +184,7 @@ export default function StudyGroups() {
                         <Button size="sm"
                           onClick={() => joinGroup.mutate({ groupId: group.id })}
                           aria-label={isFr ? `Rejoindre ${group.name}` : `Join ${group.name}`}
-                          className="focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                          className="focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                           {isFr ? "Rejoindre" : "Join"}
                         </Button>
                       )}

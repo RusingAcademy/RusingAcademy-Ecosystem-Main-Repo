@@ -39,7 +39,7 @@ export default function PremiumFeatureCard({
     },
     orange: {
       iconBg: "from-cta to-cta",
-      iconShadow: "shadow-[#C65A1E]/25",
+      iconShadow: "shadow-orange-700/25",
       border: "border-orange-500/20",
       badge: "bg-orange-100 text-orange-700",
     },

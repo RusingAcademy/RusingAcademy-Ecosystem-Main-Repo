@@ -196,7 +196,7 @@ export default function BarholexHome() {
               
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Link href="/barholex/contact">
-                  <Button size="lg" className="bg-barholex-gold hover:bg-amber-600 text-black gap-2 px-8 h-12 text-base shadow-lg shadow-[#D4AF37]/20 rounded-full font-semibold">
+                  <Button size="lg" className="bg-barholex-gold hover:bg-amber-600 text-black gap-2 px-8 h-12 text-base shadow-lg shadow-amber-500/20 rounded-full font-semibold">
                     {language === "en" ? "Start a Project" : "Démarrer un projet"}
                     <ArrowRight className="w-5 h-5" />
                   </Button>

@@ -173,7 +173,7 @@ export default function WritingPortfolio() {
       <DashboardLayout>
         <div className="max-w-4xl mx-auto px-4 py-6">
           <button onClick={resetEditor}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-700/30 rounded"
             aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
             <span className="material-icons text-lg" aria-hidden="true">arrow_back</span>
             {isFr ? "Retour au portfolio" : "Back to Portfolio"}
@@ -209,7 +209,7 @@ export default function WritingPortfolio() {
                   <button
                     onClick={() => handleSubmitForFeedback(s.id, s.content)}
                     disabled={feedbackMutation.isPending}
-                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white text-sm rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white text-sm rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                   >
                     <span className="material-icons text-lg" aria-hidden="true">auto_awesome</span>
                     {feedbackMutation.isPending
@@ -264,7 +264,7 @@ export default function WritingPortfolio() {
       <DashboardLayout>
         <div className="max-w-3xl mx-auto px-4 py-6">
           <button onClick={resetEditor}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 mb-4 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-700/30 rounded"
             aria-label={isFr ? "Retour au portfolio" : "Back to Portfolio"}>
             <span className="material-icons text-lg" aria-hidden="true">arrow_back</span>
             {isFr ? "Retour au portfolio" : "Back to Portfolio"}
@@ -279,7 +279,7 @@ export default function WritingPortfolio() {
               <div>
                 <label htmlFor="writing-lang" className="sr-only">{isFr ? "Langue" : "Language"}</label>
                 <select id="writing-lang" value={language} onChange={(e) => setLanguage(e.target.value as any)}
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   <option value="fr">{isFr ? "Français" : "French"}</option>
                   <option value="en">{isFr ? "Anglais" : "English"}</option>
                 </select>
@@ -287,7 +287,7 @@ export default function WritingPortfolio() {
               <div>
                 <label htmlFor="writing-level" className="sr-only">{isFr ? "Niveau CECR" : "CEFR Level"}</label>
                 <select id="writing-level" value={cefrLevel} onChange={(e) => setCefrLevel(e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="w-full border border-gray-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   {CEFR_LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
                 </select>
               </div>
@@ -298,7 +298,7 @@ export default function WritingPortfolio() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={isFr ? "Titre de votre texte..." : "Title of your writing..."}
-              className="w-full border border-gray-200 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+              className="w-full border border-gray-200 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
             />
             <label htmlFor="writing-content" className="sr-only">{isFr ? "Contenu" : "Content"}</label>
             <textarea
@@ -306,7 +306,7 @@ export default function WritingPortfolio() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder={isFr ? "Commencez à écrire ici..." : "Start writing here..."}
-              className="w-full border border-gray-200 rounded-lg p-4 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#008090]/30 min-h-[300px] leading-relaxed"
+              className="w-full border border-gray-200 rounded-lg p-4 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[300px] leading-relaxed"
             />
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center gap-4">
@@ -335,7 +335,7 @@ export default function WritingPortfolio() {
                 <button
                   onClick={handleSave}
                   disabled={!title.trim() || !content.trim() || createMutation.isPending || updateMutation.isPending}
-                  className="px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 disabled:opacity-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                  className="px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 disabled:opacity-50 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                 >
                   {createMutation.isPending || updateMutation.isPending
                     ? (isFr ? "Enregistrement..." : "Saving...")
@@ -372,7 +372,7 @@ export default function WritingPortfolio() {
             <p className="text-sm text-gray-500 mt-1">{isFr ? "Pratiquez l'écriture et obtenez un retour IA" : "Practice writing and get AI-powered feedback"}</p>
           </div>
           <button onClick={() => openEditor()}
-            className="flex items-center gap-2 px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+            className="flex items-center gap-2 px-4 py-2 bg-teal-700 text-white text-sm rounded-lg hover:bg-teal-800 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30"
             aria-label={t("writing.newEntry")}>
             <span className="material-icons text-lg" aria-hidden="true">edit_note</span> {t("writing.newEntry")}
           </button>
@@ -387,7 +387,7 @@ export default function WritingPortfolio() {
                 key={i}
                 role="listitem"
                 onClick={() => openEditor(prompt)}
-                className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                 aria-label={`${prompt.level}: ${language === "fr" ? prompt.fr : prompt.en}`}
               >
                 <span className="px-2 py-0.5 bg-teal-700/10 text-teal-700 rounded-full text-[10px] font-semibold">{prompt.level}</span>
@@ -419,7 +419,7 @@ export default function WritingPortfolio() {
                 key={s.id}
                 role="listitem"
                 onClick={() => openDetail(s.id)}
-                className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
               >
                 <div className="flex items-start justify-between">
                   <div className="min-w-0 flex-1">

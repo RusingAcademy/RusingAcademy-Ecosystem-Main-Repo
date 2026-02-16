@@ -104,7 +104,7 @@ function ChallengeCard({ challenge, onSelect }: { challenge: DisplayChallenge; o
               <span className="text-muted-foreground font-medium">{challenge.currentProgress}/{challenge.targetCount}</span>
               <span className="font-bold" style={{ color: progress === 100 ? "#D4AF37" : "#1B1464" }}>{progress}%</span>
             </div>
-            <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(27, 20, 100, 0.04)" }}>
+            <div className="h-2 rounded-full overflow-hidden" >
               <motion.div
                 className="h-full rounded-full"
                 style={{ background: progress === 100 ? "linear-gradient(90deg, #D4AF37, #E8CB6A)" : "linear-gradient(90deg, #1B1464, #2D2580)" }}
@@ -116,7 +116,7 @@ function ChallengeCard({ challenge, onSelect }: { challenge: DisplayChallenge; o
           </div>
         )}
         {!challenge.isJoined && challenge.status === "active" && (
-          <div className="text-[11px] font-bold flex items-center gap-1" style={{ color: "#1B1464" }}>
+          <div className="text-[11px] font-bold flex items-center gap-1" >
             Join to start tracking <span className="transition-transform group-hover:translate-x-1">→</span>
           </div>
         )}
@@ -174,12 +174,12 @@ function ChallengeDetail({ challenge, onBack }: { challenge: DisplayChallenge; o
           <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-10 blur-2xl" style={{ background: "linear-gradient(135deg, #D4AF37, #1B1464)" }} />
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Flame className="w-5 h-5" style={{ color: "#D4AF37" }} />
+              <Flame className="w-5 h-5"  />
               <span className="font-bold text-foreground">Your Progress</span>
             </div>
             <span className="text-lg font-bold" style={{ color: progress === 100 ? "#D4AF37" : "#1B1464" }}>{progress}%</span>
           </div>
-          <div className="h-3 rounded-full overflow-hidden mb-2" style={{ background: "rgba(27, 20, 100, 0.04)" }}>
+          <div className="h-3 rounded-full overflow-hidden mb-2" >
             <motion.div
               className="h-full rounded-full"
               style={{ background: progress === 100 ? "linear-gradient(90deg, #D4AF37, #E8CB6A)" : "linear-gradient(90deg, #1B1464, #2D2580)" }}
@@ -318,10 +318,10 @@ export default function Challenges() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="rounded-2xl overflow-hidden animate-pulse" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)" }}>
-              <div className="h-36" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+              <div className="h-36"  />
               <div className="p-4 space-y-2">
-                <div className="h-3 rounded w-full" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
-                <div className="h-3 rounded w-2/3" style={{ background: "rgba(27, 20, 100, 0.04)" }} />
+                <div className="h-3 rounded w-full"  />
+                <div className="h-3 rounded w-2/3"  />
               </div>
             </div>
           ))}

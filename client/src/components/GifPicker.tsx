@@ -259,7 +259,7 @@ export default function GifPicker({ isOpen, onClose, onSelect }: GifPickerProps)
                       onSelect(getGifUrl(gif));
                       onClose();
                     }}
-                    className="relative rounded-xl overflow-hidden bg-muted/30 hover:ring-2 hover:ring-[#D4AF37] transition-all group aspect-video"
+                    className="relative rounded-xl overflow-hidden bg-muted/30 hover:ring-2 hover:ring-amber-500 transition-all group aspect-video"
                   >
                     <img
                       src={getPreviewUrl(gif)}
