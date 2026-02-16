@@ -9,13 +9,13 @@ export default function ContactInsights() {
   const stats = insights ?? { signupTrend: 0, roleDistribution: {} as any, languageDistribution: {} as any, activeUsers: 0 };
 
   const roleSegments = Object.entries(stats.roleDistribution || {}).map(([label, count]) => ({
-    label, count: count as number, color: label === "admin" ? "#3b82f6" : label === "user" ? "#22c55e" : "#a855f7",
+    label, count: count as number, color: label === "admin" ? "var(--color-blue-500, #3b82f6)" : label === "user" ? "#22c55e" : "#a855f7",
   }));
 
   const langSegments = Object.entries(stats.languageDistribution || {}).map(([label, count]) => ({
     label: label === "en" ? "English" : label === "fr" ? "French" : label === "both" ? "Bilingual" : label,
     count: count as number,
-    color: label === "en" ? "#3b82f6" : label === "fr" ? "#ef4444" : "#f59e0b",
+    color: label === "en" ? "var(--color-blue-500, #3b82f6)" : label === "fr" ? "var(--semantic-danger, #ef4444)" : "var(--semantic-warning, #f59e0b)",
   }));
 
   return (

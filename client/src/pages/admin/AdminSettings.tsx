@@ -41,7 +41,7 @@ const DEFAULTS: Record<string, string> = {
   brand_secondary_color: "#D4A843",
   brand_accent_color: "#1a5c5e",
   brand_bg_color: "#FAFAF8",
-  brand_text_color: "#1a1a1a",
+  brand_text_color: "var(--brand-obsidian, #1a1a1a)",
   brand_muted_color: "#000000",
   brand_heading_font: "Playfair Display",
   brand_body_font: "Inter",
@@ -212,7 +212,7 @@ export default function AdminSettings() {
               {renderField("brand_secondary_color", "Secondary Color", "color", "#D4A843")}
               {renderField("brand_accent_color", "Accent Color", "color", "#1a5c5e")}
               {renderField("brand_bg_color", "Background Color", "color", "#FAFAF8")}
-              {renderField("brand_text_color", "Text Color", "color", "#1a1a1a")}
+              {renderField("brand_text_color", "Text Color", "color", "var(--brand-obsidian, #1a1a1a)")}
               {renderField("brand_muted_color", "Muted Color", "color", "#000000")}
             </div>
             <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider pt-2">Typography</h3>
@@ -224,7 +224,7 @@ export default function AdminSettings() {
               <h4 className="text-sm font-medium mb-3">Preview</h4>
               <div className="p-4 rounded-lg border" style={{ backgroundColor: formData.brand_bg_color || "#FAFAF8" }}>
                 <h3 style={{ fontFamily: formData.brand_heading_font || "Playfair Display", color: formData.brand_primary_color || "#0F3D3E" }} className="text-xl font-bold mb-1">Heading Preview</h3>
-                <p style={{ fontFamily: formData.brand_body_font || "Inter", color: formData.brand_text_color || "#1a1a1a" }} className="text-sm mb-2">Body text preview with your selected font and colors.</p>
+                <p style={{ fontFamily: formData.brand_body_font || "Inter", color: formData.brand_text_color || "var(--brand-obsidian, #1a1a1a)" }} className="text-sm mb-2">Body text preview with your selected font and colors.</p>
                 <div className="flex gap-2">
                   <span className="px-3 py-1 rounded text-xs text-white" style={{ backgroundColor: formData.brand_primary_color || "#0F3D3E" }}>Primary</span>
                   <span className="px-3 py-1 rounded text-xs text-white" style={{ backgroundColor: formData.brand_secondary_color || "#D4A843" }}>Secondary</span>
