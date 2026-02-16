@@ -61,7 +61,7 @@ export async function generateDiagnosticPDF(result: DiagnosticResult): Promise<B
     const { overall, level } = calculateOverallScore(result.scores);
     
     // Header
-    doc.fillColor(PDF_COLORS.primary).fontSize(24).font('Helvetica-Bold').text('RusingÂcademy', 50, 50);
+    doc.fillColor(PDF_COLORS.primary).fontSize(24).font('Helvetica-Bold').text('RusingAcademy', 50, 50);
     doc.fillColor(PDF_COLORS.textMuted).fontSize(10).font('Helvetica').text('Rusinga International Consulting Ltd.', 50, 78);
     
     // Title
@@ -104,18 +104,18 @@ export async function sendDiagnosticEmail(result: DiagnosticResult, pdfBuffer: B
   
   try {
     await transporter.sendMail({
-      from: '"RusingÂcademy" <noreply@rusingacademy.ca>',
+      from: '"RusingAcademy" <noreply@rusingacademy.ca>',
       to: result.email,
-      subject: 'Votre Rapport de Diagnostic Linguistique - RusingÂcademy',
+      subject: 'Votre Rapport de Diagnostic Linguistique - RusingAcademy',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #1E3A5F;">Bonjour ${result.firstName},</h1>
-          <p>Merci d'avoir complété votre diagnostic linguistique avec RusingÂcademy.</p>
+          <p>Merci d'avoir complété votre diagnostic linguistique avec RusingAcademy.</p>
           <p>Votre rapport personnalisé est en pièce jointe.</p>
           <p><strong>Prochaine étape:</strong> Réservez une consultation gratuite avec un de nos coaches Lingueefy.</p>
           <a href="https://app.rusingacademy.ca/consultation" style="background: #C9A227; color: #1E3A5F; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">Réserver ma consultation</a>
           <hr style="margin: 30px 0; border: none; border-top: 1px solid #E5E7EB;">
-          <p style="color: #6B7280; font-size: 12px;">Rusinga International Consulting Ltd.<br>Commercialement connue sous le nom de RusingÂcademy</p>
+          <p style="color: #6B7280; font-size: 12px;">Rusinga International Consulting Ltd.<br>Commercialement connue sous le nom de RusingAcademy</p>
         </div>
       `,
       attachments: [{ filename: `diagnostic-${result.firstName.toLowerCase()}-${Date.now()}.pdf`, content: pdfBuffer }],

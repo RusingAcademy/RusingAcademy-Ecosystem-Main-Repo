@@ -799,8 +799,8 @@ export default function CurriculumPathSeries() {
               <div className="bg-[#FDF8F3] rounded-2xl p-8 md:p-10 shadow-sm">
                 <p className="text-lg text-[#0F3D3E] leading-relaxed mb-6">
                   {isEn 
-                    ? "The GC Bilingual Mastery Series represents a paradigm shift in professional language training for Canada's federal public service. Developed by RusingÂcademy in collaboration with leading language acquisition specialists, this program combines cutting-edge pedagogical research with the practical realities of public service communication requirements."
-                    : "La Série Maîtrise Bilingue GC représente un changement de paradigme dans la formation linguistique professionnelle pour la fonction publique fédérale du Canada. Développé par RusingÂcademy en collaboration avec des spécialistes de premier plan en acquisition des langues, ce programme combine la recherche pédagogique de pointe avec les réalités pratiques des exigences de communication du service public."
+                    ? "The GC Bilingual Mastery Series represents a paradigm shift in professional language training for Canada's federal public service. Developed by RusingAcademy in collaboration with leading language acquisition specialists, this program combines cutting-edge pedagogical research with the practical realities of public service communication requirements."
+                    : "La Série Maîtrise Bilingue GC représente un changement de paradigme dans la formation linguistique professionnelle pour la fonction publique fédérale du Canada. Développé par RusingAcademy en collaboration avec des spécialistes de premier plan en acquisition des langues, ce programme combine la recherche pédagogique de pointe avec les réalités pratiques des exigences de communication du service public."
                   }
                 </p>
                 <p className="text-lg text-[#0F3D3E] leading-relaxed">
@@ -886,8 +886,8 @@ export default function CurriculumPathSeries() {
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                   {isEn 
-                    ? "Our curriculum is built on the RusingÂcademy Structured Action Model™, which ensures every learning activity is:"
-                    : "Notre curriculum est construit sur le Modèle d'Action Structuré RusingÂcademy™, qui garantit que chaque activité d'apprentissage est:"
+                    ? "Our curriculum is built on the RusingAcademy Structured Action Model™, which ensures every learning activity is:"
+                    : "Notre curriculum est construit sur le Modèle d'Action Structuré RusingAcademy™, qui garantit que chaque activité d'apprentissage est:"
                   }
                 </p>
               </div>
@@ -952,7 +952,7 @@ export default function CurriculumPathSeries() {
                   </div>
                   <CardContent className="p-6">
                     <h4 className="font-semibold text-lg mb-3 text-[#0F3D3E]">
-                      {isEn ? "RusingÂcademy Learning Platform" : "Plateforme d'Apprentissage RusingÂcademy"}
+                      {isEn ? "RusingAcademy Learning Platform" : "Plateforme d'Apprentissage RusingAcademy"}
                     </h4>
                     <p className="text-muted-foreground mb-4">
                       {isEn 

@@ -8,7 +8,7 @@ import { Facebook, Twitter, Linkedin, Instagram, Youtube, Mail, MapPin, Globe, P
  * Per Guide Maître v3.0 specifications:
  * - 3 columns: Explorer l'Écosystème | Obtenir de l'Aide | À Propos & Légal
  * - Copyright: © 2026 Rusinga International Consulting Ltd.
- * - Commercially known as RusingÂcademy
+ * - Commercially known as RusingAcademy
  * - Follows design-tokens.json v3.0 specifications
  */
 
@@ -42,14 +42,14 @@ export default function FooterInstitutional() {
 
   // Column 1: Explorer l'Écosystème
   const ecosystemLinks = language === "fr" ? [
-    { href: "/rusingacademy", label: "RusingÂcademy" },
+    { href: "/rusingacademy", label: "RusingAcademy" },
     { href: "/lingueefy", label: "Lingueefy" },
     { href: "/barholex", label: "Barholex Media" },
     { href: "/courses", label: "Nos cours" },
     { href: "/coaches", label: "Nos coachs" },
     { href: "/pricing", label: "Tarification" },
   ] : [
-    { href: "/rusingacademy", label: "RusingÂcademy" },
+    { href: "/rusingacademy", label: "RusingAcademy" },
     { href: "/lingueefy", label: "Lingueefy" },
     { href: "/barholex", label: "Barholex Media" },
     { href: "/courses", label: "Our Courses" },
@@ -250,8 +250,8 @@ export default function FooterInstitutional() {
               </p>
               <p className="text-xs text-white/90 mt-1">
                 {language === "fr" 
-                  ? "Commercialement connue sous le nom de RusingÂcademy. Tous droits réservés."
-                  : "Commercially known as RusingÂcademy. All rights reserved."}
+                  ? "Commercialement connue sous le nom de RusingAcademy. Tous droits réservés."
+                  : "Commercially known as RusingAcademy. All rights reserved."}
               </p>
             </div>
           </div>

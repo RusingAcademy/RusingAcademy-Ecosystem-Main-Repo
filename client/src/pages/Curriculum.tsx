@@ -369,7 +369,7 @@ export default function Curriculum() {
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <Badge variant="outline" className="glass-badge px-4 py-1.5 text-sm font-medium">
                 <Sparkles className="h-4 w-4 mr-2" />
-                {isEn ? "Path Series™ by RusingÂcademy" : "Série Path™ par RusingÂcademy"}
+                {isEn ? "Path Series™ by RusingAcademy" : "Série Path™ par RusingAcademy"}
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">

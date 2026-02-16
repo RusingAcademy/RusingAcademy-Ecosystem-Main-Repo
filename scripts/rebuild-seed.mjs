@@ -298,7 +298,7 @@ async function main() {
           path.category, path.level, path.targetLanguage,
           path.price, path.originalPrice, 'CAD', 'one_time',
           4, 16, 960, // 4 modules, 16 lessons, 16×60min
-          'RusingÂcademy', 'published',
+          'RusingAcademy', 'published',
           true, true, true,
           112, // 16 lessons × 7 activities
         ]

@@ -2,7 +2,7 @@
  * TemplateMarketplace — Section Template Marketplace for the Visual Editor
  * 
  * Replaces the simple "Add Block" list with a categorized, searchable marketplace.
- * Supports: bilingual FR/EN, brand-specific templates (RusingÂcademy, Lingueefy, Barholex),
+ * Supports: bilingual FR/EN, brand-specific templates (RusingAcademy, Lingueefy, Barholex),
  * saving existing sections as templates, and filtering by category/brand/language.
  */
 import { useState, useMemo } from "react";
@@ -90,7 +90,7 @@ const BRAND_COLORS: Record<string, string> = {
 };
 
 const BRAND_LABELS: Record<string, string> = {
-  rusingacademy: "RusingÂcademy",
+  rusingacademy: "RusingAcademy",
   lingueefy: "Lingueefy",
   barholex: "Barholex",
   universal: "Universal",
@@ -272,7 +272,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                 <div className="flex flex-wrap gap-1">
                   {[
                     { value: "all", label: "All" },
-                    { value: "rusingacademy", label: "RusingÂcademy" },
+                    { value: "rusingacademy", label: "RusingAcademy" },
                     { value: "lingueefy", label: "Lingueefy" },
                     { value: "barholex", label: "Barholex" },
                   ].map(b => (
@@ -465,7 +465,7 @@ export function SaveAsTemplateDialog({ open, onClose, sectionId, sectionTitle, s
             <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., RusingÂcademy Hero with CTA"
+              placeholder="e.g., RusingAcademy Hero with CTA"
               className="mt-1"
             />
           </div>
@@ -519,7 +519,7 @@ export function SaveAsTemplateDialog({ open, onClose, sectionId, sectionTitle, s
               </SelectTrigger>
               <SelectContent className="z-[300]">
                 <SelectItem value="universal">Universal (All Brands)</SelectItem>
-                <SelectItem value="rusingacademy">RusingÂcademy</SelectItem>
+                <SelectItem value="rusingacademy">RusingAcademy</SelectItem>
                 <SelectItem value="lingueefy">Lingueefy</SelectItem>
                 <SelectItem value="barholex">Barholex Media</SelectItem>
               </SelectContent>

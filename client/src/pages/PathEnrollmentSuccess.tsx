@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import confetti from "canvas-confetti";
 
 export default function PathEnrollmentSuccess() {
@@ -120,8 +119,7 @@ export default function PathEnrollmentSuccess() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-        <EcosystemHeaderGold />
-        <div className="container py-16 px-4">
+<div className="container py-16 px-4">
           <div className="animate-pulse space-y-8 max-w-2xl mx-auto">
             <div className="h-16 bg-slate-200 rounded-full w-16 mx-auto" />
             <div className="h-8 bg-slate-200 rounded w-3/4 mx-auto" />
@@ -134,9 +132,7 @@ export default function PathEnrollmentSuccess() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 via-white to-slate-50">
-      <EcosystemHeaderGold />
-      
-      {/* Success Hero */}
+{/* Success Hero */}
       <section className="py-16 md:py-24">
         <div className="container px-4 sm:px-6 lg:px-8">
           <motion.div

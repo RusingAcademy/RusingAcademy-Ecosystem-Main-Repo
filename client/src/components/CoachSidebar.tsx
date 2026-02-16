@@ -1,5 +1,5 @@
 /**
- * CoachSidebar — RusingÂcademy Coach Portal
+ * CoachSidebar — RusingAcademy Coach Portal
  * Design: White sidebar with violet (#7c3aed) accents, matching Learner Portal pattern
  */
 import { Link, useLocation } from "wouter";
@@ -83,10 +83,10 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
         {/* Logo Section */}
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
           <Link href="/coach/portal/dashboard" className="flex items-center gap-3 group">
-            <img src={LOGO_ICON} alt="RusingÂcademy" className="w-8 h-8 rounded-lg" />
+            <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
             <div>
               <span className="text-gray-900 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
-                RusingÂcademy
+                RusingAcademy
               </span>
               <span className="block text-[10px] text-[#7c3aed] tracking-wider uppercase font-medium">
                 {lang === "fr" ? "Portail Coach" : "Coach Portal"}
@@ -165,7 +165,7 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
           </button>
 
           <div className="text-center mt-2">
-            <span className="text-[9px] text-gray-400">v2.0.0 — RusingÂcademy</span>
+            <span className="text-[9px] text-gray-400">v2.0.0 — RusingAcademy</span>
           </div>
         </div>
       </aside>

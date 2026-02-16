@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Authorizations Page
+ * RusingAcademy Learning Portal - Authorizations Page
  * Design: 3 tabs - Modules / Pre-Authorized Hours / Extra Information
  * Table with teal header
  */

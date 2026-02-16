@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bell, BellOff, X } from "lucide-react";
+import { Bell, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -8,6 +8,10 @@ interface NotificationPermissionProps {
   onPermissionGranted?: () => void;
   onPermissionDenied?: () => void;
 }
+
+const DISMISS_KEY = "notification-banner-dismissed";
+const DISMISS_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+const SHOW_DELAY_MS = 60_000; // 60 seconds after page load
 
 export function NotificationPermission({
   onPermissionGranted,
@@ -20,22 +24,26 @@ export function NotificationPermission({
   const [isRequesting, setIsRequesting] = useState(false);
 
   useEffect(() => {
-    if ("Notification" in window) {
-      setPermission(Notification.permission);
-      // Show banner only if permission hasn't been decided yet
-      if (Notification.permission === "default") {
-        // Delay showing banner for better UX
-        const timer = setTimeout(() => setShowBanner(true), 3000);
-        return () => clearTimeout(timer);
-      }
-    }
+    // Don't show if notifications aren't supported
+    if (!("Notification" in window)) return;
+
+    const currentPermission = Notification.permission;
+    setPermission(currentPermission);
+
+    // Only show if permission hasn't been decided yet
+    if (currentPermission !== "default") return;
+
+    // Check if user dismissed recently (within 7 days)
+    const dismissedAt = localStorage.getItem(DISMISS_KEY);
+    if (dismissedAt && Date.now() - parseInt(dismissedAt) < DISMISS_DURATION_MS) return;
+
+    // Staged delay: show after 60 seconds
+    const timer = setTimeout(() => setShowBanner(true), SHOW_DELAY_MS);
+    return () => clearTimeout(timer);
   }, []);
 
   const requestPermission = async () => {
-    if (!("Notification" in window)) {
-      console.warn("Notifications not supported");
-      return;
-    }
+    if (!("Notification" in window)) return;
 
     setIsRequesting(true);
     try {
@@ -45,7 +53,6 @@ export function NotificationPermission({
 
       if (result === "granted") {
         onPermissionGranted?.();
-        // Show a test notification
         new Notification(
           isEn ? "Notifications Enabled!" : "Notifications Activées !",
           {
@@ -68,20 +75,11 @@ export function NotificationPermission({
 
   const dismissBanner = () => {
     setShowBanner(false);
-    // Store dismissal in localStorage to not show again for a while
-    localStorage.setItem("notification-banner-dismissed", Date.now().toString());
+    localStorage.setItem(DISMISS_KEY, Date.now().toString());
   };
 
-  // Don't render if notifications aren't supported or permission already decided
-  if (!("Notification" in window) || permission !== "default" || !showBanner) {
-    return null;
-  }
-
-  // Check if user dismissed recently (within 7 days)
-  const dismissedAt = localStorage.getItem("notification-banner-dismissed");
-  if (dismissedAt && Date.now() - parseInt(dismissedAt) < 7 * 24 * 60 * 60 * 1000) {
-    return null;
-  }
+  // Don't render if not ready to show
+  if (!showBanner || permission !== "default") return null;
 
   return (
     <div className="fixed bottom-4 right-4 z-50 animate-slide-up max-w-sm">
@@ -116,12 +114,8 @@ export function NotificationPermission({
                   className="text-xs"
                 >
                   {isRequesting
-                    ? isEn
-                      ? "Enabling..."
-                      : "Activation..."
-                    : isEn
-                    ? "Enable"
-                    : "Activer"}
+                    ? isEn ? "Enabling..." : "Activation..."
+                    : isEn ? "Enable" : "Activer"}
                 </Button>
                 <Button
                   size="sm"
@@ -149,21 +143,11 @@ export function useNotifications() {
     title: string,
     options?: NotificationOptions
   ): boolean => {
-    if (!("Notification" in window)) {
-      console.warn("Notifications not supported");
-      return false;
-    }
-
-    if (Notification.permission !== "granted") {
-      console.warn("Notification permission not granted");
-      return false;
-    }
+    if (!("Notification" in window)) return false;
+    if (Notification.permission !== "granted") return false;
 
     try {
-      new Notification(title, {
-        icon: "/favicon.ico",
-        ...options,
-      });
+      new Notification(title, { icon: "/favicon.ico", ...options });
       return true;
     } catch (error) {
       console.error("Error sending notification:", error);
@@ -175,23 +159,17 @@ export function useNotifications() {
     sessionTitle: string,
     timeUntil: "24h" | "1h"
   ) => {
-    const title =
-      timeUntil === "24h"
-        ? isEn
-          ? "Session Tomorrow"
-          : "Session Demain"
-        : isEn
-        ? "Session in 1 Hour"
-        : "Session dans 1 Heure";
+    const title = timeUntil === "24h"
+      ? (isEn ? "Session Tomorrow" : "Session Demain")
+      : (isEn ? "Session in 1 Hour" : "Session dans 1 Heure");
 
-    const body =
-      timeUntil === "24h"
-        ? isEn
+    const body = timeUntil === "24h"
+      ? (isEn
           ? `Don't forget: "${sessionTitle}" is scheduled for tomorrow.`
-          : `N'oubliez pas : "${sessionTitle}" est prévu pour demain.`
-        : isEn
-        ? `Your session "${sessionTitle}" starts in 1 hour.`
-        : `Votre session "${sessionTitle}" commence dans 1 heure.`;
+          : `N'oubliez pas : "${sessionTitle}" est prévu pour demain.`)
+      : (isEn
+          ? `Your session "${sessionTitle}" starts in 1 hour.`
+          : `Votre session "${sessionTitle}" commence dans 1 heure.`);
 
     return sendNotification(title, {
       body,
@@ -201,27 +179,27 @@ export function useNotifications() {
   };
 
   const notifyBadgeEarned = (badgeName: string, xpEarned: number) => {
-    const title = isEn ? "🏆 Badge Earned!" : "🏆 Badge Gagné !";
-    const body = isEn
-      ? `Congratulations! You earned the "${badgeName}" badge and ${xpEarned} XP!`
-      : `Félicitations ! Vous avez gagné le badge "${badgeName}" et ${xpEarned} XP !`;
-
-    return sendNotification(title, {
-      body,
-      tag: `badge-${badgeName}`,
-    });
+    return sendNotification(
+      isEn ? "Badge Earned!" : "Badge Gagné !",
+      {
+        body: isEn
+          ? `Congratulations! You earned the "${badgeName}" badge and ${xpEarned} XP!`
+          : `Félicitations ! Vous avez gagné le badge "${badgeName}" et ${xpEarned} XP !`,
+        tag: `badge-${badgeName}`,
+      }
+    );
   };
 
   const notifyNewMessage = (senderName: string) => {
-    const title = isEn ? "New Message" : "Nouveau Message";
-    const body = isEn
-      ? `You have a new message from ${senderName}.`
-      : `Vous avez un nouveau message de ${senderName}.`;
-
-    return sendNotification(title, {
-      body,
-      tag: "new-message",
-    });
+    return sendNotification(
+      isEn ? "New Message" : "Nouveau Message",
+      {
+        body: isEn
+          ? `You have a new message from ${senderName}.`
+          : `Vous avez un nouveau message de ${senderName}.`,
+        tag: "new-message",
+      }
+    );
   };
 
   return {
@@ -230,8 +208,7 @@ export function useNotifications() {
     notifyBadgeEarned,
     notifyNewMessage,
     isSupported: "Notification" in window,
-    permission:
-      "Notification" in window ? Notification.permission : "denied",
+    permission: "Notification" in window ? Notification.permission : "denied",
   };
 }
 

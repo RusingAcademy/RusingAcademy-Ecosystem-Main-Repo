@@ -2,7 +2,7 @@
 
 ## Folders and Files Available:
 1. The GC Bilingual Mastery Grammar
-2. RusingÂcademy - Le sevrage linguistique progressif dans le Path Series™
+2. RusingAcademy - Le sevrage linguistique progressif dans le Path Series™
 3. Rapport LRDG
 4. Photos
 5. Path1

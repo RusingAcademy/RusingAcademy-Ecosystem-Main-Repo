@@ -30,7 +30,6 @@ import {
   Video,
 } from "lucide-react";
 import { getLoginUrl } from "@/const";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { COACH_EARNINGS } from "@shared/pricing";
 
 export default function BecomeCoach() {
@@ -330,8 +329,7 @@ export default function BecomeCoach() {
   if (showApplication && isAuthenticated) {
     return (
       <div className="min-h-screen bg-white">
-        <EcosystemHeaderGold />
-        <div className="container py-8">
+<div className="container py-8">
           <ApplicationStatusTracker />
           <CoachApplicationWizard
             onComplete={() => setApplicationComplete(true)}
@@ -345,9 +343,7 @@ export default function BecomeCoach() {
 
   return (
     <div className="min-h-screen bg-white">
-      <EcosystemHeaderGold />
-
-      <main>
+<main>
         {/* Hero Section - Premium Dark Gradient */}
         <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
           {/* Background decorations */}

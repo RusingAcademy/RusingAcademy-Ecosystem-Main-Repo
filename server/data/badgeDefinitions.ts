@@ -1,5 +1,5 @@
 /**
- * Badge Definitions — RusingÂcademy Gamification System
+ * Badge Definitions — RusingAcademy Gamification System
  * 
  * Each badge has:
  * - Unique ID matching the learnerBadges.badgeType enum
@@ -326,8 +326,8 @@ export const BADGE_DEFINITIONS: BadgeDefinition[] = [
     id: "founding_member",
     name: "Founding Member",
     nameFr: "Membre Fondateur",
-    description: "Joined RusingÂcademy during the founding period",
-    descriptionFr: "A rejoint RusingÂcademy pendant la période de fondation",
+    description: "Joined RusingAcademy during the founding period",
+    descriptionFr: "A rejoint RusingAcademy pendant la période de fondation",
     category: "special",
     tier: "platinum",
     xpReward: 500,

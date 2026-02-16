@@ -52,7 +52,7 @@ const coaches = [
     email: "steven.barholere@lingueefy.com",
     slug: "steven-barholere",
     headline: "Founder & Lead Coach | SLE Strategy Expert",
-    bio: "Fondateur de RusingÂcademy et expert en stratégies d'apprentissage des langues. Avec plus de 15 ans d'expérience dans l'enseignement du français et de l'anglais aux fonctionnaires fédéraux, j'ai développé des méthodes éprouvées pour réussir les examens SLE à tous les niveaux.",
+    bio: "Fondateur de RusingAcademy et expert en stratégies d'apprentissage des langues. Avec plus de 15 ans d'expérience dans l'enseignement du français et de l'anglais aux fonctionnaires fédéraux, j'ai développé des méthodes éprouvées pour réussir les examens SLE à tous les niveaux.",
     photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
     languages: "both",
     specializations: { oral_a: true, oral_b: true, oral_c: true, written_a: true, written_b: true, written_c: true, reading: true, anxiety_coaching: true },

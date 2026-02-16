@@ -25,8 +25,8 @@ const portalConfigs: Record<string, PortalConfig> = {
     titleFr: "Portail Coach",
     subtitle: "Manage your students, sessions & earnings",
     subtitleFr: "Gérez vos étudiants, sessions et revenus",
-    description: "A dedicated workspace for RusingÂcademy language coaches to manage their teaching practice, track student progress, schedule sessions, and monitor earnings.",
-    descriptionFr: "Un espace dédié aux coachs linguistiques de RusingÂcademy pour gérer leur pratique d'enseignement, suivre les progrès des étudiants, planifier des sessions et surveiller les revenus.",
+    description: "A dedicated workspace for RusingAcademy language coaches to manage their teaching practice, track student progress, schedule sessions, and monitor earnings.",
+    descriptionFr: "Un espace dédié aux coachs linguistiques de RusingAcademy pour gérer leur pratique d'enseignement, suivre les progrès des étudiants, planifier des sessions et surveiller les revenus.",
     icon: "person",
     color: "#7c3aed",
     bgGradient: "linear-gradient(160deg, #f5f3ff 0%, #ede9fe 40%, #ddd6fe 100%)",
@@ -63,8 +63,8 @@ const portalConfigs: Record<string, PortalConfig> = {
     titleFr: "Système de Contrôle Admin",
     subtitle: "Full platform management & analytics",
     subtitleFr: "Gestion complète de la plateforme et analytique",
-    description: "The central command center for RusingÂcademy platform administrators. Manage users, content, commerce, marketing, analytics, and all system configurations from a single unified interface.",
-    descriptionFr: "Le centre de commande central pour les administrateurs de la plateforme RusingÂcademy. Gérez les utilisateurs, le contenu, le commerce, le marketing, l'analytique et toutes les configurations système depuis une interface unifiée.",
+    description: "The central command center for RusingAcademy platform administrators. Manage users, content, commerce, marketing, analytics, and all system configurations from a single unified interface.",
+    descriptionFr: "Le centre de commande central pour les administrateurs de la plateforme RusingAcademy. Gérez les utilisateurs, le contenu, le commerce, le marketing, l'analytique et toutes les configurations système depuis une interface unifiée.",
     icon: "admin_panel_settings",
     color: "#dc2626",
     bgGradient: "linear-gradient(160deg, #fef2f2 0%, #fee2e2 40%, #fecaca 100%)",
@@ -143,7 +143,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
         <div className="w-full max-w-md text-center">
           {/* Logo */}
-          <img src={LOGO_ICON} alt="RusingÂcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />
+          <img src={LOGO_ICON} alt="RusingAcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />
 
           {/* Construction badge */}
           <div
@@ -214,7 +214,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
 
           {/* Footer */}
           <p className="text-center text-xs text-gray-400 mt-10">
-            © 2026 RusingÂcademy — Barholex Media Inc.
+            © 2026 RusingAcademy — Barholex Media Inc.
           </p>
           <p className="text-center text-[10px] text-gray-300 mt-1">
             Rusinga International Consulting Ltd.

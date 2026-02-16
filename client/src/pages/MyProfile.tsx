@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal — My Profile Page (Sprint H1)
+ * RusingAcademy Learning Portal — My Profile Page (Sprint H1)
  * Fully database-driven, bilingual, WCAG 2.1 AA accessible
  * Sections: Personal Info, SLE Levels, Learning Goals, Certification, Preferences
  */

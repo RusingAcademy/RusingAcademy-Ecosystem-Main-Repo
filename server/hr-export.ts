@@ -329,7 +329,7 @@ export function generatePDFHTML(
     </table>
     
     <div class="footer">
-      <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. | ${isEn ? "Commercially known as" : "Commercialement connu sous"} RusingÂcademy</p>
+      <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. | ${isEn ? "Commercially known as" : "Commercialement connu sous"} RusingAcademy</p>
       <p>${isEn ? "This report is confidential and intended for internal use only." : "Ce rapport est confidentiel et destiné à un usage interne uniquement."}</p>
     </div>
   </div>

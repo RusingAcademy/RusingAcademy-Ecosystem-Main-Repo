@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import confetti from "canvas-confetti";
 
 export default function CourseSuccess() {
@@ -171,9 +170,7 @@ export default function CourseSuccess() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-50 via-amber-50/30 to-white">
-      <EcosystemHeaderGold />
-      
-      {/* Success Hero */}
+{/* Success Hero */}
       <section className="py-16 md:py-24">
         <div className="container px-4 sm:px-6 lg:px-8">
           <motion.div

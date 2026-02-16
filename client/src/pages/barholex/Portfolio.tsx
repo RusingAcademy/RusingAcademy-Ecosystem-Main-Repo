@@ -42,8 +42,8 @@ export default function BarholexPortfolio() {
   const PROJECTS = [
     {
       id: 1,
-      titleEn: "RusingÂcademy Learning Ecosystem",
-      titleFr: "Écosystème d'apprentissage RusingÂcademy",
+      titleEn: "RusingAcademy Learning Ecosystem",
+      titleFr: "Écosystème d'apprentissage RusingAcademy",
       categoryEn: "Full-Stack LMS Platform",
       categoryFr: "Plateforme LMS complète",
       descEn: "A comprehensive bilingual learning management system with 6 structured Paths (A1–C1 + Exam Prep), AI-powered coaching, progress tracking, and SLE exam preparation for Canadian public servants.",

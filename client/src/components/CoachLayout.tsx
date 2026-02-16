@@ -1,5 +1,5 @@
 /**
- * CoachLayout — RusingÂcademy Coach Portal Layout
+ * CoachLayout — RusingAcademy Coach Portal Layout
  * Design: White sidebar (240px), white main area with violet accents
  */
 import { useState, useEffect } from "react";
@@ -62,7 +62,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
         <footer className="text-center py-4 border-t border-gray-100 bg-white" role="contentinfo">
           <SocialLinks size={14} color="#9ca3af" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">
-            © 2026 RusingÂcademy — A Division of{" "}
+            © 2026 RusingAcademy — A Division of{" "}
             <span className="font-medium text-[#7c3aed]">Rusinga International Consulting Ltd.</span>
           </p>
           <p className="text-[10px] text-gray-400 mt-0.5">

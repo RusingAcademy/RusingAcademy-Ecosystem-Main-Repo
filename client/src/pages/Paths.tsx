@@ -30,7 +30,6 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
 import { FREE_ACCESS_MODE } from "@shared/const";
 
@@ -114,8 +113,8 @@ export default function Paths() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">      <EcosystemHeaderGold />
-      <SEO title="Learning Paths" description="Structured learning paths for bilingual excellence with guided SLE preparation courses." canonical="/paths" />
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+<SEO title="Learning Paths" description="Structured learning paths for bilingual excellence with guided SLE preparation courses." canonical="/paths" />
       
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">

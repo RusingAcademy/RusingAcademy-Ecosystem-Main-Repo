@@ -16,7 +16,7 @@ export default function SignUp() {
         {/* Logo and branding */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-[#0A2540] mb-2">
-            Join RusingÂcademy
+            Join RusingAcademy
           </h1>
           <p className="text-black">
             Start your journey to bilingual excellence

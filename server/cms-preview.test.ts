@@ -36,7 +36,7 @@ describe("CMS Public Page Rendering", () => {
       title: "About Us",
       slug: "about-us",
       status: "published",
-      metaTitle: "About RusingÂcademy",
+      metaTitle: "About RusingAcademy",
       metaDescription: "Learn about our mission",
       ogImage: "https://example.com/og.jpg",
       publishedAt: Date.now(),

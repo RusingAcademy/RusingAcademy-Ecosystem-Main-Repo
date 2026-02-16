@@ -3,7 +3,7 @@
  * 
  * Manages reusable section templates for the Visual Editor.
  * Categories: Hero, CTA, Testimonials, Features, Course Promo, Government Training, etc.
- * Supports bilingual FR/EN and brand-specific templates (RusingÂcademy, Lingueefy, Barholex).
+ * Supports bilingual FR/EN and brand-specific templates (RusingAcademy, Lingueefy, Barholex).
  */
 import { z } from "zod";
 import { router, adminProcedure, publicProcedure } from "../_core/trpc";

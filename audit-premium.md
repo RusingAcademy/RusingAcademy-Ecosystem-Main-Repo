@@ -1,8 +1,8 @@
-# Audit Premium - Écosystème RusingÂcademy
+# Audit Premium - Écosystème RusingAcademy
 
 ## Améliorations à implémenter
 
-### 1. RusingÂcademy (Page B)
+### 1. RusingAcademy (Page B)
 - [ ] Améliorer Hero avec sous-titre sur "Crash Courses" intensifs
 - [ ] Ajouter section "Le Problème" avec tableau comparatif
 - [ ] Améliorer section Path Series™ avec onglets interactifs

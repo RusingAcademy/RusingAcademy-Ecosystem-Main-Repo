@@ -72,7 +72,7 @@ export default function Contact() {
       brand: "Which brand are you contacting?",
       brands: {
         ecosystem: "Ecosystem Hub (General)",
-        rusingacademy: "RusingÂcademy",
+        rusingacademy: "RusingAcademy",
         lingueefy: "Lingueefy",
         barholex: "Barholex Media",
       },
@@ -135,7 +135,7 @@ export default function Contact() {
       brand: "Quelle marque contactez-vous?",
       brands: {
         ecosystem: "Ecosystem Hub (Général)",
-        rusingacademy: "RusingÂcademy",
+        rusingacademy: "RusingAcademy",
         lingueefy: "Lingueefy",
         barholex: "Barholex Media",
       },

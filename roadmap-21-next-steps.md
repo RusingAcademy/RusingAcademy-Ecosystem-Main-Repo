@@ -1,4 +1,4 @@
-# RusingÂcademy Learning Ecosystem — Les 21 prochaines étapes stratégiques
+# RusingAcademy Learning Ecosystem — Les 21 prochaines étapes stratégiques
 
 **Projet :** EcosystemHub Preview  
 **Date :** 7 février 2026  
@@ -8,7 +8,7 @@
 
 ## Contexte et état des lieux
 
-L'écosystème RusingÂcademy a atteint un stade de maturité significatif : 109 pages frontend, 32 pages d'administration, 186 composants réutilisables, 29 routeurs serveur, 145 tables de base de données et 1 413 tests unitaires. Les fondations techniques — authentification OAuth, Stripe, progression XP, leaderboard social, notifications push, tableau de bord coach, rapports PDF, funnels marketing et automations — sont en place et fonctionnelles.
+L'écosystème RusingAcademy a atteint un stade de maturité significatif : 109 pages frontend, 32 pages d'administration, 186 composants réutilisables, 29 routeurs serveur, 145 tables de base de données et 1 413 tests unitaires. Les fondations techniques — authentification OAuth, Stripe, progression XP, leaderboard social, notifications push, tableau de bord coach, rapports PDF, funnels marketing et automations — sont en place et fonctionnelles.
 
 Les 389 tâches restantes ont été analysées, regroupées par thème et priorisées selon trois critères : **impact business** (conversion, rétention, revenus), **dette technique** (stabilité, maintenabilité, déploiement) et **expérience utilisateur** (parcours apprenant, crédibilité institutionnelle). Les 21 étapes ci-dessous sont ordonnées en vagues progressives, chaque vague débloquant la suivante.
 
@@ -22,7 +22,7 @@ Ces cinq étapes éliminent les obstacles techniques qui empêchent un déploiem
 |---|-------|--------|---------------|
 | 1 | **Résolution des erreurs TypeScript (~160)** | Corriger les erreurs de types tRPC, schéma DB et imports manquants qui font crasher le compilateur TSC. | Le build de production échoue actuellement. C'est le bloqueur n°1 pour tout déploiement. |
 | 2 | **Audit d'accessibilité WCAG AA** | Contraste texte/fond sur sections sombres, focus clavier visible, hiérarchie éditoriale (Title → Lead → Content → CTA), rythme vertical normalisé. | Le public cible — fonctionnaires canadiens — exige une conformité aux normes d'accessibilité du gouvernement fédéral. |
-| 3 | **Design System unifié** | Échelle typographique cohérente (H1–labels), système d'espacement 8px, boutons standardisés (primary/secondary/ghost), cartes unifiées, ombres et border-radius cohérents. | Élimine les incohérences visuelles entre les 3 marques (RusingÂcademy, Lingueefy, Barholex) et accélère le développement futur. |
+| 3 | **Design System unifié** | Échelle typographique cohérente (H1–labels), système d'espacement 8px, boutons standardisés (primary/secondary/ghost), cartes unifiées, ombres et border-radius cohérents. | Élimine les incohérences visuelles entre les 3 marques (RusingAcademy, Lingueefy, Barholex) et accélère le développement futur. |
 | 4 | **Header statique Canada.ca + Cross-Ecosystem Section premium** | Header qui scroll away (pas sticky), section Cross-Ecosystem redesignée avant le footer sur les 3 pages principales. | Aligne l'expérience avec les conventions institutionnelles canadiennes et renforce la navigation inter-marques. |
 | 5 | **Audit Lighthouse complet (Mobile + Desktop) + axe-core** | Inventaire des pages (sitemap), audit automatisé de performance, accessibilité et SEO, rapport priorisé P0/P1/P2 avec Top 10 quick wins. | Fournit une baseline mesurable avant le lancement et identifie les problèmes critiques de performance mobile. |
 
@@ -38,7 +38,7 @@ Ces six étapes construisent le parcours apprenant de bout en bout : de la déco
 | 7 | **Checkout Stripe fonctionnel** | Créer les produits et prix Stripe pour les Plans Maison, connecter les boutons "Enroll Now" et "Get Started" des Bundles au checkout, flux de paiement complet avec carte test 4242. | Pas de revenus sans checkout fonctionnel. C'est le chemin critique vers la monétisation. |
 | 8 | **Système de quiz interactifs** | Table quiz_questions et quiz_attempts, composant QuizViewer.tsx, questions à choix multiples avec feedback immédiat, attribution de XP selon la performance, seed des questions pour les 6 Paths. | Les quiz sont le mécanisme principal d'évaluation formative et le moteur d'engagement qui alimente le système de progression XP. |
 | 9 | **Bouton "Mark as Complete" + connexion données réelles** | Bouton de complétion sur la vue leçon, connexion du streak et des défis aux données réelles de complétion leçon/quiz. | Sans ce bouton, le système de progression XP, les streaks et les badges restent déconnectés de l'activité réelle de l'apprenant. |
-| 10 | **Facturation organisationnelle (Org Billing)** | Facturation par siège pour les organisations, invoices Stripe par organisation, gestion des plans Enterprise. | Débloque le segment B2B (ministères fédéraux, agences) qui représente le marché principal de RusingÂcademy. |
+| 10 | **Facturation organisationnelle (Org Billing)** | Facturation par siège pour les organisations, invoices Stripe par organisation, gestion des plans Enterprise. | Débloque le segment B2B (ministères fédéraux, agences) qui représente le marché principal de RusingAcademy. |
 | 11 | **Bundles & Learning Paths** | Regroupement de cours en parcours structurés, tarification bundle, progression inter-cours, certificats de parcours. | Augmente la valeur perçue et le panier moyen en proposant des parcours complets plutôt que des cours isolés. |
 
 ---
@@ -59,7 +59,7 @@ Ces cinq étapes transforment l'écosystème d'un simple LMS en une plateforme d
 
 ## Vague D — Infrastructure de contenu et outils admin (Étapes 17–19)
 
-Ces trois étapes renforcent les outils de gestion de contenu et d'administration pour permettre à l'équipe de RusingÂcademy d'opérer de manière autonome.
+Ces trois étapes renforcent les outils de gestion de contenu et d'administration pour permettre à l'équipe de RusingAcademy d'opérer de manière autonome.
 
 | # | Étape | Portée | Justification |
 |---|-------|--------|---------------|

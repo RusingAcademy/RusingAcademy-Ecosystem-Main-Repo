@@ -1,6 +1,6 @@
 /**
  * Transactional Email Templates — Learner Lifecycle
- * RusingÂcademy Learning Ecosystem
+ * RusingAcademy Learning Ecosystem
  * 
  * 8 bilingual (FR/EN) transactional email templates covering:
  * 1. Enrollment Confirmation (course purchase)

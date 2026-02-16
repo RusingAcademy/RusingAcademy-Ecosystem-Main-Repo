@@ -24,7 +24,7 @@ type OnboardingStep = {
 };
 
 const DEFAULT_STEPS: OnboardingStep[] = [
-  { id: "1", type: "email", title: "Welcome Email", config: { subject: "Welcome to RusingÂcademy!", template: "welcome", delay: 0 }, enabled: true },
+  { id: "1", type: "email", title: "Welcome Email", config: { subject: "Welcome to RusingAcademy!", template: "welcome", delay: 0 }, enabled: true },
   { id: "2", type: "notification", title: "Admin Notification", config: { message: "New student enrolled: {{name}}", recipients: "admin" }, enabled: true },
   { id: "3", type: "delay", title: "Wait 1 hour", config: { hours: 1 }, enabled: true },
   { id: "4", type: "course_assign", title: "Assign Free Starter Course", config: { courseType: "starter", autoEnroll: true }, enabled: true },
@@ -234,7 +234,7 @@ export default function OnboardingWorkflow() {
             <CardHeader><CardTitle className="text-lg">Onboarding Email Templates</CardTitle></CardHeader>
             <CardContent className="space-y-4">
               {[
-                { name: "Welcome Email", subject: "Welcome to RusingÂcademy!", status: "active" },
+                { name: "Welcome Email", subject: "Welcome to RusingAcademy!", status: "active" },
                 { name: "Getting Started Guide", subject: "Your learning journey starts here", status: "active" },
                 { name: "First Week Check-in", subject: "How's your first week going?", status: "draft" },
                 { name: "Course Recommendation", subject: "Courses picked for you", status: "draft" },

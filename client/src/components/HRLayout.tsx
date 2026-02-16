@@ -1,5 +1,5 @@
 /**
- * HRLayout — RusingÂcademy Client Portal Layout
+ * HRLayout — RusingAcademy Client Portal Layout
  * This is the layout for client organizations (government departments, ministries, agencies).
  * Design: White sidebar (240px), white main area with blue accents
  */
@@ -39,7 +39,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
         <div className="flex-1 p-4 lg:p-6">{children}</div>
         <footer className="text-center py-4 border-t border-gray-100 bg-white" role="contentinfo">
           <SocialLinks size={14} color="#9ca3af" className="flex items-center justify-center gap-4 mb-2" />
-          <p className="text-[11px] text-gray-500">© 2026 RusingÂcademy — A Division of <span className="font-medium text-[#2563eb]">Rusinga International Consulting Ltd.</span></p>
+          <p className="text-[11px] text-gray-500">© 2026 RusingAcademy — A Division of <span className="font-medium text-[#2563eb]">Rusinga International Consulting Ltd.</span></p>
           <p className="text-[10px] text-gray-400 mt-0.5">Version 2.0.0 — Client Portal</p>
         </footer>
       </main>

@@ -120,7 +120,7 @@ const EMPTY_STATE_CONFIGS: Record<EmptyStateType, EmptyStateConfig> = {
       path: '/lms/progress',
       variant: 'primary'
     },
-    tip: 'Les certificats RusingÂcademy sont reconnus par les ministères fédéraux'
+    tip: 'Les certificats RusingAcademy sont reconnus par les ministères fédéraux'
   },
   'no-streak': {
     icon: '🔥',

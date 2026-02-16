@@ -99,7 +99,7 @@ const SECTION_TYPES = [
 // ─── Section Templates ───
 const SECTION_TEMPLATES: Record<string, any> = {
   hero: {
-    title: "Welcome to RusingÂcademy | Bienvenue chez RusingÂcademy",
+    title: "Welcome to RusingAcademy | Bienvenue chez RusingAcademy",
     subtitle: "Master bilingual excellence for the Canadian public service | Maîtrisez l'excellence bilingue pour la fonction publique canadienne",
     content: { ctaText: "Start Learning | Commencer", ctaUrl: "/courses", backgroundImage: "", alignment: "center" },
     backgroundColor: "#062b2b",
@@ -139,7 +139,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
     subtitle: "",
     content: {
       items: [
-        { name: "Marie D.", role: "Policy Analyst | Analyste de politiques", quote: "RusingÂcademy helped me pass my SLE with confidence. | RusingÂcademy m'a aidée à réussir mes ELS avec confiance.", rating: 5 },
+        { name: "Marie D.", role: "Policy Analyst | Analyste de politiques", quote: "RusingAcademy helped me pass my SLE with confidence. | RusingAcademy m'a aidée à réussir mes ELS avec confiance.", rating: 5 },
         { name: "James T.", role: "Program Manager | Gestionnaire de programme", quote: "The coaching sessions were incredibly effective. | Les séances de coaching étaient incroyablement efficaces.", rating: 5 },
         { name: "Sophie L.", role: "HR Advisor | Conseillère RH", quote: "Best investment for my career development. | Meilleur investissement pour mon développement de carrière.", rating: 5 },
       ],

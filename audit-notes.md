@@ -1,4 +1,4 @@
-# Audit de l'Écosystème RusingÂcademy - Notes
+# Audit de l'Écosystème RusingAcademy - Notes
 
 ## Date: 22 janvier 2026
 
@@ -8,7 +8,7 @@
 |------|---------|----------|
 | Fond Principal | Ivoire Pur | #FEFEF8 |
 | Texte Principal | Noir Foncé | #111827 |
-| Accent RusingÂcademy | Navy Blue | #1E3A8A |
+| Accent RusingAcademy | Navy Blue | #1E3A8A |
 | Accent Lingueefy | Teal | #0EA5A4 |
 | Accent Barholex Media | Gold/Orange | #F7941D |
 | CTA Primaire | Orange Vif | #F97316 |
@@ -28,7 +28,7 @@
 - Le Trilemme (3 Piliers) - OK (existant)
 - La Méthode Rusinga - À vérifier
 
-### Page B: RusingÂcademy (L'École)
+### Page B: RusingAcademy (L'École)
 - Hero "Académie" - À améliorer
 - Le Problème - À créer/améliorer
 - La Solution: Path Series™ - À vérifier

@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import {
   Zap,
   Brain,

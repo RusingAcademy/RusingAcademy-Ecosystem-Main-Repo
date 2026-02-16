@@ -1,6 +1,6 @@
 # MISSION NEXT+ — Final E2E Validation & Proof Pack
 
-**Project:** EcosystemHub Preview (RusingÂcademy Learning Ecosystem)
+**Project:** EcosystemHub Preview (RusingAcademy Learning Ecosystem)
 **Date:** February 12, 2026
 **Scope:** Coach Messaging Activation + Admin Seeds + Post-Login Return UX
 **Methodology:** Autonomous verification via API testing, SQL queries, static code analysis, and Puppeteer screenshots
@@ -31,7 +31,7 @@ This report documents the complete end-to-end validation of three critical featu
 
 **Method:** Direct SQL verification against TiDB production database.
 
-Five demo coach applications were seeded with realistic bilingual data spanning all application statuses. Each application includes complete professional credentials, pricing, specializations, and language qualifications appropriate for the RusingÂcademy coaching ecosystem.
+Five demo coach applications were seeded with realistic bilingual data spanning all application statuses. Each application includes complete professional credentials, pricing, specializations, and language qualifications appropriate for the RusingAcademy coaching ecosystem.
 
 | ID | Applicant | Status | Experience | Hourly Rate | Specializations |
 |---|---|---|---|---|---|
