@@ -114,7 +114,7 @@ Score moyen: ${stats.avgScore}/100
 
   if (authLoading || isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-6">
+      <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-6">
         <div className="max-w-4xl mx-auto">
           <Skeleton className="h-10 w-64 mb-6" />
           <Skeleton className="h-32 mb-6" />
@@ -130,7 +130,7 @@ Score moyen: ${stats.avgScore}/100
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian flex items-center justify-center p-6">
         <Card className="max-w-md bg-white/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Connexion requise</CardTitle>
@@ -149,7 +149,7 @@ Score moyen: ${stats.avgScore}/100
 
   if (error || !session) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian flex items-center justify-center p-6">
         <Card className="max-w-md bg-white/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Session introuvable</CardTitle>
@@ -174,7 +174,7 @@ Score moyen: ${stats.avgScore}/100
   const coachImage = coachImages[coachId] || coachImages.steven;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-6">
+    <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

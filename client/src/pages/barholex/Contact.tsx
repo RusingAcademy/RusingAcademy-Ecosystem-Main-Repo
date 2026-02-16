@@ -83,7 +83,7 @@ export default function BarholexContact() {
 
   if (formSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
+      <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white">
         <main className="pt-24 pb-20 px-4">
           <div className="container mx-auto max-w-2xl">
             <motion.div
@@ -119,7 +119,7 @@ export default function BarholexContact() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white">
       <main id="main-content">
         {/* Hero Section */}
         <section className="relative pt-20 pb-12 px-4 overflow-hidden">
@@ -140,7 +140,7 @@ export default function BarholexContact() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-6"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-barholex-gold/30 text-barholex-gold font-medium">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-barholex-gold/20 to-barholex-gold/10 border border-barholex-gold/30 text-barholex-gold font-medium">
                   <MessageSquare className="w-4 h-4" />
                   {language === "en" ? "Start a Conversation" : "Démarrer une conversation"}
                 </span>
@@ -154,7 +154,7 @@ export default function BarholexContact() {
                 className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
               >
                 <span className="text-white">{language === "en" ? "Let's " : "Créons "}</span>
-                <span className="bg-gradient-to-r from-[#D4AF37] via-[#F7DC6F] to-[#D4AF37] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-barholex-gold via-[#F7DC6F] to-barholex-gold bg-clip-text text-transparent">
                   {language === "en" ? "Create Together" : "ensemble"}
                 </span>
               </motion.h1>
@@ -187,7 +187,7 @@ export default function BarholexContact() {
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className="p-6 rounded-2xl bg-gradient-to-br from-[#D4AF37] to-[#B8962E] text-black"
+                      className="p-6 rounded-2xl bg-gradient-to-br from-barholex-gold to-amber-600 text-black"
                     >
                       <h3 className="text-xl font-bold mb-6">
                         {language === "en" ? "Contact Information" : "Coordonnées"}
@@ -452,7 +452,7 @@ export default function BarholexContact() {
                       <Button 
                         type="submit"
                         size="lg"
-                        className="w-full bg-gradient-to-r from-[#D4AF37] to-[#B8962E] hover:from-[#B8962E] hover:to-[#D4AF37] text-black rounded-full h-14 text-lg font-semibold shadow-lg shadow-[#D4AF37]/20"
+                        className="w-full bg-gradient-to-r from-barholex-gold to-amber-600 hover:from-[#B8962E] hover:to-barholex-gold text-black rounded-full h-14 text-lg font-semibold shadow-lg shadow-[#D4AF37]/20"
                       >
                         {language === "en" ? "Send Message" : "Envoyer le message"}
                         <Send className="ml-2 h-5 w-5" />

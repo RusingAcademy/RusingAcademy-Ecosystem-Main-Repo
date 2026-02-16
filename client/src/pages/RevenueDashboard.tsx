@@ -30,7 +30,7 @@ export default function RevenueDashboard() {
   const isLoading = revLoading || engLoading;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1B1464]/5 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-900/5 to-background">
       <div className="max-w-7xl mx-auto px-4 pt-8 pb-16">
         <button onClick={() => navigate("/")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> {t.membership.backToCommunity}

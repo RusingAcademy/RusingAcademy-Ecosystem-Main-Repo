@@ -109,7 +109,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
           {state === 'idle' && (
             <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center">
               <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={startRecording}
-                className="w-24 h-24 rounded-full bg-gradient-to-br from-red-500 to-[#E06B2D] flex items-center justify-center shadow-lg">
+                className="w-24 h-24 rounded-full bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center shadow-lg">
                 <span className="text-4xl">🎤</span>
               </motion.button>
               <p className="mt-4 text-white/60 text-sm">Cliquez pour commencer</p>

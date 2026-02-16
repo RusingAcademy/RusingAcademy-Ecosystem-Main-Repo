@@ -271,7 +271,7 @@ export default function BarholexPortfolio() {
                 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight"
               >
                 <span className="text-white">{language === "en" ? "Our " : "Notre "}</span>
-                <span className="bg-gradient-to-r from-[#D4AF37] via-[#F7DC6F] to-[#D4AF37] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-barholex-gold via-[#F7DC6F] to-barholex-gold bg-clip-text text-transparent">
                   Portfolio
                 </span>
               </motion.h1>
@@ -335,7 +335,7 @@ export default function BarholexPortfolio() {
                   aria-label={`Filter by ${language === "en" ? filter.labelEn : filter.labelFr}`}
                   className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                     activeFilter === filter.id
-                      ? "bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-white shadow-lg shadow-[#D4AF37]/25"
+                      ? "bg-gradient-to-r from-barholex-gold to-amber-600 text-white shadow-lg shadow-[#D4AF37]/25"
                       : "bg-white text-slate-600 hover:bg-[#F0EDE8] border border-stone-200 hover:border-barholex-gold/30"
                   }`}
                 >
@@ -434,7 +434,7 @@ export default function BarholexPortfolio() {
                     
                     {/* Featured Badge */}
                     {project.featured && (
-                      <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7DC6F] text-slate-900 text-xs font-bold flex items-center gap-1.5 shadow-lg">
+                      <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-barholex-gold to-[#F7DC6F] text-slate-900 text-xs font-bold flex items-center gap-1.5 shadow-lg">
                         <Star className="w-3 h-3" />
                         {language === "en" ? "FLAGSHIP" : "PHARE"}
                       </div>
@@ -527,7 +527,7 @@ export default function BarholexPortfolio() {
                         aria-label={`Go to testimonial ${index + 1}`}
                         aria-current={index === testimonialIndex ? "true" : undefined}
                         className={`h-2.5 rounded-full transition-all duration-300 ${
-                          index === testimonialIndex ? "w-10 bg-gradient-to-r from-[#D4AF37] to-[#B8962E]" : "w-2.5 bg-[#E8E6E1] hover:bg-barholex-gold/30"
+                          index === testimonialIndex ? "w-10 bg-gradient-to-r from-barholex-gold to-amber-600" : "w-2.5 bg-[#E8E6E1] hover:bg-barholex-gold/30"
                         }`}
                       />
                     ))}
@@ -602,7 +602,7 @@ export default function BarholexPortfolio() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-slate-900 hover:from-[#F7DC6F] hover:to-[#D4AF37] shadow-lg shadow-[#D4AF37]/25 transition-all duration-300"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-slate-900 hover:from-[#F7DC6F] hover:to-barholex-gold shadow-lg shadow-[#D4AF37]/25 transition-all duration-300"
                   >
                     {language === "en" ? "Start a Conversation" : "Démarrer une conversation"}
                     <ArrowRight className="ml-2 h-5 w-5" />

@@ -32,7 +32,7 @@ const brandColors = {
   },
   barholex: {
     primary: '#D4A853',
-    gradient: 'from-[#D97B3D] to-yellow-600',
+    gradient: 'from-cta-2 to-yellow-600',
     glow: 'shadow-amber-500/30',
     border: 'border-amber-500/30',
     bg: 'bg-cta/10',
@@ -82,7 +82,7 @@ export function BrandCard({
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.6 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b] via-[#062b2b]/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent" />
         
         {/* Brand badge */}
         <div className={`absolute top-4 left-4 px-3 py-1 rounded-full ${colors.bg} ${colors.text} text-xs font-semibold backdrop-blur-sm border ${colors.border}`}>

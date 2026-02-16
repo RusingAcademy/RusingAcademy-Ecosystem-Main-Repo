@@ -35,7 +35,7 @@ export default function NotFound() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#062b2b] dark:to-[#0a4040]">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-obsidian dark:to-teal-900">
       <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 dark:bg-obsidian/80 backdrop-blur-sm">
         <CardContent className="pt-8 pb-8 text-center">
           <div className="flex justify-center mb-6">

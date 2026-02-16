@@ -202,7 +202,7 @@ export default function Community() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#080a14] via-[#0d1020] to-[#080a14] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-[#0d1020] to-[#080a14] text-white">
       <SEO title="Community" description="Join the RusingAcademy learning community. Connect with fellow public servants preparing for SLE exams." canonical="/community" />
       
       
@@ -249,7 +249,7 @@ export default function Community() {
             <div className="flex flex-wrap justify-center gap-4">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-[#17E2C6] to-[#0d9488] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                className="bg-gradient-to-r from-teal-400 to-teal-600 text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
                 style={{ boxShadow: "0 10px 25px -5px rgba(23, 226, 198, 0.5)" }}
               >
                 {language === "en" ? "Join the Community" : "Rejoindre la communauté"}
@@ -526,7 +526,7 @@ export default function Community() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-[#17E2C6]/10 to-[#1E9B8A]/10 border border-teal-400/20"
+              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-teal-400/10 to-[#1E9B8A]/10 border border-teal-400/20"
             >
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                 <Globe className="w-5 h-5 text-teal-400" />
@@ -640,7 +640,7 @@ export default function Community() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-[#17E2C6]/20 to-[#1E9B8A]/20 border border-teal-400/30"
+              className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-teal-400/20 to-[#1E9B8A]/20 border border-teal-400/30"
             >
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="flex-1">
@@ -691,7 +691,7 @@ export default function Community() {
           <div className="flex flex-wrap justify-center gap-4">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-[#17E2C6] to-[#0d9488] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+              className="bg-gradient-to-r from-teal-400 to-teal-600 text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
               style={{ boxShadow: "0 10px 25px -5px rgba(23, 226, 198, 0.5)" }}
             >
               {language === "en" ? "Create Free Account" : "Créer un compte gratuit"}

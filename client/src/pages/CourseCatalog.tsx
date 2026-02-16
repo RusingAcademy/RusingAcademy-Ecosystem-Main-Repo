@@ -172,7 +172,7 @@ export default function CourseCatalog() {
                   className="group bg-card rounded-2xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300"
                 >
                   {/* Thumbnail */}
-                  <div className="relative h-48 bg-gradient-to-br from-[#1B1464]/20 to-[#2EC4B6]/20 overflow-hidden">
+                  <div className="relative h-48 bg-gradient-to-br from-indigo-900/20 to-[#2EC4B6]/20 overflow-hidden">
                     {course.thumbnailUrl ? (
                       <img
                         src={course.thumbnailUrl}

@@ -153,7 +153,7 @@ export default function BarholexHome() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white">
       <main id="main-content">
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
@@ -179,7 +179,7 @@ export default function BarholexHome() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               >
                 {language === "en" ? "Where Creativity Meets" : "Là où la créativité rencontre"}{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#145A5B]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-barholex-gold to-teal-700">
                   {language === "en" ? "Innovation" : "l'innovation"}
                 </span>
               </motion.h1>
@@ -276,7 +276,7 @@ export default function BarholexHome() {
         </section>
 
         {/* Portfolio Preview */}
-        <section className="py-20 px-4 bg-gradient-to-br from-[#062b2b] to-[#041e1e]">
+        <section className="py-20 px-4 bg-gradient-to-br from-obsidian to-teal-950">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -353,7 +353,7 @@ export default function BarholexHome() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-r from-[#D4AF37] to-[#B8962E]">
+        <section className="py-20 px-4 bg-gradient-to-r from-barholex-gold to-amber-600">
           <div className="container mx-auto">
             <div className="max-w-3xl mx-auto text-center text-black">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">

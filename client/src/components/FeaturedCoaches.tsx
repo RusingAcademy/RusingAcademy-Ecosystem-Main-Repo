@@ -43,7 +43,7 @@ const FEATURED_COACHES = [
     totalSessions: 385,
     languages: ["french", "english"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Wed", "Fri", "Sat"] },
-    accentColor: "from-[#0F3D3E] to-[#E06B2D]",
+    accentColor: "from-foundation to-orange-600",
     linkedinUrl: "https://www.linkedin.com/in/sue-anne-richer/",
   },
   {
@@ -63,7 +63,7 @@ const FEATURED_COACHES = [
     totalSessions: 278,
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Tomorrow", availableDays: ["Tue", "Thu", "Sat"] },
-    accentColor: "from-[#C65A1E] to-[#A84A15]",
+    accentColor: "from-cta to-cta",
     linkedinUrl: "https://www.linkedin.com/in/erika-seguin-9aaa40383/",
   },
   {
@@ -103,7 +103,7 @@ const FEATURED_COACHES = [
     totalSessions: 310,
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Monday", availableDays: ["Mon", "Wed", "Fri"] },
-    accentColor: "from-indigo-500 to-[#145A5B]",
+    accentColor: "from-indigo-500 to-teal-700",
     linkedinUrl: "https://www.linkedin.com/in/victor-amisi-bb92a0114/",
   },
   {
@@ -123,7 +123,7 @@ const FEATURED_COACHES = [
     totalSessions: 324,
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Wednesday", availableDays: ["Wed", "Sat", "Sun"] },
-    accentColor: "from-[#C65A1E] to-red-600",
+    accentColor: "from-cta to-red-600",
     linkedinUrl: "https://www.linkedin.com/in/managerok/",
   },
 ];
@@ -278,7 +278,7 @@ function VideoModal({
       
       {/* Modal Content */}
       <div 
-        className="relative w-full max-w-6xl bg-gradient-to-br from-[#062b2b] via-[#062b2b] to-[#041e1e] rounded-3xl overflow-hidden shadow-2xl border border-white/60 animate-in fade-in zoom-in-95 duration-500"
+        className="relative w-full max-w-6xl bg-gradient-to-br from-obsidian via-obsidian to-teal-950 rounded-3xl overflow-hidden shadow-2xl border border-white/60 animate-in fade-in zoom-in-95 duration-500"
         onClick={(e) => e.stopPropagation()}
         onMouseMove={handleMouseMove}
       >

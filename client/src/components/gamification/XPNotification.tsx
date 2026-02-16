@@ -219,7 +219,7 @@ export function LevelUpCelebration({
 
           {/* Modal content */}
           <motion.div
-            className="relative bg-gradient-to-b from-[#062b2b] to-[#041e1e] rounded-2xl p-8 max-w-sm w-full mx-4 border border-teal-800 shadow-2xl"
+            className="relative bg-gradient-to-b from-obsidian to-teal-950 rounded-2xl p-8 max-w-sm w-full mx-4 border border-teal-800 shadow-2xl"
             initial={{ scale: 0.5, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.5, y: 50 }}

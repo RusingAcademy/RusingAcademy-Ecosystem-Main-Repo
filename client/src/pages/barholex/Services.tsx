@@ -235,7 +235,7 @@ export default function BarholexServices() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white">
       
       <main id="main-content">
         {/* Hero Section - Premium Design */}
@@ -244,7 +244,7 @@ export default function BarholexServices() {
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-barholex-gold/10 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-foundation-soft/10 rounded-full blur-[120px]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-[#D4AF37]/5 to-transparent rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-barholex-gold/5 to-transparent rounded-full" />
           </div>
           
           {/* Decorative Grid */}
@@ -258,7 +258,7 @@ export default function BarholexServices() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-8"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-barholex-gold/30 text-barholex-gold font-medium">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-barholex-gold/20 to-barholex-gold/10 border border-barholex-gold/30 text-barholex-gold font-medium">
                   <Zap className="w-4 h-4" />
                   {language === "en" ? "Full-Service Creative Agency" : "Agence créative à service complet"}
                 </span>
@@ -272,7 +272,7 @@ export default function BarholexServices() {
                 className="text-4xl md:text-6xl font-bold text-center mb-6 leading-tight"
               >
                 <span className="text-white">{language === "en" ? "Creative Solutions for " : "Solutions créatives pour "}</span>
-                <span className="bg-gradient-to-r from-[#D4AF37] via-[#F7DC6F] to-[#D4AF37] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-barholex-gold via-[#F7DC6F] to-barholex-gold bg-clip-text text-transparent">
                   {language === "en" ? "Modern Learning" : "l'apprentissage moderne"}
                 </span>
               </motion.h1>
@@ -318,7 +318,7 @@ export default function BarholexServices() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-black hover:from-[#B8962E] hover:to-[#D4AF37] shadow-lg shadow-[#D4AF37]/20"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-black hover:from-[#B8962E] hover:to-barholex-gold shadow-lg shadow-[#D4AF37]/20"
                   >
                     {language === "en" ? "Start Your Project" : "Démarrer votre projet"}
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -421,7 +421,7 @@ export default function BarholexServices() {
                   </div>
 
                   {/* Outcome */}
-                  <div className="p-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/10 to-transparent border border-barholex-gold/20">
+                  <div className="p-4 rounded-xl bg-gradient-to-r from-barholex-gold/10 to-transparent border border-barholex-gold/20">
                     <div className="flex items-center gap-2 text-sm font-medium text-barholex-gold mb-2">
                       <TrendingUp className="w-4 h-4" />
                       {language === "en" ? "Expected Outcome" : "Résultat attendu"}
@@ -473,7 +473,7 @@ export default function BarholexServices() {
         </section>
 
         {/* Process Section - Timeline */}
-        <section className="py-20 px-4 bg-gradient-to-br from-[#062b2b]/50 to-[#041e1e] relative overflow-hidden">
+        <section className="py-20 px-4 bg-gradient-to-br from-obsidian/50 to-teal-950 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
           
           <div className="container mx-auto">
@@ -495,7 +495,7 @@ export default function BarholexServices() {
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 {/* Connection Line */}
-                <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-[#D4AF37] via-[#D4AF37]/50 to-[#D4AF37]" />
+                <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-barholex-gold via-[#D4AF37]/50 to-barholex-gold" />
                 
                 {PROCESS.map((step, index) => (
                   <motion.div
@@ -506,7 +506,7 @@ export default function BarholexServices() {
                     className="relative text-center"
                   >
                     {/* Step Number */}
-                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8962E] text-black font-bold text-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#D4AF37]/20">
+                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-barholex-gold to-amber-600 text-black font-bold text-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#D4AF37]/20">
                       <step.icon className="w-10 h-10" />
                     </div>
                     
@@ -579,7 +579,7 @@ export default function BarholexServices() {
 
         {/* CTA Section */}
         <section className="py-20 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#B8962E]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-barholex-gold to-amber-600" />
           <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.1)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.1)_75%,transparent_75%)] bg-[size:20px_20px]" />
           
           <div className="container mx-auto relative z-10">

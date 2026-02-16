@@ -63,7 +63,7 @@ const pathsFSL = [
     autonomousPractice: "80-130 Hours",
     pfl2Level: "OF 7-12",
     price: 899,
-    color: "from-[#0F3D3E] to-[#145A5B]",
+    color: "from-foundation to-teal-700",
   },
   {
     id: "III",
@@ -84,7 +84,7 @@ const pathsFSL = [
     autonomousPractice: "80-130 Hours",
     pfl2Level: "OF 13-22",
     price: 999,
-    color: "from-[#D97B3D] to-[#C65A1E]",
+    color: "from-cta-2 to-cta",
   },
   {
     id: "IV",
@@ -105,7 +105,7 @@ const pathsFSL = [
     autonomousPractice: "80-130 Hours",
     pfl2Level: "OF 23-32",
     price: 1099,
-    color: "from-[#0F3D3E] to-[#145A5B]",
+    color: "from-foundation to-teal-700",
   },
   {
     id: "V",
@@ -126,7 +126,7 @@ const pathsFSL = [
     autonomousPractice: "80-130 Hours",
     pfl2Level: "OF 33-40",
     price: 1199,
-    color: "from-[#C65A1E] to-[#E06B2D]",
+    color: "from-cta to-orange-600",
   },
   {
     id: "VI",
@@ -147,7 +147,7 @@ const pathsFSL = [
     practiceExams: "5 Complete",
     coachingSessions: "5-Hour Quick Prep",
     price: 1299,
-    color: "from-red-500 to-[#C65A1E]",
+    color: "from-red-500 to-cta",
   },
 ];
 
@@ -250,18 +250,18 @@ export default function Programs() {
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFF8F3] via-white to-teal-50/30">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-teal-50/30">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-28 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[#FFE4D6]/30 to-[#FFE4D6]/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#0F3D3E]/20 to-[#145A5B]/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-foundation/20 to-teal-700/20 rounded-full blur-3xl" />
         </div>
 
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta border-orange-100">
+            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta border-orange-100">
               <Sparkles className="w-4 h-4 mr-2" />
               Exclusive Professional Training
             </Badge>
@@ -269,7 +269,7 @@ export default function Programs() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="text-black">Discover Your Path to</span>
               <br />
-              <span className="bg-gradient-to-r from-[#C65A1E] via-amber-500 to-teal-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cta via-amber-500 to-teal-500 bg-clip-text text-transparent">
                 Bilingual Excellence
               </span>
             </h1>
@@ -285,7 +285,7 @@ export default function Programs() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <Button size="lg" className="bg-gradient-to-r from-[#C65A1E] to-[#D97B3D] hover:from-[#A84A15] hover:to-[#C65A1E] text-white shadow-lg">
+              <Button size="lg" className="bg-gradient-to-r from-cta to-cta-2 hover:from-cta hover:to-cta text-white shadow-lg">
                 Explore the Program
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -304,7 +304,7 @@ export default function Programs() {
                 { value: "40", label: "PFL2 Objectives Integrated" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#C65A1E] to-teal-500 bg-clip-text text-transparent">
+                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cta to-teal-500 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
                   <div className="text-xs md:text-sm text-black">{stat.label}</div>
@@ -334,19 +334,19 @@ export default function Programs() {
                 title: "Structured Progression",
                 description: "Clear milestones from A1 to C1 with each Path corresponding to a specific CEFR level",
                 icon: Target,
-                color: "from-[#C65A1E] to-[#D97B3D]",
+                color: "from-cta to-cta-2",
               },
               {
                 title: "Accelerated Performance",
                 description: "Intensive 4-week modules with measurable outcomes and 3-4x faster results",
                 icon: Zap,
-                color: "from-[#0F3D3E] to-[#145A5B]",
+                color: "from-foundation to-teal-700",
               },
               {
                 title: "Deep Consolidation",
                 description: "Spaced repetition, booster sessions, and community practice for long-term retention",
                 icon: Shield,
-                color: "from-[#0F3D3E] to-[#145A5B]",
+                color: "from-foundation to-teal-700",
               },
             ].map((item, index) => (
               <Card key={index} className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
@@ -371,7 +371,7 @@ export default function Programs() {
               <Card className="border-2 border-orange-100 bg-orange-50/50">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C65A1E] to-[#D97B3D] flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cta to-cta-2 flex items-center justify-center text-white font-bold text-xl">
                       70%
                     </div>
                     <CardTitle>RusingAcademy Platform</CardTitle>
@@ -386,7 +386,7 @@ export default function Programs() {
               <Card className="border-2 border-teal-200 bg-teal-50/50">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-foundation to-teal-700 flex items-center justify-center text-white font-bold text-xl">
                       30%
                     </div>
                     <CardTitle>Live Coaching</CardTitle>
@@ -514,7 +514,7 @@ export default function Programs() {
       <section className="py-16 bg-white">
         <div className="container">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta">
+            <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta">
               Save Up to $500
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Bundle Packages</h2>
@@ -536,17 +536,17 @@ export default function Programs() {
                 }`}
               >
                 {bundle.popular && (
-                  <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#C65A1E] to-[#D97B3D] text-white text-center py-1 text-sm font-semibold">
+                  <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-cta to-cta-2 text-white text-center py-1 text-sm font-semibold">
                     Most Popular
                   </div>
                 )}
                 {bundle.bestValue && (
-                  <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white text-center py-1 text-sm font-semibold">
+                  <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-foundation to-teal-700 text-white text-center py-1 text-sm font-semibold">
                     Best Value
                   </div>
                 )}
                 <CardHeader className={bundle.popular || bundle.bestValue ? "pt-10" : ""}>
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#D97B3D] text-white font-bold mb-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-cta to-cta-2 text-white font-bold mb-4">
                     {bundle.id}
                   </div>
                   <CardTitle className="text-lg">{bundle.name}</CardTitle>
@@ -584,9 +584,9 @@ export default function Programs() {
                   <Button 
                     className={`w-full ${
                       bundle.popular 
-                        ? "bg-gradient-to-r from-[#C65A1E] to-[#D97B3D] hover:from-[#A84A15] hover:to-[#C65A1E]" 
+                        ? "bg-gradient-to-r from-cta to-cta-2 hover:from-cta hover:to-cta" 
                         : bundle.bestValue 
-                        ? "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] hover:from-[#041e1e] hover:to-[#0F3D3E]" 
+                        ? "bg-gradient-to-r from-foundation to-teal-700 hover:from-teal-950 hover:to-foundation" 
                         : ""
                     }`}
                   >
@@ -615,7 +615,7 @@ export default function Programs() {
             {targetProfiles.map((profile, index) => (
               <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardHeader>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C65A1E] to-teal-500 flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cta to-teal-500 flex items-center justify-center mb-4">
                     <profile.icon className="w-6 h-6 text-white" />
                   </div>
                   <CardTitle className="text-lg">{profile.title}</CardTitle>
@@ -638,7 +638,7 @@ export default function Programs() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-[#C65A1E] via-amber-500 to-teal-500">
+      <section className="py-16 bg-gradient-to-r from-cta via-amber-500 to-teal-500">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">

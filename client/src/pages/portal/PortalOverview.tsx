@@ -87,7 +87,7 @@ export default function PortalOverview() {
     <PortalLayout>
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Welcome Section */}
-        <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-[#145A5B] rounded-2xl p-6 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-teal-700 rounded-2xl p-6 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-1/2 w-32 h-32 bg-white/5 rounded-full translate-y-1/2" />
           
@@ -149,7 +149,7 @@ export default function PortalOverview() {
                 {upcomingSessions.map((session) => (
                   <div key={session.id} className={`p-4 rounded-xl border-2 transition-all ${session.isLive ? "border-emerald-200 bg-emerald-50" : "border-slate-200 bg-white hover:border-slate-300"}`}>
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center text-white font-semibold">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-foundation to-teal-700 flex items-center justify-center text-white font-semibold">
                         {session.coach.split(" ").map(n => n[0]).join("")}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -214,7 +214,7 @@ export default function PortalOverview() {
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-[#FFF8F3] to-[#FFF8F3]">
+            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-orange-50 to-orange-50">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-2">
                   <Award className="h-5 w-5 text-cta600" />
@@ -225,7 +225,7 @@ export default function PortalOverview() {
                 <div className="flex items-center gap-4">
                   <div className="flex -space-x-2">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D97B3D] to-[#C65A1E] border-2 border-white flex items-center justify-center">
+                      <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-cta-2 to-cta border-2 border-white flex items-center justify-center">
                         <Award className="h-4 w-4 text-white" />
                       </div>
                     ))}

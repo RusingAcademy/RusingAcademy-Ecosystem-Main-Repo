@@ -34,13 +34,13 @@ const LEVEL_COLORS: Record<number, string> = {
   1: "from-gray-400 to-gray-500",
   2: "from-green-400 to-green-500",
   3: "from-blue-400 to-blue-500",
-  4: "from-[#0F3D3E] to-[#145A5B]",
+  4: "from-foundation to-teal-700",
   5: "from-yellow-400 to-[#FFFBEB]0",
-  6: "from-[#D97B3D] to-[#C65A1E]",
+  6: "from-cta-2 to-cta",
   7: "from-red-400 to-red-500",
-  8: "from-[#C65A1E] to-[#E06B2D]",
+  8: "from-cta to-orange-600",
   9: "from-indigo-400 to-indigo-500",
-  10: "from-[#D97B3D] via-yellow-300 to-[#C65A1E]",
+  10: "from-cta-2 via-yellow-300 to-cta",
 };
 
 interface GamificationDashboardProps {
@@ -252,7 +252,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             <div 
               key={entry.userId}
               className={`flex items-center gap-3 p-3 rounded-xl ${
-                index < 3 ? "bg-gradient-to-r from-[#FFFBEB] to-[#FFF8F3]" : "bg-white"
+                index < 3 ? "bg-gradient-to-r from-[#FFFBEB] to-orange-50" : "bg-white"
               }`}
             >
               <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${

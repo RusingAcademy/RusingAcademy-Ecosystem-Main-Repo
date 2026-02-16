@@ -117,7 +117,7 @@ function LibraryHero({ language }: { language: string }) {
   return (
     <section className="relative overflow-hidden py-20 md:py-28 lg:py-32">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0F3D3E] via-[#1a5c5e] to-[#0d2f30]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-foundation via-[#1a5c5e] to-[#0d2f30]" />
 
       {/* Animated decorative orbs */}
       <motion.div
@@ -160,12 +160,12 @@ function LibraryHero({ language }: { language: string }) {
                 {language === "fr" ? (
                   <>
                     La Bibliothèque{" "}
-                    <span className="bg-gradient-to-r from-[#F97316] to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>
+                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>
                   </>
                 ) : (
                   <>
                     The{" "}
-                    <span className="bg-gradient-to-r from-[#F97316] to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>{" "}
+                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>{" "}
                     Library
                   </>
                 )}
@@ -563,7 +563,7 @@ function ProductDetailModal({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 rounded-2xl">
         {/* Header with cover */}
-        <div className="relative bg-gradient-to-br from-[#0F3D3E] via-[#1a5c5e] to-[#0d2f30] p-6 md:p-8 rounded-t-2xl">
+        <div className="relative bg-gradient-to-br from-foundation via-[#1a5c5e] to-[#0d2f30] p-6 md:p-8 rounded-t-2xl">
           {/* Decorative orbs */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl" />
@@ -623,7 +623,7 @@ function ProductDetailModal({
         {/* Body */}
         <div className="p-6 md:p-8 space-y-8">
           {/* Why it exists */}
-          <div className="bg-gradient-to-br from-[#F97316]/5 to-[#fb923c]/5 border border-orange-500/15 rounded-2xl p-5">
+          <div className="bg-gradient-to-br from-orange-500/5 to-[#fb923c]/5 border border-orange-500/15 rounded-2xl p-5">
             <h3 className="font-semibold text-foundation mb-2 flex items-center gap-2">
               <Zap className="w-5 h-5 text-orange-500" />
               {language === "fr" ? "Pourquoi ce produit existe" : "Why This Product Exists"}
@@ -816,7 +816,7 @@ function SectionHeader({
     <div className="flex items-start justify-between mb-8">
       <div>
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#F97316]/10 to-[#fb923c]/10 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500/10 to-[#fb923c]/10 flex items-center justify-center">
             <Icon className="w-5 h-5 text-orange-500" />
           </div>
           {title}
@@ -1030,7 +1030,7 @@ export default function Library() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeInScale}
-                  className="bg-gradient-to-br from-[#0F3D3E]/5 via-[#14B8A6]/5 to-[#0F3D3E]/5 rounded-3xl p-8 md:p-12 text-center border border-foundation/10"
+                  className="bg-gradient-to-br from-foundation/5 via-[#14B8A6]/5 to-foundation/5 rounded-3xl p-8 md:p-12 text-center border border-foundation/10"
                 >
                   <div className="max-w-2xl mx-auto">
                     <Badge className="bg-teal-500/10 text-teal-500 border-teal-500/20 mb-4">

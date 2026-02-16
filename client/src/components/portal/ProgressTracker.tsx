@@ -78,7 +78,7 @@ const levelColors = {
     bgLight: "bg-amber-50",
     text: "text-amber-600",
     border: "border-orange-100",
-    gradient: "from-[#C65A1E] to-[#A84A15]",
+    gradient: "from-cta to-cta",
   },
   C: {
     bg: "bg-blue-500",

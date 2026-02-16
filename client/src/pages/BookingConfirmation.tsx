@@ -228,7 +228,7 @@ export default function BookingConfirmation() {
                 <Link href="/rusingacademy">
                   <Button 
                     size="lg"
-                    className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 font-bold rounded-xl"
+                    className="bg-gradient-to-r from-[#FF6A2B] to-orange-400 text-white border-0 px-8 font-bold rounded-xl"
                   >
                     {l.ctaExplore}
                     <ArrowRight className="w-4 h-4 ml-2" />

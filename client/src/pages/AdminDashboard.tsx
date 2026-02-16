@@ -897,7 +897,7 @@ export default function AdminDashboard() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">
       <Header />
 
       <main className="flex-1">

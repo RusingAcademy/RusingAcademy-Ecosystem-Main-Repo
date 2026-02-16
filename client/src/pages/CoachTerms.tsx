@@ -234,7 +234,7 @@ export default function CoachTerms() {
   const termsVersion = "v2026.01.29";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-obsidian/80 backdrop-blur-md border-b border-slate-200 dark:border-teal-800">
         <div className="container mx-auto px-4 py-4">

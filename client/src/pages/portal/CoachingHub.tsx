@@ -283,7 +283,7 @@ export default function CoachingHub() {
               </CardHeader>
               <CardContent>
                 <div className="text-center">
-                  <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center text-white text-2xl font-bold mb-3">
+                  <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-foundation to-teal-700 flex items-center justify-center text-white text-2xl font-bold mb-3">
                     {myCoach.name.split(" ").map(n => n[0]).join("")}
                   </div>
                   <h3 className="font-semibold text-slate-900">{myCoach.name}</h3>
@@ -303,7 +303,7 @@ export default function CoachingHub() {
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-[#0F3D3E]-50 to-blue-50">
+            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-foundation-50 to-blue-50">
               <CardContent className="pt-4">
                 <div className="text-center">
                   <div className="w-12 h-12 mx-auto rounded-full bg-foundation-soft flex items-center justify-center mb-3">

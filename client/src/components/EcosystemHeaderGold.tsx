@@ -381,7 +381,7 @@ export default function EcosystemHeaderGold() {
               <SheetContent side="right" className="w-80">
                 <nav className="flex flex-col gap-4 mt-8" aria-label="Mobile navigation">
                   {/* Theme Toggle for Mobile */}
-                  <div className="flex items-center justify-between p-4 rounded-xl border border-orange-100/50 bg-gradient-to-r from-[#FFF8F3]/50 to-transparent">
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-orange-100/50 bg-gradient-to-r from-orange-50/50 to-transparent">
                     <div className="flex items-center gap-3">
                       {isDark ? (
                         <Moon className="h-5 w-5 text-amber-600" />

@@ -250,10 +250,10 @@ export default function ForBusiness() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">      {/* Hero Section */}
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">      {/* Hero Section */}
       <SEO title="For Business" description="Enterprise bilingual training solutions for organizations. Custom SLE preparation programs and team coaching." canonical="/for-business" />
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-transparent to-[#FFF8F3]/30 dark:from-teal-950/30 dark:to-[#431407]/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-transparent to-orange-50/30 dark:from-teal-950/30 dark:to-[#431407]/20" />
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-teal-100/20 to-transparent dark:from-teal-900/10" />
         
         <div className="container relative pt-20 pb-24 md:pt-28 md:pb-32">
@@ -328,7 +328,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Packages Section */}
-      <section ref={setSectionRef('packages')} data-section="packages" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-[#041e1e] dark:to-[#062b2b]">
+      <section ref={setSectionRef('packages')} data-section="packages" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.packagesTitle}</h2>
@@ -398,7 +398,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Testimonials Section */}
-      <section ref={setSectionRef('testimonials')} data-section="testimonials" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-[#041e1e] dark:to-[#062b2b]">
+      <section ref={setSectionRef('testimonials')} data-section="testimonials" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.testimonialsTitle}</h2>

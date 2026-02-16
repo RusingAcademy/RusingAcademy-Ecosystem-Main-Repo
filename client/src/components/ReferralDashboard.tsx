@@ -307,7 +307,7 @@ export default function ReferralDashboard() {
       </Card>
       
       {/* Rewards Info */}
-      <Card className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF8F3] border-orange-100">
+      <Card className="bg-gradient-to-br from-orange-50 to-orange-50 border-orange-100">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-amber-800">
             <Gift className="h-5 w-5" />

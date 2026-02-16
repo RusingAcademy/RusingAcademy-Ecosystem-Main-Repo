@@ -543,7 +543,7 @@ export default function BecomeCoachNew() {
   // Application success view
   if (applicationComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-[#062b2b] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-obsidian flex items-center justify-center p-4">
         <Card className="max-w-lg w-full">
           <CardContent className="pt-8 text-center">
             <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
@@ -800,7 +800,7 @@ export default function BecomeCoachNew() {
               {/* Content Needed */}
               <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
                 <CardContent className="p-8">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#C65A1E] to-[#A84A15] flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
                     <Camera className="h-7 w-7 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-black mb-5">{l.contentNeeded.title}</h3>
@@ -841,7 +841,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Safety & Trust Section - Premium Design */}
-        <section className="py-24 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-emerald-900 relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-br from-obsidian via-teal-900 to-emerald-900 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
@@ -864,8 +864,8 @@ export default function BecomeCoachNew() {
                 const gradients = [
                   "from-emerald-400 to-teal-500",
                   "from-blue-400 to-indigo-500",
-                  "from-[#D97B3D] to-[#C65A1E]",
-                  "from-[#C65A1E] to-[#E06B2D]",
+                  "from-cta-2 to-cta",
+                  "from-cta to-orange-600",
                 ];
                 return (
                   <div key={i} className="group text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/60 hover:bg-white/10 hover:border-white/60 transition-all duration-300">
@@ -899,10 +899,10 @@ export default function BecomeCoachNew() {
                 const gradients = [
                   "from-blue-500 to-indigo-600",
                   "from-emerald-500 to-teal-600",
-                  "from-[#0F3D3E] to-[#145A5B]",
-                  "from-[#C65A1E] to-[#A84A15]",
+                  "from-foundation to-teal-700",
+                  "from-cta to-cta",
                   "from-teal-500 to-cyan-600",
-                  "from-[#C65A1E] to-[#E06B2D]",
+                  "from-cta to-orange-600",
                 ];
                 const bgColors = [
                   "bg-blue-50",
@@ -950,7 +950,7 @@ export default function BecomeCoachNew() {
                   <div className="space-y-5">
                     {l.earningFeatures.map((feature, i) => {
                       const icons = [Briefcase, TrendingUp, DollarSign];
-                      const gradients = ["from-teal-500 to-emerald-600", "from-emerald-500 to-green-600", "from-[#C65A1E] to-[#A84A15]"];
+                      const gradients = ["from-teal-500 to-emerald-600", "from-emerald-500 to-green-600", "from-cta to-cta"];
                       const Icon = icons[i];
                       return (
                         <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl transition-shadow duration-300">
@@ -970,7 +970,7 @@ export default function BecomeCoachNew() {
                 {/* Premium Earnings Card */}
                 <div className="relative">
                   <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-30" />
-                  <div className="relative bg-gradient-to-br from-emerald-900 via-teal-800 to-[#062b2b] rounded-3xl p-10 text-white shadow-2xl">
+                  <div className="relative bg-gradient-to-br from-emerald-900 via-teal-800 to-obsidian rounded-3xl p-10 text-white shadow-2xl">
                     <div className="flex items-center gap-3 mb-8">
                       <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center">
                         <TrendingUp className="h-5 w-5 text-emerald-300" />
@@ -997,7 +997,7 @@ export default function BecomeCoachNew() {
         <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative">
           <div className="container">
             <div className="text-center mb-16">
-              <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta700 border-orange-100">
+              <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta700 border-orange-100">
                 <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
@@ -1010,7 +1010,7 @@ export default function BecomeCoachNew() {
                   <CardContent className="p-8">
                     {/* Quote icon */}
                     <div className="mb-6">
-                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#D97B3D] to-[#C65A1E] flex items-center justify-center shadow-lg shadow-amber-500/20">
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-cta-2 to-cta flex items-center justify-center shadow-lg shadow-amber-500/20">
                         <MessageSquare className="h-5 w-5 text-white" />
                       </div>
                     </div>
@@ -1091,7 +1091,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

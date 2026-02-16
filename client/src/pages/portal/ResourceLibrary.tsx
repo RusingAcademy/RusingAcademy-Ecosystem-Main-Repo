@@ -255,7 +255,7 @@ export default function ResourceLibrary() {
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-[#145A5B]-50">
+            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-teal-700-50">
               <CardContent className="pt-4">
                 <div className="text-center">
                   <div className="w-12 h-12 mx-auto rounded-full bg-blue-100 flex items-center justify-center mb-3">

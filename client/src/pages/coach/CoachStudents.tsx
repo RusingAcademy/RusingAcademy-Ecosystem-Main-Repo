@@ -115,7 +115,7 @@ export default function CoachStudents() {
                 <div key={student.id || student.learnerId} className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow group">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
                         {name.charAt(0)}
                       </div>
                       <div>

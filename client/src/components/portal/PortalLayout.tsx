@@ -67,7 +67,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-teal-800">
           <Link href="/portal/overview" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-teal-700 flex items-center justify-center">
               <BookOpen className="h-4 w-4 text-white" />
             </div>
             <span className="font-semibold text-lg">RusingAcademy</span>
@@ -77,7 +77,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         {/* User Info */}
         <div className="px-4 py-4 border-b border-teal-800">
           <div className="flex items-center gap-3 p-3 rounded-lg bg-foundation/50">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center text-white font-semibold">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-teal-700 flex items-center justify-center text-white font-semibold">
               {userInitial}
             </div>
             <div className="flex-1 min-w-0">
@@ -128,7 +128,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
             </div>
             <div className="w-full h-2 bg-teal-800 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-blue-500 to-[#145A5B] rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-blue-500 to-teal-700 rounded-full transition-all duration-500"
                 style={{ width: "45%" }}
               />
             </div>
@@ -160,7 +160,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
             </button>
             <div className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center text-white font-semibold text-sm">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-teal-700 flex items-center justify-center text-white font-semibold text-sm">
                 {userInitial}
               </div>
               <button

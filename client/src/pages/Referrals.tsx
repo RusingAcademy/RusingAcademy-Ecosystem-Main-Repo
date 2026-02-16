@@ -39,7 +39,7 @@ export default function Referrals() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#D4AF37]/5 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-barholex-gold/5 to-background">
       <div className="max-w-5xl mx-auto px-4 pt-8 pb-16">
         <button onClick={() => navigate("/")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> {t.membership.backToCommunity}

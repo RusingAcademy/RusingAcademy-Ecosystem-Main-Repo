@@ -164,7 +164,7 @@ const pathSeriesData = [
     pfl2Level: "OF 23-32",
     price: PATH_SERIES_PRICES.PATH_IV.priceInCents / 100,
     originalPrice: PATH_SERIES_PRICES.PATH_IV.originalPriceInCents / 100,
-    color: "from-[#0F3D3E] to-[#145A5B]",
+    color: "from-foundation to-teal-700",
     bgColor: "bg-foundation-soft",
     borderColor: "border-foundation",
     icon: "🎯",
@@ -721,7 +721,7 @@ export default function CurriculumPathSeries() {
     <div className="min-h-screen flex flex-col bg-orange-50">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E]">
+        <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-foundation via-teal-700 to-foundation">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
           
           <div className="container relative z-10">
@@ -939,7 +939,7 @@ export default function CurriculumPathSeries() {
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Platform Learning */}
                 <Card className="border-none shadow-xl overflow-hidden">
-                  <div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] p-6 text-white">
+                  <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
                         <Video className="h-8 w-8" />
@@ -983,7 +983,7 @@ export default function CurriculumPathSeries() {
 
                 {/* Live Coaching */}
                 <Card className="border-none shadow-xl overflow-hidden">
-                  <div className="bg-gradient-to-r from-[#C65A1E] to-[#A84A15] p-6 text-white">
+                  <div className="bg-gradient-to-r from-cta to-cta p-6 text-white">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
                         <Headphones className="h-8 w-8" />
@@ -1370,7 +1370,7 @@ export default function CurriculumPathSeries() {
                       "{isEn ? testimonial.quote : testimonial.quoteFr}"
                     </p>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0F3D3E] to-[#C65A1E] flex items-center justify-center text-white font-semibold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-foundation to-cta flex items-center justify-center text-white font-semibold">
                         {testimonial.name.charAt(0)}
                       </div>
                       <div>
@@ -1386,7 +1386,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B]">
+        <section className="py-16 bg-gradient-to-r from-foundation to-teal-700">
           <div className="container text-center">
             <h2 className="text-3xl font-bold text-white mb-4" style={{color: '#f8f7f7'}}>
               {isEn ? "Ready to Start Your Journey?" : "Prêt à Commencer Votre Parcours?"}

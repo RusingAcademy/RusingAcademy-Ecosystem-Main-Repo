@@ -123,7 +123,7 @@ export default function CoachDashboardHome() {
                 <div className="space-y-3">
                   {upcomingSessions.map((session: any) => (
                     <div key={session.id} className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
                         {(session.learnerName || "?").charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -210,7 +210,7 @@ export default function CoachDashboardHome() {
             </div>
 
             {/* Earnings Summary */}
-            <div className="bg-gradient-to-br from-[#7c3aed] to-[#6d28d9] rounded-xl p-5 text-white">
+            <div className="bg-gradient-to-br from-violet-600 to-[#6d28d9] rounded-xl p-5 text-white">
               <h3 className="text-sm font-semibold mb-3 opacity-90">
                 {lang === "fr" ? "Résumé des revenus" : "Earnings Summary"}
               </h3>

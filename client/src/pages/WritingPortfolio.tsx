@@ -209,7 +209,7 @@ export default function WritingPortfolio() {
                   <button
                     onClick={() => handleSubmitForFeedback(s.id, s.content)}
                     disabled={feedbackMutation.isPending}
-                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#008090] to-[#006d7a] text-white text-sm rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                    className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white text-sm rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                   >
                     <span className="material-icons text-lg" aria-hidden="true">auto_awesome</span>
                     {feedbackMutation.isPending

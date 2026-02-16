@@ -163,7 +163,7 @@ export function Quiz({
     
     return (
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
-        <div className={`p-8 text-center ${passed ? "bg-gradient-to-br from-teal-500 to-teal-600" : "bg-gradient-to-br from-[#C65A1E] to-red-500"} text-white`}>
+        <div className={`p-8 text-center ${passed ? "bg-gradient-to-br from-teal-500 to-teal-600" : "bg-gradient-to-br from-cta to-red-500"} text-white`}>
           <div className="text-6xl mb-4">{passed ? "🎉" : "📚"}</div>
           <h2 className="text-2xl font-bold mb-2">
             {passed 

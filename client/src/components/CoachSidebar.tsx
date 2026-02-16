@@ -96,7 +96,7 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
         </div>
 
         {/* Coach Status Card */}
-        <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#7c3aed]/5 to-[#7c3aed]/10 border border-violet-600/15">
+        <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-violet-600/5 to-violet-600/10 border border-violet-600/15">
           <div className="flex items-center justify-between mb-1.5">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -135,7 +135,7 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
         {/* User Profile Section */}
         <div className="p-4 border-t border-gray-100">
           <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all cursor-pointer group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#9333ea] flex items-center justify-center text-white font-bold text-sm shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[#9333ea] flex items-center justify-center text-white font-bold text-sm shadow-sm">
               {user?.name?.charAt(0) || "C"}
             </div>
             <div className="flex-1 min-w-0">

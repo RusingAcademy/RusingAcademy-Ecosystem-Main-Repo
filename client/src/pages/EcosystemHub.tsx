@@ -74,7 +74,7 @@ const scaleIn = {
 // ============================================================================
 function HeroSection({ language }: { language: string }) {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" />
@@ -105,14 +105,14 @@ function HeroSection({ language }: { language: string }) {
             {language === "en" ? (
               <>
                 Is your career stuck?{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D97B3D] via-orange-400 to-[#C65A1E]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta-2 via-orange-400 to-cta">
                   Bilingualism is one of the essential keys to moving forward.
                 </span>
               </>
             ) : (
               <>
                 Votre carrière est bloquée ?{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D97B3D] via-orange-400 to-[#C65A1E]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta-2 via-orange-400 to-cta">
                   Le bilinguisme est l'une des clés indispensables pour avancer.
                 </span>
               </>
@@ -134,7 +134,7 @@ function HeroSection({ language }: { language: string }) {
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/30"
+                className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/30"
               >
                 {language === "en" ? "Get my strategic action plan" : "Obtenir mon plan d'action stratégique"}
                 <ArrowRight className="w-5 h-5" />
@@ -167,7 +167,7 @@ function TrilemmeSection({ language }: { language: string }) {
       titleFr: "Le mur de la fluidité",
       descEn: "You understand everything, but you freeze when speaking.",
       descFr: "Vous comprenez tout, mais vous bloquez à l'oral.",
-      color: "from-red-500 to-[#E06B2D]",
+      color: "from-red-500 to-orange-600",
     },
     {
       icon: Brain,
@@ -175,7 +175,7 @@ function TrilemmeSection({ language }: { language: string }) {
       titleFr: "Le syndrome de l'imposteur",
       descEn: "The fear of being 'exposed', even after years of learning.",
       descFr: "La peur d'être « démasqué », même après des années d'apprentissage.",
-      color: "from-[#0F3D3E] to-[#145A5B]",
+      color: "from-foundation to-teal-700",
     },
     {
       icon: TrendingUp,
@@ -271,9 +271,9 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] rounded-2xl p-8 border border-orange-100/50">
+          <div className="bg-gradient-to-r from-orange-50 to-orange-50 rounded-2xl p-8 border border-orange-100/50">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cta to-cta flex items-center justify-center flex-shrink-0">
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -314,7 +314,7 @@ function EcosystemSection({ language }: { language: string }) {
       descFr: "Parcours structurés et cours professionnels alignés sur les exigences fédérales (BBB, CBC, CCC).",
       icon: GraduationCap,
       color: "#E07B39",
-      gradient: "from-[#C65A1E] to-[#A84A15]",
+      gradient: "from-cta to-cta",
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-rusingacademy.jpg",
       link: "/rusingacademy",
     },
@@ -342,7 +342,7 @@ function EcosystemSection({ language }: { language: string }) {
       descFr: "Production de contenu pédagogique de pointe et solutions sur mesure pour les ministères et organisations.",
       icon: Clapperboard,
       color: "#D4AF37",
-      gradient: "from-[#C65A1E] to-[#A84A15]",
+      gradient: "from-cta to-cta",
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-barholex.jpg",
       link: "/barholex",
     },
@@ -470,7 +470,7 @@ function MethodologySection({ language }: { language: string }) {
       titleFr: "Valider",
       descEn: "Approach your language proficiency exams with clarity, structure, and confidence.",
       descFr: "Abordez vos examens de compétence linguistique avec clarté, structure et confiance.",
-      color: "from-[#C65A1E] to-[#A84A15]",
+      color: "from-cta to-cta",
     },
   ];
 
@@ -653,7 +653,7 @@ function OffersSection({ language }: { language: string }) {
                   alt={language === "en" ? offer.titleEn : offer.titleFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="flex items-center gap-2 text-white/90 text-sm mb-1">
                     <offer.icon className="w-4 h-4" />
@@ -735,7 +735,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-[#062b2b] to-[#0a4040]">
+    <section className="py-24 px-4 bg-gradient-to-b from-obsidian to-teal-900">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -780,7 +780,7 @@ function TargetAudienceSection({ language }: { language: string }) {
               className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60 hover:bg-white/10 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cta to-cta flex items-center justify-center flex-shrink-0">
                   <profile.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -807,7 +807,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           <Link href="/sle-diagnostic">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
+              className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
             >
               Book your free assessment
               <ArrowRight className="w-5 h-5" />
@@ -988,7 +988,7 @@ function LeadershipSection({ language }: { language: string }) {
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-transparent to-transparent md:bg-gradient-to-r" />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-transparent to-transparent md:bg-gradient-to-r" />
               </motion.div>
 
               {/* Content */}
@@ -1073,7 +1073,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             {/* Badge */}
             <motion.div 
               variants={scaleIn}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-[#C65A1E]/10 border border-teal-500/20 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-cta/10 border border-teal-500/20 mb-6"
             >
               <Heart className="w-4 h-4 text-teal-600" />
               <span className="text-sm font-medium text-teal-700">
@@ -1082,7 +1082,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             </motion.div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[#062b2b] via-[#0a6969] to-[#062b2b] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-obsidian via-[#0a6969] to-obsidian bg-clip-text text-transparent">
                 {language === "en" ? "What His Colleagues Say" : "Ce que disent ses collègues"}
               </span>
             </h2>
@@ -1112,7 +1112,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                 {/* Glassmorphism Card */}
                 <div className="relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/70 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
                   {/* Gradient Border Effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-[#C65A1E]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-cta/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Image Container */}
                   <div className="relative p-4">
@@ -1124,7 +1124,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                         loading="lazy"                       />
                       
                       {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-[#062b2b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
+                      <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
                         <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 backdrop-blur-sm shadow-xl">
                           <ZoomIn className="w-5 h-5 text-teal-600" />
                           <span className="font-medium text-black">
@@ -1337,7 +1337,7 @@ function ValueSection({ language }: { language: string }) {
               alt="Steven teaching"
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/40 to-transparent" />
           </motion.div>
 
           {/* Values Grid */}
@@ -1354,7 +1354,7 @@ function ValueSection({ language }: { language: string }) {
                 variants={scaleIn}
                 className="bg-gradient-to-br from-slate-50 to-white rounded-xl p-6 border border-slate-100 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-4">
                   <value.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-black mb-2">
@@ -1464,7 +1464,7 @@ function TeamSection({ language }: { language: string }) {
                   alt={member.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 to-transparent" />
               </div>
 
               {/* Content */}
@@ -1488,7 +1488,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
+    <section className="py-24 px-4 bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1517,7 +1517,7 @@ function FinalCTASection({ language }: { language: string }) {
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
+                className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
               >
                 <Calendar className="w-5 h-5" />
                 {language === "en" ? "Book a free discovery call (30 min)" : "Réserver un appel découverte gratuit (30 min)"}

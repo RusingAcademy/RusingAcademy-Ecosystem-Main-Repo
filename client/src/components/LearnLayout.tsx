@@ -411,7 +411,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                     <div key={module.id}>
                       {/* Module header */}
                       <div className="flex items-start gap-2 mb-2 px-2 py-1.5 rounded-lg bg-muted/30 border border-border/30">
-                        <div className="w-5 h-5 rounded-md bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-5 h-5 rounded-md bg-gradient-to-br from-foundation to-teal-700 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-[9px] font-bold text-white">{moduleIndex + 1}</span>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -534,7 +534,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                 {course.modules?.map((module: any, moduleIndex: number) => (
                   <div key={module.id}>
                     <div className="flex items-start gap-2 mb-2 px-2 py-1.5 rounded-lg bg-muted/30 border border-border/30">
-                      <div className="w-5 h-5 rounded-md bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-5 h-5 rounded-md bg-gradient-to-br from-foundation to-teal-700 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-[9px] font-bold text-white">{moduleIndex + 1}</span>
                       </div>
                       <div className="flex-1 min-w-0">
@@ -770,7 +770,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                 className={`gap-2 transition-all duration-300 ${
                   isCurrentLessonCompleted
                     ? "border-green-500/50 text-green-600 hover:bg-green-50 dark:hover:bg-green-950/20 shadow-sm"
-                    : "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] hover:opacity-90 text-white shadow-md shadow-[#0F3D3E]/20"
+                    : "bg-gradient-to-r from-foundation to-teal-700 hover:opacity-90 text-white shadow-md shadow-[#0F3D3E]/20"
                 }`}
               >
                 {markCompleteMutation.isPending ? (
@@ -802,7 +802,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
             onClick={() => nextLesson && navigateToLesson(nextLesson.id)}
             className={`gap-1 min-w-[100px] justify-end transition-all duration-300 ${
               isCurrentLessonCompleted && nextLesson 
-                ? "bg-gradient-to-r from-[#C65A1E] to-[#E06B2D] hover:opacity-90 text-white shadow-md shadow-[#C65A1E]/20" 
+                ? "bg-gradient-to-r from-cta to-orange-600 hover:opacity-90 text-white shadow-md shadow-[#C65A1E]/20" 
                 : ""
             }`}
             aria-label={isEn ? "Next lesson" : "Leçon suivante"}

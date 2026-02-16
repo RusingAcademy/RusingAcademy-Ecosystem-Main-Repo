@@ -142,7 +142,7 @@ const PathCard = ({ path }: { path: PathProgress }) => {
         <div className="flex justify-between"><span className="text-cyan-300">Quiz</span><span className={path.quizReady ? 'text-emerald-400' : 'text-amber-400'}>{path.quizReady ? '✓ Prêt' : 'Structure OK'}</span></div>
       </div>
       <div className="w-full bg-teal-800 rounded-full h-2 mt-4">
-        <div className="bg-gradient-to-r from-[#C65A1E] to-yellow-400 h-2 rounded-full" style={{ width: `${overallProgress}%` }} />
+        <div className="bg-gradient-to-r from-cta to-yellow-400 h-2 rounded-full" style={{ width: `${overallProgress}%` }} />
       </div>
       <p className="text-xs text-cyan-300 mt-2">{path.priority ? '⭐ Priorité SLE Level B' : `${overallProgress}% complété`}</p>
     </div>
@@ -157,7 +157,7 @@ export default function ProjectTrackerDashboard() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500"></div>
       </div>
     );
@@ -165,7 +165,7 @@ export default function ProjectTrackerDashboard() {
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian flex items-center justify-center">
         <div className="text-center">
           <AlertTriangle className="w-16 h-16 text-amber-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-white mb-2">Accès Restreint</h1>
@@ -178,7 +178,7 @@ export default function ProjectTrackerDashboard() {
   const sprintProgress = (data.sprintsCompleted / data.sprintsTotal) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white">
+    <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian text-white">
       <header className="bg-white/5 backdrop-blur-sm border-b border-white/60 sticky top-0 z-50 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -211,7 +211,7 @@ export default function ProjectTrackerDashboard() {
                 <div key={index} className="bg-white/5 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold ${index === 0 ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : index === 1 ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 'bg-gradient-to-br from-[#0F3D3E] to-[#E06B2D]'}`}>{branch.name.substring(0, 2)}</div>
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold ${index === 0 ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : index === 1 ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 'bg-gradient-to-br from-foundation to-orange-600'}`}>{branch.name.substring(0, 2)}</div>
                       <div><h3 className="font-semibold">{branch.name}</h3><p className="text-xs text-cyan-300">{branch.description}</p></div>
                     </div>
                     <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Production</span>

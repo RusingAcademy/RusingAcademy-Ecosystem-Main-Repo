@@ -148,7 +148,7 @@ export default function CoachRevenue() {
           {/* Right Column */}
           <div className="space-y-6">
             {/* Commission Tier */}
-            <div className="bg-gradient-to-br from-[#7c3aed] to-[#6d28d9] rounded-xl p-5 text-white">
+            <div className="bg-gradient-to-br from-violet-600 to-[#6d28d9] rounded-xl p-5 text-white">
               <div className="flex items-center gap-2 mb-3">
                 <span className="material-icons text-amber-300">emoji_events</span>
                 <h3 className="text-sm font-semibold">{lang === "fr" ? "Niveau de commission" : "Commission Tier"}</h3>

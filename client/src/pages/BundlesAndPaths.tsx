@@ -66,7 +66,7 @@ const bundleData = [
     originalPrice: 3596,
     bundlePrice: 2799,
     savings: 797,
-    color: "from-[#C65A1E] to-amber-600",
+    color: "from-cta to-amber-600",
     icon: "🏛️",
     popular: true,
     features: [
@@ -100,7 +100,7 @@ const bundleData = [
     originalPrice: 5394,
     bundlePrice: 3999,
     savings: 1395,
-    color: "from-[#0F3D3E] to-emerald-700",
+    color: "from-foundation to-emerald-700",
     icon: "👑",
     popular: false,
     features: [
@@ -205,7 +205,7 @@ export default function BundlesAndPaths() {
     <div className="min-h-screen flex flex-col bg-orange-50">
 <main className="flex-1">
         {/* Hero */}
-        <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E]">
+        <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-foundation via-teal-700 to-foundation">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
           <div className="container relative z-10 text-center">
             <Badge className="bg-cta/20 text-cta border-cta/30 mb-4">
@@ -414,7 +414,7 @@ export default function BundlesAndPaths() {
         </section>
 
         {/* Why Bundles CTA */}
-        <section className="py-16 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B]">
+        <section className="py-16 bg-gradient-to-r from-foundation to-teal-700">
           <div className="container text-center">
             <h2 className="text-3xl font-bold text-white mb-4" style={{ color: "#f8f7f7" }}>
               {isEn ? "Not Sure Which to Choose?" : "Pas Sûr de Votre Choix?"}

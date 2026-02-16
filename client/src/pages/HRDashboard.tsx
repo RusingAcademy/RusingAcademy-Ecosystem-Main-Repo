@@ -496,7 +496,7 @@ export default function HRDashboard() {
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           {/* Hero Banner - Professional & Accessible */}
           <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-teal-800/50">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0a6969]/50 to-[#062b2b]/50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-800/50 to-obsidian/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">

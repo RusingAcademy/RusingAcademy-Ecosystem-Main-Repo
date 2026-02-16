@@ -708,7 +708,7 @@ export default function SLEExamSimulation() {
   // ═══════════════════════════════════════════════════════════════════
   if (phase === "setup") {
     return (
-      <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-[#041e1e] via-[#062b2b] to-[#041e1e] text-white">
+      <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white">
         <div className="max-w-4xl mx-auto px-4 py-12">
           {/* Header */}
           <motion.div
@@ -895,7 +895,7 @@ export default function SLEExamSimulation() {
     const passed = examResults.overallScore >= (config.level === "C" ? 70 : 55);
 
     return (
-      <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-[#041e1e] via-[#062b2b] to-[#041e1e] text-white">
+      <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white">
         <div className="max-w-4xl mx-auto px-4 py-12">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center mb-10">
             <div className={cn(

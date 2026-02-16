@@ -129,7 +129,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
   return (
     <section className="relative overflow-hidden py-16 md:py-24 lg:py-28">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0F3D3E] via-[#1a5c5e] to-[#0d2f30]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-foundation via-[#1a5c5e] to-[#0d2f30]" />
 
       {/* Animated decorative orbs */}
       <motion.div
@@ -313,10 +313,10 @@ function WhySection({ item, language }: { item: LibraryItem; language: string })
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
       variants={fadeInUp}
-      className="relative bg-gradient-to-r from-[#F97316]/5 via-[#F97316]/10 to-[#F97316]/5 border-y border-orange-500/10 overflow-hidden"
+      className="relative bg-gradient-to-r from-orange-500/5 via-[#F97316]/10 to-orange-500/5 border-y border-orange-500/10 overflow-hidden"
     >
       {/* Subtle decorative element */}
-      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#F97316] via-[#fb923c] to-[#F97316]/30" />
+      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-orange-500 via-[#fb923c] to-orange-500/30" />
 
       <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">
         <div className="max-w-3xl mx-auto text-center">
@@ -405,7 +405,7 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
           <Card className="border border-slate-200 shadow-sm sticky top-24 rounded-2xl overflow-hidden">
             <CardContent className="p-0">
               {/* Card header */}
-              <div className="bg-gradient-to-r from-[#0F3D3E] to-[#1a5c5e] p-5">
+              <div className="bg-gradient-to-r from-foundation to-[#1a5c5e] p-5">
                 <h3 className="font-semibold text-white text-lg flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-orange-500" />
                   {language === "fr" ? "Détails du produit" : "Product Details"}

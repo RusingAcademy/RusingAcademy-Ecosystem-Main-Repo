@@ -307,7 +307,7 @@ export default function BookingForm() {
                     {/* Submit Button */}
                     <Button 
                       type="submit" 
-                      className="w-full bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl"
+                      className="w-full bg-gradient-to-r from-[#FF6A2B] to-orange-400 text-white border-0 px-8 py-6 text-base font-bold rounded-xl"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? l.submitting : l.submit}

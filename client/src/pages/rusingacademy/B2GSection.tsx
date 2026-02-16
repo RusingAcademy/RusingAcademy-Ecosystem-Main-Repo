@@ -97,7 +97,7 @@ export default function B2GSection() {
   return (
     <section id="b2g" className="scroll-mt-20">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0F3D3E] to-[#1a5a5c] py-20">
+      <div className="bg-gradient-to-br from-foundation to-[#1a5a5c] py-20">
         <div className="container mx-auto px-6 text-center">
           <Badge className="mb-6 bg-cta/20 text-cta border-cta/30">
             <Landmark className="w-4 h-4 mr-2" aria-hidden="true" />{t.badge}
@@ -233,7 +233,7 @@ export default function B2GSection() {
       </div>
 
       {/* Final CTA */}
-      <div className="py-16 bg-gradient-to-br from-[#0F3D3E] to-[#1a5a5c]">
+      <div className="py-16 bg-gradient-to-br from-foundation to-[#1a5a5c]">
         <div className="container mx-auto px-6 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">{t.ctaTitle}</h3>
           <p className="text-white/90 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>

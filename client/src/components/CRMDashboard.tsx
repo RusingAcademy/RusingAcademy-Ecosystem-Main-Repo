@@ -246,7 +246,7 @@ export default function CRMDashboard() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian text-white p-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

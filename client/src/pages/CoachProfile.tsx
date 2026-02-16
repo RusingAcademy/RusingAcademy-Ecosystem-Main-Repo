@@ -316,7 +316,7 @@ export default function CoachProfile() {
       />
       <main className="flex-1">
         {/* Premium Hero Section */}
-        <section className="relative bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#0a4040] overflow-hidden">
+        <section className="relative bg-gradient-to-br from-obsidian via-teal-900 to-teal-900 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -517,7 +517,7 @@ export default function CoachProfile() {
                       }
                       // Fallback: external link
                       return (
-                        <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 dark:from-[#0a4040] dark:to-[#062b2b] flex items-center justify-center rounded-b-lg">
+                        <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 dark:from-teal-900 dark:to-obsidian flex items-center justify-center rounded-b-lg">
                           <a href={url} target="_blank" rel="noopener noreferrer">
                             <Button size="lg" className="gap-2 bg-teal-600 hover:bg-teal-700">
                               <Play className="h-5 w-5" />
@@ -1023,7 +1023,7 @@ export default function CoachProfile() {
                 </Card>
 
                 {/* Trust Signals Card */}
-                <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b]">
+                <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian">
                   <CardContent className="p-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30">

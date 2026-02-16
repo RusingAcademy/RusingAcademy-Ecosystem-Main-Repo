@@ -336,7 +336,7 @@ export default function Pricing() {
         />
 
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
+        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
@@ -525,16 +525,16 @@ export default function Pricing() {
               {/* Coach Sessions Card */}
               <div className="relative bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-orange-300 transition-all duration-300 hover:shadow-xl group overflow-hidden">
                 {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#D97B3D]/5 to-teal-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-cta-2/5 to-teal-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative">
-                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#C65A1E] to-[#A84A15] flex items-center justify-center mb-6 shadow-lg shadow-[#C65A1E]/25">
+                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-6 shadow-lg shadow-[#C65A1E]/25">
                     <Users className="h-8 w-8 text-white" />
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-2">{l.coachSessions}</h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold bg-gradient-to-r from-[#C65A1E] to-teal-500 bg-clip-text text-transparent">{l.sessionRange}</span>
+                    <span className="text-4xl font-bold bg-gradient-to-r from-cta to-teal-500 bg-clip-text text-transparent">{l.sessionRange}</span>
                     <span className="text-muted-foreground ml-2">{l.perHour}</span>
                   </div>
                   <p className="text-muted-foreground mb-6">{l.sessionDescription}</p>
@@ -682,7 +682,7 @@ export default function Pricing() {
                     </div>
 
                     {/* Referral Bonus */}
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 border border-orange-100/50 hover:shadow-md transition-all duration-300">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-50/50 border border-orange-100/50 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="h-12 w-12 rounded-xl bg-cta flex items-center justify-center shadow-lg shadow-[#C65A1E]/25">
                           <Star className="h-6 w-6 text-white" />
@@ -698,7 +698,7 @@ export default function Pricing() {
 
                   <div className="mt-10 text-center">
                     <Link href="/become-a-coach">
-                      <Button size="lg" className="bg-gradient-to-r from-[#C65A1E] to-[#A84A15] hover:from-[#A84A15] hover:to-[#9A3412] text-white shadow-lg shadow-[#C65A1E]/25 px-8">
+                      <Button size="lg" className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-[#9A3412] text-white shadow-lg shadow-[#C65A1E]/25 px-8">
                         {l.applyNow}
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
@@ -767,7 +767,7 @@ export default function Pricing() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
+        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />

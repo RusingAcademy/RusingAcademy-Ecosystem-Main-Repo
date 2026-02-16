@@ -72,7 +72,7 @@ const learningCapsules = [
     descEn: "How mental processes shape knowledge acquisition",
     descFr: "Comment les processus mentaux façonnent l'acquisition des connaissances",
     icon: Sparkles,
-    color: "from-[#C65A1E] to-[#A84A15]",
+    color: "from-cta to-cta",
     ringColor: "ring-amber-500/30 hover:ring-amber-400",
     accentColor: "text-amber-300"
   },
@@ -85,7 +85,7 @@ const learningCapsules = [
     descEn: "Learning through social interaction and collaboration",
     descFr: "Apprendre par l'interaction sociale et la collaboration",
     icon: Users,
-    color: "from-[#0F3D3E] to-[#145A5B]",
+    color: "from-foundation to-teal-700",
     ringColor: "ring-[#0F3D3E]/30 hover:ring-[#0F3D3E]",
     accentColor: "text-teal-200"
   },
@@ -111,7 +111,7 @@ const learningCapsules = [
     descEn: "Learner-centered approach focusing on personal growth",
     descFr: "Approche centrée sur l'apprenant axée sur la croissance personnelle",
     icon: Heart,
-    color: "from-[#C65A1E] to-[#E06B2D]",
+    color: "from-cta to-orange-600",
     ringColor: "ring-[#C65A1E]/30 hover:ring-[#C65A1E]",
     accentColor: "text-orange-300"
   },
@@ -137,7 +137,7 @@ const learningCapsules = [
     descEn: "Learning through reflection on doing",
     descFr: "Apprendre par la réflexion sur l'action",
     icon: Video,
-    color: "from-[#C65A1E] to-red-600",
+    color: "from-cta to-red-600",
     ringColor: "ring-orange-500/30 hover:ring-orange-400",
     accentColor: "text-orange-300"
   }
@@ -479,7 +479,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
 
     return (
       <div
-        className="relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.4)] ring-1 ring-white/10 hover:ring-[#C65A1E]/50 group bg-gradient-to-b from-[#0a4040] to-[#062b2b]"
+        className="relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.4)] ring-1 ring-white/10 hover:ring-[#C65A1E]/50 group bg-gradient-to-b from-teal-900 to-obsidian"
         style={{ aspectRatio: '9/16' }}
       >
         {isPlaying ? (
@@ -533,7 +533,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             {/* Top Row: Number + Category Badge */}
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg ring-2 ring-white/10">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cta to-orange-600 flex items-center justify-center text-white font-bold text-xs shadow-lg ring-2 ring-white/10">
                 {index + 1}
               </div>
               <div className={`bg-gradient-to-r ${catColor} text-white text-[10px] px-2.5 py-1 rounded-full font-semibold flex items-center gap-1.5 shadow-lg backdrop-blur-sm`}>
@@ -604,7 +604,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
         >
           {/* Badge */}
           <motion.div 
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#C65A1E]/20 to-amber-500/10 border border-amber-500/25 mb-8 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-cta/20 to-amber-500/10 border border-amber-500/25 mb-8 backdrop-blur-sm"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
@@ -617,9 +617,9 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           {/* Main Title */}
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 tracking-tight leading-tight">
             {language === "en" ? (
-              <>Take learning <span className="bg-gradient-to-r from-[#C65A1E] via-amber-400 to-[#C65A1E] bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite]">beyond</span> the session</>
+              <>Take learning <span className="bg-gradient-to-r from-cta via-amber-400 to-cta bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite]">beyond</span> the session</>
             ) : (
-              <>Prolongez l'apprentissage <span className="bg-gradient-to-r from-[#C65A1E] via-amber-400 to-[#C65A1E] bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite]">au-delà</span> de la session</>
+              <>Prolongez l'apprentissage <span className="bg-gradient-to-r from-cta via-amber-400 to-cta bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite]">au-delà</span> de la session</>
             )}
           </h2>
           
@@ -816,7 +816,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                           key={instanceKey}
                           className="scroll-card shrink-0 w-[260px] sm:w-[300px] md:w-[340px]"
                         >
-                          <div className="relative bg-gradient-to-br from-[#0a4545]/80 via-[#0a5555]/60 to-[#0a4040]/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_60px_-12px_rgba(0,200,200,0.15)] transition-all duration-500 ring-1 ring-white/10 hover:ring-white/25 hover:-translate-y-2 group">
+                          <div className="relative bg-gradient-to-br from-[#0a4545]/80 via-[#0a5555]/60 to-teal-900/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_60px_-12px_rgba(0,200,200,0.15)] transition-all duration-500 ring-1 ring-white/10 hover:ring-white/25 hover:-translate-y-2 group">
                             {/* Video Container */}
                             <div className="aspect-video relative overflow-hidden">
                               {isPlaying ? (
@@ -868,7 +868,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                             </div>
                             
                             {/* Content Section */}
-                            <div className="p-4 bg-gradient-to-t from-[#062b2b] via-[#0a3d3d]/95 to-[#0a4040]/90">
+                            <div className="p-4 bg-gradient-to-t from-obsidian via-[#0a3d3d]/95 to-teal-900/90">
                               <div className="flex items-center gap-2 mb-2">
                                 <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${capsule.color} flex items-center justify-center`}>
                                   <IconComponent className="w-3.5 h-3.5 text-white" />

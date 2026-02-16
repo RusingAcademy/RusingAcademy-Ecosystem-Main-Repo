@@ -114,7 +114,7 @@ export default function CoachPayments() {
         <div className="bg-white dark:bg-foundation rounded-2xl shadow-sm border border-gray-200 dark:border-teal-800 p-6 mb-8">
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-[#145A5B] rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-teal-700 rounded-xl flex items-center justify-center">
                 <CreditCard className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -155,7 +155,7 @@ export default function CoachPayments() {
           {/* Connection Status Details */}
           {!hasAccount ? (
             <div className="space-y-6">
-              <div className="bg-gradient-to-r from-indigo-50 to-[#FFFFFF] dark:from-indigo-900/20 dark:to-[#145A5B]/20 rounded-xl p-6">
+              <div className="bg-gradient-to-r from-indigo-50 to-[#FFFFFF] dark:from-indigo-900/20 dark:to-teal-700/20 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-black dark:text-white mb-4">
                   Why Connect with Stripe?
                 </h3>
@@ -199,7 +199,7 @@ export default function CoachPayments() {
               <button
                 onClick={handleConnectStripe}
                 disabled={isConnecting}
-                className="w-full py-4 bg-gradient-to-r from-indigo-600 to-[#145A5B] text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-[#145A5B] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-4 bg-gradient-to-r from-indigo-600 to-teal-700 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-teal-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {isConnecting ? (
                   <>

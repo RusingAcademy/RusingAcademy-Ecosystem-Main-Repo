@@ -145,7 +145,7 @@ export function BadgeUnlockModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-gradient-to-b from-[#062b2b] to-[#041e1e] border-teal-800">
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-gradient-to-b from-obsidian to-teal-950 border-teal-800">
         {/* Close button */}
         <button
           onClick={onClose}

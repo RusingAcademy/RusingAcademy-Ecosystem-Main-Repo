@@ -717,7 +717,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
               >
                 <Button
                   onClick={() => setShowCelebration(false)}
-                  className="bg-gradient-to-r from-[#0F3D3E] to-[#1E6B4F] hover:from-[#145A5B] hover:to-[#1E6B4F] text-white shadow-lg"
+                  className="bg-gradient-to-r from-foundation to-[#1E6B4F] hover:from-[#145A5B] hover:to-[#1E6B4F] text-white shadow-lg"
                 >
                   <Award className="h-4 w-4 mr-2" />
                   {isEn ? "Continue" : "Continuer"}
@@ -799,7 +799,7 @@ function ActivityContent({
             </div>
           ) : (
             <div className="rounded-xl overflow-hidden border border-cta/20">
-              <div className="bg-gradient-to-r from-[#C65A1E]/10 to-[#C65A1E]/5 px-5 py-3 flex items-center gap-3">
+              <div className="bg-gradient-to-r from-cta/10 to-cta/5 px-5 py-3 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-cta/15 flex items-center justify-center">
                   <Video className="h-5 w-5 text-cta" />
                 </div>

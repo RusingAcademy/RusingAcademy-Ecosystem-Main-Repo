@@ -47,7 +47,7 @@ export default function Organizations() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-50 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-50 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">
       
 
       <main className="pt-20 pb-20">

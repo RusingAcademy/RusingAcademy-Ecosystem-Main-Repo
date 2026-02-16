@@ -88,7 +88,7 @@ export default function FloatingAICompanion() {
           style={{ height: "520px", animation: "fadeInUp 0.25s ease-out" }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#008090] to-[#006d7a] text-white flex-shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white flex-shrink-0">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 <span className="material-icons" style={{ fontSize: "18px" }}>smart_toy</span>
@@ -224,7 +224,7 @@ export default function FloatingAICompanion() {
         className={`fixed bottom-4 right-4 z-[60] w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${
           isOpen
             ? "bg-gray-600 hover:bg-gray-700"
-            : "bg-gradient-to-br from-[#008090] to-[#006d7a] hover:shadow-xl"
+            : "bg-gradient-to-br from-teal-700 to-[#006d7a] hover:shadow-xl"
         }`}
         aria-label={isOpen ? "Close AI Companion" : "Open AI Companion"}
       >

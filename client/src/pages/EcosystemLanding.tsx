@@ -213,7 +213,7 @@ export default function EcosystemLanding() {
       textSecondary: "text-white/90",
       surface: "bg-white/5 backdrop-blur-xl border border-white/60",
       surfaceHover: "hover:bg-white/10",
-      heroOverlay: "bg-gradient-to-br from-[#062b2b]/95 to-[#062b2b]/70",
+      heroOverlay: "bg-gradient-to-br from-obsidian/95 to-obsidian/70",
       glow: "opacity-50",
     },
     light: {
@@ -635,8 +635,8 @@ export default function EcosystemLanding() {
           </motion.div>
           
           {/* Gradient overlays for fade effect */}
-          <div className={`absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r ${theme === "glass" ? "from-[#080a14]" : "from-[#F4F6F9]"} to-transparent z-10 pointer-events-none`} />
-          <div className={`absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l ${theme === "glass" ? "from-[#080a14]" : "from-[#F4F6F9]"} to-transparent z-10 pointer-events-none`} />
+          <div className={`absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r ${theme === "glass" ? "from-slate-950" : "from-slate-100"} to-transparent z-10 pointer-events-none`} />
+          <div className={`absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l ${theme === "glass" ? "from-slate-950" : "from-slate-100"} to-transparent z-10 pointer-events-none`} />
         </div>
       </section>
 
@@ -651,7 +651,7 @@ export default function EcosystemLanding() {
           style={{ boxShadow: theme === "glass" ? "0 20px 40px rgba(0,0,0,0.4)" : "0 10px 30px rgba(0,0,0,0.08)" }}
         >
           {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#17E2C6]/20 via-transparent to-[#8B5CFF]/20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-400/20 via-transparent to-violet-500/20" />
           
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 p-5 sm:p-8 md:p-12">
             {/* Left - SLE AI Companion Info */}
@@ -694,7 +694,7 @@ export default function EcosystemLanding() {
               <Link href="/ecosystem">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-[#17E2C6] to-[#0d9488] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                  className="bg-gradient-to-r from-teal-400 to-teal-600 text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
                   style={{ boxShadow: "0 10px 25px -5px rgba(23, 226, 198, 0.5)" }}
                 >
                   {language === "en" ? "Try SLE AI Companion AI" : "Essayer SLE AI Companion AI"}
@@ -736,7 +736,7 @@ export default function EcosystemLanding() {
                         e.currentTarget.nextElementSibling?.classList.remove('hidden');
                       }}
                     />
-                    <div className="hidden w-full h-full bg-gradient-to-br from-[#17E2C6] to-[#0d9488] flex items-center justify-center">
+                    <div className="hidden w-full h-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
                       <span className="text-6xl md:text-7xl">🤖</span>
                     </div>
                   </div>

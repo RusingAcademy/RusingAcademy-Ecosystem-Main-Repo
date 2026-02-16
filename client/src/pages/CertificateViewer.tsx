@@ -84,7 +84,7 @@ export default function CertificateViewer() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-[#062b2b] dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-obsidian dark:to-gray-800">
       
       
       <main className="max-w-5xl mx-auto px-4 py-8">

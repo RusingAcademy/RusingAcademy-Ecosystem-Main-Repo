@@ -200,7 +200,7 @@ export default function RusingAcademyHome() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFF8F3] via-white to-[#FDFBF7]">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-stone-50">
       {/* Header removed - using EcosystemHeaderGold from layout */}
       
       <main id="main-content">
@@ -332,7 +332,7 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-[#FDFBF7]">
+        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
@@ -388,7 +388,7 @@ export default function RusingAcademyHome() {
                   transition={{ delay: index * 0.1 }}
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
-                      ? "border-cta-2 bg-gradient-to-br from-[#FFF8F3] to-white shadow-xl" 
+                      ? "border-cta-2 bg-gradient-to-br from-orange-50 to-white shadow-xl" 
                       : "border-gray-200 bg-white/80"
                   }`}
                 >
@@ -432,7 +432,7 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-[#062b2b] to-gray-800">
+        <section className="py-20 px-4 bg-gradient-to-br from-obsidian to-gray-800">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">

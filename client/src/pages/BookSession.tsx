@@ -269,7 +269,7 @@ export default function BookSession() {
   // Loading state
   if (authLoading || plansLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900">
 <main className="container py-8">
           <div className="flex items-center justify-center h-64">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -283,7 +283,7 @@ export default function BookSession() {
   // No active plan
   if (!activePlan) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900">
 <main className="container py-8">
           <Link href="/app/my-courses">
             <Button variant="ghost" className="mb-6">
@@ -309,7 +309,7 @@ export default function BookSession() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900">
 <main className="container py-8">
         {/* Back Button */}
         <Link href="/app/my-courses">

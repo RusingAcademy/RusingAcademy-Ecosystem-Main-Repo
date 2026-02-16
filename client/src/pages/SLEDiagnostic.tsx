@@ -204,7 +204,7 @@ export default function SLEDiagnostic() {
               <Link href="/booking">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                  className="bg-gradient-to-r from-[#FF6A2B] to-orange-400 text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
                   style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
                 >
                   {l.ctaButton}
@@ -334,7 +334,7 @@ export default function SLEDiagnostic() {
                   <Link href="/booking">
                     <Button 
                       size="lg" 
-                      className="w-full bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl"
+                      className="w-full bg-gradient-to-r from-[#FF6A2B] to-orange-400 text-white border-0 px-8 py-6 text-base font-bold rounded-xl"
                     >
                       {l.ctaButton}
                       <ArrowRight className="ml-2 w-5 h-5" />
@@ -403,7 +403,7 @@ export default function SLEDiagnostic() {
               <Link href="/booking">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                  className="bg-gradient-to-r from-[#FF6A2B] to-orange-400 text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
                   style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
                 >
                   {l.ctaButton}

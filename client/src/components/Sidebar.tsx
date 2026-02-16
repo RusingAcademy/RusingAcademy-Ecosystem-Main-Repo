@@ -230,7 +230,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         <div className="p-4 border-t border-gray-100">
           <Link href="/profile">
             <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all cursor-pointer group">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#008090] to-[#00a0b0] flex items-center justify-center text-white font-bold text-sm shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-700 to-[#00a0b0] flex items-center justify-center text-white font-bold text-sm shadow-sm">
                 SB
               </div>
               <div className="flex-1 min-w-0">

@@ -83,7 +83,7 @@ export default function Membership() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1B1464]/5 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-900/5 to-background">
       {/* Header */}
       <div className="max-w-6xl mx-auto px-4 pt-8 pb-4">
         <button onClick={() => navigate("/")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">

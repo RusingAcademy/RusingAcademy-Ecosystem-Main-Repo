@@ -193,7 +193,7 @@ export default function HRCompliance() {
 
         {/* Recommendations */}
         {allRecords.length > 0 && (highRisk > 0 || medRisk > 0) && (
-          <div className="mt-6 bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 rounded-xl border border-blue-600/15 p-5">
+          <div className="mt-6 bg-gradient-to-br from-blue-600/5 to-blue-600/10 rounded-xl border border-blue-600/15 p-5">
             <h2 className="text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
               <span className="material-icons text-blue-600">lightbulb</span>
               {lang === "fr" ? "Recommandations" : "Recommendations"}
