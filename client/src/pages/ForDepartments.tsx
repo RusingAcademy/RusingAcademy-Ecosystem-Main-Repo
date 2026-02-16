@@ -356,7 +356,7 @@ export default function ForDepartments() {
                   blue: "bg-blue-100 text-blue-600",
                   emerald: "bg-emerald-100 text-emerald-600",
                   orange: "bg-orange-100 text-orange-600",
-                  copper: "bg-[#FFF1E8] text-[#C65A1E]",
+                  copper: "bg-cta-soft text-cta",
                   amber: "bg-amber-100 text-amber-600",
                 };
                 return (
@@ -456,7 +456,7 @@ export default function ForDepartments() {
                 >
                   {pkg.popular && pkg.popularLabel && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <Badge className="bg-[#C65A1E] text-white border-0 shadow-lg">
+                      <Badge className="bg-cta text-white border-0 shadow-lg">
                         <Star className="h-3 w-3 mr-1 fill-current" />
                         {pkg.popularLabel}
                       </Badge>

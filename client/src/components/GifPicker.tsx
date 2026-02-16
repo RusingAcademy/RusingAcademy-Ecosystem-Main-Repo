@@ -165,7 +165,7 @@ export default function GifPicker({ isOpen, onClose, onSelect }: GifPickerProps)
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-border">
             <div className="flex items-center gap-2">
-              <Smile className="w-4 h-4 text-[#D4AF37]" />
+              <Smile className="w-4 h-4 text-barholex-gold" />
               <span className="text-sm font-bold text-foreground">GIF Picker</span>
             </div>
             <button

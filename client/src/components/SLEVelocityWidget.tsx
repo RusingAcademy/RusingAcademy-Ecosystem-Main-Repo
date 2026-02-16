@@ -73,7 +73,7 @@ export function SLEVelocityWidget({
   const l = labels[language];
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-[#062b2b] p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-obsidian p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -121,21 +121,21 @@ export function SLEVelocityWidget({
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <Clock className="h-4 w-4 text-black" />
             <span className="text-sm text-black dark:text-[#67E8F9]">{l.weeklyHours}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-white">{weeklyHours}h</p>
         </div>
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <TrendingUp className="h-4 w-4 text-black" />
             <span className="text-sm text-black dark:text-[#67E8F9]">{l.avgProgress}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-white">+{averageProgress}%</p>
         </div>
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <Calendar className="h-4 w-4 text-black" />
             <span className="text-sm text-black dark:text-[#67E8F9]">{l.estimatedReady}</span>
@@ -145,7 +145,7 @@ export function SLEVelocityWidget({
           </p>
         </div>
         {daysUntilExam && (
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-black" />
               <span className="text-sm text-black dark:text-[#67E8F9]">{l.daysUntilExam}</span>

@@ -45,9 +45,9 @@ export function AnimatedHero({
       case 'gradient':
         return 'bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-teal-900';
       case 'dark':
-        return 'bg-[#062b2b]';
+        return 'bg-obsidian';
       default:
-        return 'bg-white dark:bg-[#062b2b]';
+        return 'bg-white dark:bg-obsidian';
     }
   };
 

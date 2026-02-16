@@ -60,7 +60,7 @@ interface Category {
 const categories: Category[] = [
   { id: "all", name: "Tous", icon: FolderOpen, count: 24, color: "text-slate-600" },
   { id: "documents", name: "Documents", icon: FileText, count: 12, color: "text-blue-600" },
-  { id: "videos", name: "Vidéos", icon: Video, count: 6, color: "text-[#0F3D3E]" },
+  { id: "videos", name: "Vidéos", icon: Video, count: 6, color: "text-foundation" },
   { id: "audio", name: "Audio", icon: Headphones, count: 3, color: "text-emerald-600" },
   { id: "exercises", name: "Exercices", icon: BookOpen, count: 3, color: "text-amber-600" },
 ];
@@ -129,7 +129,7 @@ const resources: Resource[] = [
 
 const typeIcons = {
   document: { icon: FileText, color: "text-blue-600", bg: "bg-blue-100" },
-  video: { icon: Video, color: "text-[#0F3D3E]", bg: "bg-[#E7F2F2]" },
+  video: { icon: Video, color: "text-foundation", bg: "bg-foundation-soft" },
   audio: { icon: Headphones, color: "text-emerald-600", bg: "bg-emerald-100" },
   slides: { icon: File, color: "text-orange-600", bg: "bg-orange-100" },
   exercise: { icon: BookOpen, color: "text-amber-600", bg: "bg-amber-100" },

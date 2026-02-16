@@ -29,7 +29,7 @@ export function TestimonialCard({
       whileHover="hover"
       viewport={{ once: true, amount: 0.2 }}
       transition={{ delay: index * 0.1 }}
-      className="relative p-6 rounded-2xl bg-white dark:bg-[#0a4040]/50 backdrop-blur-sm border border-slate-200 dark:border-[#0a6969]/50 shadow-lg hover:shadow-xl transition-all duration-300"
+      className="relative p-6 rounded-2xl bg-white dark:bg-foundation/50 backdrop-blur-sm border border-slate-200 dark:border-[#0a6969]/50 shadow-lg hover:shadow-xl transition-all duration-300"
     >
       {/* Quote icon */}
       <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">

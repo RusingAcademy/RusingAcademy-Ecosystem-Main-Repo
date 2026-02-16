@@ -48,8 +48,8 @@ import { toast } from "sonner";
 const categoryConfig: Record<string, { icon: typeof BookOpen; labelEn: string; labelFr: string; color: string }> = {
   sle_oral: { icon: Headphones, labelEn: "SLE Oral", labelFr: "ELS Oral", color: "bg-blue-500" },
   sle_written: { icon: FileText, labelEn: "SLE Written", labelFr: "ELS Écrit", color: "bg-green-500" },
-  sle_reading: { icon: BookOpen, labelEn: "SLE Reading", labelFr: "ELS Lecture", color: "bg-[#E7F2F2]" },
-  sle_complete: { icon: Award, labelEn: "SLE Complete", labelFr: "ELS Complet", color: "bg-[#C65A1E]" },
+  sle_reading: { icon: BookOpen, labelEn: "SLE Reading", labelFr: "ELS Lecture", color: "bg-foundation-soft" },
+  sle_complete: { icon: Award, labelEn: "SLE Complete", labelFr: "ELS Complet", color: "bg-cta" },
   business_french: { icon: Globe, labelEn: "Business French", labelFr: "Français des affaires", color: "bg-teal-500" },
   business_english: { icon: Globe, labelEn: "Business English", labelFr: "Anglais des affaires", color: "bg-indigo-500" },
 };
@@ -375,7 +375,7 @@ export default function CourseDetail() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="sticky top-24 bg-white dark:bg-[#0a4040] shadow-2xl border-0">
+                <Card className="sticky top-24 bg-white dark:bg-foundation shadow-2xl border-0">
                   {/* Thumbnail */}
                   <div className="relative aspect-video bg-slate-200 dark:bg-[#0a6969] overflow-hidden rounded-t-lg">
                     {course.thumbnailUrl ? (

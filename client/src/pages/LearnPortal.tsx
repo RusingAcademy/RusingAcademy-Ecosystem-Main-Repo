@@ -202,7 +202,7 @@ function SlotIndicators({
         })}
         {/* Extra activities indicator */}
         {lessonActivities.filter((a: any) => a.slotIndex > 7).length > 0 && (
-          <div className="w-6 h-6 rounded-md bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center text-[10px] font-bold text-muted-foreground">
+          <div className="w-6 h-6 rounded-md bg-slate-100 dark:bg-foundation flex items-center justify-center text-[10px] font-bold text-muted-foreground">
             +{lessonActivities.filter((a: any) => a.slotIndex > 7).length}
           </div>
         )}
@@ -444,7 +444,7 @@ export default function LearnPortal() {
             <div className="bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E] relative">
               {/* Decorative orbs */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#C65A1E]/20 rounded-full blur-3xl" />
+                <div className="absolute -top-20 -right-20 w-80 h-80 bg-cta/20 rounded-full blur-3xl" />
                 <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#17E2C6]/10 rounded-full blur-3xl" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
               </div>
@@ -473,7 +473,7 @@ export default function LearnPortal() {
             ═══════════════════════════════════════════════════════ */}
         <div className="max-w-4xl mx-auto px-6 pt-6">
           <div className="flex items-center gap-2 mb-2">
-            <Zap className="h-4 w-4 text-[#C65A1E]" />
+            <Zap className="h-4 w-4 text-cta" />
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               {isEn
                 ? "7-Slot Learning Structure"
@@ -503,7 +503,7 @@ export default function LearnPortal() {
             ═══════════════════════════════════════════════════════ */}
         <div className="max-w-4xl mx-auto px-6 py-6">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Target className="h-5 w-5 text-[#0F3D3E]" />
+            <Target className="h-5 w-5 text-foundation" />
             {isEn ? "Course Content" : "Contenu du cours"}
             <span className="text-sm font-normal text-muted-foreground ml-auto">
               {course.modules?.length || 0} {isEn ? "modules" : "modules"} ·{" "}
@@ -567,8 +567,8 @@ export default function LearnPortal() {
                         )}
                         {/* Mini progress ring on thumbnail */}
                         {isAuthenticated && moduleTotal > 0 && !isModuleComplete && modulePercent > 0 && (
-                          <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-background border-2 border-[#C65A1E] flex items-center justify-center">
-                            <span className="text-[8px] font-bold text-[#C65A1E]">
+                          <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-background border-2 border-cta flex items-center justify-center">
+                            <span className="text-[8px] font-bold text-cta">
                               {modulePercent}%
                             </span>
                           </div>
@@ -669,7 +669,7 @@ export default function LearnPortal() {
                                   : isCompleted
                                   ? "hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20"
                                   : isInProgress
-                                  ? "bg-[#C65A1E]/5 hover:bg-[#C65A1E]/10 ring-1 ring-[#C65A1E]/10"
+                                  ? "bg-cta/5 hover:bg-cta/10 ring-1 ring-[#C65A1E]/10"
                                   : "hover:bg-muted/60 hover:shadow-sm"
                               }`}
                             >
@@ -680,8 +680,8 @@ export default function LearnPortal() {
                                     <CheckCircle2 className="h-4 w-4 text-white" />
                                   </div>
                                 ) : isInProgress ? (
-                                  <div className="w-6 h-6 rounded-full border-2 border-[#C65A1E] flex items-center justify-center animate-pulse">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-[#C65A1E]" />
+                                  <div className="w-6 h-6 rounded-full border-2 border-cta flex items-center justify-center animate-pulse">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-cta" />
                                   </div>
                                 ) : isLocked ? (
                                   <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center">
@@ -704,7 +704,7 @@ export default function LearnPortal() {
                                       isCompleted
                                         ? "text-emerald-600 dark:text-emerald-400"
                                         : isInProgress
-                                        ? "text-[#C65A1E]"
+                                        ? "text-cta"
                                         : ""
                                     } group-hover:text-foreground transition-colors`}
                                   >
@@ -721,7 +721,7 @@ export default function LearnPortal() {
                                     </Badge>
                                   )}
                                   {isInProgress && (
-                                    <Badge className="text-[10px] px-1.5 py-0 bg-[#C65A1E]/10 text-[#C65A1E] border-[#C65A1E]/20">
+                                    <Badge className="text-[10px] px-1.5 py-0 bg-cta/10 text-cta border-cta/20">
                                       {isEn ? "In Progress" : "En cours"}
                                     </Badge>
                                   )}
@@ -964,8 +964,8 @@ function HeroContent({
                 isComplete
                   ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/25 hover:shadow-emerald-600/30"
                   : hasStarted
-                  ? "bg-[#C65A1E] hover:bg-[#E06B2D] text-white shadow-[#C65A1E]/25 hover:shadow-[#C65A1E]/30"
-                  : "bg-white text-[#0F3D3E] hover:bg-white/90 shadow-white/25 hover:shadow-white/30"
+                  ? "bg-cta hover:bg-[#E06B2D] text-white shadow-[#C65A1E]/25 hover:shadow-[#C65A1E]/30"
+                  : "bg-white text-foundation hover:bg-white/90 shadow-white/25 hover:shadow-white/30"
               }`}
               onClick={() =>
                 setLocation(`/learn/${slug}/lessons/${resumeTarget.id}`)
@@ -997,7 +997,7 @@ function HeroContent({
         ) : !isAuthenticated ? (
           <Button
             size="lg"
-            className="bg-white text-[#0F3D3E] hover:bg-white/90 shadow-lg shadow-white/25"
+            className="bg-white text-foundation hover:bg-white/90 shadow-lg shadow-white/25"
             onClick={() => setLocation("/login")}
           >
             <Shield className="h-4 w-4 mr-2" />

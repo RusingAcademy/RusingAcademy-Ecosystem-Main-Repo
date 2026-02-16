@@ -63,7 +63,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
   const alternativeRecos = recommendations.slice(1);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-[#0F3D3E]/10 to-[#145A5B]/10 border border-[#0F3D3E]/20">
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-[#0F3D3E]/10 to-[#145A5B]/10 border border-foundation/20">
       <div className="text-center mb-6">
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', delay: 0.2 }} className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 text-3xl mb-4">
           {performance.score >= 80 ? '🎉' : performance.score >= 60 ? '👍' : '💪'}
@@ -72,8 +72,8 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
         <p className="text-white/60 text-sm mt-1">Score: {performance.score}% • Temps: {formatTime(performance.timeSpent)}</p>
       </div>
       <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }} className="flex justify-center gap-4 mb-6">
-        <div className="px-4 py-2 rounded-xl bg-[#C65A1E]/20 border border-amber-500/30"><span className="text-amber-400 font-bold">+{calculateXP(performance)} XP</span></div>
-        {performance.score >= 90 && <div className="px-4 py-2 rounded-xl bg-[#E7F2F2]/20 border border-[#0F3D3E]/30"><span className="text-[#0F3D3E] font-bold">🏆 Perfection Bonus!</span></div>}
+        <div className="px-4 py-2 rounded-xl bg-cta/20 border border-amber-500/30"><span className="text-amber-400 font-bold">+{calculateXP(performance)} XP</span></div>
+        {performance.score >= 90 && <div className="px-4 py-2 rounded-xl bg-foundation-soft/20 border border-foundation/30"><span className="text-foundation font-bold">🏆 Perfection Bonus!</span></div>}
       </motion.div>
       {primaryReco && !showAllOptions && (
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="space-y-4">
@@ -82,7 +82,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
               <div className="text-3xl">{primaryReco.icon}</div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-[#E7F2F2]/30 text-[#0F3D3E]">Recommandé</span>
+                  <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-foundation-soft/30 text-foundation">Recommandé</span>
                   <span className="text-xs text-white/75">{primaryReco.estimatedTime}</span>
                 </div>
                 <h4 className="text-lg font-semibold text-white">{primaryReco.title}</h4>
@@ -104,13 +104,13 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
           <h4 className="text-sm font-medium text-white/80 mb-4">Choisissez votre prochaine étape :</h4>
           {recommendations.map((reco, index) => (
-            <motion.button key={reco.path} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} onClick={() => handleAcceptRecommendation(reco)} className={`w-full p-4 text-left rounded-xl border transition-all duration-200 ${index === 0 ? 'bg-[#E7F2F2]/20 border-[#0F3D3E]/30 hover:bg-[#E7F2F2]/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+            <motion.button key={reco.path} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} onClick={() => handleAcceptRecommendation(reco)} className={`w-full p-4 text-left rounded-xl border transition-all duration-200 ${index === 0 ? 'bg-foundation-soft/20 border-foundation/30 hover:bg-foundation-soft/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{reco.icon}</span>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-white">{reco.title}</span>
-                    {index === 0 && <span className="text-xs px-2 py-0.5 rounded-full bg-[#E7F2F2]/30 text-[#0F3D3E]">Recommandé</span>}
+                    {index === 0 && <span className="text-xs px-2 py-0.5 rounded-full bg-foundation-soft/30 text-foundation">Recommandé</span>}
                   </div>
                   <p className="text-white/80 text-sm">{reco.description}</p>
                 </div>

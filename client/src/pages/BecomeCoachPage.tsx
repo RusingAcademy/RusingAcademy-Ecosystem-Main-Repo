@@ -31,12 +31,12 @@ export default function BecomeCoachPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#C65A1E]/10 to-[#C65A1E]/10" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-block px-4 py-2 bg-amber-100 text-[#C65A1E]800 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-2 bg-amber-100 text-cta800 rounded-full text-sm font-medium mb-4">
               Rejoignez notre équipe de coaches
             </span>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
               Devenez Coach Linguistique<br />
-              <span className="text-[#C65A1E]600">RusingAcademy</span>
+              <span className="text-cta600">RusingAcademy</span>
             </h1>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
               Partagez votre expertise linguistique avec des professionnels canadiens 
@@ -63,7 +63,7 @@ export default function BecomeCoachPage() {
               <Card key={index} className="border-2 border-slate-100 hover:border-[#FFE4D6] transition-colors">
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <benefit.icon className="h-6 w-6 text-[#C65A1E]600" />
+                    <benefit.icon className="h-6 w-6 text-cta600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">{benefit.title}</h3>
                   <p className="text-sm text-slate-600">{benefit.description}</p>
@@ -101,7 +101,7 @@ export default function BecomeCoachPage() {
           <h2 className="text-3xl font-bold text-white mb-6">
             Prêt à transformer des carrières?
           </h2>
-          <p className="text-xl text-[#C65A1E]100 mb-8">
+          <p className="text-xl text-cta100 mb-8">
             Rejoignez une communauté de coaches passionnés et aidez les fonctionnaires 
             canadiens à atteindre leurs objectifs linguistiques.
           </p>

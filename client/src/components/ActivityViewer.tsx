@@ -476,8 +476,8 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                   <div className={`
                     w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border-2
                     ${activeSlotIndex > 7 
-                      ? 'bg-[#0F3D3E] border-[#0F3D3E] text-white shadow-lg' 
-                      : 'bg-[#0F3D3E]/10 border-[#0F3D3E] text-[#0F3D3E]'
+                      ? 'bg-foundation border-foundation text-white shadow-lg' 
+                      : 'bg-foundation/10 border-foundation text-foundation'
                     }
                   `}>
                     <Plus className="h-4 w-4" />
@@ -798,13 +798,13 @@ function ActivityContent({
               )}
             </div>
           ) : (
-            <div className="rounded-xl overflow-hidden border border-[#C65A1E]/20">
+            <div className="rounded-xl overflow-hidden border border-cta/20">
               <div className="bg-gradient-to-r from-[#C65A1E]/10 to-[#C65A1E]/5 px-5 py-3 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#C65A1E]/15 flex items-center justify-center">
-                  <Video className="h-5 w-5 text-[#C65A1E]" />
+                <div className="w-10 h-10 rounded-full bg-cta/15 flex items-center justify-center">
+                  <Video className="h-5 w-5 text-cta" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-[#C65A1E]">
+                  <p className="text-sm font-semibold text-cta">
                     {isEn ? "Video Scenario — Script" : "Scénario Vidéo — Script"}
                   </p>
                   <p className="text-xs text-muted-foreground">
@@ -976,7 +976,7 @@ function ActivityContent({
             size="sm"
             onClick={() => onComplete()}
             disabled={isCompleting}
-            className="bg-[#0F3D3E] hover:bg-[#0F3D3E]/90 text-white gap-1.5"
+            className="bg-foundation hover:bg-foundation/90 text-white gap-1.5"
           >
             {isCompleting ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -1000,7 +1000,7 @@ function ActivityContent({
               size="sm"
               variant="outline"
               onClick={onNext}
-              className="gap-1.5 border-[#C65A1E]/30 text-[#C65A1E] hover:bg-[#C65A1E]/5"
+              className="gap-1.5 border-cta/30 text-cta hover:bg-cta/5"
             >
               {isEn ? "Next Activity" : "Activité suivante"}
               <ArrowRight className="h-4 w-4" />

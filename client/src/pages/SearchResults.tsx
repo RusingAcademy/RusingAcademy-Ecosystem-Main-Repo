@@ -168,8 +168,8 @@ export default function SearchResultsPage() {
                   )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <BookOpen className="w-4 h-4 text-[#D4AF37]" />
-                      <span className="text-xs font-medium text-[#D4AF37] uppercase">
+                      <BookOpen className="w-4 h-4 text-barholex-gold" />
+                      <span className="text-xs font-medium text-barholex-gold uppercase">
                         Course
                       </span>
                     </div>

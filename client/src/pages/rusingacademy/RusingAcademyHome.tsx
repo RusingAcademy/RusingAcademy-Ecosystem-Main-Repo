@@ -206,7 +206,7 @@ export default function RusingAcademyHome() {
       <main id="main-content">
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#E07B39]/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-cta-2/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#2DD4BF]/10 rounded-full blur-3xl" />
           
           <div className="container mx-auto relative z-10">
@@ -217,7 +217,7 @@ export default function RusingAcademyHome() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-[#E07B39]/10 border border-[#E07B39]/20 text-black">
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-[#E07B39]/20 text-black">
                   <Sparkles className="w-4 h-4 text-[#E07B39]" />
                   {language === "en" ? "B2B/B2G Training Excellence" : "Excellence en formation B2B/B2G"}
                 </span>
@@ -245,7 +245,7 @@ export default function RusingAcademyHome() {
               
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Link href="/rusingacademy/contact">
-                  <Button size="lg" className="bg-[#E07B39] hover:bg-[#C45E1A] text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full">
+                  <Button size="lg" className="bg-cta-2 hover:bg-[#C45E1A] text-white gap-2 px-8 h-12 text-base shadow-lg shadow-[#E07B39]/20 rounded-full">
                     {language === "en" ? "Request a Proposal" : "Demander une proposition"}
                     <ArrowRight className="w-5 h-5" />
                   </Button>
@@ -349,7 +349,7 @@ export default function RusingAcademyHome() {
                   transition={{ delay: index * 0.1 }}
                   className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#E07B39]/10 flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-cta-2/10 flex items-center justify-center mb-4">
                     <feature.icon className="w-6 h-6 text-[#E07B39]" />
                   </div>
                   <h3 className="font-bold text-black mb-2">
@@ -394,7 +394,7 @@ export default function RusingAcademyHome() {
                 >
                   {pkg.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="px-4 py-1 text-xs font-bold rounded-full bg-[#E07B39] text-white">
+                      <span className="px-4 py-1 text-xs font-bold rounded-full bg-cta-2 text-white">
                         {language === "en" ? "POPULAR" : "POPULAIRE"}
                       </span>
                     </div>
@@ -418,7 +418,7 @@ export default function RusingAcademyHome() {
                     <Button 
                       className={`w-full rounded-full ${
                         pkg.popular 
-                          ? "bg-[#E07B39] hover:bg-[#C45E1A] text-white" 
+                          ? "bg-cta-2 hover:bg-[#C45E1A] text-white" 
                           : "bg-gray-100 hover:bg-gray-200 text-black"
                       }`}
                     >

@@ -112,7 +112,7 @@ export default function CoachingPlanSuccess() {
           <Card className="mb-8 overflow-hidden border-2 border-teal-200 dark:border-teal-800">
             <CardHeader className="bg-gradient-to-r from-teal-500/10 to-[#C65A1E]/10">
               <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-[#C65A1E]500" />
+                <Sparkles className="h-5 w-5 text-cta500" />
                 {l.planDetails}
               </CardTitle>
             </CardHeader>
@@ -130,7 +130,7 @@ export default function CoachingPlanSuccess() {
                       </p>
                     </div>
                     {purchasedPlan.id === "accelerator-plan" && (
-                      <Badge className="bg-[#C65A1E] text-white">Most Popular</Badge>
+                      <Badge className="bg-cta text-white">Most Popular</Badge>
                     )}
                     {purchasedPlan.id === "immersion-plan" && (
                       <Badge className="bg-gradient-to-r from-[#C65A1E] to-[#A84A15] text-white">Premium</Badge>
@@ -150,7 +150,7 @@ export default function CoachingPlanSuccess() {
                     </div>
                     <div className="flex items-center gap-3 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-xl">
                       <div className="p-2 bg-amber-100 dark:bg-amber-900 rounded-lg">
-                        <Calendar className="h-5 w-5 text-[#C65A1E]600 dark:text-[#C65A1E]400" />
+                        <Calendar className="h-5 w-5 text-cta600 dark:text-cta400" />
                       </div>
                       <div>
                         <p className="text-sm text-black dark:text-white">{l.validity}</p>
@@ -171,7 +171,7 @@ export default function CoachingPlanSuccess() {
                   {/* Features */}
                   <div className="pt-4 border-t">
                     <h4 className="font-semibold mb-3 flex items-center gap-2">
-                      <Zap className="h-4 w-4 text-[#C65A1E]500" />
+                      <Zap className="h-4 w-4 text-cta500" />
                       {l.features}
                     </h4>
                     <ul className="grid sm:grid-cols-2 gap-2">

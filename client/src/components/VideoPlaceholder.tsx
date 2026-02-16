@@ -116,8 +116,8 @@ export function VideoPlaceholder({
         
         {/* Info Cards */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-[#E7F2F2] rounded-xl p-4">
-            <div className="flex items-center gap-2 text-[#0F3D3E] mb-1">
+          <div className="bg-foundation-soft rounded-xl p-4">
+            <div className="flex items-center gap-2 text-foundation mb-1">
               <Video className="w-4 h-4" />
               <span className="text-sm font-medium">
                 {language === "fr" ? "Format" : "Format"}
@@ -148,7 +148,7 @@ export function VideoPlaceholder({
           </h4>
           <ul className="space-y-2">
             <li className="flex items-start gap-2 text-sm text-black">
-              <CheckCircle className="w-4 h-4 text-[#0F3D3E] mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-4 h-4 text-foundation mt-0.5 flex-shrink-0" />
               <span>
                 {language === "fr" 
                   ? "Techniques de prononciation avancées" 
@@ -156,7 +156,7 @@ export function VideoPlaceholder({
               </span>
             </li>
             <li className="flex items-start gap-2 text-sm text-black">
-              <CheckCircle className="w-4 h-4 text-[#0F3D3E] mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-4 h-4 text-foundation mt-0.5 flex-shrink-0" />
               <span>
                 {language === "fr" 
                   ? "Vocabulaire professionnel en contexte" 
@@ -164,7 +164,7 @@ export function VideoPlaceholder({
               </span>
             </li>
             <li className="flex items-start gap-2 text-sm text-black">
-              <CheckCircle className="w-4 h-4 text-[#0F3D3E] mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-4 h-4 text-foundation mt-0.5 flex-shrink-0" />
               <span>
                 {language === "fr" 
                   ? "Exercices pratiques interactifs" 

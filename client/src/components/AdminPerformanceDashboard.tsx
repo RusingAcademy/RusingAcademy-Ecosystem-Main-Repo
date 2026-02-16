@@ -201,15 +201,15 @@ export function AdminPerformanceDashboard({
               </div>
             </div>
 
-            <div className="bg-[#E7F2F2] rounded-lg p-4">
+            <div className="bg-foundation-soft rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-600 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
-                  <p className="text-3xl font-bold text-[#0F3D3E] mt-2">
+                  <p className="text-3xl font-bold text-foundation mt-2">
                     {selectedAdminDetails.averages?.averageReviewTimeHours || 0}h
                   </p>
                 </div>
-                <Clock className="text-[#0F3D3E]" size={32} />
+                <Clock className="text-foundation" size={32} />
               </div>
             </div>
 

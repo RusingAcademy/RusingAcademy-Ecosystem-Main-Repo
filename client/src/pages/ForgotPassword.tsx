@@ -32,7 +32,7 @@ export default function ForgotPassword() {
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <div className="mx-auto w-16 h-16 bg-teal-500/20 rounded-full flex items-center justify-center">
@@ -48,7 +48,7 @@ export default function ForgotPassword() {
               </p>
               <div className="pt-4">
                 <Link to="/login">
-                  <Button variant="outline" className="bg-[#0a6969]/50 border-slate-600 text-white hover:bg-[#0a6969]">
+                  <Button variant="outline" className="bg-[#0a6969]/50 border-slate-600 text-white hover:bg-foundation-2">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Login
                   </Button>
@@ -63,7 +63,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-      <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img

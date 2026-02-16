@@ -378,7 +378,7 @@ export function AdminApplicationDashboard() {
                 placeholder={l.search}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
+                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-foundation text-black dark:text-white"
               />
             </div>
 
@@ -386,7 +386,7 @@ export function AdminApplicationDashboard() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-foundation text-black dark:text-white"
             >
               <option value="all">{l.status}: All</option>
               <option value="submitted">{l.submitted}</option>
@@ -399,7 +399,7 @@ export function AdminApplicationDashboard() {
             <select
               value={languageFilter}
               onChange={(e) => setLanguageFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-foundation text-black dark:text-white"
             >
               <option value="all">{l.language}: All</option>
               <option value="french">French</option>
@@ -411,7 +411,7 @@ export function AdminApplicationDashboard() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-foundation text-black dark:text-white"
             >
               <option value="createdAt">
                 {l.sortBy}: {l.date}
@@ -491,7 +491,7 @@ export function AdminApplicationDashboard() {
                   {applications.map((app: Application) => (
                     <tr
                       key={app.id}
-                      className="border-b border-slate-200 dark:border-[#0a6969] hover:bg-white dark:hover:bg-[#0a4040]"
+                      className="border-b border-slate-200 dark:border-[#0a6969] hover:bg-white dark:hover:bg-foundation"
                     >
                       <td className="py-3 px-4">
                         <button onClick={() => toggleApplicationSelection(app.id)}>
@@ -845,7 +845,7 @@ export function AdminApplicationDashboard() {
                 placeholder={l.rejectReason}
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
+                className="w-full p-3 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-foundation text-black dark:text-white"
                 rows={4}
                 autoFocus
               />
@@ -888,7 +888,7 @@ export function AdminApplicationDashboard() {
                 placeholder={bulkAction === "approve" ? l.approveNotes : l.rejectReason}
                 value={bulkNotes}
                 onChange={(e) => setBulkNotes(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
+                className="w-full p-3 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-foundation text-black dark:text-white"
                 rows={4}
               />
               <div className="flex gap-2">

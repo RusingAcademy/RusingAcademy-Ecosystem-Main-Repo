@@ -58,14 +58,14 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
         <div className="flex justify-center gap-4 mb-8">
           {(['A', 'B', 'C'] as const).map((level) => (
             <button key={level} onClick={() => setSelectedLevel(level)}
-              className={`px-8 py-4 rounded-xl font-bold text-lg transition-all ${selectedLevel === level ? 'bg-[#E7F2F2] text-white scale-105' : 'bg-white/5 text-white/60 hover:bg-white/10'}`}>
+              className={`px-8 py-4 rounded-xl font-bold text-lg transition-all ${selectedLevel === level ? 'bg-foundation-soft text-white scale-105' : 'bg-white/5 text-white/60 hover:bg-white/10'}`}>
               Niveau {level}
             </button>
           ))}
         </div>
 
         {/* Readiness Score */}
-        <div className="bg-gradient-to-br from-[#0F3D3E]/20 to-[#145A5B]/20 rounded-2xl p-8 mb-8 text-center border border-[#0F3D3E]/30">
+        <div className="bg-gradient-to-br from-[#0F3D3E]/20 to-[#145A5B]/20 rounded-2xl p-8 mb-8 text-center border border-foundation/30">
           <p className="text-white/60 mb-2">Score de préparation - Niveau {selectedLevel}</p>
           <div className="text-6xl font-bold text-white mb-4">{Math.round(readinessScore) || '--'}%</div>
           <div className="w-full bg-white/10 rounded-full h-3"><div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] h-3 rounded-full" style={{ width: `${readinessScore || 0}%` }} /></div>
@@ -75,7 +75,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
         <div className="grid grid-cols-3 gap-4 mb-8">
           {Object.entries(SLE_CONFIG.sections).map(([key, section]) => (
             <button key={key} onClick={() => setSelectedSection(key as any)}
-              className={`p-6 rounded-xl text-left transition-all ${selectedSection === key ? 'bg-[#E7F2F2]/20 border-[#0F3D3E]' : 'bg-white/5 border-white/10'} border`}>
+              className={`p-6 rounded-xl text-left transition-all ${selectedSection === key ? 'bg-foundation-soft/20 border-foundation' : 'bg-white/5 border-white/10'} border`}>
               <h3 className="font-bold text-white mb-1">{section.name}</h3>
               <p className="text-sm text-white/75">{section.duration} minutes</p>
             </button>
@@ -118,7 +118,7 @@ function ExamSimulator({ level, section, onComplete }: { level: string; section:
           <span className="text-white font-medium">{SLE_CONFIG.sections[section as keyof typeof SLE_CONFIG.sections].name}</span>
         </div>
         <div className={`text-2xl font-mono font-bold ${timeLeft < 300 ? 'text-red-500 animate-pulse' : 'text-white'}`}>{formatTime(timeLeft)}</div>
-        <button onClick={handleSubmit} className="px-4 py-2 bg-[#E7F2F2] rounded-lg text-white">Terminer</button>
+        <button onClick={handleSubmit} className="px-4 py-2 bg-foundation-soft rounded-lg text-white">Terminer</button>
       </div>
 
       {/* Exam Content */}
@@ -127,7 +127,7 @@ function ExamSimulator({ level, section, onComplete }: { level: string; section:
           {section === 'oral' && (
             <div className="text-center">
               <h2 className="text-2xl font-bold text-white mb-4">Partie {currentPart + 1}: {(SLE_CONFIG.sections.oral.parts[currentPart] || {}).name}</h2>
-              <button onClick={() => setIsRecording(!isRecording)} className={`w-24 h-24 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-[#E7F2F2]'} flex items-center justify-center mx-auto`}>
+              <button onClick={() => setIsRecording(!isRecording)} className={`w-24 h-24 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-foundation-soft'} flex items-center justify-center mx-auto`}>
                 <span className="text-3xl">{isRecording ? '⏹' : '🎤'}</span>
               </button>
               <p className="text-white/60 mt-4">{isRecording ? 'Enregistrement en cours...' : 'Cliquez pour commencer'}</p>

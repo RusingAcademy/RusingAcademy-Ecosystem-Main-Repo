@@ -58,13 +58,13 @@ export default function PremiumHeroSection({
       case "dark":
         return {
           primary: "bg-teal-500/20",
-          secondary: "bg-[#E7F2F2]/10",
-          tertiary: "bg-[#C65A1E]/10",
+          secondary: "bg-foundation-soft/10",
+          tertiary: "bg-cta/10",
         };
       default:
         return {
           primary: "bg-teal-400/20",
-          secondary: "bg-[#E7F2F2]/10",
+          secondary: "bg-foundation-soft/10",
           tertiary: "bg-orange-400/10",
         };
     }

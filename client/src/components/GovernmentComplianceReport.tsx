@@ -52,7 +52,7 @@ export function GovernmentComplianceReport() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-12">
-        <Loader2 className="h-8 w-8 animate-spin text-[#C65A1E]" />
+        <Loader2 className="h-8 w-8 animate-spin text-cta" />
       </div>
     );
   }
@@ -63,7 +63,7 @@ export function GovernmentComplianceReport() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-2">
-            <Shield className="h-5 w-5 text-[#C65A1E]" />
+            <Shield className="h-5 w-5 text-cta" />
             {isFr ? "Rapport de conformité gouvernemental" : "Government Compliance Report"}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
@@ -300,7 +300,7 @@ export function GovernmentComplianceReport() {
                         <span className="text-sm w-20 text-muted-foreground">{t.month}</span>
                         <div className="flex-1 h-6 bg-muted rounded-full overflow-hidden">
                           <div
-                            className="h-full rounded-full bg-[#C65A1E] transition-all"
+                            className="h-full rounded-full bg-cta transition-all"
                             style={{ width: `${Math.max(3, (t.enrollments / maxEnrollments) * 100)}%` }}
                           />
                         </div>

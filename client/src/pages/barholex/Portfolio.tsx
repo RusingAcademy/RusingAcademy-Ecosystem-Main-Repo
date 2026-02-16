@@ -257,7 +257,7 @@ export default function BarholexPortfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-8"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#D4AF37] font-medium text-sm shadow-lg shadow-black/10">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-barholex-gold font-medium text-sm shadow-lg shadow-black/10">
                   <Award className="w-4 h-4" />
                   {language === "en" ? "Our Work in Action" : "Nos réalisations en action"}
                 </span>
@@ -306,7 +306,7 @@ export default function BarholexPortfolio() {
                     key={i}
                     className="relative p-4 rounded-2xl bg-white/[0.07] backdrop-blur-md border border-white/15 hover:bg-white/[0.12] transition-all duration-300 group"
                   >
-                    <stat.icon className="w-5 h-5 text-[#D4AF37]/60 mb-2 mx-auto group-hover:text-[#D4AF37] transition-colors" />
+                    <stat.icon className="w-5 h-5 text-barholex-gold/60 mb-2 mx-auto group-hover:text-barholex-gold transition-colors" />
                     <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
                     <div className="text-xs text-white/70 mt-1">{language === "en" ? stat.labelEn : stat.labelFr}</div>
                   </div>
@@ -401,7 +401,7 @@ export default function BarholexPortfolio() {
                       {/* Client & Year */}
                       <div className="flex items-center gap-3 text-sm text-white/70 mb-3">
                         <span className="font-medium">{language === "en" ? project.clientEn : project.clientFr}</span>
-                        <span className="text-[#D4AF37]">|</span>
+                        <span className="text-barholex-gold">|</span>
                         <span>{language === "en" ? project.yearEn : project.yearFr}</span>
                       </div>
 
@@ -412,7 +412,7 @@ export default function BarholexPortfolio() {
                         <div className="flex flex-wrap gap-2 mb-4">
                           {(language === "en" ? project.resultsEn : project.resultsFr).map((result, i) => (
                             <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
-                              <CheckCircle className="w-3 h-3 text-[#D4AF37]" />
+                              <CheckCircle className="w-3 h-3 text-barholex-gold" />
                               {result}
                             </span>
                           ))}
@@ -485,7 +485,7 @@ export default function BarholexPortfolio() {
                     exit={{ opacity: 0, x: -50 }}
                     className="p-8 md:p-12 rounded-3xl bg-white/80 backdrop-blur-xl border border-[#E8E6E1] shadow-xl shadow-black/5"
                   >
-                    <Quote className="w-12 h-12 text-[#D4AF37]/25 mb-6" />
+                    <Quote className="w-12 h-12 text-barholex-gold/25 mb-6" />
                     
                     <p className="text-xl md:text-2xl text-[#1A1A1A] leading-relaxed mb-8 font-medium">
                       "{language === "en" ? TESTIMONIALS[testimonialIndex].quoteEn : TESTIMONIALS[testimonialIndex].quoteFr}"
@@ -563,7 +563,7 @@ export default function BarholexPortfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#D4AF37]/15 text-[#D4AF37] text-sm font-semibold mb-6 border border-[#D4AF37]/20">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#D4AF37]/15 text-barholex-gold text-sm font-semibold mb-6 border border-[#D4AF37]/20">
                   <Zap className="w-4 h-4" />
                   {language === "en" ? "Let's Collaborate" : "Collaborons"}
                 </span>

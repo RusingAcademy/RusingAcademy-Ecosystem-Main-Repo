@@ -18,7 +18,7 @@ const brands: Brand[] = [
     description: "Expert SLE coaching and structured learning paths for federal public servants",
     descriptionFr: "Coaching SLE expert et parcours d'apprentissage structurés pour les fonctionnaires fédéraux",
     url: "https://www.rusingacademy.com",
-    bgColor: "bg-[#C65A1E]",
+    bgColor: "bg-cta",
     textColor: "text-white",
   },
   {
@@ -36,7 +36,7 @@ const brands: Brand[] = [
     description: "Bilingual content creation and professional development media",
     descriptionFr: "Création de contenu bilingue et médias de développement professionnel",
     url: "https://www.barholexmedia.com",
-    bgColor: "bg-[#062b2b]",
+    bgColor: "bg-obsidian",
     textColor: "text-white",
   },
 ];

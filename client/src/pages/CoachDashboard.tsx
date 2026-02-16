@@ -394,18 +394,18 @@ export default function CoachDashboard() {
   }
 
   return (
-    <Wrap className="bg-slate-50 dark:bg-[#041e1e]">
+    <Wrap className="bg-slate-50 dark:bg-obsidian">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-[#0a4040]/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-[#0a4040]/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-foundation/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-foundation/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           {/* Hero Banner - Professional & Accessible */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-[#0a4040] dark:bg-[#062b2b] p-8 md:p-10 border border-[#0a6969]/50">
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-[#0a6969]/50">
             <div className="absolute inset-0 bg-gradient-to-br from-[#0a6969]/50 to-[#062b2b]/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
@@ -447,7 +447,7 @@ export default function CoachDashboard() {
 
           {/* Profile Summary Card - Clean & Accessible */}
           {coachProfile && (
-            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-[#062b2b] border border-slate-200 dark:border-[#0a6969] shadow-sm">
+            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-obsidian border border-slate-200 dark:border-[#0a6969] shadow-sm">
               <div className="flex flex-col md:flex-row">
                 {/* Profile Photo */}
                 <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">

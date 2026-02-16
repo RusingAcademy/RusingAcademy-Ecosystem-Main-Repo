@@ -286,8 +286,8 @@ export default function MyLearning() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 flex items-center justify-center">
-                  <Award className="h-6 w-6 text-[#0F3D3E]" />
+                <div className="w-12 h-12 rounded-full bg-foundation-soft dark:bg-foundation-soft/30 flex items-center justify-center">
+                  <Award className="h-6 w-6 text-foundation" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">

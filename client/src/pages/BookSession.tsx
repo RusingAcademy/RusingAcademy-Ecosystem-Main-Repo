@@ -523,7 +523,7 @@ export default function BookSession() {
                         onClick={() => setSelectedSlot(slot)}
                         className={cn(
                           "p-3 rounded-lg border text-sm font-medium transition-all",
-                          !slot.available && "opacity-50 cursor-not-allowed bg-slate-100 dark:bg-[#0a4040]",
+                          !slot.available && "opacity-50 cursor-not-allowed bg-slate-100 dark:bg-foundation",
                           slot.available && "hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20",
                           selectedSlot?.id === slot.id && "border-purple-500 bg-purple-100 dark:bg-purple-900/30"
                         )}
@@ -568,7 +568,7 @@ export default function BookSession() {
               
               <div className="space-y-4">
                 {/* Coach */}
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50">
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
                   <img
                     src={selectedCoach?.photoUrl || `https://ui-avatars.com/api/?name=${selectedCoach?.name}&background=random`}
                     alt={selectedCoach?.name}
@@ -582,7 +582,7 @@ export default function BookSession() {
 
                 {/* Date & Time */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50">
+                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
                     <p className="text-sm text-black">{l.date}</p>
                     <p className="font-semibold text-black dark:text-white">
                       {selectedDate?.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
@@ -593,7 +593,7 @@ export default function BookSession() {
                       })}
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50">
+                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
                     <p className="text-sm text-black">{l.time}</p>
                     <p className="font-semibold text-black dark:text-white">
                       {selectedSlot?.startTime} - {selectedSlot?.endTime}
@@ -602,7 +602,7 @@ export default function BookSession() {
                 </div>
 
                 {/* Duration */}
-                <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50">
+                <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
                   <p className="text-sm text-black">{l.duration}</p>
                   <p className="font-semibold text-black dark:text-white">60 {l.minutes}</p>
                 </div>
@@ -662,7 +662,7 @@ function CoachCard({ coach, isSelected, onSelect, labels, language }: {
         "p-4 rounded-xl border-2 cursor-pointer transition-all",
         isSelected 
           ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20" 
-          : "border-slate-200 dark:border-[#0a6969] hover:border-purple-300 bg-white dark:bg-[#0a4040]"
+          : "border-slate-200 dark:border-[#0a6969] hover:border-purple-300 bg-white dark:bg-foundation"
       )}
     >
       <div className="flex items-start gap-4">

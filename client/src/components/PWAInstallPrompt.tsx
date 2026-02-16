@@ -94,7 +94,7 @@ export default function PWAInstallPrompt() {
           </button>
 
           <div className="flex items-start gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0F3D3E]">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-foundation">
               <span className="text-lg font-bold text-[#E06B2D]">R</span>
             </div>
             <div className="flex-1 pr-6">
@@ -110,7 +110,7 @@ export default function PWAInstallPrompt() {
           <div className="mt-3 flex items-center gap-2">
             <button
               onClick={handleInstall}
-              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#0F3D3E] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#145A5B]"
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-foundation px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-foundation-2"
             >
               <Download size={16} />
               Install App
@@ -141,7 +141,7 @@ export default function PWAInstallPrompt() {
           </button>
 
           <div className="flex items-start gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0F3D3E]">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-foundation">
               <span className="text-lg font-bold text-[#E06B2D]">R</span>
             </div>
             <div className="flex-1 pr-6">
@@ -165,7 +165,7 @@ export default function PWAInstallPrompt() {
               </p>
             </div>
             <div className="flex items-center gap-3 rounded-lg bg-gray-50 px-3 py-2">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#0F3D3E]">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-foundation">
                 <Plus size={14} className="text-white" />
               </div>
               <p className="text-xs text-gray-700">

@@ -86,7 +86,7 @@ export default function PipelineNotificationsBell() {
       case "high_value":
         return <DollarSign className="h-4 w-4 text-green-500" />;
       case "follow_up_due":
-        return <Clock className="h-4 w-4 text-[#0F3D3E]" />;
+        return <Clock className="h-4 w-4 text-foundation" />;
       default:
         return <Bell className="h-4 w-4" />;
     }
@@ -149,7 +149,7 @@ export default function PipelineNotificationsBell() {
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-3 hover:bg-white dark:hover:bg-[#062b2b] cursor-pointer ${
+                  className={`p-3 hover:bg-white dark:hover:bg-obsidian cursor-pointer ${
                     !notification.isRead ? "bg-blue-50/50 dark:bg-blue-950/20" : ""
                   }`}
                   onClick={() => {

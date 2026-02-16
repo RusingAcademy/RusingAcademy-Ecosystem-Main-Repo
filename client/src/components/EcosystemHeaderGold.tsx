@@ -429,7 +429,7 @@ export default function EcosystemHeaderGold() {
                   {/* Brand Navigation */}
                   {brandTiles.map((brand) => (
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
-                      <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-[#0a4040] transition-colors">
+                      <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-foundation transition-colors">
                         <div className="font-semibold">{brand.name}</div>
                         <div className="text-sm text-black dark:text-[#67E8F9]">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}

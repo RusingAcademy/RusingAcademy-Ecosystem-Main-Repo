@@ -320,12 +320,12 @@ export default function PostCard({ post }: { post: Post }) {
           >
             <ThumbsUp
               className={`w-4 h-4 transition-colors duration-200 ${
-                liked ? "text-[#D4AF37]" : "text-muted-foreground"
+                liked ? "text-barholex-gold" : "text-muted-foreground"
               }`}
               fill={liked ? "currentColor" : "none"}
               strokeWidth={liked ? 2.5 : 1.8}
             />
-            <span className={`text-xs font-semibold ${liked ? "text-[#D4AF37]" : "text-muted-foreground"}`}>
+            <span className={`text-xs font-semibold ${liked ? "text-barholex-gold" : "text-muted-foreground"}`}>
               {likeCount}
             </span>
           </motion.button>
@@ -357,7 +357,7 @@ export default function PostCard({ post }: { post: Post }) {
         >
           <Bookmark
             className={`w-4 h-4 transition-colors duration-200 ${
-              bookmarked ? "text-[#D4AF37]" : "text-muted-foreground"
+              bookmarked ? "text-barholex-gold" : "text-muted-foreground"
             }`}
             fill={bookmarked ? "currentColor" : "none"}
             strokeWidth={1.8}

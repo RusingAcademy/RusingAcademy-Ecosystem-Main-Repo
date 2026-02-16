@@ -251,7 +251,7 @@ function TypewriterTitle({
   
   const cursorColorClass = isTypingHighlight 
     ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
-    : "bg-[#0a4040] dark:bg-gray-200";
+    : "bg-foundation dark:bg-gray-200";
 
   return (
     <span>
@@ -926,10 +926,10 @@ export default function Home() {
             {/* Before/After Comparison */}
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* BEFORE Column */}
-              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 shadow-lg border border-[#C65A1E]">
+              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 shadow-lg border border-cta">
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="h-6 w-6 bg-[#FFF1E8] rounded" aria-hidden="true" />
-                  <h3 className="text-xl font-bold text-[#C65A1E] tracking-wide">
+                  <div className="h-6 w-6 bg-cta-soft rounded" aria-hidden="true" />
+                  <h3 className="text-xl font-bold text-cta tracking-wide">
                     {t("transformation.before")}
                   </h3>
                 </div>
@@ -941,7 +941,7 @@ export default function Home() {
                     { emoji: "🚫", text: t("transformation.before4") },
                     { emoji: "🤔", text: t("transformation.before5") },
                   ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-4 pb-5 border-b border-[#C65A1E]/50 last:border-0 last:pb-0">
+                    <div key={index} className="flex items-center gap-4 pb-5 border-b border-cta/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
                       <span className="text-black font-medium">{item.text}</span>
                     </div>
@@ -1293,7 +1293,7 @@ export default function Home() {
                     </div>
                   </>
                 ) : (
-                  <div className="w-full h-full bg-[#062b2b] relative group">
+                  <div className="w-full h-full bg-obsidian relative group">
                     {/* HTML5 Video Player with Steven's MP4 */}
                     <video
                       className="w-full h-full object-contain"

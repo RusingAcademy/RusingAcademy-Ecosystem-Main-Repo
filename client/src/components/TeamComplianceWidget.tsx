@@ -107,7 +107,7 @@ export function TeamComplianceWidget({
         
         {/* Overall Stats */}
         <div className="grid grid-cols-4 gap-3 mt-4">
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className={cn("text-2xl font-bold", getComplianceColor(overallComplianceRate))}>
               {overallComplianceRate}%
             </p>
@@ -158,7 +158,7 @@ export function TeamComplianceWidget({
                   "p-4 rounded-xl border transition-all",
                   meetsTarget
                     ? "bg-emerald-50/50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800/50"
-                    : "bg-white border-slate-200 dark:bg-[#0a4040] dark:border-[#0a6969]",
+                    : "bg-white border-slate-200 dark:bg-foundation dark:border-[#0a6969]",
                   onDepartmentClick && "cursor-pointer hover:border-violet-300 dark:hover:border-violet-700"
                 )}
               >

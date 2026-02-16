@@ -194,7 +194,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-[#0a4040] rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-foundation rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

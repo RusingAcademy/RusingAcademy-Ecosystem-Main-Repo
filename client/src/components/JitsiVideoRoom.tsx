@@ -315,7 +315,7 @@ export function JitsiVideoRoom({
       <CardContent className="p-0 relative">
         {/* Loading State */}
         {isLoading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#062b2b]">
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-obsidian">
             <div className="text-center">
               <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
               <p className="text-white">
@@ -328,7 +328,7 @@ export function JitsiVideoRoom({
         {/* Jitsi Container */}
         <div 
           ref={jitsiContainerRef} 
-          className="w-full h-[500px] bg-[#062b2b]"
+          className="w-full h-[500px] bg-obsidian"
         />
 
         {/* Custom Control Bar */}

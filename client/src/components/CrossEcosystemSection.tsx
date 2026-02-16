@@ -398,7 +398,7 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
   return (
     <button
       onClick={(e) => { e.stopPropagation(); onClick(); }}
-      className={`absolute top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-13 md:h-13 rounded-full bg-black/50 backdrop-blur-xl border border-white/15 flex items-center justify-center text-white/90 hover:text-white hover:bg-[#C65A1E]/80 hover:border-[#C65A1E]/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_20px_rgba(198,90,30,0.4)] active:scale-90 ${
+      className={`absolute top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-13 md:h-13 rounded-full bg-black/50 backdrop-blur-xl border border-white/15 flex items-center justify-center text-white/90 hover:text-white hover:bg-cta/80 hover:border-cta/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_20px_rgba(198,90,30,0.4)] active:scale-90 ${
         direction === 'left' ? 'left-2 md:left-4' : 'right-2 md:right-4'
       }`}
       aria-label={`Scroll ${direction}`}
@@ -571,7 +571,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
       {/* ── Decorative Background ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Premium gradient orbs */}
-        <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/8 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-cta/8 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
         <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-teal-500/6 rounded-full blur-[140px] animate-pulse" style={{ animationDuration: '12s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/4 rounded-full blur-[180px]" />
         <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-amber-500/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '10s' }} />
@@ -989,7 +989,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             <Link href="/#videos">
               <motion.button 
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-[#C65A1E]/50 hover:bg-white/10 hover:shadow-xl hover:shadow-[#C65A1E]/10 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-cta/50 hover:bg-white/10 hover:shadow-xl hover:shadow-[#C65A1E]/10 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >

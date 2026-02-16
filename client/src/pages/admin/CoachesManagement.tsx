@@ -168,10 +168,10 @@ export default function CoachesManagement() {
 
     return (
       <div key={app.id} className="border-b last:border-b-0">
-        <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#0a4040]/50 transition-colors">
+        <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-foundation/50 transition-colors">
           <div className="flex items-center gap-4 flex-1 min-w-0">
             {/* Photo */}
-            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-[#0a4040] overflow-hidden flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-foundation overflow-hidden flex-shrink-0">
               {app.photoUrl || app.profilePhotoUrl ? (
                 <img
                   src={app.photoUrl || app.profilePhotoUrl}
@@ -247,7 +247,7 @@ export default function CoachesManagement() {
 
         {/* Expanded Quick Preview */}
         {isExpanded && (
-          <div className="px-4 pb-4 pt-0 bg-slate-50/50 dark:bg-[#0a4040]/20">
+          <div className="px-4 pb-4 pt-0 bg-slate-50/50 dark:bg-foundation/20">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               {app.bio && (
                 <div>
@@ -431,7 +431,7 @@ export default function CoachesManagement() {
             <div className="space-y-6">
               {/* Header */}
               <div className="flex items-center gap-4">
-                <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-[#0a4040] overflow-hidden flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-foundation overflow-hidden flex-shrink-0">
                   {selectedApp.photoUrl || selectedApp.profilePhotoUrl ? (
                     <img
                       src={selectedApp.photoUrl || selectedApp.profilePhotoUrl}
@@ -483,7 +483,7 @@ export default function CoachesManagement() {
               {selectedApp.headline && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Headline (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-[#0a4040]/50 rounded-lg p-3">{selectedApp.headline}</p>
+                  <p className="text-sm bg-slate-50 dark:bg-foundation/50 rounded-lg p-3">{selectedApp.headline}</p>
                 </div>
               )}
 
@@ -499,7 +499,7 @@ export default function CoachesManagement() {
               {selectedApp.bio && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Bio (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-[#0a4040]/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
+                  <p className="text-sm bg-slate-50 dark:bg-foundation/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
                 </div>
               )}
 

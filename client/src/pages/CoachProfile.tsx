@@ -305,7 +305,7 @@ export default function CoachProfile() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-[#062b2b]">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-obsidian">
       <SEO
         title={`${coach.name || coach.firstName} - ${coach.headline || 'Language Coach'}`}
         description={coach.bio?.substring(0, 160) || `Book a session with ${coach.name || coach.firstName}, a certified language coach on RusingAcademy.`}
@@ -414,7 +414,7 @@ export default function CoachProfile() {
                     ) : (
                       <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                         <div className="flex items-center justify-center gap-1 mb-1">
-                          <Clock className="h-5 w-5 text-[#0F3D3E]" />
+                          <Clock className="h-5 w-5 text-foundation" />
                           <span className="text-2xl font-bold text-white">{coach.responseTimeHours || 24}h</span>
                         </div>
                         <p className="text-sm text-white/90">{isEn ? "Response" : "Réponse"}</p>
@@ -534,7 +534,7 @@ export default function CoachProfile() {
 
               {/* Tabs - Custom Implementation */}
               <div className="w-full">
-                <div className="bg-white dark:bg-[#0a4040] inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-[#0a6969] mb-6">
+                <div className="bg-white dark:bg-foundation inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-[#0a6969] mb-6">
                   <button
                     onClick={() => setActiveTab("about")}
                     aria-pressed={activeTab === "about"}
@@ -714,7 +714,7 @@ export default function CoachProfile() {
                   ) : (
                     <Card className="border-0 shadow-lg">
                       <CardContent className="pt-8 pb-8 text-center">
-                        <div className="w-16 h-16 bg-slate-100 dark:bg-[#0a4040] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div className="w-16 h-16 bg-slate-100 dark:bg-foundation rounded-full flex items-center justify-center mx-auto mb-4">
                           <MessageSquare className="h-8 w-8 text-[#67E8F9]" />
                         </div>
                         <p className="text-black dark:text-white">
@@ -749,7 +749,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "trial" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-[#0a4040] border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
+                            : "bg-white dark:bg-foundation border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("trial")}
                       >
@@ -768,7 +768,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "single" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-[#0a4040] border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
+                            : "bg-white dark:bg-foundation border-slate-200 dark:border-[#0a6969] hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("single")}
                       >
@@ -1085,7 +1085,7 @@ export default function CoachProfile() {
       </main>
 
       {/* Mobile Sticky Booking Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-[#062b2b] border-t border-slate-200 dark:border-[#0a6969] shadow-2xl p-3">
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-obsidian border-t border-slate-200 dark:border-[#0a6969] shadow-2xl p-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-black dark:text-white truncate">{coach.name}</p>

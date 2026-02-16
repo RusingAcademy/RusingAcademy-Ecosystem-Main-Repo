@@ -271,7 +271,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-[#062b2b]">
+    <div className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-obsidian">
       {!isPlaying ? (
         <>
           {/* Thumbnail */}
@@ -311,7 +311,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
 
             {/* Barholex Logo Badge */}
             <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1.5">
-              <div className="h-6 w-6 rounded-full bg-[#C65A1E] flex items-center justify-center">
+              <div className="h-6 w-6 rounded-full bg-cta flex items-center justify-center">
                 <span className="text-sm font-bold text-black">B</span>
               </div>
               <span className="text-white text-xs font-medium">Barholex</span>
@@ -319,7 +319,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
           </div>
           
           {/* Title */}
-          <div className="p-4 bg-[#0a4040]">
+          <div className="p-4 bg-foundation">
             <h4 className="text-white font-medium line-clamp-2">
               {language === 'fr' ? video.titleFr : video.titleEn}
             </h4>
@@ -374,7 +374,7 @@ export default function YouTubeVideos() {
       <section className="py-24 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cta/10 rounded-full blur-3xl" />
         
         <div className="container relative z-10">
           {/* Section Header */}
@@ -451,7 +451,7 @@ export default function YouTubeVideos() {
       <section className="py-24 bg-gradient-to-b from-[#062b2b] to-[#0a4040] relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 right-0 w-64 h-64 bg-[#C65A1E]/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-64 h-64 bg-cta/5 rounded-full blur-3xl" />
         
         <div className="container relative z-10">
           {/* Section Header */}

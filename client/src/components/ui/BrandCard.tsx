@@ -35,7 +35,7 @@ const brandColors = {
     gradient: 'from-[#D97B3D] to-yellow-600',
     glow: 'shadow-amber-500/30',
     border: 'border-amber-500/30',
-    bg: 'bg-[#C65A1E]/10',
+    bg: 'bg-cta/10',
     text: 'text-amber-400',
   },
 };
@@ -62,7 +62,7 @@ export function BrandCard({
       transition={{ delay: index * 0.15 }}
       className={`
         relative group rounded-3xl overflow-hidden
-        bg-[#062b2b]/90 backdrop-blur-xl
+        bg-obsidian/90 backdrop-blur-xl
         border ${colors.border}
         shadow-xl hover:${colors.glow}
         transition-all duration-500

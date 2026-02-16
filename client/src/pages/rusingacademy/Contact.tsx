@@ -122,7 +122,7 @@ export default function RusingAcademyContact() {
           <div className="max-w-6xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">
-              <span className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-[#E07B39]/10 border border-[#E07B39]/20 text-black text-sm">
+              <span className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-cta-2/10 border border-[#E07B39]/20 text-black text-sm">
                 <Building2 className="w-4 h-4 text-[#E07B39]" />
                 {language === "en" ? "B2B/B2G Solutions" : "Solutions B2B/B2G"}
               </span>
@@ -396,7 +396,7 @@ export default function RusingAcademyContact() {
                     <Button 
                       type="submit"
                       size="lg"
-                      className="w-full bg-[#E07B39] hover:bg-[#C45E1A] text-white rounded-full h-14 text-lg font-semibold"
+                      className="w-full bg-cta-2 hover:bg-[#C45E1A] text-white rounded-full h-14 text-lg font-semibold"
                     >
                       {language === "en" ? "Submit Proposal Request" : "Soumettre la demande de proposition"}
                       <Send className="ml-2 h-5 w-5" />

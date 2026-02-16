@@ -189,7 +189,7 @@ export default function LearningCapsules() {
                     <div className="relative p-8 md:p-12 min-h-[350px] flex flex-col justify-between">
                       {/* Capsule Badge */}
                       <div className="flex items-center justify-between">
-                        <span className="px-4 py-2 bg-[#C65A1E] text-white text-sm font-bold rounded-full shadow-lg">
+                        <span className="px-4 py-2 bg-cta text-white text-sm font-bold rounded-full shadow-lg">
                           Capsule {capsule.number} / {capsules.length}
                         </span>
                         <div className="flex items-center gap-2 text-white/90 text-sm">
@@ -213,7 +213,7 @@ export default function LearningCapsules() {
 
                       {/* Play Button */}
                       <div className="flex items-center gap-4 mt-8">
-                        <button className="h-16 w-16 rounded-full bg-[#C65A1E] flex items-center justify-center shadow-xl hover:scale-110 hover:bg-orange-400 transition-all duration-300 group-hover:animate-pulse">
+                        <button className="h-16 w-16 rounded-full bg-cta flex items-center justify-center shadow-xl hover:scale-110 hover:bg-orange-400 transition-all duration-300 group-hover:animate-pulse">
                           <Play className="h-7 w-7 text-white ml-1" fill="white" />
                         </button>
                         <span className="text-white font-medium">
@@ -263,7 +263,7 @@ export default function LearningCapsules() {
           >
             <Button 
               size="lg" 
-              className="bg-[#C65A1E] hover:bg-orange-600 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-orange-500/30 gap-2"
+              className="bg-cta hover:bg-orange-600 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-orange-500/30 gap-2"
             >
               {language === 'fr' 
                 ? 'Accéder aux 40 capsules d\'apprentissage'

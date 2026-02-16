@@ -58,7 +58,7 @@ export function AdminBroadcastPanel() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Megaphone className="h-5 w-5 text-[#C65A1E]" />
+          <Megaphone className="h-5 w-5 text-cta" />
           Broadcast Notification
         </CardTitle>
         <CardDescription>
@@ -78,7 +78,7 @@ export function AdminBroadcastPanel() {
                   variant={targetRole === opt.value ? "default" : "outline"}
                   size="sm"
                   onClick={() => setTargetRole(opt.value)}
-                  className={targetRole === opt.value ? "bg-[#C65A1E] hover:bg-[#A84A16]" : ""}
+                  className={targetRole === opt.value ? "bg-cta hover:bg-[#A84A16]" : ""}
                 >
                   <Icon className="h-4 w-4 mr-1" />
                   {opt.label}
@@ -128,7 +128,7 @@ export function AdminBroadcastPanel() {
         <Button
           onClick={handleSend}
           disabled={broadcastMutation.isPending || !title.trim() || !message.trim()}
-          className="w-full bg-[#C65A1E] hover:bg-[#A84A16]"
+          className="w-full bg-cta hover:bg-[#A84A16]"
         >
           {broadcastMutation.isPending ? (
             <>

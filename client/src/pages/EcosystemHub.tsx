@@ -77,9 +77,9 @@ function HeroSection({ language }: { language: string }) {
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C65A1E]/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cta/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -92,7 +92,7 @@ function HeroSection({ language }: { language: string }) {
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-8">
             <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 text-white text-sm font-medium">
-              <Globe className="w-4 h-4 text-[#C65A1E]400" />
+              <Globe className="w-4 h-4 text-cta400" />
               {language === "en" ? "Canada's Premier Bilingual Training Ecosystem" : "L'écosystème de formation bilingue de référence au Canada"}
             </span>
           </motion.div>
@@ -281,12 +281,12 @@ function TrilemmeSection({ language }: { language: string }) {
                   {language === "en" ? (
                     <>
                       <strong className="text-black">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
-                      <strong className="text-[#C65A1E]600">3 to 4 times faster</strong> than traditional approaches.
+                      <strong className="text-cta600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
                       <strong className="text-black">RusingAcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
-                      <strong className="text-[#C65A1E]600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
+                      <strong className="text-cta600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
                 </p>
@@ -425,7 +425,7 @@ function EcosystemSection({ language }: { language: string }) {
                 <Link href={pillar.link}>
                   <Button
                     variant="outline"
-                    className="w-full group-hover:bg-[#062b2b] group-hover:text-white transition-colors duration-300"
+                    className="w-full group-hover:bg-obsidian group-hover:text-white transition-colors duration-300"
                   >
                     {language === "en" ? "Learn more" : "En savoir plus"}
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -671,7 +671,7 @@ function OffersSection({ language }: { language: string }) {
                   {language === "en" ? offer.descEn : offer.descFr}
                 </p>
                 <Link href={offer.link}>
-                  <Button className="w-full bg-[#062b2b] hover:bg-[#0a4040] text-white">
+                  <Button className="w-full bg-obsidian hover:bg-foundation text-white">
                     {language === "en" ? offer.ctaEn : offer.ctaFr}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -909,7 +909,7 @@ function TestimonialsSection({ language }: { language: string }) {
             >
               {/* Quote */}
               <div className="mb-6">
-                <div className="text-4xl text-[#C65A1E]500 mb-4">"</div>
+                <div className="text-4xl text-cta500 mb-4">"</div>
                 <p className="text-black leading-relaxed italic">
                   {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
                 </p>
@@ -1057,7 +1057,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C65A1E]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta/5 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-slate-100/50 to-transparent rounded-full" />
         </div>
 
@@ -1470,7 +1470,7 @@ function TeamSection({ language }: { language: string }) {
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-lg font-bold text-black mb-1">{member.name}</h3>
-                <p className="text-sm text-[#C65A1E]600 font-medium mb-3">{member.role}</p>
+                <p className="text-sm text-cta600 font-medium mb-3">{member.role}</p>
                 <p className="text-black text-sm leading-relaxed">
                   {language === "en" ? member.bioEn : member.bioFr}
                 </p>

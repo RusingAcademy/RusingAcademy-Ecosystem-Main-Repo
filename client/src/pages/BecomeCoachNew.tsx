@@ -689,7 +689,7 @@ export default function BecomeCoachNew() {
                           : "Rejoignez 50+ coaches experts et aidez les fonctionnaires canadiens à atteindre l'excellence bilingue."}
                       </p>
                       <Button 
-                        className="w-full h-12 bg-[#C65A1E] hover:bg-amber-600 text-white font-semibold text-lg"
+                        className="w-full h-12 bg-cta hover:bg-amber-600 text-white font-semibold text-lg"
                         onClick={() => {
                           if (!isAuthenticated) {
                             localStorage.setItem("postLoginRedirect", "/become-a-coach?apply=true");
@@ -808,7 +808,7 @@ export default function BecomeCoachNew() {
                     {l.contentNeeded.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
-                          <CheckCircle className="h-3 w-3 text-[#C65A1E]600" />
+                          <CheckCircle className="h-3 w-3 text-cta600" />
                         </div>
                         <span className="text-black">{item}</span>
                       </li>
@@ -907,10 +907,10 @@ export default function BecomeCoachNew() {
                 const bgColors = [
                   "bg-blue-50",
                   "bg-emerald-50",
-                  "bg-[#E7F2F2]",
+                  "bg-foundation-soft",
                   "bg-amber-50",
                   "bg-teal-50",
-                  "bg-[#FFF1E8]",
+                  "bg-cta-soft",
                 ];
                 return (
                   <Card key={i} className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg rounded-2xl overflow-hidden ${bgColors[i]}`}>
@@ -997,7 +997,7 @@ export default function BecomeCoachNew() {
         <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative">
           <div className="container">
             <div className="text-center mb-16">
-              <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-[#C65A1E]700 border-[#FFE4D6]">
+              <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-cta700 border-[#FFE4D6]">
                 <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
@@ -1018,7 +1018,7 @@ export default function BecomeCoachNew() {
                     {/* Stars */}
                     <div className="flex items-center gap-1 mb-5">
                       {[...Array(testimonial.rating)].map((_, j) => (
-                        <Star key={j} className="h-5 w-5 fill-amber-400 text-[#C65A1E]400" />
+                        <Star key={j} className="h-5 w-5 fill-amber-400 text-cta400" />
                       ))}
                     </div>
                     

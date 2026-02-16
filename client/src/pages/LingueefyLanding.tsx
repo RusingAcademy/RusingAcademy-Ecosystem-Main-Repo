@@ -105,7 +105,7 @@ const FloatingCoachBubble = ({
           <div className="font-semibold text-black text-sm">{name}</div>
           <div className="text-xs text-black">{specialty}</div>
           <div className="flex items-center gap-1 mt-1">
-            <Star className="w-3 h-3 fill-amber-400 text-[#C65A1E]400" />
+            <Star className="w-3 h-3 fill-amber-400 text-cta400" />
             <span className="text-xs font-medium">{rating}</span>
           </div>
         </div>
@@ -1112,23 +1112,23 @@ export default function LingueefyLanding() {
               {/* Coaching Plans Option */}
               <div className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 rounded-3xl p-8 border-2 border-[#FFE4D6] hover:border-[#D97B3D] transition-all duration-300 hover:shadow-xl group relative">
                 <div className="absolute -top-3 right-6">
-                  <Badge className="bg-[#C65A1E] text-white border-0 px-4 py-1">Popular</Badge>
+                  <Badge className="bg-cta text-white border-0 px-4 py-1">Popular</Badge>
                 </div>
                 <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <GraduationCap className="w-8 h-8 text-[#C65A1E]600" />
+                  <GraduationCap className="w-8 h-8 text-cta600" />
                 </div>
                 <h3 className="text-2xl font-bold text-black mb-3">{c.learningPath.plans.title}</h3>
                 <p className="text-black mb-6">{c.learningPath.plans.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.plans.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-3 text-black">
-                      <CheckCircle className="w-5 h-5 text-[#C65A1E]500 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-cta500 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <Button 
-                  className="w-full bg-[#C65A1E] hover:bg-amber-600 text-white py-6 rounded-xl text-lg font-semibold"
+                  className="w-full bg-cta hover:bg-amber-600 text-white py-6 rounded-xl text-lg font-semibold"
                   onClick={() => document.getElementById('pricing-plans')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {c.learningPath.plans.cta}
@@ -1209,10 +1209,10 @@ export default function LingueefyLanding() {
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
               {/* Before Column */}
-              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 md:p-10 border border-[#C65A1E]/50 shadow-lg">
+              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 md:p-10 border border-cta/50 shadow-lg">
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="w-4 h-4 bg-[#FFF1E8] rounded-sm" />
-                  <h3 className="text-2xl font-bold text-[#C65A1E] tracking-wide">{c.transformation.before.title}</h3>
+                  <div className="w-4 h-4 bg-cta-soft rounded-sm" />
+                  <h3 className="text-2xl font-bold text-cta tracking-wide">{c.transformation.before.title}</h3>
                 </div>
                 <div className="space-y-6">
                   {c.transformation.before.items.map((item, index) => (
@@ -1250,7 +1250,7 @@ export default function LingueefyLanding() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-1/4 w-64 h-64 bg-emerald-200 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-amber-200 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#FFF1E8] rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cta-soft rounded-full blur-3xl" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -1275,18 +1275,18 @@ export default function LingueefyLanding() {
                   amber: {
                     bg: 'from-[#FFF8F3] to-[#FFF0E6]/50',
                     border: 'border-[#FFE4D6] hover:border-[#D97B3D]',
-                    badge: 'bg-[#C65A1E]',
-                    icon: 'bg-amber-100 text-[#C65A1E]600',
-                    check: 'text-[#C65A1E]500',
+                    badge: 'bg-cta',
+                    icon: 'bg-amber-100 text-cta600',
+                    check: 'text-cta500',
                     button: 'bg-amber-600 hover:bg-amber-700',
                   },
                   copper: {
                     bg: 'from-[#FFF1E8] to-[#FFF8F3]',
-                    border: 'border-[#C65A1E] hover:border-[#C65A1E]',
-                    badge: 'bg-[#FFF1E8]',
-                    icon: 'bg-[#FFF1E8] text-[#C65A1E]',
-                    check: 'text-[#C65A1E]',
-                    button: 'bg-[#FFF1E8] hover:bg-[#FFF1E8]',
+                    border: 'border-cta hover:border-cta',
+                    badge: 'bg-cta-soft',
+                    icon: 'bg-cta-soft text-cta',
+                    check: 'text-cta',
+                    button: 'bg-cta-soft hover:bg-cta-soft',
                   },
                 };
                 const colors = colorClasses[level.color as keyof typeof colorClasses];
@@ -1344,7 +1344,7 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <div>
-              <Badge className="mb-4 bg-amber-100 text-[#C65A1E]700">Expert Coaches</Badge>
+              <Badge className="mb-4 bg-amber-100 text-cta700">Expert Coaches</Badge>
               <h2 className="text-3xl md:text-5xl font-bold text-black mb-2">{c.coaches.title}</h2>
               <p className="text-xl text-black">{c.coaches.subtitle}</p>
             </div>
@@ -1375,7 +1375,7 @@ export default function LingueefyLanding() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 via-[#062b2b]/20 to-transparent" />
                     
                     {/* Badge */}
-                    <Badge className="absolute top-4 left-4 bg-[#C65A1E] text-white border-0">
+                    <Badge className="absolute top-4 left-4 bg-cta text-white border-0">
                       {coach.badge}
                     </Badge>
                     
@@ -1400,7 +1400,7 @@ export default function LingueefyLanding() {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
-                        <Star className="w-5 h-5 fill-amber-400 text-[#C65A1E]400" />
+                        <Star className="w-5 h-5 fill-amber-400 text-cta400" />
                         <span className="font-bold text-black">{coach.rating}</span>
                         <span className="text-black">({coach.reviews} reviews)</span>
                       </div>
@@ -1437,7 +1437,7 @@ export default function LingueefyLanding() {
       <section className="py-20 md:py-28 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-[#FFF1E8] text-[#C65A1E]">Our Services</Badge>
+            <Badge className="mb-4 bg-cta-soft text-cta">Our Services</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.services.title}</h2>
             <p className="text-xl text-black">{c.services.subtitle}</p>
           </div>
@@ -1445,9 +1445,9 @@ export default function LingueefyLanding() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {c.services.items.map((service, index) => {
               const colorClasses = {
-                teal: "from-[#0F3D3E] to-[#145A5B] bg-[#E7F2F2] text-[#0F3D3E]",
-                amber: "from-[#C65A1E] to-[#A84A15] bg-amber-50 text-[#C65A1E]",
-                copper: "from-[#C65A1E] to-[#E06B2D] bg-[#FFF1E8] text-[#C65A1E]",
+                teal: "from-[#0F3D3E] to-[#145A5B] bg-foundation-soft text-foundation",
+                amber: "from-[#C65A1E] to-[#A84A15] bg-amber-50 text-cta",
+                copper: "from-[#C65A1E] to-[#E06B2D] bg-cta-soft text-cta",
               };
               const colors = colorClasses[service.color as keyof typeof colorClasses];
               
@@ -1484,7 +1484,7 @@ export default function LingueefyLanding() {
       <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-[#E7F2F2] text-[#0F3D3E]">Success Stories</Badge>
+            <Badge className="mb-4 bg-foundation-soft text-foundation">Success Stories</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.testimonials.title}</h2>
             <p className="text-xl text-black">{c.testimonials.subtitle}</p>
           </div>
@@ -1507,7 +1507,7 @@ export default function LingueefyLanding() {
                   {/* Rating */}
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-[#C65A1E]400 fill-amber-400" />
+                      <Star key={i} className="w-5 h-5 text-cta400 fill-amber-400" />
                     ))}
                   </div>
                   

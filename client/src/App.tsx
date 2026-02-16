@@ -18,7 +18,7 @@ import PWAInstallBanner from "./components/PWAInstallBanner";
 // ─── Shared Loading Skeleton ───────────────────────────────────────────────
 function PageSkeleton() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#062b2b]">
+    <div className="min-h-screen flex items-center justify-center bg-obsidian">
       <div className="text-center">
         <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
         <p className="text-white/70 text-sm">Loading...</p>

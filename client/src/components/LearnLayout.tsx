@@ -379,14 +379,14 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
               {/* Sidebar header */}
               <div className="p-4 border-b bg-gradient-to-b from-muted/40 to-transparent">
                 <h2 className="font-semibold text-sm truncate flex items-center gap-2">
-                  <BookOpen className="h-4 w-4 text-[#0F3D3E]" />
+                  <BookOpen className="h-4 w-4 text-foundation" />
                   {isEn ? "Course Content" : "Contenu du cours"}
                 </h2>
                 {isAuthenticated && (
                   <div className="mt-3 space-y-1.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-medium text-muted-foreground">{isEn ? "Your Progress" : "Votre progression"}</span>
-                      <span className="text-[10px] font-bold text-[#0F3D3E]">{progressPercent}%</span>
+                      <span className="text-[10px] font-bold text-foundation">{progressPercent}%</span>
                     </div>
                     <div className="relative h-2 rounded-full bg-border/50 overflow-hidden">
                       <div 
@@ -517,7 +517,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
           <SheetContent side="left" className="w-[300px] p-0">
             <SheetHeader className="p-4 border-b bg-gradient-to-b from-muted/40 to-transparent">
               <SheetTitle className="text-sm flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-[#0F3D3E]" />
+                <BookOpen className="h-4 w-4 text-foundation" />
                 {isEn ? "Course Content" : "Contenu du cours"}
               </SheetTitle>
               {isAuthenticated && (

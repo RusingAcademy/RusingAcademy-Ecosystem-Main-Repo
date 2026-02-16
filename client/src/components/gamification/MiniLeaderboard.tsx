@@ -54,7 +54,7 @@ const RankBadge = ({ rank }: { rank: number }) => {
     );
   }
   return (
-    <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center">
+    <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center">
       <span className="text-sm font-bold text-black dark:text-[#67E8F9]">{rank}</span>
     </div>
   );
@@ -141,7 +141,7 @@ export function MiniLeaderboard({
                     "flex items-center gap-2 sm:gap-3 p-2 rounded-lg transition-colors cursor-pointer",
                     entry.isCurrentUser
                       ? "bg-primary/5 border border-primary/20"
-                      : "hover:bg-slate-50 dark:hover:bg-[#0a4040]/50"
+                      : "hover:bg-slate-50 dark:hover:bg-foundation/50"
                   )}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}

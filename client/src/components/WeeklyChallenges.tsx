@@ -76,7 +76,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
         </CardHeader>
         <CardContent className="space-y-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-20 bg-slate-100 dark:bg-[#0a4040] rounded" />
+            <div key={i} className="h-20 bg-slate-100 dark:bg-foundation rounded" />
           ))}
         </CardContent>
       </Card>
@@ -132,8 +132,8 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                   isComplete && !isClaimed
                     ? "bg-emerald-50 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800"
                     : isClaimed
-                    ? "bg-slate-50 border-slate-200 dark:bg-[#0a4040]/50 dark:border-[#0a6969] opacity-75"
-                    : "bg-white border-slate-200 dark:bg-[#0a4040] dark:border-[#0a6969] hover:border-amber-300 dark:hover:border-amber-700"
+                    ? "bg-slate-50 border-slate-200 dark:bg-foundation/50 dark:border-[#0a6969] opacity-75"
+                    : "bg-white border-slate-200 dark:bg-foundation dark:border-[#0a6969] hover:border-amber-300 dark:hover:border-amber-700"
                 )}
               >
                 <div className="flex items-start gap-3">

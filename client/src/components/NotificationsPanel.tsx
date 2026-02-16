@@ -24,11 +24,11 @@ interface NotificationsPanelProps {
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-  like: <ThumbsUp className="w-4 h-4 text-[#D4AF37]" />,
+  like: <ThumbsUp className="w-4 h-4 text-barholex-gold" />,
   comment: <MessageCircle className="w-4 h-4 text-blue-500" />,
   reply: <MessageCircle className="w-4 h-4 text-green-500" />,
   badge: <Award className="w-4 h-4 text-purple-500" />,
-  level_up: <Award className="w-4 h-4 text-[#D4AF37]" />,
+  level_up: <Award className="w-4 h-4 text-barholex-gold" />,
   event: <Calendar className="w-4 h-4 text-orange-500" />,
   challenge: <BookOpen className="w-4 h-4 text-[#1B1464]" />,
   system: <Bell className="w-4 h-4 text-muted-foreground" />,
@@ -118,7 +118,7 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
             <div className="flex-1 overflow-y-auto">
               {isLoading ? (
                 <div className="flex justify-center py-12">
-                  <Loader2 className="w-6 h-6 animate-spin text-[#D4AF37]" />
+                  <Loader2 className="w-6 h-6 animate-spin text-barholex-gold" />
                 </div>
               ) : (notifications as any[]).length === 0 ? (
                 <div className="text-center py-16 text-muted-foreground">

@@ -29,7 +29,7 @@ export function StreakDisplay({ streak, size = 'default' }: { streak: StreakData
   
   return (
     <motion.div 
-      className={`flex items-center gap-2 p-3 rounded-xl ${isActive ? 'bg-[#C65A1E]/20' : 'bg-white0/20'}`}
+      className={`flex items-center gap-2 p-3 rounded-xl ${isActive ? 'bg-cta/20' : 'bg-white0/20'}`}
       animate={{ scale: isActive ? [1, 1.05, 1] : 1 }}
       transition={{ repeat: isActive ? Infinity : 0, duration: 2 }}
     >
@@ -63,7 +63,7 @@ export function StreakMilestoneProgress({ currentStreak }: { currentStreak: numb
     <div className="space-y-2">
       <div className="flex justify-between text-sm">
         <span className="text-[#67E8F9]">Prochain objectif</span>
-        <span className="text-[#0F3D3E]">{nextMilestone.label} ({nextMilestone.days}j)</span>
+        <span className="text-foundation">{nextMilestone.label} ({nextMilestone.days}j)</span>
       </div>
       <div className="h-2 bg-[#0a6969] rounded-full overflow-hidden">
         <motion.div className="h-full bg-gradient-to-r from-[#C65A1E] to-red-500" initial={{ width: 0 }} animate={{ width: `${Math.min(progress, 100)}%` }} />

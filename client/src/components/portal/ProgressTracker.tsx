@@ -74,7 +74,7 @@ const levelColors = {
     gradient: "from-emerald-500 to-emerald-600",
   },
   B: {
-    bg: "bg-[#C65A1E]",
+    bg: "bg-cta",
     bgLight: "bg-amber-50",
     text: "text-amber-600",
     border: "border-[#FFE4D6]",
@@ -105,9 +105,9 @@ export default function ProgressTracker({
           <h3 className="text-lg font-semibold text-black">Progression SLE</h3>
           <p className="text-sm text-black">Votre parcours vers la maîtrise bilingue</p>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-[#E7F2F2] rounded-full">
-          <Trophy className="h-4 w-4 text-[#0F3D3E]" />
-          <span className="text-sm font-medium text-[#0F3D3E]">Path Series™</span>
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-foundation-soft rounded-full">
+          <Trophy className="h-4 w-4 text-foundation" />
+          <span className="text-sm font-medium text-foundation">Path Series™</span>
         </div>
       </div>
 

@@ -253,7 +253,7 @@ export default function ConversationPractice() {
             {/* Hero */}
             <section className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E]">
               <div className="container relative z-10 text-center">
-                <Badge className="bg-[#C65A1E]/20 text-[#C65A1E] border-[#C65A1E]/30 mb-4">
+                <Badge className="bg-cta/20 text-cta border-cta/30 mb-4">
                   <MessageSquare className="h-3 w-3 mr-1" />
                   {isEn ? "AI-Powered Conversation Practice" : "Pratique de Conversation Assistée par IA"}
                 </Badge>
@@ -273,7 +273,7 @@ export default function ConversationPractice() {
               <div className="container max-w-3xl">
                 <Card className="shadow-xl border-none">
                   <CardHeader>
-                    <CardTitle className="text-[#0F3D3E]">
+                    <CardTitle className="text-foundation">
                       {isEn ? "Configure Your Session" : "Configurez Votre Session"}
                     </CardTitle>
                     <CardDescription>
@@ -285,7 +285,7 @@ export default function ConversationPractice() {
                   <CardContent className="space-y-6">
                     {/* Coach Selection */}
                     <div>
-                      <label className="text-sm font-medium text-[#0F3D3E] mb-3 block">
+                      <label className="text-sm font-medium text-foundation mb-3 block">
                         {isEn ? "Choose Your Coach" : "Choisissez Votre Coach"}
                       </label>
                       <div className="grid grid-cols-2 gap-3">
@@ -295,12 +295,12 @@ export default function ConversationPractice() {
                             onClick={() => setSelectedCoach(coach.key)}
                             className={`p-4 rounded-xl border-2 text-left transition-all ${
                               selectedCoach === coach.key
-                                ? "border-[#C65A1E] bg-[#C65A1E]/5"
+                                ? "border-cta bg-cta/5"
                                 : "border-gray-200 hover:border-gray-300"
                             }`}
                           >
                             <span className="text-2xl mb-1 block">{coach.emoji}</span>
-                            <p className="font-semibold text-sm text-[#0F3D3E]">{coach.name}</p>
+                            <p className="font-semibold text-sm text-foundation">{coach.name}</p>
                             <p className="text-xs text-muted-foreground">{coach.specialty}</p>
                           </button>
                         ))}
@@ -309,7 +309,7 @@ export default function ConversationPractice() {
 
                     {/* Level Selection */}
                     <div>
-                      <label className="text-sm font-medium text-[#0F3D3E] mb-2 block">
+                      <label className="text-sm font-medium text-foundation mb-2 block">
                         {isEn ? "Your Level" : "Votre Niveau"}
                       </label>
                       <Select value={selectedLevel} onValueChange={setSelectedLevel}>
@@ -326,7 +326,7 @@ export default function ConversationPractice() {
 
                     {/* Skill Selection */}
                     <div>
-                      <label className="text-sm font-medium text-[#0F3D3E] mb-3 block">
+                      <label className="text-sm font-medium text-foundation mb-3 block">
                         {isEn ? "Skill Focus" : "Compétence Ciblée"}
                       </label>
                       <div className="grid grid-cols-2 gap-3">
@@ -338,11 +338,11 @@ export default function ConversationPractice() {
                               onClick={() => setSelectedSkill(skill.value)}
                               className={`p-3 rounded-xl border-2 text-left transition-all flex items-center gap-3 ${
                                 selectedSkill === skill.value
-                                  ? "border-[#C65A1E] bg-[#C65A1E]/5"
+                                  ? "border-cta bg-cta/5"
                                   : "border-gray-200 hover:border-gray-300"
                               }`}
                             >
-                              <SkillIcon className={`h-5 w-5 ${selectedSkill === skill.value ? "text-[#C65A1E]" : "text-muted-foreground"}`} />
+                              <SkillIcon className={`h-5 w-5 ${selectedSkill === skill.value ? "text-cta" : "text-muted-foreground"}`} />
                               <span className="text-sm font-medium">{skill.label}</span>
                             </button>
                           );
@@ -352,7 +352,7 @@ export default function ConversationPractice() {
 
                     {/* Optional Topic */}
                     <div>
-                      <label className="text-sm font-medium text-[#0F3D3E] mb-2 block">
+                      <label className="text-sm font-medium text-foundation mb-2 block">
                         {isEn ? "Topic (Optional)" : "Sujet (Optionnel)"}
                       </label>
                       <Textarea
@@ -364,7 +364,7 @@ export default function ConversationPractice() {
                     </div>
 
                     <Button
-                      className="w-full bg-[#C65A1E] hover:bg-[#A84A15] text-white"
+                      className="w-full bg-cta hover:bg-cta hover:bg-cta-2 text-white"
                       size="lg"
                       onClick={handleStartSession}
                       disabled={startSessionMutation.isPending}
@@ -398,7 +398,7 @@ export default function ConversationPractice() {
                   {coachOptions.find((c) => c.key === selectedCoach)?.emoji}
                 </span>
                 <div>
-                  <p className="font-semibold text-sm text-[#0F3D3E]">
+                  <p className="font-semibold text-sm text-foundation">
                     {coachOptions.find((c) => c.key === selectedCoach)?.name}
                   </p>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -442,7 +442,7 @@ export default function ConversationPractice() {
                       <div
                         className={`rounded-2xl px-4 py-3 ${
                           msg.role === "user"
-                            ? "bg-[#0F3D3E] text-white rounded-br-sm"
+                            ? "bg-foundation text-white rounded-br-sm"
                             : "bg-white shadow-sm border rounded-bl-sm"
                         }`}
                       >
@@ -523,7 +523,7 @@ export default function ConversationPractice() {
 
                 {/* Send button */}
                 <Button
-                  className="bg-[#C65A1E] hover:bg-[#A84A15] text-white flex-shrink-0"
+                  className="bg-cta hover:bg-cta hover:bg-cta-2 text-white flex-shrink-0"
                   size="icon"
                   onClick={handleSendMessage}
                   disabled={!inputText.trim() || isSending}
@@ -549,7 +549,7 @@ export default function ConversationPractice() {
                   <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
                     <Award className="h-8 w-8 text-emerald-600" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#0F3D3E] mb-2">
+                  <h2 className="text-2xl font-bold text-foundation mb-2">
                     {isEn ? "Session Complete!" : "Session Terminée!"}
                   </h2>
                   <p className="text-muted-foreground mb-6">
@@ -559,10 +559,10 @@ export default function ConversationPractice() {
                   </p>
                   {lastEvaluation && (
                     <div className="bg-gray-50 rounded-xl p-4 mb-6">
-                      <p className="text-sm font-medium text-[#0F3D3E] mb-2">
+                      <p className="text-sm font-medium text-foundation mb-2">
                         {isEn ? "Last Score" : "Dernier Score"}
                       </p>
-                      <p className="text-4xl font-bold text-[#C65A1E]">{lastEvaluation.score}/100</p>
+                      <p className="text-4xl font-bold text-cta">{lastEvaluation.score}/100</p>
                       {lastEvaluation.feedback && (
                         <p className="text-sm text-muted-foreground mt-2">{lastEvaluation.feedback}</p>
                       )}
@@ -570,7 +570,7 @@ export default function ConversationPractice() {
                   )}
                   <div className="flex gap-3 justify-center">
                     <Button
-                      className="bg-[#C65A1E] hover:bg-[#A84A15] text-white"
+                      className="bg-cta hover:bg-cta hover:bg-cta-2 text-white"
                       onClick={handleNewSession}
                     >
                       <RefreshCw className="mr-2 h-4 w-4" />

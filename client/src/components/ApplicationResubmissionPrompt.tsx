@@ -58,7 +58,7 @@ export function ApplicationResubmissionPrompt({
                   <div
                     key={i}
                     className={`w-3 h-3 rounded-full ${
-                      i < resubmissionCount ? "bg-[#C65A1E]" : "bg-gray-300"
+                      i < resubmissionCount ? "bg-cta" : "bg-gray-300"
                     }`}
                   />
                 ))}

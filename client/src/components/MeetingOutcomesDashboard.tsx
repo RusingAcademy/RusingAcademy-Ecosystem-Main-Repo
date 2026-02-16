@@ -221,7 +221,7 @@ function getDueStatus(date: Date): { label: string; color: string; bgColor: stri
   if (dueDate < today) {
     return { label: "overdue", color: "text-red-400", bgColor: "bg-red-500/20" };
   } else if (dueDate.getTime() === today.getTime()) {
-    return { label: "dueToday", color: "text-orange-400", bgColor: "bg-[#C65A1E]/20" };
+    return { label: "dueToday", color: "text-orange-400", bgColor: "bg-cta/20" };
   } else if (dueDate.getTime() === tomorrow.getTime()) {
     return { label: "dueTomorrow", color: "text-yellow-400", bgColor: "bg-yellow-500/20" };
   } else if (dueDate < weekEnd) {
@@ -378,15 +378,15 @@ export default function MeetingOutcomesDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-[#E7F2F2]/20 rounded-lg">
-                    <Target className="w-5 h-5 text-[#0F3D3E]" />
+                  <div className="p-2 bg-foundation-soft/20 rounded-lg">
+                    <Target className="w-5 h-5 text-foundation" />
                   </div>
                   <span className="font-medium">{t.avgQualScore}</span>
                 </div>
                 <div className="text-4xl font-bold mb-2">{stats.averageQualificationScore}/10</div>
                 <div className="w-full bg-white/10 rounded-full h-2">
                   <div
-                    className="bg-[#E7F2F2] h-2 rounded-full transition-all"
+                    className="bg-foundation-soft h-2 rounded-full transition-all"
                     style={{ width: `${stats.averageQualificationScore * 10}%` }}
                   />
                 </div>
@@ -434,7 +434,7 @@ export default function MeetingOutcomesDashboard() {
             className="space-y-4"
           >
             <div className="flex justify-end mb-4">
-              <button className="flex items-center gap-2 px-4 py-2 bg-[#C65A1E]/20 text-orange-400 rounded-lg hover:bg-[#C65A1E]/30 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 bg-cta/20 text-orange-400 rounded-lg hover:bg-cta/30 transition-colors">
                 <Bell className="w-4 h-4" />
                 {t.sendAllReminders}
               </button>

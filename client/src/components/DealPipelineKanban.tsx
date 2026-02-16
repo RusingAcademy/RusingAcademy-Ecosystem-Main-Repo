@@ -89,7 +89,7 @@ interface PipelineStage {
 
 const PIPELINE_STAGES: Omit<PipelineStage, "leads">[] = [
   { id: "new", title: "New", titleFr: "Nouveau", color: "text-blue-600", bgColor: "bg-blue-50 dark:bg-blue-950/30" },
-  { id: "contacted", title: "Contacted", titleFr: "Contacté", color: "text-[#0F3D3E]", bgColor: "bg-[#E7F2F2] dark:bg-[#E7F2F2]-950/30" },
+  { id: "contacted", title: "Contacted", titleFr: "Contacté", color: "text-foundation", bgColor: "bg-foundation-soft dark:bg-foundation-soft-950/30" },
   { id: "qualified", title: "Qualified", titleFr: "Qualifié", color: "text-amber-600", bgColor: "bg-amber-50 dark:bg-amber-950/30" },
   { id: "proposal", title: "Proposal", titleFr: "Proposition", color: "text-orange-600", bgColor: "bg-orange-50 dark:bg-orange-950/30" },
   { id: "converted", title: "Won", titleFr: "Gagné", color: "text-green-600", bgColor: "bg-green-50 dark:bg-green-950/30" },
@@ -646,8 +646,8 @@ export default function DealPipelineKanban() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-[#E7F2F2] flex items-center justify-center">
-                <Target className="h-5 w-5 text-[#0F3D3E]" />
+              <div className="h-10 w-10 rounded-full bg-foundation-soft flex items-center justify-center">
+                <Target className="h-5 w-5 text-foundation" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{l.conversionRate}</p>
@@ -685,7 +685,7 @@ export default function DealPipelineKanban() {
             onDrop={(e) => handleDrop(e, stage.id)}
           >
             {/* Stage Header */}
-            <div className="p-3 border-b bg-white/50 dark:bg-[#041e1e]/20 rounded-t-lg">
+            <div className="p-3 border-b bg-white/50 dark:bg-obsidian/20 rounded-t-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className={`font-semibold ${stage.color}`}>
@@ -719,7 +719,7 @@ export default function DealPipelineKanban() {
                       setSelectedLead(lead);
                       setShowLeadDialog(true);
                     }}
-                    className={`bg-white dark:bg-[#062b2b] rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
+                    className={`bg-white dark:bg-obsidian rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
                       draggedLead?.id === lead.id ? "opacity-50" : ""
                     }`}
                   >
@@ -916,11 +916,11 @@ export default function DealPipelineKanban() {
 
               {/* Metrics */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-lg bg-white dark:bg-[#0a4040]">
+                <div className="p-3 rounded-lg bg-white dark:bg-foundation">
                   <p className="text-xs text-muted-foreground">{l.score}</p>
                   <p className="text-lg font-bold">{selectedLead.leadScore || 0}</p>
                 </div>
-                <div className="p-3 rounded-lg bg-white dark:bg-[#0a4040]">
+                <div className="p-3 rounded-lg bg-white dark:bg-foundation">
                   <p className="text-xs text-muted-foreground">{l.dealValue}</p>
                   <p className="text-lg font-bold">
                     {selectedLead.dealValue

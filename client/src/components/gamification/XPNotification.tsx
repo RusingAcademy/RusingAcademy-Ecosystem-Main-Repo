@@ -283,7 +283,7 @@ export function LevelUpCelebration({
                   <span className="text-4xl font-black text-white">{newLevel}</span>
                 </motion.div>
                 <motion.div
-                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#0a4040] rounded-full border border-slate-600"
+                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-foundation rounded-full border border-slate-600"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}

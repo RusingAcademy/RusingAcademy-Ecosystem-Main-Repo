@@ -75,7 +75,7 @@ export default function CoachPayments() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-white dark:bg-[#062b2b]">
+      <div className="min-h-screen bg-white dark:bg-obsidian">
         <Header />
         <main className="max-w-4xl mx-auto px-4 py-16 text-center">
           <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
@@ -96,7 +96,7 @@ export default function CoachPayments() {
   const hasAccount = stripeStatus?.hasAccount;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#062b2b]">
+    <div className="min-h-screen bg-white dark:bg-obsidian">
       <Header />
       
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -111,7 +111,7 @@ export default function CoachPayments() {
         </div>
 
         {/* Stripe Connect Status Card */}
-        <div className="bg-white dark:bg-[#0a4040] rounded-2xl shadow-sm border border-gray-200 dark:border-[#0a6969] p-6 mb-8">
+        <div className="bg-white dark:bg-foundation rounded-2xl shadow-sm border border-gray-200 dark:border-[#0a6969] p-6 mb-8">
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-[#145A5B] rounded-xl flex items-center justify-center">
@@ -161,7 +161,7 @@ export default function CoachPayments() {
                 </h3>
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-[#0a4040] rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-foundation rounded-lg flex items-center justify-center shadow-sm">
                       <Zap className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
@@ -172,7 +172,7 @@ export default function CoachPayments() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-[#0a4040] rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-foundation rounded-lg flex items-center justify-center shadow-sm">
                       <Shield className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
@@ -183,7 +183,7 @@ export default function CoachPayments() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-[#0a4040] rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-foundation rounded-lg flex items-center justify-center shadow-sm">
                       <TrendingUp className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
@@ -248,7 +248,7 @@ export default function CoachPayments() {
 
               <button
                 onClick={handleOpenDashboard}
-                className="w-full py-3 bg-gray-100 dark:bg-[#0a6969] text-black dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-[#0a6969] transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gray-100 dark:bg-[#0a6969] text-black dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-foundation-2 transition-colors flex items-center justify-center gap-2"
               >
                 <ExternalLink className="w-5 h-5" />
                 Open Stripe Dashboard
@@ -285,7 +285,7 @@ export default function CoachPayments() {
         {/* Earnings Summary */}
         {earnings && (
           <div className="grid md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
+            <div className="bg-white dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
                   <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -297,7 +297,7 @@ export default function CoachPayments() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
+            <div className="bg-white dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -309,10 +309,10 @@ export default function CoachPayments() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
+            <div className="bg-white dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 rounded-lg flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-[#0F3D3E] dark:text-[#0F3D3E]" />
+                <div className="w-10 h-10 bg-foundation-soft dark:bg-foundation-soft/30 rounded-lg flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-foundation dark:text-foundation" />
                 </div>
                 <span className="text-sm text-black dark:text-[#67E8F9]">Pending</span>
               </div>
@@ -321,7 +321,7 @@ export default function CoachPayments() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
+            <div className="bg-white dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center">
                   <Calendar className="w-5 h-5 text-teal-600 dark:text-teal-400" />
@@ -336,7 +336,7 @@ export default function CoachPayments() {
         )}
 
         {/* Commission Info */}
-        <div className="bg-white dark:bg-[#0a4040] rounded-2xl shadow-sm border border-gray-200 dark:border-[#0a6969] p-6">
+        <div className="bg-white dark:bg-foundation rounded-2xl shadow-sm border border-gray-200 dark:border-[#0a6969] p-6">
           <h3 className="text-lg font-semibold text-black dark:text-white mb-4">
             Commission Structure
           </h3>

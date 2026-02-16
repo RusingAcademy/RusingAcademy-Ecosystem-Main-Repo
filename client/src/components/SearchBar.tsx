@@ -302,7 +302,7 @@ export function SearchBar({
             size="icon"
             className={cn(
               "h-12 w-12 flex-shrink-0",
-              hasActiveFilters && "bg-[#C65A1E] hover:bg-amber-600"
+              hasActiveFilters && "bg-cta hover:bg-amber-600"
             )}
             onClick={() => setShowFilterPanel(!showFilterPanel)}
           >
@@ -360,7 +360,7 @@ export function SearchBar({
                   size="sm"
                   className={cn(
                     "h-7 text-xs",
-                    selectedCategories.includes(value) && "bg-[#C65A1E] hover:bg-amber-600"
+                    selectedCategories.includes(value) && "bg-cta hover:bg-amber-600"
                   )}
                   onClick={() => toggleCategory(value)}
                 >

@@ -57,7 +57,7 @@ export function BadgeUnlockAnimation({ badge, onComplete }) {
       <div className="text-center">
         <span className="text-8xl">{badge.icon}</span>
         <h2 className="text-2xl text-white mt-4">Badge Débloqué!</h2>
-        <p className="text-xl text-[#0F3D3E]">{badge.name}</p>
+        <p className="text-xl text-foundation">{badge.name}</p>
       </div>
     </motion.div>
   ) : null;

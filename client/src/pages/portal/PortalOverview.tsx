@@ -75,9 +75,9 @@ const recentCapsules = [
 
 const quickStats = [
   { label: "Heures d'apprentissage", value: "24.5h", icon: Clock, color: "text-blue-600", bg: "bg-blue-50" },
-  { label: "Sessions complétées", value: "12", icon: Video, color: "text-[#0F3D3E]", bg: "bg-[#E7F2F2]" },
+  { label: "Sessions complétées", value: "12", icon: Video, color: "text-foundation", bg: "bg-foundation-soft" },
   { label: "Documents lus", value: "8", icon: FileText, color: "text-emerald-600", bg: "bg-emerald-50" },
-  { label: "Série en cours", value: "5 jours", icon: Zap, color: "text-[#C65A1E]600", bg: "bg-amber-50" },
+  { label: "Série en cours", value: "5 jours", icon: Zap, color: "text-cta600", bg: "bg-amber-50" },
 ];
 
 export default function PortalOverview() {
@@ -193,7 +193,7 @@ export default function PortalOverview() {
                 {recentCapsules.map((capsule) => (
                   <div key={capsule.id} className="p-3 rounded-lg border border-slate-200 hover:border-blue-200 hover:bg-blue-50/50 transition-all cursor-pointer group">
                     <div className="flex items-start gap-3">
-                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${capsule.type === "video" ? "bg-[#E7F2F2] text-[#0F3D3E]" : capsule.type === "document" ? "bg-blue-100 text-blue-600" : "bg-emerald-100 text-emerald-600"}`}>
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${capsule.type === "video" ? "bg-foundation-soft text-foundation" : capsule.type === "document" ? "bg-blue-100 text-blue-600" : "bg-emerald-100 text-emerald-600"}`}>
                         {capsule.type === "video" ? <PlayCircle className="h-5 w-5" /> : capsule.type === "document" ? <FileText className="h-5 w-5" /> : <BookOpen className="h-5 w-5" />}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -217,7 +217,7 @@ export default function PortalOverview() {
             <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-[#FFF8F3] to-[#FFF8F3]">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-2">
-                  <Award className="h-5 w-5 text-[#C65A1E]600" />
+                  <Award className="h-5 w-5 text-cta600" />
                   Réalisations
                 </CardTitle>
               </CardHeader>

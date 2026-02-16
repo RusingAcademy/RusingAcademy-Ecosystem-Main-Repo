@@ -234,7 +234,7 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#062b2b]/80 border-b border-white/60">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-obsidian/80 border-b border-white/60">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3">

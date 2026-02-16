@@ -207,7 +207,7 @@ export default function CreatePostDialog({
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-border">
               <div className="flex items-center gap-3">
-                <Sparkles className="w-5 h-5 text-[#D4AF37]" />
+                <Sparkles className="w-5 h-5 text-barholex-gold" />
                 <h2 className="text-lg font-bold text-foreground">Create Post</h2>
               </div>
               <button

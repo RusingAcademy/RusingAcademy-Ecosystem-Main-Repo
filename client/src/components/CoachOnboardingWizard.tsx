@@ -168,7 +168,7 @@ export default function CoachOnboardingWizard() {
                 <CreditCard className="h-16 w-16 mx-auto text-slate-400 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Connectez votre compte Stripe</h3>
                 <p className="text-slate-600 mb-4">Pour recevoir vos paiements de coaching</p>
-                <Button onClick={() => updateFormData("stripeConnected", true)} className="bg-[#E7F2F2] hover:bg-[#E7F2F2]">
+                <Button onClick={() => updateFormData("stripeConnected", true)} className="bg-foundation-soft hover:bg-foundation-soft">
                   {formData.stripeConnected ? "✓ Stripe Connecté" : "Connecter Stripe"}
                 </Button>
               </div>

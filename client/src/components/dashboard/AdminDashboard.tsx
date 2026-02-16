@@ -116,7 +116,7 @@ export default function AdminDashboardContent({ user }: AdminDashboardProps) {
                 <div className="flex items-center gap-2">
                   <h1 className="text-2xl font-bold">{labels.greeting}</h1>
                   {isOwner && (
-                    <Badge variant="default" className="bg-[#C65A1E]">
+                    <Badge variant="default" className="bg-cta">
                       <Shield className="h-3 w-3 mr-1" />
                       Owner
                     </Badge>
@@ -206,8 +206,8 @@ export default function AdminDashboardContent({ user }: AdminDashboardProps) {
                 <Card>
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-full bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 flex items-center justify-center">
-                        <TrendingUp className="h-6 w-6 text-[#0F3D3E]" />
+                      <div className="h-12 w-12 rounded-full bg-foundation-soft dark:bg-foundation-soft/30 flex items-center justify-center">
+                        <TrendingUp className="h-6 w-6 text-foundation" />
                       </div>
                       <div>
                         <p className="text-2xl font-bold">{orgStats?.avgProgress || 0}%</p>
@@ -315,7 +315,7 @@ export default function AdminDashboardContent({ user }: AdminDashboardProps) {
                           <p className="text-sm text-muted-foreground">CBC Level</p>
                         </div>
                         <div className="p-4 rounded-lg bg-muted/50 text-center">
-                          <p className="text-3xl font-bold text-[#0F3D3E]">{orgStats?.levelCCC || 0}</p>
+                          <p className="text-3xl font-bold text-foundation">{orgStats?.levelCCC || 0}</p>
                           <p className="text-sm text-muted-foreground">CCC Level</p>
                         </div>
                       </div>

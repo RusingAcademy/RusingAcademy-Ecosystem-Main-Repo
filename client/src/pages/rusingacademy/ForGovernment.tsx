@@ -208,7 +208,7 @@ export default function ForGovernment() {
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
           {/* Background decorations */}
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#2DD4BF]/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#E07B39]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta-2/10 rounded-full blur-3xl" />
           <div className="absolute top-40 right-20 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-2xl" />
           
           <div className="container mx-auto relative z-10">
@@ -486,7 +486,7 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                 >
-                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-[#E07B39]/10 border border-[#E07B39]/20 text-black">
+                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-[#E07B39]/20 text-black">
                     <Sparkles className="w-4 h-4 text-[#E07B39]" />
                     {isEn ? "Get Started Today" : "Commencez aujourd'hui"}
                   </span>

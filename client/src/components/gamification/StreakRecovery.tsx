@@ -240,7 +240,7 @@ export function StreakRecovery({
           </div>
         </div>
 
-        <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50 border border-slate-200 dark:border-[#0a6969]">
+        <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-[#0a6969]">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-black dark:text-white/90">{l.streakFreezes}</span>
             <span className="text-xs text-black">{streakFreezes} {l.available}</span>

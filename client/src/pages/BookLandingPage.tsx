@@ -353,8 +353,8 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
           className="md:col-span-3"
         >
           <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#0F3D3E]/10 flex items-center justify-center">
-              <FileText className="w-4 h-4 text-[#0F3D3E]" />
+            <div className="w-8 h-8 rounded-lg bg-foundation/10 flex items-center justify-center">
+              <FileText className="w-4 h-4 text-foundation" />
             </div>
             {language === "fr" ? "Description complète" : "Full Description"}
           </h2>
@@ -457,7 +457,7 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
                 {/* Price */}
                 <div className="flex items-center justify-between py-4 border-t border-slate-200 mt-2">
                   <span className="text-sm font-medium text-slate-700">{language === "fr" ? "Prix" : "Price"}</span>
-                  <span className="text-2xl font-bold text-[#0F3D3E]">
+                  <span className="text-2xl font-bold text-foundation">
                     {item.price_type === "paid" && item.price_amount
                       ? `$${item.price_amount.toFixed(2)}`
                       : language === "fr" ? "Gratuit" : "Free"}
@@ -562,7 +562,7 @@ function RelatedProducts({
                     />
                   </div>
                   <CardContent className="p-3.5">
-                    <h3 className="text-xs font-semibold text-slate-900 line-clamp-2 group-hover:text-[#0F3D3E] transition-colors duration-300 leading-snug">
+                    <h3 className="text-xs font-semibold text-slate-900 line-clamp-2 group-hover:text-foundation transition-colors duration-300 leading-snug">
                       {relTitle}
                     </h3>
                     <div className="flex items-center justify-between mt-2.5">
@@ -570,7 +570,7 @@ function RelatedProducts({
                         {rel.language === "BILINGUAL" ? "FR/EN" : rel.language}
                       </Badge>
                       {rel.price_type === "paid" && rel.price_amount ? (
-                        <span className="text-xs font-bold text-[#0F3D3E]">${rel.price_amount.toFixed(2)}</span>
+                        <span className="text-xs font-bold text-foundation">${rel.price_amount.toFixed(2)}</span>
                       ) : (
                         <span className="text-xs font-semibold text-emerald-600">
                           {language === "fr" ? "Gratuit" : "Free"}
@@ -589,7 +589,7 @@ function RelatedProducts({
           <Button
             variant="outline"
             size="lg"
-            className="rounded-full border-slate-300 hover:border-[#0F3D3E] hover:text-[#0F3D3E] gap-2 transition-all duration-200"
+            className="rounded-full border-slate-300 hover:border-foundation hover:text-foundation gap-2 transition-all duration-200"
             onClick={() => navigate("/library")}
           >
             <ArrowLeft className="w-4 h-4" />

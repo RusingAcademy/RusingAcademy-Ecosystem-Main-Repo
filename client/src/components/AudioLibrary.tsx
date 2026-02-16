@@ -93,7 +93,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="w-8 h-8 animate-spin text-[#0F3D3E]" />
+        <Loader2 className="w-8 h-8 animate-spin text-foundation" />
       </div>
     );
   }
@@ -180,8 +180,8 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                   onClick={() => playAudio(phrase.id, phrase.audioUrl)}
                   className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                     playingId === phrase.id
-                      ? "bg-[#0F3D3E] text-white"
-                      : "bg-[#E7F2F2] text-[#0F3D3E] hover:bg-[#0F3D3E] hover:text-white"
+                      ? "bg-foundation text-white"
+                      : "bg-foundation-soft text-foundation hover:bg-foundation hover:text-white"
                   }`}
                 >
                   {playingId === phrase.id ? (

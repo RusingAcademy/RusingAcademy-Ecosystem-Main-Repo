@@ -68,7 +68,7 @@ export default function AICoach() {
           icon: BookOpen,
           title: "Reading Comprehension",
           description: "Enhance your reading skills with adaptive difficulty texts and comprehension exercises.",
-          color: "bg-[#E7F2F2] text-[#0F3D3E]",
+          color: "bg-foundation-soft text-foundation",
           coachIndex: 2,
         },
         {
@@ -82,7 +82,7 @@ export default function AICoach() {
           icon: BarChart3,
           title: "Progress Tracking",
           description: "Monitor your improvement with detailed analytics and personalized recommendations.",
-          color: "bg-[#FFF1E8] text-[#C65A1E]",
+          color: "bg-cta-soft text-cta",
           coachIndex: 0,
         },
         {
@@ -146,7 +146,7 @@ export default function AICoach() {
           icon: BookOpen,
           title: "Compréhension de lecture",
           description: "Améliorez vos compétences en lecture avec des textes à difficulté adaptative.",
-          color: "bg-[#E7F2F2] text-[#0F3D3E]",
+          color: "bg-foundation-soft text-foundation",
           coachIndex: 2,
         },
         {
@@ -160,7 +160,7 @@ export default function AICoach() {
           icon: BarChart3,
           title: "Suivi des progrès",
           description: "Surveillez votre amélioration avec des analyses détaillées et des recommandations.",
-          color: "bg-[#FFF1E8] text-[#C65A1E]",
+          color: "bg-cta-soft text-cta",
           coachIndex: 0,
         },
         {
@@ -415,7 +415,7 @@ export default function AICoach() {
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                  <Badge className="mb-4 bg-[#E7F2F2] text-[#0F3D3E] border-[#0F3D3E]">
+                  <Badge className="mb-4 bg-foundation-soft text-foundation border-foundation">
                     {isEn ? "Meet Your AI Coach" : "Rencontrez votre coach IA"}
                   </Badge>
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">

@@ -654,7 +654,7 @@ export default function SeoEditorPanel({
                         <Code2 className="w-4 h-4" />
                         JSON-LD Preview
                       </Label>
-                      <div className="bg-[#062b2b] rounded-lg p-3 overflow-auto max-h-[300px]">
+                      <div className="bg-obsidian rounded-lg p-3 overflow-auto max-h-[300px]">
                         <pre className="text-xs text-emerald-400 font-mono whitespace-pre-wrap">
                           {JSON.stringify(localData.structuredData, null, 2)}
                         </pre>

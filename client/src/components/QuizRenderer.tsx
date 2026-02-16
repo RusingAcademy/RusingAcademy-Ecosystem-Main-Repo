@@ -639,7 +639,7 @@ export default function QuizRenderer({ content, language = "en", onComplete, max
                         flex items-center gap-3 group
                         ${
                           !isAnswered
-                            ? "border-border hover:border-[#0F3D3E]/50 hover:bg-[#0F3D3E]/5 hover:shadow-sm cursor-pointer"
+                            ? "border-border hover:border-foundation/50 hover:bg-foundation/5 hover:shadow-sm cursor-pointer"
                             : showCorrect
                               ? "border-emerald-500 bg-emerald-500/10"
                               : showWrong
@@ -654,7 +654,7 @@ export default function QuizRenderer({ content, language = "en", onComplete, max
                         w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 transition-all
                         ${
                           !isAnswered
-                            ? "bg-muted text-muted-foreground group-hover:bg-[#0F3D3E] group-hover:text-white"
+                            ? "bg-muted text-muted-foreground group-hover:bg-foundation group-hover:text-white"
                             : showCorrect
                               ? "bg-emerald-500 text-white"
                               : showWrong
@@ -717,7 +717,7 @@ export default function QuizRenderer({ content, language = "en", onComplete, max
                   <Button
                     onClick={handleFillSubmit}
                     disabled={!fillInput.trim()}
-                    className="bg-[#0F3D3E] hover:bg-[#0F3D3E]/90 text-white shrink-0"
+                    className="bg-foundation hover:bg-foundation/90 text-white shrink-0"
                   >
                     <ArrowRight className="h-4 w-4" />
                   </Button>
@@ -792,7 +792,7 @@ export default function QuizRenderer({ content, language = "en", onComplete, max
                 }}
                 className={`
                   w-2.5 h-2.5 rounded-full transition-all duration-200
-                  ${i === currentIndex ? "w-5 bg-[#0F3D3E]" : ""}
+                  ${i === currentIndex ? "w-5 bg-foundation" : ""}
                   ${correct ? "bg-emerald-500" : ""}
                   ${wrong ? "bg-red-400" : ""}
                   ${
@@ -811,7 +811,7 @@ export default function QuizRenderer({ content, language = "en", onComplete, max
           size="sm"
           onClick={goNext}
           disabled={!isAnswered}
-          className="gap-1 bg-[#0F3D3E] hover:bg-[#0F3D3E]/90 text-white"
+          className="gap-1 bg-foundation hover:bg-foundation/90 text-white"
         >
           {currentIndex === totalQuestions - 1
             ? isEn
