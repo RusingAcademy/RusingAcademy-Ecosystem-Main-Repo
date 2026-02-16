@@ -1,0 +1,192 @@
+/**
+ * ============================================
+ * RUSINGACADEMY ECOSYSTEM - STATE DISPLAY CSS
+ * ============================================
+ * Wave 10: Loading, Empty, and Error States
+ * 
+ * Provides consistent, professional state displays
+ * with glassmorphism aesthetics and smooth animations.
+ * ============================================ */
+
+/* ============================================
+   SKELETON SHIMMER ANIMATION
+   ============================================ */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-slate-200, #e2e8f0) 25%,
+    var(--color-slate-100, #f1f5f9) 37%,
+    var(--color-slate-200, #e2e8f0) 63%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.dark .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-slate-800, #1e293b) 25%,
+    var(--color-slate-700, #334155) 37%,
+    var(--color-slate-800, #1e293b) 63%
+  );
+  background-size: 200% 100%;
+}
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+@keyframes spin-smooth {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  display: inline-block;
+  border: 3px solid var(--color-slate-200, #e2e8f0);
+  border-top-color: var(--color-teal-600, #0d9488);
+  border-radius: 50%;
+  animation: spin-smooth 0.8s linear infinite;
+}
+
+.loading-spinner-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+.loading-spinner-md {
+  width: 2rem;
+  height: 2rem;
+  border-width: 3px;
+}
+
+.loading-spinner-lg {
+  width: 3rem;
+  height: 3rem;
+  border-width: 4px;
+}
+
+.dark .loading-spinner {
+  border-color: var(--color-slate-700, #334155);
+  border-top-color: var(--color-teal-400, #2dd4bf);
+}
+
+/* ============================================
+   STATE CONTAINER
+   ============================================ */
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  min-height: 200px;
+}
+
+.state-container-full {
+  min-height: 60vh;
+}
+
+/* ============================================
+   STATE ICON WRAPPER
+   ============================================ */
+.state-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+}
+
+.state-icon-loading {
+  background: linear-gradient(135deg, var(--color-teal-50, #f0fdfa), var(--color-teal-100, #ccfbf1));
+}
+
+.state-icon-empty {
+  background: linear-gradient(135deg, var(--color-slate-50, #f8fafc), var(--color-slate-100, #f1f5f9));
+}
+
+.state-icon-error {
+  background: linear-gradient(135deg, var(--color-red-50, #fef2f2), var(--color-red-100, #fee2e2));
+}
+
+.state-icon-success {
+  background: linear-gradient(135deg, var(--color-emerald-50, #ecfdf5), var(--color-emerald-100, #d1fae5));
+}
+
+.dark .state-icon-loading {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(13, 148, 136, 0.08));
+}
+
+.dark .state-icon-empty {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.08));
+}
+
+.dark .state-icon-error {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(220, 38, 38, 0.08));
+}
+
+.dark .state-icon-success {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+}
+
+/* ============================================
+   PULSE ANIMATION FOR LOADING DOTS
+   ============================================ */
+@keyframes pulse-dot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--color-teal-500, #14b8a6);
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ============================================
+   PAGE TRANSITION FADE
+   ============================================ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.state-fade-in {
+  animation: fade-in-up 0.3s ease-out;
+}
