@@ -42,7 +42,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
       <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700"
         role="banner">
         <button onClick={() => setSidebarCollapsed(false)}
-          className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7c3aed] focus:ring-offset-2"
+          className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-violet-600, #7c3aed)] focus:ring-offset-2"
           aria-label="Open navigation menu">
           <span className="material-icons text-gray-700">menu</span>
         </button>

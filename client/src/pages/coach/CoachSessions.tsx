@@ -8,7 +8,7 @@ import { trpc } from "@/lib/trpc";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const ACCENT = "#7c3aed";
+const ACCENT = "var(--color-violet-600, #7c3aed)";
 const MONTHS_EN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
 function SessionStatusBadge({ status }: { status: string }) {
