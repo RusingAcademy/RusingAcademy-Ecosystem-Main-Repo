@@ -16,7 +16,7 @@ export default function ProgramSelect() {
     <DashboardLayout>
       <div className="space-y-8">
         {/* Hero Section — Light */}
-        <div className="bg-white border border-gray-200 rounded-xl p-8 md:p-10 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-8 md:p-10 shadow-sm">
           <div className="flex items-center gap-3 mb-3">
             <img src={LOGO_URL} alt="RusingAcademy" className="w-10 h-10 rounded-lg" />
             <span className="text-xs font-bold uppercase tracking-widest text-teal-700">Learning Portal</span>
@@ -38,7 +38,7 @@ export default function ProgramSelect() {
             { icon: "local_fire_department", label: "Streak", value: `${streak} days`, color: "#e74c3c" },
             { icon: "school", label: "Lessons Done", value: lessonsCompleted.toString(), color: "#8b5cf6" },
           ].map((stat) => (
-            <div key={stat.label} className="bg-white border border-gray-200 p-4 rounded-xl text-center shadow-sm">
+            <div key={stat.label} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 p-4 rounded-xl text-center shadow-sm">
               <span className="material-icons" style={{ color: stat.color, fontSize: "22px" }}>{stat.icon}</span>
               <div className="text-sm font-bold text-gray-900 mt-1">{stat.value}</div>
               <div className="text-[10px] text-gray-400 uppercase tracking-wider">{stat.label}</div>
@@ -54,7 +54,7 @@ export default function ProgramSelect() {
 
             return (
               <Link key={prog.id} href={`/programs/${prog.id}`}>
-                <div className="group bg-white border border-gray-200 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-lg cursor-pointer">
+                <div className="group bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-lg cursor-pointer">
                   {/* Card Header with gradient */}
                   <div className="relative h-40 overflow-hidden" style={{
                     background: isESL
@@ -66,7 +66,7 @@ export default function ProgramSelect() {
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-5">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/20 text-white backdrop-blur-sm">
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-slate-900/20 text-white backdrop-blur-sm">
                           {isESL ? "English" : "Français"}
                         </span>
                         <span className="text-xs text-white/70">A1 → C1+</span>
@@ -117,7 +117,7 @@ export default function ProgramSelect() {
         </div>
 
         {/* Info Banner */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-6 flex items-start gap-4 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 flex items-start gap-4 shadow-sm">
           <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-teal-700/5">
             <span className="material-icons text-teal-700">info</span>
           </div>

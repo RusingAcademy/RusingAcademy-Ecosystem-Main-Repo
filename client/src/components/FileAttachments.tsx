@@ -112,7 +112,7 @@ export default function FileAttachments({ entityType, entityId }: FileAttachment
       {isLoading ? (
         <div className="flex justify-center py-4"><Loader2 className="animate-spin text-gray-300" size={16} /></div>
       ) : items.length === 0 ? (
-        <div className="text-center py-6 border-2 border-dashed border-gray-200 rounded-lg">
+        <div className="text-center py-6 border-2 border-dashed border-gray-200 dark:border-slate-700 rounded-lg">
           <Paperclip size={24} className="mx-auto text-gray-300 mb-2" />
           <p className="text-sm text-gray-400">No attachments yet</p>
           <button

@@ -129,7 +129,7 @@ export default function ProfitLossReport() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload) return null;
     return (
-      <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-sm">
+      <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg p-3 text-sm">
         <p className="font-semibold text-gray-800 mb-1">{label}</p>
         {payload.map((entry: any, i: number) => (
           <div key={i} className="flex items-center gap-2">
@@ -157,7 +157,7 @@ export default function ProfitLossReport() {
         </div>
         <div className="flex items-center gap-2">
           {/* View Mode Toggle */}
-          <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+          <div className="flex items-center border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden">
             <button
               className={`p-2 ${viewMode === "table" ? "bg-gray-100 text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("table")}
@@ -182,7 +182,7 @@ export default function ProfitLossReport() {
             <GitCompareArrows size={14} /> YoY
           </button>
           {/* Period Picker */}
-          <div className="flex items-center gap-1 border border-gray-200 rounded-lg px-3 py-1.5">
+          <div className="flex items-center gap-1 border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-1.5">
             <Calendar size={14} className="text-gray-400" />
             <select
               className="text-sm bg-transparent border-none focus:outline-none"
@@ -294,7 +294,7 @@ export default function ProfitLossReport() {
                     </div>
                   ))
                 )}
-                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 mt-2">
+                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 dark:border-slate-700 mt-2">
                   <span className="text-gray-800">Total Income</span>
                   <span className="text-gray-900 font-mono">{fmt(pnl.totalIncome)}</span>
                 </div>
@@ -329,7 +329,7 @@ export default function ProfitLossReport() {
                       </div>
                     ))
                 )}
-                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 mt-2">
+                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 dark:border-slate-700 mt-2">
                   <span className="text-gray-800">Total Expenses</span>
                   <span className="text-gray-900 font-mono">{fmt(pnl.totalExpenses)}</span>
                 </div>

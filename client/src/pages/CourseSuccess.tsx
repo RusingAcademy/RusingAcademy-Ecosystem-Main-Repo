@@ -200,20 +200,20 @@ export default function CourseSuccess() {
               {l.badge}
             </Badge>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white mb-4">
               {l.title}
             </h1>
             
-            <p className="text-xl text-black mb-6">
+            <p className="text-xl text-black dark:text-white mb-6">
               {l.subtitle}
             </p>
             
             {/* Email Confirmation Notice */}
             {user?.email && (
-              <div className="flex items-center justify-center gap-2 text-sm text-black mb-8">
+              <div className="flex items-center justify-center gap-2 text-sm text-black dark:text-white mb-8">
                 <Mail className="w-4 h-4" />
                 <span>
-                  {l.emailSent} <strong className="text-black">{user.email}</strong>
+                  {l.emailSent} <strong className="text-black dark:text-white">{user.email}</strong>
                 </span>
               </div>
             )}
@@ -222,9 +222,9 @@ export default function CourseSuccess() {
       </section>
 
       {/* Next Steps Section */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white dark:bg-slate-900">
         <div className="container px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-black mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-8 text-center">
             {l.nextStepsTitle}
           </h2>
           
@@ -247,8 +247,8 @@ export default function CourseSuccess() {
                       <div className={`p-2 rounded-lg mb-3 ${index === 0 ? "bg-teal-100" : "bg-slate-100"}`}>
                         <step.icon className={`w-5 h-5 ${index === 0 ? "text-teal-600" : "text-black"}`} />
                       </div>
-                      <h3 className="font-semibold text-black mb-2">{step.title}</h3>
-                      <p className="text-sm text-black">{step.description}</p>
+                      <h3 className="font-semibold text-black dark:text-white mb-2">{step.title}</h3>
+                      <p className="text-sm text-black dark:text-white">{step.description}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -261,7 +261,7 @@ export default function CourseSuccess() {
       {/* What's Included Section */}
       <section className="py-12 bg-gradient-to-b from-slate-50 to-white">
         <div className="container px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-black mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-8 text-center">
             {l.whatIncluded}
           </h2>
           
@@ -272,12 +272,12 @@ export default function CourseSuccess() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm"
+                className="flex items-center gap-3 p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 shadow-sm"
               >
                 <div className="p-2 bg-amber-100 rounded-lg shrink-0">
                   <feature.icon className="w-5 h-5 text-amber-600" />
                 </div>
-                <span className="text-black">{feature.text}</span>
+                <span className="text-black dark:text-white">{feature.text}</span>
               </motion.div>
             ))}
           </div>
@@ -294,7 +294,7 @@ export default function CourseSuccess() {
               </div>
               <div>
                 <h3 className="font-semibold text-emerald-700 text-lg mb-1">{l.guarantee}</h3>
-                <p className="text-black">{l.guaranteeText}</p>
+                <p className="text-black dark:text-white">{l.guaranteeText}</p>
               </div>
             </div>
           </div>
@@ -315,13 +315,13 @@ export default function CourseSuccess() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/app">
-              <Button size="lg" variant="secondary" className="bg-white text-teal-700 hover:bg-teal-50">
+              <Button size="lg" variant="secondary" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50">
                 <BookOpen className="w-5 h-5 mr-2" />
                 {l.ctaDashboard}
               </Button>
             </Link>
             <Link href="/coaches">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white dark:bg-slate-900/10">
                 <Users className="w-5 h-5 mr-2" />
                 {l.ctaCoaches}
               </Button>

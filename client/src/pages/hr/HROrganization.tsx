@@ -71,7 +71,7 @@ export default function HROrganization() {
         {org ? (
           <>
             {/* Department Information */}
-            <div className="bg-white rounded-xl border border-gray-100 p-6">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="material-icons text-blue-600">business</span>
                 {ui.departmentInfo}
@@ -93,7 +93,7 @@ export default function HROrganization() {
             </div>
 
             {/* Contract Details */}
-            <div className="bg-white rounded-xl border border-gray-100 p-6">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="material-icons text-blue-600">description</span>
                 {ui.contractDetails}
@@ -115,7 +115,7 @@ export default function HROrganization() {
           </>
         ) : (
           /* Empty State */
-          <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-12 text-center">
             <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
               <span className="material-icons text-3xl text-blue-600">business</span>
             </div>

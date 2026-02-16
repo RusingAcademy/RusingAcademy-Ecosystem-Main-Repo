@@ -42,7 +42,7 @@ export default function InvoicePdf() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Action Bar (hidden in print) */}
-      <div className="print:hidden bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
+      <div className="print:hidden bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
         <button
           onClick={() => navigate(`/invoices/${invoiceId}`)}
           className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
@@ -71,7 +71,7 @@ export default function InvoicePdf() {
       </div>
 
       {/* Invoice Document */}
-      <div className="max-w-[800px] mx-auto my-8 print:my-0 bg-white shadow-lg print:shadow-none">
+      <div className="max-w-[800px] mx-auto my-8 print:my-0 bg-white dark:bg-slate-900 shadow-lg print:shadow-none">
         <div className="p-10">
           {/* Header */}
           <div className="flex justify-between items-start mb-10">
@@ -129,7 +129,7 @@ export default function InvoicePdf() {
           {/* Line Items Table */}
           <table className="w-full mb-8">
             <thead>
-              <tr className="border-b-2 border-gray-200">
+              <tr className="border-b-2 border-gray-200 dark:border-slate-700">
                 <th className="text-left py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">#</th>
                 <th className="text-left py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Description</th>
                 <th className="text-right py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Qty</th>
@@ -175,7 +175,7 @@ export default function InvoicePdf() {
                     <span className="text-gray-500">Amount Paid</span>
                     <span className="font-medium text-green-600">-{fmt(invoice.amountPaid)}</span>
                   </div>
-                  <div className="flex justify-between py-2 text-sm border-t border-gray-200">
+                  <div className="flex justify-between py-2 text-sm border-t border-gray-200 dark:border-slate-700">
                     <span className="font-semibold text-gray-700">Amount Due</span>
                     <span className="font-bold text-red-600">{fmt(invoice.amountDue)}</span>
                   </div>
@@ -186,14 +186,14 @@ export default function InvoicePdf() {
 
           {/* Notes */}
           {invoice.notes && (
-            <div className="mt-8 pt-6 border-t border-gray-200">
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
               <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Notes</p>
               <p className="text-sm text-gray-600 whitespace-pre-wrap">{invoice.notes}</p>
             </div>
           )}
 
           {/* Footer */}
-          <div className="mt-12 pt-6 border-t border-gray-200 text-center">
+          <div className="mt-12 pt-6 border-t border-gray-200 dark:border-slate-700 text-center">
             <p className="text-xs text-gray-400">
               Thank you for your business!
             </p>

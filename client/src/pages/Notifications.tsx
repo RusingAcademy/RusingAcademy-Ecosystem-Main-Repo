@@ -106,7 +106,7 @@ export default function Notifications() {
         {isLoading ? (
           <div className="space-y-3">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white border border-gray-100 rounded-xl p-4 animate-pulse">
+              <div key={i} className="bg-white dark:bg-slate-900 border border-gray-100 rounded-xl p-4 animate-pulse">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gray-100" />
                   <div className="flex-1">

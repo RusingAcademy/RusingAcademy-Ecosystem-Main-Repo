@@ -82,7 +82,7 @@ export function BunnyStreamPlayer({
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/90 z-10">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-900/10 flex items-center justify-center">
               <Play className="w-8 h-8 text-white/90 ml-1" />
             </div>
             <Loader2 className="w-5 h-5 animate-spin text-white/90" />
@@ -154,8 +154,8 @@ export function BunnyStreamThumbnail({
         }}
       />
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-        <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-          <Play className="w-5 h-5 text-black ml-0.5" />
+        <div className="w-12 h-12 rounded-full bg-white dark:bg-slate-900/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+          <Play className="w-5 h-5 text-black dark:text-white ml-0.5" />
         </div>
       </div>
     </div>

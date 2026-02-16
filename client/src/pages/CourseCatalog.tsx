@@ -112,8 +112,8 @@ export default function CourseCatalog() {
           </p>
         </div>
         {/* Decorative orbs */}
-        <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/3 translate-y-1/3" />
+        <div className="absolute top-0 left-0 w-64 h-64 bg-white dark:bg-slate-900/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white dark:bg-slate-900/5 rounded-full translate-x-1/3 translate-y-1/3" />
       </div>
 
       {/* Filters */}
@@ -186,7 +186,7 @@ export default function CourseCatalog() {
                     )}
                     {/* Level badge */}
                     {course.level && (
-                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-white/90 text-indigo-900 backdrop-blur-sm">
+                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-white dark:bg-slate-900/90 text-indigo-900 backdrop-blur-sm">
                         {LEVEL_LABELS[course.level] ?? course.level}
                       </span>
                     )}

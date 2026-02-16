@@ -27,7 +27,7 @@ export default function JournalEntries() {
         ) : (entries as any[])?.length ? (
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-gray-200">
+              <tr className="border-b-2 border-gray-200 dark:border-slate-700">
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Date</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Entry #</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Memo</th>

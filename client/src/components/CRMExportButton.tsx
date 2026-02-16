@@ -188,7 +188,7 @@ export default function CRMExportButton() {
                       type="date"
                       value={filters.startDate}
                       onChange={(e) => setFilters(prev => ({ ...prev, startDate: e.target.value }))}
-                      className="w-full px-3 py-2 bg-white/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-900/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -197,7 +197,7 @@ export default function CRMExportButton() {
                       type="date"
                       value={filters.endDate}
                       onChange={(e) => setFilters(prev => ({ ...prev, endDate: e.target.value }))}
-                      className="w-full px-3 py-2 bg-white/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-900/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export default function CRMExportButton() {
               <div className="flex gap-3">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="flex-1 px-4 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors"
+                  className="flex-1 px-4 py-2 bg-white dark:bg-slate-900/10 text-white rounded-lg hover:bg-white dark:bg-slate-900/20 transition-colors"
                 >
                   {t.cancel}
                 </button>

@@ -130,7 +130,7 @@ export function MiniLeaderboard({
               <Trophy className="h-6 w-6 text-amber-500" />
             </div>
             <p className="text-sm text-black dark:text-cyan-300">{l.noData}</p>
-            <p className="text-xs text-black mt-1">{l.beFirst}</p>
+            <p className="text-xs text-black dark:text-white mt-1">{l.beFirst}</p>
           </motion.div>
         ) : (
           <>
@@ -166,7 +166,7 @@ export function MiniLeaderboard({
                     )}>
                       {entry.name}
                       {entry.isCurrentUser && (
-                        <span className="text-xs text-black ml-1">
+                        <span className="text-xs text-black dark:text-white ml-1">
                           ({language === "fr" ? "vous" : "you"})
                         </span>
                       )}
@@ -182,7 +182,7 @@ export function MiniLeaderboard({
                       <p className="text-sm font-semibold text-black dark:text-white">
                         {entry.xp.toLocaleString()}
                       </p>
-                      <p className="text-xs text-black">{l.xp}</p>
+                      <p className="text-xs text-black dark:text-white">{l.xp}</p>
                     </div>
                     <TrendIndicator trend={entry.trend} />
                   </div>
@@ -195,7 +195,7 @@ export function MiniLeaderboard({
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-full mt-2 text-black hover:text-black"
+                className="w-full mt-2 text-black dark:text-white hover:text-black dark:text-white"
               >
                 {l.viewFull}
                 <ChevronRight className="h-4 w-4 ml-1" />

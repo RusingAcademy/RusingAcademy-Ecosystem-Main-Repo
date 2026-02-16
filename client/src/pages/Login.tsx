@@ -198,7 +198,7 @@ function LoginContent() {
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-white hover:bg-gray-100 text-black border-gray-300"
+              className="w-full bg-white dark:bg-slate-900 hover:bg-gray-100 text-black dark:text-white border-gray-300"
               onClick={handleGoogleSignIn}
               disabled={isPending || loginSuccess}
             >

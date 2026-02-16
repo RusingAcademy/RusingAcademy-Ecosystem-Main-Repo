@@ -275,7 +275,7 @@ export default function Reports() {
         </p>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 mb-6">
+        <div className="flex border-b border-gray-200 dark:border-slate-700 mb-6">
           {tabs.map((tab) => (
             <button
               key={tab.id}

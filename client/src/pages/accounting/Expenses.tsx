@@ -223,7 +223,7 @@ export default function Expenses() {
       </div>
 
       {/* Expense Table */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">
@@ -287,7 +287,7 @@ export default function Expenses() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 bg-gray-50">
             <span className="text-sm text-gray-500">
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>

@@ -168,7 +168,7 @@ export default function RecurringTransactions() {
       )}
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 mb-4">
+      <div className="flex border-b border-gray-200 dark:border-slate-700 mb-4">
         <button className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${activeTab === "templates" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => setActiveTab("templates")}>
           <RefreshCw size={14} className="inline mr-1.5" />Templates
@@ -218,10 +218,10 @@ export default function RecurringTransactions() {
           </div>
 
           {/* Table */}
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200 bg-gray-50">
+                <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Template Name</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Type</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Frequency</th>
@@ -298,10 +298,10 @@ export default function RecurringTransactions() {
 
       {/* Generation Log Tab */}
       {activeTab === "log" && (
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Template</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Type</th>
@@ -405,7 +405,7 @@ export default function RecurringTransactions() {
 
             {/* Invoice-specific template fields */}
             {form.transactionType === "Invoice" && (
-              <div className="border-t border-gray-200 pt-4 space-y-4">
+              <div className="border-t border-gray-200 dark:border-slate-700 pt-4 space-y-4">
                 <h3 className="text-sm font-semibold text-gray-700 flex items-center gap-2"><FileText size={14} /> Invoice Template Details</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                   <div>

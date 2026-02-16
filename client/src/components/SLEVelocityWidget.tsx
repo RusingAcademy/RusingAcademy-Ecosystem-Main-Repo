@@ -108,7 +108,7 @@ export function SLEVelocityWidget({
               />
             </div>
             <div 
-              className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-blue-500 rounded-full shadow-md"
+              className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white dark:bg-slate-900 border-2 border-blue-500 rounded-full shadow-md"
               style={{ left: `calc(${(currentProgress / targetProgress) * 100}% - 8px)` }}
             />
           </div>
@@ -123,21 +123,21 @@ export function SLEVelocityWidget({
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
-            <Clock className="h-4 w-4 text-black" />
+            <Clock className="h-4 w-4 text-black dark:text-white" />
             <span className="text-sm text-black dark:text-cyan-300">{l.weeklyHours}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-white">{weeklyHours}h</p>
         </div>
         <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
-            <TrendingUp className="h-4 w-4 text-black" />
+            <TrendingUp className="h-4 w-4 text-black dark:text-white" />
             <span className="text-sm text-black dark:text-cyan-300">{l.avgProgress}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-white">+{averageProgress}%</p>
         </div>
         <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
-            <Calendar className="h-4 w-4 text-black" />
+            <Calendar className="h-4 w-4 text-black dark:text-white" />
             <span className="text-sm text-black dark:text-cyan-300">{l.estimatedReady}</span>
           </div>
           <p className="text-lg font-bold text-black dark:text-white">
@@ -147,7 +147,7 @@ export function SLEVelocityWidget({
         {daysUntilExam && (
           <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
             <div className="flex items-center gap-2 mb-1">
-              <Target className="h-4 w-4 text-black" />
+              <Target className="h-4 w-4 text-black dark:text-white" />
               <span className="text-sm text-black dark:text-cyan-300">{l.daysUntilExam}</span>
             </div>
             <p className="text-2xl font-bold text-black dark:text-white">{daysUntilExam}</p>

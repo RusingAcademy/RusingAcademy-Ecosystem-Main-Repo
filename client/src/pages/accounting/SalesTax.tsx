@@ -93,7 +93,7 @@ export default function SalesTax() {
               <span className="text-gray-600">Paid on purchases</span>
               <span className="font-medium text-gray-800">${Number(currentFiling.taxPaid || 0).toFixed(2)}</span>
             </div>
-            <div className="flex items-center justify-between text-sm font-bold border-t border-gray-200 pt-2">
+            <div className="flex items-center justify-between text-sm font-bold border-t border-gray-200 dark:border-slate-700 pt-2">
               <span className="text-gray-800">Net tax owing</span>
               <span className="text-gray-900">${Number(currentFiling.amountOwing || 0).toFixed(2)}</span>
             </div>
@@ -122,7 +122,7 @@ export default function SalesTax() {
 
       {/* Filing History */}
       <h2 className="text-lg font-semibold text-gray-800 mb-4">Filing History</h2>
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-50 border-b">

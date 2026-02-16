@@ -143,7 +143,7 @@ const GrammarDrillsAdmin = () => {
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white dark:bg-slate-900 divide-y divide-gray-200">
                       {(results as any[]).map((r: any) => (
                         <tr key={r.id}>
                           <td className="px-4 py-3 text-sm font-medium text-gray-900">{r.userName || `User #${r.userId}`}</td>

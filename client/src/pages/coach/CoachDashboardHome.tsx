@@ -11,7 +11,7 @@ const ACCENT = "#7c3aed";
 
 function KPICard({ icon, value, label, trend, trendUp, loading }: { icon: string; value: string; label: string; trend?: string; trendUp?: boolean; loading?: boolean }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${ACCENT}10` }}>
           <span className="material-icons text-xl" style={{ color: ACCENT }}>{icon}</span>
@@ -97,7 +97,7 @@ export default function CoachDashboardHome() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Upcoming Sessions */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl border border-gray-100 p-5">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-gray-900">
                   {lang === "fr" ? "Sessions à venir" : "Upcoming Sessions"}
@@ -122,7 +122,7 @@ export default function CoachDashboardHome() {
               ) : (
                 <div className="space-y-3">
                   {upcomingSessions.map((session: any) => (
-                    <div key={session.id} className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
+                    <div key={session.id} className="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
                         {(session.learnerName || "?").charAt(0)}
                       </div>
@@ -155,7 +155,7 @@ export default function CoachDashboardHome() {
                 { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "#d97706" },
               ].map((action) => (
                 <Link key={action.label} href={action.href}>
-                  <button className="w-full flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-all group">
+                  <button className="w-full flex flex-col items-center gap-2 p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 hover:shadow-md transition-all group">
                     <span className="material-icons text-2xl transition-transform group-hover:scale-110" style={{ color: action.color }}>
                       {action.icon}
                     </span>
@@ -169,7 +169,7 @@ export default function CoachDashboardHome() {
           {/* Right Column */}
           <div className="space-y-6">
             {/* Active Learners */}
-            <div className="bg-white rounded-xl border border-gray-100 p-5">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5">
               <h2 className="text-base font-semibold text-gray-900 mb-4">
                 {lang === "fr" ? "Étudiants actifs" : "Active Students"}
               </h2>
@@ -216,7 +216,7 @@ export default function CoachDashboardHome() {
               </h3>
               {earningsQuery.isLoading ? (
                 <div className="space-y-2">
-                  {[1, 2, 3].map((i) => <div key={i} className="h-5 bg-white/10 rounded animate-pulse" />)}
+                  {[1, 2, 3].map((i) => <div key={i} className="h-5 bg-white dark:bg-slate-900/10 rounded animate-pulse" />)}
                 </div>
               ) : (
                 <div className="space-y-2">

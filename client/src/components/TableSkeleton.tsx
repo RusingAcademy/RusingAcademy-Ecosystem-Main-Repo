@@ -12,9 +12,9 @@ export function TableSkeleton({ columns = 5, rows = 8 }: { columns?: number; row
         <div className="ml-auto h-8 bg-gray-200 rounded-lg w-36" />
       </div>
       {/* Table skeleton */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         {/* Table header */}
-        <div className="flex gap-4 px-4 py-3 border-b border-gray-200 bg-gray-50">
+        <div className="flex gap-4 px-4 py-3 border-b border-gray-200 dark:border-slate-700 bg-gray-50">
           {Array.from({ length: columns }).map((_, i) => (
             <div key={i} className="h-3 bg-gray-200 rounded flex-1" />
           ))}
@@ -76,7 +76,7 @@ export function DetailSkeleton() {
         <div className="h-5 w-5 bg-gray-200 rounded" />
         <div className="h-6 bg-gray-200 rounded w-48" />
       </div>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
         <div className="grid grid-cols-2 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i}>
@@ -106,7 +106,7 @@ export function ReportSkeleton() {
           <div className="h-9 bg-gray-200 rounded w-20" />
         </div>
       </div>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
         <div className="text-center mb-6">
           <div className="h-5 bg-gray-200 rounded w-40 mx-auto mb-2" />
           <div className="h-4 bg-gray-200 rounded w-32 mx-auto" />

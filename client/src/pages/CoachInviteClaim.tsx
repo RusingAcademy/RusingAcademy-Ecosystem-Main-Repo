@@ -103,7 +103,7 @@ export default function CoachInviteClaim() {
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
-            <p className="text-sm text-black">
+            <p className="text-sm text-black dark:text-white">
               Expirée le: {new Date(invitation.expiresAt).toLocaleDateString('fr-CA')}
             </p>
             <Button onClick={() => setLocation("/")} variant="outline">
@@ -235,7 +235,7 @@ export default function CoachInviteClaim() {
           </div>
 
           {/* Expiration notice */}
-          <p className="text-xs text-black text-center">
+          <p className="text-xs text-black dark:text-white text-center">
             Cette invitation expire le {new Date(invitation.expiresAt).toLocaleDateString('fr-CA')}
           </p>
 
@@ -271,7 +271,7 @@ export default function CoachInviteClaim() {
                   Se connecter pour réclamer
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-                <p className="text-xs text-black text-center">
+                <p className="text-xs text-black dark:text-white text-center">
                   Vous devrez vous connecter ou créer un compte pour réclamer ce profil
                 </p>
               </>

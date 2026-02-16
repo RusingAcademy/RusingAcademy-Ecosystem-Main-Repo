@@ -80,7 +80,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
             {sectionId ? "Section" : "Page"} Revision History
           </DialogTitle>
           {sectionTitle && (
-            <p className="text-xs text-black mt-1">Section: {sectionTitle}</p>
+            <p className="text-xs text-black dark:text-white mt-1">Section: {sectionTitle}</p>
           )}
         </DialogHeader>
 
@@ -123,7 +123,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                             <span className="text-[10px] text-cyan-300 truncate max-w-[150px]">{rev.fieldChanged}</span>
                           )}
                           {(rev as any).sectionTitle && (
-                            <span className="text-[10px] text-black font-medium truncate max-w-[120px]">
+                            <span className="text-[10px] text-black dark:text-white font-medium truncate max-w-[120px]">
                               {(rev as any).sectionTitle}
                             </span>
                           )}
@@ -171,8 +171,8 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                               <div className="bg-red-50 rounded p-2 text-[10px] space-y-0.5 max-h-32 overflow-auto">
                                 {Object.entries(rev.previousData).map(([k, v]) => (
                                   <div key={k}>
-                                    <span className="text-black">{k}:</span>{" "}
-                                    <span className="text-black break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
+                                    <span className="text-black dark:text-white">{k}:</span>{" "}
+                                    <span className="text-black dark:text-white break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
                                   </div>
                                 ))}
                               </div>
@@ -184,8 +184,8 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                               <div className="bg-green-50 rounded p-2 text-[10px] space-y-0.5 max-h-32 overflow-auto">
                                 {Object.entries(rev.newData).map(([k, v]) => (
                                   <div key={k}>
-                                    <span className="text-black">{k}:</span>{" "}
-                                    <span className="text-black break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
+                                    <span className="text-black dark:text-white">{k}:</span>{" "}
+                                    <span className="text-black dark:text-white break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
                                   </div>
                                 ))}
                               </div>

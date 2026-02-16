@@ -51,7 +51,7 @@ export default function PathList() {
           }} />
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/20 text-white backdrop-blur-sm">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-white dark:bg-slate-900/20 text-white backdrop-blur-sm">
                 {isESL ? "English as a Second Language" : "Français langue seconde"}
               </span>
             </div>

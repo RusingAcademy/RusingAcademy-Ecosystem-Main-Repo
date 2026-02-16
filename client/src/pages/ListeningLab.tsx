@@ -220,7 +220,7 @@ export default function ListeningLab() {
                 { label: t("listening.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "#f5a623" },
                 { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "#8b5cf6" },
               ].map((s, i) => (
-                <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center" role="status">
+                <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 shadow-sm text-center" role="status">
                   <span className="material-icons text-lg mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{s.value}</div>
                   <div className="text-xs text-gray-500">{s.label}</div>
@@ -241,7 +241,7 @@ export default function ListeningLab() {
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("listening.emptyDesc")}</p>
                 </div>
               ) : history.map((h: any, i: number) => (
-                <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex items-center justify-between">
+                <div key={i} className="bg-white dark:bg-slate-900 rounded-xl p-4 border border-gray-100 shadow-sm flex items-center justify-between">
                   <div>
                     <div className="font-semibold text-gray-900">{h.exerciseTitle}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
@@ -268,7 +268,7 @@ export default function ListeningLab() {
               <div className="space-y-4" role="list" aria-label={isFr ? "Exercices d'écoute" : "Listening exercises"}>
                 {EXERCISES[selectedLevel]?.map((e, i) => (
                   <div key={i} role="listitem"
-                    className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
+                    className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
                     onClick={() => { setExerciseIndex(i); startExercise(); }}
                     onKeyDown={ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setExerciseIndex(i); startExercise(); }}}
                     tabIndex={0}
@@ -297,7 +297,7 @@ export default function ListeningLab() {
                 </div>
               </div>
               {/* Audio Player */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-6">
                 <span className="material-icons text-6xl text-teal-700 mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <button onClick={isPlaying ? stopAudio : playAudio}
@@ -348,7 +348,7 @@ export default function ListeningLab() {
               </div>
               <div className="space-y-6">
                 {exercise?.questions.map((q, qi) => (
-                  <div key={qi} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                  <div key={qi} className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 shadow-sm">
                     <p className="font-semibold text-gray-900 mb-4">{qi + 1}. {q.q}</p>
                     <div className="space-y-2" role="radiogroup" aria-label={q.q}>
                       {q.options.map((opt, oi) => (
@@ -372,7 +372,7 @@ export default function ListeningLab() {
             </div>
           ) : (
             <div role="region" aria-label={t("grammar.drillComplete")}>
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-8">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-8">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
                   <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>

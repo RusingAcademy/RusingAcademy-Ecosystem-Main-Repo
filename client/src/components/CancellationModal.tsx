@@ -114,13 +114,13 @@ export function CancellationModal({ isOpen, onClose, session, onCancelled }: Can
 
         <div className="space-y-4 py-4">
           {/* Session Details */}
-          <div className="bg-white rounded-lg p-4 space-y-2">
+          <div className="bg-white dark:bg-slate-900 rounded-lg p-4 space-y-2">
             <div className="flex justify-between">
-              <span className="text-black">{labels.coachLabel}:</span>
+              <span className="text-black dark:text-white">{labels.coachLabel}:</span>
               <span className="font-medium">{session.coachName}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-black">{labels.dateLabel}:</span>
+              <span className="text-black dark:text-white">{labels.dateLabel}:</span>
               <span className="font-medium">
                 {sessionDateTime.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", {
                   weekday: "long",
@@ -131,11 +131,11 @@ export function CancellationModal({ isOpen, onClose, session, onCancelled }: Can
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-black">{labels.timeLabel}:</span>
+              <span className="text-black dark:text-white">{labels.timeLabel}:</span>
               <span className="font-medium">{session.time} ({session.duration} min)</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-black">{labels.priceLabel}:</span>
+              <span className="text-black dark:text-white">{labels.priceLabel}:</span>
               <span className="font-medium">${session.price.toFixed(2)}</span>
             </div>
           </div>
@@ -146,7 +146,7 @@ export function CancellationModal({ isOpen, onClose, session, onCancelled }: Can
               <Clock className="h-4 w-4" />
               {labels.policyTitle}
             </h4>
-            <ul className="text-sm space-y-1 text-black">
+            <ul className="text-sm space-y-1 text-black dark:text-white">
               <li>• {labels.policy24h}</li>
               <li>• {labels.policyLess24h}</li>
             </ul>

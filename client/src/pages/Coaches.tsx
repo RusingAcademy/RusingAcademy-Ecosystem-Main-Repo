@@ -460,7 +460,7 @@ export default function Coaches() {
                                     : 'bg-blue-500/90 text-white'
                                 }`}>
                                   {availability.color === 'green' && (
-                                    <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                                    <span className="w-2 h-2 rounded-full bg-white dark:bg-slate-900 animate-pulse" />
                                   )}
                                   {availability.color !== 'green' && <Calendar className="w-3 h-3" />}
                                   {availability.label}
@@ -529,7 +529,7 @@ export default function Coaches() {
                                 </Badge>
                               ))}
                               {coach.specializationsArray.length > 4 && (
-                                <Badge variant="outline" className="border-slate-200 dark:border-teal-800 text-black px-3 py-1">
+                                <Badge variant="outline" className="border-slate-200 dark:border-teal-800 text-black dark:text-white px-3 py-1">
                                   +{coach.specializationsArray.length - 4}
                                 </Badge>
                               )}

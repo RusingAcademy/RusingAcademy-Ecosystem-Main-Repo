@@ -84,8 +84,8 @@ export default function NotificationsCenter() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-black">Notifications Center</h1>
-          <p className="text-black mt-1">
+          <h1 className="text-2xl font-bold text-black dark:text-white">Notifications Center</h1>
+          <p className="text-black dark:text-white mt-1">
             {unreadCount ? `${unreadCount} unread` : "All caught up"} — Manage alerts for payments, enrollments, reviews, and system events
           </p>
         </div>
@@ -116,7 +116,7 @@ export default function NotificationsCenter() {
           <CardContent className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-sm font-medium text-black">Type</label>
+                <label className="text-sm font-medium text-black dark:text-white">Type</label>
                 <select
                   className="w-full mt-1 px-3 py-2 border rounded-lg text-sm"
                   value={composeType}
@@ -130,7 +130,7 @@ export default function NotificationsCenter() {
                 </select>
               </div>
               <div>
-                <label className="text-sm font-medium text-black">Target</label>
+                <label className="text-sm font-medium text-black dark:text-white">Target</label>
                 <select
                   className="w-full mt-1 px-3 py-2 border rounded-lg text-sm"
                   value={composeTarget}
@@ -211,7 +211,7 @@ export default function NotificationsCenter() {
           <Card>
             <CardContent className="py-12 text-center">
               <Bell className="w-12 h-12 text-white/90 mx-auto mb-3" />
-              <p className="text-black font-medium">No notifications</p>
+              <p className="text-black dark:text-white font-medium">No notifications</p>
               <p className="text-cyan-300 text-sm mt-1">You're all caught up!</p>
             </CardContent>
           </Card>
@@ -240,7 +240,7 @@ export default function NotificationsCenter() {
                           <Badge variant="outline" className="text-xs">{n.targetRole}</Badge>
                         )}
                       </div>
-                      <p className="text-sm text-black mt-0.5 line-clamp-2">{n.message}</p>
+                      <p className="text-sm text-black dark:text-white mt-0.5 line-clamp-2">{n.message}</p>
                       <span className="text-xs text-cyan-300 mt-1 block">{formatDate(n.createdAt)}</span>
                     </div>
                     <div className="flex items-center gap-1">

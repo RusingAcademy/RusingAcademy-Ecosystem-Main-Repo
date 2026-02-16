@@ -185,7 +185,7 @@ export default function ForBusiness() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black">
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-white">
                   <Building2 className="w-4 h-4 text-cta-2" />
                   {t.badge}
                 </span>
@@ -193,7 +193,7 @@ export default function ForBusiness() {
               
               <motion.h1 
                 variants={fadeInUp}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black dark:text-white"
               >
                 {t.title}{" "}
                 <span className="text-cta-2">{t.highlight}</span>
@@ -201,7 +201,7 @@ export default function ForBusiness() {
               
               <motion.p 
                 variants={fadeInUp}
-                className="text-lg md:text-xl text-black mb-8 max-w-3xl mx-auto leading-relaxed"
+                className="text-lg md:text-xl text-black dark:text-white mb-8 max-w-3xl mx-auto leading-relaxed"
               >
                 {t.subtitle}
               </motion.p>
@@ -228,24 +228,24 @@ export default function ForBusiness() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-gray-200/50 bg-white/50 backdrop-blur-sm">
+        <section className="py-8 border-y border-gray-200 dark:border-slate-700/50 bg-white dark:bg-slate-900/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={clients.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{clients.count}+</div>
-                <div className="text-sm text-black">{t.stats[0].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[0].label}</div>
               </div>
               <div ref={employees.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{employees.count.toLocaleString()}+</div>
-                <div className="text-sm text-black">{t.stats[1].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[1].label}</div>
               </div>
               <div ref={completion.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{completion.count}%</div>
-                <div className="text-sm text-black">{t.stats[2].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[2].label}</div>
               </div>
               <div ref={satisfaction.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
-                <div className="text-sm text-black">{t.stats[3].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[3].label}</div>
               </div>
             </div>
           </div>
@@ -254,7 +254,7 @@ export default function ForBusiness() {
         {/* Industries Section */}
         <section className="py-12 px-4">
           <div className="container mx-auto text-center">
-            <h2 className="text-xl font-semibold text-black mb-6">{t.industriesTitle}</h2>
+            <h2 className="text-xl font-semibold text-black dark:text-white mb-6">{t.industriesTitle}</h2>
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
               {t.industries.map((industry, i) => (
                 <motion.span 
@@ -262,7 +262,7 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.05 }}
-                  className="px-4 py-2 rounded-full bg-white/80 border border-gray-200/50 text-black text-sm shadow-sm"
+                  className="px-4 py-2 rounded-full bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 text-black dark:text-white text-sm shadow-sm"
                 >
                   {industry}
                 </motion.span>
@@ -275,7 +275,7 @@ export default function ForBusiness() {
         <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.benefitsTitle}
               </h2>
             </div>
@@ -287,13 +287,13 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="w-12 h-12 rounded-xl bg-cta-2/10 flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-cta-2" />
                   </div>
-                  <h3 className="font-bold text-black mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-black">{benefit.desc}</p>
+                  <h3 className="font-bold text-black dark:text-white mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-black dark:text-white">{benefit.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -304,10 +304,10 @@ export default function ForBusiness() {
         <section className="py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.packagesTitle}
               </h2>
-              <p className="text-lg text-black max-w-2xl mx-auto">
+              <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
                 {t.packagesSubtitle}
               </p>
             </div>
@@ -334,15 +334,15 @@ export default function ForBusiness() {
                     </div>
                   )}
                   <div className="pt-2">
-                    <h3 className="text-xl font-bold text-black">{pkg.name}</h3>
-                    <p className="text-sm text-black mb-4">{pkg.size}</p>
+                    <h3 className="text-xl font-bold text-black dark:text-white">{pkg.name}</h3>
+                    <p className="text-sm text-black dark:text-white mb-4">{pkg.size}</p>
                     <div className="mb-6">
-                      <span className="text-3xl font-bold text-black">{pkg.price}</span>
-                      <span className="text-black">{pkg.period}</span>
+                      <span className="text-3xl font-bold text-black dark:text-white">{pkg.price}</span>
+                      <span className="text-black dark:text-white">{pkg.period}</span>
                     </div>
                     <ul className="space-y-3 mb-6">
                       {pkg.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-black">
+                        <li key={i} className="flex items-start gap-2 text-sm text-black dark:text-white">
                           <CheckCircle2 className="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" />
                           {feature}
                         </li>
@@ -369,7 +369,7 @@ export default function ForBusiness() {
         <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.testimonialsTitle}
               </h2>
             </div>
@@ -381,12 +381,12 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 shadow-lg"
                 >
                   <Quote className="w-8 h-8 text-cta-2/30 mb-4" />
-                  <p className="text-black mb-6 italic">"{testimonial.quote}"</p>
+                  <p className="text-black dark:text-white mb-6 italic">"{testimonial.quote}"</p>
                   <div>
-                    <p className="font-semibold text-black">{testimonial.author}</p>
+                    <p className="font-semibold text-black dark:text-white">{testimonial.author}</p>
                     <p className="text-sm text-cta-2">{testimonial.company}</p>
                   </div>
                 </motion.div>
@@ -404,15 +404,15 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                 >
-                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-teal-400/10 border border-teal-400/20 text-black">
+                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-teal-400/10 border border-teal-400/20 text-black dark:text-white">
                     <Sparkles className="w-4 h-4 text-teal-400" />
                     {isEn ? "Get Started Today" : "Commencez aujourd'hui"}
                   </span>
                 </motion.div>
-                <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                   {t.ctaTitle}
                 </h2>
-                <p className="text-lg text-black max-w-2xl mx-auto">
+                <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
                   {t.ctaSubtitle}
                 </p>
               </div>
@@ -420,47 +420,47 @@ export default function ForBusiness() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-xl"
+                className="p-8 rounded-3xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 shadow-xl"
               >
-                <h3 className="text-xl font-bold text-black mb-2">{t.formTitle}</h3>
-                <p className="text-black mb-6">{t.formSubtitle}</p>
+                <h3 className="text-xl font-bold text-black dark:text-white mb-2">{t.formTitle}</h3>
+                <p className="text-black dark:text-white mb-6">{t.formSubtitle}</p>
 
                 {formSubmitted ? (
                   <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
                       <CheckCircle2 className="w-8 h-8 text-teal-400" />
                     </div>
-                    <p className="text-lg font-semibold text-black">{t.formSuccess}</p>
+                    <p className="text-lg font-semibold text-black dark:text-white">{t.formSuccess}</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.company} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.employees} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-cta-2 focus:ring-orange-500"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-cta-2 focus:ring-orange-500"
+                      className="min-h-[120px] rounded-xl border-gray-200 dark:border-slate-700 focus:border-cta-2 focus:ring-orange-500"
                       rows={4}
                     />
                     <Button 

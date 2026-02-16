@@ -118,7 +118,7 @@ export default function Notes() {
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
       <main className="flex-1 lg:ml-[240px] overflow-y-auto">
         {/* Mobile header */}
-        <div className="lg:hidden flex items-center gap-3 p-4 bg-white border-b border-gray-200 sticky top-0 z-30">
+        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-30">
           <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100">
             <span className="material-icons text-gray-600">menu</span>
           </button>
@@ -154,7 +154,7 @@ export default function Notes() {
                 placeholder="Search notes..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
@@ -179,7 +179,7 @@ export default function Notes() {
           {/* Editor Modal */}
           {showEditor && (
             <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4" onClick={() => resetForm()}>
-              <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-bold text-gray-900">
@@ -195,7 +195,7 @@ export default function Notes() {
                     placeholder="Note title..."
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-900 font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
                   />
 
                   <textarea
@@ -203,7 +203,7 @@ export default function Notes() {
                     value={content}
                     onChange={e => setContent(e.target.value)}
                     rows={10}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700 resize-none font-mono"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700 resize-none font-mono"
                   />
 
                   {/* Tags */}
@@ -225,7 +225,7 @@ export default function Notes() {
                         value={tagInput}
                         onChange={e => setTagInput(e.target.value)}
                         onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); handleAddTag(); } }}
-                        className="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700/20"
+                        className="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-slate-700 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-700/20"
                       />
                       <button onClick={handleAddTag} className="px-3 py-2 rounded-lg bg-gray-100 text-gray-600 text-sm hover:bg-gray-200">
                         Add
@@ -332,13 +332,13 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }: {
     <div className={`${colorClasses.bg} border ${colorClasses.border} rounded-2xl p-5 transition-all hover:shadow-md group relative`}>
       {/* Actions */}
       <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button onClick={() => onTogglePin(note.id, note.isPinned)} className="p-1.5 rounded-lg hover:bg-white/80" title={note.isPinned ? "Unpin" : "Pin"}>
+        <button onClick={() => onTogglePin(note.id, note.isPinned)} className="p-1.5 rounded-lg hover:bg-white dark:bg-slate-900/80" title={note.isPinned ? "Unpin" : "Pin"}>
           <span className={`material-icons text-sm ${note.isPinned ? "text-teal-700" : "text-gray-400"}`}>push_pin</span>
         </button>
-        <button onClick={() => onEdit(note)} className="p-1.5 rounded-lg hover:bg-white/80" title="Edit">
+        <button onClick={() => onEdit(note)} className="p-1.5 rounded-lg hover:bg-white dark:bg-slate-900/80" title="Edit">
           <span className="material-icons text-sm text-gray-400">edit</span>
         </button>
-        <button onClick={() => { if (confirm("Delete this note?")) onDelete(note.id); }} className="p-1.5 rounded-lg hover:bg-white/80" title="Delete">
+        <button onClick={() => { if (confirm("Delete this note?")) onDelete(note.id); }} className="p-1.5 rounded-lg hover:bg-white dark:bg-slate-900/80" title="Delete">
           <span className="material-icons text-sm text-red-400">delete</span>
         </button>
       </div>

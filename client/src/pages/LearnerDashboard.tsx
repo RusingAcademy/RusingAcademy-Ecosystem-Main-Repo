@@ -482,7 +482,7 @@ export default function LearnerDashboard() {
                     })}
                   </span>
                   {displayStreak > 0 && (
-                    <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">
+                    <Badge className="bg-white dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-900/30">
                       <Flame className="h-3 w-3 mr-1" />
                       {displayStreak} {language === "fr" ? "jours" : "days"}
                     </Badge>
@@ -499,7 +499,7 @@ export default function LearnerDashboard() {
                 <RoleSwitcherCompact />
                 {resumePoint && (
                   <Link href={`/courses/${resumePoint.courseId}/lessons/${resumePoint.lessonId}`}>
-                    <Button size="lg" className="bg-white text-black hover:bg-slate-100 shadow-lg">
+                    <Button size="lg" className="bg-white dark:bg-slate-900 text-black dark:text-white hover:bg-slate-100 shadow-lg">
                       <Play className="h-5 w-5 mr-2" />
                       {language === "fr" ? "Reprendre" : "Resume"}
                     </Button>
@@ -776,7 +776,7 @@ export default function LearnerDashboard() {
                               coachName: session.coachName || "Coach",
                               date: new Date(session.scheduledAt),
                             })}
-                            className="text-black hover:text-purple-600"
+                            className="text-black dark:text-white hover:text-purple-600"
                           >
                             <CalendarClock className="h-4 w-4" />
                           </Button>

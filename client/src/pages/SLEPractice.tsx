@@ -158,7 +158,7 @@ export default function SLEPractice() {
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-foundation to-teal-700 rounded-3xl p-8 mb-8 text-white">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-900/20 flex items-center justify-center">
               <Target className="h-8 w-8" />
             </div>
             <div>
@@ -175,15 +175,15 @@ export default function SLEPractice() {
           
           {/* Session Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-            <div className="bg-white/10 rounded-xl p-4 text-center">
+            <div className="bg-white dark:bg-slate-900/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{completedPhrases.size}</div>
               <div className="text-sm text-white/90">{isEn ? "Completed" : "Terminées"}</div>
             </div>
-            <div className="bg-white/10 rounded-xl p-4 text-center">
+            <div className="bg-white dark:bg-slate-900/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{sessionScore}</div>
               <div className="text-sm text-white/90">{isEn ? "Points" : "Points"}</div>
             </div>
-            <div className="bg-white/10 rounded-xl p-4 text-center">
+            <div className="bg-white dark:bg-slate-900/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{Math.round(progress)}%</div>
               <div className="text-sm text-white/90">{isEn ? "Progress" : "Progrès"}</div>
             </div>

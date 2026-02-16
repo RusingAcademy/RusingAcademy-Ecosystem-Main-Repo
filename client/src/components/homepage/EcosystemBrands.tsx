@@ -48,8 +48,8 @@ export default function EcosystemBrands() {
     <section className="py-16 bg-gradient-to-r from-slate-600 via-slate-500 to-slate-600 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-white rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-white rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-white dark:bg-slate-900 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-white dark:bg-slate-900 rounded-full blur-3xl" />
       </div>
 
       <div className="container relative z-10">

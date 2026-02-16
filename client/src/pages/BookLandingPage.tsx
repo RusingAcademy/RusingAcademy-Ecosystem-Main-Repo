@@ -142,7 +142,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-10 left-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"
       />
-      <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-white/[0.02] rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-white dark:bg-slate-900/[0.02] rounded-full blur-3xl" />
 
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -184,7 +184,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
                   </Badge>
                 )}
                 {item.is_featured && (
-                  <Badge className="bg-white/20 backdrop-blur-sm text-white border-0 text-xs font-semibold shadow-md">
+                  <Badge className="bg-white dark:bg-slate-900/20 backdrop-blur-sm text-white border-0 text-xs font-semibold shadow-md">
                     <Star className="w-3 h-3 mr-1" />
                     {language === "fr" ? "Vedette" : "Featured"}
                   </Badge>
@@ -200,19 +200,19 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
             variants={fadeInRight}
             className="flex-1"
           >
-            <div className="bg-white/[0.07] backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 lg:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
+            <div className="bg-white dark:bg-slate-900/[0.07] backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 lg:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
               {/* Meta badges */}
               <div className="flex flex-wrap gap-2 mb-5">
-                <Badge className="bg-white/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                <Badge className="bg-white dark:bg-slate-900/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                   <FileText className="w-3 h-3 mr-1" />
                   {item.format}
                 </Badge>
-                <Badge className="bg-white/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                <Badge className="bg-white dark:bg-slate-900/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                   <Globe className="w-3 h-3 mr-1" />
                   {langBadge}
                 </Badge>
                 {item.level[0] !== "ALL" && (
-                  <Badge className="bg-white/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                  <Badge className="bg-white dark:bg-slate-900/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                     <GraduationCap className="w-3 h-3 mr-1" />
                     {item.level.join(", ")}
                   </Badge>
@@ -247,7 +247,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
                   <BookMarked className="w-4 h-4" />
                   {language === "fr" ? "Par" : "By"} {item.author}
                 </span>
-                <span className="w-1 h-1 rounded-full bg-white/30" />
+                <span className="w-1 h-1 rounded-full bg-white dark:bg-slate-900/30" />
                 <span className="flex items-center gap-1.5">
                   <BookOpen className="w-4 h-4" />
                   {item.collection.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
@@ -276,7 +276,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-white/20 text-white hover:bg-white/10 gap-2 transition-all duration-200"
+                  className="rounded-full border-white/20 text-white hover:bg-white dark:bg-slate-900/10 gap-2 transition-all duration-200"
                   onClick={() => {
                     if (navigator.share) {
                       navigator.share({
@@ -381,7 +381,7 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
                 <motion.li
                   key={i}
                   variants={cardVariant}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-slate-100 hover:border-teal-500/30 hover:shadow-sm transition-all duration-300 group"
+                  className="flex items-start gap-3 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 hover:border-teal-500/30 hover:shadow-sm transition-all duration-300 group"
                 >
                   <div className="w-6 h-6 rounded-full bg-teal-500/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-teal-500/20 transition-colors">
                     <CheckCircle2 className="w-3.5 h-3.5 text-teal-500" />
@@ -671,7 +671,7 @@ export default function BookLandingPage() {
         <meta property="og:type" content="product" />
       </Helmet>
 
-      <main id="main-content" className="min-h-screen bg-white">
+      <main id="main-content" className="min-h-screen bg-white dark:bg-slate-900">
         {/* Hero */}
         <BookHero item={item} language={language} />
 

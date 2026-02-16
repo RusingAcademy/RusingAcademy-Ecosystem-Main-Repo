@@ -84,7 +84,7 @@ export default function PWAInstallPrompt() {
   if (showBanner) {
     return (
       <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md animate-in slide-in-from-bottom-4 duration-300">
-        <div className="relative rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
+        <div className="relative rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 shadow-lg">
           <button
             onClick={handleDismiss}
             className="absolute right-3 top-3 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
@@ -131,7 +131,7 @@ export default function PWAInstallPrompt() {
   if (showIOSGuide) {
     return (
       <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md animate-in slide-in-from-bottom-4 duration-300">
-        <div className="relative rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
+        <div className="relative rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 shadow-lg">
           <button
             onClick={handleDismiss}
             className="absolute right-3 top-3 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"

@@ -69,7 +69,7 @@ export function AdminPerformanceDashboard({
   return (
     <div className="space-y-8">
       {/* Leaderboard */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <Trophy size={24} className="text-yellow-500" />
@@ -115,7 +115,7 @@ export function AdminPerformanceDashboard({
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200">
+              <tr className="border-b border-gray-200 dark:border-slate-700">
                 <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Rank" : "Classement"}</th>
                 <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Admin" : "Administrateur"}</th>
                 <th className="text-center py-3 px-4 font-semibold text-gray-900">{isEn ? "Reviewed" : "Examinées"}</th>
@@ -133,7 +133,7 @@ export function AdminPerformanceDashboard({
                     setSelectedAdminId(admin.adminId);
                     onSelectAdmin?.(admin.adminId);
                   }}
-                  className="border-b border-gray-100 hover:bg-white cursor-pointer transition-colors"
+                  className="border-b border-gray-100 hover:bg-white dark:bg-slate-900 cursor-pointer transition-colors"
                 >
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-2">
@@ -170,7 +170,7 @@ export function AdminPerformanceDashboard({
 
       {/* Individual Admin Details */}
       {selectedAdminDetails && (
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <h3 className="text-xl font-semibold text-gray-900 mb-6">
             {isEn ? "Performance Details" : "Détails de performance"} - {selectedAdminDetails.adminName}
           </h3>

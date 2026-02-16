@@ -190,7 +190,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
   return (
     <div className="flex flex-col h-full">
       {/* Tab Switcher */}
-      <div className="flex border-b border-gray-200 bg-gray-50/50">
+      <div className="flex border-b border-gray-200 dark:border-slate-700 bg-gray-50/50">
         <button
           onClick={() => setActiveTab("templates")}
           className={`flex-1 px-3 py-2 text-[11px] font-medium transition-colors ${
@@ -224,7 +224,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
               <button
                 key={st.type}
                 onClick={() => onAddBlankSection(st.type)}
-                className="w-full flex items-center gap-2.5 p-2.5 rounded-lg border border-dashed border-gray-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition-all text-left"
+                className="w-full flex items-center gap-2.5 p-2.5 rounded-lg border border-dashed border-gray-200 dark:border-slate-700 hover:border-indigo-300 hover:bg-indigo-50/50 transition-all text-left"
               >
                 <div className={`w-7 h-7 rounded flex items-center justify-center text-white shrink-0 ${st.color}`}>
                   <st.icon className="h-3.5 w-3.5" />
@@ -268,7 +268,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
             </div>
             {showFilters && (
               <div className="space-y-1.5 pt-1">
-                <Label className="text-[10px] text-black">Brand</Label>
+                <Label className="text-[10px] text-black dark:text-white">Brand</Label>
                 <div className="flex flex-wrap gap-1">
                   {[
                     { value: "all", label: "All" },
@@ -342,7 +342,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                   return (
                     <div
                       key={template.id}
-                      className="group relative rounded-lg border border-gray-200 hover:border-indigo-300 hover:shadow-sm transition-all overflow-hidden"
+                      className="group relative rounded-lg border border-gray-200 dark:border-slate-700 hover:border-indigo-300 hover:shadow-sm transition-all overflow-hidden"
                     >
                       {/* Template Card */}
                       <button
@@ -360,7 +360,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                               <p className="text-[10px] text-cyan-300 mt-0.5 line-clamp-2">{template.description}</p>
                             )}
                             <div className="flex items-center gap-1 mt-1.5 flex-wrap">
-                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200">
+                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-slate-700">
                                 {template.sectionType.replace(/_/g, " ")}
                               </Badge>
                               {template.brand !== "universal" && (
@@ -368,7 +368,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                                   {BRAND_LABELS[template.brand]}
                                 </Badge>
                               )}
-                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200">
+                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-slate-700">
                                 <Globe className="h-2.5 w-2.5 mr-0.5" />
                                 {LANGUAGE_LABELS[template.language] || template.language}
                               </Badge>

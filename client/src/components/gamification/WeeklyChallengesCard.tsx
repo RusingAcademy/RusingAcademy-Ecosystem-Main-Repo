@@ -295,7 +295,7 @@ export function WeeklyChallengesCard({
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-full text-black hover:text-black"
+                className="w-full text-black dark:text-white hover:text-black dark:text-white"
                 onClick={() => setShowAll(!showAll)}
               >
                 {showAll ? l.showLess : `${l.viewAll} (${challenges.length - 3} more)`}

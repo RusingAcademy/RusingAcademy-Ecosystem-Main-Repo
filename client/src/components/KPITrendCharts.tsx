@@ -240,7 +240,7 @@ export default function KPITrendCharts() {
   const getTrendIcon = (change: number) => {
     if (change > 2) return <TrendingUp className="h-4 w-4 text-green-500" />;
     if (change < -2) return <TrendingDown className="h-4 w-4 text-red-500" />;
-    return <Minus className="h-4 w-4 text-black" />;
+    return <Minus className="h-4 w-4 text-black dark:text-white" />;
   };
 
   const getTrendColor = (change: number) => {

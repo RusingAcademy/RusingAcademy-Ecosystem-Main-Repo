@@ -239,7 +239,7 @@ export default function ResourceLibrary() {
                   {favoriteResources.map((resource) => {
                     const typeInfo = typeIcons[resource.type];
                     return (
-                      <div key={resource.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-white cursor-pointer">
+                      <div key={resource.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-white dark:bg-slate-900 cursor-pointer">
                         <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center", typeInfo.bg)}>
                           <typeInfo.icon className={cn("h-4 w-4", typeInfo.color)} />
                         </div>

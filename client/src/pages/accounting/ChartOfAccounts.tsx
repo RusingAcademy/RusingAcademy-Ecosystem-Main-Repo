@@ -111,7 +111,7 @@ export default function ChartOfAccounts() {
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white"
+          className="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white dark:bg-slate-900"
         >
           {accountTypes.map((t) => (
             <option key={t as string} value={t as string}>{t as string}</option>
@@ -126,7 +126,7 @@ export default function ChartOfAccounts() {
       <div className="text-sm text-gray-500 mb-2">{filtered.length} accounts</div>
 
       {/* Account Table */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">

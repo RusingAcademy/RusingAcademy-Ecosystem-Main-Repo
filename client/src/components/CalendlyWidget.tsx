@@ -42,7 +42,7 @@ export default function CalendlyWidget({ url, onClose, title = "Schedule Your Se
       aria-modal="true"
       aria-label={title}
     >
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div className="flex items-center gap-3">

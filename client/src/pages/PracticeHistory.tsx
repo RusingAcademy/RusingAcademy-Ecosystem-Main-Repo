@@ -132,7 +132,7 @@ export default function PracticeHistory() {
   if (!user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian flex items-center justify-center p-6">
-        <Card className="max-w-md bg-white/5 border-white/60">
+        <Card className="max-w-md bg-white dark:bg-slate-900/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Connexion requise</CardTitle>
             <CardDescription className="text-cyan-300">
@@ -165,7 +165,7 @@ export default function PracticeHistory() {
             </p>
           </div>
           <Link href="/dashboard">
-            <Button variant="outline" className="border-white/60 text-white hover:bg-white/10">
+            <Button variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10">
               ← Retour au tableau de bord
             </Button>
           </Link>
@@ -173,7 +173,7 @@ export default function PracticeHistory() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card className="bg-white/5 border-white/60">
+          <Card className="bg-white dark:bg-slate-900/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
@@ -187,7 +187,7 @@ export default function PracticeHistory() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/60">
+          <Card className="bg-white dark:bg-slate-900/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
@@ -201,7 +201,7 @@ export default function PracticeHistory() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/60">
+          <Card className="bg-white dark:bg-slate-900/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
@@ -219,7 +219,7 @@ export default function PracticeHistory() {
         {/* Filters */}
         <div className="flex flex-wrap gap-3 mb-6 items-center">
           <Select value={dateRange} onValueChange={setDateRange}>
-            <SelectTrigger className="w-44 bg-white/5 border-white/60 text-white">
+            <SelectTrigger className="w-44 bg-white dark:bg-slate-900/5 border-white/60 text-white">
               <CalendarDays className="w-4 h-4 mr-2 text-cyan-400" />
               <SelectValue placeholder="Toutes les dates" />
             </SelectTrigger>
@@ -233,7 +233,7 @@ export default function PracticeHistory() {
           </Select>
 
           <Select value={coachFilter} onValueChange={setCoachFilter}>
-            <SelectTrigger className="w-44 bg-white/5 border-white/60 text-white">
+            <SelectTrigger className="w-44 bg-white dark:bg-slate-900/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les coaches" />
             </SelectTrigger>
             <SelectContent>
@@ -244,7 +244,7 @@ export default function PracticeHistory() {
           </Select>
 
           <Select value={levelFilter} onValueChange={setLevelFilter}>
-            <SelectTrigger className="w-40 bg-white/5 border-white/60 text-white">
+            <SelectTrigger className="w-40 bg-white dark:bg-slate-900/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les niveaux" />
             </SelectTrigger>
             <SelectContent>
@@ -256,7 +256,7 @@ export default function PracticeHistory() {
           </Select>
 
           <Select value={skillFilter} onValueChange={setSkillFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
+            <SelectTrigger className="w-48 bg-white dark:bg-slate-900/5 border-white/60 text-white">
               <SelectValue placeholder="Toutes les compétences" />
             </SelectTrigger>
             <SelectContent>
@@ -293,7 +293,7 @@ export default function PracticeHistory() {
             {filteredSessions.map((session) => (
               <Card
                 key={session.id}
-                className="bg-white/5 border-white/60 hover:border-cyan-400/30 transition-colors"
+                className="bg-white dark:bg-slate-900/5 border-white/60 hover:border-cyan-400/30 transition-colors"
               >
                 <CardContent className="p-4">
                   <div className="flex items-center gap-4">
@@ -373,7 +373,7 @@ export default function PracticeHistory() {
             ))}
           </div>
         ) : (
-          <Card className="bg-white/5 border-white/60">
+          <Card className="bg-white dark:bg-slate-900/5 border-white/60">
             <CardContent className="p-8 text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-teal-800/20 flex items-center justify-center">
                 <span className="text-3xl">🎯</span>

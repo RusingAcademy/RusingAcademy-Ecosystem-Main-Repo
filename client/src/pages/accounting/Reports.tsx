@@ -135,7 +135,7 @@ export default function Reports() {
       {/* Report Categories */}
       <div className="space-y-2">
         {filteredCategories.map((category) => (
-          <div key={category.title} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div key={category.title} className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
             <button
               className="w-full flex items-center gap-2 px-4 py-3 hover:bg-gray-50 text-left"
               onClick={() => toggleCategory(category.title)}

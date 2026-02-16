@@ -68,10 +68,10 @@ export default function MeetOurExperts() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 font-serif italic">
+          <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-4 font-serif italic">
             {language === 'fr' ? 'Rencontrez nos experts' : 'Meet our experts'}
           </h2>
-          <p className="text-lg text-black max-w-2xl mx-auto">
+          <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Une équipe d\'experts passionnés dédiés à votre réussite dans la fonction publique canadienne'
               : 'A team of passionate experts dedicated to your success in the Canadian public service'}
@@ -83,7 +83,7 @@ export default function MeetOurExperts() {
           {experts.map((expert, index) => (
             <div 
               key={index}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100"
             >
               {/* Photo with metallic frame effect */}
               <div className="relative aspect-[4/5] overflow-hidden">
@@ -105,17 +105,17 @@ export default function MeetOurExperts() {
               </div>
 
               {/* Info Card */}
-              <div className="p-6 bg-white">
-                <h3 className="text-xl font-bold text-black mb-1 font-serif">
+              <div className="p-6 bg-white dark:bg-slate-900">
+                <h3 className="text-xl font-bold text-black dark:text-white mb-1 font-serif">
                   {expert.name}
                 </h3>
                 <p className="text-teal-600 font-medium text-sm mb-1">
                   {language === 'fr' ? expert.titleFr : expert.title}
                 </p>
-                <p className="text-black text-xs mb-4">
+                <p className="text-black dark:text-white text-xs mb-4">
                   {expert.company}
                 </p>
-                <p className="text-black text-sm leading-relaxed mb-4 line-clamp-4">
+                <p className="text-black dark:text-white text-sm leading-relaxed mb-4 line-clamp-4">
                   {language === 'fr' ? expert.bioFr : expert.bio}
                 </p>
                 

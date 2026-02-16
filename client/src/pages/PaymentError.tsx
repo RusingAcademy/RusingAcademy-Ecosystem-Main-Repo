@@ -57,7 +57,7 @@ export default function PaymentError() {
         <div className="max-w-lg w-full space-y-6">
           <Card className="border-red-200 dark:border-red-700/50 overflow-hidden">
             <div className="bg-gradient-to-r from-red-500 to-rose-600 p-8 text-center text-white">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white dark:bg-slate-900/20 flex items-center justify-center">
                 <XCircle className="h-10 w-10" />
               </div>
               <h1 className="text-2xl font-bold mb-2">{errorInfo.title}</h1>

@@ -55,8 +55,8 @@ export default function GeneralLedgerReport() {
         </button>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <div className="text-center py-4 border-b border-gray-200 bg-gray-50">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+        <div className="text-center py-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50">
           <h2 className="text-lg font-bold text-gray-800">RusingAcademy</h2>
           <p className="text-sm text-gray-500">General Ledger</p>
         </div>
@@ -67,7 +67,7 @@ export default function GeneralLedgerReport() {
           <div className="px-4 py-8 text-center text-gray-400">No journal entries found</div>
         ) : (
           Object.entries(grouped).map(([accountName, lines]) => (
-            <div key={accountName} className="border-b border-gray-200">
+            <div key={accountName} className="border-b border-gray-200 dark:border-slate-700">
               <div className="bg-gray-50 px-4 py-2">
                 <h3 className="text-sm font-bold text-gray-700">{accountName}</h3>
               </div>

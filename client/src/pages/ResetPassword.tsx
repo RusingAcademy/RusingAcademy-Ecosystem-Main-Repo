@@ -246,7 +246,7 @@ export default function ResetPassword() {
           </form>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-xs text-black pt-4 border-t border-teal-800">
+          <div className="text-center text-xs text-black dark:text-white pt-4 border-t border-teal-800">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

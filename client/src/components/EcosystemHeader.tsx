@@ -232,7 +232,7 @@ export default function EcosystemHeader() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setSearchOpen(true)}
-                className="rounded-full h-10 w-10 transition-all hover:bg-white/10"
+                className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-slate-900/10"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.1)",
                   border: "1px solid rgba(255,255,255,0.2)",
@@ -248,7 +248,7 @@ export default function EcosystemHeader() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="gap-1.5 rounded-full px-3 h-10 font-medium transition-all hover:bg-white/10"
+                    className="gap-1.5 rounded-full px-3 h-10 font-medium transition-all hover:bg-white dark:bg-slate-900/10"
                     style={{ 
                       backgroundColor: "rgba(255,255,255,0.1)",
                       border: "1px solid rgba(255,255,255,0.2)",
@@ -298,7 +298,7 @@ export default function EcosystemHeader() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="rounded-full h-10 w-10 transition-all hover:bg-white/10 hover:scale-105"
+                className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-slate-900/10 hover:scale-105"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.1)",
                   border: "1px solid rgba(255,255,255,0.2)",
@@ -345,7 +345,7 @@ export default function EcosystemHeader() {
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    className="rounded-full h-10 w-10 transition-all hover:bg-white/10"
+                    className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-slate-900/10"
                     aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                   >
                     <Menu className="h-5 w-5 text-white" aria-hidden="true" />
@@ -535,7 +535,7 @@ export default function EcosystemHeader() {
                   role="dialog"
                   aria-modal="true"
                   aria-label={language === "fr" ? "SLE AI Coach" : "SLE AI Coach"}
-                  className="absolute top-full right-0 mt-4 w-[380px] bg-white rounded-2xl shadow-2xl z-[100] overflow-hidden"
+                  className="absolute top-full right-0 mt-4 w-[380px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl z-[100] overflow-hidden"
                   style={{ boxShadow: "0 25px 50px rgba(0,0,0,0.3)" }}
                 >
                   {/* Header */}
@@ -551,7 +551,7 @@ export default function EcosystemHeader() {
                     <div>
                       <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
                         SLE AI Coach
-                        <span className="bg-white/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
+                        <span className="bg-white dark:bg-slate-900/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
                           Powered by Lingueefy
                         </span>
                       </h3>
@@ -559,7 +559,7 @@ export default function EcosystemHeader() {
                     </div>
                     <button 
                       onClick={() => setStevenAIOpen(false)}
-                      className="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
+                      className="absolute top-3 right-3 w-8 h-8 bg-white dark:bg-slate-900/20 hover:bg-white dark:bg-slate-900/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
                       aria-label={language === "fr" ? "Fermer" : "Close"}
                     >
                       <X className="w-5 h-5" />
@@ -570,8 +570,8 @@ export default function EcosystemHeader() {
                   <div className="p-5">
                     {/* Welcome */}
                     <div className="text-center mb-4">
-                      <h4 className="text-base font-extrabold text-black mb-2">👋 {t.welcome}</h4>
-                      <p className="text-sm text-black leading-relaxed">{t.welcomeDesc}</p>
+                      <h4 className="text-base font-extrabold text-black dark:text-white mb-2">👋 {t.welcome}</h4>
+                      <p className="text-sm text-black dark:text-white leading-relaxed">{t.welcomeDesc}</p>
                     </div>
 
                     {/* 3 Main Options */}
@@ -583,8 +583,8 @@ export default function EcosystemHeader() {
                             <Mic className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h5 className="text-sm font-extrabold text-black">{t.voicePractice}</h5>
-                            <p className="text-xs text-black">{t.voicePracticeDesc}</p>
+                            <h5 className="text-sm font-extrabold text-black dark:text-white">{t.voicePractice}</h5>
+                            <p className="text-xs text-black dark:text-white">{t.voicePracticeDesc}</p>
                           </div>
                         </div>
                       </Link>
@@ -596,8 +596,8 @@ export default function EcosystemHeader() {
                             <ClipboardCheck className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h5 className="text-sm font-extrabold text-black">{t.placementTest}</h5>
-                            <p className="text-xs text-black">{t.placementTestDesc}</p>
+                            <h5 className="text-sm font-extrabold text-black dark:text-white">{t.placementTest}</h5>
+                            <p className="text-xs text-black dark:text-white">{t.placementTestDesc}</p>
                           </div>
                         </div>
                       </Link>
@@ -609,8 +609,8 @@ export default function EcosystemHeader() {
                             <GraduationCap className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h5 className="text-sm font-extrabold text-black">{t.examSimulation}</h5>
-                            <p className="text-xs text-black">{t.examSimulationDesc}</p>
+                            <h5 className="text-sm font-extrabold text-black dark:text-white">{t.examSimulation}</h5>
+                            <p className="text-xs text-black dark:text-white">{t.examSimulationDesc}</p>
                           </div>
                         </div>
                       </Link>
@@ -618,8 +618,8 @@ export default function EcosystemHeader() {
                   </div>
 
                   {/* Footer */}
-                  <div className="px-5 py-3 bg-white text-center border-t border-gray-100">
-                    <span className="text-xs text-black">⚡ {t.poweredBy}</span>
+                  <div className="px-5 py-3 bg-white dark:bg-slate-900 text-center border-t border-gray-100">
+                    <span className="text-xs text-black dark:text-white">⚡ {t.poweredBy}</span>
                   </div>
                 </div>
               )}

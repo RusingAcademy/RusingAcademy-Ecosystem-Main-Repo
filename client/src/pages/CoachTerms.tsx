@@ -275,7 +275,7 @@ export default function CoachTerms() {
                 loading="lazy"
                 src="/rusinga-logo.png"
                 alt="Rusinga International Consulting Ltd."
-                className="w-12 h-12 rounded-lg bg-white p-1"
+                className="w-12 h-12 rounded-lg bg-white dark:bg-slate-900 p-1"
                 onError={(e) => { e.currentTarget.style.display = "none"; }}
               />
               <div>
@@ -283,7 +283,7 @@ export default function CoachTerms() {
                 <p className="text-teal-100 text-sm">{t.hero.subtitle[l]}</p>
               </div>
             </div>
-            <div className="bg-white/10 rounded-lg p-4 mt-4">
+            <div className="bg-white dark:bg-slate-900/10 rounded-lg p-4 mt-4">
               <p className="font-semibold">{t.hero.company}</p>
               <p className="text-teal-100 text-sm">{t.hero.brand[l]}</p>
               <p className="text-teal-200 text-xs mt-2">{t.hero.platform[l]}</p>

@@ -142,7 +142,7 @@ export function StreakTracker({
             <span className="text-xs text-black dark:text-cyan-300">{l.longestStreak}</span>
           </div>
           <p className="text-xl font-bold text-black dark:text-white">
-            {longestStreak} <span className="text-sm font-normal text-black">{l.days}</span>
+            {longestStreak} <span className="text-sm font-normal text-black dark:text-white">{l.days}</span>
           </p>
         </div>
         
@@ -153,7 +153,7 @@ export function StreakTracker({
               <span className="text-xs text-black dark:text-cyan-300">{l.nextMilestone}</span>
             </div>
             <p className="text-xl font-bold text-black dark:text-white">
-              {nextMilestone} <span className="text-sm font-normal text-black">{l.days}</span>
+              {nextMilestone} <span className="text-sm font-normal text-black dark:text-white">{l.days}</span>
             </p>
           </div>
         )}
@@ -228,7 +228,7 @@ export function StreakMilestone({
       "p-6 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white text-center",
       className
     )}>
-      <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+      <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-900/20 flex items-center justify-center mx-auto mb-4">
         <Flame className="h-8 w-8" />
       </div>
       <h3 className="text-xl font-bold mb-2">{l.congratulations}</h3>
@@ -236,7 +236,7 @@ export function StreakMilestone({
         {l.reached} <span className="font-bold text-2xl">{milestone}</span> {l.dayStreak}
       </p>
       {reward && (
-        <div className="p-3 rounded-lg bg-white/20 mb-4">
+        <div className="p-3 rounded-lg bg-white dark:bg-slate-900/20 mb-4">
           <p className="text-sm opacity-90 mb-1">{l.reward}</p>
           <p className="font-semibold flex items-center justify-center gap-2">
             <Gift className="h-4 w-4" />
@@ -247,7 +247,7 @@ export function StreakMilestone({
       {onClaim && (
         <button
           onClick={onClaim}
-          className="px-6 py-2 rounded-full bg-white text-orange-600 font-semibold hover:bg-white/90 transition-colors"
+          className="px-6 py-2 rounded-full bg-white dark:bg-slate-900 text-orange-600 font-semibold hover:bg-white dark:bg-slate-900/90 transition-colors"
         >
           {l.claim}
         </button>
