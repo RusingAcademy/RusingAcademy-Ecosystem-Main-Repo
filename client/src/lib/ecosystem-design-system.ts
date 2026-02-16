@@ -4,18 +4,18 @@
 // Brand Colors
 export const brandColors = {
   rusingacademy: {
-    primary: '#F97316', // Orange energy
-    secondary: '#FB923C',
-    accent: '#FDBA74',
+    primary: 'var(--color-orange-500, #F97316)', // Orange energy
+    secondary: 'var(--color-orange-400, #FB923C)',
+    accent: 'var(--color-orange-300, #FDBA74)',
     glow: 'rgba(249, 115, 22, 0.3)',
-    gradient: 'linear-gradient(135deg, #F97316 0%, #FB923C 50%, #FDBA74 100%)',
+    gradient: 'linear-gradient(135deg, var(--color-orange-500, #F97316) 0%, var(--color-orange-400, #FB923C) 50%, var(--color-orange-300, #FDBA74) 100%)',
   },
   lingueefy: {
-    primary: '#14B8A6', // Cyan/teal tech
-    secondary: '#2DD4BF',
+    primary: 'var(--color-teal-500, #14B8A6)', // Cyan/teal tech
+    secondary: 'var(--color-teal-400, #2DD4BF)',
     accent: '#5EEAD4',
     glow: 'rgba(20, 184, 166, 0.3)',
-    gradient: 'linear-gradient(135deg, #14B8A6 0%, #2DD4BF 50%, #5EEAD4 100%)',
+    gradient: 'linear-gradient(135deg, var(--color-teal-500, #14B8A6) 0%, var(--color-teal-400, #2DD4BF) 50%, #5EEAD4 100%)',
   },
   barholexMedia: {
     primary: '#8B5CF6', // Violet premium/executive

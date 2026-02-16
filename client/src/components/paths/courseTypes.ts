@@ -297,7 +297,7 @@ export const PATH_COLORS: Record<number, string> = {
   2: '#7C3AED', // Violet - Building Confidence
   3: '#2563EB', // Blue - Professional Fluency
   4: '#0891B2', // Cyan - Advanced Professional
-  5: '#059669', // Emerald - Executive Communication
+  5: 'var(--semantic-success, #059669)', // Emerald - Executive Communication
   6: '#DC2626'  // Red - SLE Mastery
 };
 
