@@ -4608,7 +4608,7 @@ export const onboardingConfig = mysqlTable("onboarding_config", {
   stepTitle: varchar("stepTitle", { length: 255 }).notNull(),
   stepDescription: text("stepDescription"),
   actionType: mysqlEnum("actionType", ["email", "notification", "course_assign", "checklist", "redirect"]).notNull(),
-  actionConfig: json("actionConfig").$type<Record<string, any>>().default({}),
+  actionConfig: json("actionConfig").$type<Record<string, any>>(),
   isEnabled: boolean("isEnabled").default(true),
   sortOrder: int("sortOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -4645,8 +4645,8 @@ export const funnels = mysqlTable("funnels", {
     title: string;
     description: string;
     config: Record<string, any>;
-  }>>().default([]),
-  stats: json("stats").$type<{ visitors: number; conversions: number; revenue: number }>().default({ visitors: 0, conversions: 0, revenue: 0 }),
+  }>>(),
+  stats: json("stats").$type<{ visitors: number; conversions: number; revenue: number }>(),
   createdBy: int("createdBy").references(() => users.id, { onDelete: "set null" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -4665,14 +4665,14 @@ export const automations = mysqlTable("automations", {
     "enrollment", "purchase", "course_complete", "lesson_complete",
     "signup", "inactivity", "tag_added", "manual"
   ]).notNull(),
-  triggerConfig: json("triggerConfig").$type<Record<string, any>>().default({}),
+  triggerConfig: json("triggerConfig").$type<Record<string, any>>(),
   status: mysqlEnum("status", ["active", "paused", "draft"]).default("draft").notNull(),
   steps: json("steps").$type<Array<{
     id: string;
     type: string;
     config: Record<string, any>;
-  }>>().default([]),
-  stats: json("stats").$type<{ triggered: number; completed: number; active: number }>().default({ triggered: 0, completed: 0, active: 0 }),
+  }>>(),
+  stats: json("stats").$type<{ triggered: number; completed: number; active: number }>(),
   createdBy: int("createdBy").references(() => users.id, { onDelete: "set null" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
