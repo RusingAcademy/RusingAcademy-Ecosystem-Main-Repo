@@ -5090,3 +5090,181 @@ export const cartRecoverySettings = mysqlTable("cart_recovery_settings", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 export type CartRecoverySetting = typeof cartRecoverySettings.$inferSelect;
+
+
+// ─── Content Reports (Moderation) ──────────────────────────────────────
+export const contentReports = mysqlTable("content_reports", {
+  id: int("id").autoincrement().primaryKey(),
+  reporterId: int("reporterId").notNull(),
+  contentType: varchar("contentType", { length: 50 }).notNull(),
+  contentId: int("contentId").notNull(),
+  reason: varchar("reason", { length: 100 }).notNull(),
+  description: text("description"),
+  status: varchar("status", { length: 30 }).default("pending").notNull(),
+  reviewedBy: int("reviewedBy"),
+  reviewedAt: timestamp("reviewedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// ─── User Suspensions (Moderation) ─────────────────────────────────────
+export const userSuspensions = mysqlTable("user_suspensions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  reason: text("reason"),
+  suspendedBy: int("suspendedBy"),
+  suspendedAt: timestamp("suspendedAt").defaultNow().notNull(),
+  expiresAt: timestamp("expiresAt"),
+  isActive: boolean("isActive").default(true).notNull(),
+  liftedAt: timestamp("liftedAt"),
+  liftedBy: int("liftedBy"),
+});
+
+// ─── Membership Tiers ──────────────────────────────────────────────────
+export const membershipTiers = mysqlTable("membership_tiers", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  nameFr: varchar("nameFr", { length: 100 }),
+  slug: varchar("slug", { length: 100 }).notNull(),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  priceMonthly: varchar("priceMonthly", { length: 20 }).default("0.00"),
+  priceYearly: varchar("priceYearly", { length: 20 }).default("0.00"),
+  currency: varchar("currency", { length: 10 }).default("CAD"),
+  features: json("features").$type<string[]>(),
+  featuresFr: json("featuresFr").$type<string[]>(),
+  maxCourses: int("maxCourses").default(-1),
+  maxDMs: int("maxDMs").default(5),
+  canAccessPremiumContent: boolean("canAccessPremiumContent").default(false),
+  canCreateEvents: boolean("canCreateEvents").default(false),
+  canAccessAnalytics: boolean("canAccessAnalytics").default(false),
+  badgeLabel: varchar("badgeLabel", { length: 50 }),
+  badgeColor: varchar("badgeColor", { length: 30 }),
+  stripeProductId: varchar("stripeProductId", { length: 100 }),
+  stripePriceIdMonthly: varchar("stripePriceIdMonthly", { length: 100 }),
+  stripePriceIdYearly: varchar("stripePriceIdYearly", { length: 100 }),
+  isActive: boolean("isActive").default(true).notNull(),
+  sortOrder: int("sortOrder").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// ─── User Subscriptions ────────────────────────────────────────────────
+export const userSubscriptions = mysqlTable("user_subscriptions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  tierId: int("tierId").notNull(),
+  status: varchar("status", { length: 30 }).default("active").notNull(),
+  billingCycle: varchar("billingCycle", { length: 20 }).default("monthly"),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 100 }),
+  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 100 }),
+  cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false),
+  canceledAt: timestamp("canceledAt"),
+  currentPeriodStart: timestamp("currentPeriodStart"),
+  currentPeriodEnd: timestamp("currentPeriodEnd"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// ─── Payment History ───────────────────────────────────────────────────
+export const paymentHistory = mysqlTable("payment_history", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  amount: varchar("amount", { length: 20 }).notNull(),
+  currency: varchar("currency", { length: 10 }).default("CAD"),
+  status: varchar("status", { length: 30 }).default("succeeded").notNull(),
+  description: text("description"),
+  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 100 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// ─── Email Broadcasts ──────────────────────────────────────────────────
+export const emailBroadcasts = mysqlTable("email_broadcasts", {
+  id: int("id").autoincrement().primaryKey(),
+  subject: varchar("subject", { length: 255 }).notNull(),
+  body: text("body"),
+  status: varchar("status", { length: 30 }).default("draft").notNull(),
+  sentCount: int("sentCount").default(0),
+  openedCount: int("openedCount").default(0),
+  clickedCount: int("clickedCount").default(0),
+  scheduledAt: timestamp("scheduledAt"),
+  sentAt: timestamp("sentAt"),
+  createdBy: int("createdBy"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// ─── AI Corrections ────────────────────────────────────────────────────
+export const aiCorrections = mysqlTable("ai_corrections", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  originalText: text("originalText"),
+  correctedText: text("correctedText"),
+  explanation: text("explanation"),
+  grammarScore: int("grammarScore"),
+  styleScore: int("styleScore"),
+  overallScore: int("overallScore"),
+  detectedLevel: varchar("detectedLevel", { length: 20 }),
+  language: varchar("language", { length: 10 }).default("fr"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// ─── Channels ──────────────────────────────────────────────────────────
+export const channels = mysqlTable("channels", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  nameFr: varchar("nameFr", { length: 100 }),
+  slug: varchar("slug", { length: 100 }).notNull(),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  isActive: boolean("isActive").default(true).notNull(),
+  memberCount: int("memberCount").default(0),
+  threadCount: int("threadCount").default(0),
+  sortOrder: int("sortOrder").default(0),
+  createdBy: int("createdBy"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// ─── Channel Memberships ───────────────────────────────────────────────
+export const channelMemberships = mysqlTable("channel_memberships", {
+  id: int("id").autoincrement().primaryKey(),
+  channelId: int("channelId").notNull(),
+  userId: int("userId").notNull(),
+  role: varchar("role", { length: 30 }).default("member"),
+  joinedAt: timestamp("joinedAt").defaultNow().notNull(),
+});
+
+// ─── Notebook Entries ──────────────────────────────────────────────────
+export const notebookEntries = mysqlTable("notebook_entries", {
+  id: int("id").autoincrement().primaryKey(),
+  authorId: int("authorId").notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  content: text("content").notNull(),
+  language: varchar("language", { length: 10 }).default("fr"),
+  status: varchar("status", { length: 30 }).default("published").notNull(),
+  correctionCount: int("correctionCount").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+// ─── Notebook Corrections ──────────────────────────────────────────────
+export const notebookCorrections = mysqlTable("notebook_corrections", {
+  id: int("id").autoincrement().primaryKey(),
+  entryId: int("entryId").notNull(),
+  correctorId: int("correctorId").notNull(),
+  correctedContent: text("correctedContent").notNull(),
+  explanation: text("explanation"),
+  isAccepted: boolean("isAccepted").default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+
+// ─── Referrals ─────────────────────────────────────────────────────────
+export const referrals = mysqlTable("referrals", {
+  id: int("id").autoincrement().primaryKey(),
+  referrerId: int("referrerId").notNull(),
+  referredUserId: int("referredUserId"),
+  referralCode: varchar("referralCode", { length: 50 }).notNull(),
+  status: varchar("status", { length: 30 }).default("pending").notNull(),
+  commissionAmount: varchar("commissionAmount", { length: 20 }).default("0.00"),
+  clickCount: int("clickCount").default(0),
+  rewardGranted: boolean("rewardGranted").default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  convertedAt: timestamp("convertedAt"),
+});

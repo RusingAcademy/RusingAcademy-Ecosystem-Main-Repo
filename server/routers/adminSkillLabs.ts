@@ -9,7 +9,7 @@ import { sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
 const getDb = async () => {
-  const { getDb: gdb } = await import("../../drizzle/db");
+  const { getDb: gdb } = await import("../db");
   return gdb();
 };
 

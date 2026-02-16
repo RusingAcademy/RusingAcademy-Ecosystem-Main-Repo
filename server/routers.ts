@@ -6309,7 +6309,7 @@ export const appRouter = router({
     // ============================================================================
     
     // Create a lesson
-    createLesson: protectedProcedure
+    createLessonBasic: protectedProcedure
       .input(z.object({
         moduleId: z.number(),
         courseId: z.number(),
