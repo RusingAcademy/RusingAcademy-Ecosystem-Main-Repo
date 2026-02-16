@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -42,6 +42,7 @@ import {
 import { motion } from "framer-motion";
 import DownloadCourseButton from "@/components/DownloadCourseButton";
 import { FREE_ACCESS_MODE } from "@shared/const";
+import { toast } from "sonner";
 
 // Category configuration
 const categoryConfig: Record<string, { icon: typeof BookOpen; labelEn: string; labelFr: string; color: string }> = {
@@ -94,6 +95,38 @@ export default function CourseDetail() {
   const progressPercent = enrollment 
     ? Math.round(((enrollment.lessonsCompleted || 0) / (enrollment.totalLessons || 1)) * 100)
     : 0;
+
+  // Checkout / enrollment mutation
+  const utils = trpc.useUtils();
+  const checkoutMutation = trpc.courses.createCheckoutSession.useMutation({
+    onSuccess: (data) => {
+      if (data.enrolledDirectly) {
+        toast.success(isEn ? "Successfully enrolled! Start learning now." : "Inscription r\u00e9ussie ! Commencez \u00e0 apprendre.");
+        utils.courses.getEnrollment.invalidate({ courseId: course?.id || 0 });
+      } else if (data.checkoutUrl) {
+        toast.info(isEn ? "Redirecting to checkout..." : "Redirection vers le paiement...");
+        window.open(data.checkoutUrl, '_blank');
+      }
+    },
+    onError: (error) => {
+      if (error.message === "Already enrolled in this course") {
+        toast.info(isEn ? "You're already enrolled in this course." : "Vous \u00eates d\u00e9j\u00e0 inscrit(e) \u00e0 ce cours.");
+        utils.courses.getEnrollment.invalidate({ courseId: course?.id || 0 });
+      } else {
+        toast.error(error.message || (isEn ? "Failed to process enrollment" : "\u00c9chec du traitement de l'inscription"));
+      }
+    },
+  });
+
+  const handleEnroll = useCallback(() => {
+    if (!user) {
+      toast.error(isEn ? "Please sign in to enroll." : "Veuillez vous connecter pour vous inscrire.");
+      setLocation('/signup');
+      return;
+    }
+    if (!course?.id) return;
+    checkoutMutation.mutate({ courseId: course.id, courseSlug: course.slug });
+  }, [user, course, isEn, checkoutMutation, setLocation]);
   
   // Format helpers
   const formatPrice = (cents: number | null) => {
@@ -421,13 +454,26 @@ export default function CourseDetail() {
                     )}
                     {/* CTA Button */}
                     {enrollment ? (
-                      <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg h-14">
-                        <Play className="h-5 w-5 mr-2" />
-                        {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
-                      </Button>
+                      <Link href={`/courses/${course.slug}/lessons/${course.modules?.[0]?.lessons?.[0]?.id || ''}`}>
+                        <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg h-14">
+                          <Play className="h-5 w-5 mr-2" />
+                          {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
+                        </Button>
+                      </Link>
                     ) : user ? (
-                      <Button size="lg" className={`w-full ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#F97316] hover:bg-[#EA580C]'} text-white text-lg h-14`}>
-                        {FREE_ACCESS_MODE ? (
+                      <Button
+                        size="lg"
+                        className={`w-full ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#F97316] hover:bg-[#EA580C]'} text-white text-lg h-14`}
+                        onClick={handleEnroll}
+                        disabled={checkoutMutation.isPending}
+                      >
+                        {checkoutMutation.isPending ? (
+                          <><Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                            {FREE_ACCESS_MODE
+                              ? (isEn ? "Enrolling..." : "Inscription...")
+                              : (isEn ? "Preparing checkout..." : "Pr\u00e9paration du paiement...")}
+                          </>
+                        ) : FREE_ACCESS_MODE ? (
                           <>{isEn ? "Start Free Course" : "Commencer le cours gratuit"}</>
                         ) : (course.price || 0) > 0 ? (
                           <>{isEn ? "Enroll Now" : "S'inscrire maintenant"}</>

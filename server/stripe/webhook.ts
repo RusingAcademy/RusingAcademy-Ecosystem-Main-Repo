@@ -719,7 +719,13 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
       progressPercent: 0,
       lessonsCompleted: 0,
       totalLessons: lessonCount?.total || 0,
+      status: "active",
     });
+
+    // Increment course enrollment counter
+    await db.execute(sql`
+      UPDATE courses SET totalEnrollments = COALESCE(totalEnrollments, 0) + 1 WHERE id = ${courseDbId}
+    `);
 
     log.info(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
 

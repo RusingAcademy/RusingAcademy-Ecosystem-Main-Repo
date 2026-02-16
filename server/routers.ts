@@ -133,7 +133,9 @@ import { membershipRouter } from "./routers/membership";
 import { emailBroadcastRouter } from "./routers/emailBroadcast";
 import { adminCoursesRouter } from "./routers/adminCourses";
 import { adminCommissionRouter } from "./routers/adminCommission";
+import { adminPayoutsRouter } from "./routers/adminPayouts";
 import { courseAdminRouter } from "./routers/courseAdmin";
+import { contentVersionsRouter } from "./routers/contentVersions";
 import { analyticsRouter } from "./routers/analytics";
 import { advancedAnalyticsRouter } from "./routers/advancedAnalytics";
 import { certificateRouter } from "./routers/certificate";
@@ -141,6 +143,7 @@ import { classroomRouter } from "./routers/classroom";
 import { notebookRouter } from "./routers/notebook";
 import { studyPlannerRouter } from "./routers/studyPlanner";
 import { discussionsRouter } from "./routers/discussions";
+import { privacyRouter } from "./routers/privacy";
 import { dictationRouter } from "./routers/dictation";
 import { peerReviewRouter } from "./routers/peerReview";
 import { bookmarksRouter } from "./routers/bookmarks";
@@ -9132,7 +9135,10 @@ export const appRouter = router({
   adminDashboard: adminDashboardDataRouter,
   adminCourses: adminCoursesRouter,
   adminCommission: adminCommissionRouter,
+  adminPayouts: adminPayoutsRouter,
   courseAdmin: courseAdminRouter,
+  contentVersions: contentVersionsRouter,
+  privacy: privacyRouter,
   analytics: analyticsRouter,
   advancedAnalytics: advancedAnalyticsRouter,
   certificate: certificateRouter,

@@ -38,6 +38,12 @@ export default function CourseSuccess() {
   const sessionId = searchParams.get("session_id");
   const courseId = searchParams.get("course_id");
   
+  // Verify checkout session if session_id is present
+  const { data: checkoutData } = trpc.courses.verifyCheckoutSession.useQuery(
+    { sessionId: sessionId || "" },
+    { enabled: !!sessionId }
+  );
+  
   const [showConfetti, setShowConfetti] = useState(true);
   
   // Trigger confetti on mount

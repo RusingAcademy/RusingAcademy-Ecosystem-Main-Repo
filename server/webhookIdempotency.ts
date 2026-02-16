@@ -10,6 +10,36 @@ import { sql } from "drizzle-orm";
 import { createLogger } from "./logger";
 const log = createLogger("webhookIdempotency");
 
+/**
+ * Ensure the webhook_events_log table exists.
+ * Called lazily on first claim attempt.
+ */
+let tableEnsured = false;
+async function ensureWebhookEventsTable(): Promise<void> {
+  if (tableEnsured) return;
+  const db = await getDb();
+  if (!db) return;
+  try {
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS webhook_events_log (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        stripeEventId VARCHAR(255) NOT NULL,
+        eventType VARCHAR(100) NOT NULL DEFAULT '',
+        status ENUM('processing','processed','failed') NOT NULL DEFAULT 'processing',
+        attempts INT NOT NULL DEFAULT 1,
+        lastError TEXT,
+        processedAt DATETIME,
+        createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE KEY uq_stripe_event (stripeEventId)
+      )
+    `);
+    tableEnsured = true;
+    log.info("[Idempotency] webhook_events_log table ensured");
+  } catch (err) {
+    log.error("[Idempotency] Failed to ensure webhook_events_log table:", err);
+  }
+}
+
 export type WebhookEventStatus = "processing" | "processed" | "failed";
 
 export interface WebhookEventRecord {
@@ -32,6 +62,7 @@ export async function claimWebhookEvent(
   stripeEventId: string,
   eventType: string
 ): Promise<boolean> {
+  await ensureWebhookEventsTable();
   const db = await getDb();
   if (!db) {
     log.error("[Idempotency] Database not available, allowing event through");

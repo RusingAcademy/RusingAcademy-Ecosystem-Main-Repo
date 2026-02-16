@@ -28,6 +28,8 @@ import calendlyRouter from "../webhooks/calendly";
 import { startReminderScheduler } from "../session-reminders";
 import { startHealthCheckScheduler } from "../cron/health-checks";
 import { scheduleReminderJobs, runAllReminderJobs } from "../jobs/reminderJobs";
+import { sql } from "drizzle-orm";
+import { getDb } from "../db";
 import authRbacRouter from "../routers/auth-rbac";
 import googleAuthRouter from "../routers/googleAuth";
 import microsoftAuthRouter from "../routers/microsoftAuth";
@@ -72,6 +74,65 @@ async function startServer() {
 
   // Metrics collection — records request count, error rate, latency per route
   app.use(metricsCollector);
+
+  // ═══ Deep Health Check Endpoint (Sprint J5) ═══
+  app.get("/api/health", async (_req, res) => {
+    const checks: Record<string, { status: string; latencyMs?: number; error?: string }> = {};
+    const start = Date.now();
+
+    // 1. Database connectivity
+    try {
+      const dbStart = Date.now();
+      const db = await getDb();
+      if (db) {
+        await db.execute(sql`SELECT 1`);
+        checks.database = { status: "ok", latencyMs: Date.now() - dbStart };
+      } else {
+        checks.database = { status: "unavailable", error: "getDb() returned null" };
+      }
+    } catch (err: any) {
+      checks.database = { status: "error", error: err.message || "Connection failed" };
+    }
+
+    // 2. Stripe API connectivity
+    try {
+      const stripeStart = Date.now();
+      if (process.env.STRIPE_SECRET_KEY) {
+        const Stripe = (await import("stripe")).default;
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2025-12-15.clover" as any });
+        await stripe.balance.retrieve();
+        checks.stripe = { status: "ok", latencyMs: Date.now() - stripeStart };
+      } else {
+        checks.stripe = { status: "not_configured", error: "STRIPE_SECRET_KEY not set" };
+      }
+    } catch (err: any) {
+      checks.stripe = { status: "error", error: err.message || "API call failed" };
+    }
+
+    // 3. Memory usage
+    const mem = process.memoryUsage();
+    checks.memory = {
+      status: mem.heapUsed / mem.heapTotal < 0.9 ? "ok" : "warning",
+      latencyMs: 0,
+    };
+
+    // Overall status
+    const allOk = Object.values(checks).every(c => c.status === "ok" || c.status === "not_configured");
+    const statusCode = allOk ? 200 : 503;
+
+    res.status(statusCode).json({
+      status: allOk ? "healthy" : "degraded",
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString(),
+      totalLatencyMs: Date.now() - start,
+      checks,
+      memory: {
+        heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
+        heapTotalMB: Math.round(mem.heapTotal / 1024 / 1024),
+        rssMB: Math.round(mem.rss / 1024 / 1024),
+      },
+    });
+  });
 
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));

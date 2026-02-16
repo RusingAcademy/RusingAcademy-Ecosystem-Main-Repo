@@ -1,5 +1,5 @@
 /**
- * Discussions Router — Wave G, Sprint G2
+ * Discussions Router — Wave G Sprint G2 + Wave M Sprint M3
  *
  * Discussion boards for learner community:
  * - getThreads: List threads with pagination
@@ -8,6 +8,11 @@
  * - deleteThread: Delete own thread
  * - getReplies: Get replies for a thread
  * - createReply: Post a reply to a thread
+ * - upvoteReply: Upvote a reply (M3)
+ * - reportContent: Report a thread or reply (M3)
+ * - togglePin: Admin pin/unpin thread (M3)
+ * - toggleLock: Admin lock/unlock thread (M3)
+ * - markAcceptedAnswer: Thread author marks best answer (M3)
  */
 import { z } from "zod";
 import { router, protectedProcedure } from "../_core/trpc";
@@ -45,9 +50,37 @@ async function ensureDiscussionTables() {
       userName VARCHAR(255),
       body TEXT NOT NULL,
       isAcceptedAnswer BOOLEAN DEFAULT FALSE,
+      upvoteCount INT DEFAULT 0,
       createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
       updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
       INDEX idx_thread (threadId)
+    )
+  `);
+  // M3: Upvotes tracking
+  await db.execute(sql`
+    CREATE TABLE IF NOT EXISTS discussion_upvotes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      replyId INT NOT NULL,
+      userId INT NOT NULL,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY unique_upvote (replyId, userId),
+      INDEX idx_reply (replyId)
+    )
+  `);
+  // M3: Content reports
+  await db.execute(sql`
+    CREATE TABLE IF NOT EXISTS discussion_reports (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      contentType ENUM('thread','reply') NOT NULL,
+      contentId INT NOT NULL,
+      reporterId INT NOT NULL,
+      reason ENUM('spam','harassment','off_topic','inappropriate','other') DEFAULT 'other',
+      details TEXT,
+      status ENUM('pending','reviewed','dismissed','actioned') DEFAULT 'pending',
+      reviewedBy INT,
+      reviewedAt DATETIME,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      INDEX idx_status (status)
     )
   `);
   return db;
@@ -208,6 +241,143 @@ export const discussionsRouter = router({
         WHERE id = ${input.threadId}
       `);
 
+      return { success: true };
+    }),
+
+  // ─── M3: Upvote a reply ────────────────────────────────────────
+  upvoteReply: protectedProcedure
+    .input(z.object({ replyId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await ensureDiscussionTables();
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      // Check if already upvoted
+      const [existing] = await db.execute(sql`
+        SELECT id FROM discussion_upvotes WHERE replyId = ${input.replyId} AND userId = ${userId} LIMIT 1
+      `);
+      if ((existing as any[])?.length > 0) {
+        // Remove upvote (toggle)
+        await db.execute(sql`DELETE FROM discussion_upvotes WHERE replyId = ${input.replyId} AND userId = ${userId}`);
+        await db.execute(sql`UPDATE discussion_replies SET upvoteCount = GREATEST(upvoteCount - 1, 0) WHERE id = ${input.replyId}`);
+        return { success: true, action: "removed" };
+      }
+
+      await db.execute(sql`INSERT INTO discussion_upvotes (replyId, userId) VALUES (${input.replyId}, ${userId})`);
+      await db.execute(sql`UPDATE discussion_replies SET upvoteCount = upvoteCount + 1 WHERE id = ${input.replyId}`);
+      return { success: true, action: "added" };
+    }),
+
+  // ─── M3: Report content ────────────────────────────────────────
+  reportContent: protectedProcedure
+    .input(z.object({
+      contentType: z.enum(["thread", "reply"]),
+      contentId: z.number(),
+      reason: z.enum(["spam", "harassment", "off_topic", "inappropriate", "other"]).default("other"),
+      details: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await ensureDiscussionTables();
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      await db.execute(sql`
+        INSERT INTO discussion_reports (contentType, contentId, reporterId, reason, details)
+        VALUES (${input.contentType}, ${input.contentId}, ${userId}, ${input.reason}, ${input.details ?? null})
+      `);
+      return { success: true };
+    }),
+
+  // ─── M3: Admin — toggle pin ────────────────────────────────────
+  togglePin: protectedProcedure
+    .input(z.object({ threadId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await ensureDiscussionTables();
+      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+
+      await db.execute(sql`
+        UPDATE discussion_threads SET isPinned = NOT isPinned WHERE id = ${input.threadId}
+      `);
+      return { success: true };
+    }),
+
+  // ─── M3: Admin — toggle lock ───────────────────────────────────
+  toggleLock: protectedProcedure
+    .input(z.object({ threadId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await ensureDiscussionTables();
+      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+
+      await db.execute(sql`
+        UPDATE discussion_threads SET isLocked = NOT isLocked WHERE id = ${input.threadId}
+      `);
+      return { success: true };
+    }),
+
+  // ─── M3: Mark accepted answer ──────────────────────────────────
+  markAcceptedAnswer: protectedProcedure
+    .input(z.object({ replyId: z.number(), threadId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await ensureDiscussionTables();
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      // Only thread author or admin can mark accepted answer
+      const [threadRows] = await db.execute(sql`
+        SELECT userId FROM discussion_threads WHERE id = ${input.threadId} LIMIT 1
+      `);
+      const thread = (threadRows as any[])?.[0];
+      if (!thread) throw new TRPCError({ code: "NOT_FOUND" });
+      if (thread.userId !== userId && ctx.user?.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Only thread author or admin can mark accepted answer" });
+      }
+
+      // Clear previous accepted answer for this thread
+      await db.execute(sql`
+        UPDATE discussion_replies SET isAcceptedAnswer = FALSE WHERE threadId = ${input.threadId}
+      `);
+      // Mark new accepted answer
+      await db.execute(sql`
+        UPDATE discussion_replies SET isAcceptedAnswer = TRUE WHERE id = ${input.replyId} AND threadId = ${input.threadId}
+      `);
+      return { success: true };
+    }),
+
+  // ─── M3: Admin — get reports ───────────────────────────────────
+  getReports: protectedProcedure
+    .input(z.object({
+      status: z.enum(["pending", "reviewed", "dismissed", "actioned"]).optional(),
+      limit: z.number().default(20),
+    }).optional())
+    .query(async ({ ctx }) => {
+      const db = await ensureDiscussionTables();
+      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+
+      const [reports] = await db.execute(sql`
+        SELECT r.*, u.name as reporterName
+        FROM discussion_reports r
+        LEFT JOIN users u ON u.id = r.reporterId
+        ORDER BY r.createdAt DESC
+        LIMIT 50
+      `);
+      return reports as any[];
+    }),
+
+  // ─── M3: Admin — resolve report ────────────────────────────────
+  resolveReport: protectedProcedure
+    .input(z.object({
+      reportId: z.number(),
+      status: z.enum(["reviewed", "dismissed", "actioned"]),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await ensureDiscussionTables();
+      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+
+      await db.execute(sql`
+        UPDATE discussion_reports
+        SET status = ${input.status}, reviewedBy = ${ctx.user.id}, reviewedAt = NOW()
+        WHERE id = ${input.reportId}
+      `);
       return { success: true };
     }),
 });

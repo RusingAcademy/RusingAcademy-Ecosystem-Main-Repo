@@ -19,6 +19,22 @@ import { eq, and, desc, asc, like, sql, or } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { createLogger } from "../logger";
 import { FREE_ACCESS_MODE } from "../../shared/const";
+import Stripe from "stripe";
+
+// Stripe instance (lazy initialization)
+let stripeInstance: Stripe | null = null;
+function getStripe(): Stripe {
+  if (!stripeInstance) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) {
+      throw new Error('STRIPE_SECRET_KEY is not configured');
+    }
+    stripeInstance = new Stripe(key, {
+      apiVersion: "2025-12-15.clover" as any,
+    });
+  }
+  return stripeInstance;
+}
 const log = createLogger("routers-courses");
 
 export const coursesRouter = router({
@@ -889,6 +905,176 @@ export const coursesRouter = router({
       return bundlesWithCourses;
     }),
   
+  // ============================================================================
+  // PROTECTED: Create Stripe Checkout Session for paid course purchase
+  // ============================================================================
+  createCheckoutSession: protectedProcedure
+    .input(
+      z.object({
+        courseId: z.number(),
+        courseSlug: z.string().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // 1. Fetch the course from DB
+      const [course] = await db
+        .select()
+        .from(courses)
+        .where(eq(courses.id, input.courseId))
+        .limit(1);
+
+      if (!course) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Course not found" });
+      }
+
+      // 2. Check if already enrolled
+      const [existingEnrollment] = await db
+        .select()
+        .from(courseEnrollments)
+        .where(
+          and(
+            eq(courseEnrollments.courseId, input.courseId),
+            eq(courseEnrollments.userId, ctx.user.id)
+          )
+        )
+        .limit(1);
+
+      if (existingEnrollment) {
+        throw new TRPCError({ code: "CONFLICT", message: "Already enrolled in this course" });
+      }
+
+      // 3. If course is free or FREE_ACCESS_MODE, enroll directly
+      const coursePrice = course.price || 0;
+      if (FREE_ACCESS_MODE || coursePrice === 0) {
+        const [lessonCount] = await db
+          .select({ count: sql<number>`count(*)` })
+          .from(lessons)
+          .where(eq(lessons.courseId, input.courseId));
+
+        await db.insert(courseEnrollments).values({
+          userId: ctx.user.id,
+          courseId: input.courseId,
+          totalLessons: lessonCount?.count ?? 0,
+          status: "active",
+        });
+
+        await db.update(courses)
+          .set({ totalEnrollments: sql`${courses.totalEnrollments} + 1` })
+          .where(eq(courses.id, input.courseId));
+
+        log.info(`[Courses] Free enrollment for user ${ctx.user.id} in course ${input.courseId}`);
+
+        // Best-effort push notification
+        try {
+          const { sendPushToUser } = await import("../services/pushNotificationService");
+          await sendPushToUser(ctx.user.id, {
+            title: "\u2705 Enrollment Confirmed!",
+            body: `You are now enrolled in "${course.title}". Start learning today!`,
+            tag: `enrollment-course-${input.courseId}`,
+            category: "reminders",
+            url: `/courses/${course.slug || input.courseId}`,
+            data: { type: "enrollment_confirmed", courseId: input.courseId },
+          });
+        } catch (_pushErr) { /* best-effort */ }
+
+        // Best-effort in-app notification
+        try {
+          const { notifyLearner } = await import("../services/learnerNotifications");
+          await notifyLearner(ctx.user.id, {
+            type: "enrollment",
+            courseTitle: course.title,
+            courseSlug: course.slug || undefined,
+          });
+        } catch (_notifErr) { /* best-effort */ }
+
+        return {
+          checkoutUrl: null,
+          sessionId: null,
+          enrolledDirectly: true,
+        };
+      }
+
+      // 4. Create Stripe checkout session for paid course
+      const stripe = getStripe();
+      const origin = ctx.req.headers.origin || 'https://ecosystemhub-preview.manus.space';
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'cad',
+              product_data: {
+                name: course.title,
+                description: course.shortDescription || course.description?.substring(0, 200) || 'Course',
+                metadata: {
+                  course_id: course.id.toString(),
+                  course_slug: course.slug,
+                },
+              },
+              unit_amount: coursePrice, // price stored in cents
+            },
+            quantity: 1,
+          },
+        ],
+        mode: 'payment',
+        success_url: `${origin}/courses/success?session_id={CHECKOUT_SESSION_ID}&course_id=${course.id}`,
+        cancel_url: `${origin}/courses/${course.slug}?canceled=true`,
+        customer_email: ctx.user.email,
+        client_reference_id: ctx.user.id.toString(),
+        allow_promotion_codes: true,
+        metadata: {
+          user_id: ctx.user.id.toString(),
+          user_email: ctx.user.email,
+          user_name: ctx.user.name || '',
+          product_type: 'course',
+          course_db_id: course.id.toString(),
+          course_slug: course.slug,
+          course_title: course.title,
+        },
+      });
+
+      log.info(`[Courses] Created Stripe checkout session ${session.id} for user ${ctx.user.id}, course ${course.id}`);
+
+      return {
+        checkoutUrl: session.url,
+        sessionId: session.id,
+        enrolledDirectly: false,
+      };
+    }),
+
+  // ============================================================================
+  // PROTECTED: Verify Checkout Session (for success page)
+  // ============================================================================
+  verifyCheckoutSession: protectedProcedure
+    .input(z.object({ sessionId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      try {
+        const stripe = getStripe();
+        const session = await stripe.checkout.sessions.retrieve(input.sessionId);
+
+        if (session.client_reference_id !== ctx.user.id.toString()) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Session does not belong to this user" });
+        }
+
+        return {
+          status: session.payment_status,
+          courseId: session.metadata?.course_db_id ? parseInt(session.metadata.course_db_id) : null,
+          courseTitle: session.metadata?.course_title || null,
+          courseSlug: session.metadata?.course_slug || null,
+          amountTotal: session.amount_total,
+          currency: session.currency,
+        };
+      } catch (err: any) {
+        if (err instanceof TRPCError) throw err;
+        log.error(`[Courses] Failed to verify checkout session: ${err.message}`);
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to verify payment" });
+      }
+    }),
+
   // Get modules for a course (for admin content management)
   getModules: publicProcedure
     .input(z.object({ courseId: z.number() }))
