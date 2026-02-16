@@ -1116,7 +1116,7 @@ export default function CurriculumPathSeries() {
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <span className="text-lg">🇫🇷</span>
+                  <span className="text-lg">🇨🇦</span>
                   {isEn ? 'French (FSL)' : 'Français (FLS)'}
                 </button>
                 <button
@@ -1127,7 +1127,7 @@ export default function CurriculumPathSeries() {
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  <span className="text-lg">🇬🇧</span>
+                  <span className="text-lg">🇨🇦</span>
                   {isEn ? 'English (ESL)' : 'Anglais (ALS)'}
                 </button>
               </div>

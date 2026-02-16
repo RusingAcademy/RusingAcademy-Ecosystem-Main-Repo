@@ -184,7 +184,7 @@ export default function Paths() {
                     : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
-                <span className="text-base">🇫🇷</span>
+                <span className="text-base">🇨🇦</span>
                 {t ? 'Français langue seconde (FLS)' : 'French as a Second Language (FSL)'}
               </button>
               <button
@@ -195,7 +195,7 @@ export default function Paths() {
                     : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
-                <span className="text-base">🇬🇧</span>
+                <span className="text-base">🇨🇦</span>
                 {t ? 'Anglais langue seconde (ALS)' : 'English as a Second Language (ESL)'}
               </button>
             </div>
