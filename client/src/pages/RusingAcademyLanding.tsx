@@ -999,7 +999,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ PATH SERIES SECTION — Premium Redesign ═══ */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-24 bg-white relative overflow-x-clip">
         <div 
           className="absolute inset-0 opacity-20"
           style={{ background: subtleGradient }}
@@ -1056,25 +1056,26 @@ export default function RusingAcademyLanding() {
           </motion.div>
 
           {/* Path Navigation Tabs */}
-          <div className="flex justify-center gap-2 mb-12 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="flex flex-wrap justify-center gap-2 mb-12 px-2">
             {currentPaths.map((path, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedPath(index)}
-                className={`relative px-5 py-2.5 rounded-full font-medium transition-all whitespace-nowrap ${
+                className={`relative px-4 py-2.5 rounded-full font-medium transition-all text-sm md:text-base ${
                   selectedPath === index
                     ? 'text-white shadow-lg scale-105'
                     : 'bg-white text-[#082038] border border-gray-200 hover:border-teal-300 hover:bg-teal-50/50 shadow-sm'
                 }`}
                 style={selectedPath === index ? { background: premiumGradient } : {}}
               >
-                <span className="flex items-center gap-2">
-                  <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+                <span className="flex items-center gap-1.5">
+                  <span className={`w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
                     selectedPath === index ? 'bg-white/20' : 'bg-gray-100'
                   }`}>
                     {path.id}
                   </span>
-                  {path.name}
+                  <span className="hidden sm:inline">{path.name}</span>
+                  <span className="sm:hidden">{path.name.split(' ')[0]}</span>
                 </span>
               </button>
             ))}
@@ -1208,21 +1209,21 @@ export default function RusingAcademyLanding() {
                     </p>
 
                     {/* Course Details Grid */}
-                    <div className="grid grid-cols-3 gap-4 mb-6">
-                      <div className="text-center p-4 rounded-xl bg-gradient-to-br from-teal-50 to-white border border-teal-100/50">
-                        <Calendar className="w-6 h-6 mx-auto mb-2 text-teal-600" />
-                        <p className="font-bold text-[#082038]">{currentPath.duration}</p>
-                        <p className="text-xs text-slate-500">{lang === 'fr' ? 'Dur\u00e9e' : 'Duration'}</p>
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6">
+                      <div className="text-center p-3 md:p-4 rounded-xl bg-gradient-to-br from-teal-50 to-white border border-teal-100/50">
+                        <Calendar className="w-5 h-5 md:w-6 md:h-6 mx-auto mb-2 text-teal-600" />
+                        <p className="font-bold text-[#082038] text-sm md:text-base">{currentPath.duration}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500">{lang === 'fr' ? 'Dur\u00e9e' : 'Duration'}</p>
                       </div>
-                      <div className="text-center p-4 rounded-xl bg-gradient-to-br from-violet-50 to-white border border-violet-100/50">
-                        <Clock className="w-6 h-6 mx-auto mb-2 text-violet-600" />
-                        <p className="font-bold text-[#082038]">{currentPath.hours}</p>
-                        <p className="text-xs text-slate-500">{lang === 'fr' ? 'Heures structur\u00e9es' : 'Structured Hours'}</p>
+                      <div className="text-center p-3 md:p-4 rounded-xl bg-gradient-to-br from-violet-50 to-white border border-violet-100/50">
+                        <Clock className="w-5 h-5 md:w-6 md:h-6 mx-auto mb-2 text-violet-600" />
+                        <p className="font-bold text-[#082038] text-sm md:text-base">{currentPath.hours}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500">{lang === 'fr' ? 'Heures structur\u00e9es' : 'Structured Hours'}</p>
                       </div>
-                      <div className="text-center p-4 rounded-xl bg-gradient-to-br from-orange-50 to-white border border-orange-100/50">
-                        <Target className="w-6 h-6 mx-auto mb-2 text-orange-600" />
-                        <p className="font-bold text-[#082038] text-sm">{currentPath.focus}</p>
-                        <p className="text-xs text-slate-500">Focus</p>
+                      <div className="text-center p-3 md:p-4 rounded-xl bg-gradient-to-br from-orange-50 to-white border border-orange-100/50 min-w-0">
+                        <Target className="w-5 h-5 md:w-6 md:h-6 mx-auto mb-2 text-orange-600" />
+                        <p className="font-bold text-[#082038] text-xs md:text-sm leading-tight">{currentPath.focus}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500">Focus</p>
                       </div>
                     </div>
                   </div>
@@ -1242,9 +1243,9 @@ export default function RusingAcademyLanding() {
           </motion.div>
 
           {/* Path Progress Indicator */}
-          <div className="flex justify-center mt-14">
+          <div className="flex justify-center mt-14 px-2">
             <div 
-              className="flex items-center justify-between gap-4 px-8 py-5 rounded-2xl w-full max-w-3xl"
+              className="flex items-center justify-between gap-2 md:gap-4 px-4 md:px-8 py-5 rounded-2xl w-full max-w-3xl"
               style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(16px)',
@@ -1284,10 +1285,11 @@ export default function RusingAcademyLanding() {
                   }`}>
                     {path.level}
                   </span>
-                  <span className={`text-[10px] font-medium transition-colors ${
+                  <span className={`text-[10px] font-medium transition-colors text-center leading-tight ${
                     selectedPath === index ? 'text-teal-500' : 'text-slate-400'
                   }`}>
-                    {path.name.split(' ').slice(0, 2).join(' ')}
+                    <span className="hidden md:inline">{path.name.split(' ').slice(0, 2).join(' ')}</span>
+                    <span className="md:hidden">{path.name.split(' ')[0]}</span>
                   </span>
                 </button>
               ))}
