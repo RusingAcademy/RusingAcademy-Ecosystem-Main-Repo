@@ -4,6 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
@@ -26,9 +27,13 @@ function PageSkeleton() {
   );
 }
 
-/** Suspense wrapper shorthand */
-function L({ children }: { children: React.ReactNode }) {
-  return <Suspense fallback={<PageSkeleton />}>{children}</Suspense>;
+/** Suspense wrapper with route-level error boundary (Sprint J5) */
+function L({ children, section }: { children: React.ReactNode; section?: string }) {
+  return (
+    <RouteErrorBoundary section={section}>
+      <Suspense fallback={<PageSkeleton />}>{children}</Suspense>
+    </RouteErrorBoundary>
+  );
 }
 
 // ─── ALL Page Imports — Lazy-loaded for code splitting ─────────────────────
