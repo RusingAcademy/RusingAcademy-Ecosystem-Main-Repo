@@ -1,0 +1,126 @@
+/**
+ * Form Standardization — Wave 16
+ * 
+ * Unified form styling for all portals:
+ * Admin, Coach, Learner, HR, and public forms.
+ * High-contrast, accessible, bilingual-ready.
+ */
+
+/* ============================================
+   FORM FIELD BASE
+   ============================================ */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text-primary, #111827);
+  letter-spacing: -0.01em;
+}
+
+.dark .form-label {
+  color: var(--admin-text-primary, #F9FAFB);
+}
+
+.form-input {
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--color-gray-300, #D1D5DB);
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--admin-text-primary, #111827);
+  background: var(--color-white, #FFFFFF);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dark .form-input {
+  border-color: var(--color-gray-600, #4B5563);
+  background: var(--admin-card-bg, #1E293B);
+  color: var(--admin-text-primary, #F9FAFB);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--brand-teal, #008090);
+  box-shadow: 0 0 0 3px rgba(0, 128, 144, 0.15);
+}
+
+.form-input::placeholder {
+  color: var(--color-gray-400, #9CA3AF);
+}
+
+/* ============================================
+   FORM HELPER & ERROR TEXT
+   ============================================ */
+
+.form-helper {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500, #6B7280);
+}
+
+.form-error {
+  font-size: 0.8125rem;
+  color: var(--semantic-danger, #DC2626);
+  font-weight: 500;
+}
+
+.form-input-error {
+  border-color: var(--semantic-danger, #DC2626);
+}
+
+.form-input-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+/* ============================================
+   FORM SECTION GROUPING
+   ============================================ */
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--admin-card-bg, #FFFFFF);
+  border: 1px solid var(--admin-card-border, #E5E7EB);
+  border-radius: 0.75rem;
+}
+
+.dark .form-section {
+  background: var(--admin-card-bg, #1E293B);
+  border-color: var(--admin-card-border, #334155);
+}
+
+.form-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--admin-text-primary, #111827);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--admin-divider, #E5E7EB);
+}
+
+.dark .form-section-title {
+  color: var(--admin-text-primary, #F9FAFB);
+  border-color: var(--admin-divider, #334155);
+}
+
+/* ============================================
+   FORM ACTIONS BAR
+   ============================================ */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--admin-divider, #E5E7EB);
+}
+
+.dark .form-actions {
+  border-color: var(--admin-divider, #334155);
+}

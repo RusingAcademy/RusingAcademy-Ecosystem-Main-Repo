@@ -137,7 +137,7 @@ const fslPaths: Path[] = [
     cefrLevel: "A1",
     coverUrl: CDN.covers.fsl.pathI,
     badgeUrl: CDN.badges.pathCompletion[0],
-    color: "#2563eb",
+    color: "var(--color-blue-600, #2563eb)",
     totalLessons: 16,
     totalActivities: 112,
     completed: false,
@@ -223,7 +223,7 @@ const fslPaths: Path[] = [
     cefrLevel: "A2",
     coverUrl: CDN.covers.fsl.pathII,
     badgeUrl: CDN.badges.pathCompletion[1],
-    color: "#059669",
+    color: "var(--semantic-success, #059669)",
     totalLessons: 16,
     totalActivities: 112,
     completed: false,
@@ -285,7 +285,7 @@ const fslPaths: Path[] = [
     cefrLevel: "B1",
     coverUrl: CDN.covers.fsl.pathIII,
     badgeUrl: CDN.badges.pathCompletion[2],
-    color: "#d97706",
+    color: "var(--semantic-warning, #d97706)",
     totalLessons: 16,
     totalActivities: 112,
     completed: false,
@@ -347,7 +347,7 @@ const fslPaths: Path[] = [
     cefrLevel: "B2",
     coverUrl: CDN.covers.fsl.pathIV,
     badgeUrl: CDN.badges.pathCompletion[3],
-    color: "#7c3aed",
+    color: "var(--color-violet-600, #7c3aed)",
     totalLessons: 16,
     totalActivities: 112,
     completed: false,
@@ -409,7 +409,7 @@ const fslPaths: Path[] = [
     cefrLevel: "C1",
     coverUrl: CDN.covers.fsl.pathV,
     badgeUrl: CDN.badges.pathCompletion[4],
-    color: "#dc2626",
+    color: "var(--semantic-danger, #dc2626)",
     totalLessons: 16,
     totalActivities: 112,
     completed: false,
@@ -539,7 +539,7 @@ const eslPaths: Path[] = [
     cefrLevel: "A1",
     coverUrl: CDN.covers.esl.pathI,
     badgeUrl: CDN.badges.pathCompletion[0],
-    color: "#2563eb",
+    color: "var(--color-blue-600, #2563eb)",
     totalLessons: 16,
     totalActivities: 112,
     completed: false,
@@ -594,7 +594,7 @@ const eslPaths: Path[] = [
   {
     id: "esl-path-ii", number: "II", title: "Everyday Fluency", titleFr: "Aisance Quotidienne",
     subtitle: "Building Confidence in Daily Professional English", subtitleFr: "Développer la confiance dans l'anglais professionnel quotidien",
-    cefrLevel: "A2", coverUrl: CDN.covers.esl.pathII, badgeUrl: CDN.badges.pathCompletion[1], color: "#059669",
+    cefrLevel: "A2", coverUrl: CDN.covers.esl.pathII, badgeUrl: CDN.badges.pathCompletion[1], color: "var(--semantic-success, #059669)",
     totalLessons: 16, totalActivities: 112, completed: false, progress: 0,
     modules: [
       { id: 5, title: "Digital Workspace", titleFr: "Espace Numérique", description: "Navigate digital tools in English.", descriptionFr: "Naviguer les outils numériques en anglais.", badgeUrl: CDN.badges.modules[0], completed: false, progress: 0, quizPassing: 80, lessons: [
@@ -626,7 +626,7 @@ const eslPaths: Path[] = [
   {
     id: "esl-path-iii", number: "III", title: "Operational English", titleFr: "Anglais Opérationnel",
     subtitle: "Professional Communication for the Workplace", subtitleFr: "Communication professionnelle pour le milieu de travail",
-    cefrLevel: "B1", coverUrl: CDN.covers.esl.pathIII, badgeUrl: CDN.badges.pathCompletion[2], color: "#d97706",
+    cefrLevel: "B1", coverUrl: CDN.covers.esl.pathIII, badgeUrl: CDN.badges.pathCompletion[2], color: "var(--semantic-warning, #d97706)",
     totalLessons: 16, totalActivities: 112, completed: false, progress: 0,
     modules: [
       { id: 9, title: "Planning & Organizing", titleFr: "Planification et Organisation", description: "Plan and organize in English.", descriptionFr: "Planifier et organiser en anglais.", badgeUrl: CDN.badges.modules[0], completed: false, progress: 0, quizPassing: 80, lessons: [
@@ -658,7 +658,7 @@ const eslPaths: Path[] = [
   {
     id: "esl-path-iv", number: "IV", title: "Strategic Expression", titleFr: "Expression Stratégique",
     subtitle: "Advanced Professional Communication", subtitleFr: "Communication professionnelle avancée",
-    cefrLevel: "B2", coverUrl: CDN.covers.esl.pathIV, badgeUrl: CDN.badges.pathCompletion[3], color: "#7c3aed",
+    cefrLevel: "B2", coverUrl: CDN.covers.esl.pathIV, badgeUrl: CDN.badges.pathCompletion[3], color: "var(--color-violet-600, #7c3aed)",
     totalLessons: 16, totalActivities: 112, completed: false, progress: 0,
     modules: [
       { id: 13, title: "Leading Meetings", titleFr: "Diriger des Réunions", description: "Lead meetings effectively.", descriptionFr: "Diriger des réunions efficacement.", badgeUrl: CDN.badges.modules[0], completed: false, progress: 0, quizPassing: 80, lessons: [
@@ -690,7 +690,7 @@ const eslPaths: Path[] = [
   {
     id: "esl-path-v", number: "V", title: "Professional Mastery", titleFr: "Maîtrise Professionnelle",
     subtitle: "Executive-Level English Communication", subtitleFr: "Communication en anglais de niveau exécutif",
-    cefrLevel: "C1", coverUrl: CDN.covers.esl.pathV, badgeUrl: CDN.badges.pathCompletion[4], color: "#dc2626",
+    cefrLevel: "C1", coverUrl: CDN.covers.esl.pathV, badgeUrl: CDN.badges.pathCompletion[4], color: "var(--semantic-danger, #dc2626)",
     totalLessons: 16, totalActivities: 112, completed: false, progress: 0,
     modules: [
       { id: 17, title: "Managing People & Performance", titleFr: "Gestion des Personnes et du Rendement", description: "Manage teams effectively.", descriptionFr: "Gérer les équipes efficacement.", badgeUrl: CDN.badges.modules[0], completed: false, progress: 0, quizPassing: 80, lessons: [
@@ -764,7 +764,7 @@ export const programs: ProgramData[] = [
     description: "Master French for the Canadian public service. Prepare for the SLE with 6 comprehensive Paths from A1 to C1+.",
     descriptionFr: "Maîtrisez le français pour la fonction publique canadienne. Préparez-vous à l'ÉLS avec 6 parcours complets de A1 à C1+.",
     icon: "🇨🇦",
-    color: "#2563eb",
+    color: "var(--color-blue-600, #2563eb)",
     paths: fslPaths,
   },
   {
@@ -774,7 +774,7 @@ export const programs: ProgramData[] = [
     description: "Master English for the Canadian public service. Build professional communication skills from A1 to C1+.",
     descriptionFr: "Maîtrisez l'anglais pour la fonction publique canadienne. Développez vos compétences en communication professionnelle de A1 à C1+.",
     icon: "🇨🇦",
-    color: "#059669",
+    color: "var(--semantic-success, #059669)",
     paths: eslPaths,
   },
 ];
