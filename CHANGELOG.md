@@ -102,3 +102,41 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## Migration Notes
 
 After merging PR #103, run: `pnpm db:push`
+
+---
+
+## [Waves J-N] — 2026-02-15
+
+**Branch:** `sprint-j2`
+**Commit:** `5aaab6b`
+**PR:** [#148](https://github.com/RusingAcademy/RusingAcademy-Ecosystem-Main-Repo/pull/148)
+
+### Wave J — Revenue & Reliability (P0)
+
+#### Added
+- Paid course enrollment pipeline via Stripe Checkout (`courses.createCheckoutSession`).
+- Coach payout automation service (`coachPayoutService.ts`) with Stripe Connect transfers.
+- Admin payouts dashboard (`adminPayouts` router) for managing payout runs.
+- Deep health check endpoint (`/api/health`) with DB, Stripe, and memory diagnostics.
+- `RouteErrorBoundary` component for UI resilience.
+- `RUNBOOK.md` with database migration and emergency procedures.
+
+### Wave K — Content at Scale (P1)
+
+#### Added
+- Content versioning system (`content_versions` table, `contentVersionService.ts`) with snapshot, restore, and compare capabilities.
+
+#### Changed
+- Lesson schema and mutations now support full bilingual content (`textContentFr`, `descriptionFr`, `contentJson`).
+
+### Wave M — Engagement (P3)
+
+#### Added
+- Community moderation tools: upvoting, content reporting, admin pin/lock, and accepted answers.
+- New tables `discussion_upvotes` and `discussion_reports` to support moderation.
+
+### Wave N — Compliance (P4)
+
+#### Added
+- PIPEDA/GDPR compliance router (`privacy.ts`) with full data export and account deletion (30-day grace period).
+- `account_deletion_requests` table for audit trail.

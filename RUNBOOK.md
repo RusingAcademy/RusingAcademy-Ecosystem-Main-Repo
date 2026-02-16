@@ -259,3 +259,53 @@ Check the Stripe Dashboard → Developers → Webhooks for:
 3. **Restore from backup**: `pnpm db:restore`
 4. **Verify data integrity**: `pnpm db:validate`
 5. **Resume application** and monitor closely
+
+
+---
+
+## 7. PR #148 Rollback Plan
+
+This section covers the specific rollback plan for the changes introduced in **PR #148 (Waves J-N)**.
+
+### Code Rollback
+
+1. **Revert the PR:** Use the "Revert" button on the PR page in GitHub. This will create a new PR that undoes all changes.
+   - **PR to Revert:** [https://github.com/RusingAcademy/RusingAcademy-Ecosystem-Main-Repo/pull/148](https://github.com/RusingAcademy/RusingAcademy-Ecosystem-Main-Repo/pull/148)
+2. **Merge the revert PR:** This will roll back the codebase to the pre-PR #148 state.
+3. **Deploy:** Railway will automatically deploy the `main` branch with the reverted code.
+
+### Database Rollback
+
+PR #148 introduces several new tables. A full rollback requires removing them.
+
+**Rollback SQL (`rollback_pr148.sql`):**
+
+```sql
+-- Wave N: Privacy
+DROP TABLE IF EXISTS `account_deletion_requests`;
+
+-- Wave M: Community Moderation
+DROP TABLE IF EXISTS `discussion_upvotes`;
+DROP TABLE IF EXISTS `discussion_reports`;
+ALTER TABLE `discussion_replies` DROP COLUMN `upvoteCount`;
+
+-- Wave K: Content Versioning
+DROP TABLE IF EXISTS `content_versions`;
+
+-- Wave K: Bilingual Content
+ALTER TABLE `lessons` DROP COLUMN `textContentFr`;
+```
+
+**Execution:**
+
+1. **Stop the application**.
+2. **Create a fresh backup**: `pnpm db:backup`.
+3. **Apply the rollback SQL**: `mysql -h <host> -u <user> -p <database> < rollback_pr148.sql`.
+4. **Restart the application**.
+
+### Risk Notes
+
+- **Stripe:** No direct rollback needed. New checkout sessions will simply fail to be created if the `createCheckoutSession` endpoint is removed.
+- **Payouts:** No rollback needed for Stripe Connect. The `adminPayouts` router will be removed, disabling the feature.
+- **Privacy Deletion:** Reverting the code will remove the `privacy` router, preventing new deletion requests. Data already marked for deletion will remain so until manually reversed in the DB.
+- **Versioning:** Reverting will remove the versioning service. Existing snapshots in `content_versions` will be orphaned until the table is dropped.
