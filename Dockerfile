@@ -10,8 +10,9 @@ FROM node:22-alpine AS deps
 
 WORKDIR /app
 
-# Copy package files
+# Copy package files and patches
 COPY package.json pnpm-lock.yaml ./
+COPY patches/ ./patches/
 
 # Install pnpm and dependencies
 RUN corepack enable && corepack prepare pnpm@latest --activate
@@ -45,6 +46,7 @@ RUN addgroup --system --gid 1001 nodejs && \
 
 # Install production dependencies only
 COPY package.json pnpm-lock.yaml ./
+COPY patches/ ./patches/
 RUN corepack enable && corepack prepare pnpm@latest --activate && \
     pnpm install --frozen-lockfile --prod && \
     pnpm store prune
