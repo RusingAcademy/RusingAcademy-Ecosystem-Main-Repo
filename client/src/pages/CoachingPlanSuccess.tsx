@@ -92,10 +92,10 @@ export default function CoachingPlanSuccess() {
         <div className="container max-w-3xl mx-auto px-4">
           {/* Success Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-teal-100 to-[#FFF0E6] dark:from-teal-900/30 dark:to-amber-900/30 mb-6 shadow-lg">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-teal-100 to-orange-50 dark:from-teal-900/30 dark:to-amber-900/30 mb-6 shadow-lg">
               <CheckCircle2 className="h-12 w-12 text-teal-600 dark:text-teal-400" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-teal-700 to-[#A84A15] bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-teal-700 to-cta bg-clip-text text-transparent">
               {l.title}
             </h1>
             <p className="text-black dark:text-white text-lg">{l.subtitle}</p>
@@ -110,7 +110,7 @@ export default function CoachingPlanSuccess() {
 
           {/* Plan Details Card */}
           <Card className="mb-8 overflow-hidden border-2 border-teal-200 dark:border-teal-800">
-            <CardHeader className="bg-gradient-to-r from-teal-500/10 to-[#C65A1E]/10">
+            <CardHeader className="bg-gradient-to-r from-teal-500/10 to-cta/10">
               <CardTitle className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-cta500" />
                 {l.planDetails}
@@ -133,7 +133,7 @@ export default function CoachingPlanSuccess() {
                       <Badge className="bg-cta text-white">Most Popular</Badge>
                     )}
                     {purchasedPlan.id === "immersion-plan" && (
-                      <Badge className="bg-gradient-to-r from-[#C65A1E] to-[#A84A15] text-white">Premium</Badge>
+                      <Badge className="bg-gradient-to-r from-cta to-cta text-white">Premium</Badge>
                     )}
                   </div>
 

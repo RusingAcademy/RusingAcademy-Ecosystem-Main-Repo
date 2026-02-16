@@ -251,7 +251,7 @@ export default function ConversationPractice() {
         {sessionState === "setup" && (
           <>
             {/* Hero */}
-            <section className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E]">
+            <section className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-foundation via-teal-700 to-foundation">
               <div className="container relative z-10 text-center">
                 <Badge className="bg-cta/20 text-cta border-cta/30 mb-4">
                   <MessageSquare className="h-3 w-3 mr-1" />

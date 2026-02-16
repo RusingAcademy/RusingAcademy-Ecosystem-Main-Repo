@@ -190,7 +190,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white dark:from-[#041e1e] dark:to-[#062b2b]">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
       <Header />
 
       <main id="main-content" className="flex-1" role="main" aria-label={isEn ? "Learner Dashboard" : "Tableau de bord apprenant"}>

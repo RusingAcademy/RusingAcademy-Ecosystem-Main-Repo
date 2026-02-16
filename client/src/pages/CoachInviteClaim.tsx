@@ -59,7 +59,7 @@ export default function CoachInviteClaim() {
   // Loading state
   if (isLoading || authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040] flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
           <p className="text-black dark:text-cyan-300">Chargement de l'invitation...</p>
@@ -71,7 +71,7 @@ export default function CoachInviteClaim() {
   // Error state
   if (error || !invitation) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
@@ -93,7 +93,7 @@ export default function CoachInviteClaim() {
   // Expired state
   if (invitation.isExpired) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <Clock className="w-16 h-16 text-amber-500 mx-auto mb-4" />
@@ -118,7 +118,7 @@ export default function CoachInviteClaim() {
   // Already claimed state
   if (invitation.isClaimed) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
@@ -145,7 +145,7 @@ export default function CoachInviteClaim() {
 
   // Valid invitation - show claim form
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
       <Card className="max-w-lg w-full">
         <CardHeader className="text-center">
           <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">

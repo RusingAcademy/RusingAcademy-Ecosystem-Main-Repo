@@ -101,7 +101,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] p-6 text-white">
+      <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
         <div className="flex items-center gap-3 mb-2">
           <Volume2 className="w-6 h-6" />
           <h2 className="text-xl font-bold">

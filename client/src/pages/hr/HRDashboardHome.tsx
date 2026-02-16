@@ -115,7 +115,7 @@ export default function HRDashboardHome() {
     <HRLayout>
       <div className="max-w-7xl mx-auto">
         {/* Welcome Banner */}
-        <div className="mb-6 p-5 rounded-xl bg-gradient-to-r from-[#2563eb]/5 to-[#2563eb]/10 border border-blue-600/15">
+        <div className="mb-6 p-5 rounded-xl bg-gradient-to-r from-blue-600/5 to-blue-600/10 border border-blue-600/15">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 capitalize" style={{ fontFamily: "'Playfair Display', serif" }}>

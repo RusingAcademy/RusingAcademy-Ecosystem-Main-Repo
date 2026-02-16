@@ -154,7 +154,7 @@ function SignupContent() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
         <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
@@ -174,7 +174,7 @@ function SignupContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4 relative">
       {/* Home Button */}
       <Link href="/">
         <button className="absolute top-4 left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/60">

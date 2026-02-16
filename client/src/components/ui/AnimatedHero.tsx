@@ -43,7 +43,7 @@ export function AnimatedHero({
   const getBackgroundClass = () => {
     switch (variant) {
       case 'gradient':
-        return 'bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-teal-900';
+        return 'bg-gradient-to-br from-obsidian via-teal-900 to-teal-900';
       case 'dark':
         return 'bg-obsidian';
       default:
@@ -226,7 +226,7 @@ export function AnimatedHero({
                 }}
               />
               <motion.div
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-[#D97B3D] to-[#D97B3D] rounded-xl -z-10"
+                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-cta-2 to-cta-2 rounded-xl -z-10"
                 animate={{
                   rotate: [0, -5, 0, 5, 0],
                 }}

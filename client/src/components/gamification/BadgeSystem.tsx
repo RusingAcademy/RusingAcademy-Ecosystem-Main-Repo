@@ -33,8 +33,8 @@ const RARITY_CONFIG = {
   common: { color: 'from-gray-400 to-gray-500', label: 'Commun' },
   uncommon: { color: 'from-green-400 to-emerald-500', label: 'Peu commun' },
   rare: { color: 'from-blue-400 to-indigo-500', label: 'Rare' },
-  epic: { color: 'from-[#0F3D3E] to-[#145A5B]', label: 'Épique' },
-  legendary: { color: 'from-[#D97B3D] to-[#C65A1E]', label: 'Légendaire' }
+  epic: { color: 'from-foundation to-teal-700', label: 'Épique' },
+  legendary: { color: 'from-cta-2 to-cta', label: 'Légendaire' }
 };
 
 export function BadgeCard({ badge, earned = false, size = 'default' }) {

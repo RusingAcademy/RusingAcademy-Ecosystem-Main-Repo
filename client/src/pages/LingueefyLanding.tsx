@@ -1110,7 +1110,7 @@ export default function LingueefyLanding() {
               </div>
               
               {/* Coaching Plans Option */}
-              <div className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 rounded-3xl p-8 border-2 border-orange-100 hover:border-cta-2 transition-all duration-300 hover:shadow-xl group relative">
+              <div className="bg-gradient-to-br from-orange-50 to-orange-50/50 rounded-3xl p-8 border-2 border-orange-100 hover:border-cta-2 transition-all duration-300 hover:shadow-xl group relative">
                 <div className="absolute -top-3 right-6">
                   <Badge className="bg-cta text-white border-0 px-4 py-1">Popular</Badge>
                 </div>
@@ -1209,7 +1209,7 @@ export default function LingueefyLanding() {
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
               {/* Before Column */}
-              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 md:p-10 border border-cta/50 shadow-lg">
+              <div className="bg-gradient-to-br from-orange-50 to-orange-50 rounded-3xl p-8 md:p-10 border border-cta/50 shadow-lg">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-4 h-4 bg-cta-soft rounded-sm" />
                   <h3 className="text-2xl font-bold text-cta tracking-wide">{c.transformation.before.title}</h3>
@@ -1273,7 +1273,7 @@ export default function LingueefyLanding() {
                     button: 'bg-emerald-600 hover:bg-emerald-700',
                   },
                   amber: {
-                    bg: 'from-[#FFF8F3] to-[#FFF0E6]/50',
+                    bg: 'from-orange-50 to-orange-50/50',
                     border: 'border-orange-100 hover:border-cta-2',
                     badge: 'bg-cta',
                     icon: 'bg-amber-100 text-cta600',
@@ -1281,7 +1281,7 @@ export default function LingueefyLanding() {
                     button: 'bg-amber-600 hover:bg-amber-700',
                   },
                   copper: {
-                    bg: 'from-[#FFF1E8] to-[#FFF8F3]',
+                    bg: 'from-orange-50 to-orange-50',
                     border: 'border-cta hover:border-cta',
                     badge: 'bg-cta-soft',
                     icon: 'bg-cta-soft text-cta',
@@ -1372,7 +1372,7 @@ export default function LingueefyLanding() {
                       alt={coach.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 via-[#062b2b]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-obsidian/20 to-transparent" />
                     
                     {/* Badge */}
                     <Badge className="absolute top-4 left-4 bg-cta text-white border-0">
@@ -1445,9 +1445,9 @@ export default function LingueefyLanding() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {c.services.items.map((service, index) => {
               const colorClasses = {
-                teal: "from-[#0F3D3E] to-[#145A5B] bg-foundation-soft text-foundation",
-                amber: "from-[#C65A1E] to-[#A84A15] bg-amber-50 text-cta",
-                copper: "from-[#C65A1E] to-[#E06B2D] bg-cta-soft text-cta",
+                teal: "from-foundation to-teal-700 bg-foundation-soft text-foundation",
+                amber: "from-cta to-cta bg-amber-50 text-cta",
+                copper: "from-cta to-orange-600 bg-cta-soft text-cta",
               };
               const colors = colorClasses[service.color as keyof typeof colorClasses];
               

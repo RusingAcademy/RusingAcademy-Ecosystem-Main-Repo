@@ -344,7 +344,7 @@ export default function CourseBuilder() {
   // ─── Course List View ────────────────────────────────────────────
   if (!editId && step === 1 && !courseId) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#1B1464]/5 to-background">
+      <div className="min-h-screen bg-gradient-to-b from-indigo-900/5 to-background">
         <div className="max-w-5xl mx-auto px-4 py-8">
           <button onClick={() => navigate("/")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
             <ArrowLeft className="w-4 h-4" /> {t.common.back}
@@ -419,7 +419,7 @@ export default function CourseBuilder() {
   const isSaving = createCourseMut.isPending || updateCourseMut.isPending || addModuleMut.isPending || addLessonMut.isPending;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1B1464]/5 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-900/5 to-background">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <button onClick={() => navigate("/admin/courses")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Courses

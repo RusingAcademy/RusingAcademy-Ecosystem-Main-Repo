@@ -69,7 +69,7 @@ export function GuestRoute({ children, redirectTo = "/dashboard" }: GuestRoutePr
   // Show loading state while checking auth
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400"></div>
       </div>
     );
@@ -78,7 +78,7 @@ export function GuestRoute({ children, redirectTo = "/dashboard" }: GuestRoutePr
   // If authenticated, don't render children (redirect will happen)
   if (isAuthenticated && user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400 mx-auto mb-4"></div>
           <p className="text-cyan-300">Redirecting to dashboard...</p>
@@ -114,7 +114,7 @@ export function ProtectedRoute({ children, redirectTo = "/login" }: ProtectedRou
   // Show loading state while checking auth
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400"></div>
       </div>
     );
@@ -123,7 +123,7 @@ export function ProtectedRoute({ children, redirectTo = "/login" }: ProtectedRou
   // If not authenticated, don't render children (redirect will happen)
   if (!isAuthenticated || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400 mx-auto mb-4"></div>
           <p className="text-cyan-300">Redirecting to login...</p>

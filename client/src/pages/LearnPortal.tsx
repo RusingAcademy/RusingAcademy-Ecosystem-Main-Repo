@@ -216,7 +216,7 @@ function PortalSkeleton() {
   return (
     <div className="min-h-full animate-pulse">
       {/* Hero skeleton */}
-      <div className="bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E] px-6 py-12">
+      <div className="bg-gradient-to-br from-foundation via-teal-700 to-foundation px-6 py-12">
         <div className="max-w-4xl mx-auto">
           <Skeleton className="w-full h-48 rounded-2xl bg-white/10 mb-6" />
           <Skeleton className="h-8 w-2/3 bg-white/10 mb-3" />
@@ -418,7 +418,7 @@ export default function LearnPortal() {
                   className="w-full h-full object-cover"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F3D3E] via-[#0F3D3E]/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foundation via-[#0F3D3E]/70 to-transparent" />
               </div>
               {/* Content overlay */}
               <div className="absolute bottom-0 left-0 right-0 z-10">
@@ -441,7 +441,7 @@ export default function LearnPortal() {
               </div>
             </div>
           ) : (
-            <div className="bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E] relative">
+            <div className="bg-gradient-to-br from-foundation via-teal-700 to-foundation relative">
               {/* Decorative orbs */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute -top-20 -right-20 w-80 h-80 bg-cta/20 rounded-full blur-3xl" />
@@ -555,7 +555,7 @@ export default function LearnPortal() {
                             className={`w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md ${
                               isModuleComplete
                                 ? "bg-gradient-to-br from-emerald-500 to-emerald-600"
-                                : "bg-gradient-to-br from-[#0F3D3E] to-[#145A5B]"
+                                : "bg-gradient-to-br from-foundation to-teal-700"
                             }`}
                           >
                             {isModuleComplete ? (

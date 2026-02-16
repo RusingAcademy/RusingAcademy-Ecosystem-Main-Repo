@@ -49,7 +49,7 @@ export default function CommunityForum() {
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
           <div className="relative h-[140px]">
             <img src={FORUM_IMG} alt="" className="w-full h-full object-cover" aria-hidden="true" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#008090]/85 to-[#008090]/40 flex items-center">
+            <div className="absolute inset-0 bg-gradient-to-r from-teal-700/85 to-teal-700/40 flex items-center">
               <div className="px-6 md:px-8">
                 <h1 className="text-white text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>
                   {t("community.title")}
@@ -181,7 +181,7 @@ export default function CommunityForum() {
             {recentPosts.map((post, i) => (
               <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#008090] to-[#00a0b0] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-700 to-[#00a0b0] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                     {post.avatar}
                   </div>
                   <div className="flex-1 min-w-0">

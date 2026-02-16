@@ -183,7 +183,7 @@ export function SpeakingExercise({
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] p-6 text-white">
+      <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">🎤</span>
           <h2 className="text-xl font-bold">
@@ -221,7 +221,7 @@ export function SpeakingExercise({
                 <button
                   onClick={handleGeneratePronunciation}
                   disabled={isGeneratingAudio}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white rounded-lg hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-foundation to-teal-700 text-white rounded-lg hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {isGeneratingAudio ? (
                     <>
@@ -248,7 +248,7 @@ export function SpeakingExercise({
                   {/* Play/Pause Button */}
                   <button
                     onClick={isPlayingGenerated ? pauseGeneratedAudio : playGeneratedAudio}
-                    className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white rounded-full hover:opacity-90 transition-all shadow-md"
+                    className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-foundation to-teal-700 text-white rounded-full hover:opacity-90 transition-all shadow-md"
                   >
                     {isPlayingGenerated ? (
                       <Pause className="w-5 h-5" />
@@ -301,7 +301,7 @@ export function SpeakingExercise({
                 className={`w-24 h-24 rounded-full flex items-center justify-center transition-all ${
                   isRecording 
                     ? "bg-red-500 hover:bg-red-600 animate-pulse" 
-                    : "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] hover:opacity-90"
+                    : "bg-gradient-to-r from-foundation to-teal-700 hover:opacity-90"
                 } text-white shadow-lg`}
               >
                 {isRecording ? (
@@ -342,7 +342,7 @@ export function SpeakingExercise({
                   <button
                     onClick={playRecording}
                     disabled={isPlaying}
-                    className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white flex items-center justify-center hover:opacity-90 disabled:opacity-50"
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-foundation to-teal-700 text-white flex items-center justify-center hover:opacity-90 disabled:opacity-50"
                   >
                     {isPlaying ? (
                       <svg className="w-6 h-6 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -424,7 +424,7 @@ export function SpeakingExercise({
         <button
           onClick={handleSubmit}
           disabled={!audioUrl}
-          className="px-6 py-2 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="px-6 py-2 bg-gradient-to-r from-foundation to-teal-700 text-white rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {language === "fr" ? "Soumettre" : "Submit"}
         </button>

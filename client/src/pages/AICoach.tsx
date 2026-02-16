@@ -217,7 +217,7 @@ export default function AICoach() {
 
       <main>
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
+        <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" />
@@ -458,7 +458,7 @@ export default function AICoach() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] rounded-2xl p-8 text-white">
+                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian rounded-2xl p-8 text-white">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="relative">
                       <img 
@@ -542,7 +542,7 @@ export default function AICoach() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

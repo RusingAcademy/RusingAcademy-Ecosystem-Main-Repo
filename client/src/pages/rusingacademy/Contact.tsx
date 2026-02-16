@@ -80,7 +80,7 @@ export default function RusingAcademyContact() {
 
   if (formSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#FFF8F3] via-white to-[#FDFBF7]">
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-stone-50">
         
         <main className="pt-24 pb-20 px-4">
           <div className="container mx-auto max-w-2xl">
@@ -114,7 +114,7 @@ export default function RusingAcademyContact() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFF8F3] via-white to-[#FDFBF7]">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-stone-50">
       
       
       <main id="main-content" className="pt-24 pb-20 px-4">

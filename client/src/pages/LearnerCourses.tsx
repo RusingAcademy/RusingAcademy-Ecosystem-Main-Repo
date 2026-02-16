@@ -422,7 +422,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Status Badge */}
         <div className="absolute top-4 right-4">
           {isCompleted ? (
@@ -483,7 +483,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Course Icon */}
         <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
           <BookOpen className="h-8 w-8 text-white" />
@@ -557,7 +557,7 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
   };
 
   return (
-    <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-teal-800 opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b]`}>
+    <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-teal-800 opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian`}>
       {/* Status Badge */}
       <div className="absolute top-4 right-4">
         <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-black"}>

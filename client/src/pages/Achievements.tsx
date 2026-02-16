@@ -57,7 +57,7 @@ export default function Achievements() {
     <DashboardLayout>
       <div className="max-w-4xl mx-auto px-4 py-6">
         {/* Header with Stats */}
-        <div className="bg-gradient-to-br from-[#008090] to-[#005a66] rounded-2xl p-6 text-white mb-6 shadow-lg">
+        <div className="bg-gradient-to-br from-teal-700 to-[#005a66] rounded-2xl p-6 text-white mb-6 shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-2xl font-bold">{isFr ? "Vitrine des réalisations" : "Achievement Showcase"}</h1>

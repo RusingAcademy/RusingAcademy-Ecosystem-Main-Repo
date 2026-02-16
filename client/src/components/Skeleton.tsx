@@ -32,7 +32,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   const baseClasses = cn(
     'relative overflow-hidden',
     'bg-gradient-to-r from-gray-200/60 via-gray-100/40 to-gray-200/60',
-    'dark:from-[#0a6969]/40 dark:via-gray-600/20 dark:to-gray-700/40',
+    'dark:from-teal-800/40 dark:via-gray-600/20 dark:to-gray-700/40',
     'backdrop-blur-sm',
     roundedClasses[rounded],
     animate && 'animate-shimmer',

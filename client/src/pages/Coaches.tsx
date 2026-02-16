@@ -173,7 +173,7 @@ export default function Coaches() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-teal-50/30 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-teal-50/30 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">
       <SEO title="Our Coaches" description="Meet RusingAcademy's certified bilingual coaches specializing in SLE preparation and professional French training." canonical="/coaches" />
       
 
@@ -448,7 +448,7 @@ export default function Coaches() {
                               )}
                               
                               {/* Gradient Overlay — reduced opacity to keep photos visible */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-[#041e1e]/20" />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-teal-950/20" />
                               
                               {/* Availability Badge */}
                               <div className="absolute top-4 left-4">
@@ -549,7 +549,7 @@ export default function Coaches() {
                           </div>
 
                           {/* Pricing & Actions Section */}
-                          <div className="lg:w-64 p-6 lg:p-8 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-[#0a4040]/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-teal-800/50 flex flex-col justify-between">
+                          <div className="lg:w-64 p-6 lg:p-8 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-teal-900/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-teal-800/50 flex flex-col justify-between">
                             <div>
                               {/* Price */}
                               <div className="text-center lg:text-left mb-6">

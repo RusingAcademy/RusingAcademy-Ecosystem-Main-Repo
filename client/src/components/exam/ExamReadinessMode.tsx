@@ -65,10 +65,10 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
         </div>
 
         {/* Readiness Score */}
-        <div className="bg-gradient-to-br from-[#0F3D3E]/20 to-[#145A5B]/20 rounded-2xl p-8 mb-8 text-center border border-foundation/30">
+        <div className="bg-gradient-to-br from-foundation/20 to-teal-700/20 rounded-2xl p-8 mb-8 text-center border border-foundation/30">
           <p className="text-white/60 mb-2">Score de préparation - Niveau {selectedLevel}</p>
           <div className="text-6xl font-bold text-white mb-4">{Math.round(readinessScore) || '--'}%</div>
-          <div className="w-full bg-white/10 rounded-full h-3"><div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] h-3 rounded-full" style={{ width: `${readinessScore || 0}%` }} /></div>
+          <div className="w-full bg-white/10 rounded-full h-3"><div className="bg-gradient-to-r from-foundation to-teal-700 h-3 rounded-full" style={{ width: `${readinessScore || 0}%` }} /></div>
         </div>
 
         {/* Section Cards */}
@@ -83,7 +83,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
         </div>
 
         {/* Start Button */}
-        <button onClick={() => setShowExam(true)} className="w-full py-4 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] rounded-xl text-white font-bold text-lg hover:opacity-90 transition-opacity">
+        <button onClick={() => setShowExam(true)} className="w-full py-4 bg-gradient-to-r from-foundation to-teal-700 rounded-xl text-white font-bold text-lg hover:opacity-90 transition-opacity">
           Commencer la simulation
         </button>
       </div>

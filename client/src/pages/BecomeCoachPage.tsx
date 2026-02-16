@@ -28,7 +28,7 @@ export default function BecomeCoachPage() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#C65A1E]/10 to-[#C65A1E]/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-cta/10 to-cta/10" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
             <span className="inline-block px-4 py-2 bg-amber-100 text-cta800 rounded-full text-sm font-medium mb-4">
@@ -96,7 +96,7 @@ export default function BecomeCoachPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-[#A84A15] to-[#A84A15]">
+      <section className="py-20 px-4 bg-gradient-to-r from-cta to-cta">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-6">
             Prêt à transformer des carrières?

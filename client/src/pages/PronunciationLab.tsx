@@ -149,7 +149,7 @@ export default function PronunciationLab() {
             <button
               onClick={speakPhrase}
               disabled={isPlaying}
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#008090] to-[#006d7a] text-white rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm"
             >
               <span className="material-icons">{isPlaying ? "volume_up" : "play_arrow"}</span>
               {isPlaying ? "Playing..." : "Listen"}
@@ -203,7 +203,7 @@ export default function PronunciationLab() {
         </div>
 
         {/* Tips */}
-        <div className="bg-gradient-to-r from-[#008090]/5 to-[#006d7a]/5 border border-teal-700/20 rounded-xl p-5">
+        <div className="bg-gradient-to-r from-teal-700/5 to-[#006d7a]/5 border border-teal-700/20 rounded-xl p-5">
           <h3 className="text-sm font-semibold text-teal-700 mb-2 flex items-center gap-1">
             <span className="material-icons text-base">tips_and_updates</span> Pronunciation Tips
           </h3>

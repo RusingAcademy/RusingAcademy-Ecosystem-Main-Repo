@@ -42,7 +42,7 @@ export function RiskDashboard({ role }: { role: 'admin' | 'coach' }) {
     fetchAtRiskLearners();
   };
 
-  const getRiskColor = (level: string) => ({ critical: 'from-red-500 to-[#E06B2D]', high: 'from-[#C65A1E] to-red-500', medium: 'from-[#C65A1E] to-[#C65A1E]' }[level] || 'from-green-500');
+  const getRiskColor = (level: string) => ({ critical: 'from-red-500 to-orange-600', high: 'from-cta to-red-500', medium: 'from-cta to-cta' }[level] || 'from-green-500');
 
   return (
     <div className="p-6 bg-slate-950 min-h-screen">

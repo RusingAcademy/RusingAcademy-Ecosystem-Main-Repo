@@ -136,7 +136,7 @@ export default function CoachPerformance() {
                   const name = learner.name || learner.learnerName || "—";
                   return (
                     <div key={learner.id || i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#9333ea] flex items-center justify-center text-white font-bold text-xs">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-600 to-[#9333ea] flex items-center justify-center text-white font-bold text-xs">
                         {name.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">

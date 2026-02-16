@@ -170,11 +170,11 @@ export default function About() {
   const getColorClasses = (color: string) => {
     const colors: Record<string, { bg: string; icon: string; iconBg: string }> = {
       teal: { bg: "from-teal-50 to-teal-100/50", icon: "text-teal-600", iconBg: "bg-teal-500" },
-      copper: { bg: "from-[#C65A1E]-50 to-[#E06B2D]/50", icon: "text-cta", iconBg: "bg-cta-soft" },
+      copper: { bg: "from-cta-50 to-orange-600/50", icon: "text-cta", iconBg: "bg-cta-soft" },
       blue: { bg: "from-blue-50 to-blue-100/50", icon: "text-blue-600", iconBg: "bg-blue-500" },
-      amber: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-cta600", iconBg: "bg-cta" },
+      amber: { bg: "from-orange-50 to-orange-50/50", icon: "text-cta600", iconBg: "bg-cta" },
       emerald: { bg: "from-emerald-50 to-emerald-100/50", icon: "text-emerald-600", iconBg: "bg-emerald-500" },
-      orange: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-cta600", iconBg: "bg-cta" },
+      orange: { bg: "from-orange-50 to-orange-50/50", icon: "text-cta600", iconBg: "bg-cta" },
     };
     return colors[color] || colors.teal;
   };

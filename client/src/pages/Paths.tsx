@@ -62,7 +62,7 @@ const fallbackPaths = Object.values(PATH_SERIES_PRICES).map((price, index) => ({
     "from-emerald-500 to-teal-600",
     "from-blue-500 to-indigo-600",
     "from-amber-500 to-orange-600",
-    "from-[#0F3D3E] to-[#145A5B]",
+    "from-foundation to-teal-700",
     "from-purple-500 to-violet-600",
     "from-rose-500 to-red-600",
   ][index],

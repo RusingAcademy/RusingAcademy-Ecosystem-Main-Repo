@@ -247,11 +247,11 @@ export default function MeetingOutcomesDashboard() {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian text-white p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-[#D97B3D] bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cta-2 bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
@@ -264,7 +264,7 @@ export default function MeetingOutcomesDashboard() {
       
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-[#C65A1E]/20 to-red-500/20 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
+        <div className="bg-gradient-to-br from-cta/20 to-red-500/20 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="w-5 h-5 text-orange-400" />
             <span className="text-sm text-orange-400">{t.pendingOutcomes}</span>
@@ -273,7 +273,7 @@ export default function MeetingOutcomesDashboard() {
           <div className="text-xs text-cyan-300">{t.meetingsPendingOutcome}</div>
         </div>
         
-        <div className="bg-gradient-to-br from-blue-500/20 to-[#145A5B]/20 backdrop-blur-sm rounded-xl p-4 border border-blue-500/30">
+        <div className="bg-gradient-to-br from-blue-500/20 to-teal-700/20 backdrop-blur-sm rounded-xl p-4 border border-blue-500/30">
           <div className="flex items-center gap-2 mb-2">
             <Clock className="w-5 h-5 text-blue-400" />
             <span className="text-sm text-blue-400">{t.followUpTasks}</span>

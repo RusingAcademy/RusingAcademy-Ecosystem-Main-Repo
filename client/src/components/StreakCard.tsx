@@ -86,12 +86,12 @@ export default function StreakCard() {
             {/* Animated fire background for active streaks */}
             {streak.currentStreak > 0 && (
               <div className="absolute inset-0 animate-pulse">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#C65A1E]/20 to-red-500/20 rounded-full blur-xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-cta/20 to-red-500/20 rounded-full blur-xl" />
               </div>
             )}
             <div className={`relative text-6xl font-black ${
               streak.currentStreak > 0 
-                ? 'bg-gradient-to-br from-[#C65A1E] to-red-500 bg-clip-text text-transparent' 
+                ? 'bg-gradient-to-br from-cta to-red-500 bg-clip-text text-transparent' 
                 : 'text-white/90'
             }`}>
               {streak.currentStreak}
@@ -124,7 +124,7 @@ export default function StreakCard() {
             </div>
             <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-[#D97B3D] to-red-500 transition-all duration-500"
+                className="h-full bg-gradient-to-r from-cta-2 to-red-500 transition-all duration-500"
                 style={{ width: `${Math.min(progressToMilestone, 100)}%` }}
               />
             </div>
@@ -193,7 +193,7 @@ export default function StreakCard() {
                 variant={streak.longestStreak >= milestone.weeks ? "default" : "outline"}
                 className={`text-xs ${
                   streak.longestStreak >= milestone.weeks 
-                    ? 'bg-gradient-to-r from-[#D97B3D] to-red-500 text-white border-0' 
+                    ? 'bg-gradient-to-r from-cta-2 to-red-500 text-white border-0' 
                     : 'opacity-50'
                 }`}
               >

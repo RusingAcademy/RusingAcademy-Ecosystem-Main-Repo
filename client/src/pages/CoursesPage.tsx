@@ -196,7 +196,7 @@ const pathSeriesData = [
     desc: 'Strategic communication, argumentation, negotiation.',
     focus: 'Strategic communication skills',
     tagline: 'Mastering nuanced professional discourse',
-    color: 'from-[#0F3D3E] to-[#145A5B]',
+    color: 'from-foundation to-teal-700',
     forWhom: 'Upper-intermediate professionals',
     outcome: 'Lead meetings and negotiations in French',
     features: ['Argumentation skills', 'Negotiation techniques', 'Complex presentations', 'Strategic writing'],
@@ -213,7 +213,7 @@ const pathSeriesData = [
     desc: 'Executive excellence, linguistic nuances, high-level presentations.',
     focus: 'Executive-level proficiency',
     tagline: 'Excellence at the executive level',
-    color: 'from-[#0F3D3E] to-[#E06B2D]',
+    color: 'from-foundation to-orange-600',
     forWhom: 'Advanced professionals targeting C level',
     outcome: 'Executive-level bilingual proficiency',
     features: ['Executive communication', 'Linguistic nuances', 'High-stakes presentations', 'Leadership language'],
@@ -230,7 +230,7 @@ const pathSeriesData = [
     desc: 'Intensive SLE exam preparation: reading, writing, oral.',
     focus: 'SLE exam success',
     tagline: 'Your final sprint to certification',
-    color: 'from-[#C65A1E] to-[#A84A15]',
+    color: 'from-cta to-cta',
     forWhom: 'Those preparing for SLE certification',
     outcome: 'Pass your SLE exam with confidence',
     features: ['SLE reading practice', 'SLE writing drills', 'Oral exam simulation', 'Mock exams included'],
@@ -577,7 +577,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Hero Section */}
-        <section className={`relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]'} transition-colors duration-500`}>
+        <section className={`relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-foundation via-[#1a4a4b] to-[#0D9488]'} transition-colors duration-500`}>
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -964,7 +964,7 @@ export default function CoursesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]'}`}>
+        <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-foundation via-[#1a4a4b] to-[#0D9488]'}`}>
           <div className="container">
             <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white/5 backdrop-blur-sm border border-white/60">
               <div className="relative z-10 text-center max-w-3xl mx-auto">

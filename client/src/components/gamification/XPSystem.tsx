@@ -57,7 +57,7 @@ export function XPProgressBar({ currentXP, showDetails = true, size = 'default' 
         </div>
       )}
       <div className="w-full bg-white/10 rounded-full overflow-hidden h-3">
-        <motion.div initial={{ width: 0 }} animate={{ width: progressPercent + '%' }} className="h-full bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] rounded-full" />
+        <motion.div initial={{ width: 0 }} animate={{ width: progressPercent + '%' }} className="h-full bg-gradient-to-r from-foundation to-teal-700 rounded-full" />
       </div>
     </div>
   );
@@ -66,7 +66,7 @@ export function XPProgressBar({ currentXP, showDetails = true, size = 'default' 
 export function XPGainAnimation({ amount, source, onComplete }) {
   const [visible, setVisible] = useState(true);
   useEffect(() => { const timer = setTimeout(() => { setVisible(false); onComplete?.(); }, 2500); return () => clearTimeout(timer); }, []);
-  return visible ? <motion.div className="fixed bottom-24 right-6 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-[#C65A1E]/90 to-[#C65A1E]/90"><p className="text-white font-bold">+{amount} XP</p></motion.div> : null;
+  return visible ? <motion.div className="fixed bottom-24 right-6 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-cta/90 to-cta/90"><p className="text-white font-bold">+{amount} XP</p></motion.div> : null;
 }
 
 export function LevelUpAnimation({ newLevel, onComplete }) {

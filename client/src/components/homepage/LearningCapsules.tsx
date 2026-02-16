@@ -47,7 +47,7 @@ const capsules: Capsule[] = [
     titleEn: "SOCIO-CONSTRUCTIVISM",
     subtitleFr: "Le jour où le groupe a libéré la voix de Karim",
     subtitleEn: "The day the group freed Karim's voice",
-    color: "from-[#C65A1E] to-[#A84A15]",
+    color: "from-cta to-cta",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZbojUzmtnVPkHCjP.jpg",
   },
   {
@@ -56,7 +56,7 @@ const capsules: Capsule[] = [
     titleEn: "HUMANISM",
     subtitleFr: "Le jour où Amélie a arrêté d'avoir peur d'être jugée",
     subtitleEn: "The day Amélie stopped fearing judgment",
-    color: "from-slate-600 to-[#0a6969]",
+    color: "from-slate-600 to-teal-800",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZLqfMOEgQqwhMFzT.jpg",
   },
   {
@@ -74,7 +74,7 @@ const capsules: Capsule[] = [
     titleEn: "EXPERIENTIAL LEARNING",
     subtitleFr: "Le jour où Sam a appris le français en commandant un café",
     subtitleEn: "The day Sam learned French ordering coffee",
-    color: "from-[#C65A1E] to-[#A84A15]",
+    color: "from-cta to-cta",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ABRBxddRHSYGoPbj.jpg",
   },
 ];

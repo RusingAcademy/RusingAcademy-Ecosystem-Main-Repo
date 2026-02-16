@@ -373,7 +373,7 @@ export default function CoursePlayer() {
 
               {/* Audio Content */}
               {activeLesson.contentType === "audio" && activeLesson.audioUrl && (
-                <div className="mb-8 p-6 bg-gradient-to-r from-[#1B1464]/10 to-[#2EC4B6]/10 rounded-xl">
+                <div className="mb-8 p-6 bg-gradient-to-r from-indigo-900/10 to-[#2EC4B6]/10 rounded-xl">
                   <div className="flex items-center gap-4 mb-4">
                     <Headphones className="w-8 h-8 text-indigo-900" />
                     <span className="font-medium text-foreground">Audio Lesson</span>

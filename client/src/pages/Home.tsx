@@ -725,7 +725,7 @@ export default function Home() {
               {/* Marketplace Option */}
               <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#D97B3D] to-[#C65A1E] flex items-center justify-center shadow-lg">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-cta-2 to-cta flex items-center justify-center shadow-lg">
                     <UserCircle className="h-7 w-7 text-white" />
                   </div>
                   <div>
@@ -743,7 +743,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link href="/coaches">
-                  <Button className="w-full bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white rounded-full">
+                  <Button className="w-full bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white rounded-full">
                     {t("plans.marketplace.cta")} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -926,7 +926,7 @@ export default function Home() {
             {/* Before/After Comparison */}
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* BEFORE Column */}
-              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 shadow-lg border border-cta">
+              <div className="bg-gradient-to-br from-orange-50 to-orange-50 rounded-3xl p-8 shadow-lg border border-cta">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-6 w-6 bg-cta-soft rounded" aria-hidden="true" />
                   <h3 className="text-xl font-bold text-cta tracking-wide">
@@ -997,7 +997,7 @@ export default function Home() {
                   level: "A",
                   title: t("sle.levelA"),
                   description: t("sle.levelADesc"),
-                  gradient: "from-[#D97B3D] via-[#C65A1E] to-[#C65A1E]",
+                  gradient: "from-cta-2 via-[#C65A1E] to-cta",
                   shadow: "shadow-amber-500/40",
                   bgGlow: "bg-amber-50",
                   borderColor: "border-orange-100",
@@ -1238,9 +1238,9 @@ export default function Home() {
 
             <div className="max-w-4xl mx-auto">
               {/* Premium Video Frame with Glassmorphism */}
-              <div className="relative p-1 rounded-[2rem] bg-gradient-to-br from-[#D97B3D] via-teal-400 to-[#C65A1E] shadow-2xl">
-                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[#D97B3D]/20 via-teal-400/20 to-[#C65A1E]/20 blur-xl" />
-                <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-[#062b2b] to-[#0a4040] aspect-video">
+              <div className="relative p-1 rounded-[2rem] bg-gradient-to-br from-cta-2 via-teal-400 to-cta shadow-2xl">
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-cta-2/20 via-teal-400/20 to-cta/20 blur-xl" />
+                <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-obsidian to-teal-900 aspect-video">
                 {!isVideoPlaying ? (
                   <>
                     {/* Video Thumbnail with Photo Carousel */}
@@ -1264,7 +1264,7 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent" />
                     
                     {/* Play Button */}
                     <button 

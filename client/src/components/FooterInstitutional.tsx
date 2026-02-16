@@ -95,7 +95,7 @@ export default function FooterInstitutional() {
       style={{ fontFamily: TOKENS.typography.fontFamily }}
     >
       {/* Decorative gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-[#062b2b]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-obsidian" aria-hidden="true" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-600/5 rounded-full blur-3xl" aria-hidden="true" />
       

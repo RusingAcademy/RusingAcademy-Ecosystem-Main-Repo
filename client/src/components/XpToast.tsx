@@ -61,7 +61,7 @@ export function XpToast({ amount, reason, leveledUp, newLevel, onClose }: XpToas
     >
       <div className={`rounded-2xl shadow-2xl overflow-hidden ${
         leveledUp 
-          ? "bg-gradient-to-r from-yellow-400 via-[#D97B3D] to-[#D97B3D]" 
+          ? "bg-gradient-to-r from-yellow-400 via-[#D97B3D] to-cta-2" 
           : "bg-gradient-to-r from-teal-500 to-teal-600"
       }`}>
         {/* Main XP notification */}

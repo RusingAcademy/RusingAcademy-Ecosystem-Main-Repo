@@ -24,7 +24,7 @@ export default function Certificates() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#D4AF37]/5 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-barholex-gold/5 to-background">
       <div className="max-w-4xl mx-auto px-4 pt-8 pb-16">
         <button onClick={() => navigate("/")} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> {t.membership.backToCommunity}
@@ -58,7 +58,7 @@ export default function Certificates() {
               <Card key={certificate.id} className="border-2 overflow-hidden hover:shadow-lg transition-shadow" style={{ borderColor: "#D4AF37" + "30" }}>
                 <CardContent className="p-0">
                   {/* Certificate Preview */}
-                  <div className="bg-gradient-to-br from-[#1B1464] to-[#2D2380] p-8 text-white text-center relative overflow-hidden">
+                  <div className="bg-gradient-to-br from-indigo-900 to-[#2D2380] p-8 text-white text-center relative overflow-hidden">
                     {/* Decorative border */}
                     <div className="absolute inset-2 border-2 border-barholex-gold/30 rounded-lg pointer-events-none" />
 

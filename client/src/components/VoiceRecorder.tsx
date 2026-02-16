@@ -215,7 +215,7 @@ export function VoiceRecorder({
           </div>
           <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#008090] to-[#00a0b0] rounded-full transition-all duration-1000"
+              className="h-full bg-gradient-to-r from-teal-700 to-[#00a0b0] rounded-full transition-all duration-1000"
               style={{ width: `${progress}%` }}
             />
           </div>

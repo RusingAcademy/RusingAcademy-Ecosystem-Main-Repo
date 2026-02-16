@@ -169,7 +169,7 @@ export default function RepetitionExercise({
   
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-[#E7F2F2] to-[#F0F7F7] dark:from-[#0F3D3E]/20 dark:to-[#0F3D3E]/10">
+      <CardHeader className="bg-gradient-to-r from-teal-50 to-[#F0F7F7] dark:from-foundation/20 dark:to-foundation/10">
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">

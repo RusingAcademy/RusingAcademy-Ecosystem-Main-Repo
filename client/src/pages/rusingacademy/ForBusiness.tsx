@@ -168,7 +168,7 @@ export default function ForBusiness() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFF8F3] via-white to-[#FDFBF7]">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-stone-50">
       <main id="main-content">
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
@@ -272,7 +272,7 @@ export default function ForBusiness() {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-[#FDFBF7]">
+        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
@@ -321,7 +321,7 @@ export default function ForBusiness() {
                   transition={{ delay: index * 0.1 }}
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
-                      ? "border-cta-2 bg-gradient-to-br from-[#FFF8F3] to-white shadow-xl scale-105" 
+                      ? "border-cta-2 bg-gradient-to-br from-orange-50 to-white shadow-xl scale-105" 
                       : "border-gray-200 bg-white/80"
                   }`}
                 >
@@ -366,7 +366,7 @@ export default function ForBusiness() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-[#FDFBF7]">
+        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">

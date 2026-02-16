@@ -48,7 +48,7 @@ export function VideoPlaceholder({
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-4xl mx-auto">
       {/* Video Preview Area */}
-      <div className="relative aspect-video bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#1A6B6C]">
+      <div className="relative aspect-video bg-gradient-to-br from-foundation via-teal-700 to-[#1A6B6C]">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -181,7 +181,7 @@ export function VideoPlaceholder({
           className={`w-full py-6 text-lg font-semibold rounded-xl transition-all ${
             isNotified 
               ? "bg-green-100 text-green-700 cursor-default" 
-              : "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white hover:opacity-90"
+              : "bg-gradient-to-r from-foundation to-teal-700 text-white hover:opacity-90"
           }`}
         >
           {isNotified ? (

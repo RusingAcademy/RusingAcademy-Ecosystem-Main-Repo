@@ -153,7 +153,7 @@ export function MiniLeaderboard({
                   {/* Avatar */}
                   <Avatar className="h-8 w-8">
                     <AvatarImage src={entry.avatarUrl} alt={entry.name} />
-                    <AvatarFallback className="text-xs bg-gradient-to-br from-slate-200 to-slate-300 dark:from-[#0a6969] dark:to-[#0a4040]">
+                    <AvatarFallback className="text-xs bg-gradient-to-br from-slate-200 to-slate-300 dark:from-teal-800 dark:to-teal-900">
                       {entry.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
                     </AvatarFallback>
                   </Avatar>

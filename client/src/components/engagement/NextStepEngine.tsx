@@ -63,7 +63,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
   const alternativeRecos = recommendations.slice(1);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-[#0F3D3E]/10 to-[#145A5B]/10 border border-foundation/20">
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-foundation/10 to-teal-700/10 border border-foundation/20">
       <div className="text-center mb-6">
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', delay: 0.2 }} className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 text-3xl mb-4">
           {performance.score >= 80 ? '🎉' : performance.score >= 60 ? '👍' : '💪'}
@@ -92,7 +92,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
-            <button onClick={() => handleAcceptRecommendation(primaryReco)} className="flex-1 px-6 py-3 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300 flex items-center justify-center gap-2">
+            <button onClick={() => handleAcceptRecommendation(primaryReco)} className="flex-1 px-6 py-3 bg-gradient-to-r from-foundation to-teal-700 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300 flex items-center justify-center gap-2">
               <span>Continuer</span>
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
             </button>

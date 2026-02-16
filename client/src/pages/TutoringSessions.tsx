@@ -203,7 +203,7 @@ export default function TutoringSessions() {
         {activeTab === "book" && (
           <div className="space-y-6">
             {/* Quick CTA Banner */}
-            <div className="bg-gradient-to-r from-[#008090] to-[#006070] rounded-2xl p-6 text-white">
+            <div className="bg-gradient-to-r from-teal-700 to-teal-900 rounded-2xl p-6 text-white">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
                   <h2 className="text-xl font-bold mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>

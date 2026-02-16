@@ -145,7 +145,7 @@ export default function SLEPractice() {
   const progress = phrases.length > 0 ? (completedPhrases.size / phrases.length) * 100 : 0;
   
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-[#062b2b] dark:to-gray-800">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-obsidian dark:to-gray-800">
       {!isInsideAppLayout && <Header />}
       
       <main className="flex-1 container py-8">
@@ -156,7 +156,7 @@ export default function SLEPractice() {
         </Link>
         
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] rounded-3xl p-8 mb-8 text-white">
+        <div className="bg-gradient-to-r from-foundation to-teal-700 rounded-3xl p-8 mb-8 text-white">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center">
               <Target className="h-8 w-8" />
@@ -252,7 +252,7 @@ export default function SLEPractice() {
               </Card>
             ) : (
               <Card className="overflow-hidden">
-                <CardHeader className="bg-gradient-to-r from-[#E7F2F2] to-[#F0F7F7] dark:from-[#0F3D3E]/20 dark:to-[#0F3D3E]/10">
+                <CardHeader className="bg-gradient-to-r from-teal-50 to-[#F0F7F7] dark:from-foundation/20 dark:to-foundation/10">
                   <div className="flex items-center justify-between">
                     <div>
                       <CardTitle className="flex items-center gap-2">
@@ -437,7 +437,7 @@ export default function SLEPractice() {
         
         {/* Session Summary */}
         {completedPhrases.size > 0 && (
-          <Card className="bg-gradient-to-r from-[#E7F2F2] to-[#F0F7F7] dark:from-[#0F3D3E]/20 dark:to-[#0F3D3E]/10 border-foundation/20">
+          <Card className="bg-gradient-to-r from-teal-50 to-[#F0F7F7] dark:from-foundation/20 dark:to-foundation/10 border-foundation/20">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">

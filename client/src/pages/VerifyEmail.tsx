@@ -39,7 +39,7 @@ export default function VerifyEmail() {
   }, [token]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
       <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">

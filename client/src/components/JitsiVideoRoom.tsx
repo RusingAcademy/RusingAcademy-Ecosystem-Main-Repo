@@ -269,7 +269,7 @@ export function JitsiVideoRoom({
   return (
     <Card className="overflow-hidden">
       {/* Header */}
-      <CardHeader className="py-3 px-4 bg-gradient-to-r from-[#062b2b] to-[#0a4040]">
+      <CardHeader className="py-3 px-4 bg-gradient-to-r from-obsidian to-teal-900">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">

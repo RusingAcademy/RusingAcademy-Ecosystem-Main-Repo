@@ -23,7 +23,7 @@ export function ApplicationResubmissionPrompt({
   const canResubmit = resubmissionCount < maxResubmissions;
 
   return (
-    <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] border border-orange-100 rounded-lg p-6 my-6">
+    <div className="bg-gradient-to-r from-orange-50 to-orange-50 border border-orange-100 rounded-lg p-6 my-6">
       <div className="flex items-start gap-4">
         <AlertCircle className="text-amber-600 flex-shrink-0 mt-1" size={24} />
         <div className="flex-1">

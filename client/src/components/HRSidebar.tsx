@@ -103,7 +103,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
 
         <div className="p-4 border-t border-gray-100">
           <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2563eb] to-[#1d4ed8] flex items-center justify-center text-white font-bold text-sm shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-[#1d4ed8] flex items-center justify-center text-white font-bold text-sm shadow-sm">
               {user?.name?.charAt(0) || "C"}
             </div>
             <div className="flex-1 min-w-0">
@@ -154,7 +154,7 @@ function OrgCard({ lang }: { lang: string }) {
   const participantCount = org?.participantCount ?? "—";
 
   return (
-    <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 border border-blue-600/15">
+    <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-blue-600/5 to-blue-600/10 border border-blue-600/15">
       <div className="flex items-center gap-2 mb-1">
         <span className="material-icons text-blue-600 text-sm">account_balance</span>
         <span className="text-xs font-bold text-gray-800">{lang === "fr" ? "Mon département" : "My Department"}</span>

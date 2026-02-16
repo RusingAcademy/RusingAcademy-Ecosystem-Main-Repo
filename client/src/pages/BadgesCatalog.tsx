@@ -341,7 +341,7 @@ export default function BadgesCatalog() {
       >
         {/* Total Progress */}
         <Card className="overflow-hidden">
-          <div className="h-1 w-full bg-gradient-to-r from-[#0F3D3E] to-[#145A5B]" />
+          <div className="h-1 w-full bg-gradient-to-r from-foundation to-teal-700" />
           <CardContent className="pt-5 pb-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-foundation/10 flex items-center justify-center">
@@ -362,7 +362,7 @@ export default function BadgesCatalog() {
 
         {/* Next to Earn */}
         <Card className="overflow-hidden">
-          <div className="h-1 w-full bg-gradient-to-r from-[#D97B3D] to-[#C65A1E]" />
+          <div className="h-1 w-full bg-gradient-to-r from-cta-2 to-cta" />
           <CardContent className="pt-5 pb-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-cta-2/10 flex items-center justify-center">

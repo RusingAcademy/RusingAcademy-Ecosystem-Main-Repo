@@ -507,11 +507,11 @@ export default function Contact() {
         </section>
 
         {/* Calendly Booking Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] to-[#145A5B]">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-foundation to-teal-700">
           <div className="container">
             <div className="max-w-4xl mx-auto text-center">
               <Calendar className="h-12 w-12 text-cta mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-white mb-3" style={{ color: '#f8f7f7' }}>
+              <h2 className="text-3xl font-bold text-white mb-3" >
                 {language === 'en' ? 'Book a Free Consultation' : 'Réservez une Consultation Gratuite'}
               </h2>
               <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{ color: '#ffffff' }}>

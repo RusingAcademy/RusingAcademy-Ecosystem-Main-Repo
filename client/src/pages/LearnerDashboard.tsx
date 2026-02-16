@@ -170,11 +170,11 @@ const GlassStatCard = ({
 }) => {
   // Accessible color scheme with high contrast
   const colorClasses = {
-    emerald: "from-[#0a6969] to-[#0a6969] text-black bg-slate-100 dark:bg-foundation dark:text-white",
-    blue: "from-[#0a6969] to-[#0a6969] text-black bg-slate-100 dark:bg-foundation dark:text-white",
-    purple: "from-[#0a6969] to-[#0a6969] text-black bg-slate-100 dark:bg-foundation dark:text-white",
-    amber: "from-[#0a6969] to-[#0a6969] text-black bg-slate-100 dark:bg-foundation dark:text-white",
-    rose: "from-[#0a6969] to-[#0a6969] text-black bg-slate-100 dark:bg-foundation dark:text-white",
+    emerald: "from-teal-800 to-teal-800 text-black bg-slate-100 dark:bg-foundation dark:text-white",
+    blue: "from-teal-800 to-teal-800 text-black bg-slate-100 dark:bg-foundation dark:text-white",
+    purple: "from-teal-800 to-teal-800 text-black bg-slate-100 dark:bg-foundation dark:text-white",
+    amber: "from-teal-800 to-teal-800 text-black bg-slate-100 dark:bg-foundation dark:text-white",
+    rose: "from-teal-800 to-teal-800 text-black bg-slate-100 dark:bg-foundation dark:text-white",
   };
 
   return (
@@ -412,7 +412,7 @@ export default function LearnerDashboard() {
   // Loading state
   if (authLoading) {
     return (
-      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-emerald-950/20">
+      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-teal-950 dark:via-obsidian dark:to-emerald-950/20">
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="relative w-20 h-20 mx-auto mb-6">
@@ -431,7 +431,7 @@ export default function LearnerDashboard() {
   // Not authenticated
   if (!isAuthenticated) {
     return (
-      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-emerald-950/20">
+      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-teal-950 dark:via-obsidian dark:to-emerald-950/20">
         <main className="flex-1 flex items-center justify-center px-4">
           <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
             <div className="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mx-auto mb-6">
@@ -470,7 +470,7 @@ export default function LearnerDashboard() {
           
           {/* Hero Section - Welcome Banner - Professional & Accessible */}
           <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-teal-800/50">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0a6969]/50 to-[#062b2b]/50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-800/50 to-obsidian/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
@@ -583,8 +583,8 @@ export default function LearnerDashboard() {
                     />
                   </div>
                   <div className="flex-1 grid grid-cols-3 gap-4 w-full">
-                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50">
-                      <p className="text-3xl font-bold bg-gradient-to-r from-[#0a6969] to-[#062b2b] dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
+                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50">
+                      <p className="text-3xl font-bold bg-gradient-to-r from-teal-800 to-obsidian dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
                       <p className="text-sm text-black dark:text-cyan-300 mt-1">{l.currentLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
@@ -678,7 +678,7 @@ export default function LearnerDashboard() {
                   <div className="grid md:grid-cols-2 gap-4">
                     {courses.slice(0, 2).map((course: any) => (
                       <Link key={course.id} href={`/courses/${course.id}`}>
-                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
                           <div className="flex items-start gap-4">
                             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
                               <BookOpen className="h-7 w-7 text-white" />
@@ -741,7 +741,7 @@ export default function LearnerDashboard() {
                     {upcomingSessions.slice(0, 3).map((session: any) => (
                       <div
                         key={session.id}
-                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-md transition-all duration-300"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-md transition-all duration-300"
                       >
                         <div className="flex items-center gap-4">
                           <Avatar className="h-12 w-12 ring-2 ring-purple-200 dark:ring-purple-800">

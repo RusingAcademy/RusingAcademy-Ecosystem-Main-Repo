@@ -331,11 +331,11 @@ export default function SequenceAnalyticsDashboard() {
   const maxEmailsSent = Math.max(...analytics.recentActivity.map(a => a.emailsSent));
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian text-white p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-[#D97B3D] bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cta-2 bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
@@ -497,7 +497,7 @@ export default function SequenceAnalyticsDashboard() {
               )}
               
               {analytics.bottomPerformingSequence && (
-                <div className="bg-gradient-to-br from-[#C65A1E]/20 to-red-500/20 backdrop-blur-sm rounded-xl p-6 border border-orange-500/30">
+                <div className="bg-gradient-to-br from-cta/20 to-red-500/20 backdrop-blur-sm rounded-xl p-6 border border-orange-500/30">
                   <div className="flex items-center gap-2 mb-3">
                     <AlertTriangle className="w-5 h-5 text-orange-400" />
                     <span className="font-medium text-orange-400">{t.needsAttention}</span>
