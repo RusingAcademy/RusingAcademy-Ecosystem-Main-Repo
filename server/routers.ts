@@ -133,6 +133,7 @@ import { membershipRouter } from "./routers/membership";
 import { emailBroadcastRouter } from "./routers/emailBroadcast";
 import { adminCoursesRouter } from "./routers/adminCourses";
 import { adminCommissionRouter } from "./routers/adminCommission";
+import { adminPayoutsRouter } from "./routers/adminPayouts";
 import { courseAdminRouter } from "./routers/courseAdmin";
 import { analyticsRouter } from "./routers/analytics";
 import { advancedAnalyticsRouter } from "./routers/advancedAnalytics";
@@ -9132,6 +9133,7 @@ export const appRouter = router({
   adminDashboard: adminDashboardDataRouter,
   adminCourses: adminCoursesRouter,
   adminCommission: adminCommissionRouter,
+  adminPayouts: adminPayoutsRouter,
   courseAdmin: courseAdminRouter,
   analytics: analyticsRouter,
   advancedAnalytics: advancedAnalyticsRouter,
