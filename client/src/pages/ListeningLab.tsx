@@ -198,7 +198,7 @@ export default function ListeningLab() {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3">
                 <span className="material-icons text-teal-700" aria-hidden="true">headphones</span>
                 {t("listening.title")}
               </h1>
@@ -220,7 +220,7 @@ export default function ListeningLab() {
                 { label: t("listening.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "var(--semantic-warning, #f5a623)" },
                 { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "var(--color-violet-500, #8b5cf6)" },
               ].map((s, i) => (
-                <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 shadow-sm text-center" role="status">
+                <div key={i} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center" role="status">
                   <span className="material-icons text-lg mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{s.value}</div>
                   <div className="text-xs text-gray-500">{s.label}</div>
@@ -231,17 +231,17 @@ export default function ListeningLab() {
 
           {showHistory ? (
             <div className="space-y-3">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("listening.history")}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("listening.history")}</h2>
               {!history?.length ? (
                 <div className="text-center py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
                     <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">headphones</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("listening.emptyTitle")}</h3>
+                  <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("listening.emptyTitle")}</h3>
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("listening.emptyDesc")}</p>
                 </div>
               ) : history.map((h: any, i: number) => (
-                <div key={i} className="bg-white dark:bg-slate-900 rounded-xl p-4 border border-gray-100 shadow-sm flex items-center justify-between">
+                <div key={i} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm flex items-center justify-between">
                   <div>
                     <div className="font-semibold text-gray-900">{h.exerciseTitle}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
@@ -255,12 +255,12 @@ export default function ListeningLab() {
             </div>
           ) : phase === "select" ? (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">{t("grammar.chooseLevel")}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("grammar.chooseLevel")}</h2>
               <div className="flex gap-3 mb-6 flex-wrap" role="radiogroup" aria-label={t("grammar.chooseLevel")}>
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => { setSelectedLevel(level); setExerciseIndex(0); }}
                     role="radio" aria-checked={selectedLevel === level}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-teal-700"}`}>
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white dark:bg-slate-800 text-gray-600 border border-gray-200 dark:border-slate-700 hover:border-teal-700"}`}>
                     {level}
                   </button>
                 ))}
@@ -268,14 +268,14 @@ export default function ListeningLab() {
               <div className="space-y-4" role="list" aria-label={isFr ? "Exercices d'écoute" : "Listening exercises"}>
                 {EXERCISES[selectedLevel]?.map((e, i) => (
                   <div key={i} role="listitem"
-                    className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
+                    className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
                     onClick={() => { setExerciseIndex(i); startExercise(); }}
                     onKeyDown={ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setExerciseIndex(i); startExercise(); }}}
                     tabIndex={0}
                     aria-label={`${e.title} — ${e.questions.length} questions`}>
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-semibold text-gray-900 text-lg">{e.title}</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg">{e.title}</h3>
                         <div className="text-sm text-gray-500 mt-1">{e.questions.length} questions</div>
                       </div>
                       <span className="material-icons text-teal-700 text-3xl" aria-hidden="true">play_circle</span>
@@ -297,7 +297,7 @@ export default function ListeningLab() {
                 </div>
               </div>
               {/* Audio Player */}
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-6">
+              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm text-center mb-6">
                 <span className="material-icons text-6xl text-teal-700 mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <button onClick={isPlaying ? stopAudio : playAudio}
@@ -311,7 +311,7 @@ export default function ListeningLab() {
                   {[0.75, 1, 1.25].map(speed => (
                     <button key={speed} onClick={() => setPlaybackSpeed(speed)}
                       aria-pressed={playbackSpeed === speed}
-                      className={`px-3 py-1 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${playbackSpeed === speed ? "bg-teal-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                      className={`px-3 py-1 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${playbackSpeed === speed ? "bg-teal-700 text-white" : "bg-gray-100 dark:bg-slate-800 text-gray-600 hover:bg-gray-200"}`}>
                       {speed}x
                     </button>
                   ))}
@@ -323,8 +323,8 @@ export default function ListeningLab() {
                   {showTranscript ? (isFr ? "Masquer la transcription" : "Hide Transcript") : (isFr ? "Afficher la transcription" : "Show Transcript")}
                 </button>
                 {showTranscript && (
-                  <div className="mt-4 p-4 bg-gray-50 rounded-xl text-left" role="region" aria-label={isFr ? "Transcription" : "Transcript"}>
-                    <p className="text-sm text-gray-700 leading-relaxed font-serif">{exercise?.transcript}</p>
+                  <div className="mt-4 p-4 bg-gray-50 dark:bg-slate-900 rounded-xl text-left" role="region" aria-label={isFr ? "Transcription" : "Transcript"}>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-serif">{exercise?.transcript}</p>
                   </div>
                 )}
               </div>
@@ -348,13 +348,13 @@ export default function ListeningLab() {
               </div>
               <div className="space-y-6">
                 {exercise?.questions.map((q, qi) => (
-                  <div key={qi} className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 shadow-sm">
-                    <p className="font-semibold text-gray-900 mb-4">{qi + 1}. {q.q}</p>
+                  <div key={qi} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 mb-4">{qi + 1}. {q.q}</p>
                     <div className="space-y-2" role="radiogroup" aria-label={q.q}>
                       {q.options.map((opt, oi) => (
                         <button key={oi} onClick={() => answerQuestion(qi, oi)}
                           role="radio" aria-checked={answers[qi] === oi}
-                          className={`w-full p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${answers[qi] === oi ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
+                          className={`w-full p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${answers[qi] === oi ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 dark:bg-slate-900 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:bg-slate-800 border border-gray-200"}`}>
                           <span className="font-semibold mr-2">{String.fromCharCode(65 + oi)}.</span> {opt}
                         </button>
                       ))}
@@ -372,11 +372,11 @@ export default function ListeningLab() {
             </div>
           ) : (
             <div role="region" aria-label={t("grammar.drillComplete")}>
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-8">
+              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm text-center mb-8">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
                   <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("grammar.drillComplete")}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{t("grammar.drillComplete")}</h2>
                 <p className="text-sm text-gray-400 mb-2">
                   <span className="material-icons text-sm align-middle mr-1" aria-hidden="true">timer</span>
                   {formatTime(Math.floor((Date.now() - startTime) / 1000))}

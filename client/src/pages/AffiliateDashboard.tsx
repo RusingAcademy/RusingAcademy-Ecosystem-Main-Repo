@@ -56,7 +56,7 @@ export default function AffiliateDashboard() {
             <div className="flex-1">
               <p className="text-sm font-medium mb-1">Your Referral Link</p>
               <div className="flex gap-2">
-                <Input readOnly value={dashboard?.referralLink || "Loading..."} className="bg-white dark:bg-background" />
+                <Input readOnly value={dashboard?.referralLink || "Loading..."} className="bg-white dark:bg-slate-800 dark:bg-background" />
                 <Button variant="outline" onClick={() => {
                   navigator.clipboard.writeText(dashboard?.referralLink || "");
                   toast.success("Referral link copied to clipboard.");

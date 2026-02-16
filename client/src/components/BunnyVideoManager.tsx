@@ -240,7 +240,7 @@ export function BunnyVideoManager({
       case 6:
         return "bg-red-500/10 text-red-700 border-red-200";
       default:
-        return "bg-teal-800/10 text-black border-gray-200";
+        return "bg-teal-800/10 text-black dark:text-white border-gray-200";
     }
   }
 

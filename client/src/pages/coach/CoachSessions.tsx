@@ -51,12 +51,12 @@ function CalendarWidget({ sessions, lang }: { sessions: any[]; lang: string }) {
   );
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5">
+    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm font-semibold text-gray-800">{MONTHS_EN[month]} {year}</span>
         <div className="flex gap-1">
-          <button onClick={prevMonth} className="p-1 hover:bg-gray-100 rounded"><span className="material-icons text-lg text-gray-500">chevron_left</span></button>
-          <button onClick={nextMonth} className="p-1 hover:bg-gray-100 rounded"><span className="material-icons text-lg text-gray-500">chevron_right</span></button>
+          <button onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded"><span className="material-icons text-lg text-gray-500">chevron_left</span></button>
+          <button onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded"><span className="material-icons text-lg text-gray-500">chevron_right</span></button>
         </div>
       </div>
       <div className="grid grid-cols-7 gap-0 text-center text-[10px] text-gray-400 mb-1">
@@ -66,7 +66,7 @@ function CalendarWidget({ sessions, lang }: { sessions: any[]; lang: string }) {
         {days.map((day, i) => (
           <div key={i} className={`py-1.5 rounded-full relative cursor-pointer ${
             day === today && isCurrentMonth ? "bg-violet-600 text-white font-bold" :
-            day ? "text-gray-700 hover:bg-gray-100" : ""
+            day ? "text-gray-700 dark:text-gray-300 hover:bg-gray-100" : ""
           }`}>
             {day || ""}
             {day && sessionDays.has(day) && (
@@ -126,7 +126,7 @@ export default function CoachSessions() {
             </h3>
             <div className="space-y-2">
               {pendingSessions.map((s: any) => (
-                <div key={s.id} className="flex items-center justify-between bg-white dark:bg-slate-900 rounded-lg p-3 border border-amber-100">
+                <div key={s.id} className="flex items-center justify-between bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-3 border border-amber-100">
                   <div>
                     <p className="text-sm font-medium text-gray-900">{s.learnerName || "—"}</p>
                     <p className="text-xs text-gray-500">
@@ -139,7 +139,7 @@ export default function CoachSessions() {
                       {lang === "fr" ? "Confirmer" : "Confirm"}
                     </button>
                     <button onClick={() => declineMutation.mutate({ sessionId: s.id, reason: "Declined by coach" })}
-                      className="text-xs px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
+                      className="text-xs px-3 py-1.5 bg-gray-100 dark:bg-slate-800 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
                       {lang === "fr" ? "Décliner" : "Decline"}
                     </button>
                   </div>
@@ -155,7 +155,7 @@ export default function CoachSessions() {
             <div className="flex gap-2 mb-4 flex-wrap">
               {(["all", "confirmed", "pending", "completed", "cancelled"] as const).map(f => (
                 <button key={f} onClick={() => setFilter(f)}
-                  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-violet-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-violet-600 text-white" : "bg-gray-100 dark:bg-slate-800 text-gray-600 hover:bg-gray-200"}`}>
                   {f === "all" ? (lang === "fr" ? "Tous" : "All") : f.charAt(0).toUpperCase() + f.slice(1)}
                 </button>
               ))}
@@ -163,10 +163,10 @@ export default function CoachSessions() {
 
             {isLoading ? (
               <div className="space-y-3">
-                {[1, 2, 3, 4].map((i) => <div key={i} className="h-20 bg-gray-50 rounded-xl animate-pulse" />)}
+                {[1, 2, 3, 4].map((i) => <div key={i} className="h-20 bg-gray-50 dark:bg-slate-900 rounded-xl animate-pulse" />)}
               </div>
             ) : filtered.length === 0 ? (
-              <div className="text-center py-12 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
+              <div className="text-center py-12 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100">
                 <span className="material-icons text-gray-300 text-5xl">event_busy</span>
                 <p className="text-sm text-gray-500 mt-2">
                   {lang === "fr" ? "Aucune session trouvée" : "No sessions found"}
@@ -177,7 +177,7 @@ export default function CoachSessions() {
                 {filtered.map((session: any) => {
                   const dt = session.scheduledAt ? new Date(session.scheduledAt) : null;
                   return (
-                    <div key={session.id} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-4 hover:shadow-md transition-shadow flex items-center gap-4">
+                    <div key={session.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 hover:shadow-md transition-shadow flex items-center gap-4">
                       <div className="w-12 h-12 rounded-lg flex flex-col items-center justify-center bg-violet-600/5 border border-violet-600/10">
                         {dt ? (
                           <>

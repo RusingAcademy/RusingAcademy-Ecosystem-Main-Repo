@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const statusColors: Record<string, string> = {
-  Draft: "bg-gray-100 text-gray-700",
+  Draft: "bg-gray-100 dark:bg-slate-800 text-gray-700",
   Open: "bg-blue-100 text-blue-700",
   Partial: "bg-yellow-100 text-yellow-700",
   Paid: "bg-green-100 text-green-700",
@@ -106,10 +106,10 @@ export default function Bills() {
         </select>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">No.</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Supplier</th>
@@ -135,7 +135,7 @@ export default function Bills() {
               </tr>
             ) : (
               paginated.map((bill: any) => (
-                <tr key={bill.id} className="border-b border-gray-100 hover:bg-gray-50">
+                <tr key={bill.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50">
                   <td className="px-4 py-3 text-sm text-gray-600">
                     {bill.billDate ? new Date(bill.billDate).toLocaleDateString("en-CA") : "-"}
                   </td>
@@ -149,7 +149,7 @@ export default function Bills() {
                     {bill.dueDate ? new Date(bill.dueDate).toLocaleDateString("en-CA") : "-"}
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[bill.status] || "bg-gray-100 text-gray-600"}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[bill.status] || "bg-gray-100 dark:bg-slate-800 text-gray-600"}`}>
                       {bill.status}
                     </span>
                   </td>
@@ -211,7 +211,7 @@ export default function Bills() {
               <span className="font-medium">{fmt(payBill?.amountDue || payBill?.total)}</span>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-1 block">Payment Amount</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Payment Amount</label>
               <input
                 type="number"
                 step="0.01"
@@ -221,7 +221,7 @@ export default function Bills() {
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-1 block">Payment Account</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Payment Account</label>
               <Select value={payAccountId} onValueChange={setPayAccountId}>
                 <SelectTrigger><SelectValue placeholder="Select account" /></SelectTrigger>
                 <SelectContent>
@@ -233,7 +233,7 @@ export default function Bills() {
               </Select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-1 block">Payment Date</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Payment Date</label>
               <input
                 type="date"
                 value={payDate}

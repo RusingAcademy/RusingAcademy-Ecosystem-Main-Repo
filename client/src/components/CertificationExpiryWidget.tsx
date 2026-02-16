@@ -106,7 +106,7 @@ export function CertificationExpiryWidget({
   );
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-obsidian p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-slate-800 dark:bg-obsidian p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -114,8 +114,8 @@ export function CertificationExpiryWidget({
             <Award className="h-5 w-5 text-amber-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-black dark:text-white">{l.title}</h3>
-            <p className="text-sm text-black dark:text-cyan-300">{l.subtitle}</p>
+            <h3 className="font-semibold text-black dark:text-white dark:text-white">{l.title}</h3>
+            <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
           </div>
         </div>
       </div>
@@ -154,7 +154,7 @@ export function CertificationExpiryWidget({
       {certifications.length === 0 ? (
         <div className="text-center py-8">
           <Award className="h-12 w-12 text-white/90 dark:text-black mx-auto mb-3" />
-          <p className="text-black dark:text-cyan-300 mb-1">{l.noCertifications}</p>
+          <p className="text-black dark:text-white dark:text-cyan-300 mb-1">{l.noCertifications}</p>
           <p className="text-sm text-cyan-300 dark:text-black">{l.startJourney}</p>
         </div>
       ) : (
@@ -180,10 +180,10 @@ export function CertificationExpiryWidget({
                       {typeLabels[cert.type]}
                     </span>
                     <div>
-                      <p className="font-semibold text-black dark:text-white">
+                      <p className="font-semibold text-black dark:text-white dark:text-white">
                         {cert.name} - {cert.level}
                       </p>
-                      <p className="text-sm text-black dark:text-cyan-300">
+                      <p className="text-sm text-black dark:text-white dark:text-cyan-300">
                         {l.obtained}: {cert.obtainedDate.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
                       </p>
                     </div>
@@ -193,12 +193,12 @@ export function CertificationExpiryWidget({
                       <p className={cn("text-sm font-medium", 
                         status === "expired" ? "text-red-600" : 
                         status === "expiresSoon" ? "text-amber-600" : 
-                        "text-black dark:text-cyan-300"
+                        "text-black dark:text-white dark:text-cyan-300"
                       )}>
                         {status === "expired" ? l.expired : `${l.expires} ${cert.expiryDate.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}`}
                       </p>
                       {status !== "expired" && (
-                        <p className="text-xs text-black dark:text-cyan-300">
+                        <p className="text-xs text-black dark:text-white dark:text-cyan-300">
                           {days} {l.daysLeft}
                         </p>
                       )}
@@ -224,7 +224,7 @@ export function CertificationExpiryWidget({
 
       {/* Info Footer */}
       <div className="mt-4 pt-4 border-t border-slate-200 dark:border-teal-800">
-        <p className="text-xs text-black dark:text-cyan-300 flex items-center gap-2">
+        <p className="text-xs text-black dark:text-white dark:text-cyan-300 flex items-center gap-2">
           <Calendar className="h-3 w-3" />
           {l.validFor}
         </p>

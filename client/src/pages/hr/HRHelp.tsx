@@ -54,17 +54,17 @@ export default function HRHelp() {
         </div>
 
         {/* FAQ */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">help_outline</span>
             {ui.faq}
           </h3>
           <div className="space-y-2">
             {faqs.map((faq, i) => (
-              <div key={i} className="border border-gray-100 rounded-lg overflow-hidden">
+              <div key={i} className="border border-gray-100 dark:border-slate-700 rounded-lg overflow-hidden">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:bg-slate-900 transition-colors"
                 >
                   <span className="text-sm font-medium text-gray-900">{faq.q}</span>
                   <span className={`material-icons text-gray-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`}>
@@ -72,7 +72,7 @@ export default function HRHelp() {
                   </span>
                 </button>
                 {openFaq === i && (
-                  <div className="px-4 pb-4 text-sm text-gray-600 border-t border-gray-100 pt-3">
+                  <div className="px-4 pb-4 text-sm text-gray-600 border-t border-gray-100 dark:border-slate-700 pt-3">
                     {faq.a}
                   </div>
                 )}
@@ -82,14 +82,14 @@ export default function HRHelp() {
         </div>
 
         {/* Contact Support */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
             <span className="material-icons text-blue-600">support_agent</span>
             {ui.contactSupport}
           </h3>
           <p className="text-sm text-gray-500 mb-4">{ui.contactSub}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a href="mailto:support@rusingacademy.com" className="flex items-center gap-3 p-4 rounded-lg border border-gray-100 hover:bg-blue-600/5 hover:border-blue-600/20 transition-all">
+            <a href="mailto:support@rusingacademy.com" className="flex items-center gap-3 p-4 rounded-lg border border-gray-100 dark:border-slate-700 hover:bg-blue-600/5 hover:border-blue-600/20 transition-all">
               <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
                 <span className="material-icons text-blue-600">email</span>
               </div>
@@ -99,7 +99,7 @@ export default function HRHelp() {
               </div>
             </a>
             <div className="flex items-center gap-3 p-4 rounded-lg border border-gray-100">
-              <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
                 <span className="material-icons text-gray-500">phone</span>
               </div>
               <div>
@@ -111,8 +111,8 @@ export default function HRHelp() {
         </div>
 
         {/* Resources */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">menu_book</span>
             {ui.resources}
           </h3>
@@ -122,7 +122,7 @@ export default function HRHelp() {
               { label: ui.complianceGuide, sub: ui.complianceGuideSub, icon: "verified" },
               { label: ui.apiDocs, sub: ui.apiDocsSub, icon: "code" },
             ].map((res, i) => (
-              <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
+              <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:bg-slate-900 transition-colors">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
                     <span className="material-icons text-blue-600">{res.icon}</span>
@@ -132,7 +132,7 @@ export default function HRHelp() {
                     <p className="text-xs text-gray-500">{res.sub}</p>
                   </div>
                 </div>
-                <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-1 rounded-full">{ui.comingSoon}</span>
+                <span className="text-xs font-medium text-gray-400 bg-gray-100 dark:bg-slate-800 px-2 py-1 rounded-full">{ui.comingSoon}</span>
               </div>
             ))}
           </div>

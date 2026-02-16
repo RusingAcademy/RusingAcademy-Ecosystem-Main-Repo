@@ -43,7 +43,7 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
           <ProgressCircle value={progress} />
           <div>
             <Link href={`/programs/${programId}/${path.id}`}>
-              <span className="text-sm font-medium text-gray-900 hover:text-teal-700 transition-colors cursor-pointer">
+              <span className="text-sm font-medium text-gray-900 dark:text-gray-100 hover:text-teal-700 transition-colors cursor-pointer">
                 {path.title}
               </span>
             </Link>
@@ -64,7 +64,7 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
         <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${
           status === "Completed" ? "bg-[rgba(245,166,35,0.12)] text-amber-600" :
           status === "In Progress" ? "bg-[rgba(0,128,144,0.1)] text-teal-700" :
-          "bg-gray-100 text-gray-500"
+          "bg-gray-100 dark:bg-slate-800 text-gray-500"
         }`}>
           {status}
         </span>
@@ -169,11 +169,11 @@ export default function LearningMaterials() {
                   <table className="w-full">
                     <thead>
                       <tr style={{ background: "linear-gradient(135deg, rgba(0,128,144,0.08), rgba(245,166,35,0.04))" }}>
-                        <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Path</th>
-                        <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Progress</th>
-                        <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Status</th>
-                        <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Modules</th>
-                        <th className="text-center text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Go</th>
+                        <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Path</th>
+                        <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Progress</th>
+                        <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Status</th>
+                        <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Modules</th>
+                        <th className="text-center text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Go</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -194,10 +194,10 @@ export default function LearningMaterials() {
             <table className="w-full">
               <thead>
                 <tr style={{ background: "linear-gradient(135deg, rgba(0,128,144,0.08), rgba(245,166,35,0.04))" }}>
-                  <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Assessment</th>
-                  <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Type</th>
-                  <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Status</th>
-                  <th className="text-left text-[11px] font-semibold text-gray-900 px-4 py-3 uppercase tracking-wider">Score</th>
+                  <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Assessment</th>
+                  <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Type</th>
+                  <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Status</th>
+                  <th className="text-left text-[11px] font-semibold text-gray-900 dark:text-gray-100 px-4 py-3 uppercase tracking-wider">Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -225,7 +225,7 @@ export default function LearningMaterials() {
                         test.status === "Passed" ? "bg-green-50 text-green-600" :
                         test.status === "Available" ? "bg-[rgba(0,128,144,0.1)] text-teal-700" :
                         test.status === "In Progress" ? "bg-blue-50 text-blue-600" :
-                        "bg-gray-100 text-gray-500"
+                        "bg-gray-100 dark:bg-slate-800 text-gray-500"
                       }`}>{test.status}</span>
                     </td>
                     <td className="px-4 py-3 text-sm font-medium" style={{ color: test.score !== "-" ? "var(--brand-teal, #008090)" : "var(--color-gray-400, #9ca3af)" }}>
@@ -255,9 +255,9 @@ export default function LearningMaterials() {
                     <span className="material-icons" style={{ color: ref.color, fontSize: "20px" }}>{ref.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-teal-700 transition-colors">{ref.name}</h3>
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-teal-700 transition-colors">{ref.name}</h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 font-medium">{ref.type}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-slate-800 text-gray-500 font-medium">{ref.type}</span>
                       <span className="text-[10px] text-gray-400">{ref.category}</span>
                     </div>
                   </div>

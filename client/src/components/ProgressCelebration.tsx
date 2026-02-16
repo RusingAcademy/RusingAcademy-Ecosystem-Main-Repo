@@ -80,7 +80,7 @@ export function ProgressCelebration({ celebration, language = "en", onComplete }
       
       {/* Celebration Card */}
       <div 
-        className={`relative bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 text-center transition-all duration-500 ${
+        className={`relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 text-center transition-all duration-500 ${
           phase === "enter" ? "opacity-0 scale-75" :
           phase === "show" ? "opacity-100 scale-100" :
           "opacity-0 scale-110"
@@ -97,11 +97,11 @@ export function ProgressCelebration({ celebration, language = "en", onComplete }
         </div>
         
         {/* Title */}
-        <h2 className="text-2xl font-bold text-black dark:text-white mb-2">{title}</h2>
+        <h2 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-2">{title}</h2>
         
         {/* Subtitle */}
         {subtitle && (
-          <p className="text-black dark:text-white mb-4">{subtitle}</p>
+          <p className="text-black dark:text-white dark:text-white mb-4">{subtitle}</p>
         )}
         
         {/* XP Award */}

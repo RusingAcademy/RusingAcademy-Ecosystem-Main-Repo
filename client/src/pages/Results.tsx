@@ -76,23 +76,23 @@ export default function Results() {
             <table className="w-full">
               <thead>
                 <tr className="bg-[rgba(0,128,144,0.08)]">
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Module</th>
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Quiz</th>
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Score</th>
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Passing Grade</th>
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Status</th>
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Date</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Module</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Quiz</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Score</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Passing Grade</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Status</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Date</th>
                 </tr>
               </thead>
               <tbody>
                 {quizResults.map((result, i) => (
-                  <tr key={i} className={`border-t border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
+                  <tr key={i} className={`border-t border-gray-100 dark:border-slate-700 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
                     <td className="px-4 py-3 text-sm text-gray-800">{result.module}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{result.quiz}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{result.score}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{result.passingGrade}</td>
                     <td className="px-4 py-3">
-                      <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-500">
+                      <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-500">
                         {result.status}
                       </span>
                     </td>
@@ -107,7 +107,7 @@ export default function Results() {
         {/* Summary Chart Tab */}
         {activeTab === 1 && (
           <div className="glass-card rounded-xl p-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-4">Final Quiz Results per Module</h3>
+            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Final Quiz Results per Module</h3>
             <div className="h-[350px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
@@ -128,14 +128,14 @@ export default function Results() {
             <table className="w-full">
               <thead>
                 <tr className="bg-[rgba(0,128,144,0.08)]">
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Skill</th>
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Level</th>
-                  <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Date</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Skill</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Level</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Date</th>
                 </tr>
               </thead>
               <tbody>
                 {proficiencyLevels.map((level, i) => (
-                  <tr key={i} className={`border-t border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}>
+                  <tr key={i} className={`border-t border-gray-100 dark:border-slate-700 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}>
                     <td className="px-4 py-3 text-sm text-gray-800">{level.skill}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{level.level}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{level.date}</td>

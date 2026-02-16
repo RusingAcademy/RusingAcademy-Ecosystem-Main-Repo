@@ -193,7 +193,7 @@ export function BadgeIcon({
         ) : (
           <Lock
             style={{ width: s.icon * 0.8, height: s.icon * 0.8 }}
-            className="text-black dark:text-white"
+            className="text-black dark:text-white dark:text-white"
           />
         )}
       </div>

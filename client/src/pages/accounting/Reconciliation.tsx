@@ -60,11 +60,11 @@ export default function Reconciliation() {
 
       {/* New Reconciliation Form */}
       {showNewForm && (
-        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">New Reconciliation</h2>
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">New Reconciliation</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Account</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Account</label>
               <select
                 value={newAccountId}
                 onChange={(e) => setNewAccountId(Number(e.target.value))}
@@ -77,7 +77,7 @@ export default function Reconciliation() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Statement Date</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Statement Date</label>
               <input
                 type="date"
                 value={statementDate}
@@ -86,7 +86,7 @@ export default function Reconciliation() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Statement Ending Balance</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Statement Ending Balance</label>
               <input
                 type="number"
                 step="0.01"
@@ -119,10 +119,10 @@ export default function Reconciliation() {
       </div>
 
       {/* Reconciliation History */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Statement Date</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Account</th>
               <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Statement Balance</th>
@@ -147,7 +147,7 @@ export default function Reconciliation() {
               (reconciliations || []).map((rec: any) => {
                 const diff = parseFloat(rec.difference || "0");
                 return (
-                  <tr key={rec.id} className="border-b border-gray-100 hover:bg-gray-50">
+                  <tr key={rec.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {rec.statementDate ? new Date(rec.statementDate).toLocaleDateString("en-CA") : "-"}
                     </td>

@@ -183,7 +183,7 @@ export default function Footer() {
                 </div>
                 
                 {isSubmitted ? (
-                  <div className="bg-white dark:bg-slate-900/20 backdrop-blur-sm rounded-xl p-6 text-center">
+                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 backdrop-blur-sm rounded-xl p-6 text-center">
                     <CheckCircle className="h-12 w-12 text-white mx-auto mb-3" />
                     <p className="text-white font-semibold text-lg">
                       {language === "fr" ? "Merci !" : "Thank you!"}
@@ -202,7 +202,7 @@ export default function Footer() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900/20 backdrop-blur-sm border border-white/60 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/20 backdrop-blur-sm border border-white/60 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                     />
                     <div className="flex gap-2">
                       <input
@@ -211,12 +211,12 @@ export default function Footer() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-900/20 backdrop-blur-sm border border-white/60 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                        className="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/20 backdrop-blur-sm border border-white/60 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                       />
                       <Button 
                         type="submit"
                         disabled={isLoading}
-                        className="px-6 py-3 h-auto bg-white dark:bg-slate-900 text-teal-600 hover:bg-teal-50 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-70"
+                        className="px-6 py-3 h-auto bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-600 hover:bg-teal-50 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-70"
                       >
                         {isLoading ? (
                           <div className="h-5 w-5 border-2 border-teal-600 border-t-transparent rounded-full animate-spin" />

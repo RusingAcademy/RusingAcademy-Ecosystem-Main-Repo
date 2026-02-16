@@ -192,13 +192,13 @@ export default function MyLearning() {
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                   <div className="flex-1">
-                    <Badge className="bg-white dark:bg-slate-900/20 text-white mb-2">
+                    <Badge className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 text-white mb-2">
                       {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
                     </Badge>
                     <h2 className="text-xl font-bold mb-2">{continueFrom.course.title}</h2>
                     <div className="flex items-center gap-4 mb-3">
                       <div className="flex items-center gap-1">
-                        <Progress value={continueFrom.progressPercent || 0} className="w-32 h-2 bg-white dark:bg-slate-900/30" />
+                        <Progress value={continueFrom.progressPercent || 0} className="w-32 h-2 bg-white dark:bg-slate-800 dark:bg-slate-900/30" />
                         <span className="text-sm">{continueFrom.progressPercent || 0}%</span>
                       </div>
                       <span className="text-sm text-white/90">
@@ -208,7 +208,7 @@ export default function MyLearning() {
                   </div>
                   <Button 
                     size="lg" 
-                    className="bg-white dark:bg-slate-900 text-teal-600 hover:bg-white dark:bg-slate-900/90"
+                    className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-600 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/90"
                     onClick={() => setLocation(`/courses/${continueFrom.course?.slug}`)}
                   >
                     <Play className="h-5 w-5 mr-2" />

@@ -95,7 +95,7 @@ const STATUS_MAP: Record<StatusVariant, StatusConfig> = {
   archived: {
     label: "Archived",
     labelFr: "Archivé",
-    className: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-gray-200 dark:border-gray-700",
+    className: "bg-gray-100 dark:bg-slate-800 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-gray-200 dark:border-slate-700 dark:border-gray-700",
     icon: Archive,
   },
   paid: {
@@ -113,7 +113,7 @@ const STATUS_MAP: Record<StatusVariant, StatusConfig> = {
   cancelled: {
     label: "Cancelled",
     labelFr: "Annulé",
-    className: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-gray-200 dark:border-gray-700",
+    className: "bg-gray-100 dark:bg-slate-800 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-gray-200 dark:border-slate-700 dark:border-gray-700",
     icon: XCircle,
   },
   submitted: {

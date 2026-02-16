@@ -59,7 +59,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
   
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-teal-500 to-teal-600 p-6 text-white">
           <div className="flex items-center gap-3 mb-2">
@@ -75,7 +75,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
         <div className="p-6">
           {step === "confidence" && (
             <div>
-              <p className="text-black dark:text-white mb-4">
+              <p className="text-black dark:text-white dark:text-white mb-4">
                 How confident do you feel about <span className="font-medium">"{lessonTitle}"</span>?
               </p>
               
@@ -89,7 +89,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
                     }`}
                   >
                     <div className="text-3xl mb-1">{level.emoji}</div>
-                    <div className="text-xs text-black dark:text-white">{level.label}</div>
+                    <div className="text-xs text-black dark:text-white dark:text-white">{level.label}</div>
                   </button>
                 ))}
               </div>
@@ -98,7 +98,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
           
           {step === "review" && (
             <div>
-              <p className="text-black dark:text-white mb-4">
+              <p className="text-black dark:text-white dark:text-white mb-4">
                 What areas would you like to review?
               </p>
               
@@ -110,7 +110,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
                     className={`p-3 rounded-xl border-2 transition-all text-left ${
                       needsReview.includes(topic.id)
                         ? "bg-teal-50 border-teal-500 text-teal-700"
-                        : "bg-white border-gray-200 hover:border-gray-300"
+                        : "bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 hover:border-gray-300"
                     }`}
                   >
                     <span className="text-xl mr-2">{topic.icon}</span>
@@ -130,7 +130,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
           
           {step === "feedback" && (
             <div>
-              <p className="text-black dark:text-white mb-4">
+              <p className="text-black dark:text-white dark:text-white mb-4">
                 Any additional feedback? (Optional)
               </p>
               
@@ -143,14 +143,14 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
               />
               
               {/* Summary */}
-              <div className="mt-4 p-3 bg-white dark:bg-slate-900 rounded-xl">
-                <p className="text-sm text-black dark:text-white">
+              <div className="mt-4 p-3 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl">
+                <p className="text-sm text-black dark:text-white dark:text-white">
                   <span className="font-medium">Your confidence:</span>{" "}
                   {CONFIDENCE_LEVELS.find(l => l.level === selectedLevel)?.emoji}{" "}
                   {CONFIDENCE_LEVELS.find(l => l.level === selectedLevel)?.label}
                 </p>
                 {needsReview.length > 0 && (
-                  <p className="text-sm text-black dark:text-white mt-1">
+                  <p className="text-sm text-black dark:text-white dark:text-white mt-1">
                     <span className="font-medium">Review areas:</span>{" "}
                     {needsReview.map(r => REVIEW_TOPICS.find(t => t.id === r)?.label).join(", ")}
                   </p>
@@ -161,10 +161,10 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
         </div>
         
         {/* Footer */}
-        <div className="border-t border-gray-200 dark:border-slate-700 p-4 flex justify-between">
+        <div className="border-t border-gray-200 dark:border-slate-700 dark:border-slate-700 p-4 flex justify-between">
           <button
             onClick={onSkip}
-            className="px-4 py-2 text-black dark:text-white hover:text-black dark:text-white"
+            className="px-4 py-2 text-black dark:text-white dark:text-white hover:text-black dark:text-white dark:text-white"
           >
             Skip
           </button>

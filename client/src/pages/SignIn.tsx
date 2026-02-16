@@ -18,13 +18,13 @@ export default function SignIn() {
           <h1 className="text-3xl font-bold text-slate-900 mb-2">
             Welcome Back
           </h1>
-          <p className="text-black dark:text-white">
+          <p className="text-black dark:text-white dark:text-white">
             Sign in to your RusingAcademy account
           </p>
         </div>
 
         {/* Clerk Sign-In component */}
-        <div className="bg-white dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
           <ClerkSignIn
             routing="path"
             path="/sign-in"
@@ -40,7 +40,7 @@ export default function SignIn() {
         </div>
 
         {/* Additional links */}
-        <div className="mt-6 text-center text-sm text-black dark:text-white">
+        <div className="mt-6 text-center text-sm text-black dark:text-white dark:text-white">
           <p>
             Don't have an account?{' '}
             <button
@@ -53,7 +53,7 @@ export default function SignIn() {
         </div>
 
         {/* Trust badges */}
-        <div className="mt-8 flex items-center justify-center gap-4 text-xs text-black dark:text-white">
+        <div className="mt-8 flex items-center justify-center gap-4 text-xs text-black dark:text-white dark:text-white">
           <span className="flex items-center gap-1">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />

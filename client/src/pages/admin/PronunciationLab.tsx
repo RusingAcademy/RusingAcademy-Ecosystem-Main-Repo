@@ -159,7 +159,7 @@ const PronunciationLab = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-slate-900 divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-slate-800 dark:bg-slate-900 divide-y divide-gray-200">
                     {filteredExercises.length > 0 ? filteredExercises.map((exercise) => (
                       <tr key={exercise.id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{exercise.phrase}</td>
@@ -205,7 +205,7 @@ const PronunciationLab = () => {
                 <CardContent>
                     <div className="space-y-4">
                         {categories.map(cat => (
-                            <div key={cat.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div key={cat.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
                                 <div>
                                     <p className="font-medium">{cat.name}</p>
                                     <p className="text-sm text-muted-foreground">{cat.count} exercises</p>

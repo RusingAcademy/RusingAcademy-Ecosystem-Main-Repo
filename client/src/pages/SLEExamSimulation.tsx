@@ -279,7 +279,7 @@ function PulsingMicRing({ isRecording, level = 0 }: { isRecording: boolean; leve
           "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200",
           isRecording
             ? "bg-red-500 text-white shadow-lg shadow-red-500/30"
-            : "bg-slate-200 dark:bg-teal-800 text-black dark:text-white/90"
+            : "bg-slate-200 dark:bg-teal-800 text-black dark:text-white dark:text-white/90"
         )}
       >
         {isRecording ? <Radio className="h-7 w-7 animate-pulse" /> : <Mic className="h-7 w-7" />}
@@ -358,11 +358,11 @@ function CriteriaRadar({ criteria, l }: { criteria: PhaseResult["criteria"]; l: 
                   )}
                 />
               </svg>
-              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-black dark:text-white/90">
+              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-black dark:text-white dark:text-white/90">
                 {pct}
               </span>
             </div>
-            <span className="text-[10px] text-black dark:text-cyan-300 text-center leading-tight">
+            <span className="text-[10px] text-black dark:text-white dark:text-cyan-300 text-center leading-tight">
               {item.label}
             </span>
           </div>

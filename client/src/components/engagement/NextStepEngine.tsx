@@ -77,7 +77,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
       </motion.div>
       {primaryReco && !showAllOptions && (
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="space-y-4">
-          <div className="p-4 rounded-xl bg-white dark:bg-slate-900/5 border border-white/10">
+          <div className="p-4 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/10">
             <div className="flex items-start gap-4">
               <div className="text-3xl">{primaryReco.icon}</div>
               <div className="flex-1">
@@ -96,7 +96,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
               <span>Continuer</span>
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
             </button>
-            <button onClick={handleOverride} className="px-6 py-3 bg-white dark:bg-slate-900/5 text-white/70 font-medium rounded-xl border border-white/10 hover:bg-white dark:bg-slate-900/10 transition-all duration-300">Autres options</button>
+            <button onClick={handleOverride} className="px-6 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/5 text-white/70 font-medium rounded-xl border border-white/10 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 transition-all duration-300">Autres options</button>
           </div>
         </motion.div>
       )}

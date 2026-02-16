@@ -32,7 +32,7 @@ export default function AccountRegister() {
     <div className="p-6 max-w-[1000px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/chart-of-accounts")} className="p-2 hover:bg-gray-100 rounded-lg">
+          <button onClick={() => navigate("/chart-of-accounts")} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
@@ -53,7 +53,7 @@ export default function AccountRegister() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Account Register</h3>
           <div className="flex items-center gap-2">
-            <select className="border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm">
+            <select className="border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm">
               <option>All dates</option>
               <option>This month</option>
               <option>Last month</option>
@@ -65,7 +65,7 @@ export default function AccountRegister() {
 
         <table className="w-full">
           <thead>
-            <tr className="border-b-2 border-gray-200 dark:border-slate-700">
+            <tr className="border-b-2 border-gray-200 dark:border-slate-700 dark:border-slate-700">
               <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Date</th>
               <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Ref Type</th>
               <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Ref #</th>

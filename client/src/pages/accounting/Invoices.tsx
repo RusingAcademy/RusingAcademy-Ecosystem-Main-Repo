@@ -120,7 +120,7 @@ export default function Invoices() {
 
   const SortHeader = ({ field, label, align }: { field: typeof sortField; label: string; align?: string }) => (
     <button
-      className={`flex items-center gap-1 hover:text-gray-900 ${align === "right" ? "ml-auto" : ""}`}
+      className={`flex items-center gap-1 hover:text-gray-900 dark:text-gray-100 ${align === "right" ? "ml-auto" : ""}`}
       onClick={() => toggleSort(field)}
     >
       {label} <ArrowUpDown size={12} className={sortField === field ? "text-green-600" : "text-gray-400"} />
@@ -191,11 +191,11 @@ export default function Invoices() {
                 Change status
               </button>
               {showBulkStatusMenu && (
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg z-20 py-1 w-40">
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg z-20 py-1 w-40">
                   {["Draft", "Sent", "Paid", "Overdue", "Voided"].map(status => (
                     <button
                       key={status}
-                      className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 text-gray-700"
+                      className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:bg-slate-900 text-gray-700"
                       onClick={() => handleBulkStatus(status)}
                     >
                       {status}
@@ -222,7 +222,7 @@ export default function Invoices() {
             </button>
             {/* Clear Selection */}
             <button
-              className="text-sm text-gray-500 hover:text-gray-700 px-2"
+              className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-300 px-2"
               onClick={() => setSelectedIds(new Set())}
             >
               Clear
@@ -276,7 +276,7 @@ export default function Invoices() {
 
       {/* Filter Tabs + Search */}
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4 border-b border-gray-200 dark:border-slate-700">
+        <div className="flex items-center gap-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
           {["All", "Draft", "Sent", "Overdue", "Partial", "Paid", "Deposited", "Voided"].map(tab => (
             <button
               key={tab}
@@ -309,7 +309,7 @@ export default function Invoices() {
       </div>
 
       {/* Invoice Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">
@@ -334,7 +334,7 @@ export default function Invoices() {
             {paginated.map((inv: any) => (
               <tr
                 key={inv.id}
-                className={`hover:bg-gray-50 cursor-pointer ${selectedIds.has(inv.id) ? "bg-blue-50" : ""}`}
+                className={`hover:bg-gray-50 dark:bg-slate-900 cursor-pointer ${selectedIds.has(inv.id) ? "bg-blue-50" : ""}`}
                 onClick={() => navigate(`/invoices/${inv.id}`)}
               >
                 <td onClick={(e) => e.stopPropagation()}>
@@ -353,7 +353,7 @@ export default function Invoices() {
                   <StatusBadge status={inv.status} />
                 </td>
                 <td onClick={(e) => e.stopPropagation()}>
-                  <button className="p-1 hover:bg-gray-100 rounded" onClick={() => navigate(`/invoices/${inv.id}`)}>
+                  <button className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded" onClick={() => navigate(`/invoices/${inv.id}`)}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>
@@ -371,7 +371,7 @@ export default function Invoices() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 bg-gray-50">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
             <span className="text-sm text-gray-500">
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>

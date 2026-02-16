@@ -56,14 +56,14 @@ export default function HRNotifications() {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex gap-2 bg-gray-100 p-1 rounded-xl">
+        <div className="flex gap-2 bg-gray-100 dark:bg-slate-800 p-1 rounded-xl">
           {filters.map((f) => (
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
                 filter === f.key
-                  ? "bg-white text-blue-600 shadow-sm"
+                  ? "bg-white dark:bg-slate-800 text-blue-600 shadow-sm"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -74,17 +74,17 @@ export default function HRNotifications() {
         </div>
 
         {/* Empty State */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-12 text-center">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-3xl text-blue-600">notifications_none</span>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{ui.noNotifications}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{ui.noNotifications}</h3>
           <p className="text-sm text-gray-500 max-w-md mx-auto">{ui.noNotificationsSub}</p>
         </div>
 
         {/* Notification Preferences */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">tune</span>
             {ui.preferences}
           </h3>
@@ -94,7 +94,7 @@ export default function HRNotifications() {
               { label: ui.weeklyDigest, sub: ui.weeklyDigestSub, icon: "summarize" },
               { label: ui.complianceAlerts, sub: ui.complianceAlertsSub, icon: "warning" },
             ].map((pref, i) => (
-              <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
+              <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:bg-slate-900 transition-colors">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
                     <span className="material-icons text-blue-600">{pref.icon}</span>
@@ -106,7 +106,7 @@ export default function HRNotifications() {
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" defaultChecked className="sr-only peer" />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white dark:bg-slate-900 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600" />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white dark:bg-slate-800 dark:bg-slate-900 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600" />
                 </label>
               </div>
             ))}

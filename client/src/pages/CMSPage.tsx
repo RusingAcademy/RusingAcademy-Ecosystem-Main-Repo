@@ -150,7 +150,7 @@ function SectionRenderer({ section }: { section: any }) {
             {section.subtitle && <p className="text-lg opacity-70 text-center mb-12 max-w-2xl mx-auto">{section.subtitle}</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((f: any, i: number) => (
-                <div key={i} className="p-6 rounded-xl border bg-white dark:bg-slate-900/5 backdrop-blur-sm">
+                <div key={i} className="p-6 rounded-xl border bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm">
                   {f.icon && <div className="text-3xl mb-3">{f.icon}</div>}
                   <h3 className="text-xl font-semibold mb-2">{f.title || `Feature ${i + 1}`}</h3>
                   <p className="opacity-70">{f.description || ""}</p>
@@ -169,7 +169,7 @@ function SectionRenderer({ section }: { section: any }) {
             {section.title && <h2 className="text-3xl font-bold text-center mb-12">{section.title}</h2>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {testimonials.map((t: any, i: number) => (
-                <div key={i} className="p-6 rounded-xl border bg-white dark:bg-slate-900/5">
+                <div key={i} className="p-6 rounded-xl border bg-white dark:bg-slate-800 dark:bg-slate-900/5">
                   <p className="italic mb-4 opacity-80">"{t.quote || t.text || ""}"</p>
                   <div className="flex items-center gap-3">
                     {t.avatar && <img src={t.avatar} alt="" className="w-10 h-10 rounded-full" />}

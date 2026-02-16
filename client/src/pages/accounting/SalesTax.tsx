@@ -75,8 +75,8 @@ export default function SalesTax() {
       {currentFiling && (
         <div className="qb-card mb-6 max-w-lg">
           <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Sales Tax</div>
-          <h2 className="text-lg font-semibold text-gray-800 mb-1">{currentFiling.agency || "CRA"}</h2>
-          <div className="text-3xl font-bold text-gray-900 mb-1">${Number(currentFiling.amountOwing || 0).toFixed(2)}</div>
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-1">{currentFiling.agency || "CRA"}</h2>
+          <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">${Number(currentFiling.amountOwing || 0).toFixed(2)}</div>
           <div className="text-sm text-gray-500 mb-1">
             {currentFiling.periodStart ? new Date(currentFiling.periodStart).toLocaleDateString("en-CA") : ""} – {currentFiling.periodEnd ? new Date(currentFiling.periodEnd).toLocaleDateString("en-CA") : ""}
           </div>
@@ -84,7 +84,7 @@ export default function SalesTax() {
             {currentFiling.status === "Upcoming" ? "CURRENT PERIOD" : currentFiling.status?.toUpperCase()}
           </div>
 
-          <div className="space-y-2 border-t border-gray-100 pt-4">
+          <div className="space-y-2 border-t border-gray-100 dark:border-slate-700 pt-4">
             <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600">Collected on sales</span>
               <span className="font-medium text-gray-800">${Number(currentFiling.taxCollected || 0).toFixed(2)}</span>
@@ -93,7 +93,7 @@ export default function SalesTax() {
               <span className="text-gray-600">Paid on purchases</span>
               <span className="font-medium text-gray-800">${Number(currentFiling.taxPaid || 0).toFixed(2)}</span>
             </div>
-            <div className="flex items-center justify-between text-sm font-bold border-t border-gray-200 dark:border-slate-700 pt-2">
+            <div className="flex items-center justify-between text-sm font-bold border-t border-gray-200 dark:border-slate-700 dark:border-slate-700 pt-2">
               <span className="text-gray-800">Net tax owing</span>
               <span className="text-gray-900">${Number(currentFiling.amountOwing || 0).toFixed(2)}</span>
             </div>
@@ -109,7 +109,7 @@ export default function SalesTax() {
         </div>
         <div className="space-y-2">
           {rates.map((rate: any) => (
-            <div key={rate.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+            <div key={rate.id} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-slate-700 last:border-0">
               <div>
                 <div className="font-medium text-gray-800">{rate.name}</div>
                 <div className="text-xs text-gray-500">{rate.agency || "CRA"} · {rate.code}</div>
@@ -121,11 +121,11 @@ export default function SalesTax() {
       </div>
 
       {/* Filing History */}
-      <h2 className="text-lg font-semibold text-gray-800 mb-4">Filing History</h2>
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Filing History</h2>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-50 border-b">
+            <tr className="bg-gray-50 dark:bg-slate-900 border-b">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Period</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Agency</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
@@ -135,7 +135,7 @@ export default function SalesTax() {
           </thead>
           <tbody>
             {filings.map((f: any) => (
-              <tr key={f.id} className="border-b border-gray-100 hover:bg-gray-50">
+              <tr key={f.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50">
                 <td className="px-4 py-3 text-sm text-gray-700">
                   {f.periodStart ? new Date(f.periodStart).toLocaleDateString("en-CA") : ""} – {f.periodEnd ? new Date(f.periodEnd).toLocaleDateString("en-CA") : ""}
                 </td>
@@ -145,7 +145,7 @@ export default function SalesTax() {
                     f.status === "Paid" ? "bg-green-100 text-green-700" :
                     f.status === "Filed" ? "bg-blue-100 text-blue-700" :
                     f.status === "Due" ? "bg-yellow-100 text-yellow-700" :
-                    "bg-gray-100 text-gray-600"
+                    "bg-gray-100 dark:bg-slate-800 text-gray-600"
                   }`}>
                     {f.status}
                   </span>
@@ -193,12 +193,12 @@ export default function SalesTax() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">Period Start</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Period Start</label>
                 <input type="date" value={prepareStart} onChange={e => setPrepareStart(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">Period End</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Period End</label>
                 <input type="date" value={prepareEnd} onChange={e => setPrepareEnd(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
               </div>

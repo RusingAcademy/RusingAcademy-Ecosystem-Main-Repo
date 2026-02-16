@@ -17,7 +17,7 @@ export default function AuditLog() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <Link href="/settings">
-          <button className="p-1.5 hover:bg-gray-100 rounded-full">
+          <button className="p-1.5 hover:bg-gray-100 dark:bg-slate-800 rounded-full">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
         </Link>
@@ -27,10 +27,10 @@ export default function AuditLog() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Timestamp</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">User</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Action</th>
@@ -51,7 +51,7 @@ export default function AuditLog() {
               </tr>
             ) : (
               (logs || []).map((log: any) => (
-                <tr key={log.id} className="border-b border-gray-100 hover:bg-gray-50">
+                <tr key={log.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50">
                   <td className="px-4 py-3 text-sm text-gray-600">
                     <div className="flex items-center gap-1.5">
                       <Clock size={13} className="text-gray-400" />
@@ -60,7 +60,7 @@ export default function AuditLog() {
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-800">{log.userName || `User #${log.userId}`}</td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${actionColors[log.action] || "bg-gray-100 text-gray-600"}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${actionColors[log.action] || "bg-gray-100 dark:bg-slate-800 text-gray-600"}`}>
                       {log.action}
                     </span>
                   </td>

@@ -144,8 +144,8 @@ export default function PreviewMode() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-black dark:text-white">Preview As</h1>
-          <p className="text-black dark:text-white mt-1">
+          <h1 className="text-2xl font-bold text-black dark:text-white dark:text-white">Preview As</h1>
+          <p className="text-black dark:text-white dark:text-white mt-1">
             View the platform exactly as different users see it. Select a role to impersonate and browse the website through their eyes.
           </p>
         </div>
@@ -169,17 +169,17 @@ export default function PreviewMode() {
                       <Icon className="w-6 h-6" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-black dark:text-white text-lg">{mode.title}</h3>
-                      <p className="text-sm text-black dark:text-white mt-1">{mode.description}</p>
+                      <h3 className="font-semibold text-black dark:text-white dark:text-white text-lg">{mode.title}</h3>
+                      <p className="text-sm text-black dark:text-white dark:text-white mt-1">{mode.description}</p>
 
                       {mode.requiresUser && (
                         <div className="mt-3 space-y-1">
-                          <p className="text-xs font-medium text-black dark:text-white">Select a user to impersonate:</p>
+                          <p className="text-xs font-medium text-black dark:text-white dark:text-white">Select a user to impersonate:</p>
                           <div className="max-h-36 overflow-y-auto space-y-1 border rounded-lg p-1">
                             {(mode.id === "learner" ? students : coaches)?.map((u: any) => (
                               <button
                                 key={u.id}
-                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-sm flex items-center gap-2 transition-colors"
+                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 text-sm flex items-center gap-2 transition-colors"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedUserId(u.id);
@@ -219,7 +219,7 @@ export default function PreviewMode() {
         {/* Quick Stats */}
         <Card className="border-dashed">
           <CardContent className="py-4">
-            <div className="flex items-center gap-6 text-sm text-black dark:text-white">
+            <div className="flex items-center gap-6 text-sm text-black dark:text-white dark:text-white">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
                 <span>{students?.length || 0} learners</span>
@@ -246,7 +246,7 @@ export default function PreviewMode() {
   // Fullscreen preview
   if (isFullscreen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white dark:bg-slate-900 flex flex-col">
+      <div className="fixed inset-0 z-50 bg-white dark:bg-slate-800 dark:bg-slate-900 flex flex-col">
         {/* Fullscreen toolbar */}
         <div className={`px-4 py-2 ${currentMode?.bg} border-b flex items-center justify-between shrink-0`}>
           <div className="flex items-center gap-3">
@@ -260,7 +260,7 @@ export default function PreviewMode() {
           </div>
           <div className="flex items-center gap-2">
             {/* Device toggles */}
-            <div className="flex items-center gap-1 bg-white dark:bg-slate-900/80 rounded-lg p-1">
+            <div className="flex items-center gap-1 bg-white dark:bg-slate-800 dark:bg-slate-900/80 rounded-lg p-1">
               <button
                 onClick={() => setDeviceMode("desktop")}
                 className={`p-1.5 rounded ${deviceMode === "desktop" ? "bg-gray-200" : "hover:bg-gray-100"}`}
@@ -282,7 +282,7 @@ export default function PreviewMode() {
             </div>
             {/* Page selector */}
             <Select value={previewUrl} onValueChange={setPreviewUrl}>
-              <SelectTrigger className="w-48 h-8 text-xs bg-white dark:bg-slate-900">
+              <SelectTrigger className="w-48 h-8 text-xs bg-white dark:bg-slate-800 dark:bg-slate-900">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -300,9 +300,9 @@ export default function PreviewMode() {
           </div>
         </div>
         {/* Iframe */}
-        <div className="flex-1 flex items-start justify-center bg-gray-100 overflow-auto p-4">
+        <div className="flex-1 flex items-start justify-center bg-gray-100 dark:bg-slate-800 overflow-auto p-4">
           <div
-            className="bg-white dark:bg-slate-900 shadow-2xl rounded-lg overflow-hidden transition-all duration-300"
+            className="bg-white dark:bg-slate-800 dark:bg-slate-900 shadow-2xl rounded-lg overflow-hidden transition-all duration-300"
             style={{
               width: DEVICE_WIDTHS[deviceMode],
               maxWidth: "100%",
@@ -331,15 +331,15 @@ export default function PreviewMode() {
               <Icon className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-bold text-black dark:text-white">
+              <h2 className="font-bold text-black dark:text-white dark:text-white">
                 Previewing as: {currentMode?.title}
                 {selectedUserId && previewData && (
-                  <span className="font-normal text-black dark:text-white">
+                  <span className="font-normal text-black dark:text-white dark:text-white">
                     {" "}— {(previewData as any).user?.name || (previewData as any).profile?.name || ""}
                   </span>
                 )}
               </h2>
-              <p className="text-sm text-black dark:text-white">Read-only preview of what this user type sees</p>
+              <p className="text-sm text-black dark:text-white dark:text-white">Read-only preview of what this user type sees</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -369,24 +369,24 @@ export default function PreviewMode() {
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-2">
               {/* Device toggles */}
-              <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+              <div className="flex items-center gap-1 bg-gray-100 dark:bg-slate-800 rounded-lg p-1">
                 <button
                   onClick={() => setDeviceMode("desktop")}
-                  className={`p-2 rounded-md transition-colors ${deviceMode === "desktop" ? "bg-white shadow-sm" : "hover:bg-gray-200"}`}
+                  className={`p-2 rounded-md transition-colors ${deviceMode === "desktop" ? "bg-white dark:bg-slate-800 shadow-sm" : "hover:bg-gray-200"}`}
                   title="Desktop"
                 >
                   <Monitor className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setDeviceMode("tablet")}
-                  className={`p-2 rounded-md transition-colors ${deviceMode === "tablet" ? "bg-white shadow-sm" : "hover:bg-gray-200"}`}
+                  className={`p-2 rounded-md transition-colors ${deviceMode === "tablet" ? "bg-white dark:bg-slate-800 shadow-sm" : "hover:bg-gray-200"}`}
                   title="Tablet"
                 >
                   <Tablet className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setDeviceMode("mobile")}
-                  className={`p-2 rounded-md transition-colors ${deviceMode === "mobile" ? "bg-white shadow-sm" : "hover:bg-gray-200"}`}
+                  className={`p-2 rounded-md transition-colors ${deviceMode === "mobile" ? "bg-white dark:bg-slate-800 shadow-sm" : "hover:bg-gray-200"}`}
                   title="Mobile"
                 >
                   <Smartphone className="w-4 h-4" />
@@ -418,9 +418,9 @@ export default function PreviewMode() {
           </div>
 
           {/* Preview iframe */}
-          <div className="flex justify-center bg-gray-100 rounded-xl p-4 min-h-[600px]">
+          <div className="flex justify-center bg-gray-100 dark:bg-slate-800 rounded-xl p-4 min-h-[600px]">
             <div
-              className="bg-white dark:bg-slate-900 shadow-xl rounded-lg overflow-hidden transition-all duration-300 border"
+              className="bg-white dark:bg-slate-800 dark:bg-slate-900 shadow-xl rounded-lg overflow-hidden transition-all duration-300 border"
               style={{
                 width: DEVICE_WIDTHS[deviceMode],
                 maxWidth: "100%",
@@ -450,7 +450,7 @@ export default function PreviewMode() {
           {/* Public View */}
           {viewMode === "public" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-black dark:text-white bg-blue-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white bg-blue-50 p-3 rounded-lg">
                 <CheckCircle2 className="w-4 h-4 text-blue-600" />
                 <span>Showing what an anonymous visitor sees — no authentication, public content only</span>
               </div>
@@ -460,8 +460,8 @@ export default function PreviewMode() {
                   <Card key={c.id} className="hover:shadow-md transition-shadow">
                     <CardContent className="pt-5">
                       <Badge variant="outline" className="mb-2">{c.category || "General"}</Badge>
-                      <h4 className="font-semibold text-black dark:text-white">{c.title}</h4>
-                      <p className="text-sm text-black dark:text-white mt-1 line-clamp-2">{c.description}</p>
+                      <h4 className="font-semibold text-black dark:text-white dark:text-white">{c.title}</h4>
+                      <p className="text-sm text-black dark:text-white dark:text-white mt-1 line-clamp-2">{c.description}</p>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-violet-600">
                           {c.price ? `$${(c.price / 100).toFixed(2)}` : "Free"}
@@ -486,7 +486,7 @@ export default function PreviewMode() {
                       </div>
                       <div>
                         <h4 className="font-semibold">{c.name}</h4>
-                        <div className="flex items-center gap-2 text-sm text-black dark:text-white">
+                        <div className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white">
                           <Star className="w-3 h-3 text-yellow-500" /> {c.averageRating || "N/A"}
                           <span>·</span>
                           <span>{c.totalSessions || 0} sessions</span>
@@ -502,7 +502,7 @@ export default function PreviewMode() {
           {/* Learner View */}
           {viewMode === "learner" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-black dark:text-white bg-emerald-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white bg-emerald-50 p-3 rounded-lg">
                 <GraduationCap className="w-4 h-4 text-emerald-600" />
                 <span>Showing the learner experience — courses, progress, and practice logs</span>
               </div>
@@ -515,7 +515,7 @@ export default function PreviewMode() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-black dark:text-white">{(previewData as any).user.email}</p>
+                    <p className="text-sm text-black dark:text-white dark:text-white">{(previewData as any).user.email}</p>
                   </CardContent>
                 </Card>
               )}
@@ -528,7 +528,7 @@ export default function PreviewMode() {
                         <BookOpen className="w-5 h-5 text-violet-600" />
                         <div>
                           <h4 className="font-medium">{e.courseName || `Course #${e.courseId}`}</h4>
-                          <div className="flex items-center gap-2 text-xs text-black dark:text-white">
+                          <div className="flex items-center gap-2 text-xs text-black dark:text-white dark:text-white">
                             <Badge variant={e.status === "completed" ? "default" : "secondary"} className="text-xs">
                               {e.status}
                             </Badge>
@@ -555,7 +555,7 @@ export default function PreviewMode() {
           {/* Coach View */}
           {viewMode === "coach" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-black dark:text-white bg-violet-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white bg-violet-50 p-3 rounded-lg">
                 <Users className="w-4 h-4 text-violet-600" />
                 <span>Showing the coach dashboard — sessions, ratings, and student management</span>
               </div>
@@ -569,17 +569,17 @@ export default function PreviewMode() {
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
                         <div className="text-2xl font-bold text-violet-600">{(previewData as any).profile.averageRating || "N/A"}</div>
-                        <div className="text-xs text-black dark:text-white">Rating</div>
+                        <div className="text-xs text-black dark:text-white dark:text-white">Rating</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
                         <div className="text-2xl font-bold text-emerald-600">{(previewData as any).profile.totalSessions || 0}</div>
-                        <div className="text-xs text-black dark:text-white">Sessions</div>
+                        <div className="text-xs text-black dark:text-white dark:text-white">Sessions</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
                         <div className="text-2xl font-bold text-blue-600">{(previewData as any).profile.totalStudents || 0}</div>
-                        <div className="text-xs text-black dark:text-white">Students</div>
+                        <div className="text-xs text-black dark:text-white dark:text-white">Students</div>
                       </div>
                     </div>
                   </CardContent>
@@ -591,7 +591,7 @@ export default function PreviewMode() {
           {/* HR Admin View */}
           {viewMode === "hr" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-black dark:text-white bg-orange-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white bg-orange-50 p-3 rounded-lg">
                 <Building2 className="w-4 h-4 text-orange-600" />
                 <span>Showing the HR Admin view — team enrollments, department analytics, and compliance</span>
               </div>
@@ -600,28 +600,28 @@ export default function PreviewMode() {
                   <CardContent className="pt-5 text-center">
                     <Users className="w-8 h-8 text-orange-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
-                    <div className="text-sm text-black dark:text-white">Team Members</div>
+                    <div className="text-sm text-black dark:text-white dark:text-white">Team Members</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BookOpen className="w-8 h-8 text-violet-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
-                    <div className="text-sm text-black dark:text-white">Available Courses</div>
+                    <div className="text-sm text-black dark:text-white dark:text-white">Available Courses</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <GraduationCap className="w-8 h-8 text-emerald-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
-                    <div className="text-sm text-black dark:text-white">Active Enrollments</div>
+                    <div className="text-sm text-black dark:text-white dark:text-white">Active Enrollments</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <DollarSign className="w-8 h-8 text-blue-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">—</div>
-                    <div className="text-sm text-black dark:text-white">Training Budget</div>
+                    <div className="text-sm text-black dark:text-white dark:text-white">Training Budget</div>
                   </CardContent>
                 </Card>
               </div>
@@ -643,9 +643,9 @@ export default function PreviewMode() {
                       { label: "Bulk User Import", desc: "Import team members via CSV for quick onboarding" },
                       { label: "Certificate Management", desc: "View and download team certificates and transcripts" },
                     ].map((feature) => (
-                      <div key={feature.label} className="p-3 bg-gray-50 rounded-lg">
+                      <div key={feature.label} className="p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
                         <div className="font-medium text-sm">{feature.label}</div>
-                        <div className="text-xs text-black dark:text-white mt-0.5">{feature.desc}</div>
+                        <div className="text-xs text-black dark:text-white dark:text-white mt-0.5">{feature.desc}</div>
                       </div>
                     ))}
                   </div>
@@ -657,7 +657,7 @@ export default function PreviewMode() {
           {/* Admin View */}
           {viewMode === "admin" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-black dark:text-white bg-amber-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white bg-amber-50 p-3 rounded-lg">
                 <Shield className="w-4 h-4 text-amber-600" />
                 <span>Full admin overview — all platform metrics and controls</span>
               </div>
@@ -666,21 +666,21 @@ export default function PreviewMode() {
                   <CardContent className="pt-5 text-center">
                     <Users className="w-8 h-8 text-blue-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
-                    <div className="text-sm text-black dark:text-white">Total Users</div>
+                    <div className="text-sm text-black dark:text-white dark:text-white">Total Users</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BookOpen className="w-8 h-8 text-violet-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
-                    <div className="text-sm text-black dark:text-white">Total Courses</div>
+                    <div className="text-sm text-black dark:text-white dark:text-white">Total Courses</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BarChart3 className="w-8 h-8 text-emerald-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
-                    <div className="text-sm text-black dark:text-white">Total Enrollments</div>
+                    <div className="text-sm text-black dark:text-white dark:text-white">Total Enrollments</div>
                   </CardContent>
                 </Card>
               </div>

@@ -426,7 +426,7 @@ export default function CourseSettingsEditor({ courseId, onBack }: CourseSetting
                 <p className="text-xs text-muted-foreground mt-1">{metaDescription.length}/160 characters {metaDescription.length > 160 && "⚠️ Too long"}</p>
               </div>
               {/* Google Snippet Preview */}
-              <div className="border rounded-lg p-4 bg-white dark:bg-obsidian">
+              <div className="border rounded-lg p-4 bg-white dark:bg-slate-800 dark:bg-obsidian">
                 <p className="text-xs text-muted-foreground mb-2">Google Snippet Preview</p>
                 <div className="space-y-0.5">
                   <p className="text-blue-600 dark:text-blue-400 text-base hover:underline cursor-pointer truncate">

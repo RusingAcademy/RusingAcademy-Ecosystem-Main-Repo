@@ -244,11 +244,11 @@ export default function PrivacyPolicy() {
             
             <div className="flex items-center gap-4">
               {/* Language Toggle */}
-              <div className="flex items-center gap-1 bg-white dark:bg-slate-900/10 rounded-full p-1">
+              <div className="flex items-center gap-1 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full p-1">
                 <button
                   onClick={() => setLang('en')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'en' ? 'bg-white text-black' : 'text-white/90 hover:text-white'
+                    lang === 'en' ? 'bg-white dark:bg-slate-800 text-black' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   EN
@@ -256,7 +256,7 @@ export default function PrivacyPolicy() {
                 <button
                   onClick={() => setLang('fr')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'fr' ? 'bg-white text-black' : 'text-white/90 hover:text-white'
+                    lang === 'fr' ? 'bg-white dark:bg-slate-800 text-black' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   FR
@@ -310,7 +310,7 @@ export default function PrivacyPolicy() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl border border-white/60 p-6 sm:p-8"
+                  className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl border border-white/60 p-6 sm:p-8"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/20 to-cyan-500/20 flex items-center justify-center">

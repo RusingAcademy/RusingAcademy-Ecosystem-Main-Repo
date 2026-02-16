@@ -507,7 +507,7 @@ export default function HRDashboard() {
                       day: 'numeric' 
                     })}
                   </span>
-                  <Badge className="bg-white dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-900/30">
+                  <Badge className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/30">
                     <Users className="h-3 w-3 mr-1" />
                     {mockTeamMembers.length} {language === "fr" ? "apprenants" : "learners"}
                   </Badge>
@@ -521,7 +521,7 @@ export default function HRDashboard() {
               <div className="flex flex-wrap gap-3">
                 <Button 
                   size="lg"
-                  className="bg-white dark:bg-slate-900 text-black dark:text-white hover:bg-slate-100 shadow-lg"
+                  className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-black dark:text-white dark:text-white hover:bg-slate-100 shadow-lg"
                   onClick={() => setShowExportFilters(!showExportFilters)}
                 >
                   <Filter className="h-5 w-5 mr-2" />
@@ -531,7 +531,7 @@ export default function HRDashboard() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="bg-white dark:bg-slate-900/20 text-white border-white/60 hover:bg-white dark:bg-slate-900/30"
+                    className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 text-white border-white/60 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/30"
                     onClick={() => handleExport("csv")}
                     disabled={isExporting}
                   >
@@ -541,7 +541,7 @@ export default function HRDashboard() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="bg-white dark:bg-slate-900/20 text-white border-white/60 hover:bg-white dark:bg-slate-900/30"
+                    className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 text-white border-white/60 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/30"
                     onClick={() => handleExport("pdf")}
                     disabled={isExporting}
                   >
@@ -549,7 +549,7 @@ export default function HRDashboard() {
                     PDF
                   </Button>
                 </div>
-                <Button size="lg" className="bg-white dark:bg-slate-900 text-rose-700 hover:bg-rose-50 shadow-lg">
+                <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-rose-700 hover:bg-rose-50 shadow-lg">
                   <UserPlus className="h-5 w-5 mr-2" />
                   {l.addEmployee}
                 </Button>

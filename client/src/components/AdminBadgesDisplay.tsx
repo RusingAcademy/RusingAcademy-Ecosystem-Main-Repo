@@ -55,7 +55,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
   return (
     <div className="space-y-8">
       {/* Achievements Section */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow p-6">
         <div className="flex items-center gap-2 mb-6">
           <Award size={24} className="text-yellow-500" />
           <h3 className="text-xl font-semibold text-gray-900">
@@ -103,7 +103,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
 
       {/* Milestones Section */}
       {milestones.length > 0 && (
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="flex items-center gap-2 mb-6">
             <Target size={24} className="text-blue-500" />
             <h3 className="text-xl font-semibold text-gray-900">
@@ -113,7 +113,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
 
           <div className="space-y-4">
             {milestones.map((milestone) => (
-              <div key={milestone.id} className="bg-white dark:bg-slate-900 rounded-lg p-4">
+              <div key={milestone.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{milestone.badgeIcon}</span>
@@ -147,10 +147,10 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
       {/* Badge Detail Modal */}
       {selectedBadge && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-900 rounded-lg p-8 max-w-md w-full mx-4">
+          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-8 max-w-md w-full mx-4">
             <div className="text-center">
               <div className="text-6xl mb-4">{selectedBadge.badgeIcon}</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedBadge.badgeName}</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{selectedBadge.badgeName}</h2>
               <div
                 className="inline-block px-4 py-2 rounded-full text-white font-bold mb-4"
                 style={{ backgroundColor: tierColors[selectedBadge.badgeTier].bg }}
@@ -188,14 +188,14 @@ export function EnhancedLeaderboard({
   const isEn = language === "en";
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-lg shadow overflow-hidden">
-      <div className="p-6 border-b border-gray-200 dark:border-slate-700">
+    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow overflow-hidden">
+      <div className="p-6 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
         <h3 className="text-xl font-semibold text-gray-900">{isEn ? "Admin Leaderboard" : "Classement des administrateurs"}</h3>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+          <thead className="bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
             <tr>
               <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Rank" : "Classement"}</th>
               <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Admin" : "Administrateur"}</th>
@@ -210,7 +210,7 @@ export function EnhancedLeaderboard({
               const topBadge = badges[0];
 
               return (
-                <tr key={admin.adminId} className="border-b border-gray-100 hover:bg-white dark:bg-slate-900">
+                <tr key={admin.adminId} className="border-b border-gray-100 dark:border-slate-700 hover:bg-white dark:bg-slate-800 dark:bg-slate-900">
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-2">
                       {index < 3 && <span className="text-lg">{index === 0 ? "🥇" : index === 1 ? "🥈" : "🥉"}</span>}

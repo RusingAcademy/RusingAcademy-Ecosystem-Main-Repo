@@ -149,7 +149,7 @@ export default function PipelineNotificationsBell() {
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-3 hover:bg-white dark:hover:bg-obsidian cursor-pointer ${
+                  className={`p-3 hover:bg-white dark:bg-slate-800 dark:hover:bg-obsidian cursor-pointer ${
                     !notification.isRead ? "bg-blue-50/50 dark:bg-blue-950/20" : ""
                   }`}
                   onClick={() => {

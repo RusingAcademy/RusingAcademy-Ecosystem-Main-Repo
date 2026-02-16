@@ -154,7 +154,7 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                       ? isPublished
                         ? `${slot.bgLight} ${slot.borderColor} hover:shadow-md hover:-translate-y-0.5`
                         : "bg-amber-50/80 border-amber-200 hover:shadow-md hover:-translate-y-0.5"
-                      : "bg-gray-50/50 border-dashed border-gray-200 hover:border-gray-400 hover:bg-gray-100/50"
+                      : "bg-gray-50/50 border-dashed border-gray-200 dark:border-slate-700 hover:border-gray-400 hover:bg-gray-100/50"
                     }
                   `}
                 >
@@ -172,7 +172,7 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                     </div>
                   )}
                   {!isFilled && (
-                    <Plus className="h-2.5 w-2.5 text-white/90 group-hover:text-black dark:text-white absolute bottom-0.5 right-0.5" />
+                    <Plus className="h-2.5 w-2.5 text-white/90 group-hover:text-black dark:text-white dark:text-white absolute bottom-0.5 right-0.5" />
                   )}
                 </button>
               </TooltipTrigger>
@@ -1582,7 +1582,7 @@ export default function CourseBuilder() {
       <div className="p-6 max-w-5xl mx-auto space-y-6">
         {/* Header with glassmorphism accent */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-foundation/5 via-transparent to-cta/5 border p-6">
-          <div className="absolute inset-0 bg-white dark:bg-slate-900/60 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-white dark:bg-slate-800 dark:bg-slate-900/60 backdrop-blur-sm" />
           <div className="relative flex items-center gap-4">
             <Button variant="ghost" size="icon" onClick={() => setEditingCourseId(null)} className="shrink-0">
               <ArrowLeft className="h-5 w-5" />
@@ -1887,7 +1887,7 @@ export default function CourseBuilder() {
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-foundation/5 via-transparent to-cta/5 border p-6">
-        <div className="absolute inset-0 bg-white dark:bg-slate-900/60 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-white dark:bg-slate-800 dark:bg-slate-900/60 backdrop-blur-sm" />
         <div className="relative flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
@@ -1988,9 +1988,9 @@ export default function CourseBuilder() {
                       {course.status}
                     </Badge>
                     {course.price > 0 ? (
-                      <Badge className="text-[10px] bg-white dark:bg-slate-900/90 text-emerald-700 border-0">${(course.price / 100).toFixed(0)} CAD</Badge>
+                      <Badge className="text-[10px] bg-white dark:bg-slate-800 dark:bg-slate-900/90 text-emerald-700 border-0">${(course.price / 100).toFixed(0)} CAD</Badge>
                     ) : (
-                      <Badge className="text-[10px] bg-white dark:bg-slate-900/90 text-blue-700 border-0">Free</Badge>
+                      <Badge className="text-[10px] bg-white dark:bg-slate-800 dark:bg-slate-900/90 text-blue-700 border-0">Free</Badge>
                     )}
                   </div>
                 </div>

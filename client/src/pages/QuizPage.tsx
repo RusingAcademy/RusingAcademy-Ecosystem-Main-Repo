@@ -261,7 +261,7 @@ export default function QuizPage() {
             <div className="mt-6 p-4 rounded-xl text-left" style={{
               background: "rgba(0,128,144,0.04)", border: "1px solid rgba(0,128,144,0.08)",
             }}>
-              <h4 className="text-sm font-semibold text-gray-900 mb-2">Instructions:</h4>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">Instructions:</h4>
               <ul className="text-xs text-gray-600 space-y-1">
                 <li>• This quiz covers all lessons in Module {currentModule.id}</li>
                 <li>• You need {passingScore}% ({Math.ceil(questions.length * passingScore / 100)}/{questions.length}) to pass</li>
@@ -444,7 +444,7 @@ export default function QuizPage() {
             )}
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">{questions[currentQ].q}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">{questions[currentQ].q}</h3>
 
           <div className="space-y-3">
             {questions[currentQ].opts.map((opt, idx) => {

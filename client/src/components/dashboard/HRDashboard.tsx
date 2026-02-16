@@ -74,20 +74,20 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 flex">
+    <div className="min-h-screen bg-white dark:bg-slate-800 dark:bg-slate-900 flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-700 flex flex-col">
+      <aside className="w-64 bg-white dark:bg-slate-800 dark:bg-slate-900 border-r border-gray-200 dark:border-slate-700 dark:border-slate-700 flex flex-col">
         {/* Org Header */}
-        <div className="p-4 border-b border-gray-200 dark:border-slate-700">
+        <div className="p-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center">
               <Building2 className="w-5 h-5 text-teal-600" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="font-semibold text-black dark:text-white truncate">
+              <h2 className="font-semibold text-black dark:text-white dark:text-white truncate">
                 {orgData?.name || "Organization"}
               </h2>
-              <p className="text-xs text-black dark:text-white">HR Dashboard</p>
+              <p className="text-xs text-black dark:text-white dark:text-white">HR Dashboard</p>
             </div>
           </div>
         </div>
@@ -101,13 +101,13 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 activeSection === item.id
                   ? "bg-teal-50 text-teal-700"
-                  : "text-black hover:bg-white hover:text-black"
+                  : "text-black dark:text-white hover:bg-white dark:bg-slate-800 hover:text-black"
               }`}
             >
               <item.icon className="w-5 h-5 flex-shrink-0" />
               <span className="flex-1 text-left">{item.label}</span>
               {item.count !== undefined && (
-                <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 text-black dark:text-white">
+                <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-slate-800 text-black dark:text-white dark:text-white">
                   {item.count}
                 </span>
               )}
@@ -121,14 +121,14 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
         </nav>
 
         {/* User Info */}
-        <div className="p-4 border-t border-gray-200 dark:border-slate-700">
+        <div className="p-4 border-t border-gray-200 dark:border-slate-700 dark:border-slate-700">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-sm font-medium">
               {user.name?.charAt(0) || "U"}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-black dark:text-white truncate">{user.name}</p>
-              <p className="text-xs text-black dark:text-white truncate">{user.email}</p>
+              <p className="text-sm font-medium text-black dark:text-white dark:text-white truncate">{user.name}</p>
+              <p className="text-xs text-black dark:text-white dark:text-white truncate">{user.email}</p>
             </div>
           </div>
         </div>
@@ -137,9 +137,9 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
       {/* Main Content */}
       <main className="flex-1 overflow-auto">
         {/* Top Bar */}
-        <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 px-6 py-4">
+        <header className="bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 px-6 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl font-semibold text-black dark:text-white">
+            <h1 className="text-xl font-semibold text-black dark:text-white dark:text-white">
               {menuItems.find(m => m.id === activeSection)?.label}
             </h1>
             <div className="flex items-center gap-3">
@@ -150,7 +150,7 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 pr-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="pl-9 pr-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -214,12 +214,12 @@ function GetStartedSection({ organizationId, checklist }: { organizationId: numb
         {steps.map((step, index) => (
           <div
             key={step.id}
-            className={`bg-white rounded-xl border p-5 flex items-center gap-4 ${
+            className={`bg-white dark:bg-slate-800 rounded-xl border p-5 flex items-center gap-4 ${
               step.completed ? "border-green-200 bg-green-50/50" : "border-gray-200"
             }`}
           >
             <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-              step.completed ? "bg-green-100 text-green-600" : "bg-gray-100 text-cyan-300"
+              step.completed ? "bg-green-100 text-green-600" : "bg-gray-100 dark:bg-slate-800 text-cyan-300"
             }`}>
               {step.completed ? (
                 <CheckSquare className="w-5 h-5" />
@@ -231,7 +231,7 @@ function GetStartedSection({ organizationId, checklist }: { organizationId: numb
               <h3 className={`font-semibold ${step.completed ? "text-green-700" : "text-black"}`}>
                 {step.label}
               </h3>
-              <p className="text-sm text-black dark:text-white">{step.description}</p>
+              <p className="text-sm text-black dark:text-white dark:text-white">{step.description}</p>
             </div>
             {!step.completed && (
               <button className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 transition-colors">
@@ -263,12 +263,12 @@ function DashboardSection({ stats, cohorts }: { stats: any; cohorts: any }) {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpiCards.map((kpi) => (
-          <div key={kpi.label} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
+          <div key={kpi.label} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-5">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-sm text-black dark:text-white">{kpi.label}</span>
+              <span className="text-sm text-black dark:text-white dark:text-white">{kpi.label}</span>
               <kpi.icon className={`w-5 h-5 text-${kpi.color}-500`} />
             </div>
-            <p className="text-2xl font-bold text-black dark:text-white">{kpi.value}</p>
+            <p className="text-2xl font-bold text-black dark:text-white dark:text-white">{kpi.value}</p>
           </div>
         ))}
       </div>
@@ -292,23 +292,23 @@ function DashboardSection({ stats, cohorts }: { stats: any; cohorts: any }) {
       )}
 
       {/* Quick Stats by Cohort */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700">
-        <div className="p-4 border-b border-gray-200 dark:border-slate-700">
-          <h3 className="font-semibold text-black dark:text-white">Cohort Overview</h3>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700">
+        <div className="p-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
+          <h3 className="font-semibold text-black dark:text-white dark:text-white">Cohort Overview</h3>
         </div>
         <div className="divide-y divide-gray-100">
           {cohorts?.slice(0, 5).map((cohort: any) => (
             <div key={cohort.id} className="p-4 flex items-center justify-between">
               <div>
-                <p className="font-medium text-black dark:text-white">{cohort.name}</p>
-                <p className="text-sm text-black dark:text-white">{cohort.memberCount} members</p>
+                <p className="font-medium text-black dark:text-white dark:text-white">{cohort.name}</p>
+                <p className="text-sm text-black dark:text-white dark:text-white">{cohort.memberCount} members</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <p className="text-sm font-medium text-black dark:text-white">{cohort.avgProgress}%</p>
-                  <p className="text-xs text-black dark:text-white">avg progress</p>
+                  <p className="text-sm font-medium text-black dark:text-white dark:text-white">{cohort.avgProgress}%</p>
+                  <p className="text-xs text-black dark:text-white dark:text-white">avg progress</p>
                 </div>
-                <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="w-24 h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-teal-500 rounded-full" 
                     style={{ width: `${cohort.avgProgress}%` }}
@@ -317,7 +317,7 @@ function DashboardSection({ stats, cohorts }: { stats: any; cohorts: any }) {
               </div>
             </div>
           )) || (
-            <div className="p-8 text-center text-black dark:text-white">
+            <div className="p-8 text-center text-black dark:text-white dark:text-white">
               No cohorts yet. Create your first cohort to get started.
             </div>
           )}
@@ -353,14 +353,14 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
           <select 
             value={filterCohort}
             onChange={(e) => setFilterCohort(e.target.value)}
-            className="px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm"
+            className="px-3 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm"
           >
             <option value="">All Cohorts</option>
           </select>
           <select 
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm"
+            className="px-3 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm"
           >
             <option value="">All Status</option>
             <option value="active">Active</option>
@@ -378,33 +378,33 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
       </div>
 
       {/* Learners Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+          <thead className="bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
             <tr>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Learner</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Cohort</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Level</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Progress</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Last Active</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Actions</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Learner</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Cohort</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Level</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Progress</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Last Active</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {filteredLearners.map((learner: any) => (
-              <tr key={learner.id} className="hover:bg-white dark:bg-slate-900">
+              <tr key={learner.id} className="hover:bg-white dark:bg-slate-800 dark:bg-slate-900">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 text-sm font-medium">
                       {learner.name?.charAt(0) || "?"}
                     </div>
                     <div>
-                      <p className="font-medium text-black dark:text-white">{learner.name}</p>
-                      <p className="text-sm text-black dark:text-white">{learner.email}</p>
+                      <p className="font-medium text-black dark:text-white dark:text-white">{learner.name}</p>
+                      <p className="text-sm text-black dark:text-white dark:text-white">{learner.email}</p>
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-sm text-black dark:text-white">{learner.cohortName || "-"}</td>
+                <td className="px-4 py-3 text-sm text-black dark:text-white dark:text-white">{learner.cohortName || "-"}</td>
                 <td className="px-4 py-3">
                   <span className="px-2 py-1 text-xs font-medium rounded bg-blue-100 text-blue-700">
                     {learner.currentLevel || "N/A"}
@@ -412,20 +412,20 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-20 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="w-20 h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-teal-500 rounded-full" 
                         style={{ width: `${learner.progress || 0}%` }}
                       />
                     </div>
-                    <span className="text-sm text-black dark:text-white">{learner.progress || 0}%</span>
+                    <span className="text-sm text-black dark:text-white dark:text-white">{learner.progress || 0}%</span>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-sm text-black dark:text-white">
+                <td className="px-4 py-3 text-sm text-black dark:text-white dark:text-white">
                   {learner.lastActiveAt ? new Date(learner.lastActiveAt).toLocaleDateString() : "Never"}
                 </td>
                 <td className="px-4 py-3">
-                  <button className="p-1 hover:bg-gray-100 rounded">
+                  <button className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded">
                     <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>
@@ -434,7 +434,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
           </tbody>
         </table>
         {filteredLearners.length === 0 && (
-          <div className="p-8 text-center text-black dark:text-white">
+          <div className="p-8 text-center text-black dark:text-white dark:text-white">
             No learners found. Invite your first learner to get started.
           </div>
         )}
@@ -460,7 +460,7 @@ function CohortsSection({ organizationId, cohorts }: { organizationId: number; c
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-black dark:text-white">Organize learners into teams, departments, or training groups.</p>
+        <p className="text-black dark:text-white dark:text-white">Organize learners into teams, departments, or training groups.</p>
         <button 
           onClick={() => setShowCreateModal(true)}
           className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700"
@@ -472,14 +472,14 @@ function CohortsSection({ organizationId, cohorts }: { organizationId: number; c
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cohorts?.map((cohort: any) => (
-          <div key={cohort.id} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
+          <div key={cohort.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-5">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="font-semibold text-black dark:text-white">{cohort.name}</h3>
-                <p className="text-sm text-black dark:text-white">{cohort.department || "No department"}</p>
+                <h3 className="font-semibold text-black dark:text-white dark:text-white">{cohort.name}</h3>
+                <p className="text-sm text-black dark:text-white dark:text-white">{cohort.department || "No department"}</p>
               </div>
               <span className={`px-2 py-1 text-xs font-medium rounded ${
-                cohort.status === "active" ? "bg-green-100 text-green-700" : "bg-gray-100 text-black"
+                cohort.status === "active" ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-slate-800 text-black"
               }`}>
                 {cohort.status}
               </span>
@@ -487,30 +487,30 @@ function CohortsSection({ organizationId, cohorts }: { organizationId: number; c
             
             <div className="space-y-3">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-black dark:text-white">Members</span>
+                <span className="text-black dark:text-white dark:text-white">Members</span>
                 <span className="font-medium">{cohort.memberCount}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-black dark:text-white">Avg Progress</span>
+                <span className="text-black dark:text-white dark:text-white">Avg Progress</span>
                 <span className="font-medium">{cohort.avgProgress}%</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-black dark:text-white">Target</span>
+                <span className="text-black dark:text-white dark:text-white">Target</span>
                 <span className="font-medium">{cohort.targetLevel || "Not set"}</span>
               </div>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-gray-100 flex gap-2">
+            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700 flex gap-2">
               <button className="flex-1 px-3 py-2 text-sm text-teal-600 hover:bg-teal-50 rounded-lg">
                 View Members
               </button>
-              <button className="flex-1 px-3 py-2 text-sm text-black dark:text-white hover:bg-white dark:bg-slate-900 rounded-lg">
+              <button className="flex-1 px-3 py-2 text-sm text-black dark:text-white dark:text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg">
                 Edit
               </button>
             </div>
           </div>
         )) || (
-          <div className="col-span-full p-8 text-center text-black dark:text-white bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700">
+          <div className="col-span-full p-8 text-center text-black dark:text-white dark:text-white bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700">
             No cohorts yet. Create your first cohort to organize learners.
           </div>
         )}
@@ -535,7 +535,7 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-black dark:text-white">Assign courses and learning paths to cohorts or individuals.</p>
+        <p className="text-black dark:text-white dark:text-white">Assign courses and learning paths to cohorts or individuals.</p>
         <button 
           onClick={() => setShowAssignModal(true)}
           className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700"
@@ -545,58 +545,58 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
         </button>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+          <thead className="bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
             <tr>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Course/Path</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Assigned To</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Type</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Due Date</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Status</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Actions</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Course/Path</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Assigned To</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Type</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Due Date</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Status</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {assignments?.map((assignment: any) => (
-              <tr key={assignment.id} className="hover:bg-white dark:bg-slate-900">
+              <tr key={assignment.id} className="hover:bg-white dark:bg-slate-800 dark:bg-slate-900">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-foundation-soft flex items-center justify-center">
                       <GraduationCap className="w-5 h-5 text-foundation" />
                     </div>
                     <div>
-                      <p className="font-medium text-black dark:text-white">{assignment.courseName}</p>
-                      <p className="text-sm text-black dark:text-white">{assignment.targetLevel || "No target"}</p>
+                      <p className="font-medium text-black dark:text-white dark:text-white">{assignment.courseName}</p>
+                      <p className="text-sm text-black dark:text-white dark:text-white">{assignment.targetLevel || "No target"}</p>
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-sm text-black dark:text-white">
+                <td className="px-4 py-3 text-sm text-black dark:text-white dark:text-white">
                   {assignment.cohortName || assignment.userName || "-"}
                 </td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 text-xs font-medium rounded ${
                     assignment.assignmentType === "required" 
                       ? "bg-red-100 text-red-700" 
-                      : "bg-gray-100 text-black"
+                      : "bg-gray-100 dark:bg-slate-800 text-black"
                   }`}>
                     {assignment.assignmentType}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-black dark:text-white">
+                <td className="px-4 py-3 text-sm text-black dark:text-white dark:text-white">
                   {assignment.dueDate ? new Date(assignment.dueDate).toLocaleDateString() : "No deadline"}
                 </td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 text-xs font-medium rounded ${
                     assignment.status === "completed" ? "bg-green-100 text-green-700" :
                     assignment.status === "active" ? "bg-blue-100 text-blue-700" :
-                    "bg-gray-100 text-black"
+                    "bg-gray-100 dark:bg-slate-800 text-black"
                   }`}>
                     {assignment.status}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <button className="p-1 hover:bg-gray-100 rounded">
+                  <button className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded">
                     <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>
@@ -605,7 +605,7 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
           </tbody>
         </table>
         {(!assignments || assignments.length === 0) && (
-          <div className="p-8 text-center text-black dark:text-white">
+          <div className="p-8 text-center text-black dark:text-white dark:text-white">
             No assignments yet. Create your first assignment to get started.
           </div>
         )}
@@ -646,13 +646,13 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-black dark:text-white">Progress & Reports</h2>
-          <p className="text-black dark:text-white">Track learner progress and export data for compliance.</p>
+          <h2 className="text-lg font-semibold text-black dark:text-white dark:text-white">Progress & Reports</h2>
+          <p className="text-black dark:text-white dark:text-white">Track learner progress and export data for compliance.</p>
         </div>
         <div className="flex gap-2">
           <button 
             onClick={() => handleExport("csv")}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-white dark:bg-slate-900"
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-white dark:bg-slate-800 dark:bg-slate-900"
           >
             <Download className="w-4 h-4" />
             Export CSV
@@ -668,18 +668,18 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-4">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-4">
         <div className="flex flex-wrap gap-4">
-          <select className="px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm">
+          <select className="px-3 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm">
             <option value="">All Cohorts</option>
           </select>
-          <select className="px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm">
+          <select className="px-3 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm">
             <option value="">All Levels</option>
             <option value="BBB">BBB</option>
             <option value="CBC">CBC</option>
             <option value="CCC">CCC</option>
           </select>
-          <select className="px-3 py-2 border border-gray-200 dark:border-slate-700 rounded-lg text-sm">
+          <select className="px-3 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm">
             <option value="30">Last 30 days</option>
             <option value="60">Last 60 days</option>
             <option value="90">Last 90 days</option>
@@ -689,18 +689,18 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
       </div>
 
       {/* Progress by Cohort */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700">
-        <div className="p-4 border-b border-gray-200 dark:border-slate-700">
-          <h3 className="font-semibold text-black dark:text-white">Progress by Cohort</h3>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700">
+        <div className="p-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
+          <h3 className="font-semibold text-black dark:text-white dark:text-white">Progress by Cohort</h3>
         </div>
         <div className="p-4">
           {reportData?.cohortProgress?.map((cohort: any) => (
             <div key={cohort.id} className="mb-4 last:mb-0">
               <div className="flex items-center justify-between mb-2">
-                <span className="font-medium text-black dark:text-white">{cohort.name}</span>
-                <span className="text-sm text-black dark:text-white">{cohort.completionRate}% complete</span>
+                <span className="font-medium text-black dark:text-white dark:text-white">{cohort.name}</span>
+                <span className="text-sm text-black dark:text-white dark:text-white">{cohort.completionRate}% complete</span>
               </div>
-              <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-teal-500 rounded-full transition-all" 
                   style={{ width: `${cohort.completionRate}%` }}
@@ -708,30 +708,30 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
               </div>
             </div>
           )) || (
-            <p className="text-black dark:text-white text-center py-4">No data available</p>
+            <p className="text-black dark:text-white dark:text-white text-center py-4">No data available</p>
           )}
         </div>
       </div>
 
       {/* Completion Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
-        <div className="p-4 border-b border-gray-200 dark:border-slate-700">
-          <h3 className="font-semibold text-black dark:text-white">Completion Details</h3>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+        <div className="p-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
+          <h3 className="font-semibold text-black dark:text-white dark:text-white">Completion Details</h3>
         </div>
         <table className="w-full">
-          <thead className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+          <thead className="bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
             <tr>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Learner</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Course</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Progress</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Completed At</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Learner</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Course</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Progress</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Completed At</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {reportData?.completions?.map((completion: any, i: number) => (
-              <tr key={i} className="hover:bg-white dark:bg-slate-900">
-                <td className="px-4 py-3 font-medium text-black dark:text-white">{completion.learnerName}</td>
-                <td className="px-4 py-3 text-black dark:text-white">{completion.courseName}</td>
+              <tr key={i} className="hover:bg-white dark:bg-slate-800 dark:bg-slate-900">
+                <td className="px-4 py-3 font-medium text-black dark:text-white dark:text-white">{completion.learnerName}</td>
+                <td className="px-4 py-3 text-black dark:text-white dark:text-white">{completion.courseName}</td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 text-xs font-medium rounded ${
                     completion.progress === 100 ? "bg-green-100 text-green-700" : "bg-blue-100 text-blue-700"
@@ -739,7 +739,7 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
                     {completion.progress}%
                   </span>
                 </td>
-                <td className="px-4 py-3 text-black dark:text-white">
+                <td className="px-4 py-3 text-black dark:text-white dark:text-white">
                   {completion.completedAt ? new Date(completion.completedAt).toLocaleDateString() : "-"}
                 </td>
               </tr>
@@ -760,26 +760,26 @@ function AssessmentsSection({ organizationId }: { organizationId: number }) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-black dark:text-white">Assessments</h2>
-        <p className="text-black dark:text-white">View quiz and evaluation scores by cohort.</p>
+        <h2 className="text-lg font-semibold text-black dark:text-white dark:text-white">Assessments</h2>
+        <p className="text-black dark:text-white dark:text-white">View quiz and evaluation scores by cohort.</p>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+          <thead className="bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
             <tr>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Assessment</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Cohort</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Avg Score</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Pass Rate</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white uppercase">Attempts</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Assessment</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Cohort</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Avg Score</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Pass Rate</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-white dark:text-white uppercase">Attempts</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {assessments?.map((assessment: any) => (
-              <tr key={assessment.id} className="hover:bg-white dark:bg-slate-900">
-                <td className="px-4 py-3 font-medium text-black dark:text-white">{assessment.name}</td>
-                <td className="px-4 py-3 text-black dark:text-white">{assessment.cohortName}</td>
+              <tr key={assessment.id} className="hover:bg-white dark:bg-slate-800 dark:bg-slate-900">
+                <td className="px-4 py-3 font-medium text-black dark:text-white dark:text-white">{assessment.name}</td>
+                <td className="px-4 py-3 text-black dark:text-white dark:text-white">{assessment.cohortName}</td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 text-xs font-medium rounded ${
                     assessment.avgScore >= 70 ? "bg-green-100 text-green-700" : "bg-orange-100 text-orange-700"
@@ -787,14 +787,14 @@ function AssessmentsSection({ organizationId }: { organizationId: number }) {
                     {assessment.avgScore}%
                   </span>
                 </td>
-                <td className="px-4 py-3 text-black dark:text-white">{assessment.passRate}%</td>
-                <td className="px-4 py-3 text-black dark:text-white">{assessment.attempts}</td>
+                <td className="px-4 py-3 text-black dark:text-white dark:text-white">{assessment.passRate}%</td>
+                <td className="px-4 py-3 text-black dark:text-white dark:text-white">{assessment.attempts}</td>
               </tr>
             ))}
           </tbody>
         </table>
         {(!assessments || assessments.length === 0) && (
-          <div className="p-8 text-center text-black dark:text-white">
+          <div className="p-8 text-center text-black dark:text-white dark:text-white">
             No assessment data available yet.
           </div>
         )}
@@ -812,16 +812,16 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-black dark:text-white">Analytics</h2>
-        <p className="text-black dark:text-white">Trends and insights for your organization.</p>
+        <h2 className="text-lg font-semibold text-black dark:text-white dark:text-white">Analytics</h2>
+        <p className="text-black dark:text-white dark:text-white">Trends and insights for your organization.</p>
       </div>
 
       {/* Trend Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
-          <h3 className="text-sm text-black dark:text-white mb-2">Active Learners (This Week)</h3>
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-5">
+          <h3 className="text-sm text-black dark:text-white dark:text-white mb-2">Active Learners (This Week)</h3>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-black dark:text-white">{analytics?.activeThisWeek || 0}</span>
+            <span className="text-3xl font-bold text-black dark:text-white dark:text-white">{analytics?.activeThisWeek || 0}</span>
             {analytics?.activeChange && (
               <span className={`text-sm ${analytics.activeChange >= 0 ? "text-green-600" : "text-red-600"}`}>
                 {analytics.activeChange >= 0 ? "+" : ""}{analytics.activeChange}%
@@ -829,25 +829,25 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
             )}
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
-          <h3 className="text-sm text-black dark:text-white mb-2">Completions (This Month)</h3>
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-5">
+          <h3 className="text-sm text-black dark:text-white dark:text-white mb-2">Completions (This Month)</h3>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-black dark:text-white">{analytics?.completionsThisMonth || 0}</span>
+            <span className="text-3xl font-bold text-black dark:text-white dark:text-white">{analytics?.completionsThisMonth || 0}</span>
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
-          <h3 className="text-sm text-black dark:text-white mb-2">Avg. Time to Complete</h3>
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-5">
+          <h3 className="text-sm text-black dark:text-white dark:text-white mb-2">Avg. Time to Complete</h3>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-black dark:text-white">{analytics?.avgTimeToComplete || "-"}</span>
-            <span className="text-sm text-black dark:text-white">days</span>
+            <span className="text-3xl font-bold text-black dark:text-white dark:text-white">{analytics?.avgTimeToComplete || "-"}</span>
+            <span className="text-sm text-black dark:text-white dark:text-white">days</span>
           </div>
         </div>
       </div>
 
       {/* Top Modules */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700">
-        <div className="p-4 border-b border-gray-200 dark:border-slate-700">
-          <h3 className="font-semibold text-black dark:text-white">Top Modules</h3>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700">
+        <div className="p-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
+          <h3 className="font-semibold text-black dark:text-white dark:text-white">Top Modules</h3>
         </div>
         <div className="divide-y divide-gray-100">
           {analytics?.topModules?.map((module: any, i: number) => (
@@ -856,12 +856,12 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
                 <span className="w-6 h-6 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-sm font-medium">
                   {i + 1}
                 </span>
-                <span className="font-medium text-black dark:text-white">{module.name}</span>
+                <span className="font-medium text-black dark:text-white dark:text-white">{module.name}</span>
               </div>
-              <span className="text-black dark:text-white">{module.completions} completions</span>
+              <span className="text-black dark:text-white dark:text-white">{module.completions} completions</span>
             </div>
           )) || (
-            <div className="p-8 text-center text-black dark:text-white">No data available</div>
+            <div className="p-8 text-center text-black dark:text-white dark:text-white">No data available</div>
           )}
         </div>
       </div>
@@ -893,25 +893,25 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
   return (
     <div className="max-w-2xl space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-black dark:text-white">Organization Settings</h2>
-        <p className="text-black dark:text-white">Manage your organization's basic settings.</p>
+        <h2 className="text-lg font-semibold text-black dark:text-white dark:text-white">Organization Settings</h2>
+        <p className="text-black dark:text-white dark:text-white">Manage your organization's basic settings.</p>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-6 space-y-6">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-6 space-y-6">
         <div>
-          <label className="block text-sm font-medium text-black dark:text-white mb-2">
+          <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
             Organization Name
           </label>
           <input
             type="text"
             value={orgName}
             onChange={(e) => setOrgName(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-black dark:text-white mb-2">
+          <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
             Allowed Email Domain (optional)
           </label>
           <input
@@ -919,9 +919,9 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
             value={emailDomain}
             onChange={(e) => setEmailDomain(e.target.value)}
             placeholder="e.g., company.com"
-            className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
-          <p className="mt-1 text-sm text-black dark:text-white">
+          <p className="mt-1 text-sm text-black dark:text-white dark:text-white">
             Only users with this email domain can be invited.
           </p>
         </div>
@@ -935,9 +935,9 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
         </button>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
-        <h3 className="font-semibold text-black dark:text-white mb-2">Need Help?</h3>
-        <p className="text-black dark:text-white text-sm">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-6">
+        <h3 className="font-semibold text-black dark:text-white dark:text-white mb-2">Need Help?</h3>
+        <p className="text-black dark:text-white dark:text-white text-sm">
           For technical settings, billing, or platform configuration, please contact your platform administrator.
         </p>
       </div>
@@ -964,30 +964,30 @@ function InviteLearnerModal({ organizationId, onClose }: { organizationId: numbe
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-slate-900 rounded-xl w-full max-w-md p-6">
-        <h2 className="text-lg font-semibold text-black dark:text-white mb-4">Invite Learner</h2>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl w-full max-w-md p-6">
+        <h2 className="text-lg font-semibold text-black dark:text-white dark:text-white mb-4">Invite Learner</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Name</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Email</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             />
           </div>
         </div>
         <div className="flex gap-3 mt-6">
-          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg">
+          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg">
             Cancel
           </button>
           <button 
@@ -1020,33 +1020,33 @@ function CreateCohortModal({ organizationId, onClose }: { organizationId: number
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-slate-900 rounded-xl w-full max-w-md p-6">
-        <h2 className="text-lg font-semibold text-black dark:text-white mb-4">Create Cohort</h2>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl w-full max-w-md p-6">
+        <h2 className="text-lg font-semibold text-black dark:text-white dark:text-white mb-4">Create Cohort</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Cohort Name</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Cohort Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Department (optional)</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Department (optional)</label>
             <input
               type="text"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Target Level</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Target Level</label>
             <select
               value={targetLevel}
               onChange={(e) => setTargetLevel(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             >
               <option value="">Select target</option>
               <option value="BBB">BBB</option>
@@ -1056,7 +1056,7 @@ function CreateCohortModal({ organizationId, onClose }: { organizationId: number
           </div>
         </div>
         <div className="flex gap-3 mt-6">
-          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg">
+          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg">
             Cancel
           </button>
           <button 
@@ -1098,15 +1098,15 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-slate-900 rounded-xl w-full max-w-md p-6">
-        <h2 className="text-lg font-semibold text-black dark:text-white mb-4">Create Assignment</h2>
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl w-full max-w-md p-6">
+        <h2 className="text-lg font-semibold text-black dark:text-white dark:text-white mb-4">Create Assignment</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Assign To (Cohort)</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Assign To (Cohort)</label>
             <select
               value={cohortId}
               onChange={(e) => setCohortId(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             >
               <option value="">Select cohort</option>
               {cohorts?.map((c: any) => (
@@ -1115,11 +1115,11 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Course</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Course</label>
             <select
               value={courseId}
               onChange={(e) => setCourseId(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             >
               <option value="">Select course</option>
               {courses?.map((c: any) => (
@@ -1128,11 +1128,11 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Type</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Type</label>
             <select
               value={assignmentType}
               onChange={(e) => setAssignmentType(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             >
               <option value="required">Required</option>
               <option value="optional">Optional</option>
@@ -1140,17 +1140,17 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-black dark:text-white mb-1">Due Date (optional)</label>
+            <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-1">Due Date (optional)</label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg"
             />
           </div>
         </div>
         <div className="flex gap-3 mt-6">
-          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-700 rounded-lg">
+          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg">
             Cancel
           </button>
           <button 

@@ -63,7 +63,7 @@ export default function VideoSession() {
             <h2 className="text-xl font-semibold mb-2">
               {isEn ? "Authentication Required" : "Authentification requise"}
             </h2>
-            <p className="text-black dark:text-white mb-4">
+            <p className="text-black dark:text-white dark:text-white mb-4">
               {isEn 
                 ? "Please sign in to access your session"
                 : "Veuillez vous connecter pour accéder à votre session"}
@@ -82,7 +82,7 @@ export default function VideoSession() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-black dark:text-white">
+          <p className="text-black dark:text-white dark:text-white">
             {isEn ? "Loading session..." : "Chargement de la session..."}
           </p>
         </div>
@@ -99,7 +99,7 @@ export default function VideoSession() {
             <h2 className="text-xl font-semibold mb-2">
               {isEn ? "Session Not Found" : "Session non trouvée"}
             </h2>
-            <p className="text-black dark:text-white mb-4">
+            <p className="text-black dark:text-white dark:text-white mb-4">
               {isEn 
                 ? "This session doesn't exist or you don't have access to it"
                 : "Cette session n'existe pas ou vous n'y avez pas accès"}
@@ -133,7 +133,7 @@ export default function VideoSession() {
             <CardContent className="p-6">
               {!isCoach && (
                 <>
-                  <p className="text-center text-black dark:text-white mb-6">
+                  <p className="text-center text-black dark:text-white dark:text-white mb-6">
                     {isEn 
                       ? "How was your session? Your feedback helps coaches improve."
                       : "Comment s'est passée votre session? Vos commentaires aident les coachs à s'améliorer."}
@@ -196,7 +196,7 @@ export default function VideoSession() {
 
               {isCoach && (
                 <div className="text-center">
-                  <p className="text-black dark:text-white mb-6">
+                  <p className="text-black dark:text-white dark:text-white mb-6">
                     {isEn 
                       ? "Great session! Your earnings will be updated shortly."
                       : "Super session! Vos gains seront mis à jour sous peu."}

@@ -140,7 +140,7 @@ export default function StudyPlanner() {
     <div className="flex h-screen bg-gray-50">
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
       <main className="flex-1 lg:ml-[240px] overflow-y-auto">
-        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-30">
+        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 sticky top-0 z-30">
           <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100">
             <span className="material-icons text-gray-600">menu</span>
           </button>
@@ -151,7 +151,7 @@ export default function StudyPlanner() {
           {/* Header */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
                 <span className="material-icons text-teal-700">event_note</span>
                 Study Planner
               </h1>
@@ -166,7 +166,7 @@ export default function StudyPlanner() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Calendar */}
             <div className="lg:col-span-2">
-              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 overflow-hidden">
+              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 overflow-hidden">
                 {/* Calendar header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                   <button onClick={prevMonth} className="p-1.5 rounded-lg hover:bg-gray-100">
@@ -236,7 +236,7 @@ export default function StudyPlanner() {
             <div className="space-y-4">
               {/* Selected date sessions */}
               {selectedDate && (
-                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 p-5">
+                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-sm font-bold text-gray-900">
                       {new Date(selectedDate + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
@@ -252,7 +252,7 @@ export default function StudyPlanner() {
                       {selectedDateSessions.map(session => {
                         const st = getSessionType(session.sessionType);
                         return (
-                          <div key={session.id} className={`p-3 rounded-xl border border-gray-100 ${session.isCompleted ? "opacity-60" : ""} group hover:shadow-sm transition-all`}>
+                          <div key={session.id} className={`p-3 rounded-xl border border-gray-100 dark:border-slate-700 ${session.isCompleted ? "opacity-60" : ""} group hover:shadow-sm transition-all`}>
                             <div className="flex items-start gap-3">
                               <button
                                 onClick={() => toggleComplete.mutate({ sessionId: session.id, isCompleted: !session.isCompleted })}
@@ -289,8 +289,8 @@ export default function StudyPlanner() {
               )}
 
               {/* Upcoming sessions */}
-              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 p-5">
-                <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
+                <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                   <span className="material-icons text-teal-700 text-base">upcoming</span>
                   Upcoming (7 days)
                 </h3>
@@ -302,12 +302,12 @@ export default function StudyPlanner() {
                       const st = getSessionType(session.sessionType);
                       const dateLabel = new Date(session.scheduledDate + "T12:00:00").toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
                       return (
-                        <div key={session.id} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-gray-50 transition-all">
+                        <div key={session.id} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-all">
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: st.color + "15" }}>
                             <span className="material-icons text-sm" style={{ color: st.color }}>{st.icon}</span>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-xs font-medium text-gray-900 truncate">{session.title}</p>
+                            <p className="text-xs font-medium text-gray-900 dark:text-gray-100 truncate">{session.title}</p>
                             <p className="text-[10px] text-gray-400">{dateLabel} {session.scheduledTime ? `at ${session.scheduledTime}` : ""}</p>
                           </div>
                           <span className="text-[10px] text-gray-400">{session.durationMinutes}m</span>
@@ -319,8 +319,8 @@ export default function StudyPlanner() {
               </div>
 
               {/* Quick stats */}
-              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 p-5">
-                <h3 className="text-sm font-bold text-gray-900 mb-3">This Month</h3>
+              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
+                <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3">This Month</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="text-center p-3 rounded-xl bg-gray-50">
                     <div className="text-xl font-bold text-gray-900">{sessions.filter(s => s.scheduledDate.startsWith(`${calYear}-${String(calMonth + 1).padStart(2, "0")}`)).length}</div>
@@ -338,14 +338,14 @@ export default function StudyPlanner() {
           {/* Session Form Modal */}
           {showForm && (
             <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4" onClick={resetForm}>
-              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full p-6" onClick={e => e.stopPropagation()}>
-                <h2 className="text-lg font-bold text-gray-900 mb-4">{editingId ? "Edit Session" : "New Study Session"}</h2>
+              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full p-6" onClick={e => e.stopPropagation()}>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">{editingId ? "Edit Session" : "New Study Session"}</h2>
 
                 <input type="text" placeholder="Session title..." value={formTitle} onChange={e => setFormTitle(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700" />
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 text-gray-900 dark:text-gray-100 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700" />
 
                 <textarea placeholder="Description (optional)..." value={formDesc} onChange={e => setFormDesc(e.target.value)} rows={2}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 resize-none" />
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 text-gray-900 dark:text-gray-100 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 resize-none" />
 
                 {/* Type selector */}
                 <div className="mb-3">
@@ -353,7 +353,7 @@ export default function StudyPlanner() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                     {SESSION_TYPES.map(st => (
                       <button key={st.id} onClick={() => setFormType(st.id)}
-                        className={`p-2 rounded-xl border text-center transition-all ${formType === st.id ? "border-teal-700 bg-teal-700/5" : "border-gray-200 hover:border-gray-300"}`}>
+                        className={`p-2 rounded-xl border text-center transition-all ${formType === st.id ? "border-teal-700 bg-teal-700/5" : "border-gray-200 dark:border-slate-700 hover:border-gray-300"}`}>
                         <span className="material-icons text-base block mb-0.5" style={{ color: st.color }}>{st.icon}</span>
                         <span className="text-[10px] text-gray-600 font-medium">{st.label}</span>
                       </button>
@@ -366,12 +366,12 @@ export default function StudyPlanner() {
                   <div>
                     <label className="text-xs font-medium text-gray-500 mb-1 block">Date</label>
                     <input type="date" value={formDate} onChange={e => setFormDate(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20" />
+                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20" />
                   </div>
                   <div>
                     <label className="text-xs font-medium text-gray-500 mb-1 block">Time (optional)</label>
                     <input type="time" value={formTime} onChange={e => setFormTime(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20" />
+                      className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/20" />
                   </div>
                 </div>
 

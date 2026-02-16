@@ -275,7 +275,7 @@ export default function Reports() {
         </p>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 dark:border-slate-700 mb-6">
+        <div className="flex border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 mb-6">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -313,7 +313,7 @@ export default function Reports() {
 
             {/* XP Over Time */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">show_chart</span>
                 XP Earned Over Time
               </h3>
@@ -322,7 +322,7 @@ export default function Reports() {
 
             {/* Quiz Scores */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-indigo-500 text-lg">quiz</span>
                 Recent Quiz Scores
               </h3>
@@ -340,7 +340,7 @@ export default function Reports() {
         {activeTab === "progress" && (
           <div className="space-y-6">
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">route</span>
                 Path Completion Progress
               </h3>
@@ -353,7 +353,7 @@ export default function Reports() {
                         <span className="text-sm font-medium text-gray-700">{path.name}</span>
                         <span className="text-xs text-gray-500">{path.completed}/{path.total} lessons ({pct}%)</span>
                       </div>
-                      <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="w-full h-3 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-500"
                           style={{
@@ -370,7 +370,7 @@ export default function Reports() {
 
             {/* Lessons per Path Bar Chart */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-amber-500 text-lg">bar_chart</span>
                 Lessons Completed per Path
               </h3>
@@ -383,7 +383,7 @@ export default function Reports() {
 
             {/* Milestones */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                 <span className="material-icons text-emerald-500 text-lg">emoji_events</span>
                 Milestones
               </h3>
@@ -401,7 +401,7 @@ export default function Reports() {
                   <div
                     key={m.name}
                     className={`rounded-xl p-3 text-center transition-all ${
-                      m.done ? "bg-[rgba(0,128,144,0.08)] border border-[rgba(0,128,144,0.2)]" : "bg-gray-50 border border-gray-100 opacity-50"
+                      m.done ? "bg-[rgba(0,128,144,0.08)] border border-[rgba(0,128,144,0.2)]" : "bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-700 opacity-50"
                     }`}
                   >
                     <span className={`material-icons text-2xl mb-1 ${m.done ? "text-teal-700" : "text-gray-300"}`}>
@@ -421,7 +421,7 @@ export default function Reports() {
           <div className="space-y-6">
             {/* Overall Score */}
             <div className="glass-card rounded-xl p-6 text-center">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4">SLE Readiness Score</h3>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4">SLE Readiness Score</h3>
               <div className="relative w-32 h-32 mx-auto mb-4">
                 <svg viewBox="0 0 100 100" className="w-full h-full">
                   <circle cx="50" cy="50" r="42" fill="none" stroke="var(--color-gray-100, #f3f4f6)" strokeWidth="8" />
@@ -450,7 +450,7 @@ export default function Reports() {
 
             {/* Radar Chart */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">radar</span>
                 Skills Breakdown
               </h3>
@@ -470,7 +470,7 @@ export default function Reports() {
                         Level {level} — {skill.value}%
                       </span>
                     </div>
-                    <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="w-full h-2.5 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                       <div className="h-full rounded-full" style={{ width: `${skill.value}%`, backgroundColor: levelColor }} />
                     </div>
                     <p className="text-[10px] text-gray-500 mt-2">
@@ -492,7 +492,7 @@ export default function Reports() {
           <div className="space-y-6">
             {/* Activity Heatmap */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">calendar_today</span>
                 Activity Heatmap (Last 12 Weeks)
               </h3>
@@ -508,7 +508,7 @@ export default function Reports() {
 
             {/* Weekly Summary */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                 <span className="material-icons text-amber-500 text-lg">insights</span>
                 Weekly Activity Summary
               </h3>
@@ -518,7 +518,7 @@ export default function Reports() {
                   return (
                     <div key={day} className="text-center">
                       <p className="text-[10px] text-gray-500 mb-1">{day}</p>
-                      <div className="w-full h-16 bg-gray-50 rounded-lg flex items-end justify-center pb-1">
+                      <div className="w-full h-16 bg-gray-50 dark:bg-slate-900 rounded-lg flex items-end justify-center pb-1">
                         <div
                           className="w-4 rounded-t-md transition-all"
                           style={{
@@ -527,7 +527,7 @@ export default function Reports() {
                           }}
                         />
                       </div>
-                      <p className="text-[10px] font-medium text-gray-700 mt-1">{val}</p>
+                      <p className="text-[10px] font-medium text-gray-700 dark:text-gray-300 mt-1">{val}</p>
                     </div>
                   );
                 })}
@@ -536,7 +536,7 @@ export default function Reports() {
 
             {/* Recent Activity Log */}
             <div className="glass-card rounded-xl p-5">
-              <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                 <span className="material-icons text-indigo-500 text-lg">history</span>
                 Recent Activity
               </h3>
