@@ -1,6 +1,6 @@
 /**
  * CoachSidebar — RusingAcademy Coach Portal
- * Design: White sidebar with violet (#7c3aed) accents, matching Learner Portal pattern
+ * Design: White sidebar with violet (var(--color-violet-600, #7c3aed)) accents, matching Learner Portal pattern
  */
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -135,7 +135,7 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
         {/* User Profile Section */}
         <div className="p-4 border-t border-gray-100">
           <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all cursor-pointer group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[#9333ea] flex items-center justify-center text-white font-bold text-sm shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, #9333ea)] flex items-center justify-center text-white font-bold text-sm shadow-sm">
               {user?.name?.charAt(0) || "C"}
             </div>
             <div className="flex-1 min-w-0">

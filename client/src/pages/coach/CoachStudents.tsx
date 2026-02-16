@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { useState } from "react";
 
-const ACCENT = "#7c3aed";
+const ACCENT = "var(--color-violet-600, #7c3aed)";
 
 function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
@@ -64,7 +64,7 @@ export default function CoachStudents() {
               <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                 placeholder={lang === "fr" ? "Rechercher..." : "Search..."}
                 aria-label={lang === "fr" ? "Rechercher un étudiant" : "Search students"}
-                className="pl-9 pr-4 py-2 text-sm border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-violet-600 outline-none w-48" />
+                className="pl-9 pr-4 py-2 text-sm border border-gray-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-[var(--color-violet-600, #7c3aed)]/20 focus:border-violet-600 outline-none w-48" />
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function CoachStudents() {
                 <div key={student.id || student.learnerId} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow group">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[#9333ea] flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, #9333ea)] flex items-center justify-center text-white font-bold text-sm">
                         {name.charAt(0)}
                       </div>
                       <div>

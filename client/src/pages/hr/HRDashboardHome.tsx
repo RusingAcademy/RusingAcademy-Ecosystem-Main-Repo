@@ -10,7 +10,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useState } from "react";
 
-const ACCENT = "#2563eb";
+const ACCENT = "var(--color-blue-600, #2563eb)";
 
 function KPICard({ icon, label, value, sub, trend }: { icon: string; label: string; value: string; sub: string; trend?: string }) {
   return (
@@ -188,19 +188,19 @@ export default function HRDashboardHome() {
               label={lang === "fr" ? "Objectif atteint" : "Target Achieved"}
               current={compliance.achieved}
               target={compliance.total || 1}
-              color="#059669"
+              color="var(--semantic-success, #059669)"
             />
             <ComplianceBar
               label={lang === "fr" ? "En cours de formation" : "In Progress"}
               current={compliance.inProgress}
               target={compliance.total || 1}
-              color="#2563eb"
+              color="var(--color-blue-600, #2563eb)"
             />
             <ComplianceBar
               label={lang === "fr" ? "En attente d'évaluation" : "Pending Assessment"}
               current={compliance.pending}
               target={compliance.total || 1}
-              color="#d97706"
+              color="var(--semantic-warning, #d97706)"
             />
             <ComplianceBar
               label={lang === "fr" ? "Expiré / Non atteint" : "Expired / Not Achieved"}
@@ -229,7 +229,7 @@ export default function HRDashboardHome() {
             </h2>
             <div className="relative w-32 h-32 mx-auto mb-4">
               <svg viewBox="0 0 120 120" className="transform -rotate-90">
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#f3f4f6" strokeWidth="12" />
+                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--admin-table-header-bg, #f3f4f6)" strokeWidth="12" />
                 <circle cx="60" cy="60" r="50" fill="none" stroke={ACCENT} strokeWidth="12"
                   strokeDasharray={2 * Math.PI * 50}
                   strokeDashoffset={2 * Math.PI * 50 * (1 - (budgetTotal > 0 ? budgetPaid / budgetTotal : 0))}
