@@ -337,10 +337,10 @@ export default function LeadScoringDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{l.coldLeads}</p>
-                  <p className="text-3xl font-bold text-black">{stats.coldLeads}</p>
+                  <p className="text-3xl font-bold text-black dark:text-white">{stats.coldLeads}</p>
                 </div>
                 <div className="h-12 w-12 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center">
-                  <Clock className="h-6 w-6 text-black" />
+                  <Clock className="h-6 w-6 text-black dark:text-white" />
                 </div>
               </div>
             </CardContent>

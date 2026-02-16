@@ -99,7 +99,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
     <div className="bg-[#1A1A2E] rounded-2xl p-6 border border-white/10">
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-white mb-2">Exercice Oral</h3>
-        <div className="bg-white/5 rounded-xl p-4">
+        <div className="bg-white dark:bg-slate-900/5 rounded-xl p-4">
           <p className="text-white/80">{promptText}</p>
           {promptAudio && <button className="mt-3 flex items-center gap-2 text-foundation text-sm">🔊 Écouter l'exemple</button>}
         </div>
@@ -131,7 +131,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
                 </div>
               </motion.div>
               <p className="mt-4 text-red-400 font-mono text-xl">{formatTime(recordingTime)}</p>
-              <button onClick={stopRecording} className="mt-4 px-6 py-2 bg-white/10 rounded-lg text-white">Terminer</button>
+              <button onClick={stopRecording} className="mt-4 px-6 py-2 bg-white dark:bg-slate-900/10 rounded-lg text-white">Terminer</button>
             </motion.div>
           )}
           {state === 'processing' && (
@@ -151,28 +151,28 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
                 <p className="text-white/60">{feedback.overallScore >= 70 ? 'Excellent travail!' : 'Continuez vos efforts!'}</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-white/5 rounded-xl p-4 text-center">
+                <div className="bg-white dark:bg-slate-900/5 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-blue-400">{feedback.pronunciation.score}%</p>
                   <p className="text-xs text-white/75">Prononciation</p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-4 text-center">
+                <div className="bg-white dark:bg-slate-900/5 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-green-400">{feedback.fluency.score}%</p>
                   <p className="text-xs text-white/75">Fluidité</p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-4 text-center">
+                <div className="bg-white dark:bg-slate-900/5 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-foundation">{feedback.grammar.score}%</p>
                   <p className="text-xs text-white/75">Grammaire</p>
                 </div>
               </div>
               {feedback.suggestions.length > 0 && (
-                <div className="bg-white/5 rounded-xl p-4 mb-4">
+                <div className="bg-white dark:bg-slate-900/5 rounded-xl p-4 mb-4">
                   <h4 className="text-sm font-medium text-white mb-2">Suggestions</h4>
                   <ul className="space-y-1">{feedback.suggestions.map((s, i) => <li key={i} className="text-sm text-white/60">• {s}</li>)}</ul>
                 </div>
               )}
               <div className="flex gap-3">
                 {attempts < VOICE_CONFIG.retryLimit && feedback.overallScore < VOICE_CONFIG.passingScore && (
-                  <button onClick={retry} className="flex-1 py-3 bg-white/10 rounded-xl text-white">Réessayer</button>
+                  <button onClick={retry} className="flex-1 py-3 bg-white dark:bg-slate-900/10 rounded-xl text-white">Réessayer</button>
                 )}
                 <button onClick={() => onComplete(feedback.overallScore >= VOICE_CONFIG.passingScore, feedback.overallScore)}
                   className="flex-1 py-3 bg-foundation-soft rounded-xl text-white">Continuer</button>

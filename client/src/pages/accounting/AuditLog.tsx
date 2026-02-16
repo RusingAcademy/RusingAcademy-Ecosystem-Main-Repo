@@ -27,10 +27,10 @@ export default function AuditLog() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Timestamp</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">User</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Action</th>

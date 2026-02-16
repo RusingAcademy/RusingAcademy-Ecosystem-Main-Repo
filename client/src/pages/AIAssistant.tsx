@@ -85,7 +85,7 @@ export default function AIAssistant() {
           {/* Right Panel — Recommendations & Quick Actions */}
           <div className="space-y-4">
             {/* Recommendations */}
-            <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
                 <span className="material-icons text-teal-700" >auto_awesome</span>
                 {t("dashboard.recommended")}
@@ -111,7 +111,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Quick Topics */}
-            <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
                 <span className="material-icons text-amber-500" >tips_and_updates</span>
                 {lang === "fr" ? "Sujets rapides" : "Quick Topics"}
@@ -129,7 +129,7 @@ export default function AIAssistant() {
                     onClick={() => handleSend(lang === "fr"
                       ? `Aidez-moi avec ${topic.label.toLowerCase()}`
                       : `Help me with ${topic.label.toLowerCase()}`)}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 text-gray-600 hover:border-teal-700 hover:text-teal-700 hover:bg-teal-700/5 transition-all">
+                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-slate-700 text-gray-600 hover:border-teal-700 hover:text-teal-700 hover:bg-teal-700/5 transition-all">
                     {topic.emoji} {topic.label}
                   </button>
                 ))}

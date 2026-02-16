@@ -51,7 +51,7 @@ function CalendarWidget({ sessions, lang }: { sessions: any[]; lang: string }) {
   );
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 p-5">
+    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5">
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm font-semibold text-gray-800">{MONTHS_EN[month]} {year}</span>
         <div className="flex gap-1">
@@ -126,7 +126,7 @@ export default function CoachSessions() {
             </h3>
             <div className="space-y-2">
               {pendingSessions.map((s: any) => (
-                <div key={s.id} className="flex items-center justify-between bg-white rounded-lg p-3 border border-amber-100">
+                <div key={s.id} className="flex items-center justify-between bg-white dark:bg-slate-900 rounded-lg p-3 border border-amber-100">
                   <div>
                     <p className="text-sm font-medium text-gray-900">{s.learnerName || "—"}</p>
                     <p className="text-xs text-gray-500">
@@ -166,7 +166,7 @@ export default function CoachSessions() {
                 {[1, 2, 3, 4].map((i) => <div key={i} className="h-20 bg-gray-50 rounded-xl animate-pulse" />)}
               </div>
             ) : filtered.length === 0 ? (
-              <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
+              <div className="text-center py-12 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
                 <span className="material-icons text-gray-300 text-5xl">event_busy</span>
                 <p className="text-sm text-gray-500 mt-2">
                   {lang === "fr" ? "Aucune session trouvée" : "No sessions found"}
@@ -177,7 +177,7 @@ export default function CoachSessions() {
                 {filtered.map((session: any) => {
                   const dt = session.scheduledAt ? new Date(session.scheduledAt) : null;
                   return (
-                    <div key={session.id} className="bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md transition-shadow flex items-center gap-4">
+                    <div key={session.id} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-4 hover:shadow-md transition-shadow flex items-center gap-4">
                       <div className="w-12 h-12 rounded-lg flex flex-col items-center justify-center bg-violet-600/5 border border-violet-600/10">
                         {dt ? (
                           <>

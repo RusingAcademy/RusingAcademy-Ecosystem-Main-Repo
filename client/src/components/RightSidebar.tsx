@@ -123,7 +123,7 @@ export default function RightSidebar() {
                   e.stopPropagation();
                   toast("Feature coming soon");
                 }}
-                className="p-1.5 rounded-lg hover:bg-white transition-all duration-200 opacity-0 group-hover:opacity-100"
+                className="p-1.5 rounded-lg hover:bg-white dark:bg-slate-900 transition-all duration-200 opacity-0 group-hover:opacity-100"
               >
                 <Bookmark className="w-4 h-4 text-muted-foreground" strokeWidth={1.8} />
               </button>

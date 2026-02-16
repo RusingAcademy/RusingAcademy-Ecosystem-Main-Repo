@@ -504,7 +504,7 @@ export default function SegmentComparisonDashboard() {
                         <p className="text-xs text-muted-foreground">{l.contacted}</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-black font-semibold">{metric.newLeads}</p>
+                        <p className="text-black dark:text-white font-semibold">{metric.newLeads}</p>
                         <p className="text-xs text-muted-foreground">{l.new}</p>
                       </div>
                     </div>
@@ -541,7 +541,7 @@ export default function SegmentComparisonDashboard() {
               </thead>
               <tbody>
                 {segmentMetrics.map((metric, index) => (
-                  <tr key={metric.id} className="border-b hover:bg-white dark:hover:bg-foundation">
+                  <tr key={metric.id} className="border-b hover:bg-white dark:bg-slate-900 dark:hover:bg-foundation">
                     <td className="py-2 px-3">
                       <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-full ${getBarColor(index)}`} />

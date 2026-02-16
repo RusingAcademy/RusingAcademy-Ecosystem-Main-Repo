@@ -155,7 +155,7 @@ export default function BankTransactions() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-4 mb-4 border-b border-gray-200">
+      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-slate-700">
         {["For Review", "Categorized", "Excluded", "Matched", "All"].map(tab => (
           <button
             key={tab}
@@ -172,7 +172,7 @@ export default function BankTransactions() {
       </div>
 
       {/* Transaction Table */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">

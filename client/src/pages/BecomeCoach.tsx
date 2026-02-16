@@ -303,7 +303,7 @@ export default function BecomeCoach() {
             </div>
             <h1 className="text-2xl font-bold mb-2">{l.successTitle}</h1>
             <p className="text-black dark:text-white mb-6">{l.successMessage}</p>
-            <div className="text-left bg-white rounded-lg p-4 mb-6">
+            <div className="text-left bg-white dark:bg-slate-900 rounded-lg p-4 mb-6">
               <h3 className="font-semibold mb-3">{l.successNext}</h3>
               <ul className="space-y-2">
                 {l.successSteps.map((step, i) => (
@@ -328,7 +328,7 @@ export default function BecomeCoach() {
   // Application wizard view
   if (showApplication && isAuthenticated) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white dark:bg-slate-900">
 <div className="container py-8">
           <ApplicationStatusTracker />
           <CoachApplicationWizard
@@ -342,7 +342,7 @@ export default function BecomeCoach() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
 <main>
         {/* Hero Section - Premium Dark Gradient */}
         <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
@@ -356,7 +356,7 @@ export default function BecomeCoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
-              <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white dark:bg-slate-900/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <Sparkles className="h-4 w-4 mr-2" />
                 {isEn ? "Join Our Coach Network" : "Rejoignez notre réseau de coachs"}
               </Badge>
@@ -383,7 +383,7 @@ export default function BecomeCoach() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 {!isAuthenticated ? (
                   <a href={getLoginUrl()}>
-                    <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2 w-full sm:w-auto">
+                    <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2 w-full sm:w-auto">
                       {l.loginToApply}
                       <ArrowRight className="h-4 w-4" />
                     </Button>
@@ -391,14 +391,14 @@ export default function BecomeCoach() {
                 ) : (
                   <Button
                     size="lg"
-                    className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2"
+                    className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2"
                     onClick={() => setShowApplication(true)}
                   >
                     {l.applyNow}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 )}
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10 gap-2">
                   <Video className="h-4 w-4" />
                   {isEn ? "Watch Video" : "Voir la vidéo"}
                 </Button>
@@ -409,7 +409,7 @@ export default function BecomeCoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
+                    className="bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-teal-200">{stat.label}</div>
@@ -431,7 +431,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Why Coaches Love Lingueefy */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
@@ -473,14 +473,14 @@ export default function BecomeCoach() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-white border-y">
+        <section className="py-12 bg-white dark:bg-slate-900 border-y">
           <div className="container">
             <p className="text-center text-sm text-black dark:text-white mb-6 uppercase tracking-wider">
               {isEn ? "Our coaches help public servants from" : "Nos coachs aident les fonctionnaires de"}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {federalOrgs.map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-black hover:text-black transition-colors">
+                <div key={i} className="flex items-center gap-2 text-black dark:text-white hover:text-black dark:text-white transition-colors">
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -490,7 +490,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
@@ -522,7 +522,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Requirements */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
@@ -536,7 +536,7 @@ export default function BecomeCoach() {
                 {l.requirementsList.map((req, i) => {
                   const Icon = req.icon;
                   return (
-                    <div key={i} className="flex items-center gap-4 p-5 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div key={i} className="flex items-center gap-4 p-5 bg-white dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                       <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center shrink-0 shadow-lg shadow-teal-500/20">
                         <Icon className="h-6 w-6 text-white" />
                       </div>
@@ -550,7 +550,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Earnings Calculator Preview */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -624,7 +624,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
@@ -662,7 +662,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-foundation-soft text-foundation border-foundation">
@@ -693,7 +693,7 @@ export default function BecomeCoach() {
           </div>
 
           <div className="container relative text-center">
-            <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white dark:bg-slate-900/10 text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>
@@ -710,7 +710,7 @@ export default function BecomeCoach() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               {!isAuthenticated ? (
                 <a href={getLoginUrl()}>
-                  <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl gap-2 w-full sm:w-auto">
+                  <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl gap-2 w-full sm:w-auto">
                     {l.loginToApply}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
@@ -718,7 +718,7 @@ export default function BecomeCoach() {
               ) : (
                 <Button
                   size="lg"
-                  className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl gap-2"
+                  className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl gap-2"
                   onClick={() => setShowApplication(true)}
                 >
                   {l.applyNow}

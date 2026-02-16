@@ -204,7 +204,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">      <main id="main-content" className="flex-1">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900">      <main id="main-content" className="flex-1">
       <SEO title="Contact Us" description="Get in touch with RusingAcademy for bilingual training inquiries, SLE preparation, and coaching partnerships." canonical="/contact" />
         <Breadcrumb 
           items={[
@@ -243,18 +243,18 @@ export default function Contact() {
 
               {/* Title */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-black">{l.title}</span>
+                <span className="text-black dark:text-white">{l.title}</span>
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg sm:text-xl text-black max-w-2xl mx-auto mb-8">
+              <p className="text-lg sm:text-xl text-black dark:text-white max-w-2xl mx-auto mb-8">
                 {l.subtitle}
               </p>
 
               {/* Features */}
               <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                 {l.features.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm text-black">
+                  <div key={index} className="flex items-center gap-2 text-sm text-black dark:text-white">
                     <CheckCircle className="h-4 w-4 text-teal-600" />
                     <span>{feature}</span>
                   </div>
@@ -270,28 +270,28 @@ export default function Contact() {
             <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <Card className="bg-white border-slate-200 shadow-lg shadow-slate-200/50">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 shadow-lg shadow-slate-200/50">
                   <CardHeader className="pb-4">
-                    <CardTitle className="text-2xl text-black">{l.formTitle}</CardTitle>
-                    <CardDescription className="text-black">{l.formDescription}</CardDescription>
+                    <CardTitle className="text-2xl text-black dark:text-white">{l.formTitle}</CardTitle>
+                    <CardDescription className="text-black dark:text-white">{l.formDescription}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="name" className="text-black">{l.name}</Label>
+                          <Label htmlFor="name" className="text-black dark:text-white">{l.name}</Label>
                           <Input
                             id="name"
                             name="name"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder={l.namePlaceholder}
-                            className="bg-white border-slate-200 focus:border-teal-500 focus:ring-teal-500"
+                            className="bg-white dark:bg-slate-900 border-slate-200 focus:border-teal-500 focus:ring-teal-500"
                             required
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="email" className="text-black">{l.email}</Label>
+                          <Label htmlFor="email" className="text-black dark:text-white">{l.email}</Label>
                           <Input
                             id="email"
                             name="email"
@@ -299,7 +299,7 @@ export default function Contact() {
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder={l.emailPlaceholder}
-                            className="bg-white border-slate-200 focus:border-teal-500 focus:ring-teal-500"
+                            className="bg-white dark:bg-slate-900 border-slate-200 focus:border-teal-500 focus:ring-teal-500"
                             required
                           />
                         </div>
@@ -307,7 +307,7 @@ export default function Contact() {
 
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="phone" className="text-black">{l.phone}</Label>
+                          <Label htmlFor="phone" className="text-black dark:text-white">{l.phone}</Label>
                           <Input
                             id="phone"
                             name="phone"
@@ -315,17 +315,17 @@ export default function Contact() {
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             placeholder={l.phonePlaceholder}
-                            className="bg-white border-slate-200 focus:border-teal-500 focus:ring-teal-500"
+                            className="bg-white dark:bg-slate-900 border-slate-200 focus:border-teal-500 focus:ring-teal-500"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="brand" className="text-black">{l.brand}</Label>
+                          <Label htmlFor="brand" className="text-black dark:text-white">{l.brand}</Label>
                           <Select 
                             name="brand" 
                             value={formData.brand}
                             onValueChange={(value) => setFormData({ ...formData, brand: value })}
                           >
-                            <SelectTrigger id="brand" className="bg-white border-slate-200">
+                            <SelectTrigger id="brand" className="bg-white dark:bg-slate-900 border-slate-200">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -339,14 +339,14 @@ export default function Contact() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="subject" className="text-black">{l.subject}</Label>
+                        <Label htmlFor="subject" className="text-black dark:text-white">{l.subject}</Label>
                         <Select 
                           name="subject" 
                           value={formData.subject}
                           onValueChange={(value) => setFormData({ ...formData, subject: value })}
                           required
                         >
-                          <SelectTrigger id="subject" className="bg-white border-slate-200">
+                          <SelectTrigger id="subject" className="bg-white dark:bg-slate-900 border-slate-200">
                             <SelectValue placeholder={l.subjectPlaceholder} />
                           </SelectTrigger>
                           <SelectContent>
@@ -362,7 +362,7 @@ export default function Contact() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message" className="text-black">{l.message}</Label>
+                        <Label htmlFor="message" className="text-black dark:text-white">{l.message}</Label>
                         <Textarea
                           id="message"
                           name="message"
@@ -370,7 +370,7 @@ export default function Contact() {
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           placeholder={l.messagePlaceholder}
                           rows={6}
-                          className="bg-white border-slate-200 focus:border-teal-500 focus:ring-teal-500 resize-none"
+                          className="bg-white dark:bg-slate-900 border-slate-200 focus:border-teal-500 focus:ring-teal-500 resize-none"
                           required
                         />
                       </div>
@@ -392,9 +392,9 @@ export default function Contact() {
               {/* Contact Info Sidebar */}
               <div className="space-y-6">
                 {/* Contact Information Card */}
-                <Card className="bg-white border-slate-200 shadow-lg shadow-slate-200/50">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 shadow-lg shadow-slate-200/50">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-lg text-black">{l.contactInfo}</CardTitle>
+                    <CardTitle className="text-lg text-black dark:text-white">{l.contactInfo}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-5">
                     <div className="flex items-start gap-4">
@@ -402,7 +402,7 @@ export default function Contact() {
                         <Mail className="h-5 w-5 text-teal-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-black">{l.emailUs}</p>
+                        <p className="font-medium text-sm text-black dark:text-white">{l.emailUs}</p>
                         <a
                           href="mailto:admin@rusingacademy.ca"
                           className="text-teal-600 hover:text-teal-700 hover:underline text-sm transition-colors"
@@ -416,7 +416,7 @@ export default function Contact() {
                         <Phone className="h-5 w-5 text-violet-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-black">{l.phoneUs}</p>
+                        <p className="font-medium text-sm text-black dark:text-white">{l.phoneUs}</p>
                         <a
                           href="tel:+16136006533"
                           className="text-violet-600 hover:text-violet-700 hover:underline text-sm transition-colors"
@@ -430,8 +430,8 @@ export default function Contact() {
                         <Clock className="h-5 w-5 text-amber-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-black">{l.officeHours}</p>
-                        <p className="text-black text-sm">{l.officeHoursValue}</p>
+                        <p className="font-medium text-sm text-black dark:text-white">{l.officeHours}</p>
+                        <p className="text-black dark:text-white text-sm">{l.officeHoursValue}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -439,8 +439,8 @@ export default function Contact() {
                         <MapPin className="h-5 w-5 text-rose-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-black">{l.location}</p>
-                        <p className="text-black text-sm">{l.locationValue}</p>
+                        <p className="font-medium text-sm text-black dark:text-white">{l.location}</p>
+                        <p className="text-black dark:text-white text-sm">{l.locationValue}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -448,18 +448,18 @@ export default function Contact() {
 
                 {/* Quick Links */}
                 <div className="space-y-4">
-                  <h3 className="text-sm font-semibold text-black uppercase tracking-wider">{l.quickLinks}</h3>
+                  <h3 className="text-sm font-semibold text-black dark:text-white uppercase tracking-wider">{l.quickLinks}</h3>
                   
                   <Link href="/faq">
-                    <Card className="bg-white border-slate-200 hover:border-teal-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
+                    <Card className="bg-white dark:bg-slate-900 border-slate-200 hover:border-teal-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
                       <CardContent className="p-5">
                         <div className="flex items-center gap-4">
                           <div className="p-2 rounded-lg bg-teal-50 group-hover:bg-teal-100 transition-colors">
                             <HelpCircle className="h-6 w-6 text-teal-600" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-black group-hover:text-teal-700 transition-colors">{l.faqTitle}</h4>
-                            <p className="text-sm text-black">{l.faqDescription}</p>
+                            <h4 className="font-semibold text-black dark:text-white group-hover:text-teal-700 transition-colors">{l.faqTitle}</h4>
+                            <p className="text-sm text-black dark:text-white">{l.faqDescription}</p>
                           </div>
                           <ArrowRight className="h-5 w-5 text-cyan-300 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
                         </div>
@@ -468,15 +468,15 @@ export default function Contact() {
                   </Link>
 
                   <Link href="/become-a-coach">
-                    <Card className="bg-white border-slate-200 hover:border-violet-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
+                    <Card className="bg-white dark:bg-slate-900 border-slate-200 hover:border-violet-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
                       <CardContent className="p-5">
                         <div className="flex items-center gap-4">
                           <div className="p-2 rounded-lg bg-violet-50 group-hover:bg-violet-100 transition-colors">
                             <Users className="h-6 w-6 text-violet-600" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-black group-hover:text-violet-700 transition-colors">{l.coachSupport}</h4>
-                            <p className="text-sm text-black">{l.coachSupportDesc}</p>
+                            <h4 className="font-semibold text-black dark:text-white group-hover:text-violet-700 transition-colors">{l.coachSupport}</h4>
+                            <p className="text-sm text-black dark:text-white">{l.coachSupportDesc}</p>
                           </div>
                           <ArrowRight className="h-5 w-5 text-cyan-300 group-hover:text-violet-600 group-hover:translate-x-1 transition-all" />
                         </div>
@@ -485,15 +485,15 @@ export default function Contact() {
                   </Link>
 
                   <Link href="/for-business">
-                    <Card className="bg-white border-slate-200 hover:border-amber-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
+                    <Card className="bg-white dark:bg-slate-900 border-slate-200 hover:border-amber-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
                       <CardContent className="p-5">
                         <div className="flex items-center gap-4">
                           <div className="p-2 rounded-lg bg-amber-50 group-hover:bg-amber-100 transition-colors">
                             <Briefcase className="h-6 w-6 text-amber-600" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-black group-hover:text-amber-700 transition-colors">{l.b2b}</h4>
-                            <p className="text-sm text-black">{l.b2bDesc}</p>
+                            <h4 className="font-semibold text-black dark:text-white group-hover:text-amber-700 transition-colors">{l.b2b}</h4>
+                            <p className="text-sm text-black dark:text-white">{l.b2bDesc}</p>
                           </div>
                           <ArrowRight className="h-5 w-5 text-cyan-300 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
                         </div>
@@ -519,7 +519,7 @@ export default function Contact() {
                   ? 'Schedule a 30-minute discovery call with our team to discuss your bilingual training needs and find the right program for you.'
                   : 'Planifiez un appel découverte de 30 minutes avec notre équipe pour discuter de vos besoins en formation bilingue et trouver le bon programme pour vous.'}
               </p>
-              <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-xl">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 lg:p-8 shadow-xl">
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                   <div className="text-center p-4">
                     <div className="w-12 h-12 rounded-full bg-cta/10 flex items-center justify-center mx-auto mb-3">
@@ -555,15 +555,15 @@ export default function Contact() {
         </section>
 
         {/* Map Section (Optional - can be added later) */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="max-w-6xl mx-auto">
               <div className="bg-gradient-to-br from-slate-100 to-slate-50 rounded-2xl p-8 lg:p-12 text-center">
                 <MapPin className="h-12 w-12 text-teal-600 mx-auto mb-4" />
-                <h2 className="text-2xl font-bold text-black mb-2">
+                <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
                   {language === 'en' ? 'Based in Ottawa, Serving Canada' : 'Basé à Ottawa, au service du Canada'}
                 </h2>
-                <p className="text-black max-w-2xl mx-auto">
+                <p className="text-black dark:text-white max-w-2xl mx-auto">
                   {language === 'en' 
                     ? 'Our team is proudly based in the National Capital Region, serving Canadian public servants and professionals across the country with bilingual excellence.'
                     : 'Notre équipe est fièrement basée dans la région de la capitale nationale, au service des fonctionnaires et professionnels canadiens à travers le pays avec excellence bilingue.'

@@ -87,7 +87,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
   const lang = typeof window !== "undefined" && localStorage.getItem("ra-language") === "fr" ? "fr" : "en";
 
   return (
-    <div className="min-h-screen flex bg-white">
+    <div className="min-h-screen flex bg-white dark:bg-slate-900">
       {/* Left Side — Portal-themed hero */}
       <div
         className="hidden lg:flex lg:w-1/2 items-center justify-center p-12 relative overflow-hidden"
@@ -130,7 +130,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
             {config.features.map((f) => (
               <span
                 key={f.en}
-                className="text-xs px-3 py-1.5 rounded-full text-gray-700 font-medium bg-white/80 border border-gray-200 shadow-sm"
+                className="text-xs px-3 py-1.5 rounded-full text-gray-700 font-medium bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700 shadow-sm"
               >
                 {lang === "fr" ? f.fr : f.en}
               </span>
@@ -140,7 +140,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
       </div>
 
       {/* Right Side — Coming Soon */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-slate-900">
         <div className="w-full max-w-md text-center">
           {/* Logo */}
           <img src={LOGO_ICON} alt="RusingAcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />

@@ -67,7 +67,7 @@ export default function Deposits() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-4 mb-4 border-b border-gray-200">
+      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-slate-700">
         <button
           className={`pb-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "payments" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => { setActiveTab("payments"); setPage(1); }}
@@ -96,10 +96,10 @@ export default function Deposits() {
       </div>
 
       {activeTab === "payments" && (
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Reference</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Method</th>
@@ -136,10 +136,10 @@ export default function Deposits() {
       )}
 
       {activeTab === "transfers" && (
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">From</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">To</th>

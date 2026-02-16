@@ -436,7 +436,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
               {labels.inProgress}
             </Badge>
           ) : (
-            <Badge variant="outline" className="text-black">
+            <Badge variant="outline" className="text-black dark:text-white">
               {labels.notStarted}
             </Badge>
           )}
@@ -513,7 +513,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
                 {labels.inProgress}
               </Badge>
             ) : (
-              <Badge variant="outline" className="text-black flex-shrink-0">
+              <Badge variant="outline" className="text-black dark:text-white flex-shrink-0">
                 {labels.notStarted}
               </Badge>
             )}

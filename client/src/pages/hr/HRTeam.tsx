@@ -135,12 +135,12 @@ export default function HRTeam() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={lang === "fr" ? "Rechercher par nom, courriel ou ID employé..." : "Search by name, email or employee ID..."}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
           />
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 overflow-hidden">
           {filtered.length === 0 ? (
             <div className="text-center py-12">
               <span className="material-icons text-5xl text-gray-300 mb-3">group_off</span>

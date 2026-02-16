@@ -58,7 +58,7 @@ export default function CoachPerformance() {
         </div>
 
         {/* Performance Rings */}
-        <div className="bg-white rounded-xl border border-gray-100 p-6 mb-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-6 mb-6">
           <h2 className="text-base font-semibold text-gray-900 mb-6">{lang === "fr" ? "Indicateurs clés" : "Key Indicators"}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             <MetricRing value={satisfactionPct} label={lang === "fr" ? "Satisfaction" : "Satisfaction"} color="#059669" loading={isLoading} />
@@ -70,7 +70,7 @@ export default function CoachPerformance() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Key Metrics */}
-          <div className="bg-white rounded-xl border border-gray-100 p-5">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5">
             <h2 className="text-base font-semibold text-gray-900 mb-4">{lang === "fr" ? "Métriques clés" : "Key Metrics"}</h2>
             <div className="space-y-4">
               {[
@@ -117,7 +117,7 @@ export default function CoachPerformance() {
           </div>
 
           {/* Student Overview */}
-          <div className="bg-white rounded-xl border border-gray-100 p-5">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5">
             <h2 className="text-base font-semibold text-gray-900 mb-4">{lang === "fr" ? "Aperçu des étudiants" : "Student Overview"}</h2>
             {learnersQuery.isLoading ? (
               <div className="space-y-3">
@@ -153,7 +153,7 @@ export default function CoachPerformance() {
         </div>
 
         {/* Session Summary */}
-        <div className="mt-6 bg-white rounded-xl border border-gray-100 p-5">
+        <div className="mt-6 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5">
           <h2 className="text-base font-semibold text-gray-900 mb-4">{lang === "fr" ? "Résumé des sessions" : "Session Summary"}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[

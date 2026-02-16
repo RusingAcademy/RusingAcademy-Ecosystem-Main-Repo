@@ -82,7 +82,7 @@ export default function HRBudget() {
             { icon: "warning", label: lang === "fr" ? "En souffrance" : "Overdue", value: formatCurrency(stats.totalOverdue), color: "#dc2626" },
             { icon: "pending", label: lang === "fr" ? "Factures en attente" : "Pending Invoices", value: String(stats.pendingCount), color: "#d97706" },
           ].map(card => (
-            <div key={card.label} className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
+            <div key={card.label} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${card.color}10` }}>
                 <span className="material-icons text-xl" style={{ color: card.color }}>{card.icon}</span>
               </div>
@@ -94,7 +94,7 @@ export default function HRBudget() {
 
         {/* Payment Progress Bar */}
         {stats.totalInvoiced > 0 && (
-          <div className="bg-white rounded-xl border border-gray-100 p-5 mb-6">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5 mb-6">
             <h2 className="text-base font-semibold text-gray-900 mb-3">
               {lang === "fr" ? "Progression des paiements" : "Payment Progress"}
             </h2>
@@ -120,7 +120,7 @@ export default function HRBudget() {
         )}
 
         {/* Billing Records Table */}
-        <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 overflow-hidden">
           <div className="p-4 border-b border-gray-100">
             <h2 className="text-base font-semibold text-gray-900">
               {lang === "fr" ? "Historique de facturation" : "Billing History"}

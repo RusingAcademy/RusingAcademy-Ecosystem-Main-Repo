@@ -219,7 +219,7 @@ export default function ForGovernment() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-teal-400/10 border border-teal-400/20 text-black">
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-teal-400/10 border border-teal-400/20 text-black dark:text-white">
                   <Landmark className="w-4 h-4 text-teal-400" />
                   {t.badge}
                 </span>
@@ -227,7 +227,7 @@ export default function ForGovernment() {
               
               <motion.h1 
                 variants={fadeInUp}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black dark:text-white"
               >
                 {t.title}{" "}
                 <span className="text-teal-400">{t.highlight}</span>
@@ -235,7 +235,7 @@ export default function ForGovernment() {
               
               <motion.p 
                 variants={fadeInUp}
-                className="text-lg md:text-xl text-black mb-8 max-w-3xl mx-auto leading-relaxed"
+                className="text-lg md:text-xl text-black dark:text-white mb-8 max-w-3xl mx-auto leading-relaxed"
               >
                 {t.subtitle}
               </motion.p>
@@ -262,24 +262,24 @@ export default function ForGovernment() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-gray-200/50 bg-white/50 backdrop-blur-sm">
+        <section className="py-8 border-y border-gray-200 dark:border-slate-700/50 bg-white dark:bg-slate-900/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={departments.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{departments.count}+</div>
-                <div className="text-sm text-black">{t.stats[0].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[0].label}</div>
               </div>
               <div ref={passRate.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{passRate.count}%</div>
-                <div className="text-sm text-black">{t.stats[1].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[1].label}</div>
               </div>
               <div ref={servants.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{servants.count.toLocaleString()}+</div>
-                <div className="text-sm text-black">{t.stats[2].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[2].label}</div>
               </div>
               <div ref={satisfaction.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
-                <div className="text-sm text-black">{t.stats[3].label}</div>
+                <div className="text-sm text-black dark:text-white">{t.stats[3].label}</div>
               </div>
             </div>
           </div>
@@ -297,11 +297,11 @@ export default function ForGovernment() {
                 <div className="w-10 h-10 rounded-xl bg-teal-400/10 flex items-center justify-center">
                   <Shield className="w-5 h-5 text-teal-400" />
                 </div>
-                <h3 className="text-lg font-bold text-black">{t.complianceTitle}</h3>
+                <h3 className="text-lg font-bold text-black dark:text-white">{t.complianceTitle}</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {t.complianceItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm text-black">
+                  <div key={i} className="flex items-center gap-2 text-sm text-black dark:text-white">
                     <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0" />
                     {item}
                   </div>
@@ -315,7 +315,7 @@ export default function ForGovernment() {
         <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.benefitsTitle}
               </h2>
             </div>
@@ -327,13 +327,13 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="w-12 h-12 rounded-xl bg-teal-400/10 flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-teal-400" />
                   </div>
-                  <h3 className="font-bold text-black mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-black">{benefit.desc}</p>
+                  <h3 className="font-bold text-black dark:text-white mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-black dark:text-white">{benefit.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -344,10 +344,10 @@ export default function ForGovernment() {
         <section className="py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.pathsTitle}
               </h2>
-              <p className="text-lg text-black max-w-2xl mx-auto">
+              <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
                 {t.pathsSubtitle}
               </p>
             </div>
@@ -359,7 +359,7 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="relative p-4 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg text-center group hover:shadow-xl transition-all"
+                  className="relative p-4 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 shadow-lg text-center group hover:shadow-xl transition-all"
                 >
                   <div 
                     className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center text-white font-bold"
@@ -367,9 +367,9 @@ export default function ForGovernment() {
                   >
                     {index + 1}
                   </div>
-                  <h3 className="font-bold text-black mb-1">{path.path}</h3>
+                  <h3 className="font-bold text-black dark:text-white mb-1">{path.path}</h3>
                   <p className="text-sm text-cta-2 font-medium mb-1">{path.level}</p>
-                  <p className="text-xs text-black">{path.duration}</p>
+                  <p className="text-xs text-black dark:text-white">{path.duration}</p>
                 </motion.div>
               ))}
             </div>
@@ -386,10 +386,10 @@ export default function ForGovernment() {
         <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.packagesTitle}
               </h2>
-              <p className="text-lg text-black max-w-2xl mx-auto">
+              <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
                 {t.packagesSubtitle}
               </p>
             </div>
@@ -416,15 +416,15 @@ export default function ForGovernment() {
                     </div>
                   )}
                   <div className="pt-2">
-                    <h3 className="text-xl font-bold text-black">{pkg.name}</h3>
-                    <p className="text-sm text-black mb-4">{pkg.size}</p>
+                    <h3 className="text-xl font-bold text-black dark:text-white">{pkg.name}</h3>
+                    <p className="text-sm text-black dark:text-white mb-4">{pkg.size}</p>
                     <div className="mb-6">
-                      <span className="text-3xl font-bold text-black">{pkg.price}</span>
-                      <span className="text-black">{pkg.period}</span>
+                      <span className="text-3xl font-bold text-black dark:text-white">{pkg.price}</span>
+                      <span className="text-black dark:text-white">{pkg.period}</span>
                     </div>
                     <ul className="space-y-3 mb-6">
                       {pkg.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-black">
+                        <li key={i} className="flex items-start gap-2 text-sm text-black dark:text-white">
                           <CheckCircle2 className="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" />
                           {feature}
                         </li>
@@ -451,7 +451,7 @@ export default function ForGovernment() {
         <section className="py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.testimonialsTitle}
               </h2>
             </div>
@@ -463,12 +463,12 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 shadow-lg"
                 >
                   <Quote className="w-8 h-8 text-teal-400/30 mb-4" />
-                  <p className="text-black mb-6 italic">"{testimonial.quote}"</p>
+                  <p className="text-black dark:text-white mb-6 italic">"{testimonial.quote}"</p>
                   <div>
-                    <p className="font-semibold text-black">{testimonial.author}</p>
+                    <p className="font-semibold text-black dark:text-white">{testimonial.author}</p>
                     <p className="text-sm text-teal-400">{testimonial.company}</p>
                   </div>
                 </motion.div>
@@ -486,15 +486,15 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                 >
-                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black">
+                  <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-white">
                     <Sparkles className="w-4 h-4 text-cta-2" />
                     {isEn ? "Get Started Today" : "Commencez aujourd'hui"}
                   </span>
                 </motion.div>
-                <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                   {t.ctaTitle}
                 </h2>
-                <p className="text-lg text-black max-w-2xl mx-auto">
+                <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
                   {t.ctaSubtitle}
                 </p>
               </div>
@@ -502,47 +502,47 @@ export default function ForGovernment() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-xl"
+                className="p-8 rounded-3xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700/50 shadow-xl"
               >
-                <h3 className="text-xl font-bold text-black mb-2">{t.formTitle}</h3>
-                <p className="text-black mb-6">{t.formSubtitle}</p>
+                <h3 className="text-xl font-bold text-black dark:text-white mb-2">{t.formTitle}</h3>
+                <p className="text-black dark:text-white mb-6">{t.formSubtitle}</p>
 
                 {formSubmitted ? (
                   <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
                       <CheckCircle2 className="w-8 h-8 text-teal-400" />
                     </div>
-                    <p className="text-lg font-semibold text-black">{t.formSuccess}</p>
+                    <p className="text-lg font-semibold text-black dark:text-white">{t.formSuccess}</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.department} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.learners} 
-                        className="h-12 rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-slate-700 focus:border-teal-400 focus:ring-teal-400"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 focus:border-teal-400 focus:ring-teal-400"
+                      className="min-h-[120px] rounded-xl border-gray-200 dark:border-slate-700 focus:border-teal-400 focus:ring-teal-400"
                       rows={4}
                     />
                     <Button 

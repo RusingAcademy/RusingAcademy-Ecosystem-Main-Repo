@@ -491,7 +491,7 @@ export function AdminApplicationDashboard() {
                   {applications.map((app: Application) => (
                     <tr
                       key={app.id}
-                      className="border-b border-slate-200 dark:border-teal-800 hover:bg-white dark:hover:bg-foundation"
+                      className="border-b border-slate-200 dark:border-teal-800 hover:bg-white dark:bg-slate-900 dark:hover:bg-foundation"
                     >
                       <td className="py-3 px-4">
                         <button onClick={() => toggleApplicationSelection(app.id)}>

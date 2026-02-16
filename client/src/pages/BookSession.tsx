@@ -465,7 +465,7 @@ export default function BookSession() {
 
                 <div className="grid grid-cols-7 gap-1 mb-2">
                   {(DAYS_OF_WEEK[language as keyof typeof DAYS_OF_WEEK] || DAYS_OF_WEEK.en).map((day) => (
-                    <div key={day} className="text-center text-xs font-medium text-black py-2">
+                    <div key={day} className="text-center text-xs font-medium text-black dark:text-white py-2">
                       {day}
                     </div>
                   ))}
@@ -499,7 +499,7 @@ export default function BookSession() {
                 </h3>
 
                 {!selectedDate ? (
-                  <div className="text-center py-8 text-black">
+                  <div className="text-center py-8 text-black dark:text-white">
                     <Calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
                     <p>{l.selectDate}</p>
                   </div>
@@ -510,7 +510,7 @@ export default function BookSession() {
                     ))}
                   </div>
                 ) : !availableSlots?.length ? (
-                  <div className="text-center py-8 text-black">
+                  <div className="text-center py-8 text-black dark:text-white">
                     <Clock className="h-12 w-12 mx-auto mb-2 opacity-50" />
                     <p>{l.noSlots}</p>
                   </div>
@@ -575,7 +575,7 @@ export default function BookSession() {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="text-sm text-black">{l.coach}</p>
+                    <p className="text-sm text-black dark:text-white">{l.coach}</p>
                     <p className="font-semibold text-black dark:text-white">{selectedCoach?.name}</p>
                   </div>
                 </div>
@@ -583,7 +583,7 @@ export default function BookSession() {
                 {/* Date & Time */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
-                    <p className="text-sm text-black">{l.date}</p>
+                    <p className="text-sm text-black dark:text-white">{l.date}</p>
                     <p className="font-semibold text-black dark:text-white">
                       {selectedDate?.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                         weekday: "long", 
@@ -594,7 +594,7 @@ export default function BookSession() {
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
-                    <p className="text-sm text-black">{l.time}</p>
+                    <p className="text-sm text-black dark:text-white">{l.time}</p>
                     <p className="font-semibold text-black dark:text-white">
                       {selectedSlot?.startTime} - {selectedSlot?.endTime}
                     </p>
@@ -603,7 +603,7 @@ export default function BookSession() {
 
                 {/* Duration */}
                 <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
-                  <p className="text-sm text-black">{l.duration}</p>
+                  <p className="text-sm text-black dark:text-white">{l.duration}</p>
                   <p className="font-semibold text-black dark:text-white">60 {l.minutes}</p>
                 </div>
 

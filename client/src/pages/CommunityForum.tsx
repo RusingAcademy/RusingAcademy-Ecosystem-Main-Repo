@@ -46,7 +46,7 @@ export default function CommunityForum() {
     <DashboardLayout>
       <div className="max-w-[1100px] space-y-5">
         {/* Header */}
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
           <div className="relative h-[140px]">
             <img src={FORUM_IMG} alt="" className="w-full h-full object-cover" aria-hidden="true" />
             <div className="absolute inset-0 bg-gradient-to-r from-teal-700/85 to-teal-700/40 flex items-center">
@@ -84,7 +84,7 @@ export default function CommunityForum() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex gap-1 bg-white border border-gray-200 rounded-xl p-1 shadow-sm">
+        <div className="flex gap-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-1 shadow-sm">
           {([
             { key: "categories" as Tab, label: lang === "fr" ? "Catégories" : "Categories", icon: "category" },
             { key: "groups" as Tab, label: t("community.studyGroups"), icon: "groups" },
@@ -106,7 +106,7 @@ export default function CommunityForum() {
         {activeTab === "categories" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {forumCategories.map((cat, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-teal-700/20 transition-all cursor-pointer group">
+              <div key={i} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-teal-700/20 transition-all cursor-pointer group">
                 <div className="flex items-start gap-4">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${cat.color}10` }}>
                     <span className="material-icons" style={{ color: cat.color, fontSize: "22px" }}>{cat.icon}</span>
@@ -138,7 +138,7 @@ export default function CommunityForum() {
         {activeTab === "groups" && (
           <div className="space-y-3">
             {studyGroups.map((group, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex items-center justify-between">
+              <div key={i} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-5 shadow-sm flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${group.active ? "bg-emerald-500/10" : "bg-gray-100"}`}>
                     <span className={`material-icons ${group.active ? "text-emerald-500" : "text-gray-400"}`} style={{ fontSize: "20px" }}>groups</span>
@@ -168,7 +168,7 @@ export default function CommunityForum() {
               </div>
             ))}
             <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-              className="w-full py-3 rounded-xl border-2 border-dashed border-gray-200 text-sm font-medium text-gray-400 hover:text-teal-700 hover:border-teal-700/30 transition-all flex items-center justify-center gap-2">
+              className="w-full py-3 rounded-xl border-2 border-dashed border-gray-200 dark:border-slate-700 text-sm font-medium text-gray-400 hover:text-teal-700 hover:border-teal-700/30 transition-all flex items-center justify-center gap-2">
               <span className="material-icons" >add</span>
               {t("community.createGroup")}
             </button>
@@ -179,7 +179,7 @@ export default function CommunityForum() {
         {activeTab === "recent" && (
           <div className="space-y-3">
             {recentPosts.map((post, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+              <div key={i} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-700 to-[#00a0b0] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                     {post.avatar}

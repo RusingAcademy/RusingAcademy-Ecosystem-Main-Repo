@@ -224,7 +224,7 @@ export function StreakRecovery({
             </div>
             <p className="text-2xl font-bold text-orange-600">
               {currentStreak}
-              <span className="text-sm font-normal text-black ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-black dark:text-white ml-1">{l.days}</span>
             </p>
           </div>
 
@@ -235,7 +235,7 @@ export function StreakRecovery({
             </div>
             <p className="text-2xl font-bold text-purple-600">
               {longestStreak}
-              <span className="text-sm font-normal text-black ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-black dark:text-white ml-1">{l.days}</span>
             </p>
           </div>
         </div>
@@ -243,7 +243,7 @@ export function StreakRecovery({
         <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-teal-800">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-black dark:text-white/90">{l.streakFreezes}</span>
-            <span className="text-xs text-black">{streakFreezes} {l.available}</span>
+            <span className="text-xs text-black dark:text-white">{streakFreezes} {l.available}</span>
           </div>
           
           <div className="flex gap-1 mb-3">

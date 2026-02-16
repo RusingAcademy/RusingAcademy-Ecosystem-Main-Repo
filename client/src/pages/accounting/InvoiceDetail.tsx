@@ -301,7 +301,7 @@ export default function InvoiceDetail() {
                 <button className="qb-btn-outline p-2">
                   <MoreVertical size={14} />
                 </button>
-                <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
                   <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center gap-2" onClick={() => handleStatusChange("Paid")}>
                     <CheckCircle size={14} className="text-green-600" /> Mark as Paid
                   </button>
@@ -455,7 +455,7 @@ export default function InvoiceDetail() {
         <div className="mb-6">
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-gray-200">
+              <tr className="border-b-2 border-gray-200 dark:border-slate-700">
                 <th className="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-2 w-8">#</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-2">Product/Service</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-2">Description</th>
@@ -473,7 +473,7 @@ export default function InvoiceDetail() {
                   <td className="py-2">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-slate-700 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.productId || ""}
                         onChange={(e) => selectProduct(index, Number(e.target.value))}
                       >
@@ -492,7 +492,7 @@ export default function InvoiceDetail() {
                     {isEditing ? (
                       <input
                         type="text"
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-slate-700 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.description}
                         onChange={(e) => updateLineItem(index, "description", e.target.value)}
                         placeholder="Description"
@@ -505,7 +505,7 @@ export default function InvoiceDetail() {
                     {isEditing ? (
                       <input
                         type="number"
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-slate-700 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.quantity}
                         onChange={(e) => updateLineItem(index, "quantity", e.target.value)}
                       />
@@ -518,7 +518,7 @@ export default function InvoiceDetail() {
                       <input
                         type="number"
                         step="0.01"
-                        className="w-full border border-gray-200 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-slate-700 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.rate}
                         onChange={(e) => updateLineItem(index, "rate", e.target.value)}
                       />
@@ -532,7 +532,7 @@ export default function InvoiceDetail() {
                   <td className="py-2 text-right">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 rounded px-1 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-slate-700 rounded px-1 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.taxCode || ""}
                         onChange={(e) => updateLineItem(index, "taxCode", e.target.value)}
                       >
@@ -583,7 +583,7 @@ export default function InvoiceDetail() {
                 <span className="text-gray-800 font-medium">${taxAmount.toFixed(2)}</span>
               </div>
             )}
-            <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 mt-1">
+            <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-slate-700 mt-1">
               <span className="text-gray-800">Total</span>
               <span className="text-gray-900">${total.toFixed(2)}</span>
             </div>
@@ -593,7 +593,7 @@ export default function InvoiceDetail() {
                   <span className="text-gray-500">Amount Paid</span>
                   <span className="text-gray-800">${Number(inv.amountPaid || 0).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200">
+                <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-slate-700">
                   <span className="text-green-600">Amount Due</span>
                   <span className="text-green-600">${Number(inv.amountDue || total).toFixed(2)}</span>
                 </div>
@@ -629,7 +629,7 @@ export default function InvoiceDetail() {
       {/* Record Payment Dialog */}
       {showPaymentDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowPaymentDialog(false)}>
-          <div className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-lg font-bold text-gray-800 mb-4">Record Payment</h3>
             <div className="space-y-4">
               <div>
@@ -685,7 +685,7 @@ export default function InvoiceDetail() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowDeleteConfirm(false)}>
-          <div className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
                 <AlertTriangle size={20} className="text-red-600" />
@@ -715,7 +715,7 @@ export default function InvoiceDetail() {
       {/* Email Invoice Dialog */}
       {showEmailDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowEmailDialog(false)}>
-          <div className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                 <Send size={20} className="text-sky-600" />

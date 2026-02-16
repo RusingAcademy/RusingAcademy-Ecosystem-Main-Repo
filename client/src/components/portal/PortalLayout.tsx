@@ -61,7 +61,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
   const userName = user?.name || "Apprenant";
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white dark:bg-slate-900 flex">
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 w-64 bg-obsidian text-white flex flex-col z-20">
         {/* Logo */}
@@ -148,7 +148,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
       {/* Main Content */}
       <div className="flex-1 ml-64">
         {/* Top Header */}
-        <header className="h-16 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
+        <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
           <div className="flex items-center gap-4">
             <h1 className="text-lg font-semibold text-slate-900">
               Portail d'Apprentissage

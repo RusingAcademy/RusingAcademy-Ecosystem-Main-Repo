@@ -31,7 +31,7 @@ const notificationIcons: Record<string, React.ReactNode> = {
   points: <Gift className="h-4 w-4 text-amber-500" />,
   challenge: <Trophy className="h-4 w-4 text-foundation" />,
   review: <Star className="h-4 w-4 text-yellow-500" />,
-  system: <Settings className="h-4 w-4 text-black" />,
+  system: <Settings className="h-4 w-4 text-black dark:text-white" />,
 };
 
 interface Notification {

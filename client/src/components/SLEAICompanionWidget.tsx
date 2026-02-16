@@ -153,7 +153,7 @@ export default function SLEAICompanionWidget() {
         </button>
 
         {/* Label */}
-        <span className="text-xs font-medium text-black whitespace-nowrap">
+        <span className="text-xs font-medium text-black dark:text-white whitespace-nowrap">
           SLE AI Companion
         </span>
       </div>
@@ -286,7 +286,7 @@ export default function SLEAICompanionWidget() {
                         <h4 className="text-white font-semibold text-sm">{option.title}</h4>
                         <p className="text-cyan-300 text-xs">{option.subtitle}</p>
                       </div>
-                      <span className="text-black group-hover:text-foundation transition-colors">›</span>
+                      <span className="text-black dark:text-white group-hover:text-foundation transition-colors">›</span>
                     </button>
                   ))}
                 </div>
@@ -338,7 +338,7 @@ export default function SLEAICompanionWidget() {
 
                     {/* Speaking Indicator */}
                     <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-500/90 rounded-full flex items-center gap-1.5 shadow-lg">
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                      <div className="w-2 h-2 bg-white dark:bg-slate-900 rounded-full animate-pulse" />
                       <span className="text-white text-xs font-medium">Speaking...</span>
                     </div>
                   </div>

@@ -197,7 +197,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     )}
                     
                     {isClaimed && (
-                      <Badge variant="outline" className="text-black border-slate-300">
+                      <Badge variant="outline" className="text-black dark:text-white border-slate-300">
                         <CheckCircle2 className="h-3 w-3 mr-1" />
                         {l.claimed}
                       </Badge>

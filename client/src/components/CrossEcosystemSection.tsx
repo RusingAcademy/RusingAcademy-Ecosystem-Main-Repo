@@ -367,7 +367,7 @@ function FloatingParticles() {
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-white"
+          className="absolute rounded-full bg-white dark:bg-slate-900"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
@@ -411,7 +411,7 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
 // ─── Stats Pill ──────────────────────────────────────────────────────────────
 function StatsPill({ icon: IconComp, value, label }: { icon: React.ElementType; value: string; label: string }) {
   return (
-    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-slate-900/5 backdrop-blur-sm border border-white/10">
       <IconComp className="w-4 h-4 text-amber-400" />
       <span className="text-sm font-bold text-white">{value}</span>
       <span className="text-xs text-white/60">{label}</span>
@@ -651,7 +651,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           variants={fadeInUp}
           className="flex justify-center mb-14 px-4"
         >
-          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/5 backdrop-blur-xl border border-white/10">
+          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white dark:bg-slate-900/5 backdrop-blur-xl border border-white/10">
             <button
               onClick={() => handleTabSwitch("shorts")}
               className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
@@ -898,7 +898,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                                 ) : (
                                   <button
                                     onClick={handleStop}
-                                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 text-white text-xs font-semibold hover:bg-white/15 transition-all duration-300"
+                                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-900/10 backdrop-blur-sm border border-white/10 text-white text-xs font-semibold hover:bg-white dark:bg-slate-900/15 transition-all duration-300"
                                   >
                                     <Square className="w-3 h-3" fill="white" />
                                     {language === "en" ? "Stop" : "Arrêter"}
@@ -916,11 +916,11 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                             
                             {/* Comments Section (Expandable) */}
                             {isCommentsOpen && (
-                              <div className="border-t border-white/10 bg-white">
+                              <div className="border-t border-white/10 bg-white dark:bg-slate-900">
                                 <div className="p-3 border-b border-slate-200 flex items-center justify-between">
                                   <div className="flex items-center gap-2">
-                                    <MessageCircle className="w-3.5 h-3.5 text-black" />
-                                    <span className="text-xs font-medium text-black">
+                                    <MessageCircle className="w-3.5 h-3.5 text-black dark:text-white" />
+                                    <span className="text-xs font-medium text-black dark:text-white">
                                       {language === "en" ? "Discussion" : "Discussion"}
                                     </span>
                                   </div>
@@ -929,7 +929,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                                     className="p-1 rounded-full hover:bg-slate-200 transition-colors"
                                     aria-label="Close comments"
                                   >
-                                    <X className="w-3.5 h-3.5 text-black" />
+                                    <X className="w-3.5 h-3.5 text-black dark:text-white" />
                                   </button>
                                 </div>
                                 
@@ -989,7 +989,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             <Link href="/#videos">
               <motion.button 
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-cta/50 hover:bg-white/10 hover:shadow-xl hover:shadow-orange-700/10 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-slate-900/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-cta/50 hover:bg-white dark:bg-slate-900/10 hover:shadow-xl hover:shadow-orange-700/10 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >

@@ -338,7 +338,7 @@ export default function CoachProfile() {
             </div>
             
             {/* Profile Header Card with Glassmorphism */}
-            <div className="backdrop-blur-xl bg-white/10 border border-white/60 rounded-3xl p-8 shadow-2xl">
+            <div className="backdrop-blur-xl bg-white dark:bg-slate-900/10 border border-white/60 rounded-3xl p-8 shadow-2xl">
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Avatar Section */}
                 <div className="shrink-0 flex flex-col items-center lg:items-start">
@@ -360,10 +360,10 @@ export default function CoachProfile() {
                         coachId={coach.id}
                         initialFavorited={isFavorite}
                         onToggle={(favorited) => setIsFavorite(favorited)}
-                        className="bg-white/10 hover:bg-white/20 border-white/60"
+                        className="bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 border-white/60"
                       />
                     )}
-                    <Button variant="outline" size="icon" className="bg-white/10 hover:bg-white/20 border-white/60 text-white">
+                    <Button variant="outline" size="icon" className="bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 border-white/60 text-white">
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -380,7 +380,7 @@ export default function CoachProfile() {
 
                   {/* Stats Row - Glassmorphism Cards */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
+                    <div className="backdrop-blur-md bg-white dark:bg-slate-900/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                         <span className="text-2xl font-bold text-white">{coach.averageRating || "New"}</span>
@@ -389,14 +389,14 @@ export default function CoachProfile() {
                         {reviews && reviews.length > 0 ? `${reviews.length} reviews` : "Rating"}
                       </p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
+                    <div className="backdrop-blur-md bg-white dark:bg-slate-900/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Users className="h-5 w-5 text-cyan-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalStudents || 0}</span>
                       </div>
                       <p className="text-sm text-white/90">{isEn ? "Students" : "Étudiants"}</p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
+                    <div className="backdrop-blur-md bg-white dark:bg-slate-900/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <CalendarIcon className="h-5 w-5 text-teal-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalSessions || 0}</span>
@@ -412,7 +412,7 @@ export default function CoachProfile() {
                         <p className="text-sm text-emerald-200 font-medium">{isEn ? "Success Rate" : "Taux de réussite"}</p>
                       </div>
                     ) : (
-                      <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
+                      <div className="backdrop-blur-md bg-white dark:bg-slate-900/10 rounded-xl p-4 text-center border border-white/60">
                         <div className="flex items-center justify-center gap-1 mb-1">
                           <Clock className="h-5 w-5 text-foundation" />
                           <span className="text-2xl font-bold text-white">{coach.responseTimeHours || 24}h</span>
@@ -434,7 +434,7 @@ export default function CoachProfile() {
 
                   {/* Specializations */}
                   <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                    <Badge className="bg-white/20 text-white border-white/60 hover:bg-white/30">
+                    <Badge className="bg-white dark:bg-slate-900/20 text-white border-white/60 hover:bg-white dark:bg-slate-900/30">
                       <Globe className="h-3 w-3 mr-1" />
                       {languageLabel}
                     </Badge>

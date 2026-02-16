@@ -18,7 +18,7 @@ const dashboardRoutes: Record<UserRole, string> = {
 };
 
 const LoadingSpinner = () => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
+  <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900">
     <div className="text-center">
       <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-red-700 border-t-transparent"></div>
       <p className="mt-4 text-gray-600">Vérification des permissions...</p>
@@ -27,8 +27,8 @@ const LoadingSpinner = () => (
 );
 
 const AccessDenied = ({ userRole, requiredRole }: { userRole: UserRole; requiredRole: UserRole }) => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
-    <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
+  <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900">
+    <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-xl shadow-lg p-8 text-center">
       <div className="text-6xl mb-4">🚫</div>
       <h1 className="text-2xl font-bold text-gray-900 mb-2">Accès Refusé</h1>
       <p className="text-gray-600 mb-6">

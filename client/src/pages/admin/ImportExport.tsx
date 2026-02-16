@@ -166,8 +166,8 @@ export default function ImportExport() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-black">Import / Export</h1>
-        <p className="text-black mt-1">
+        <h1 className="text-2xl font-bold text-black dark:text-white">Import / Export</h1>
+        <p className="text-black dark:text-white mt-1">
           Backup your data, migrate contacts, and export reports — all in CSV format
         </p>
       </div>
@@ -217,8 +217,8 @@ export default function ImportExport() {
             )}
           </div>
           <div className="mt-3 p-3 bg-gray-50 rounded-lg">
-            <p className="text-xs text-black font-medium mb-1">CSV Format Example:</p>
-            <code className="text-xs text-black block">
+            <p className="text-xs text-black dark:text-white font-medium mb-1">CSV Format Example:</p>
+            <code className="text-xs text-black dark:text-white block">
               name,email,role<br />
               John Doe,john@example.com,user<br />
               Jane Smith,jane@example.com,coach
@@ -229,8 +229,8 @@ export default function ImportExport() {
 
       {/* Export Section */}
       <div>
-        <h2 className="text-lg font-semibold text-black mb-3 flex items-center gap-2">
-          <Download className="w-5 h-5 text-black" />
+        <h2 className="text-lg font-semibold text-black dark:text-white mb-3 flex items-center gap-2">
+          <Download className="w-5 h-5 text-black dark:text-white" />
           Export Data
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -245,8 +245,8 @@ export default function ImportExport() {
                       <Icon className={`w-5 h-5 ${card.color}`} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-black">{card.title}</h3>
-                      <p className="text-xs text-black mt-1">{card.description}</p>
+                      <h3 className="font-semibold text-black dark:text-white">{card.title}</h3>
+                      <p className="text-xs text-black dark:text-white mt-1">{card.description}</p>
                     </div>
                   </div>
                   <Button
@@ -270,10 +270,10 @@ export default function ImportExport() {
       </div>
 
       {/* Tips */}
-      <Card className="bg-gray-50 border-gray-200">
+      <Card className="bg-gray-50 border-gray-200 dark:border-slate-700">
         <CardContent className="py-4">
-          <h3 className="font-medium text-black text-sm mb-2">Tips</h3>
-          <ul className="text-xs text-black space-y-1">
+          <h3 className="font-medium text-black dark:text-white text-sm mb-2">Tips</h3>
+          <ul className="text-xs text-black dark:text-white space-y-1">
             <li className="flex items-center gap-2"><ArrowRight className="w-3 h-3" /> Exports include all records — use date filters in Sales Analytics for time-specific data</li>
             <li className="flex items-center gap-2"><ArrowRight className="w-3 h-3" /> Imported contacts with existing emails are automatically skipped (no duplicates)</li>
             <li className="flex items-center gap-2"><ArrowRight className="w-3 h-3" /> CSV files can be opened in Excel, Google Sheets, or any spreadsheet application</li>

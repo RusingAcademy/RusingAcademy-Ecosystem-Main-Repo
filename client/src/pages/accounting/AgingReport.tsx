@@ -99,7 +99,7 @@ export default function AgingReport() {
       {/* Summary Buckets */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 mb-6">
         {buckets.map((b) => (
-          <div key={b} className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+          <div key={b} className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-4 text-center">
             <p className="text-xs text-gray-500 mb-1">{b === "Current" ? "Current" : `${b} days`}</p>
             <p className="text-lg font-bold text-gray-800">
               ${bucketTotals[b].toLocaleString("en-CA", { minimumFractionDigits: 2 })}
@@ -115,10 +115,10 @@ export default function AgingReport() {
       </div>
 
       {/* Detail Table */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-slate-700 bg-gray-50">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">
                 {reportType === "receivable" ? "Customer" : "Supplier"}
               </th>

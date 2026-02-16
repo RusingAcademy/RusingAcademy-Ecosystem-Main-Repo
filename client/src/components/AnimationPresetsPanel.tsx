@@ -116,7 +116,7 @@ function AnimationPreviewBox({ presetId, duration }: { presetId: string; duratio
 
   if (!preset || presetId === "none") {
     return (
-      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 flex items-center justify-center text-cyan-300 text-xs">
+      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 dark:border-slate-700 flex items-center justify-center text-cyan-300 text-xs">
         No animation selected
       </div>
     );
@@ -140,7 +140,7 @@ function AnimationPreviewBox({ presetId, duration }: { presetId: string; duratio
 
   return (
     <div className="space-y-2">
-      <div className="w-full h-24 rounded-lg border border-gray-200 bg-gradient-to-br from-indigo-50 to-white overflow-hidden flex items-center justify-center relative">
+      <div className="w-full h-24 rounded-lg border border-gray-200 dark:border-slate-700 bg-gradient-to-br from-indigo-50 to-white overflow-hidden flex items-center justify-center relative">
         <div
           style={animationStyle}
           className="w-3/4 h-16 rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white text-xs font-medium shadow-sm"
@@ -237,7 +237,7 @@ export default function AnimationPresetsPanel({
             <Sparkles className="h-4 w-4 text-indigo-500" />
             Animation Preset
           </DialogTitle>
-          <p className="text-xs text-black mt-1">
+          <p className="text-xs text-black dark:text-white mt-1">
             Section: <span className="font-medium">{sectionTitle}</span>
           </p>
         </DialogHeader>
@@ -253,13 +253,13 @@ export default function AnimationPresetsPanel({
 
             {/* Preview */}
             <div>
-              <Label className="text-xs font-medium text-black mb-2 block">Preview</Label>
+              <Label className="text-xs font-medium text-black dark:text-white mb-2 block">Preview</Label>
               <AnimationPreviewBox presetId={selectedPreset} duration={duration} />
             </div>
 
             {/* Basic */}
             <div>
-              <Label className="text-xs font-medium text-black mb-2 block">Basic</Label>
+              <Label className="text-xs font-medium text-black dark:text-white mb-2 block">Basic</Label>
               <div className="grid grid-cols-2 gap-2">
                 {basicPresets.map(preset => {
                   const Icon = preset.icon;
@@ -273,7 +273,7 @@ export default function AnimationPresetsPanel({
                           : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                       }`}
                     >
-                      <Icon className="h-4 w-4 text-black shrink-0" />
+                      <Icon className="h-4 w-4 text-black dark:text-white shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
                         <p className="text-[10px] text-cyan-300">{preset.labelFr}</p>
@@ -286,7 +286,7 @@ export default function AnimationPresetsPanel({
 
             {/* Directional */}
             <div>
-              <Label className="text-xs font-medium text-black mb-2 block">Directional</Label>
+              <Label className="text-xs font-medium text-black dark:text-white mb-2 block">Directional</Label>
               <div className="grid grid-cols-2 gap-2">
                 {directionalPresets.map(preset => {
                   const Icon = preset.icon;
@@ -300,7 +300,7 @@ export default function AnimationPresetsPanel({
                           : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                       }`}
                     >
-                      <Icon className="h-4 w-4 text-black shrink-0" />
+                      <Icon className="h-4 w-4 text-black dark:text-white shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
                         <p className="text-[10px] text-cyan-300">{preset.labelFr}</p>
@@ -313,7 +313,7 @@ export default function AnimationPresetsPanel({
 
             {/* Emphasis */}
             <div>
-              <Label className="text-xs font-medium text-black mb-2 block">Emphasis</Label>
+              <Label className="text-xs font-medium text-black dark:text-white mb-2 block">Emphasis</Label>
               <div className="grid grid-cols-2 gap-2">
                 {emphasisPresets.map(preset => {
                   const Icon = preset.icon;
@@ -327,7 +327,7 @@ export default function AnimationPresetsPanel({
                           : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                       }`}
                     >
-                      <Icon className="h-4 w-4 text-black shrink-0" />
+                      <Icon className="h-4 w-4 text-black dark:text-white shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
                         <p className="text-[10px] text-cyan-300">{preset.labelFr}</p>
@@ -343,7 +343,7 @@ export default function AnimationPresetsPanel({
               <div className="space-y-4 pt-2 border-t border-gray-100">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <Label className="text-xs font-medium text-black">Duration</Label>
+                    <Label className="text-xs font-medium text-black dark:text-white">Duration</Label>
                     <Badge variant="outline" className="text-[10px]">{duration}ms</Badge>
                   </div>
                   <Slider
@@ -362,7 +362,7 @@ export default function AnimationPresetsPanel({
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <Label className="text-xs font-medium text-black">Delay</Label>
+                    <Label className="text-xs font-medium text-black dark:text-white">Delay</Label>
                     <Badge variant="outline" className="text-[10px]">{delay}ms</Badge>
                   </div>
                   <Slider

@@ -279,7 +279,7 @@ export default function ForBusiness() {
                 {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-white dark:hover:bg-foundation">
+              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-white dark:bg-slate-900 dark:hover:bg-foundation">
                 <FileText className="w-5 h-5 mr-2" />
                 {t.ctaSecondary}
               </Button>
@@ -502,7 +502,7 @@ export default function ForBusiness() {
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{t.ctaTitle}</h2>
           <p className="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">{t.ctaSubtitle}</p>
-          <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 shadow-lg hover:shadow-xl transition-all duration-300 px-8">
+          <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-lg hover:shadow-xl transition-all duration-300 px-8">
             <Calendar className="w-5 h-5 mr-2" />
             {t.ctaButton}
           </Button>

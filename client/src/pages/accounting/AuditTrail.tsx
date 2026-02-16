@@ -155,30 +155,30 @@ export default function AuditTrail() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 mb-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-3 text-center">
           <div className="text-2xl font-bold text-gray-800">{stats.total}</div>
           <div className="text-xs text-gray-500">Total Events</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-3 text-center">
           <div className="text-2xl font-bold text-green-600">{stats.creates}</div>
           <div className="text-xs text-gray-500">Creates</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-3 text-center">
           <div className="text-2xl font-bold text-blue-600">{stats.updates}</div>
           <div className="text-xs text-gray-500">Updates</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-3 text-center">
           <div className="text-2xl font-bold text-red-600">{stats.deletes}</div>
           <div className="text-xs text-gray-500">Deletes</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-3 text-center">
           <div className="text-2xl font-bold text-purple-600">{stats.uniqueEntities}</div>
           <div className="text-xs text-gray-500">Entity Types</div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-4 mb-6">
         <div className="flex items-center gap-3 mb-3">
           <div className="relative flex-1">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -232,7 +232,7 @@ export default function AuditTrail() {
       {isLoading ? (
         <div className="flex justify-center py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
       ) : items.length === 0 ? (
-        <div className="bg-white rounded-lg border border-gray-200 text-center py-12">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 text-center py-12">
           <Shield size={32} className="mx-auto text-gray-300 mb-3" />
           <p className="text-gray-500 mb-1">No audit entries found</p>
           <p className="text-sm text-gray-400">
@@ -248,7 +248,7 @@ export default function AuditTrail() {
                 <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">{date}</span>
                 <span className="text-xs text-gray-400">({entries.length} events)</span>
               </div>
-              <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
                 {entries.map((entry: any) => {
                   const EntityIcon = ENTITY_ICONS[entry.entityType] || FileText;
                   const isExpanded = expandedId === entry.id;

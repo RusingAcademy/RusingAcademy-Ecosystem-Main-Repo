@@ -129,7 +129,7 @@ export default function PhotoLightbox({
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-4 right-4 text-white hover:bg-white/20 z-50"
+        className="absolute top-4 right-4 text-white hover:bg-white dark:bg-slate-900/20 z-50"
         onClick={onClose}
       >
         <X className="h-6 w-6" />
@@ -140,7 +140,7 @@ export default function PhotoLightbox({
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20 h-12 w-12"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white dark:bg-slate-900/20 h-12 w-12"
             onClick={handlePrevious}
           >
             <ChevronLeft className="h-8 w-8" />
@@ -148,7 +148,7 @@ export default function PhotoLightbox({
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20 h-12 w-12"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white dark:bg-slate-900/20 h-12 w-12"
             onClick={handleNext}
           >
             <ChevronRight className="h-8 w-8" />
@@ -171,7 +171,7 @@ export default function PhotoLightbox({
         <Button
           variant="ghost"
           size="icon"
-          className="text-white hover:bg-white/20 h-8 w-8"
+          className="text-white hover:bg-white dark:bg-slate-900/20 h-8 w-8"
           onClick={handleZoomOut}
           disabled={zoom <= 0.5}
         >
@@ -183,17 +183,17 @@ export default function PhotoLightbox({
         <Button
           variant="ghost"
           size="icon"
-          className="text-white hover:bg-white/20 h-8 w-8"
+          className="text-white hover:bg-white dark:bg-slate-900/20 h-8 w-8"
           onClick={handleZoomIn}
           disabled={zoom >= 3}
         >
           <ZoomIn className="h-4 w-4" />
         </Button>
-        <div className="w-px h-4 bg-white/30 mx-2" />
+        <div className="w-px h-4 bg-white dark:bg-slate-900/30 mx-2" />
         <Button
           variant="ghost"
           size="icon"
-          className="text-white hover:bg-white/20 h-8 w-8"
+          className="text-white hover:bg-white dark:bg-slate-900/20 h-8 w-8"
           onClick={handleRotate}
         >
           <RotateCw className="h-4 w-4" />
@@ -201,7 +201,7 @@ export default function PhotoLightbox({
         <Button
           variant="ghost"
           size="icon"
-          className="text-white hover:bg-white/20 h-8 w-8"
+          className="text-white hover:bg-white dark:bg-slate-900/20 h-8 w-8"
           onClick={handleDownload}
         >
           <Download className="h-4 w-4" />

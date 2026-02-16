@@ -264,7 +264,7 @@ export default function AdminLeads() {
                             <span className="font-medium text-black dark:text-white">
                               {lead.firstName} {lead.lastName}
                             </span>
-                            <span className="text-sm text-black">{lead.email}</span>
+                            <span className="text-sm text-black dark:text-white">{lead.email}</span>
                           </div>
                         </TableCell>
                         <TableCell>
@@ -284,7 +284,7 @@ export default function AdminLeads() {
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm text-black">
+                          <span className="text-sm text-black dark:text-white">
                             {lead.createdAt ? format(new Date(lead.createdAt), "MMM d, yyyy") : "N/A"}
                           </span>
                         </TableCell>

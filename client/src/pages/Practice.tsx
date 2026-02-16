@@ -500,7 +500,7 @@ export default function Practice() {
                             <Badge variant={isSelected ? "default" : "secondary"} className={isSelected ? "bg-rose-600" : ""}>
                               {lvl.label}
                             </Badge>
-                            <span className="text-sm text-black">{lvl.passingScore}% {l.passingScore}</span>
+                            <span className="text-sm text-black dark:text-white">{lvl.passingScore}% {l.passingScore}</span>
                           </div>
                           <p className="text-sm text-black dark:text-cyan-300 mb-3">{lvl.desc}</p>
                           {selectedType && (

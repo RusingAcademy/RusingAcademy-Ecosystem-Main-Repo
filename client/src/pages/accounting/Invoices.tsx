@@ -191,7 +191,7 @@ export default function Invoices() {
                 Change status
               </button>
               {showBulkStatusMenu && (
-                <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-20 py-1 w-40">
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg z-20 py-1 w-40">
                   {["Draft", "Sent", "Paid", "Overdue", "Voided"].map(status => (
                     <button
                       key={status}
@@ -276,7 +276,7 @@ export default function Invoices() {
 
       {/* Filter Tabs + Search */}
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4 border-b border-gray-200">
+        <div className="flex items-center gap-4 border-b border-gray-200 dark:border-slate-700">
           {["All", "Draft", "Sent", "Overdue", "Partial", "Paid", "Deposited", "Voided"].map(tab => (
             <button
               key={tab}
@@ -309,7 +309,7 @@ export default function Invoices() {
       </div>
 
       {/* Invoice Table */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">
@@ -371,7 +371,7 @@ export default function Invoices() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 bg-gray-50">
             <span className="text-sm text-gray-500">
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>

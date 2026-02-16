@@ -417,7 +417,7 @@ export default function CoachDashboard() {
                       day: 'numeric' 
                     })}
                   </span>
-                  <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">
+                  <Badge className="bg-white dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-900/30">
                     <Star className="h-3 w-3 mr-1" />
                     {coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}
                   </Badge>
@@ -435,7 +435,7 @@ export default function CoachDashboard() {
                 <RoleSwitcherCompact />
                 <Button 
                   size="lg" 
-                  className="bg-white text-black hover:bg-slate-100 shadow-lg"
+                  className="bg-white dark:bg-slate-900 text-black dark:text-white hover:bg-slate-100 shadow-lg"
                   onClick={() => setShowSetupWizard(true)}
                 >
                   <Settings className="h-5 w-5 mr-2" />
