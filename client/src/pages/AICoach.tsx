@@ -213,7 +213,7 @@ export default function AICoach() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white dark:bg-slate-800 dark:bg-slate-900">
 
       <main>
         {/* Hero Section - Premium Dark Gradient */}
@@ -228,7 +228,7 @@ export default function AICoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge with coach photo */}
-              <Badge className="mb-6 bg-white dark:bg-slate-900/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white dark:bg-slate-800 dark:bg-slate-900/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <img 
                   loading="lazy" src={coachPhotos[0]} 
                   alt="SLE AI Coach" 
@@ -282,11 +282,11 @@ export default function AICoach() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2">
+                <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2">
                   <Play className="h-4 w-4" />
                   {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 gap-2">
                   <MessageSquare className="h-4 w-4" />
                   {isEn ? "Try Demo" : "Essayer la démo"}
                 </Button>
@@ -297,7 +297,7 @@ export default function AICoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
+                    className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-teal-200">{stat.label}</div>
@@ -309,7 +309,7 @@ export default function AICoach() {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
@@ -318,7 +318,7 @@ export default function AICoach() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {isEn ? "Everything You Need to Succeed" : "Tout ce dont vous avez besoin pour réussir"}
               </h2>
-              <p className="text-black dark:text-white max-w-2xl mx-auto">
+              <p className="text-black dark:text-white dark:text-white max-w-2xl mx-auto">
                 {isEn
                   ? "SLE AI Companion offers comprehensive SLE practice tools designed to help you achieve your language goals."
                   : "Le Compagnon IA ELS offre des outils de pratique ELS complets conçus pour vous aider à atteindre vos objectifs linguistiques."}
@@ -342,7 +342,7 @@ export default function AICoach() {
                         />
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-                      <p className="text-black dark:text-white">{feature.description}</p>
+                      <p className="text-black dark:text-white dark:text-white">{feature.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -352,14 +352,14 @@ export default function AICoach() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-white dark:bg-slate-900 border-y">
+        <section className="py-12 bg-white dark:bg-slate-800 dark:bg-slate-900 border-y">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
-            <p className="text-center text-sm text-black dark:text-white mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm text-black dark:text-white dark:text-white mb-6 uppercase tracking-wider">
               {isEn ? "Trusted by public servants from" : "Utilisé par les fonctionnaires de"}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {federalOrgs.map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-black dark:text-white hover:text-black dark:text-white transition-colors">
+                <div key={i} className="flex items-center gap-2 text-black dark:text-white dark:text-white hover:text-black dark:text-white dark:text-white transition-colors">
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -369,7 +369,7 @@ export default function AICoach() {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
@@ -378,7 +378,7 @@ export default function AICoach() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {isEn ? "How It Works" : "Comment ça marche"}
               </h2>
-              <p className="text-black dark:text-white max-w-2xl mx-auto">
+              <p className="text-black dark:text-white dark:text-white max-w-2xl mx-auto">
                 {isEn
                   ? "Start practicing in minutes with our intuitive AI coach."
                   : "Commencez à pratiquer en quelques minutes avec notre coach IA intuitif."}
@@ -402,7 +402,7 @@ export default function AICoach() {
                     </div>
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                  <p className="text-black dark:text-white text-sm">{step.description}</p>
+                  <p className="text-black dark:text-white dark:text-white text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -410,7 +410,7 @@ export default function AICoach() {
         </section>
 
         {/* AI Coach Preview */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -421,7 +421,7 @@ export default function AICoach() {
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     {isEn ? "Your Personal AI Language Coach" : "Votre coach linguistique IA personnel"}
                   </h2>
-                  <p className="text-black dark:text-white mb-6">
+                  <p className="text-black dark:text-white dark:text-white mb-6">
                     {isEn
                       ? "SLE AI Companion is designed specifically for Canadian federal public servants preparing for SLE exams. With advanced AI technology, it provides personalized feedback and adapts to your learning style."
                       : "Le Compagnon IA ELS est conçu spécifiquement pour les fonctionnaires fédéraux canadiens préparant les examens ELS. Avec une technologie IA avancée, il fournit des commentaires personnalisés et s'adapte à votre style d'apprentissage."}
@@ -434,7 +434,7 @@ export default function AICoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Bilingual Support" : "Support bilingue"}</div>
-                        <div className="text-sm text-black dark:text-white">{isEn ? "Practice in French or English" : "Pratiquez en français ou en anglais"}</div>
+                        <div className="text-sm text-black dark:text-white dark:text-white">{isEn ? "Practice in French or English" : "Pratiquez en français ou en anglais"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -443,7 +443,7 @@ export default function AICoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Available 24/7" : "Disponible 24/7"}</div>
-                        <div className="text-sm text-black dark:text-white">{isEn ? "Practice anytime, anywhere" : "Pratiquez à tout moment, n'importe où"}</div>
+                        <div className="text-sm text-black dark:text-white dark:text-white">{isEn ? "Practice anytime, anywhere" : "Pratiquez à tout moment, n'importe où"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -477,7 +477,7 @@ export default function AICoach() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-lg p-4">
+                    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-sm rounded-lg p-4">
                       <p className="text-sm text-teal-100">
                         {isEn
                           ? '"Hello! I\'m your SLE AI Companion. How can I help you prepare for your SLE exam today?"'
@@ -485,11 +485,11 @@ export default function AICoach() {
                       </p>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-white dark:bg-slate-900/20 hover:bg-white dark:bg-slate-900/30 text-white border-0">
+                      <Button size="sm" className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/30 text-white border-0">
                         <Mic className="h-4 w-4 mr-2" />
                         {isEn ? "Oral Practice" : "Pratique orale"}
                       </Button>
-                      <Button size="sm" className="bg-white dark:bg-slate-900/20 hover:bg-white dark:bg-slate-900/30 text-white border-0">
+                      <Button size="sm" className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/30 text-white border-0">
                         <PenTool className="h-4 w-4 mr-2" />
                         {isEn ? "Written" : "Écrit"}
                       </Button>
@@ -502,7 +502,7 @@ export default function AICoach() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
@@ -522,7 +522,7 @@ export default function AICoach() {
                         <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
-                    <p className="mb-6 italic text-black dark:text-white">"{testimonial.quote}"</p>
+                    <p className="mb-6 italic text-black dark:text-white dark:text-white">"{testimonial.quote}"</p>
                     <div className="flex items-center gap-3">
                       <img 
                         loading="lazy" src={coachPhotos[i % coachPhotos.length]} 
@@ -531,7 +531,7 @@ export default function AICoach() {
                       />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
-                        <div className="text-sm text-black dark:text-white">{testimonial.role}</div>
+                        <div className="text-sm text-black dark:text-white dark:text-white">{testimonial.role}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -550,7 +550,7 @@ export default function AICoach() {
           </div>
 
           <div className="container max-w-6xl mx-auto px-6 md:px-12 relative text-center">
-            <Badge className="mb-6 bg-white dark:bg-slate-900/10 text-white border-white/60 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white dark:bg-slate-800 dark:bg-slate-900/10 text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Free Today" : "Commencez gratuitement aujourd'hui"}
             </Badge>
@@ -577,12 +577,12 @@ export default function AICoach() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl gap-2">
+              <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl gap-2">
                 <Play className="h-4 w-4" />
                 {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
               </Button>
               <a href="/coaches">
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 gap-2">
                   <Users className="h-4 w-4" />
                   {isEn ? "Or Find a Human Coach" : "Ou trouver un coach humain"}
                 </Button>

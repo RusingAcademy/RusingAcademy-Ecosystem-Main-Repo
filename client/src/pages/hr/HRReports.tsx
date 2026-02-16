@@ -54,7 +54,7 @@ export default function HRReports() {
           <div className="flex gap-2">
             <button
               onClick={() => toast.info(isEn ? "CSV export coming soon" : "Export CSV bientôt disponible")}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-colors"
             >
               <span className="material-icons text-sm">download</span>
               {ui.exportCsv}
@@ -70,14 +70,14 @@ export default function HRReports() {
         </div>
 
         {/* Report Type Tabs */}
-        <div className="flex gap-2 bg-gray-100 p-1 rounded-xl">
+        <div className="flex gap-2 bg-gray-100 dark:bg-slate-800 p-1 rounded-xl">
           {reportTypes.map((rt) => (
             <button
               key={rt.key}
               onClick={() => setReportType(rt.key)}
               className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium transition-all ${
                 reportType === rt.key
-                  ? "bg-white text-blue-600 shadow-sm"
+                  ? "bg-white dark:bg-slate-800 text-blue-600 shadow-sm"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -95,7 +95,7 @@ export default function HRReports() {
             { label: ui.activeParticipants, value: "—", icon: "groups", color: "var(--color-violet-600, #7c3aed)" },
             { label: ui.totalHours, value: "—", icon: "schedule", color: "#ea580c" },
           ].map((kpi, i) => (
-            <div key={i} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
+            <div key={i} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${kpi.color}10` }}>
                   <span className="material-icons text-xl" style={{ color: kpi.color }}>{kpi.icon}</span>
@@ -108,11 +108,11 @@ export default function HRReports() {
         </div>
 
         {/* Empty State */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 p-12 text-center">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-3xl text-blue-600">assessment</span>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{ui.noData}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{ui.noData}</h3>
           <p className="text-sm text-gray-500 max-w-md mx-auto">{ui.noDataSub}</p>
         </div>
       </div>

@@ -220,30 +220,30 @@ export function StreakRecovery({
           <div className="p-3 rounded-lg bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border border-orange-200/50 dark:border-orange-800/50">
             <div className="flex items-center gap-2 mb-1">
               <Flame className="h-4 w-4 text-orange-500" />
-              <span className="text-xs text-black dark:text-cyan-300">{l.currentStreak}</span>
+              <span className="text-xs text-black dark:text-white dark:text-cyan-300">{l.currentStreak}</span>
             </div>
             <p className="text-2xl font-bold text-orange-600">
               {currentStreak}
-              <span className="text-sm font-normal text-black dark:text-white ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-black dark:text-white dark:text-white ml-1">{l.days}</span>
             </p>
           </div>
 
           <div className="p-3 rounded-lg bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 border border-purple-200/50 dark:border-purple-800/50">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="h-4 w-4 text-purple-500" />
-              <span className="text-xs text-black dark:text-cyan-300">{l.longestStreak}</span>
+              <span className="text-xs text-black dark:text-white dark:text-cyan-300">{l.longestStreak}</span>
             </div>
             <p className="text-2xl font-bold text-purple-600">
               {longestStreak}
-              <span className="text-sm font-normal text-black dark:text-white ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-black dark:text-white dark:text-white ml-1">{l.days}</span>
             </p>
           </div>
         </div>
 
         <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-teal-800">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-black dark:text-white/90">{l.streakFreezes}</span>
-            <span className="text-xs text-black dark:text-white">{streakFreezes} {l.available}</span>
+            <span className="text-sm font-medium text-black dark:text-white dark:text-white/90">{l.streakFreezes}</span>
+            <span className="text-xs text-black dark:text-white dark:text-white">{streakFreezes} {l.available}</span>
           </div>
           
           <div className="flex gap-1 mb-3">
@@ -319,7 +319,7 @@ export function StreakRecovery({
                   <DialogDescription>{l.purchaseDesc}</DialogDescription>
                 </DialogHeader>
                 <div className="space-y-3">
-                  <p className="text-sm font-medium text-black dark:text-white/90">{l.earnMethods}:</p>
+                  <p className="text-sm font-medium text-black dark:text-white dark:text-white/90">{l.earnMethods}:</p>
                   <div className="space-y-2">
                     <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
                       <CheckCircle2 className="h-5 w-5 text-emerald-500" />
@@ -347,7 +347,7 @@ export function StreakRecovery({
         </div>
 
         {lastActivityDate && (
-          <div className="flex items-center justify-between text-xs text-black dark:text-cyan-300 pt-2 border-t border-slate-200 dark:border-teal-800">
+          <div className="flex items-center justify-between text-xs text-black dark:text-white dark:text-cyan-300 pt-2 border-t border-slate-200 dark:border-teal-800">
             <span className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
               {l.lastActive}

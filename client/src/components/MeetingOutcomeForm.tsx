@@ -205,14 +205,14 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white dark:bg-slate-900/10 rounded-lg transition-colors"
+            className="p-2 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
         
         {/* Meeting Info */}
-        <div className="bg-white dark:bg-slate-900/5 rounded-xl p-4 mb-6">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-xl p-4 mb-6">
           <div className="flex items-center gap-3 mb-2">
             <Calendar className="w-5 h-5 text-teal-400" />
             <span className="font-medium">{meeting.title}</span>
@@ -280,7 +280,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                     max="10"
                     value={qualificationScore}
                     onChange={(e) => setQualificationScore(parseInt(e.target.value))}
-                    className="flex-1 h-2 bg-white dark:bg-slate-900/10 rounded-lg appearance-none cursor-pointer accent-teal-500"
+                    className="flex-1 h-2 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg appearance-none cursor-pointer accent-teal-500"
                   />
                   <div className="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center text-xl font-bold text-teal-400">
                     {qualificationScore}
@@ -304,7 +304,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                         value={dealValue}
                         onChange={(e) => setDealValue(e.target.value)}
                         placeholder="0"
-                        className="w-full pl-8 pr-4 py-3 bg-white dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                        className="w-full pl-8 pr-4 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                       />
                     </div>
                   </div>
@@ -322,7 +322,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                         step="5"
                         value={dealProbability}
                         onChange={(e) => setDealProbability(parseInt(e.target.value))}
-                        className="flex-1 h-2 bg-white dark:bg-slate-900/10 rounded-lg appearance-none cursor-pointer accent-teal-500"
+                        className="flex-1 h-2 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg appearance-none cursor-pointer accent-teal-500"
                       />
                       <span className="w-12 text-right font-medium">{dealProbability}%</span>
                     </div>
@@ -341,7 +341,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                   type="text"
                   value={nextSteps}
                   onChange={(e) => setNextSteps(e.target.value)}
-                  className="w-full px-4 py-3 bg-white dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                  className="w-full px-4 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                   placeholder={language === "fr" ? "Ex: Envoyer une proposition" : "Ex: Send proposal"}
                 />
               </div>
@@ -356,7 +356,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 bg-white dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors resize-none"
                 />
               </div>
               
@@ -392,7 +392,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                             type="datetime-local"
                             value={followUpDate}
                             onChange={(e) => setFollowUpDate(e.target.value)}
-                            className="w-full px-4 py-3 bg-white dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                           />
                         </div>
                         
@@ -401,7 +401,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                           <select
                             value={followUpType}
                             onChange={(e) => setFollowUpType(e.target.value as "call" | "email" | "meeting")}
-                            className="w-full px-4 py-3 bg-white dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 rounded-lg focus:outline-none focus:border-teal-500 transition-colors"
                           >
                             <option value="call">{t.call}</option>
                             <option value="email">{t.email}</option>
@@ -421,7 +421,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
         <div className="flex gap-3 mt-6 pt-6 border-t border-white/60">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-3 bg-white dark:bg-slate-900/10 text-white rounded-lg hover:bg-white dark:bg-slate-900/20 transition-colors"
+            className="flex-1 px-4 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/10 text-white rounded-lg hover:bg-white dark:bg-slate-800 dark:bg-slate-900/20 transition-colors"
           >
             {t.cancel}
           </button>

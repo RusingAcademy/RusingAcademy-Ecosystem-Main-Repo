@@ -36,7 +36,7 @@ export function XpMultiplierCard({ language, className }: XpMultiplierCardProps)
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Zap className="h-5 w-5 text-amber-500" />
-            <span className="font-semibold text-sm text-black dark:text-white/90">{l.title}</span>
+            <span className="font-semibold text-sm text-black dark:text-white dark:text-white/90">{l.title}</span>
           </div>
           <Badge variant="secondary" className="bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 text-lg font-bold px-3">
             {data.totalMultiplier}x
@@ -44,14 +44,14 @@ export function XpMultiplierCard({ language, className }: XpMultiplierCardProps)
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="flex items-center gap-1 text-black dark:text-cyan-300">
+            <span className="flex items-center gap-1 text-black dark:text-white dark:text-cyan-300">
               <Flame className="h-3.5 w-3.5 text-orange-500" />
               {l.streak} ({data.currentStreak}j)
             </span>
             <span className="font-medium text-orange-600 dark:text-orange-400">{data.streakMultiplier}x</span>
           </div>
           <div className="flex items-center justify-between text-xs">
-            <span className="flex items-center gap-1 text-black dark:text-cyan-300">
+            <span className="flex items-center gap-1 text-black dark:text-white dark:text-cyan-300">
               <TrendingUp className="h-3.5 w-3.5 text-emerald-500" />
               {l.level} {data.currentLevel}
             </span>

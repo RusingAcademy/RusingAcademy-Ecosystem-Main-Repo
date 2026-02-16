@@ -143,7 +143,7 @@ export function NotificationSettings() {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Main Toggle */}
-        <div className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 rounded-lg">
+        <div className="flex items-center justify-between p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg">
           <div className="flex items-center gap-3">
             <div className={cn(
               "p-2 rounded-full",

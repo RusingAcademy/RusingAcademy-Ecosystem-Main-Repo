@@ -76,7 +76,7 @@ export default function CalendarPage() {
               className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                 activeCategories.includes(cat.name)
                   ? "border-transparent text-white"
-                  : "border-gray-200 text-gray-500 bg-white"
+                  : "border-gray-200 dark:border-slate-700 text-gray-500 bg-white"
               }`}
               style={activeCategories.includes(cat.name) ? { backgroundColor: cat.color } : {}}
             >
@@ -90,13 +90,13 @@ export default function CalendarPage() {
         <div className="glass-card rounded-xl overflow-hidden">
           {/* Month Navigation */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-            <button onClick={prevMonth} className="p-1 hover:bg-gray-100 rounded">
+            <button onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded">
               <span className="material-icons text-gray-500">chevron_left</span>
             </button>
             <h2 className="text-lg font-medium text-gray-800">
               {MONTHS[month]} {year}
             </h2>
-            <button onClick={nextMonth} className="p-1 hover:bg-gray-100 rounded">
+            <button onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded">
               <span className="material-icons text-gray-500">chevron_right</span>
             </button>
           </div>

@@ -545,15 +545,15 @@ export default function CoursesPage() {
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Language Toggle - FSL vs ESL */}
-        <section className="py-4 bg-white dark:bg-slate-900 border-b border-gray-100 sticky top-0 z-50">
+        <section className="py-4 bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-700 sticky top-0 z-50">
           <div className="container">
             <div className="flex justify-center">
-              <div className="inline-flex rounded-xl bg-gray-100 p-1 gap-1">
+              <div className="inline-flex rounded-xl bg-gray-100 dark:bg-slate-800 p-1 gap-1">
                 <button
                   onClick={() => { setLangTab('fsl'); setSelectedLevel('all'); }}
                   className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     langTab === 'fsl'
-                      ? 'bg-white text-teal-700 shadow-md'
+                      ? 'bg-white dark:bg-slate-800 text-teal-700 shadow-md'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -564,7 +564,7 @@ export default function CoursesPage() {
                   onClick={() => { setLangTab('esl'); setSelectedLevel('all'); }}
                   className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     langTab === 'esl'
-                      ? 'bg-white text-blue-700 shadow-md'
+                      ? 'bg-white dark:bg-slate-800 text-blue-700 shadow-md'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -593,7 +593,7 @@ export default function CoursesPage() {
               className="text-center max-w-4xl mx-auto"
             >
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                 <Sparkles className="w-4 h-4 text-teal-300" />                {langTab === 'esl' ? ui.eslBadge : ui.badge}      </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -615,7 +615,7 @@ export default function CoursesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
-                    className="px-6 py-4 rounded-2xl bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/60"
+                    className="px-6 py-4 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-md border border-white/60"
                   >
                     <p className="text-2xl lg:text-3xl font-bold text-white">{stat.value}</p>
                     <p className="text-sm text-white/90">{stat.label}</p>
@@ -627,7 +627,7 @@ export default function CoursesPage() {
               <div className="flex flex-wrap justify-center gap-4 mt-10">
                 <a
                   href="#courses"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-900 text-foundation hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-800 dark:bg-slate-900 text-foundation hover:bg-gray-100 dark:bg-slate-800 transition-all hover:scale-105 shadow-xl"
                 >
                   <BookOpen className="w-5 h-5" />
                   Browse Courses
@@ -636,7 +636,7 @@ export default function CoursesPage() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-900/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-slate-900/20 transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/20 transition-all hover:scale-105"
                 >
                   <Calendar className="w-5 h-5" />
                   {ui.freeAssessment}
@@ -647,13 +647,13 @@ export default function CoursesPage() {
         </section>
 
         {/* Why Path Series Section */}
-        <section className="py-16 lg:py-20 bg-white dark:bg-slate-900">
+        <section className="py-16 lg:py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-white mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">
                 {ui.whyTitle} <span className="text-teal-600">Path Series\u2122</span>
               </h2>
-              <p className="text-lg text-black dark:text-white">
+              <p className="text-lg text-black dark:text-white dark:text-white">
                 {ui.whySubtitle}
               </p>
             </div>
@@ -666,13 +666,13 @@ export default function CoursesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-gray-100 hover:border-teal-200 hover:shadow-lg transition-all group"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-100 dark:border-slate-700 hover:border-teal-200 hover:shadow-lg transition-all group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <prop.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-black dark:text-white mb-2">{prop.title}</h3>
-                  <p className="text-black dark:text-white text-sm">{prop.description}</p>
+                  <h3 className="text-lg font-bold text-black dark:text-white dark:text-white mb-2">{prop.title}</h3>
+                  <p className="text-black dark:text-white dark:text-white text-sm">{prop.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -680,14 +680,14 @@ export default function CoursesPage() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-10 bg-white dark:bg-slate-900 border-y border-gray-100">
+        <section className="py-10 bg-white dark:bg-slate-800 dark:bg-slate-900 border-y border-gray-100">
           <div className="container">
-            <p className="text-center text-sm font-medium text-black dark:text-white mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm font-medium text-black dark:text-white dark:text-white mb-6 uppercase tracking-wider">
               {ui.trustedBy}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
               {federalOrgs.map((org, index) => (
-                <div key={index} className="flex items-center gap-2 text-cyan-300 hover:text-black dark:text-white transition-colors">
+                <div key={index} className="flex items-center gap-2 text-cyan-300 hover:text-black dark:text-white dark:text-white transition-colors">
                   <Building2 className="w-5 h-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -697,13 +697,13 @@ export default function CoursesPage() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-16 lg:py-20 bg-white dark:bg-slate-900">
+        <section className="py-16 lg:py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-white mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">
                 {ui.howItWorks}
               </h2>
-              <p className="text-lg text-black dark:text-white">
+              <p className="text-lg text-black dark:text-white dark:text-white">
                 {ui.howItWorksSubtitle}
               </p>
             </div>
@@ -731,8 +731,8 @@ export default function CoursesPage() {
                   <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4">
                     <step.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-black dark:text-white mb-2">{step.title}</h3>
-                  <p className="text-black dark:text-white text-sm">{step.description}</p>
+                  <h3 className="text-lg font-bold text-black dark:text-white dark:text-white mb-2">{step.title}</h3>
+                  <p className="text-black dark:text-white dark:text-white text-sm">{step.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -740,10 +740,10 @@ export default function CoursesPage() {
         </section>
 
         {/* Filter Section */}
-        <section id="courses" className="py-8 border-b border-gray-100 bg-white dark:bg-slate-900 sticky top-0 z-40 shadow-sm">
+        <section id="courses" className="py-8 border-b border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:bg-slate-900 sticky top-0 z-40 shadow-sm">
           <div className="container">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-black dark:text-white">
+              <div className="flex items-center gap-2 text-black dark:text-white dark:text-white">
                 <Filter className="w-5 h-5" />
                 <span className="font-medium">{ui.filterLabel}</span>
               </div>
@@ -757,7 +757,7 @@ export default function CoursesPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedLevel === filter.id
                         ? 'bg-teal-600 text-white shadow-lg'
-                        : 'bg-gray-100 text-black hover:bg-gray-200'
+                        : 'bg-gray-100 dark:bg-slate-800 text-black dark:text-white hover:bg-gray-200'
                     }`}
                   >
                     {filter.label}
@@ -769,7 +769,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Courses Grid */}
-        <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
+        <section className="py-16 lg:py-24 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container">
             <AnimatePresence mode="wait">
               <motion.div
@@ -786,7 +786,7 @@ export default function CoursesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="group relative bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300"
+                    className="group relative bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700 overflow-hidden hover:shadow-2xl transition-all duration-300"
                   >
                     {/* Popular Badge */}
                     {course.popular && (
@@ -813,7 +813,7 @@ export default function CoursesPage() {
                         style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? 'var(--semantic-success, #10b981)' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? 'var(--color-blue-500, #3b82f6)' : course.color.includes('teal') ? 'var(--color-violet-500, #8b5cf6)' : course.color.includes('teal') ? 'var(--color-purple-500, #a855f7)' : 'var(--semantic-warning, #f59e0b)'} 0%, transparent 100%)` }}
                       />
                       <div className="absolute bottom-4 left-4">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white dark:bg-slate-900/90 backdrop-blur-sm text-sm font-bold text-black dark:text-white">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm text-sm font-bold text-black dark:text-white dark:text-white">
                           Path {course.id}
                         </span>
                       </div>
@@ -826,36 +826,36 @@ export default function CoursesPage() {
                         <span className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${course.color}`}>
                           {course.level}
                         </span>
-                        <span className="flex items-center gap-1 text-sm text-black dark:text-white">
+                        <span className="flex items-center gap-1 text-sm text-black dark:text-white dark:text-white">
                           <Clock className="w-4 h-4" />
                           {course.duration}
                         </span>
-                        <span className="flex items-center gap-1 text-sm text-black dark:text-white">
+                        <span className="flex items-center gap-1 text-sm text-black dark:text-white dark:text-white">
                           <BookOpen className="w-4 h-4" />
                           {course.hours}
                         </span>
                       </div>
 
                       {/* Title & Tagline */}
-                      <h3 className="text-xl font-bold text-black dark:text-white mb-2">{course.name}</h3>
+                      <h3 className="text-xl font-bold text-black dark:text-white dark:text-white mb-2">{course.name}</h3>
                       <p className="text-sm text-teal-600 font-medium italic mb-3">"{course.tagline}"</p>
                       
                       {/* For Whom & Outcome */}
-                      <div className="space-y-2 mb-4 p-3 rounded-xl bg-white dark:bg-slate-900">
+                      <div className="space-y-2 mb-4 p-3 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900">
                         <div className="flex items-start gap-2 text-sm">
                           <Users className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-black dark:text-white"><strong>{ui.forLabel}</strong> {course.forWhom}</span>
+                          <span className="text-black dark:text-white dark:text-white"><strong>{ui.forLabel}</strong> {course.forWhom}</span>
                         </div>
                         <div className="flex items-start gap-2 text-sm">
                           <Target className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-black dark:text-white"><strong>{ui.outcomeLabel}</strong> {course.outcome}</span>
+                          <span className="text-black dark:text-white dark:text-white"><strong>{ui.outcomeLabel}</strong> {course.outcome}</span>
                         </div>
                       </div>
 
                       {/* Features */}
                       <div className="space-y-2 mb-6">
                         {course.features.slice(0, 3).map((feature, i) => (
-                          <div key={i} className="flex items-center gap-2 text-sm text-black dark:text-white">
+                          <div key={i} className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white">
                             <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0" />
                             {feature}
                           </div>
@@ -872,8 +872,8 @@ export default function CoursesPage() {
                             </>
                           ) : (
                             <>
-                              <p className="text-2xl font-bold text-black dark:text-white">{course.priceDisplay}</p>
-                              <p className="text-xs text-black dark:text-white">{ui.cadLifetime}</p>
+                              <p className="text-2xl font-bold text-black dark:text-white dark:text-white">{course.priceDisplay}</p>
+                              <p className="text-xs text-black dark:text-white dark:text-white">{ui.cadLifetime}</p>
                             </>
                           )}
                         </div>
@@ -905,25 +905,25 @@ export default function CoursesPage() {
             {filteredCourses.length === 0 && (
               <div className="text-center py-16">
                 <GraduationCap className="w-16 h-16 text-white/90 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-black dark:text-white mb-2">{ui.noCourses}</h3>
-                <p className="text-black dark:text-white">{ui.noCoursesHint}</p>
+                <h3 className="text-xl font-semibold text-black dark:text-white dark:text-white mb-2">{ui.noCourses}</h3>
+                <p className="text-black dark:text-white dark:text-white">{ui.noCoursesHint}</p>
               </div>
             )}
           </div>
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-16 lg:py-20 bg-white dark:bg-slate-900">
+        <section className="py-16 lg:py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-cta700 text-sm font-medium mb-4">
                 <MessageCircle className="w-4 h-4" />
                 {ui.successStories}
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-white mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">
                 {ui.whatStudentsSay}
               </h2>
-              <p className="text-lg text-black dark:text-white">
+              <p className="text-lg text-black dark:text-white dark:text-white">
                 {ui.studentsSaySubtitle}
               </p>
             </div>
@@ -936,7 +936,7 @@ export default function CoursesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-gray-100"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-100"
                 >
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-4">
@@ -947,12 +947,12 @@ export default function CoursesPage() {
                   
                   {/* Quote */}
                   <Quote className="w-8 h-8 text-teal-200 mb-2" />
-                  <p className="text-black dark:text-white mb-4">{testimonial.quote}</p>
+                  <p className="text-black dark:text-white dark:text-white mb-4">{testimonial.quote}</p>
                   
                   {/* Author */}
-                  <div className="pt-4 border-t border-gray-200 dark:border-slate-700">
-                    <p className="font-semibold text-black dark:text-white">{testimonial.author}</p>
-                    <p className="text-sm text-black dark:text-white">{testimonial.role}</p>
+                  <div className="pt-4 border-t border-gray-200 dark:border-slate-700 dark:border-slate-700">
+                    <p className="font-semibold text-black dark:text-white dark:text-white">{testimonial.author}</p>
+                    <p className="text-sm text-black dark:text-white dark:text-white">{testimonial.role}</p>
                     <span className="inline-block mt-2 px-2 py-1 rounded-full bg-teal-100 text-teal-700 text-xs font-medium">
                       {testimonial.path}
                     </span>
@@ -966,10 +966,10 @@ export default function CoursesPage() {
         {/* CTA Section */}
         <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[var(--color-blue-500, #3b82f6)]' : 'from-foundation via-[#1a4a4b] to-[#0D9488]'}`}>
           <div className="container">
-            <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white dark:bg-slate-900/5 backdrop-blur-sm border border-white/60">
+            <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm border border-white/60">
               <div className="relative z-10 text-center max-w-3xl mx-auto">
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                   <Sparkles className="w-4 h-4 text-teal-300" />
                   {ui.startToday}
                 </div>
@@ -986,14 +986,14 @@ export default function CoursesPage() {
                     href="https://calendly.com/steven-barholere/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-900 text-foundation hover:bg-gray-100 transition-all hover:scale-105 shadow-xl"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-800 dark:bg-slate-900 text-foundation hover:bg-gray-100 dark:bg-slate-800 transition-all hover:scale-105 shadow-xl"
                   >
                     {ui.bookDiagnostic}
                     <ArrowRight className="w-5 h-5" />
                   </a>
                   <Link
                     href="/rusingacademy"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-900/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-slate-900/20 transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/20 transition-all hover:scale-105"
                   >
                     {ui.viewAll}
                   </Link>

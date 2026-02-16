@@ -374,7 +374,7 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-br from-teal-600 via-teal-500 to-teal-700" />
               
               {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-slate-900/10 rounded-full blur-3xl" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full blur-3xl" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-cta/20 rounded-full blur-3xl" />
               
               <div className="relative p-12 md:p-16 text-center text-white">
@@ -383,7 +383,7 @@ export default function About() {
                   {l.ctaDescription}
                 </p>
                 <Link href="/coaches">
-                  <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-white dark:bg-slate-900/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                  <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                     {l.ctaButton}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>

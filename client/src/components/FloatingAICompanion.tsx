@@ -84,13 +84,13 @@ export default function FloatingAICompanion() {
       {/* Chat Panel */}
       {isOpen && (
         <div
-          className="fixed bottom-20 right-4 z-[60] w-[380px] max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 flex flex-col overflow-hidden"
+          className="fixed bottom-20 right-4 z-[60] w-[380px] max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 flex flex-col overflow-hidden"
           style={{ height: "520px", animation: "fadeInUp 0.25s ease-out" }}
         >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white flex-shrink-0">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-white dark:bg-slate-900/20 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/20 flex items-center justify-center">
                 <span className="material-icons" >smart_toy</span>
               </div>
               <div>
@@ -103,14 +103,14 @@ export default function FloatingAICompanion() {
                 onClick={() => {
                   setMessages([SYSTEM_PROMPT]);
                 }}
-                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-slate-900/15 flex items-center justify-center transition-colors"
+                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-slate-800 dark:bg-slate-900/15 flex items-center justify-center transition-colors"
                 title="New conversation"
               >
                 <span className="material-icons" >refresh</span>
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-slate-900/15 flex items-center justify-center transition-colors"
+                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-slate-800 dark:bg-slate-900/15 flex items-center justify-center transition-colors"
                 title="Close"
               >
                 <span className="material-icons" >close</span>
@@ -125,7 +125,7 @@ export default function FloatingAICompanion() {
                 <div className="w-14 h-14 rounded-full bg-teal-700/10 flex items-center justify-center mb-4">
                   <span className="material-icons text-teal-700" style={{ fontSize: "28px" }}>smart_toy</span>
                 </div>
-                <p className="text-sm font-semibold text-gray-900 mb-1">Hello! I'm your SLE Companion</p>
+                <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">Hello! I'm your SLE Companion</p>
                 <p className="text-xs text-gray-500 mb-5 leading-relaxed">
                   Ask me anything about your SLE preparation, grammar, vocabulary, or exam strategies.
                 </p>
@@ -134,7 +134,7 @@ export default function FloatingAICompanion() {
                     <button
                       key={qp.label}
                       onClick={() => handleSend(qp.prompt)}
-                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-teal-700/30 hover:bg-teal-700/5 transition-all text-left"
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-white dark:bg-slate-800 dark:bg-slate-900 hover:border-teal-700/30 hover:bg-teal-700/5 transition-all text-left"
                     >
                       <span className="material-icons text-teal-700" >{qp.icon}</span>
                       <span className="text-[11px] font-medium text-gray-700">{qp.label}</span>
@@ -155,7 +155,7 @@ export default function FloatingAICompanion() {
                       className={`max-w-[80%] rounded-xl px-3 py-2 text-sm leading-relaxed ${
                         msg.role === "user"
                           ? "bg-teal-700 text-white rounded-br-sm"
-                          : "bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm"
+                          : "bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-gray-200 rounded-bl-sm shadow-sm"
                       }`}
                     >
                       {msg.role === "assistant" ? (
@@ -173,7 +173,7 @@ export default function FloatingAICompanion() {
                     <div className="w-6 h-6 rounded-full bg-teal-700/10 flex items-center justify-center mr-2 flex-shrink-0">
                       <span className="material-icons text-teal-700" >smart_toy</span>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl rounded-bl-sm px-4 py-3 shadow-sm">
+                    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl rounded-bl-sm px-4 py-3 shadow-sm">
                       <div className="flex gap-1.5">
                         <div className="w-2 h-2 rounded-full bg-teal-700/40 animate-bounce" style={{ animationDelay: "0ms" }} />
                         <div className="w-2 h-2 rounded-full bg-teal-700/40 animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -187,7 +187,7 @@ export default function FloatingAICompanion() {
           </div>
 
           {/* Input */}
-          <div className="px-3 py-3 border-t border-gray-100 bg-white dark:bg-slate-900 flex-shrink-0">
+          <div className="px-3 py-3 border-t border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:bg-slate-900 flex-shrink-0">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -202,7 +202,7 @@ export default function FloatingAICompanion() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything..."
                 rows={1}
-                className="flex-1 resize-none rounded-xl border border-gray-200 dark:border-slate-700 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700/40 max-h-20 bg-gray-50"
+                className="flex-1 resize-none rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 px-3 py-2 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700/40 max-h-20 bg-gray-50"
               />
               <button
                 type="submit"

@@ -70,9 +70,9 @@ export function BadgeConfigurationPanel({
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-slate-700 p-6">
+      <div className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 p-6">
         <div className="flex items-center gap-2">
           <Settings size={24} className="text-teal-600" />
           <h2 className="text-2xl font-bold text-gray-900">
@@ -82,7 +82,7 @@ export function BadgeConfigurationPanel({
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200 dark:border-slate-700 flex">
+      <div className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 flex">
         <button
           onClick={() => setActiveTab("criteria")}
           className={`flex-1 py-4 px-6 font-medium text-center transition-colors ${
@@ -111,7 +111,7 @@ export function BadgeConfigurationPanel({
           <div className="space-y-6">
             {/* Existing Criteria */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
                 {isEn ? "Active Criteria" : "Critères actifs"}
               </h3>
               <div className="space-y-3">
@@ -119,7 +119,7 @@ export function BadgeConfigurationPanel({
                   <p className="text-gray-600">{isEn ? "No criteria configured yet" : "Aucun critère configuré"}</p>
                 ) : (
                   badges.map((badge) => (
-                    <div key={badge.id} className="bg-white dark:bg-slate-900 rounded-lg p-4 flex items-center justify-between">
+                    <div key={badge.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4 flex items-center justify-between">
                       <div className="flex-1">
                         <p className="font-semibold text-gray-900">{badge.badgeName}</p>
                         <p className="text-sm text-gray-600">
@@ -159,7 +159,7 @@ export function BadgeConfigurationPanel({
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {isEn ? "Criteria Type" : "Type de critère"}
                   </label>
                   <select
@@ -178,7 +178,7 @@ export function BadgeConfigurationPanel({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       {isEn ? "Min Value" : "Valeur min"}
                     </label>
                     <input
@@ -190,7 +190,7 @@ export function BadgeConfigurationPanel({
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       {isEn ? "Max Value" : "Valeur max"}
                     </label>
                     <input
@@ -202,7 +202,7 @@ export function BadgeConfigurationPanel({
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       {isEn ? "Target Value" : "Valeur cible"}
                     </label>
                     <input
@@ -240,7 +240,7 @@ export function BadgeConfigurationPanel({
                   className={`cursor-pointer rounded-lg p-4 border-2 transition-all ${
                     selectedTemplate?.id === template.id
                       ? "border-teal-600 bg-teal-50"
-                      : "border-gray-200 bg-white hover:border-teal-300"
+                      : "border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-teal-300"
                   }`}
                 >
                   <div className="flex items-start justify-between mb-2">
@@ -261,7 +261,7 @@ export function BadgeConfigurationPanel({
 
             {selectedTemplate && (
               <div className="bg-teal-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
                   {isEn ? "Apply Template" : "Appliquer le modèle"}
                 </h3>
                 <p className="text-gray-600 mb-4">

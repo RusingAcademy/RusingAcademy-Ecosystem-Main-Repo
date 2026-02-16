@@ -111,7 +111,7 @@ export default function AdminExecutiveSummary() {
                       return (
                         <div key={i} className="flex items-center gap-3">
                           <span className="text-sm text-muted-foreground w-24">{r.label}</span>
-                          <div className="flex-1 bg-gray-100 rounded-full h-6 relative overflow-hidden">
+                          <div className="flex-1 bg-gray-100 dark:bg-slate-800 rounded-full h-6 relative overflow-hidden">
                             <div
                               className="bg-teal-700 h-full rounded-full transition-all"
                               style={{ width: `${Math.min(100, maxRev > 0 ? (Number(r.revenue) / maxRev) * 100 : 0)}%` }}

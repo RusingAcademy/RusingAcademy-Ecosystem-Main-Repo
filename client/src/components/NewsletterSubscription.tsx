@@ -140,10 +140,10 @@ export function NewsletterSubscription({
         checkbox: "border-white/30 data-[state=checked]:bg-white/20"
       }
     : { 
-        bg: "bg-white border border-gray-200 shadow-lg", 
+        bg: "bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg", 
         text: "text-gray-900", 
         textSecondary: "text-gray-600", 
-        input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400",
+        input: "bg-white dark:bg-slate-800 border-gray-300 text-gray-900 dark:text-gray-100 placeholder:text-gray-400",
         checkbox: "border-gray-300"
       };
 

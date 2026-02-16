@@ -127,7 +127,7 @@ const AdminStudyGroups = () => {
                         <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white dark:bg-slate-900 divide-y divide-gray-200">
+                    <tbody className="bg-white dark:bg-slate-800 dark:bg-slate-900 divide-y divide-gray-200">
                       {(groups as any[]).map((g: any) => (
                         <tr key={g.id}>
                           <td className="px-4 py-3">

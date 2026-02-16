@@ -39,7 +39,7 @@ export default function ProductsServices() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">
@@ -54,14 +54,14 @@ export default function ProductsServices() {
           </thead>
           <tbody>
             {filteredProducts.map((prod: any) => (
-              <tr key={prod.id} className="hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/products-services/${prod.id}`)}>
+              <tr key={prod.id} className="hover:bg-gray-50 dark:bg-slate-900 cursor-pointer" onClick={() => navigate(`/products-services/${prod.id}`)}>
                 <td onClick={(e) => e.stopPropagation()}><input type="checkbox" className="rounded" /></td>
                 <td className="text-sky-600 font-medium">{prod.name}</td>
                 <td className="text-gray-600 text-xs max-w-[200px] truncate">{prod.description || "—"}</td>
                 <td className="text-gray-600">{prod.category || "—"}</td>
                 <td>
                   <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                    prod.type === "Service" ? "bg-blue-50 text-blue-700" : "bg-gray-100 text-gray-600"
+                    prod.type === "Service" ? "bg-blue-50 text-blue-700" : "bg-gray-100 dark:bg-slate-800 text-gray-600"
                   }`}>
                     {prod.type || "Service"}
                   </span>
@@ -70,7 +70,7 @@ export default function ProductsServices() {
                   {prod.price ? `$${Number(prod.price).toFixed(2)}` : "—"}
                 </td>
                 <td>
-                  <button className="p-1 hover:bg-gray-100 rounded" onClick={() => toast("Feature coming soon")}>
+                  <button className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded" onClick={() => toast("Feature coming soon")}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>

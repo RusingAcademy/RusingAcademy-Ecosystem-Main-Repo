@@ -121,15 +121,15 @@ export default function LearningCapsules() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white dark:text-white mb-2">
             {language === 'fr' ? 'Trucs et astuces d\'apprentissage :' : 'Learning Tips & Tricks:'}
           </h2>
-          <h3 className="text-xl md:text-2xl font-semibold text-black dark:text-white mb-4">
+          <h3 className="text-xl md:text-2xl font-semibold text-black dark:text-white dark:text-white mb-4">
             {language === 'fr' 
               ? '40 micro-leçons fondées sur des données probantes pour les apprenants adultes'
               : '40 Evidence-Based Micro-Lessons for Adult Learners'}
           </h3>
-          <p className="text-black dark:text-white max-w-4xl mx-auto leading-relaxed">
+          <p className="text-black dark:text-white dark:text-white max-w-4xl mx-auto leading-relaxed">
             {language === 'fr' 
               ? 'Des leçons vidéo courtes et ciblées, fondées sur les sciences de l\'apprentissage et les principes de l\'éducation des adultes, conçues spécifiquement pour les professionnels occupés.'
               : 'Short, focused video lessons grounded in learning science and adult education principles, designed specifically for busy professionals.'}
@@ -145,18 +145,18 @@ export default function LearningCapsules() {
           {/* Navigation Arrows */}
           <button
             onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-slate-900/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-slate-900 hover:scale-110 transition-all duration-300 -translate-x-4 md:translate-x-0"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-slate-800 dark:bg-slate-900 hover:scale-110 transition-all duration-300 -translate-x-4 md:translate-x-0"
             aria-label="Previous capsule"
           >
-            <ChevronLeft className="h-6 w-6 text-black dark:text-white" />
+            <ChevronLeft className="h-6 w-6 text-black dark:text-white dark:text-white" />
           </button>
           
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-slate-900/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-slate-900 hover:scale-110 transition-all duration-300 translate-x-4 md:translate-x-0"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-slate-800 dark:bg-slate-900 hover:scale-110 transition-all duration-300 translate-x-4 md:translate-x-0"
             aria-label="Next capsule"
           >
-            <ChevronRight className="h-6 w-6 text-black dark:text-white" />
+            <ChevronRight className="h-6 w-6 text-black dark:text-white dark:text-white" />
           </button>
 
           {/* Carousel Track */}
@@ -182,7 +182,7 @@ export default function LearningCapsules() {
                     <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color}`} />
                     
                     {/* Decorative elements */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-slate-900/10 rounded-full -translate-y-32 translate-x-32" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full -translate-y-32 translate-x-32" />
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-24 -translate-x-24" />
                     
                     {/* Content */}

@@ -257,7 +257,7 @@ export default function BarholexPortfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-8"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/20 text-barholex-gold font-medium text-sm shadow-lg shadow-black/10">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-md border border-white/20 text-barholex-gold font-medium text-sm shadow-lg shadow-black/10">
                   <Award className="w-4 h-4" />
                   {language === "en" ? "Our Work in Action" : "Nos réalisations en action"}
                 </span>
@@ -304,7 +304,7 @@ export default function BarholexPortfolio() {
                 ].map((stat, i) => (
                   <div
                     key={i}
-                    className="relative p-4 rounded-2xl bg-white dark:bg-slate-900/[0.07] backdrop-blur-md border border-white/15 hover:bg-white dark:bg-slate-900/[0.12] transition-all duration-300 group"
+                    className="relative p-4 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/[0.07] backdrop-blur-md border border-white/15 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/[0.12] transition-all duration-300 group"
                   >
                     <stat.icon className="w-5 h-5 text-barholex-gold/60 mb-2 mx-auto group-hover:text-barholex-gold transition-colors" />
                     <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
@@ -336,7 +336,7 @@ export default function BarholexPortfolio() {
                   className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                     activeFilter === filter.id
                       ? "bg-gradient-to-r from-barholex-gold to-amber-600 text-white shadow-lg shadow-amber-500/25"
-                      : "bg-white text-slate-600 hover:bg-[#F0EDE8] border border-stone-200 hover:border-barholex-gold/30"
+                      : "bg-white dark:bg-slate-800 text-slate-600 hover:bg-[#F0EDE8] border border-stone-200 hover:border-barholex-gold/30"
                   }`}
                 >
                   <filter.icon className="w-4 h-4" aria-hidden="true" />
@@ -411,7 +411,7 @@ export default function BarholexPortfolio() {
                       } overflow-hidden`}>
                         <div className="flex flex-wrap gap-2 mb-4">
                           {(language === "en" ? project.resultsEn : project.resultsFr).map((result, i) => (
-                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-slate-900/15 backdrop-blur-sm text-white text-xs font-medium">
+                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/15 backdrop-blur-sm text-white text-xs font-medium">
                               <CheckCircle className="w-3 h-3 text-barholex-gold" />
                               {result}
                             </span>
@@ -483,11 +483,11 @@ export default function BarholexPortfolio() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
-                    className="p-8 md:p-12 rounded-3xl bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-stone-200 shadow-xl shadow-black/5"
+                    className="p-8 md:p-12 rounded-3xl bg-white dark:bg-slate-800 dark:bg-slate-900/80 backdrop-blur-xl border border-stone-200 shadow-xl shadow-black/5"
                   >
                     <Quote className="w-12 h-12 text-barholex-gold/25 mb-6" />
                     
-                    <p className="text-xl md:text-2xl text-gray-900 leading-relaxed mb-8 font-medium">
+                    <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 leading-relaxed mb-8 font-medium">
                       "{language === "en" ? TESTIMONIALS[testimonialIndex].quoteEn : TESTIMONIALS[testimonialIndex].quoteFr}"
                     </p>
                     
@@ -514,7 +514,7 @@ export default function BarholexPortfolio() {
                   <button
                     onClick={prevTestimonial}
                     aria-label="Previous testimonial"
-                    className="w-12 h-12 rounded-full bg-white dark:bg-slate-900 border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
+                    className="w-12 h-12 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900 border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
                   >
                     <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                   </button>
@@ -536,7 +536,7 @@ export default function BarholexPortfolio() {
                   <button
                     onClick={nextTestimonial}
                     aria-label="Next testimonial"
-                    className="w-12 h-12 rounded-full bg-white dark:bg-slate-900 border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
+                    className="w-12 h-12 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900 border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
                   >
                     <ChevronRight className="w-5 h-5" aria-hidden="true" />
                   </button>
@@ -612,7 +612,7 @@ export default function BarholexPortfolio() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/20 text-white hover:bg-white dark:bg-slate-900/10 hover:border-white/30 transition-all duration-300"
+                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/20 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 hover:border-white/30 transition-all duration-300"
                   >
                     {language === "en" ? "View Our Services" : "Voir nos services"}
                   </Button>

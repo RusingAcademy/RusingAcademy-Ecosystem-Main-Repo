@@ -88,11 +88,11 @@ export default function TheyTrustedUs() {
         >
           <h2 
             id="they-trusted-us-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-black dark:text-white mb-4 font-serif italic"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4 font-serif italic"
           >
             {language === 'fr' ? 'Ils nous ont fait confiance' : 'They Trusted Us'}
           </h2>
-          <p className="text-base sm:text-lg text-black dark:text-white max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-black dark:text-white dark:text-white max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Des fonctionnaires de toutes les institutions canadiennes nous font confiance'
               : 'Civil servants from all Canadian institutions trust us'}
@@ -116,7 +116,7 @@ export default function TheyTrustedUs() {
               <motion.div 
                 key={index}
                 role="listitem"
-                className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 w-full max-w-[180px] sm:max-w-[200px] min-h-[120px] sm:min-h-[140px] group border border-slate-100 hover:border-slate-200"
+                className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 w-full max-w-[180px] sm:max-w-[200px] min-h-[120px] sm:min-h-[140px] group border border-slate-100 hover:border-slate-200"
                 title={language === 'fr' ? org.nameFr : org.nameEn}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export default function TheyTrustedUs() {
                   loading="lazy"                   decoding="async"
                 />
                 <span 
-                  className="text-[10px] sm:text-xs text-black dark:text-white mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
+                  className="text-[10px] sm:text-xs text-black dark:text-white dark:text-white mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
                   aria-hidden="true"
                 >
                   {language === 'fr' ? org.nameFr : org.nameEn}
@@ -143,7 +143,7 @@ export default function TheyTrustedUs() {
 
         {/* Disclaimer */}
         <motion.p 
-          className="text-center text-xs sm:text-sm text-black dark:text-white mt-8 italic max-w-3xl mx-auto"
+          className="text-center text-xs sm:text-sm text-black dark:text-white dark:text-white mt-8 italic max-w-3xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

@@ -112,7 +112,7 @@ export default function FileAttachments({ entityType, entityId }: FileAttachment
       {isLoading ? (
         <div className="flex justify-center py-4"><Loader2 className="animate-spin text-gray-300" size={16} /></div>
       ) : items.length === 0 ? (
-        <div className="text-center py-6 border-2 border-dashed border-gray-200 dark:border-slate-700 rounded-lg">
+        <div className="text-center py-6 border-2 border-dashed border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg">
           <Paperclip size={24} className="mx-auto text-gray-300 mb-2" />
           <p className="text-sm text-gray-400">No attachments yet</p>
           <button
@@ -127,7 +127,7 @@ export default function FileAttachments({ entityType, entityId }: FileAttachment
           {items.map((att: any) => {
             const Icon = getFileIcon(att.mimeType);
             return (
-              <div key={att.id} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div key={att.id} className="flex items-center justify-between p-2 bg-gray-50 dark:bg-slate-900 rounded-lg hover:bg-gray-100 dark:bg-slate-800 transition-colors">
                 <div className="flex items-center gap-3">
                   <Icon size={16} className="text-gray-400" />
                   <div>

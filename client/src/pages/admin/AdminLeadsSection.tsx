@@ -61,7 +61,7 @@ const statusColors: Record<string, string> = {
   contacted: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
   in_progress: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
   converted: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-  closed: "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300",
+  closed: "bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 dark:bg-gray-900/30 dark:text-gray-300",
 };
 
 export default function AdminLeadsSection() {

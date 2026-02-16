@@ -95,7 +95,7 @@ function getFileTypeBadgeColor(fileType: string) {
     case "zip":
       return "bg-amber-50 text-amber-700 border-amber-200";
     default:
-      return "bg-gray-50 text-gray-700 border-gray-200";
+      return "bg-gray-50 dark:bg-slate-900 text-gray-700 dark:text-gray-300 border-gray-200";
   }
 }
 

@@ -117,7 +117,7 @@ function CalendlyEmbed({ url, onClose }: { url: string; onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div className="flex items-center gap-3">
@@ -128,7 +128,7 @@ function CalendlyEmbed({ url, onClose }: { url: string; onClose: () => void }) {
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:bg-slate-800 transition-colors"
           >
             <span className="material-icons text-gray-500">close</span>
           </button>
@@ -182,7 +182,7 @@ export default function TutoringSessions() {
         </p>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 dark:border-slate-700 mb-6">
+        <div className="flex border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 mb-6">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -215,7 +215,7 @@ export default function TutoringSessions() {
                 </div>
                 <button
                   onClick={() => handleBook("https://calendly.com/steven-barholere/30min")}
-                  className="bg-white dark:bg-slate-900 text-teal-700 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors flex items-center gap-2 whitespace-nowrap"
+                  className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 dark:bg-slate-900 transition-colors flex items-center gap-2 whitespace-nowrap"
                 >
                   <span className="material-icons text-lg">phone_in_talk</span>
                   Book Free Discovery Call
@@ -232,7 +232,7 @@ export default function TutoringSessions() {
                   className={`glass-card rounded-xl p-5 cursor-pointer transition-all duration-300 border-2
                     ${selectedBooking === bt.id
                       ? `border-[${bt.color}] shadow-lg`
-                      : "border-transparent hover:border-gray-200 hover:shadow-md"
+                      : "border-transparent hover:border-gray-200 dark:border-slate-700 hover:shadow-md"
                     }`}
                   style={selectedBooking === bt.id ? { borderColor: bt.color } : {}}
                 >
@@ -289,7 +289,7 @@ export default function TutoringSessions() {
 
             {/* How It Works */}
             <div className="glass-card rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
                 How It Works
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -304,7 +304,7 @@ export default function TutoringSessions() {
                       <span className="text-sm font-bold text-teal-700">{s.step}</span>
                     </div>
                     <span className="material-icons text-[1.75rem] text-teal-700 mb-2 block">{s.icon}</span>
-                    <h4 className="font-semibold text-gray-900 text-sm mb-1">{s.title}</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-1">{s.title}</h4>
                     <p className="text-xs text-gray-500">{s.desc}</p>
                   </div>
                 ))}
@@ -347,7 +347,7 @@ export default function TutoringSessions() {
                       <p className="text-sm text-teal-700 font-medium mb-1">{coach.role}</p>
                       <p className="text-xs text-gray-500 mb-2">{coach.bio}</p>
                       <div className="flex items-center gap-3 flex-wrap">
-                        <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-600">
+                        <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600">
                           {coach.specialty}
                         </span>
                         <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-[rgba(0,128,144,0.1)] text-teal-700">
@@ -377,17 +377,17 @@ export default function TutoringSessions() {
               <table className="w-full">
                 <thead>
                   <tr className="bg-[rgba(0,128,144,0.06)]">
-                    <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">
+                    <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">
                       <div className="flex items-center gap-1">
                         Date
                         <span className="material-icons text-sm text-gray-400">unfold_more</span>
                       </div>
                     </th>
-                    <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Time</th>
-                    <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Duration</th>
-                    <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Coach</th>
-                    <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Type</th>
-                    <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Status</th>
+                    <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Time</th>
+                    <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Duration</th>
+                    <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Coach</th>
+                    <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Type</th>
+                    <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -414,7 +414,7 @@ export default function TutoringSessions() {
             <div className="mt-4 glass-card rounded-xl p-4 flex items-start gap-3">
               <span className="material-icons text-teal-700 text-xl mt-0.5">info</span>
               <div>
-                <p className="text-sm text-gray-700 font-medium">Session tracking coming soon</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">Session tracking coming soon</p>
                 <p className="text-xs text-gray-500 mt-1">
                   We're working on automatic session tracking with Calendly integration. For now, book sessions through the calendar and your coach will track your progress.
                 </p>

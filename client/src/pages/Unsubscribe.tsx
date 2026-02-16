@@ -154,7 +154,7 @@ export default function Unsubscribe() {
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center mb-4">
-            <Mail className="h-8 w-8 text-black dark:text-cyan-300" />
+            <Mail className="h-8 w-8 text-black dark:text-white dark:text-cyan-300" />
           </div>
           <CardTitle className="text-2xl">{l.title}</CardTitle>
           <CardDescription className="text-base">{l.subtitle}</CardDescription>

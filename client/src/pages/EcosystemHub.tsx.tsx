@@ -87,7 +87,7 @@ function HeroSection({ language }: { language: string }) {
         >
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
               <Globe className="w-4 h-4 text-amber-400" />
               {language === "en" ? "Canada's Premier Bilingual Training Ecosystem" : "L'écosystème de formation bilingue de référence au Canada"}
             </span>
@@ -140,7 +140,7 @@ function HeroSection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white dark:bg-slate-900/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
+                className="border-2 border-white/30 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
               >
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
               </Button>
@@ -244,7 +244,7 @@ function TrilemmeSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+              className="group relative bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
             >
               <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${obstacle.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <obstacle.icon className="w-8 h-8 text-white" />
@@ -345,7 +345,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white dark:bg-slate-900">
+    <section className="py-24 px-4 bg-white dark:bg-slate-800 dark:bg-slate-900">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -392,7 +392,7 @@ function EcosystemSection({ language }: { language: string }) {
             <motion.div
               key={pillar.id}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group relative bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
             >
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
@@ -523,7 +523,7 @@ function MethodologySection({ language }: { language: string }) {
                 <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-slate-300 to-transparent" />
               )}
 
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
+              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
                 {/* Step Number */}
                 <div className="text-5xl font-bold text-slate-100 mb-4">{step.number}</div>
 
@@ -598,7 +598,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white dark:bg-slate-900">
+    <section className="py-24 px-4 bg-white dark:bg-slate-800 dark:bg-slate-900">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -640,7 +640,7 @@ function OffersSection({ language }: { language: string }) {
             <motion.div
               key={offer.id}
               variants={scaleIn}
-              className="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
@@ -773,7 +773,7 @@ function TargetAudienceSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white dark:bg-slate-900/10 transition-all duration-300"
+              className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center flex-shrink-0">
@@ -859,7 +859,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white dark:bg-slate-900">
+    <section className="py-24 px-4 bg-white dark:bg-slate-800 dark:bg-slate-900">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -975,7 +975,7 @@ function LeadershipSection({ language }: { language: string }) {
           variants={staggerContainer}
           className="max-w-5xl mx-auto"
         >
-          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-3xl shadow-xl overflow-hidden border border-slate-100">
             <div className="grid md:grid-cols-2">
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
@@ -1126,7 +1126,7 @@ function ValueSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white dark:bg-slate-900">
+    <section className="py-24 px-4 bg-white dark:bg-slate-800 dark:bg-slate-900">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1288,7 +1288,7 @@ function TeamSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+              className="group bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
             >
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
@@ -1360,7 +1360,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white dark:bg-slate-900/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-white/30 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <ClipboardCheck className="w-5 h-5" />
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
@@ -1370,7 +1370,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white dark:bg-slate-900/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-white/30 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <FileText className="w-5 h-5" />
                 {language === "en" ? "Explore the product library" : "Explorer la bibliothèque de produits"}
@@ -1408,7 +1408,7 @@ function ProofGallerySection({ language }: { language: string }) {
   const filteredContent = activeFilter === "all" ? content : content.filter(item => item.type === activeFilter);
 
   return (
-    <section className="py-24 px-4 bg-white dark:bg-slate-900">
+    <section className="py-24 px-4 bg-white dark:bg-slate-800 dark:bg-slate-900">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1473,7 +1473,7 @@ function ProofGallerySection({ language }: { language: string }) {
             <motion.div
               key={item.id}
               variants={scaleIn}
-              className="group bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer"
+              className="group bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer"
             >
               {/* Thumbnail */}
               <div className="relative h-48 bg-slate-200 overflow-hidden">
@@ -1588,7 +1588,7 @@ function FAQSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={fadeInUp}
-              className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 overflow-hidden"
+              className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-slate-200 overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -1625,7 +1625,7 @@ export default function EcosystemHub() {
   const { language } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white dark:bg-slate-800 dark:bg-slate-900">
       <Header />
 
       <main id="main-content">

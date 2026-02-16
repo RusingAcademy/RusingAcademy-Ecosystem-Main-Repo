@@ -235,7 +235,7 @@ export default function MyPath() {
                         const isModuleCompleted = module.status === "completed";
                         const isModuleActive = module.status === "in-progress";
                         return (
-                          <div key={module.id} className={cn("flex items-center gap-4 p-3 rounded-lg transition-all", isModuleActive && "bg-amber-50 border border-orange-100", isModuleCompleted && "bg-white", !isModuleLocked && !isModuleCompleted && !isModuleActive && "hover:bg-white cursor-pointer", isModuleLocked && "opacity-50")}>
+                          <div key={module.id} className={cn("flex items-center gap-4 p-3 rounded-lg transition-all", isModuleActive && "bg-amber-50 border border-orange-100", isModuleCompleted && "bg-white", !isModuleLocked && !isModuleCompleted && !isModuleActive && "hover:bg-white dark:bg-slate-800 cursor-pointer", isModuleLocked && "opacity-50")}>
                             <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isModuleCompleted ? "bg-emerald-100 text-emerald-600" : isModuleActive ? "bg-amber-100 text-amber-600" : isModuleLocked ? "bg-slate-200 text-slate-400" : "bg-blue-100 text-blue-600")}>
                               {isModuleLocked ? <Lock className="h-4 w-4" /> : <Icon className="h-5 w-5" />}
                             </div>

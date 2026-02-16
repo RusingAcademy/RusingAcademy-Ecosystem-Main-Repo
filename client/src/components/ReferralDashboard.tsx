@@ -316,7 +316,7 @@ export default function ReferralDashboard() {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="p-4 bg-white dark:bg-slate-900/50 rounded-lg">
+            <div className="p-4 bg-white dark:bg-slate-800 dark:bg-slate-900/50 rounded-lg">
               <h4 className="font-semibold text-amber-800 mb-2">
                 {isEn ? "You Get" : "Vous recevez"}
               </h4>
@@ -335,7 +335,7 @@ export default function ReferralDashboard() {
                 </li>
               </ul>
             </div>
-            <div className="p-4 bg-white dark:bg-slate-900/50 rounded-lg">
+            <div className="p-4 bg-white dark:bg-slate-800 dark:bg-slate-900/50 rounded-lg">
               <h4 className="font-semibold text-amber-800 mb-2">
                 {isEn ? "Your Friend Gets" : "Votre ami reçoit"}
               </h4>

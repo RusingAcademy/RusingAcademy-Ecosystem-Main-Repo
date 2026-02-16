@@ -36,9 +36,9 @@ function ProfileContent() {
     }
   
     return (
-        <div className="min-h-screen bg-white dark:bg-slate-900">
+        <div className="min-h-screen bg-white dark:bg-slate-800 dark:bg-slate-900">
             {/* Header */}
-            <header className="bg-white dark:bg-slate-900 border-b border-slate-200 sticky top-0 z-10">
+            <header className="bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-slate-200 sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4">
@@ -48,7 +48,7 @@ function ProfileContent() {
                                     Dashboard
                                 </Button>
                             </Link>
-                            <h1 className="text-xl font-semibold text-black dark:text-white">Mon Profil</h1>
+                            <h1 className="text-xl font-semibold text-black dark:text-white dark:text-white">Mon Profil</h1>
                         </div>
                         <Link href="/app/settings">
                             <Button variant="outline" size="sm" className="gap-2">
@@ -65,19 +65,19 @@ function ProfileContent() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Profile Summary Card */}
                     <div className="lg:col-span-1">
-                        <Card className="bg-white dark:bg-slate-900 shadow-sm border-slate-200">
+                        <Card className="bg-white dark:bg-slate-800 dark:bg-slate-900 shadow-sm border-slate-200">
                             <CardContent className="pt-6">
                                 <div className="flex flex-col items-center text-center">
                                     <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-teal-700 flex items-center justify-center text-white text-3xl font-bold mb-4">
                                         {user.firstName?.[0] || user.emailAddresses[0]?.emailAddress[0]?.toUpperCase()}
                                     </div>
-                                    <h2 className="text-xl font-semibold text-black dark:text-white">
+                                    <h2 className="text-xl font-semibold text-black dark:text-white dark:text-white">
                                         {user.fullName || "Utilisateur"}
                                     </h2>
-                                    <p className="text-black dark:text-white text-sm mt-1">
+                                    <p className="text-black dark:text-white dark:text-white text-sm mt-1">
                                         {user.emailAddresses[0]?.emailAddress}
                                     </p>
-                                    <div className="flex items-center gap-2 mt-3 text-sm text-black dark:text-white">
+                                    <div className="flex items-center gap-2 mt-3 text-sm text-black dark:text-white dark:text-white">
                                         <Calendar className="h-4 w-4" />
                                         <span>Membre depuis {new Date(user.createdAt!).toLocaleDateString('fr-CA', { month: 'long', year: 'numeric' })}</span>
                                     </div>
@@ -89,25 +89,25 @@ function ProfileContent() {
                                         <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 mx-auto mb-2">
                                             <BookOpen className="h-5 w-5 text-blue-600" />
                                         </div>
-                                        <p className="text-2xl font-bold text-black dark:text-white">0</p>
-                                        <p className="text-xs text-black dark:text-white">Cours</p>
+                                        <p className="text-2xl font-bold text-black dark:text-white dark:text-white">0</p>
+                                        <p className="text-xs text-black dark:text-white dark:text-white">Cours</p>
                                     </div>
                                     <div className="text-center">
                                         <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-foundation-soft mx-auto mb-2">
                                             <Users className="h-5 w-5 text-foundation" />
                                         </div>
-                                        <p className="text-2xl font-bold text-black dark:text-white">0</p>
-                                        <p className="text-xs text-black dark:text-white">Sessions</p>
+                                        <p className="text-2xl font-bold text-black dark:text-white dark:text-white">0</p>
+                                        <p className="text-xs text-black dark:text-white dark:text-white">Sessions</p>
                                     </div>
                                 </div>
                             </CardContent>
                         </Card>
                         
                         {/* Account Info Card */}
-                        <Card className="bg-white dark:bg-slate-900 shadow-sm border-slate-200 mt-6">
+                        <Card className="bg-white dark:bg-slate-800 dark:bg-slate-900 shadow-sm border-slate-200 mt-6">
                             <CardHeader>
                                 <CardTitle className="text-lg flex items-center gap-2">
-                                    <Shield className="h-5 w-5 text-black dark:text-white" />
+                                    <Shield className="h-5 w-5 text-black dark:text-white dark:text-white" />
                                     Informations du compte
                                 </CardTitle>
                             </CardHeader>
@@ -115,22 +115,22 @@ function ProfileContent() {
                                 <div className="flex items-center gap-3">
                                     <User className="h-4 w-4 text-cyan-300" />
                                     <div>
-                                        <p className="text-xs text-black dark:text-white">Nom complet</p>
-                                        <p className="text-sm font-medium text-black dark:text-white">{user.fullName || "Non défini"}</p>
+                                        <p className="text-xs text-black dark:text-white dark:text-white">Nom complet</p>
+                                        <p className="text-sm font-medium text-black dark:text-white dark:text-white">{user.fullName || "Non défini"}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Mail className="h-4 w-4 text-cyan-300" />
                                     <div>
-                                        <p className="text-xs text-black dark:text-white">Email</p>
-                                        <p className="text-sm font-medium text-black dark:text-white">{user.emailAddresses[0]?.emailAddress}</p>
+                                        <p className="text-xs text-black dark:text-white dark:text-white">Email</p>
+                                        <p className="text-sm font-medium text-black dark:text-white dark:text-white">{user.emailAddresses[0]?.emailAddress}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Calendar className="h-4 w-4 text-cyan-300" />
                                     <div>
-                                        <p className="text-xs text-black dark:text-white">Date d'inscription</p>
-                                        <p className="text-sm font-medium text-black dark:text-white">
+                                        <p className="text-xs text-black dark:text-white dark:text-white">Date d'inscription</p>
+                                        <p className="text-sm font-medium text-black dark:text-white dark:text-white">
                                             {new Date(user.createdAt!).toLocaleDateString('fr-CA', { 
                                                 day: 'numeric',
                                                 month: 'long', 
@@ -145,7 +145,7 @@ function ProfileContent() {
                     
                     {/* Clerk UserProfile Component */}
                     <div className="lg:col-span-2">
-                        <Card className="bg-white dark:bg-slate-900 shadow-sm border-slate-200 overflow-hidden">
+                        <Card className="bg-white dark:bg-slate-800 dark:bg-slate-900 shadow-sm border-slate-200 overflow-hidden">
                             <CardContent className="p-0">
                                 <UserProfile 
                                     appearance={{

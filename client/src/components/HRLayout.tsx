@@ -26,7 +26,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
         Skip to main content
       </a>
       <HRSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
         <button onClick={() => setSidebarCollapsed(false)} className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
           <span className="material-icons text-gray-700">menu</span>
         </button>
@@ -37,7 +37,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
       </header>
       <main id="main-content" className="lg:ml-[240px] min-h-screen pt-14 lg:pt-0 flex flex-col" role="main" tabIndex={-1}>
         <div className="flex-1 p-4 lg:p-6">{children}</div>
-        <footer className="text-center py-4 border-t border-gray-100 bg-white dark:bg-slate-900" role="contentinfo">
+        <footer className="text-center py-4 border-t border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:bg-slate-900" role="contentinfo">
           <SocialLinks size={14} color="var(--color-gray-400, #9ca3af)" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">© 2026 RusingAcademy — A Division of <span className="font-medium text-blue-600">Rusinga International Consulting Ltd.</span></p>
           <p className="text-[10px] text-gray-400 mt-0.5">Version 2.0.0 — Client Portal</p>

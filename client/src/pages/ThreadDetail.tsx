@@ -220,7 +220,7 @@ export default function ThreadDetail() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/10 mb-8"
+            className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/10 mb-8"
           >
             <p className="text-white/90 whitespace-pre-wrap leading-relaxed">{thread.content}</p>
           </motion.div>
@@ -241,7 +241,7 @@ export default function ThreadDetail() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="p-5 rounded-xl bg-white dark:bg-slate-900/5 border border-white/10 hover:border-white/20 transition-all"
+                  className="p-5 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/10 hover:border-white/20 transition-all"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
@@ -281,7 +281,7 @@ export default function ThreadDetail() {
                                   setEditContent(post.content || "");
                                   setShowActions(null);
                                 }}
-                                className="w-full px-4 py-2 text-left text-sm text-white/80 hover:bg-white dark:bg-slate-900/5 flex items-center gap-2"
+                                className="w-full px-4 py-2 text-left text-sm text-white/80 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/5 flex items-center gap-2"
                               >
                                 <Edit3 className="w-3.5 h-3.5" /> {language === "en" ? "Edit" : "Modifier"}
                               </button>
@@ -291,7 +291,7 @@ export default function ThreadDetail() {
                                 handleDeletePost(post.id);
                                 setShowActions(null);
                               }}
-                              className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-white dark:bg-slate-900/5 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/5 flex items-center gap-2"
                             >
                               <Trash2 className="w-3.5 h-3.5" /> {language === "en" ? "Delete" : "Supprimer"}
                             </button>
@@ -307,7 +307,7 @@ export default function ThreadDetail() {
                       <textarea
                         value={editContent}
                         onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white resize-none"
                         rows={4}
                       />
                       <div className="flex gap-2 justify-end">
@@ -323,7 +323,7 @@ export default function ThreadDetail() {
                           size="sm"
                           onClick={() => handleEditPost(post.id)}
                           disabled={editPostMutation.isPending}
-                          className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90"
+                          className="bg-teal-400 text-black dark:text-white dark:text-white hover:bg-teal-400/90"
                         >
                           {editPostMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-1" />}
                           {language === "en" ? "Save" : "Enregistrer"}
@@ -363,7 +363,7 @@ export default function ThreadDetail() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/10"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/10"
             >
               <h3 className="font-bold mb-3">
                 {language === "en" ? "Write a Reply" : "Écrire une réponse"}
@@ -372,14 +372,14 @@ export default function ThreadDetail() {
                 value={replyContent}
                 onChange={(e) => setReplyContent(e.target.value)}
                 placeholder={language === "en" ? "Share your thoughts..." : "Partagez vos pensées..."}
-                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
                 rows={4}
               />
               <div className="flex justify-end">
                 <Button
                   onClick={handleReply}
                   disabled={!replyContent.trim() || createPostMutation.isPending}
-                  className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold"
+                  className="bg-teal-400 text-black dark:text-white dark:text-white hover:bg-teal-400/90 font-bold"
                 >
                   {createPostMutation.isPending ? (
                     <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -391,19 +391,19 @@ export default function ThreadDetail() {
               </div>
             </motion.div>
           ) : (
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/10 text-center">
+            <div className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/10 text-center">
               <p className="text-white/60 mb-3">
                 {language === "en" ? "Sign in to join the discussion" : "Connectez-vous pour participer à la discussion"}
               </p>
               <a href={getLoginUrl()}>
-                <Button className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold">
+                <Button className="bg-teal-400 text-black dark:text-white dark:text-white hover:bg-teal-400/90 font-bold">
                   {language === "en" ? "Sign In" : "Se connecter"}
                 </Button>
               </a>
             </div>
           )
         ) : (
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-red-400/20 text-center">
+          <div className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-red-400/20 text-center">
             <Lock className="w-6 h-6 text-red-400 mx-auto mb-2" />
             <p className="text-white/60">
               {language === "en" ? "This thread is locked. No new replies can be posted." : "Cette discussion est verrouillée. Aucune nouvelle réponse ne peut être publiée."}

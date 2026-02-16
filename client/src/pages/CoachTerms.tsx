@@ -248,7 +248,7 @@ export default function CoachTerms() {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-teal-600" />
-                <span className="font-semibold text-black dark:text-white">{t.header.title[l]}</span>
+                <span className="font-semibold text-black dark:text-white dark:text-white">{t.header.title[l]}</span>
               </div>
               {/* Language Toggle */}
               <Button
@@ -267,7 +267,7 @@ export default function CoachTerms() {
 
       {/* Content */}
       <main className="container mx-auto px-4 py-12 max-w-4xl">
-        <div className="bg-white dark:bg-foundation rounded-2xl shadow-xl border border-slate-200 dark:border-teal-800 overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-2xl shadow-xl border border-slate-200 dark:border-teal-800 overflow-hidden">
           {/* Title Section */}
           <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-8 py-8 text-white">
             <div className="flex items-center gap-3 mb-4">
@@ -275,7 +275,7 @@ export default function CoachTerms() {
                 loading="lazy"
                 src="/rusinga-logo.png"
                 alt="Rusinga International Consulting Ltd."
-                className="w-12 h-12 rounded-lg bg-white dark:bg-slate-900 p-1"
+                className="w-12 h-12 rounded-lg bg-white dark:bg-slate-800 dark:bg-slate-900 p-1"
                 onError={(e) => { e.currentTarget.style.display = "none"; }}
               />
               <div>
@@ -283,7 +283,7 @@ export default function CoachTerms() {
                 <p className="text-teal-100 text-sm">{t.hero.subtitle[l]}</p>
               </div>
             </div>
-            <div className="bg-white dark:bg-slate-900/10 rounded-lg p-4 mt-4">
+            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg p-4 mt-4">
               <p className="font-semibold">{t.hero.company}</p>
               <p className="text-teal-100 text-sm">{t.hero.brand[l]}</p>
               <p className="text-teal-200 text-xs mt-2">{t.hero.platform[l]}</p>
@@ -297,11 +297,11 @@ export default function CoachTerms() {
           <div className="p-8 space-y-8">
             {/* Section 1 — Introduction */}
             <section>
-              <h2 className="text-xl font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+              <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4 flex items-center gap-2">
                 <FileText className="w-5 h-5 text-teal-600" />
                 {t.s1.title[l]}
               </h2>
-              <p className="text-black dark:text-white/90 leading-relaxed mb-4">{t.s1.intro[l]}</p>
+              <p className="text-black dark:text-white dark:text-white/90 leading-relaxed mb-4">{t.s1.intro[l]}</p>
               <div className="bg-slate-50 dark:bg-teal-800/50 rounded-lg p-4 space-y-2 text-sm">
                 {t.s1.defs[l].map((d, i) => (
                   <p key={i}><strong>{d.term}</strong> {d.def}</p>
@@ -311,21 +311,21 @@ export default function CoachTerms() {
 
             {/* Section 2 — Commission */}
             <section className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6">
-              <h2 className="text-xl font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+              <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4 flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-amber-600" />
                 {t.s2.title[l]}
               </h2>
               <div className="space-y-6">
-                <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-amber-300 dark:border-amber-600">
-                  <p className="text-lg font-semibold text-black dark:text-white mb-2">
+                <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-lg p-4 border border-amber-300 dark:border-amber-600">
+                  <p className="text-lg font-semibold text-black dark:text-white dark:text-white mb-2">
                     {t.s2.rate[l]} <span className="text-amber-600 text-2xl">{t.s2.rateValue}</span>
                   </p>
-                  <p className="text-black dark:text-white/90" dangerouslySetInnerHTML={{ __html: t.s2.desc[l] }} />
+                  <p className="text-black dark:text-white dark:text-white/90" dangerouslySetInnerHTML={{ __html: t.s2.desc[l] }} />
                 </div>
 
-                <div className="bg-white dark:bg-foundation rounded-lg p-5 border border-slate-200 dark:border-slate-600">
-                  <h3 className="font-bold text-black dark:text-white mb-4 text-center">{t.s2.breakdownTitle[l]}</h3>
-                  <p className="text-sm text-black dark:text-cyan-300 mb-4 text-center">{t.s2.breakdownDesc[l]}</p>
+                <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-lg p-5 border border-slate-200 dark:border-slate-600">
+                  <h3 className="font-bold text-black dark:text-white dark:text-white mb-4 text-center">{t.s2.breakdownTitle[l]}</h3>
+                  <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-4 text-center">{t.s2.breakdownDesc[l]}</p>
                   <div className="grid md:grid-cols-2 gap-4">
                     {t.s2.items[l].map((item, i) => (
                       <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-teal-800/50 rounded-lg">
@@ -333,8 +333,8 @@ export default function CoachTerms() {
                           {iconMap[item.icon]}
                         </div>
                         <div>
-                          <h4 className="font-semibold text-black dark:text-white text-sm">{item.title}</h4>
-                          <p className="text-xs text-black dark:text-cyan-300">{item.desc}</p>
+                          <h4 className="font-semibold text-black dark:text-white dark:text-white text-sm">{item.title}</h4>
+                          <p className="text-xs text-black dark:text-white dark:text-cyan-300">{item.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -342,17 +342,17 @@ export default function CoachTerms() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
-                    <h4 className="font-semibold text-black dark:text-white mb-2">{t.s2.example.title[l]}</h4>
-                    <ul className="text-sm text-black dark:text-cyan-300 space-y-1">
+                  <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
+                    <h4 className="font-semibold text-black dark:text-white dark:text-white mb-2">{t.s2.example.title[l]}</h4>
+                    <ul className="text-sm text-black dark:text-white dark:text-cyan-300 space-y-1">
                       {t.s2.example.lines[l].map((line, i) => (
                         <li key={i}>• {i === 2 ? <strong>{line}</strong> : line}</li>
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
-                    <h4 className="font-semibold text-black dark:text-white mb-2">{t.s2.benefits.title[l]}</h4>
-                    <ul className="text-sm text-black dark:text-cyan-300 space-y-1">
+                  <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
+                    <h4 className="font-semibold text-black dark:text-white dark:text-white mb-2">{t.s2.benefits.title[l]}</h4>
+                    <ul className="text-sm text-black dark:text-white dark:text-cyan-300 space-y-1">
                       {t.s2.benefits.lines[l].map((line, i) => (
                         <li key={i}>✓ {line}</li>
                       ))}
@@ -365,13 +365,13 @@ export default function CoachTerms() {
             {/* Sections 3-6 — Clause-based */}
             {([t.s3, t.s4, t.s5, t.s6] as Array<{ title: Record<string, string>; clauses: Record<string, Array<{ id: string; title: string; body: string }>> }>).map((section, si) => (
               <section key={si}>
-                <h2 className="text-xl font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+                <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4 flex items-center gap-2">
                   {si === 0 && <Clock className="w-5 h-5 text-teal-600" />}
                   {si === 1 && <Shield className="w-5 h-5 text-teal-600" />}
                   {si === 2 && <AlertTriangle className="w-5 h-5 text-teal-600" />}
                   {section.title[l]}
                 </h2>
-                <div className="space-y-3 text-black dark:text-white/90">
+                <div className="space-y-3 text-black dark:text-white dark:text-white/90">
                   {section.clauses[l].map((clause) => (
                     <p key={clause.id}>
                       <strong>{clause.id} {clause.title}</strong> {clause.body}
@@ -383,26 +383,26 @@ export default function CoachTerms() {
 
             {/* Section 7 — IP */}
             <section>
-              <h2 className="text-xl font-bold text-black dark:text-white mb-4">{t.s7.title[l]}</h2>
-              <p className="text-black dark:text-white/90">{t.s7.body[l]}</p>
+              <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4">{t.s7.title[l]}</h2>
+              <p className="text-black dark:text-white dark:text-white/90">{t.s7.body[l]}</p>
             </section>
 
             {/* Section 8 — Modifications */}
             <section>
-              <h2 className="text-xl font-bold text-black dark:text-white mb-4">{t.s8.title[l]}</h2>
-              <p className="text-black dark:text-white/90">{t.s8.body[l]}</p>
+              <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4">{t.s8.title[l]}</h2>
+              <p className="text-black dark:text-white dark:text-white/90">{t.s8.body[l]}</p>
             </section>
 
             {/* Section 9 — Governing Law */}
             <section>
-              <h2 className="text-xl font-bold text-black dark:text-white mb-4">{t.s9.title[l]}</h2>
-              <p className="text-black dark:text-white/90">{t.s9.body[l]}</p>
+              <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4">{t.s9.title[l]}</h2>
+              <p className="text-black dark:text-white dark:text-white/90">{t.s9.body[l]}</p>
             </section>
 
             {/* Section 10 — Contact */}
             <section>
-              <h2 className="text-xl font-bold text-black dark:text-white mb-4">{t.s10.title[l]}</h2>
-              <div className="text-black dark:text-white/90 space-y-2">
+              <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4">{t.s10.title[l]}</h2>
+              <div className="text-black dark:text-white dark:text-white/90 space-y-2">
                 <p>{t.s10.intro[l]}</p>
                 <div className="bg-slate-50 dark:bg-teal-800/50 rounded-lg p-4">
                   <p className="font-semibold">Rusinga International Consulting Ltd.</p>
@@ -419,11 +419,11 @@ export default function CoachTerms() {
 
             {/* Key Points Summary */}
             <section className="bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700 rounded-xl p-6">
-              <h2 className="text-xl font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+              <h2 className="text-xl font-bold text-black dark:text-white dark:text-white mb-4 flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-teal-600" />
                 {t.summary.title[l]}
               </h2>
-              <ul className="space-y-2 text-black dark:text-white/90">
+              <ul className="space-y-2 text-black dark:text-white dark:text-white/90">
                 {t.summary.items[l].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-teal-600 mt-1 flex-shrink-0" />
@@ -434,7 +434,7 @@ export default function CoachTerms() {
             </section>
 
             {/* Legal Notice */}
-            <div className="text-center text-xs text-black dark:text-cyan-300 pt-4 border-t border-slate-200 dark:border-teal-800">
+            <div className="text-center text-xs text-black dark:text-white dark:text-cyan-300 pt-4 border-t border-slate-200 dark:border-teal-800">
               <p>&copy; {new Date().getFullYear()} Rusinga International Consulting Ltd. {t.copyright[l]}</p>
               <p className="mt-1">{l === "fr" ? "Document version" : "Document version"} {termsVersion}</p>
             </div>

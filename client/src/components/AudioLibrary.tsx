@@ -74,7 +74,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       case "A": return "bg-green-100 text-green-700 border-green-200";
       case "B": return "bg-yellow-100 text-yellow-700 border-yellow-200";
       case "C": return "bg-red-100 text-red-700 border-red-200";
-      default: return "bg-gray-100 text-black border-gray-200";
+      default: return "bg-gray-100 dark:bg-slate-800 text-black dark:text-white border-gray-200";
     }
   };
   
@@ -99,7 +99,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
   }
   
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden">
+    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
         <div className="flex items-center gap-3 mb-2">
@@ -116,7 +116,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       </div>
       
       {/* Filters */}
-      <div className="p-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50">
+      <div className="p-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
         <div className="flex flex-wrap gap-3">
           {/* Search */}
           <div className="relative flex-1 min-w-[200px]">
@@ -163,7 +163,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       {/* Audio List */}
       <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
         {filteredAudio.length === 0 ? (
-          <div className="p-8 text-center text-black dark:text-white">
+          <div className="p-8 text-center text-black dark:text-white dark:text-white">
             {language === "fr" 
               ? "Aucune phrase trouvée avec ces filtres."
               : "No phrases found with these filters."}
@@ -172,7 +172,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
           filteredAudio.map((phrase) => (
             <div
               key={phrase.id}
-              className="p-4 hover:bg-gray-50 transition-colors"
+              className="p-4 hover:bg-gray-50 dark:bg-slate-900 transition-colors"
             >
               <div className="flex items-start gap-4">
                 {/* Play Button */}
@@ -194,12 +194,12 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   {/* French Text */}
-                  <p className="text-black dark:text-white font-medium mb-1">
+                  <p className="text-black dark:text-white dark:text-white font-medium mb-1">
                     {phrase.textFr}
                   </p>
                   
                   {/* English Translation */}
-                  <p className="text-black dark:text-white text-sm mb-2">
+                  <p className="text-black dark:text-white dark:text-white text-sm mb-2">
                     {phrase.text}
                   </p>
                   
@@ -208,7 +208,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                     <span className={`px-2 py-0.5 text-xs font-medium rounded border ${getLevelColor(phrase.level)}`}>
                       {language === "fr" ? "Niveau" : "Level"} {phrase.level}
                     </span>
-                    <span className="px-2 py-0.5 text-xs bg-gray-100 text-black dark:text-white rounded">
+                    <span className="px-2 py-0.5 text-xs bg-gray-100 dark:bg-slate-800 text-black dark:text-white dark:text-white rounded">
                       {getCategoryLabel(phrase.category)}
                     </span>
                     {phrase.duration && (
@@ -237,8 +237,8 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       </div>
       
       {/* Footer Stats */}
-      <div className="p-4 bg-gray-50 border-t border-gray-200 dark:border-slate-700">
-        <div className="flex items-center justify-between text-sm text-black dark:text-white">
+      <div className="p-4 bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 dark:border-slate-700">
+        <div className="flex items-center justify-between text-sm text-black dark:text-white dark:text-white">
           <span>
             {language === "fr" 
               ? `${filteredAudio.length} phrase(s) affichée(s)`

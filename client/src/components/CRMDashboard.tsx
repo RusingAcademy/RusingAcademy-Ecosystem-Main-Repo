@@ -267,7 +267,7 @@ export default function CRMDashboard() {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
       >
         {/* Total Leads */}
-        <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-cyan-300 text-sm">{t.totalLeads}</span>
             <span className="text-2xl">📊</span>
@@ -277,7 +277,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Converted */}
-        <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-cyan-300 text-sm">{t.converted}</span>
             <span className="text-2xl">✅</span>
@@ -287,7 +287,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Conversion Rate */}
-        <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-cyan-300 text-sm">{t.conversionRate}</span>
             <span className="text-2xl">📈</span>
@@ -297,7 +297,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Cross-Sell */}
-        <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-cyan-300 text-sm">{t.crossSell}</span>
             <span className="text-2xl">🔗</span>
@@ -315,7 +315,7 @@ export default function CRMDashboard() {
         className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"
       >
         {/* Leads by Source */}
-        <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <h3 className="text-lg font-semibold mb-4">{t.leadsBySource}</h3>
           <div className="space-y-4">
             {mockAnalytics.leadsBySource.map((item) => (
@@ -323,7 +323,7 @@ export default function CRMDashboard() {
                 <div className={`w-3 h-3 rounded-full ${sourceColors[item.source]}`} />
                 <span className="flex-1 capitalize">{item.source.replace("_", " ")}</span>
                 <span className="font-semibold">{item.count}</span>
-                <div className="w-24 bg-white dark:bg-slate-900/10 rounded-full h-2">
+                <div className="w-24 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full ${sourceColors[item.source]}`}
                     style={{ width: `${(item.count / mockAnalytics.totalLeads) * 100}%` }}
@@ -335,7 +335,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Leads by Status */}
-        <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
+        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <h3 className="text-lg font-semibold mb-4">{t.leadsByStatus}</h3>
           <div className="space-y-4">
             {mockAnalytics.leadsByStatus.map((item) => (
@@ -343,7 +343,7 @@ export default function CRMDashboard() {
                 <div className={`w-3 h-3 rounded-full ${statusColors[item.status]}`} />
                 <span className="flex-1 capitalize">{t[item.status as keyof typeof t] || item.status}</span>
                 <span className="font-semibold">{item.count}</span>
-                <div className="w-24 bg-white dark:bg-slate-900/10 rounded-full h-2">
+                <div className="w-24 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full ${statusColors[item.status]}`}
                     style={{ width: `${(item.count / mockAnalytics.totalLeads) * 100}%` }}
@@ -360,7 +360,7 @@ export default function CRMDashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl border border-white/60 overflow-hidden"
+        className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm rounded-2xl border border-white/60 overflow-hidden"
       >
         {/* Filters */}
         <div className="p-6 border-b border-white/60">
@@ -374,14 +374,14 @@ export default function CRMDashboard() {
               placeholder={t.search}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="px-4 py-2 bg-white dark:bg-slate-900/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm w-64"
+              className="px-4 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm w-64"
             />
             
             {/* Source Filter */}
             <select
               value={selectedSource}
               onChange={(e) => setSelectedSource(e.target.value)}
-              className="px-4 py-2 bg-white dark:bg-slate-900/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm"
+              className="px-4 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm"
             >
               <option value="all">{t.allSources}</option>
               <option value="lingueefy">Lingueefy</option>
@@ -394,7 +394,7 @@ export default function CRMDashboard() {
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="px-4 py-2 bg-white dark:bg-slate-900/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm"
+              className="px-4 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm"
             >
               <option value="all">{t.allStatuses}</option>
               <option value="new">{t.new}</option>
@@ -411,7 +411,7 @@ export default function CRMDashboard() {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-white dark:bg-slate-900/5">
+            <thead className="bg-white dark:bg-slate-800 dark:bg-slate-900/5">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.name}</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.email}</th>
@@ -428,7 +428,7 @@ export default function CRMDashboard() {
                   key={lead.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="hover:bg-white dark:bg-slate-900/5 transition-colors cursor-pointer"
+                  className="hover:bg-white dark:bg-slate-800 dark:bg-slate-900/5 transition-colors cursor-pointer"
                   onClick={() => setSelectedLead(lead)}
                 >
                   <td className="px-6 py-4">
@@ -449,7 +449,7 @@ export default function CRMDashboard() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <div className="w-12 bg-white dark:bg-slate-900/10 rounded-full h-2">
+                      <div className="w-12 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full h-2">
                         <div
                           className={`h-2 rounded-full ${lead.leadScore >= 70 ? 'bg-green-500' : lead.leadScore >= 40 ? 'bg-yellow-500' : 'bg-red-500'}`}
                           style={{ width: `${lead.leadScore}%` }}
@@ -502,45 +502,45 @@ export default function CRMDashboard() {
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
-                  className="p-2 hover:bg-white dark:bg-slate-900/10 rounded-lg transition-colors"
+                  className="p-2 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-lg transition-colors"
                 >
                   ✕
                 </button>
               </div>
 
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="bg-white dark:bg-slate-900/5 rounded-lg p-4">
+                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-lg p-4">
                   <div className="text-sm text-cyan-300 mb-1">{t.source}</div>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${sourceColors[selectedLead.source]} text-white`}>
                     {selectedLead.source.replace("_", " ")}
                   </span>
                 </div>
-                <div className="bg-white dark:bg-slate-900/5 rounded-lg p-4">
+                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-lg p-4">
                   <div className="text-sm text-cyan-300 mb-1">{t.status}</div>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[selectedLead.status]} text-white`}>
                     {t[selectedLead.status as keyof typeof t]}
                   </span>
                 </div>
                 {selectedLead.company && (
-                  <div className="bg-white dark:bg-slate-900/5 rounded-lg p-4">
+                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-lg p-4">
                     <div className="text-sm text-cyan-300 mb-1">{t.company}</div>
                     <div>{selectedLead.company}</div>
                   </div>
                 )}
                 {selectedLead.phone && (
-                  <div className="bg-white dark:bg-slate-900/5 rounded-lg p-4">
+                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-lg p-4">
                     <div className="text-sm text-cyan-300 mb-1">Phone</div>
                     <div>{selectedLead.phone}</div>
                   </div>
                 )}
                 {selectedLead.budget && (
-                  <div className="bg-white dark:bg-slate-900/5 rounded-lg p-4">
+                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-lg p-4">
                     <div className="text-sm text-cyan-300 mb-1">Budget</div>
                     <div>{selectedLead.budget}</div>
                   </div>
                 )}
                 {selectedLead.timeline && (
-                  <div className="bg-white dark:bg-slate-900/5 rounded-lg p-4">
+                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-lg p-4">
                     <div className="text-sm text-cyan-300 mb-1">Timeline</div>
                     <div>{selectedLead.timeline}</div>
                   </div>
@@ -548,7 +548,7 @@ export default function CRMDashboard() {
               </div>
 
               {selectedLead.message && (
-                <div className="bg-white dark:bg-slate-900/5 rounded-lg p-4 mb-6">
+                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-lg p-4 mb-6">
                   <div className="text-sm text-cyan-300 mb-2">Message</div>
                   <p>{selectedLead.message}</p>
                 </div>
@@ -559,7 +559,7 @@ export default function CRMDashboard() {
                   <div className="text-sm text-cyan-300 mb-2">Interests</div>
                   <div className="flex flex-wrap gap-2">
                     {selectedLead.interests.map((interest, i) => (
-                      <span key={i} className="px-3 py-1 bg-white dark:bg-slate-900/10 rounded-full text-sm">
+                      <span key={i} className="px-3 py-1 bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full text-sm">
                         {interest}
                       </span>
                     ))}
@@ -571,7 +571,7 @@ export default function CRMDashboard() {
                 <button className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors">
                   {t.edit}
                 </button>
-                <button className="flex-1 px-4 py-2 bg-white dark:bg-slate-900/10 text-white rounded-lg hover:bg-white dark:bg-slate-900/20 transition-colors">
+                <button className="flex-1 px-4 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900/10 text-white rounded-lg hover:bg-white dark:bg-slate-800 dark:bg-slate-900/20 transition-colors">
                   {t.assign}
                 </button>
               </div>

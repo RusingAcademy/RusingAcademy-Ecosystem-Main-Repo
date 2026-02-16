@@ -44,7 +44,7 @@ export default function FreeEnrollmentSuccess() {
           {/* Success Card */}
           <Card className="border-emerald-200 dark:border-emerald-700/50 overflow-hidden">
             <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-8 text-center text-white">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white dark:bg-slate-900/20 flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/20 flex items-center justify-center">
                 <CheckCircle2 className="h-10 w-10" />
               </div>
               <h1 className="text-2xl font-bold mb-2">{l.title}</h1>

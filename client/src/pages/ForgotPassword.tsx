@@ -127,7 +127,7 @@ export default function ForgotPassword() {
               Back to Login
             </Link>
           </div>
-          <div className="text-center text-xs text-black dark:text-white pt-4 border-t border-teal-800">
+          <div className="text-center text-xs text-black dark:text-white dark:text-white pt-4 border-t border-teal-800">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

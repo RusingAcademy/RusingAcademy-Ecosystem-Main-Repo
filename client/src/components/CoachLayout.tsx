@@ -39,7 +39,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
       />
 
       {/* Mobile header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700"
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700"
         role="banner">
         <button onClick={() => setSidebarCollapsed(false)}
           className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, #7c3aed))] focus:ring-offset-2"
@@ -59,7 +59,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
           {children}
         </div>
 
-        <footer className="text-center py-4 border-t border-gray-100 bg-white dark:bg-slate-900" role="contentinfo">
+        <footer className="text-center py-4 border-t border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 dark:bg-slate-900" role="contentinfo">
           <SocialLinks size={14} color="var(--color-gray-400, #9ca3af)" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">
             © 2026 RusingAcademy — A Division of{" "}

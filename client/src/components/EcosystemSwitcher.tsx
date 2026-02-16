@@ -132,7 +132,7 @@ export function EcosystemSwitcher({
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-100 dark:text-white text-lg">
                     Rusinga Ecosystem
                   </h3>
                   <p className="text-sm text-gray-500 dark:text-gray-300">
@@ -141,7 +141,7 @@ export function EcosystemSwitcher({
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-zinc-800 transition-colors"
                   aria-label={language === "fr" ? "Fermer" : "Close"}
                 >
                   <X className="w-5 h-5 text-gray-500" />
@@ -162,10 +162,10 @@ export function EcosystemSwitcher({
                         whileTap={{ scale: 0.98 }}
                         className={cn(
                           "w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300",
-                          "border border-transparent hover:border-gray-200 dark:hover:border-zinc-700",
+                          "border border-transparent hover:border-gray-200 dark:border-slate-700 dark:hover:border-zinc-700",
                           isActive
                             ? "bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800"
-                            : "hover:bg-white dark:hover:bg-zinc-800/50"
+                            : "hover:bg-white dark:bg-slate-800 dark:hover:bg-zinc-800/50"
                         )}
                       >
                         {/* Platform Icon */}
@@ -179,7 +179,7 @@ export function EcosystemSwitcher({
                         {/* Platform Info */}
                         <div className="flex-1 text-left">
                           <div className="flex items-center gap-2">
-                            <span className="font-medium text-gray-900 dark:text-white">
+                            <span className="font-medium text-gray-900 dark:text-gray-100 dark:text-white">
                               {platform.name}
                             </span>
                             {isActive && (
@@ -216,12 +216,12 @@ export function EcosystemSwitcher({
                 {isAuthenticated ? (
                   <>
                     <Link href="/dashboard">
-                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
+                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-zinc-800 transition-colors">
                         <User className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
                     <Link href="/app/settings">
-                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
+                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-zinc-800 transition-colors">
                         <Settings className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
@@ -239,7 +239,7 @@ export function EcosystemSwitcher({
                   href="https://rusinga.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-300 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                   rusinga.com
@@ -270,7 +270,7 @@ export function EcosystemSwitcher({
         <Grid3X3
           className={cn(
             "w-6 h-6 transition-all duration-300",
-            isOpen ? "text-gray-700 rotate-45" : "text-white"
+            isOpen ? "text-gray-700 dark:text-gray-300 rotate-45" : "text-white"
           )}
         />
       </motion.button>

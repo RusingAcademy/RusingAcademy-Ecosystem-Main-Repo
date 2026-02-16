@@ -155,7 +155,7 @@ export default function BankTransactions() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-slate-700">
+      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
         {["For Review", "Categorized", "Excluded", "Matched", "All"].map(tab => (
           <button
             key={tab}
@@ -172,7 +172,7 @@ export default function BankTransactions() {
       </div>
 
       {/* Transaction Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">
@@ -192,7 +192,7 @@ export default function BankTransactions() {
                 <tr key={txn.id} className="hover:bg-gray-50">
                   <td><input type="checkbox" className="rounded" /></td>
                   <td className="text-gray-700">{txn.transactionDate ? new Date(txn.transactionDate).toLocaleDateString("en-CA") : ""}</td>
-                  <td className="text-gray-800 max-w-[300px] truncate">{txn.description || "—"}</td>
+                  <td className="text-gray-800 dark:text-gray-200 max-w-[300px] truncate">{txn.description || "—"}</td>
                   <td className={`text-right font-medium ${amount < 0 ? "text-red-600" : "text-green-600"}`}>
                     ${Math.abs(amount).toFixed(2)}
                   </td>
@@ -201,7 +201,7 @@ export default function BankTransactions() {
                       txn.status === "For Review" ? "bg-yellow-100 text-yellow-700" :
                       txn.status === "Categorized" ? "bg-green-100 text-green-700" :
                       txn.status === "Matched" ? "bg-blue-100 text-blue-700" :
-                      "bg-gray-100 text-gray-600"
+                      "bg-gray-100 dark:bg-slate-800 text-gray-600"
                     }`}>
                       {txn.status}
                     </span>
@@ -259,7 +259,7 @@ export default function BankTransactions() {
               <span>Found {csvData.length} rows. Map the columns below and select a bank account.</span>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-1 block">Bank Account</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Bank Account</label>
               <Select value={selectedAccountId} onValueChange={setSelectedAccountId}>
                 <SelectTrigger><SelectValue placeholder="Select account" /></SelectTrigger>
                 <SelectContent>
@@ -274,7 +274,7 @@ export default function BankTransactions() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">Date Column</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Date Column</label>
                 <Select value={dateCol} onValueChange={setDateCol}>
                   <SelectTrigger><SelectValue placeholder="Date" /></SelectTrigger>
                   <SelectContent>
@@ -283,7 +283,7 @@ export default function BankTransactions() {
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">Description</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Description</label>
                 <Select value={descCol} onValueChange={setDescCol}>
                   <SelectTrigger><SelectValue placeholder="Description" /></SelectTrigger>
                   <SelectContent>
@@ -292,7 +292,7 @@ export default function BankTransactions() {
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">Amount</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Amount</label>
                 <Select value={amountCol} onValueChange={setAmountCol}>
                   <SelectTrigger><SelectValue placeholder="Amount" /></SelectTrigger>
                   <SelectContent>

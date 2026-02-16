@@ -101,7 +101,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
 
   if (compact) {
     return (
-      <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3">
+      <div className="flex items-center gap-3 bg-gray-50 dark:bg-slate-900 rounded-xl px-4 py-3">
         {audioUrl && <audio ref={audioRef} src={audioUrl} preload="metadata" />}
         <button
           onClick={togglePlay}

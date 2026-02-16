@@ -35,7 +35,7 @@ export default function PathList() {
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <Link href="/programs" className="hover:text-teal-700 transition-colors">Programs</Link>
           <span>/</span>
-          <span className="text-gray-900 font-medium">{program.title}</span>
+          <span className="text-gray-900 dark:text-gray-100 font-medium">{program.title}</span>
         </div>
 
         {/* Program Hero */}
@@ -51,7 +51,7 @@ export default function PathList() {
           }} />
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-white dark:bg-slate-900/20 text-white backdrop-blur-sm">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/20 text-white backdrop-blur-sm">
                 {isESL ? "English as a Second Language" : "Français langue seconde"}
               </span>
             </div>
@@ -128,7 +128,7 @@ export default function PathList() {
                     <div className="flex-1 p-5">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h2 className="text-xl font-bold text-gray-900 group-hover:text-teal-700 transition-colors" style={{
+                          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-teal-700 transition-colors" style={{
                             fontFamily: "'Playfair Display', serif",
                           }}>
                             {path.title}

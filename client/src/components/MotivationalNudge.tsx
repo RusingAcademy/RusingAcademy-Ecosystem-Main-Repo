@@ -151,7 +151,7 @@ export function MotivationalNudge({ userState, language = "en", onDismiss }: Mot
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       }`}
     >
-      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
         {/* Colored top bar based on type */}
         <div className={`h-1 ${
           nudge.type === "streak" ? "bg-cta" :
@@ -166,7 +166,7 @@ export function MotivationalNudge({ userState, language = "en", onDismiss }: Mot
           <div className="flex items-start gap-3">
             <div className="text-3xl flex-shrink-0">{nudge.icon}</div>
             <div className="flex-1">
-              <p className="text-gray-700 text-sm leading-relaxed">{message}</p>
+              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{message}</p>
               
               {nudge.action && (
                 <a

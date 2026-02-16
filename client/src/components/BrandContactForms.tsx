@@ -161,7 +161,7 @@ export function RusingAcademyContactForm({ language, theme }: Omit<ContactFormPr
   const color = brandColors.rusingacademy;
   const t = theme === "glass" 
     ? { bg: "bg-white/5 backdrop-blur-xl border border-white/10", text: "text-white", textSecondary: "text-white/70", input: "bg-white/10 border-white/20 text-white placeholder:text-white/80" }
-    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-600", input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400" };
+    : { bg: "bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-600", input: "bg-white dark:bg-slate-800 border-gray-300 text-gray-900 dark:text-gray-100 placeholder:text-gray-400" };
 
   if (isSuccess) {
     return (
@@ -335,7 +335,7 @@ export function LingueefyContactForm({ language, theme }: Omit<ContactFormProps,
   const color = brandColors.lingueefy;
   const t = theme === "glass" 
     ? { bg: "bg-white/5 backdrop-blur-xl border border-white/10", text: "text-white", textSecondary: "text-white/70", input: "bg-white/10 border-white/20 text-white placeholder:text-white/80" }
-    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-600", input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400" };
+    : { bg: "bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-600", input: "bg-white dark:bg-slate-800 border-gray-300 text-gray-900 dark:text-gray-100 placeholder:text-gray-400" };
 
   if (isSuccess) {
     return (
@@ -499,7 +499,7 @@ export function BarholexContactForm({ language, theme }: Omit<ContactFormProps, 
   const color = brandColors.barholex;
   const t = theme === "glass" 
     ? { bg: "bg-white/5 backdrop-blur-xl border border-white/10", text: "text-white", textSecondary: "text-white/70", input: "bg-white/10 border-white/20 text-white placeholder:text-white/80" }
-    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-600", input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400" };
+    : { bg: "bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-600", input: "bg-white dark:bg-slate-800 border-gray-300 text-gray-900 dark:text-gray-100 placeholder:text-gray-400" };
 
   if (isSuccess) {
     return (

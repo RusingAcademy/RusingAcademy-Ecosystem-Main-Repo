@@ -300,7 +300,7 @@ export default function BarholexServices() {
                 {STATS.map((stat, index) => (
                   <div
                     key={index}
-                    className="p-4 rounded-2xl bg-white dark:bg-slate-900/5 backdrop-blur-sm border border-white/60 text-center"
+                    className="p-4 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm border border-white/60 text-center"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-barholex-gold mb-1">{stat.value}</div>
                     <div className="text-sm text-white/90">{language === "en" ? stat.labelEn : stat.labelFr}</div>
@@ -318,7 +318,7 @@ export default function BarholexServices() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-black dark:text-white hover:from-[#B8962E] hover:to-barholex-gold shadow-lg shadow-amber-500/20"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-barholex-gold to-amber-600 text-black dark:text-white dark:text-white hover:from-[#B8962E] hover:to-barholex-gold shadow-lg shadow-amber-500/20"
                   >
                     {language === "en" ? "Start Your Project" : "Démarrer votre projet"}
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -328,7 +328,7 @@ export default function BarholexServices() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/60 text-white hover:bg-white dark:bg-slate-900/10"
+                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/60 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10"
                   >
                     <Play className="mr-2 h-5 w-5" />
                     {language === "en" ? "View Our Work" : "Voir nos réalisations"}
@@ -367,7 +367,7 @@ export default function BarholexServices() {
                   aria-label={`View ${language === "en" ? service.titleEn : service.titleFr} service`}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                     activeService === index
-                      ? "text-black shadow-lg"
+                      ? "text-black dark:text-white shadow-lg"
                       : "bg-white/5 text-white hover:bg-white/10 border border-white/60"
                   }`}
                   style={{
@@ -410,7 +410,7 @@ export default function BarholexServices() {
                   </p>
 
                   {/* For Who */}
-                  <div className="mb-6 p-4 rounded-xl bg-white dark:bg-slate-900/5 border border-white/60">
+                  <div className="mb-6 p-4 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60">
                     <div className="flex items-center gap-2 text-sm font-medium text-barholex-gold mb-2">
                       <Users className="w-4 h-4" />
                       {language === "en" ? "Ideal For" : "Idéal pour"}
@@ -445,7 +445,7 @@ export default function BarholexServices() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1 }}
-                      className="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900/5 border border-white/60 hover:border-white/60 transition-colors"
+                      className="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 hover:border-white/60 transition-colors"
                     >
                       <div 
                         className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -459,7 +459,7 @@ export default function BarholexServices() {
 
                   <Link href="/barholex/contact">
                     <Button 
-                      className="w-full mt-6 rounded-xl h-12 font-semibold text-black dark:text-white"
+                      className="w-full mt-6 rounded-xl h-12 font-semibold text-black dark:text-white dark:text-white"
                       style={{ backgroundColor: SERVICES[activeService].color }}
                     >
                       {language === "en" ? "Get a Quote" : "Obtenir un devis"}
@@ -506,11 +506,11 @@ export default function BarholexServices() {
                     className="relative text-center"
                   >
                     {/* Step Number */}
-                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-barholex-gold to-amber-600 text-black dark:text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-amber-500/20">
+                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-barholex-gold to-amber-600 text-black dark:text-white dark:text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-amber-500/20">
                       <step.icon className="w-10 h-10" />
                     </div>
                     
-                    <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/60 backdrop-blur-sm">
+                    <div className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 backdrop-blur-sm">
                       <div className="text-sm text-barholex-gold font-medium mb-2">
                         {language === "en" ? `Step ${index + 1}` : `Étape ${index + 1}`}
                       </div>
@@ -542,7 +542,7 @@ export default function BarholexServices() {
                 {CLIENTS.map((client, index) => (
                   <div
                     key={index}
-                    className="p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/60 text-center hover:border-barholex-gold/30 transition-colors"
+                    className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 text-center hover:border-barholex-gold/30 transition-colors"
                   >
                     <client.icon className="w-8 h-8 text-barholex-gold mx-auto mb-3" />
                     <p className="text-sm text-white/90">
@@ -554,19 +554,19 @@ export default function BarholexServices() {
 
               {/* Trust Badges */}
               <div className="flex flex-wrap justify-center gap-4 mt-8">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900/5 border border-white/60">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60">
                   <Shield className="w-4 h-4 text-green-400" />
                   <span className="text-sm text-white/90">
                     {language === "en" ? "Government Certified" : "Certifié gouvernemental"}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900/5 border border-white/60">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60">
                   <Star className="w-4 h-4 text-yellow-400" />
                   <span className="text-sm text-white/90">
                     {language === "en" ? "5-Star Reviews" : "Avis 5 étoiles"}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900/5 border border-white/60">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60">
                   <Clock className="w-4 h-4 text-blue-400" />
                   <span className="text-sm text-white/90">
                     {language === "en" ? "On-Time Delivery" : "Livraison à temps"}
@@ -583,11 +583,11 @@ export default function BarholexServices() {
           <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.1)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.1)_75%,transparent_75%)] bg-[size:20px_20px]" />
           
           <div className="container mx-auto relative z-10">
-            <div className="max-w-3xl mx-auto text-center text-black dark:text-white">
+            <div className="max-w-3xl mx-auto text-center text-black dark:text-white dark:text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {language === "en" ? "Ready to Transform Your Learning Experience?" : "Prêt à transformer votre expérience d'apprentissage?"}
               </h2>
-              <p className="text-xl text-black dark:text-white/80 mb-10">
+              <p className="text-xl text-black dark:text-white dark:text-white/80 mb-10">
                 {language === "en"
                   ? "Let's discuss how we can help bring your educational vision to life"
                   : "Discutons de comment nous pouvons aider à donner vie à votre vision éducative"
@@ -607,7 +607,7 @@ export default function BarholexServices() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="rounded-full px-8 h-14 text-lg font-semibold border-black/30 text-black dark:text-white hover:bg-black/10"
+                    className="rounded-full px-8 h-14 text-lg font-semibold border-black/30 text-black dark:text-white dark:text-white hover:bg-black/10"
                   >
                     {language === "en" ? "View Portfolio" : "Voir le portfolio"}
                   </Button>

@@ -168,7 +168,7 @@ export default function BarholexHome() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-white dark:bg-slate-900/10 border border-white/60 text-white">
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/10 border border-white/60 text-white">
                   <Clapperboard className="w-4 h-4 text-barholex-gold" />
                   {language === "en" ? "Creative Production & EdTech" : "Production créative & EdTech"}
                 </span>
@@ -196,13 +196,13 @@ export default function BarholexHome() {
               
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
                 <Link href="/barholex/contact">
-                  <Button size="lg" className="bg-barholex-gold hover:bg-amber-600 text-black dark:text-white gap-2 px-8 h-12 text-base shadow-lg shadow-amber-500/20 rounded-full font-semibold">
+                  <Button size="lg" className="bg-barholex-gold hover:bg-amber-600 text-black dark:text-white dark:text-white gap-2 px-8 h-12 text-base shadow-lg shadow-amber-500/20 rounded-full font-semibold">
                     {language === "en" ? "Start a Project" : "Démarrer un projet"}
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>
                 <Link href="/barholex/portfolio">
-                  <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 border-white/60 text-white hover:bg-white dark:bg-slate-900/10 rounded-full">
+                  <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 border-white/60 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full">
                     <Play className="w-5 h-5" />
                     {language === "en" ? "View Portfolio" : "Voir le portfolio"}
                   </Button>
@@ -213,7 +213,7 @@ export default function BarholexHome() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-white/60 bg-white dark:bg-slate-900/5 backdrop-blur-sm">
+        <section className="py-8 border-y border-white/60 bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={projects.ref} className="text-center">
@@ -258,7 +258,7 @@ export default function BarholexHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-900/5 backdrop-blur-sm border border-white/60 hover:border-barholex-gold/50 transition-all group"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm border border-white/60 hover:border-barholex-gold/50 transition-all group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-barholex-gold/10 flex items-center justify-center mb-4 group-hover:bg-barholex-gold/20 transition-colors">
                     <service.icon className="w-6 h-6 text-barholex-gold" />
@@ -318,7 +318,7 @@ export default function BarholexHome() {
 
             <div className="text-center mt-10">
               <Link href="/barholex/portfolio">
-                <Button variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10 rounded-full px-8">
+                <Button variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-full px-8">
                   {language === "en" ? "View All Projects" : "Voir tous les projets"}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -343,7 +343,7 @@ export default function BarholexHome() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  className="px-6 py-3 rounded-full bg-white dark:bg-slate-900/5 border border-white/60 text-white/90 text-sm"
+                  className="px-6 py-3 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/60 text-white/90 text-sm"
                 >
                   {language === "en" ? client.nameEn : client.nameFr}
                 </motion.div>
@@ -355,11 +355,11 @@ export default function BarholexHome() {
         {/* CTA Section */}
         <section className="py-20 px-4 bg-gradient-to-r from-barholex-gold to-amber-600">
           <div className="container mx-auto">
-            <div className="max-w-3xl mx-auto text-center text-black dark:text-white">
+            <div className="max-w-3xl mx-auto text-center text-black dark:text-white dark:text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {language === "en" ? "Ready to Create Something Amazing?" : "Prêt à créer quelque chose d'incroyable?"}
               </h2>
-              <p className="text-xl text-black dark:text-white/80 mb-10">
+              <p className="text-xl text-black dark:text-white dark:text-white/80 mb-10">
                 {language === "en"
                   ? "Let's discuss your next project and bring your vision to life"
                   : "Discutons de votre prochain projet et donnons vie à votre vision"

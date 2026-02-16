@@ -87,7 +87,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
   const lang = typeof window !== "undefined" && localStorage.getItem("ra-language") === "fr" ? "fr" : "en";
 
   return (
-    <div className="min-h-screen flex bg-white dark:bg-slate-900">
+    <div className="min-h-screen flex bg-white dark:bg-slate-800 dark:bg-slate-900">
       {/* Left Side — Portal-themed hero */}
       <div
         className="hidden lg:flex lg:w-1/2 items-center justify-center p-12 relative overflow-hidden"
@@ -113,7 +113,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
             </span>
           </div>
           <h2
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {lang === "fr" ? config.titleFr : config.title}
@@ -130,7 +130,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
             {config.features.map((f) => (
               <span
                 key={f.en}
-                className="text-xs px-3 py-1.5 rounded-full text-gray-700 font-medium bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700 shadow-sm"
+                className="text-xs px-3 py-1.5 rounded-full text-gray-700 dark:text-gray-300 font-medium bg-white dark:bg-slate-800 dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700 dark:border-slate-700 shadow-sm"
               >
                 {lang === "fr" ? f.fr : f.en}
               </span>
@@ -140,7 +140,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
       </div>
 
       {/* Right Side — Coming Soon */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-slate-900">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-slate-800 dark:bg-slate-900">
         <div className="w-full max-w-md text-center">
           {/* Logo */}
           <img src={LOGO_ICON} alt="RusingAcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />
@@ -159,7 +159,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
           </div>
 
           <h1
-            className="text-3xl font-bold text-gray-900 mb-3"
+            className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {lang === "fr" ? "Bientôt disponible" : "Coming Soon"}
@@ -177,7 +177,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
               <span>{lang === "fr" ? "Progression" : "Progress"}</span>
               <span>Phase 0</span>
             </div>
-            <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-1000"
                 style={{
@@ -189,7 +189,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
           </div>
 
           {/* Planned features preview */}
-          <div className="text-left bg-gray-50 rounded-xl p-5 mb-8 border border-gray-100">
+          <div className="text-left bg-gray-50 dark:bg-slate-900 rounded-xl p-5 mb-8 border border-gray-100">
             <p className="text-xs text-gray-400 uppercase tracking-wider mb-3 font-medium">
               {lang === "fr" ? "Fonctionnalités prévues" : "Planned Features"}
             </p>

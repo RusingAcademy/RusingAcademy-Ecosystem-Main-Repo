@@ -36,7 +36,7 @@ export default function PremiumTestimonialCard({
       case "dark":
         return "bg-slate-900 text-white";
       default:
-        return "bg-white shadow-lg hover:shadow-xl";
+        return "bg-white dark:bg-slate-800 shadow-lg hover:shadow-xl";
     }
   };
 

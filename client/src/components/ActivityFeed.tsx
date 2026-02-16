@@ -79,7 +79,7 @@ export function ActivityFeed({ language, className }: ActivityFeedProps) {
       <Card className={className}>
         <CardContent className="p-6 text-center">
           <Activity className="h-10 w-10 text-white/90 dark:text-black mx-auto mb-3" />
-          <p className="text-sm font-medium text-black dark:text-cyan-300">{l.empty}</p>
+          <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{l.empty}</p>
           <p className="text-xs text-cyan-300 dark:text-black mt-1">{l.emptyDesc}</p>
         </CardContent>
       </Card>
@@ -103,10 +103,10 @@ export function ActivityFeed({ language, className }: ActivityFeedProps) {
               className="flex items-center gap-3 py-2 px-2 rounded-md hover:bg-slate-50 dark:hover:bg-foundation/50 transition-colors"
             >
               <div className="p-1.5 rounded-md bg-slate-100 dark:bg-foundation">
-                <Icon className="h-3.5 w-3.5 text-black dark:text-cyan-300" />
+                <Icon className="h-3.5 w-3.5 text-black dark:text-white dark:text-cyan-300" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-black dark:text-white/90 truncate">
+                <p className="text-sm text-black dark:text-white dark:text-white/90 truncate">
                   {item.description}
                 </p>
               </div>

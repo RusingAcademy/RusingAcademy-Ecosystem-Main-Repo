@@ -200,7 +200,7 @@ export function AnimatedStreak({
         {/* Milestone badge */}
         {milestone && showMilestones && (
           <motion.div
-            className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white dark:bg-foundation shadow-lg flex items-center justify-center text-lg"
+            className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white dark:bg-slate-800 dark:bg-foundation shadow-lg flex items-center justify-center text-lg"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", delay: 0.3 }}
@@ -228,10 +228,10 @@ export function AnimatedStreak({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <p className={cn(config.text, "font-bold text-black dark:text-white")}>
+        <p className={cn(config.text, "font-bold text-black dark:text-white dark:text-white")}>
           {currentStreak}
         </p>
-        <p className="text-sm text-black dark:text-cyan-300 font-medium">
+        <p className="text-sm text-black dark:text-white dark:text-cyan-300 font-medium">
           {l.streak}
         </p>
       </motion.div>
@@ -273,7 +273,7 @@ export function AnimatedStreak({
           transition={{ delay: 0.5 }}
         >
           {longestStreak > 0 && (
-            <div className="flex items-center gap-1 text-black dark:text-cyan-300">
+            <div className="flex items-center gap-1 text-black dark:text-white dark:text-cyan-300">
               <Zap className="h-3 w-3" />
               <span>{l.longest}: {longestStreak} {l.days}</span>
             </div>

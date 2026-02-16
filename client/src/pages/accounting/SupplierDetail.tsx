@@ -88,7 +88,7 @@ export default function SupplierDetail() {
     <div className="p-6 max-w-[900px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/suppliers")} className="p-2 hover:bg-gray-100 rounded-lg">
+          <button onClick={() => navigate("/suppliers")} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">
@@ -167,7 +167,7 @@ export default function SupplierDetail() {
           <div>
             <div className="qb-card">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Balance</h3>
-              <p className="text-3xl font-bold text-gray-900 mb-2">${Number(s.balance || 0).toFixed(2)}</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">${Number(s.balance || 0).toFixed(2)}</p>
               <p className="text-xs text-gray-500">Outstanding balance</p>
               {s.email && (
                 <>

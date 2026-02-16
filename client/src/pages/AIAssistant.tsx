@@ -85,18 +85,18 @@ export default function AIAssistant() {
           {/* Right Panel — Recommendations & Quick Actions */}
           <div className="space-y-4">
             {/* Recommendations */}
-            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
-              <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-teal-700" >auto_awesome</span>
                 {t("dashboard.recommended")}
               </h2>
               <div className="space-y-2">
                 {recommendationsQuery.data?.map((rec, idx) => (
                   <Link key={idx} href={rec.link}>
-                    <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer group">
+                    <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-colors cursor-pointer group">
                       <span className="material-icons text-teal-700 mt-0.5" >{rec.icon}</span>
                       <div>
-                        <p className="text-sm font-medium text-gray-900 group-hover:text-teal-700 transition-colors">{rec.title}</p>
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-teal-700 transition-colors">{rec.title}</p>
                         <p className="text-[11px] text-gray-400 mt-0.5">{rec.description}</p>
                       </div>
                     </div>
@@ -111,8 +111,8 @@ export default function AIAssistant() {
             </div>
 
             {/* Quick Topics */}
-            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
-              <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-amber-500" >tips_and_updates</span>
                 {lang === "fr" ? "Sujets rapides" : "Quick Topics"}
               </h2>
@@ -129,7 +129,7 @@ export default function AIAssistant() {
                     onClick={() => handleSend(lang === "fr"
                       ? `Aidez-moi avec ${topic.label.toLowerCase()}`
                       : `Help me with ${topic.label.toLowerCase()}`)}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-slate-700 text-gray-600 hover:border-teal-700 hover:text-teal-700 hover:bg-teal-700/5 transition-all">
+                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-slate-700 dark:border-slate-700 text-gray-600 hover:border-teal-700 hover:text-teal-700 hover:bg-teal-700/5 transition-all">
                     {topic.emoji} {topic.label}
                   </button>
                 ))}
@@ -137,7 +137,7 @@ export default function AIAssistant() {
             </div>
 
             {/* AI Capabilities */}
-            <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+            <div className="bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-700 rounded-xl p-4">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
                 {lang === "fr" ? "Capacités" : "Capabilities"}
               </h3>

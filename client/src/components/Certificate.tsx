@@ -82,7 +82,7 @@ export default function Certificate({
       {/* Certificate Display */}
       <div
         ref={certificateRef}
-        className="relative bg-white dark:bg-slate-900 rounded-lg shadow-2xl overflow-hidden"
+        className="relative bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow-2xl overflow-hidden"
         style={{
           aspectRatio: "1.414/1", // A4 landscape ratio
           maxWidth: "900px",
@@ -106,17 +106,17 @@ export default function Certificate({
             <Award className="h-10 w-10 text-teal-600" />
             <div className="text-left">
               <h2 className="text-2xl font-bold text-teal-700">RusingAcademy</h2>
-              <p className="text-xs text-black dark:text-white">{content.organizationTagline}</p>
+              <p className="text-xs text-black dark:text-white dark:text-white">{content.organizationTagline}</p>
             </div>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-serif font-bold text-black dark:text-white mb-4 tracking-wide">
+          <h1 className="text-4xl font-serif font-bold text-black dark:text-white dark:text-white mb-4 tracking-wide">
             {content.title}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-black dark:text-white mb-3">{content.subtitle}</p>
+          <p className="text-lg text-black dark:text-white dark:text-white mb-3">{content.subtitle}</p>
 
           {/* Recipient Name */}
           <p className="text-3xl font-bold text-teal-700 mb-3 font-serif">
@@ -124,16 +124,16 @@ export default function Certificate({
           </p>
 
           {/* Completion Text */}
-          <p className="text-lg text-black dark:text-white mb-2">{content.hasCompleted}</p>
+          <p className="text-lg text-black dark:text-white dark:text-white mb-2">{content.hasCompleted}</p>
 
           {/* Course Title */}
-          <p className="text-2xl font-semibold text-black dark:text-white mb-2 max-w-lg">
+          <p className="text-2xl font-semibold text-black dark:text-white dark:text-white mb-2 max-w-lg">
             {courseTitle}
           </p>
 
           {/* Path info */}
           {pathTitle && (
-            <p className="text-sm text-black dark:text-white italic mb-1">
+            <p className="text-sm text-black dark:text-white dark:text-white italic mb-1">
               {isEn
                 ? `Part of the ${pathTitle} learning path`
                 : `Fait partie du parcours ${pathTitle}`}
@@ -164,8 +164,8 @@ export default function Certificate({
           <div className="flex items-end justify-between w-full max-w-2xl mt-auto">
             {/* Date */}
             <div className="text-left">
-              <p className="text-sm text-black dark:text-white">{content.issuedOn}</p>
-              <p className="text-lg font-medium text-black dark:text-white">
+              <p className="text-sm text-black dark:text-white dark:text-white">{content.issuedOn}</p>
+              <p className="text-lg font-medium text-black dark:text-white dark:text-white">
                 {formatDate(issuedAt)}
               </p>
             </div>
@@ -173,11 +173,11 @@ export default function Certificate({
             {/* Signature */}
             <div className="text-center">
               <div className="w-48 border-b-2 border-gray-400 mb-2">
-                <p className="text-2xl font-script text-black dark:text-white italic">
+                <p className="text-2xl font-script text-black dark:text-white dark:text-white italic">
                   Prof. Steven Rusinga
                 </p>
               </div>
-              <p className="text-sm text-black dark:text-white">{content.signedBy}</p>
+              <p className="text-sm text-black dark:text-white dark:text-white">{content.signedBy}</p>
               <p className="text-xs text-cyan-300">{content.instructorTitle}</p>
             </div>
           </div>

@@ -131,7 +131,7 @@ Score moyen: ${stats.avgScore}/100
   if (!user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian flex items-center justify-center p-6">
-        <Card className="max-w-md bg-white dark:bg-slate-900/5 border-white/60">
+        <Card className="max-w-md bg-white dark:bg-slate-800 dark:bg-slate-900/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Connexion requise</CardTitle>
           </CardHeader>
@@ -150,7 +150,7 @@ Score moyen: ${stats.avgScore}/100
   if (error || !session) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian flex items-center justify-center p-6">
-        <Card className="max-w-md bg-white dark:bg-slate-900/5 border-white/60">
+        <Card className="max-w-md bg-white dark:bg-slate-800 dark:bg-slate-900/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Session introuvable</CardTitle>
           </CardHeader>
@@ -180,7 +180,7 @@ Score moyen: ${stats.avgScore}/100
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
             <Link href="/practice-history">
-              <Button variant="ghost" className="text-white hover:bg-white dark:bg-slate-900/10">
+              <Button variant="ghost" className="text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Retour
               </Button>
@@ -196,7 +196,7 @@ Score moyen: ${stats.avgScore}/100
           </div>
           <Button
             variant="outline"
-            className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10"
+            className="border-white/60 text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10"
             onClick={handleDownloadTranscript}
           >
             <Download className="w-4 h-4 mr-2" />
@@ -205,7 +205,7 @@ Score moyen: ${stats.avgScore}/100
         </div>
 
         {/* Session Info Card */}
-        <Card className="bg-white dark:bg-slate-900/5 border-white/60 mb-6">
+        <Card className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 border-white/60 mb-6">
           <CardContent className="p-6">
             <div className="flex items-center gap-6">
               <img
@@ -272,14 +272,14 @@ Score moyen: ${stats.avgScore}/100
                     {stats.avgScore}%
                   </span>
                 </div>
-                <Progress value={stats.avgScore} className="h-2 bg-white dark:bg-slate-900/10" />
+                <Progress value={stats.avgScore} className="h-2 bg-white dark:bg-slate-800 dark:bg-slate-900/10" />
               </div>
             )}
           </CardContent>
         </Card>
 
         {/* Conversation */}
-        <Card className="bg-white dark:bg-slate-900/5 border-white/60">
+        <Card className="bg-white dark:bg-slate-800 dark:bg-slate-900/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white text-lg">Conversation complète</CardTitle>
           </CardHeader>

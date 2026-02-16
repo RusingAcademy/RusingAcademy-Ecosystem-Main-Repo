@@ -314,7 +314,7 @@ export default function EmailTemplateBuilder() {
                 <div className="flex items-center gap-2 text-sm"><span className="text-muted-foreground w-16">Subject:</span><span className="font-semibold">{previewSubject || "(No subject)"}</span></div>
               </div>
               {/* Email Body */}
-              <div className="p-6 bg-white dark:bg-slate-900 min-h-[300px]">
+              <div className="p-6 bg-white dark:bg-slate-800 dark:bg-slate-900 min-h-[300px]">
                 {previewHtml ? (
                   <div dangerouslySetInnerHTML={{ __html: previewHtml }} className="prose prose-sm max-w-none" style={{ color: "var(--color-black, #000000)" }} />
                 ) : (

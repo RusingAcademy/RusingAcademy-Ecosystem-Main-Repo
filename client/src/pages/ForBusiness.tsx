@@ -263,14 +263,14 @@ export default function ForBusiness() {
               {t.badge}
             </Badge>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white dark:text-white mb-6 leading-tight">
               {t.title}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-600">
                 {t.titleHighlight}
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-black dark:text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-black dark:text-white dark:text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
               {t.subtitle}
             </p>
             
@@ -279,7 +279,7 @@ export default function ForBusiness() {
                 {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-white dark:bg-slate-900 dark:hover:bg-foundation">
+              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-white dark:bg-slate-800 dark:bg-slate-900 dark:hover:bg-foundation">
                 <FileText className="w-5 h-5 mr-2" />
                 {t.ctaSecondary}
               </Button>
@@ -295,7 +295,7 @@ export default function ForBusiness() {
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-teal-600 dark:text-teal-400 mb-1">{stat.value}</div>
-                  <div className="text-sm text-black dark:text-cyan-300">{stat.label}</div>
+                  <div className="text-sm text-black dark:text-white dark:text-cyan-300">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -304,11 +304,11 @@ export default function ForBusiness() {
       </section>
 
       {/* Benefits Section */}
-      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-obsidian">
+      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-slate-800 dark:bg-obsidian">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.benefitsTitle}</h2>
-            <p className="text-lg text-black dark:text-cyan-300 max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">{t.benefitsTitle}</h2>
+            <p className="text-lg text-black dark:text-white dark:text-cyan-300 max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${visibleSections.has('benefits') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -318,8 +318,8 @@ export default function ForBusiness() {
                   <div className={`w-12 h-12 rounded-xl ${colorMap[benefit.color]} flex items-center justify-center mb-4`}>
                     <benefit.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-semibold text-black dark:text-white mb-2">{benefit.title}</h3>
-                  <p className="text-black dark:text-cyan-300">{benefit.desc}</p>
+                  <h3 className="text-lg font-semibold text-black dark:text-white dark:text-white mb-2">{benefit.title}</h3>
+                  <p className="text-black dark:text-white dark:text-cyan-300">{benefit.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -331,8 +331,8 @@ export default function ForBusiness() {
       <section ref={setSectionRef('packages')} data-section="packages" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.packagesTitle}</h2>
-            <p className="text-lg text-black dark:text-cyan-300 max-w-2xl mx-auto">{t.packagesSubtitle}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">{t.packagesTitle}</h2>
+            <p className="text-lg text-black dark:text-white dark:text-cyan-300 max-w-2xl mx-auto">{t.packagesSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-3 gap-8 max-w-5xl mx-auto transition-all duration-700 ${visibleSections.has('packages') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -347,19 +347,19 @@ export default function ForBusiness() {
                   </div>
                 )}
                 <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-xl font-bold text-black dark:text-white">{pkg.name}</CardTitle>
+                  <CardTitle className="text-xl font-bold text-black dark:text-white dark:text-white">{pkg.name}</CardTitle>
                   <div className="mt-4">
                     <span className="text-4xl font-bold text-teal-600 dark:text-teal-400">{pkg.price}</span>
-                    <span className="text-black dark:text-cyan-300 ml-2">{pkg.period}</span>
+                    <span className="text-black dark:text-white dark:text-cyan-300 ml-2">{pkg.period}</span>
                   </div>
-                  <p className="text-sm text-black dark:text-cyan-300 mt-2">{pkg.description}</p>
+                  <p className="text-sm text-black dark:text-white dark:text-cyan-300 mt-2">{pkg.description}</p>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-black dark:text-white/90 text-sm">{feature}</span>
+                        <span className="text-black dark:text-white dark:text-white/90 text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -374,11 +374,11 @@ export default function ForBusiness() {
       </section>
 
       {/* Industries Section */}
-      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-obsidian">
+      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-slate-800 dark:bg-obsidian">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.industriesTitle}</h2>
-            <p className="text-lg text-black dark:text-cyan-300 max-w-2xl mx-auto">{t.industriesSubtitle}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">{t.industriesTitle}</h2>
+            <p className="text-lg text-black dark:text-white dark:text-cyan-300 max-w-2xl mx-auto">{t.industriesSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${visibleSections.has('industries') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -388,8 +388,8 @@ export default function ForBusiness() {
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-100 to-emerald-100 dark:from-teal-900/50 dark:to-emerald-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                     <industry.icon className="w-8 h-8 text-teal-600 dark:text-teal-400" />
                   </div>
-                  <h3 className="text-lg font-semibold text-black dark:text-white mb-2">{industry.name}</h3>
-                  <p className="text-sm text-black dark:text-cyan-300">{industry.desc}</p>
+                  <h3 className="text-lg font-semibold text-black dark:text-white dark:text-white mb-2">{industry.name}</h3>
+                  <p className="text-sm text-black dark:text-white dark:text-cyan-300">{industry.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -401,22 +401,22 @@ export default function ForBusiness() {
       <section ref={setSectionRef('testimonials')} data-section="testimonials" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.testimonialsTitle}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">{t.testimonialsTitle}</h2>
           </div>
           
           <div className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {t.testimonials.map((testimonial, i) => (
-              <Card key={i} className="border-slate-200 dark:border-teal-800 bg-white dark:bg-foundation">
+              <Card key={i} className="border-slate-200 dark:border-teal-800 bg-white dark:bg-slate-800 dark:bg-foundation">
                 <CardContent className="p-6">
                   <Quote className="w-10 h-10 text-teal-200 dark:text-teal-800 mb-4" />
-                  <p className="text-black dark:text-white/90 mb-6 italic">"{testimonial.quote}"</p>
+                  <p className="text-black dark:text-white dark:text-white/90 mb-6 italic">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center text-white font-bold">
                       {testimonial.author.charAt(0)}
                     </div>
                     <div>
-                      <div className="font-semibold text-black dark:text-white">{testimonial.author}</div>
-                      <div className="text-sm text-black dark:text-cyan-300">{testimonial.role}, {testimonial.company}</div>
+                      <div className="font-semibold text-black dark:text-white dark:text-white">{testimonial.author}</div>
+                      <div className="text-sm text-black dark:text-white dark:text-cyan-300">{testimonial.role}, {testimonial.company}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -427,12 +427,12 @@ export default function ForBusiness() {
       </section>
 
       {/* Contact Form Section */}
-      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-obsidian">
+      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-slate-800 dark:bg-obsidian">
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.formTitle}</h2>
-              <p className="text-lg text-black dark:text-cyan-300">{t.formSubtitle}</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white dark:text-white mb-4">{t.formTitle}</h2>
+              <p className="text-lg text-black dark:text-white dark:text-cyan-300">{t.formSubtitle}</p>
             </div>
             
             {formSubmitted ? (
@@ -502,7 +502,7 @@ export default function ForBusiness() {
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{t.ctaTitle}</h2>
           <p className="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">{t.ctaSubtitle}</p>
-          <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-lg hover:shadow-xl transition-all duration-300 px-8">
+          <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-lg hover:shadow-xl transition-all duration-300 px-8">
             <Calendar className="w-5 h-5 mr-2" />
             {t.ctaButton}
           </Button>
