@@ -122,8 +122,8 @@ export default function FloatingAICompanion() {
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-gray-50/50">
             {displayMessages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-4">
-                <div className="w-14 h-14 rounded-full bg-[#008090]/10 flex items-center justify-center mb-4">
-                  <span className="material-icons text-[#008090]" style={{ fontSize: "28px" }}>smart_toy</span>
+                <div className="w-14 h-14 rounded-full bg-teal-700/10 flex items-center justify-center mb-4">
+                  <span className="material-icons text-teal-700" style={{ fontSize: "28px" }}>smart_toy</span>
                 </div>
                 <p className="text-sm font-semibold text-gray-900 mb-1">Hello! I'm your SLE Companion</p>
                 <p className="text-xs text-gray-500 mb-5 leading-relaxed">
@@ -134,9 +134,9 @@ export default function FloatingAICompanion() {
                     <button
                       key={qp.label}
                       onClick={() => handleSend(qp.prompt)}
-                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-white hover:border-[#008090]/30 hover:bg-[#008090]/5 transition-all text-left"
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-white hover:border-teal-700/30 hover:bg-teal-700/5 transition-all text-left"
                     >
-                      <span className="material-icons text-[#008090]" style={{ fontSize: "16px" }}>{qp.icon}</span>
+                      <span className="material-icons text-teal-700" style={{ fontSize: "16px" }}>{qp.icon}</span>
                       <span className="text-[11px] font-medium text-gray-700">{qp.label}</span>
                     </button>
                   ))}
@@ -147,14 +147,14 @@ export default function FloatingAICompanion() {
                 {displayMessages.map((msg, i) => (
                   <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                     {msg.role === "assistant" && (
-                      <div className="w-6 h-6 rounded-full bg-[#008090]/10 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
-                        <span className="material-icons text-[#008090]" style={{ fontSize: "14px" }}>smart_toy</span>
+                      <div className="w-6 h-6 rounded-full bg-teal-700/10 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                        <span className="material-icons text-teal-700" style={{ fontSize: "14px" }}>smart_toy</span>
                       </div>
                     )}
                     <div
                       className={`max-w-[80%] rounded-xl px-3 py-2 text-sm leading-relaxed ${
                         msg.role === "user"
-                          ? "bg-[#008090] text-white rounded-br-sm"
+                          ? "bg-teal-700 text-white rounded-br-sm"
                           : "bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm"
                       }`}
                     >
@@ -170,14 +170,14 @@ export default function FloatingAICompanion() {
                 ))}
                 {chatMutation.isPending && (
                   <div className="flex justify-start">
-                    <div className="w-6 h-6 rounded-full bg-[#008090]/10 flex items-center justify-center mr-2 flex-shrink-0">
-                      <span className="material-icons text-[#008090]" style={{ fontSize: "14px" }}>smart_toy</span>
+                    <div className="w-6 h-6 rounded-full bg-teal-700/10 flex items-center justify-center mr-2 flex-shrink-0">
+                      <span className="material-icons text-teal-700" style={{ fontSize: "14px" }}>smart_toy</span>
                     </div>
                     <div className="bg-white border border-gray-200 rounded-xl rounded-bl-sm px-4 py-3 shadow-sm">
                       <div className="flex gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-[#008090]/40 animate-bounce" style={{ animationDelay: "0ms" }} />
-                        <div className="w-2 h-2 rounded-full bg-[#008090]/40 animate-bounce" style={{ animationDelay: "150ms" }} />
-                        <div className="w-2 h-2 rounded-full bg-[#008090]/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+                        <div className="w-2 h-2 rounded-full bg-teal-700/40 animate-bounce" style={{ animationDelay: "0ms" }} />
+                        <div className="w-2 h-2 rounded-full bg-teal-700/40 animate-bounce" style={{ animationDelay: "150ms" }} />
+                        <div className="w-2 h-2 rounded-full bg-teal-700/40 animate-bounce" style={{ animationDelay: "300ms" }} />
                       </div>
                     </div>
                   </div>
@@ -202,12 +202,12 @@ export default function FloatingAICompanion() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything..."
                 rows={1}
-                className="flex-1 resize-none rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]/40 max-h-20 bg-gray-50"
+                className="flex-1 resize-none rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700/40 max-h-20 bg-gray-50"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || chatMutation.isPending}
-                className="w-9 h-9 rounded-xl bg-[#008090] hover:bg-[#006d7a] disabled:bg-gray-200 disabled:cursor-not-allowed flex items-center justify-center transition-colors flex-shrink-0"
+                className="w-9 h-9 rounded-xl bg-teal-700 hover:bg-teal-800 disabled:bg-gray-200 disabled:cursor-not-allowed flex items-center justify-center transition-colors flex-shrink-0"
               >
                 <span className="material-icons text-white" style={{ fontSize: "18px" }}>
                   {chatMutation.isPending ? "hourglass_empty" : "send"}
@@ -232,7 +232,7 @@ export default function FloatingAICompanion() {
           {isOpen ? "close" : "smart_toy"}
         </span>
         {!isOpen && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#f5a623] border-2 border-white flex items-center justify-center">
+          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-500 border-2 border-white flex items-center justify-center">
             <span className="text-[8px] font-bold text-white">AI</span>
           </span>
         )}

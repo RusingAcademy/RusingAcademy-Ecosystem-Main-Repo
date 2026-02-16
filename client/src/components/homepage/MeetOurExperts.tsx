@@ -124,7 +124,7 @@ export default function MeetOurExperts() {
                   href={expert.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#0077B5] text-white text-sm font-medium rounded-full hover:bg-[#006097] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-sky-700 text-white text-sm font-medium rounded-full hover:bg-sky-800 transition-colors"
                 >
                   <Linkedin className="h-4 w-4" />
                   LinkedIn

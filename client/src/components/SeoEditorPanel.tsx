@@ -144,13 +144,13 @@ function SocialCardPreview({
           </div>
         ) : (
           <div className="h-[200px] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-            <ImagePlus className="w-8 h-8 text-[#67E8F9]" />
+            <ImagePlus className="w-8 h-8 text-cyan-300" />
           </div>
         )}
         <div className="p-3 space-y-1">
           <h4 className="text-sm font-semibold text-black truncate">{displayTitle}</h4>
           <p className="text-xs text-black line-clamp-2">{displayDesc}</p>
-          <div className="flex items-center gap-1 text-xs text-[#67E8F9]">
+          <div className="flex items-center gap-1 text-xs text-cyan-300">
             <Twitter className="w-3 h-3" />
             <span>{displayUrl.replace(/https?:\/\//, "").split("/")[0]}</span>
           </div>
@@ -167,7 +167,7 @@ function SocialCardPreview({
         </div>
       ) : (
         <div className="h-[210px] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-          <ImagePlus className="w-8 h-8 text-[#67E8F9]" />
+          <ImagePlus className="w-8 h-8 text-cyan-300" />
         </div>
       )}
       <div className="p-3 bg-[#f2f3f5] space-y-0.5">

@@ -65,12 +65,12 @@ function CalendarWidget({ sessions, lang }: { sessions: any[]; lang: string }) {
       <div className="grid grid-cols-7 gap-0 text-center text-xs">
         {days.map((day, i) => (
           <div key={i} className={`py-1.5 rounded-full relative cursor-pointer ${
-            day === today && isCurrentMonth ? "bg-[#7c3aed] text-white font-bold" :
+            day === today && isCurrentMonth ? "bg-violet-600 text-white font-bold" :
             day ? "text-gray-700 hover:bg-gray-100" : ""
           }`}>
             {day || ""}
             {day && sessionDays.has(day) && (
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#7c3aed]" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-violet-600" />
             )}
           </div>
         ))}
@@ -155,7 +155,7 @@ export default function CoachSessions() {
             <div className="flex gap-2 mb-4 flex-wrap">
               {(["all", "confirmed", "pending", "completed", "cancelled"] as const).map(f => (
                 <button key={f} onClick={() => setFilter(f)}
-                  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-[#7c3aed] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-violet-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
                   {f === "all" ? (lang === "fr" ? "Tous" : "All") : f.charAt(0).toUpperCase() + f.slice(1)}
                 </button>
               ))}
@@ -178,10 +178,10 @@ export default function CoachSessions() {
                   const dt = session.scheduledAt ? new Date(session.scheduledAt) : null;
                   return (
                     <div key={session.id} className="bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md transition-shadow flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg flex flex-col items-center justify-center bg-[#7c3aed]/5 border border-[#7c3aed]/10">
+                      <div className="w-12 h-12 rounded-lg flex flex-col items-center justify-center bg-violet-600/5 border border-violet-600/10">
                         {dt ? (
                           <>
-                            <span className="text-[10px] font-bold text-[#7c3aed] uppercase">{MONTHS_EN[dt.getMonth()]}</span>
+                            <span className="text-[10px] font-bold text-violet-600 uppercase">{MONTHS_EN[dt.getMonth()]}</span>
                             <span className="text-lg font-bold text-gray-900">{dt.getDate()}</span>
                           </>
                         ) : (
@@ -196,12 +196,12 @@ export default function CoachSessions() {
                         <p className="text-xs text-gray-500">{session.sessionType || "Session"} · {session.duration || 60} min</p>
                       </div>
                       <div className="text-right flex flex-col items-end gap-1">
-                        <p className="text-sm font-semibold text-[#7c3aed]">
+                        <p className="text-sm font-semibold text-violet-600">
                           {dt ? dt.toLocaleTimeString(lang === "fr" ? "fr-CA" : "en-CA", { hour: "2-digit", minute: "2-digit" }) : "—"}
                         </p>
                         {session.status === "confirmed" && session.meetingUrl && (
                           <a href={session.meetingUrl} target="_blank" rel="noopener noreferrer"
-                            className="text-[11px] text-gray-400 hover:text-[#7c3aed] flex items-center gap-0.5">
+                            className="text-[11px] text-gray-400 hover:text-violet-600 flex items-center gap-0.5">
                             <span className="material-icons text-sm">videocam</span> Join
                           </a>
                         )}

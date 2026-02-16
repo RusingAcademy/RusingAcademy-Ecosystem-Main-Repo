@@ -195,7 +195,7 @@ export default function RightSidebar() {
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[13px] font-semibold text-foreground leading-tight line-clamp-2 group-hover:text-[#1B1464] transition-colors">
+                <p className="text-[13px] font-semibold text-foreground leading-tight line-clamp-2 group-hover:text-indigo-900 transition-colors">
                   {pick.title}
                 </p>
                 <p className="text-[11px] text-muted-foreground mt-1 font-medium">

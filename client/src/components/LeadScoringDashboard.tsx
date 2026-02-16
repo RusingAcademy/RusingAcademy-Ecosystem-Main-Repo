@@ -204,7 +204,7 @@ export default function LeadScoringDashboard() {
     if (!previousScore) return null;
     if (score > previousScore) return <TrendingUp className="h-4 w-4 text-emerald-500" />;
     if (score < previousScore) return <TrendingDown className="h-4 w-4 text-red-500" />;
-    return <Minus className="h-4 w-4 text-[#67E8F9]" />;
+    return <Minus className="h-4 w-4 text-cyan-300" />;
   };
 
   const getConversionProbability = (score: number) => {
@@ -216,7 +216,7 @@ export default function LeadScoringDashboard() {
 
   const getRankBadge = (rank: number) => {
     if (rank === 1) return <Trophy className="h-5 w-5 text-amber-500" />;
-    if (rank === 2) return <Award className="h-5 w-5 text-[#67E8F9]" />;
+    if (rank === 2) return <Award className="h-5 w-5 text-cyan-300" />;
     if (rank === 3) return <Award className="h-5 w-5 text-amber-700" />;
     return <span className="text-sm font-medium text-muted-foreground">#{rank}</span>;
   };
@@ -478,7 +478,7 @@ export default function LeadScoringDashboard() {
                             {getActivityIcon(activity.type)}
                           </div>
                           {idx < (activitiesQuery.data?.activities?.length || 0) - 1 && (
-                            <div className="w-px h-full bg-slate-200 dark:bg-[#0a6969] my-1" />
+                            <div className="w-px h-full bg-slate-200 dark:bg-teal-800 my-1" />
                           )}
                         </div>
                         <div className="flex-1 pb-4">

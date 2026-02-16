@@ -123,12 +123,12 @@ function LibraryHero({ language }: { language: string }) {
       <motion.div
         animate={{ x: [0, 20, 0], y: [0, -15, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-10 left-10 w-72 h-72 bg-[#F97316]/10 rounded-full blur-3xl"
+        className="absolute top-10 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl"
       />
       <motion.div
         animate={{ x: [0, -20, 0], y: [0, 20, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-10 right-10 w-96 h-96 bg-[#14B8A6]/10 rounded-full blur-3xl"
+        className="absolute bottom-10 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-3xl" />
 
@@ -148,7 +148,7 @@ function LibraryHero({ language }: { language: string }) {
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-6">
             <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white/10 backdrop-blur-md text-white/90 border border-white/15 shadow-lg">
-              <BookOpen className="w-4 h-4 text-[#F97316]" />
+              <BookOpen className="w-4 h-4 text-orange-500" />
               {language === "fr" ? "Collection RusingAcademy" : "RusingAcademy Collection"}
             </span>
           </motion.div>
@@ -192,7 +192,7 @@ function LibraryHero({ language }: { language: string }) {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="flex flex-col items-center gap-1.5 px-6 py-4 rounded-2xl bg-white/[0.08] backdrop-blur-md border border-white/10 min-w-[100px]"
               >
-                <stat.icon className="w-5 h-5 text-[#F97316]" />
+                <stat.icon className="w-5 h-5 text-orange-500" />
                 <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
                 <span className="text-xs text-white/60">{stat.label}</span>
               </motion.div>
@@ -291,7 +291,7 @@ function FilterBar({
               placeholder={language === "fr" ? "Rechercher un livre, un cours..." : "Search a book, a course..."}
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-              className="pl-11 h-11 rounded-full border-slate-200 focus:border-[#F97316] focus:ring-[#F97316]/20 shadow-sm"
+              className="pl-11 h-11 rounded-full border-slate-200 focus:border-orange-500 focus:ring-[#F97316]/20 shadow-sm"
             />
             {filters.search && (
               <button
@@ -309,14 +309,14 @@ function FilterBar({
             onClick={() => setShowFilters(!showFilters)}
             className={`rounded-full gap-2 transition-all duration-200 ${
               hasActiveFilters
-                ? "border-[#F97316] text-[#F97316] bg-[#F97316]/5"
+                ? "border-orange-500 text-orange-500 bg-orange-500/5"
                 : "border-slate-200"
             }`}
           >
             <Filter className="w-4 h-4" />
             {language === "fr" ? "Filtres" : "Filters"}
             {hasActiveFilters && (
-              <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
             )}
           </Button>
 
@@ -346,7 +346,7 @@ function FilterBar({
                     key={filter.key}
                     value={filter.value}
                     onChange={(e) => setFilters({ ...filters, [filter.key]: e.target.value })}
-                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316]/20 outline-none transition-all duration-200 hover:border-slate-300"
+                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:border-orange-500 focus:ring-1 focus:ring-[#F97316]/20 outline-none transition-all duration-200 hover:border-slate-300"
                   >
                     {filter.options.map((o) => (
                       <option key={o.value} value={o.value}>{o.label}</option>
@@ -369,7 +369,7 @@ function FilterBar({
                         audience: "all",
                       })
                     }
-                    className="text-slate-500 hover:text-[#F97316] transition-colors"
+                    className="text-slate-500 hover:text-orange-500 transition-colors"
                   >
                     <X className="w-4 h-4 mr-1" />
                     {language === "fr" ? "Réinitialiser" : "Reset"}
@@ -411,7 +411,7 @@ function ProductCard({
   return (
     <motion.div variants={cardVariant}>
       <Card
-        className="group relative overflow-hidden border border-slate-200/80 hover:border-[#F97316]/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] transition-all duration-500 cursor-pointer bg-white h-full flex flex-col rounded-2xl"
+        className="group relative overflow-hidden border border-slate-200/80 hover:border-orange-500/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] transition-all duration-500 cursor-pointer bg-white h-full flex flex-col rounded-2xl"
         onClick={() => onSelect(item)}
         tabIndex={0}
         role="button"
@@ -432,7 +432,7 @@ function ProductCard({
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">
             {item.is_new && (
-              <Badge className="bg-[#F97316] text-white border-0 text-xs font-semibold shadow-md">
+              <Badge className="bg-orange-500 text-white border-0 text-xs font-semibold shadow-md">
                 <Sparkles className="w-3 h-3 mr-1" />
                 {language === "fr" ? "Nouveau" : "New"}
               </Badge>
@@ -484,7 +484,7 @@ function ProductCard({
               </Badge>
             )}
             {item.audience === "coach" && (
-              <Badge variant="outline" className="text-[10px] border-[#14B8A6]/30 text-[#14B8A6] rounded-full">
+              <Badge variant="outline" className="text-[10px] border-teal-500/30 text-teal-500 rounded-full">
                 <UserCheck className="w-3 h-3 mr-0.5" />
                 Coach
               </Badge>
@@ -516,7 +516,7 @@ function ProductCard({
             </div>
             <Button
               size="sm"
-              className="rounded-full bg-[#F97316] hover:bg-[#ea6c10] text-white text-xs px-4 shadow-sm hover:shadow-md transition-all duration-200"
+              className="rounded-full bg-orange-500 hover:bg-cta-2 text-white text-xs px-4 shadow-sm hover:shadow-md transition-all duration-200"
             >
               {item.price_type === "free" ? (
                 <Download className="w-3.5 h-3.5 mr-1" />
@@ -565,8 +565,8 @@ function ProductDetailModal({
         {/* Header with cover */}
         <div className="relative bg-gradient-to-br from-[#0F3D3E] via-[#1a5c5e] to-[#0d2f30] p-6 md:p-8 rounded-t-2xl">
           {/* Decorative orbs */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-[#F97316]/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#14B8A6]/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl" />
 
           <div className="flex flex-col md:flex-row gap-6 relative z-10">
             {/* Cover with 3D shadow */}
@@ -586,7 +586,7 @@ function ProductDetailModal({
               <DialogHeader>
                 <div className="flex flex-wrap gap-2 mb-3 justify-center md:justify-start">
                   {item.is_new && (
-                    <Badge className="bg-[#F97316] text-white border-0 text-xs shadow-md">
+                    <Badge className="bg-orange-500 text-white border-0 text-xs shadow-md">
                       <Sparkles className="w-3 h-3 mr-1" />
                       {language === "fr" ? "Nouveau" : "New"}
                     </Badge>
@@ -623,9 +623,9 @@ function ProductDetailModal({
         {/* Body */}
         <div className="p-6 md:p-8 space-y-8">
           {/* Why it exists */}
-          <div className="bg-gradient-to-br from-[#F97316]/5 to-[#fb923c]/5 border border-[#F97316]/15 rounded-2xl p-5">
+          <div className="bg-gradient-to-br from-[#F97316]/5 to-[#fb923c]/5 border border-orange-500/15 rounded-2xl p-5">
             <h3 className="font-semibold text-foundation mb-2 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-[#F97316]" />
+              <Zap className="w-5 h-5 text-orange-500" />
               {language === "fr" ? "Pourquoi ce produit existe" : "Why This Product Exists"}
             </h3>
             <p className="text-slate-600 text-sm leading-relaxed">{whyExists}</p>
@@ -642,14 +642,14 @@ function ProductDetailModal({
           {/* Benefits */}
           <div>
             <h3 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
-              <Award className="w-5 h-5 text-[#F97316]" />
+              <Award className="w-5 h-5 text-orange-500" />
               {language === "fr" ? "Ce que vous allez apprendre" : "What You'll Learn"}
             </h3>
             <ul className="space-y-2.5">
               {benefits.map((b, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                  <div className="w-5 h-5 rounded-full bg-[#F97316]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <ChevronRight className="w-3 h-3 text-[#F97316]" />
+                  <div className="w-5 h-5 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <ChevronRight className="w-3 h-3 text-orange-500" />
                   </div>
                   {b}
                 </li>
@@ -660,7 +660,7 @@ function ProductDetailModal({
           {/* Target audience */}
           <div>
             <h3 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
-              <Users className="w-5 h-5 text-[#14B8A6]" />
+              <Users className="w-5 h-5 text-teal-500" />
               {language === "fr" ? "Public cible" : "Target Audience"}
             </h3>
             <p className="text-slate-600 text-sm">{targetAudience}</p>
@@ -700,7 +700,7 @@ function ProductDetailModal({
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-100">
             <Button
               size="lg"
-              className="flex-1 rounded-full bg-[#F97316] hover:bg-[#ea6c10] text-white font-semibold gap-2 shadow-md hover:shadow-lg transition-all duration-200"
+              className="flex-1 rounded-full bg-orange-500 hover:bg-cta-2 text-white font-semibold gap-2 shadow-md hover:shadow-lg transition-all duration-200"
               onClick={() => {
                 onClose();
                 navigate(item.cta_url);
@@ -817,7 +817,7 @@ function SectionHeader({
       <div>
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900 flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#F97316]/10 to-[#fb923c]/10 flex items-center justify-center">
-            <Icon className="w-5 h-5 text-[#F97316]" />
+            <Icon className="w-5 h-5 text-orange-500" />
           </div>
           {title}
         </h2>
@@ -829,7 +829,7 @@ function SectionHeader({
         <Button
           variant="ghost"
           size="sm"
-          className="text-[#F97316] hover:text-[#ea6c10] hover:bg-[#F97316]/5 hidden md:flex rounded-full"
+          className="text-orange-500 hover:text-[#ea6c10] hover:bg-orange-500/5 hidden md:flex rounded-full"
           onClick={onViewAll}
         >
           {language === "fr" ? "Voir tout" : "View All"}
@@ -1033,7 +1033,7 @@ export default function Library() {
                   className="bg-gradient-to-br from-[#0F3D3E]/5 via-[#14B8A6]/5 to-[#0F3D3E]/5 rounded-3xl p-8 md:p-12 text-center border border-foundation/10"
                 >
                   <div className="max-w-2xl mx-auto">
-                    <Badge className="bg-[#14B8A6]/10 text-[#14B8A6] border-[#14B8A6]/20 mb-4">
+                    <Badge className="bg-teal-500/10 text-teal-500 border-teal-500/20 mb-4">
                       {language === "fr" ? "Bientôt disponible" : "Coming Soon"}
                     </Badge>
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">

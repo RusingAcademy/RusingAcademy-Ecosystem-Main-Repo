@@ -175,7 +175,7 @@ export function AnimatedHero({
             {stats && stats.length > 0 && (
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-wrap gap-8 pt-8 border-t border-slate-200 dark:border-[#0a6969]"
+                className="flex flex-wrap gap-8 pt-8 border-t border-slate-200 dark:border-teal-800"
               >
                 {stats.map((stat, index) => (
                   <motion.div
@@ -186,7 +186,7 @@ export function AnimatedHero({
                     className="text-center"
                   >
                     <div className="text-3xl font-bold text-teal-500">{stat.value}</div>
-                    <div className="text-sm text-black dark:text-[#67E8F9]">{stat.label}</div>
+                    <div className="text-sm text-black dark:text-cyan-300">{stat.label}</div>
                   </motion.div>
                 ))}
               </motion.div>

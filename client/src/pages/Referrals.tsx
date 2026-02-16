@@ -143,7 +143,7 @@ export default function Referrals() {
                       {ref.referredUser?.avatarUrl ? (
                         <img src={ref.referredUser.avatarUrl} alt="" className="w-9 h-9 rounded-full" />
                       ) : (
-                        <div className="w-9 h-9 rounded-full bg-[#1B1464]/10 flex items-center justify-center text-sm font-bold" style={{ color: "#1B1464" }}>
+                        <div className="w-9 h-9 rounded-full bg-indigo-900/10 flex items-center justify-center text-sm font-bold" style={{ color: "#1B1464" }}>
                           {(ref.referredUser?.name ?? "?")[0]}
                         </div>
                       )}

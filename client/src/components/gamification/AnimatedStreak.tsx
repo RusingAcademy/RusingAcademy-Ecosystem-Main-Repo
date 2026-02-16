@@ -161,7 +161,7 @@ export function AnimatedStreak({
             config.container,
             isActive && currentStreak > 0
               ? `bg-gradient-to-br ${colors.from} ${colors.to} shadow-lg ${colors.glow}`
-              : "bg-slate-200 dark:bg-[#0a6969]"
+              : "bg-slate-200 dark:bg-teal-800"
           )}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -191,7 +191,7 @@ export function AnimatedStreak({
             <Flame
               className={cn(
                 config.icon,
-                isActive && currentStreak > 0 ? "text-white" : "text-[#67E8F9]"
+                isActive && currentStreak > 0 ? "text-white" : "text-cyan-300"
               )}
             />
           </motion.div>
@@ -231,7 +231,7 @@ export function AnimatedStreak({
         <p className={cn(config.text, "font-bold text-black dark:text-white")}>
           {currentStreak}
         </p>
-        <p className="text-sm text-black dark:text-[#67E8F9] font-medium">
+        <p className="text-sm text-black dark:text-cyan-300 font-medium">
           {l.streak}
         </p>
       </motion.div>
@@ -273,7 +273,7 @@ export function AnimatedStreak({
           transition={{ delay: 0.5 }}
         >
           {longestStreak > 0 && (
-            <div className="flex items-center gap-1 text-black dark:text-[#67E8F9]">
+            <div className="flex items-center gap-1 text-black dark:text-cyan-300">
               <Zap className="h-3 w-3" />
               <span>{l.longest}: {longestStreak} {l.days}</span>
             </div>

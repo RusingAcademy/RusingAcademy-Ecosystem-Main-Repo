@@ -207,7 +207,7 @@ export default function ComponentLab() {
                         <TypewriterText
                           text="Master French 3–4× faster"
                           highlightText="with RusingAcademy."
-                          highlightClassName="text-[#E07B39]"
+                          highlightClassName="text-cta-2"
                           speed={60}
                           delay={500}
                           repeatInterval={8000}

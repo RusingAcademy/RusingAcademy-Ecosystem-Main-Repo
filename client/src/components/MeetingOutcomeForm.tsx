@@ -134,7 +134,7 @@ const outcomeOptions = [
   { value: "not_qualified", icon: XCircle, color: "text-red-400", bgColor: "bg-red-500/20", borderColor: "border-red-500/50" },
   { value: "needs_follow_up", icon: Clock, color: "text-yellow-400", bgColor: "bg-yellow-500/20", borderColor: "border-yellow-500/50" },
   { value: "converted", icon: Trophy, color: "text-teal-400", bgColor: "bg-teal-500/20", borderColor: "border-teal-500/50" },
-  { value: "no_show", icon: UserX, color: "text-[#67E8F9]", bgColor: "bg-white0/20", borderColor: "border-slate-500/50" },
+  { value: "no_show", icon: UserX, color: "text-cyan-300", bgColor: "bg-white0/20", borderColor: "border-slate-500/50" },
 ] as const;
 
 export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: MeetingOutcomeFormProps) {
@@ -201,7 +201,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
         <div className="flex items-start justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold">{t.title}</h2>
-            <p className="text-[#67E8F9] mt-1">{t.subtitle}</p>
+            <p className="text-cyan-300 mt-1">{t.subtitle}</p>
           </div>
           <button
             onClick={onClose}
@@ -217,10 +217,10 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
             <Calendar className="w-5 h-5 text-teal-400" />
             <span className="font-medium">{meeting.title}</span>
           </div>
-          <div className="text-sm text-[#67E8F9]">
+          <div className="text-sm text-cyan-300">
             {t.meetingWith}: <span className="text-white">{meeting.leadName}</span> ({meeting.leadEmail})
           </div>
-          <div className="text-sm text-[#67E8F9] mt-1">{formattedDate}</div>
+          <div className="text-sm text-cyan-300 mt-1">{formattedDate}</div>
         </div>
         
         {/* Outcome Selection */}
@@ -245,7 +245,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                 >
                   <Icon className={`w-6 h-6 mb-2 ${option.color}`} />
                   <div className="font-medium">{label}</div>
-                  <div className="text-xs text-[#67E8F9] mt-1">{desc}</div>
+                  <div className="text-xs text-cyan-300 mt-1">{desc}</div>
                 </button>
               );
             })}
@@ -272,7 +272,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                   <Target className="w-4 h-4 inline mr-2" />
                   {t.qualificationScore}
                 </label>
-                <p className="text-xs text-[#67E8F9] mb-3">{t.qualificationScoreDesc}</p>
+                <p className="text-xs text-cyan-300 mb-3">{t.qualificationScoreDesc}</p>
                 <div className="flex items-center gap-4">
                   <input
                     type="range"
@@ -296,9 +296,9 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                       <DollarSign className="w-4 h-4 inline mr-2" />
                       {t.dealValue}
                     </label>
-                    <p className="text-xs text-[#67E8F9] mb-2">{t.dealValueDesc}</p>
+                    <p className="text-xs text-cyan-300 mb-2">{t.dealValueDesc}</p>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#67E8F9]">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-300">$</span>
                       <input
                         type="number"
                         value={dealValue}
@@ -313,7 +313,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                     <label className="block text-sm font-medium text-white/90 mb-2">
                       {t.dealProbability}
                     </label>
-                    <p className="text-xs text-[#67E8F9] mb-2">{t.dealProbabilityDesc}</p>
+                    <p className="text-xs text-cyan-300 mb-2">{t.dealProbabilityDesc}</p>
                     <div className="flex items-center gap-3">
                       <input
                         type="range"
@@ -336,7 +336,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                   <FileText className="w-4 h-4 inline mr-2" />
                   {t.nextSteps}
                 </label>
-                <p className="text-xs text-[#67E8F9] mb-2">{t.nextStepsDesc}</p>
+                <p className="text-xs text-cyan-300 mb-2">{t.nextStepsDesc}</p>
                 <input
                   type="text"
                   value={nextSteps}
@@ -351,7 +351,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                 <label className="block text-sm font-medium text-white/90 mb-2">
                   {t.notes}
                 </label>
-                <p className="text-xs text-[#67E8F9] mb-2">{t.notesDesc}</p>
+                <p className="text-xs text-cyan-300 mb-2">{t.notesDesc}</p>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
@@ -387,7 +387,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                         className="grid grid-cols-2 gap-4"
                       >
                         <div>
-                          <label className="block text-xs text-[#67E8F9] mb-2">{t.followUpDate}</label>
+                          <label className="block text-xs text-cyan-300 mb-2">{t.followUpDate}</label>
                           <input
                             type="datetime-local"
                             value={followUpDate}
@@ -397,7 +397,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
                         </div>
                         
                         <div>
-                          <label className="block text-xs text-[#67E8F9] mb-2">{t.followUpType}</label>
+                          <label className="block text-xs text-cyan-300 mb-2">{t.followUpType}</label>
                           <select
                             value={followUpType}
                             onChange={(e) => setFollowUpType(e.target.value as "call" | "email" | "meeting")}

@@ -95,7 +95,7 @@ export default function ModerationPage() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.id
-                ? "text-[#1B1464] border-[#1B1464]"
+                ? "text-indigo-900 border-indigo-900"
                 : "text-muted-foreground border-transparent hover:text-foreground"
             }`}
           >
@@ -116,7 +116,7 @@ export default function ModerationPage() {
                 onClick={() => setStatusFilter(status)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   statusFilter === status
-                    ? "bg-[#1B1464] text-white"
+                    ? "bg-indigo-900 text-white"
                     : "bg-muted text-muted-foreground hover:text-foreground"
                 }`}
               >

@@ -137,7 +137,7 @@ export default function StudyGroups() {
           {publicGroups.isLoading ? (
             <Card>
               <CardContent className="py-12 text-center" role="status">
-                <div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full mx-auto" />
+                <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
                 <p className="text-sm text-muted-foreground mt-3">{t("skillLabs.loading")}</p>
               </CardContent>
             </Card>
@@ -200,7 +200,7 @@ export default function StudyGroups() {
           {myGroups.isLoading ? (
             <Card>
               <CardContent className="py-12 text-center" role="status">
-                <div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full mx-auto" />
+                <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
                 <p className="text-sm text-muted-foreground mt-3">{t("skillLabs.loading")}</p>
               </CardContent>
             </Card>
@@ -208,7 +208,7 @@ export default function StudyGroups() {
             <Card>
               <CardContent className="py-12 text-center" role="status">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                  <span className="material-icons text-3xl text-[#008090]/60" aria-hidden="true">group_add</span>
+                  <span className="material-icons text-3xl text-teal-700/60" aria-hidden="true">group_add</span>
                 </div>
                 <h3 className="font-semibold text-gray-700">
                   {isFr ? "Vous n'avez rejoint aucun groupe" : "You haven't joined any groups yet"}

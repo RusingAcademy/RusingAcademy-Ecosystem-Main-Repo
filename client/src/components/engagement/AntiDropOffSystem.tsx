@@ -45,7 +45,7 @@ export function RiskDashboard({ role }: { role: 'admin' | 'coach' }) {
   const getRiskColor = (level: string) => ({ critical: 'from-red-500 to-[#E06B2D]', high: 'from-[#C65A1E] to-red-500', medium: 'from-[#C65A1E] to-[#C65A1E]' }[level] || 'from-green-500');
 
   return (
-    <div className="p-6 bg-[#0D0D1A] min-h-screen">
+    <div className="p-6 bg-slate-950 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div><h1 className="text-2xl font-bold text-white">Système Anti-Abandon</h1><p className="text-white/60">Surveillance proactive des apprenants à risque</p></div>

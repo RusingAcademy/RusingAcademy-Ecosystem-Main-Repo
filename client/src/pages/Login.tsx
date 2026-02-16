@@ -168,7 +168,7 @@ function LoginContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -180,7 +180,7 @@ function LoginContent() {
           <CardTitle className="text-2xl font-bold text-white">
             Welcome Back
           </CardTitle>
-          <CardDescription className="text-[#67E8F9]">
+          <CardDescription className="text-cyan-300">
             Sign in to your RusingAcademy account
           </CardDescription>
         </CardHeader>
@@ -209,7 +209,7 @@ function LoginContent() {
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-[#2F2F2F] hover:bg-[#3F3F3F] text-white border-slate-600"
+              className="w-full bg-[#2F2F2F] hover:bg-neutral-700 text-white border-slate-600"
               onClick={handleMicrosoftSignIn}
               disabled={isPending || loginSuccess}
             >
@@ -224,7 +224,7 @@ function LoginContent() {
               <span className="w-full border-t border-slate-600" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-foundation/50 px-2 text-[#67E8F9]">
+              <span className="bg-foundation/50 px-2 text-cyan-300">
                 Or continue with email
               </span>
             </div>
@@ -260,7 +260,7 @@ function LoginContent() {
                 onChange={handleChange}
                 required
                 disabled={isPending || loginSuccess}
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
+                className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60"
                 autoComplete="email"
               />
             </div>
@@ -287,13 +287,13 @@ function LoginContent() {
                   onChange={handleChange}
                   required
                   disabled={isPending || loginSuccess}
-                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
+                  className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
                   autoComplete="current-password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#67E8F9] hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   aria-pressed={showPassword}
                 >
@@ -325,7 +325,7 @@ function LoginContent() {
 
           {/* Debug panel - only in development */}
           {AUTH_DEBUG && (
-            <div className="mt-4 p-3 bg-obsidian/80 border border-[#0a6969] rounded-lg text-xs font-mono">
+            <div className="mt-4 p-3 bg-obsidian/80 border border-teal-800 rounded-lg text-xs font-mono">
               <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug</div>
               <div className="text-white/90">
                 <div>Redirect to: {redirectTo}</div>
@@ -338,7 +338,7 @@ function LoginContent() {
           )}
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-sm text-[#67E8F9]">
+          <div className="text-center text-sm text-cyan-300">
             Don't have an account?{" "}
             <Link to="/signup" className="text-teal-400 hover:text-teal-300">
               Sign up

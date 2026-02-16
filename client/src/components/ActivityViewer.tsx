@@ -864,10 +864,10 @@ function ActivityContent({
       {activity.activityType === "audio" && (
         <div className="space-y-4">
           {activity.audioUrl && (
-            <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl p-5 border border-[#DC2626]/15">
+            <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl p-5 border border-red-600/15">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-[#DC2626]/10 flex items-center justify-center shadow-sm">
-                  <Headphones className="h-6 w-6 text-[#DC2626]" />
+                <div className="w-12 h-12 rounded-full bg-red-600/10 flex items-center justify-center shadow-sm">
+                  <Headphones className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold">{isEn ? "Pronunciation Audio" : "Audio de prononciation"}</p>
@@ -884,13 +884,13 @@ function ActivityContent({
           {activity.content && (
             <div>
               {!activity.audioUrl && (
-                <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl px-5 py-3 mb-4 border border-[#DC2626]/15">
+                <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl px-5 py-3 mb-4 border border-red-600/15">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#DC2626]/10 flex items-center justify-center">
-                      <Mic className="h-5 w-5 text-[#DC2626]" />
+                    <div className="w-10 h-10 rounded-full bg-red-600/10 flex items-center justify-center">
+                      <Mic className="h-5 w-5 text-red-600" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#DC2626]">
+                      <p className="text-sm font-semibold text-red-600">
                         {isEn ? "Oral Practice" : "Pratique Orale"}
                       </p>
                       <p className="text-xs text-muted-foreground">

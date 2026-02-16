@@ -74,7 +74,7 @@ export default function CategoryThreads() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A1628] text-white">
+    <div className="min-h-screen bg-slate-900 text-white">
       {/* Header */}
       <div className="bg-gradient-to-b from-[#0F2140] to-[#0A1628] border-b border-white/10">
         <div className="max-w-[900px] mx-auto px-6 py-8">
@@ -102,7 +102,7 @@ export default function CategoryThreads() {
               if (!user) { window.location.href = getLoginUrl(); return; }
               setShowNewThread(true);
             }}
-            className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold"
+            className="bg-teal-400 text-black hover:bg-teal-400/90 font-bold"
           >
             <Plus className="w-4 h-4 mr-2" />
             {language === "en" ? "New Discussion" : "Nouvelle discussion"}
@@ -116,7 +116,7 @@ export default function CategoryThreads() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mb-6 p-6 rounded-2xl bg-white/5 border border-[#17E2C6]/30"
+              className="mb-6 p-6 rounded-2xl bg-white/5 border border-teal-400/30"
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold">{language === "en" ? "Start a New Discussion" : "Commencer une nouvelle discussion"}</h3>
@@ -129,20 +129,20 @@ export default function CategoryThreads() {
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 placeholder={language === "en" ? "Discussion title..." : "Titre de la discussion..."}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40 mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 mb-3"
               />
               <textarea
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
                 placeholder={language === "en" ? "Share more details..." : "Partagez plus de détails..."}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40 resize-none mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
                 rows={4}
               />
               <div className="flex justify-end">
                 <Button
                   onClick={handleCreateThread}
                   disabled={!newTitle.trim() || !newContent.trim() || createThreadMutation.isPending}
-                  className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold"
+                  className="bg-teal-400 text-black hover:bg-teal-400/90 font-bold"
                 >
                   {createThreadMutation.isPending && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
                   {language === "en" ? "Post Discussion" : "Publier la discussion"}
@@ -155,7 +155,7 @@ export default function CategoryThreads() {
         {/* Thread List */}
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
+            <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
           </div>
         ) : threads && threads.length > 0 ? (
           <div className="space-y-3">
@@ -167,14 +167,14 @@ export default function CategoryThreads() {
                 transition={{ delay: index * 0.03 }}
               >
                 <Link href={`/community/thread/${thread.id}`}>
-                  <div className="group p-5 rounded-xl bg-white/5 border border-white/10 hover:border-[#17E2C6]/30 transition-all cursor-pointer">
+                  <div className="group p-5 rounded-xl bg-white/5 border border-white/10 hover:border-teal-400/30 transition-all cursor-pointer">
                     <div className="flex items-start gap-4">
                       {/* Author avatar */}
                       <div className="hidden sm:block">
                         {thread.authorAvatar ? (
                           <img src={thread.authorAvatar} alt="" className="w-10 h-10 rounded-full" />
                         ) : (
-                          <div className="w-10 h-10 rounded-full bg-[#17E2C6]/20 flex items-center justify-center text-sm font-bold text-[#17E2C6]">
+                          <div className="w-10 h-10 rounded-full bg-teal-400/20 flex items-center justify-center text-sm font-bold text-teal-400">
                             {(thread.authorName || "?")[0]}
                           </div>
                         )}
@@ -188,7 +188,7 @@ export default function CategoryThreads() {
                           {thread.isLocked && (
                             <Lock className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
                           )}
-                          <h3 className="font-bold text-white/90 group-hover:text-[#17E2C6] transition-colors truncate">
+                          <h3 className="font-bold text-white/90 group-hover:text-teal-400 transition-colors truncate">
                             {thread.title}
                           </h3>
                         </div>
@@ -200,7 +200,7 @@ export default function CategoryThreads() {
                         </div>
                       </div>
 
-                      <ChevronRight className="w-5 h-5 text-white/30 group-hover:text-[#17E2C6] transition-colors flex-shrink-0" />
+                      <ChevronRight className="w-5 h-5 text-white/30 group-hover:text-teal-400 transition-colors flex-shrink-0" />
                     </div>
                   </div>
                 </Link>
@@ -214,7 +214,7 @@ export default function CategoryThreads() {
             {user && (
               <Button
                 onClick={() => setShowNewThread(true)}
-                className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold"
+                className="bg-teal-400 text-black hover:bg-teal-400/90 font-bold"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {language === "en" ? "Start the First Discussion" : "Commencer la première discussion"}

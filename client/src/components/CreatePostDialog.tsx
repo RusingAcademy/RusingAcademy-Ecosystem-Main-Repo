@@ -226,7 +226,7 @@ export default function CreatePostDialog({
                 <div className="relative">
                   <button
                     onClick={() => setShowTypeDropdown(!showTypeDropdown)}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border text-sm font-medium hover:border-[#1B1464]/30 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border text-sm font-medium hover:border-indigo-900/30 transition-colors"
                   >
                     <span>{contentTypes.find((t) => t.id === contentType)?.emoji}</span>
                     <span>{contentTypes.find((t) => t.id === contentType)?.label}</span>
@@ -242,7 +242,7 @@ export default function CreatePostDialog({
                             setShowTypeDropdown(false);
                           }}
                           className={`w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-accent transition-colors ${
-                            contentType === type.id ? "font-semibold text-[#1B1464]" : "text-foreground"
+                            contentType === type.id ? "font-semibold text-indigo-900" : "text-foreground"
                           }`}
                         >
                           <span>{type.emoji}</span>
@@ -257,7 +257,7 @@ export default function CreatePostDialog({
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(Number(e.target.value))}
-                  className="flex-1 px-4 py-2.5 rounded-xl border border-border text-sm font-medium bg-transparent hover:border-[#1B1464]/30 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/30"
+                  className="flex-1 px-4 py-2.5 rounded-xl border border-border text-sm font-medium bg-transparent hover:border-indigo-900/30 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/30"
                 >
                   {categories.map((cat) => (
                     <option key={cat.id} value={cat.id}>
@@ -273,7 +273,7 @@ export default function CreatePostDialog({
                 placeholder="Give your post a title..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full text-xl font-bold text-foreground placeholder:text-muted-foreground/50 bg-transparent outline-none py-2 border-b border-transparent focus:border-[#D4AF37]/30 transition-colors"
+                className="w-full text-xl font-bold text-foreground placeholder:text-muted-foreground/50 bg-transparent outline-none py-2 border-b border-transparent focus:border-barholex-gold/30 transition-colors"
                 maxLength={255}
               />
 
@@ -321,7 +321,7 @@ export default function CreatePostDialog({
                     onClick={() => setShowGifPicker(!showGifPicker)}
                     className={`p-2 rounded-lg transition-colors ${
                       showGifPicker
-                        ? "bg-[#1B1464]/10 text-[#1B1464]"
+                        ? "bg-indigo-900/10 text-indigo-900"
                         : "hover:bg-accent text-muted-foreground"
                     }`}
                     title="Add GIF"

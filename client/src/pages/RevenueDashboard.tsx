@@ -45,7 +45,7 @@ export default function RevenueDashboard() {
 
         {isLoading ? (
           <div className="flex justify-center py-16">
-            <Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" />
+            <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : (
           <>

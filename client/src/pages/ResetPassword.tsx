@@ -91,7 +91,7 @@ export default function ResetPassword() {
   if (tokenValid === null) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <Loader2 className="w-12 h-12 text-teal-400 mx-auto animate-spin" />
@@ -107,7 +107,7 @@ export default function ResetPassword() {
   if (!tokenValid) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <AlertCircle className="w-16 h-16 text-red-500 mx-auto" />
@@ -123,7 +123,7 @@ export default function ResetPassword() {
                   </Button>
                 </Link>
                 <Link to="/login">
-                  <Button variant="outline" className="w-full bg-[#0a6969]/50 border-slate-600 text-white hover:bg-foundation-2">
+                  <Button variant="outline" className="w-full bg-teal-800/50 border-slate-600 text-white hover:bg-foundation-2">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Login
                   </Button>
@@ -140,7 +140,7 @@ export default function ResetPassword() {
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
@@ -148,7 +148,7 @@ export default function ResetPassword() {
               <p className="text-white/90">
                 Your password has been successfully reset.
               </p>
-              <p className="text-sm text-[#67E8F9]">
+              <p className="text-sm text-cyan-300">
                 Redirecting to login...
               </p>
             </div>
@@ -160,7 +160,7 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -172,7 +172,7 @@ export default function ResetPassword() {
           <CardTitle className="text-2xl font-bold text-white">
             Create New Password
           </CardTitle>
-          <CardDescription className="text-[#67E8F9]">
+          <CardDescription className="text-cyan-300">
             Enter your new password below
           </CardDescription>
         </CardHeader>
@@ -199,12 +199,12 @@ export default function ResetPassword() {
                   onChange={handleChange}
                   required
                   minLength={8}
-                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
+                  className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#67E8F9] hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   aria-pressed={showPassword}
                 >
@@ -225,7 +225,7 @@ export default function ResetPassword() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
+                className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -246,7 +246,7 @@ export default function ResetPassword() {
           </form>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-xs text-black pt-4 border-t border-[#0a6969]">
+          <div className="text-center text-xs text-black pt-4 border-t border-teal-800">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

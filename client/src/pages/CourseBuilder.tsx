@@ -365,7 +365,7 @@ export default function CourseBuilder() {
           </div>
 
           {courseList.isLoading ? (
-            <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" /></div>
+            <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-indigo-900" /></div>
           ) : (
             <div className="grid gap-4">
               {(courseList.data ?? []).map((course) => (
@@ -375,8 +375,8 @@ export default function CourseBuilder() {
                       {course.thumbnailUrl ? (
                         <img src={course.thumbnailUrl} alt="" className="w-16 h-16 rounded-lg object-cover" />
                       ) : (
-                        <div className="w-16 h-16 rounded-lg bg-[#1B1464]/10 flex items-center justify-center">
-                          <BookOpen className="w-7 h-7 text-[#1B1464]" />
+                        <div className="w-16 h-16 rounded-lg bg-indigo-900/10 flex items-center justify-center">
+                          <BookOpen className="w-7 h-7 text-indigo-900" />
                         </div>
                       )}
                       <div>
@@ -435,7 +435,7 @@ export default function CourseBuilder() {
             <div key={s.num} className="flex items-center gap-2">
               <div
                 className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
-                  step >= s.num ? "bg-[#1B1464] text-white" : "bg-muted text-muted-foreground"
+                  step >= s.num ? "bg-indigo-900 text-white" : "bg-muted text-muted-foreground"
                 }`}
               >
                 {step > s.num ? <Check className="w-4 h-4" /> : s.num}
@@ -443,7 +443,7 @@ export default function CourseBuilder() {
               <span className={`text-sm font-medium hidden sm:inline ${step >= s.num ? "text-foreground" : "text-muted-foreground"}`}>
                 {s.label}
               </span>
-              {i < 2 && <div className={`w-12 h-0.5 ${step > s.num ? "bg-[#1B1464]" : "bg-muted"}`} />}
+              {i < 2 && <div className={`w-12 h-0.5 ${step > s.num ? "bg-indigo-900" : "bg-muted"}`} />}
             </div>
           ))}
         </div>

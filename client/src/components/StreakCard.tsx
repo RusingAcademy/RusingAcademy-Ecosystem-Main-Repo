@@ -75,7 +75,7 @@ export default function StreakCard() {
     <Card className="glass-card overflow-hidden">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Flame className={`h-5 w-5 ${streak.currentStreak > 0 ? 'text-orange-500' : 'text-[#67E8F9]'}`} />
+          <Flame className={`h-5 w-5 ${streak.currentStreak > 0 ? 'text-orange-500' : 'text-cyan-300'}`} />
           {isEn ? "Learning Streak" : "Série d'apprentissage"}
         </CardTitle>
       </CardHeader>

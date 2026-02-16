@@ -115,8 +115,8 @@ export default function Reports() {
           <h3 className="text-sm font-bold text-gray-700">Financial planning</h3>
         </div>
         <div className="flex items-center gap-4">
-          <button className="text-sm text-[#0077C5] hover:underline" onClick={() => toast("Feature coming soon")}>Cash flow overview</button>
-          <button className="text-sm text-[#0077C5] hover:underline" onClick={() => toast("Feature coming soon")}>Cash flow planner</button>
+          <button className="text-sm text-sky-600 hover:underline" onClick={() => toast("Feature coming soon")}>Cash flow overview</button>
+          <button className="text-sm text-sky-600 hover:underline" onClick={() => toast("Feature coming soon")}>Cash flow planner</button>
         </div>
       </div>
 
@@ -161,7 +161,7 @@ export default function Reports() {
                     }}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-sm text-[#0077C5]">{report}</span>
+                      <span className="text-sm text-sky-600">{report}</span>
                       <FileText size={14} className="text-gray-300 opacity-0 group-hover:opacity-100" />
                     </div>
                     <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100">

@@ -197,7 +197,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
 
       {/* Timeline */}
       {timeline && timeline.length > 0 && (
-        <div className="bg-white dark:bg-obsidian rounded-lg border border-slate-200 dark:border-[#0a6969] p-6">
+        <div className="bg-white dark:bg-obsidian rounded-lg border border-slate-200 dark:border-teal-800 p-6">
           <h3 className="text-lg font-bold mb-6 text-black dark:text-white">
             {language === 'fr' ? 'Historique de candidature' : 'Application Timeline'}
           </h3>
@@ -220,12 +220,12 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
                 </div>
 
                 {/* Event content */}
-                <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-[#0a6969]">
+                <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-teal-800">
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-black dark:text-white">
                       {event.message}
                     </h4>
-                    <span className="text-xs text-black dark:text-[#67E8F9] whitespace-nowrap ml-2">
+                    <span className="text-xs text-black dark:text-cyan-300 whitespace-nowrap ml-2">
                       {formatDate(new Date(event.timestamp))}
                     </span>
                   </div>
@@ -241,7 +241,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
 
       {/* Auto-refresh indicator */}
       {autoRefresh && applicationStatus.status !== 'approved' && (
-        <div className="text-center text-sm text-black dark:text-[#67E8F9]">
+        <div className="text-center text-sm text-black dark:text-cyan-300">
           <Loader className="w-4 h-4 inline animate-spin mr-2" />
           {language === 'fr' ? 'Mise à jour automatique toutes les 30 secondes' : 'Auto-refreshing every 30 seconds'}
         </div>

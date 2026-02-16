@@ -61,7 +61,7 @@ export default function HRReports() {
             </button>
             <button
               onClick={() => toast.info(isEn ? "PDF export coming soon" : "Export PDF bientôt disponible")}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#2563eb] rounded-lg hover:bg-[#1d4ed8] transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
             >
               <span className="material-icons text-sm">picture_as_pdf</span>
               {ui.exportPdf}
@@ -77,7 +77,7 @@ export default function HRReports() {
               onClick={() => setReportType(rt.key)}
               className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium transition-all ${
                 reportType === rt.key
-                  ? "bg-white text-[#2563eb] shadow-sm"
+                  ? "bg-white text-blue-600 shadow-sm"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -109,8 +109,8 @@ export default function HRReports() {
 
         {/* Empty State */}
         <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
-          <div className="w-16 h-16 rounded-full bg-[#2563eb]/10 flex items-center justify-center mx-auto mb-4">
-            <span className="material-icons text-3xl text-[#2563eb]">assessment</span>
+          <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
+            <span className="material-icons text-3xl text-blue-600">assessment</span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">{ui.noData}</h3>
           <p className="text-sm text-gray-500 max-w-md mx-auto">{ui.noDataSub}</p>

@@ -30,7 +30,7 @@ const iconMap: Record<string, React.ReactNode> = {
   badge: <Award className="w-4 h-4 text-purple-500" />,
   level_up: <Award className="w-4 h-4 text-barholex-gold" />,
   event: <Calendar className="w-4 h-4 text-orange-500" />,
-  challenge: <BookOpen className="w-4 h-4 text-[#1B1464]" />,
+  challenge: <BookOpen className="w-4 h-4 text-indigo-900" />,
   system: <Bell className="w-4 h-4 text-muted-foreground" />,
 };
 
@@ -86,10 +86,10 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-border">
               <div className="flex items-center gap-2">
-                <Bell className="w-5 h-5 text-[#1B1464]" />
+                <Bell className="w-5 h-5 text-indigo-900" />
                 <h2 className="text-lg font-bold text-foreground">Notifications</h2>
                 {(unreadCount ?? 0) > 0 && (
-                  <span className="bg-[#D4AF37] text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  <span className="bg-barholex-gold text-white text-xs font-bold px-2 py-0.5 rounded-full">
                     {unreadCount}
                   </span>
                 )}
@@ -98,7 +98,7 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
                 {(unreadCount ?? 0) > 0 && (
                   <button
                     onClick={() => markAllRead.mutate()}
-                    className="text-xs font-medium text-[#1B1464] hover:underline"
+                    className="text-xs font-medium text-indigo-900 hover:underline"
                     disabled={markAllRead.isPending}
                   >
                     <CheckCheck className="w-4 h-4 inline mr-1" />
@@ -136,7 +136,7 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       className={`flex gap-3 px-5 py-4 border-b border-border/50 hover:bg-accent/30 transition-colors cursor-pointer ${
-                        !notif.isRead ? "bg-[#1B1464]/3" : ""
+                        !notif.isRead ? "bg-indigo-900/3" : ""
                       }`}
                       onClick={() => {
                         if (!notif.isRead) {
@@ -172,7 +172,7 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
 
                       {/* Unread dot */}
                       {!notif.isRead && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] shrink-0 mt-2" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-barholex-gold shrink-0 mt-2" />
                       )}
                     </motion.div>
                   ))}
@@ -206,7 +206,7 @@ export function NotificationBadge({ onClick }: { onClick: () => void }) {
     >
       <Bell className="w-5 h-5 text-foreground" />
       {(count ?? 0) > 0 && (
-        <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 bg-[#D4AF37] text-white text-[10px] font-bold rounded-full flex items-center justify-center min-w-[18px] px-1">
+        <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 bg-barholex-gold text-white text-[10px] font-bold rounded-full flex items-center justify-center min-w-[18px] px-1">
           {count! > 99 ? "99+" : count}
         </span>
       )}

@@ -172,7 +172,7 @@ function PodcastPlayerUI({
 
       {/* Mini Player — fixed bottom */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 bg-[#1B1464] text-white shadow-2xl transition-all ${
+        className={`fixed bottom-0 left-0 right-0 z-50 bg-indigo-900 text-white shadow-2xl transition-all ${
           isExpanded ? "h-[280px]" : "h-[72px]"
         }`}
       >
@@ -183,10 +183,10 @@ function PodcastPlayerUI({
           className="absolute top-0 left-0 right-0 h-1 bg-white/20 cursor-pointer group"
         >
           <div
-            className="h-full bg-[#D4AF37] transition-all relative"
+            className="h-full bg-barholex-gold transition-all relative"
             style={{ width: `${progress}%` }}
           >
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-barholex-gold opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
         </div>
 
@@ -227,7 +227,7 @@ function PodcastPlayerUI({
             </button>
             <button
               onClick={togglePlay}
-              className="p-2.5 bg-[#D4AF37] hover:bg-[#c9a432] rounded-full transition-colors"
+              className="p-2.5 bg-barholex-gold hover:bg-[#c9a432] rounded-full transition-colors"
               aria-label={isPlaying ? "Pause" : "Play"}
             >
               {isPlaying ? (

@@ -77,7 +77,7 @@ const levelColors = {
     bg: "bg-cta",
     bgLight: "bg-amber-50",
     text: "text-amber-600",
-    border: "border-[#FFE4D6]",
+    border: "border-orange-100",
     gradient: "from-[#C65A1E] to-[#A84A15]",
   },
   C: {
@@ -228,7 +228,7 @@ function CompactTracker({ levels, currentLevel }: { levels: LevelProgress[]; cur
                 "w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold transition-all",
                 isCompleted && `bg-gradient-to-br ${colors.gradient} text-white`,
                 isActive && `bg-gradient-to-br ${colors.gradient} text-white ring-2 ring-offset-2`,
-                !isCompleted && !isActive && "bg-slate-200 text-[#67E8F9]"
+                !isCompleted && !isActive && "bg-slate-200 text-cyan-300"
               )}
             >
               {isCompleted ? <CheckCircle2 className="h-4 w-4" /> : level.level}

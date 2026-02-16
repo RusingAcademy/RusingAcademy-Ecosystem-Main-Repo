@@ -80,7 +80,7 @@ export default function BankRules() {
 
       {/* Create Rule Dialog */}
       {showCreate && (
-        <div className="qb-card mb-6 border-2 border-[#2CA01C]">
+        <div className="qb-card mb-6 border-2 border-green-600">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Create Bank Rule</h3>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
@@ -116,7 +116,7 @@ export default function BankRules() {
                 )}
               </div>
             ))}
-            <button onClick={addCondition} className="text-xs text-[#0077C5] hover:underline">+ Add condition</button>
+            <button onClick={addCondition} className="text-xs text-sky-600 hover:underline">+ Add condition</button>
           </div>
 
           <div className="mb-4">

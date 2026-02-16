@@ -113,21 +113,21 @@ function ProfileContent() {
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="flex items-center gap-3">
-                                    <User className="h-4 w-4 text-[#67E8F9]" />
+                                    <User className="h-4 w-4 text-cyan-300" />
                                     <div>
                                         <p className="text-xs text-black">Nom complet</p>
                                         <p className="text-sm font-medium text-black">{user.fullName || "Non défini"}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Mail className="h-4 w-4 text-[#67E8F9]" />
+                                    <Mail className="h-4 w-4 text-cyan-300" />
                                     <div>
                                         <p className="text-xs text-black">Email</p>
                                         <p className="text-sm font-medium text-black">{user.emailAddresses[0]?.emailAddress}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Calendar className="h-4 w-4 text-[#67E8F9]" />
+                                    <Calendar className="h-4 w-4 text-cyan-300" />
                                     <div>
                                         <p className="text-xs text-black">Date d'inscription</p>
                                         <p className="text-sm font-medium text-black">

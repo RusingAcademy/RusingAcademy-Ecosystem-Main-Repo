@@ -148,7 +148,7 @@ export default function BankTransactions() {
             </div>
             <div className="text-center">
               <div className="text-xs text-gray-500">For review</div>
-              <div className="text-lg font-bold text-[#0077C5]">{bankData?.bankAccounts?.toReview || 0}</div>
+              <div className="text-lg font-bold text-sky-600">{bankData?.bankAccounts?.toReview || 0}</div>
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ export default function BankTransactions() {
             key={tab}
             className={`pb-2 text-sm font-medium border-b-2 transition-colors ${
               statusFilter === tab
-                ? "border-[#2CA01C] text-[#2CA01C]"
+                ? "border-green-600 text-green-600"
                 : "border-transparent text-gray-500 hover:text-gray-700"
             }`}
             onClick={() => setStatusFilter(tab)}
@@ -226,7 +226,7 @@ export default function BankTransactions() {
                       </div>
                     ) : (
                       <button
-                        className="text-xs text-[#0077C5] hover:underline"
+                        className="text-xs text-sky-600 hover:underline"
                         onClick={() => updateMutation.mutate({ id: txn.id, status: "For Review" })}
                       >
                         Undo

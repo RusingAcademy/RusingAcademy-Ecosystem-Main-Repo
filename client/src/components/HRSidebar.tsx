@@ -55,10 +55,10 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
     <Link key={item.path} href={item.path} onClick={onToggle}>
       <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
         isActive(item.path)
-          ? "bg-[#2563eb]/8 text-[#2563eb] font-semibold border-l-[3px] border-[#2563eb]"
+          ? "bg-blue-600/8 text-blue-600 font-semibold border-l-[3px] border-blue-600"
           : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent"
       }`}>
-        <span className={`material-icons text-lg ${isActive(item.path) ? "text-[#2563eb]" : "text-gray-400 group-hover:text-gray-600"}`}>
+        <span className={`material-icons text-lg ${isActive(item.path) ? "text-blue-600" : "text-gray-400 group-hover:text-gray-600"}`}>
           {item.icon}
         </span>
         <span className="font-medium">{lang === "fr" ? item.labelFr : item.label}</span>
@@ -80,7 +80,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
               <span className="text-gray-900 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
                 RusingAcademy
               </span>
-              <span className="block text-[10px] text-[#2563eb] tracking-wider uppercase font-medium">
+              <span className="block text-[10px] text-blue-600 tracking-wider uppercase font-medium">
                 {lang === "fr" ? "Portail Client" : "Client Portal"}
               </span>
             </div>
@@ -113,14 +113,14 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
           </div>
 
           <button onClick={toggleLang}
-            className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-[#2563eb] hover:bg-[#2563eb]/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
+            className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-600/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
             <span className="material-icons text-sm">translate</span>
             {lang === "en" ? "Français" : "English"}
-            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#2563eb]/10 text-[#2563eb] font-bold uppercase">{lang}</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-blue-600/10 text-blue-600 font-bold uppercase">{lang}</span>
           </button>
 
           <button onClick={() => setLocation("/dashboard")}
-            className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-[#008090] hover:bg-[#008090]/5 transition-all flex items-center justify-center gap-1.5 border border-[#008090]/20">
+            className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-teal-700 hover:bg-teal-700/5 transition-all flex items-center justify-center gap-1.5 border border-teal-700/20">
             <span className="material-icons text-sm">swap_horiz</span>
             {lang === "fr" ? "Portail Apprenant" : "Learner Portal"}
           </button>
@@ -154,15 +154,15 @@ function OrgCard({ lang }: { lang: string }) {
   const participantCount = org?.participantCount ?? "—";
 
   return (
-    <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 border border-[#2563eb]/15">
+    <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#2563eb]/5 to-[#2563eb]/10 border border-blue-600/15">
       <div className="flex items-center gap-2 mb-1">
-        <span className="material-icons text-[#2563eb] text-sm">account_balance</span>
+        <span className="material-icons text-blue-600 text-sm">account_balance</span>
         <span className="text-xs font-bold text-gray-800">{lang === "fr" ? "Mon département" : "My Department"}</span>
       </div>
       <p className="text-[10px] text-gray-500 truncate" title={orgName}>{orgName}</p>
       <div className="flex justify-between mt-2">
         <span className="text-[10px] text-gray-500">{lang === "fr" ? "Participants inscrits" : "Enrolled Participants"}</span>
-        <span className="text-[10px] text-[#2563eb] font-bold">{participantCount}</span>
+        <span className="text-[10px] text-blue-600 font-bold">{participantCount}</span>
       </div>
       <div className="flex justify-between mt-1">
         <span className="text-[10px] text-gray-500">{lang === "fr" ? "Contrat actif" : "Active Contract"}</span>

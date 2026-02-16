@@ -55,7 +55,7 @@ export default function SearchResultsPage() {
             <ArrowLeft className="w-5 h-5" />
           </button>
         </Link>
-        <div className="flex-1 flex items-center gap-2 px-4 py-3 rounded-2xl border border-border bg-muted/30 focus-within:border-[#1B1464] transition-colors">
+        <div className="flex-1 flex items-center gap-2 px-4 py-3 rounded-2xl border border-border bg-muted/30 focus-within:border-indigo-900 transition-colors">
           <Search className="w-5 h-5 text-muted-foreground" />
           <input
             type="text"
@@ -76,7 +76,7 @@ export default function SearchResultsPage() {
             onClick={() => setActiveType(tab.id)}
             className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${
               activeType === tab.id
-                ? "text-[#1B1464] border-[#1B1464]"
+                ? "text-indigo-900 border-indigo-900"
                 : "text-muted-foreground border-transparent hover:text-foreground"
             }`}
           >
@@ -123,10 +123,10 @@ export default function SearchResultsPage() {
           {(activeType === "all" || activeType === "posts") &&
             results.data?.posts.map((post: any) => (
               <Link key={`post-${post.id}`} href={`/thread/${post.id}`}>
-                <div className="p-4 rounded-2xl border border-border hover:border-[#1B1464]/30 hover:shadow-sm transition-all cursor-pointer">
+                <div className="p-4 rounded-2xl border border-border hover:border-indigo-900/30 hover:shadow-sm transition-all cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <FileText className="w-4 h-4 text-[#1B1464]" />
-                    <span className="text-xs font-medium text-[#1B1464] uppercase">
+                    <FileText className="w-4 h-4 text-indigo-900" />
+                    <span className="text-xs font-medium text-indigo-900 uppercase">
                       Post
                     </span>
                     <span className="text-xs text-muted-foreground">
@@ -156,7 +156,7 @@ export default function SearchResultsPage() {
             results.data?.courses.map((course: any) => (
               <div
                 key={`course-${course.id}`}
-                className="p-4 rounded-2xl border border-border hover:border-[#D4AF37]/30 hover:shadow-sm transition-all cursor-pointer"
+                className="p-4 rounded-2xl border border-border hover:border-barholex-gold/30 hover:shadow-sm transition-all cursor-pointer"
               >
                 <div className="flex gap-4">
                   {course.thumbnailUrl && (
@@ -193,7 +193,7 @@ export default function SearchResultsPage() {
             results.data?.events.map((event: any) => (
               <div
                 key={`event-${event.id}`}
-                className="p-4 rounded-2xl border border-border hover:border-[#1B1464]/30 hover:shadow-sm transition-all cursor-pointer"
+                className="p-4 rounded-2xl border border-border hover:border-indigo-900/30 hover:shadow-sm transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <Calendar className="w-4 h-4 text-green-600" />
@@ -221,7 +221,7 @@ export default function SearchResultsPage() {
           {(activeType === "all" || activeType === "members") &&
             results.data?.members.map((member: any) => (
               <Link key={`member-${member.id}`} href={`/profile/${member.id}`}>
-                <div className="p-4 rounded-2xl border border-border hover:border-[#1B1464]/30 hover:shadow-sm transition-all cursor-pointer">
+                <div className="p-4 rounded-2xl border border-border hover:border-indigo-900/30 hover:shadow-sm transition-all cursor-pointer">
                   <div className="flex items-center gap-3">
                     {member.avatarUrl ? (
                       <img
@@ -230,7 +230,7 @@ export default function SearchResultsPage() {
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-[#1B1464] flex items-center justify-center text-white font-bold">
+                      <div className="w-12 h-12 rounded-full bg-indigo-900 flex items-center justify-center text-white font-bold">
                         {member.name?.charAt(0) || "?"}
                       </div>
                     )}

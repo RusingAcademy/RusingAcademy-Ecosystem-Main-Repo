@@ -100,7 +100,7 @@ export default function Achievements() {
               role="tab"
               aria-selected={tab === t.id}
               className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                tab === t.id ? "bg-white text-[#008090] shadow-sm" : "text-gray-500 hover:text-gray-700"
+                tab === t.id ? "bg-white text-teal-700 shadow-sm" : "text-gray-500 hover:text-gray-700"
               }`}
             >
               <span className="material-icons text-base">{t.icon}</span> {t.label}
@@ -169,17 +169,17 @@ export default function Achievements() {
                 >
                   <div
                     className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                      reached ? "bg-[#008090]/10" : "bg-gray-100"
+                      reached ? "bg-teal-700/10" : "bg-gray-100"
                     }`}
                   >
-                    <span className={`material-icons text-xl ${reached ? "text-[#008090]" : "text-gray-300"}`}>{milestone.icon}</span>
+                    <span className={`material-icons text-xl ${reached ? "text-teal-700" : "text-gray-300"}`}>{milestone.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <h3 className={`text-sm font-semibold ${reached ? "text-gray-900" : "text-gray-400"}`}>
                         {isFr ? milestone.titleFr : milestone.title}
                       </h3>
-                      <span className={`text-xs font-medium ${reached ? "text-[#008090]" : "text-gray-400"}`}>{milestone.xp.toLocaleString()} XP</span>
+                      <span className={`text-xs font-medium ${reached ? "text-teal-700" : "text-gray-400"}`}>{milestone.xp.toLocaleString()} XP</span>
                     </div>
                     <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                       <div
@@ -205,7 +205,7 @@ export default function Achievements() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" role="tabpanel">
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1">
-                <span className="material-icons text-[#008090] text-base">school</span>
+                <span className="material-icons text-teal-700 text-base">school</span>
                 {isFr ? "Statistiques d'apprentissage" : "Learning Stats"}
               </h3>
               <div className="space-y-3">
@@ -229,7 +229,7 @@ export default function Achievements() {
             </div>
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1">
-                <span className="material-icons text-[#f59e0b] text-base">local_fire_department</span>
+                <span className="material-icons text-amber-500 text-base">local_fire_department</span>
                 {isFr ? "Statistiques de série" : "Streak Stats"}
               </h3>
               <div className="space-y-3">
@@ -257,20 +257,20 @@ export default function Achievements() {
             </div>
             <div className="sm:col-span-2 bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1">
-                <span className="material-icons text-[#8b5cf6] text-base">trending_up</span>
+                <span className="material-icons text-violet-500 text-base">trending_up</span>
                 {isFr ? "Aperçu de la progression" : "Progress Overview"}
               </h3>
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div className="bg-gray-50 rounded-xl p-4">
-                  <div className="text-2xl font-bold text-[#008090]">{earnedBadgeIds.size}/{ALL_BADGES.length}</div>
+                  <div className="text-2xl font-bold text-teal-700">{earnedBadgeIds.size}/{ALL_BADGES.length}</div>
                   <div className="text-[10px] text-gray-400 mt-1">{isFr ? "Badges obtenus" : "Badges Earned"}</div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-4">
-                  <div className="text-2xl font-bold text-[#f59e0b]">{MILESTONES.filter(m => totalXp >= m.xp).length}/{MILESTONES.length}</div>
+                  <div className="text-2xl font-bold text-amber-500">{MILESTONES.filter(m => totalXp >= m.xp).length}/{MILESTONES.length}</div>
                   <div className="text-[10px] text-gray-400 mt-1">{isFr ? "Jalons atteints" : "Milestones Reached"}</div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-4">
-                  <div className="text-2xl font-bold text-[#8b5cf6]">{nextMilestone ? `${Math.round((totalXp / nextMilestone.xp) * 100)}%` : "100%"}</div>
+                  <div className="text-2xl font-bold text-violet-500">{nextMilestone ? `${Math.round((totalXp / nextMilestone.xp) * 100)}%` : "100%"}</div>
                   <div className="text-[10px] text-gray-400 mt-1">{isFr ? "Prochain jalon" : "Next Milestone"}</div>
                 </div>
               </div>

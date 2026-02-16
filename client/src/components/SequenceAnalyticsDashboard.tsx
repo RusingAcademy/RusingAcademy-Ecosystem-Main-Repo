@@ -338,7 +338,7 @@ export default function SequenceAnalyticsDashboard() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-[#D97B3D] bg-clip-text text-transparent">
             {t.title}
           </h1>
-          <p className="text-[#67E8F9] mt-1">{t.subtitle}</p>
+          <p className="text-cyan-300 mt-1">{t.subtitle}</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
           <RefreshCw className="w-4 h-4" />
@@ -380,10 +380,10 @@ export default function SequenceAnalyticsDashboard() {
                   <div className="p-2 bg-teal-500/20 rounded-lg">
                     <BarChart3 className="w-5 h-5 text-teal-400" />
                   </div>
-                  <span className="text-[#67E8F9] text-sm">{t.totalSequences}</span>
+                  <span className="text-cyan-300 text-sm">{t.totalSequences}</span>
                 </div>
                 <div className="text-2xl font-bold">{analytics.totalSequences}</div>
-                <div className="text-sm text-[#67E8F9]">{analytics.activeSequences} {t.active.toLowerCase()}</div>
+                <div className="text-sm text-cyan-300">{analytics.activeSequences} {t.active.toLowerCase()}</div>
               </div>
               
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
@@ -391,7 +391,7 @@ export default function SequenceAnalyticsDashboard() {
                   <div className="p-2 bg-blue-500/20 rounded-lg">
                     <Users className="w-5 h-5 text-blue-400" />
                   </div>
-                  <span className="text-[#67E8F9] text-sm">{t.totalEnrollments}</span>
+                  <span className="text-cyan-300 text-sm">{t.totalEnrollments}</span>
                 </div>
                 <div className="text-2xl font-bold">{analytics.totalEnrollments}</div>
               </div>
@@ -401,7 +401,7 @@ export default function SequenceAnalyticsDashboard() {
                   <div className="p-2 bg-foundation-soft/20 rounded-lg">
                     <Mail className="w-5 h-5 text-foundation" />
                   </div>
-                  <span className="text-[#67E8F9] text-sm">{t.totalEmailsSent}</span>
+                  <span className="text-cyan-300 text-sm">{t.totalEmailsSent}</span>
                 </div>
                 <div className="text-2xl font-bold">{analytics.totalEmailsSent}</div>
               </div>
@@ -411,7 +411,7 @@ export default function SequenceAnalyticsDashboard() {
                   <div className="p-2 bg-cta/20 rounded-lg">
                     <Target className="w-5 h-5 text-orange-400" />
                   </div>
-                  <span className="text-[#67E8F9] text-sm">{t.avgConversionRate}</span>
+                  <span className="text-cyan-300 text-sm">{t.avgConversionRate}</span>
                 </div>
                 <div className="text-2xl font-bold">{analytics.averageConversionRate}%</div>
               </div>
@@ -436,7 +436,7 @@ export default function SequenceAnalyticsDashboard() {
                     style={{ width: `${Math.min(analytics.averageOpenRate, 100)}%` }}
                   />
                 </div>
-                <div className="text-xs text-[#67E8F9] mt-2">{t.benchmark}: 30-45%</div>
+                <div className="text-xs text-cyan-300 mt-2">{t.benchmark}: 30-45%</div>
               </div>
               
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
@@ -456,7 +456,7 @@ export default function SequenceAnalyticsDashboard() {
                     style={{ width: `${Math.min(analytics.averageClickRate * 5, 100)}%` }}
                   />
                 </div>
-                <div className="text-xs text-[#67E8F9] mt-2">{t.benchmark}: 10-15%</div>
+                <div className="text-xs text-cyan-300 mt-2">{t.benchmark}: 10-15%</div>
               </div>
               
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
@@ -476,7 +476,7 @@ export default function SequenceAnalyticsDashboard() {
                     style={{ width: `${Math.min(analytics.averageConversionRate * 5, 100)}%` }}
                   />
                 </div>
-                <div className="text-xs text-[#67E8F9] mt-2">{t.benchmark}: 8-15%</div>
+                <div className="text-xs text-cyan-300 mt-2">{t.benchmark}: 8-15%</div>
               </div>
             </div>
             
@@ -524,7 +524,7 @@ export default function SequenceAnalyticsDashboard() {
                         title={`${t.emailsSent}: ${day.emailsSent}`}
                       />
                     </div>
-                    <div className="text-xs text-[#67E8F9]">
+                    <div className="text-xs text-cyan-300">
                       {new Date(day.date).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { weekday: "short" })}
                     </div>
                   </div>
@@ -533,7 +533,7 @@ export default function SequenceAnalyticsDashboard() {
               <div className="flex items-center justify-center gap-6 mt-4 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-foundation-soft rounded" />
-                  <span className="text-[#67E8F9]">{t.emailsSent}</span>
+                  <span className="text-cyan-300">{t.emailsSent}</span>
                 </div>
               </div>
             </div>
@@ -561,7 +561,7 @@ export default function SequenceAnalyticsDashboard() {
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-lg font-semibold">{seq.sequenceName}</h3>
-                      <div className="flex items-center gap-4 mt-2 text-sm text-[#67E8F9]">
+                      <div className="flex items-center gap-4 mt-2 text-sm text-cyan-300">
                         <span>{seq.totalEnrollments} {t.enrollments}</span>
                         <span className="text-green-400">{seq.activeEnrollments} {t.active}</span>
                         <span>{seq.completedEnrollments} {t.completed}</span>
@@ -570,12 +570,12 @@ export default function SequenceAnalyticsDashboard() {
                     <div className="flex items-center gap-6">
                       <div className="text-right">
                         <div className="text-2xl font-bold text-teal-400">{seq.conversionRate}%</div>
-                        <div className="text-xs text-[#67E8F9]">{t.conversionRate}</div>
+                        <div className="text-xs text-cyan-300">{t.conversionRate}</div>
                       </div>
                       {expandedSequence === seq.sequenceId ? (
-                        <ChevronUp className="w-5 h-5 text-[#67E8F9]" />
+                        <ChevronUp className="w-5 h-5 text-cyan-300" />
                       ) : (
-                        <ChevronDown className="w-5 h-5 text-[#67E8F9]" />
+                        <ChevronDown className="w-5 h-5 text-cyan-300" />
                       )}
                     </div>
                   </div>
@@ -591,52 +591,52 @@ export default function SequenceAnalyticsDashboard() {
                     >
                       <div className="p-6 grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-white/5 rounded-lg p-4">
-                          <div className="text-sm text-[#67E8F9] mb-1">{t.emailsSent}</div>
+                          <div className="text-sm text-cyan-300 mb-1">{t.emailsSent}</div>
                           <div className="text-xl font-bold">{seq.totalEmailsSent}</div>
                         </div>
                         <div className="bg-white/5 rounded-lg p-4">
-                          <div className="text-sm text-[#67E8F9] mb-1">{t.openRate}</div>
+                          <div className="text-sm text-cyan-300 mb-1">{t.openRate}</div>
                           <div className="text-xl font-bold text-teal-400">{seq.openRate}%</div>
                         </div>
                         <div className="bg-white/5 rounded-lg p-4">
-                          <div className="text-sm text-[#67E8F9] mb-1">{t.clickRate}</div>
+                          <div className="text-sm text-cyan-300 mb-1">{t.clickRate}</div>
                           <div className="text-xl font-bold text-blue-400">{seq.clickRate}%</div>
                         </div>
                         <div className="bg-white/5 rounded-lg p-4">
-                          <div className="text-sm text-[#67E8F9] mb-1">{t.conversions}</div>
+                          <div className="text-sm text-cyan-300 mb-1">{t.conversions}</div>
                           <div className="text-xl font-bold text-orange-400">{seq.conversions}</div>
                         </div>
                       </div>
                       
                       {/* Conversion Funnel */}
                       <div className="px-6 pb-6">
-                        <h4 className="text-sm font-medium text-[#67E8F9] mb-3">{t.conversionFunnel}</h4>
+                        <h4 className="text-sm font-medium text-cyan-300 mb-3">{t.conversionFunnel}</h4>
                         <div className="flex items-center gap-2">
                           <div className="flex-1">
                             <div className="bg-teal-500/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalEnrollments}</div>
-                              <div className="text-xs text-[#67E8F9]">{t.enrolled}</div>
+                              <div className="text-xs text-cyan-300">{t.enrolled}</div>
                             </div>
                           </div>
                           <div className="text-black">→</div>
                           <div className="flex-1">
                             <div className="bg-blue-500/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalOpened}</div>
-                              <div className="text-xs text-[#67E8F9]">{t.opened}</div>
+                              <div className="text-xs text-cyan-300">{t.opened}</div>
                             </div>
                           </div>
                           <div className="text-black">→</div>
                           <div className="flex-1">
                             <div className="bg-foundation-soft/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalClicked}</div>
-                              <div className="text-xs text-[#67E8F9]">{t.clicked}</div>
+                              <div className="text-xs text-cyan-300">{t.clicked}</div>
                             </div>
                           </div>
                           <div className="text-black">→</div>
                           <div className="flex-1">
                             <div className="bg-cta/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.conversions}</div>
-                              <div className="text-xs text-[#67E8F9]">{t.converted}</div>
+                              <div className="text-xs text-cyan-300">{t.converted}</div>
                             </div>
                           </div>
                         </div>
@@ -662,13 +662,13 @@ export default function SequenceAnalyticsDashboard() {
                 <table className="w-full">
                   <thead className="bg-white/5">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.stepNumber}</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.subject}</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.delay}</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.emailsSent}</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.openRate}</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.clickRate}</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.dropOff}</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.stepNumber}</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.subject}</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.delay}</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.emailsSent}</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.openRate}</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.clickRate}</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-cyan-300">{t.dropOff}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
@@ -703,7 +703,7 @@ export default function SequenceAnalyticsDashboard() {
                           {step.dropOffRate > 0 ? (
                             <span className="text-red-400">-{step.dropOffRate}%</span>
                           ) : (
-                            <span className="text-[#67E8F9]">-</span>
+                            <span className="text-cyan-300">-</span>
                           )}
                         </td>
                       </tr>

@@ -295,7 +295,7 @@ export default function ForBusiness() {
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-teal-600 dark:text-teal-400 mb-1">{stat.value}</div>
-                  <div className="text-sm text-black dark:text-[#67E8F9]">{stat.label}</div>
+                  <div className="text-sm text-black dark:text-cyan-300">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -308,18 +308,18 @@ export default function ForBusiness() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.benefitsTitle}</h2>
-            <p className="text-lg text-black dark:text-[#67E8F9] max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
+            <p className="text-lg text-black dark:text-cyan-300 max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${visibleSections.has('benefits') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {t.benefits.map((benefit, i) => (
-              <Card key={i} className="border-slate-200 dark:border-[#0a6969] hover:shadow-lg transition-shadow duration-300">
+              <Card key={i} className="border-slate-200 dark:border-teal-800 hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-6">
                   <div className={`w-12 h-12 rounded-xl ${colorMap[benefit.color]} flex items-center justify-center mb-4`}>
                     <benefit.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-semibold text-black dark:text-white mb-2">{benefit.title}</h3>
-                  <p className="text-black dark:text-[#67E8F9]">{benefit.desc}</p>
+                  <p className="text-black dark:text-cyan-300">{benefit.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -332,12 +332,12 @@ export default function ForBusiness() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.packagesTitle}</h2>
-            <p className="text-lg text-black dark:text-[#67E8F9] max-w-2xl mx-auto">{t.packagesSubtitle}</p>
+            <p className="text-lg text-black dark:text-cyan-300 max-w-2xl mx-auto">{t.packagesSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-3 gap-8 max-w-5xl mx-auto transition-all duration-700 ${visibleSections.has('packages') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {t.packages.map((pkg, i) => (
-              <Card key={i} className={`relative border-2 ${pkg.popular ? 'border-teal-500 dark:border-teal-400 shadow-xl shadow-teal-500/10' : 'border-slate-200 dark:border-[#0a6969]'} hover:shadow-lg transition-all duration-300`}>
+              <Card key={i} className={`relative border-2 ${pkg.popular ? 'border-teal-500 dark:border-teal-400 shadow-xl shadow-teal-500/10' : 'border-slate-200 dark:border-teal-800'} hover:shadow-lg transition-all duration-300`}>
                 {pkg.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                     <Badge className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white border-0 px-4 py-1">
@@ -350,9 +350,9 @@ export default function ForBusiness() {
                   <CardTitle className="text-xl font-bold text-black dark:text-white">{pkg.name}</CardTitle>
                   <div className="mt-4">
                     <span className="text-4xl font-bold text-teal-600 dark:text-teal-400">{pkg.price}</span>
-                    <span className="text-black dark:text-[#67E8F9] ml-2">{pkg.period}</span>
+                    <span className="text-black dark:text-cyan-300 ml-2">{pkg.period}</span>
                   </div>
-                  <p className="text-sm text-black dark:text-[#67E8F9] mt-2">{pkg.description}</p>
+                  <p className="text-sm text-black dark:text-cyan-300 mt-2">{pkg.description}</p>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <ul className="space-y-3 mb-6">
@@ -378,18 +378,18 @@ export default function ForBusiness() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.industriesTitle}</h2>
-            <p className="text-lg text-black dark:text-[#67E8F9] max-w-2xl mx-auto">{t.industriesSubtitle}</p>
+            <p className="text-lg text-black dark:text-cyan-300 max-w-2xl mx-auto">{t.industriesSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${visibleSections.has('industries') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {t.industries.map((industry, i) => (
-              <Card key={i} className="border-slate-200 dark:border-[#0a6969] hover:shadow-lg hover:border-teal-300 dark:hover:border-teal-700 transition-all duration-300 group cursor-pointer">
+              <Card key={i} className="border-slate-200 dark:border-teal-800 hover:shadow-lg hover:border-teal-300 dark:hover:border-teal-700 transition-all duration-300 group cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-100 to-emerald-100 dark:from-teal-900/50 dark:to-emerald-900/50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                     <industry.icon className="w-8 h-8 text-teal-600 dark:text-teal-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-black dark:text-white mb-2">{industry.name}</h3>
-                  <p className="text-sm text-black dark:text-[#67E8F9]">{industry.desc}</p>
+                  <p className="text-sm text-black dark:text-cyan-300">{industry.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -406,7 +406,7 @@ export default function ForBusiness() {
           
           <div className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {t.testimonials.map((testimonial, i) => (
-              <Card key={i} className="border-slate-200 dark:border-[#0a6969] bg-white dark:bg-foundation">
+              <Card key={i} className="border-slate-200 dark:border-teal-800 bg-white dark:bg-foundation">
                 <CardContent className="p-6">
                   <Quote className="w-10 h-10 text-teal-200 dark:text-teal-800 mb-4" />
                   <p className="text-black dark:text-white/90 mb-6 italic">"{testimonial.quote}"</p>
@@ -416,7 +416,7 @@ export default function ForBusiness() {
                     </div>
                     <div>
                       <div className="font-semibold text-black dark:text-white">{testimonial.author}</div>
-                      <div className="text-sm text-black dark:text-[#67E8F9]">{testimonial.role}, {testimonial.company}</div>
+                      <div className="text-sm text-black dark:text-cyan-300">{testimonial.role}, {testimonial.company}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -432,7 +432,7 @@ export default function ForBusiness() {
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">{t.formTitle}</h2>
-              <p className="text-lg text-black dark:text-[#67E8F9]">{t.formSubtitle}</p>
+              <p className="text-lg text-black dark:text-cyan-300">{t.formSubtitle}</p>
             </div>
             
             {formSubmitted ? (
@@ -443,7 +443,7 @@ export default function ForBusiness() {
                 </CardContent>
               </Card>
             ) : (
-              <Card className="border-slate-200 dark:border-[#0a6969]">
+              <Card className="border-slate-200 dark:border-teal-800">
                 <CardContent className="p-8">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">

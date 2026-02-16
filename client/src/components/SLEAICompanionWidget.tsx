@@ -142,7 +142,7 @@ export default function SLEAICompanionWidget() {
           </div>
 
           {/* Golden Star Badge - Top Right (Page 6 Style) */}
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-[#E8A76B] via-yellow-400 to-[#C65A1E] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40 border border-[#FFE4D6]/50">
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-[#E8A76B] via-yellow-400 to-[#C65A1E] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40 border border-orange-100/50">
             <span className="text-[10px]">✨</span>
           </div>
 
@@ -190,7 +190,7 @@ export default function SLEAICompanionWidget() {
                   </div>
                   <button
                     onClick={handleClose}
-                    className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-foundation-2/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
+                    className="w-8 h-8 rounded-full bg-teal-800/50 hover:bg-foundation-2/50 flex items-center justify-center text-cyan-300 hover:text-white transition-colors"
                   >
                     ✕
                   </button>
@@ -202,7 +202,7 @@ export default function SLEAICompanionWidget() {
                     <button
                       key={coach.id}
                       onClick={() => handleCoachSelect(coach)}
-                      className="group relative p-4 rounded-xl bg-foundation/50 hover:bg-foundation-2/50 border border-[#0a6969]/50 hover:border-foundation/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
+                      className="group relative p-4 rounded-xl bg-foundation/50 hover:bg-foundation-2/50 border border-teal-800/50 hover:border-foundation/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
                     >
                       {/* Coach Photo with Violet/Cyan Ring */}
                       <div className="relative w-20 h-20 mx-auto mb-3">
@@ -237,7 +237,7 @@ export default function SLEAICompanionWidget() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handleBack}
-                      className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-foundation-2/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
+                      className="w-8 h-8 rounded-full bg-teal-800/50 hover:bg-foundation-2/50 flex items-center justify-center text-cyan-300 hover:text-white transition-colors"
                     >
                       ‹
                     </button>
@@ -248,14 +248,14 @@ export default function SLEAICompanionWidget() {
                   </div>
                   <button
                     onClick={handleClose}
-                    className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-foundation-2/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
+                    className="w-8 h-8 rounded-full bg-teal-800/50 hover:bg-foundation-2/50 flex items-center justify-center text-cyan-300 hover:text-white transition-colors"
                   >
                     ✕
                   </button>
                 </div>
 
                 {/* Selected Coach Card */}
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-foundation/50 border border-[#0a6969]/50 mb-6">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-foundation/50 border border-teal-800/50 mb-6">
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] p-[2px]">
                     <div className="w-full h-full rounded-full overflow-hidden bg-obsidian">
                       <img
@@ -277,14 +277,14 @@ export default function SLEAICompanionWidget() {
                     <button
                       key={option.id}
                       onClick={() => handleMenuSelect(option)}
-                      className="w-full flex items-center gap-4 p-4 rounded-xl bg-foundation/30 hover:bg-foundation-2/50 border border-[#0a6969]/30 hover:border-foundation/30 transition-all duration-300 group"
+                      className="w-full flex items-center gap-4 p-4 rounded-xl bg-foundation/30 hover:bg-foundation-2/50 border border-teal-800/30 hover:border-foundation/30 transition-all duration-300 group"
                     >
                       <div className={`w-12 h-12 rounded-xl ${option.iconBg} flex items-center justify-center text-xl shadow-lg`}>
                         {option.icon}
                       </div>
                       <div className="flex-1 text-left">
                         <h4 className="text-white font-semibold text-sm">{option.title}</h4>
-                        <p className="text-[#67E8F9] text-xs">{option.subtitle}</p>
+                        <p className="text-cyan-300 text-xs">{option.subtitle}</p>
                       </div>
                       <span className="text-black group-hover:text-foundation transition-colors">›</span>
                     </button>
@@ -297,11 +297,11 @@ export default function SLEAICompanionWidget() {
             {currentScreen === "voice" && selectedCoach && (
               <div className="relative h-full flex flex-col">
                 {/* Header */}
-                <div className="flex items-center justify-between p-4 border-b border-[#0a6969]/50">
+                <div className="flex items-center justify-between p-4 border-b border-teal-800/50">
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handleBack}
-                      className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-foundation-2/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
+                      className="w-8 h-8 rounded-full bg-teal-800/50 hover:bg-foundation-2/50 flex items-center justify-center text-cyan-300 hover:text-white transition-colors"
                     >
                       ‹
                     </button>
@@ -312,7 +312,7 @@ export default function SLEAICompanionWidget() {
                   </div>
                   <button
                     onClick={handleClose}
-                    className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-foundation-2/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
+                    className="w-8 h-8 rounded-full bg-teal-800/50 hover:bg-foundation-2/50 flex items-center justify-center text-cyan-300 hover:text-white transition-colors"
                   >
                     ✕
                   </button>
@@ -363,7 +363,7 @@ export default function SLEAICompanionWidget() {
                   </div>
 
                   {/* AI Message */}
-                  <div className="w-full max-w-sm p-4 rounded-xl bg-foundation/50 border border-[#0a6969]/30 mb-6">
+                  <div className="w-full max-w-sm p-4 rounded-xl bg-foundation/50 border border-teal-800/30 mb-6">
                     <p className="text-white/90 text-sm italic text-center">
                       "Hello! I'm {selectedCoach.name.split(' ')[1] || selectedCoach.name}. Ready to work on your {selectedCoach.specialty.toLowerCase()} today. Let's begin when you're ready."
                     </p>
@@ -377,7 +377,7 @@ export default function SLEAICompanionWidget() {
                       <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
                     </svg>
                   </button>
-                  <span className="text-[#67E8F9] text-xs mt-2">Tap to speak</span>
+                  <span className="text-cyan-300 text-xs mt-2">Tap to speak</span>
                 </div>
               </div>
             )}

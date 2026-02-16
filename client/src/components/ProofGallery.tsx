@@ -253,7 +253,7 @@ export default function ProofGallery() {
                   {language === "fr" ? video.descriptionFr : video.description}
                 </p>
                 {video.views && (
-                  <p className="text-xs text-[#67E8F9] mt-2">
+                  <p className="text-xs text-cyan-300 mt-2">
                     {video.views} {language === "fr" ? "vues" : "views"}
                   </p>
                 )}

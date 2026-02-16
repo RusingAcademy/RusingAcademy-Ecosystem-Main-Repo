@@ -251,7 +251,7 @@ export default function BalanceSheetReport() {
             <div className="qb-card">
               {/* Assets */}
               <div className="mb-6">
-                <h3 className="text-xs font-bold text-[#0077C5] uppercase tracking-wider mb-3 pb-2 border-b-2 border-[#0077C5]">Assets</h3>
+                <h3 className="text-xs font-bold text-sky-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-[#0077C5]">Assets</h3>
                 {Object.entries(assetGroups).map(([group, items]) => <div key={group}>{renderSection(group, items)}</div>)}
                 <div className="flex justify-between py-2 text-sm font-bold border-t-2 border-gray-300 mt-2">
                   <span className="text-gray-900">Total Assets</span>
@@ -261,7 +261,7 @@ export default function BalanceSheetReport() {
 
               {/* Liabilities */}
               <div className="mb-6">
-                <h3 className="text-xs font-bold text-[#D4380D] uppercase tracking-wider mb-3 pb-2 border-b-2 border-[#D4380D]">Liabilities</h3>
+                <h3 className="text-xs font-bold text-red-700 uppercase tracking-wider mb-3 pb-2 border-b-2 border-red-700">Liabilities</h3>
                 {bs.liabilities.length === 0 ? (
                   <p className="text-sm text-gray-400 pl-4 py-2">No liabilities</p>
                 ) : (
@@ -280,7 +280,7 @@ export default function BalanceSheetReport() {
 
               {/* Equity */}
               <div className="mb-6">
-                <h3 className="text-xs font-bold text-[#2CA01C] uppercase tracking-wider mb-3 pb-2 border-b-2 border-[#2CA01C]">Equity</h3>
+                <h3 className="text-xs font-bold text-green-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-green-600">Equity</h3>
                 {bs.equity.map((a: any, i: number) => (
                   <div key={i} className="flex justify-between py-1.5 text-sm pl-4">
                     <span className="text-gray-700">{a.name}</span>
@@ -300,7 +300,7 @@ export default function BalanceSheetReport() {
                   <span className="text-gray-900 font-mono">{fmt(bs.totalLiabilities + bs.totalEquity)}</span>
                 </div>
                 {Math.abs(bs.totalAssets - (bs.totalLiabilities + bs.totalEquity)) > 0.01 && (
-                  <p className="text-xs text-[#D4380D] mt-1">
+                  <p className="text-xs text-red-700 mt-1">
                     Note: Assets ({fmt(bs.totalAssets)}) do not equal Liabilities + Equity ({fmt(bs.totalLiabilities + bs.totalEquity)}). 
                     Difference: {fmt(bs.totalAssets - bs.totalLiabilities - bs.totalEquity)}
                   </p>

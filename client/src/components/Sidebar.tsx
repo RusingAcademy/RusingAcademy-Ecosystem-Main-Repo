@@ -104,7 +104,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
               <span className="text-gray-900 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
                 RusingAcademy
               </span>
-              <span className="block text-[10px] text-[#008090] tracking-wider uppercase font-medium">Learning Portal</span>
+              <span className="block text-[10px] text-teal-700 tracking-wider uppercase font-medium">Learning Portal</span>
             </div>
           </Link>
         </div>
@@ -122,7 +122,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         <div className="mx-4 mb-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
           <div className="flex items-center justify-between mb-1.5">
             <div className="flex items-center gap-1.5">
-              <span className="text-[#008090] text-xs font-bold">Lv.{level}</span>
+              <span className="text-teal-700 text-xs font-bold">Lv.{level}</span>
               <span className="text-gray-500 text-[10px]">{levelTitle}</span>
             </div>
             <div className="flex items-center gap-1">
@@ -135,7 +135,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
           </div>
           <div className="flex justify-between mt-1">
             <span className="text-[10px] text-gray-500">{totalXP.toLocaleString()} XP</span>
-            <span className="text-[10px] text-[#008090] font-medium">{500 - (totalXP % 500)} to next</span>
+            <span className="text-[10px] text-teal-700 font-medium">{500 - (totalXP % 500)} to next</span>
           </div>
         </div>
 
@@ -146,15 +146,15 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             <Link key={item.path} href={item.path} onClick={onToggle}>
               <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
                 isActive(item.path)
-                  ? "bg-[#008090]/8 text-[#008090] font-semibold border-l-[3px] border-[#008090]"
+                  ? "bg-teal-700/8 text-teal-700 font-semibold border-l-[3px] border-teal-700"
                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent"
               }`}>
-                <span className={`material-icons text-lg ${isActive(item.path) ? "text-[#008090]" : "text-gray-400 group-hover:text-gray-600"}`}>
+                <span className={`material-icons text-lg ${isActive(item.path) ? "text-teal-700" : "text-gray-400 group-hover:text-gray-600"}`}>
                   {item.icon}
                 </span>
                 <span className="font-medium">{item.label}</span>
                 {item.badge && (
-                  <span className="ml-auto bg-[#008090] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
+                  <span className="ml-auto bg-teal-700 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
                     {item.badge}
                   </span>
                 )}
@@ -169,10 +169,10 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             <Link key={item.path} href={item.path} onClick={onToggle}>
               <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
                 isActive(item.path)
-                  ? "bg-[#008090]/8 text-[#008090] font-semibold border-l-[3px] border-[#008090]"
+                  ? "bg-teal-700/8 text-teal-700 font-semibold border-l-[3px] border-teal-700"
                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent"
               }`}>
-                <span className={`material-icons text-lg ${isActive(item.path) ? "text-[#008090]" : "text-gray-400 group-hover:text-gray-600"}`}>
+                <span className={`material-icons text-lg ${isActive(item.path) ? "text-teal-700" : "text-gray-400 group-hover:text-gray-600"}`}>
                   {item.icon}
                 </span>
                 <span className="font-medium">{item.label}</span>
@@ -187,10 +187,10 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             <Link key={item.path} href={item.path} onClick={onToggle}>
               <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
                 isActive(item.path)
-                  ? "bg-[#008090]/8 text-[#008090] font-semibold border-l-[3px] border-[#008090]"
+                  ? "bg-teal-700/8 text-teal-700 font-semibold border-l-[3px] border-teal-700"
                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent"
               }`}>
-                <span className={`material-icons text-lg ${isActive(item.path) ? "text-[#008090]" : "text-gray-400 group-hover:text-gray-600"}`}>
+                <span className={`material-icons text-lg ${isActive(item.path) ? "text-teal-700" : "text-gray-400 group-hover:text-gray-600"}`}>
                   {item.icon}
                 </span>
                 <span className="font-medium">{item.label}</span>
@@ -237,16 +237,16 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 <p className="text-gray-900 text-sm font-medium truncate">Steven B.</p>
                 <p className="text-gray-400 text-[10px] truncate">Public Servant</p>
               </div>
-              <span className="material-icons text-gray-300 text-sm group-hover:text-[#008090]">settings</span>
+              <span className="material-icons text-gray-300 text-sm group-hover:text-teal-700">settings</span>
             </div>
           </Link>
 
           {/* Language Toggle */}
           <button onClick={toggleLang}
-            className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-[#008090] hover:bg-[#008090]/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
+            className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-teal-700 hover:bg-teal-700/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
             <span className="material-icons text-sm">translate</span>
             {lang === "en" ? "Français" : "English"}
-            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#008090]/10 text-[#008090] font-bold uppercase">{lang}</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-teal-700/10 text-teal-700 font-bold uppercase">{lang}</span>
           </button>
 
           <button onClick={handleLogout} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 hover:bg-gray-50 transition-all flex items-center justify-center gap-1.5">

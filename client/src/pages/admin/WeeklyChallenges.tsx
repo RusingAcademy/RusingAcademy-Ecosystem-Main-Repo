@@ -403,7 +403,7 @@ export default function WeeklyChallenges() {
       {pastChallenges.length > 0 && (
         <div>
           <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-            <Clock className="h-5 w-5 text-[#67E8F9]" />
+            <Clock className="h-5 w-5 text-cyan-300" />
             Past Challenges
           </h2>
           <div className="grid md:grid-cols-2 gap-4">

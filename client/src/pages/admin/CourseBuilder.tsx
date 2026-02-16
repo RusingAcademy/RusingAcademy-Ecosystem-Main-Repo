@@ -159,7 +159,7 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                   `}
                 >
                   <Icon className={`h-3.5 w-3.5 mb-0.5 ${isFilled ? slot.textColor : "text-white/90"}`} />
-                  <span className={`text-[7px] font-semibold leading-tight text-center truncate w-full px-0.5 ${isFilled ? slot.textColor : "text-[#67E8F9]"}`}>
+                  <span className={`text-[7px] font-semibold leading-tight text-center truncate w-full px-0.5 ${isFilled ? slot.textColor : "text-cyan-300"}`}>
                     {slot.labelEn.split(" ")[0]}
                   </span>
                   {isFilled && (
@@ -1910,7 +1910,7 @@ export default function CourseBuilder() {
           { label: "Published", value: stats.published, color: "text-emerald-600", bg: "bg-emerald-50" },
           { label: "In Review", value: stats.review, color: "text-blue-600", bg: "bg-blue-50" },
           { label: "Drafts", value: stats.draft, color: "text-amber-600", bg: "bg-amber-50" },
-          { label: "Archived", value: stats.archived, color: "text-[#67E8F9]", bg: "bg-gray-50" },
+          { label: "Archived", value: stats.archived, color: "text-cyan-300", bg: "bg-gray-50" },
         ].map((stat, i) => (
           <Card key={i} className="overflow-hidden hover:shadow-md transition-shadow">
             <CardContent className={`p-4 ${stat.bg}`}>

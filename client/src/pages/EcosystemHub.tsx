@@ -271,7 +271,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] rounded-2xl p-8 border border-[#FFE4D6]/50">
+          <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] rounded-2xl p-8 border border-orange-100/50">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center flex-shrink-0">
                 <Zap className="w-6 h-6 text-white" />
@@ -745,7 +745,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-[#67E8F9] text-sm md:text-base leading-relaxed">
+          <p className="text-cyan-300 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
               : "Nos programmes sont spécifiquement conçus pour les fonctionnaires canadiens à différentes étapes de leur carrière. Si vous vous reconnaissez dans l'un de ces profils, nous pouvons vous aider à atteindre vos objectifs linguistiques."}
@@ -787,7 +787,7 @@ function TargetAudienceSection({ language }: { language: string }) {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {language === "en" ? profile.titleEn : profile.titleFr}
                   </h3>
-                  <p className="text-[#67E8F9] text-sm leading-relaxed">
+                  <p className="text-cyan-300 text-sm leading-relaxed">
                     {language === "en" ? profile.descEn : profile.descFr}
                   </p>
                 </div>
@@ -921,7 +921,7 @@ function TestimonialsSection({ language }: { language: string }) {
                   <img
                     loading="lazy" src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-[#FFE4D6]"
+                    className="w-14 h-14 rounded-full object-cover border-2 border-orange-100"
                   />
                 ) : (
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
@@ -937,7 +937,7 @@ function TestimonialsSection({ language }: { language: string }) {
                   href={testimonial.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#0077B5] flex items-center justify-center hover:bg-[#006097] transition-colors"
+                  className="w-10 h-10 rounded-full bg-sky-700 flex items-center justify-center hover:bg-sky-800 transition-colors"
                 >
                   <Linkedin className="w-5 h-5 text-white" />
                 </a>
@@ -1232,7 +1232,7 @@ function InstitutionsSection({ language }: { language: string }) {
               className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
             >
               <div className="h-12 md:h-16 flex items-center justify-center">
-                <Building2 className="w-12 h-12 text-[#67E8F9]" />
+                <Building2 className="w-12 h-12 text-cyan-300" />
               </div>
             </motion.div>
           ))}

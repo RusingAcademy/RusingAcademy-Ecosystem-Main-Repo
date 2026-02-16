@@ -58,7 +58,7 @@ export default function AdminContentPipeline() {
         title="Content Pipeline"
         description="Manage content creation workflow, quality scores, and publishing calendar"
         actions={
-          <Button className="bg-[#008090] hover:bg-[#006070]" onClick={() => setCreateDialog(true)}>
+          <Button className="bg-teal-700 hover:bg-teal-900" onClick={() => setCreateDialog(true)}>
             New Content
           </Button>
         }
@@ -127,7 +127,7 @@ export default function AdminContentPipeline() {
                   variant={statusFilter === (f === "all" ? undefined : f) ? "default" : "outline"}
                   size="sm"
                   onClick={() => setStatusFilter(f === "all" ? undefined : f)}
-                  className={statusFilter === (f === "all" ? undefined : f) ? "bg-[#008090]" : ""}
+                  className={statusFilter === (f === "all" ? undefined : f) ? "bg-teal-700" : ""}
                 >
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </Button>
@@ -192,7 +192,7 @@ export default function AdminContentPipeline() {
                             </>
                           )}
                           {item.status === "approved" && (
-                            <Button size="sm" className="bg-[#008090] hover:bg-[#006070] text-white" onClick={() => updateStatus.mutate({ id: item.id, status: "published" })}>
+                            <Button size="sm" className="bg-teal-700 hover:bg-teal-900 text-white" onClick={() => updateStatus.mutate({ id: item.id, status: "published" })}>
                               Publish
                             </Button>
                           )}
@@ -349,7 +349,7 @@ export default function AdminContentPipeline() {
                 Cancel
               </Button>
               <Button
-                className="bg-[#008090]"
+                className="bg-teal-700"
                 disabled={!newItem.title.trim()}
                 onClick={() =>
                   createItemMut.mutate({

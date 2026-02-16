@@ -74,7 +74,7 @@ function ChallengeCard({ challenge, isFr }: { challenge: {
 
       <div className="flex items-center justify-between mt-3">
         {challenge.isCompleted ? (
-          <div className="flex items-center gap-1 text-[10px] text-[#10b981] font-semibold">
+          <div className="flex items-center gap-1 text-[10px] text-emerald-500 font-semibold">
             <span className="material-icons" style={{ fontSize: "14px" }} aria-hidden="true">verified</span>
             {isFr ? "Défi complété" : "Challenge Complete"}
           </div>
@@ -107,7 +107,7 @@ export default function WeeklyChallenges() {
         {/* Header */}
         <div className="bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm">
           <div className="flex items-center gap-3 mb-2">
-            <span className="material-icons text-[#8b5cf6]" style={{ fontSize: "28px" }} aria-hidden="true">flag</span>
+            <span className="material-icons text-violet-500" style={{ fontSize: "28px" }} aria-hidden="true">flag</span>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
               {t("challenges.title")}
             </h1>
@@ -119,17 +119,17 @@ export default function WeeklyChallenges() {
           {/* Stats Row */}
           <div className="flex items-center gap-6 mt-4" role="region" aria-label={isFr ? "Statistiques des défis" : "Challenge statistics"}>
             <div className="text-center" role="status">
-              <div className="text-2xl font-bold text-[#008090]">{activeChallenges.length}</div>
+              <div className="text-2xl font-bold text-teal-700">{activeChallenges.length}</div>
               <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "Actifs" : "Active"}</div>
             </div>
             <div className="w-px h-8 bg-gray-200" aria-hidden="true" />
             <div className="text-center" role="status">
-              <div className="text-2xl font-bold text-[#10b981]">{completedChallenges.length}</div>
+              <div className="text-2xl font-bold text-emerald-500">{completedChallenges.length}</div>
               <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "Complétés" : "Completed"}</div>
             </div>
             <div className="w-px h-8 bg-gray-200" aria-hidden="true" />
             <div className="text-center" role="status">
-              <div className="text-2xl font-bold text-[#f5a623]">{totalXpEarned.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-amber-500">{totalXpEarned.toLocaleString()}</div>
               <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "XP gagnés" : "XP Earned"}</div>
             </div>
           </div>
@@ -139,14 +139,14 @@ export default function WeeklyChallenges() {
         <div className="flex gap-2" role="tablist" aria-label={isFr ? "Filtrer les défis" : "Filter challenges"}>
           <button onClick={() => setTab("active")} role="tab" aria-selected={tab === "active"}
             className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${
-              tab === "active" ? "bg-[#008090] text-white border-[#008090]" : "bg-white text-gray-500 border-gray-200 hover:border-[#008090] hover:text-[#008090]"
+              tab === "active" ? "bg-teal-700 text-white border-teal-700" : "bg-white text-gray-500 border-gray-200 hover:border-teal-700 hover:text-teal-700"
             }`}>
             <span className="material-icons align-middle mr-1" style={{ fontSize: "14px" }} aria-hidden="true">flag</span>
             {isFr ? "Actifs" : "Active"} ({activeChallenges.length})
           </button>
           <button onClick={() => setTab("completed")} role="tab" aria-selected={tab === "completed"}
             className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-[#10b981]/30 ${
-              tab === "completed" ? "bg-[#10b981] text-white border-[#10b981]" : "bg-white text-gray-500 border-gray-200 hover:border-[#10b981] hover:text-[#10b981]"
+              tab === "completed" ? "bg-emerald-500 text-white border-emerald-500" : "bg-white text-gray-500 border-gray-200 hover:border-emerald-500 hover:text-emerald-500"
             }`}>
             <span className="material-icons align-middle mr-1" style={{ fontSize: "14px" }} aria-hidden="true">check_circle</span>
             {isFr ? "Complétés" : "Completed"} ({completedChallenges.length})
@@ -156,7 +156,7 @@ export default function WeeklyChallenges() {
         {/* Challenge Cards */}
         {challengesQuery.isLoading ? (
           <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm" role="status">
-            <div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full mx-auto" />
+            <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
             <p className="text-sm text-gray-400 mt-3">{t("skillLabs.loading")}</p>
           </div>
         ) : displayChallenges.length === 0 ? (
@@ -186,7 +186,7 @@ export default function WeeklyChallenges() {
         {/* How It Works */}
         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
           <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <span className="material-icons text-[#008090]" style={{ fontSize: "18px" }} aria-hidden="true">help_outline</span>
+            <span className="material-icons text-teal-700" style={{ fontSize: "18px" }} aria-hidden="true">help_outline</span>
             {isFr ? "Comment fonctionnent les défis hebdomadaires" : "How Weekly Challenges Work"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -200,7 +200,7 @@ export default function WeeklyChallenges() {
               { icon: "emoji_events", title: "Unlock Badges", desc: "Some challenges unlock exclusive badges that showcase your dedication." },
             ]).map((item) => (
               <div key={item.title} className="text-center p-3">
-                <span className="material-icons text-[#008090]" style={{ fontSize: "28px" }} aria-hidden="true">{item.icon}</span>
+                <span className="material-icons text-teal-700" style={{ fontSize: "28px" }} aria-hidden="true">{item.icon}</span>
                 <h3 className="text-xs font-bold text-gray-900 mt-2">{item.title}</h3>
                 <p className="text-[11px] text-gray-400 mt-1">{item.desc}</p>
               </div>

@@ -40,7 +40,7 @@ export default function VerifyEmail() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -67,7 +67,7 @@ export default function VerifyEmail() {
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
                 <h2 className="text-xl font-semibold text-white">Email Verified!</h2>
                 <p className="text-white/90">{message}</p>
-                <p className="text-sm text-[#67E8F9]">Redirecting to login...</p>
+                <p className="text-sm text-cyan-300">Redirecting to login...</p>
               </>
             )}
             

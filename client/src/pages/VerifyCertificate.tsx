@@ -231,14 +231,14 @@ export default function VerifyCertificate() {
                 </div>
                 <span className="font-semibold">RusingAcademy</span>
               </div>
-              <p className="text-[#67E8F9] text-sm">
+              <p className="text-cyan-300 text-sm">
                 © {new Date().getFullYear()} RusingAcademy. All rights reserved.
               </p>
               <div className="flex gap-4">
-                <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-[#67E8F9] hover:text-white text-sm">
+                <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:text-white text-sm">
                   rusing.academy
                 </a>
-                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-[#67E8F9] hover:text-white text-sm">
+                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:text-white text-sm">
                   rusingacademy.com
                 </a>
               </div>

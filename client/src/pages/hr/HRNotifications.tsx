@@ -50,7 +50,7 @@ export default function HRNotifications() {
             <h1 className="text-2xl font-bold text-gray-900">{ui.title}</h1>
             <p className="text-sm text-gray-500 mt-1">{ui.subtitle}</p>
           </div>
-          <button className="text-sm text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">
+          <button className="text-sm text-blue-600 hover:text-[#1d4ed8] font-medium transition-colors">
             {ui.markAllRead}
           </button>
         </div>
@@ -63,7 +63,7 @@ export default function HRNotifications() {
               onClick={() => setFilter(f.key)}
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
                 filter === f.key
-                  ? "bg-white text-[#2563eb] shadow-sm"
+                  ? "bg-white text-blue-600 shadow-sm"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -75,8 +75,8 @@ export default function HRNotifications() {
 
         {/* Empty State */}
         <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
-          <div className="w-16 h-16 rounded-full bg-[#2563eb]/10 flex items-center justify-center mx-auto mb-4">
-            <span className="material-icons text-3xl text-[#2563eb]">notifications_none</span>
+          <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
+            <span className="material-icons text-3xl text-blue-600">notifications_none</span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">{ui.noNotifications}</h3>
           <p className="text-sm text-gray-500 max-w-md mx-auto">{ui.noNotificationsSub}</p>
@@ -85,7 +85,7 @@ export default function HRNotifications() {
         {/* Notification Preferences */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="material-icons text-[#2563eb]">tune</span>
+            <span className="material-icons text-blue-600">tune</span>
             {ui.preferences}
           </h3>
           <div className="space-y-4">
@@ -96,8 +96,8 @@ export default function HRNotifications() {
             ].map((pref, i) => (
               <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#2563eb]/10 flex items-center justify-center">
-                    <span className="material-icons text-[#2563eb]">{pref.icon}</span>
+                  <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
+                    <span className="material-icons text-blue-600">{pref.icon}</span>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">{pref.label}</p>
@@ -106,7 +106,7 @@ export default function HRNotifications() {
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" defaultChecked className="sr-only peer" />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2563eb]" />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600" />
                 </label>
               </div>
             ))}

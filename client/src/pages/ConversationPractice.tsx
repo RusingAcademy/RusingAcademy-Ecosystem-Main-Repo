@@ -244,7 +244,7 @@ export default function ConversationPractice() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDF8F3]">
+    <div className="min-h-screen flex flex-col bg-orange-50">
       {!isInsideAppLayout && <EcosystemHeaderGold />}
       <main className="flex-1">
         {/* Setup Screen */}

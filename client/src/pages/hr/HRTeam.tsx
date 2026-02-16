@@ -97,7 +97,7 @@ export default function HRTeam() {
           </div>
           <button
             onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#2563eb] text-white text-sm font-medium rounded-lg hover:bg-[#1d4ed8] transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
           >
             <span className="material-icons text-lg">person_add</span>
             {lang === "fr" ? "Inscrire un participant" : "Enroll Participant"}
@@ -118,8 +118,8 @@ export default function HRTeam() {
               onClick={() => setStatusFilter(tab.key)}
               className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
                 statusFilter === tab.key
-                  ? "bg-[#2563eb] text-white border-[#2563eb]"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-[#2563eb]/40"
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-white text-gray-600 border-gray-200 hover:border-blue-600/40"
               }`}
             >
               {tab.label} ({tab.count})
@@ -135,7 +135,7 @@ export default function HRTeam() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={lang === "fr" ? "Rechercher par nom, courriel ou ID employé..." : "Search by name, email or employee ID..."}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-blue-600"
           />
         </div>
 

@@ -94,7 +94,7 @@ export default function Expenses() {
       className={`flex items-center gap-1 hover:text-gray-900 ${align === "right" ? "ml-auto" : ""}`}
       onClick={() => toggleSort(field)}
     >
-      {label} <ArrowUpDown size={12} className={sortField === field ? "text-[#2CA01C]" : "text-gray-400"} />
+      {label} <ArrowUpDown size={12} className={sortField === field ? "text-green-600" : "text-gray-400"} />
     </button>
   );
 
@@ -184,7 +184,7 @@ export default function Expenses() {
                   key={type}
                   className={`px-3 py-1 rounded-full text-xs font-medium border ${
                     typeFilter === type
-                      ? "bg-[#2CA01C] text-white border-[#2CA01C]"
+                      ? "bg-green-600 text-white border-green-600"
                       : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"
                   }`}
                   onClick={() => { setTypeFilter(type); setPage(1); setSelectedIds(new Set()); }}
@@ -263,7 +263,7 @@ export default function Expenses() {
                   </td>
                   <td className="text-gray-700">{exp.expenseDate ? new Date(exp.expenseDate).toLocaleDateString("en-CA") : ""}</td>
                   <td className="text-gray-600">{exp.expenseType || "Expense"}</td>
-                  <td className="text-[#0077C5] font-medium">{exp.payeeName || "—"}</td>
+                  <td className="text-sky-600 font-medium">{exp.payeeName || "—"}</td>
                   <td className="text-right text-gray-800">${Number(exp.subtotal || 0).toLocaleString("en-CA", { minimumFractionDigits: 2 })}</td>
                   <td className="text-right text-gray-600">${Number(exp.taxAmount || 0).toFixed(2)}</td>
                   <td className="text-right font-medium text-gray-800">${Number(exp.total || 0).toLocaleString("en-CA", { minimumFractionDigits: 2 })}</td>
@@ -304,7 +304,7 @@ export default function Expenses() {
                 return (
                   <button
                     key={pageNum}
-                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-[#2CA01C] text-white" : "hover:bg-gray-200 text-gray-700"}`}
+                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-green-600 text-white" : "hover:bg-gray-200 text-gray-700"}`}
                     onClick={() => setPage(pageNum)}
                   >
                     {pageNum}

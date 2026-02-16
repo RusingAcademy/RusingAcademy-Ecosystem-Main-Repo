@@ -581,7 +581,7 @@ export default function PathDetail() {
                     ) : (
                       <>
                         {displayPath.originalPrice && displayPath.originalPrice > displayPath.price && (
-                          <span className="text-lg text-[#67E8F9] line-through mr-2">
+                          <span className="text-lg text-cyan-300 line-through mr-2">
                             {formatPrice(displayPath.originalPrice)}
                           </span>
                         )}

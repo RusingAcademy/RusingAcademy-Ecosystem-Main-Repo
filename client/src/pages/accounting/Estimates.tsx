@@ -62,7 +62,7 @@ export default function Estimates() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Estimates</h1>
         <Link href="/estimates/new">
-          <Button className="bg-[#2CA01C] hover:bg-[#248a17]">
+          <Button className="bg-green-600 hover:bg-green-700">
             <Plus size={16} className="mr-1" /> Create estimate
           </Button>
         </Link>
@@ -115,7 +115,7 @@ export default function Estimates() {
                   <FileText size={40} className="mx-auto text-gray-300 mb-3" />
                   <p className="text-gray-500 text-sm">No estimates yet</p>
                   <Link href="/estimates/new">
-                    <button className="mt-3 text-sm text-[#2CA01C] font-medium hover:underline">Create your first estimate</button>
+                    <button className="mt-3 text-sm text-green-600 font-medium hover:underline">Create your first estimate</button>
                   </Link>
                 </td>
               </tr>
@@ -126,7 +126,7 @@ export default function Estimates() {
                     {est.estimateDate ? new Date(est.estimateDate).toLocaleDateString("en-CA") : "-"}
                   </td>
                   <td className="px-4 py-3">
-                    <Link href={`/estimates/${est.id}`} className="text-sm text-[#0077C5] hover:underline font-medium">
+                    <Link href={`/estimates/${est.id}`} className="text-sm text-sky-600 hover:underline font-medium">
                       {est.estimateNumber}
                     </Link>
                   </td>
@@ -145,7 +145,7 @@ export default function Estimates() {
                       {est.status === "Accepted" && (
                         <button
                           onClick={() => setConvertId(est.id)}
-                          className="text-xs text-[#0077C5] hover:underline font-medium flex items-center gap-1"
+                          className="text-xs text-sky-600 hover:underline font-medium flex items-center gap-1"
                           title="Convert to Invoice"
                         >
                           <ArrowRight size={12} /> Invoice
@@ -154,7 +154,7 @@ export default function Estimates() {
                       {est.status === "Draft" && (
                         <button
                           onClick={() => updateMutation.mutate({ id: est.id, status: "Sent" })}
-                          className="text-xs text-[#2CA01C] hover:underline font-medium"
+                          className="text-xs text-green-600 hover:underline font-medium"
                         >
                           Send
                         </button>
@@ -212,7 +212,7 @@ export default function Estimates() {
             <Button
               onClick={() => convertId && convertMutation.mutate({ id: convertId })}
               disabled={convertMutation.isPending}
-              className="bg-[#2CA01C] hover:bg-[#248a17]"
+              className="bg-green-600 hover:bg-green-700"
             >
               {convertMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : <ArrowRight size={14} className="mr-1" />}
               Convert to Invoice

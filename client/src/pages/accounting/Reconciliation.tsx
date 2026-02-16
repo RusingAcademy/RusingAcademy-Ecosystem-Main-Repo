@@ -173,7 +173,7 @@ export default function Reconciliation() {
                       {rec.status === "In Progress" && (
                         <button
                           onClick={() => updateMutation.mutate({ id: rec.id, status: "Completed", completedAt: new Date() })}
-                          className="text-sm text-[#2CA01C] font-medium hover:underline"
+                          className="text-sm text-green-600 font-medium hover:underline"
                         >
                           Finish
                         </button>

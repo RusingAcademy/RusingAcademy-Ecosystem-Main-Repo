@@ -330,7 +330,7 @@ export default function Practice() {
               <div className="absolute inset-0 rounded-full border-4 border-rose-200 dark:border-rose-800" />
               <div className="absolute inset-0 rounded-full border-4 border-rose-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-black dark:text-[#67E8F9] font-medium">
+            <p className="text-black dark:text-cyan-300 font-medium">
               {language === "fr" ? "Chargement..." : "Loading..."}
             </p>
           </div>
@@ -353,7 +353,7 @@ export default function Practice() {
               <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
                 {l.loginRequired}
               </h2>
-              <p className="text-black dark:text-[#67E8F9] mb-6">
+              <p className="text-black dark:text-cyan-300 mb-6">
                 {l.loginMessage}
               </p>
               <Button asChild className="w-full bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700">
@@ -417,7 +417,7 @@ export default function Practice() {
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-black dark:text-white">{l.title}</h1>
-                <p className="text-black dark:text-[#67E8F9]">{l.subtitle}</p>
+                <p className="text-black dark:text-cyan-300">{l.subtitle}</p>
               </div>
             </div>
           </div>
@@ -456,12 +456,12 @@ export default function Practice() {
                           className={`p-6 rounded-xl border-2 transition-all text-left ${
                             isSelected
                               ? colorClasses[exam.color]
-                              : "border-slate-200 dark:border-[#0a6969] hover:border-slate-300 dark:hover:border-slate-600"
+                              : "border-slate-200 dark:border-teal-800 hover:border-slate-300 dark:hover:border-slate-600"
                           }`}
                         >
-                          <Icon className={`h-8 w-8 mb-3 ${isSelected ? iconColors[exam.color] : "text-[#67E8F9]"}`} />
+                          <Icon className={`h-8 w-8 mb-3 ${isSelected ? iconColors[exam.color] : "text-cyan-300"}`} />
                           <h3 className="font-semibold text-black dark:text-white mb-1">{exam.label}</h3>
-                          <p className="text-sm text-black dark:text-[#67E8F9]">{exam.desc}</p>
+                          <p className="text-sm text-black dark:text-cyan-300">{exam.desc}</p>
                           {isSelected && (
                             <CheckCircle className={`h-5 w-5 mt-3 ${iconColors[exam.color]}`} />
                           )}
@@ -493,7 +493,7 @@ export default function Practice() {
                           className={`p-6 rounded-xl border-2 transition-all text-left ${
                             isSelected
                               ? "border-rose-500 bg-rose-50 dark:bg-rose-900/20"
-                              : "border-slate-200 dark:border-[#0a6969] hover:border-slate-300 dark:hover:border-slate-600"
+                              : "border-slate-200 dark:border-teal-800 hover:border-slate-300 dark:hover:border-slate-600"
                           }`}
                         >
                           <div className="flex items-center justify-between mb-3">
@@ -502,9 +502,9 @@ export default function Practice() {
                             </Badge>
                             <span className="text-sm text-black">{lvl.passingScore}% {l.passingScore}</span>
                           </div>
-                          <p className="text-sm text-black dark:text-[#67E8F9] mb-3">{lvl.desc}</p>
+                          <p className="text-sm text-black dark:text-cyan-300 mb-3">{lvl.desc}</p>
                           {selectedType && (
-                            <p className="text-xs text-[#67E8F9]">
+                            <p className="text-xs text-cyan-300">
                               {questions} {l.questions}
                             </p>
                           )}
@@ -544,7 +544,7 @@ export default function Practice() {
                 <CardContent>
                   <ul className="space-y-3">
                     {[l.tip1, l.tip2, l.tip3, l.tip4].map((tip, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-black dark:text-[#67E8F9]">
+                      <li key={i} className="flex items-start gap-2 text-sm text-black dark:text-cyan-300">
                         <CheckCircle className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
                         {tip}
                       </li>
@@ -562,7 +562,7 @@ export default function Practice() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-black dark:text-[#67E8F9] text-center py-4">
+                  <p className="text-sm text-black dark:text-cyan-300 text-center py-4">
                     {l.noResults}
                   </p>
                 </CardContent>

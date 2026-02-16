@@ -184,7 +184,7 @@ export default function ListeningLab() {
 
   if (authLoading) return (
     <div className="flex h-screen items-center justify-center" role="status" aria-label={t("skillLabs.loading")}>
-      <div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" />
+      <div className="animate-spin w-8 h-8 border-4 border-teal-700 border-t-transparent rounded-full" />
       <span className="sr-only">{t("skillLabs.loading")}</span>
     </div>
   );
@@ -199,13 +199,13 @@ export default function ListeningLab() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                <span className="material-icons text-[#008090]" aria-hidden="true">headphones</span>
+                <span className="material-icons text-teal-700" aria-hidden="true">headphones</span>
                 {t("listening.title")}
               </h1>
               <p className="text-gray-500 mt-1">{isFr ? "Entraînez votre oreille avec du français authentique" : "Train your ear with authentic French audio"}</p>
             </div>
             <button onClick={() => setShowHistory(!showHistory)}
-              className="px-4 py-2 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] flex items-center gap-2 hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+              className="px-4 py-2 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 flex items-center gap-2 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
               aria-label={showHistory ? t("grammar.practice") : t("listening.history")}>
               <span className="material-icons text-base" aria-hidden="true">{showHistory ? "play_circle" : "history"}</span>
               {showHistory ? t("grammar.practice") : t("listening.history")}
@@ -235,7 +235,7 @@ export default function ListeningLab() {
               {!history?.length ? (
                 <div className="text-center py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                    <span className="material-icons text-4xl text-[#008090]/60" aria-hidden="true">headphones</span>
+                    <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">headphones</span>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-700 mb-2">{t("listening.emptyTitle")}</h3>
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("listening.emptyDesc")}</p>
@@ -245,7 +245,7 @@ export default function ListeningLab() {
                   <div>
                     <div className="font-semibold text-gray-900">{h.exerciseTitle}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
-                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#008090]/10 text-[#008090]">{h.cefrLevel}</span>
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-teal-700/10 text-teal-700">{h.cefrLevel}</span>
                       <span>{h.correctAnswers}/{h.totalQuestions} {t("grammar.correct").toLowerCase()}</span>
                     </div>
                   </div>
@@ -260,7 +260,7 @@ export default function ListeningLab() {
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => { setSelectedLevel(level); setExerciseIndex(0); }}
                     role="radio" aria-checked={selectedLevel === level}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-[#008090] text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-[#008090]"}`}>
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white text-gray-600 border border-gray-200 hover:border-teal-700"}`}>
                     {level}
                   </button>
                 ))}
@@ -278,7 +278,7 @@ export default function ListeningLab() {
                         <h3 className="font-semibold text-gray-900 text-lg">{e.title}</h3>
                         <div className="text-sm text-gray-500 mt-1">{e.questions.length} questions</div>
                       </div>
-                      <span className="material-icons text-[#008090] text-3xl" aria-hidden="true">play_circle</span>
+                      <span className="material-icons text-teal-700 text-3xl" aria-hidden="true">play_circle</span>
                     </div>
                   </div>
                 ))}
@@ -288,7 +288,7 @@ export default function ListeningLab() {
             <div role="region" aria-label={exercise?.title}>
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <span className="px-3 py-1 rounded-full text-sm font-semibold bg-[#008090]/10 text-[#008090]">{selectedLevel}</span>
+                  <span className="px-3 py-1 rounded-full text-sm font-semibold bg-teal-700/10 text-teal-700">{selectedLevel}</span>
                    <h2 className="text-lg font-semibold text-gray-900">{exercise?.title}</h2>
                 </div>
                 <div className="flex items-center gap-1 text-sm text-gray-400">
@@ -298,10 +298,10 @@ export default function ListeningLab() {
               </div>
               {/* Audio Player */}
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center mb-6">
-                <span className="material-icons text-6xl text-[#008090] mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
+                <span className="material-icons text-6xl text-teal-700 mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <button onClick={isPlaying ? stopAudio : playAudio}
-                    className="w-14 h-14 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006a75] transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
+                    className="w-14 h-14 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-800 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-[#008090]/30"
                     aria-label={isPlaying ? (isFr ? "Arrêter" : "Stop") : t("listening.playAudio")}>
                     <span className="material-icons text-2xl" aria-hidden="true">{isPlaying ? "stop" : "play_arrow"}</span>
                   </button>
@@ -311,13 +311,13 @@ export default function ListeningLab() {
                   {[0.75, 1, 1.25].map(speed => (
                     <button key={speed} onClick={() => setPlaybackSpeed(speed)}
                       aria-pressed={playbackSpeed === speed}
-                      className={`px-3 py-1 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${playbackSpeed === speed ? "bg-[#008090] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                      className={`px-3 py-1 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${playbackSpeed === speed ? "bg-teal-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
                       {speed}x
                     </button>
                   ))}
                 </div>
                 <button onClick={() => setShowTranscript(!showTranscript)}
-                  className="text-sm text-[#008090] hover:underline flex items-center gap-1 mx-auto focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+                  className="text-sm text-teal-700 hover:underline flex items-center gap-1 mx-auto focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
                   aria-expanded={showTranscript}>
                   <span className="material-icons text-base" aria-hidden="true">description</span>
                   {showTranscript ? (isFr ? "Masquer la transcription" : "Hide Transcript") : (isFr ? "Afficher la transcription" : "Show Transcript")}
@@ -331,7 +331,7 @@ export default function ListeningLab() {
 
               <div className="flex justify-center">
                 <button onClick={goToQuestions}
-                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                   {isFr ? "Répondre aux questions" : "Answer Questions"}
                 </button>
               </div>
@@ -341,7 +341,7 @@ export default function ListeningLab() {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-gray-900">{isFr ? "Questions de compréhension" : "Comprehension Questions"}</h2>
                 <button onClick={playAudio}
-                  className="text-sm text-[#008090] hover:underline flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
+                  className="text-sm text-teal-700 hover:underline flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[#008090]/30 rounded"
                   aria-label={t("listening.replay")}>
                   <span className="material-icons text-base" aria-hidden="true">replay</span> {t("listening.replay")}
                 </button>
@@ -354,7 +354,7 @@ export default function ListeningLab() {
                       {q.options.map((opt, oi) => (
                         <button key={oi} onClick={() => answerQuestion(qi, oi)}
                           role="radio" aria-checked={answers[qi] === oi}
-                          className={`w-full p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[qi] === oi ? "bg-[#008090] text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
+                          className={`w-full p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-[#008090]/30 ${answers[qi] === oi ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"}`}>
                           <span className="font-semibold mr-2">{String.fromCharCode(65 + oi)}.</span> {opt}
                         </button>
                       ))}
@@ -365,7 +365,7 @@ export default function ListeningLab() {
               <div className="mt-6 flex justify-end">
                 <button onClick={submitAnswers}
                   disabled={answers.filter(a => a !== undefined).length < (exercise?.questions.length ?? 0)}
-                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-6 py-3 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 disabled:opacity-40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                   {t("grammar.submit")}
                 </button>
               </div>
@@ -420,11 +420,11 @@ export default function ListeningLab() {
 
               <div className="flex gap-3 justify-center">
                 <button onClick={() => setPhase("select")}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-[#008090] border border-[#008090] hover:bg-[#008090]/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold text-teal-700 border border-teal-700 hover:bg-teal-700/5 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                   {t("grammar.chooseAnother")}
                 </button>
                 <button onClick={startExercise}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-[#008090]/30">
                   {t("grammar.tryAgain")}
                 </button>
               </div>

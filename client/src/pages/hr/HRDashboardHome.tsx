@@ -115,7 +115,7 @@ export default function HRDashboardHome() {
     <HRLayout>
       <div className="max-w-7xl mx-auto">
         {/* Welcome Banner */}
-        <div className="mb-6 p-5 rounded-xl bg-gradient-to-r from-[#2563eb]/5 to-[#2563eb]/10 border border-[#2563eb]/15">
+        <div className="mb-6 p-5 rounded-xl bg-gradient-to-r from-[#2563eb]/5 to-[#2563eb]/10 border border-blue-600/15">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 capitalize" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -292,25 +292,25 @@ export default function HRDashboardHome() {
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <button
             onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-            className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-[#2563eb]/30 transition-all text-left group"
+            className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
-            <span className="material-icons text-[#2563eb] text-2xl mb-2 group-hover:scale-110 transition-transform">person_add</span>
+            <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">person_add</span>
             <p className="text-sm font-semibold text-gray-900">{lang === "fr" ? "Inscrire un participant" : "Enroll a Participant"}</p>
             <p className="text-[11px] text-gray-500 mt-1">{lang === "fr" ? "Ajouter un nouveau participant à une cohorte" : "Add a new participant to a training cohort"}</p>
           </button>
           <button
             onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-            className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-[#2563eb]/30 transition-all text-left group"
+            className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
-            <span className="material-icons text-[#2563eb] text-2xl mb-2 group-hover:scale-110 transition-transform">download</span>
+            <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">download</span>
             <p className="text-sm font-semibold text-gray-900">{lang === "fr" ? "Télécharger un rapport" : "Download Report"}</p>
             <p className="text-[11px] text-gray-500 mt-1">{lang === "fr" ? "Rapport de conformité ELS pour votre direction" : "SLE compliance report for your directorate"}</p>
           </button>
           <button
             onClick={() => setShowCalendly(true)}
-            className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-[#2563eb]/30 transition-all text-left group"
+            className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
-            <span className="material-icons text-[#2563eb] text-2xl mb-2 group-hover:scale-110 transition-transform">calendar_month</span>
+            <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">calendar_month</span>
             <p className="text-sm font-semibold text-gray-900">{lang === "fr" ? "Réserver une consultation" : "Book a Consultation"}</p>
             <p className="text-[11px] text-gray-500 mt-1">{lang === "fr" ? "Planifier un appel avec votre gestionnaire de compte" : "Schedule a call with your account manager"}</p>
           </button>

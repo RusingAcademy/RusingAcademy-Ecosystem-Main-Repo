@@ -55,15 +55,15 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
     <Link key={item.path} href={item.path} onClick={onToggle}>
       <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
         isActive(item.path)
-          ? "bg-[#7c3aed]/8 text-[#7c3aed] font-semibold border-l-[3px] border-[#7c3aed]"
+          ? "bg-violet-600/8 text-violet-600 font-semibold border-l-[3px] border-violet-600"
           : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent"
       }`}>
-        <span className={`material-icons text-lg ${isActive(item.path) ? "text-[#7c3aed]" : "text-gray-400 group-hover:text-gray-600"}`}>
+        <span className={`material-icons text-lg ${isActive(item.path) ? "text-violet-600" : "text-gray-400 group-hover:text-gray-600"}`}>
           {item.icon}
         </span>
         <span className="font-medium">{lang === "fr" ? item.labelFr : item.label}</span>
         {item.badge && item.badge > 0 && (
-          <span className="ml-auto bg-[#7c3aed] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
+          <span className="ml-auto bg-violet-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
             {item.badge}
           </span>
         )}
@@ -88,7 +88,7 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
               <span className="text-gray-900 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
                 RusingAcademy
               </span>
-              <span className="block text-[10px] text-[#7c3aed] tracking-wider uppercase font-medium">
+              <span className="block text-[10px] text-violet-600 tracking-wider uppercase font-medium">
                 {lang === "fr" ? "Portail Coach" : "Coach Portal"}
               </span>
             </div>
@@ -96,17 +96,17 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
         </div>
 
         {/* Coach Status Card */}
-        <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#7c3aed]/5 to-[#7c3aed]/10 border border-[#7c3aed]/15">
+        <div className="mx-4 my-3 p-3 rounded-xl bg-gradient-to-br from-[#7c3aed]/5 to-[#7c3aed]/10 border border-violet-600/15">
           <div className="flex items-center justify-between mb-1.5">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-[#7c3aed] text-xs font-bold">{lang === "fr" ? "En ligne" : "Online"}</span>
+              <span className="text-violet-600 text-xs font-bold">{lang === "fr" ? "En ligne" : "Online"}</span>
             </div>
             <span className="text-gray-500 text-[10px] font-medium">⭐ 4.8</span>
           </div>
           <div className="flex justify-between mt-1">
             <span className="text-[10px] text-gray-500">{lang === "fr" ? "Sessions ce mois" : "Sessions this month"}</span>
-            <span className="text-[10px] text-[#7c3aed] font-bold">12</span>
+            <span className="text-[10px] text-violet-600 font-bold">12</span>
           </div>
         </div>
 
@@ -146,15 +146,15 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
 
           {/* Language Toggle */}
           <button onClick={toggleLang}
-            className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-[#7c3aed] hover:bg-[#7c3aed]/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
+            className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-violet-600 hover:bg-violet-600/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
             <span className="material-icons text-sm">translate</span>
             {lang === "en" ? "Français" : "English"}
-            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#7c3aed]/10 text-[#7c3aed] font-bold uppercase">{lang}</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-violet-600/10 text-violet-600 font-bold uppercase">{lang}</span>
           </button>
 
           {/* Switch to Learner Portal */}
           <button onClick={() => setLocation("/dashboard")}
-            className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-[#008090] hover:bg-[#008090]/5 transition-all flex items-center justify-center gap-1.5 border border-[#008090]/20">
+            className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-teal-700 hover:bg-teal-700/5 transition-all flex items-center justify-center gap-1.5 border border-teal-700/20">
             <span className="material-icons text-sm">swap_horiz</span>
             {lang === "fr" ? "Portail Apprenant" : "Learner Portal"}
           </button>

@@ -116,7 +116,7 @@ export default function FileAttachments({ entityType, entityId }: FileAttachment
           <Paperclip size={24} className="mx-auto text-gray-300 mb-2" />
           <p className="text-sm text-gray-400">No attachments yet</p>
           <button
-            className="text-xs text-[#0077C5] hover:underline mt-1"
+            className="text-xs text-sky-600 hover:underline mt-1"
             onClick={() => fileInputRef.current?.click()}
           >
             Upload a file
@@ -135,7 +135,7 @@ export default function FileAttachments({ entityType, entityId }: FileAttachment
                       href={att.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-medium text-[#0077C5] hover:underline"
+                      className="text-sm font-medium text-sky-600 hover:underline"
                     >
                       {att.fileName}
                     </a>

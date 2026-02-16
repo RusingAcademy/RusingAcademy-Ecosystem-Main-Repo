@@ -81,7 +81,7 @@ export function GuestRoute({ children, redirectTo = "/dashboard" }: GuestRoutePr
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400 mx-auto mb-4"></div>
-          <p className="text-[#67E8F9]">Redirecting to dashboard...</p>
+          <p className="text-cyan-300">Redirecting to dashboard...</p>
         </div>
       </div>
     );
@@ -126,7 +126,7 @@ export function ProtectedRoute({ children, redirectTo = "/login" }: ProtectedRou
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400 mx-auto mb-4"></div>
-          <p className="text-[#67E8F9]">Redirecting to login...</p>
+          <p className="text-cyan-300">Redirecting to login...</p>
         </div>
       </div>
     );

@@ -95,7 +95,7 @@ export default function PWAInstallPrompt() {
 
           <div className="flex items-start gap-3">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-foundation">
-              <span className="text-lg font-bold text-[#E06B2D]">R</span>
+              <span className="text-lg font-bold text-cta-2">R</span>
             </div>
             <div className="flex-1 pr-6">
               <h3 className="text-sm font-semibold text-gray-900">
@@ -142,7 +142,7 @@ export default function PWAInstallPrompt() {
 
           <div className="flex items-start gap-3">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-foundation">
-              <span className="text-lg font-bold text-[#E06B2D]">R</span>
+              <span className="text-lg font-bold text-cta-2">R</span>
             </div>
             <div className="flex-1 pr-6">
               <h3 className="text-sm font-semibold text-gray-900">
@@ -156,7 +156,7 @@ export default function PWAInstallPrompt() {
 
           <div className="mt-3 space-y-2">
             <div className="flex items-center gap-3 rounded-lg bg-gray-50 px-3 py-2">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#0077C5]">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-sky-600">
                 <Share size={14} className="text-white" />
               </div>
               <p className="text-xs text-gray-700">

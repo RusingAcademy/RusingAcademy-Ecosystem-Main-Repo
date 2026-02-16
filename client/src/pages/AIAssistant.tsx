@@ -60,8 +60,8 @@ export default function AIAssistant() {
                 : "Your bilingual AI-powered language coach"}
             </p>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#10b981]/10 text-[#10b981] text-xs font-semibold">
-            <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             Online
           </div>
         </div>
@@ -87,16 +87,16 @@ export default function AIAssistant() {
             {/* Recommendations */}
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#008090]" style={{ fontSize: "18px" }}>auto_awesome</span>
+                <span className="material-icons text-teal-700" style={{ fontSize: "18px" }}>auto_awesome</span>
                 {t("dashboard.recommended")}
               </h2>
               <div className="space-y-2">
                 {recommendationsQuery.data?.map((rec, idx) => (
                   <Link key={idx} href={rec.link}>
                     <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer group">
-                      <span className="material-icons text-[#008090] mt-0.5" style={{ fontSize: "18px" }}>{rec.icon}</span>
+                      <span className="material-icons text-teal-700 mt-0.5" style={{ fontSize: "18px" }}>{rec.icon}</span>
                       <div>
-                        <p className="text-sm font-medium text-gray-900 group-hover:text-[#008090] transition-colors">{rec.title}</p>
+                        <p className="text-sm font-medium text-gray-900 group-hover:text-teal-700 transition-colors">{rec.title}</p>
                         <p className="text-[11px] text-gray-400 mt-0.5">{rec.description}</p>
                       </div>
                     </div>
@@ -113,7 +113,7 @@ export default function AIAssistant() {
             {/* Quick Topics */}
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="material-icons text-[#f5a623]" style={{ fontSize: "18px" }}>tips_and_updates</span>
+                <span className="material-icons text-amber-500" style={{ fontSize: "18px" }}>tips_and_updates</span>
                 {lang === "fr" ? "Sujets rapides" : "Quick Topics"}
               </h2>
               <div className="flex flex-wrap gap-2">
@@ -129,7 +129,7 @@ export default function AIAssistant() {
                     onClick={() => handleSend(lang === "fr"
                       ? `Aidez-moi avec ${topic.label.toLowerCase()}`
                       : `Help me with ${topic.label.toLowerCase()}`)}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 text-gray-600 hover:border-[#008090] hover:text-[#008090] hover:bg-[#008090]/5 transition-all">
+                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 text-gray-600 hover:border-teal-700 hover:text-teal-700 hover:bg-teal-700/5 transition-all">
                     {topic.emoji} {topic.label}
                   </button>
                 ))}
@@ -150,7 +150,7 @@ export default function AIAssistant() {
                   lang === "fr" ? "Stratégies d'apprentissage" : "Learning strategies",
                 ].map((cap) => (
                   <li key={cap} className="flex items-center gap-2 text-[11px] text-gray-500">
-                    <span className="material-icons text-[#10b981]" style={{ fontSize: "12px" }}>check_circle</span>
+                    <span className="material-icons text-emerald-500" style={{ fontSize: "12px" }}>check_circle</span>
                     {cap}
                   </li>
                 ))}

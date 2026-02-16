@@ -1338,7 +1338,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
           </div>
         </div>
 
-        <div className="p-4 bg-amber-50 border border-[#FFE4D6] rounded-lg">
+        <div className="p-4 bg-amber-50 border border-orange-100 rounded-lg">
           <div className="flex items-start gap-3">
             <DollarSign className="h-5 w-5 text-amber-600 mt-0.5" />
             <div>
@@ -1522,11 +1522,11 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
               </div>
             ) : (
               <div className="space-y-3">
-                <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
+                <Upload className="h-12 w-12 text-cyan-300 mx-auto" />
                 <p className="text-sm text-black">
                   {isEn ? "Click to upload photo" : "Cliquez pour télécharger une photo"}
                 </p>
-                <p className="text-xs text-[#67E8F9]">
+                <p className="text-xs text-cyan-300">
                   JPG, PNG (max 5MB)
                 </p>
               </div>
@@ -1915,7 +1915,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
                   "flex flex-col items-center min-w-[80px]",
                   isActive && "text-teal-600",
                   isCompleted && "text-green-600",
-                  !isActive && !isCompleted && "text-[#67E8F9]"
+                  !isActive && !isCompleted && "text-cyan-300"
                 )}
               >
                 <div className={cn(

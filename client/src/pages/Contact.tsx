@@ -461,7 +461,7 @@ export default function Contact() {
                             <h4 className="font-semibold text-black group-hover:text-teal-700 transition-colors">{l.faqTitle}</h4>
                             <p className="text-sm text-black">{l.faqDescription}</p>
                           </div>
-                          <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="h-5 w-5 text-cyan-300 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </CardContent>
                     </Card>
@@ -478,7 +478,7 @@ export default function Contact() {
                             <h4 className="font-semibold text-black group-hover:text-violet-700 transition-colors">{l.coachSupport}</h4>
                             <p className="text-sm text-black">{l.coachSupportDesc}</p>
                           </div>
-                          <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-violet-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="h-5 w-5 text-cyan-300 group-hover:text-violet-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </CardContent>
                     </Card>
@@ -495,7 +495,7 @@ export default function Contact() {
                             <h4 className="font-semibold text-black group-hover:text-amber-700 transition-colors">{l.b2b}</h4>
                             <p className="text-sm text-black">{l.b2bDesc}</p>
                           </div>
-                          <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="h-5 w-5 text-cyan-300 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </CardContent>
                     </Card>

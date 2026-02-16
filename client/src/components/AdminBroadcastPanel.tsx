@@ -78,7 +78,7 @@ export function AdminBroadcastPanel() {
                   variant={targetRole === opt.value ? "default" : "outline"}
                   size="sm"
                   onClick={() => setTargetRole(opt.value)}
-                  className={targetRole === opt.value ? "bg-cta hover:bg-[#A84A16]" : ""}
+                  className={targetRole === opt.value ? "bg-cta hover:bg-cta" : ""}
                 >
                   <Icon className="h-4 w-4 mr-1" />
                   {opt.label}
@@ -128,7 +128,7 @@ export function AdminBroadcastPanel() {
         <Button
           onClick={handleSend}
           disabled={broadcastMutation.isPending || !title.trim() || !message.trim()}
-          className="w-full bg-cta hover:bg-[#A84A16]"
+          className="w-full bg-cta hover:bg-cta"
         >
           {broadcastMutation.isPending ? (
             <>

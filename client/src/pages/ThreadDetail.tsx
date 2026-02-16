@@ -117,19 +117,19 @@ export default function ThreadDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0A1628] text-white flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
+      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
       </div>
     );
   }
 
   if (error || !data) {
     return (
-      <div className="min-h-screen bg-[#0A1628] text-white flex flex-col items-center justify-center gap-4">
+      <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center gap-4">
         <AlertCircle className="w-12 h-12 text-red-400" />
         <p>{language === "en" ? "Thread not found" : "Discussion introuvable"}</p>
         <Link href="/community">
-          <Button variant="outline" className="border-[#17E2C6] text-[#17E2C6]">
+          <Button variant="outline" className="border-teal-400 text-teal-400">
             <ArrowLeft className="w-4 h-4 mr-2" />
             {language === "en" ? "Back to Community" : "Retour à la communauté"}
           </Button>
@@ -143,7 +143,7 @@ export default function ThreadDetail() {
   const isAuthor = user?.id === thread.authorId;
 
   return (
-    <div className="min-h-screen bg-[#0A1628] text-white">
+    <div className="min-h-screen bg-slate-900 text-white">
       {/* Header */}
       <div className="bg-gradient-to-b from-[#0F2140] to-[#0A1628] border-b border-white/10">
         <div className="max-w-[900px] mx-auto px-6 py-8">
@@ -174,7 +174,7 @@ export default function ThreadDetail() {
                   {thread.authorAvatar ? (
                     <img src={thread.authorAvatar} alt="" className="w-6 h-6 rounded-full" />
                   ) : (
-                    <div className="w-6 h-6 rounded-full bg-[#17E2C6]/20 flex items-center justify-center text-xs font-bold text-[#17E2C6]">
+                    <div className="w-6 h-6 rounded-full bg-teal-400/20 flex items-center justify-center text-xs font-bold text-teal-400">
                       {(thread.authorName || "?")[0]}
                     </div>
                   )}
@@ -229,7 +229,7 @@ export default function ThreadDetail() {
         {/* Replies */}
         <div className="mb-8">
           <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-            <MessageSquare className="w-5 h-5 text-[#17E2C6]" />
+            <MessageSquare className="w-5 h-5 text-teal-400" />
             {posts.length} {language === "en" ? (posts.length === 1 ? "Reply" : "Replies") : (posts.length === 1 ? "Réponse" : "Réponses")}
           </h2>
 
@@ -248,7 +248,7 @@ export default function ThreadDetail() {
                       {post.authorAvatar ? (
                         <img src={post.authorAvatar} alt="" className="w-8 h-8 rounded-full" />
                       ) : (
-                        <div className="w-8 h-8 rounded-full bg-[#17E2C6]/20 flex items-center justify-center text-sm font-bold text-[#17E2C6]">
+                        <div className="w-8 h-8 rounded-full bg-teal-400/20 flex items-center justify-center text-sm font-bold text-teal-400">
                           {(post.authorName || "?")[0]}
                         </div>
                       )}
@@ -307,7 +307,7 @@ export default function ThreadDetail() {
                       <textarea
                         value={editContent}
                         onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-[#17E2C6] focus:outline-none text-white resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white resize-none"
                         rows={4}
                       />
                       <div className="flex gap-2 justify-end">
@@ -323,7 +323,7 @@ export default function ThreadDetail() {
                           size="sm"
                           onClick={() => handleEditPost(post.id)}
                           disabled={editPostMutation.isPending}
-                          className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90"
+                          className="bg-teal-400 text-black hover:bg-teal-400/90"
                         >
                           {editPostMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-1" />}
                           {language === "en" ? "Save" : "Enregistrer"}
@@ -338,7 +338,7 @@ export default function ThreadDetail() {
                   <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5">
                     <button
                       onClick={() => user && toggleLikeMutation.mutate({ postId: post.id })}
-                      className="flex items-center gap-1.5 text-sm text-white/50 hover:text-[#17E2C6] transition-colors"
+                      className="flex items-center gap-1.5 text-sm text-white/50 hover:text-teal-400 transition-colors"
                     >
                       <Heart className="w-4 h-4" />
                       <span>{post.likeCount || 0}</span>
@@ -372,14 +372,14 @@ export default function ThreadDetail() {
                 value={replyContent}
                 onChange={(e) => setReplyContent(e.target.value)}
                 placeholder={language === "en" ? "Share your thoughts..." : "Partagez vos pensées..."}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40 resize-none mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
                 rows={4}
               />
               <div className="flex justify-end">
                 <Button
                   onClick={handleReply}
                   disabled={!replyContent.trim() || createPostMutation.isPending}
-                  className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold"
+                  className="bg-teal-400 text-black hover:bg-teal-400/90 font-bold"
                 >
                   {createPostMutation.isPending ? (
                     <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -396,7 +396,7 @@ export default function ThreadDetail() {
                 {language === "en" ? "Sign in to join the discussion" : "Connectez-vous pour participer à la discussion"}
               </p>
               <a href={getLoginUrl()}>
-                <Button className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold">
+                <Button className="bg-teal-400 text-black hover:bg-teal-400/90 font-bold">
                   {language === "en" ? "Sign In" : "Se connecter"}
                 </Button>
               </a>

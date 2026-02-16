@@ -42,7 +42,7 @@ const GlassCard = ({ children, className = "", hover = true }: { children: React
   <div className={`
     relative overflow-hidden rounded-xl
     bg-white dark:bg-obsidian
-    border border-slate-200 dark:border-[#0a6969]
+    border border-slate-200 dark:border-teal-800
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
     ${className}
@@ -159,7 +159,7 @@ export default function LearnerCourses() {
               <div className="absolute inset-0 rounded-full border-4 border-blue-200 dark:border-blue-800" />
               <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-black dark:text-[#67E8F9] font-medium">
+            <p className="text-black dark:text-cyan-300 font-medium">
               {language === "fr" ? "Chargement..." : "Loading..."}
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function LearnerCourses() {
             <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-black dark:text-[#67E8F9] mb-6">
+            <p className="text-black dark:text-cyan-300 mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à vos cours"
                 : "Sign in to access your courses"}
@@ -217,7 +217,7 @@ export default function LearnerCourses() {
                   <BookOpen className="h-8 w-8 text-blue-600" />
                   {l.title}
                 </h1>
-                <p className="text-black dark:text-[#67E8F9] mt-1">{l.subtitle}</p>
+                <p className="text-black dark:text-cyan-300 mt-1">{l.subtitle}</p>
               </div>
               <Link href="/curriculum">
                 <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
@@ -237,7 +237,7 @@ export default function LearnerCourses() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-black dark:text-white">{courses.length}</p>
-                  <p className="text-xs text-black dark:text-[#67E8F9]">
+                  <p className="text-xs text-black dark:text-cyan-300">
                     {language === "fr" ? "Cours inscrits" : "Enrolled Courses"}
                   </p>
                 </div>
@@ -253,7 +253,7 @@ export default function LearnerCourses() {
                   <p className="text-2xl font-bold text-black dark:text-white">
                     {courses.filter((c: any) => c.progressPercent > 0 && c.progressPercent < 100).length}
                   </p>
-                  <p className="text-xs text-black dark:text-[#67E8F9]">{l.inProgress}</p>
+                  <p className="text-xs text-black dark:text-cyan-300">{l.inProgress}</p>
                 </div>
               </div>
             </GlassCard>
@@ -267,7 +267,7 @@ export default function LearnerCourses() {
                   <p className="text-2xl font-bold text-black dark:text-white">
                     {courses.filter((c: any) => c.progressPercent === 100).length}
                   </p>
-                  <p className="text-xs text-black dark:text-[#67E8F9]">{l.completed}</p>
+                  <p className="text-xs text-black dark:text-cyan-300">{l.completed}</p>
                 </div>
               </div>
             </GlassCard>
@@ -281,7 +281,7 @@ export default function LearnerCourses() {
                   <p className="text-2xl font-bold text-black dark:text-white">
                     {plans.filter((p: any) => p.status === "active").length}
                   </p>
-                  <p className="text-xs text-black dark:text-[#67E8F9]">
+                  <p className="text-xs text-black dark:text-cyan-300">
                     {language === "fr" ? "Plans actifs" : "Active Plans"}
                   </p>
                 </div>
@@ -294,7 +294,7 @@ export default function LearnerCourses() {
             {/* Filters and Search */}
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#67E8F9]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-cyan-300" />
                 <Input
                   placeholder={l.searchPlaceholder}
                   value={searchQuery}
@@ -355,7 +355,7 @@ export default function LearnerCourses() {
                   <BookOpen className="h-10 w-10 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-black dark:text-white mb-2">{l.noCourses}</h3>
-                <p className="text-black dark:text-[#67E8F9] mb-6">{l.noCoursesDesc}</p>
+                <p className="text-black dark:text-cyan-300 mb-6">{l.noCoursesDesc}</p>
                 <Link href="/curriculum">
                   <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                     {l.exploreCourses}
@@ -398,7 +398,7 @@ export default function LearnerCourses() {
                   <Trophy className="h-8 w-8 text-purple-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-black dark:text-white mb-2">{l.noPlans}</h3>
-                <p className="text-black dark:text-[#67E8F9] mb-4">{l.noPlansDesc}</p>
+                <p className="text-black dark:text-cyan-300 mb-4">{l.noPlansDesc}</p>
                 <Link href="/ecosystem">
                   <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
                     {l.viewPlans}
@@ -422,7 +422,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Status Badge */}
         <div className="absolute top-4 right-4">
           {isCompleted ? (
@@ -452,14 +452,14 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
           {course.title}
         </h3>
         
-        <p className="text-sm text-black dark:text-[#67E8F9] mb-4 line-clamp-2">
+        <p className="text-sm text-black dark:text-cyan-300 mb-4 line-clamp-2">
           {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
         </p>
 
         {/* Progress */}
         <div className="mt-auto">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-black dark:text-[#67E8F9]">
+            <span className="text-black dark:text-cyan-300">
               {course.completedLessons || 0}/{course.totalLessons || 0} {labels.lessons}
             </span>
             <span className="font-semibold text-blue-600">{course.progressPercent || 0}%</span>
@@ -468,7 +468,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
         </div>
 
         {/* Enrolled Date */}
-        <p className="text-xs text-[#67E8F9] mt-3">
+        <p className="text-xs text-cyan-300 mt-3">
           {labels.enrolledOn} {new Date(course.enrolledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
         </p>
       </div>
@@ -483,7 +483,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Course Icon */}
         <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
           <BookOpen className="h-8 w-8 text-white" />
@@ -496,7 +496,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
               <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-600 transition-colors">
                 {course.title}
               </h3>
-              <p className="text-sm text-black dark:text-[#67E8F9] mt-1 line-clamp-1">
+              <p className="text-sm text-black dark:text-cyan-300 mt-1 line-clamp-1">
                 {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
               </p>
             </div>
@@ -530,14 +530,14 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
           </div>
 
           {/* Meta Info */}
-          <div className="flex items-center gap-4 mt-2 text-xs text-[#67E8F9]">
+          <div className="flex items-center gap-4 mt-2 text-xs text-cyan-300">
             <span>{course.completedLessons || 0}/{course.totalLessons || 0} {labels.lessons}</span>
             <span>•</span>
             <span>{labels.enrolledOn} {new Date(course.enrolledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}</span>
           </div>
         </div>
 
-        <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
+        <ArrowRight className="h-5 w-5 text-cyan-300 group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
       </div>
     </Link>
   );
@@ -557,7 +557,7 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
   };
 
   return (
-    <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-[#0a6969] opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b]`}>
+    <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-teal-800 opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b]`}>
       {/* Status Badge */}
       <div className="absolute top-4 right-4">
         <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-black"}>
@@ -573,13 +573,13 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
       {/* Plan Info */}
       <h3 className="font-semibold text-black dark:text-white mb-1">{plan.planName}</h3>
       
-      <div className="flex items-center gap-2 text-sm text-black dark:text-[#67E8F9] mb-4">
+      <div className="flex items-center gap-2 text-sm text-black dark:text-cyan-300 mb-4">
         <span className="font-bold text-purple-600">{plan.remainingSessions}</span>
         <span>{labels.sessionsRemaining}</span>
       </div>
 
       {/* Expiry */}
-      <p className="text-xs text-[#67E8F9] mb-4">
+      <p className="text-xs text-cyan-300 mb-4">
         {labels.validUntil} {new Date(plan.expiresAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
       </p>
 

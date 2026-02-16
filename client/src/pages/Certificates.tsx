@@ -44,7 +44,7 @@ export default function Certificates() {
 
         {isLoading ? (
           <div className="flex justify-center py-12">
-            <Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" />
+            <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : !certs || certs.length === 0 ? (
           <div className="text-center py-16">
@@ -60,7 +60,7 @@ export default function Certificates() {
                   {/* Certificate Preview */}
                   <div className="bg-gradient-to-br from-[#1B1464] to-[#2D2380] p-8 text-white text-center relative overflow-hidden">
                     {/* Decorative border */}
-                    <div className="absolute inset-2 border-2 border-[#D4AF37]/30 rounded-lg pointer-events-none" />
+                    <div className="absolute inset-2 border-2 border-barholex-gold/30 rounded-lg pointer-events-none" />
 
                     <img src={RA_LOGO} alt="RusingAcademy" className="w-12 h-12 mx-auto mb-3 rounded-lg" />
                     <p className="text-xs uppercase tracking-widest text-barholex-gold font-bold mb-2">Certificate of Completion</p>
@@ -89,7 +89,7 @@ export default function Certificates() {
                     <div className="flex items-center gap-2">
                       <Badge variant="outline" className="text-xs font-mono">{certificate.certificateNumber}</Badge>
                       {certificate.certificateUrl && (
-                        <a href={certificate.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-[#1B1464] hover:text-barholex-gold transition-colors">
+                        <a href={certificate.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-900 hover:text-barholex-gold transition-colors">
                           <ExternalLink className="w-4 h-4" />
                         </a>
                       )}

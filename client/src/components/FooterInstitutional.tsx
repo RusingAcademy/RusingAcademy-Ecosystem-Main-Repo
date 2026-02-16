@@ -150,7 +150,7 @@ export default function FooterInstitutional() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-10 w-10 rounded-lg bg-foundation/80 border border-[#0a6969] flex items-center justify-center text-white/90 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-200"
+                  className="h-10 w-10 rounded-lg bg-foundation/80 border border-teal-800 flex items-center justify-center text-white/90 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-200"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" aria-hidden="true" />
@@ -225,7 +225,7 @@ export default function FooterInstitutional() {
       </div>
 
       {/* Bottom Bar - Copyright */}
-      <div className="border-t border-[#0a6969]/50 bg-obsidian/50">
+      <div className="border-t border-teal-800/50 bg-obsidian/50">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company */}

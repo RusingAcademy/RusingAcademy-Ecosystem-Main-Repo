@@ -177,7 +177,7 @@ export default function QuizPage() {
         <div className="text-center py-20">
           <span className="material-icons text-6xl text-gray-300">error_outline</span>
           <p className="text-gray-500 mt-4">Quiz not found.</p>
-          <Link href="/programs" className="text-[#008090] text-sm mt-2 inline-block hover:underline">&larr; Back</Link>
+          <Link href="/programs" className="text-teal-700 text-sm mt-2 inline-block hover:underline">&larr; Back</Link>
         </div>
       </DashboardLayout>
     );
@@ -190,7 +190,7 @@ export default function QuizPage() {
     return (
       <DashboardLayout>
         <div className="max-w-2xl mx-auto py-10 text-center">
-          <div className="animate-spin w-12 h-12 border-4 border-[#008090] border-t-transparent rounded-full mx-auto" />
+          <div className="animate-spin w-12 h-12 border-4 border-teal-700 border-t-transparent rounded-full mx-auto" />
           <p className="text-gray-500 mt-4">Loading quiz...</p>
         </div>
       </DashboardLayout>
@@ -203,7 +203,7 @@ export default function QuizPage() {
       <DashboardLayout>
         <div className="max-w-2xl mx-auto py-10 space-y-6">
           <Link href={`/programs/${programId}/${pathId}`}
-            className="text-sm text-gray-500 hover:text-[#008090] flex items-center gap-1">
+            className="text-sm text-gray-500 hover:text-teal-700 flex items-center gap-1">
             <span className="material-icons" style={{ fontSize: "16px" }}>arrow_back</span>
             Back to Path {path.number}
           </Link>
@@ -245,15 +245,15 @@ export default function QuizPage() {
 
             <div className="mt-6 grid grid-cols-3 gap-4 max-w-sm mx-auto">
               <div className="text-center">
-                <div className="text-2xl font-bold text-[#008090]">{questions.length}</div>
+                <div className="text-2xl font-bold text-teal-700">{questions.length}</div>
                 <div className="text-[10px] text-gray-400 uppercase">Questions</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-[#f5a623]">{passingScore}%</div>
+                <div className="text-2xl font-bold text-amber-500">{passingScore}%</div>
                 <div className="text-[10px] text-gray-400 uppercase">To Pass</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-[#8b5cf6]">200</div>
+                <div className="text-2xl font-bold text-violet-500">200</div>
                 <div className="text-[10px] text-gray-400 uppercase">XP Reward</div>
               </div>
             </div>
@@ -322,8 +322,8 @@ export default function QuizPage() {
 
             {passed && (
               <div className="mt-4 space-y-2">
-                <p className="text-sm font-semibold text-[#008090]">+200 XP earned!</p>
-                <p className="text-sm text-[#f5a623] font-medium flex items-center justify-center gap-1">
+                <p className="text-sm font-semibold text-teal-700">+200 XP earned!</p>
+                <p className="text-sm text-amber-500 font-medium flex items-center justify-center gap-1">
                   <span className="material-icons" style={{ fontSize: "16px" }}>workspace_premium</span>
                   Module {currentModule.id} Badge Unlocked!
                 </p>
@@ -354,7 +354,7 @@ export default function QuizPage() {
                       <p className="font-medium text-gray-700">{q.q}</p>
                       <p className="text-gray-500 mt-0.5">
                         Your answer: {q.opts[answers[i]]}
-                        {answers[i] !== q.correct && <span className="text-[#008090] ml-2">Correct: {q.opts[q.correct]}</span>}
+                        {answers[i] !== q.correct && <span className="text-teal-700 ml-2">Correct: {q.opts[q.correct]}</span>}
                       </p>
                     </div>
                   </div>
@@ -407,7 +407,7 @@ export default function QuizPage() {
         {/* Progress Header */}
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">Module {currentModule.id}: {currentModule.title}</span>
-          <span className="text-sm font-bold text-[#008090]">
+          <span className="text-sm font-bold text-teal-700">
             {currentQ + 1} / {questions.length}
           </span>
         </div>

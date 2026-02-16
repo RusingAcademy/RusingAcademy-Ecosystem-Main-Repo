@@ -66,7 +66,7 @@ export function PWAInstallBanner() {
             {canInstall ? (
               <button
                 onClick={installApp}
-                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-[#0D7377] shadow-lg transition-all hover:bg-white/90 hover:shadow-xl active:scale-95"
+                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white/90 hover:shadow-xl active:scale-95"
               >
                 <Download className="h-4 w-4" />
                 {isEn ? 'Install' : 'Installer'}
@@ -74,7 +74,7 @@ export function PWAInstallBanner() {
             ) : isIOS ? (
               <button
                 onClick={() => setShowIOSInstructions(true)}
-                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-[#0D7377] shadow-lg transition-all hover:bg-white/90 hover:shadow-xl active:scale-95"
+                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white/90 hover:shadow-xl active:scale-95"
               >
                 <Download className="h-4 w-4" />
                 {isEn ? 'Install' : 'Installer'}
@@ -103,7 +103,7 @@ export function PWAInstallBanner() {
             <div className="space-y-4">
               {/* Step 1 */}
               <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#0D7377]/10 text-sm font-bold text-[#0D7377]">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-teal-700/10 text-sm font-bold text-teal-700">
                   1
                 </div>
                 <div>
@@ -121,7 +121,7 @@ export function PWAInstallBanner() {
 
               {/* Step 2 */}
               <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#0D7377]/10 text-sm font-bold text-[#0D7377]">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-teal-700/10 text-sm font-bold text-teal-700">
                   2
                 </div>
                 <div>
@@ -138,7 +138,7 @@ export function PWAInstallBanner() {
 
               {/* Step 3 */}
               <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#0D7377]/10 text-sm font-bold text-[#0D7377]">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-teal-700/10 text-sm font-bold text-teal-700">
                   3
                 </div>
                 <div>
@@ -159,7 +159,7 @@ export function PWAInstallBanner() {
                 setShowIOSInstructions(false);
                 dismissInstall();
               }}
-              className="mt-6 w-full rounded-xl bg-[#0D7377] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0a5c5f]"
+              className="mt-6 w-full rounded-xl bg-teal-700 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0a5c5f]"
             >
               {isEn ? 'Got it' : 'Compris'}
             </button>

@@ -133,7 +133,7 @@ export default function StudyPlanner() {
     else setCalMonth(calMonth + 1);
   }
 
-  if (authLoading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin w-8 h-8 border-2 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full" /></div>;
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
@@ -152,7 +152,7 @@ export default function StudyPlanner() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                <span className="material-icons text-[#008090]">event_note</span>
+                <span className="material-icons text-teal-700">event_note</span>
                 Study Planner
               </h1>
               <p className="text-sm text-gray-500 mt-1">{sessions.length} sessions planned · {upcoming.length} upcoming</p>
@@ -205,11 +205,11 @@ export default function StudyPlanner() {
                     return (
                       <div
                         key={day}
-                        className={`h-20 border-b border-r border-gray-50 p-1.5 cursor-pointer transition-all hover:bg-[#008090]/5 ${isSelected ? "bg-[#008090]/10 ring-1 ring-[#008090]/30" : ""}`}
+                        className={`h-20 border-b border-r border-gray-50 p-1.5 cursor-pointer transition-all hover:bg-teal-700/5 ${isSelected ? "bg-teal-700/10 ring-1 ring-[#008090]/30" : ""}`}
                         onClick={() => setSelectedDate(dateStr)}
                         onDoubleClick={() => openNewSession(dateStr)}
                       >
-                        <div className={`text-xs font-medium mb-1 w-6 h-6 flex items-center justify-center rounded-full ${isToday ? "bg-[#008090] text-white" : "text-gray-700"}`}>
+                        <div className={`text-xs font-medium mb-1 w-6 h-6 flex items-center justify-center rounded-full ${isToday ? "bg-teal-700 text-white" : "text-gray-700"}`}>
                           {day}
                         </div>
                         {daySessions.length > 0 && (
@@ -242,7 +242,7 @@ export default function StudyPlanner() {
                       {new Date(selectedDate + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
                     </h3>
                     <button onClick={() => openNewSession(selectedDate)} className="p-1.5 rounded-lg hover:bg-gray-100" title="Add session">
-                      <span className="material-icons text-[#008090] text-lg">add</span>
+                      <span className="material-icons text-teal-700 text-lg">add</span>
                     </button>
                   </div>
                   {selectedDateSessions.length === 0 ? (
@@ -256,7 +256,7 @@ export default function StudyPlanner() {
                             <div className="flex items-start gap-3">
                               <button
                                 onClick={() => toggleComplete.mutate({ sessionId: session.id, isCompleted: !session.isCompleted })}
-                                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 transition-all ${session.isCompleted ? "border-green-500 bg-green-500" : "border-gray-300 hover:border-[#008090]"}`}
+                                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 transition-all ${session.isCompleted ? "border-green-500 bg-green-500" : "border-gray-300 hover:border-teal-700"}`}
                               >
                                 {session.isCompleted && <span className="material-icons text-white text-xs">check</span>}
                               </button>
@@ -291,7 +291,7 @@ export default function StudyPlanner() {
               {/* Upcoming sessions */}
               <div className="bg-white rounded-2xl border border-gray-100 p-5">
                 <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="material-icons text-[#008090] text-base">upcoming</span>
+                  <span className="material-icons text-teal-700 text-base">upcoming</span>
                   Upcoming (7 days)
                 </h3>
                 {upcoming.length === 0 ? (
@@ -342,7 +342,7 @@ export default function StudyPlanner() {
                 <h2 className="text-lg font-bold text-gray-900 mb-4">{editingId ? "Edit Session" : "New Study Session"}</h2>
 
                 <input type="text" placeholder="Session title..." value={formTitle} onChange={e => setFormTitle(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-[#008090]" />
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 focus:border-teal-700" />
 
                 <textarea placeholder="Description (optional)..." value={formDesc} onChange={e => setFormDesc(e.target.value)} rows={2}
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#008090]/20 resize-none" />
@@ -353,7 +353,7 @@ export default function StudyPlanner() {
                   <div className="grid grid-cols-3 gap-2">
                     {SESSION_TYPES.map(st => (
                       <button key={st.id} onClick={() => setFormType(st.id)}
-                        className={`p-2 rounded-xl border text-center transition-all ${formType === st.id ? "border-[#008090] bg-[#008090]/5" : "border-gray-200 hover:border-gray-300"}`}>
+                        className={`p-2 rounded-xl border text-center transition-all ${formType === st.id ? "border-teal-700 bg-teal-700/5" : "border-gray-200 hover:border-gray-300"}`}>
                         <span className="material-icons text-base block mb-0.5" style={{ color: st.color }}>{st.icon}</span>
                         <span className="text-[10px] text-gray-600 font-medium">{st.label}</span>
                       </button>

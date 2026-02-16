@@ -90,7 +90,7 @@ export function Leaderboard() {
       case 1:
         return <Crown className="h-5 w-5 text-yellow-500" />;
       case 2:
-        return <Medal className="h-5 w-5 text-[#67E8F9]" />;
+        return <Medal className="h-5 w-5 text-cyan-300" />;
       case 3:
         return <Medal className="h-5 w-5 text-amber-600" />;
       default:

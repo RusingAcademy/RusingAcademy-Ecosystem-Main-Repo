@@ -226,7 +226,7 @@ export function AnimatedBadge({
           sizeClasses[size],
           isUnlocked
             ? `bg-gradient-to-br ${colors.bg} shadow-lg ${isHovered ? colors.glow : ""}`
-            : "bg-slate-200 dark:bg-[#0a6969]",
+            : "bg-slate-200 dark:bg-teal-800",
           "transition-shadow duration-300"
         )}
         initial={showAnimation && isNew ? { scale: 0, rotate: -180 } : {}}
@@ -264,7 +264,7 @@ export function AnimatedBadge({
         {isUnlocked ? (
           <Icon className={cn(iconSizes[size], "text-white drop-shadow-md")} />
         ) : (
-          <Lock className={cn(iconSizes[size], "text-[#67E8F9] dark:text-black")} />
+          <Lock className={cn(iconSizes[size], "text-cyan-300 dark:text-black")} />
         )}
 
         {/* New badge indicator */}
@@ -284,7 +284,7 @@ export function AnimatedBadge({
       <motion.span
         className={cn(
           "text-xs font-medium mt-2 text-center line-clamp-2 max-w-[80px]",
-          isUnlocked ? "text-black dark:text-white" : "text-[#67E8F9] dark:text-black"
+          isUnlocked ? "text-black dark:text-white" : "text-cyan-300 dark:text-black"
         )}
         initial={showAnimation && isNew ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}

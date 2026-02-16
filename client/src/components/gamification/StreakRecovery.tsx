@@ -220,7 +220,7 @@ export function StreakRecovery({
           <div className="p-3 rounded-lg bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border border-orange-200/50 dark:border-orange-800/50">
             <div className="flex items-center gap-2 mb-1">
               <Flame className="h-4 w-4 text-orange-500" />
-              <span className="text-xs text-black dark:text-[#67E8F9]">{l.currentStreak}</span>
+              <span className="text-xs text-black dark:text-cyan-300">{l.currentStreak}</span>
             </div>
             <p className="text-2xl font-bold text-orange-600">
               {currentStreak}
@@ -231,7 +231,7 @@ export function StreakRecovery({
           <div className="p-3 rounded-lg bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 border border-purple-200/50 dark:border-purple-800/50">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="h-4 w-4 text-purple-500" />
-              <span className="text-xs text-black dark:text-[#67E8F9]">{l.longestStreak}</span>
+              <span className="text-xs text-black dark:text-cyan-300">{l.longestStreak}</span>
             </div>
             <p className="text-2xl font-bold text-purple-600">
               {longestStreak}
@@ -240,7 +240,7 @@ export function StreakRecovery({
           </div>
         </div>
 
-        <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-[#0a6969]">
+        <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-teal-800">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-black dark:text-white/90">{l.streakFreezes}</span>
             <span className="text-xs text-black">{streakFreezes} {l.available}</span>
@@ -254,7 +254,7 @@ export function StreakRecovery({
                   "w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
                   i < streakFreezes
                     ? "bg-blue-500 text-white"
-                    : "bg-slate-200 dark:bg-[#0a6969] text-[#67E8F9]"
+                    : "bg-slate-200 dark:bg-teal-800 text-cyan-300"
                 )}
                 initial={false}
                 animate={i < streakFreezes ? { scale: [1, 1.1, 1] } : {}}
@@ -347,7 +347,7 @@ export function StreakRecovery({
         </div>
 
         {lastActivityDate && (
-          <div className="flex items-center justify-between text-xs text-black dark:text-[#67E8F9] pt-2 border-t border-slate-200 dark:border-[#0a6969]">
+          <div className="flex items-center justify-between text-xs text-black dark:text-cyan-300 pt-2 border-t border-slate-200 dark:border-teal-800">
             <span className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
               {l.lastActive}

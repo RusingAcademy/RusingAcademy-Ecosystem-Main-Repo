@@ -73,7 +73,7 @@ export function SLEVelocityWidget({
   const l = labels[language];
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-obsidian p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-obsidian p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ export function SLEVelocityWidget({
           </div>
           <div>
             <h3 className="font-semibold text-black dark:text-white">{l.title}</h3>
-            <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
+            <p className="text-sm text-black dark:text-cyan-300">{l.subtitle}</p>
           </div>
         </div>
         <div className={cn(
@@ -101,7 +101,7 @@ export function SLEVelocityWidget({
         <div className="flex items-center justify-between mb-2">
           <span className="text-2xl font-bold text-black dark:text-white">{currentLevel}</span>
           <div className="flex-1 mx-4 relative">
-            <div className="h-3 bg-slate-200 dark:bg-[#0a6969] rounded-full overflow-hidden">
+            <div className="h-3 bg-slate-200 dark:bg-teal-800 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full transition-all duration-1000"
                 style={{ width: `${(currentProgress / targetProgress) * 100}%` }}
@@ -114,7 +114,7 @@ export function SLEVelocityWidget({
           </div>
           <span className="text-2xl font-bold text-emerald-600">{targetLevel}</span>
         </div>
-        <p className="text-center text-sm text-black dark:text-[#67E8F9]">
+        <p className="text-center text-sm text-black dark:text-cyan-300">
           {weeksToTarget} {l.weeksToGo}
         </p>
       </div>
@@ -124,21 +124,21 @@ export function SLEVelocityWidget({
         <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <Clock className="h-4 w-4 text-black" />
-            <span className="text-sm text-black dark:text-[#67E8F9]">{l.weeklyHours}</span>
+            <span className="text-sm text-black dark:text-cyan-300">{l.weeklyHours}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-white">{weeklyHours}h</p>
         </div>
         <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <TrendingUp className="h-4 w-4 text-black" />
-            <span className="text-sm text-black dark:text-[#67E8F9]">{l.avgProgress}</span>
+            <span className="text-sm text-black dark:text-cyan-300">{l.avgProgress}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-white">+{averageProgress}%</p>
         </div>
         <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
           <div className="flex items-center gap-2 mb-1">
             <Calendar className="h-4 w-4 text-black" />
-            <span className="text-sm text-black dark:text-[#67E8F9]">{l.estimatedReady}</span>
+            <span className="text-sm text-black dark:text-cyan-300">{l.estimatedReady}</span>
           </div>
           <p className="text-lg font-bold text-black dark:text-white">
             {predictedReadyDate.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short", day: "numeric" })}
@@ -148,7 +148,7 @@ export function SLEVelocityWidget({
           <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-black" />
-              <span className="text-sm text-black dark:text-[#67E8F9]">{l.daysUntilExam}</span>
+              <span className="text-sm text-black dark:text-cyan-300">{l.daysUntilExam}</span>
             </div>
             <p className="text-2xl font-bold text-black dark:text-white">{daysUntilExam}</p>
           </div>

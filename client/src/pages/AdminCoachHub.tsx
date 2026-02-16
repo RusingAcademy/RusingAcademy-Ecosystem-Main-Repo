@@ -77,7 +77,7 @@ export default function AdminCoachHub() {
               {["all", "pending", "approved", "rejected"].map(f => (
                 <Button key={f} variant={appFilter === (f === "all" ? undefined : f) ? "default" : "outline"} size="sm"
                   onClick={() => setAppFilter(f === "all" ? undefined : f)}
-                  className={appFilter === (f === "all" ? undefined : f) ? "bg-[#008090]" : ""}>
+                  className={appFilter === (f === "all" ? undefined : f) ? "bg-teal-700" : ""}>
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </Button>
               ))}
@@ -125,7 +125,7 @@ export default function AdminCoachHub() {
               {["all", "active", "suspended"].map(f => (
                 <Button key={f} variant={coachFilter === (f === "all" ? undefined : f) ? "default" : "outline"} size="sm"
                   onClick={() => setCoachFilter(f === "all" ? undefined : f)}
-                  className={coachFilter === (f === "all" ? undefined : f) ? "bg-[#008090]" : ""}>
+                  className={coachFilter === (f === "all" ? undefined : f) ? "bg-teal-700" : ""}>
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </Button>
               ))}
@@ -165,7 +165,7 @@ export default function AdminCoachHub() {
           <TabsContent value="commission" className="space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">Commission Tiers</h3>
-              <Button size="sm" className="bg-[#008090] hover:bg-[#006070]" onClick={() => setTierDialog(true)}>Add Tier</Button>
+              <Button size="sm" className="bg-teal-700 hover:bg-teal-900" onClick={() => setTierDialog(true)}>Add Tier</Button>
             </div>
             {commAnalytics.data && (
               <AdminStatsGrid stats={[
@@ -265,7 +265,7 @@ export default function AdminCoachHub() {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setTierDialog(false)}>Cancel</Button>
-              <Button className="bg-[#008090]" disabled={!newTier.name.trim()} onClick={() => createTier.mutate(newTier)}>Create</Button>
+              <Button className="bg-teal-700" disabled={!newTier.name.trim()} onClick={() => createTier.mutate(newTier)}>Create</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

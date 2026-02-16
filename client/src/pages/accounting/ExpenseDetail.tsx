@@ -385,7 +385,7 @@ export default function ExpenseDetail() {
             </tbody>
           </table>
           {isEditing && (
-            <button className="mt-3 text-sm text-[#0077C5] hover:underline flex items-center gap-1" onClick={addLineItem}>
+            <button className="mt-3 text-sm text-sky-600 hover:underline flex items-center gap-1" onClick={addLineItem}>
               <Plus size={14} /> Add a line
             </button>
           )}

@@ -256,7 +256,7 @@ export default function CourseDetail() {
         
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-20 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-[#67E8F9] mb-6">
+          <nav className="flex items-center gap-2 text-sm text-cyan-300 mb-6">
             <Link href="/courses" className="hover:text-white transition-colors">
               {isEn ? "Courses" : "Cours"}
             </Link>
@@ -300,7 +300,7 @@ export default function CourseDetail() {
                 </p>
                 
                 {/* Stats Row */}
-                <div className="flex flex-wrap items-center gap-6 text-sm text-[#67E8F9] mb-6">
+                <div className="flex flex-wrap items-center gap-6 text-sm text-cyan-300 mb-6">
                   {course.totalDurationMinutes && course.totalDurationMinutes > 0 && (
                     <span className="flex items-center gap-2">
                       <Clock className="h-4 w-4" />
@@ -346,7 +346,7 @@ export default function CourseDetail() {
                       {Number(course.averageRating).toFixed(1)}
                     </span>
                     {course.totalReviews && course.totalReviews > 0 && (
-                      <span className="text-[#67E8F9]">
+                      <span className="text-cyan-300">
                         ({course.totalReviews} {isEn ? "reviews" : "avis"})
                       </span>
                     )}
@@ -360,7 +360,7 @@ export default function CourseDetail() {
                       {course.instructorName.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-sm text-[#67E8F9]">{isEn ? "Instructor" : "Instructeur"}</p>
+                      <p className="text-sm text-cyan-300">{isEn ? "Instructor" : "Instructeur"}</p>
                       <p className="font-medium text-white">{course.instructorName}</p>
                     </div>
                   </div>
@@ -377,7 +377,7 @@ export default function CourseDetail() {
               >
                 <Card className="sticky top-24 bg-white dark:bg-foundation shadow-2xl border-0">
                   {/* Thumbnail */}
-                  <div className="relative aspect-video bg-slate-200 dark:bg-[#0a6969] overflow-hidden rounded-t-lg">
+                  <div className="relative aspect-video bg-slate-200 dark:bg-teal-800 overflow-hidden rounded-t-lg">
                     {course.thumbnailUrl ? (
                       <img
                         loading="lazy" src={course.thumbnailUrl}
@@ -463,7 +463,7 @@ export default function CourseDetail() {
                     ) : user ? (
                       <Button
                         size="lg"
-                        className={`w-full ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#F97316] hover:bg-[#EA580C]'} text-white text-lg h-14`}
+                        className={`w-full ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-orange-500 hover:bg-orange-600'} text-white text-lg h-14`}
                         onClick={handleEnroll}
                         disabled={checkoutMutation.isPending}
                       >
@@ -482,7 +482,7 @@ export default function CourseDetail() {
                         )}
                       </Button>
                     ) : (
-                      <Button size="lg" className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14" asChild>
+                      <Button size="lg" className="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg h-14" asChild>
                         <Link href="/signup">
                           {isEn ? "Sign Up to Enroll" : "Inscrivez-vous pour commencer"}
                         </Link>
@@ -802,7 +802,7 @@ export default function CourseDetail() {
               : "Rejoignez des milliers de fonctionnaires canadiens qui ont amélioré leurs compétences linguistiques avec Lingueefy."}
           </p>
           {!enrollment && (
-            <Button size="lg" className="bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14 px-8">
+            <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white text-lg h-14 px-8">
               {FREE_ACCESS_MODE
                 ? (isEn ? "Start Free Course" : "Commencer le cours gratuit")
                 : ((course.price || 0) > 0 

@@ -64,7 +64,7 @@ export default function CoachStudents() {
               <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                 placeholder={lang === "fr" ? "Rechercher..." : "Search..."}
                 aria-label={lang === "fr" ? "Rechercher un étudiant" : "Search students"}
-                className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-[#7c3aed] outline-none w-48" />
+                className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#7c3aed]/20 focus:border-violet-600 outline-none w-48" />
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function CoachStudents() {
         <div className="flex gap-2 mb-4" role="tablist">
           {(["all", "active", "paused", "completed"] as const).map(f => (
             <button key={f} onClick={() => setFilter(f)} role="tab" aria-selected={filter === f}
-              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-[#7c3aed] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-violet-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
               {f === "all" ? (lang === "fr" ? "Tous" : "All") :
                f === "active" ? (lang === "fr" ? "Actifs" : "Active") :
                f === "paused" ? (lang === "fr" ? "En pause" : "Paused") :
@@ -130,7 +130,7 @@ export default function CoachStudents() {
                     <div className="mb-3">
                       <div className="flex justify-between text-[11px] mb-1">
                         <span className="text-gray-500">{lang === "fr" ? "Progression" : "Progress"}</span>
-                        <span className="font-semibold text-[#7c3aed]">{progress}%</span>
+                        <span className="font-semibold text-violet-600">{progress}%</span>
                       </div>
                       <ProgressBar value={progress} />
                     </div>

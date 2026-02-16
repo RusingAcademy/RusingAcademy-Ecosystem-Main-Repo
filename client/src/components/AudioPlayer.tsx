@@ -105,7 +105,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
         {audioUrl && <audio ref={audioRef} src={audioUrl} preload="metadata" />}
         <button
           onClick={togglePlay}
-          className="w-9 h-9 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006070] transition-colors flex-shrink-0"
+          className="w-9 h-9 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-900 transition-colors flex-shrink-0"
         >
           <span className="material-icons text-lg">{isPlaying ? "pause" : "play_arrow"}</span>
         </button>
@@ -130,7 +130,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
         )}
         <button
           onClick={changeSpeed}
-          className="text-[10px] font-bold text-[#008090] bg-[rgba(0,128,144,0.1)] px-2 py-1 rounded-md hover:bg-[rgba(0,128,144,0.2)] transition-colors"
+          className="text-[10px] font-bold text-teal-700 bg-[rgba(0,128,144,0.1)] px-2 py-1 rounded-md hover:bg-[rgba(0,128,144,0.2)] transition-colors"
         >
           {playbackRate}x
         </button>
@@ -143,14 +143,14 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
       {audioUrl && <audio ref={audioRef} src={audioUrl} preload="metadata" />}
       {title && (
         <div className="flex items-center gap-2 mb-3">
-          <span className="material-icons text-[#008090] text-xl">headphones</span>
+          <span className="material-icons text-teal-700 text-xl">headphones</span>
           <h4 className="text-sm font-semibold text-gray-900">{title}</h4>
         </div>
       )}
       <div className="flex items-center gap-3">
         <button
           onClick={togglePlay}
-          className="w-12 h-12 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006070] transition-colors shadow-md flex-shrink-0"
+          className="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-900 transition-colors shadow-md flex-shrink-0"
         >
           <span className="material-icons text-2xl">{isPlaying ? "pause" : "play_arrow"}</span>
         </button>
@@ -176,7 +176,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div
                     key={i}
-                    className="w-1 bg-[#008090] rounded-full"
+                    className="w-1 bg-teal-700 rounded-full"
                     style={{
                       height: isPlaying ? `${8 + Math.random() * 16}px` : "4px",
                       transition: "height 0.2s ease",
@@ -192,7 +192,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
         </div>
         <button
           onClick={changeSpeed}
-          className="text-xs font-bold text-[#008090] bg-[rgba(0,128,144,0.1)] px-3 py-1.5 rounded-lg hover:bg-[rgba(0,128,144,0.2)] transition-colors"
+          className="text-xs font-bold text-teal-700 bg-[rgba(0,128,144,0.1)] px-3 py-1.5 rounded-lg hover:bg-[rgba(0,128,144,0.2)] transition-colors"
         >
           {playbackRate}x
         </button>

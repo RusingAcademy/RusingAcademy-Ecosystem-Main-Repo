@@ -21,8 +21,8 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
   }, [sidebarCollapsed]);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fb]">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-[#2563eb] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg">
+    <div className="min-h-screen bg-slate-50">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg">
         Skip to main content
       </a>
       <HRSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
@@ -39,7 +39,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
         <div className="flex-1 p-4 lg:p-6">{children}</div>
         <footer className="text-center py-4 border-t border-gray-100 bg-white" role="contentinfo">
           <SocialLinks size={14} color="#9ca3af" className="flex items-center justify-center gap-4 mb-2" />
-          <p className="text-[11px] text-gray-500">© 2026 RusingAcademy — A Division of <span className="font-medium text-[#2563eb]">Rusinga International Consulting Ltd.</span></p>
+          <p className="text-[11px] text-gray-500">© 2026 RusingAcademy — A Division of <span className="font-medium text-blue-600">Rusinga International Consulting Ltd.</span></p>
           <p className="text-[10px] text-gray-400 mt-0.5">Version 2.0.0 — Client Portal</p>
         </footer>
       </main>

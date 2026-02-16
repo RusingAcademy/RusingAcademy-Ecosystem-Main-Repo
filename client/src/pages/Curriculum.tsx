@@ -121,7 +121,7 @@ const courses: Course[] = [
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/curriculum/path_b1_operational.jpg",
     color: "text-amber-600",
     bgColor: "bg-amber-50",
-    borderColor: "border-[#FFE4D6]",
+    borderColor: "border-orange-100",
     sleBadge: "BBB",
   },
   {

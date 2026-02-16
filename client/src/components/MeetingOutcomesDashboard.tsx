@@ -227,7 +227,7 @@ function getDueStatus(date: Date): { label: string; color: string; bgColor: stri
   } else if (dueDate < weekEnd) {
     return { label: "dueThisWeek", color: "text-blue-400", bgColor: "bg-blue-500/20" };
   }
-  return { label: "dueThisWeek", color: "text-[#67E8F9]", bgColor: "bg-white0/20" };
+  return { label: "dueThisWeek", color: "text-cyan-300", bgColor: "bg-white0/20" };
 }
 
 export default function MeetingOutcomesDashboard() {
@@ -254,7 +254,7 @@ export default function MeetingOutcomesDashboard() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-[#D97B3D] bg-clip-text text-transparent">
             {t.title}
           </h1>
-          <p className="text-[#67E8F9] mt-1">{t.subtitle}</p>
+          <p className="text-cyan-300 mt-1">{t.subtitle}</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
           <RefreshCw className="w-4 h-4" />
@@ -270,7 +270,7 @@ export default function MeetingOutcomesDashboard() {
             <span className="text-sm text-orange-400">{t.pendingOutcomes}</span>
           </div>
           <div className="text-2xl font-bold">{pendingMeetings.length}</div>
-          <div className="text-xs text-[#67E8F9]">{t.meetingsPendingOutcome}</div>
+          <div className="text-xs text-cyan-300">{t.meetingsPendingOutcome}</div>
         </div>
         
         <div className="bg-gradient-to-br from-blue-500/20 to-[#145A5B]/20 backdrop-blur-sm rounded-xl p-4 border border-blue-500/30">
@@ -279,7 +279,7 @@ export default function MeetingOutcomesDashboard() {
             <span className="text-sm text-blue-400">{t.followUpTasks}</span>
           </div>
           <div className="text-2xl font-bold">{followUpTasks.length}</div>
-          <div className="text-xs text-[#67E8F9]">{t.upcomingFollowUps}</div>
+          <div className="text-xs text-cyan-300">{t.upcomingFollowUps}</div>
         </div>
         
         <div className="bg-gradient-to-br from-green-500/20 to-teal-500/20 backdrop-blur-sm rounded-xl p-4 border border-green-500/30">
@@ -288,7 +288,7 @@ export default function MeetingOutcomesDashboard() {
             <span className="text-sm text-green-400">{t.converted}</span>
           </div>
           <div className="text-2xl font-bold">{stats.converted}</div>
-          <div className="text-xs text-[#67E8F9]">{stats.conversionRate}% {t.conversionRate.toLowerCase()}</div>
+          <div className="text-xs text-cyan-300">{stats.conversionRate}% {t.conversionRate.toLowerCase()}</div>
         </div>
         
         <div className="bg-gradient-to-br from-teal-500/20 to-cyan-500/20 backdrop-blur-sm rounded-xl p-4 border border-teal-500/30">
@@ -297,7 +297,7 @@ export default function MeetingOutcomesDashboard() {
             <span className="text-sm text-teal-400">{t.totalDealValue}</span>
           </div>
           <div className="text-2xl font-bold">${(stats.totalDealValue / 1000).toFixed(0)}K</div>
-          <div className="text-xs text-[#67E8F9]">{stats.averageDealProbability}% {t.avgDealProb.toLowerCase()}</div>
+          <div className="text-xs text-cyan-300">{stats.averageDealProbability}% {t.avgDealProb.toLowerCase()}</div>
         </div>
       </div>
       
@@ -337,7 +337,7 @@ export default function MeetingOutcomesDashboard() {
                     <CheckCircle className="w-8 h-8 text-green-400" />
                   </div>
                   <div className="text-2xl font-bold">{stats.qualifiedLeads}</div>
-                  <div className="text-xs text-[#67E8F9]">{t.qualifiedLeads}</div>
+                  <div className="text-xs text-cyan-300">{t.qualifiedLeads}</div>
                 </div>
                 
                 <div className="text-center">
@@ -345,7 +345,7 @@ export default function MeetingOutcomesDashboard() {
                     <XCircle className="w-8 h-8 text-red-400" />
                   </div>
                   <div className="text-2xl font-bold">{stats.notQualifiedLeads}</div>
-                  <div className="text-xs text-[#67E8F9]">{t.notQualified}</div>
+                  <div className="text-xs text-cyan-300">{t.notQualified}</div>
                 </div>
                 
                 <div className="text-center">
@@ -353,7 +353,7 @@ export default function MeetingOutcomesDashboard() {
                     <Clock className="w-8 h-8 text-yellow-400" />
                   </div>
                   <div className="text-2xl font-bold">{stats.needsFollowUp}</div>
-                  <div className="text-xs text-[#67E8F9]">{t.needsFollowUp}</div>
+                  <div className="text-xs text-cyan-300">{t.needsFollowUp}</div>
                 </div>
                 
                 <div className="text-center">
@@ -361,15 +361,15 @@ export default function MeetingOutcomesDashboard() {
                     <Trophy className="w-8 h-8 text-teal-400" />
                   </div>
                   <div className="text-2xl font-bold">{stats.converted}</div>
-                  <div className="text-xs text-[#67E8F9]">{t.converted}</div>
+                  <div className="text-xs text-cyan-300">{t.converted}</div>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto bg-white0/20 rounded-full flex items-center justify-center mb-2">
-                    <UserX className="w-8 h-8 text-[#67E8F9]" />
+                    <UserX className="w-8 h-8 text-cyan-300" />
                   </div>
                   <div className="text-2xl font-bold">{stats.noShows}</div>
-                  <div className="text-xs text-[#67E8F9]">{t.noShows}</div>
+                  <div className="text-xs text-cyan-300">{t.noShows}</div>
                 </div>
               </div>
             </div>
@@ -416,7 +416,7 @@ export default function MeetingOutcomesDashboard() {
                   <span className="font-medium">{t.totalDealValue}</span>
                 </div>
                 <div className="text-4xl font-bold mb-2">${stats.totalDealValue.toLocaleString()}</div>
-                <div className="text-sm text-[#67E8F9]">
+                <div className="text-sm text-cyan-300">
                   Avg. Probability: {stats.averageDealProbability}%
                 </div>
               </div>
@@ -455,11 +455,11 @@ export default function MeetingOutcomesDashboard() {
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="text-lg font-semibold">{meeting.title}</h3>
-                      <div className="flex items-center gap-4 mt-2 text-sm text-[#67E8F9]">
+                      <div className="flex items-center gap-4 mt-2 text-sm text-cyan-300">
                         <span>{meeting.leadName}</span>
                         <span>{meeting.leadEmail}</span>
                       </div>
-                      <div className="flex items-center gap-2 mt-2 text-sm text-[#67E8F9]">
+                      <div className="flex items-center gap-2 mt-2 text-sm text-cyan-300">
                         <Calendar className="w-4 h-4" />
                         {formattedDate} ({meeting.durationMinutes} min)
                       </div>
@@ -484,7 +484,7 @@ export default function MeetingOutcomesDashboard() {
             })}
             
             {pendingMeetings.length === 0 && (
-              <div className="text-center py-12 text-[#67E8F9]">
+              <div className="text-center py-12 text-cyan-300">
                 {t.noData}
               </div>
             )}
@@ -525,8 +525,8 @@ export default function MeetingOutcomesDashboard() {
                             {t[dueStatus.label as keyof typeof t]}
                           </span>
                         </div>
-                        <div className="text-sm text-[#67E8F9] mt-1">{task.leadEmail}</div>
-                        <div className="flex items-center gap-2 mt-2 text-sm text-[#67E8F9]">
+                        <div className="text-sm text-cyan-300 mt-1">{task.leadEmail}</div>
+                        <div className="flex items-center gap-2 mt-2 text-sm text-cyan-300">
                           <Calendar className="w-4 h-4" />
                           {formattedDate}
                           <span className="text-black">•</span>
@@ -534,7 +534,7 @@ export default function MeetingOutcomesDashboard() {
                         </div>
                         {task.nextSteps && (
                           <div className="mt-3 p-3 bg-white/5 rounded-lg text-sm">
-                            <span className="text-[#67E8F9]">Next steps: </span>
+                            <span className="text-cyan-300">Next steps: </span>
                             {task.nextSteps}
                           </div>
                         )}
@@ -549,7 +549,7 @@ export default function MeetingOutcomesDashboard() {
             })}
             
             {followUpTasks.length === 0 && (
-              <div className="text-center py-12 text-[#67E8F9]">
+              <div className="text-center py-12 text-cyan-300">
                 {t.noData}
               </div>
             )}

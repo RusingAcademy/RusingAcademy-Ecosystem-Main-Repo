@@ -120,7 +120,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
         <div className="flex flex-wrap gap-3">
           {/* Search */}
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-300" />
             <Input
               placeholder={language === "fr" ? "Rechercher..." : "Search..."}
               value={searchQuery}
@@ -212,7 +212,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                       {getCategoryLabel(phrase.category)}
                     </span>
                     {phrase.duration && (
-                      <span className="text-xs text-[#67E8F9]">
+                      <span className="text-xs text-cyan-300">
                         {phrase.duration}s
                       </span>
                     )}

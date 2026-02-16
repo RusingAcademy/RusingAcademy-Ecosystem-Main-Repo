@@ -81,7 +81,7 @@ export default function ExchangeRates() {
             <p className="text-sm text-gray-500">Manage currency exchange rates for multi-currency transactions</p>
           </div>
         </div>
-        <Button className="bg-[#2CA01C] hover:bg-[#248a17]" onClick={() => setShowCreate(true)}>
+        <Button className="bg-green-600 hover:bg-green-700" onClick={() => setShowCreate(true)}>
           <Plus size={14} className="mr-1" /> Add Rate
         </Button>
       </div>
@@ -90,7 +90,7 @@ export default function ExchangeRates() {
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="qb-card">
           <div className="flex items-center gap-2 mb-2">
-            <Globe size={16} className="text-[#0077C5]" />
+            <Globe size={16} className="text-sky-600" />
             <span className="text-xs font-bold text-gray-500 uppercase">Active Pairs</span>
           </div>
           <div className="text-2xl font-bold text-gray-800">{ratePairs.length}</div>
@@ -98,7 +98,7 @@ export default function ExchangeRates() {
         </div>
         <div className="qb-card">
           <div className="flex items-center gap-2 mb-2">
-            <TrendingUp size={16} className="text-[#2CA01C]" />
+            <TrendingUp size={16} className="text-green-600" />
             <span className="text-xs font-bold text-gray-500 uppercase">Total Rates</span>
           </div>
           <div className="text-2xl font-bold text-gray-800">{items.length}</div>
@@ -117,7 +117,7 @@ export default function ExchangeRates() {
       {/* Currency Converter */}
       <div className="qb-card mb-6 border-l-4 border-l-[#0077C5]">
         <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
-          <ArrowRightLeft size={14} className="text-[#0077C5]" /> Quick Currency Converter
+          <ArrowRightLeft size={14} className="text-sky-600" /> Quick Currency Converter
         </h3>
         <div className="grid grid-cols-7 gap-3 items-end">
           <div className="col-span-2">
@@ -159,7 +159,7 @@ export default function ExchangeRates() {
 
       {/* Add Rate Form */}
       {showCreate && (
-        <div className="qb-card mb-6 border-2 border-[#2CA01C]">
+        <div className="qb-card mb-6 border-2 border-green-600">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Add Exchange Rate</h3>
           <div className="grid grid-cols-4 gap-4 mb-4">
             <div>
@@ -185,7 +185,7 @@ export default function ExchangeRates() {
           </div>
           <div className="flex gap-2 justify-end">
             <Button variant="outline" onClick={() => setShowCreate(false)}>Cancel</Button>
-            <Button className="bg-[#2CA01C] hover:bg-[#248a17]" onClick={handleCreate} disabled={createMutation.isPending}>
+            <Button className="bg-green-600 hover:bg-green-700" onClick={handleCreate} disabled={createMutation.isPending}>
               {createMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : null} Save Rate
             </Button>
           </div>
@@ -203,7 +203,7 @@ export default function ExchangeRates() {
                   <span className="text-sm font-bold text-gray-800">{r.fromCurrency}/{r.toCurrency}</span>
                   <span className="text-xs text-gray-400">{r.source || "Manual"}</span>
                 </div>
-                <div className="text-lg font-bold text-[#0077C5]">{parseFloat(r.rate).toFixed(4)}</div>
+                <div className="text-lg font-bold text-sky-600">{parseFloat(r.rate).toFixed(4)}</div>
                 <div className="text-xs text-gray-400 mt-1">
                   {r.effectiveDate ? new Date(r.effectiveDate).toLocaleDateString("en-CA") : "—"}
                 </div>

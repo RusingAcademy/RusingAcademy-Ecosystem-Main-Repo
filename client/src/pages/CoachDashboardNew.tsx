@@ -101,7 +101,7 @@ const SessionCard = ({ session }: { session: Session }) => {
       </div>
       <div className="mt-4 flex space-x-3">
         {session.status === 'scheduled' && (
-          <button className="flex-1 px-4 py-2 bg-[#b91c1c] text-white rounded-lg hover:bg-[#991b1b] text-sm font-medium">
+          <button className="flex-1 px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800 text-sm font-medium">
             Rejoindre
           </button>
         )}
@@ -127,7 +127,7 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
         </div>
       </div>
       <div className="text-right">
-        <span className="text-2xl font-bold text-[#b91c1c]">{learner.currentLevel}</span>
+        <span className="text-2xl font-bold text-red-700">{learner.currentLevel}</span>
         <span className="text-gray-400 mx-1">→</span>
         <span className="text-2xl font-bold text-gray-400">{learner.targetLevel}</span>
       </div>
@@ -138,7 +138,7 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
         <span className="font-medium text-gray-900">{learner.progress}%</span>
       </div>
       <div className="w-full h-2 bg-gray-200 rounded-full">
-        <div className="h-full bg-[#b91c1c] rounded-full" style={{ width: `${learner.progress}%` }} />
+        <div className="h-full bg-red-700 rounded-full" style={{ width: `${learner.progress}%` }} />
       </div>
     </div>
     <div className="flex justify-between text-sm text-gray-600">
@@ -178,7 +178,7 @@ export default function CoachDashboardNew() {
               {coachNavItems.map((item) => (
                 <button key={item.id} onClick={() => setActiveTab(item.id)}
                   aria-pressed={activeTab === item.id}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === item.id ? 'border-[#b91c1c] text-[#b91c1c]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === item.id ? 'border-red-700 text-red-700' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
                   <span className="mr-2" aria-hidden="true">{item.icon}</span>{item.label}
                 </button>
               ))}

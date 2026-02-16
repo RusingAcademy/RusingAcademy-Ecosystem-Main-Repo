@@ -124,7 +124,7 @@ export default function CourseCatalog() {
             onClick={() => setSelectedCategory(undefined)}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
               !selectedCategory
-                ? "bg-[#1B1464] text-white"
+                ? "bg-indigo-900 text-white"
                 : "bg-muted text-muted-foreground hover:bg-muted/80"
             }`}
           >
@@ -136,7 +136,7 @@ export default function CourseCatalog() {
               onClick={() => setSelectedCategory(cat === selectedCategory ? undefined : cat!)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 selectedCategory === cat
-                  ? "bg-[#1B1464] text-white"
+                  ? "bg-indigo-900 text-white"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
             >
@@ -148,7 +148,7 @@ export default function CourseCatalog() {
         {/* Course Grid */}
         {isLoading ? (
           <div className="flex justify-center py-16">
-            <Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" />
+            <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : !courses?.length ? (
           <div className="text-center py-16">
@@ -181,12 +181,12 @@ export default function CourseCatalog() {
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full">
-                        <BookOpen className="w-16 h-16 text-[#1B1464]/30" />
+                        <BookOpen className="w-16 h-16 text-indigo-900/30" />
                       </div>
                     )}
                     {/* Level badge */}
                     {course.level && (
-                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-white/90 text-[#1B1464] backdrop-blur-sm">
+                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-white/90 text-indigo-900 backdrop-blur-sm">
                         {LEVEL_LABELS[course.level] ?? course.level}
                       </span>
                     )}
@@ -215,7 +215,7 @@ export default function CourseCatalog() {
                       )}
                     </div>
 
-                    <h3 className="font-bold text-lg text-foreground mb-2 line-clamp-2 group-hover:text-[#1B1464] transition-colors">
+                    <h3 className="font-bold text-lg text-foreground mb-2 line-clamp-2 group-hover:text-indigo-900 transition-colors">
                       {title}
                     </h3>
 
@@ -241,7 +241,7 @@ export default function CourseCatalog() {
 
                     {/* Certificate badge */}
                     {course.hasCertificate && (
-                      <div className="flex items-center gap-1.5 text-xs text-[#2EC4B6] font-medium mb-4">
+                      <div className="flex items-center gap-1.5 text-xs text-teal-400 font-medium mb-4">
                         <Award className="w-3.5 h-3.5" />
                         {t.coursePlayer.certificate}
                       </div>
@@ -252,7 +252,7 @@ export default function CourseCatalog() {
                       <div className="mb-4">
                         <div className="flex items-center justify-between text-xs mb-1">
                           <span className="text-muted-foreground">{t.coursePlayer.progress}</span>
-                          <span className="font-medium text-[#1B1464]">
+                          <span className="font-medium text-indigo-900">
                             {enrollment.enrollment.progressPercent ?? 0}%
                           </span>
                         </div>

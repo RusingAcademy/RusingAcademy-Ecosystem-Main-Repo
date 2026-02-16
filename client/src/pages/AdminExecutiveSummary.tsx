@@ -37,7 +37,7 @@ export default function AdminExecutiveSummary() {
           <AdminStatsGrid
             stats={[
               { label: "Total Users", value: k.totalUsers?.toLocaleString() ?? "0" },
-              { label: "Active Users (30d)", value: k.activeUsers?.toLocaleString() ?? "0", color: "text-[#008090]" },
+              { label: "Active Users (30d)", value: k.activeUsers?.toLocaleString() ?? "0", color: "text-teal-700" },
               { label: "Lessons Completed", value: k.completedLessons?.toLocaleString() ?? "0", color: "text-green-600" },
               { label: "Retention Rate", value: `${k.retentionRate ?? 0}%`, color: (k.retentionRate ?? 0) >= 70 ? "text-green-600" : "text-amber-600" },
               { label: "Total Enrollments", value: k.totalEnrollments?.toLocaleString() ?? "0" },
@@ -113,7 +113,7 @@ export default function AdminExecutiveSummary() {
                           <span className="text-sm text-muted-foreground w-24">{r.label}</span>
                           <div className="flex-1 bg-gray-100 rounded-full h-6 relative overflow-hidden">
                             <div
-                              className="bg-[#008090] h-full rounded-full transition-all"
+                              className="bg-teal-700 h-full rounded-full transition-all"
                               style={{ width: `${Math.min(100, maxRev > 0 ? (Number(r.revenue) / maxRev) * 100 : 0)}%` }}
                             />
                           </div>
@@ -148,7 +148,7 @@ export default function AdminExecutiveSummary() {
                 <TableBody>
                   {performers.data.map((p: any, i: number) => (
                     <TableRow key={i}>
-                      <TableCell className="font-bold text-[#008090]">#{i + 1}</TableCell>
+                      <TableCell className="font-bold text-teal-700">#{i + 1}</TableCell>
                       <TableCell className="font-medium">User #{p.userId}</TableCell>
                       <TableCell>{p.activityCount ?? 0}</TableCell>
                     </TableRow>

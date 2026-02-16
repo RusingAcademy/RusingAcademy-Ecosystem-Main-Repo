@@ -65,14 +65,14 @@ export default function Notifications() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+            <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
               <span className="material-icons text-xl">navigate_before</span>
             </Link>
             <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
               Notifications
             </h1>
             {unreadCount > 0 && (
-              <span className="px-2.5 py-0.5 rounded-full bg-[#008090] text-white text-xs font-bold">
+              <span className="px-2.5 py-0.5 rounded-full bg-teal-700 text-white text-xs font-bold">
                 {unreadCount} new
               </span>
             )}
@@ -92,8 +92,8 @@ export default function Notifications() {
               onClick={() => setFilter(tab.key)}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-medium transition-all ${
                 filter === tab.key
-                  ? "bg-[#008090] text-white shadow-sm"
-                  : "bg-white border border-gray-200 text-gray-600 hover:border-[#008090]/30"
+                  ? "bg-teal-700 text-white shadow-sm"
+                  : "bg-white border border-gray-200 text-gray-600 hover:border-teal-700/30"
               }`}
             >
               <span className="material-icons" style={{ fontSize: "14px" }}>{tab.icon}</span>
@@ -131,7 +131,7 @@ export default function Notifications() {
               <div
                 key={n.id}
                 className={`bg-white border rounded-xl p-4 transition-all hover:shadow-sm cursor-pointer ${
-                  n.isRead ? "border-gray-100" : "border-[#008090]/20 bg-[#008090]/[0.02]"
+                  n.isRead ? "border-gray-100" : "border-teal-700/20 bg-teal-700/[0.02]"
                 }`}
                 onClick={() => {
                   if (!n.isRead) markRead.mutate({ notificationId: n.id });
@@ -160,7 +160,7 @@ export default function Notifications() {
                     )}
                   </div>
                   {!n.isRead && (
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#008090] flex-shrink-0 mt-1.5" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-teal-700 flex-shrink-0 mt-1.5" />
                   )}
                 </div>
               </div>

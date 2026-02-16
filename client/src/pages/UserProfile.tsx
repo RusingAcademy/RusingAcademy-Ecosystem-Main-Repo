@@ -46,7 +46,7 @@ export default function UserProfile() {
     if (level >= 6) return "bg-blue-500";
     if (level >= 4) return "bg-green-500";
     if (level >= 2) return "bg-yellow-500";
-    return "bg-[#0a6969]";
+    return "bg-teal-800";
   };
 
   const generateActivityHeatmap = () => {

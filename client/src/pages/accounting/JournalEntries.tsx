@@ -38,7 +38,7 @@ export default function JournalEntries() {
               {(entries as any[]).map((entry: any) => (
                 <tr key={entry.id} className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
                   <td className="py-3 text-sm text-gray-800">{new Date(entry.entryDate).toLocaleDateString("en-CA")}</td>
-                  <td className="py-3 text-sm text-[#0077C5]">{entry.entryNumber || `JE-${entry.id}`}</td>
+                  <td className="py-3 text-sm text-sky-600">{entry.entryNumber || `JE-${entry.id}`}</td>
                   <td className="py-3 text-sm text-gray-600">{entry.memo || "—"}</td>
                   <td className="py-3 text-center">
                     {entry.isAdjusting && (

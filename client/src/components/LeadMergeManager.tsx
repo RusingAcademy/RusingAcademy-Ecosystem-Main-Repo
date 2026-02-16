@@ -276,7 +276,7 @@ export default function LeadMergeManager() {
 
       {/* Potential Duplicates */}
       {potentialDuplicates.length > 0 && (
-        <Card className="border-[#FFE4D6] bg-amber-50 dark:bg-amber-950/20">
+        <Card className="border-orange-100 bg-amber-50 dark:bg-amber-950/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-amber-700 dark:text-amber-400">
               <AlertTriangle className="h-5 w-5" />
@@ -400,7 +400,7 @@ export default function LeadMergeManager() {
                       className={`flex items-center space-x-3 p-3 rounded-lg border ${
                         primaryLeadId === lead.id
                           ? "border-primary bg-primary/5"
-                          : "border-slate-200 dark:border-[#0a6969]"
+                          : "border-slate-200 dark:border-teal-800"
                       }`}
                     >
                       <RadioGroupItem value={lead.id.toString()} id={`lead-${lead.id}`} />
@@ -517,7 +517,7 @@ export default function LeadMergeManager() {
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-[#FFE4D6]">
+            <div className="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-orange-100">
               <div className="flex items-start gap-2">
                 <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5" />
                 <div>

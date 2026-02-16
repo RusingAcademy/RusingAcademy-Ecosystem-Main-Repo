@@ -235,7 +235,7 @@ export default function CoachEarnings() {
 
           {/* Stripe Setup Banner */}
           {!stripeStatus?.isOnboarded && (
-            <Card className="mb-6 border-[#FFE4D6] bg-amber-50">
+            <Card className="mb-6 border-orange-100 bg-amber-50">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">

@@ -15,7 +15,7 @@ export default function SignUp() {
       <div className="relative z-10 w-full max-w-md">
         {/* Logo and branding */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#0A2540] mb-2">
+          <h1 className="text-3xl font-bold text-slate-900 mb-2">
             Join RusingAcademy
           </h1>
           <p className="text-black">
@@ -24,7 +24,7 @@ export default function SignUp() {
         </div>
 
         {/* Clerk Sign-Up component */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-[#0A2540]/10 p-2">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
           <ClerkSignUp
             routing="path"
             path="/sign-up"
@@ -45,7 +45,7 @@ export default function SignUp() {
             Already have an account?{' '}
             <button
               onClick={() => setLocation('/sign-in')}
-              className="text-[#0A2540] font-semibold hover:underline"
+              className="text-slate-900 font-semibold hover:underline"
             >
               Sign in
             </button>
@@ -56,7 +56,7 @@ export default function SignUp() {
         <div className="mt-8 grid grid-cols-3 gap-4 text-center text-xs text-black">
           <div className="flex flex-col items-center gap-1">
             <div className="w-10 h-10 rounded-full bg-[#0A2540]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#0A2540]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
             </div>

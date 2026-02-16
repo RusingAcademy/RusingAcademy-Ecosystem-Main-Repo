@@ -236,7 +236,7 @@ export default function CoachTerms() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040]">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-obsidian/80 backdrop-blur-md border-b border-slate-200 dark:border-[#0a6969]">
+      <header className="sticky top-0 z-50 bg-white/80 dark:bg-obsidian/80 backdrop-blur-md border-b border-slate-200 dark:border-teal-800">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/coach/dashboard">
@@ -267,7 +267,7 @@ export default function CoachTerms() {
 
       {/* Content */}
       <main className="container mx-auto px-4 py-12 max-w-4xl">
-        <div className="bg-white dark:bg-foundation rounded-2xl shadow-xl border border-slate-200 dark:border-[#0a6969] overflow-hidden">
+        <div className="bg-white dark:bg-foundation rounded-2xl shadow-xl border border-slate-200 dark:border-teal-800 overflow-hidden">
           {/* Title Section */}
           <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-8 py-8 text-white">
             <div className="flex items-center gap-3 mb-4">
@@ -302,7 +302,7 @@ export default function CoachTerms() {
                 {t.s1.title[l]}
               </h2>
               <p className="text-black dark:text-white/90 leading-relaxed mb-4">{t.s1.intro[l]}</p>
-              <div className="bg-slate-50 dark:bg-[#0a6969]/50 rounded-lg p-4 space-y-2 text-sm">
+              <div className="bg-slate-50 dark:bg-teal-800/50 rounded-lg p-4 space-y-2 text-sm">
                 {t.s1.defs[l].map((d, i) => (
                   <p key={i}><strong>{d.term}</strong> {d.def}</p>
                 ))}
@@ -325,16 +325,16 @@ export default function CoachTerms() {
 
                 <div className="bg-white dark:bg-foundation rounded-lg p-5 border border-slate-200 dark:border-slate-600">
                   <h3 className="font-bold text-black dark:text-white mb-4 text-center">{t.s2.breakdownTitle[l]}</h3>
-                  <p className="text-sm text-black dark:text-[#67E8F9] mb-4 text-center">{t.s2.breakdownDesc[l]}</p>
+                  <p className="text-sm text-black dark:text-cyan-300 mb-4 text-center">{t.s2.breakdownDesc[l]}</p>
                   <div className="grid md:grid-cols-2 gap-4">
                     {t.s2.items[l].map((item, i) => (
-                      <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-[#0a6969]/50 rounded-lg">
+                      <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-teal-800/50 rounded-lg">
                         <div className={`w-10 h-10 ${iconBgMap[item.icon]} rounded-full flex items-center justify-center flex-shrink-0`}>
                           {iconMap[item.icon]}
                         </div>
                         <div>
                           <h4 className="font-semibold text-black dark:text-white text-sm">{item.title}</h4>
-                          <p className="text-xs text-black dark:text-[#67E8F9]">{item.desc}</p>
+                          <p className="text-xs text-black dark:text-cyan-300">{item.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -344,7 +344,7 @@ export default function CoachTerms() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
                     <h4 className="font-semibold text-black dark:text-white mb-2">{t.s2.example.title[l]}</h4>
-                    <ul className="text-sm text-black dark:text-[#67E8F9] space-y-1">
+                    <ul className="text-sm text-black dark:text-cyan-300 space-y-1">
                       {t.s2.example.lines[l].map((line, i) => (
                         <li key={i}>• {i === 2 ? <strong>{line}</strong> : line}</li>
                       ))}
@@ -352,7 +352,7 @@ export default function CoachTerms() {
                   </div>
                   <div className="bg-white dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-slate-600">
                     <h4 className="font-semibold text-black dark:text-white mb-2">{t.s2.benefits.title[l]}</h4>
-                    <ul className="text-sm text-black dark:text-[#67E8F9] space-y-1">
+                    <ul className="text-sm text-black dark:text-cyan-300 space-y-1">
                       {t.s2.benefits.lines[l].map((line, i) => (
                         <li key={i}>✓ {line}</li>
                       ))}
@@ -404,7 +404,7 @@ export default function CoachTerms() {
               <h2 className="text-xl font-bold text-black dark:text-white mb-4">{t.s10.title[l]}</h2>
               <div className="text-black dark:text-white/90 space-y-2">
                 <p>{t.s10.intro[l]}</p>
-                <div className="bg-slate-50 dark:bg-[#0a6969]/50 rounded-lg p-4">
+                <div className="bg-slate-50 dark:bg-teal-800/50 rounded-lg p-4">
                   <p className="font-semibold">Rusinga International Consulting Ltd.</p>
                   <p className="text-sm">{t.hero.brand[l]}</p>
                   <p className="mt-2">
@@ -434,7 +434,7 @@ export default function CoachTerms() {
             </section>
 
             {/* Legal Notice */}
-            <div className="text-center text-xs text-black dark:text-[#67E8F9] pt-4 border-t border-slate-200 dark:border-[#0a6969]">
+            <div className="text-center text-xs text-black dark:text-cyan-300 pt-4 border-t border-slate-200 dark:border-teal-800">
               <p>&copy; {new Date().getFullYear()} Rusinga International Consulting Ltd. {t.copyright[l]}</p>
               <p className="mt-1">{l === "fr" ? "Document version" : "Document version"} {termsVersion}</p>
             </div>

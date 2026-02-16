@@ -447,7 +447,7 @@ export default function Pricing() {
               <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6">{l.trustedBy}</p>
               <div className="flex flex-wrap justify-center gap-8 items-center">
                 {organizations.map((org, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[#67E8F9] hover:text-teal-600 transition-colors">
+                  <div key={i} className="flex items-center gap-2 text-cyan-300 hover:text-teal-600 transition-colors">
                     <Building2 className="h-5 w-5" />
                     <span className="font-medium">{org.name}</span>
                   </div>
@@ -682,7 +682,7 @@ export default function Pricing() {
                     </div>
 
                     {/* Referral Bonus */}
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 border border-[#FFE4D6]/50 hover:shadow-md transition-all duration-300">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 border border-orange-100/50 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="h-12 w-12 rounded-xl bg-cta flex items-center justify-center shadow-lg shadow-[#C65A1E]/25">
                           <Star className="h-6 w-6 text-white" />

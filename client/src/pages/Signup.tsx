@@ -155,7 +155,7 @@ function SignupContent() {
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
@@ -163,7 +163,7 @@ function SignupContent() {
               <p className="text-white/90">
                 Please check your email to verify your account.
               </p>
-              <p className="text-sm text-[#67E8F9]">
+              <p className="text-sm text-cyan-300">
                 Redirecting to dashboard...
               </p>
             </div>
@@ -181,7 +181,7 @@ function SignupContent() {
           <Home className="h-5 w-5 text-white" />
         </button>
       </Link>
-      <Card className="w-full max-w-md bg-foundation/50 border-[#0a6969]">
+      <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -193,7 +193,7 @@ function SignupContent() {
           <CardTitle className="text-2xl font-bold text-white">
             Create Your Account
           </CardTitle>
-          <CardDescription className="text-[#67E8F9]">
+          <CardDescription className="text-cyan-300">
             Join RusingAcademy and start your bilingual journey
           </CardDescription>
         </CardHeader>
@@ -222,7 +222,7 @@ function SignupContent() {
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-[#2F2F2F] hover:bg-[#3F3F3F] text-white border-slate-600"
+              className="w-full bg-[#2F2F2F] hover:bg-neutral-700 text-white border-slate-600"
               onClick={handleMicrosoftSignUp}
               disabled={signupMutation.isPending}
             >
@@ -237,7 +237,7 @@ function SignupContent() {
               <span className="w-full border-t border-slate-600" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-foundation/50 px-2 text-[#67E8F9]">
+              <span className="bg-foundation/50 px-2 text-cyan-300">
                 Or sign up with email
               </span>
             </div>
@@ -264,7 +264,7 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
+                className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -281,7 +281,7 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
+                className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -300,12 +300,12 @@ function SignupContent() {
                   required
                   minLength={8}
                   disabled={signupMutation.isPending}
-                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
+                  className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#67E8F9] hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   aria-pressed={showPassword}
                 >
@@ -327,7 +327,7 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
+                className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -349,7 +349,7 @@ function SignupContent() {
 
           {/* Debug panel - only in development */}
           {AUTH_DEBUG && (
-            <div className="mt-4 p-3 bg-obsidian/80 border border-[#0a6969] rounded-lg text-xs font-mono">
+            <div className="mt-4 p-3 bg-obsidian/80 border border-teal-800 rounded-lg text-xs font-mono">
               <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug</div>
               <div className="text-white/90">
                 <div>Is pending: {signupMutation.isPending ? "yes" : "no"}</div>
@@ -360,7 +360,7 @@ function SignupContent() {
           )}
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-sm text-[#67E8F9]">
+          <div className="text-center text-sm text-cyan-300">
             Already have an account?{" "}
             <Link to="/login" className="text-teal-400 hover:text-teal-300 font-medium">
               Sign in
@@ -376,7 +376,7 @@ function SignupContent() {
               Privacy Policy
             </Link>
           </div>
-          <div className="text-center text-xs text-black pt-4 border-t border-[#0a6969]">
+          <div className="text-center text-xs text-black pt-4 border-t border-teal-800">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

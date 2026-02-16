@@ -174,7 +174,7 @@ export default function EmailBroadcasts() {
         {/* Broadcasts List */}
         {isLoading ? (
           <div className="flex justify-center py-12">
-            <Loader2 className="w-8 h-8 animate-spin text-[#1B1464]" />
+            <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : !broadcasts || broadcasts.length === 0 ? (
           <div className="text-center py-16">

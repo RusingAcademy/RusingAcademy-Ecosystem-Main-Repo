@@ -175,7 +175,7 @@ export default function ProfitLossReport() {
           </div>
           {/* YoY Toggle */}
           <button
-            className={`flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border ${showYoY ? "bg-[#E6F5E1] border-[#2CA01C] text-[#2CA01C]" : "border-gray-200 text-gray-500 hover:text-gray-700"}`}
+            className={`flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border ${showYoY ? "bg-green-50 border-green-600 text-green-600" : "border-gray-200 text-gray-500 hover:text-gray-700"}`}
             onClick={() => setShowYoY(!showYoY)}
             title="Year-over-Year comparison"
           >
@@ -283,7 +283,7 @@ export default function ProfitLossReport() {
             <div className="qb-card">
               {/* Income Section */}
               <div className="mb-6">
-                <h3 className="text-xs font-bold text-[#2CA01C] uppercase tracking-wider mb-3 pb-2 border-b-2 border-[#2CA01C]">Income</h3>
+                <h3 className="text-xs font-bold text-green-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-green-600">Income</h3>
                 {pnl.income.length === 0 ? (
                   <p className="text-sm text-gray-400 pl-4 py-2">No income recorded for this period</p>
                 ) : (
@@ -315,7 +315,7 @@ export default function ProfitLossReport() {
 
               {/* Expenses */}
               <div className="mb-6">
-                <h3 className="text-xs font-bold text-[#D4380D] uppercase tracking-wider mb-3 pb-2 border-b-2 border-[#D4380D]">Expenses</h3>
+                <h3 className="text-xs font-bold text-red-700 uppercase tracking-wider mb-3 pb-2 border-b-2 border-red-700">Expenses</h3>
                 {pnl.expenses.filter((e: any) => !e.name.includes("COS") && !e.name.includes("Cost")).length === 0 ? (
                   <p className="text-sm text-gray-400 pl-4 py-2">No expenses recorded for this period</p>
                 ) : (
@@ -339,7 +339,7 @@ export default function ProfitLossReport() {
               <div className="border-t-2 border-gray-800 pt-3">
                 <div className="flex justify-between text-lg font-bold">
                   <span className="text-gray-900">Net Profit (Loss)</span>
-                  <span className={`font-mono ${pnl.netProfit >= 0 ? "text-[#2CA01C]" : "text-[#D4380D]"}`}>
+                  <span className={`font-mono ${pnl.netProfit >= 0 ? "text-green-600" : "text-red-700"}`}>
                     {fmt(pnl.netProfit)}
                   </span>
                 </div>

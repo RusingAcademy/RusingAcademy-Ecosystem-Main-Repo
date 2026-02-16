@@ -64,7 +64,7 @@ export default function PeerReview() {
     </div>
   );
 
-  if (authLoading) return <div className="flex h-screen items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full" /></div>;
+  if (authLoading) return <div className="flex h-screen items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-teal-700 border-t-transparent rounded-full" /></div>;
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
@@ -75,7 +75,7 @@ export default function PeerReview() {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-              <span className="material-icons text-[#008090]">rate_review</span>
+              <span className="material-icons text-teal-700">rate_review</span>
               Peer Review
             </h1>
             <p className="text-gray-500 mt-1">Help fellow learners improve their writing</p>
@@ -94,7 +94,7 @@ export default function PeerReview() {
               <div className="text-xs text-gray-500">Completed</div>
             </div>
             <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
-              <span className="material-icons text-2xl mb-1 text-[#008090]">stars</span>
+              <span className="material-icons text-2xl mb-1 text-teal-700">stars</span>
               <div className="text-xl font-bold text-gray-900">{(completedReviews?.length ?? 0) * 25}</div>
               <div className="text-xs text-gray-500">XP Earned</div>
             </div>
@@ -104,7 +104,7 @@ export default function PeerReview() {
           <div className="flex gap-1 mb-6 bg-white rounded-xl p-1 border border-gray-100 shadow-sm w-fit">
             {(["guide", "pending", "completed"] as const).map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${activeTab === tab ? "bg-[#008090] text-white shadow-md" : "text-gray-500 hover:text-gray-700"}`}>
+                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${activeTab === tab ? "bg-teal-700 text-white shadow-md" : "text-gray-500 hover:text-gray-700"}`}>
                 {tab === "pending" ? `Pending (${pendingReviews?.length ?? 0})` : tab}
               </button>
             ))}
@@ -113,7 +113,7 @@ export default function PeerReview() {
           {activeTab === "guide" && (
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
               <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <span className="material-icons text-[#008090]">school</span>
+                <span className="material-icons text-teal-700">school</span>
                 Peer Review Guide
               </h2>
               <div className="space-y-6">
@@ -131,14 +131,14 @@ export default function PeerReview() {
                     { icon: "format_align_left", title: "Coherence (33%)", desc: "Judge logical flow, paragraph structure, transitions, and overall clarity." },
                   ].map((item, i) => (
                     <div key={i} className="p-4 rounded-xl bg-gray-50 border border-gray-100">
-                      <span className="material-icons text-[#008090] text-2xl mb-2 block">{item.icon}</span>
+                      <span className="material-icons text-teal-700 text-2xl mb-2 block">{item.icon}</span>
                       <h4 className="font-semibold text-gray-900 text-sm mb-1">{item.title}</h4>
                       <p className="text-xs text-gray-500">{item.desc}</p>
                     </div>
                   ))}
                 </div>
-                <div className="p-4 rounded-xl bg-[#008090]/5 border border-[#008090]/10">
-                  <h4 className="font-semibold text-[#008090] text-sm mb-1">Tips for Effective Reviews</h4>
+                <div className="p-4 rounded-xl bg-teal-700/5 border border-teal-700/10">
+                  <h4 className="font-semibold text-teal-700 text-sm mb-1">Tips for Effective Reviews</h4>
                   <ul className="text-xs text-gray-600 space-y-1 list-disc list-inside">
                     <li>Be specific — cite exact sentences or phrases when giving feedback</li>
                     <li>Be constructive — suggest improvements, don't just point out errors</li>
@@ -156,7 +156,7 @@ export default function PeerReview() {
               {activeReview ? (
                 /* Review Form */
                 <div className="space-y-6">
-                  <button onClick={() => setActiveReview(null)} className="text-sm text-[#008090] hover:underline flex items-center gap-1">
+                  <button onClick={() => setActiveReview(null)} className="text-sm text-teal-700 hover:underline flex items-center gap-1">
                     <span className="material-icons text-base">arrow_back</span> Back to list
                   </button>
 
@@ -202,7 +202,7 @@ export default function PeerReview() {
                     <div className="flex justify-end">
                       <button onClick={handleSubmitReview}
                         disabled={!feedback.trim() || completeReview.isPending}
-                        className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-[#008090] text-white hover:bg-[#006a75] disabled:opacity-40 transition-colors flex items-center gap-2">
+                        className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 disabled:opacity-40 transition-colors flex items-center gap-2">
                         {completeReview.isPending ? (
                           <><div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" /> Submitting...</>
                         ) : (
@@ -215,7 +215,7 @@ export default function PeerReview() {
               ) : (
                 <div className="space-y-3">
                   {loadingPending ? (
-                    <div className="text-center py-16"><div className="animate-spin w-8 h-8 border-4 border-[#008090] border-t-transparent rounded-full mx-auto" /></div>
+                    <div className="text-center py-16"><div className="animate-spin w-8 h-8 border-4 border-teal-700 border-t-transparent rounded-full mx-auto" /></div>
                   ) : !pendingReviews?.length ? (
                     <div className="text-center py-16 text-gray-400">
                       <span className="material-icons text-5xl mb-3 block">inbox</span>
@@ -230,7 +230,7 @@ export default function PeerReview() {
                           <div className="font-semibold text-gray-900">Submission #{review.submissionId}</div>
                           <div className="text-sm text-gray-500 mt-1">Assigned for review</div>
                         </div>
-                        <span className="material-icons text-[#008090]">arrow_forward</span>
+                        <span className="material-icons text-teal-700">arrow_forward</span>
                       </div>
                     </div>
                   ))}

@@ -70,7 +70,7 @@ export function StudentProgressWidget({
       case "down":
         return <TrendingDown className="h-4 w-4 text-red-500" />;
       default:
-        return <Minus className="h-4 w-4 text-[#67E8F9]" />;
+        return <Minus className="h-4 w-4 text-cyan-300" />;
     }
   };
 
@@ -88,7 +88,7 @@ export function StudentProgressWidget({
             </div>
             <div>
               <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
+              <p className="text-sm text-black dark:text-cyan-300">{l.subtitle}</p>
             </div>
           </div>
         </div>
@@ -97,22 +97,22 @@ export function StudentProgressWidget({
         <div className="grid grid-cols-3 gap-4 mt-4">
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{avgProgress}%</p>
-            <p className="text-xs text-black dark:text-[#67E8F9]">{l.avgProgress}</p>
+            <p className="text-xs text-black dark:text-cyan-300">{l.avgProgress}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-black dark:text-white">{students.length}</p>
-            <p className="text-xs text-black dark:text-[#67E8F9]">{l.totalStudents}</p>
+            <p className="text-xs text-black dark:text-cyan-300">{l.totalStudents}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{onTrackCount}</p>
-            <p className="text-xs text-black dark:text-[#67E8F9]">{l.onTrack}</p>
+            <p className="text-xs text-black dark:text-cyan-300">{l.onTrack}</p>
           </div>
         </div>
       </CardHeader>
       
       <CardContent className="p-4 space-y-3 max-h-[400px] overflow-y-auto">
         {students.length === 0 ? (
-          <div className="text-center py-8 text-black dark:text-[#67E8F9]">
+          <div className="text-center py-8 text-black dark:text-cyan-300">
             <Users className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noStudents}</p>
           </div>
@@ -122,7 +122,7 @@ export function StudentProgressWidget({
               key={student.id}
               onClick={() => onViewStudent?.(student.id)}
               className={cn(
-                "p-4 rounded-xl border bg-white dark:bg-foundation border-slate-200 dark:border-[#0a6969]",
+                "p-4 rounded-xl border bg-white dark:bg-foundation border-slate-200 dark:border-teal-800",
                 "hover:border-blue-300 dark:hover:border-blue-700 transition-all",
                 onViewStudent && "cursor-pointer"
               )}
@@ -141,7 +141,7 @@ export function StudentProgressWidget({
                     </h4>
                     {getTrendIcon(student.trend)}
                   </div>
-                  <p className="text-sm text-black dark:text-[#67E8F9]">
+                  <p className="text-sm text-black dark:text-cyan-300">
                     {student.sessionsCompleted} {l.sessions}
                   </p>
                 </div>
@@ -151,7 +151,7 @@ export function StudentProgressWidget({
                     <Badge variant="outline" className="text-xs">
                       {l.level} {student.currentLevel}
                     </Badge>
-                    <span className="text-[#67E8F9]">→</span>
+                    <span className="text-cyan-300">→</span>
                     <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300 text-xs">
                       <Target className="h-3 w-3 mr-1" />
                       {student.targetLevel}

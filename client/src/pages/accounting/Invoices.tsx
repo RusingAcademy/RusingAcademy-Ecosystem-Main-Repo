@@ -123,7 +123,7 @@ export default function Invoices() {
       className={`flex items-center gap-1 hover:text-gray-900 ${align === "right" ? "ml-auto" : ""}`}
       onClick={() => toggleSort(field)}
     >
-      {label} <ArrowUpDown size={12} className={sortField === field ? "text-[#2CA01C]" : "text-gray-400"} />
+      {label} <ArrowUpDown size={12} className={sortField === field ? "text-green-600" : "text-gray-400"} />
     </button>
   );
 
@@ -237,14 +237,14 @@ export default function Invoices() {
           <div>
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Unpaid Last 365 Days</h3>
             <div className="qb-money-bar mb-3">
-              <div className="bg-[#E8A317]" style={{ flex: Math.max(overdueTotal, 0.1) }} />
+              <div className="bg-amber-500" style={{ flex: Math.max(overdueTotal, 0.1) }} />
               <div className="bg-gray-300" style={{ flex: Math.max(notDueTotal, 0.1) }} />
             </div>
             <div className="flex items-center gap-6">
               <div>
                 <div className="text-xl font-bold text-gray-900">${overdueTotal.toFixed(2)}</div>
                 <div className="text-xs text-gray-500 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-[#E8A317]" /> {overdueInvoices.length} OVERDUE
+                  <div className="w-2 h-2 rounded-full bg-amber-500" /> {overdueInvoices.length} OVERDUE
                 </div>
               </div>
               <div>
@@ -260,13 +260,13 @@ export default function Invoices() {
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Paid</h3>
             <div className="qb-money-bar mb-3">
               <div className="bg-gray-300" style={{ flex: 0.1 }} />
-              <div className="bg-[#2CA01C]" style={{ flex: Math.max(depositedTotal, 0.1) }} />
+              <div className="bg-green-600" style={{ flex: Math.max(depositedTotal, 0.1) }} />
             </div>
             <div className="flex items-center gap-6">
               <div>
                 <div className="text-xl font-bold text-gray-900">${depositedTotal.toFixed(2)}</div>
                 <div className="text-xs text-gray-500 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-[#2CA01C]" /> {depositedInvoices.length} DEPOSITED
+                  <div className="w-2 h-2 rounded-full bg-green-600" /> {depositedInvoices.length} DEPOSITED
                 </div>
               </div>
             </div>
@@ -282,7 +282,7 @@ export default function Invoices() {
               key={tab}
               className={`pb-2 text-sm font-medium border-b-2 transition-colors ${
                 statusFilter === tab
-                  ? "border-[#2CA01C] text-[#2CA01C]"
+                  ? "border-green-600 text-green-600"
                   : "border-transparent text-gray-500 hover:text-gray-700"
               }`}
               onClick={() => { setStatusFilter(tab); setPage(1); setSelectedIds(new Set()); }}
@@ -346,7 +346,7 @@ export default function Invoices() {
                   />
                 </td>
                 <td className="text-gray-700">{inv.invoiceDate ? new Date(inv.invoiceDate).toLocaleDateString("en-CA") : ""}</td>
-                <td className="text-[#0077C5] font-medium">{inv.invoiceNumber}</td>
+                <td className="text-sky-600 font-medium">{inv.invoiceNumber}</td>
                 <td className="text-gray-800">{inv.customerName || ""}</td>
                 <td className="text-right font-medium text-gray-800">${Number(inv.total || 0).toFixed(2)}</td>
                 <td>
@@ -388,7 +388,7 @@ export default function Invoices() {
                 return (
                   <button
                     key={pageNum}
-                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-[#2CA01C] text-white" : "hover:bg-gray-200 text-gray-700"}`}
+                    className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-green-600 text-white" : "hover:bg-gray-200 text-gray-700"}`}
                     onClick={() => setPage(pageNum)}
                   >
                     {pageNum}

@@ -61,7 +61,7 @@ export default function CalendarPage() {
     <DashboardLayout>
       <div className="max-w-[1200px]">
         <div className="flex items-center gap-2 mb-4">
-          <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+          <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
             <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>Calendar</h1>
@@ -122,7 +122,7 @@ export default function CalendarPage() {
                 {day && (
                   <span className={`text-sm ${
                     day === today && isCurrentMonth
-                      ? "bg-[#008090] text-white w-6 h-6 rounded-full flex items-center justify-center font-medium"
+                      ? "bg-teal-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-medium"
                       : "text-gray-700"
                   }`}>
                     {day}

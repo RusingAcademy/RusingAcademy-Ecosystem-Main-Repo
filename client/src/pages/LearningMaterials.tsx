@@ -43,7 +43,7 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
           <ProgressCircle value={progress} />
           <div>
             <Link href={`/programs/${programId}/${path.id}`}>
-              <span className="text-sm font-medium text-gray-900 hover:text-[#008090] transition-colors cursor-pointer">
+              <span className="text-sm font-medium text-gray-900 hover:text-teal-700 transition-colors cursor-pointer">
                 {path.title}
               </span>
             </Link>
@@ -62,8 +62,8 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
       </td>
       <td className="px-4 py-3">
         <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${
-          status === "Completed" ? "bg-[rgba(245,166,35,0.12)] text-[#d4943c]" :
-          status === "In Progress" ? "bg-[rgba(0,128,144,0.1)] text-[#008090]" :
+          status === "Completed" ? "bg-[rgba(245,166,35,0.12)] text-amber-600" :
+          status === "In Progress" ? "bg-[rgba(0,128,144,0.1)] text-teal-700" :
           "bg-gray-100 text-gray-500"
         }`}>
           {status}
@@ -72,7 +72,7 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
       <td className="px-4 py-3 text-xs text-gray-500">{completedModules}/{totalModules} modules</td>
       <td className="px-4 py-3 text-center">
         <Link href={`/programs/${programId}/${path.id}`}>
-          <span className="material-icons text-[#008090] hover:text-[#f5a623] transition-colors cursor-pointer text-lg">
+          <span className="material-icons text-teal-700 hover:text-amber-500 transition-colors cursor-pointer text-lg">
             arrow_forward
           </span>
         </Link>
@@ -93,7 +93,7 @@ export default function LearningMaterials() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
+            <Link href="/dashboard" className="text-gray-400 hover:text-teal-700 transition-colors">
               <span className="material-icons text-xl">navigate_before</span>
             </Link>
             <div>
@@ -139,7 +139,7 @@ export default function LearningMaterials() {
               onClick={() => setActiveTab(i)}
               className={`px-6 py-3 text-sm font-medium transition-all relative ${
                 activeTab === i
-                  ? "text-[#008090]"
+                  ? "text-teal-700"
                   : "text-gray-500 hover:text-gray-900"
               }`}
             >
@@ -157,11 +157,11 @@ export default function LearningMaterials() {
             {programs.map((program) => (
               <div key={program.id} className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="material-icons text-[#008090]">{program.icon}</span>
+                  <span className="material-icons text-teal-700">{program.icon}</span>
                   <h2 className="text-lg font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
                     {program.title}
                   </h2>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(0,128,144,0.08)] text-[#008090] font-medium">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(0,128,144,0.08)] text-teal-700 font-medium">
                     {program.paths.length} Paths
                   </span>
                 </div>
@@ -216,14 +216,14 @@ export default function LearningMaterials() {
                     <td className="px-4 py-3">
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
                         test.type === "Diagnostic" ? "bg-purple-50 text-purple-600" :
-                        test.type === "Summative" ? "bg-[rgba(0,128,144,0.1)] text-[#008090]" :
-                        "bg-[rgba(245,166,35,0.1)] text-[#d4943c]"
+                        test.type === "Summative" ? "bg-[rgba(0,128,144,0.1)] text-teal-700" :
+                        "bg-[rgba(245,166,35,0.1)] text-amber-600"
                       }`}>{test.type}</span>
                     </td>
                     <td className="px-4 py-3">
                       <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${
                         test.status === "Passed" ? "bg-green-50 text-green-600" :
-                        test.status === "Available" ? "bg-[rgba(0,128,144,0.1)] text-[#008090]" :
+                        test.status === "Available" ? "bg-[rgba(0,128,144,0.1)] text-teal-700" :
                         test.status === "In Progress" ? "bg-blue-50 text-blue-600" :
                         "bg-gray-100 text-gray-500"
                       }`}>{test.status}</span>
@@ -255,13 +255,13 @@ export default function LearningMaterials() {
                     <span className="material-icons" style={{ color: ref.color, fontSize: "20px" }}>{ref.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[#008090] transition-colors">{ref.name}</h3>
+                    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-teal-700 transition-colors">{ref.name}</h3>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 font-medium">{ref.type}</span>
                       <span className="text-[10px] text-gray-400">{ref.category}</span>
                     </div>
                   </div>
-                  <span className="material-icons text-gray-300 group-hover:text-[#008090] transition-colors text-lg">download</span>
+                  <span className="material-icons text-gray-300 group-hover:text-teal-700 transition-colors text-lg">download</span>
                 </div>
               </div>
             ))}

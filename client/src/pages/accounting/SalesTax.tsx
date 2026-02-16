@@ -80,7 +80,7 @@ export default function SalesTax() {
           <div className="text-sm text-gray-500 mb-1">
             {currentFiling.periodStart ? new Date(currentFiling.periodStart).toLocaleDateString("en-CA") : ""} – {currentFiling.periodEnd ? new Date(currentFiling.periodEnd).toLocaleDateString("en-CA") : ""}
           </div>
-          <div className="text-xs font-bold text-[#0077C5] uppercase mb-4">
+          <div className="text-xs font-bold text-sky-600 uppercase mb-4">
             {currentFiling.status === "Upcoming" ? "CURRENT PERIOD" : currentFiling.status?.toUpperCase()}
           </div>
 
@@ -156,7 +156,7 @@ export default function SalesTax() {
                     {(f.status === "Upcoming" || f.status === "Due") && (
                       <button
                         onClick={() => fileMutation.mutate({ id: f.id, status: "Filed", filedDate: new Date() })}
-                        className="text-xs text-[#0077C5] hover:underline font-medium flex items-center gap-1"
+                        className="text-xs text-sky-600 hover:underline font-medium flex items-center gap-1"
                       >
                         <FileCheck size={12} /> File
                       </button>
@@ -164,7 +164,7 @@ export default function SalesTax() {
                     {f.status === "Filed" && (
                       <button
                         onClick={() => setShowPayDialog(f.id)}
-                        className="text-xs text-[#2CA01C] hover:underline font-medium flex items-center gap-1"
+                        className="text-xs text-green-600 hover:underline font-medium flex items-center gap-1"
                       >
                         <DollarSign size={12} /> Pay
                       </button>
@@ -209,7 +209,7 @@ export default function SalesTax() {
             <Button
               onClick={() => prepareMutation.mutate({ periodStart: new Date(prepareStart), periodEnd: new Date(prepareEnd) })}
               disabled={prepareMutation.isPending}
-              className="bg-[#2CA01C] hover:bg-[#248a17]"
+              className="bg-green-600 hover:bg-green-700"
             >
               {prepareMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : null}
               Prepare Return
@@ -230,7 +230,7 @@ export default function SalesTax() {
             <Button
               onClick={() => showPayDialog && payMutation.mutate({ id: showPayDialog, paidDate: new Date() })}
               disabled={payMutation.isPending}
-              className="bg-[#2CA01C] hover:bg-[#248a17]"
+              className="bg-green-600 hover:bg-green-700"
             >
               {payMutation.isPending ? <Loader2 size={14} className="animate-spin mr-1" /> : <DollarSign size={14} className="mr-1" />}
               Record Payment

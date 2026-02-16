@@ -62,7 +62,7 @@ export default function CoachInviteClaim() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040] flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-black dark:text-[#67E8F9]">Chargement de l'invitation...</p>
+          <p className="text-black dark:text-cyan-300">Chargement de l'invitation...</p>
         </div>
       </div>
     );
@@ -164,7 +164,7 @@ export default function CoachInviteClaim() {
               {invitation.coachName}
             </h3>
             {invitation.coachHeadline && (
-              <p className="text-black dark:text-[#67E8F9] text-sm mt-1">
+              <p className="text-black dark:text-cyan-300 text-sm mt-1">
                 {invitation.coachHeadline}
               </p>
             )}
@@ -175,7 +175,7 @@ export default function CoachInviteClaim() {
             <h4 className="font-medium text-black dark:text-white">
               En réclamant ce profil, vous pourrez :
             </h4>
-            <ul className="space-y-2 text-sm text-black dark:text-[#67E8F9]">
+            <ul className="space-y-2 text-sm text-black dark:text-cyan-300">
               <li className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                 <span>Gérer votre profil et vos disponibilités</span>
@@ -203,7 +203,7 @@ export default function CoachInviteClaim() {
                 <h4 className="font-semibold text-black dark:text-white text-sm">
                   Commission de la plateforme : 30%
                 </h4>
-                <p className="text-xs text-black dark:text-[#67E8F9] mt-1">
+                <p className="text-xs text-black dark:text-cyan-300 mt-1">
                   Une commission de 30% sera prélevée sur chaque paiement. Vous recevrez 70% directement sur votre compte Stripe.
                 </p>
               </div>
@@ -211,7 +211,7 @@ export default function CoachInviteClaim() {
           </div>
 
           {/* Terms Acceptance Checkbox */}
-          <div className="bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-[#0a6969] rounded-lg p-4">
+          <div className="bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-teal-800 rounded-lg p-4">
             <div className="flex items-start gap-3">
               <Checkbox 
                 id="terms" 

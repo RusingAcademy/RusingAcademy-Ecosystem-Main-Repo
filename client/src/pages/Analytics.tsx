@@ -91,8 +91,8 @@ export default function AnalyticsPage() {
     <div className="max-w-[1000px] mx-auto">
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-2.5 rounded-xl bg-[#1B1464]/10">
-          <BarChart3 className="w-6 h-6 text-[#1B1464]" />
+        <div className="p-2.5 rounded-xl bg-indigo-900/10">
+          <BarChart3 className="w-6 h-6 text-indigo-900" />
         </div>
         <div>
           <h1 className="text-2xl font-bold text-foreground">
@@ -121,18 +121,18 @@ export default function AnalyticsPage() {
           {/* Overview Stats */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <StatCard
-              icon={<Users className="w-5 h-5 text-[#1B1464]" />}
+              icon={<Users className="w-5 h-5 text-indigo-900" />}
               label="Total Members"
               value={overview.data?.totalMembers ?? 0}
               subValue={`+${overview.data?.newMembersThisWeek ?? 0} this week`}
-              color="bg-[#1B1464]/10"
+              color="bg-indigo-900/10"
             />
             <StatCard
               icon={<FileText className="w-5 h-5 text-barholex-gold" />}
               label="Total Posts"
               value={overview.data?.totalPosts ?? 0}
               subValue={`+${overview.data?.postsThisWeek ?? 0} this week`}
-              color="bg-[#D4AF37]/10"
+              color="bg-barholex-gold/10"
             />
             <StatCard
               icon={<MessageCircle className="w-5 h-5 text-green-600" />}
@@ -166,7 +166,7 @@ export default function AnalyticsPage() {
           {timeline.data && timeline.data.length > 0 && (
             <div className="mb-8">
               <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-[#1B1464]" />
+                <TrendingUp className="w-5 h-5 text-indigo-900" />
                 Activity (Last 30 Days)
               </h2>
               <div className="p-4 rounded-2xl border border-border bg-card">
@@ -186,7 +186,7 @@ export default function AnalyticsPage() {
                           {day.date}: {day.posts}p, {day.comments}c
                         </div>
                         <div
-                          className="w-full rounded-t-sm bg-[#1B1464] transition-all hover:bg-[#D4AF37]"
+                          className="w-full rounded-t-sm bg-indigo-900 transition-all hover:bg-barholex-gold"
                           style={{ height: `${Math.max(height, 2)}%` }}
                         />
                       </div>
@@ -233,7 +233,7 @@ export default function AnalyticsPage() {
                           <span
                             className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                               i === 0
-                                ? "bg-[#D4AF37] text-white"
+                                ? "bg-barholex-gold text-white"
                                 : i === 1
                                 ? "bg-gray-300 text-gray-700"
                                 : i === 2
@@ -253,7 +253,7 @@ export default function AnalyticsPage() {
                                 className="w-8 h-8 rounded-full object-cover"
                               />
                             ) : (
-                              <div className="w-8 h-8 rounded-full bg-[#1B1464] flex items-center justify-center text-white text-xs font-bold">
+                              <div className="w-8 h-8 rounded-full bg-indigo-900 flex items-center justify-center text-white text-xs font-bold">
                                 {entry.user?.name?.charAt(0) || "?"}
                               </div>
                             )}

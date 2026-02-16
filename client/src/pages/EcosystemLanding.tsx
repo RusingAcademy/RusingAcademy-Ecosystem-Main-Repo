@@ -657,10 +657,10 @@ export default function EcosystemLanding() {
             {/* Left - SLE AI Companion Info */}
             <div className="flex flex-col justify-center">
               <div className="flex items-center gap-2 mb-4">
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#17E2C6]/20 text-[#17E2C6]">
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-400/20 text-teal-400">
                   AI-Powered
                 </span>
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#8B5CFF]/20 text-[#8B5CFF]">
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-violet-500/20 text-[#8B5CFF]">
                   24/7 Available
                 </span>
               </div>
@@ -743,7 +743,7 @@ export default function EcosystemLanding() {
                   
                   {/* Animated ring */}
                   <motion.div
-                    className="absolute inset-0 rounded-full border-2 border-[#17E2C6]/30"
+                    className="absolute inset-0 rounded-full border-2 border-teal-400/30"
                     animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.2, 0.5] }}
                     transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                   />
@@ -751,7 +751,7 @@ export default function EcosystemLanding() {
                 
                 {/* Floating chat bubbles */}
                 <motion.div
-                  className="absolute -top-4 -right-4 px-4 py-2 rounded-2xl bg-[#17E2C6] text-white text-sm font-medium shadow-lg"
+                  className="absolute -top-4 -right-4 px-4 py-2 rounded-2xl bg-teal-400 text-white text-sm font-medium shadow-lg"
                   animate={{ y: [0, -5, 0], rotate: [0, 2, 0] }}
                   transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.5 }}
                 >
@@ -759,7 +759,7 @@ export default function EcosystemLanding() {
                 </motion.div>
                 
                 <motion.div
-                  className="absolute -bottom-2 -left-4 px-4 py-2 rounded-2xl bg-[#8B5CFF] text-white text-sm font-medium shadow-lg"
+                  className="absolute -bottom-2 -left-4 px-4 py-2 rounded-2xl bg-violet-500 text-white text-sm font-medium shadow-lg"
                   animate={{ y: [0, 5, 0], rotate: [0, -2, 0] }}
                   transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 1 }}
                 >

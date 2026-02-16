@@ -175,7 +175,7 @@ export function VoiceRecorder({
     <div className="glass-card rounded-xl p-5">
       {/* Header */}
       <div className="flex items-center gap-2 mb-4">
-        <span className="material-icons text-[#008090] text-xl">mic</span>
+        <span className="material-icons text-teal-700 text-xl">mic</span>
         <h4 className="text-sm font-semibold text-gray-900">Voice Recording</h4>
         {isRecording && (
           <span className="ml-auto flex items-center gap-1.5">
@@ -224,7 +224,7 @@ export function VoiceRecorder({
             {Array.from({ length: 40 }).map((_, i) => (
               <div
                 key={i}
-                className="w-1 bg-[#008090] rounded-full transition-all duration-150"
+                className="w-1 bg-teal-700 rounded-full transition-all duration-150"
                 style={{
                   height: isPaused ? "4px" : `${4 + Math.random() * 24}px`,
                   opacity: isPaused ? 0.3 : 0.6 + Math.random() * 0.4,
@@ -241,7 +241,7 @@ export function VoiceRecorder({
           <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
             <button
               onClick={playRecording}
-              className="w-10 h-10 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006070] transition-colors flex-shrink-0"
+              className="w-10 h-10 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-900 transition-colors flex-shrink-0"
             >
               <span className="material-icons text-xl">{isPlaying ? "pause" : "play_arrow"}</span>
             </button>
@@ -276,7 +276,7 @@ export function VoiceRecorder({
         {!isRecording && !audioUrl && (
           <button
             onClick={startRecording}
-            className="flex items-center gap-2 px-6 py-3 bg-[#008090] text-white rounded-xl font-semibold text-sm hover:bg-[#006070] transition-colors shadow-md"
+            className="flex items-center gap-2 px-6 py-3 bg-teal-700 text-white rounded-xl font-semibold text-sm hover:bg-teal-900 transition-colors shadow-md"
           >
             <span className="material-icons text-lg">mic</span>
             Start Recording
@@ -302,7 +302,7 @@ export function VoiceRecorder({
         {audioUrl && !isRecording && (
           <button
             onClick={startRecording}
-            className="flex items-center gap-2 px-6 py-3 bg-[#008090] text-white rounded-xl font-semibold text-sm hover:bg-[#006070] transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-teal-700 text-white rounded-xl font-semibold text-sm hover:bg-teal-900 transition-colors"
           >
             <span className="material-icons text-lg">refresh</span>
             Record Again
