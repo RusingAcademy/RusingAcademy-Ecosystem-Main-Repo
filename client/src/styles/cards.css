@@ -1,0 +1,370 @@
+/* ============================================
+   CARD SYSTEM — RusingAcademy Ecosystem
+   ============================================
+   Version: 4.0.0 (Wave 4)
+   
+   Card Hierarchy (4 tiers):
+   1. Glass Card — premium glassmorphism (hero sections, features)
+   2. Elevated Card — shadow-based depth (content cards, course cards)
+   3. Bordered Card — clean border (list items, settings)
+   4. Flat Card — minimal (dashboard widgets, stats)
+   
+   Container Variants:
+   - Section containers with alternating backgrounds
+   - Dashboard panels with high-contrast borders
+   - Feature grid containers
+   
+   All cards include:
+   - Consistent border-radius (--radius-xl: 1rem)
+   - Hover states with lift/glow
+   - Dark mode support
+   - Focus-visible for keyboard navigation
+   ============================================ */
+
+/* === 1. GLASS CARD (Premium Glassmorphism) === */
+@layer components {
+  .eco-card-glass {
+    position: relative;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.06),
+      0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  .eco-card-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .eco-card-glass:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 16px 48px rgba(0, 0, 0, 0.1),
+      0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Glass card on dark backgrounds */
+  .eco-card-glass-dark {
+    background: rgba(6, 43, 43, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  .eco-card-glass-dark:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Glass card with teal glow */
+  .eco-card-glass-teal {
+    background: rgba(15, 61, 62, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(15, 61, 62, 0.2);
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow: 0 8px 32px rgba(15, 61, 62, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .eco-card-glass-teal:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(15, 61, 62, 0.15);
+    border-color: rgba(15, 61, 62, 0.3);
+  }
+
+  /* Glass card with gold accent */
+  .eco-card-glass-gold {
+    background: rgba(212, 175, 55, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .eco-card-glass-gold:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.35);
+  }
+}
+
+/* === 2. ELEVATED CARD (Shadow-based depth) === */
+@layer components {
+  .eco-card-elevated {
+    background-color: #ffffff;
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.07),
+      0 2px 4px -2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+  }
+  .eco-card-elevated:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+      0 12px 24px -4px rgba(0, 0, 0, 0.1),
+      0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* === 3. BORDERED CARD (Clean border) === */
+@layer components {
+  .eco-card-bordered {
+    background-color: #ffffff;
+    border: 1px solid var(--sand, #E8E4CC);
+    border-radius: var(--radius-xl, 1rem);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+  .eco-card-bordered:hover {
+    border-color: var(--brand-foundation, #0F3D3E);
+    box-shadow: 0 4px 12px rgba(15, 61, 62, 0.06);
+  }
+}
+
+/* === 4. FLAT CARD (Minimal) === */
+@layer components {
+  .eco-card-flat {
+    background-color: var(--surface, #FEFEF8);
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+  .eco-card-flat:hover {
+    background-color: var(--sand, #F5F1D6);
+  }
+}
+
+/* === CARD INNER STRUCTURE === */
+@layer components {
+  .eco-card-header {
+    padding: 1.5rem 1.5rem 0;
+  }
+  .eco-card-body {
+    padding: 1.5rem;
+  }
+  .eco-card-footer {
+    padding: 0 1.5rem 1.5rem;
+  }
+  /* Compact variant */
+  .eco-card-header-sm {
+    padding: 1rem 1rem 0;
+  }
+  .eco-card-body-sm {
+    padding: 1rem;
+  }
+  .eco-card-footer-sm {
+    padding: 0 1rem 1rem;
+  }
+}
+
+/* === STAT CARD (Dashboard metrics) === */
+@layer components {
+  .eco-card-stat {
+    background-color: #ffffff;
+    border: 1px solid var(--sand, #E8E4CC);
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1.25rem;
+    transition: border-color 0.2s ease;
+  }
+  .eco-card-stat:hover {
+    border-color: var(--brand-foundation, #0F3D3E);
+  }
+  .eco-card-stat .stat-value {
+    font-family: var(--font-display, 'Merriweather', serif);
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 1;
+    color: var(--text, #1A1A1A);
+  }
+  .eco-card-stat .stat-label {
+    font-family: var(--font-ui, 'Inter', sans-serif);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    color: var(--muted, #6B7280);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 0.5rem;
+  }
+  .eco-card-stat .stat-change {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+  .eco-card-stat .stat-change.positive {
+    color: #16a34a;
+  }
+  .eco-card-stat .stat-change.negative {
+    color: #dc2626;
+  }
+}
+
+/* === FEATURE CARD (Landing pages) === */
+@layer components {
+  .eco-card-feature {
+    position: relative;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-xl, 1rem);
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  .eco-card-feature:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+  .eco-card-feature .feature-icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background-color: var(--brand-foundation-soft, #E7F2F2);
+    color: var(--brand-foundation, #0F3D3E);
+    margin-bottom: 1rem;
+  }
+}
+
+/* === COURSE CARD === */
+@layer components {
+  .eco-card-course {
+    background-color: #ffffff;
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .eco-card-course:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+  .eco-card-course .course-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  .eco-card-course .course-body {
+    padding: 1.25rem;
+  }
+  .eco-card-course .course-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: 9999px;
+    background-color: var(--brand-foundation-soft, #E7F2F2);
+    color: var(--brand-foundation, #0F3D3E);
+  }
+}
+
+/* === CONTAINER UTILITIES === */
+@layer components {
+  /* Dashboard panel with high-contrast border */
+  .eco-panel {
+    background-color: #ffffff;
+    border: 1px solid var(--sand, #E8E4CC);
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1.5rem;
+  }
+
+  /* Feature grid container */
+  .eco-feature-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media (min-width: 640px) {
+    .eco-feature-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .eco-feature-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Stat grid */
+  .eco-stat-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 768px) {
+    .eco-stat-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+/* === DARK MODE === */
+.dark .eco-card-glass {
+  background: rgba(6, 43, 43, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark .eco-card-elevated {
+  background-color: var(--surface, #0a2e2e);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.dark .eco-card-bordered {
+  background-color: var(--surface, #0a2e2e);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark .eco-card-flat {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.dark .eco-card-stat {
+  background-color: var(--surface, #0a2e2e);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark .eco-card-feature {
+  background: rgba(6, 43, 43, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark .eco-card-course {
+  background-color: var(--surface, #0a2e2e);
+}
+.dark .eco-panel {
+  background-color: var(--surface, #0a2e2e);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* === FOCUS VISIBLE FOR INTERACTIVE CARDS === */
+a[class*="eco-card"]:focus-visible,
+button[class*="eco-card"]:focus-visible,
+[role="button"][class*="eco-card"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.3);
+}
+
+/* === CARD LOADING SKELETON === */
+@layer components {
+  .eco-card-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-xl, 1rem);
+  }
+}
