@@ -150,7 +150,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
                 </div>
                 <p className="text-white/60">{feedback.overallScore >= 70 ? 'Excellent travail!' : 'Continuez vos efforts!'}</p>
               </div>
-              <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-white/5 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-blue-400">{feedback.pronunciation.score}%</p>
                   <p className="text-xs text-white/75">Prononciation</p>

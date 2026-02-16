@@ -229,7 +229,7 @@ export default function BalanceSheetReport() {
               </div>
 
               {/* Summary Cards */}
-              <div className="grid grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                 <div className="p-3 bg-blue-50 rounded-lg">
                   <p className="text-xs text-blue-600 font-medium">Total Assets</p>
                   <p className="text-lg font-bold text-blue-800">{fmt(bs.totalAssets)}</p>

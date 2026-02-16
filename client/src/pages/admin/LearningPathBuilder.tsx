@@ -417,7 +417,7 @@ export default function LearningPathBuilder() {
                   <div className="border-t border-gray-200 dark:border-gray-700 p-5 bg-gray-50 dark:bg-gray-900/50">
                     {/* Analytics Row */}
                     {analyticsQuery.data && (
-                      <div className="grid grid-cols-4 gap-4 mb-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                         {[
                           { label: ui.totalEnrollments, value: analyticsQuery.data.totalEnrollments, color: "text-blue-600" },
                           { label: ui.activeEnrollments, value: analyticsQuery.data.activeEnrollments, color: "text-green-600" },

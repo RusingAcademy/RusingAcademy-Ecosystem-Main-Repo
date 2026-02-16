@@ -216,7 +216,7 @@ export default function ProjectTrackerDashboard() {
                     </div>
                     <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Production</span>
                   </div>
-                  <div className="grid grid-cols-4 gap-4 text-center text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
                     {branch.features.map((feature, i) => (<div key={i}><span className="block text-lg font-bold text-emerald-400">✓</span><span className="text-cyan-300">{feature}</span></div>))}
                   </div>
                 </div>

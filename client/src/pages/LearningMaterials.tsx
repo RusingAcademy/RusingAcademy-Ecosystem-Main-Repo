@@ -113,7 +113,7 @@ export default function LearningMaterials() {
         </div>
 
         {/* Stats Bar */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           {[
             { icon: "auto_stories", label: "Lessons Done", value: lessonsCompleted, color: "#008090" },
             { icon: "star", label: "Total XP", value: totalXP.toLocaleString(), color: "#f5a623" },

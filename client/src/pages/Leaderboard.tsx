@@ -221,7 +221,7 @@ export default function Leaderboard() {
         {/* Time Filter Tabs */}
         <div className="flex justify-center mb-6">
           <Tabs value={timeFilter} onValueChange={(v) => { setTimeFilter(v as TimeFilter); setCurrentPage(1); }}>
-            <TabsList className="grid grid-cols-3 w-full max-w-md">
+            <TabsList className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full max-w-md">
               <TabsTrigger value="weekly">This Week</TabsTrigger>
               <TabsTrigger value="monthly">This Month</TabsTrigger>
               <TabsTrigger value="allTime">All Time</TabsTrigger>

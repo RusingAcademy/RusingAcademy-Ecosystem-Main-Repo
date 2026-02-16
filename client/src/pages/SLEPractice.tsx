@@ -174,7 +174,7 @@ export default function SLEPractice() {
           </div>
           
           {/* Session Stats */}
-          <div className="grid grid-cols-3 gap-4 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{completedPhrases.size}</div>
               <div className="text-sm text-white/90">{isEn ? "Completed" : "Terminées"}</div>
@@ -191,7 +191,7 @@ export default function SLEPractice() {
         </div>
         
         {/* Level Selector */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
           {(["A", "B", "C"] as SLELevel[]).map((level) => (
             <button
               key={level}
@@ -220,7 +220,7 @@ export default function SLEPractice() {
         
         {/* Exercise Type Tabs */}
         <Tabs value={activeExercise} onValueChange={(v) => setActiveExercise(v as ExerciseType)} className="mb-8">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             <TabsTrigger value="listening" className="flex items-center gap-2">
               <Headphones className="h-4 w-4" />
               <span className="hidden sm:inline">{isEn ? "Listening" : "Écoute"}</span>

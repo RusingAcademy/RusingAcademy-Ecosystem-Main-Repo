@@ -217,7 +217,7 @@ export default function DailyReview() {
 
               {/* Score breakdown */}
               {sessionRatings.length > 0 && (
-                <div className="grid grid-cols-4 gap-3 max-w-md mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 max-w-md mx-auto">
                   <div className="text-center p-2 rounded-lg bg-green-50 dark:bg-green-950">
                     <p className="text-lg font-bold text-green-600">{easyCount}</p>
                     <p className="text-xs text-muted-foreground">{t("flashcards.easy")}</p>
@@ -313,7 +313,7 @@ export default function DailyReview() {
                     <Badge className="mb-2">{t("flashcards.back").split(" ")[0]}</Badge>
                     <h2 className="text-2xl font-bold text-primary">{currentCard.back}</h2>
 
-                    <div className="grid grid-cols-4 gap-2 pt-6" role="group" aria-label={t("flashcards.howWell")}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 pt-6" role="group" aria-label={t("flashcards.howWell")}>
                       {ratingButtons.map(btn => (
                         <button
                           key={btn.quality}

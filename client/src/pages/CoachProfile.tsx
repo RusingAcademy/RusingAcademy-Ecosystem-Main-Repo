@@ -836,7 +836,7 @@ export default function CoachProfile() {
                         {selectedDate && (
                           <div className="space-y-3">
                             <p className="text-sm font-medium">{isEn ? "Available times:" : "Heures disponibles:"}</p>
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                               {availableTimeSlots.map((time) => (
                                 <Button
                                   key={time}

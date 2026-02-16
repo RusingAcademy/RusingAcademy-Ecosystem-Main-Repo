@@ -241,7 +241,7 @@ export default function DictationPractice() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Score Summary */}
-                <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
                   <div className="p-4 bg-muted/50 rounded-lg">
                     <p className="text-3xl font-bold text-primary">{avgAccuracy}%</p>
                     <p className="text-sm text-muted-foreground">Score moyen</p>

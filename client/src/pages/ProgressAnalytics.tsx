@@ -185,7 +185,7 @@ export default function ProgressAnalytics() {
 
                   {/* Skill-specific details */}
                   {skill.name === "Reading" && readingStats && (
-                    <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-100">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-100">
                       <div className="text-center">
                         <div className="text-lg font-bold text-gray-900">{readingStats.avgWpm ?? 0}</div>
                         <div className="text-xs text-gray-500">Avg WPM</div>
@@ -221,7 +221,7 @@ export default function ProgressAnalytics() {
                   )}
 
                   {skill.name === "Vocabulary" && Array.isArray(vocabItems) && vocabItems.length > 0 && (
-                    <div className="grid grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-100">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-100">
                       {["new", "learning", "familiar", "mastered"].map(level => {
                         const count = vocabItems.filter((v: any) => v.masteryLevel === level).length;
                         const colors: Record<string, string> = { new: "#94a3b8", learning: "#f5a623", familiar: "#8b5cf6", mastered: "#22c55e" };

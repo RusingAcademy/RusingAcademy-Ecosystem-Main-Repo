@@ -305,7 +305,7 @@ export default function ComponentLab() {
                     The EcosystemSwitcher component renders a full overlay with animated brand cards.
                     In this lab, we show a simplified preview. The full component is imported and functional.
                   </p>
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {[
                       { name: "RusingAcademy", color: "#E07B39", desc: "Formation B2B/B2G" },
                       { name: "Lingueefy", color: "#145A5B", desc: "Coaching personnalisé" },

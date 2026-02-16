@@ -209,7 +209,7 @@ export default function WeeklyChallenges() {
           <Input type="number" value={form.xpReward} onChange={(e) => setForm({ ...form, xpReward: Number(e.target.value) })} />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div>
           <Label>Target Count</Label>
           <Input type="number" value={form.targetCount} onChange={(e) => setForm({ ...form, targetCount: Number(e.target.value) })} />
@@ -260,7 +260,7 @@ export default function WeeklyChallenges() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-4 flex items-center gap-3">
             <div className="p-2 rounded-lg bg-amber-100">

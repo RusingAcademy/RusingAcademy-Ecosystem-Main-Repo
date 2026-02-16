@@ -82,7 +82,7 @@ export default function ProgramSelect() {
                     <p className="text-sm text-gray-600 mb-4">{prog.description}</p>
                     <p className="text-xs text-gray-400 mb-4 italic">{prog.descriptionFr}</p>
 
-                    <div className="grid grid-cols-4 gap-2 mb-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 mb-4">
                       {[
                         { label: "Paths", value: stats.paths },
                         { label: "Modules", value: stats.modules },

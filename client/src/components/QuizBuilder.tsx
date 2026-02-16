@@ -205,7 +205,7 @@ function SortableQuestionCard({
       {expanded && (
         <div className="px-4 pb-4 pt-1 space-y-4 border-t bg-muted/10">
           {/* Question Type & Difficulty Row */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             <div>
               <Label className="text-xs">Type</Label>
               <Select value={localType} onValueChange={(v) => { setLocalType(v); markDirty(); }}>

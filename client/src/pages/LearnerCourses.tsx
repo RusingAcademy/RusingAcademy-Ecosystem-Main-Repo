@@ -324,7 +324,7 @@ export default function LearnerCourses() {
 
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
-              <TabsList className="grid w-full grid-cols-4 max-w-lg">
+              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 max-w-lg">
                 <TabsTrigger value="all">{l.allCourses}</TabsTrigger>
                 <TabsTrigger value="in-progress">{l.inProgress}</TabsTrigger>
                 <TabsTrigger value="completed">{l.completed}</TabsTrigger>

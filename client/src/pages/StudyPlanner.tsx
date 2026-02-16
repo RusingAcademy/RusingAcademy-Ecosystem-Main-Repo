@@ -350,7 +350,7 @@ export default function StudyPlanner() {
                 {/* Type selector */}
                 <div className="mb-3">
                   <label className="text-xs font-medium text-gray-500 mb-2 block">Session Type</label>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                     {SESSION_TYPES.map(st => (
                       <button key={st.id} onClick={() => setFormType(st.id)}
                         className={`p-2 rounded-xl border text-center transition-all ${formType === st.id ? "border-teal-700 bg-teal-700/5" : "border-gray-200 hover:border-gray-300"}`}>

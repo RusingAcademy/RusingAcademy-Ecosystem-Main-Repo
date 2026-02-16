@@ -183,7 +183,7 @@ Généré par RusingAcademy Learning Ecosystem
         </div>
         
         {/* Quick Stats */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           <div className="text-center p-3 bg-slate-800/50 rounded-lg">
             <Clock className="w-5 h-5 mx-auto text-blue-400 mb-1" />
             <div className="text-lg font-semibold">{formatDuration(summary.duration)}</div>

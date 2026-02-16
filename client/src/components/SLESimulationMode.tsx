@@ -286,7 +286,7 @@ export function SLESimulationMode({
           <p className="text-black dark:text-cyan-300 mb-8">{l.subtitle}</p>
 
           {/* Exam Info */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
               <p className="text-sm text-black dark:text-cyan-300 mb-1">Type</p>
               <p className="font-semibold text-black dark:text-white">{examTypeLabels[examType]}</p>

@@ -81,7 +81,7 @@ export default function ABTesting() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <Card><CardContent className="pt-6 text-center">
           <FlaskConical className="h-8 w-8 mx-auto mb-2 text-blue-500" />
           <div className="text-2xl font-bold">{stats.total}</div>

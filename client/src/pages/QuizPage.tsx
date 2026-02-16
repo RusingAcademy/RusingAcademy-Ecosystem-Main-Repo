@@ -243,7 +243,7 @@ export default function QuizPage() {
               </div>
             )}
 
-            <div className="mt-6 grid grid-cols-3 gap-4 max-w-sm mx-auto">
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-sm mx-auto">
               <div className="text-center">
                 <div className="text-2xl font-bold text-teal-700">{questions.length}</div>
                 <div className="text-[10px] text-gray-400 uppercase">Questions</div>

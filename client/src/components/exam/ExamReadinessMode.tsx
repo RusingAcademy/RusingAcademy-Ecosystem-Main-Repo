@@ -72,7 +72,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
         </div>
 
         {/* Section Cards */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
           {Object.entries(SLE_CONFIG.sections).map(([key, section]) => (
             <button key={key} onClick={() => setSelectedSection(key as any)}
               className={`p-6 rounded-xl text-left transition-all ${selectedSection === key ? 'bg-foundation-soft/20 border-foundation' : 'bg-white/5 border-white/10'} border`}>

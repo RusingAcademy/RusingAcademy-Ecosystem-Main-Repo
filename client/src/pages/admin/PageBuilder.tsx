@@ -171,7 +171,7 @@ function LivePreviewSection({ section }: { section: any }) {
       return (
         <div style={sectionStyle} className="px-4">
           {section.title && <h2 className="text-xl font-bold text-center mb-4">{section.title}</h2>}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {features.slice(0, 6).map((f: any, i: number) => (
               <div key={i} className="p-3 border rounded text-center text-xs">
                 <p className="font-semibold">{f.title || `Feature ${i + 1}`}</p>
@@ -210,7 +210,7 @@ function LivePreviewSection({ section }: { section: any }) {
       return (
         <div style={sectionStyle} className="px-4">
           {section.title && <h2 className="text-xl font-bold text-center mb-4">{section.title}</h2>}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {plans.slice(0, 3).map((p: any, i: number) => (
               <div key={i} className={`p-3 border rounded text-center text-xs ${p.featured ? "border-blue-500 ring-1 ring-blue-200" : ""}`}>
                 <p className="font-bold">{p.name}</p>
@@ -239,7 +239,7 @@ function LivePreviewSection({ section }: { section: any }) {
       return (
         <div style={sectionStyle} className="px-4">
           {section.title && <h2 className="text-xl font-bold text-center mb-4">{section.title}</h2>}
-          <div className="grid grid-cols-4 gap-3 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-center">
             {stats.slice(0, 4).map((s: any, i: number) => (
               <div key={i}><p className="text-2xl font-bold">{s.value}</p><p className="text-xs opacity-60">{s.label}</p></div>
             ))}
@@ -641,7 +641,7 @@ export default function PageBuilder() {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div className="col-span-1 space-y-3">
           <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Menus</h3>
           {(menusQuery.data as any[] || []).map((menu: any) => (

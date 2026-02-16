@@ -111,7 +111,7 @@ export default function AdminContentPipeline() {
         )}
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             <TabsTrigger value="pipeline">Pipeline</TabsTrigger>
             <TabsTrigger value="calendar">Calendar</TabsTrigger>
             <TabsTrigger value="quality">Quality</TabsTrigger>

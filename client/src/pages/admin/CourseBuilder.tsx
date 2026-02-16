@@ -577,7 +577,7 @@ function QualityGatePanel({ courseId }: { courseId: number }) {
       </CardHeader>
       <CardContent className="pt-0">
         {/* Summary stats */}
-        <div className="grid grid-cols-4 gap-3 mb-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
           <div className="text-center p-2 rounded-lg bg-muted/30">
             <p className={`text-lg font-bold ${data.totalModules === 4 ? "text-emerald-600" : "text-red-600"}`}>{data.totalModules}</p>
             <p className="text-[10px] text-muted-foreground">Modules (need 4)</p>
@@ -1004,7 +1004,7 @@ function ActivityDialog({
           </div>
         </DialogHeader>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             <TabsTrigger value="content-en" className="gap-1.5">
               <span className="text-[10px] px-1 rounded bg-red-50 text-red-600 border border-red-100">EN</span> Content
             </TabsTrigger>

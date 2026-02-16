@@ -406,7 +406,7 @@ export default function LeadMergeManager() {
                       <RadioGroupItem value={lead.id.toString()} id={`lead-${lead.id}`} />
                       <label
                         htmlFor={`lead-${lead.id}`}
-                        className="flex-1 cursor-pointer grid grid-cols-4 gap-4"
+                        className="flex-1 cursor-pointer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
                       >
                         <div>
                           <p className="font-medium">

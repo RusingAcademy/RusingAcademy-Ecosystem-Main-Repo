@@ -295,7 +295,7 @@ export default function FunnelBuilder() {
         </div>
 
         {/* Pipeline Stats */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold">{editingFunnel.stats.visitors.toLocaleString()}</p><p className="text-xs text-muted-foreground">Visitors</p></CardContent></Card>
           <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold">{editingFunnel.stats.conversions}</p><p className="text-xs text-muted-foreground">Conversions</p></CardContent></Card>
           <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold">${editingFunnel.stats.revenue.toLocaleString()}</p><p className="text-xs text-muted-foreground">Revenue</p></CardContent></Card>

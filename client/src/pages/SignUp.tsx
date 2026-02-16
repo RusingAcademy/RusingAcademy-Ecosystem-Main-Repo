@@ -53,7 +53,7 @@ export default function SignUp() {
         </div>
 
         {/* Benefits */}
-        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-xs text-black">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center text-xs text-black">
           <div className="flex flex-col items-center gap-1">
             <div className="w-10 h-10 rounded-full bg-[#0A2540]/10 flex items-center justify-center">
               <svg className="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">

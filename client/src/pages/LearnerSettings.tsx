@@ -281,7 +281,7 @@ export default function LearnerSettings() {
             </div>
           ) : (
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-6">
                 <TabsTrigger value="profile" className="gap-2">
                   <User className="h-4 w-4" />
                   {t.profile}
@@ -414,7 +414,7 @@ export default function LearnerSettings() {
                     {/* Current Levels */}
                     <div className="space-y-4">
                       <Label className="text-base font-semibold">{t.currentLevel}</Label>
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
                           <Label className="text-sm text-muted-foreground">{t.oral}</Label>
                           <Select value={currentOral} onValueChange={setCurrentOral}>
@@ -463,7 +463,7 @@ export default function LearnerSettings() {
                     {/* Target Levels */}
                     <div className="space-y-4">
                       <Label className="text-base font-semibold">{t.targetLevel}</Label>
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
                           <Label className="text-sm text-muted-foreground">{t.oral}</Label>
                           <Select value={targetOral} onValueChange={setTargetOral}>

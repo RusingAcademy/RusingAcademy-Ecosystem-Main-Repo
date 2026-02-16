@@ -213,7 +213,7 @@ export default function WebhookHealthDashboard() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-muted/50 rounded-lg">
               <p className="text-2xl font-bold">{l.avgLatencyMs ?? 0}ms</p>
               <p className="text-xs text-muted-foreground">{ui.avgLatency}</p>

@@ -299,7 +299,7 @@ export default function LiveKPIDashboard() {
                 <TooltipProvider>
                   <div className="space-y-3">
                     {/* Summary metrics */}
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       <div className="text-center p-2 bg-muted/30 rounded-lg">
                         <p className="text-lg font-bold">{pct(pipelineHealth.overallFailureRate)}</p>
                         <p className="text-xs text-muted-foreground">Failure Rate</p>

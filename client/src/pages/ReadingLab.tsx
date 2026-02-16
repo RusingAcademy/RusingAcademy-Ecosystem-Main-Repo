@@ -340,7 +340,7 @@ export default function ReadingLab() {
                   <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("grammar.drillComplete")}</h2>
-                <div className="grid grid-cols-3 gap-6 mt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
                   {(() => {
                     const correct = passage?.questions.reduce((sum, q, i) => sum + (answers[i] === q.correct ? 1 : 0), 0) ?? 0;
                     const total = passage?.questions.length ?? 1;

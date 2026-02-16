@@ -496,7 +496,7 @@ export default function CoachGuide() {
         <section className="py-8">
           <div className="container max-w-6xl mx-auto px-4">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-              <TabsList className="grid grid-cols-3 lg:grid-cols-6 gap-2 h-auto p-1">
+              <TabsList className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 h-auto p-1">
                 <TabsTrigger value="getting-started" className="text-xs sm:text-sm">
                   {c.tabs.gettingStarted}
                 </TabsTrigger>

@@ -198,7 +198,7 @@ export default function MediaLibraryPicker({
                     <p className="text-xs mt-1">Try adjusting your search or filters</p>
                   </div>
                 ) : viewMode === "grid" ? (
-                  <div className="grid grid-cols-4 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                     {items.map((item: any) => (
                       <button
                         key={item.id}

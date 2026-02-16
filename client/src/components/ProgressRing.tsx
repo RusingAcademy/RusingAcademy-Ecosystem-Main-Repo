@@ -273,7 +273,7 @@ export function SLETripleRing({
   ];
 
   return (
-    <div className={cn("grid grid-cols-3 gap-6", className)}>
+    <div className={cn("grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6", className)}>
       {skills.map((skill) => {
         const currentProgress = getLevelProgress(skill.data.current);
         const targetProgress = getLevelProgress(skill.data.target);

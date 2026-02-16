@@ -206,7 +206,7 @@ export default function MySessions() {
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-6">
               <TabsTrigger value="upcoming" className="gap-2">
                 <Calendar className="h-4 w-4" />
                 {l.upcoming}

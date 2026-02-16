@@ -139,7 +139,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-3">
                 <div>
                   <p className="text-xs text-gray-600">{isEn ? "Applications" : "Candidatures"}</p>
                   <p className="text-lg font-semibold text-gray-900">{team.totalApplicationsReviewed}</p>

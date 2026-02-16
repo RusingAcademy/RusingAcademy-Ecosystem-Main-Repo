@@ -94,7 +94,7 @@ export function StudentProgressWidget({
         </div>
         
         {/* Summary Stats */}
-        <div className="grid grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{avgProgress}%</p>
             <p className="text-xs text-black dark:text-cyan-300">{l.avgProgress}</p>

@@ -93,7 +93,7 @@ export default function LearnerProgressCards() {
       <CardContent className="space-y-4">
         {/* Cohort Summary Bar */}
         {cohortData && (
-          <div className="grid grid-cols-3 gap-3 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-4">
             <div className="text-center p-3 rounded-lg bg-muted/50">
               <p className="text-2xl font-bold">{cohortData.totalLearners || 0}</p>
               <p className="text-xs text-muted-foreground">{t.totalLearners}</p>

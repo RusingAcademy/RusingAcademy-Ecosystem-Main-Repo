@@ -106,7 +106,7 @@ export function TeamComplianceWidget({
         </div>
         
         {/* Overall Stats */}
-        <div className="grid grid-cols-4 gap-3 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mt-4">
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className={cn("text-2xl font-bold", getComplianceColor(overallComplianceRate))}>
               {overallComplianceRate}%

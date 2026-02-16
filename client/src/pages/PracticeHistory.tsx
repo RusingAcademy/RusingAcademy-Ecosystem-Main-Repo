@@ -118,7 +118,7 @@ export default function PracticeHistory() {
       <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-6">
         <div className="max-w-4xl mx-auto">
           <Skeleton className="h-10 w-64 mb-6" />
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
             <Skeleton className="h-24" />
             <Skeleton className="h-24" />
             <Skeleton className="h-24" />

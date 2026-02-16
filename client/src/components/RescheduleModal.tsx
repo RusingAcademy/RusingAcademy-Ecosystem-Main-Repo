@@ -199,7 +199,7 @@ export default function RescheduleModal({
               ) : availabilityQuery.data?.length === 0 ? (
                 <p className="text-center py-4 text-muted-foreground">{l.noSlots}</p>
               ) : (
-                <div className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto">
                   {(availabilityQuery.data || []).map((slot: string) => (
                     <Button
                       key={slot}

@@ -186,7 +186,7 @@ export function AvailabilityManager() {
                 key={index}
                 className="flex items-center gap-3 p-3 border rounded-lg bg-muted/30"
               >
-                <div className="flex-1 grid grid-cols-4 gap-3 items-center">
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 items-center">
                   {/* Day selector */}
                   <div>
                     <Label className="text-xs text-muted-foreground mb-1 block">{t.day}</Label>

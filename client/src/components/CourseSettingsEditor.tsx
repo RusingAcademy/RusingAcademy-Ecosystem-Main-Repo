@@ -231,7 +231,7 @@ export default function CourseSettingsEditor({ courseId, onBack }: CourseSetting
 
       {/* Settings Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-3 md:grid-cols-6">
+        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-cols-6">
           <TabsTrigger value="general" className="text-xs"><Settings2 className="h-3 w-3 mr-1" /> General</TabsTrigger>
           <TabsTrigger value="pricing" className="text-xs"><DollarSign className="h-3 w-3 mr-1" /> Pricing</TabsTrigger>
           <TabsTrigger value="media" className="text-xs"><ImageIcon className="h-3 w-3 mr-1" /> Media</TabsTrigger>

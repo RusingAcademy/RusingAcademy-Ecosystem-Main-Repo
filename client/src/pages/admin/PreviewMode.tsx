@@ -568,7 +568,7 @@ export default function PreviewMode() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                       <div className="text-center p-3 bg-gray-50 rounded-lg">
                         <div className="text-2xl font-bold text-violet-600">{(previewData as any).profile.averageRating || "N/A"}</div>
                         <div className="text-xs text-black">Rating</div>
@@ -661,7 +661,7 @@ export default function PreviewMode() {
                 <Shield className="w-4 h-4 text-amber-600" />
                 <span>Full admin overview — all platform metrics and controls</span>
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <Users className="w-8 h-8 text-blue-600 mx-auto" />

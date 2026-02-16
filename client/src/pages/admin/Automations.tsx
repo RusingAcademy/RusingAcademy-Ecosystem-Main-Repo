@@ -370,7 +370,7 @@ export default function Automations() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold">{editingAutomation.stats.triggered}</p><p className="text-xs text-muted-foreground">Triggered</p></CardContent></Card>
           <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold text-green-600">{editingAutomation.stats.completed}</p><p className="text-xs text-muted-foreground">Completed</p></CardContent></Card>
           <Card><CardContent className="p-4 text-center"><p className="text-2xl font-bold text-blue-600">{editingAutomation.stats.active}</p><p className="text-xs text-muted-foreground">In Progress</p></CardContent></Card>

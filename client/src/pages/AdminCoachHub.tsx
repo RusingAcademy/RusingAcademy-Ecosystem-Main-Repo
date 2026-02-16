@@ -64,7 +64,7 @@ export default function AdminCoachHub() {
         )}
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="coaches">Active Coaches</TabsTrigger>
             <TabsTrigger value="commission">Commission</TabsTrigger>
@@ -257,7 +257,7 @@ export default function AdminCoachHub() {
             <div className="space-y-3">
               <Input placeholder="Tier Name" value={newTier.name} onChange={(e) => setNewTier(p => ({ ...p, name: e.target.value }))} />
               <Input placeholder="Description" value={newTier.description} onChange={(e) => setNewTier(p => ({ ...p, description: e.target.value }))} />
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                 <Input type="number" placeholder="Rate %" value={newTier.commissionRate} onChange={(e) => setNewTier(p => ({ ...p, commissionRate: Number(e.target.value) }))} />
                 <Input type="number" placeholder="Min Students" value={newTier.minStudents} onChange={(e) => setNewTier(p => ({ ...p, minStudents: Number(e.target.value) }))} />
                 <Input type="number" placeholder="Max Students" value={newTier.maxStudents} onChange={(e) => setNewTier(p => ({ ...p, maxStudents: Number(e.target.value) }))} />

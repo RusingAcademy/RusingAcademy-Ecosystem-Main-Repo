@@ -1209,7 +1209,7 @@ export default function RusingAcademyLanding() {
                     </p>
 
                     {/* Course Details Grid */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mb-6">
                       <div className="text-center p-3 md:p-4 rounded-xl bg-gradient-to-br from-teal-50 to-white border border-teal-100/50">
                         <Calendar className="w-5 h-5 md:w-6 md:h-6 mx-auto mb-2 text-teal-600" />
                         <p className="font-bold text-slate-900 text-sm md:text-base">{currentPath.duration}</p>

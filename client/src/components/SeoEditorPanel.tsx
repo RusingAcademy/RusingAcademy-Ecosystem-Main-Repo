@@ -420,7 +420,7 @@ export default function SeoEditorPanel({
             {/* Left: Editor */}
             <div className="flex-1 overflow-y-auto pr-2">
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="w-full grid grid-cols-3 mb-4">
+                <TabsList className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-4">
                   <TabsTrigger value="search" className="text-xs">
                     <Search className="w-3.5 h-3.5 mr-1" />
                     Search

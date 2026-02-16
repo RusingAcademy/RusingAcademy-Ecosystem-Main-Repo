@@ -147,7 +147,7 @@ export function NativeCalendar({ coachId, coachName, sessionDuration, onBookingC
           <CardContent>
             {slotsLoading ? <div className="flex justify-center py-8"><Loader2 className="h-6 w-6 animate-spin" /></div> :
              availableSlots?.length > 0 ? (
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
                 {availableSlots.map((slot: TimeSlot) => (
                   <button key={slot.id} disabled={!slot.available} onClick={() => setSelectedSlot(slot)}
                     className={cn("px-3 py-2 text-sm rounded-lg border", !slot.available && "bg-muted cursor-not-allowed",
