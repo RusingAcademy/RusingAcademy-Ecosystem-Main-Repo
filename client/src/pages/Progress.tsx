@@ -28,7 +28,7 @@ export default function Progress() {
       <div className="max-w-[1200px]">
         <div className="flex items-center gap-2 mb-4">
           <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
-            <span className="material-icons text-[20px]">navigate_before</span>
+            <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>Progress</h1>
         </div>

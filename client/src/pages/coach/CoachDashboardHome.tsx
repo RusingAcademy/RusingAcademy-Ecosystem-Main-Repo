@@ -136,7 +136,7 @@ export default function CoachDashboardHome() {
                         </p>
                         {session.meetingUrl && (
                           <a href={session.meetingUrl} target="_blank" rel="noopener noreferrer" className="text-[10px] text-gray-400 hover:text-[#7c3aed] mt-0.5 transition-colors">
-                            <span className="material-icons text-[14px]">videocam</span>
+                            <span className="material-icons text-sm">videocam</span>
                           </a>
                         )}
                       </div>

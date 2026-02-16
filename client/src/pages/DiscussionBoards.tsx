@@ -70,7 +70,7 @@ export default function DiscussionBoards() {
       <DashboardLayout>
         <div className="max-w-4xl mx-auto px-4 py-6">
           <button onClick={() => setSelectedThread(null)} className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#008090] mb-4 transition-colors">
-            <span className="material-icons text-[18px]">arrow_back</span> Back to Discussions
+            <span className="material-icons text-lg">arrow_back</span> Back to Discussions
           </button>
           {thread.isLoading ? (
             <div className="space-y-4">{[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse" />)}</div>
@@ -84,15 +84,15 @@ export default function DiscussionBoards() {
                   </div>
                   {user && t.userId === user.id && (
                     <button onClick={() => { if (confirm("Delete this thread?")) deleteThread.mutate({ threadId: t.id }); }} className="text-gray-400 hover:text-red-500">
-                      <span className="material-icons text-[18px]">delete</span>
+                      <span className="material-icons text-lg">delete</span>
                     </button>
                   )}
                 </div>
                 <h1 className="text-xl font-bold text-gray-900 mb-3">{t.title}</h1>
                 <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{t.content}</p>
                 <div className="flex items-center gap-4 mt-4 text-[11px] text-gray-400">
-                  <span className="flex items-center gap-1"><span className="material-icons text-[14px]">visibility</span>{t.viewCount} views</span>
-                  <span className="flex items-center gap-1"><span className="material-icons text-[14px]">chat_bubble</span>{t.replyCount} replies</span>
+                  <span className="flex items-center gap-1"><span className="material-icons text-sm">visibility</span>{t.viewCount} views</span>
+                  <span className="flex items-center gap-1"><span className="material-icons text-sm">chat_bubble</span>{t.replyCount} replies</span>
                 </div>
               </div>
 
@@ -101,7 +101,7 @@ export default function DiscussionBoards() {
                   <div key={reply.id} className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-7 h-7 rounded-full bg-[#008090]/10 flex items-center justify-center">
-                        <span className="material-icons text-[#008090] text-[14px]">person</span>
+                        <span className="material-icons text-[#008090] text-sm">person</span>
                       </div>
                       <span className="text-[11px] text-gray-500">User #{reply.userId}</span>
                       <span className="text-[10px] text-gray-400">{new Date(reply.createdAt).toLocaleDateString()}</span>
@@ -152,7 +152,7 @@ export default function DiscussionBoards() {
           </div>
           {user && (
             <button onClick={() => setShowNewThread(true)} className="flex items-center gap-2 px-4 py-2 bg-[#008090] text-white text-sm rounded-lg hover:bg-[#006d7a] transition-colors shadow-sm">
-              <span className="material-icons text-[18px]">add</span> New Thread
+              <span className="material-icons text-lg">add</span> New Thread
             </button>
           )}
         </div>
@@ -170,7 +170,7 @@ export default function DiscussionBoards() {
               }`}
               style={category === cat.id ? { background: cat.color } : {}}
             >
-              <span className="material-icons text-[14px]">{cat.icon}</span>
+              <span className="material-icons text-sm">{cat.icon}</span>
               {cat.label}
             </button>
           ))}
@@ -246,14 +246,14 @@ export default function DiscussionBoards() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        {t.isPinned && <span className="material-icons text-[#f59e0b] text-[14px]">push_pin</span>}
+                        {t.isPinned && <span className="material-icons text-[#f59e0b] text-sm">push_pin</span>}
                         <h3 className="text-sm font-semibold text-gray-900 truncate">{t.title}</h3>
                       </div>
                       <p className="text-xs text-gray-500 line-clamp-2">{t.content}</p>
                       <div className="flex items-center gap-3 mt-2 text-[10px] text-gray-400">
                         <span className="px-1.5 py-0.5 rounded-full text-[9px] font-medium" style={{ background: catInfo.color + "15", color: catInfo.color }}>{catInfo.label}</span>
-                        <span className="flex items-center gap-0.5"><span className="material-icons text-[12px]">chat_bubble</span>{t.replyCount}</span>
-                        <span className="flex items-center gap-0.5"><span className="material-icons text-[12px]">visibility</span>{t.viewCount}</span>
+                        <span className="flex items-center gap-0.5"><span className="material-icons text-xs">chat_bubble</span>{t.replyCount}</span>
+                        <span className="flex items-center gap-0.5"><span className="material-icons text-xs">visibility</span>{t.viewCount}</span>
                         <span>{new Date(t.createdAt).toLocaleDateString()}</span>
                       </div>
                     </div>

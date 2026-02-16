@@ -36,7 +36,7 @@ export default function Help() {
       <div className="max-w-[1200px]">
         <div className="flex items-center gap-2 mb-4">
           <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
-            <span className="material-icons text-[20px]">navigate_before</span>
+            <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>Help Center</h1>
         </div>
@@ -45,7 +45,7 @@ export default function Help() {
         <div className="bg-[#008090] rounded-md p-8 mb-6">
           <h2 className="text-white text-lg font-medium text-center mb-4">How can we help?</h2>
           <div className="max-w-md mx-auto relative">
-            <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">search</span>
+            <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl">search</span>
             <input
               type="text"
               value={search}
@@ -64,7 +64,7 @@ export default function Help() {
               className="glass-card rounded-xl p-5 text-center hover:border-[#008090]/30 hover:shadow-sm transition-all cursor-pointer"
             >
               <div className="w-12 h-12 rounded-full bg-[rgba(0,128,144,0.08)] flex items-center justify-center mx-auto mb-3">
-                <span className="material-icons text-[#008090] text-[24px]">{cat.icon}</span>
+                <span className="material-icons text-[#008090] text-2xl">{cat.icon}</span>
               </div>
               <h3 className="text-sm font-medium text-gray-800">{cat.name}</h3>
               <p className="text-xs text-gray-400 mt-1">{cat.articles} articles</p>
@@ -78,7 +78,7 @@ export default function Help() {
           <div className="glass-card rounded-xl divide-y divide-gray-100">
             {promotedArticles.map((article, i) => (
               <div key={i} className="px-4 py-3 hover:bg-gray-50 cursor-pointer flex items-center gap-2">
-                <span className="material-icons text-[#008090] text-[16px]">article</span>
+                <span className="material-icons text-[#008090] text-base">article</span>
                 <span className="text-sm text-gray-700">{article}</span>
               </div>
             ))}

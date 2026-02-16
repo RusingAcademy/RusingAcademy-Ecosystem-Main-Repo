@@ -107,7 +107,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
           onClick={togglePlay}
           className="w-9 h-9 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006070] transition-colors flex-shrink-0"
         >
-          <span className="material-icons text-[18px]">{isPlaying ? "pause" : "play_arrow"}</span>
+          <span className="material-icons text-lg">{isPlaying ? "pause" : "play_arrow"}</span>
         </button>
         {!isTTS && (
           <div className="flex-1 flex items-center gap-2">
@@ -143,7 +143,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
       {audioUrl && <audio ref={audioRef} src={audioUrl} preload="metadata" />}
       {title && (
         <div className="flex items-center gap-2 mb-3">
-          <span className="material-icons text-[#008090] text-[20px]">headphones</span>
+          <span className="material-icons text-[#008090] text-xl">headphones</span>
           <h4 className="text-sm font-semibold text-gray-900">{title}</h4>
         </div>
       )}
@@ -152,7 +152,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
           onClick={togglePlay}
           className="w-12 h-12 rounded-full bg-[#008090] text-white flex items-center justify-center hover:bg-[#006070] transition-colors shadow-md flex-shrink-0"
         >
-          <span className="material-icons text-[24px]">{isPlaying ? "pause" : "play_arrow"}</span>
+          <span className="material-icons text-2xl">{isPlaying ? "pause" : "play_arrow"}</span>
         </button>
         <div className="flex-1">
           {!isTTS ? (

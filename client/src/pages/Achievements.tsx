@@ -103,7 +103,7 @@ export default function Achievements() {
                 tab === t.id ? "bg-white text-[#008090] shadow-sm" : "text-gray-500 hover:text-gray-700"
               }`}
             >
-              <span className="material-icons text-[16px]">{t.icon}</span> {t.label}
+              <span className="material-icons text-base">{t.icon}</span> {t.label}
             </button>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function Achievements() {
                   <div className="mt-2 text-[10px] font-semibold" style={{ color: earned ? badge.color : "#d1d5db" }}>+{badge.xp} XP</div>
                   {earned && earnedBadge && (
                     <div className="absolute top-2 right-2">
-                      <span className="material-icons text-green-500 text-[14px]">verified</span>
+                      <span className="material-icons text-green-500 text-sm">verified</span>
                     </div>
                   )}
                 </div>
@@ -205,7 +205,7 @@ export default function Achievements() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" role="tabpanel">
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1">
-                <span className="material-icons text-[#008090] text-[16px]">school</span>
+                <span className="material-icons text-[#008090] text-base">school</span>
                 {isFr ? "Statistiques d'apprentissage" : "Learning Stats"}
               </h3>
               <div className="space-y-3">
@@ -229,7 +229,7 @@ export default function Achievements() {
             </div>
             <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1">
-                <span className="material-icons text-[#f59e0b] text-[16px]">local_fire_department</span>
+                <span className="material-icons text-[#f59e0b] text-base">local_fire_department</span>
                 {isFr ? "Statistiques de série" : "Streak Stats"}
               </h3>
               <div className="space-y-3">
@@ -257,7 +257,7 @@ export default function Achievements() {
             </div>
             <div className="sm:col-span-2 bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1">
-                <span className="material-icons text-[#8b5cf6] text-[16px]">trending_up</span>
+                <span className="material-icons text-[#8b5cf6] text-base">trending_up</span>
                 {isFr ? "Aperçu de la progression" : "Progress Overview"}
               </h3>
               <div className="grid grid-cols-3 gap-4 text-center">

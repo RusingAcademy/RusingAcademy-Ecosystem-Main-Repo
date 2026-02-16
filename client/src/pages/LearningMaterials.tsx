@@ -94,7 +94,7 @@ export default function LearningMaterials() {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
-              <span className="material-icons text-[20px]">navigate_before</span>
+              <span className="material-icons text-xl">navigate_before</span>
             </Link>
             <div>
               <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>

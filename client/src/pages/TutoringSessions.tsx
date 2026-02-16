@@ -171,7 +171,7 @@ export default function TutoringSessions() {
         {/* Header */}
         <div className="flex items-center gap-2 mb-2">
           <Link href="/dashboard" className="text-gray-400 hover:text-[#008090] transition-colors">
-            <span className="material-icons text-[20px]">navigate_before</span>
+            <span className="material-icons text-xl">navigate_before</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
             Tutoring Sessions
@@ -193,7 +193,7 @@ export default function TutoringSessions() {
                   : "text-gray-500 hover:text-gray-700"
                 }`}
             >
-              <span className="material-icons text-[18px]">{tab.icon}</span>
+              <span className="material-icons text-lg">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
@@ -217,7 +217,7 @@ export default function TutoringSessions() {
                   onClick={() => handleBook("https://calendly.com/steven-barholere/30min")}
                   className="bg-white text-[#008090] px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors flex items-center gap-2 whitespace-nowrap"
                 >
-                  <span className="material-icons text-[18px]">phone_in_talk</span>
+                  <span className="material-icons text-lg">phone_in_talk</span>
                   Book Free Discovery Call
                 </button>
               </div>
@@ -242,7 +242,7 @@ export default function TutoringSessions() {
                         className="w-12 h-12 rounded-xl flex items-center justify-center"
                         style={{ backgroundColor: `${bt.color}15` }}
                       >
-                        <span className="material-icons text-[24px]" style={{ color: bt.color }}>
+                        <span className="material-icons text-2xl" style={{ color: bt.color }}>
                           {bt.icon}
                         </span>
                       </div>
@@ -280,7 +280,7 @@ export default function TutoringSessions() {
                       (e.target as HTMLElement).style.color = bt.color;
                     }}
                   >
-                    <span className="material-icons text-[16px]">calendar_today</span>
+                    <span className="material-icons text-base">calendar_today</span>
                     Book Now
                   </button>
                 </div>
@@ -303,7 +303,7 @@ export default function TutoringSessions() {
                     <div className="w-10 h-10 rounded-full bg-[rgba(0,128,144,0.1)] flex items-center justify-center mx-auto mb-3">
                       <span className="text-sm font-bold text-[#008090]">{s.step}</span>
                     </div>
-                    <span className="material-icons text-[28px] text-[#008090] mb-2 block">{s.icon}</span>
+                    <span className="material-icons text-[1.75rem] text-[#008090] mb-2 block">{s.icon}</span>
                     <h4 className="font-semibold text-gray-900 text-sm mb-1">{s.title}</h4>
                     <p className="text-xs text-gray-500">{s.desc}</p>
                   </div>
@@ -360,7 +360,7 @@ export default function TutoringSessions() {
                     onClick={() => handleBook("https://calendly.com/rusingacademy")}
                     className="w-full mt-4 py-2.5 rounded-xl text-sm font-semibold bg-[rgba(0,128,144,0.08)] text-[#008090] hover:bg-[#008090] hover:text-white transition-colors flex items-center justify-center gap-2"
                   >
-                    <span className="material-icons text-[16px]">calendar_today</span>
+                    <span className="material-icons text-base">calendar_today</span>
                     Book with {coach.name.split(" ")[0]}
                   </button>
                 </div>
@@ -380,7 +380,7 @@ export default function TutoringSessions() {
                     <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">
                       <div className="flex items-center gap-1">
                         Date
-                        <span className="material-icons text-[14px] text-gray-400">unfold_more</span>
+                        <span className="material-icons text-sm text-gray-400">unfold_more</span>
                       </div>
                     </th>
                     <th className="text-left text-xs font-medium text-gray-700 px-4 py-3">Time</th>
@@ -412,7 +412,7 @@ export default function TutoringSessions() {
 
             {/* Info Card */}
             <div className="mt-4 glass-card rounded-xl p-4 flex items-start gap-3">
-              <span className="material-icons text-[#008090] text-[20px] mt-0.5">info</span>
+              <span className="material-icons text-[#008090] text-xl mt-0.5">info</span>
               <div>
                 <p className="text-sm text-gray-700 font-medium">Session tracking coming soon</p>
                 <p className="text-xs text-gray-500 mt-1">
