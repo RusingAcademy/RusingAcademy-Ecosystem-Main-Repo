@@ -66,3 +66,5 @@ export { default as GovernmentReporting } from "./GovernmentReporting";
 export { default as WebhookHealthDashboard } from "./WebhookHealthDashboard";
 export { default as LearningPathBuilder } from "./LearningPathBuilder";
 export { default as ContentWorkflowBoard } from "./ContentWorkflowBoard";
+// ═══ Developer Tools ═══
+export { default as ComponentLab } from "./ComponentLab";
