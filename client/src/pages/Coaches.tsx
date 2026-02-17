@@ -213,7 +213,7 @@ export default function Coaches() {
         <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Filters Sidebar - Premium */}
-            <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
+            <aside className={`lg:w-80 lg:self-start ${showFilters ? 'block' : 'hidden lg:block'}`}>
               <div className="sticky top-24 space-y-6">
                 {/* Filter Card */}
                 <div className="bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden">
