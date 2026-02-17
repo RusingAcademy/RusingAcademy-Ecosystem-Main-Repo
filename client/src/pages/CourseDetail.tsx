@@ -791,7 +791,7 @@ export default function CourseDetail() {
       </section>
       
       {/* CTA Section */}
-      <section className="py-6 md:py-8 lg:py-12 bg-gradient-to-r from-[#0d9488] to-[#14b8a6]">
+      <section className="py-6 md:py-8 lg:py-12 bg-gradient-to-r from-[var(--teal)] to-[#14b8a6]">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {isEn ? "Ready to Start Learning?" : "Prêt à commencer ?"}

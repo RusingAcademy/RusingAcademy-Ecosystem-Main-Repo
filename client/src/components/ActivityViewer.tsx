@@ -68,13 +68,13 @@ function renderMarkdown(content: string): string {
 
 // ─── Slot Configuration ───
 const SLOT_CONFIG = [
-  { index: 1, type: "introduction", label: "Introduction", labelFr: "Introduction", icon: BookOpen, color: "var(--brand-foundation, #0F3D3E)", bg: "rgba(15,61,62,0.12)" },
-  { index: 2, type: "video", label: "Video", labelFr: "Vidéo", icon: Video, color: "#C65A1E", bg: "rgba(198,90,30,0.12)" },
+  { index: 1, type: "introduction", label: "Introduction", labelFr: "Introduction", icon: BookOpen, color: "var(--brand-foundation, var(--brand-foundation))", bg: "rgba(15,61,62,0.12)" },
+  { index: 2, type: "video", label: "Video", labelFr: "Vidéo", icon: Video, color: "var(--brand-cta)", bg: "rgba(198,90,30,0.12)" },
   { index: 3, type: "grammar", label: "Grammar", labelFr: "Grammaire", icon: PenTool, color: "#1E6B4F", bg: "rgba(30,107,79,0.12)" },
-  { index: 4, type: "written_practice", label: "Written", labelFr: "Écrit", icon: FileText, color: "#2563EB", bg: "rgba(37,99,235,0.12)" },
-  { index: 5, type: "oral_practice", label: "Oral", labelFr: "Oral", icon: Mic, color: "#DC2626", bg: "rgba(220,38,38,0.12)" },
-  { index: 6, type: "quiz", label: "Quiz", labelFr: "Quiz", icon: HelpCircle, color: "#F59E0B", bg: "rgba(245,158,11,0.12)" },
-  { index: 7, type: "coaching_tip", label: "Coach Tip", labelFr: "Conseil", icon: Sparkles, color: "#8B5CF6", bg: "rgba(139,92,246,0.12)" },
+  { index: 4, type: "written_practice", label: "Written", labelFr: "Écrit", icon: FileText, color: "var(--semantic-info)", bg: "rgba(37,99,235,0.12)" },
+  { index: 5, type: "oral_practice", label: "Oral", labelFr: "Oral", icon: Mic, color: "var(--danger)", bg: "rgba(220,38,38,0.12)" },
+  { index: 6, type: "quiz", label: "Quiz", labelFr: "Quiz", icon: HelpCircle, color: "var(--warning)", bg: "rgba(245,158,11,0.12)" },
+  { index: 7, type: "coaching_tip", label: "Coach Tip", labelFr: "Conseil", icon: Sparkles, color: "var(--accent-purple)", bg: "rgba(139,92,246,0.12)" },
 ];
 
 // Activity type icon mapping
@@ -349,7 +349,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
           <div className="h-1.5 rounded-full bg-muted overflow-hidden">
             <motion.div
               className="h-full rounded-full"
-              style={{ background: "linear-gradient(90deg, var(--brand-foundation, #0F3D3E), #1E6B4F, #C65A1E)" }}
+              style={{ background: "linear-gradient(90deg, var(--brand-foundation, var(--brand-foundation)), #1E6B4F, var(--brand-cta))" }}
               initial={{ width: 0 }}
               animate={{ width: `${progressPercent}%` }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -402,14 +402,14 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                           `}
                           style={{
                             backgroundColor: isCompleted && !isActive
-                              ? '#10B981'
+                              ? 'var(--success)'
                               : isActive 
                               ? slot.color 
                               : isFilled 
                               ? slot.bg 
                               : 'transparent',
                             borderColor: isCompleted && !isActive
-                              ? '#10B981'
+                              ? 'var(--success)'
                               : isActive 
                               ? slot.color 
                               : isFilled 
@@ -515,7 +515,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                 <div 
                   className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 relative"
                   style={{ 
-                    backgroundColor: isCurrentCompleted ? '#10B981' : (currentSlotConfig?.color || 'var(--brand-foundation, #0F3D3E)'),
+                    backgroundColor: isCurrentCompleted ? 'var(--success)' : (currentSlotConfig?.color || 'var(--brand-foundation, var(--brand-foundation))'),
                     color: 'white'
                   }}
                 >
@@ -532,7 +532,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                     <Badge 
                       variant="outline" 
                       className="text-[10px] px-1.5 py-0 border-current"
-                      style={{ color: isCurrentCompleted ? '#10B981' : (currentSlotConfig?.color || 'var(--brand-foundation, #0F3D3E)') }}
+                      style={{ color: isCurrentCompleted ? 'var(--success)' : (currentSlotConfig?.color || 'var(--brand-foundation, var(--brand-foundation))') }}
                     >
                       {currentSlotConfig 
                         ? `Slot ${currentSlotConfig.index}` 
@@ -641,7 +641,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                     : 'w-2.5 h-2.5 hover:scale-125 bg-border hover:bg-muted-foreground'
                   }
                 `}
-                style={idx === activeSlotIndex ? { backgroundColor: slotConf?.color || 'var(--brand-foundation, #0F3D3E)' } : undefined}
+                style={idx === activeSlotIndex ? { backgroundColor: slotConf?.color || 'var(--brand-foundation, var(--brand-foundation))' } : undefined}
                 aria-label={`Go to slot ${idx}`}
               />
             );
@@ -717,7 +717,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
               >
                 <Button
                   onClick={() => setShowCelebration(false)}
-                  className="bg-gradient-to-r from-foundation to-[#1E6B4F] hover:from-[#145A5B] hover:to-[#1E6B4F] text-white shadow-lg"
+                  className="bg-gradient-to-r from-foundation to-[#1E6B4F] hover:from-[var(--brand-foundation-2)] hover:to-[#1E6B4F] text-white shadow-lg"
                 >
                   <Award className="h-4 w-4 mr-2" />
                   {isEn ? "Continue" : "Continuer"}
@@ -864,7 +864,7 @@ function ActivityContent({
       {activity.activityType === "audio" && (
         <div className="space-y-4">
           {activity.audioUrl && (
-            <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl p-5 border border-red-600/15">
+            <div className="bg-gradient-to-r from-[var(--danger)]/5 to-transparent rounded-xl p-5 border border-red-600/15">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-full bg-red-600/10 flex items-center justify-center shadow-sm">
                   <Headphones className="h-6 w-6 text-red-600" />
@@ -884,7 +884,7 @@ function ActivityContent({
           {activity.content && (
             <div>
               {!activity.audioUrl && (
-                <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl px-5 py-3 mb-4 border border-red-600/15">
+                <div className="bg-gradient-to-r from-[var(--danger)]/5 to-transparent rounded-xl px-5 py-3 mb-4 border border-red-600/15">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-red-600/10 flex items-center justify-center">
                       <Mic className="h-5 w-5 text-red-600" />

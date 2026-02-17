@@ -17,10 +17,10 @@ const tokens = {
   colors: {
     primary: '#1E3A5F',
     secondary: '#C9A227',
-    background: '#FFFFFF',
+    background: 'var(--text-inverse)',
     surface: '#F8F9FA',
     text: '#1A1A1A',
-    textMuted: '#6B7280',
+    textMuted: 'var(--muted-foreground)',
   },
   spacing: {
     xs: '4px',

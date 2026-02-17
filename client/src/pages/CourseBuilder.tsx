@@ -571,7 +571,7 @@ export default function CourseBuilder() {
             </Card>
 
             {modules.map((mod, mi) => (
-              <Card key={mod.tempId} className="border-l-4" style={{ borderLeftColor: "var(--brand-obsidian, #1B1464)" }}>
+              <Card key={mod.tempId} className="border-l-4" style={{ borderLeftColor: "var(--brand-obsidian, var(--accent-purple-deep))" }}>
                 <CardContent className="p-5">
                   {/* Module Header */}
                   <div className="flex items-center gap-3 mb-3">
@@ -825,7 +825,7 @@ export default function CourseBuilder() {
                     onClick={handlePublish}
                     disabled={publishMut.isPending}
                     className="rounded-xl font-semibold text-white gap-2 px-8"
-                    style={{ backgroundColor: "var(--brand-gold, #D4AF37)" }}
+                    style={{ backgroundColor: "var(--brand-gold, var(--barholex-gold))" }}
                   >
                     {publishMut.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Rocket className="w-4 h-4" />}
                     {t.courseBuilder.publish}

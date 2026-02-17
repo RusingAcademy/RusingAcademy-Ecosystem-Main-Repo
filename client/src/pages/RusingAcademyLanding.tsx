@@ -493,7 +493,7 @@ function PriceDisplay({ originalPrice, lang, size = 'md' }: { originalPrice: str
   
   if (!FREE_ACCESS_MODE) {
     return (
-      <span className={`${sizeClasses[size].free} font-bold bg-clip-text text-transparent`} style={{ backgroundImage: 'linear-gradient(135deg, #0D9488 0%, #7C3AED 50%, #DB2777 100%)' }}>
+      <span className={`${sizeClasses[size].free} font-bold bg-clip-text text-transparent`} style={{ backgroundImage: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, #DB2777 100%)' }}>
         {originalPrice}
       </span>
     );
@@ -531,7 +531,7 @@ function PromoBanner({ lang }: { lang: 'en' | 'fr' }) {
     >
       <div 
         className="relative py-3 px-4"
-        style={{ background: 'linear-gradient(135deg, var(--semantic-success, #059669) 0%, #0D9488 50%, #0891B2 100%)' }}
+        style={{ background: 'linear-gradient(135deg, var(--semantic-success, var(--success)) 0%, var(--teal) 50%, #0891B2 100%)' }}
       >
         {/* Animated shimmer */}
         <div className="absolute inset-0 overflow-hidden">
@@ -580,7 +580,7 @@ export default function RusingAcademyLanding() {
   const brand = brandColors.rusingacademy;
 
   // Premium gradient for RusingAcademy
-  const premiumGradient = 'linear-gradient(135deg, #0D9488 0%, #7C3AED 50%, #DB2777 100%)';
+  const premiumGradient = 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, #DB2777 100%)';
   const subtleGradient = 'linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(124, 58, 237, 0.1) 50%, rgba(219, 39, 119, 0.1) 100%)';
 
   // Authentication
@@ -642,7 +642,7 @@ export default function RusingAcademyLanding() {
   const currentPath = currentPaths[selectedPath];
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0A0A] text-white' : 'bg-stone-50'}`}>
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-[var(--text)] text-white' : 'bg-stone-50'}`}>
       <SEO
         title="RusingAcademy - Path Series\u2122 SLE Training | RusingAcademy"
         description="Intensive SLE preparation courses for Canadian public servants. Achieve BBB, CBC, or CCC certification 3-4x faster with our proven Path Series\u2122 methodology."
@@ -663,7 +663,7 @@ export default function RusingAcademyLanding() {
           <div 
             className="absolute inset-0"
             style={{ 
-              background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)'
+              background: 'linear-gradient(180deg, var(--text-inverse) 0%, #F8FAFC 50%, #F1F5F9 100%)'
             }}
           />
           
@@ -776,7 +776,7 @@ export default function RusingAcademyLanding() {
                 <br />
                 <span 
                   className="bg-clip-text text-transparent"
-                  style={{ backgroundImage: 'linear-gradient(135deg, #0D9488 0%, #7C3AED 50%, #F97316 100%)' }}
+                  style={{ backgroundImage: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, #F97316 100%)' }}
                 >
                   {t.hero.titleHighlight}
                 </span>
@@ -815,7 +815,7 @@ export default function RusingAcademyLanding() {
                 <Link
                   href="/curriculum"
                   className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-2xl shadow-xl"
-                  style={{ background: 'linear-gradient(135deg, #0D9488 0%, #7C3AED 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 100%)' }}
                 >
                   {t.hero.cta1}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -861,7 +861,7 @@ export default function RusingAcademyLanding() {
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, #0D9488 0%, #7C3AED 100%)' }}
+                    style={{ background: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 100%)' }}
                   >
                     <TrendingUp className="w-5 h-5 text-white" />
                   </div>
@@ -887,7 +887,7 @@ export default function RusingAcademyLanding() {
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #DB2777 100%)' }}
+                    style={{ background: 'linear-gradient(135deg, var(--accent-purple) 0%, #DB2777 100%)' }}
                   >
                     <Users className="w-5 h-5 text-white" />
                   </div>
@@ -957,7 +957,7 @@ export default function RusingAcademyLanding() {
               className="p-8 rounded-3xl relative overflow-hidden border-2 shadow-xl shadow-teal-100/50"
               style={{ 
                 background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(124, 58, 237, 0.05) 50%, rgba(219, 39, 119, 0.05) 100%)',
-                borderColor: '#0D9488'
+                borderColor: 'var(--teal)'
               }}
             >
               <div 
@@ -1149,7 +1149,7 @@ export default function RusingAcademyLanding() {
                       onClick={() => handleEnroll(currentPath.id)}
                       disabled={enrollingCourse === currentPath.id}
                       className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white transition-all hover:scale-[1.02] shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg"
-                      style={{ background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, var(--semantic-success, #059669) 0%, #0D9488 100%)' : premiumGradient }}
+                      style={{ background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, var(--semantic-success, var(--success)) 0%, var(--teal) 100%)' : premiumGradient }}
                     >
                       {enrollingCourse === currentPath.id ? (
                         <>
@@ -1331,7 +1331,7 @@ export default function RusingAcademyLanding() {
                 <div className="relative">
                   <stat.icon 
                     className="w-8 h-8 mb-3" 
-                    style={{ color: '#0D9488' }} 
+                    style={{ color: 'var(--teal)' }} 
                   />
                   <p 
                     className="text-lg md:text-2xl lg:text-3xl font-bold mb-1 bg-clip-text text-transparent"
@@ -1433,7 +1433,7 @@ export default function RusingAcademyLanding() {
                   background: bundle.featured 
                     ? 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(240,253,250,1) 100%)' 
                     : 'white',
-                  borderColor: bundle.featured ? '#0D9488' : undefined,
+                  borderColor: bundle.featured ? 'var(--teal)' : undefined,
                 }}
               >
                 {bundle.featured && (
@@ -1483,7 +1483,7 @@ export default function RusingAcademyLanding() {
                           ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
                           : 'bg-gray-100 dark:bg-card text-slate-900 hover:bg-gray-200'
                       }`}
-                      style={bundle.featured ? { background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, var(--semantic-success, #059669) 0%, #0D9488 100%)' : premiumGradient } : {}}
+                      style={bundle.featured ? { background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, var(--semantic-success, var(--success)) 0%, var(--teal) 100%)' : premiumGradient } : {}}
                     >
                       {FREE_ACCESS_MODE ? (
                         <>

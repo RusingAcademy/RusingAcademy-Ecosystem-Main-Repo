@@ -124,7 +124,7 @@ function BadgeCard({
                 style={{
                   background: isEarned
                     ? `linear-gradient(90deg, ${badge.gradientFrom}, ${badge.gradientTo})`
-                    : "linear-gradient(90deg, var(--color-gray-500, #6b7280), var(--color-gray-400, #9ca3af))",
+                    : "linear-gradient(90deg, var(--color-gray-500, var(--muted-foreground)), var(--color-gray-400, var(--muted-foreground)))",
                 }}
               />
 

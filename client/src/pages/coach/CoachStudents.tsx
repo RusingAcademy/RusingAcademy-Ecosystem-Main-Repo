@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { useState } from "react";
 
-const ACCENT = "var(--color-violet-600, var(--color-violet-600, #7c3aed))";
+const ACCENT = "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))";
 
 function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
@@ -64,7 +64,7 @@ export default function CoachStudents() {
               <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                 placeholder={lang === "fr" ? "Rechercher..." : "Search..."}
                 aria-label={lang === "fr" ? "Rechercher un étudiant" : "Search students"}
-                className="pl-9 pr-4 py-2 text-sm border border-gray-200 dark:border-border dark:border-border rounded-lg focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, #7c3aed))]/20 focus:border-violet-600 outline-none w-48" />
+                className="pl-9 pr-4 py-2 text-sm border border-gray-200 dark:border-border dark:border-border rounded-lg focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))]/20 focus:border-violet-600 outline-none w-48" />
             </div>
           </div>
         </div>

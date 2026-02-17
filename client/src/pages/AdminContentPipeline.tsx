@@ -83,11 +83,11 @@ export default function AdminContentPipeline() {
             <CardContent className="p-4">
               <div className="flex h-4 rounded-full overflow-hidden bg-gray-100">
                 {[
-                  { count: s.draft, color: "var(--color-gray-400, #9ca3af)", label: "Draft" },
-                  { count: s.review, color: "var(--color-blue-500, #3b82f6)", label: "Review" },
-                  { count: s.approved, color: "var(--semantic-success, #10b981)", label: "Approved" },
+                  { count: s.draft, color: "var(--color-gray-400, var(--muted-foreground))", label: "Draft" },
+                  { count: s.review, color: "var(--color-blue-500, var(--semantic-info))", label: "Review" },
+                  { count: s.approved, color: "var(--semantic-success, var(--success))", label: "Approved" },
                   { count: s.published, color: "var(--semantic-success, #16a34a)", label: "Published" },
-                  { count: s.archived, color: "var(--semantic-warning, #f59e0b)", label: "Archived" },
+                  { count: s.archived, color: "var(--semantic-warning, var(--warning))", label: "Archived" },
                 ].map((seg, i) =>
                   seg.count > 0 ? (
                     <div
@@ -262,7 +262,7 @@ export default function AdminContentPipeline() {
                               className="h-full rounded-full"
                               style={{
                                 width: `${q.qualityScore}%`,
-                                backgroundColor: q.qualityScore >= 80 ? "var(--semantic-success, #16a34a)" : q.qualityScore >= 60 ? "var(--semantic-warning, #d97706)" : "var(--semantic-danger, #dc2626)",
+                                backgroundColor: q.qualityScore >= 80 ? "var(--semantic-success, #16a34a)" : q.qualityScore >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))",
                               }}
                             />
                           </div>

@@ -19,12 +19,12 @@
 .form-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--admin-text-primary, #111827);
+  color: var(--admin-text-primary, var(--brand-obsidian));
   letter-spacing: -0.01em;
 }
 
 .dark .form-label {
-  color: var(--admin-text-primary, #F9FAFB);
+  color: var(--admin-text-primary, var(--bg));
 }
 
 .form-input {
@@ -33,25 +33,25 @@
   border-radius: 0.5rem;
   font-size: 0.9375rem;
   line-height: 1.5;
-  color: var(--admin-text-primary, #111827);
-  background: var(--color-white, #FFFFFF);
+  color: var(--admin-text-primary, var(--brand-obsidian));
+  background: var(--color-white, var(--text-inverse));
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .dark .form-input {
-  border-color: var(--color-gray-600, #4B5563);
+  border-color: var(--color-gray-600, var(--text-paragraph));
   background: var(--admin-card-bg, #1E293B);
-  color: var(--admin-text-primary, #F9FAFB);
+  color: var(--admin-text-primary, var(--bg));
 }
 
 .form-input:focus {
   outline: none;
-  border-color: var(--brand-teal, #008090);
+  border-color: var(--brand-teal, var(--teal));
   box-shadow: 0 0 0 3px rgba(0, 128, 144, 0.15);
 }
 
 .form-input::placeholder {
-  color: var(--color-gray-400, #9CA3AF);
+  color: var(--color-gray-400, var(--muted-foreground));
 }
 
 /* ============================================
@@ -60,17 +60,17 @@
 
 .form-helper {
   font-size: 0.8125rem;
-  color: var(--color-gray-500, #6B7280);
+  color: var(--color-gray-500, var(--muted-foreground));
 }
 
 .form-error {
   font-size: 0.8125rem;
-  color: var(--semantic-danger, #DC2626);
+  color: var(--semantic-danger, var(--danger));
   font-weight: 500;
 }
 
 .form-input-error {
-  border-color: var(--semantic-danger, #DC2626);
+  border-color: var(--semantic-danger, var(--danger));
 }
 
 .form-input-error:focus {
@@ -86,27 +86,27 @@
   flex-direction: column;
   gap: 1.25rem;
   padding: 1.5rem;
-  background: var(--admin-card-bg, #FFFFFF);
-  border: 1px solid var(--admin-card-border, #E5E7EB);
+  background: var(--admin-card-bg, var(--text-inverse));
+  border: 1px solid var(--admin-card-border, var(--border));
   border-radius: 0.75rem;
 }
 
 .dark .form-section {
   background: var(--admin-card-bg, #1E293B);
-  border-color: var(--admin-card-border, #334155);
+  border-color: var(--admin-card-border, var(--text-paragraph));
 }
 
 .form-section-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--admin-text-primary, #111827);
+  color: var(--admin-text-primary, var(--brand-obsidian));
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--admin-divider, #E5E7EB);
+  border-bottom: 1px solid var(--admin-divider, var(--border));
 }
 
 .dark .form-section-title {
-  color: var(--admin-text-primary, #F9FAFB);
-  border-color: var(--admin-divider, #334155);
+  color: var(--admin-text-primary, var(--bg));
+  border-color: var(--admin-divider, var(--text-paragraph));
 }
 
 /* ============================================
@@ -118,9 +118,9 @@
   justify-content: flex-end;
   gap: 0.75rem;
   padding-top: 1.25rem;
-  border-top: 1px solid var(--admin-divider, #E5E7EB);
+  border-top: 1px solid var(--admin-divider, var(--border));
 }
 
 .dark .form-actions {
-  border-color: var(--admin-divider, #334155);
+  border-color: var(--admin-divider, var(--text-paragraph));
 }

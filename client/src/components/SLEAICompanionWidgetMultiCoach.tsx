@@ -512,7 +512,7 @@ export default function SLEAICompanionWidget() {
       case "thinking": return "#67E8F9";
       case "user-speaking": return "#22D3EE";
       case "listening": return "#34D399";
-      default: return "#9CA3AF";
+      default: return "var(--muted-foreground)";
     }
   };
 
@@ -533,9 +533,9 @@ export default function SLEAICompanionWidget() {
         }`}
       >
         <button onClick={() => setIsOpen(true)} className="relative group" aria-label="Open SLE AI Companion">
-          <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)', animation: 'rotateGlow 3s linear infinite' }} />
-          <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', animation: 'breathe 2s ease-in-out infinite' }} />
-          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/60 shadow-2xl" style={{ background: 'linear-gradient(135deg, #062b2b, #0a4040)' }}>
+          <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, var(--accent-purple) 50%, #06B6D4 100%)', animation: 'rotateGlow 3s linear infinite' }} />
+          <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, var(--accent-purple))', animation: 'breathe 2s ease-in-out infinite' }} />
+          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/60 shadow-2xl" style={{ background: 'linear-gradient(135deg, var(--brand-obsidian), #0a4040)' }}>
             {coaches.map((coach, index) => (
               <img loading="lazy" key={coach.id} src={coach.image} alt={coach.name}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentCoachIndex ? "opacity-100" : "opacity-0"}`} />
@@ -543,11 +543,11 @@ export default function SLEAICompanionWidget() {
             <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="absolute -bottom-1 -right-1">
-            <span className="absolute inline-flex h-4 w-4 rounded-full opacity-75" style={{ backgroundColor: '#10B981', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }} />
-            <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: '#10B981', border: '3px solid #062b2b', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
+            <span className="absolute inline-flex h-4 w-4 rounded-full opacity-75" style={{ backgroundColor: 'var(--success)', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }} />
+            <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: 'var(--success)', border: '3px solid var(--brand-obsidian)', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
           </div>
         </button>
-        <span className="mt-2 text-sm font-semibold tracking-wide" style={{ background: 'linear-gradient(90deg, #06B6D4, #8B5CF6, #06B6D4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '0 0 20px rgba(139, 92, 246, 0.5)' }}>
+        <span className="mt-2 text-sm font-semibold tracking-wide" style={{ background: 'linear-gradient(90deg, #06B6D4, var(--accent-purple), #06B6D4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '0 0 20px rgba(139, 92, 246, 0.5)' }}>
           SLE AI Companion
         </span>
       </div>
@@ -578,7 +578,7 @@ export default function SLEAICompanionWidget() {
           <div
             className="relative w-full h-full sm:w-[95vw] sm:max-w-xl sm:h-[94vh] sm:max-h-[860px] sm:rounded-3xl overflow-hidden flex flex-col"
             style={{
-              background: 'linear-gradient(160deg, #041e1e 0%, #062b2b 20%, #0a4040 45%, #083838 70%, #051a2a 100%)',
+              background: 'linear-gradient(160deg, var(--brand-obsidian-2) 0%, var(--brand-obsidian) 20%, #0a4040 45%, #083838 70%, #051a2a 100%)',
               boxShadow: '0 0 80px rgba(10,105,105,0.35), 0 0 160px rgba(6,182,212,0.12), 0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)',
               animation: 'fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
               border: '1px solid rgba(6,182,212,0.15)',
@@ -830,7 +830,7 @@ export default function SLEAICompanionWidget() {
                       <div className="relative">
                         {userSpeaking && <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-20" />}
                         <svg className="w-4 h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : 'var(--color-white, #ffffff)' }}>
+                          style={{ color: vadState === "closed" ? 'var(--danger)' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : 'var(--color-white, var(--text-inverse))' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                         </svg>
                       </div>
@@ -846,7 +846,7 @@ export default function SLEAICompanionWidget() {
                       </div>
                       {/* Status text */}
                       <span className="text-xs font-semibold tracking-wide" style={{
-                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : 'var(--color-white, #ffffff)',
+                        color: vadState === "closed" ? 'var(--danger)' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : 'var(--color-white, var(--text-inverse))',
                       }}>
                         {vadState === "closed"
                           ? (selectedCoach?.lang === "fr" ? "Micro fermé" : "Mic off")
@@ -865,7 +865,7 @@ export default function SLEAICompanionWidget() {
 
             {/* Footer gradient line — premium shimmer */}
             <div className="h-1 flex-shrink-0 relative" style={{ zIndex: 2 }}>
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #0a6969 0%, #06B6D4 25%, #8B5CF6 50%, #06B6D4 75%, #0a6969 100%)' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #0a6969 0%, #06B6D4 25%, var(--accent-purple) 50%, #06B6D4 75%, #0a6969 100%)' }} />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.9) 50%, transparent 100%)', animation: 'shimmerBorder 2s ease-in-out infinite' }} />
             </div>
           </div>

@@ -59,7 +59,7 @@ const brands: BrandCard[] = [
   {
     id: "rusingacademy",
     name: "RusingAcademy",
-    color: "#1E9B8A",
+    color: "var(--teal)",
     image: "https://rusingacademy-cdn.b-cdn.net/images/generated/rusingacademy-hero.jpg",
     pitch: {
       en: "A structured curriculum built for public service realities—Path Series™ programs aligned with SLE outcomes.",
@@ -85,7 +85,7 @@ const brands: BrandCard[] = [
   {
     id: "lingueefy",
     name: "Lingueefy",
-    color: "#17E2C6",
+    color: "var(--lingueefy-accent)",
     image: "https://rusingacademy-cdn.b-cdn.net/images/generated/lingueefy-hero.jpg",
     pitch: {
       en: "Find the right coach fast—and practice smarter with SLE AI Companion AI tools.",
@@ -111,7 +111,7 @@ const brands: BrandCard[] = [
   {
     id: "barholex",
     name: "Barholex Media",
-    color: "#D4A853",
+    color: "var(--barholex-gold)",
   image: "https://rusingacademy-cdn.b-cdn.net/images/generated/video-production.jpg",   pitch: {
       en: "Premium audiovisual production and performance coaching for bilingual executive presence.",
       fr: "Production audiovisuelle premium et coaching de performance pour une présence exécutive bilingue.",
@@ -239,7 +239,7 @@ export default function EcosystemLanding() {
       {/* Ambient Background Glows */}
       <div
         className={`fixed top-[-20%] left-[-10%] w-[70%] h-[70%] rounded-full pointer-events-none z-0 ${t.glow}`}
-        style={{ background: "radial-gradient(circle, #17E2C6, transparent 60%)" }}
+        style={{ background: "radial-gradient(circle, var(--lingueefy-accent), transparent 60%)" }}
       />
       <div
         className={`fixed bottom-[-20%] right-[-10%] w-[70%] h-[70%] rounded-full pointer-events-none z-0 ${t.glow}`}
@@ -416,11 +416,11 @@ export default function EcosystemLanding() {
           >
             <div className={`p-6 rounded-2xl ${t.surface}`} style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}>
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)" }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--teal) 0%, var(--lingueefy-accent) 100%)" }}>
                   <Users className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <div className="text-xl md:text-3xl lg:text-4xl font-black" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2,500+</div>
+                  <div className="text-xl md:text-3xl lg:text-4xl font-black" style={{ background: "linear-gradient(135deg, var(--teal) 0%, var(--lingueefy-accent) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2,500+</div>
                   <div className={t.textSecondary}>
                     {language === "en" ? "Public Servants Trained" : "Fonctionnaires formés"}
                   </div>
@@ -444,11 +444,11 @@ export default function EcosystemLanding() {
 
             <div className={`p-6 rounded-2xl ${t.surface}`} style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}>
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #D4A853 0%, #F5D89A 100%)" }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--barholex-gold) 0%, #F5D89A 100%)" }}>
                   <ArrowRight className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <div className="text-xl md:text-3xl lg:text-4xl font-black" style={{ background: "linear-gradient(135deg, #D4A853 0%, #F5D89A 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>3-4×</div>
+                  <div className="text-xl md:text-3xl lg:text-4xl font-black" style={{ background: "linear-gradient(135deg, var(--barholex-gold) 0%, #F5D89A 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>3-4×</div>
                   <div className={t.textSecondary}>
                     {language === "en" ? "Faster Learning Results" : "Résultats d'apprentissage plus rapides"}
                   </div>
@@ -527,7 +527,7 @@ export default function EcosystemLanding() {
                     author: "Michael Anderson",
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },
                     org: "Treasury Board Secretariat",
-                    color: "#1E9B8A",
+                    color: "var(--teal)",
                     image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-4.jpg"
                   },
                   {
@@ -538,7 +538,7 @@ export default function EcosystemLanding() {
                     author: "Sarah Mitchell",
                     role: { en: "Senior Policy Analyst", fr: "Analyste principale des politiques" },
                     org: "Global Affairs Canada",
-                    color: "#17E2C6",
+                    color: "var(--lingueefy-accent)",
                     image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-2.jpg"
                   },
                   {
@@ -549,7 +549,7 @@ export default function EcosystemLanding() {
                     author: "David Thompson",
                     role: { en: "Communications Manager", fr: "Gestionnaire des communications" },
                     org: "Health Canada",
-                    color: "#D4A853",
+                    color: "var(--barholex-gold)",
                     image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-6.jpg"
                   },
                   {
@@ -560,7 +560,7 @@ export default function EcosystemLanding() {
                     author: "Jennifer Williams",
                     role: { en: "Deputy Director", fr: "Directrice adjointe" },
                     org: "Employment and Social Development Canada",
-                    color: "#1E9B8A",
+                    color: "var(--teal)",
                     image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-1.jpg"
                   },
                   {
@@ -571,7 +571,7 @@ export default function EcosystemLanding() {
                     author: "Robert Chen",
                     role: { en: "Program Officer", fr: "Agent de programme" },
                     org: "Canada Revenue Agency",
-                    color: "#17E2C6",
+                    color: "var(--lingueefy-accent)",
                     image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-3.jpg"
                   },
                   {
@@ -582,7 +582,7 @@ export default function EcosystemLanding() {
                     author: "Amanda Foster",
                     role: { en: "Executive Director", fr: "Directrice exécutive" },
                     org: "Innovation, Science and Economic Development",
-                    color: "#D4A853",
+                    color: "var(--barholex-gold)",
                     image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-5.jpg"
                   }
                 ].map((testimonial, index) => (
@@ -666,7 +666,7 @@ export default function EcosystemLanding() {
               </div>
               
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3 sm:mb-4">
-                <span style={{ color: "#17E2C6" }}>SLE AI Companion</span>{" "}
+                <span style={{ color: "var(--lingueefy-accent)" }}>SLE AI Companion</span>{" "}
                 <span className={t.text}>AI</span>
               </h3>
               
@@ -713,7 +713,7 @@ export default function EcosystemLanding() {
                 {/* Glowing circle background */}
                 <div 
                   className="absolute inset-0 rounded-full blur-3xl opacity-30"
-                  style={{ background: "radial-gradient(circle, #17E2C6, #8B5CFF)" }}
+                  style={{ background: "radial-gradient(circle, var(--lingueefy-accent), #8B5CFF)" }}
                 />
                 
                 {/* Avatar container */}

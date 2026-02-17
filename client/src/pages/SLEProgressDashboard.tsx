@@ -381,7 +381,7 @@ export default function SLEProgressDashboard() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData}>
-                  <PolarGrid stroke="#334155" />
+                  <PolarGrid stroke="var(--text-paragraph)" />
                   <PolarAngleAxis
                     dataKey="criterion"
                     tick={{ fill: "#94a3b8", fontSize: 11 }}
@@ -389,7 +389,7 @@ export default function SLEProgressDashboard() {
                   <PolarRadiusAxis
                     angle={90}
                     domain={[0, 100]}
-                    tick={{ fill: "#64748b", fontSize: 10 }}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
                   />
                   <Radar
                     name="Score"
@@ -443,10 +443,10 @@ export default function SLEProgressDashboard() {
                         <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--text-paragraph)" />
                     <XAxis
                       dataKey="date"
-                      tick={{ fill: "#64748b", fontSize: 10 }}
+                      tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
                       tickFormatter={(val) => {
                         try {
                           return format(new Date(val), "dd/MM", { locale: language === "fr" ? fr : undefined });
@@ -457,12 +457,12 @@ export default function SLEProgressDashboard() {
                     />
                     <YAxis
                       domain={[0, 100]}
-                      tick={{ fill: "#64748b", fontSize: 10 }}
+                      tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
                     />
                     <Tooltip
                       contentStyle={{
                         backgroundColor: "#0a4040",
-                        border: "1px solid #334155",
+                        border: "1px solid var(--text-paragraph)",
                         borderRadius: "8px",
                         color: "#e2e8f0",
                         fontSize: 12,
@@ -485,8 +485,8 @@ export default function SLEProgressDashboard() {
                       activeDot={{ r: 5, fill: "#818cf8" }}
                     />
                     {/* Level threshold lines */}
-                    <Line type="monotone" dataKey={() => 55} stroke="var(--color-blue-500, #3b82f6)" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level B" />
-                    <Line type="monotone" dataKey={() => 75} stroke="var(--color-violet-500, #8b5cf6)" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level C" />
+                    <Line type="monotone" dataKey={() => 55} stroke="var(--color-blue-500, var(--semantic-info))" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level B" />
+                    <Line type="monotone" dataKey={() => 75} stroke="var(--color-violet-500, var(--accent-purple))" strokeDasharray="5 5" strokeWidth={1} dot={false} name="Level C" />
                   </AreaChart>
                 </ResponsiveContainer>
               ) : (
@@ -519,7 +519,7 @@ export default function SLEProgressDashboard() {
                       <path
                         d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                         fill="none"
-                        stroke="#334155"
+                        stroke="var(--text-paragraph)"
                         strokeWidth="3"
                       />
                       <path

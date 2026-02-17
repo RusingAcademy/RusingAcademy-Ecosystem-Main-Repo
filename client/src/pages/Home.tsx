@@ -675,7 +675,7 @@ export default function Home() {
             <div className="absolute bottom-0 right-0 w-60 h-60 bg-white dark:bg-background rounded-full translate-x-1/3 translate-y-1/3" />
           </div>
           
-          <div className="container mx-auto px-4 relative z-10" style={{backgroundColor: 'var(--color-white, #ffffff)'}}>
+          <div className="container mx-auto px-4 relative z-10" style={{backgroundColor: 'var(--color-white, var(--text-inverse))'}}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {statistics.map((stat, index) => (
                 <div key={index} className="text-center">
@@ -997,7 +997,7 @@ export default function Home() {
                   level: "A",
                   title: t("sle.levelA"),
                   description: t("sle.levelADesc"),
-                  gradient: "from-cta-2 via-[#C65A1E] to-cta",
+                  gradient: "from-cta-2 via-[var(--brand-cta)] to-cta",
                   shadow: "shadow-amber-500/40",
                   bgGlow: "bg-amber-50",
                   borderColor: "border-orange-100",

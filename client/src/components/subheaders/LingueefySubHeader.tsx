@@ -80,7 +80,7 @@ export default function LingueefySubHeader() {
                 language={language}
                 isActive={isActive}
                 isScrolled={isScrolled}
-                activeColor="#14C9B0"
+                activeColor="var(--lingueefy-accent-2)"
                 activeBg="var(--lingueefy-accent-soft)"
               />
             ))}
@@ -135,7 +135,7 @@ export default function LingueefySubHeader() {
                       item={link}
                       language={language}
                       isActive={isActive}
-                      activeColor="#14C9B0"
+                      activeColor="var(--lingueefy-accent-2)"
                       activeBg="var(--lingueefy-accent-soft)"
                       onNavigate={() => setMobileOpen(false)}
                     />

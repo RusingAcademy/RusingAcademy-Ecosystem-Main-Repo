@@ -141,7 +141,7 @@ export default function RusingAcademyContact() {
               {/* Contact Info */}
               <div className="lg:col-span-1">
                 <div className="sticky top-24 space-y-6">
-                  <div className="p-6 rounded-2xl bg-gradient-to-br from-[#E07B39] to-[#C45E1A] text-white">
+                  <div className="p-6 rounded-2xl bg-gradient-to-br from-[var(--barholex-gold-hover)] to-[#C45E1A] text-white">
                     <h3 className="text-xl font-bold mb-4">
                       {language === "en" ? "Contact Information" : "Coordonnées"}
                     </h3>

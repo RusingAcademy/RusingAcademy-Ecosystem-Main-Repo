@@ -7,7 +7,7 @@ import HRLayout from "@/components/HRLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 
-const ACCENT = "var(--color-blue-600, #2563eb)";
+const ACCENT = "var(--color-blue-600, var(--semantic-info))";
 
 function formatCurrency(cents: number) {
   return `$${(cents / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -78,9 +78,9 @@ export default function HRBudget() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {[
             { icon: "receipt_long", label: lang === "fr" ? "Total facturé" : "Total Invoiced", value: formatCurrency(stats.totalInvoiced), color: ACCENT },
-            { icon: "payments", label: lang === "fr" ? "Total payé" : "Total Paid", value: formatCurrency(stats.totalPaid), color: "var(--semantic-success, #059669)" },
-            { icon: "warning", label: lang === "fr" ? "En souffrance" : "Overdue", value: formatCurrency(stats.totalOverdue), color: "var(--semantic-danger, #dc2626)" },
-            { icon: "pending", label: lang === "fr" ? "Factures en attente" : "Pending Invoices", value: String(stats.pendingCount), color: "var(--semantic-warning, #d97706)" },
+            { icon: "payments", label: lang === "fr" ? "Total payé" : "Total Paid", value: formatCurrency(stats.totalPaid), color: "var(--semantic-success, var(--success))" },
+            { icon: "warning", label: lang === "fr" ? "En souffrance" : "Overdue", value: formatCurrency(stats.totalOverdue), color: "var(--semantic-danger, var(--danger))" },
+            { icon: "pending", label: lang === "fr" ? "Factures en attente" : "Pending Invoices", value: String(stats.pendingCount), color: "var(--semantic-warning, var(--warning))" },
           ].map(card => (
             <div key={card.label} className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5 hover:shadow-md transition-shadow">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${card.color}10` }}>
@@ -99,12 +99,12 @@ export default function HRBudget() {
               {lang === "fr" ? "Progression des paiements" : "Payment Progress"}
             </h2>
             <div className="h-6 bg-gray-100 dark:bg-card rounded-full overflow-hidden flex">
-              <div className="h-full bg-[var(--semantic-success, #059669)] transition-all" style={{ width: `${(stats.totalPaid / stats.totalInvoiced) * 100}%` }} />
+              <div className="h-full bg-[var(--semantic-success, var(--success))] transition-all" style={{ width: `${(stats.totalPaid / stats.totalInvoiced) * 100}%` }} />
               <div className="h-full bg-red-600 transition-all" style={{ width: `${(stats.totalOverdue / stats.totalInvoiced) * 100}%` }} />
             </div>
             <div className="flex gap-6 mt-2 text-xs">
               <span className="flex items-center gap-1">
-                <span className="w-3 h-3 rounded-sm bg-[var(--semantic-success, #059669)]" />
+                <span className="w-3 h-3 rounded-sm bg-[var(--semantic-success, var(--success))]" />
                 {lang === "fr" ? "Payé" : "Paid"} ({Math.round((stats.totalPaid / stats.totalInvoiced) * 100)}%)
               </span>
               <span className="flex items-center gap-1">

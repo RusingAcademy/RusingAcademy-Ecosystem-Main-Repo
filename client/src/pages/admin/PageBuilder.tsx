@@ -96,15 +96,15 @@ function SortableSectionCard({ section, idx, totalCount, isEditing, onEdit, onSa
               <div className="space-y-1.5">
                 <Label className="text-xs">Background Color</Label>
                 <div className="flex gap-2">
-                  <input type="color" value={editData.bgColor || "var(--color-white, #ffffff)"} onChange={(e) => setEditData((d: any) => ({ ...d, bgColor: e.target.value }))} className="w-8 h-8 rounded border cursor-pointer" />
-                  <Input value={editData.bgColor} onChange={(e) => setEditData((d: any) => ({ ...d, bgColor: e.target.value }))} placeholder="var(--color-white, #ffffff)" />
+                  <input type="color" value={editData.bgColor || "var(--color-white, var(--text-inverse))"} onChange={(e) => setEditData((d: any) => ({ ...d, bgColor: e.target.value }))} className="w-8 h-8 rounded border cursor-pointer" />
+                  <Input value={editData.bgColor} onChange={(e) => setEditData((d: any) => ({ ...d, bgColor: e.target.value }))} placeholder="var(--color-white, var(--text-inverse))" />
                 </div>
               </div>
               <div className="space-y-1.5">
                 <Label className="text-xs">Text Color</Label>
                 <div className="flex gap-2">
-                  <input type="color" value={editData.textColor || "var(--color-black, #000000)"} onChange={(e) => setEditData((d: any) => ({ ...d, textColor: e.target.value }))} className="w-8 h-8 rounded border cursor-pointer" />
-                  <Input value={editData.textColor} onChange={(e) => setEditData((d: any) => ({ ...d, textColor: e.target.value }))} placeholder="var(--color-black, #000000)" />
+                  <input type="color" value={editData.textColor || "var(--color-black, var(--text))"} onChange={(e) => setEditData((d: any) => ({ ...d, textColor: e.target.value }))} className="w-8 h-8 rounded border cursor-pointer" />
+                  <Input value={editData.textColor} onChange={(e) => setEditData((d: any) => ({ ...d, textColor: e.target.value }))} placeholder="var(--color-black, var(--text))" />
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@ function LivePreviewSection({ section }: { section: any }) {
     ? (() => { try { return JSON.parse(section.content); } catch { return {}; } })()
     : (section.content || {});
   const sectionStyle: React.CSSProperties = {
-    backgroundColor: section.backgroundColor || "var(--color-white, #ffffff)",
+    backgroundColor: section.backgroundColor || "var(--color-white, var(--text-inverse))",
     color: section.textColor || "var(--brand-obsidian, var(--brand-obsidian, #1a1a1a))",
     paddingTop: `${section.paddingTop ?? 48}px`,
     paddingBottom: `${section.paddingBottom ?? 48}px`,
@@ -701,9 +701,9 @@ export default function PageBuilder() {
           <CardHeader><CardTitle className="text-sm">Colors</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             {[
-              { key: "primaryColor", label: "Primary Color", default: "var(--color-blue-600, var(--color-blue-600, #2563eb))" },
-              { key: "secondaryColor", label: "Secondary Color", default: "var(--color-violet-600, var(--color-violet-600, #7c3aed))" },
-              { key: "accentColor", label: "Accent Color", default: "var(--semantic-warning, var(--semantic-warning, #f59e0b))" },
+              { key: "primaryColor", label: "Primary Color", default: "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))" },
+              { key: "secondaryColor", label: "Secondary Color", default: "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))" },
+              { key: "accentColor", label: "Accent Color", default: "var(--semantic-warning, var(--semantic-warning, var(--warning)))" },
             ].map(({ key, label, default: def }) => (
               <div key={key} className="flex items-center gap-3">
                 <input type="color" value={styles[key] || def} onChange={(e) => updateStyle(key, e.target.value)} className="w-10 h-10 rounded border cursor-pointer" />
@@ -809,11 +809,11 @@ export default function PageBuilder() {
           <CardHeader><CardTitle className="text-sm">Preview</CardTitle></CardHeader>
           <CardContent>
             <div className="p-6 border rounded-lg" style={{ fontFamily: styles.fontFamily || "Inter", fontSize: styles.fontSize || "16px", borderRadius: styles.borderRadius || "8px" }}>
-              <h2 style={{ fontFamily: styles.headingFont || "Inter", color: styles.primaryColor || "var(--color-blue-600, var(--color-blue-600, #2563eb))" }} className="text-2xl font-bold mb-2">Heading Preview</h2>
+              <h2 style={{ fontFamily: styles.headingFont || "Inter", color: styles.primaryColor || "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))" }} className="text-2xl font-bold mb-2">Heading Preview</h2>
               <p className="mb-4 opacity-70">This is how your body text will look with the selected typography and spacing settings.</p>
               <div className="flex gap-2">
-                <button style={{ backgroundColor: styles.primaryColor || "var(--color-blue-600, var(--color-blue-600, #2563eb))", borderRadius: styles.borderRadius || "8px" }} className="px-4 py-2 text-white text-sm">Primary Button</button>
-                <button style={{ borderColor: styles.secondaryColor || "var(--color-violet-600, var(--color-violet-600, #7c3aed))", color: styles.secondaryColor || "var(--color-violet-600, var(--color-violet-600, #7c3aed))", borderRadius: styles.borderRadius || "8px" }} className="px-4 py-2 border text-sm">Secondary</button>
+                <button style={{ backgroundColor: styles.primaryColor || "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))", borderRadius: styles.borderRadius || "8px" }} className="px-4 py-2 text-white text-sm">Primary Button</button>
+                <button style={{ borderColor: styles.secondaryColor || "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))", color: styles.secondaryColor || "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))", borderRadius: styles.borderRadius || "8px" }} className="px-4 py-2 border text-sm">Secondary</button>
               </div>
             </div>
           </CardContent>

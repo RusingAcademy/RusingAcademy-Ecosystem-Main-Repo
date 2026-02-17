@@ -59,7 +59,7 @@ export default function LingeefyLogo({
           <span 
             className="font-black tracking-wide text-lg leading-tight"
             style={{ 
-              background: "linear-gradient(135deg, #2DD4BF 0%, #17E2C6 50%, #0d9488 100%)",
+              background: "linear-gradient(135deg, #2DD4BF 0%, var(--lingueefy-accent) 50%, var(--teal) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               textShadow: theme === "glass" ? "0 2px 10px rgba(23, 226, 198, 0.3)" : "none",
@@ -70,7 +70,7 @@ export default function LingeefyLogo({
           <span 
             className="text-xs tracking-wider font-medium"
             style={{ 
-              color: theme === "glass" ? "rgba(45, 212, 191, 0.8)" : "#0d9488",
+              color: theme === "glass" ? "rgba(45, 212, 191, 0.8)" : "var(--teal)",
             }}
           >
             1-on-1 Coaching

@@ -183,8 +183,8 @@
   body {
     font-size: 12pt;
     line-height: 1.5;
-    color: #000000;
-    background: #ffffff;
+    color: var(--text);
+    background: var(--text-inverse);
   }
   
   /* Prevent page breaks inside cards */

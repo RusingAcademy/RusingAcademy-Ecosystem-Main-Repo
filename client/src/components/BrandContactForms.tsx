@@ -113,7 +113,7 @@ const focusAreas = [
 
 const brandColors = {
   rusingacademy: "#FF6A2B",
-  lingueefy: "#17E2C6",
+  lingueefy: "var(--lingueefy-accent)",
   barholex: "#8B5CFF",
 };
 

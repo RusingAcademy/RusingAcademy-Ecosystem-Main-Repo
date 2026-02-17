@@ -11,10 +11,10 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 
 const MASTERY_CONFIG: Record<string, { label: string; labelFr: string; color: string; bg: string; icon: string }> = {
-  new: { label: "New", labelFr: "Nouveau", color: "var(--color-blue-500, #3b82f6)", bg: "bg-blue-50 text-blue-700", icon: "fiber_new" },
-  learning: { label: "Learning", labelFr: "En cours", color: "var(--semantic-warning, #f59e0b)", bg: "bg-amber-50 text-amber-700", icon: "school" },
-  familiar: { label: "Familiar", labelFr: "Familier", color: "var(--color-violet-500, #8b5cf6)", bg: "bg-purple-50 text-purple-700", icon: "thumb_up" },
-  mastered: { label: "Mastered", labelFr: "Maîtrisé", color: "var(--semantic-success, #22c55e)", bg: "bg-green-50 text-green-700", icon: "verified" },
+  new: { label: "New", labelFr: "Nouveau", color: "var(--color-blue-500, var(--semantic-info))", bg: "bg-blue-50 text-blue-700", icon: "fiber_new" },
+  learning: { label: "Learning", labelFr: "En cours", color: "var(--semantic-warning, var(--warning))", bg: "bg-amber-50 text-amber-700", icon: "school" },
+  familiar: { label: "Familiar", labelFr: "Familier", color: "var(--color-violet-500, var(--accent-purple))", bg: "bg-purple-50 text-purple-700", icon: "thumb_up" },
+  mastered: { label: "Mastered", labelFr: "Maîtrisé", color: "var(--semantic-success, var(--success))", bg: "bg-green-50 text-green-700", icon: "verified" },
 };
 
 const POS_OPTIONS = ["noun", "verb", "adjective", "adverb", "preposition", "conjunction", "pronoun", "interjection", "expression"];
@@ -182,7 +182,7 @@ export default function Vocabulary() {
                 </button>
                 <button onClick={() => aiSuggest.mutate({ topic: "public service bilingualism", level: "B2", count: 5 })}
                   disabled={aiSuggest.isPending}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-violet-500 border border-violet-500 flex items-center gap-2 hover:bg-violet-500/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[var(--color-violet-500, #8b5cf6)]/30"
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-violet-500 border border-violet-500 flex items-center gap-2 hover:bg-violet-500/5 disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-[var(--color-violet-500, var(--accent-purple))]/30"
                   aria-label={t("vocab.aiSuggest")}>
                   <span className="material-icons text-base" aria-hidden="true">{aiSuggest.isPending ? "hourglass_empty" : "auto_awesome"}</span>
                   {aiSuggest.isPending ? t("skillLabs.loading") : t("vocab.aiSuggest")}

@@ -449,7 +449,7 @@ export default function BarholexPortfolio() {
         {/* ─── Testimonials Section ─── Warm cream background with glassmorphism cards */}
         <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-[#F5F5F3] to-[#FAFAF8] relative overflow-hidden">
           {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-gold, #D4AF37)]/20 to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-gold, var(--barholex-gold))]/20 to-transparent" />
           <div className="absolute top-20 right-[10%] w-64 h-64 bg-barholex-gold/5 rounded-full blur-[80px]" />
           <div className="absolute bottom-20 left-[10%] w-48 h-48 bg-teal-500/5 rounded-full blur-[60px]" />
           
@@ -551,7 +551,7 @@ export default function BarholexPortfolio() {
           {/* Background texture */}
           <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(212,175,55,0.03)_25%,transparent_25%,transparent_50%,rgba(212,175,55,0.03)_50%,rgba(212,175,55,0.03)_75%,transparent_75%)] bg-[size:24px_24px]" />
           {/* Gold accent line at top */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--brand-gold, #D4AF37)] to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--brand-gold, var(--barholex-gold))] to-transparent" />
           {/* Decorative orbs */}
           <div className="absolute top-10 left-[20%] w-48 h-48 bg-barholex-gold/8 rounded-full blur-[80px]" />
           <div className="absolute bottom-10 right-[20%] w-56 h-56 bg-teal-500/6 rounded-full blur-[80px]" />

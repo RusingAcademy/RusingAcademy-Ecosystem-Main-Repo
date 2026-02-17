@@ -10,11 +10,11 @@ import { useLocation } from "wouter";
 import { useState } from "react";
 
 const STATUS_COLORS: Record<string, string> = {
-  draft: "#6B7280",
-  scheduled: "#3B82F6",
-  sending: "#F59E0B",
+  draft: "var(--muted-foreground)",
+  scheduled: "var(--semantic-info)",
+  sending: "var(--warning)",
   sent: "#22C55E",
-  failed: "#EF4444",
+  failed: "var(--danger)",
 };
 
 export default function EmailBroadcasts() {
@@ -91,9 +91,9 @@ export default function EmailBroadcasts() {
           <div className="grid sm:grid-cols-4 gap-4 mb-8">
             {[
               { label: "Total Sent", value: stats.totalSent, icon: Send, color: "#22C55E" },
-              { label: "Drafts", value: stats.totalDrafts, icon: Edit, color: "#6B7280" },
-              { label: "Recipients", value: stats.totalRecipients, icon: Users, color: "var(--brand-obsidian, #1B1464)" },
-              { label: "Avg Open Rate", value: `${stats.avgOpenRate}%`, icon: Eye, color: "var(--brand-gold, #D4AF37)" },
+              { label: "Drafts", value: stats.totalDrafts, icon: Edit, color: "var(--muted-foreground)" },
+              { label: "Recipients", value: stats.totalRecipients, icon: Users, color: "var(--brand-obsidian, var(--accent-purple-deep))" },
+              { label: "Avg Open Rate", value: `${stats.avgOpenRate}%`, icon: Eye, color: "var(--brand-gold, var(--barholex-gold))" },
             ].map((stat) => (
               <Card key={stat.label} className="border">
                 <CardContent className="p-4 flex items-center gap-3">
@@ -112,7 +112,7 @@ export default function EmailBroadcasts() {
 
         {/* Create Form */}
         {showCreate && (
-          <Card className="mb-8 border-2" style={{ borderColor: "var(--brand-obsidian, #1B1464)" + "30" }}>
+          <Card className="mb-8 border-2" style={{ borderColor: "var(--brand-obsidian, var(--accent-purple-deep))" + "30" }}>
             <CardHeader>
               <CardTitle className="text-lg">Create New Broadcast</CardTitle>
             </CardHeader>

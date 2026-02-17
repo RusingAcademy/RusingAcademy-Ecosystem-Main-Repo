@@ -155,7 +155,7 @@ export default function CoachPayments() {
           {/* Connection Status Details */}
           {!hasAccount ? (
             <div className="space-y-6">
-              <div className="bg-gradient-to-r from-indigo-50 to-[#FFFFFF] dark:from-indigo-900/20 dark:to-teal-700/20 rounded-xl p-6">
+              <div className="bg-gradient-to-r from-indigo-50 to-[var(--text-inverse)] dark:from-indigo-900/20 dark:to-teal-700/20 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-black dark:text-foreground mb-4">
                   Why Connect with Stripe?
                 </h3>

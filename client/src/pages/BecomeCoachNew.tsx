@@ -596,7 +596,7 @@ export default function BecomeCoachNew() {
     <>
       <main className="bg-white dark:bg-background">
         {/* Hero Section - Premium Design with Light Green Background */}
-        <section className="relative overflow-hidden" style={{background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 25%, #d1fae5 50%, #ecfdf5 75%, #f0fdf4 100%)'}}>
+        <section className="relative overflow-hidden" style={{background: 'linear-gradient(135deg, #f0fdf4 0%, var(--success-soft) 25%, #d1fae5 50%, #ecfdf5 75%, #f0fdf4 100%)'}}>
           {/* Decorative elements */}
           <div className="absolute inset-0 overflow-hidden">
             {/* Floating orbs with subtle animation */}
@@ -604,7 +604,7 @@ export default function BecomeCoachNew() {
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-200/20 rounded-full blur-3xl animate-pulse" style={{animationDuration: '6s'}} />
             <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-green-100/40 rounded-full blur-2xl" />
             {/* Subtle grid pattern */}
-            <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, var(--semantic-success, var(--semantic-success, #059669)) 1px, transparent 0)', backgroundSize: '40px 40px'}} />
+            <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, var(--semantic-success, var(--semantic-success, var(--success))) 1px, transparent 0)', backgroundSize: '40px 40px'}} />
           </div>
           
           <div className="container relative py-16 md:py-24 px-6 md:px-8 lg:px-12 lg:px-12">
@@ -855,7 +855,7 @@ export default function BecomeCoachNew() {
                 {isEn ? "Your Security Matters" : "Votre sécurité compte"}
               </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{l.safetyTitle}</h2>
-              <p className="text-lg max-w-2xl mx-auto" style={{color: 'var(--color-white, #ffffff)'}}>{l.safetySubtitle}</p>
+              <p className="text-lg max-w-2xl mx-auto" style={{color: 'var(--color-white, var(--text-inverse))'}}>{l.safetySubtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

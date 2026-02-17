@@ -15,8 +15,8 @@ import { Facebook, Twitter, Linkedin, Instagram, Youtube, Mail, MapPin, Globe, P
 // Design tokens from design-tokens.json v3.0
 const TOKENS = {
   colors: {
-    bg: { canvas: "#FEFEF8", surface: "#FFFFFF" },
-    text: { primary: "#041e1e", secondary: "#3A4456", muted: "#6B7280", onDark: "#FFFFFF" },
+    bg: { canvas: "var(--bg)", surface: "var(--text-inverse)" },
+    text: { primary: "var(--brand-obsidian-2)", secondary: "#3A4456", muted: "var(--muted-foreground)", onDark: "var(--text-inverse)" },
     accent: { navy: "#0F2A44", teal: "#0E7490", purple: "#6D28D9" },
     border: { subtle: "#E7E7DF", strong: "#D3D3C9" },
   },

@@ -19,7 +19,7 @@ const tokens = {
   primary: "#1E3A5F",
   secondary: "#C9A227",
   success: "#16A34A",
-  error: "#DC2626",
+  error: "var(--danger)",
 };
 
 interface CoachApplication {
