@@ -1,0 +1,392 @@
+/**
+ * Wave 7: Mobile-First CSS Architecture
+ * 
+ * Purpose: Establish mobile-first responsive design patterns across the entire ecosystem
+ * Impact: Ensures optimal mobile experience and progressive enhancement for larger screens
+ * 
+ * Key Features:
+ * - Mobile-first breakpoint system
+ * - Touch-friendly interactive elements (min 44x44px)
+ * - Optimized typography scaling
+ * - Flexible grid layouts
+ * - Performance-optimized animations
+ */
+
+/* ==========================================================================
+   MOBILE-FIRST BASE STYLES
+   ========================================================================== */
+
+/* Root Variables - Mobile First */
+:root {
+  /* Typography Scale - Mobile */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  
+  /* Spacing Scale - Mobile */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  
+  /* Touch Target Minimum */
+  --touch-target-min: 44px;
+  
+  /* Container Widths */
+  --container-mobile: 100%;
+  --container-tablet: 768px;
+  --container-desktop: 1024px;
+  --container-wide: 1280px;
+  --container-max: 1536px;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* Mobile First - Default styles are for mobile (320px+) */
+
+/* Small Mobile: 375px+ */
+@media (min-width: 375px) {
+  :root {
+    --font-size-base: 1rem;
+    --font-size-2xl: 1.625rem;  /* 26px */
+    --font-size-3xl: 2rem;      /* 32px */
+  }
+}
+
+/* Tablet: 768px+ */
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 1rem;
+    --font-size-2xl: 1.75rem;   /* 28px */
+    --font-size-3xl: 2.25rem;   /* 36px */
+    --font-size-4xl: 3rem;      /* 48px */
+    
+    --space-8: 2.5rem;    /* 40px */
+    --space-10: 3rem;     /* 48px */
+    --space-12: 4rem;     /* 64px */
+    --space-16: 5rem;     /* 80px */
+  }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  :root {
+    --font-size-2xl: 2rem;      /* 32px */
+    --font-size-3xl: 2.5rem;    /* 40px */
+    --font-size-4xl: 3.5rem;    /* 56px */
+    
+    --space-10: 3.5rem;   /* 56px */
+    --space-12: 5rem;     /* 80px */
+    --space-16: 6rem;     /* 96px */
+  }
+}
+
+/* Large Desktop: 1280px+ */
+@media (min-width: 1280px) {
+  :root {
+    --font-size-3xl: 3rem;      /* 48px */
+    --font-size-4xl: 4rem;      /* 64px */
+  }
+}
+
+/* ==========================================================================
+   MOBILE-FIRST LAYOUT UTILITIES
+   ========================================================================== */
+
+/* Container - Mobile First */
+.container-mobile-first {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .container-mobile-first {
+    max-width: var(--container-tablet);
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-mobile-first {
+    max-width: var(--container-desktop);
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-mobile-first {
+    max-width: var(--container-wide);
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-mobile-first {
+    max-width: var(--container-max);
+  }
+}
+
+/* ==========================================================================
+   TOUCH-FRIENDLY INTERACTIVE ELEMENTS
+   ========================================================================== */
+
+/* Minimum Touch Target Size */
+.touch-target {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button - Mobile First */
+.btn-mobile-first {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .btn-mobile-first {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* Link - Touch Friendly */
+.link-mobile-first {
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================================================
+   RESPONSIVE GRID SYSTEM
+   ========================================================================== */
+
+/* Grid - Mobile First (1 column default) */
+.grid-mobile-first {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+/* 2 columns on tablet */
+@media (min-width: 768px) {
+  .grid-mobile-first-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+/* 3 columns on desktop */
+@media (min-width: 1024px) {
+  .grid-mobile-first-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* 4 columns on large desktop */
+@media (min-width: 1280px) {
+  .grid-mobile-first-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE TYPOGRAPHY
+   ========================================================================== */
+
+/* Heading - Mobile First */
+.heading-mobile-first {
+  font-size: var(--font-size-2xl);
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .heading-mobile-first {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading-mobile-first {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+/* Body Text - Mobile First */
+.text-mobile-first {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .text-mobile-first {
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+  }
+}
+
+/* ==========================================================================
+   MOBILE-FIRST NAVIGATION
+   ========================================================================== */
+
+/* Mobile Menu - Stacked by default */
+.nav-mobile-first {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .nav-mobile-first {
+    flex-direction: row;
+    gap: var(--space-6);
+  }
+}
+
+/* Mobile Menu Item */
+.nav-item-mobile-first {
+  min-height: var(--touch-target-min);
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Reduce motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* GPU Acceleration for smooth animations on mobile */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* ==========================================================================
+   MOBILE-FIRST SPACING UTILITIES
+   ========================================================================== */
+
+/* Padding - Mobile First */
+.p-mobile-1 { padding: var(--space-1); }
+.p-mobile-2 { padding: var(--space-2); }
+.p-mobile-3 { padding: var(--space-3); }
+.p-mobile-4 { padding: var(--space-4); }
+.p-mobile-6 { padding: var(--space-6); }
+.p-mobile-8 { padding: var(--space-8); }
+
+@media (min-width: 768px) {
+  .p-tablet-6 { padding: var(--space-6); }
+  .p-tablet-8 { padding: var(--space-8); }
+  .p-tablet-10 { padding: var(--space-10); }
+}
+
+@media (min-width: 1024px) {
+  .p-desktop-8 { padding: var(--space-8); }
+  .p-desktop-10 { padding: var(--space-10); }
+  .p-desktop-12 { padding: var(--space-12); }
+}
+
+/* Margin - Mobile First */
+.m-mobile-1 { margin: var(--space-1); }
+.m-mobile-2 { margin: var(--space-2); }
+.m-mobile-3 { margin: var(--space-3); }
+.m-mobile-4 { margin: var(--space-4); }
+.m-mobile-6 { margin: var(--space-6); }
+.m-mobile-8 { margin: var(--space-8); }
+
+@media (min-width: 768px) {
+  .m-tablet-6 { margin: var(--space-6); }
+  .m-tablet-8 { margin: var(--space-8); }
+  .m-tablet-10 { margin: var(--space-10); }
+}
+
+@media (min-width: 1024px) {
+  .m-desktop-8 { margin: var(--space-8); }
+  .m-desktop-10 { margin: var(--space-10); }
+  .m-desktop-12 { margin: var(--space-12); }
+}
+
+/* ==========================================================================
+   MOBILE-FIRST VISIBILITY UTILITIES
+   ========================================================================== */
+
+/* Hide on mobile, show on tablet+ */
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-mobile {
+    display: block;
+  }
+}
+
+/* Show on mobile only */
+.show-mobile-only {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .show-mobile-only {
+    display: none;
+  }
+}
+
+/* Hide on tablet, show on desktop+ */
+.hide-tablet {
+  display: block;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hide-tablet {
+    display: none;
+  }
+}

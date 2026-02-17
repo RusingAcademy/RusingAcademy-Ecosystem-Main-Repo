@@ -1,8 +1,8 @@
-import { useEffect, lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton";
@@ -706,7 +706,36 @@ function PostLoginRedirect() {
   return null;
 }
 
+// Wave 7: Canonical URL Hook for SEO
+function useCanonicalUrl() {
+  const [location] = useLocation();
+  const baseUrl = 'https://www.rusingacademy.com';
+
+  useEffect(() => {
+    // Remove existing canonical link
+    const existingCanonical = document.querySelector('link[rel="canonical"]');
+    if (existingCanonical) {
+      existingCanonical.remove();
+    }
+
+    // Create new canonical link
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = `${baseUrl}${location}`;
+    document.head.appendChild(canonical);
+
+    return () => {
+      const link = document.querySelector('link[rel="canonical"]');
+      if (link) {
+        link.remove();
+      }
+    };
+  }, [location]);
+}
+
 function App() {
+  useCanonicalUrl(); // Wave 7: Dynamic canonical URLs
+
   return (
     <HelmetProvider>
       <ErrorBoundary>
