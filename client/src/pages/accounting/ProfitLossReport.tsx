@@ -242,8 +242,8 @@ export default function ProfitLossReport() {
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData} barGap={2} barCategoryGap="20%">
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" tick={{ fontSize: 11 }} stroke="var(--color-gray-400, #9ca3af)" />
-                    <YAxis tick={{ fontSize: 11 }} stroke="var(--color-gray-400, #9ca3af)" tickFormatter={fmtShort} />
+                    <XAxis dataKey="month" tick={{ fontSize: 11 }} stroke="var(--color-gray-400, var(--muted-foreground))" />
+                    <YAxis tick={{ fontSize: 11 }} stroke="var(--color-gray-400, var(--muted-foreground))" tickFormatter={fmtShort} />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend wrapperStyle={{ fontSize: 12 }} />
                     <Bar dataKey="income" name={`Income ${chartYear}`} fill="#2CA01C" radius={[3, 3, 0, 0]} />
@@ -264,8 +264,8 @@ export default function ProfitLossReport() {
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" tick={{ fontSize: 11 }} stroke="var(--color-gray-400, #9ca3af)" />
-                    <YAxis tick={{ fontSize: 11 }} stroke="var(--color-gray-400, #9ca3af)" tickFormatter={fmtShort} />
+                    <XAxis dataKey="month" tick={{ fontSize: 11 }} stroke="var(--color-gray-400, var(--muted-foreground))" />
+                    <YAxis tick={{ fontSize: 11 }} stroke="var(--color-gray-400, var(--muted-foreground))" tickFormatter={fmtShort} />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend wrapperStyle={{ fontSize: 12 }} />
                     <Line type="monotone" dataKey="netProfit" name={`Net Profit ${chartYear}`} stroke="#2CA01C" strokeWidth={2} dot={{ r: 4 }} />

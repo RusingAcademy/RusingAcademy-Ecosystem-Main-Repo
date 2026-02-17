@@ -294,11 +294,11 @@ export const XP_REWARDS: XPRewards = {
 
 export const PATH_COLORS: Record<number, string> = {
   1: '#4F46E5', // Indigo - Foundations
-  2: '#7C3AED', // Violet - Building Confidence
-  3: '#2563EB', // Blue - Professional Fluency
+  2: 'var(--accent-purple)', // Violet - Building Confidence
+  3: 'var(--semantic-info)', // Blue - Professional Fluency
   4: '#0891B2', // Cyan - Advanced Professional
-  5: 'var(--semantic-success, #059669)', // Emerald - Executive Communication
-  6: '#DC2626'  // Red - SLE Mastery
+  5: 'var(--semantic-success, var(--success))', // Emerald - Executive Communication
+  6: 'var(--danger)'  // Red - SLE Mastery
 };
 
 export const CECR_DESCRIPTIONS: Record<CECRLevel, { en: string; fr: string }> = {

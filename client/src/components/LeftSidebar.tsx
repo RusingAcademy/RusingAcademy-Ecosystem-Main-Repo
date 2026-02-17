@@ -1,4 +1,4 @@
-// DESIGN: Premium glassmorphism sidebar — Navy var(--brand-obsidian, #1B1464) + Gold var(--brand-gold, #D4AF37)
+// DESIGN: Premium glassmorphism sidebar — Navy var(--brand-obsidian, var(--accent-purple-deep)) + Gold var(--brand-gold, var(--barholex-gold))
 // Elevated visual hierarchy, animated active states, section dividers
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLocation } from "wouter";
@@ -121,15 +121,15 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
             />
             <div
               className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white"
-              style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)" }}
+              style={{ background: "linear-gradient(135deg, var(--brand-gold, var(--barholex-gold)), #E8CB6A)" }}
             />
           </div>
           <div className="leading-tight">
             <div className="flex items-baseline">
-              <span className="text-[15px] font-extrabold tracking-tight" style={{ color: isDark ? "#A5A4FF" : "var(--brand-obsidian, #1B1464)" }}>
+              <span className="text-[15px] font-extrabold tracking-tight" style={{ color: isDark ? "#A5A4FF" : "var(--brand-obsidian, var(--accent-purple-deep))" }}>
                 Rusing
               </span>
-              <span className="text-[15px] font-extrabold tracking-tight" style={{ color: isDark ? "#E8CB6A" : "var(--brand-gold, #D4AF37)" }}>
+              <span className="text-[15px] font-extrabold tracking-tight" style={{ color: isDark ? "#E8CB6A" : "var(--brand-gold, var(--barholex-gold))" }}>
                 Academy
               </span>
             </div>
@@ -169,7 +169,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
                         background: isActive
                           ? "linear-gradient(135deg, rgba(27, 20, 100, 0.08), rgba(212, 175, 55, 0.06))"
                           : "transparent",
-                        color: isActive ? (isDark ? "#A5A4FF" : "var(--brand-obsidian, #1B1464)") : undefined,
+                        color: isActive ? (isDark ? "#A5A4FF" : "var(--brand-obsidian, var(--accent-purple-deep))") : undefined,
                       }}
                     >
                       {/* Active indicator bar */}
@@ -177,7 +177,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
                         <motion.div
                           layoutId="sidebar-active"
                           className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 rounded-r-full"
-                          style={{ background: "linear-gradient(180deg, var(--brand-obsidian, #1B1464), var(--brand-gold, #D4AF37))" }}
+                          style={{ background: "linear-gradient(180deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-gold, var(--barholex-gold)))" }}
                           transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         />
                       )}
@@ -195,7 +195,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
                             isActive ? "" : "text-muted-foreground group-hover:text-foreground"
                           }`}
                           strokeWidth={isActive ? 2.5 : 1.8}
-                          style={isActive ? { color: isDark ? "#A5A4FF" : "var(--brand-obsidian, #1B1464)" } : undefined}
+                          style={isActive ? { color: isDark ? "#A5A4FF" : "var(--brand-obsidian, var(--accent-purple-deep))" } : undefined}
                         />
                       </div>
 
@@ -218,7 +218,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           className="ml-auto w-2 h-2 rounded-full"
-                          style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)" }}
+                          style={{ background: "linear-gradient(135deg, var(--brand-gold, var(--barholex-gold)), #E8CB6A)" }}
                         />
                       )}
                     </button>
@@ -243,7 +243,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
         {user && (
           <div className="glass-card rounded-xl p-3 mb-3">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" }}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))" }}>
                 {user.name?.charAt(0)?.toUpperCase() || "U"}
               </div>
               <div className="flex-1 min-w-0">

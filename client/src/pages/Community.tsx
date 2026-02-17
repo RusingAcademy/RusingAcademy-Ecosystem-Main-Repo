@@ -49,7 +49,7 @@ const resources = [
     size: "2.4 MB",
     downloads: 1234,
     icon: FileText,
-    color: "#17E2C6"
+    color: "var(--lingueefy-accent)"
   },
   {
     id: 2,
@@ -60,7 +60,7 @@ const resources = [
     duration: "3h 45m",
     views: 5678,
     icon: Video,
-    color: "#1E9B8A"
+    color: "var(--teal)"
   },
   {
     id: 3,
@@ -71,7 +71,7 @@ const resources = [
     size: "156 KB",
     downloads: 892,
     icon: FileText,
-    color: "#D4A853"
+    color: "var(--barholex-gold)"
   },
   {
     id: 4,
@@ -115,12 +115,12 @@ export default function Community() {
 
   const getEventTypeColor = (type: string) => {
     switch (type) {
-      case "workshop": return "#17E2C6";
-      case "networking": return "#D4A853";
-      case "practice": return "#1E9B8A";
+      case "workshop": return "var(--lingueefy-accent)";
+      case "networking": return "var(--barholex-gold)";
+      case "practice": return "var(--teal)";
       case "info_session": return "#8B5CFF";
       case "webinar": return "#FF6B6B";
-      default: return "#17E2C6";
+      default: return "var(--lingueefy-accent)";
     }
   };
 
@@ -211,7 +211,7 @@ export default function Community() {
         {/* Background effects */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-1/4 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#1E9B8A]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[var(--teal)]/10 rounded-full blur-3xl" />
         </div>
 
         <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12">
@@ -481,7 +481,7 @@ export default function Community() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {forumCategories.map((category) => {
                   const IconComponent = categoryIcons[category.icon || "💬"] || MessageSquare;
-                  const categoryColor = category.color || "#17E2C6";
+                  const categoryColor = category.color || "var(--lingueefy-accent)";
                   
                   return (
                     <Link key={category.id} href={`/community/category/${category.id}`}>                    <motion.div
@@ -526,7 +526,7 @@ export default function Community() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-teal-400/10 to-[#1E9B8A]/10 border border-teal-400/20"
+              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-teal-400/10 to-[var(--teal)]/10 border border-teal-400/20"
             >
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                 <Globe className="w-5 h-5 text-teal-400" />
@@ -640,7 +640,7 @@ export default function Community() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-teal-400/20 to-[#1E9B8A]/20 border border-teal-400/30"
+              className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-teal-400/20 to-[var(--teal)]/20 border border-teal-400/30"
             >
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="flex-1">

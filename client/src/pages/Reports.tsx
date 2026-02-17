@@ -12,7 +12,7 @@ import { useState, useMemo } from "react";
 /* ─── Chart Components ─── */
 
 /** Simple SVG Line Chart */
-function LineChart({ data, color = "var(--brand-teal, #008090)", height = 160, label }: {
+function LineChart({ data, color = "var(--brand-teal, var(--teal))", height = 160, label }: {
   data: number[]; color?: string; height?: number; label?: string;
 }) {
   if (!data.length) return null;
@@ -40,7 +40,7 @@ function LineChart({ data, color = "var(--brand-teal, #008090)", height = 160, l
       {/* Grid lines */}
       {[0, 0.25, 0.5, 0.75, 1].map((f) => (
         <line key={f} x1={padding} y1={padding + chartH * (1 - f)} x2={w - padding} y2={padding + chartH * (1 - f)}
-          stroke="var(--color-gray-200, #e5e7eb)" strokeWidth="0.3" strokeDasharray="2,2" />
+          stroke="var(--color-gray-200, var(--border))" strokeWidth="0.3" strokeDasharray="2,2" />
       ))}
       {/* Area fill */}
       <path d={areaD} fill={`url(#grad-${color.replace("#", "")})`} />
@@ -51,15 +51,15 @@ function LineChart({ data, color = "var(--brand-teal, #008090)", height = 160, l
         <circle key={i} cx={p.x} cy={p.y} r="1.5" fill="white" stroke={color} strokeWidth="1" />
       ))}
       {/* Y-axis labels */}
-      <text x={padding - 2} y={padding + 3} fontSize="4" fill="var(--color-gray-400, #9ca3af)" textAnchor="end">{max}</text>
-      <text x={padding - 2} y={padding + chartH + 3} fontSize="4" fill="var(--color-gray-400, #9ca3af)" textAnchor="end">0</text>
-      {label && <text x={w / 2} y={h - 2} fontSize="4" fill="var(--color-gray-400, #9ca3af)" textAnchor="middle">{label}</text>}
+      <text x={padding - 2} y={padding + 3} fontSize="4" fill="var(--color-gray-400, var(--muted-foreground))" textAnchor="end">{max}</text>
+      <text x={padding - 2} y={padding + chartH + 3} fontSize="4" fill="var(--color-gray-400, var(--muted-foreground))" textAnchor="end">0</text>
+      {label && <text x={w / 2} y={h - 2} fontSize="4" fill="var(--color-gray-400, var(--muted-foreground))" textAnchor="middle">{label}</text>}
     </svg>
   );
 }
 
 /** Simple SVG Bar Chart */
-function BarChart({ data, labels, color = "var(--brand-teal, #008090)", height = 160 }: {
+function BarChart({ data, labels, color = "var(--brand-teal, var(--teal))", height = 160 }: {
   data: number[]; labels?: string[]; color?: string; height?: number;
 }) {
   if (!data.length) return null;
@@ -77,7 +77,7 @@ function BarChart({ data, labels, color = "var(--brand-teal, #008090)", height =
       {/* Grid lines */}
       {[0, 0.25, 0.5, 0.75, 1].map((f) => (
         <line key={f} x1={padding} y1={padding + chartH * (1 - f)} x2={w - padding} y2={padding + chartH * (1 - f)}
-          stroke="var(--color-gray-200, #e5e7eb)" strokeWidth="0.3" strokeDasharray="2,2" />
+          stroke="var(--color-gray-200, var(--border))" strokeWidth="0.3" strokeDasharray="2,2" />
       ))}
       {data.map((v, i) => {
         const barH = (v / max) * chartH;
@@ -86,16 +86,16 @@ function BarChart({ data, labels, color = "var(--brand-teal, #008090)", height =
         return (
           <g key={i}>
             <rect x={x} y={y} width={barW} height={barH} rx="1.5" fill={color} opacity="0.8" />
-            <text x={x + barW / 2} y={y - 2} fontSize="3.5" fill="var(--color-gray-500, #6b7280)" textAnchor="middle">{v}</text>
+            <text x={x + barW / 2} y={y - 2} fontSize="3.5" fill="var(--color-gray-500, var(--muted-foreground))" textAnchor="middle">{v}</text>
             {labels?.[i] && (
-              <text x={x + barW / 2} y={padding + chartH + 8} fontSize="3" fill="var(--color-gray-400, #9ca3af)" textAnchor="middle">
+              <text x={x + barW / 2} y={padding + chartH + 8} fontSize="3" fill="var(--color-gray-400, var(--muted-foreground))" textAnchor="middle">
                 {labels[i]}
               </text>
             )}
           </g>
         );
       })}
-      <text x={padding - 2} y={padding + 3} fontSize="4" fill="var(--color-gray-400, #9ca3af)" textAnchor="end">{max}</text>
+      <text x={padding - 2} y={padding + 3} fontSize="4" fill="var(--color-gray-400, var(--muted-foreground))" textAnchor="end">{max}</text>
     </svg>
   );
 }
@@ -124,24 +124,24 @@ function RadarChart({ skills, height = 200 }: {
       {gridLevels.map((level) => {
         const pts = skills.map((_, i) => getPoint(i, level * 100, 100));
         const path = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ") + " Z";
-        return <path key={level} d={path} fill="none" stroke="var(--color-gray-200, #e5e7eb)" strokeWidth="0.3" />;
+        return <path key={level} d={path} fill="none" stroke="var(--color-gray-200, var(--border))" strokeWidth="0.3" />;
       })}
       {/* Axes */}
       {skills.map((_, i) => {
         const p = getPoint(i, 100, 100);
-        return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="var(--color-gray-200, #e5e7eb)" strokeWidth="0.3" />;
+        return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="var(--color-gray-200, var(--border))" strokeWidth="0.3" />;
       })}
       {/* Data area */}
-      <path d={dataPath} fill="rgba(0,128,144,0.15)" stroke="var(--brand-teal, #008090)" strokeWidth="1" />
+      <path d={dataPath} fill="rgba(0,128,144,0.15)" stroke="var(--brand-teal, var(--teal))" strokeWidth="1" />
       {/* Data points */}
       {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="1.5" fill="var(--brand-teal, #008090)" />
+        <circle key={i} cx={p.x} cy={p.y} r="1.5" fill="var(--brand-teal, var(--teal))" />
       ))}
       {/* Labels */}
       {skills.map((s, i) => {
         const p = getPoint(i, 120, 100);
         return (
-          <text key={i} x={p.x} y={p.y} fontSize="3.5" fill="var(--color-gray-700, #374151)" textAnchor="middle" dominantBaseline="middle">
+          <text key={i} x={p.x} y={p.y} fontSize="3.5" fill="var(--color-gray-700, var(--muted-foreground))" textAnchor="middle" dominantBaseline="middle">
             {s.name}
           </text>
         );
@@ -158,7 +158,7 @@ function ActivityHeatmap({ data, weeks = 12 }: { data: Record<string, number>; w
   const maxVal = Math.max(...Object.values(data), 1);
 
   const getColor = (val: number) => {
-    if (val === 0) return "var(--color-gray-100, #f3f4f6)";
+    if (val === 0) return "var(--color-gray-100, var(--bg-alt))";
     const ratio = val / maxVal;
     if (ratio < 0.25) return "rgba(0,128,144,0.2)";
     if (ratio < 0.5) return "rgba(0,128,144,0.4)";
@@ -188,7 +188,7 @@ function ActivityHeatmap({ data, weeks = 12 }: { data: Record<string, number>; w
     <div className="overflow-x-auto">
       <svg width={weeks * (cellSize + gap)} height={7 * (cellSize + gap) + 15} className="block">
         {days.map((label, i) => (
-          label && <text key={i} x={-2} y={i * (cellSize + gap) + cellSize - 1} fontSize="3" fill="var(--color-gray-400, #9ca3af)" textAnchor="end">{label}</text>
+          label && <text key={i} x={-2} y={i * (cellSize + gap) + cellSize - 1} fontSize="3" fill="var(--color-gray-400, var(--muted-foreground))" textAnchor="end">{label}</text>
         ))}
         {cells.map((c, i) => (
           <rect key={i} x={c.x + 10} y={c.y} width={cellSize} height={cellSize} rx="1" fill={c.color}>
@@ -256,7 +256,7 @@ export default function Reports() {
 
   const overallScore = Math.round(sleSkills.reduce((a, s) => a + s.value, 0) / sleSkills.length);
   const sleLevel = overallScore >= 80 ? "C" : overallScore >= 60 ? "B" : "A";
-  const sleLevelColor = overallScore >= 80 ? "var(--semantic-success, #10b981)" : overallScore >= 60 ? "var(--semantic-warning, #f59e0b)" : "var(--semantic-danger, #ef4444)";
+  const sleLevelColor = overallScore >= 80 ? "var(--semantic-success, var(--success))" : overallScore >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))";
 
   return (
     <DashboardLayout>
@@ -298,10 +298,10 @@ export default function Reports() {
             {/* Summary Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: "Total XP", value: gamification.totalXP.toLocaleString(), icon: "star", color: "var(--semantic-warning, #f59e0b)" },
-                { label: "Lessons Done", value: gamification.lessonsCompleted.toString(), icon: "school", color: "var(--brand-teal, #008090)" },
+                { label: "Total XP", value: gamification.totalXP.toLocaleString(), icon: "star", color: "var(--semantic-warning, var(--warning))" },
+                { label: "Lessons Done", value: gamification.lessonsCompleted.toString(), icon: "school", color: "var(--brand-teal, var(--teal))" },
                 { label: "Quizzes Passed", value: gamification.quizzesPassed.toString(), icon: "quiz", color: "#6366f1" },
-                { label: "Day Streak", value: `${gamification.streak}d`, icon: "local_fire_department", color: "var(--semantic-danger, #ef4444)" },
+                { label: "Day Streak", value: `${gamification.streak}d`, icon: "local_fire_department", color: "var(--semantic-danger, var(--danger))" },
               ].map((s) => (
                 <div key={s.label} className="glass-card rounded-xl p-4 text-center">
                   <span className="material-icons text-[1.75rem] mb-2" style={{ color: s.color }}>{s.icon}</span>
@@ -317,7 +317,7 @@ export default function Reports() {
                 <span className="material-icons text-teal-700 text-lg">show_chart</span>
                 XP Earned Over Time
               </h3>
-              <LineChart data={xpData} color="var(--brand-teal, #008090)" label="Last 12 weeks" />
+              <LineChart data={xpData} color="var(--brand-teal, var(--teal))" label="Last 12 weeks" />
             </div>
 
             {/* Quiz Scores */}
@@ -358,7 +358,7 @@ export default function Reports() {
                           className="h-full rounded-full transition-all duration-500"
                           style={{
                             width: `${pct}%`,
-                            background: pct === 100 ? "var(--semantic-success, #10b981)" : pct > 50 ? "var(--brand-teal, #008090)" : "var(--semantic-warning, #f59e0b)",
+                            background: pct === 100 ? "var(--semantic-success, var(--success))" : pct > 50 ? "var(--brand-teal, var(--teal))" : "var(--semantic-warning, var(--warning))",
                           }}
                         />
                       </div>
@@ -377,7 +377,7 @@ export default function Reports() {
               <BarChart
                 data={pathProgress.map((p) => p.completed)}
                 labels={pathProgress.map((p) => p.name.replace("Path ", "P"))}
-                color="var(--semantic-warning, #f59e0b)"
+                color="var(--semantic-warning, var(--warning))"
               />
             </div>
 
@@ -424,7 +424,7 @@ export default function Reports() {
               <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4">SLE Readiness Score</h3>
               <div className="relative w-32 h-32 mx-auto mb-4">
                 <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <circle cx="50" cy="50" r="42" fill="none" stroke="var(--color-gray-100, #f3f4f6)" strokeWidth="8" />
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="var(--color-gray-100, var(--bg-alt))" strokeWidth="8" />
                   <circle
                     cx="50" cy="50" r="42" fill="none" stroke={sleLevelColor} strokeWidth="8"
                     strokeDasharray={`${overallScore * 2.64} 264`}
@@ -461,7 +461,7 @@ export default function Reports() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {sleSkills.map((skill) => {
                 const level = skill.value >= 80 ? "C" : skill.value >= 60 ? "B" : "A";
-                const levelColor = skill.value >= 80 ? "var(--semantic-success, #10b981)" : skill.value >= 60 ? "var(--semantic-warning, #f59e0b)" : "var(--semantic-danger, #ef4444)";
+                const levelColor = skill.value >= 80 ? "var(--semantic-success, var(--success))" : skill.value >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))";
                 return (
                   <div key={skill.name} className="glass-card rounded-xl p-4">
                     <div className="flex items-center justify-between mb-2">
@@ -499,7 +499,7 @@ export default function Reports() {
               <ActivityHeatmap data={activityData} weeks={12} />
               <div className="flex items-center gap-2 mt-3 justify-end">
                 <span className="text-[10px] text-gray-400">Less</span>
-                {["var(--color-gray-100, #f3f4f6)", "rgba(0,128,144,0.2)", "rgba(0,128,144,0.4)", "rgba(0,128,144,0.6)", "rgba(0,128,144,0.9)"].map((c) => (
+                {["var(--color-gray-100, var(--bg-alt))", "rgba(0,128,144,0.2)", "rgba(0,128,144,0.4)", "rgba(0,128,144,0.6)", "rgba(0,128,144,0.9)"].map((c) => (
                   <div key={c} className="w-3 h-3 rounded-sm" style={{ backgroundColor: c }} />
                 ))}
                 <span className="text-[10px] text-gray-400">More</span>
@@ -523,7 +523,7 @@ export default function Reports() {
                           className="w-4 rounded-t-md transition-all"
                           style={{
                             height: `${Math.max(val * 20, 4)}%`,
-                            backgroundColor: val > 3 ? "var(--brand-teal, #008090)" : val > 1 ? "rgba(0,128,144,0.5)" : "var(--color-gray-200, #e5e7eb)",
+                            backgroundColor: val > 3 ? "var(--brand-teal, var(--teal))" : val > 1 ? "rgba(0,128,144,0.5)" : "var(--color-gray-200, var(--border))",
                           }}
                         />
                       </div>

@@ -16,7 +16,7 @@ export const LingueefyLogo: React.FC<LingueefyLogoProps> = ({
   glassEffect = true,
 }) => {
   // Premium color palette
-  const tealDark = '#0d9488';
+  const tealDark = 'var(--teal)';
   const tealPrimary = '#14b8a6';
   const tealLight = '#2dd4bf';
   const tealGlow = '#5eead4';

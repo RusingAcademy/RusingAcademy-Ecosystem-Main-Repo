@@ -51,7 +51,7 @@ export default function BarholexServices() {
         "Animation et motion graphics",
         "Diffusion en direct et webinaires",
       ],
-      color: "#E07B39",
+      color: "var(--barholex-gold-hover)",
       forEn: "Government departments, language schools, corporate training teams",
       forFr: "Ministères, écoles de langues, équipes de formation corporative",
       outcomeEn: "Engaging video content that improves learning retention by up to 65%",
@@ -103,7 +103,7 @@ export default function BarholexServices() {
         "Infographies et illustrations",
         "Matériel imprimé et numérique",
       ],
-      color: "var(--brand-gold, #D4AF37)",
+      color: "var(--brand-gold, var(--barholex-gold))",
       forEn: "Startups, educational institutions, government agencies",
       forFr: "Startups, institutions éducatives, agences gouvernementales",
       outcomeEn: "Memorable visual identity that builds trust and recognition",
@@ -129,7 +129,7 @@ export default function BarholexServices() {
         "CMS et gestion de contenu",
         "Intégrations API",
       ],
-      color: "#8B5CF6",
+      color: "var(--accent-purple)",
       forEn: "Language schools, training organizations, EdTech startups",
       forFr: "Écoles de langues, organisations de formation, startups EdTech",
       outcomeEn: "Scalable digital platforms that grow with your organization",
@@ -474,7 +474,7 @@ export default function BarholexServices() {
 
         {/* Process Section - Timeline */}
         <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-obsidian/50 to-teal-950 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-gold, #D4AF37)]/30 to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-gold, var(--barholex-gold))]/30 to-transparent" />
           
           <div className="container mx-auto">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
@@ -495,7 +495,7 @@ export default function BarholexServices() {
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 {/* Connection Line */}
-                <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-barholex-gold via-[var(--brand-gold, #D4AF37)]/50 to-barholex-gold" />
+                <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-barholex-gold via-[var(--brand-gold, var(--barholex-gold))]/50 to-barholex-gold" />
                 
                 {PROCESS.map((step, index) => (
                   <motion.div

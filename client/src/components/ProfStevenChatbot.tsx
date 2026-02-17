@@ -215,7 +215,7 @@ export default function ProfStevenChatbot() {
 
             {/* Oral Exam Simulations */}
             <Link href="/ai-coach?mode=simulation" onClick={() => setIsOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-[#FFFFFF] hover:from-foundation hover:to-orange-600 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-foundation hover:translate-x-1 cursor-pointer">
+              <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-[var(--text-inverse)] hover:from-foundation hover:to-orange-600 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-foundation hover:translate-x-1 cursor-pointer">
                 <div className="w-11 h-11 bg-gradient-to-br from-foundation to-teal-700 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
                   <GraduationCap className="w-6 h-6 text-white" />
                 </div>

@@ -66,10 +66,10 @@ import { FREE_ACCESS_MODE } from "@shared/const";
 
 // ─── 7-Slot Template Definition ─────────────────────────────────
 const SLOT_TEMPLATE = [
-  { index: 1, type: "introduction", label: "Introduction", labelFr: "Accroche", icon: Lightbulb, color: "#F59E0B", bg: "bg-amber-500/10", textColor: "text-amber-500" },
-  { index: 2, type: "video_scenario", label: "Video", labelFr: "Vidéo", icon: Video, color: "#3B82F6", bg: "bg-blue-500/10", textColor: "text-blue-500" },
-  { index: 3, type: "grammar_strategy", label: "Grammar", labelFr: "Grammaire", icon: BookOpen, color: "#10B981", bg: "bg-emerald-500/10", textColor: "text-emerald-500" },
-  { index: 4, type: "written_practice", label: "Written", labelFr: "Écrit", icon: PenLine, color: "#8B5CF6", bg: "bg-purple-500/10", textColor: "text-purple-500" },
+  { index: 1, type: "introduction", label: "Introduction", labelFr: "Accroche", icon: Lightbulb, color: "var(--warning)", bg: "bg-amber-500/10", textColor: "text-amber-500" },
+  { index: 2, type: "video_scenario", label: "Video", labelFr: "Vidéo", icon: Video, color: "var(--semantic-info)", bg: "bg-blue-500/10", textColor: "text-blue-500" },
+  { index: 3, type: "grammar_strategy", label: "Grammar", labelFr: "Grammaire", icon: BookOpen, color: "var(--success)", bg: "bg-emerald-500/10", textColor: "text-emerald-500" },
+  { index: 4, type: "written_practice", label: "Written", labelFr: "Écrit", icon: PenLine, color: "var(--accent-purple)", bg: "bg-purple-500/10", textColor: "text-purple-500" },
   { index: 5, type: "oral_practice", label: "Oral", labelFr: "Oral", icon: Mic, color: "#F43F5E", bg: "bg-rose-500/10", textColor: "text-rose-500" },
   { index: 6, type: "quiz", label: "Quiz", labelFr: "Quiz", icon: HelpCircle, color: "#F97316", bg: "bg-orange-500/10", textColor: "text-orange-500" },
   { index: 7, type: "coaching_tip", label: "Coach Tip", labelFr: "Conseil", icon: Sparkles, color: "#14B8A6", bg: "bg-teal-500/10", textColor: "text-teal-500" },
@@ -116,8 +116,8 @@ function ProgressRing({
         />
         <defs>
           <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#17E2C6" />
-            <stop offset="100%" stopColor="#C65A1E" />
+            <stop offset="0%" stopColor="var(--lingueefy-accent)" />
+            <stop offset="100%" stopColor="var(--brand-cta)" />
           </linearGradient>
         </defs>
       </svg>
@@ -418,7 +418,7 @@ export default function LearnPortal() {
                   className="w-full h-full object-cover"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-foundation via-[var(--brand-foundation, #0F3D3E)]/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foundation via-[var(--brand-foundation, var(--brand-foundation))]/70 to-transparent" />
               </div>
               {/* Content overlay */}
               <div className="absolute bottom-0 left-0 right-0 z-10">
@@ -784,19 +784,19 @@ export default function LearnPortal() {
                   icon={Layers}
                   value={course.modules.length}
                   label={isEn ? "Modules" : "Modules"}
-                  color="var(--brand-foundation, #0F3D3E)"
+                  color="var(--brand-foundation, var(--brand-foundation))"
                 />
                 <StatCard
                   icon={BookOpen}
                   value={totalLessons}
                   label={isEn ? "Lessons" : "Leçons"}
-                  color="#C65A1E"
+                  color="var(--brand-cta)"
                 />
                 <StatCard
                   icon={Award}
                   value={totalActivities}
                   label={isEn ? "Activities" : "Activités"}
-                  color="#8B5CF6"
+                  color="var(--accent-purple)"
                 />
                 <StatCard
                   icon={Clock}
@@ -806,7 +806,7 @@ export default function LearnPortal() {
                       : "—"
                   }
                   label={isEn ? "Total Duration" : "Durée totale"}
-                  color="#10B981"
+                  color="var(--success)"
                 />
               </div>
             </motion.div>
@@ -964,7 +964,7 @@ function HeroContent({
                 isComplete
                   ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/25 hover:shadow-emerald-600/30"
                   : hasStarted
-                  ? "bg-cta hover:bg-[#E06B2D] text-white shadow-orange-700/25 hover:shadow-orange-700/30"
+                  ? "bg-cta hover:bg-[var(--brand-cta-2)] text-white shadow-orange-700/25 hover:shadow-orange-700/30"
                   : "bg-white dark:bg-slate-800 text-foundation hover:bg-white/90 shadow-white/25 hover:shadow-white/30"
               }`}
               onClick={() =>

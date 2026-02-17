@@ -180,7 +180,7 @@ export default function CoursePlayer() {
                 style={{
                   width: `${progressData?.enrollment.progressPercent ?? 0}%`,
                   backgroundColor:
-                    (progressData?.enrollment.progressPercent ?? 0) >= 100 ? "#2EC4B6" : "var(--brand-obsidian, #1B1464)",
+                    (progressData?.enrollment.progressPercent ?? 0) >= 100 ? "#2EC4B6" : "var(--brand-obsidian, var(--accent-purple-deep))",
                 }}
               />
             </div>

@@ -74,7 +74,7 @@ export default function PremiumSection({
       case "gradient":
         return "bg-gradient-to-br from-slate-50 via-white to-teal-50/30";
       case "teal-gradient":
-        return "bg-gradient-to-br from-teal-50/50 via-white to-[#FFFFFF]/30";
+        return "bg-gradient-to-br from-teal-50/50 via-white to-[var(--text-inverse)]/30";
       default:
         return "bg-white";
     }

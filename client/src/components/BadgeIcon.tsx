@@ -132,8 +132,8 @@ export function BadgeIcon({
       >
         <defs>
           <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={earned ? gradientFrom : "#6B7280"} />
-            <stop offset="100%" stopColor={earned ? gradientTo : "#9CA3AF"} />
+            <stop offset="0%" stopColor={earned ? gradientFrom : "var(--muted-foreground)"} />
+            <stop offset="100%" stopColor={earned ? gradientTo : "var(--muted-foreground)"} />
           </linearGradient>
           {earned && (
             <filter id={`glow-${gradId}`}>
@@ -161,7 +161,7 @@ export function BadgeIcon({
           cy={r}
           r={ringR}
           fill="none"
-          stroke={earned ? tierStyle.stroke : "#4B5563"}
+          stroke={earned ? tierStyle.stroke : "var(--text-paragraph)"}
           strokeWidth={s.ring}
           strokeLinecap="round"
           strokeDasharray={earned ? `${circumference}` : `${circumference * 0.3} ${circumference * 0.7}`}

@@ -113,7 +113,7 @@ export default function EmailTemplateBuilder() {
   const previewHtml = useMemo(() => {
     let html = editorForm.bodyHtml;
     VARIABLE_PRESETS.forEach(v => {
-      html = html.replace(new RegExp(v.key.replace(/[{}]/g, "\\$&"), "g"), `<strong style="color:var(--brand-foundation, #0F3D3E)">${v.example}</strong>`);
+      html = html.replace(new RegExp(v.key.replace(/[{}]/g, "\\$&"), "g"), `<strong style="color:var(--brand-foundation, var(--brand-foundation))">${v.example}</strong>`);
     });
     return html;
   }, [editorForm.bodyHtml]);
@@ -276,9 +276,9 @@ export default function EmailTemplateBuilder() {
                 <CardHeader><CardTitle className="text-sm flex items-center gap-2"><Palette className="h-4 w-4" /> Quick Snippets</CardTitle></CardHeader>
                 <CardContent className="space-y-2">
                   {[
-                    { label: "CTA Button", code: `<a href="{{login_url}}" style="display:inline-block;padding:12px 24px;background:var(--brand-foundation, #0F3D3E);color:#fff;text-decoration:none;border-radius:6px;font-weight:600;">Start Learning</a>` },
-                    { label: "Divider", code: `<hr style="border:none;border-top:1px solid var(--color-gray-200, #e5e7eb);margin:24px 0;" />` },
-                    { label: "Footer", code: `<p style="font-size:12px;color:var(--color-black, #000000);margin-top:32px;">© {{date}} {{platform_name}}. All rights reserved.</p>` },
+                    { label: "CTA Button", code: `<a href="{{login_url}}" style="display:inline-block;padding:12px 24px;background:var(--brand-foundation, var(--brand-foundation));color:#fff;text-decoration:none;border-radius:6px;font-weight:600;">Start Learning</a>` },
+                    { label: "Divider", code: `<hr style="border:none;border-top:1px solid var(--color-gray-200, var(--border));margin:24px 0;" />` },
+                    { label: "Footer", code: `<p style="font-size:12px;color:var(--color-black, var(--text));margin-top:32px;">© {{date}} {{platform_name}}. All rights reserved.</p>` },
                   ].map(snippet => (
                     <Button key={snippet.label} variant="outline" size="sm" className="w-full justify-start text-xs"
                       onClick={() => { setEditorForm(p => ({ ...p, bodyHtml: p.bodyHtml + "\n" + snippet.code })); toast.info(`Inserted ${snippet.label}`); }}>
@@ -316,7 +316,7 @@ export default function EmailTemplateBuilder() {
               {/* Email Body */}
               <div className="p-6 bg-white dark:bg-slate-900 min-h-[300px]">
                 {previewHtml ? (
-                  <div dangerouslySetInnerHTML={{ __html: previewHtml }} className="prose prose-sm max-w-none" style={{ color: "var(--color-black, #000000)" }} />
+                  <div dangerouslySetInnerHTML={{ __html: previewHtml }} className="prose prose-sm max-w-none" style={{ color: "var(--color-black, var(--text))" }} />
                 ) : (
                   <p className="text-muted-foreground text-center py-8">No content yet. Add HTML in the editor.</p>
                 )}

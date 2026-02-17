@@ -79,12 +79,12 @@ export function HRExportButton({ organizationId, cohortId }: HRExportButtonProps
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10pt; color: #333; }
-    .header { background: var(--brand-foundation, #0F3D3E); color: white; padding: 30px 40px; margin-bottom: 30px; }
+    .header { background: var(--brand-foundation, var(--brand-foundation)); color: white; padding: 30px 40px; margin-bottom: 30px; }
     .header h1 { font-size: 24pt; margin-bottom: 5px; }
     .header p { opacity: 0.9; }
     .container { padding: 0 40px 40px; }
     table { width: 100%; border-collapse: collapse; font-size: 9pt; }
-    th { background: var(--brand-foundation, #0F3D3E); color: white; padding: 12px 8px; text-align: left; }
+    th { background: var(--brand-foundation, var(--brand-foundation)); color: white; padding: 12px 8px; text-align: left; }
     td { padding: 10px 8px; border-bottom: 1px solid #eee; }
     tr:nth-child(even) { background: #f9f9f9; }
     .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; font-size: 8pt; color: #999; }

@@ -414,7 +414,7 @@ export default function BarholexMediaLanding() {
           />
           <div 
             className="absolute bottom-20 right-[20%] w-72 h-72 rounded-full blur-3xl animate-pulse"
-            style={{ background: '#7C3AED10', animationDuration: '12s', animationDelay: '4s' }}
+            style={{ background: 'var(--accent-purple)10', animationDuration: '12s', animationDelay: '4s' }}
           />
         </div>
 
@@ -432,7 +432,7 @@ export default function BarholexMediaLanding() {
                 <span 
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8 shadow-sm"
                   style={{ 
-                    background: '#FEF3C7',
+                    background: 'var(--warning-soft)',
                     color: '#92400E',
                     border: '1px solid #FCD34D'
                   }}
@@ -760,7 +760,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* ========== INSIGHTS SECTION ========== */}
-      <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: '#062b2b' }}>
+      <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: 'var(--brand-obsidian)' }}>
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
@@ -809,7 +809,7 @@ export default function BarholexMediaLanding() {
                 <h3 className="text-xl font-bold mb-4 text-white leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-white/90 mb-6 leading-relaxed" style={{color: 'var(--color-white, #ffffff)'}}>
+                <p className="text-white/90 mb-6 leading-relaxed" style={{color: 'var(--color-white, var(--text-inverse))'}}>
                   {item.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
@@ -1025,7 +1025,7 @@ export default function BarholexMediaLanding() {
       {/* ========== FINAL CTA SECTION ========== */}
       <section 
         className="py-24 lg:py-32 relative overflow-hidden"
-        style={{ background: colors.navy, backgroundColor: '#062b2b' }}
+        style={{ background: colors.navy, backgroundColor: 'var(--brand-obsidian)' }}
       >
         {/* Background decoration */}
         <div className="absolute inset-0 pointer-events-none">
@@ -1049,7 +1049,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.cta.title}
             </h2>
-            <p className="text-xl mb-4 md:mb-6 lg:mb-10 text-white/90 max-w-2xl mx-auto" style={{color: 'var(--color-white, #ffffff)'}}>
+            <p className="text-xl mb-4 md:mb-6 lg:mb-10 text-white/90 max-w-2xl mx-auto" style={{color: 'var(--color-white, var(--text-inverse))'}}>
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">

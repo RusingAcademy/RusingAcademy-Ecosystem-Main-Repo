@@ -72,14 +72,14 @@
   --color-popover: var(--surface);
   --color-popover-foreground: var(--text);
   --color-primary: var(--brand-foundation);
-  --color-primary-foreground: #FFFFFF;
+  --color-primary-foreground: var(--text-inverse);
   --color-secondary: var(--sand);
   --color-secondary-foreground: var(--text);
-  --color-muted-foreground: #000000;      /* Pure black for strict contrast */
+  --color-muted-foreground: var(--text);      /* Pure black for strict contrast */
   --color-accent: var(--brand-cta);
-  --color-accent-foreground: #FFFFFF;
+  --color-accent-foreground: var(--text-inverse);
   --color-destructive: var(--danger);
-  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-foreground: var(--text-inverse);
   --color-border: var(--sand);
   --color-input: var(--sand);
   --color-ring: var(--ring);
@@ -92,7 +92,7 @@
   --color-sidebar: oklch(0.97 0.005 250);
   --color-sidebar-foreground: oklch(0.25 0.02 250);
   --color-sidebar-primary: var(--brand-foundation);
-  --color-sidebar-primary-foreground: #FFFFFF;
+  --color-sidebar-primary-foreground: var(--text-inverse);
   --color-sidebar-accent: oklch(0.93 0.01 250);
   --color-sidebar-accent-foreground: oklch(0.25 0.02 250);
   --color-sidebar-border: oklch(0.90 0.005 250);
@@ -126,7 +126,7 @@
   
   /* Accessible card backgrounds */
   .bg-card-accessible {
-    @apply bg-white dark:bg-[#062b2b] border border-slate-200 dark:border-[#0a6969];
+    @apply bg-white dark:bg-[var(--brand-obsidian)] border border-slate-200 dark:border-[#0a6969];
   }
   
   /* Skip link for screen readers */
@@ -150,15 +150,15 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
-    --color-border: #000000;
-    --color-text: #000000;
-    --color-muted-foreground: #000000;
+    --color-border: var(--text);
+    --color-text: var(--text);
+    --color-muted-foreground: var(--text);
   }
   
   .dark {
-    --color-border: #ffffff;
-    --color-text: #ffffff;
-    --color-muted-foreground: #ffffff;
+    --color-border: var(--text-inverse);
+    --color-text: var(--text-inverse);
+    --color-muted-foreground: var(--text-inverse);
   }
 }
 
@@ -270,32 +270,32 @@
 @layer utilities {
   /* Force readable text on light backgrounds */
   .text-readable {
-    color: #000000 !important;
+    color: var(--text) !important;
   }
   
   .text-readable-muted {
-    color: #000000 !important;
+    color: var(--text) !important;
   }
   
   /* Force readable text on dark backgrounds */
   .text-readable-inverse {
-    color: #ffffff !important;
+    color: var(--text-inverse) !important;
   }
   
   .text-readable-inverse-muted {
-    color: #ffffff !important;
+    color: var(--text-inverse) !important;
   }
   
   /* Paragraph text - optimized for reading */
   .text-paragraph {
     @apply text-base leading-relaxed;
-    color: #000000;
+    color: var(--text);
   }
   
   /* Heading text - high contrast */
   .text-heading {
     @apply font-bold tracking-tight;
-    color: #000000;
+    color: var(--text);
   }
 }
 
@@ -357,7 +357,7 @@
   }
   
   .card-bordered:hover {
-    border-color: var(--brand-foundation, #0F3D3E);
+    border-color: var(--brand-foundation, var(--brand-foundation));
     box-shadow: 0 4px 12px rgba(15, 61, 62, 0.08);
   }
 }
@@ -370,31 +370,31 @@
   }
   
   .section-cream {
-    background-color: #FEFEF8;
+    background-color: var(--bg);
   }
   
   .section-sand {
-    background-color: #F5F1D6;
+    background-color: var(--bg-alt);
   }
   
   .section-teal {
-    background-color: #0F3D3E;
-    color: #ffffff;
+    background-color: var(--brand-foundation);
+    color: var(--text-inverse);
   }
   
   .section-teal .text-muted,
   .section-teal .text-muted-foreground {
-    color: #ffffff !important;
+    color: var(--text-inverse) !important;
   }
   
   .section-dark {
-    background-color: #062b2b;
-    color: #ffffff;
+    background-color: var(--brand-obsidian);
+    color: var(--text-inverse);
   }
   
   .section-dark .text-muted,
   .section-dark .text-muted-foreground {
-    color: #ffffff !important;
+    color: var(--text-inverse) !important;
   }
 }
 
@@ -402,7 +402,7 @@
 @layer base {
   /* Ensure all headings have proper contrast */
   h1, h2, h3, h4, h5, h6 {
-    color: var(--text, #000000);
+    color: var(--text, var(--text));
     font-family: var(--font-display, 'Merriweather', Georgia, serif);
   }
   
@@ -411,7 +411,7 @@
   .section-teal h4, .section-teal h5, .section-teal h6,
   .section-dark h1, .section-dark h2, .section-dark h3,
   .section-dark h4, .section-dark h5, .section-dark h6 {
-    color: #ffffff !important;
+    color: var(--text-inverse) !important;
   }
 
   /* Dark section — force ALL text descendants to white */
@@ -421,18 +421,18 @@
   .section-dark small,
   .section-dark li,
   .section-dark div:not([class*="bg-white"]) {
-    color: #ffffff;
+    color: var(--text-inverse);
   }
   
   /* Paragraph text optimization */
   p {
-    color: var(--text-paragraph, #000000);
+    color: var(--text-paragraph, var(--text));
     line-height: 1.7;
   }
   
   /* Dark section paragraph override */
   .section-teal p, .section-dark p {
-    color: #ffffff !important;
+    color: var(--text-inverse) !important;
   }
 }
 
@@ -441,12 +441,12 @@
   /* Primary CTA button - always high contrast */
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 font-semibold text-white rounded-full;
-    background-color: var(--brand-cta, #C65A1E);
+    background-color: var(--brand-cta, var(--brand-cta));
     transition: all 0.2s ease;
   }
   
   .btn-primary:hover {
-    background-color: var(--brand-cta-2, #E06B2D);
+    background-color: var(--brand-cta-2, var(--brand-cta-2));
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(198, 90, 30, 0.3);
   }
@@ -454,15 +454,15 @@
   /* Secondary button - outline style */
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full border-2;
-    color: var(--brand-foundation, #0F3D3E);
-    border-color: var(--brand-foundation, #0F3D3E);
+    color: var(--brand-foundation, var(--brand-foundation));
+    border-color: var(--brand-foundation, var(--brand-foundation));
     background: transparent;
     transition: all 0.2s ease;
   }
   
   .btn-secondary:hover {
-    background-color: var(--brand-foundation, #0F3D3E);
-    color: #ffffff;
+    background-color: var(--brand-foundation, var(--brand-foundation));
+    color: var(--text-inverse);
   }
 }
 
@@ -470,20 +470,20 @@
 @layer base {
   /* Ensure links are always visible */
   a:not([class]) {
-    color: var(--brand-foundation, #0F3D3E);
+    color: var(--brand-foundation, var(--brand-foundation));
     text-decoration: underline;
     text-underline-offset: 2px;
     transition: color 0.15s ease;
   }
   
   a:not([class]):hover {
-    color: var(--brand-foundation-2, #145A5B);
+    color: var(--brand-foundation-2, var(--brand-foundation-2));
   }
   
   /* Links on dark backgrounds */
   .section-teal a:not([class]),
   .section-dark a:not([class]) {
-    color: #ffffff;
+    color: var(--text-inverse);
   }
 }
 
@@ -492,13 +492,13 @@
   /* Input fields with proper contrast */
   .input-field {
     @apply w-full px-4 py-3 rounded-lg border border-gray-300 bg-white;
-    color: #000000;
+    color: var(--text);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   
   .input-field:focus {
     @apply outline-none;
-    border-color: var(--brand-foundation, #0F3D3E);
+    border-color: var(--brand-foundation, var(--brand-foundation));
     box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.15);
   }
   
@@ -584,12 +584,12 @@
 }
 
 .coach-card .coach-name {
-  color: #000000 !important;
+  color: var(--text) !important;
   font-weight: 600;
 }
 
 .coach-card .coach-headline {
-  color: #000000 !important;
+  color: var(--text) !important;
 }
 
 /* Force headline text color on coach cards - high specificity to override dark mode */
@@ -597,7 +597,7 @@ p.coach-headline-dark,
 .coach-headline-dark,
 [class*="dark:bg-slate"] .coach-headline-dark,
 [class*="dark:bg-slate"] p.coach-headline-dark {
-  color: #000000 !important;
+  color: var(--text) !important;
 }
 
 /* Force Message button text color - high specificity */
@@ -609,25 +609,25 @@ button.btn-message-teal,
 }
 
 .coach-card .coach-stats {
-  color: #000000 !important;
+  color: var(--text) !important;
 }
 
 /* === FOOTER CONTRAST FIX === */
 footer {
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 footer a {
-  color: #ffffff;
+  color: var(--text-inverse);
   transition: color 0.15s ease;
 }
 
 footer a:hover {
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 footer .text-muted-foreground {
-  color: #ffffff !important;
+  color: var(--text-inverse) !important;
 }
 
 /* === SCROLLBAR HIDE UTILITY === */

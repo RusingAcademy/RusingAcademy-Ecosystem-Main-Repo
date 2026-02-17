@@ -862,7 +862,7 @@ export default function CurriculumPathSeries() {
                       <h4 className="font-semibold text-lg mb-3 text-cta">
                         {isEn ? diff.title : diff.titleFr}
                       </h4>
-                      <p className="text-sm text-white/90" style={{color: 'var(--color-white, #ffffff)'}}>
+                      <p className="text-sm text-white/90" style={{color: 'var(--color-white, var(--text-inverse))'}}>
                         {isEn ? diff.desc : diff.descFr}
                       </p>
                     </div>
@@ -1362,7 +1362,7 @@ export default function CurriculumPathSeries() {
                   <CardContent className="p-6">
                     <div className="flex gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-[#C65A1E] text-cta" />
+                        <Star key={i} className="h-5 w-5 fill-[var(--brand-cta)] text-cta" />
                       ))}
                     </div>
                     <Quote className="h-8 w-8 text-cta/20 mb-2" />
@@ -1391,7 +1391,7 @@ export default function CurriculumPathSeries() {
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-4" style={{color: '#f8f7f7'}}>
               {isEn ? "Ready to Start Your Journey?" : "Prêt à Commencer Votre Parcours?"}
             </h2>
-            <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{color: 'var(--color-white, #ffffff)'}}>
+            <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{color: 'var(--color-white, var(--text-inverse))'}}>
               {isEn 
                 ? "Join thousands of federal public servants who have transformed their careers with Path Series™."
                 : "Rejoignez des milliers de fonctionnaires fédéraux qui ont transformé leur carrière avec Path Series™."

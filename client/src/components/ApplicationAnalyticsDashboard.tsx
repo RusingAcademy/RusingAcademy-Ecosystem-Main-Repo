@@ -241,9 +241,9 @@ export function ApplicationAnalyticsDashboard({
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="submitted" stroke="var(--semantic-warning, #f59e0b)" name={isEn ? "Submitted" : "Soumises"} />
-            <Line type="monotone" dataKey="approved" stroke="var(--semantic-success, #10b981)" name={isEn ? "Approved" : "Approuvées"} />
-            <Line type="monotone" dataKey="rejected" stroke="var(--semantic-danger, #ef4444)" name={isEn ? "Rejected" : "Rejetées"} />
+            <Line type="monotone" dataKey="submitted" stroke="var(--semantic-warning, var(--warning))" name={isEn ? "Submitted" : "Soumises"} />
+            <Line type="monotone" dataKey="approved" stroke="var(--semantic-success, var(--success))" name={isEn ? "Approved" : "Approuvées"} />
+            <Line type="monotone" dataKey="rejected" stroke="var(--semantic-danger, var(--danger))" name={isEn ? "Rejected" : "Rejetées"} />
           </LineChart>
         </ResponsiveContainer>
       </div>
@@ -264,7 +264,7 @@ export function ApplicationAnalyticsDashboard({
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="count" fill="var(--color-violet-500, #8b5cf6)" />
+            <Bar dataKey="count" fill="var(--color-violet-500, var(--accent-purple))" />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -37,12 +37,12 @@ const DEFAULTS: Record<string, string> = {
   seo_title: "RusingAcademy — Professional Bilingual Training",
   seo_description: "Secure your C level. Propel your federal career.",
   seo_keywords: "SLE, bilingual, public service, French, English",
-  brand_primary_color: "var(--brand-foundation, #0F3D3E)",
+  brand_primary_color: "var(--brand-foundation, var(--brand-foundation))",
   brand_secondary_color: "#D4A843",
   brand_accent_color: "#1a5c5e",
   brand_bg_color: "#FAFAF8",
   brand_text_color: "var(--brand-obsidian, var(--brand-obsidian, #1a1a1a))",
-  brand_muted_color: "var(--color-black, #000000)",
+  brand_muted_color: "var(--color-black, var(--text))",
   brand_heading_font: "Playfair Display",
   brand_body_font: "Inter",
   auth_session_duration: "24",
@@ -150,8 +150,8 @@ export default function AdminSettings() {
         <div className="space-y-1.5" key={key}>
           <Label className="text-sm font-medium">{label}</Label>
           <div className="flex items-center gap-2">
-            <input type="color" value={formData[key] || "var(--color-black, #000000)"} onChange={(e) => updateField(key, e.target.value)} className="w-10 h-10 rounded border cursor-pointer" />
-            <Input value={formData[key] || ""} onChange={(e) => updateField(key, e.target.value)} placeholder={placeholder || "var(--color-black, #000000)"} className="flex-1" />
+            <input type="color" value={formData[key] || "var(--color-black, var(--text))"} onChange={(e) => updateField(key, e.target.value)} className="w-10 h-10 rounded border cursor-pointer" />
+            <Input value={formData[key] || ""} onChange={(e) => updateField(key, e.target.value)} placeholder={placeholder || "var(--color-black, var(--text))"} className="flex-1" />
           </div>
         </div>
       );
@@ -208,12 +208,12 @@ export default function AdminSettings() {
             {renderField("brand_favicon_url", "Favicon URL", "text", "https://...")}
             <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider pt-2">Color Palette</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {renderField("brand_primary_color", "Primary Color", "color", "var(--brand-foundation, #0F3D3E)")}
+              {renderField("brand_primary_color", "Primary Color", "color", "var(--brand-foundation, var(--brand-foundation))")}
               {renderField("brand_secondary_color", "Secondary Color", "color", "#D4A843")}
               {renderField("brand_accent_color", "Accent Color", "color", "#1a5c5e")}
               {renderField("brand_bg_color", "Background Color", "color", "#FAFAF8")}
               {renderField("brand_text_color", "Text Color", "color", "var(--brand-obsidian, var(--brand-obsidian, #1a1a1a))")}
-              {renderField("brand_muted_color", "Muted Color", "color", "var(--color-black, #000000)")}
+              {renderField("brand_muted_color", "Muted Color", "color", "var(--color-black, var(--text))")}
             </div>
             <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider pt-2">Typography</h3>
             <div className="grid grid-cols-2 gap-4">
@@ -223,10 +223,10 @@ export default function AdminSettings() {
             <div className="p-4 bg-muted/30 rounded-lg">
               <h4 className="text-sm font-medium mb-3">Preview</h4>
               <div className="p-4 rounded-lg border" style={{ backgroundColor: formData.brand_bg_color || "#FAFAF8" }}>
-                <h3 style={{ fontFamily: formData.brand_heading_font || "Playfair Display", color: formData.brand_primary_color || "var(--brand-foundation, #0F3D3E)" }} className="text-xl font-bold mb-1">Heading Preview</h3>
+                <h3 style={{ fontFamily: formData.brand_heading_font || "Playfair Display", color: formData.brand_primary_color || "var(--brand-foundation, var(--brand-foundation))" }} className="text-xl font-bold mb-1">Heading Preview</h3>
                 <p style={{ fontFamily: formData.brand_body_font || "Inter", color: formData.brand_text_color || "var(--brand-obsidian, var(--brand-obsidian, #1a1a1a))" }} className="text-sm mb-2">Body text preview with your selected font and colors.</p>
                 <div className="flex gap-2">
-                  <span className="px-3 py-1 rounded text-xs text-white" style={{ backgroundColor: formData.brand_primary_color || "var(--brand-foundation, #0F3D3E)" }}>Primary</span>
+                  <span className="px-3 py-1 rounded text-xs text-white" style={{ backgroundColor: formData.brand_primary_color || "var(--brand-foundation, var(--brand-foundation))" }}>Primary</span>
                   <span className="px-3 py-1 rounded text-xs text-white" style={{ backgroundColor: formData.brand_secondary_color || "#D4A843" }}>Secondary</span>
                   <span className="px-3 py-1 rounded text-xs text-white" style={{ backgroundColor: formData.brand_accent_color || "#1a5c5e" }}>Accent</span>
                 </div>

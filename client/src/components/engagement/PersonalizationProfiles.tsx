@@ -79,7 +79,7 @@ export const LEARNER_PROFILES: LearnerProfile[] = [
     name: 'Busy Professional',
     nameFr: 'Professionnel Occupé',
     icon: <Clock className="w-5 h-5" />,
-    color: '#3B82F6',
+    color: 'var(--semantic-info)',
     description: 'Time-constrained, needs maximum efficiency',
     descriptionFr: 'Contraint par le temps, a besoin d\'efficacité maximale',
     characteristics: [
@@ -105,7 +105,7 @@ export const LEARNER_PROFILES: LearnerProfile[] = [
     name: 'SLE-Focused',
     nameFr: 'Focalisé SLE',
     icon: <Target className="w-5 h-5" />,
-    color: '#EF4444',
+    color: 'var(--danger)',
     description: 'Exam-oriented with specific deadline',
     descriptionFr: 'Orienté examen avec une date limite spécifique',
     characteristics: [
@@ -131,7 +131,7 @@ export const LEARNER_PROFILES: LearnerProfile[] = [
     name: 'Perfectionist',
     nameFr: 'Perfectionniste',
     icon: <Brain className="w-5 h-5" />,
-    color: '#8B5CF6',
+    color: 'var(--accent-purple)',
     description: 'Detail-oriented, wants comprehensive mastery',
     descriptionFr: 'Orienté détails, veut une maîtrise complète',
     characteristics: [
@@ -157,7 +157,7 @@ export const LEARNER_PROFILES: LearnerProfile[] = [
     name: 'Social Learner',
     nameFr: 'Apprenant Social',
     icon: <Users className="w-5 h-5" />,
-    color: '#10B981',
+    color: 'var(--success)',
     description: 'Thrives with community and collaboration',
     descriptionFr: 'S\'épanouit avec la communauté et la collaboration',
     characteristics: [

@@ -34,7 +34,7 @@
 
   /* Preserve brand colors for headings */
   h1, h2, h3 {
-    color: #0F3D3E !important;
+    color: var(--brand-foundation) !important;
   }
 
   /* Show URLs for links */

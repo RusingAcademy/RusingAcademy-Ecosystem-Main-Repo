@@ -9,12 +9,12 @@ import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
 
 const SESSION_TYPES = [
-  { id: "lesson", label: "Lesson", icon: "menu_book", color: "var(--brand-teal, #008090)" },
-  { id: "quiz", label: "Quiz", icon: "quiz", color: "var(--color-violet-500, #8b5cf6)" },
-  { id: "sle_practice", label: "SLE Practice", icon: "verified", color: "var(--semantic-warning, #f59e0b)" },
-  { id: "flashcard_review", label: "Flashcard Review", icon: "style", color: "var(--color-blue-500, #3b82f6)" },
-  { id: "tutoring", label: "Tutoring", icon: "groups", color: "var(--semantic-success, #22c55e)" },
-  { id: "custom", label: "Custom", icon: "event", color: "var(--color-gray-500, #6b7280)" },
+  { id: "lesson", label: "Lesson", icon: "menu_book", color: "var(--brand-teal, var(--teal))" },
+  { id: "quiz", label: "Quiz", icon: "quiz", color: "var(--color-violet-500, var(--accent-purple))" },
+  { id: "sle_practice", label: "SLE Practice", icon: "verified", color: "var(--semantic-warning, var(--warning))" },
+  { id: "flashcard_review", label: "Flashcard Review", icon: "style", color: "var(--color-blue-500, var(--semantic-info))" },
+  { id: "tutoring", label: "Tutoring", icon: "groups", color: "var(--semantic-success, var(--success))" },
+  { id: "custom", label: "Custom", icon: "event", color: "var(--color-gray-500, var(--muted-foreground))" },
 ] as const;
 
 function getSessionType(id: string) {
@@ -379,7 +379,7 @@ export default function StudyPlanner() {
                 <div className="mb-4">
                   <label className="text-xs font-medium text-gray-500 mb-1 block">Duration: {formDuration} minutes</label>
                   <input type="range" min={5} max={180} step={5} value={formDuration} onChange={e => setFormDuration(Number(e.target.value))}
-                    className="w-full accent-[var(--brand-teal, #008090)]" />
+                    className="w-full accent-[var(--brand-teal, var(--teal))]" />
                   <div className="flex justify-between text-[10px] text-gray-400">
                     <span>5 min</span><span>3 hours</span>
                   </div>

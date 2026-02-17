@@ -166,7 +166,7 @@ export default function B2BSection() {
               <Card key={i} className="border-gray-200 dark:border-slate-700 dark:border-slate-700">
                 <CardContent className="p-6">
                   <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[#C65A1E] text-cta" />)}
+                    {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[var(--brand-cta)] text-cta" />)}
                   </div>
                   <p className="text-black dark:text-white italic mb-4">"{testimonial.quote}"</p>
                   <p className="font-semibold text-foundation">{testimonial.author}</p>

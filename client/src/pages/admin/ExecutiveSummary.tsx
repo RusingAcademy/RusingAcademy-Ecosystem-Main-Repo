@@ -95,7 +95,7 @@ function KPICard({
 function HealthScoreRing({ score }: { score: number }) {
   const circumference = 2 * Math.PI * 40;
   const strokeDashoffset = circumference - (score / 100) * circumference;
-  const color = score >= 75 ? "#10B981" : score >= 50 ? "#F59E0B" : "#EF4444";
+  const color = score >= 75 ? "var(--success)" : score >= 50 ? "var(--warning)" : "var(--danger)";
 
   return (
     <div className="relative w-24 h-24">

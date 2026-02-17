@@ -6,7 +6,7 @@ import CoachLayout from "@/components/CoachLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 
-const ACCENT = "var(--color-violet-600, var(--color-violet-600, #7c3aed))";
+const ACCENT = "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))";
 
 function MetricRing({ value, label, color, loading }: { value: number; label: string; color: string; loading?: boolean }) {
   const circumference = 2 * Math.PI * 40;
@@ -14,7 +14,7 @@ function MetricRing({ value, label, color, loading }: { value: number; label: st
   return (
     <div className="flex flex-col items-center">
       <svg width="100" height="100" className="transform -rotate-90" role="img" aria-label={`${label}: ${value}%`}>
-        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--admin-table-header-bg, var(--color-gray-100, #f3f4f6))" strokeWidth="8" />
+        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--admin-table-header-bg, var(--color-gray-100, var(--bg-alt)))" strokeWidth="8" />
         {!loading && (
           <circle cx="50" cy="50" r="40" fill="none" stroke={color} strokeWidth="8"
             strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" className="transition-all duration-1000" />
@@ -61,10 +61,10 @@ export default function CoachPerformance() {
         <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6 mb-6">
           <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-6">{lang === "fr" ? "Indicateurs clés" : "Key Indicators"}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <MetricRing value={satisfactionPct} label={lang === "fr" ? "Satisfaction" : "Satisfaction"} color="var(--semantic-success, var(--semantic-success, #059669))" loading={isLoading} />
+            <MetricRing value={satisfactionPct} label={lang === "fr" ? "Satisfaction" : "Satisfaction"} color="var(--semantic-success, var(--semantic-success, var(--success)))" loading={isLoading} />
             <MetricRing value={successRate || satisfactionPct} label={lang === "fr" ? "Taux de réussite" : "Success Rate"} color={ACCENT} loading={isLoading} />
-            <MetricRing value={totalStudents > 0 ? Math.min(Math.round((totalStudents / (totalStudents + 2)) * 100), 100) : 0} label={lang === "fr" ? "Rétention" : "Retention"} color="var(--color-blue-600, var(--color-blue-600, #2563eb))" loading={isLoading} />
-            <MetricRing value={avgRating > 0 ? Math.round(avgRating * 20) : 0} label={lang === "fr" ? "Note globale" : "Overall Rating"} color="var(--semantic-warning, var(--semantic-warning, #d97706))" loading={isLoading} />
+            <MetricRing value={totalStudents > 0 ? Math.min(Math.round((totalStudents / (totalStudents + 2)) * 100), 100) : 0} label={lang === "fr" ? "Rétention" : "Retention"} color="var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))" loading={isLoading} />
+            <MetricRing value={avgRating > 0 ? Math.round(avgRating * 20) : 0} label={lang === "fr" ? "Note globale" : "Overall Rating"} color="var(--semantic-warning, var(--semantic-warning, var(--warning)))" loading={isLoading} />
           </div>
         </div>
 
@@ -78,7 +78,7 @@ export default function CoachPerformance() {
                   label: lang === "fr" ? "Note moyenne" : "Average Rating",
                   value: avgRating > 0 ? `${avgRating.toFixed(1)} / 5.0` : "—",
                   icon: "star",
-                  color: "var(--semantic-warning, var(--semantic-warning, #d97706))",
+                  color: "var(--semantic-warning, var(--semantic-warning, var(--warning)))",
                 },
                 {
                   label: lang === "fr" ? "Sessions complétées" : "Sessions Completed",
@@ -90,13 +90,13 @@ export default function CoachPerformance() {
                   label: lang === "fr" ? "Étudiants actifs" : "Active Students",
                   value: String(totalStudents),
                   icon: "school",
-                  color: "var(--color-blue-600, var(--color-blue-600, #2563eb))",
+                  color: "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))",
                 },
                 {
                   label: lang === "fr" ? "Revenus totaux" : "Total Earnings",
                   value: `$${(earnings?.totalEarnings || 0).toLocaleString()}`,
                   icon: "payments",
-                  color: "var(--semantic-success, var(--semantic-success, #059669))",
+                  color: "var(--semantic-success, var(--semantic-success, var(--success)))",
                 },
               ].map(item => (
                 <div key={item.label} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">

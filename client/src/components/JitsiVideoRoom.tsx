@@ -172,7 +172,7 @@ export function JitsiVideoRoom({
             TOOLBAR_ALWAYS_VISIBLE: true,
             DISABLE_JOIN_LEAVE_NOTIFICATIONS: false,
             MOBILE_APP_PROMO: false,
-            DEFAULT_BACKGROUND: "#062b2b",
+            DEFAULT_BACKGROUND: "var(--brand-obsidian)",
             DEFAULT_LOGO_URL: "",
             JITSI_WATERMARK_LINK: "",
           },

@@ -57,14 +57,14 @@ export default function CourseSuccess() {
           angle: 60,
           spread: 55,
           origin: { x: 0 },
-          colors: ["var(--semantic-warning, #f59e0b)", "#f97316", "var(--semantic-success, #10b981)", "#0d9488"],
+          colors: ["var(--semantic-warning, var(--warning))", "#f97316", "var(--semantic-success, var(--success))", "var(--teal)"],
         });
         confetti({
           particleCount: 3,
           angle: 120,
           spread: 55,
           origin: { x: 1 },
-          colors: ["var(--semantic-warning, #f59e0b)", "#f97316", "var(--semantic-success, #10b981)", "#0d9488"],
+          colors: ["var(--semantic-warning, var(--warning))", "#f97316", "var(--semantic-success, var(--success))", "var(--teal)"],
         });
         
         if (Date.now() < end) {

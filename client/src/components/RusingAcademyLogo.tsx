@@ -11,7 +11,7 @@ interface RusingAcademyLogoProps {
 /**
  * RusingAcademy Logo Component
  * Uses the official logo images
- * Brand colors: Teal (#1E9B8A) and Orange (#F7941D)
+ * Brand colors: Teal (var(--teal)) and Orange (#F7941D)
  */
 export default function RusingAcademyLogo({ 
   size = 48, 
@@ -36,7 +36,7 @@ export default function RusingAcademyLogo({
         <span 
           className="font-bold tracking-wide text-lg leading-tight"
           style={{ 
-            background: "linear-gradient(135deg, #2BB5A3 0%, #1E9B8A 30%, #0D8A7C 70%, #077A6D 100%)",
+            background: "linear-gradient(135deg, #2BB5A3 0%, var(--teal) 30%, #0D8A7C 70%, #077A6D 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             textShadow: theme === "glass" ? "0 2px 10px rgba(30, 155, 138, 0.3)" : "none",
@@ -89,7 +89,7 @@ export default function RusingAcademyLogo({
             className="font-bold tracking-wide leading-tight"
             style={{ 
               fontSize: size > 40 ? "1.125rem" : "0.875rem",
-              background: "linear-gradient(135deg, #2BB5A3 0%, #1E9B8A 30%, #0D8A7C 70%, #077A6D 100%)",
+              background: "linear-gradient(135deg, #2BB5A3 0%, var(--teal) 30%, #0D8A7C 70%, #077A6D 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               textShadow: theme === "glass" ? "0 2px 10px rgba(30, 155, 138, 0.3)" : "none",

@@ -76,7 +76,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
             />
             <div
               className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-white"
-              style={{ background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)" }}
+              style={{ background: "linear-gradient(135deg, var(--brand-gold, var(--barholex-gold)), #E8CB6A)" }}
             />
           </div>
           <span className="text-base font-extrabold tracking-tight">
@@ -106,7 +106,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
           >
             <Search
               className="w-4 h-4 shrink-0 transition-colors duration-200"
-              style={{ color: searchFocused ? "var(--brand-obsidian, #1B1464)" : "rgba(27, 20, 100, 0.3)" }}
+              style={{ color: searchFocused ? "var(--brand-obsidian, var(--accent-purple-deep))" : "rgba(27, 20, 100, 0.3)" }}
             />
             <input
               type="text"
@@ -173,8 +173,8 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
                 onClick={onCreatePost}
                 className="rounded-xl px-4 font-semibold text-sm hidden sm:flex items-center gap-1.5 border-0 transition-all duration-300 hover:shadow-lg active:scale-[0.97]"
                 style={{
-                  background: "linear-gradient(135deg, var(--brand-gold, #D4AF37), #E8CB6A)",
-                  color: "var(--brand-obsidian, #1B1464)",
+                  background: "linear-gradient(135deg, var(--brand-gold, var(--barholex-gold)), #E8CB6A)",
+                  color: "var(--brand-obsidian, var(--accent-purple-deep))",
                   boxShadow: "0 2px 8px rgba(212, 175, 55, 0.2)",
                 }}
                 size="sm"
@@ -209,7 +209,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
                       ) : (
                         <div
                           className="w-8 h-8 rounded-full text-white flex items-center justify-center text-sm font-bold"
-                          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" }}
+                          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))" }}
                         >
                           {(user.name ?? "U").charAt(0).toUpperCase()}
                         </div>
@@ -254,7 +254,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
                 onClick={() => { window.location.href = getLoginUrl(); }}
                 className="rounded-xl px-5 font-semibold text-sm text-white border-0 transition-all duration-300 hover:shadow-lg active:scale-[0.97]"
                 style={{
-                  background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))",
+                  background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))",
                   boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)",
                 }}
               >

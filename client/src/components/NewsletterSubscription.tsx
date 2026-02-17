@@ -82,7 +82,7 @@ const labels = {
 const brandColors = {
   ecosystem: "#FF6A2B",
   rusingacademy: "#FF6A2B",
-  lingueefy: "#17E2C6",
+  lingueefy: "var(--lingueefy-accent)",
   barholex: "#8B5CFF",
 };
 

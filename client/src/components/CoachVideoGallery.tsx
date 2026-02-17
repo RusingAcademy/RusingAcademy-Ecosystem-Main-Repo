@@ -140,7 +140,7 @@ function CoachCard({ coach, language, onClick }: CoachCardProps) {
         </h3>
         <p 
           className="text-sm font-medium mb-2"
-          style={{ color: "#D4A853" }}
+          style={{ color: "var(--barholex-gold)" }}
         >
           {language === "fr" ? coach.roleFr : coach.role}
         </p>
@@ -254,7 +254,7 @@ function VideoModal({ coach, language, onClose }: VideoModalProps) {
           </h3>
           <p 
             className="text-lg font-medium mb-2"
-            style={{ color: "#D4A853" }}
+            style={{ color: "var(--barholex-gold)" }}
           >
             {language === "fr" ? coach.roleFr : coach.role}
           </p>
@@ -290,7 +290,7 @@ export default function CoachVideoGallery() {
     <section 
       className="py-12 md:py-16 lg:py-24 relative overflow-hidden"
       style={{ 
-        background: "linear-gradient(180deg, #0B1220 0%, var(--brand-foundation, #0F3D3E) 50%, #0B1220 100%)",
+        background: "linear-gradient(180deg, var(--brand-obsidian-2) 0%, var(--brand-foundation, var(--brand-foundation)) 50%, var(--brand-obsidian-2) 100%)",
       }}
       aria-labelledby="coach-gallery-title"
     >
@@ -311,7 +311,7 @@ export default function CoachVideoGallery() {
             className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6"
             style={{ 
               background: "linear-gradient(135deg, rgba(23, 226, 198, 0.2) 0%, rgba(15, 157, 142, 0.2) 100%)",
-              color: "#17E2C6",
+              color: "var(--lingueefy-accent)",
               border: "1px solid rgba(23, 226, 198, 0.3)",
             }}
           >

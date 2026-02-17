@@ -86,7 +86,7 @@ const learningCapsules = [
     descFr: "Apprendre par l'interaction sociale et la collaboration",
     icon: Users,
     color: "from-foundation to-teal-700",
-    ringColor: "ring-[var(--brand-foundation, #0F3D3E)]/30 hover:ring-[var(--brand-foundation, #0F3D3E)]",
+    ringColor: "ring-[var(--brand-foundation, var(--brand-foundation))]/30 hover:ring-[var(--brand-foundation, var(--brand-foundation))]",
     accentColor: "text-teal-200"
   },
   {

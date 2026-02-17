@@ -33,10 +33,10 @@ export default function ProgramSelect() {
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
-            { icon: "stars", label: "Total XP", value: totalXP.toLocaleString(), color: "var(--semantic-warning, #f5a623)" },
-            { icon: "military_tech", label: "Level", value: `${level} — ${levelTitle}`, color: "var(--brand-teal, #008090)" },
-            { icon: "local_fire_department", label: "Streak", value: `${streak} days`, color: "var(--semantic-danger, #e74c3c)" },
-            { icon: "school", label: "Lessons Done", value: lessonsCompleted.toString(), color: "var(--color-violet-500, #8b5cf6)" },
+            { icon: "stars", label: "Total XP", value: totalXP.toLocaleString(), color: "var(--semantic-warning, var(--warning))" },
+            { icon: "military_tech", label: "Level", value: `${level} — ${levelTitle}`, color: "var(--brand-teal, var(--teal))" },
+            { icon: "local_fire_department", label: "Streak", value: `${streak} days`, color: "var(--semantic-danger, var(--danger))" },
+            { icon: "school", label: "Lessons Done", value: lessonsCompleted.toString(), color: "var(--color-violet-500, var(--accent-purple))" },
           ].map((stat) => (
             <div key={stat.label} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-4 rounded-xl text-center shadow-sm">
               <span className="material-icons" style={{ color: stat.color, fontSize: "22px" }}>{stat.icon}</span>
@@ -58,8 +58,8 @@ export default function ProgramSelect() {
                   {/* Card Header with gradient */}
                   <div className="relative h-40 overflow-hidden" style={{
                     background: isESL
-                      ? "linear-gradient(135deg, #1a365d, var(--color-blue-600, #2563eb), var(--color-blue-500, #3b82f6))"
-                      : "linear-gradient(135deg, #7c2d12, var(--semantic-danger, #dc2626), var(--semantic-danger, #ef4444))",
+                      ? "linear-gradient(135deg, #1a365d, var(--color-blue-600, var(--semantic-info)), var(--color-blue-500, var(--semantic-info)))"
+                      : "linear-gradient(135deg, #7c2d12, var(--semantic-danger, var(--danger)), var(--semantic-danger, var(--danger)))",
                   }}>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="material-icons text-white/20" style={{ fontSize: "80px" }}>{prog.icon}</span>

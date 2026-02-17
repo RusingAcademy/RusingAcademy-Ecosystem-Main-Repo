@@ -1,12 +1,12 @@
 /**
  * AdminControlSidebar — Sidebar navigation for Admin Control System
- * Red accent theme (var(--semantic-danger, #dc2626)) with glassmorphism
+ * Red accent theme (var(--semantic-danger, var(--danger))) with glassmorphism
  */
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link, useLocation } from "wouter";
 import SocialLinks from "./SocialLinks";
 
-const ACCENT = "var(--semantic-danger, #dc2626)";
+const ACCENT = "var(--semantic-danger, var(--danger))";
 
 interface NavItem {
   icon: string;
