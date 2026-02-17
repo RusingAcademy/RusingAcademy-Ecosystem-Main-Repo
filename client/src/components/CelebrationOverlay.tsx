@@ -160,7 +160,7 @@ function CelebrationModal({
             onClick={handleDismiss}
             className="mt-2 px-6 py-2 rounded-xl text-sm font-semibold text-[#0c1929] transition-all hover:scale-105"
             style={{
-              background: "linear-gradient(135deg, var(--semantic-warning, var(--warning)), #ffd700)",
+              background: "linear-gradient(135deg, var(--semantic-warning, var(--warning)), var(--barholex-gold))",
               animation: "celebrationSlideUp 0.5s ease-out 0.8s both",
             }}
           >

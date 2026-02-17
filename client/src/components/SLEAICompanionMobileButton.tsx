@@ -86,7 +86,7 @@ export default function SLEAICompanionMobileButton() {
             className="absolute rounded-full"
             style={{
               inset: '-10px',
-              background: 'conic-gradient(from 0deg, #6D28D9, var(--accent-purple), #0891B2, #06B6D4, #0891B2, var(--accent-purple), #6D28D9)',
+              background: 'conic-gradient(from 0deg, var(--ai-violet), var(--accent-purple), #0891B2, #06B6D4, #0891B2, var(--accent-purple), #6D28D9)',
               filter: 'blur(8px)',
               opacity: 0.8,
               animation: 'mobileBreathe 3s ease-in-out infinite'
@@ -100,7 +100,7 @@ export default function SLEAICompanionMobileButton() {
               width: '64px',
               height: '64px',
               padding: '3px',
-              background: 'conic-gradient(from 0deg, #6D28D9, var(--accent-purple), #0891B2, #06B6D4, #0891B2, var(--accent-purple), #6D28D9)',
+              background: 'conic-gradient(from 0deg, var(--ai-violet), var(--accent-purple), #0891B2, #06B6D4, #0891B2, var(--accent-purple), #6D28D9)',
               boxShadow: '0 0 20px rgba(109, 40, 217, 0.6), 0 0 40px rgba(8, 145, 178, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3)'
             }}
           >
