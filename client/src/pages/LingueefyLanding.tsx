@@ -1381,10 +1381,10 @@ export default function LingueefyLanding() {
                     
                     {/* Quick actions */}
                     <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="w-10 h-10 bg-white dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-900 transition-colors">
+                      <button aria-label="Action" className="w-10 h-10 bg-white dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-900 transition-colors">
                         <Heart className="w-5 h-5 text-black dark:text-white" />
                       </button>
-                      <button className="w-10 h-10 bg-white dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-900 transition-colors">
+                      <button aria-label="Action" className="w-10 h-10 bg-white dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-900 transition-colors">
                         <Video className="w-5 h-5 text-black dark:text-white" />
                       </button>
                     </div>

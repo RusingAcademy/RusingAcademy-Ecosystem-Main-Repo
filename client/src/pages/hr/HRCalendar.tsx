@@ -76,13 +76,13 @@ export default function HRCalendar() {
         {/* Calendar Navigation */}
         <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
-            <button onClick={prevMonth} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg transition-colors">
+            <button aria-label="Action" onClick={prevMonth} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg transition-colors">
               <span className="material-icons text-gray-600">chevron_left</span>
             </button>
             <h2 className="text-lg font-semibold text-gray-900">
               {months[currentMonth]} {currentYear}
             </h2>
-            <button onClick={nextMonth} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg transition-colors">
+            <button aria-label="Action" onClick={nextMonth} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg transition-colors">
               <span className="material-icons text-gray-600">chevron_right</span>
             </button>
           </div>

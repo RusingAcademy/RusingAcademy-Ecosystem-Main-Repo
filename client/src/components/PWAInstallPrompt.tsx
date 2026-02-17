@@ -108,7 +108,7 @@ export default function PWAInstallPrompt() {
           </div>
 
           <div className="mt-3 flex items-center gap-2">
-            <button
+            <button aria-label="Action"
               onClick={handleInstall}
               className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-foundation px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-foundation-2"
             >

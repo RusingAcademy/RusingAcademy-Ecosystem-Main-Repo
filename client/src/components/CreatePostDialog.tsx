@@ -210,7 +210,7 @@ export default function CreatePostDialog({
                 <Sparkles className="w-5 h-5 text-barholex-gold" />
                 <h2 className="text-lg font-bold text-foreground">Create Post</h2>
               </div>
-              <button
+              <button aria-label="Action"
                 onClick={handleClose}
                 className="p-2 rounded-full hover:bg-accent transition-colors"
               >

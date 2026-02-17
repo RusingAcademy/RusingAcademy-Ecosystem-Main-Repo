@@ -169,11 +169,11 @@ export default function StudyPlanner() {
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 overflow-hidden">
                 {/* Calendar header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-                  <button onClick={prevMonth} className="p-1.5 rounded-lg hover:bg-gray-100">
+                  <button aria-label="Action" onClick={prevMonth} className="p-1.5 rounded-lg hover:bg-gray-100">
                     <span className="material-icons text-gray-500">chevron_left</span>
                   </button>
                   <h2 className="text-base font-bold text-gray-900">{MONTHS[calMonth]} {calYear}</h2>
-                  <button onClick={nextMonth} className="p-1.5 rounded-lg hover:bg-gray-100">
+                  <button aria-label="Action" onClick={nextMonth} className="p-1.5 rounded-lg hover:bg-gray-100">
                     <span className="material-icons text-gray-500">chevron_right</span>
                   </button>
                 </div>

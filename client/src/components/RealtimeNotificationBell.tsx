@@ -26,7 +26,7 @@ export default function RealtimeNotificationBell({ onClick }: RealtimeNotificati
   const totalUnread = dbUnread + wsUnread;
 
   return (
-    <button
+    <button aria-label="Action"
       onClick={onClick}
       className="relative p-2.5 rounded-xl transition-all duration-200 hover:bg-accent active:scale-95 group"
     >

@@ -39,7 +39,7 @@ export default function LanguageSwitcher({ variant = "compact", className = "" }
 
   // compact (default)
   return (
-    <button
+    <button aria-label="Action"
       onClick={toggleLocale}
       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-sm font-medium hover:bg-accent transition-colors ${className}`}
       title={locale === "en" ? "Passer au français" : "Switch to English"}

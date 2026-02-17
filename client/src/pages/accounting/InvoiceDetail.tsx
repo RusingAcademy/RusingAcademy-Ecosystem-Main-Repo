@@ -277,16 +277,16 @@ export default function InvoiceDetail() {
         <div className="flex items-center gap-2">
           {!isNew && !isEditing && (
             <>
-              <button className="qb-btn-outline flex items-center gap-1" onClick={() => window.print()}>
+              <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => window.print()}>
                 <Printer size={14} /> Print
               </button>
-              <button className="qb-btn-outline flex items-center gap-1" onClick={() => navigate(`/invoices/${invoiceId}/pdf`)}>
+              <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => navigate(`/invoices/${invoiceId}/pdf`)}>
                 <Download size={14} /> PDF
               </button>
-              <button className="qb-btn-outline flex items-center gap-1" onClick={() => handleStatusChange("Sent")}>
+              <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => handleStatusChange("Sent")}>
                 <Send size={14} /> Mark as Sent
               </button>
-              <button className="qb-btn flex items-center gap-1 bg-sky-600 text-white" onClick={() => {
+              <button aria-label="Action" className="qb-btn flex items-center gap-1 bg-sky-600 text-white" onClick={() => {
                 const customer = customers?.find((c: any) => c.id === inv?.customerId);
                 setEmailRecipient(customer?.email || "");
                 setEmailMessage("");
@@ -294,34 +294,34 @@ export default function InvoiceDetail() {
               }}>
                 <Send size={14} /> Email Invoice
               </button>
-              <button className="qb-btn-outline flex items-center gap-1" onClick={() => setIsEditing(true)}>
+              <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => setIsEditing(true)}>
                 Edit
               </button>
               <div className="relative group">
-                <button className="qb-btn-outline p-2">
+                <button aria-label="Action" className="qb-btn-outline p-2">
                   <MoreVertical size={14} />
                 </button>
                 <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => handleStatusChange("Paid")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => handleStatusChange("Paid")}>
                     <CheckCircle size={14} className="text-green-600" /> Mark as Paid
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => handleStatusChange("Deposited")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => handleStatusChange("Deposited")}>
                     <Download size={14} className="text-green-600" /> Mark as Deposited
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => toast("Feature coming soon")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => toast("Feature coming soon")}>
                     <Copy size={14} /> Duplicate
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => {
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => {
                     setPaymentAmount(inv?.amountDue || inv?.total || "0");
                     setShowPaymentDialog(true);
                   }}>
                     <DollarSign size={14} className="text-green-600" /> Record Payment
                   </button>
                   <hr className="my-1" />
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 text-red-600 flex items-center gap-2" onClick={() => handleStatusChange("Voided")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 text-red-600 flex items-center gap-2" onClick={() => handleStatusChange("Voided")}>
                     <XCircle size={14} /> Void Invoice
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
                     <Trash2 size={14} /> Delete Invoice
                   </button>
                 </div>
@@ -547,7 +547,7 @@ export default function InvoiceDetail() {
                   </td>
                   {isEditing && (
                     <td className="py-2 text-center">
-                      <button
+                      <button aria-label="Action"
                         className="p-1 hover:bg-red-50 rounded text-gray-400 hover:text-red-500"
                         onClick={() => removeLineItem(index)}
                       >
@@ -561,7 +561,7 @@ export default function InvoiceDetail() {
           </table>
 
           {isEditing && (
-            <button
+            <button aria-label="Action"
               className="mt-3 text-sm text-sky-600 hover:underline flex items-center gap-1"
               onClick={addLineItem}
             >
@@ -790,7 +790,7 @@ export default function InvoiceDetail() {
             </div>
             <div className="flex justify-end gap-2 mt-6">
               <button className="qb-btn-outline" onClick={() => setShowEmailDialog(false)}>Cancel</button>
-              <button
+              <button aria-label="Action"
                 className="px-4 py-2 bg-sky-600 text-white rounded-lg text-sm font-medium hover:bg-[#005fa3] flex items-center gap-2"
                 disabled={sendEmailMutation.isPending || !emailRecipient}
                 onClick={() => sendEmailMutation.mutate({

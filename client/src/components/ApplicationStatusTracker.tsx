@@ -273,7 +273,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
               ? 'Vous pouvez soumettre une nouvelle candidature après avoir examiné les commentaires ci-dessus. Vos données précédentes seront pré-remplies pour faciliter le processus.' 
               : 'You can submit a revised application after reviewing the feedback above. Your previous data will be pre-filled to make the process easier.'}
           </p>
-          <button 
+          <button aria-label="Action" 
             onClick={onResubmit}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2"
           >

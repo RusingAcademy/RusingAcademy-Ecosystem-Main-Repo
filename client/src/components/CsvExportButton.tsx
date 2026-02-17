@@ -38,7 +38,7 @@ export default function CsvExportButton({ data, filename, columns, className, la
   };
 
   return (
-    <button
+    <button aria-label="Action"
       onClick={handleExport}
       disabled={!data || data.length === 0}
       className={className || "qb-btn-outline flex items-center gap-1.5 text-sm"}

@@ -105,7 +105,7 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
                     Mark all read
                   </button>
                 )}
-                <button
+                <button aria-label="Action"
                   onClick={onClose}
                   className="p-2 rounded-full hover:bg-accent transition-colors"
                 >
@@ -200,7 +200,7 @@ export function NotificationBadge({ onClick }: { onClick: () => void }) {
   const count = countData && 'unreadCount' in countData ? countData.unreadCount : 0;
 
   return (
-    <button
+    <button aria-label="Action"
       onClick={onClick}
       className="relative p-2 rounded-full hover:bg-accent transition-colors"
     >

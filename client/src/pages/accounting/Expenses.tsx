@@ -90,7 +90,7 @@ export default function Expenses() {
   };
 
   const SortHeader = ({ field, label, align }: { field: typeof sortField; label: string; align?: string }) => (
-    <button
+    <button aria-label="Action"
       className={`flex items-center gap-1 hover:text-gray-900 dark:text-gray-100 ${align === "right" ? "ml-auto" : ""}`}
       onClick={() => toggleSort(field)}
     >
@@ -131,10 +131,10 @@ export default function Expenses() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Expense transactions</h1>
         <div className="flex items-center gap-2">
-          <button className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/expenses/new")}>
+          <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/expenses/new")}>
             <Plus size={16} /> Record expense
           </button>
-          <button className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
             Upload receipt
           </button>
         </div>
@@ -148,7 +148,7 @@ export default function Expenses() {
             <span className="text-sm font-medium text-blue-800">{selectedIds.size} expense(s) selected</span>
           </div>
           <div className="flex items-center gap-2">
-            <button
+            <button aria-label="Action"
               className="text-sm flex items-center gap-1 px-3 py-1.5 border border-red-200 text-red-600 rounded-md hover:bg-red-50"
               onClick={handleBulkDelete}
             >
@@ -180,7 +180,7 @@ export default function Expenses() {
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Types</h3>
             <div className="flex gap-2 flex-wrap">
               {["All", "Expense", "Cheque Expense"].map(type => (
-                <button
+                <button aria-label="Action"
                   key={type}
                   className={`px-3 py-1 rounded-full text-xs font-medium border ${
                     typeFilter === type
@@ -200,13 +200,13 @@ export default function Expenses() {
       {/* Search + Filter Bar */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <button className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
             Date <ChevronDown size={14} />
           </button>
-          <button className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
             Payee <ChevronDown size={14} />
           </button>
-          <button className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
             <Filter size={14} /> More filters
           </button>
         </div>
@@ -268,7 +268,7 @@ export default function Expenses() {
                   <td className="text-right text-gray-600">${Number(exp.taxAmount || 0).toFixed(2)}</td>
                   <td className="text-right font-medium text-gray-800">${Number(exp.total || 0).toLocaleString("en-CA", { minimumFractionDigits: 2 })}</td>
                   <td>
-                    <button className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded" onClick={(e) => { e.stopPropagation(); navigate(`/expenses/${exp.id}`); }}>
+                    <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded" onClick={(e) => { e.stopPropagation(); navigate(`/expenses/${exp.id}`); }}>
                       <MoreVertical size={14} className="text-gray-400" />
                     </button>
                   </td>
@@ -292,7 +292,7 @@ export default function Expenses() {
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>
             <div className="flex items-center gap-1">
-              <button
+              <button aria-label="Action"
                 className="p-1.5 rounded hover:bg-gray-200 disabled:opacity-40"
                 disabled={page === 1}
                 onClick={() => setPage(p => p - 1)}
@@ -302,7 +302,7 @@ export default function Expenses() {
               {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
                 const pageNum = totalPages <= 5 ? i + 1 : Math.max(1, Math.min(page - 2, totalPages - 4)) + i;
                 return (
-                  <button
+                  <button aria-label="Action"
                     key={pageNum}
                     className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-green-600 text-white" : "hover:bg-gray-200 text-gray-700"}`}
                     onClick={() => setPage(pageNum)}
@@ -311,7 +311,7 @@ export default function Expenses() {
                   </button>
                 );
               })}
-              <button
+              <button aria-label="Action"
                 className="p-1.5 rounded hover:bg-gray-200 disabled:opacity-40"
                 disabled={page === totalPages}
                 onClick={() => setPage(p => p + 1)}

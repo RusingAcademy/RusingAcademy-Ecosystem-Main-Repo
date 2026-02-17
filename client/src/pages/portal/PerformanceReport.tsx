@@ -34,7 +34,7 @@ export default function PerformanceReport() {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div><h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900">Rapport de Performance</h1><p className="text-slate-600 mt-1">Document officiel pour justification ministérielle</p></div>
-          <button onClick={generatePDF} disabled={isGenerating} className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors">
+          <button aria-label="Action" onClick={generatePDF} disabled={isGenerating} className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors">
             <Download className="w-5 h-5" />{isGenerating ? 'Génération...' : 'Exporter PDF'}
           </button>
         </div>

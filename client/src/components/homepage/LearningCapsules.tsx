@@ -213,7 +213,7 @@ export default function LearningCapsules() {
 
                       {/* Play Button */}
                       <div className="flex items-center gap-4 mt-8">
-                        <button className="h-16 w-16 rounded-full bg-cta flex items-center justify-center shadow-xl hover:scale-110 hover:bg-orange-400 transition-all duration-300 group-hover:animate-pulse">
+                        <button aria-label="Action" className="h-16 w-16 rounded-full bg-cta flex items-center justify-center shadow-xl hover:scale-110 hover:bg-orange-400 transition-all duration-300 group-hover:animate-pulse">
                           <Play className="h-7 w-7 text-white ml-1" fill="white" />
                         </button>
                         <span className="text-white font-medium">

@@ -316,7 +316,7 @@ export default function EcosystemHeaderGold() {
             {isAuthenticated && user ? (
               /* Authenticated: Show user menu */
               <Link href="/dashboard" aria-label="Go to dashboard" title="Go to your dashboard">
-                <button
+                <button aria-label="Action"
                   className="flex items-center gap-2 rounded-full font-semibold"
                   style={{
                     padding: isScrolled ? "0 1.25rem" : "0 1.5rem",
@@ -344,7 +344,7 @@ export default function EcosystemHeaderGold() {
             ) : (
               /* Not authenticated: Show login button */
               <Link href="/login" aria-label="Login to your account" title="Sign in to your account">
-                <button
+                <button aria-label="Action"
                   className="flex items-center gap-2 rounded-full font-semibold"
                   style={{
                     padding: isScrolled ? "0 1.5rem" : "0 2rem",

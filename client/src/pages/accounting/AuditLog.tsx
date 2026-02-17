@@ -17,7 +17,7 @@ export default function AuditLog() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <Link href="/settings">
-          <button className="p-1.5 hover:bg-gray-100 dark:bg-slate-800 rounded-full">
+          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-slate-800 rounded-full">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
         </Link>

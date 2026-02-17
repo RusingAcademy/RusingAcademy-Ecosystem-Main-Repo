@@ -216,19 +216,19 @@ export function EcosystemSwitcher({
                 {isAuthenticated ? (
                   <>
                     <Link href="/dashboard">
-                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-zinc-800 transition-colors">
+                      <button aria-label="Action" className="p-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-zinc-800 transition-colors">
                         <User className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
                     <Link href="/app/settings">
-                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-zinc-800 transition-colors">
+                      <button aria-label="Action" className="p-2 rounded-lg hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-zinc-800 transition-colors">
                         <Settings className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
                   </>
                 ) : (
                   <Link href="/login">
-                    <button className="flex items-center gap-2 text-sm text-teal-600 hover:underline">
+                    <button aria-label="Action" className="flex items-center gap-2 text-sm text-teal-600 hover:underline">
                       <User className="w-4 h-4" />
                       {language === "fr" ? "Se connecter" : "Sign in"}
                     </button>

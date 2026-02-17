@@ -64,7 +64,7 @@ function SortableSectionCard({ section, idx, totalCount, isEditing, onEdit, onSa
     <Card ref={setNodeRef} style={style} className={`group transition-all ${section.isVisible === false ? "opacity-50" : ""} ${isEditing ? "ring-2 ring-primary" : ""}`}>
       <CardContent className="p-0">
         <div className="flex items-center gap-2 px-4 py-2.5 border-b bg-muted/30">
-          <button {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing touch-none p-1 -m-1 rounded hover:bg-muted">
+          <button aria-label="Action" {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing touch-none p-1 -m-1 rounded hover:bg-muted">
             <GripVertical className="h-4 w-4 text-muted-foreground" />
           </button>
           <Icon className="h-4 w-4 text-primary" />

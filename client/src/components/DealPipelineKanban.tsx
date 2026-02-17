@@ -843,7 +843,7 @@ export default function DealPipelineKanban() {
                                 tagsQuery.data?.tags
                                   .filter((tag) => !(leadTags[lead.id] || []).some((t) => t.id === tag.id))
                                   .map((tag) => (
-                                    <button
+                                    <button aria-label="Action"
                                       key={tag.id}
                                       className="w-full flex items-center gap-2 px-2 py-1 rounded hover:bg-muted text-left text-sm"
                                       onClick={() => {

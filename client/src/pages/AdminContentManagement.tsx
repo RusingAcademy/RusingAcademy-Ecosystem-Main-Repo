@@ -120,7 +120,7 @@ function SortableQuestionItem({
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2">
-          <button
+          <button aria-label="Action"
             {...attributes}
             {...listeners}
             className="cursor-grab active:cursor-grabbing p-1 hover:bg-muted rounded"
