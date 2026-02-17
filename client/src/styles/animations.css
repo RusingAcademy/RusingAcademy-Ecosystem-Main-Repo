@@ -520,6 +520,220 @@
   animation: checkmark var(--animation-slow) var(--ease-out-expo) forwards;
 }
 
+/* ============================================
+   WAVE 5 — NEW KEYFRAMES
+   ============================================ */
+
+/* --- Motion Timing Tokens --- */
+:root {
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-glacial: 800ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slide-down-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progress-fill {
+  from { width: 0%; }
+  to { width: var(--progress-target, 100%); }
+}
+
+@keyframes stagger-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes parallax-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+/* --- Animation Utility Classes --- */
+.animate-slide-down-fade {
+  animation: slide-down-fade var(--duration-normal) var(--ease-out-expo) forwards;
+}
+
+.animate-scale-bounce {
+  animation: scale-bounce var(--duration-fast) var(--ease-spring);
+}
+
+.animate-blur-in {
+  animation: blur-in var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+.animate-count-up {
+  animation: count-up var(--duration-normal) var(--ease-out-expo) forwards;
+}
+
+.animate-progress-fill {
+  animation: progress-fill var(--duration-glacial) var(--ease-out-expo) forwards;
+}
+
+.animate-stagger-fade-in {
+  animation: stagger-fade-in var(--duration-normal) var(--ease-out-expo) forwards;
+}
+
+.animate-ripple {
+  animation: ripple 600ms linear forwards;
+}
+
+.animate-parallax-float {
+  animation: parallax-float 6s ease-in-out infinite;
+}
+
+/* ============================================
+   WAVE 5 — HOVER MICRO-INTERACTIONS
+   ============================================ */
+
+/* Button hover: subtle lift + shadow */
+.hover-lift {
+  transition: transform var(--duration-fast) var(--ease-out-expo),
+              box-shadow var(--duration-fast) var(--ease-out-expo);
+}
+.hover-lift:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15);
+}
+.hover-lift:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Card hover: float up + enhanced shadow */
+.hover-card {
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+.hover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
+}
+
+/* Link hover: underline slide-in */
+.hover-underline {
+  position: relative;
+  text-decoration: none;
+}
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width var(--duration-fast) var(--ease-out-expo);
+}
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Icon hover: gentle rotate */
+.hover-icon {
+  transition: transform var(--duration-instant) var(--ease-spring);
+}
+.hover-icon:hover {
+  transform: rotate(5deg) scale(1.1);
+}
+
+/* Nav item hover: background fade */
+.hover-nav {
+  transition: background-color var(--duration-fast) var(--ease-out-expo),
+              color var(--duration-fast) var(--ease-out-expo);
+}
+
+/* Tag/badge hover: pop */
+.hover-pop {
+  transition: transform var(--duration-instant) var(--ease-spring);
+}
+.hover-pop:hover {
+  transform: scale(1.05);
+}
+
+/* Glassmorphism reveal */
+.glass-reveal {
+  animation: blur-in var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+/* Skeleton shimmer (enhanced) */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-alt, #f3f4f6) 25%,
+    var(--surface, #ffffff) 50%,
+    var(--bg-alt, #f3f4f6) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
 /* ----------------------------------------
    Responsive Adjustments
    ---------------------------------------- */
