@@ -482,7 +482,7 @@ export default function LearnerDashboard() {
                     })}
                   </span>
                   {displayStreak > 0 && (
-                    <Badge className="bg-white dark:bg-background/20 text-white border-0 hover:bg-white dark:bg-background/30">
+                    <Badge className="bg-white/15 dark:bg-background/20 text-white border-0 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm">
                       <Flame className="h-3 w-3 mr-1" />
                       {displayStreak} {language === "fr" ? "jours" : "days"}
                     </Badge>

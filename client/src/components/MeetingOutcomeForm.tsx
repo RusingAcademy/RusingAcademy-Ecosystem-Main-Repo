@@ -421,7 +421,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
         <div className="flex gap-3 mt-6 pt-6 border-t border-white/60">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-3 bg-white dark:bg-background/10 text-white rounded-lg hover:bg-white dark:bg-background/20 transition-colors"
+            className="flex-1 px-4 py-3 bg-white/10 dark:bg-background/10 text-white rounded-lg hover:bg-white/20 dark:bg-background/20 transition-colors border border-white/10"
           >
             {t.cancel}
           </button>
