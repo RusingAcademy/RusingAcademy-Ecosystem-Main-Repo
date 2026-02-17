@@ -1284,7 +1284,7 @@ export default function CurriculumPathSeries() {
                         )}
                       </div>
                       {!FREE_ACCESS_MODE && (
-                        <Badge className="mt-2 bg-white dark:bg-background/20 text-white">
+                        <Badge className="mt-2 bg-white/15 dark:bg-background/20 text-white backdrop-blur-sm">
                           {Math.round((1 - currentPath.price / currentPath.originalPrice) * 100)}% OFF
                         </Badge>
                       )}

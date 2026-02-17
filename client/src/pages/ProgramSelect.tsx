@@ -66,7 +66,7 @@ export default function ProgramSelect() {
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-5">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-background/20 text-white backdrop-blur-sm">
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/20 dark:bg-background/20 text-white backdrop-blur-sm">
                           {isESL ? "English" : "Français"}
                         </span>
                         <span className="text-xs text-white/70">A1 → C1+</span>

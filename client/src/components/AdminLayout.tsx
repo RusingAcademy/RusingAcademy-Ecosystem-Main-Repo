@@ -21,21 +21,22 @@ import {
 import { cn } from "@/lib/utils";
 import GlobalSearchBar from "@/pages/admin/GlobalSearch";
 import { usePermissions } from "@/hooks/usePermissions";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-interface NavItem { id: string; label: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
-interface NavSection { title: string; items: NavItem[]; collapsible?: boolean; }
+interface NavItem { id: string; label: string; labelFr?: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
+interface NavSection { title: string; titleFr?: string; items: NavItem[]; collapsible?: boolean; }
 
 // ============================================================================
 // KAJABI-STYLE SIDEBAR HIERARCHY
 // Products → Sales → Website → Marketing → Contacts → Analytics → More
 // ============================================================================
 const navSections: NavSection[] = [
-  { title: "", items: [
-    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
+  { title: "", titleFr: "", items: [
+    { id: "dashboard", label: "Dashboard", labelFr: "Tableau de bord", icon: LayoutDashboard, path: "/admin" },
   ]},
 
   // ── PRODUCTS ──────────────────────────────────────────────────────────────
-  { title: "PRODUCTS", collapsible: true, items: [
+  { title: "PRODUCTS", titleFr: "PRODUITS", collapsible: true, items: [
     { id: "all-products", label: "All Products", icon: BookOpen, path: "/admin/products", requiredPermission: "manage_courses" },
     { id: "courses", label: "Courses", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
     { id: "coaching", label: "Coaching", icon: GraduationCap, path: "/admin/coaching", requiredPermission: "manage_coaches" },
@@ -54,7 +55,7 @@ const navSections: NavSection[] = [
   ]},
 
   // ── SALES ─────────────────────────────────────────────────────────────────
-  { title: "SALES", collapsible: true, items: [
+  { title: "SALES", titleFr: "VENTES", collapsible: true, items: [
     { id: "payments", label: "Payments", icon: DollarSign, path: "/admin/payments", requiredPermission: "manage_payments" },
     { id: "offers", label: "Offers", icon: Tag, path: "/admin/offers", requiredPermission: "manage_payments" },
     { id: "pricing", label: "Pricing & Checkout", icon: CreditCard, path: "/admin/pricing", requiredPermission: "manage_payments" },
@@ -66,7 +67,7 @@ const navSections: NavSection[] = [
   ]},
 
   // ── WEBSITE ───────────────────────────────────────────────────────────────
-  { title: "WEBSITE", collapsible: true, items: [
+  { title: "WEBSITE", titleFr: "SITE WEB", collapsible: true, items: [
     { id: "design", label: "Design", icon: Palette, path: "/admin/design", requiredPermission: "manage_cms" },
     { id: "pages", label: "Pages", icon: FileText, path: "/admin/pages", requiredPermission: "manage_cms" },
     { id: "navigation", label: "Navigation", icon: Navigation, path: "/admin/navigation", requiredPermission: "manage_cms" },
@@ -76,7 +77,7 @@ const navSections: NavSection[] = [
   ]},
 
   // ── MARKETING ─────────────────────────────────────────────────────────────
-  { title: "MARKETING", collapsible: true, items: [
+  { title: "MARKETING", titleFr: "MARKETING", collapsible: true, items: [
     { id: "marketing-overview", label: "Overview", icon: Megaphone, path: "/admin/marketing", requiredPermission: "manage_analytics" },
     { id: "inbox", label: "Inbox", icon: Inbox, path: "/admin/inbox", requiredPermission: "manage_crm" },
     { id: "email", label: "Email Campaigns", icon: Mail, path: "/admin/email" },
@@ -87,7 +88,7 @@ const navSections: NavSection[] = [
   ]},
 
   // ── CONTACTS ──────────────────────────────────────────────────────────────
-  { title: "CONTACTS", collapsible: true, items: [
+  { title: "CONTACTS", titleFr: "CONTACTS", collapsible: true, items: [
     { id: "all-contacts", label: "All Contacts", icon: Users, path: "/admin/contacts", requiredPermission: "manage_crm" },
     { id: "crm", label: "CRM & Pipeline", icon: Target, path: "/admin/crm", requiredPermission: "manage_crm" },
     { id: "insights", label: "Insights", icon: Lightbulb, path: "/admin/contact-insights", requiredPermission: "manage_crm" },
@@ -96,7 +97,7 @@ const navSections: NavSection[] = [
   ]},
 
   // ── ANALYTICS ─────────────────────────────────────────────────────────────
-  { title: "ANALYTICS", collapsible: true, items: [
+  { title: "ANALYTICS", titleFr: "ANALYTIQUE", collapsible: true, items: [
     { id: "analytics", label: "Overview", icon: BarChart3, path: "/admin/analytics", requiredPermission: "manage_analytics" },
     { id: "reports", label: "Reports", icon: PieChart, path: "/admin/reports", requiredPermission: "manage_analytics" },
     { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics", requiredPermission: "manage_analytics" },
@@ -107,20 +108,20 @@ const navSections: NavSection[] = [
   ]},
 
   // ── AI & SLE ──────────────────────────────────────────────────────────────
-  { title: "AI & SLE", collapsible: true, items: [
+  { title: "AI & SLE", titleFr: "IA & ELS", collapsible: true, items: [
     { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion", requiredPermission: "manage_ai" },
     { id: "ai-predictive", label: "AI Predictive", icon: Sparkles, path: "/admin/ai-predictive", requiredPermission: "manage_ai" },
     { id: "sle-exam", label: "SLE Exam Mode", icon: ClipboardCheck, path: "/admin/sle-exam", requiredPermission: "manage_sle_exam" },
   ]},
 
   // ── PEOPLE ────────────────────────────────────────────────────────────────
-  { title: "PEOPLE", collapsible: true, items: [
+  { title: "PEOPLE", titleFr: "PERSONNES", collapsible: true, items: [
     { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users", requiredPermission: "manage_users" },
     { id: "permissions", label: "Permissions", icon: Shield, path: "/admin/permissions", requiredPermission: "manage_roles" },
   ]},
 
   // ── SYSTEM ────────────────────────────────────────────────────────────────
-  { title: "SYSTEM", collapsible: true, items: [
+  { title: "SYSTEM", titleFr: "SYSTÈME", collapsible: true, items: [
     { id: "notifications", label: "Notifications", icon: Bell, path: "/admin/notifications", requiredPermission: "manage_notifications" },
     { id: "onboarding", label: "Onboarding", icon: Rocket, path: "/admin/onboarding", requiredPermission: "manage_settings" },
     { id: "enterprise", label: "Enterprise", icon: Building2, path: "/admin/enterprise", requiredPermission: "manage_enterprise" },
@@ -143,6 +144,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [location, navigate] = useLocation();
   const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
   const { can } = usePermissions();
+  const { language } = useLanguage();
 
   const toggleSection = (title: string) => {
     setCollapsedSections(prev => ({ ...prev, [title]: !prev[title] }));
@@ -237,7 +239,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         section.collapsible && "hover:text-sidebar-foreground cursor-pointer"
                       )}
                     >
-                      <span>{section.title}</span>
+                      <span>{language === 'fr' && section.titleFr ? section.titleFr : section.title}</span>
                       {section.collapsible && (
                         <ChevronDown className={cn("h-3 w-3 transition-transform", isSectionCollapsed && "-rotate-90")} />
                       )}
@@ -248,15 +250,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     <Tooltip key={item.id}>
                       <TooltipTrigger asChild>
                         <Link href={item.path}>
-                          <button aria-label="Action" className={cn(
+                          <button aria-label={language === 'fr' && item.labelFr ? item.labelFr : item.label} className={cn(
                             "w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
                             isActive(item.path)
-                              ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
+                              ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium border-l-3 border-[var(--admin-terracotta,#C65A1E)]"
                               : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                             collapsed && "justify-center px-0"
                           )}>
                             <item.icon className={cn("h-4 w-4 shrink-0", collapsed && "h-5 w-5")} />
-                            {!collapsed && <span className="truncate">{item.label}</span>}
+                            {!collapsed && <span className="truncate">{language === 'fr' && item.labelFr ? item.labelFr : item.label}</span>}
                             {!collapsed && item.badge !== undefined && item.badge > 0 && (
                               <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">{item.badge}</span>
                             )}

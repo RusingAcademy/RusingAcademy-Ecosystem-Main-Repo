@@ -1693,7 +1693,7 @@ export default function RusingAcademyLanding() {
                 href="https://calendly.com/steven-barholere/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-background/10 text-white border-2 border-white/60 hover:bg-white dark:bg-background/20 backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white/15 dark:bg-background/10 text-white border-2 border-white/30 hover:bg-white/25 dark:bg-background/20 backdrop-blur-sm"
               >
                 {t.cta.button2}
               </a>

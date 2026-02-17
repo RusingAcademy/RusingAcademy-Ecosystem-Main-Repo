@@ -571,7 +571,7 @@ export default function CRMDashboard() {
                 <button className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors">
                   {t.edit}
                 </button>
-                <button className="flex-1 px-4 py-2 bg-white dark:bg-background/10 text-white rounded-lg hover:bg-white dark:bg-background/20 transition-colors">
+                <button className="flex-1 px-4 py-2 bg-white dark:bg-background/10 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-background/20 transition-colors border border-slate-300 dark:border-white/10">
                   {t.assign}
                 </button>
               </div>

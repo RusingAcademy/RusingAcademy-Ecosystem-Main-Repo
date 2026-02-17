@@ -184,7 +184,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
                   </Badge>
                 )}
                 {item.is_featured && (
-                  <Badge className="bg-white dark:bg-background/20 backdrop-blur-sm text-white border-0 text-xs font-semibold shadow-md">
+                  <Badge className="bg-white/20 dark:bg-background/20 backdrop-blur-sm text-white border-0 text-xs font-semibold shadow-md">
                     <Star className="w-3 h-3 mr-1" />
                     {language === "fr" ? "Vedette" : "Featured"}
                   </Badge>
@@ -203,16 +203,16 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
             <div className="bg-white dark:bg-background/[0.07] backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 lg:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
               {/* Meta badges */}
               <div className="flex flex-wrap gap-2 mb-5">
-                <Badge className="bg-white dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                <Badge className="bg-white/15 dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                   <FileText className="w-3 h-3 mr-1" />
                   {item.format}
                 </Badge>
-                <Badge className="bg-white dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                <Badge className="bg-white/15 dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                   <Globe className="w-3 h-3 mr-1" />
                   {langBadge}
                 </Badge>
                 {item.level[0] !== "ALL" && (
-                  <Badge className="bg-white dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                  <Badge className="bg-white/15 dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                     <GraduationCap className="w-3 h-3 mr-1" />
                     {item.level.join(", ")}
                   </Badge>
