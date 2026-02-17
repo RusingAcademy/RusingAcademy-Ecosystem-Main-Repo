@@ -408,7 +408,7 @@ export default function Coaches() {
 
               {/* Coach Cards - Premium Grid */}
               {!isLoading && (
-                <div className="grid gap-6" role="list">
+                <div className="grid gap-4" role="list">
                   {processedCoaches.slice(0, displayLimit).map((coach, index) => {
                     const availability = getAvailability(coach);
                     const isHovered = hoveredCoach === coach.id;
@@ -432,8 +432,8 @@ export default function Coaches() {
 
                         <div className="relative flex flex-col lg:flex-row">
                           {/* Coach Photo Section */}
-                          <div className="lg:w-72 relative overflow-hidden">
-                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full min-h-[220px] lg:min-h-[280px] relative bg-slate-100 dark:bg-foundation">
+                          <div className="lg:w-64 relative overflow-hidden">
+                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full min-h-[200px] lg:min-h-[240px] relative bg-slate-100 dark:bg-foundation">
                               {/* Photo */}
                               {imgErrors.has(coach.id) ? (
                                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-100 to-emerald-100 dark:from-teal-900/30 dark:to-emerald-900/30">
@@ -491,9 +491,9 @@ export default function Coaches() {
                           </div>
 
                           {/* Coach Info Section */}
-                          <div className="flex-1 p-6 lg:p-8">
+                          <div className="flex-1 p-4 lg:p-5">
                             {/* Name & Headline - Desktop */}
-                            <div className="hidden lg:block mb-4">
+                            <div className="hidden lg:block mb-3">
                               <h3 className="text-2xl font-bold text-black dark:text-foreground mb-2 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
@@ -503,7 +503,7 @@ export default function Coaches() {
                             </div>
 
                             {/* Stats Row */}
-                            <div className="flex flex-wrap items-center gap-4 mb-5">
+                            <div className="flex flex-wrap items-center gap-4 mb-3">
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Users className="w-4 h-4 text-teal-600" />
                                 <span className="font-medium text-black dark:text-foreground">{coach.totalSessions || 324}</span>
@@ -522,7 +522,7 @@ export default function Coaches() {
                             </div>
 
                             {/* Specializations */}
-                            <div className="flex flex-wrap gap-2 mb-5">
+                            <div className="flex flex-wrap gap-2 mb-3">
                               <Badge className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white border-0 px-3 py-1">
                                 {getLangLabel(coach.languages || "french")}
                               </Badge>
@@ -543,7 +543,7 @@ export default function Coaches() {
                             </div>
 
                             {/* Verified Badge */}
-                            <div className="flex items-center gap-2 mb-5">
+                            <div className="flex items-center gap-2 mb-3">
                               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
                                 <CheckCircle className="w-3.5 h-3.5" />
                                 {language === 'fr' ? 'Certifié SLE' : 'SLE Certified'}
@@ -556,10 +556,10 @@ export default function Coaches() {
                           </div>
 
                           {/* Pricing & Actions Section */}
-                          <div className="lg:w-64 p-6 lg:p-8 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-teal-900/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-teal-800/50 flex flex-col justify-between">
+                          <div className="lg:w-64 p-4 lg:p-5 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-teal-900/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-teal-800/50 flex flex-col justify-between">
                             <div>
                               {/* Price */}
-                              <div className="text-center lg:text-left mb-6">
+                              <div className="text-center lg:text-left mb-4">
                                 <div className="flex items-baseline justify-center lg:justify-start gap-1">
                                   <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">
                                     ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
