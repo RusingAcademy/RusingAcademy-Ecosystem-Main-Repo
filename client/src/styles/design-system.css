@@ -41,6 +41,14 @@
   --sand: #EEE9DF;             /* Sand accent (from tokens.css) */
   --border: #E6E6E0;           /* Borders - soft gray (Light Luxury) */
   
+
+  /* === ACCENT COLORS (Wave 3) === */
+  --accent-purple: #8B5CF6;
+  --accent-purple-dark: #2D2580;
+  --accent-purple-deep: #1B1464;
+  --semantic-info: #2563EB;
+  --semantic-info-light: #DBEAFE;
+
   /* === TEXT COLORS (HIGH CONTRAST) === */
   --text: #0a0a0a;             /* Primary text - near black for max contrast */
   --text-inverse: #FFFFFF;     /* Text on dark/colored backgrounds */
