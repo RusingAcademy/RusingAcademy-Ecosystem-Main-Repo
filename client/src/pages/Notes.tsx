@@ -272,8 +272,8 @@ export default function Notes() {
               ))}
             </div>
           ) : filteredNotes.length === 0 ? (
-            <div className="text-center py-16">
-              <span className="material-icons text-6xl text-gray-300 mb-4 block">note_alt</span>
+            <div className="text-center py-8 md:py-12 lg:py-16">
+              <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-gray-300 mb-4 block">note_alt</span>
               <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">No notes yet</h3>
               <p className="text-sm text-gray-500 mb-4">Create your first study note to get started!</p>
               <button

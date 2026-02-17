@@ -59,7 +59,7 @@ export default function TrustedByPublicServants() {
   const { language } = useLanguage();
 
   return (
-    <section className="py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
@@ -69,7 +69,7 @@ export default function TrustedByPublicServants() {
 
       <div className="container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-4 font-serif italic">
             {language === 'fr' ? 'La confiance des fonctionnaires' : 'Trusted by Public Servants'}
           </h2>
@@ -103,7 +103,7 @@ export default function TrustedByPublicServants() {
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
-                        target.parentElement!.innerHTML = `<div class="h-full w-full bg-slate-400 flex items-center justify-center"><span class="text-3xl font-bold text-white">${testimonial.name.split(' ').map(n => n[0]).join('')}</span></div>`;
+                        target.parentElement!.innerHTML = `<div class="h-full w-full bg-slate-400 flex items-center justify-center"><span class="text-lg md:text-2xl lg:text-3xl font-bold text-white">${testimonial.name.split(' ').map(n => n[0]).join('')}</span></div>`;
                       }}
                     />
                   </div>

@@ -124,7 +124,7 @@ export default function CoachOnboardingWizard() {
     <div className="min-h-screen bg-white dark:bg-slate-900 py-8 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Devenir Coach RusingAcademy</h1>
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 mb-2">Devenir Coach RusingAcademy</h1>
           <Progress value={progress} className="h-2" />
           <p className="text-sm text-slate-600 mt-2">Étape {currentStep} sur {STEPS.length}</p>
         </div>

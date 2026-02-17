@@ -890,7 +890,7 @@ function ActivityDialog({
   const renderContentEditor = (lang: "en" | "fr") => {
     if (isLoadingFullData) {
       return (
-        <div className="flex items-center justify-center py-12 text-muted-foreground">
+        <div className="flex items-center justify-center py-6 md:py-8 lg:py-12 text-muted-foreground">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mr-3" />
           Loading content...
         </div>
@@ -1720,7 +1720,7 @@ export default function CourseBuilder() {
           </CardHeader>
           <CardContent className="p-3">
             {enrichedModules.length === 0 ? (
-              <div className="text-center py-12">
+              <div className="text-center py-6 md:py-8 lg:py-12">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-foundation/10 to-cta/10 flex items-center justify-center mx-auto mb-3">
                   <Layers className="h-8 w-8 text-foundation/40" />
                 </div>
@@ -1958,7 +1958,7 @@ export default function CourseBuilder() {
             <CardContent className="p-5"><Skeleton className="h-40 w-full rounded-lg" /></CardContent>
           </Card>
         )) : filtered.length === 0 ? (
-          <div className="col-span-full text-center py-16">
+          <div className="col-span-full text-center py-8 md:py-12 lg:py-16">
             <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-foundation/10 to-cta/10 flex items-center justify-center mx-auto mb-4">
               <BookOpen className="h-10 w-10 text-foundation/40" />
             </div>

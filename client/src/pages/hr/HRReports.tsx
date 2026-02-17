@@ -110,7 +110,7 @@ export default function HRReports() {
         {/* Empty State */}
         <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
-            <span className="material-icons text-3xl text-blue-600">assessment</span>
+            <span className="material-icons text-lg md:text-2xl lg:text-3xl text-blue-600">assessment</span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{ui.noData}</h3>
           <p className="text-sm text-gray-500 max-w-md mx-auto">{ui.noDataSub}</p>

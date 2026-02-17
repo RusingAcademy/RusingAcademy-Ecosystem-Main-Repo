@@ -171,7 +171,7 @@ export default function MyLearning() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">
             {isEn ? `Welcome back, ${user?.name?.split(' ')[0] || 'Learner'}!` : `Bon retour, ${user?.name?.split(' ')[0] || 'Apprenant'} !`}
           </h1>
           <p className="text-muted-foreground">
@@ -382,7 +382,7 @@ export default function MyLearning() {
 
             {/* Empty State */}
             {(!enrollments || enrollments.length === 0) && (
-              <Card className="text-center py-12">
+              <Card className="text-center py-6 md:py-8 lg:py-12">
                 <CardContent>
                   <GraduationCap className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
                   <h3 className="text-xl font-semibold mb-2">
@@ -514,7 +514,7 @@ function LeaderboardSection({ isEn }: { isEn: boolean }) {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center py-12">
+      <div className="flex justify-center py-6 md:py-8 lg:py-12">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );

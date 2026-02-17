@@ -253,7 +253,7 @@ export default function CRMDashboard() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
           {t.title}
         </h1>
         <p className="text-cyan-300 mt-2">{t.subtitle}</p>
@@ -272,7 +272,7 @@ export default function CRMDashboard() {
             <span className="text-cyan-300 text-sm">{t.totalLeads}</span>
             <span className="text-2xl">📊</span>
           </div>
-          <div className="text-3xl font-bold">{mockAnalytics.totalLeads}</div>
+          <div className="text-lg md:text-2xl lg:text-3xl font-bold">{mockAnalytics.totalLeads}</div>
           <div className="text-green-400 text-sm mt-2">+12% this month</div>
         </div>
 
@@ -282,7 +282,7 @@ export default function CRMDashboard() {
             <span className="text-cyan-300 text-sm">{t.converted}</span>
             <span className="text-2xl">✅</span>
           </div>
-          <div className="text-3xl font-bold text-emerald-400">{mockAnalytics.convertedLeads}</div>
+          <div className="text-lg md:text-2xl lg:text-3xl font-bold text-emerald-400">{mockAnalytics.convertedLeads}</div>
           <div className="text-green-400 text-sm mt-2">+5 this week</div>
         </div>
 
@@ -292,7 +292,7 @@ export default function CRMDashboard() {
             <span className="text-cyan-300 text-sm">{t.conversionRate}</span>
             <span className="text-2xl">📈</span>
           </div>
-          <div className="text-3xl font-bold text-cyan-400">{mockAnalytics.conversionRate}%</div>
+          <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cyan-400">{mockAnalytics.conversionRate}%</div>
           <div className="text-green-400 text-sm mt-2">+2.3% vs last month</div>
         </div>
 
@@ -302,7 +302,7 @@ export default function CRMDashboard() {
             <span className="text-cyan-300 text-sm">{t.crossSell}</span>
             <span className="text-2xl">🔗</span>
           </div>
-          <div className="text-3xl font-bold text-amber-400">{mockAnalytics.crossSellOpportunities}</div>
+          <div className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-400">{mockAnalytics.crossSellOpportunities}</div>
           <div className="text-cyan-300 text-sm mt-2">{mockAnalytics.convertedCrossSell} converted</div>
         </div>
       </motion.div>
@@ -471,7 +471,7 @@ export default function CRMDashboard() {
           </table>
           
           {filteredLeads.length === 0 && (
-            <div className="text-center py-12 text-cyan-300">
+            <div className="text-center py-6 md:py-8 lg:py-12 text-cyan-300">
               {t.noLeads}
             </div>
           )}

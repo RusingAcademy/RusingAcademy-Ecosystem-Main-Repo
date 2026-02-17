@@ -67,7 +67,7 @@ export function XpToast({ amount, reason, leveledUp, newLevel, onClose }: XpToas
         {/* Main XP notification */}
         <div className="p-4 text-white">
           <div className="flex items-center gap-3">
-            <div className="text-3xl animate-bounce">{reasonInfo.icon}</div>
+            <div className="text-lg md:text-2xl lg:text-3xl animate-bounce">{reasonInfo.icon}</div>
             <div>
               <p className="text-sm opacity-90">{reasonInfo.label}</p>
               <p className="text-2xl font-bold">+{amount} XP</p>

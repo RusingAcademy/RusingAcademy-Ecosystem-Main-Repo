@@ -416,7 +416,7 @@ export default function Practice() {
                 <Gamepad2 className="h-7 w-7 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-black dark:text-white">{l.title}</h1>
+                <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{l.title}</h1>
                 <p className="text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
               </div>
             </div>

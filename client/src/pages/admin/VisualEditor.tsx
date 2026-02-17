@@ -489,8 +489,8 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((s: any, i: number) => (
                 <div key={i} className="text-center">
-                  {s.icon && <div className="text-3xl mb-2">{s.icon}</div>}
-                  <div className="text-3xl font-bold">{s.value || "0"}</div>
+                  {s.icon && <div className="text-lg md:text-2xl lg:text-3xl mb-2">{s.icon}</div>}
+                  <div className="text-lg md:text-2xl lg:text-3xl font-bold">{s.value || "0"}</div>
                   <div className="text-sm opacity-70 mt-1">{s.label || `Stat ${i + 1}`}</div>
                 </div>
               ))}

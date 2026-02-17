@@ -2639,7 +2639,7 @@ export default function AdminDashboard() {
           </SheetHeader>
           
           {userActivityQuery.isLoading ? (
-            <div className="flex items-center justify-center py-12">
+            <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
               <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           ) : userActivityQuery.data?.user ? (
@@ -2741,7 +2741,7 @@ export default function AdminDashboard() {
               </div>
             </div>
           ) : (
-            <div className="text-center py-12 text-muted-foreground">
+            <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
               {language === "fr" ? "Utilisateur non trouvé" : "User not found"}
             </div>
           )}

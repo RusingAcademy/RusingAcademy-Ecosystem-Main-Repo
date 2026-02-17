@@ -35,7 +35,7 @@ export default function Bookmarks() {
   return (
     <div className="container max-w-4xl py-8 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Bookmarks & Favorites</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">Bookmarks & Favorites</h1>
         <p className="text-muted-foreground mt-1">Quick access to your saved content across the platform</p>
       </div>
 
@@ -70,8 +70,8 @@ export default function Bookmarks() {
             </div>
           ) : !filtered.length ? (
             <Card>
-              <CardContent className="py-12 text-center">
-                <div className="text-4xl mb-3">🔖</div>
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center">
+                <div className="text-xl md:text-3xl lg:text-4xl mb-3">🔖</div>
                 <h3 className="font-semibold">No bookmarks yet</h3>
                 <p className="text-muted-foreground text-sm mt-1">
                   Save lessons, notes, vocabulary, and discussions for quick access

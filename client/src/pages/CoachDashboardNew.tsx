@@ -53,7 +53,7 @@ const StatCard = ({ title, value, icon }: { title: string; value: string | numbe
         <p className="text-sm font-medium text-gray-600">{title}</p>
         <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{value}</p>
       </div>
-      <div className="text-3xl">{icon}</div>
+      <div className="text-lg md:text-2xl lg:text-3xl">{icon}</div>
     </div>
   </div>
 );

@@ -282,7 +282,7 @@ export default function CustomerDetail() {
           <div>
             <div className="qb-card">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Balance</h3>
-              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">${Number(c.balance || 0).toFixed(2)}</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">${Number(c.balance || 0).toFixed(2)}</p>
               <p className="text-xs text-gray-500">Outstanding balance</p>
               <hr className="my-4" />
               <div className="space-y-2 text-sm">

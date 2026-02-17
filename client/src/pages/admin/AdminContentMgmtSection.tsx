@@ -221,7 +221,7 @@ export default function AdminContentMgmtSection() {
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
                 </div>
               ) : courseList.length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                   <h3 className="text-lg font-semibold mb-2">No courses yet</h3>
                   <p className="text-muted-foreground mb-4">Create your first course to get started</p>

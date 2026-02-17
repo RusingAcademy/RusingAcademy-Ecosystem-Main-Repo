@@ -478,14 +478,14 @@ export default function CoachGuide() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary/10 via-primary/5 to-background py-12 border-b">
+        <section className="bg-gradient-to-r from-primary/10 via-primary/5 to-background py-6 md:py-8 lg:py-12 border-b">
           <div className="container max-w-6xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-3 rounded-xl bg-primary/10">
                 <BookOpen className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold">{c.title}</h1>
+                <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">{c.title}</h1>
                 <p className="text-black dark:text-white">{c.subtitle}</p>
               </div>
             </div>

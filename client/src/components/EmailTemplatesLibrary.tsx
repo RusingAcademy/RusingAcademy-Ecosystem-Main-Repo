@@ -524,7 +524,7 @@ export default function EmailTemplatesLibrary() {
       {/* Templates Grid */}
       {filteredTemplates.length === 0 ? (
         <Card>
-          <CardContent className="py-12 text-center">
+          <CardContent className="py-6 md:py-8 lg:py-12 text-center">
             <Mail className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
             <p className="text-muted-foreground">{l.noTemplates}</p>
           </CardContent>

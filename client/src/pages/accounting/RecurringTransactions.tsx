@@ -235,7 +235,7 @@ export default function RecurringTransactions() {
                 {isLoading ? (
                   <tr><td colSpan={7} className="px-4 py-8 text-center text-gray-400"><Loader2 className="animate-spin inline mr-2" size={16} />Loading...</td></tr>
                 ) : paginated.length === 0 ? (
-                  <tr><td colSpan={7} className="px-4 py-12 text-center">
+                  <tr><td colSpan={7} className="px-4 py-6 md:py-8 lg:py-12 text-center">
                     <RefreshCw size={40} className="mx-auto text-gray-300 mb-3" />
                     <p className="text-gray-500 text-sm">No recurring transactions</p>
                     <p className="text-gray-400 text-xs mt-1">Set up templates to automate invoices, expenses, and bills</p>
@@ -314,7 +314,7 @@ export default function RecurringTransactions() {
               {logLoading ? (
                 <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-400"><Loader2 className="animate-spin inline mr-2" size={16} />Loading...</td></tr>
               ) : !generationLog || (generationLog as any[]).length === 0 ? (
-                <tr><td colSpan={6} className="px-4 py-12 text-center">
+                <tr><td colSpan={6} className="px-4 py-6 md:py-8 lg:py-12 text-center">
                   <Clock size={40} className="mx-auto text-gray-300 mb-3" />
                   <p className="text-gray-500 text-sm">No generation history yet</p>
                   <p className="text-gray-400 text-xs mt-1">Entries will appear here when recurring transactions are processed</p>

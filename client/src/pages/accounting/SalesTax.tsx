@@ -76,7 +76,7 @@ export default function SalesTax() {
         <div className="qb-card mb-6 max-w-lg">
           <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Sales Tax</div>
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-1">{currentFiling.agency || "CRA"}</h2>
-          <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">${Number(currentFiling.amountOwing || 0).toFixed(2)}</div>
+          <div className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">${Number(currentFiling.amountOwing || 0).toFixed(2)}</div>
           <div className="text-sm text-gray-500 mb-1">
             {currentFiling.periodStart ? new Date(currentFiling.periodStart).toLocaleDateString("en-CA") : ""} – {currentFiling.periodEnd ? new Date(currentFiling.periodEnd).toLocaleDateString("en-CA") : ""}
           </div>

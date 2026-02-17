@@ -487,8 +487,8 @@ function PriceDisplay({ originalPrice, lang, size = 'md' }: { originalPrice: str
   const freeLabel = lang === 'fr' ? 'GRATUIT' : 'FREE';
   const sizeClasses = {
     sm: { original: 'text-base', free: 'text-2xl' },
-    md: { original: 'text-xl', free: 'text-3xl' },
-    lg: { original: 'text-2xl', free: 'text-4xl' },
+    md: { original: 'text-xl', free: 'text-lg md:text-2xl lg:text-3xl' },
+    lg: { original: 'text-2xl', free: 'text-xl md:text-3xl lg:text-4xl' },
   };
   
   if (!FREE_ACCESS_MODE) {
@@ -743,7 +743,7 @@ export default function RusingAcademyLanding() {
           />
         </div>
 
-        <div className="relative max-w-5xl mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
+        <div className="relative max-w-5xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16 lg:py-24 text-center">
           <div className="flex flex-col items-center">
             <motion.div
               style={{ opacity: heroOpacity, scale: heroScale }}
@@ -785,7 +785,7 @@ export default function RusingAcademyLanding() {
               {/* Subtitle */}
               <motion.p 
                 variants={animationVariants.fadeInUp}
-                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-slate-600 leading-relaxed"
+                className="text-lg md:text-xl mb-4 md:mb-6 lg:mb-10 max-w-2xl mx-auto text-slate-600 leading-relaxed"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -810,7 +810,7 @@ export default function RusingAcademyLanding() {
               {/* CTAs */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex flex-wrap justify-center gap-4 mb-10"
+                className="flex flex-wrap justify-center gap-4 mb-4 md:mb-6 lg:mb-10"
               >
                 <Link
                   href="/curriculum"
@@ -903,14 +903,14 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ PROBLEM SECTION ═══ */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-10 md:py-16 lg:py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
-            className="text-center mb-12"
+            className="text-center mb-6 md:mb-8 lg:mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               {t.problem.title}
@@ -999,7 +999,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ PATH SERIES SECTION — Premium Redesign ═══ */}
-      <section className="py-24 bg-white dark:bg-slate-900 relative overflow-x-clip">
+      <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-slate-900 relative overflow-x-clip">
         <div 
           className="absolute inset-0 opacity-20"
           style={{ background: subtleGradient }}
@@ -1010,7 +1010,7 @@ export default function RusingAcademyLanding() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
-            className="text-center mb-14"
+            className="text-center mb-6 md:mb-10 lg:mb-14"
           >
             <div 
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-semibold mb-5 shadow-lg"
@@ -1056,7 +1056,7 @@ export default function RusingAcademyLanding() {
           </motion.div>
 
           {/* Path Navigation Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12 px-2">
+          <div className="flex flex-wrap justify-center gap-2 mb-6 md:mb-8 lg:mb-12 px-2">
             {currentPaths.map((path, index) => (
               <button
                 key={index}
@@ -1299,7 +1299,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ STATS SECTION ═══ */}
-      <section className="py-16 relative overflow-hidden">
+      <section className="py-8 md:py-12 lg:py-16 relative overflow-hidden">
         <div 
           className="absolute inset-0 opacity-40"
           style={{ background: subtleGradient }}
@@ -1334,7 +1334,7 @@ export default function RusingAcademyLanding() {
                     style={{ color: '#0D9488' }} 
                   />
                   <p 
-                    className="text-3xl font-bold mb-1 bg-clip-text text-transparent"
+                    className="text-lg md:text-2xl lg:text-3xl font-bold mb-1 bg-clip-text text-transparent"
                     style={{ backgroundImage: premiumGradient }}
                   >
                     {stat.value}
@@ -1350,14 +1350,14 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ WHY CHOOSE US SECTION ═══ */}
-      <section className="py-20 bg-white dark:bg-slate-900">
+      <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-12 lg:mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               {t.whyUs.title}
@@ -1395,7 +1395,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ BUNDLES SECTION — With Strikethrough Pricing ═══ */}
-      <section className="py-24 bg-stone-50 relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-24 bg-stone-50 relative overflow-hidden">
         <div 
           className="absolute inset-0 opacity-10"
           style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(13, 148, 136, 0.2) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(124, 58, 237, 0.2) 0%, transparent 60%)' }}
@@ -1406,7 +1406,7 @@ export default function RusingAcademyLanding() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
-            className="text-center mb-14"
+            className="text-center mb-6 md:mb-10 lg:mb-14"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-5 text-slate-900">
               {t.bundles.title}
@@ -1506,14 +1506,14 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ OFFERINGS SECTION ═══ */}
-      <section className="py-20 bg-white dark:bg-slate-900">
+      <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
-            className="text-center mb-14"
+            className="text-center mb-6 md:mb-10 lg:mb-14"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               {t.offerings.title}
@@ -1572,7 +1572,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ TESTIMONIALS SECTION ═══ */}
-      <section className="py-20 bg-stone-50 relative overflow-hidden">
+      <section className="py-10 md:py-16 lg:py-20 bg-stone-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image Side */}
@@ -1603,7 +1603,7 @@ export default function RusingAcademyLanding() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={animationVariants.fadeInUp}
-                className="mb-10"
+                className="mb-4 md:mb-6 lg:mb-10"
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
                   {t.testimonials.title}
@@ -1653,7 +1653,7 @@ export default function RusingAcademyLanding() {
 
       {/* ═══ FINAL CTA SECTION ═══ */}
       <section 
-        className="py-24 relative overflow-hidden"
+        className="py-12 md:py-16 lg:py-24 relative overflow-hidden"
         style={{ background: premiumGradient }}
       >
         <div className="absolute inset-0 opacity-10">

@@ -76,7 +76,7 @@ export default function EmailBroadcasts() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight mb-2" >
               {t.emailBroadcasts.title}
             </h1>
             <p className="text-muted-foreground">{t.emailBroadcasts.subtitle}</p>
@@ -173,11 +173,11 @@ export default function EmailBroadcasts() {
 
         {/* Broadcasts List */}
         {isLoading ? (
-          <div className="flex justify-center py-12">
+          <div className="flex justify-center py-6 md:py-8 lg:py-12">
             <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : !broadcasts || broadcasts.length === 0 ? (
-          <div className="text-center py-16">
+          <div className="text-center py-8 md:py-12 lg:py-16">
             <Mail className="w-16 h-16 text-muted-foreground/20 mx-auto mb-4" />
             <p className="text-muted-foreground">No broadcasts yet. Create your first one!</p>
           </div>

@@ -393,7 +393,7 @@ export default function EcosystemLanding() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-6 md:mb-8 lg:mb-12"
         >
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3 sm:mb-4">
             {language === "en" ? "Real Training in Action" : "Formation réelle sur le terrain"}
@@ -420,7 +420,7 @@ export default function EcosystemLanding() {
                   <Users className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2,500+</div>
+                  <div className="text-xl md:text-3xl lg:text-4xl font-black" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2,500+</div>
                   <div className={t.textSecondary}>
                     {language === "en" ? "Public Servants Trained" : "Fonctionnaires formés"}
                   </div>
@@ -434,7 +434,7 @@ export default function EcosystemLanding() {
                   <Check className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #F97316 0%, #FBBF24 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>95%</div>
+                  <div className="text-xl md:text-3xl lg:text-4xl font-black" style={{ background: "linear-gradient(135deg, #F97316 0%, #FBBF24 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>95%</div>
                   <div className={t.textSecondary}>
                     {language === "en" ? "SLE Success Rate" : "Taux de réussite ELS"}
                   </div>
@@ -448,7 +448,7 @@ export default function EcosystemLanding() {
                   <ArrowRight className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #D4A853 0%, #F5D89A 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>3-4×</div>
+                  <div className="text-xl md:text-3xl lg:text-4xl font-black" style={{ background: "linear-gradient(135deg, #D4A853 0%, #F5D89A 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>3-4×</div>
                   <div className={t.textSecondary}>
                     {language === "en" ? "Faster Learning Results" : "Résultats d'apprentissage plus rapides"}
                   </div>
@@ -494,7 +494,7 @@ export default function EcosystemLanding() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-6 md:mb-8 lg:mb-12"
         >
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3 sm:mb-4">
             {language === "en" ? "What Our Clients Say" : "Ce que disent nos clients"}
@@ -593,7 +593,7 @@ export default function EcosystemLanding() {
                   >
                     {/* Quote Mark */}
                     <div 
-                      className="absolute top-3 right-3 text-5xl font-serif opacity-20"
+                      className="absolute top-3 right-3 text-2xl md:text-4xl lg:text-5xl font-serif opacity-20"
                       style={{ color: testimonial.color }}
                     >
                       "

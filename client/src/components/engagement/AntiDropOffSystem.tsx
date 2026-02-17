@@ -63,8 +63,8 @@ export function RiskDashboard({ role }: { role: 'admin' | 'coach' }) {
           ))}
         </div>
         <div className="space-y-4">
-          {loading ? <div className="text-center py-12 text-white/75">Chargement...</div> :
-           atRiskLearners.length === 0 ? <div className="text-center py-12"><span className="text-4xl mb-4 block">🎉</span><p className="text-white/60">Aucun apprenant à risque!</p></div> :
+          {loading ? <div className="text-center py-6 md:py-8 lg:py-12 text-white/75">Chargement...</div> :
+           atRiskLearners.length === 0 ? <div className="text-center py-6 md:py-8 lg:py-12"><span className="text-xl md:text-3xl lg:text-4xl mb-4 block">🎉</span><p className="text-white/60">Aucun apprenant à risque!</p></div> :
            atRiskLearners.map((learner) => (
             <LearnerRiskCard key={learner.userId} learner={learner} onIntervene={(type) => triggerIntervention(learner.userId, type)} getRiskColor={getRiskColor} />
           ))}
@@ -114,7 +114,7 @@ export function NudgeModal({ isOpen, onClose, message, incentive }: { isOpen: bo
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
       <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-[#1A1A2E] rounded-2xl p-6 max-w-md w-full border border-white/10">
-        <div className="text-center"><span className="text-5xl mb-4 block">👋</span><h2 className="text-xl font-bold text-white mb-2">On vous attend!</h2><p className="text-white/60 mb-6">{message}</p></div>
+        <div className="text-center"><span className="text-2xl md:text-4xl lg:text-5xl mb-4 block">👋</span><h2 className="text-xl font-bold text-white mb-2">On vous attend!</h2><p className="text-white/60 mb-6">{message}</p></div>
         {incentive && <div className="bg-foundation-soft/10 rounded-xl p-4 mb-6 text-center"><p className="text-foundation font-medium">🎁 Bonus de retour: +{incentive.value} XP</p></div>}
         <div className="flex gap-3"><button onClick={onClose} className="flex-1 py-3 bg-white dark:bg-slate-900/10 rounded-xl text-white">Plus tard</button><button onClick={onClose} className="flex-1 py-3 bg-foundation-soft rounded-xl text-white font-medium">Reprendre</button></div>
       </motion.div>

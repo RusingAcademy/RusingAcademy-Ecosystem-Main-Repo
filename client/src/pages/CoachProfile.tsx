@@ -328,7 +328,7 @@ export default function CoachProfile() {
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
           
-          <div className="container relative z-10 py-12">
+          <div className="container relative z-10 py-6 md:py-8 lg:py-12">
             {/* Breadcrumb */}
             <div className="mb-6">
               <Link href="/coaches" className="inline-flex items-center gap-2 text-sm text-white/90 hover:text-white transition-colors">
@@ -345,7 +345,7 @@ export default function CoachProfile() {
                   <div className="relative">
                     <Avatar className="h-40 w-40 ring-4 ring-white/30 shadow-2xl">
                       <AvatarImage src={coach.photoUrl || coach.avatarUrl || undefined} className="object-cover" />
-                      <AvatarFallback className="text-4xl bg-gradient-to-br from-teal-500 to-cyan-500 text-white">
+                      <AvatarFallback className="text-xl md:text-3xl lg:text-4xl bg-gradient-to-br from-teal-500 to-cyan-500 text-white">
                         {(coach.name || "C").split(" ").map((n) => n[0]).join("")}
                       </AvatarFallback>
                     </Avatar>

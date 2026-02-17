@@ -118,10 +118,10 @@ export default function MediaLibrary() {
 
       {/* Grid / List View */}
       {listQuery.isLoading ? (
-        <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading media...</div>
+        <div className="flex items-center gap-2 text-muted-foreground py-6 md:py-8 lg:py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading media...</div>
       ) : items.length === 0 ? (
         <Card>
-          <CardContent className="py-16 text-center">
+          <CardContent className="py-8 md:py-12 lg:py-16 text-center">
             <Image className="h-12 w-12 mx-auto mb-4 text-black/40 dark:text-white/40" />
             <h3 className="font-semibold mb-1">No media files yet</h3>
             <p className="text-sm text-muted-foreground mb-4">Upload images, videos, and documents to get started.</p>

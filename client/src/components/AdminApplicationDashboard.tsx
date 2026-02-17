@@ -334,7 +334,7 @@ export function AdminApplicationDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-black dark:text-white">{l.title}</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{l.title}</h1>
         <p className="text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
       </div>
 
@@ -351,7 +351,7 @@ export function AdminApplicationDashboard() {
             <Card key={i}>
               <CardContent className="pt-6">
                 <div className="text-center">
-                  <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
+                  <div className={`text-lg md:text-2xl lg:text-3xl font-bold ${stat.color}`}>{stat.value}</div>
                   <div className="text-sm text-black dark:text-white dark:text-cyan-300">{stat.label}</div>
                 </div>
               </CardContent>
@@ -460,11 +460,11 @@ export function AdminApplicationDashboard() {
       <Card>
         <CardContent className="pt-6">
           {isLoading ? (
-            <div className="flex items-center justify-center py-12">
+            <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
               <Loader className="w-8 h-8 animate-spin text-cyan-300" />
             </div>
           ) : applications.length === 0 ? (
-            <div className="text-center py-12 text-black dark:text-white dark:text-cyan-300">{l.noResults}</div>
+            <div className="text-center py-6 md:py-8 lg:py-12 text-black dark:text-white dark:text-cyan-300">{l.noResults}</div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">

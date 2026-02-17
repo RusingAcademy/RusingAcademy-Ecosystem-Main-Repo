@@ -55,10 +55,10 @@ export default function VerifyCertificate() {
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-4 py-12">
+        <main className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-12">
           {/* Search Section */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">
+          <div className="text-center mb-6 md:mb-8 lg:mb-12">
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white mb-4">
               Verify Certificate Authenticity
             </h2>
             <p className="text-black dark:text-white mb-8 max-w-2xl mx-auto">
@@ -91,7 +91,7 @@ export default function VerifyCertificate() {
           {params.certificateNumber && (
             <div className="mt-8">
               {isLoading ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <div className="inline-block w-8 h-8 border-4 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
                   <p className="mt-4 text-black dark:text-white">Verifying certificate...</p>
                 </div>

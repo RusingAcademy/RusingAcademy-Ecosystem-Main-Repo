@@ -91,8 +91,8 @@ export function AnimatedStreak({
   
   const sizeConfig = {
     sm: { container: "w-16 h-16", icon: "h-8 w-8", text: "text-xl", particles: 4 },
-    md: { container: "w-20 h-20", icon: "h-10 w-10", text: "text-3xl", particles: 6 },
-    lg: { container: "w-28 h-28", icon: "h-14 w-14", text: "text-4xl", particles: 8 },
+    md: { container: "w-20 h-20", icon: "h-10 w-10", text: "text-lg md:text-2xl lg:text-3xl", particles: 6 },
+    lg: { container: "w-28 h-28", icon: "h-14 w-14", text: "text-xl md:text-3xl lg:text-4xl", particles: 8 },
   };
   
   const config = sizeConfig[size];

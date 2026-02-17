@@ -62,7 +62,7 @@ export default function LearnerLoyalty() {
         <div className="container py-8">
           {/* Page Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">
               {isEn ? "Loyalty Rewards" : "Récompenses de fidélité"}
             </h1>
             <p className="text-muted-foreground">

@@ -223,19 +223,19 @@ export default function QuizManagement() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Card>
                   <CardContent className="p-4 text-center">
-                    <p className="text-3xl font-bold text-primary">{(questionStats as any).total || 0}</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-primary">{(questionStats as any).total || 0}</p>
                     <p className="text-xs text-muted-foreground mt-1">{t.questions}</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="p-4 text-center">
-                    <p className="text-3xl font-bold text-amber-600">{(questionStats as any).totalPoints || 0}</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-600">{(questionStats as any).totalPoints || 0}</p>
                     <p className="text-xs text-muted-foreground mt-1">{t.totalPoints}</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="p-4 text-center">
-                    <p className="text-3xl font-bold text-green-600">
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-green-600">
                       {(questionStats as any).byDifficulty?.length || 0}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">Difficulty Levels</p>
@@ -350,13 +350,13 @@ export default function QuizManagement() {
 
       {/* Quiz Lessons List */}
       {isLoading ? (
-        <div className="flex items-center justify-center py-12 text-muted-foreground">
+        <div className="flex items-center justify-center py-6 md:py-8 lg:py-12 text-muted-foreground">
           <Loader2 className="h-5 w-5 animate-spin mr-2" />
           {t.loadingLessons}
         </div>
       ) : filteredLessons.length === 0 ? (
         <Card>
-          <CardContent className="py-12 text-center">
+          <CardContent className="py-6 md:py-8 lg:py-12 text-center">
             <HelpCircle className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-30" />
             <h3 className="text-lg font-semibold mb-2">{t.noQuizLessons}</h3>
             <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">

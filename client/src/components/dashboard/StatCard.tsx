@@ -33,7 +33,7 @@ export function StatCard({
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <p className="text-sm font-medium text-muted-foreground">{title}</p>
-            <p className="text-3xl font-bold tracking-tight">{value}</p>
+            <p className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight">{value}</p>
             {(trend !== undefined || subtitle) && (
               <div className="flex items-center gap-1">
                 {trend !== undefined && (

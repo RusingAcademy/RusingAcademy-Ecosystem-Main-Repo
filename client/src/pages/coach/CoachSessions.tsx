@@ -166,8 +166,8 @@ export default function CoachSessions() {
                 {[1, 2, 3, 4].map((i) => <div key={i} className="h-20 bg-gray-50 dark:bg-slate-900 rounded-xl animate-pulse" />)}
               </div>
             ) : filtered.length === 0 ? (
-              <div className="text-center py-12 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
-                <span className="material-icons text-gray-300 text-5xl">event_busy</span>
+              <div className="text-center py-6 md:py-8 lg:py-12 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
+                <span className="material-icons text-gray-300 text-2xl md:text-4xl lg:text-5xl">event_busy</span>
                 <p className="text-sm text-gray-500 mt-2">
                   {lang === "fr" ? "Aucune session trouvée" : "No sessions found"}
                 </p>

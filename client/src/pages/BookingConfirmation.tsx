@@ -139,7 +139,7 @@ export default function BookingConfirmation() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 lg:mb-12 text-center">
                 {l.nextSteps}
               </h2>
 

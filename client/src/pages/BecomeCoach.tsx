@@ -375,12 +375,12 @@ export default function BecomeCoach() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-teal-100 mb-10 max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-teal-100 mb-4 md:mb-6 lg:mb-10 max-w-3xl mx-auto">
                 {l.subtitle}
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6 md:mb-8 lg:mb-12">
                 {!isAuthenticated ? (
                   <a href={getLoginUrl()}>
                     <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2 w-full sm:w-auto">
@@ -431,9 +431,9 @@ export default function BecomeCoach() {
         </section>
 
         {/* Why Coaches Love Lingueefy */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
@@ -473,7 +473,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-white dark:bg-slate-900 border-y">
+        <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-slate-900 border-y">
           <div className="container">
             <p className="text-center text-sm text-black dark:text-white mb-6 uppercase tracking-wider">
               {isEn ? "Our coaches help public servants from" : "Nos coachs aident les fonctionnaires de"}
@@ -490,9 +490,9 @@ export default function BecomeCoach() {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
                 {isEn ? "Simple Process" : "Processus simple"}
               </Badge>
@@ -522,10 +522,10 @@ export default function BecomeCoach() {
         </section>
 
         {/* Requirements */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <Badge className="mb-4 bg-amber-100 text-amber-700 border-orange-100">
                   {isEn ? "Requirements" : "Exigences"}
                 </Badge>
@@ -550,7 +550,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Earnings Calculator Preview */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -624,9 +624,9 @@ export default function BecomeCoach() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
@@ -662,9 +662,9 @@ export default function BecomeCoach() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 bg-white dark:bg-slate-900">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-foundation-soft text-foundation border-foundation">
                 FAQ
               </Badge>
@@ -685,7 +685,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
+        <section className="relative py-10 md:py-16 lg:py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

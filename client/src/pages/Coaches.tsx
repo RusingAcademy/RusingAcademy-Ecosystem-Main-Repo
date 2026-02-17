@@ -387,7 +387,7 @@ export default function Coaches() {
 
               {/* Loading State */}
               {isLoading && (
-                <div className="flex items-center justify-center py-20">
+                <div className="flex items-center justify-center py-10 md:py-16 lg:py-20">
                   <div className="text-center">
                     <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center mx-auto mb-4 animate-pulse">
                       <Loader2 className="h-8 w-8 animate-spin text-white" />
@@ -554,7 +554,7 @@ export default function Coaches() {
                               {/* Price */}
                               <div className="text-center lg:text-left mb-6">
                                 <div className="flex items-baseline justify-center lg:justify-start gap-1">
-                                  <span className="text-3xl font-bold text-black dark:text-white">
+                                  <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">
                                     ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                                   </span>
                                   <span className="text-black dark:text-white/90 text-sm font-medium">/{language === 'fr' ? 'heure' : 'hour'}</span></div>

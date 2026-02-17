@@ -92,7 +92,7 @@ export function ProgressCelebration({ celebration, language = "en", onComplete }
             <div className="w-24 h-24 rounded-full bg-teal-500" />
           </div>
           <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center shadow-lg">
-            <span className="text-5xl">{celebration.icon}</span>
+            <span className="text-2xl md:text-4xl lg:text-5xl">{celebration.icon}</span>
           </div>
         </div>
         
@@ -119,7 +119,7 @@ export function ProgressCelebration({ celebration, language = "en", onComplete }
               {language === "fr" ? "Nouveau badge débloqué !" : "New badge unlocked!"}
             </p>
             <div className="flex items-center justify-center gap-2">
-              <span className="text-3xl">{celebration.badgeAwarded.icon}</span>
+              <span className="text-lg md:text-2xl lg:text-3xl">{celebration.badgeAwarded.icon}</span>
               <span className="font-medium text-yellow-800">
                 {language === "fr" ? celebration.badgeAwarded.nameFr : celebration.badgeAwarded.name}
               </span>

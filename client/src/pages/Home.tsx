@@ -512,11 +512,11 @@ function FAQSection() {
 
   return (
     <section 
-      className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
+      className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
       aria-labelledby="faq-title"
     >
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
             <HelpCircle className="h-4 w-4" />
             {language === 'fr' ? 'Questions Fréquentes' : 'Frequently Asked Questions'}
@@ -705,11 +705,11 @@ export default function Home() {
 
         {/* Plans Maison Section - Coaching Packages */}
         <section 
-          className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
+          className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
           aria-labelledby="plans-title"
         >
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
                 <Shield className="h-4 w-4" />
                 {t("plans.badge")}
@@ -721,7 +721,7 @@ export default function Home() {
             </div>
 
             {/* Two Options: Marketplace vs Plans Maison */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8 md:mb-12 lg:mb-16">
               {/* Marketplace Option */}
               <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-4 mb-6">
@@ -789,7 +789,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.starter.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.starter.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.STARTER.priceDisplay}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.STARTER.priceDisplay}</span>
                     <span className="text-muted-foreground">/ 10h</span>
                   </div>
                 </div>
@@ -825,7 +825,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.accelerator.name")}</h3>
                   <p className="text-sm text-teal-100 mb-4">{t("plans.accelerator.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-black">{COACHING_PLAN_PRICES.ACCELERATOR.priceDisplay}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-black">{COACHING_PLAN_PRICES.ACCELERATOR.priceDisplay}</span>
                     <span className="text-teal-200">/ 20h</span>
                   </div>
                   <p className="text-xs text-amber-300 mt-2">{t("plans.accelerator.savings")}</p>
@@ -858,7 +858,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.immersion.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.immersion.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.IMMERSION.priceDisplay}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.IMMERSION.priceDisplay}</span>
                     <span className="text-muted-foreground">/ 40h</span>
                   </div>
                   <p className="text-xs text-green-600 mt-2">{t("plans.immersion.savings")}</p>
@@ -909,12 +909,12 @@ export default function Home() {
 
         {/* Transformation Section - Before/After */}
         <section 
-          className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-teal-50/20"
+          className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-teal-50/20"
           aria-labelledby="transformation-title"
         >
           <div className="container mx-auto px-4 relative z-10">
             {/* Section Header */}
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <h2 id="transformation-title" className="text-3xl md:text-4xl font-bold mb-4">
                 {t("transformation.title")}
               </h2>
@@ -978,13 +978,13 @@ export default function Home() {
 
         {/* SLE Levels Section */}
         <section 
-          className="py-20 relative overflow-hidden"
+          className="py-10 md:py-16 lg:py-20 relative overflow-hidden"
           aria-labelledby="sle-title"
         >
           <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
           
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <h2 id="sle-title" className="text-3xl md:text-4xl font-bold mb-4">{t("sle.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("sle.description")}
@@ -1044,7 +1044,7 @@ export default function Home() {
                       className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-xl ${item.shadow} group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
                       aria-hidden="true"
                     >
-                      <span className="text-3xl font-black text-white drop-shadow-lg">{item.level}</span>
+                      <span className="text-lg md:text-2xl lg:text-3xl font-black text-white drop-shadow-lg">{item.level}</span>
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
@@ -1071,11 +1071,11 @@ export default function Home() {
 
         {/* How It Works */}
         <section 
-          className="py-24 relative overflow-hidden bg-white dark:bg-slate-900"
+          className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-slate-900"
           aria-labelledby="how-title"
         >
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-20">
+            <div className="text-center mb-10 md:mb-16 lg:mb-20">
               <h2 id="how-title" className="text-3xl md:text-4xl font-bold mb-4">{t("how.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("how.description")}
@@ -1136,13 +1136,13 @@ export default function Home() {
 
         {/* Why Choose Lingueefy */}
         <section 
-          className="py-24 relative overflow-hidden"
+          className="py-12 md:py-16 lg:py-24 relative overflow-hidden"
           aria-labelledby="features-title"
         >
           <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
           
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-20">
+            <div className="text-center mb-10 md:mb-16 lg:mb-20">
               <h2 id="features-title" className="text-3xl md:text-4xl font-bold mb-4">{t("features.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("features.description")}
@@ -1225,9 +1225,9 @@ export default function Home() {
         <FAQSection />
 
         {/* Video Presentation Section - Moved here from after statistics */}
-        <section className="py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
+        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Meet Prof. Steven Barholere
               </h2>
@@ -1345,7 +1345,7 @@ export default function Home() {
 
         {/* CTA Section */}
         <section 
-          className="py-24 relative overflow-hidden mesh-gradient"
+          className="py-12 md:py-16 lg:py-24 relative overflow-hidden mesh-gradient"
           aria-labelledby="cta-title"
         >
           <div className="container mx-auto px-4 relative z-10">

@@ -265,10 +265,10 @@ export default function CoursePlayer() {
         <main className="flex-1 overflow-y-auto">
           {!isEnrolled ? (
             /* Enrollment CTA */
-            <div className="max-w-3xl mx-auto px-6 py-12">
+            <div className="max-w-3xl mx-auto px-6 py-6 md:py-8 lg:py-12">
               <div className="text-center mb-8">
                 <GraduationCap className="w-16 h-16 text-indigo-900 mx-auto mb-4" />
-                <h2 className="text-3xl font-extrabold text-foreground mb-3">{courseTitle}</h2>
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-extrabold text-foreground mb-3">{courseTitle}</h2>
                 <p className="text-muted-foreground max-w-xl mx-auto">
                   {locale === "fr" && course.descriptionFr
                     ? course.descriptionFr
@@ -456,11 +456,11 @@ export default function CoursePlayer() {
               </div>
             </div>
           ) : lessonLoading ? (
-            <div className="flex items-center justify-center py-16">
+            <div className="flex items-center justify-center py-8 md:py-12 lg:py-16">
               <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-16 gap-4">
+            <div className="flex flex-col items-center justify-center py-8 md:py-12 lg:py-16 gap-4">
               <BookOpen className="w-12 h-12 text-muted-foreground" />
               <p className="text-muted-foreground">Select a lesson to begin</p>
             </div>

@@ -222,7 +222,7 @@ export default function About() {
 
         {/* Mission Section - Glassmorphism */}
         <section 
-          className="py-16"
+          className="py-8 md:py-12 lg:py-16"
           ref={(el) => { if (el) sectionRefs.current.set('mission', el); }}
           data-section="mission"
         >
@@ -243,7 +243,7 @@ export default function About() {
 
         {/* Story Section - Glassmorphism */}
         <section 
-          className="py-16 relative overflow-hidden"
+          className="py-8 md:py-12 lg:py-16 relative overflow-hidden"
           ref={(el) => { if (el) sectionRefs.current.set('story', el); }}
           data-section="story"
         >
@@ -290,12 +290,12 @@ export default function About() {
 
         {/* Values Section - Glassmorphism Grid */}
         <section 
-          className="py-16"
+          className="py-8 md:py-12 lg:py-16"
           ref={(el) => { if (el) sectionRefs.current.set('values', el); }}
           data-section="values"
         >
           <div className="container">
-            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">{l.valuesTitle}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 lg:mb-12 text-center">{l.valuesTitle}</h2>
             
             <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto transition-all duration-700 ${
               visibleSections.has('values') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -321,7 +321,7 @@ export default function About() {
 
         {/* Team Section - Glassmorphism */}
         <section 
-          className="py-16 relative overflow-hidden"
+          className="py-8 md:py-12 lg:py-16 relative overflow-hidden"
           ref={(el) => { if (el) sectionRefs.current.set('team', el); }}
           data-section="team"
         >
@@ -329,7 +329,7 @@ export default function About() {
           <div className="orb orb-orange w-48 h-48 top-20 -left-24 opacity-30" />
           
           <div className="container relative z-10">
-            <div className={`text-center mb-12 transition-all duration-700 ${
+            <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('team') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <h2 className="text-2xl md:text-3xl font-bold mb-2">{l.teamTitle}</h2>
@@ -345,7 +345,7 @@ export default function About() {
                   <div className="relative group">
                     <div className="absolute inset-0 bg-teal-400/30 rounded-full blur-xl group-hover:bg-teal-400/40 transition-all duration-300" />
                     <div className="w-32 h-32 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shrink-0 relative shadow-xl">
-                      <span className="text-4xl font-bold text-white">SB</span>
+                      <span className="text-xl md:text-3xl lg:text-4xl font-bold text-white">SB</span>
                     </div>
                   </div>
                   
@@ -362,7 +362,7 @@ export default function About() {
 
         {/* CTA Section - Glassmorphism */}
         <section 
-          className="py-16"
+          className="py-8 md:py-12 lg:py-16"
           ref={(el) => { if (el) sectionRefs.current.set('cta', el); }}
           data-section="cta"
         >

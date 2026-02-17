@@ -161,7 +161,7 @@ export default function AdminEnrollments() {
           </div>
         </div>
         <Card>
-          <CardContent className="py-12 text-center">
+          <CardContent className="py-6 md:py-8 lg:py-12 text-center">
             <p className="text-muted-foreground">Unable to load enrollments. Please try again.</p>
             <Button variant="outline" className="mt-4" onClick={() => refetch()}>
               <RefreshCw className="h-4 w-4 mr-2" /> Retry
@@ -353,9 +353,9 @@ export default function AdminEnrollments() {
       <Card>
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="py-12 text-center text-muted-foreground">Loading enrollments...</div>
+            <div className="py-6 md:py-8 lg:py-12 text-center text-muted-foreground">Loading enrollments...</div>
           ) : filteredEnrollments.length === 0 ? (
-            <div className="py-12 text-center text-muted-foreground">
+            <div className="py-6 md:py-8 lg:py-12 text-center text-muted-foreground">
               {enrollments.length === 0 ? (
                 <div className="space-y-3">
                   <GraduationCap className="h-12 w-12 mx-auto text-muted-foreground/50" />

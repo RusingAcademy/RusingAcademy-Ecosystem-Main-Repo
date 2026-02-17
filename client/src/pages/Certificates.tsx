@@ -30,11 +30,11 @@ export default function Certificates() {
           <ArrowLeft className="w-4 h-4" /> {t.membership.backToCommunity}
         </button>
 
-        <div className="text-center mb-10">
+        <div className="text-center mb-4 md:mb-6 lg:mb-10">
           <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "var(--brand-gold, #D4AF37)" + "20" }}>
             <Award className="w-8 h-8"  />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight mb-2" >
             {t.certificates.title}
           </h1>
           <p className="text-muted-foreground">
@@ -43,11 +43,11 @@ export default function Certificates() {
         </div>
 
         {isLoading ? (
-          <div className="flex justify-center py-12">
+          <div className="flex justify-center py-6 md:py-8 lg:py-12">
             <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : !certs || certs.length === 0 ? (
-          <div className="text-center py-16">
+          <div className="text-center py-8 md:py-12 lg:py-16">
             <Award className="w-20 h-20 text-muted-foreground/20 mx-auto mb-4" />
             <p className="text-muted-foreground text-lg mb-2">No certificates yet</p>
             <p className="text-sm text-muted-foreground">Complete a course to earn your first certificate.</p>

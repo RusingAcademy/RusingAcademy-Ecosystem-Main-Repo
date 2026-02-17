@@ -149,7 +149,7 @@ export default function LoyaltyDashboard() {
               <p className="text-sm text-muted-foreground">
                 {isEn ? "Available Points" : "Points disponibles"}
               </p>
-              <p className="text-4xl font-bold">{loyalty.availablePoints.toLocaleString()}</p>
+              <p className="text-xl md:text-3xl lg:text-4xl font-bold">{loyalty.availablePoints.toLocaleString()}</p>
             </div>
           </div>
         </div>
@@ -258,7 +258,7 @@ export default function LoyaltyDashboard() {
                   onClick={() => canRedeem && hasRequiredTier && setSelectedReward(reward as Reward)}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <span className="text-3xl">{getRewardIcon(reward.rewardType)}</span>
+                    <span className="text-lg md:text-2xl lg:text-3xl">{getRewardIcon(reward.rewardType)}</span>
                     {!hasRequiredTier && (
                       <Badge variant="outline" className="text-xs capitalize">
                         {reward.minTier}+
@@ -349,7 +349,7 @@ export default function LoyaltyDashboard() {
           {selectedReward && (
             <div className="py-4">
               <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
-                <span className="text-4xl">{getRewardIcon(selectedReward.rewardType)}</span>
+                <span className="text-xl md:text-3xl lg:text-4xl">{getRewardIcon(selectedReward.rewardType)}</span>
                 <div>
                   <h3 className="font-semibold">
                     {isEn ? selectedReward.nameEn : selectedReward.nameFr}

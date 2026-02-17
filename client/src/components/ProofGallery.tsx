@@ -168,12 +168,12 @@ export default function ProofGallery() {
 
   return (
     <section 
-      className="py-20 bg-gradient-to-b from-white to-slate-50"
+      className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50"
       aria-labelledby="proof-gallery-title"
     >
       <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-6 md:mb-8 lg:mb-12">
           <span className="inline-flex items-center gap-2 bg-teal-50 text-teal-700 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
             <Play className="h-4 w-4" aria-hidden="true" />
             {language === "fr" ? "Voyez les résultats réels" : "See Real Results"}
@@ -194,7 +194,7 @@ export default function ProofGallery() {
         </div>
 
         {/* Filter Chips */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-4 md:mb-6 lg:mb-10">
           {filterOptions.map((option) => (
             <button
               key={option.value}

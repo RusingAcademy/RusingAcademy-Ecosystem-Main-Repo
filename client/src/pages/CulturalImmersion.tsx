@@ -107,7 +107,7 @@ export default function CulturalImmersion() {
   return (
     <div className="container max-w-5xl py-8 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Cultural Immersion</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">Cultural Immersion</h1>
         <p className="text-muted-foreground mt-1">
           Deepen your understanding of Canadian Francophone culture and bilingual workplace dynamics
         </p>
@@ -126,7 +126,7 @@ export default function CulturalImmersion() {
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">{selectedTopic.icon}</span>
+                    <span className="text-lg md:text-2xl lg:text-3xl">{selectedTopic.icon}</span>
                     <div>
                       <CardTitle className="text-xl">
                         {lang === "fr" ? selectedTopic.titleFr : selectedTopic.title}
@@ -178,7 +178,7 @@ export default function CulturalImmersion() {
                   >
                     <CardContent className="pt-6 space-y-3">
                       <div className="flex items-start gap-3">
-                        <span className="text-3xl">{topic.icon}</span>
+                        <span className="text-lg md:text-2xl lg:text-3xl">{topic.icon}</span>
                         <div className="flex-1">
                           <h3 className="font-semibold">
                             {lang === "fr" ? topic.titleFr : topic.title}

@@ -58,7 +58,7 @@ export default function CertificateViewer() {
     return (
       <div className="min-h-screen bg-background">
         
-        <div className="max-w-2xl mx-auto px-4 py-16">
+        <div className="max-w-2xl mx-auto px-4 py-8 md:py-12 lg:py-16">
           <Card>
             <CardContent className="p-8 text-center">
               <AlertCircle className="h-16 w-16 text-red-500 mx-auto mb-4" />
@@ -89,7 +89,7 @@ export default function CertificateViewer() {
       
       <main className="max-w-5xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">
             {isEn ? "Your Certificate" : "Votre certificat"}
           </h1>
           <p className="text-muted-foreground">

@@ -282,7 +282,7 @@ export default function BarholexServices() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-white/90 text-center max-w-3xl mx-auto mb-12 leading-relaxed"
+                className="text-lg md:text-xl text-white/90 text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12 leading-relaxed"
               >
                 {language === "en"
                   ? "We specialize in EdTech solutions for Canadian language schools and government departments. From video production to AI-powered learning platforms, we bring your educational vision to life."
@@ -295,7 +295,7 @@ export default function BarholexServices() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12"
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-6 md:mb-8 lg:mb-12"
               >
                 {STATS.map((stat, index) => (
                   <div
@@ -340,9 +340,9 @@ export default function BarholexServices() {
         </section>
 
         {/* Services Section - Interactive Cards */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <span className="inline-block px-4 py-1.5 rounded-full bg-barholex-gold/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "Our Expertise" : "Notre expertise"}
               </span>
@@ -358,7 +358,7 @@ export default function BarholexServices() {
             </div>
 
             {/* Service Navigation */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <div className="flex flex-wrap justify-center gap-3 mb-6 md:mb-8 lg:mb-12">
               {SERVICES.map((service, index) => (
                 <button
                   key={index}
@@ -473,11 +473,11 @@ export default function BarholexServices() {
         </section>
 
         {/* Process Section - Timeline */}
-        <section className="py-20 px-4 bg-gradient-to-br from-obsidian/50 to-teal-950 relative overflow-hidden">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-obsidian/50 to-teal-950 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-gold, #D4AF37)]/30 to-transparent" />
           
           <div className="container mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <span className="inline-block px-4 py-1.5 rounded-full bg-barholex-gold/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "How We Work" : "Comment nous travaillons"}
               </span>
@@ -529,10 +529,10 @@ export default function BarholexServices() {
         </section>
 
         {/* Trust Signals */}
-        <section className="py-16 px-4">
+        <section className="py-8 md:py-12 lg:py-16 px-4">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <h2 className="text-2xl font-bold mb-4">
                   {language === "en" ? "Trusted By" : "Ils nous font confiance"}
                 </h2>
@@ -578,7 +578,7 @@ export default function BarholexServices() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 relative overflow-hidden">
+        <section className="py-10 md:py-16 lg:py-20 px-4 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-barholex-gold to-amber-600" />
           <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.1)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.1)_75%,transparent_75%)] bg-[size:20px_20px]" />
           
@@ -587,7 +587,7 @@ export default function BarholexServices() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {language === "en" ? "Ready to Transform Your Learning Experience?" : "Prêt à transformer votre expérience d'apprentissage?"}
               </h2>
-              <p className="text-xl text-black dark:text-white/80 mb-10">
+              <p className="text-xl text-black dark:text-white/80 mb-4 md:mb-6 lg:mb-10">
                 {language === "en"
                   ? "Let's discuss how we can help bring your educational vision to life"
                   : "Discutons de comment nous pouvons aider à donner vie à votre vision éducative"

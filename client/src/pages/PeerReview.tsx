@@ -215,10 +215,10 @@ export default function PeerReview() {
               ) : (
                 <div className="space-y-3">
                   {loadingPending ? (
-                    <div className="text-center py-16"><div className="animate-spin w-8 h-8 border-4 border-teal-700 border-t-transparent rounded-full mx-auto" /></div>
+                    <div className="text-center py-8 md:py-12 lg:py-16"><div className="animate-spin w-8 h-8 border-4 border-teal-700 border-t-transparent rounded-full mx-auto" /></div>
                   ) : !pendingReviews?.length ? (
-                    <div className="text-center py-16 text-gray-400">
-                      <span className="material-icons text-5xl mb-3 block">inbox</span>
+                    <div className="text-center py-8 md:py-12 lg:py-16 text-gray-400">
+                      <span className="material-icons text-2xl md:text-4xl lg:text-5xl mb-3 block">inbox</span>
                       <p className="text-lg font-medium">No pending reviews</p>
                       <p className="text-sm mt-1">Check back later for new submissions to review.</p>
                     </div>
@@ -242,8 +242,8 @@ export default function PeerReview() {
           {activeTab === "completed" && (
             <div className="space-y-3">
               {!completedReviews?.length ? (
-                <div className="text-center py-16 text-gray-400">
-                  <span className="material-icons text-5xl mb-3 block">check_circle</span>
+                <div className="text-center py-8 md:py-12 lg:py-16 text-gray-400">
+                  <span className="material-icons text-2xl md:text-4xl lg:text-5xl mb-3 block">check_circle</span>
                   <p className="text-lg font-medium">No completed reviews yet</p>
                   <p className="text-sm mt-1">Complete a peer review to see it here.</p>
                 </div>

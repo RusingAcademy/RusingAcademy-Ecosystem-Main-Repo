@@ -511,7 +511,7 @@ export default function Contact() {
           <div className="container">
             <div className="max-w-4xl mx-auto text-center">
               <Calendar className="h-12 w-12 text-cta mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-white mb-3" >
+              <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-3" >
                 {language === 'en' ? 'Book a Free Consultation' : 'Réservez une Consultation Gratuite'}
               </h2>
               <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{ color: 'var(--color-white, #ffffff)' }}>
@@ -555,7 +555,7 @@ export default function Contact() {
         </section>
 
         {/* Map Section (Optional - can be added later) */}
-        <section className="py-16 bg-white dark:bg-slate-900">
+        <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-slate-900">
           <div className="container">
             <div className="max-w-6xl mx-auto">
               <div className="bg-gradient-to-br from-slate-100 to-slate-50 rounded-2xl p-8 lg:p-12 text-center">

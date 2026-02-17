@@ -172,14 +172,14 @@ END:VCALENDAR`;
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-emerald-50/50 to-background dark:from-emerald-950/20">
       
 
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-6 md:py-8 lg:py-12">
         <div className="container max-w-3xl mx-auto px-4">
           {/* Success Header */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-900/30 mb-6">
               <CheckCircle2 className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
             </div>
-            <h1 className="text-3xl font-bold mb-2">{l.title}</h1>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">{l.title}</h1>
             <p className="text-black dark:text-white text-lg">{l.subtitle}</p>
             
             {user?.email && (

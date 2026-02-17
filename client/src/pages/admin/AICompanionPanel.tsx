@@ -265,7 +265,7 @@ export default function AICompanionPanel() {
           {aiUsersQuery.isLoading ? (
             <div className="flex items-center gap-2 text-muted-foreground py-8 justify-center"><Loader2 className="h-4 w-4 animate-spin" /> Loading users...</div>
           ) : (aiUsersQuery.data as any[] || []).length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">
+            <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
               <Users className="h-10 w-10 mx-auto mb-3 opacity-30" />
               <p>No AI usage data yet. Users will appear here once they start practicing.</p>
             </div>
@@ -305,8 +305,8 @@ export default function AICompanionPanel() {
   // ─── USER DRILL-DOWN TAB ───
   const renderDrilldown = () => {
     const data = drilldownQuery.data as any;
-    if (!selectedUserId) return <div className="text-center py-12 text-muted-foreground"><p>Select a user from the Users tab.</p></div>;
-    if (drilldownQuery.isLoading) return <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading user data...</div>;
+    if (!selectedUserId) return <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground"><p>Select a user from the Users tab.</p></div>;
+    if (drilldownQuery.isLoading) return <div className="flex items-center gap-2 text-muted-foreground py-6 md:py-8 lg:py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading user data...</div>;
 
     const user = data?.user as any;
     const sessions = (data?.sessions || []) as any[];

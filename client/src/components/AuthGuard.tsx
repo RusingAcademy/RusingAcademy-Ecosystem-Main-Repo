@@ -38,7 +38,7 @@ export default function AuthGuard({ children, requiredRole }: AuthGuardProps) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center max-w-md p-8">
-          <span className="material-icons text-5xl text-red-400 mb-4">block</span>
+          <span className="material-icons text-2xl md:text-4xl lg:text-5xl text-red-400 mb-4">block</span>
           <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             {lang === "fr" ? "Accès refusé" : "Access Denied"}
           </h1>

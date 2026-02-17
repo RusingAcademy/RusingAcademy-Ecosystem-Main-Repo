@@ -83,9 +83,9 @@ export default function PremiumSection({
   const getPaddingClasses = () => {
     switch (padding) {
       case "sm":
-        return "py-12";
+        return "py-6 md:py-8 lg:py-12";
       case "md":
-        return "py-16";
+        return "py-8 md:py-12 lg:py-16";
       case "lg":
         return "py-20 lg:py-24";
       case "xl":

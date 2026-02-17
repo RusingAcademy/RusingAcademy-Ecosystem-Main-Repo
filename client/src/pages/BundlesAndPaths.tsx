@@ -224,10 +224,10 @@ export default function BundlesAndPaths() {
         </section>
 
         {/* Tabs */}
-        <section className="py-12">
+        <section className="py-6 md:py-8 lg:py-12">
           <div className="container">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <div className="flex justify-center mb-10">
+              <div className="flex justify-center mb-4 md:mb-6 lg:mb-10">
                 <TabsList className="bg-white dark:bg-slate-900 shadow-md">
                   <TabsTrigger value="bundles" className="gap-2">
                     <Package className="h-4 w-4" />
@@ -261,13 +261,13 @@ export default function BundlesAndPaths() {
                       )}
                       <Card className={`h-full shadow-xl border-none overflow-hidden ${bundle.popular ? "ring-2 ring-cta" : ""}`}>
                         <div className={`bg-gradient-to-r ${bundle.color} p-6 text-white text-center`}>
-                          <span className="text-3xl mb-2 block">{bundle.icon}</span>
+                          <span className="text-lg md:text-2xl lg:text-3xl mb-2 block">{bundle.icon}</span>
                           <h3 className="text-xl font-bold mb-1">
                             {isEn ? bundle.name : bundle.nameFr}
                           </h3>
                           <p className="text-sm text-white/90">{bundle.levels}</p>
                           <div className="mt-3 flex items-center justify-center gap-2">
-                            <span className="text-3xl font-bold">${bundle.bundlePrice}</span>
+                            <span className="text-lg md:text-2xl lg:text-3xl font-bold">${bundle.bundlePrice}</span>
                             <span className="text-lg line-through opacity-60">${bundle.originalPrice}</span>
                           </div>
                           <Badge className="mt-2 bg-white dark:bg-slate-900/20 text-white">
@@ -414,9 +414,9 @@ export default function BundlesAndPaths() {
         </section>
 
         {/* Why Bundles CTA */}
-        <section className="py-16 bg-gradient-to-r from-foundation to-teal-700">
+        <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-foundation to-teal-700">
           <div className="container text-center">
-            <h2 className="text-3xl font-bold text-white mb-4" style={{ color: "#f8f7f7" }}>
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-4" style={{ color: "#f8f7f7" }}>
               {isEn ? "Not Sure Which to Choose?" : "Pas Sûr de Votre Choix?"}
             </h2>
             <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{ color: "var(--color-white, #ffffff)" }}>

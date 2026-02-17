@@ -335,7 +335,7 @@ export default function Community() {
             </div>
 
             {eventsLoading ? (
-              <div className="flex items-center justify-center py-20">
+              <div className="flex items-center justify-center py-10 md:py-16 lg:py-20">
                 <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
               </div>
             ) : events && events.length > 0 ? (
@@ -437,7 +437,7 @@ export default function Community() {
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/90">
+              <div className="text-center py-10 md:py-16 lg:py-20 text-white/90">
                 <Calendar className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No upcoming events at the moment." : "Aucun événement à venir pour le moment."}</p>
               </div>
@@ -474,7 +474,7 @@ export default function Community() {
             </div>
 
             {categoriesLoading ? (
-              <div className="flex items-center justify-center py-20">
+              <div className="flex items-center justify-center py-10 md:py-16 lg:py-20">
                 <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
               </div>
             ) : forumCategories && forumCategories.length > 0 ? (
@@ -515,7 +515,7 @@ export default function Community() {
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/90">
+              <div className="text-center py-10 md:py-16 lg:py-20 text-white/90">
                 <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No forum categories available." : "Aucune catégorie de forum disponible."}</p>
               </div>
@@ -680,7 +680,7 @@ export default function Community() {
           className="text-center p-12 rounded-3xl bg-gradient-to-r from-white/5 to-white/10 border border-white/60"
         >
           <Heart className="w-12 h-12 text-teal-400 mx-auto mb-4" />
-          <h2 className="text-3xl font-black mb-4">
+          <h2 className="text-lg md:text-2xl lg:text-3xl font-black mb-4">
             {language === "en" ? "Ready to Join Our Community?" : "Prêt à rejoindre notre communauté?"}
           </h2>
           <p className="text-white/90 max-w-2xl mx-auto mb-8">

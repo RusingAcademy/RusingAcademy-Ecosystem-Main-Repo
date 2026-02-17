@@ -64,7 +64,7 @@ export default function Achievements() {
               <p className="text-white/70 text-sm mt-1">{isFr ? "Les étapes de votre parcours d'apprentissage" : "Your learning journey milestones"}</p>
             </div>
             <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-900/10 flex items-center justify-center">
-              <span className="material-icons text-3xl">emoji_events</span>
+              <span className="material-icons text-lg md:text-2xl lg:text-3xl">emoji_events</span>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">

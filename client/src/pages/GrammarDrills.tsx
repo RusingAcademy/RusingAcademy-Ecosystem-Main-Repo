@@ -237,9 +237,9 @@ export default function GrammarDrillsPage() {
             <div className="space-y-3">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("grammar.history")}</h2>
               {!history?.length ? (
-                <div className="text-center py-16" role="status">
+                <div className="text-center py-8 md:py-12 lg:py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                    <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">spellcheck</span>
+                    <span className="material-icons text-xl md:text-3xl lg:text-4xl text-teal-700/60" aria-hidden="true">spellcheck</span>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("grammar.emptyTitle")}</h3>
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("grammar.emptyDesc")}</p>
@@ -309,9 +309,9 @@ export default function GrammarDrillsPage() {
                   </div>
                 ))}
                 {filteredDrills.length === 0 && (
-                  <div className="text-center py-12" role="status">
+                  <div className="text-center py-6 md:py-8 lg:py-12" role="status">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                      <span className="material-icons text-3xl text-gray-400" aria-hidden="true">construction</span>
+                      <span className="material-icons text-lg md:text-2xl lg:text-3xl text-gray-400" aria-hidden="true">construction</span>
                     </div>
                     <p className="text-sm text-gray-500">{isFr ? "Plus d'exercices bientôt pour ce niveau !" : "More drills coming soon for this level!"}</p>
                   </div>
@@ -405,7 +405,7 @@ export default function GrammarDrillsPage() {
             <div role="region" aria-label={t("grammar.drillComplete")}>
               <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm text-center mb-8">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
+                  <span className="material-icons text-xl md:text-3xl lg:text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{t("grammar.drillComplete")}</h2>
                 <p className="text-sm text-gray-400 mb-2">
@@ -420,7 +420,7 @@ export default function GrammarDrillsPage() {
                   const total = selectedDrill?.questions.length ?? 1;
                   const score = Math.round((correct / total) * 100);
                   return (
-                    <div className="text-4xl font-bold mt-4" style={{ color: score >= 80 ? "var(--semantic-success, #22c55e)" : score >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }} aria-label={`${t("grammar.score")}: ${score}%`}>
+                    <div className="text-xl md:text-3xl lg:text-4xl font-bold mt-4" style={{ color: score >= 80 ? "var(--semantic-success, #22c55e)" : score >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }} aria-label={`${t("grammar.score")}: ${score}%`}>
                       {score}%
                       <div className="text-sm text-gray-500 font-normal mt-1">{correct}/{total} {t("grammar.correct").toLowerCase()}</div>
                     </div>

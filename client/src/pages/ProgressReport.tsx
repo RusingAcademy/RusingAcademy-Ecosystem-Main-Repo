@@ -83,7 +83,7 @@ export default function ProgressReport() {
   return (
     <div className="container max-w-5xl py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold flex items-center gap-3">
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold flex items-center gap-3">
           <FileText className="h-8 w-8 text-primary" />
           {labels.title}
         </h1>
@@ -168,7 +168,7 @@ export default function ProgressReport() {
               title="Progress Report"
             />
           ) : (
-            <div className="text-center py-16">
+            <div className="text-center py-8 md:py-12 lg:py-16">
               <FileText className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
               <p className="text-lg font-medium text-muted-foreground">{labels.noReport}</p>
               <p className="text-sm text-muted-foreground/70 mt-1">{labels.noReportDesc}</p>

@@ -55,7 +55,7 @@ function CoursesIncludedSection({ pathId, language }: { pathId: number; language
 
   if (isLoading) {
     return (
-      <section className="py-16 bg-slate-50">
+      <section className="py-8 md:py-12 lg:py-16 bg-slate-50">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" />
@@ -75,7 +75,7 @@ function CoursesIncludedSection({ pathId, language }: { pathId: number; language
   }
 
   return (
-    <section className="py-16 bg-slate-50">
+    <section className="py-8 md:py-12 lg:py-16 bg-slate-50">
       <div className="container px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-8 text-center">
           {t ? "Cours Inclus" : "Courses Included"}
@@ -396,7 +396,7 @@ export default function PathDetail() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-50">
-<div className="container py-16 px-4">
+<div className="container py-8 md:py-12 lg:py-16 px-4">
           <div className="animate-pulse space-y-8">
             <div className="h-64 bg-slate-200 rounded-xl" />
             <div className="h-8 bg-slate-200 rounded w-1/2" />
@@ -411,7 +411,7 @@ export default function PathDetail() {
   if (!displayPath) {
     return (
       <div className="min-h-screen bg-slate-50">
-<div className="container py-16 px-4 text-center">
+<div className="container py-8 md:py-12 lg:py-16 px-4 text-center">
           <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-black dark:text-white mb-2">
             {t ? "Parcours non trouvé" : "Path Not Found"}
@@ -480,7 +480,7 @@ export default function PathDetail() {
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-5xl">{displayPath.icon || "📚"}</span>
+                <span className="text-2xl md:text-4xl lg:text-5xl">{displayPath.icon || "📚"}</span>
                 <div>
                   <Badge variant="outline" className="mb-1">
                     {displayPath.cefrLevel === "exam_prep" 
@@ -574,7 +574,7 @@ export default function PathDetail() {
                         <span className="text-lg text-slate-400 line-through mr-2">
                           {formatPrice(displayPath.price)}
                         </span>
-                        <span className="text-4xl font-bold text-emerald-600">
+                        <span className="text-xl md:text-3xl lg:text-4xl font-bold text-emerald-600">
                           {t ? "Gratuit" : "Free"}
                         </span>
                       </>
@@ -585,7 +585,7 @@ export default function PathDetail() {
                             {formatPrice(displayPath.originalPrice)}
                           </span>
                         )}
-                        <span className="text-4xl font-bold text-black dark:text-white">
+                        <span className="text-xl md:text-3xl lg:text-4xl font-bold text-black dark:text-white">
                           {formatPrice(displayPath.price)}
                         </span>
                         <span className="text-black dark:text-white ml-2">CAD</span>
@@ -678,7 +678,7 @@ export default function PathDetail() {
       </section>
 
       {/* Learning Outcomes Section */}
-      <section className="py-16 bg-white dark:bg-slate-900">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-slate-900">
         <div className="container px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-8 text-center">
             {t ? "Ce Que Vous Apprendrez" : "What You'll Learn"}
@@ -707,7 +707,7 @@ export default function PathDetail() {
       <CoursesIncludedSection pathId={displayPath.id} language={language} />
 
       {/* CTA Section */}
-      <section className={`py-16 bg-gradient-to-r ${displayPath.colorGradient || "from-amber-600 to-orange-600"}`}>
+      <section className={`py-8 md:py-12 lg:py-16 bg-gradient-to-r ${displayPath.colorGradient || "from-amber-600 to-orange-600"}`}>
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer?" : "Ready to Begin?"}
