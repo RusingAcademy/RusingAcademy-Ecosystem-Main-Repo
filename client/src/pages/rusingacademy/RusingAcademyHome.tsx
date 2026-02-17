@@ -191,11 +191,11 @@ export default function RusingAcademyHome() {
   ];
 
   const PATH_SERIES = [
-    { path: "Path I", level: "A1→A2", duration: "4 weeks", color: "#E07B39" },
-    { path: "Path II", level: "A2→B1", duration: "4 weeks", color: "#E07B39" },
-    { path: "Path III", level: "B1→B1+", duration: "4 weeks", color: "#E07B39" },
-    { path: "Path IV", level: "B1+→B2", duration: "4 weeks", color: "var(--brand-gold, #D4AF37)" },
-    { path: "Path V", level: "B2→C1", duration: "4 weeks", color: "var(--brand-gold, #D4AF37)" },
+    { path: "Path I", level: "A1→A2", duration: "4 weeks", color: "var(--barholex-gold-hover)" },
+    { path: "Path II", level: "A2→B1", duration: "4 weeks", color: "var(--barholex-gold-hover)" },
+    { path: "Path III", level: "B1→B1+", duration: "4 weeks", color: "var(--barholex-gold-hover)" },
+    { path: "Path IV", level: "B1+→B2", duration: "4 weeks", color: "var(--brand-gold, var(--barholex-gold))" },
+    { path: "Path V", level: "B2→C1", duration: "4 weeks", color: "var(--brand-gold, var(--barholex-gold))" },
     { path: "Path VI", level: "SLE Prep", duration: "4 weeks", color: "#2DD4BF" },
   ];
 
@@ -322,7 +322,7 @@ export default function RusingAcademyHome() {
             </div>
 
             <div className="mt-10 text-center">
-              <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-gradient-to-r from-[#E07B39] to-[#2DD4BF] text-white">
+              <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-gradient-to-r from-[var(--barholex-gold-hover)] to-[#2DD4BF] text-white">
                 <span className="font-semibold">70% {language === "en" ? "Platform" : "Plateforme"}</span>
                 <span className="w-px h-6 bg-white dark:bg-slate-900/30" />
                 <span className="font-semibold">30% {language === "en" ? "Live Coaching" : "Coaching en direct"}</span>
@@ -468,7 +468,7 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-r from-[#E07B39] to-[#C45E1A]">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-r from-[var(--barholex-gold-hover)] to-[#C45E1A]">
           <div className="container mx-auto">
             <div className="max-w-3xl mx-auto text-center text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">

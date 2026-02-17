@@ -59,7 +59,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-xl, 1rem);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
+    color: var(--text-inverse);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
   }
@@ -105,7 +105,7 @@
 /* === 2. ELEVATED CARD (Shadow-based depth) === */
 @layer components {
   .eco-card-elevated {
-    background-color: #ffffff;
+    background-color: var(--text-inverse);
     border-radius: var(--radius-xl, 1rem);
     box-shadow: 
       0 4px 6px -1px rgba(0, 0, 0, 0.07),
@@ -124,14 +124,14 @@
 /* === 3. BORDERED CARD (Clean border) === */
 @layer components {
   .eco-card-bordered {
-    background-color: #ffffff;
+    background-color: var(--text-inverse);
     border: 1px solid var(--sand, #E8E4CC);
     border-radius: var(--radius-xl, 1rem);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
   }
   .eco-card-bordered:hover {
-    border-color: var(--brand-foundation, #0F3D3E);
+    border-color: var(--brand-foundation, var(--brand-foundation));
     box-shadow: 0 4px 12px rgba(15, 61, 62, 0.06);
   }
 }
@@ -139,13 +139,13 @@
 /* === 4. FLAT CARD (Minimal) === */
 @layer components {
   .eco-card-flat {
-    background-color: var(--surface, #FEFEF8);
+    background-color: var(--surface, var(--bg));
     border-radius: var(--radius-lg, 0.75rem);
     padding: 1.5rem;
     overflow: hidden;
   }
   .eco-card-flat:hover {
-    background-color: var(--sand, #F5F1D6);
+    background-color: var(--sand, var(--bg-alt));
   }
 }
 
@@ -175,14 +175,14 @@
 /* === STAT CARD (Dashboard metrics) === */
 @layer components {
   .eco-card-stat {
-    background-color: #ffffff;
+    background-color: var(--text-inverse);
     border: 1px solid var(--sand, #E8E4CC);
     border-radius: var(--radius-lg, 0.75rem);
     padding: 1.25rem;
     transition: border-color 0.2s ease;
   }
   .eco-card-stat:hover {
-    border-color: var(--brand-foundation, #0F3D3E);
+    border-color: var(--brand-foundation, var(--brand-foundation));
   }
   .eco-card-stat .stat-value {
     font-family: var(--font-display, 'Merriweather', serif);
@@ -195,7 +195,7 @@
     font-family: var(--font-ui, 'Inter', sans-serif);
     font-weight: 500;
     font-size: 0.8125rem;
-    color: var(--muted, #6B7280);
+    color: var(--muted, var(--muted-foreground));
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin-top: 0.5rem;
@@ -209,7 +209,7 @@
     color: #16a34a;
   }
   .eco-card-stat .stat-change.negative {
-    color: #dc2626;
+    color: var(--danger);
   }
 }
 
@@ -238,8 +238,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 0.75rem;
-    background-color: var(--brand-foundation-soft, #E7F2F2);
-    color: var(--brand-foundation, #0F3D3E);
+    background-color: var(--brand-foundation-soft, var(--brand-foundation-soft));
+    color: var(--brand-foundation, var(--brand-foundation));
     margin-bottom: 1rem;
   }
 }
@@ -247,7 +247,7 @@
 /* === COURSE CARD === */
 @layer components {
   .eco-card-course {
-    background-color: #ffffff;
+    background-color: var(--text-inverse);
     border-radius: var(--radius-xl, 1rem);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     overflow: hidden;
@@ -274,8 +274,8 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
     border-radius: 9999px;
-    background-color: var(--brand-foundation-soft, #E7F2F2);
-    color: var(--brand-foundation, #0F3D3E);
+    background-color: var(--brand-foundation-soft, var(--brand-foundation-soft));
+    color: var(--brand-foundation, var(--brand-foundation));
   }
 }
 
@@ -283,7 +283,7 @@
 @layer components {
   /* Dashboard panel with high-contrast border */
   .eco-panel {
-    background-color: #ffffff;
+    background-color: var(--text-inverse);
     border: 1px solid var(--sand, #E8E4CC);
     border-radius: var(--radius-lg, 0.75rem);
     padding: 1.5rem;

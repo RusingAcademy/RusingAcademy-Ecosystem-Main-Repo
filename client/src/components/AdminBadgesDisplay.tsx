@@ -37,8 +37,8 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
   const tierColors = {
     bronze: { bg: "#cd7f32", light: "#f5e6d3" },
     silver: { bg: "#c0c0c0", light: "#f0f0f0" },
-    gold: { bg: "#fbbf24", light: "#fef3c7" },
-    platinum: { bg: "var(--color-gray-200, #e5e7eb)", light: "var(--color-gray-50, #f9fafb)" },
+    gold: { bg: "#fbbf24", light: "var(--warning-soft)" },
+    platinum: { bg: "var(--color-gray-200, var(--border))", light: "var(--color-gray-50, var(--bg))" },
   };
 
   if (loading) {

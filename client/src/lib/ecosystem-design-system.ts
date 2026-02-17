@@ -18,11 +18,11 @@ export const brandColors = {
     gradient: 'linear-gradient(135deg, var(--color-teal-500, #14B8A6) 0%, var(--color-teal-400, #2DD4BF) 50%, #5EEAD4 100%)',
   },
   barholexMedia: {
-    primary: '#8B5CF6', // Violet premium/executive
+    primary: 'var(--accent-purple)', // Violet premium/executive
     secondary: '#A78BFA',
     accent: '#C4B5FD',
     glow: 'rgba(139, 92, 246, 0.3)',
-    gradient: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%)',
+    gradient: 'linear-gradient(135deg, var(--accent-purple) 0%, #A78BFA 50%, #C4B5FD 100%)',
   },
   ecosystem: {
     primary: '#06B6D4', // Ecosystem cyan

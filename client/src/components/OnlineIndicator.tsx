@@ -35,7 +35,7 @@ export default function OnlineIndicator({
     <span
       className={`absolute ${positionMap[size]} ${sizeMap[size]} rounded-full border-2 border-white dark:border-gray-900 ${className}`}
       style={{
-        background: "linear-gradient(135deg, var(--semantic-success, #22c55e), var(--semantic-success, #16a34a))",
+        background: "linear-gradient(135deg, var(--semantic-success, var(--success)), var(--semantic-success, #16a34a))",
         boxShadow: "0 0 6px rgba(34, 197, 94, 0.4)",
       }}
       aria-label="Online"

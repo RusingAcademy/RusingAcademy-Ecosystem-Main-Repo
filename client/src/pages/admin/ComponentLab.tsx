@@ -307,8 +307,8 @@ export default function ComponentLab() {
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {[
-                      { name: "RusingAcademy", color: "#E07B39", desc: "Formation B2B/B2G" },
-                      { name: "Lingueefy", color: "#145A5B", desc: "Coaching personnalisé" },
+                      { name: "RusingAcademy", color: "var(--barholex-gold-hover)", desc: "Formation B2B/B2G" },
+                      { name: "Lingueefy", color: "var(--brand-foundation-2)", desc: "Coaching personnalisé" },
                       { name: "Barholex Media", color: "#1E3A5F", desc: "EdTech & Contenu" },
                     ].map((brand) => (
                       <button

@@ -46,11 +46,11 @@ const translations = {
 };
 
 const columns: Column[] = [
-  { id: "new", title: { en: "New", fr: "Nouveau" }, color: "#3B82F6", bgColor: "#3B82F620" },
+  { id: "new", title: { en: "New", fr: "Nouveau" }, color: "var(--semantic-info)", bgColor: "var(--semantic-info)20" },
   { id: "contacted", title: { en: "Contacted", fr: "Contacté" }, color: "#06B6D4", bgColor: "#06B6D420" },
-  { id: "qualified", title: { en: "Qualified", fr: "Qualifié" }, color: "#10B981", bgColor: "#10B98120" },
-  { id: "proposal_sent", title: { en: "Proposal Sent", fr: "Proposition envoyée" }, color: "#F59E0B", bgColor: "#F59E0B20" },
-  { id: "negotiating", title: { en: "Negotiating", fr: "En négociation" }, color: "#8B5CF6", bgColor: "#8B5CF620" },
+  { id: "qualified", title: { en: "Qualified", fr: "Qualifié" }, color: "var(--success)", bgColor: "var(--success)20" },
+  { id: "proposal_sent", title: { en: "Proposal Sent", fr: "Proposition envoyée" }, color: "var(--warning)", bgColor: "var(--warning)20" },
+  { id: "negotiating", title: { en: "Negotiating", fr: "En négociation" }, color: "var(--accent-purple)", bgColor: "var(--accent-purple)20" },
   { id: "won", title: { en: "Won", fr: "Gagné" }, color: "#22C55E", bgColor: "#22C55E20" },
 ];
 
@@ -58,7 +58,7 @@ const sourceColors: Record<string, string> = {
   lingueefy: "#009688",
   rusingacademy: "#F97316",
   barholex: "#EAB308",
-  ecosystem_hub: "#8B5CF6",
+  ecosystem_hub: "var(--accent-purple)",
 };
 
 // Mock data
@@ -82,7 +82,7 @@ interface LeadCardProps {
 
 function LeadCard({ lead, onDragStart, onViewDetails, onSchedule, language }: LeadCardProps) {
   const t = translations[language];
-  const scoreColor = lead.leadScore >= 70 ? "#10B981" : lead.leadScore >= 40 ? "#F59E0B" : "#EF4444";
+  const scoreColor = lead.leadScore >= 70 ? "var(--success)" : lead.leadScore >= 40 ? "var(--warning)" : "var(--danger)";
   
   return (
     <motion.div
@@ -104,7 +104,7 @@ function LeadCard({ lead, onDragStart, onViewDetails, onSchedule, language }: Le
         </div>
         <div 
           className="w-3 h-3 rounded-full" 
-          style={{ backgroundColor: sourceColors[lead.source] || "#64748B" }}
+          style={{ backgroundColor: sourceColors[lead.source] || "var(--muted-foreground)" }}
           title={lead.source}
         />
       </div>
@@ -365,7 +365,7 @@ export default function LeadPipelineKanban() {
                 <div className="flex justify-between">
                   <span className="text-slate-400">Score</span>
                   <span className="font-bold" style={{ 
-                    color: selectedLead.leadScore >= 70 ? "#10B981" : selectedLead.leadScore >= 40 ? "#F59E0B" : "#EF4444" 
+                    color: selectedLead.leadScore >= 70 ? "var(--success)" : selectedLead.leadScore >= 40 ? "var(--warning)" : "var(--danger)" 
                   }}>
                     {selectedLead.leadScore}/100
                   </span>

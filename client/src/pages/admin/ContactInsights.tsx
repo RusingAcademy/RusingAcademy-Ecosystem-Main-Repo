@@ -9,13 +9,13 @@ export default function ContactInsights() {
   const stats = insights ?? { signupTrend: 0, roleDistribution: {} as any, languageDistribution: {} as any, activeUsers: 0 };
 
   const roleSegments = Object.entries(stats.roleDistribution || {}).map(([label, count]) => ({
-    label, count: count as number, color: label === "admin" ? "var(--color-blue-500, var(--color-blue-500, #3b82f6))" : label === "user" ? "var(--semantic-success, #22c55e)" : "var(--color-purple-500, #a855f7)",
+    label, count: count as number, color: label === "admin" ? "var(--color-blue-500, var(--color-blue-500, var(--semantic-info)))" : label === "user" ? "var(--semantic-success, var(--success))" : "var(--color-purple-500, #a855f7)",
   }));
 
   const langSegments = Object.entries(stats.languageDistribution || {}).map(([label, count]) => ({
     label: label === "en" ? "English" : label === "fr" ? "French" : label === "both" ? "Bilingual" : label,
     count: count as number,
-    color: label === "en" ? "var(--color-blue-500, var(--color-blue-500, #3b82f6))" : label === "fr" ? "var(--semantic-danger, var(--semantic-danger, #ef4444))" : "var(--semantic-warning, var(--semantic-warning, #f59e0b))",
+    color: label === "en" ? "var(--color-blue-500, var(--color-blue-500, var(--semantic-info)))" : label === "fr" ? "var(--semantic-danger, var(--semantic-danger, var(--danger)))" : "var(--semantic-warning, var(--semantic-warning, var(--warning)))",
   }));
 
   return (

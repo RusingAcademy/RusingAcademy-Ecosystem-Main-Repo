@@ -18,8 +18,8 @@ export default function DesignAdmin() {
   const { data: settings } = trpc.kajabiDesign.getSettings.useQuery();
 
   const [primaryColor, setPrimaryColor] = useState("#1e3a5f");
-  const [secondaryColor, setSecondaryColor] = useState("var(--color-violet-600, var(--color-violet-600, #7c3aed))");
-  const [accentColor, setAccentColor] = useState("var(--color-blue-500, var(--color-blue-500, #3b82f6))");
+  const [secondaryColor, setSecondaryColor] = useState("var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))");
+  const [accentColor, setAccentColor] = useState("var(--color-blue-500, var(--color-blue-500, var(--semantic-info)))");
   const [fontFamily, setFontFamily] = useState("Inter");
   const [logoUrl, setLogoUrl] = useState("");
   const [faviconUrl, setFaviconUrl] = useState("");
@@ -27,8 +27,8 @@ export default function DesignAdmin() {
   useEffect(() => {
     if (settings) {
       setPrimaryColor(settings.primaryColor || "#1e3a5f");
-      setSecondaryColor(settings.secondaryColor || "var(--color-violet-600, var(--color-violet-600, #7c3aed))");
-      setAccentColor(settings.accentColor || "var(--color-blue-500, var(--color-blue-500, #3b82f6))");
+      setSecondaryColor(settings.secondaryColor || "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))");
+      setAccentColor(settings.accentColor || "var(--color-blue-500, var(--color-blue-500, var(--semantic-info)))");
       setFontFamily(settings.fontFamily || "Inter");
       setLogoUrl(settings.logoUrl || "");
       setFaviconUrl(settings.faviconUrl || "");

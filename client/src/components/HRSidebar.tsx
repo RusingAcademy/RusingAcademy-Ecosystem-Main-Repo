@@ -2,7 +2,7 @@
  * HRSidebar — RusingAcademy Client Portal (for Government Departments / Organizations)
  * This is NOT an internal HR tool — it's a client-facing portal for departments
  * that have contracted RusingAcademy for language training services.
- * Design: White sidebar with blue (var(--color-blue-600, #2563eb)) accents
+ * Design: White sidebar with blue (var(--color-blue-600, var(--semantic-info))) accents
  */
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";

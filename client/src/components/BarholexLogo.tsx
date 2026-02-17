@@ -59,7 +59,7 @@ export default function BarholexLogo({
           <span 
             className="font-bold tracking-wider text-lg leading-tight"
             style={{ 
-              background: "linear-gradient(135deg, #F5D78E 0%, #D4A853 30%, #B8860B 70%, #8B6914 100%)",
+              background: "linear-gradient(135deg, #F5D78E 0%, var(--barholex-gold) 30%, #B8860B 70%, #8B6914 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               textShadow: theme === "glass" ? "0 2px 10px rgba(212, 168, 83, 0.3)" : "none",

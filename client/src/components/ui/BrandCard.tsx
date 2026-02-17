@@ -15,7 +15,7 @@ interface BrandCardProps {
 
 const brandColors = {
   rusingacademy: {
-    primary: '#1E9B8A',
+    primary: 'var(--teal)',
     gradient: 'from-teal-500 to-emerald-600',
     glow: 'shadow-teal-500/30',
     border: 'border-teal-500/30',
@@ -23,7 +23,7 @@ const brandColors = {
     text: 'text-teal-400',
   },
   lingueefy: {
-    primary: '#17E2C6',
+    primary: 'var(--lingueefy-accent)',
     gradient: 'from-cyan-400 to-teal-500',
     glow: 'shadow-cyan-500/30',
     border: 'border-cyan-500/30',
@@ -31,7 +31,7 @@ const brandColors = {
     text: 'text-cyan-400',
   },
   barholex: {
-    primary: '#D4A853',
+    primary: 'var(--barholex-gold)',
     gradient: 'from-cta-2 to-yellow-600',
     glow: 'shadow-amber-500/30',
     border: 'border-amber-500/30',

@@ -165,7 +165,7 @@ export const PLATFORM_CONFIG: Record<EcosystemPlatform, {
   rusingacademy: {
     name: "RusingAcademy",
     nameFr: "RusingAcademy",
-    color: "#E07B39",
+    color: "var(--barholex-gold-hover)",
     icon: "🎓",
     description: "B2B/B2G Training Solutions",
     descriptionFr: "Solutions de formation B2B/B2G",
@@ -173,7 +173,7 @@ export const PLATFORM_CONFIG: Record<EcosystemPlatform, {
   barholex: {
     name: "Barholex Media",
     nameFr: "Barholex Media",
-    color: "var(--brand-gold, #D4AF37)",
+    color: "var(--brand-gold, var(--barholex-gold))",
     icon: "🎬",
     description: "Creative Production & EdTech",
     descriptionFr: "Production créative & EdTech",

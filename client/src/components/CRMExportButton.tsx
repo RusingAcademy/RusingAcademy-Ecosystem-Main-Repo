@@ -344,7 +344,7 @@ function generateMockExport(filters: ExportFilters): string {
     <tr><td>Sarah Thompson</td><td>TechStartup Inc.</td><td>78</td><td>Proposal Sent</td></tr>
     <tr><td>Jean-Pierre Martin</td><td>-</td><td>65</td><td>New</td></tr>
   </table>
-  <p style="color: #64748b; font-size: 12px; margin-top: 40px;">© 2026 Rusinga International Consulting Ltd.</p>
+  <p style="color: var(--muted-foreground); font-size: 12px; margin-top: 40px;">© 2026 Rusinga International Consulting Ltd.</p>
 </body>
 </html>
     `;

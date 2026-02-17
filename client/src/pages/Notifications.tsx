@@ -37,10 +37,10 @@ export default function Notifications() {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "achievement": return "var(--semantic-warning, #f5a623)";
-      case "system": return "var(--brand-teal, #008090)";
-      case "info": return "var(--color-blue-500, #3b82f6)";
-      default: return "var(--color-gray-500, #6b7280)";
+      case "achievement": return "var(--semantic-warning, var(--warning))";
+      case "system": return "var(--brand-teal, var(--teal))";
+      case "info": return "var(--color-blue-500, var(--semantic-info))";
+      default: return "var(--color-gray-500, var(--muted-foreground))";
     }
   };
 

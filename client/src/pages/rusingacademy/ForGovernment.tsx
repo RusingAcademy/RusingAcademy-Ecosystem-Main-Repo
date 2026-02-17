@@ -88,11 +88,11 @@ export default function ForGovernment() {
       pathsTitle: "GC Bilingual Mastery Series",
       pathsSubtitle: "Six structured paths from beginner to SLE mastery",
       paths: [
-        { path: "Path I", level: "A1→A2", duration: "4 weeks", color: "#E07B39" },
-        { path: "Path II", level: "A2→B1", duration: "4 weeks", color: "#E07B39" },
-        { path: "Path III", level: "B1→B1+", duration: "4 weeks", color: "#E07B39" },
-        { path: "Path IV", level: "B1+→B2", duration: "4 weeks", color: "var(--brand-gold, #D4AF37)" },
-        { path: "Path V", level: "B2→C1", duration: "4 weeks", color: "var(--brand-gold, #D4AF37)" },
+        { path: "Path I", level: "A1→A2", duration: "4 weeks", color: "var(--barholex-gold-hover)" },
+        { path: "Path II", level: "A2→B1", duration: "4 weeks", color: "var(--barholex-gold-hover)" },
+        { path: "Path III", level: "B1→B1+", duration: "4 weeks", color: "var(--barholex-gold-hover)" },
+        { path: "Path IV", level: "B1+→B2", duration: "4 weeks", color: "var(--brand-gold, var(--barholex-gold))" },
+        { path: "Path V", level: "B2→C1", duration: "4 weeks", color: "var(--brand-gold, var(--barholex-gold))" },
         { path: "Path VI", level: "SLE Prep", duration: "4 weeks", color: "#2DD4BF" }
       ],
       packagesTitle: "Government Training Packages",
@@ -156,11 +156,11 @@ export default function ForGovernment() {
       pathsTitle: "Série Maîtrise Bilingue GC",
       pathsSubtitle: "Six parcours structurés du débutant à la maîtrise ELS",
       paths: [
-        { path: "Parcours I", level: "A1→A2", duration: "4 semaines", color: "#E07B39" },
-        { path: "Parcours II", level: "A2→B1", duration: "4 semaines", color: "#E07B39" },
-        { path: "Parcours III", level: "B1→B1+", duration: "4 semaines", color: "#E07B39" },
-        { path: "Parcours IV", level: "B1+→B2", duration: "4 semaines", color: "var(--brand-gold, #D4AF37)" },
-        { path: "Parcours V", level: "B2→C1", duration: "4 semaines", color: "var(--brand-gold, #D4AF37)" },
+        { path: "Parcours I", level: "A1→A2", duration: "4 semaines", color: "var(--barholex-gold-hover)" },
+        { path: "Parcours II", level: "A2→B1", duration: "4 semaines", color: "var(--barholex-gold-hover)" },
+        { path: "Parcours III", level: "B1→B1+", duration: "4 semaines", color: "var(--barholex-gold-hover)" },
+        { path: "Parcours IV", level: "B1+→B2", duration: "4 semaines", color: "var(--brand-gold, var(--barholex-gold))" },
+        { path: "Parcours V", level: "B2→C1", duration: "4 semaines", color: "var(--brand-gold, var(--barholex-gold))" },
         { path: "Parcours VI", level: "Prép. ELS", duration: "4 semaines", color: "#2DD4BF" }
       ],
       packagesTitle: "Forfaits de formation gouvernementale",
@@ -291,7 +291,7 @@ export default function ForGovernment() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="max-w-4xl mx-auto p-6 rounded-2xl bg-gradient-to-r from-[#2DD4BF]/5 to-[#E07B39]/5 border border-teal-400/20"
+              className="max-w-4xl mx-auto p-6 rounded-2xl bg-gradient-to-r from-[#2DD4BF]/5 to-[var(--barholex-gold-hover)]/5 border border-teal-400/20"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-teal-400/10 flex items-center justify-center">
@@ -375,7 +375,7 @@ export default function ForGovernment() {
             </div>
 
             <div className="mt-10 text-center">
-              <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-gradient-to-r from-[#E07B39] to-[#2DD4BF] text-white">
+              <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-gradient-to-r from-[var(--barholex-gold-hover)] to-[#2DD4BF] text-white">
                 <span className="font-semibold">{t.blend}</span>
               </div>
             </div>

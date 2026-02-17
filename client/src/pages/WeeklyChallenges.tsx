@@ -14,8 +14,8 @@ const CHALLENGE_ICONS: Record<string, string> = {
 };
 
 const CHALLENGE_COLORS: Record<string, string> = {
-  complete_lessons: "var(--brand-teal, #008090)", earn_xp: "var(--semantic-warning, #f5a623)", perfect_quizzes: "var(--color-violet-500, #8b5cf6)",
-  maintain_streak: "var(--semantic-danger, #e74c3c)", complete_slots: "var(--semantic-success, #10b981)", study_time: "var(--color-blue-500, #3b82f6)",
+  complete_lessons: "var(--brand-teal, var(--teal))", earn_xp: "var(--semantic-warning, var(--warning))", perfect_quizzes: "var(--color-violet-500, var(--accent-purple))",
+  maintain_streak: "var(--semantic-danger, var(--danger))", complete_slots: "var(--semantic-success, var(--success))", study_time: "var(--color-blue-500, var(--semantic-info))",
 };
 
 function getDaysRemaining(endDate: string): number {
@@ -30,12 +30,12 @@ function ChallengeCard({ challenge, isFr }: { challenge: {
   currentValue: number; isCompleted: boolean;
 }; isFr: boolean }) {
   const icon = CHALLENGE_ICONS[challenge.challengeType] || "flag";
-  const color = CHALLENGE_COLORS[challenge.challengeType] || "var(--brand-teal, #008090)";
+  const color = CHALLENGE_COLORS[challenge.challengeType] || "var(--brand-teal, var(--teal))";
   const progress = Math.min(100, (challenge.currentValue / challenge.targetValue) * 100);
   const daysLeft = getDaysRemaining(challenge.weekEndDate);
 
   return (
-    <div className={`bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-5 transition-all duration-300 hover:shadow-md ${challenge.isCompleted ? "ring-1 ring-[var(--semantic-success, #10b981)]/30" : ""}`}
+    <div className={`bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-5 transition-all duration-300 hover:shadow-md ${challenge.isCompleted ? "ring-1 ring-[var(--semantic-success, var(--success))]/30" : ""}`}
       style={{ borderLeft: `4px solid ${color}` }}
       role="article"
       aria-label={isFr ? challenge.titleFr : challenge.title}>
@@ -60,14 +60,14 @@ function ChallengeCard({ challenge, isFr }: { challenge: {
       <div className="mb-2">
         <div className="flex items-center justify-between text-[10px] mb-1">
           <span className="text-gray-400">{challenge.currentValue} / {challenge.targetValue}</span>
-          <span className="font-bold" style={{ color: challenge.isCompleted ? "var(--semantic-success, #10b981)" : color }}>
+          <span className="font-bold" style={{ color: challenge.isCompleted ? "var(--semantic-success, var(--success))" : color }}>
             {challenge.isCompleted ? (isFr ? "Complété !" : "Completed!") : `${Math.round(progress)}%`}
           </span>
         </div>
         <div className="h-2.5 rounded-full overflow-hidden bg-gray-100" role="progressbar" aria-valuenow={challenge.currentValue} aria-valuemin={0} aria-valuemax={challenge.targetValue}>
           <div className="h-full rounded-full transition-all duration-700 ease-out" style={{
             width: `${progress}%`,
-            background: challenge.isCompleted ? "linear-gradient(90deg, var(--semantic-success, #10b981), var(--color-emerald-400, #34d399))" : `linear-gradient(90deg, ${color}, ${color}cc)`,
+            background: challenge.isCompleted ? "linear-gradient(90deg, var(--semantic-success, var(--success)), var(--color-emerald-400, #34d399))" : `linear-gradient(90deg, ${color}, ${color}cc)`,
           }} />
         </div>
       </div>
@@ -145,7 +145,7 @@ export default function WeeklyChallenges() {
             {isFr ? "Actifs" : "Active"} ({activeChallenges.length})
           </button>
           <button onClick={() => setTab("completed")} role="tab" aria-selected={tab === "completed"}
-            className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-[var(--semantic-success, #10b981)]/30 ${
+            className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-[var(--semantic-success, var(--success))]/30 ${
               tab === "completed" ? "bg-emerald-500 text-white border-emerald-500" : "bg-white dark:bg-slate-800 text-gray-500 border-gray-200 dark:border-slate-700 hover:border-emerald-500 hover:text-emerald-500"
             }`}>
             <span className="material-icons align-middle mr-1"  aria-hidden="true">check_circle</span>

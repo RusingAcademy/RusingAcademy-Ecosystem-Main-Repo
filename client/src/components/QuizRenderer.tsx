@@ -447,7 +447,7 @@ export default function QuizRenderer({ content, language = "en", onComplete, max
 
             <div
               className="text-xl md:text-3xl lg:text-4xl font-black my-3"
-              style={{ color: passed ? "var(--semantic-success, #10b981)" : "var(--semantic-warning, #f59e0b)" }}
+              style={{ color: passed ? "var(--semantic-success, var(--success))" : "var(--semantic-warning, var(--warning))" }}
             >
               {score}%
             </div>

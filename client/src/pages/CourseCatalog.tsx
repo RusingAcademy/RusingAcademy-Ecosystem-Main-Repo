@@ -99,7 +99,7 @@ export default function CourseCatalog() {
       <div
         className="relative overflow-hidden py-8 md:py-12 lg:py-16 px-4"
         style={{
-          background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464) 0%, #2EC4B6 50%, #FF4B2B 100%)",
+          background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)) 0%, #2EC4B6 50%, #FF4B2B 100%)",
         }}
       >
         <div className="max-w-5xl mx-auto text-center relative z-10">
@@ -264,7 +264,7 @@ export default function CourseCatalog() {
                               backgroundColor:
                                 (enrollment.enrollment.progressPercent ?? 0) >= 100
                                   ? "#2EC4B6"
-                                  : "var(--brand-obsidian, #1B1464)",
+                                  : "var(--brand-obsidian, var(--accent-purple-deep))",
                             }}
                           />
                         </div>

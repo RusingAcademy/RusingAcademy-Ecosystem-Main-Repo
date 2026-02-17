@@ -11,9 +11,9 @@ import { useAuth } from "@/_core/hooks/useAuth";
 
 function LessonIcon({ type }: { type: string }) {
   const config: Record<string, { icon: typeof Video; color: string; bg: string }> = {
-    video: { icon: Video, color: "var(--color-blue-500, #3b82f6)", bg: "rgba(59, 130, 246, 0.08)" },
-    quiz: { icon: CircleHelp, color: "var(--color-violet-500, #8b5cf6)", bg: "rgba(139, 92, 246, 0.08)" },
-    text: { icon: FileText, color: "var(--semantic-success, #22c55e)", bg: "rgba(34, 197, 94, 0.08)" },
+    video: { icon: Video, color: "var(--color-blue-500, var(--semantic-info))", bg: "rgba(59, 130, 246, 0.08)" },
+    quiz: { icon: CircleHelp, color: "var(--color-violet-500, var(--accent-purple))", bg: "rgba(139, 92, 246, 0.08)" },
+    text: { icon: FileText, color: "var(--semantic-success, var(--success))", bg: "rgba(34, 197, 94, 0.08)" },
   };
   const c = config[type] || config.text;
   const Icon = c.icon;
@@ -51,7 +51,7 @@ function CourseCard({ course, onSelect }: { course: DisplayCourse; onSelect: (c:
       style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)", boxShadow: "var(--shadow-card)" }}
       onClick={() => onSelect(course)}
     >
-      <div className="relative h-40 overflow-hidden flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580), rgba(212, 175, 55, 0.3))" }}>
+      <div className="relative h-40 overflow-hidden flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)), rgba(212, 175, 55, 0.3))" }}>
         {course.thumbnailUrl ? (
           <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         ) : (
@@ -62,10 +62,10 @@ function CourseCard({ course, onSelect }: { course: DisplayCourse; onSelect: (c:
         
         {course.progress > 0 && (
           <div className="absolute bottom-0 left-0 right-0 h-1" style={{ background: "rgba(0,0,0,0.2)" }}>
-            <div className="h-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, var(--brand-gold, #D4AF37), #E8CB6A)" }} />
+            <div className="h-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, var(--brand-gold, var(--barholex-gold)), #E8CB6A)" }} />
           </div>
         )}
-        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider" style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(8px)", color: "var(--brand-obsidian, #1B1464)" }}>
+        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider" style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(8px)", color: "var(--brand-obsidian, var(--accent-purple-deep))" }}>
           {course.level || "All Levels"}
         </div>
         {course.hasCertificate && (
@@ -87,7 +87,7 @@ function CourseCard({ course, onSelect }: { course: DisplayCourse; onSelect: (c:
         {course.progress > 0 && (
           <div className="mt-3 flex items-center gap-2">
             <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(212, 175, 55, 0.1)" }}>
-              <div className="h-full rounded-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, var(--brand-gold, #D4AF37), #E8CB6A)" }} />
+              <div className="h-full rounded-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, var(--brand-gold, var(--barholex-gold)), #E8CB6A)" }} />
             </div>
             <span className="text-[11px] font-bold" >{course.progress}%</span>
           </div>
@@ -115,7 +115,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
 
       {/* Course Header */}
       <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: "0 8px 32px rgba(27, 20, 100, 0.1)" }}>
-        <div className="w-full h-52 flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580), rgba(212, 175, 55, 0.3))" }}>
+        <div className="w-full h-52 flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)), rgba(212, 175, 55, 0.3))" }}>
           {course.thumbnailUrl ? (
             <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover" />
           ) : (
@@ -136,7 +136,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
       {/* Instructor + Stats */}
       <div className="flex items-center justify-between rounded-xl p-4" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)", boxShadow: "var(--shadow-card)" }}>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))" }}>
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))" }}>
             {(course.instructorName || "RA").split(" ").map(n => n[0]).join("")}
           </div>
           <div>
@@ -168,7 +168,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
             <span className="text-sm font-bold" >{course.progress}%</span>
           </div>
           <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(212, 175, 55, 0.1)" }}>
-            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, var(--brand-gold, #D4AF37), #E8CB6A)" }} />
+            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${course.progress}%`, background: "linear-gradient(90deg, var(--brand-gold, var(--barholex-gold)), #E8CB6A)" }} />
           </div>
         </div>
       )}
@@ -181,7 +181,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
           }}
           disabled={enrollMutation.isPending}
           className="w-full rounded-xl font-bold text-white border-0 h-12"
-          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))", boxShadow: "0 4px 12px rgba(27, 20, 100, 0.2)" }}
+          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))", boxShadow: "0 4px 12px rgba(27, 20, 100, 0.2)" }}
         >
           {enrollMutation.isPending ? "Enrolling..." : "Enroll Now — Free"}
         </Button>
@@ -201,7 +201,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
                   style={{ background: isExpanded ? "rgba(27, 20, 100, 0.02)" : "transparent" }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-bold" style={{ background: "rgba(27, 20, 100, 0.04)", color: "var(--brand-obsidian, #1B1464)" }}>
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-bold" style={{ background: "rgba(27, 20, 100, 0.04)", color: "var(--brand-obsidian, var(--accent-purple-deep))" }}>
                       {idx + 1}
                     </div>
                     <div className="text-left">

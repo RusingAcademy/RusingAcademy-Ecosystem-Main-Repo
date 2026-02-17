@@ -53,9 +53,9 @@ export default function RevenueDashboard() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               {[
                 { label: "Total Revenue", value: `$${(revenue?.totalRevenue ?? 0).toFixed(2)}`, icon: DollarSign, color: "#22C55E", sub: `${revenue?.transactionCount ?? 0} transactions` },
-                { label: "MRR", value: `$${(revenue?.mrr ?? 0).toFixed(2)}`, icon: TrendingUp, color: "var(--brand-obsidian, #1B1464)", sub: `ARR: $${(revenue?.arr ?? 0).toFixed(2)}` },
-                { label: "Active Subs", value: String(revenue?.tierBreakdown?.reduce((s, t) => s + (t.activeCount ?? 0), 0) ?? 0), icon: Users, color: "var(--brand-gold, #D4AF37)", sub: `Churn: ${revenue?.churnRate ?? 0}%` },
-                { label: "Active Users", value: String(engagement?.activeUsers ?? 0), icon: Activity, color: "#8B5CF6", sub: `${engagement?.retentionRate ?? 0}% retention` },
+                { label: "MRR", value: `$${(revenue?.mrr ?? 0).toFixed(2)}`, icon: TrendingUp, color: "var(--brand-obsidian, var(--accent-purple-deep))", sub: `ARR: $${(revenue?.arr ?? 0).toFixed(2)}` },
+                { label: "Active Subs", value: String(revenue?.tierBreakdown?.reduce((s, t) => s + (t.activeCount ?? 0), 0) ?? 0), icon: Users, color: "var(--brand-gold, var(--barholex-gold))", sub: `Churn: ${revenue?.churnRate ?? 0}%` },
+                { label: "Active Users", value: String(engagement?.activeUsers ?? 0), icon: Activity, color: "var(--accent-purple)", sub: `${engagement?.retentionRate ?? 0}% retention` },
               ].map((kpi) => (
                 <Card key={kpi.label} className="border hover:shadow-md transition-shadow">
                   <CardContent className="p-5">
@@ -75,10 +75,10 @@ export default function RevenueDashboard() {
             {/* Engagement Metrics */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               {[
-                { label: "New Users", value: engagement?.newUsers ?? 0, icon: Users, color: "#3B82F6" },
-                { label: "Posts Created", value: engagement?.postsCreated ?? 0, icon: BarChart3, color: "var(--brand-obsidian, #1B1464)" },
-                { label: "Course Enrollments", value: engagement?.courseEnrollments ?? 0, icon: BookOpen, color: "var(--brand-gold, #D4AF37)" },
-                { label: "AI Corrections", value: engagement?.aiCorrections ?? 0, icon: Sparkles, color: "#8B5CF6" },
+                { label: "New Users", value: engagement?.newUsers ?? 0, icon: Users, color: "var(--semantic-info)" },
+                { label: "Posts Created", value: engagement?.postsCreated ?? 0, icon: BarChart3, color: "var(--brand-obsidian, var(--accent-purple-deep))" },
+                { label: "Course Enrollments", value: engagement?.courseEnrollments ?? 0, icon: BookOpen, color: "var(--brand-gold, var(--barholex-gold))" },
+                { label: "AI Corrections", value: engagement?.aiCorrections ?? 0, icon: Sparkles, color: "var(--accent-purple)" },
               ].map((metric) => (
                 <Card key={metric.label} className="border">
                   <CardContent className="p-4 flex items-center gap-3">

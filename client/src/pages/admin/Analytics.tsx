@@ -71,10 +71,10 @@ export default function Analytics() {
       <div><h1 className="text-2xl font-bold">{ui.title}</h1><p className="text-sm text-muted-foreground">{ui.subtitle}</p></div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: ui.totalUsers, value: totalUsers, icon: Users, color: "var(--color-blue-600, var(--color-blue-600, #2563eb))", sub: `${totalLearners} ${ui.learners}` },
-          { label: ui.activeCoaches, value: activeCoaches, icon: GraduationCap, color: "var(--semantic-success, var(--semantic-success, #059669))", sub: `${pendingCoaches} ${ui.pending}` },
-          { label: ui.sessions, value: sessionsThisMonth, icon: Calendar, color: "var(--color-violet-600, var(--color-violet-600, #7c3aed))", sub: a.sessionGrowth ? `${a.sessionGrowth > 0 ? "+" : ""}${a.sessionGrowth}%` : "" },
-          { label: ui.revenue, value: `$${(revenue / 100).toLocaleString()}`, icon: DollarSign, color: "var(--semantic-danger, var(--semantic-danger, #dc2626))", sub: a.revenueGrowth ? `${a.revenueGrowth > 0 ? "+" : ""}${a.revenueGrowth}%` : "" },
+          { label: ui.totalUsers, value: totalUsers, icon: Users, color: "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))", sub: `${totalLearners} ${ui.learners}` },
+          { label: ui.activeCoaches, value: activeCoaches, icon: GraduationCap, color: "var(--semantic-success, var(--semantic-success, var(--success)))", sub: `${pendingCoaches} ${ui.pending}` },
+          { label: ui.sessions, value: sessionsThisMonth, icon: Calendar, color: "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))", sub: a.sessionGrowth ? `${a.sessionGrowth > 0 ? "+" : ""}${a.sessionGrowth}%` : "" },
+          { label: ui.revenue, value: `$${(revenue / 100).toLocaleString()}`, icon: DollarSign, color: "var(--semantic-danger, var(--semantic-danger, var(--danger)))", sub: a.revenueGrowth ? `${a.revenueGrowth > 0 ? "+" : ""}${a.revenueGrowth}%` : "" },
         ].map((s) => (
           <Card key={s.label}><CardContent className="p-4"><div className="flex items-center gap-3"><s.icon className="h-5 w-5" style={{ color: s.color }} /><div><p className="text-xl font-bold">{s.value}</p><p className="text-xs text-muted-foreground">{s.label}</p>{s.sub && <p className="text-xs text-muted-foreground">{s.sub}</p>}</div></div></CardContent></Card>
         ))}
@@ -83,7 +83,7 @@ export default function Analytics() {
         <Card><CardHeader><CardTitle className="text-base flex items-center gap-2"><BarChart3 className="h-4 w-4" /> {ui.coursePerformance}</CardTitle></CardHeader>
           <CardContent>{courseStats && Array.isArray(courseStats) && courseStats.length > 0 ? (
             <div className="space-y-3">{(courseStats as any[]).slice(0, 8).map((c: any, i: number) => (
-              <div key={i} className="flex items-center justify-between"><span className="text-sm truncate max-w-[200px]">{c.title || c.name}</span><div className="flex items-center gap-3 text-sm"><span className="text-muted-foreground">{c.enrollmentCount ?? 0} {ui.enrolled}</span><div className="w-24 h-2 bg-muted rounded-full overflow-hidden"><div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(5, ((c.enrollmentCount ?? 0) / Math.max(totalUsers, 1)) * 100))}%`, backgroundColor: "var(--color-blue-600, var(--color-blue-600, #2563eb))" }} /></div></div></div>
+              <div key={i} className="flex items-center justify-between"><span className="text-sm truncate max-w-[200px]">{c.title || c.name}</span><div className="flex items-center gap-3 text-sm"><span className="text-muted-foreground">{c.enrollmentCount ?? 0} {ui.enrolled}</span><div className="w-24 h-2 bg-muted rounded-full overflow-hidden"><div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(5, ((c.enrollmentCount ?? 0) / Math.max(totalUsers, 1)) * 100))}%`, backgroundColor: "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))" }} /></div></div></div>
             ))}</div>
           ) : <p className="text-sm text-muted-foreground text-center py-4">{ui.noCourseData}</p>}</CardContent>
         </Card>

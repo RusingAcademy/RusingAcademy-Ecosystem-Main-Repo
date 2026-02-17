@@ -215,7 +215,7 @@ export default function BundlesAndPaths() {
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4" style={{ color: "#f8f7f7" }}>
               {isEn ? "Bundles & Learning Paths" : "Forfaits & Parcours d'Apprentissage"}
             </h1>
-            <p className="text-lg text-white/90 max-w-3xl mx-auto" style={{ color: "var(--color-white, #ffffff)" }}>
+            <p className="text-lg text-white/90 max-w-3xl mx-auto" style={{ color: "var(--color-white, var(--text-inverse))" }}>
               {isEn
                 ? "Choose a curated bundle for maximum savings, or follow a structured learning path designed for your specific career goals."
                 : "Choisissez un forfait sélectionné pour des économies maximales, ou suivez un parcours d'apprentissage structuré conçu pour vos objectifs de carrière spécifiques."}
@@ -419,7 +419,7 @@ export default function BundlesAndPaths() {
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-4" style={{ color: "#f8f7f7" }}>
               {isEn ? "Not Sure Which to Choose?" : "Pas Sûr de Votre Choix?"}
             </h2>
-            <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{ color: "var(--color-white, #ffffff)" }}>
+            <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{ color: "var(--color-white, var(--text-inverse))" }}>
               {isEn
                 ? "Take our free diagnostic assessment to find the perfect starting point for your bilingual journey."
                 : "Passez notre évaluation diagnostique gratuite pour trouver le point de départ parfait pour votre parcours bilingue."}
