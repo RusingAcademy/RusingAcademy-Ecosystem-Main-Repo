@@ -4,7 +4,8 @@ import {
   authRateLimiter,
   paymentRateLimiter,
   corsMiddleware,
-  helmetMiddleware,
+  apiHelmetMiddleware,
+  frontendHelmetMiddleware,
   sanitizeRequest,
   registerSecurityMiddleware,
 } from "./middleware/security";
@@ -19,8 +20,10 @@ describe("Security Middleware — Sprint 2", () => {
     expect(typeof paymentRateLimiter).toBe("function");
     expect(corsMiddleware).toBeDefined();
     expect(typeof corsMiddleware).toBe("function");
-    expect(helmetMiddleware).toBeDefined();
-    expect(typeof helmetMiddleware).toBe("function");
+    expect(apiHelmetMiddleware).toBeDefined();
+    expect(typeof apiHelmetMiddleware).toBe("function");
+    expect(frontendHelmetMiddleware).toBeDefined();
+    expect(typeof frontendHelmetMiddleware).toBe("function");
     expect(sanitizeRequest).toBeDefined();
     expect(typeof sanitizeRequest).toBe("function");
     expect(registerSecurityMiddleware).toBeDefined();

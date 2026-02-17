@@ -6,6 +6,12 @@ import type { Express, Request, Response, NextFunction } from "express";
 /**
  * Security middleware for the RusingAcademy ecosystem.
  * Sprint 2 — Production-readiness hardening.
+ *
+ * IMPORTANT: Helmet CSP is applied ONLY to /api/ routes.
+ * Applying CSP to the HTML document blocks Vite's dynamic import()
+ * calls for lazy-loaded route chunks, causing a blank white screen.
+ * Non-API routes (HTML pages, static assets) are served without CSP.
+ * Security for the frontend is handled by CORS, HSTS, and other headers.
  */
 
 // ─── Rate Limiters ───────────────────────────────────────────────────────────
@@ -51,6 +57,8 @@ function getAllowedOrigins(): string[] {
   if (appUrl) origins.push(appUrl);
   origins.push("https://rusingacademy.com");
   origins.push("https://www.rusingacademy.com");
+  origins.push("https://www.rusing.academy");
+  origins.push("https://rusing.academy");
   if (process.env.NODE_ENV === "development") {
     origins.push("http://localhost:3000");
     origins.push("http://localhost:5173");
@@ -76,9 +84,11 @@ export const corsMiddleware = cors({
   maxAge: 86400,
 });
 
-// ─── Helmet (Security Headers) ──────────────────────────────────────────────
+// ─── Helmet (Security Headers) — API-only ──────────────────────────────────
+// Full CSP is applied only to API routes. Frontend routes skip CSP entirely
+// to allow Vite's dynamic import() for code-split chunks.
 
-export const helmetMiddleware = helmet({
+export const apiHelmetMiddleware = helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
@@ -88,8 +98,6 @@ export const helmetMiddleware = helmet({
         "https://www.googletagmanager.com", "https://www.google-analytics.com",
         "https://cloud.umami.is",
       ],
-      // Allow inline event handlers required by some UI libraries;
-      // removing 'none' prevents Vite module scripts from being blocked.
       scriptSrcAttr: ["'unsafe-inline'"],
       styleSrc: [
         "'self'", "'unsafe-inline'",
@@ -125,6 +133,16 @@ export const helmetMiddleware = helmet({
   hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
 });
 
+// Lightweight security headers for frontend routes (no CSP).
+// Keeps HSTS, X-Frame-Options, referrer policy, etc. without CSP.
+export const frontendHelmetMiddleware = helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+});
+
 // ─── Request Sanitization ───────────────────────────────────────────────────
 
 export function sanitizeRequest(req: Request, _res: Response, next: NextFunction) {
@@ -142,14 +160,18 @@ export function sanitizeRequest(req: Request, _res: Response, next: NextFunction
 // ─── Register All Security Middleware ────────────────────────────────────────
 
 export function registerSecurityMiddleware(app: Express) {
-  // Skip helmet for static assets — CSP headers on JS/CSS files
-  // can block Vite's dynamic import() module loading.
+  // API routes get full helmet with CSP
+  app.use("/api/", apiHelmetMiddleware);
+
+  // All other routes (HTML pages, static assets) get lightweight
+  // security headers WITHOUT CSP to allow Vite module loading.
   app.use((req: Request, res: Response, next: NextFunction) => {
-    if (req.path.startsWith("/assets/") || req.path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|map)$/)) {
-      return next();
+    if (!req.path.startsWith("/api/")) {
+      return frontendHelmetMiddleware(req, res, next);
     }
-    return helmetMiddleware(req, res, next);
+    next();
   });
+
   app.use(corsMiddleware);
   app.use(sanitizeRequest);
   app.use("/api/", apiRateLimiter);
