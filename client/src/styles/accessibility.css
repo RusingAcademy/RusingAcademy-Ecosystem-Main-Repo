@@ -355,17 +355,13 @@
     border-width: 2px;
   }
   
-  /* Ensure text is fully opaque */
-  .text-muted-foreground,
-  .text-black,
-  .text-black {
+  /* Ensure text is fully opaque and high-contrast readable */
+  .text-muted-foreground {
     opacity: 1;
-    color: #0a6969 !important;
+    color: #1e293b !important; /* slate-800 — WCAG AAA on light backgrounds */
   }
   
-  .dark .text-muted-foreground,
-  .dark .text-black,
-  .dark .text-black {
+  .dark .text-muted-foreground {
     color: #D1D5DB !important;
   }
 }

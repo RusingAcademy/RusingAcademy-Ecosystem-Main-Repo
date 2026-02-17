@@ -270,7 +270,7 @@ export default function BundlesAndPaths() {
                             <span className="text-lg md:text-2xl lg:text-3xl font-bold">${bundle.bundlePrice}</span>
                             <span className="text-lg line-through opacity-60">${bundle.originalPrice}</span>
                           </div>
-                          <Badge className="mt-2 bg-white dark:bg-background/20 text-white">
+                          <Badge className="mt-2 bg-white/15 dark:bg-background/20 text-white backdrop-blur-sm">
                             <Gift className="h-3 w-3 mr-1" />
                             {isEn ? `Save $${bundle.savings}` : `Économisez ${bundle.savings}$`}
                           </Badge>
