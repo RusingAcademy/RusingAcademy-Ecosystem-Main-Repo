@@ -154,7 +154,7 @@ export default function CategoryThreads() {
 
         {/* Thread List */}
         {isLoading ? (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex items-center justify-center py-10 md:py-16 lg:py-20">
             <Loader2 className="w-8 h-8 animate-spin text-teal-400" />
           </div>
         ) : threads && threads.length > 0 ? (
@@ -208,7 +208,7 @@ export default function CategoryThreads() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 text-white/50">
+          <div className="text-center py-10 md:py-16 lg:py-20 text-white/50">
             <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
             <p className="mb-4">{language === "en" ? "No discussions yet in this category." : "Aucune discussion encore dans cette catégorie."}</p>
             {user && (

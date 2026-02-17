@@ -147,10 +147,10 @@ export default function EmailTemplateBuilder() {
 
       {/* Templates Grid */}
       {listQuery.isLoading ? (
-        <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading...</div>
+        <div className="flex items-center gap-2 text-muted-foreground py-6 md:py-8 lg:py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading...</div>
       ) : templates.length === 0 ? (
         <Card>
-          <CardContent className="py-16 text-center">
+          <CardContent className="py-8 md:py-12 lg:py-16 text-center">
             <Mail className="h-12 w-12 mx-auto mb-4 text-black/40 dark:text-foreground/40" />
             <h3 className="font-semibold mb-1">No email templates yet</h3>
             <p className="text-sm text-muted-foreground mb-4">Create your first template to start sending professional emails.</p>
@@ -190,7 +190,7 @@ export default function EmailTemplateBuilder() {
   const renderEditor = () => (
     <div className="space-y-6">
       {!editingTemplate ? (
-        <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">Select a template to edit, or create a new one.</p></CardContent></Card>
+        <Card><CardContent className="py-6 md:py-8 lg:py-12 text-center"><p className="text-muted-foreground">Select a template to edit, or create a new one.</p></CardContent></Card>
       ) : (
         <>
           {/* Editor Header */}
@@ -298,7 +298,7 @@ export default function EmailTemplateBuilder() {
   const renderPreviewContent = () => (
     <div className="space-y-6">
       {!editingTemplate ? (
-        <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">Select a template to preview.</p></CardContent></Card>
+        <Card><CardContent className="py-6 md:py-8 lg:py-12 text-center"><p className="text-muted-foreground">Select a template to preview.</p></CardContent></Card>
       ) : (
         <Card>
           <CardHeader>

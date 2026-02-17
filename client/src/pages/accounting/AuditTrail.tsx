@@ -230,9 +230,9 @@ export default function AuditTrail() {
 
       {/* Audit Log */}
       {isLoading ? (
-        <div className="flex justify-center py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
+        <div className="flex justify-center py-6 md:py-8 lg:py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
       ) : items.length === 0 ? (
-        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border text-center py-12">
+        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border text-center py-6 md:py-8 lg:py-12">
           <Shield size={32} className="mx-auto text-gray-300 mb-3" />
           <p className="text-gray-500 mb-1">No audit entries found</p>
           <p className="text-sm text-gray-400">

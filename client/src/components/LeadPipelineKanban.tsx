@@ -287,7 +287,7 @@ export default function LeadPipelineKanban() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
           {t.pipeline}
         </h1>
         <p className="text-slate-400 mt-2">{t.subtitle}</p>

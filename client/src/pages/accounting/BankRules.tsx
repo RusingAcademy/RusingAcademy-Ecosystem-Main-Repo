@@ -153,9 +153,9 @@ export default function BankRules() {
 
       {/* Rules List */}
       {isLoading ? (
-        <div className="flex justify-center py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
+        <div className="flex justify-center py-6 md:py-8 lg:py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
       ) : !rules || rules.length === 0 ? (
-        <div className="qb-card text-center py-12">
+        <div className="qb-card text-center py-6 md:py-8 lg:py-12">
           <Zap size={32} className="mx-auto text-gray-300 mb-3" />
           <p className="text-gray-500 mb-1">No bank rules yet</p>
           <p className="text-sm text-gray-400">Create rules to automatically categorize imported bank transactions</p>

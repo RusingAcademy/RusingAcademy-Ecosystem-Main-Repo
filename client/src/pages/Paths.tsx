@@ -299,7 +299,7 @@ export default function Paths() {
                         {!path.thumbnailUrl && (
                           <div className="flex items-start justify-between">
                             <div className="flex items-center gap-3">
-                              <span className="text-3xl">{path.icon || "📚"}</span>
+                              <span className="text-lg md:text-2xl lg:text-3xl">{path.icon || "📚"}</span>
                               <div>
                                 <Badge variant="outline" className="mb-1 text-xs">
                                   {path.cefrLevel === "exam_prep" 
@@ -405,7 +405,7 @@ export default function Paths() {
           
           {/* Empty State */}
           {!isLoading && displayPaths.length === 0 && (
-            <div className="text-center py-16">
+            <div className="text-center py-8 md:py-12 lg:py-16">
               <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-black dark:text-foreground mb-2">
                 {t ? "Aucun parcours trouvé" : "No paths found"}
@@ -430,7 +430,7 @@ export default function Paths() {
       </section>
 
       {/* CTA Section */}
-      <section className={`py-16 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-600 to-indigo-600' : 'from-amber-600 to-orange-600'}`}>
+      <section className={`py-8 md:py-12 lg:py-16 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-600 to-indigo-600' : 'from-amber-600 to-orange-600'}`}>
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer Votre Parcours?" : "Ready to Start Your Journey?"}

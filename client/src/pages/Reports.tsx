@@ -433,7 +433,7 @@ export default function Reports() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-3xl font-bold text-gray-900">{overallScore}%</span>
+                  <span className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900">{overallScore}%</span>
                   <span className="text-xs font-semibold px-2 py-0.5 rounded-full text-white mt-1" style={{ backgroundColor: sleLevelColor }}>
                     Level {sleLevel}
                   </span>

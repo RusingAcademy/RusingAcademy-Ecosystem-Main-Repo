@@ -60,14 +60,14 @@ export default function MeetOurExperts() {
   const { language } = useLanguage();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-20 right-10 w-72 h-72 bg-teal-100 rounded-full blur-3xl opacity-30" />
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-20" />
 
       <div className="container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-foreground mb-4 font-serif italic">
             {language === 'fr' ? 'Rencontrez nos experts' : 'Meet our experts'}
           </h2>

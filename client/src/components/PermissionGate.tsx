@@ -66,7 +66,7 @@ export function PermissionGate({
 
   if (showDenied) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+      <div className="flex flex-col items-center justify-center py-6 md:py-8 lg:py-12 text-muted-foreground">
         <Shield className="h-10 w-10 mb-3 opacity-30" />
         <p className="text-sm font-medium">Access Restricted</p>
         <p className="text-xs mt-1">You don't have permission to view this section.</p>

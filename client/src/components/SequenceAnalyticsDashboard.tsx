@@ -335,7 +335,7 @@ export default function SequenceAnalyticsDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cta-2 bg-clip-text text-transparent">
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-400 to-cta-2 bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
@@ -429,7 +429,7 @@ export default function SequenceAnalyticsDashboard() {
                     {t[getPerformanceRating(analytics.averageOpenRate, "open").label as keyof typeof t]}
                   </span>
                 </div>
-                <div className="text-4xl font-bold mb-2">{analytics.averageOpenRate}%</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">{analytics.averageOpenRate}%</div>
                 <div className="w-full bg-white dark:bg-background/10 rounded-full h-2">
                   <div
                     className="bg-teal-500 h-2 rounded-full transition-all"
@@ -449,7 +449,7 @@ export default function SequenceAnalyticsDashboard() {
                     {t[getPerformanceRating(analytics.averageClickRate, "click").label as keyof typeof t]}
                   </span>
                 </div>
-                <div className="text-4xl font-bold mb-2">{analytics.averageClickRate}%</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">{analytics.averageClickRate}%</div>
                 <div className="w-full bg-white dark:bg-background/10 rounded-full h-2">
                   <div
                     className="bg-blue-500 h-2 rounded-full transition-all"
@@ -469,7 +469,7 @@ export default function SequenceAnalyticsDashboard() {
                     {t[getPerformanceRating(analytics.averageConversionRate, "conversion").label as keyof typeof t]}
                   </span>
                 </div>
-                <div className="text-4xl font-bold mb-2">{analytics.averageConversionRate}%</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">{analytics.averageConversionRate}%</div>
                 <div className="w-full bg-white dark:bg-background/10 rounded-full h-2">
                   <div
                     className="bg-cta h-2 rounded-full transition-all"

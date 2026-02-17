@@ -256,7 +256,7 @@ export default function Leaderboard() {
                 ))}
               </div>
             ) : leaderboardData?.entries?.length === 0 ? (
-              <div className="text-center py-12">
+              <div className="text-center py-6 md:py-8 lg:py-12">
                 <Trophy className="w-16 h-16 mx-auto mb-4 text-muted-foreground/50" />
                 <h3 className="text-lg font-semibold mb-2">No Rankings Yet</h3>
                 <p className="text-muted-foreground mb-4">

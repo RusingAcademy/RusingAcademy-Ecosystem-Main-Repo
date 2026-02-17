@@ -92,7 +92,7 @@ export default function RusingAcademyContact() {
               <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle2 className="w-10 h-10 text-green-600" />
               </div>
-              <h1 className="text-3xl font-bold text-black dark:text-foreground mb-4">
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground mb-4">
                 {language === "en" ? "Thank You!" : "Merci!"}
               </h1>
               <p className="text-lg text-black dark:text-foreground mb-6">
@@ -121,7 +121,7 @@ export default function RusingAcademyContact() {
         <div className="container mx-auto">
           <div className="max-w-6xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <span className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-foreground text-sm">
                 <Building2 className="w-4 h-4 text-cta-2" />
                 {language === "en" ? "B2B/B2G Solutions" : "Solutions B2B/B2G"}

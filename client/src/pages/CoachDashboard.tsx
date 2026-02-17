@@ -459,7 +459,7 @@ export default function CoachDashboard() {
                     />
                   ) : (
                     <Avatar className="w-32 h-32 border-4 border-white shadow-lg">
-                      <AvatarFallback className="text-3xl bg-primary text-primary-foreground">
+                      <AvatarFallback className="text-lg md:text-2xl lg:text-3xl bg-primary text-primary-foreground">
                         {user?.name?.split(" ").map(n => n[0]).join("") || "C"}
                       </AvatarFallback>
                     </Avatar>

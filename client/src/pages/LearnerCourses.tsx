@@ -213,7 +213,7 @@ export default function LearnerCourses() {
           <div className="mb-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold text-black dark:text-foreground flex items-center gap-3">
+                <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground flex items-center gap-3">
                   <BookOpen className="h-8 w-8 text-blue-600" />
                   {l.title}
                 </h1>
@@ -350,7 +350,7 @@ export default function LearnerCourses() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16">
+              <div className="text-center py-8 md:py-12 lg:py-16">
                 <div className="w-20 h-20 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-6">
                   <BookOpen className="h-10 w-10 text-blue-600" />
                 </div>
@@ -393,7 +393,7 @@ export default function LearnerCourses() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
+              <div className="text-center py-6 md:py-8 lg:py-12">
                 <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
                   <Trophy className="h-8 w-8 text-purple-600" />
                 </div>

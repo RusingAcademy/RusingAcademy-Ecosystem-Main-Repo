@@ -127,7 +127,7 @@ export default function ContentIntelligence() {
             </CardHeader>
             <CardContent>
               {!topContent?.topCourses || (topContent.topCourses as any[]).length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <BarChart3 className="h-12 w-12 mx-auto text-black/40 dark:text-foreground/40 mb-3" />
                   <p className="font-medium">No course data yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Performance data will appear as students interact with courses</p>

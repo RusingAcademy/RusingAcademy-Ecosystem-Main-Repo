@@ -179,7 +179,7 @@ export default function SLEExamMode() {
             </CardHeader>
             <CardContent>
               {!exams || (exams as any[]).length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <GraduationCap className="h-12 w-12 mx-auto text-black/40 dark:text-foreground/40 mb-3" />
                   <p className="font-medium">No exam sessions yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Sessions will appear as learners take SLE practice exams</p>
@@ -259,7 +259,7 @@ export default function SLEExamMode() {
             </CardHeader>
             <CardContent>
               {!stats?.byType || (stats.byType as any[]).length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <BarChart3 className="h-12 w-12 mx-auto text-black/40 dark:text-foreground/40 mb-3" />
                   <p className="font-medium">No exam results yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Results will appear after students complete exams</p>

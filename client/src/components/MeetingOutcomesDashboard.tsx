@@ -251,7 +251,7 @@ export default function MeetingOutcomesDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cta-2 bg-clip-text text-transparent">
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-400 to-cta-2 bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
@@ -383,7 +383,7 @@ export default function MeetingOutcomesDashboard() {
                   </div>
                   <span className="font-medium">{t.avgQualScore}</span>
                 </div>
-                <div className="text-4xl font-bold mb-2">{stats.averageQualificationScore}/10</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">{stats.averageQualificationScore}/10</div>
                 <div className="w-full bg-white dark:bg-background/10 rounded-full h-2">
                   <div
                     className="bg-foundation-soft h-2 rounded-full transition-all"
@@ -399,7 +399,7 @@ export default function MeetingOutcomesDashboard() {
                   </div>
                   <span className="font-medium">{t.conversionRate}</span>
                 </div>
-                <div className="text-4xl font-bold mb-2">{stats.conversionRate}%</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">{stats.conversionRate}%</div>
                 <div className="w-full bg-white dark:bg-background/10 rounded-full h-2">
                   <div
                     className="bg-green-500 h-2 rounded-full transition-all"
@@ -415,7 +415,7 @@ export default function MeetingOutcomesDashboard() {
                   </div>
                   <span className="font-medium">{t.totalDealValue}</span>
                 </div>
-                <div className="text-4xl font-bold mb-2">${stats.totalDealValue.toLocaleString()}</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">${stats.totalDealValue.toLocaleString()}</div>
                 <div className="text-sm text-cyan-300">
                   Avg. Probability: {stats.averageDealProbability}%
                 </div>
@@ -484,7 +484,7 @@ export default function MeetingOutcomesDashboard() {
             })}
             
             {pendingMeetings.length === 0 && (
-              <div className="text-center py-12 text-cyan-300">
+              <div className="text-center py-6 md:py-8 lg:py-12 text-cyan-300">
                 {t.noData}
               </div>
             )}
@@ -549,7 +549,7 @@ export default function MeetingOutcomesDashboard() {
             })}
             
             {followUpTasks.length === 0 && (
-              <div className="text-center py-12 text-cyan-300">
+              <div className="text-center py-6 md:py-8 lg:py-12 text-cyan-300">
                 {t.noData}
               </div>
             )}

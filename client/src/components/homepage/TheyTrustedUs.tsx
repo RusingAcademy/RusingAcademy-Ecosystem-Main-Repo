@@ -59,7 +59,7 @@ export default function TheyTrustedUs() {
 
   return (
     <section 
-      className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden"
+      className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden"
       aria-labelledby="they-trusted-us-heading"
     >
       {/* Decorative wave top */}
@@ -80,7 +80,7 @@ export default function TheyTrustedUs() {
       <div className="container relative z-10 px-6 md:px-8 lg:px-12 lg:px-8 max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-6 md:mb-8 lg:mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

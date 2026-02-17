@@ -45,7 +45,7 @@ export default function EcosystemBrands() {
   const { language } = useLanguage();
 
   return (
-    <section className="py-16 bg-gradient-to-r from-slate-600 via-slate-500 to-slate-600 relative overflow-hidden">
+    <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-slate-600 via-slate-500 to-slate-600 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-white dark:bg-background rounded-full blur-3xl" />

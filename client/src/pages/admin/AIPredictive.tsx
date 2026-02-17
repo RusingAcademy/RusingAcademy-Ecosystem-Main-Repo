@@ -69,7 +69,7 @@ export default function AIPredictive() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-black dark:text-foreground">At Risk</p>
-                <p className="text-3xl font-bold text-red-600">{summary?.atRiskCount || 0}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-red-600">{summary?.atRiskCount || 0}</p>
               </div>
               <AlertTriangle className="w-8 h-8 text-red-200" />
             </div>
@@ -81,7 +81,7 @@ export default function AIPredictive() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-black dark:text-foreground">Needs Attention</p>
-                <p className="text-3xl font-bold text-amber-600">{summary?.needsAttentionCount || 0}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-600">{summary?.needsAttentionCount || 0}</p>
               </div>
               <Target className="w-8 h-8 text-amber-200" />
             </div>
@@ -93,7 +93,7 @@ export default function AIPredictive() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-black dark:text-foreground">High Performers</p>
-                <p className="text-3xl font-bold text-emerald-600">{summary?.highPerformersCount || 0}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-emerald-600">{summary?.highPerformersCount || 0}</p>
               </div>
               <Star className="w-8 h-8 text-emerald-200" />
             </div>
@@ -105,7 +105,7 @@ export default function AIPredictive() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-black dark:text-foreground">Total Tracked</p>
-                <p className="text-3xl font-bold text-violet-600">{(predictions as any[])?.length || 0}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-violet-600">{(predictions as any[])?.length || 0}</p>
               </div>
               <Users className="w-8 h-8 text-violet-200" />
             </div>

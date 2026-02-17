@@ -93,7 +93,7 @@ export default function SearchResultsPage() {
 
       {/* Results */}
       {!query ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
+        <div className="flex flex-col items-center justify-center py-8 md:py-12 lg:py-16 text-center">
           <Search className="w-12 h-12 text-muted-foreground mb-3" />
           <p className="text-muted-foreground">
             Type to search across all community content
@@ -110,7 +110,7 @@ export default function SearchResultsPage() {
           ))}
         </div>
       ) : results.data?.total === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
+        <div className="flex flex-col items-center justify-center py-8 md:py-12 lg:py-16 text-center">
           <Search className="w-12 h-12 text-muted-foreground mb-3" />
           <p className="text-lg font-semibold">No results found</p>
           <p className="text-sm text-muted-foreground mt-1">

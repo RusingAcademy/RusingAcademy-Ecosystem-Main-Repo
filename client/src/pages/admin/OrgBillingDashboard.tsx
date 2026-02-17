@@ -110,7 +110,7 @@ export default function OrgBillingDashboard() {
             {tiers.map((tier: any) => (
               <div key={tier.plan} className={`p-6 rounded-lg border-2 transition-colors ${selectedPlan === tier.plan ? "border-primary bg-primary/5" : "border-border"}`}>
                 <h3 className="text-lg font-bold capitalize mb-1">{tier.plan}</h3>
-                <div className="text-3xl font-bold mb-1">${tier.seatPrice}<span className="text-sm font-normal text-muted-foreground">/seat/mo</span></div>
+                <div className="text-lg md:text-2xl lg:text-3xl font-bold mb-1">${tier.seatPrice}<span className="text-sm font-normal text-muted-foreground">/seat/mo</span></div>
                 <ul className="space-y-1 mb-4">
                   {tier.features?.map((f: string) => (
                     <li key={f} className="text-sm text-muted-foreground flex items-center gap-1">

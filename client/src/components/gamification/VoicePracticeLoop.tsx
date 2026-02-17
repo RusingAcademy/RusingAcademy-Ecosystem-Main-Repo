@@ -110,7 +110,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
             <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center">
               <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={startRecording}
                 className="w-24 h-24 rounded-full bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center shadow-lg">
-                <span className="text-4xl">🎤</span>
+                <span className="text-xl md:text-3xl lg:text-4xl">🎤</span>
               </motion.button>
               <p className="mt-4 text-white/60 text-sm">Cliquez pour commencer</p>
             </motion.div>
@@ -118,7 +118,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
           {state === 'countdown' && (
             <motion.div key="countdown" className="text-center">
               <div className="w-24 h-24 rounded-full bg-cta/20 flex items-center justify-center">
-                <span className="text-5xl font-bold text-amber-400">{countdown}</span>
+                <span className="text-2xl md:text-4xl lg:text-5xl font-bold text-amber-400">{countdown}</span>
               </div>
               <p className="mt-4 text-amber-400">Préparez-vous...</p>
             </motion.div>
@@ -127,7 +127,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
             <motion.div key="recording" className="text-center">
               <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1, repeat: Infinity }}>
                 <div className="w-24 h-24 rounded-full bg-red-500 flex items-center justify-center shadow-lg">
-                  <span className="text-4xl">🎤</span>
+                  <span className="text-xl md:text-3xl lg:text-4xl">🎤</span>
                 </div>
               </motion.div>
               <p className="mt-4 text-red-400 font-mono text-xl">{formatTime(recordingTime)}</p>
@@ -145,7 +145,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
           {state === 'feedback' && feedback && (
             <motion.div key="feedback" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full">
               <div className="text-center mb-6">
-                <div className={`text-6xl font-bold ${feedback.overallScore >= 70 ? 'text-green-400' : 'text-amber-400'}`}>
+                <div className={`text-3xl md:text-5xl lg:text-6xl font-bold ${feedback.overallScore >= 70 ? 'text-green-400' : 'text-amber-400'}`}>
                   {feedback.overallScore}%
                 </div>
                 <p className="text-white/60">{feedback.overallScore >= 70 ? 'Excellent travail!' : 'Continuez vos efforts!'}</p>

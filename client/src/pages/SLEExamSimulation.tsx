@@ -709,17 +709,17 @@ export default function SLEExamSimulation() {
   if (phase === "setup") {
     return (
       <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white">
-        <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-12">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
+            className="text-center mb-6 md:mb-8 lg:mb-12"
           >
             <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/20">
               <Trophy className="h-10 w-10 text-white" />
             </div>
-            <h1 className="text-3xl font-bold mb-3">{l.title}</h1>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-3">{l.title}</h1>
             <p className="text-cyan-300 text-lg">{l.subtitle}</p>
           </motion.div>
 
@@ -896,8 +896,8 @@ export default function SLEExamSimulation() {
 
     return (
       <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white">
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center mb-10">
+        <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-12">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center mb-4 md:mb-6 lg:mb-10">
             <div className={cn(
               "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6",
               passed ? "bg-emerald-500/20" : "bg-amber-500/20"
@@ -908,7 +908,7 @@ export default function SLEExamSimulation() {
                 <Target className="h-12 w-12 text-amber-400" />
               )}
             </div>
-            <h1 className="text-3xl font-bold mb-2">{l.results}</h1>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">{l.results}</h1>
             <p className={cn("text-lg font-medium", passed ? "text-emerald-400" : "text-amber-400")}>
               {passed ? l.passed : l.needsWork}
             </p>
@@ -919,7 +919,7 @@ export default function SLEExamSimulation() {
             <div className="p-6 rounded-xl bg-foundation/50 border border-teal-800 text-center">
               <p className="text-sm text-cyan-300 mb-2">{l.overallLevel}</p>
               <p className={cn(
-                "text-5xl font-bold",
+                "text-2xl md:text-4xl lg:text-5xl font-bold",
                 levelColor === "emerald" && "text-emerald-400",
                 levelColor === "blue" && "text-blue-400",
                 levelColor === "amber" && "text-amber-400"
@@ -929,11 +929,11 @@ export default function SLEExamSimulation() {
             </div>
             <div className="p-6 rounded-xl bg-foundation/50 border border-teal-800 text-center">
               <p className="text-sm text-cyan-300 mb-2">{l.overallScore}</p>
-              <p className="text-5xl font-bold text-white">{examResults.overallScore}%</p>
+              <p className="text-2xl md:text-4xl lg:text-5xl font-bold text-white">{examResults.overallScore}%</p>
             </div>
             <div className="p-6 rounded-xl bg-foundation/50 border border-teal-800 text-center">
               <p className="text-sm text-cyan-300 mb-2">{l.duration}</p>
-              <p className="text-5xl font-bold text-white">{Math.round(examResults.totalDuration / 60)}</p>
+              <p className="text-2xl md:text-4xl lg:text-5xl font-bold text-white">{Math.round(examResults.totalDuration / 60)}</p>
               <p className="text-sm text-white/90">{l.minutes}</p>
             </div>
           </motion.div>

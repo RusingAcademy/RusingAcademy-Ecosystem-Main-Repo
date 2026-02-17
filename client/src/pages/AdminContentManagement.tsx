@@ -614,7 +614,7 @@ export default function AdminContentManagement() {
         
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Content Management</h1>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">Content Management</h1>
             <p className="text-muted-foreground mt-1">
               Manage courses, modules, lessons, and quiz questions
             </p>

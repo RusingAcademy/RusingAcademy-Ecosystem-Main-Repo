@@ -126,7 +126,7 @@ export function NotificationCenter() {
         
         <ScrollArea className="h-[400px]">
           {!notifications || notifications.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+            <div className="flex flex-col items-center justify-center py-6 md:py-8 lg:py-12 text-muted-foreground">
               <Bell className="h-10 w-10 mb-3 opacity-50" />
               <p className="text-sm">
                 {isEn ? "No notifications yet" : "Aucune notification"}

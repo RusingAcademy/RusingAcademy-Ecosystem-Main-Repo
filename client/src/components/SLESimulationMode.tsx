@@ -357,7 +357,7 @@ export function SLESimulationMode({
           </p>
 
           {/* Score Display */}
-          <div className="text-6xl font-bold text-black dark:text-foreground mb-8">
+          <div className="text-3xl md:text-5xl lg:text-6xl font-bold text-black dark:text-foreground mb-8">
             {score}%
           </div>
 

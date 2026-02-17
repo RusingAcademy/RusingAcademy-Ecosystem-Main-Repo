@@ -105,7 +105,7 @@ export default function SetPassword() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
         <Card className="w-full max-w-md">
-          <CardContent className="flex flex-col items-center justify-center py-12">
+          <CardContent className="flex flex-col items-center justify-center py-6 md:py-8 lg:py-12">
             <Loader2 className="h-8 w-8 animate-spin text-teal-500 mb-4" />
             <p className="text-muted-foreground">Validating your link...</p>
           </CardContent>
@@ -118,7 +118,7 @@ export default function SetPassword() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
         <Card className="w-full max-w-md">
-          <CardContent className="flex flex-col items-center justify-center py-12">
+          <CardContent className="flex flex-col items-center justify-center py-6 md:py-8 lg:py-12">
             <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
             <h2 className="text-2xl font-bold text-green-600 mb-2">Password Set Successfully!</h2>
             <p className="text-muted-foreground text-center mb-4">
@@ -135,7 +135,7 @@ export default function SetPassword() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
         <Card className="w-full max-w-md">
-          <CardContent className="flex flex-col items-center justify-center py-12">
+          <CardContent className="flex flex-col items-center justify-center py-6 md:py-8 lg:py-12">
             <XCircle className="h-16 w-16 text-red-500 mb-4" />
             <h2 className="text-2xl font-bold text-red-600 mb-2">Invalid Link</h2>
             <p className="text-muted-foreground text-center mb-4">{error}</p>

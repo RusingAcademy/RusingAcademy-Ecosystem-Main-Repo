@@ -233,9 +233,9 @@ export default function ListeningLab() {
             <div className="space-y-3">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">{t("listening.history")}</h2>
               {!history?.length ? (
-                <div className="text-center py-16" role="status">
+                <div className="text-center py-8 md:py-12 lg:py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                    <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">headphones</span>
+                    <span className="material-icons text-xl md:text-3xl lg:text-4xl text-teal-700/60" aria-hidden="true">headphones</span>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-700 dark:text-muted-foreground mb-2">{t("listening.emptyTitle")}</h3>
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("listening.emptyDesc")}</p>
@@ -278,7 +278,7 @@ export default function ListeningLab() {
                         <h3 className="font-semibold text-gray-900 dark:text-foreground text-lg">{e.title}</h3>
                         <div className="text-sm text-gray-500 mt-1">{e.questions.length} questions</div>
                       </div>
-                      <span className="material-icons text-teal-700 text-3xl" aria-hidden="true">play_circle</span>
+                      <span className="material-icons text-teal-700 text-lg md:text-2xl lg:text-3xl" aria-hidden="true">play_circle</span>
                     </div>
                   </div>
                 ))}
@@ -298,7 +298,7 @@ export default function ListeningLab() {
               </div>
               {/* Audio Player */}
               <div className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm text-center mb-6">
-                <span className="material-icons text-6xl text-teal-700 mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
+                <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-teal-700 mb-4 block" aria-hidden="true">{isPlaying ? "graphic_eq" : "headphones"}</span>
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <button onClick={isPlaying ? stopAudio : playAudio}
                     className="w-14 h-14 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-800 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-700/30"
@@ -374,7 +374,7 @@ export default function ListeningLab() {
             <div role="region" aria-label={t("grammar.drillComplete")}>
               <div className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm text-center mb-8">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
+                  <span className="material-icons text-xl md:text-3xl lg:text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-foreground mb-2">{t("grammar.drillComplete")}</h2>
                 <p className="text-sm text-gray-400 mb-2">
@@ -386,7 +386,7 @@ export default function ListeningLab() {
                   const total = exercise?.questions.length ?? 1;
                   const score = Math.round((correct / total) * 100);
                   return (
-                    <div className="text-4xl font-bold mt-4" style={{ color: score >= 80 ? "var(--semantic-success, #22c55e)" : score >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }} aria-label={`${t("grammar.score")}: ${score}%`}>
+                    <div className="text-xl md:text-3xl lg:text-4xl font-bold mt-4" style={{ color: score >= 80 ? "var(--semantic-success, #22c55e)" : score >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }} aria-label={`${t("grammar.score")}: ${score}%`}>
                       {score}%
                       <div className="text-sm text-gray-500 font-normal mt-1">{correct}/{total} {t("grammar.correct").toLowerCase()}</div>
                     </div>

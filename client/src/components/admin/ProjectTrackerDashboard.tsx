@@ -113,7 +113,7 @@ const KPICard = ({ icon: Icon, label, value, subtitle, progress }: { icon: any; 
       <span className="text-cyan-300 text-sm">{label}</span>
       <Icon className="w-6 h-6 text-emerald-400" />
     </div>
-    <div className="text-4xl font-bold text-white">{value}</div>
+    <div className="text-xl md:text-3xl lg:text-4xl font-bold text-white">{value}</div>
     <div className="text-sm text-cyan-300 mt-2">{subtitle}</div>
     {progress !== undefined && (
       <div className="w-full bg-teal-800 rounded-full h-2 mt-3">
@@ -234,7 +234,7 @@ export default function ProjectTrackerDashboard() {
                   <defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="var(--semantic-success, #10b981)" /><stop offset="100%" stopColor="#14b8a6" /></linearGradient></defs>
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-4xl font-bold">{sprintProgress.toFixed(0)}%</span>
+                  <span className="text-xl md:text-3xl lg:text-4xl font-bold">{sprintProgress.toFixed(0)}%</span>
                   <span className="text-sm text-cyan-300">Complété</span>
                 </div>
               </div>
@@ -286,9 +286,9 @@ export default function ProjectTrackerDashboard() {
         <section className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Video className="w-6 h-6 text-emerald-400" /> Estimation Production Média</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center"><div className="text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-cyan-300 mt-2">Assets Média Total</p><p className="text-xs text-black dark:text-foreground">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
-            <div className="text-center"><div className="text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-cyan-300 mt-2">Mois de Production</p><p className="text-xs text-black dark:text-foreground">Avec équipe dédiée</p></div>
-            <div className="text-center"><div className="text-4xl font-bold text-foundation">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-cyan-300 mt-2">Budget Estimé (CAD)</p><p className="text-xs text-black dark:text-foreground">Incluant AI-assisted production</p></div>
+            <div className="text-center"><div className="text-2xl md:text-4xl lg:text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-cyan-300 mt-2">Assets Média Total</p><p className="text-xs text-black dark:text-foreground">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
+            <div className="text-center"><div className="text-2xl md:text-4xl lg:text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-cyan-300 mt-2">Mois de Production</p><p className="text-xs text-black dark:text-foreground">Avec équipe dédiée</p></div>
+            <div className="text-center"><div className="text-xl md:text-3xl lg:text-4xl font-bold text-foundation">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-cyan-300 mt-2">Budget Estimé (CAD)</p><p className="text-xs text-black dark:text-foreground">Incluant AI-assisted production</p></div>
           </div>
         </section>
       </main>

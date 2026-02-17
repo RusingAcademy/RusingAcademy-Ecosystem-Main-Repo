@@ -321,7 +321,7 @@ export default function SLEProgressDashboard() {
             lvl.bg, lvl.border
           )}>
             <p className="text-xs text-cyan-300 mb-2">{l.overallLevel}</p>
-            <p className={cn("text-6xl font-black", lvl.text)}>{summary.overallLevel}</p>
+            <p className={cn("text-3xl md:text-5xl lg:text-6xl font-black", lvl.text)}>{summary.overallLevel}</p>
             <p className="text-[10px] text-white/90 mt-1">{l.basedOnLast5}</p>
           </div>
 
@@ -331,7 +331,7 @@ export default function SLEProgressDashboard() {
               <Calendar className="h-4 w-4 text-cyan-300" />
               <span className="text-xs text-cyan-300">{l.totalSessions}</span>
             </div>
-            <p className="text-3xl font-bold text-white">{summary.totalSessions}</p>
+            <p className="text-lg md:text-2xl lg:text-3xl font-bold text-white">{summary.totalSessions}</p>
           </div>
 
           {/* Total Minutes */}
@@ -340,7 +340,7 @@ export default function SLEProgressDashboard() {
               <Clock className="h-4 w-4 text-cyan-300" />
               <span className="text-xs text-cyan-300">{l.totalMinutes}</span>
             </div>
-            <p className="text-3xl font-bold text-white">{summary.totalMinutes}</p>
+            <p className="text-lg md:text-2xl lg:text-3xl font-bold text-white">{summary.totalMinutes}</p>
           </div>
 
           {/* Average Score */}
@@ -349,7 +349,7 @@ export default function SLEProgressDashboard() {
               <Target className="h-4 w-4 text-cyan-300" />
               <span className="text-xs text-cyan-300">{l.averageScore}</span>
             </div>
-            <p className="text-3xl font-bold text-white">{summary.averageScore}%</p>
+            <p className="text-lg md:text-2xl lg:text-3xl font-bold text-white">{summary.averageScore}%</p>
             <div className="flex items-center gap-1 mt-1">
               <TrendIcon className={cn("h-3 w-3", trendColor)} />
               <span className={cn("text-[10px]", trendColor)}>{trendLabel}</span>
@@ -362,7 +362,7 @@ export default function SLEProgressDashboard() {
               <Flame className="h-4 w-4 text-orange-400" />
               <span className="text-xs text-cyan-300">{l.streak}</span>
             </div>
-            <p className="text-3xl font-bold text-white">{summary.streakDays}</p>
+            <p className="text-lg md:text-2xl lg:text-3xl font-bold text-white">{summary.streakDays}</p>
             <p className="text-[10px] text-white/90">{l.days}</p>
           </div>
         </motion.div>
@@ -704,7 +704,7 @@ export default function SLEProgressDashboard() {
               })}
             </div>
           ) : (
-            <div className="px-6 py-12 text-center text-white/90">
+            <div className="px-6 py-6 md:py-8 lg:py-12 text-center text-white/90">
               <p>{l.noSessions}</p>
             </div>
           )}

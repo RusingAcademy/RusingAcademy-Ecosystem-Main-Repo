@@ -653,7 +653,7 @@ export default function BadgesPanel({
               <Progress value={progressPercent} className="h-2 bg-white dark:bg-background/10" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-amber-400">
+          <div className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-400">
             {progressPercent}%
           </div>
         </div>

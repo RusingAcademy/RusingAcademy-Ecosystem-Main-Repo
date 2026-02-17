@@ -442,7 +442,7 @@ export default function PreviewMode() {
       {previewTab === "data" && (
         <>
           {isLoading && (
-            <div className="flex items-center justify-center py-12">
+            <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600" />
             </div>
           )}
@@ -599,28 +599,28 @@ export default function PreviewMode() {
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <Users className="w-8 h-8 text-orange-600 mx-auto" />
-                    <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
                     <div className="text-sm text-black dark:text-foreground">Team Members</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BookOpen className="w-8 h-8 text-violet-600 mx-auto" />
-                    <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
                     <div className="text-sm text-black dark:text-foreground">Available Courses</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <GraduationCap className="w-8 h-8 text-emerald-600 mx-auto" />
-                    <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
                     <div className="text-sm text-black dark:text-foreground">Active Enrollments</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <DollarSign className="w-8 h-8 text-blue-600 mx-auto" />
-                    <div className="text-3xl font-bold mt-2">—</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold mt-2">—</div>
                     <div className="text-sm text-black dark:text-foreground">Training Budget</div>
                   </CardContent>
                 </Card>
@@ -665,21 +665,21 @@ export default function PreviewMode() {
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <Users className="w-8 h-8 text-blue-600 mx-auto" />
-                    <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
                     <div className="text-sm text-black dark:text-foreground">Total Users</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BookOpen className="w-8 h-8 text-violet-600 mx-auto" />
-                    <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
                     <div className="text-sm text-black dark:text-foreground">Total Courses</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BarChart3 className="w-8 h-8 text-emerald-600 mx-auto" />
-                    <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
                     <div className="text-sm text-black dark:text-foreground">Total Enrollments</div>
                   </CardContent>
                 </Card>

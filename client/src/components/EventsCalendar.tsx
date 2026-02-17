@@ -209,7 +209,7 @@ export default function EventsCalendar() {
       )}
 
       {!isLoading && filtered.length === 0 && (
-        <div className="text-center py-12">
+        <div className="text-center py-6 md:py-8 lg:py-12">
           <div className="w-16 h-16 rounded-2xl mx-auto mb-3 flex items-center justify-center" style={{ background: "rgba(27, 20, 100, 0.03)" }}>
             <Calendar className="w-8 h-8 text-muted-foreground opacity-30" />
           </div>

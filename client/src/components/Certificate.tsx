@@ -111,7 +111,7 @@ export default function Certificate({
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-serif font-bold text-black dark:text-foreground mb-4 tracking-wide">
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-serif font-bold text-black dark:text-foreground mb-4 tracking-wide">
             {content.title}
           </h1>
 
@@ -119,7 +119,7 @@ export default function Certificate({
           <p className="text-lg text-black dark:text-foreground mb-3">{content.subtitle}</p>
 
           {/* Recipient Name */}
-          <p className="text-3xl font-bold text-teal-700 mb-3 font-serif">
+          <p className="text-lg md:text-2xl lg:text-3xl font-bold text-teal-700 mb-3 font-serif">
             {recipientName}
           </p>
 

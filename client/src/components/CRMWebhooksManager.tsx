@@ -283,7 +283,7 @@ export default function CRMWebhooksManager() {
       {/* Webhooks List */}
       {webhooks.length === 0 ? (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12">
+          <CardContent className="flex flex-col items-center justify-center py-6 md:py-8 lg:py-12">
             <Webhook className="h-12 w-12 text-muted-foreground mb-4" />
             <h3 className="text-lg font-medium">{l.noWebhooks}</h3>
             <p className="text-muted-foreground text-sm mb-4">{l.noWebhooksDesc}</p>

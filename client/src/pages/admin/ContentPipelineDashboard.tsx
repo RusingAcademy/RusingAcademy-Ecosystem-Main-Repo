@@ -164,7 +164,7 @@ export default function ContentPipelineDashboard() {
               </div>
             ) : courses.length === 0 ? (
               <Card>
-                <CardContent className="py-12 text-center">
+                <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                   <BookOpen className="h-10 w-10 mx-auto text-muted-foreground/30 mb-3" />
                   <p className="text-muted-foreground">No courses yet</p>
                   <p className="text-sm text-muted-foreground mt-1">

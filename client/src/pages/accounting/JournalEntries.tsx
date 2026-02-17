@@ -21,7 +21,7 @@ export default function JournalEntries() {
 
       <div className="qb-card">
         {isLoading ? (
-          <div className="flex items-center justify-center py-12">
+          <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
             <Loader2 className="animate-spin text-gray-400" size={24} />
           </div>
         ) : (entries as any[])?.length ? (
@@ -50,7 +50,7 @@ export default function JournalEntries() {
             </tbody>
           </table>
         ) : (
-          <div className="text-center py-12">
+          <div className="text-center py-6 md:py-8 lg:py-12">
             <BookOpen size={48} className="mx-auto text-gray-300 mb-3" />
             <p className="text-gray-500 mb-1">No journal entries yet</p>
             <p className="text-sm text-gray-400">Create your first journal entry to get started</p>

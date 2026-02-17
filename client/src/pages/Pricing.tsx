@@ -365,12 +365,12 @@ export default function Pricing() {
                 {language === "en" && <span className="text-white"> Pricing</span>}
               </h1>
               
-              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10">
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-4 md:mb-6 lg:mb-10">
                 {l.subtitle}
               </p>
 
               {/* Stats with glassmorphism */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-4 md:mb-6 lg:mb-10">
                 {[
                   { value: "$0", label: language === "fr" ? "Pratique IA" : "AI Practice" },
                   { value: COACH_RATES.RANGE_DISPLAY, label: language === "fr" ? "Par heure" : "Per Hour" },
@@ -408,12 +408,12 @@ export default function Pricing() {
 
         {/* Why Choose Us - Value Props */}
         <section 
-          className="py-20 bg-gradient-to-b from-slate-50 to-white"
+          className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-slate-50 to-white"
           ref={(el) => { if (el) sectionRefs.current.set('why', el); }}
           data-section="why"
         >
           <div className="container">
-            <div className={`text-center mb-12 transition-all duration-700 ${
+            <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('why') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyChooseUs}</h2>
@@ -459,7 +459,7 @@ export default function Pricing() {
 
         {/* For Learners - Pricing Cards */}
         <section 
-          className="py-20 relative"
+          className="py-10 md:py-16 lg:py-20 relative"
           aria-labelledby="learners-title"
           ref={(el) => { if (el) sectionRefs.current.set('learners', el); }}
           data-section="learners"
@@ -468,7 +468,7 @@ export default function Pricing() {
             <h2 id="learners-title" className="text-3xl md:text-4xl font-bold mb-4 text-center">
               {l.forLearners}
             </h2>
-            <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-center mb-6 md:mb-8 lg:mb-12 max-w-2xl mx-auto">
               {language === "fr" 
                 ? "Choisissez l'option qui vous convient le mieux"
                 : "Choose the option that works best for you"
@@ -497,7 +497,7 @@ export default function Pricing() {
                   
                   <h3 className="text-2xl font-bold mb-2">{l.aiPractice}</h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold text-teal-600">$0</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-bold text-teal-600">$0</span>
                     <span className="text-muted-foreground ml-2">{language === "fr" ? "pour toujours" : "forever"}</span>
                   </div>
                   <p className="text-muted-foreground mb-6">{l.aiDescription}</p>
@@ -534,7 +534,7 @@ export default function Pricing() {
                   
                   <h3 className="text-2xl font-bold mb-2">{l.coachSessions}</h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold bg-gradient-to-r from-cta to-teal-500 bg-clip-text text-transparent">{l.sessionRange}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cta to-teal-500 bg-clip-text text-transparent">{l.sessionRange}</span>
                     <span className="text-muted-foreground ml-2">{l.perHour}</span>
                   </div>
                   <p className="text-muted-foreground mb-6">{l.sessionDescription}</p>
@@ -564,12 +564,12 @@ export default function Pricing() {
 
         {/* Testimonials Section */}
         <section 
-          className="py-20 bg-gradient-to-b from-white to-slate-50"
+          className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50"
           ref={(el) => { if (el) sectionRefs.current.set('testimonials', el); }}
           data-section="testimonials"
         >
           <div className="container">
-            <div className={`text-center mb-12 transition-all duration-700 ${
+            <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 mb-4">
@@ -599,7 +599,7 @@ export default function Pricing() {
                   </div>
                   
                   {/* Quote icon */}
-                  <div className="text-4xl text-cta200 font-serif mb-2">"</div>
+                  <div className="text-xl md:text-3xl lg:text-4xl text-cta200 font-serif mb-2">"</div>
                   
                   <p className="text-black dark:text-foreground mb-6 italic">{testimonial.quote}</p>
                   
@@ -615,7 +615,7 @@ export default function Pricing() {
 
         {/* For Coaches Section */}
         <section 
-          className="py-20 relative overflow-hidden"
+          className="py-10 md:py-16 lg:py-20 relative overflow-hidden"
           aria-labelledby="coaches-title"
           ref={(el) => { if (el) sectionRefs.current.set('coaches', el); }}
           data-section="coaches"
@@ -623,7 +623,7 @@ export default function Pricing() {
           <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white" />
           
           <div className="container relative z-10">
-            <div className={`text-center mb-12 transition-all duration-700 ${
+            <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('coaches') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <h2 id="coaches-title" className="text-3xl md:text-4xl font-bold mb-4">
@@ -649,7 +649,7 @@ export default function Pricing() {
                         </div>
                         <h4 className="font-semibold text-lg">{l.trialSessions}</h4>
                       </div>
-                      <p className="text-3xl font-bold text-emerald-600 mb-2">
+                      <p className="text-lg md:text-2xl lg:text-3xl font-bold text-emerald-600 mb-2">
                         {l.trialCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.trialDesc}</p>
@@ -663,7 +663,7 @@ export default function Pricing() {
                         </div>
                         <h4 className="font-semibold text-lg">{l.verifiedSLE}</h4>
                       </div>
-                      <p className="text-3xl font-bold text-teal-600 mb-2">
+                      <p className="text-lg md:text-2xl lg:text-3xl font-bold text-teal-600 mb-2">
                         {l.verifiedCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.verifiedDesc}</p>
@@ -677,7 +677,7 @@ export default function Pricing() {
                         </div>
                         <h4 className="font-semibold text-lg">{l.standardCoaches}</h4>
                       </div>
-                      <p className="text-3xl font-bold mb-2">{l.standardCommission}</p>
+                      <p className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">{l.standardCommission}</p>
                       <p className="text-sm text-muted-foreground">{l.standardDesc}</p>
                     </div>
 
@@ -689,7 +689,7 @@ export default function Pricing() {
                         </div>
                         <h4 className="font-semibold text-lg">{l.referralBonus}</h4>
                       </div>
-                      <p className="text-3xl font-bold text-cta600 mb-2">
+                      <p className="text-lg md:text-2xl lg:text-3xl font-bold text-cta600 mb-2">
                         {l.referralCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.referralDesc}</p>
@@ -712,13 +712,13 @@ export default function Pricing() {
 
         {/* FAQ Section */}
         <section 
-          className="py-20"
+          className="py-10 md:py-16 lg:py-20"
           aria-labelledby="faq-title"
           ref={(el) => { if (el) sectionRefs.current.set('faq', el); }}
           data-section="faq"
         >
           <div className="container">
-            <div className={`text-center mb-12 transition-all duration-700 ${
+            <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('faq') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 mb-4">
@@ -767,7 +767,7 @@ export default function Pricing() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
+        <section className="py-10 md:py-16 lg:py-20 relative overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
@@ -791,12 +791,12 @@ export default function Pricing() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/90 mb-10">
+              <p className="text-lg text-white/90 mb-4 md:mb-6 lg:mb-10">
                 {l.ctaSubtitle}
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 md:mb-6 lg:mb-10">
                 <Link href="/prof-steven-ai">
                   <Button size="lg" className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg shadow-teal-500/25 px-8">
                     {l.startPracticing}

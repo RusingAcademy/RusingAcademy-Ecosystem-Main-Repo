@@ -22,7 +22,7 @@ const GrammarDrillsAdmin = () => {
       </div>
 
       {statsLoading ? (
-        <div className="flex items-center justify-center py-12">
+        <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
           <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
         </div>
       ) : (
@@ -80,11 +80,11 @@ const GrammarDrillsAdmin = () => {
             </CardHeader>
             <CardContent>
               {topicsLoading ? (
-                <div className="flex items-center justify-center py-12">
+                <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                   <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
                 </div>
               ) : !topics || (topics as any[]).length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                   <PenTool className="mx-auto h-12 w-12 mb-4" />
                   <h3 className="text-lg font-semibold mb-2">No drill results yet</h3>
                   <p className="text-sm">Topics will appear here once learners complete grammar drills.</p>
@@ -123,11 +123,11 @@ const GrammarDrillsAdmin = () => {
             </CardHeader>
             <CardContent>
               {resultsLoading ? (
-                <div className="flex items-center justify-center py-12">
+                <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                   <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
                 </div>
               ) : !results || (results as any[]).length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                   <BookOpen className="mx-auto h-12 w-12 mb-4" />
                   <p>No drill results yet.</p>
                 </div>

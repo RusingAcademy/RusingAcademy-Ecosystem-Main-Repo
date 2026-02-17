@@ -237,9 +237,9 @@ export default function BarholexHome() {
         </section>
 
         {/* Services Section */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Our Services" : "Nos services"}
               </h2>
@@ -276,9 +276,9 @@ export default function BarholexHome() {
         </section>
 
         {/* Portfolio Preview */}
-        <section className="py-20 px-4 bg-gradient-to-br from-obsidian to-teal-950">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-obsidian to-teal-950">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Featured Work" : "Travaux en vedette"}
               </h2>
@@ -328,9 +328,9 @@ export default function BarholexHome() {
         </section>
 
         {/* Clients Section */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Trusted By" : "Ils nous font confiance"}
               </h2>
@@ -353,13 +353,13 @@ export default function BarholexHome() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-r from-barholex-gold to-amber-600">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-r from-barholex-gold to-amber-600">
           <div className="container mx-auto">
             <div className="max-w-3xl mx-auto text-center text-black dark:text-foreground">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {language === "en" ? "Ready to Create Something Amazing?" : "Prêt à créer quelque chose d'incroyable?"}
               </h2>
-              <p className="text-xl text-black dark:text-foreground/80 mb-10">
+              <p className="text-xl text-black dark:text-foreground/80 mb-4 md:mb-6 lg:mb-10">
                 {language === "en"
                   ? "Let's discuss your next project and bring your vision to life"
                   : "Discutons de votre prochain projet et donnons vie à votre vision"

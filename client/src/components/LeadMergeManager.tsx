@@ -459,7 +459,7 @@ export default function LeadMergeManager() {
 
       {selectedLeads.length === 0 && (
         <Card>
-          <CardContent className="py-12">
+          <CardContent className="py-6 md:py-8 lg:py-12">
             <p className="text-center text-muted-foreground">{l.noLeadsSelected}</p>
           </CardContent>
         </Card>

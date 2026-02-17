@@ -496,7 +496,7 @@ export default function Automations() {
 
       <div className="space-y-3">
         {filtered.length === 0 ? (
-          <div className="text-center py-12">
+          <div className="text-center py-6 md:py-8 lg:py-12">
             <Zap className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
             <p className="text-lg font-medium">No automations yet</p>
             <p className="text-sm text-muted-foreground mb-4">Create your first automation from a template</p>

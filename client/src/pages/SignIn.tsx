@@ -15,7 +15,7 @@ export default function SignIn() {
       <div className="relative z-10 w-full max-w-md">
         {/* Logo and branding */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 mb-2">
             Welcome Back
           </h1>
           <p className="text-black dark:text-foreground">

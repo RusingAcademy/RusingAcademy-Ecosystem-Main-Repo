@@ -625,12 +625,12 @@ export default function BecomeCoachNew() {
                 </h1>
 
                 {/* Lead text with better styling */}
-                <p className="text-lg md:text-xl text-black dark:text-foreground mb-10 leading-relaxed">
+                <p className="text-lg md:text-xl text-black dark:text-foreground mb-4 md:mb-6 lg:mb-10 leading-relaxed">
                   {l.heroLead}
                 </p>
 
                 {/* Benefits list with glassmorphism cards */}
-                <div className="space-y-3 mb-10">
+                <div className="space-y-3 mb-4 md:mb-6 lg:mb-10">
                   {l.heroBenefits.map((benefit, i) => {
                     const Icon = benefit.icon;
                     return (
@@ -714,9 +714,9 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* How It Works Section - Premium Editorial Layout */}
-        <section className="py-24 bg-gradient-to-b from-white to-slate-50">
+        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50">
           <div className="container">
-            <div className="text-center mb-20">
+            <div className="text-center mb-10 md:mb-16 lg:mb-20">
               <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 mb-4">
                 <Sparkles className="h-3 w-3 mr-1" />
                 {isEn ? "Simple Process" : "Processus Simple"}
@@ -730,7 +730,7 @@ export default function BecomeCoachNew() {
                 <div 
                   key={i} 
                   className={cn(
-                    "grid md:grid-cols-[140px_1fr] gap-8 md:gap-12 pb-16 mb-16 relative",
+                    "grid md:grid-cols-[140px_1fr] gap-8 md:gap-12 pb-16 mb-8 md:mb-12 lg:mb-16 relative",
                     i < l.steps.length - 1 && "border-b border-slate-200"
                   )}
                 >
@@ -759,7 +759,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Requirements Section - Premium Design */}
-        <section className="py-24 relative overflow-hidden" style={{background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'}}>
+        <section className="py-12 md:py-16 lg:py-24 relative overflow-hidden" style={{background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'}}>
           {/* Decorative background */}
           <div className="absolute inset-0 opacity-50">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-100 rounded-full blur-3xl" />
@@ -767,7 +767,7 @@ export default function BecomeCoachNew() {
           </div>
           
           <div className="container relative">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="bg-white dark:bg-background text-emerald-700 border-emerald-200 shadow-sm mb-4">
                 <Award className="h-3 w-3 mr-1" />
                 {isEn ? "Join Our Team" : "Rejoignez Notre Équipe"}
@@ -841,7 +841,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Safety & Trust Section - Premium Design */}
-        <section className="py-24 bg-gradient-to-br from-obsidian via-teal-900 to-emerald-900 relative overflow-hidden">
+        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-obsidian via-teal-900 to-emerald-900 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
@@ -849,7 +849,7 @@ export default function BecomeCoachNew() {
           </div>
           
           <div className="container relative">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-white dark:bg-background/10 text-emerald-300 border-emerald-500/30 backdrop-blur-sm">
                 <Shield className="h-4 w-4 mr-2" />
                 {isEn ? "Your Security Matters" : "Votre sécurité compte"}
@@ -882,9 +882,9 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Why Coaches Love Lingueefy - Premium Design */}
-        <section className="py-24 bg-white dark:bg-background relative">
+        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative">
           <div className="container">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 border-emerald-200">
                 <Star className="h-3 w-3 mr-1 fill-emerald-500" />
                 {isEn ? "Benefits" : "Avantages"}
@@ -929,7 +929,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Earning Potential - Premium Design */}
-        <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0 opacity-30">
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-emerald-100 rounded-full blur-3xl" />
@@ -981,7 +981,7 @@ export default function BecomeCoachNew() {
                       {l.earningExamples.map((example, i) => (
                         <div key={i} className={`flex justify-between items-center py-4 ${i < l.earningExamples.length - 1 ? "border-b border-white/60" : ""}`}>
                           <span className="text-emerald-200 text-lg">{example.sessions}</span>
-                          <span className="text-3xl font-black bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">{example.amount}</span>
+                          <span className="text-lg md:text-2xl lg:text-3xl font-black bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">{example.amount}</span>
                         </div>
                       ))}
                     </div>
@@ -994,9 +994,9 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Testimonials - Premium Design */}
-        <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative">
+        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50 relative">
           <div className="container">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta700 border-orange-100">
                 <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
@@ -1050,9 +1050,9 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* FAQ Section - Premium Design */}
-        <section className="py-24 bg-white dark:bg-background">
+        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background">
           <div className="container">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-white dark:bg-background text-emerald-700 border-emerald-200 shadow-sm">
                 <HelpCircle className="h-3 w-3 mr-1" />
                 {isEn ? "FAQ" : "FAQ"}
@@ -1091,7 +1091,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
+        <section className="relative py-10 md:py-16 lg:py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

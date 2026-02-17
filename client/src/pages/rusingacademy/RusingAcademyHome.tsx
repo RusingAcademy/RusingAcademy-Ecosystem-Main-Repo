@@ -285,9 +285,9 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Path Series Section */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {language === "en" ? "GC Bilingual Mastery Series" : "Série Maîtrise Bilingue GC"}
               </h2>
@@ -332,9 +332,9 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy?"}
               </h2>
@@ -365,9 +365,9 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Packages Section */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {language === "en" ? "Flexible Packages" : "Forfaits flexibles"}
               </h2>
@@ -403,7 +403,7 @@ export default function RusingAcademyHome() {
                     {language === "en" ? pkg.nameEn : pkg.nameFr}
                   </h3>
                   <div className="mb-4">
-                    <span className="text-3xl font-bold text-black dark:text-foreground">{pkg.price}</span>
+                    <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{pkg.price}</span>
                     <span className="text-black dark:text-foreground">{language === "en" ? pkg.periodEn : pkg.periodFr}</span>
                   </div>
                   <ul className="space-y-3 mb-6">
@@ -432,9 +432,9 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-obsidian to-gray-800">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-obsidian to-gray-800">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 {language === "en" ? "Trusted by Government Leaders" : "Approuvé par les leaders gouvernementaux"}
               </h2>
@@ -468,13 +468,13 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-r from-[#E07B39] to-[#C45E1A]">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-r from-[#E07B39] to-[#C45E1A]">
           <div className="container mx-auto">
             <div className="max-w-3xl mx-auto text-center text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {language === "en" ? "Ready to Transform Your Team?" : "Prêt à transformer votre équipe?"}
               </h2>
-              <p className="text-xl text-white/90 mb-10">
+              <p className="text-xl text-white/90 mb-4 md:mb-6 lg:mb-10">
                 {language === "en"
                   ? "Get a customized proposal for your organization's bilingual training needs"
                   : "Obtenez une proposition personnalisée pour les besoins de formation bilingue de votre organisation"

@@ -524,7 +524,7 @@ export default function CRMLeadImport() {
       {step === "importing" && (
         <Card>
           <CardContent className="pt-6">
-            <div className="text-center py-12">
+            <div className="text-center py-6 md:py-8 lg:py-12">
               <Loader2 className="h-16 w-16 mx-auto mb-4 animate-spin text-primary" />
               <p className="text-lg font-medium mb-4">{l.importing}</p>
               <Progress value={importProgress} className="max-w-md mx-auto" />
@@ -544,12 +544,12 @@ export default function CRMLeadImport() {
 
               <div className="flex justify-center gap-8 mb-6">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-green-600">{importResults.success}</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-green-600">{importResults.success}</p>
                   <p className="text-sm text-muted-foreground">{l.leadsImported}</p>
                 </div>
                 {importResults.failed > 0 && (
                   <div className="text-center">
-                    <p className="text-3xl font-bold text-red-600">{importResults.failed}</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-red-600">{importResults.failed}</p>
                     <p className="text-sm text-muted-foreground">{l.leadsFailed}</p>
                   </div>
                 )}

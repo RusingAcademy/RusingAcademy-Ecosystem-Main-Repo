@@ -57,7 +57,7 @@ export default function AdminGamification() {
           </div>
         </div>
         <Card>
-          <CardContent className="py-12 text-center">
+          <CardContent className="py-6 md:py-8 lg:py-12 text-center">
             <p className="text-muted-foreground">Unable to load gamification data. Please try again.</p>
             <Button variant="outline" className="mt-4" onClick={() => refetchStats()}>
               <RefreshCw className="h-4 w-4 mr-2" /> Retry

@@ -136,7 +136,7 @@ export default function ModerationPage() {
               ))}
             </div>
           ) : reports.data?.reports.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="flex flex-col items-center justify-center py-8 md:py-12 lg:py-16 text-center">
               <Check className="w-12 h-12 text-green-500 mb-3" />
               <p className="text-lg font-semibold">All clear</p>
               <p className="text-sm text-muted-foreground">
@@ -266,7 +266,7 @@ export default function ModerationPage() {
               ))}
             </div>
           ) : suspensions.data?.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="flex flex-col items-center justify-center py-8 md:py-12 lg:py-16 text-center">
               <Check className="w-12 h-12 text-green-500 mb-3" />
               <p className="text-lg font-semibold">No active suspensions</p>
               <p className="text-sm text-muted-foreground">

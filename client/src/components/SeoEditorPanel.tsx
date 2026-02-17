@@ -412,7 +412,7 @@ export default function SeoEditorPanel({
         </DialogHeader>
 
         {isLoading ? (
-          <div className="flex-1 flex items-center justify-center py-12">
+          <div className="flex-1 flex items-center justify-center py-6 md:py-8 lg:py-12">
             <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
           </div>
         ) : (

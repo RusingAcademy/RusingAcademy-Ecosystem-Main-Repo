@@ -417,7 +417,7 @@ export default function AdminSettings() {
                 {activityQuery.isLoading ? (
                   <div className="flex items-center gap-2 text-muted-foreground py-8 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading activity log...</div>
                 ) : (activityQuery.data as any[] || []).length === 0 ? (
-                  <div className="text-center py-12 text-muted-foreground">
+                  <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                     <History className="h-10 w-10 mx-auto mb-3 opacity-30" />
                     <p className="text-sm">No activity recorded yet. Actions will appear here as admins make changes.</p>
                   </div>

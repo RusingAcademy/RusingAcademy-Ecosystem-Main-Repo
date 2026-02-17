@@ -89,7 +89,7 @@ export default function StreakCard() {
                 <div className="absolute inset-0 bg-gradient-to-t from-cta/20 to-red-500/20 rounded-full blur-xl" />
               </div>
             )}
-            <div className={`relative text-6xl font-black ${
+            <div className={`relative text-3xl md:text-5xl lg:text-6xl font-black ${
               streak.currentStreak > 0 
                 ? 'bg-gradient-to-br from-cta to-red-500 bg-clip-text text-transparent' 
                 : 'text-white/90'

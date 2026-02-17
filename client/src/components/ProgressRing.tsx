@@ -47,7 +47,7 @@ export function ProgressRing({
     sm: { dimension: 64, defaultStroke: 6, fontSize: "text-sm", labelSize: "text-xs" },
     md: { dimension: 96, defaultStroke: 8, fontSize: "text-xl", labelSize: "text-xs" },
     lg: { dimension: 128, defaultStroke: 10, fontSize: "text-2xl", labelSize: "text-sm" },
-    xl: { dimension: 160, defaultStroke: 12, fontSize: "text-3xl", labelSize: "text-sm" },
+    xl: { dimension: 160, defaultStroke: 12, fontSize: "text-lg md:text-2xl lg:text-3xl", labelSize: "text-sm" },
   };
 
   const config = sizeConfig[size];

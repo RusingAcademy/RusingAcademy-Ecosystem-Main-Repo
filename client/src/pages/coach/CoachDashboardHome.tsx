@@ -114,7 +114,7 @@ export default function CoachDashboardHome() {
                 </div>
               ) : upcomingSessions.length === 0 ? (
                 <div className="text-center py-8">
-                  <span className="material-icons text-gray-300 text-4xl">event_available</span>
+                  <span className="material-icons text-gray-300 text-xl md:text-3xl lg:text-4xl">event_available</span>
                   <p className="text-sm text-gray-500 mt-2">
                     {lang === "fr" ? "Aucune session à venir" : "No upcoming sessions"}
                   </p>
@@ -179,7 +179,7 @@ export default function CoachDashboardHome() {
                 </div>
               ) : learners.length === 0 ? (
                 <div className="text-center py-6">
-                  <span className="material-icons text-gray-300 text-3xl">school</span>
+                  <span className="material-icons text-gray-300 text-lg md:text-2xl lg:text-3xl">school</span>
                   <p className="text-xs text-gray-500 mt-1">
                     {lang === "fr" ? "Aucun étudiant pour le moment" : "No students yet"}
                   </p>

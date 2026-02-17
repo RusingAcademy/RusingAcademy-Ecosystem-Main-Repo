@@ -222,7 +222,7 @@ export default function CourseSuccess() {
       </section>
 
       {/* Next Steps Section */}
-      <section className="py-12 bg-white dark:bg-background">
+      <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-background">
         <div className="container px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-8 text-center">
             {l.nextStepsTitle}
@@ -259,7 +259,7 @@ export default function CourseSuccess() {
       </section>
 
       {/* What's Included Section */}
-      <section className="py-12 bg-gradient-to-b from-slate-50 to-white">
+      <section className="py-6 md:py-8 lg:py-12 bg-gradient-to-b from-slate-50 to-white">
         <div className="container px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-8 text-center">
             {l.whatIncluded}
@@ -302,7 +302,7 @@ export default function CourseSuccess() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-600 to-teal-700">
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-teal-600 to-teal-700">
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
           <GraduationCap className="w-12 h-12 text-white/90 mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">

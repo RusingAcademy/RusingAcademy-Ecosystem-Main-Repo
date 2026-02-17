@@ -561,7 +561,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
               {/* Activity Content */}
               <CardContent className="p-0">
                 {activityLoading ? (
-                  <div className="flex items-center gap-2 py-12 justify-center text-muted-foreground">
+                  <div className="flex items-center gap-2 py-6 md:py-8 lg:py-12 justify-center text-muted-foreground">
                     <Loader2 className="h-5 w-5 animate-spin" />
                     <span className="text-sm">{isEn ? "Loading content..." : "Chargement du contenu..."}</span>
                   </div>

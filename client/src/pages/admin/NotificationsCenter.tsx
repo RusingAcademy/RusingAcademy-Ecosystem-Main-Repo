@@ -209,7 +209,7 @@ export default function NotificationsCenter() {
       <div className="space-y-2">
         {filtered.length === 0 ? (
           <Card>
-            <CardContent className="py-12 text-center">
+            <CardContent className="py-6 md:py-8 lg:py-12 text-center">
               <Bell className="w-12 h-12 text-white/90 mx-auto mb-3" />
               <p className="text-black dark:text-foreground font-medium">No notifications</p>
               <p className="text-cyan-300 text-sm mt-1">You're all caught up!</p>

@@ -107,7 +107,7 @@ export default function AdminCertificates() {
               ))}
             </div>
           ) : certs.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">
+            <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
               <Award className="h-12 w-12 mx-auto mb-3 opacity-30" />
               <p>No certificates have been issued yet.</p>
               <p className="text-sm mt-1">Certificates are auto-generated when learners complete courses.</p>

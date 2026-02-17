@@ -329,7 +329,7 @@ export default function SLEDiagnostic() {
               <p className="text-lg text-muted-foreground mb-8">{l.pricingDesc}</p>
               <Card className="max-w-md mx-auto">
                 <CardContent className="pt-8">
-                  <div className="text-5xl font-bold mb-2">{l.pricingPrice}</div>
+                  <div className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2">{l.pricingPrice}</div>
                   <p className="text-muted-foreground mb-6">{l.pricingIncludes}</p>
                   <Link href="/booking">
                     <Button 

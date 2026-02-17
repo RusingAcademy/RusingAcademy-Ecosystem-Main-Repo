@@ -747,19 +747,19 @@ export default function CurriculumPathSeries() {
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
                 <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-cta">6</div>
+                  <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cta">6</div>
                   <div className="text-sm text-white/90">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
                 </div>
                 <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-cta">180</div>
+                  <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cta">180</div>
                   <div className="text-sm text-white/90">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
                 </div>
                 <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-cta">3-4x</div>
+                  <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cta">3-4x</div>
                   <div className="text-sm text-white/90">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
                 </div>
                 <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-cta">94%</div>
+                  <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cta">94%</div>
                   <div className="text-sm text-white/90">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
                 </div>
               </div>
@@ -784,14 +784,14 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* About the Program Section */}
-        <section className="py-16 bg-white dark:bg-background">
+        <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
           <div className="container">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "About the Program" : "À Propos du Programme"}
                 </p>
-                <h2 className="text-3xl font-bold text-foundation mb-6">
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation mb-6">
                   {isEn ? "The GC Bilingual Mastery Series" : "La Série Maîtrise Bilingue GC"}
                 </h2>
               </div>
@@ -815,14 +815,14 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Path Series Methodology Section */}
-        <section className="py-16 bg-orange-50">
+        <section className="py-8 md:py-12 lg:py-16 bg-orange-50">
           <div className="container">
             <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "Our Approach" : "Notre Approche"}
                 </p>
-                <h2 className="text-3xl font-bold text-foundation mb-6">
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation mb-6">
                   {isEn ? "The Path Series™ Methodology" : "La Méthodologie Path Series™"}
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -833,7 +833,7 @@ export default function CurriculumPathSeries() {
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-background rounded-2xl p-8 md:p-10 shadow-lg mb-12">
+              <div className="bg-white dark:bg-background rounded-2xl p-8 md:p-10 shadow-lg mb-6 md:mb-8 lg:mb-12">
                 <p className="text-lg text-foundation leading-relaxed">
                   {isEn 
                     ? "Each Path (I through VI) corresponds to a specific CEFR level and is designed as a self-contained, intensive learning experience that builds systematically on previous competencies. This ensures that every learner progresses at the optimal pace while maintaining the depth of understanding required for true bilingual proficiency."
@@ -874,14 +874,14 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Curriculum Design Philosophy Section */}
-        <section className="py-16 bg-white dark:bg-background">
+        <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
           <div className="container">
             <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "Design Philosophy" : "Philosophie de Conception"}
                 </p>
-                <h2 className="text-3xl font-bold text-foundation mb-6">
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation mb-6">
                   {isEn ? "Curriculum Design Philosophy" : "Philosophie de Conception du Curriculum"}
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -918,14 +918,14 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Double-Modality Learning Architecture Section */}
-        <section className="py-16 bg-orange-50">
+        <section className="py-8 md:py-12 lg:py-16 bg-orange-50">
           <div className="container">
             <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                   {isEn ? "Learning Architecture" : "Architecture d'Apprentissage"}
                 </p>
-                <h2 className="text-3xl font-bold text-foundation mb-6">
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation mb-6">
                   {isEn ? "Double-Modality Learning Architecture" : "Architecture d'Apprentissage à Double Modalité"}
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -1030,13 +1030,13 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Why Path Series Section */}
-        <section className="py-16 bg-white dark:bg-background">
+        <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                 {isEn ? "Why Path Series™" : "Pourquoi Path Series™"}
               </p>
-              <h2 className="text-3xl font-bold text-foundation">
+              <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation">
                 {isEn ? "Built for Federal Success" : "Conçu pour la Réussite Fédérale"}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
@@ -1089,7 +1089,7 @@ export default function CurriculumPathSeries() {
               <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                 {isEn ? "Our Crash Courses" : "Nos Cours Intensifs"}
               </p>
-              <h2 className="text-3xl font-bold text-foundation mb-4">
+              <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation mb-4">
                 {isEn ? "The Six Paths to Bilingual Mastery" : "Les Six Parcours vers la Maîtrise Bilingue"}
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -1134,7 +1134,7 @@ export default function CurriculumPathSeries() {
             </div>
 
             {/* Path Tabs */}
-            <div className="flex flex-wrap justify-center gap-2 mb-12">
+            <div className="flex flex-wrap justify-center gap-2 mb-6 md:mb-8 lg:mb-12">
               {activePathData.map((path) => (
                 <button
                   key={path.id}
@@ -1164,7 +1164,7 @@ export default function CurriculumPathSeries() {
                 {/* Path Info */}
                 <div className="lg:col-span-2 space-y-6">
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-4xl">{currentPath.icon}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl">{currentPath.icon}</span>
                     <Badge className={`bg-gradient-to-r ${currentPath.color} text-white`}>
                       {currentPath.level}
                     </Badge>
@@ -1176,7 +1176,7 @@ export default function CurriculumPathSeries() {
                   </div>
 
                   <div>
-                    <h2 className="text-3xl font-bold text-foundation mb-2">
+                    <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation mb-2">
                       {isEn ? currentPath.title : currentPath.titleFr}
                     </h2>
                     <p className="text-lg text-cta font-medium">
@@ -1274,11 +1274,11 @@ export default function CurriculumPathSeries() {
                         {FREE_ACCESS_MODE ? (
                           <>
                             <span className="text-lg line-through opacity-70">${currentPath.price}</span>
-                            <span className="text-4xl font-bold">{isEn ? "Free" : "Gratuit"}</span>
+                            <span className="text-xl md:text-3xl lg:text-4xl font-bold">{isEn ? "Free" : "Gratuit"}</span>
                           </>
                         ) : (
                           <>
-                            <span className="text-4xl font-bold">${currentPath.price}</span>
+                            <span className="text-xl md:text-3xl lg:text-4xl font-bold">${currentPath.price}</span>
                             <span className="text-lg line-through opacity-70">${currentPath.originalPrice}</span>
                           </>
                         )}
@@ -1339,13 +1339,13 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-16 bg-white dark:bg-background">
+        <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
                 {isEn ? "Success Stories" : "Témoignages de Réussite"}
               </p>
-              <h2 className="text-3xl font-bold text-foundation">
+              <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation">
                 {isEn ? "What Our Students Say" : "Ce Que Disent Nos Étudiants"}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
@@ -1386,9 +1386,9 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-foundation to-teal-700">
+        <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-foundation to-teal-700">
           <div className="container text-center">
-            <h2 className="text-3xl font-bold text-white mb-4" style={{color: '#f8f7f7'}}>
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-4" style={{color: '#f8f7f7'}}>
               {isEn ? "Ready to Start Your Journey?" : "Prêt à Commencer Votre Parcours?"}
             </h2>
             <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{color: 'var(--color-white, #ffffff)'}}>

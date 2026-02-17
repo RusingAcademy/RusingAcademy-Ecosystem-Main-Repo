@@ -135,7 +135,7 @@ export default function DiscussionBoards() {
               )}
             </>
           ) : (
-            <div className="text-center py-12 text-gray-400">Thread not found</div>
+            <div className="text-center py-6 md:py-8 lg:py-12 text-gray-400">Thread not found</div>
           )}
         </div>
       </DashboardLayout>
@@ -225,8 +225,8 @@ export default function DiscussionBoards() {
         {threads.isLoading ? (
           <div className="space-y-3">{[1,2,3,4].map(i => <div key={i} className="h-24 bg-gray-100 dark:bg-card rounded-xl animate-pulse" />)}</div>
         ) : (threads.data || []).length === 0 ? (
-          <div className="text-center py-16">
-            <span className="material-icons text-gray-300 text-5xl mb-3">forum</span>
+          <div className="text-center py-8 md:py-12 lg:py-16">
+            <span className="material-icons text-gray-300 text-2xl md:text-4xl lg:text-5xl mb-3">forum</span>
             <h3 className="text-lg font-semibold text-gray-700 dark:text-muted-foreground mb-1">No discussions yet</h3>
             <p className="text-sm text-gray-400">Start the conversation by creating the first thread!</p>
           </div>

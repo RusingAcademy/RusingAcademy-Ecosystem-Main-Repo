@@ -131,7 +131,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-4xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold mb-4">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">{section.title}</h2>}
             {section.subtitle && <p className="text-lg opacity-70 mb-6">{section.subtitle}</p>}
             <div
               className="prose prose-lg max-w-none"
@@ -146,12 +146,12 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-6xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-4">{section.title}</h2>}
-            {section.subtitle && <p className="text-lg opacity-70 text-center mb-12 max-w-2xl mx-auto">{section.subtitle}</p>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-4">{section.title}</h2>}
+            {section.subtitle && <p className="text-lg opacity-70 text-center mb-6 md:mb-8 lg:mb-12 max-w-2xl mx-auto">{section.subtitle}</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((f: any, i: number) => (
                 <div key={i} className="p-6 rounded-xl border bg-white dark:bg-background/5 backdrop-blur-sm">
-                  {f.icon && <div className="text-3xl mb-3">{f.icon}</div>}
+                  {f.icon && <div className="text-lg md:text-2xl lg:text-3xl mb-3">{f.icon}</div>}
                   <h3 className="text-xl font-semibold mb-2">{f.title || `Feature ${i + 1}`}</h3>
                   <p className="opacity-70">{f.description || ""}</p>
                 </div>
@@ -166,7 +166,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-6xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-12">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-6 md:mb-8 lg:mb-12">{section.title}</h2>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {testimonials.map((t: any, i: number) => (
                 <div key={i} className="p-6 rounded-xl border bg-white dark:bg-background/5">
@@ -212,7 +212,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-6xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-8">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-8">{section.title}</h2>}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {images.map((img: any, i: number) => (
                 <div key={i} className="aspect-square rounded-lg overflow-hidden">
@@ -228,7 +228,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-4xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-8">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-8">{section.title}</h2>}
             <div className="aspect-video rounded-xl overflow-hidden border shadow-lg">
               {content.embedUrl ? (
                 <iframe src={content.embedUrl} className="w-full h-full" allowFullScreen allow="autoplay; encrypted-media" />
@@ -249,7 +249,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-3xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-8">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-8">{section.title}</h2>}
             <div className="space-y-4">
               {faqs.map((faq: any, i: number) => (
                 <details key={i} className="group border rounded-lg">
@@ -271,13 +271,13 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-6xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-4">{section.title}</h2>}
-            {section.subtitle && <p className="text-lg opacity-70 text-center mb-12">{section.subtitle}</p>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-4">{section.title}</h2>}
+            {section.subtitle && <p className="text-lg opacity-70 text-center mb-6 md:mb-8 lg:mb-12">{section.subtitle}</p>}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {plans.map((plan: any, i: number) => (
                 <div key={i} className={`p-8 rounded-xl border ${plan.featured ? "border-primary ring-2 ring-primary/20 scale-105" : ""}`}>
                   <h3 className="text-xl font-bold mb-2">{plan.name || `Plan ${i + 1}`}</h3>
-                  <p className="text-3xl font-bold mb-4">{plan.price || "$0"}<span className="text-sm font-normal opacity-60">/{plan.interval || "mo"}</span></p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">{plan.price || "$0"}<span className="text-sm font-normal opacity-60">/{plan.interval || "mo"}</span></p>
                   <ul className="space-y-2 mb-6">
                     {(plan.features || []).map((f: string, j: number) => (
                       <li key={j} className="flex items-center gap-2 text-sm">
@@ -300,11 +300,11 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-6xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-8">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-8">{section.title}</h2>}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {stats.map((stat: any, i: number) => (
                 <div key={i}>
-                  <p className="text-4xl font-bold">{stat.value || "0"}</p>
+                  <p className="text-xl md:text-3xl lg:text-4xl font-bold">{stat.value || "0"}</p>
                   <p className="text-sm opacity-70 mt-1">{stat.label || `Stat ${i + 1}`}</p>
                 </div>
               ))}
@@ -318,7 +318,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-6xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-8">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-8">{section.title}</h2>}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {members.map((m: any, i: number) => (
                 <div key={i} className="text-center">
@@ -336,7 +336,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-2xl mx-auto px-6">
-            {section.title && <h2 className="text-3xl font-bold text-center mb-8">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-8">{section.title}</h2>}
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-2 gap-4">
                 <input type="text" placeholder="Name" className="p-3 border rounded-lg w-full" />
@@ -353,7 +353,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-xl mx-auto px-6 text-center">
-            {section.title && <h2 className="text-3xl font-bold mb-4">{section.title}</h2>}
+            {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">{section.title}</h2>}
             {section.subtitle && <p className="opacity-70 mb-6">{section.subtitle}</p>}
             <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
               <input type="email" placeholder="Your email" className="flex-1 p-3 border rounded-lg" />
@@ -414,7 +414,7 @@ export default function CMSPage() {
   if (!page) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
+        <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-4">Page Not Found</h1>
         <p className="text-muted-foreground mb-6">This page doesn't exist or hasn't been published yet.</p>
         <Button asChild><a href="/">Go Home</a></Button>
       </div>

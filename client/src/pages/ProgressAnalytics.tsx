@@ -101,7 +101,7 @@ export default function ProgressAnalytics() {
                         strokeDasharray={`${(overallScore / 100) * 327} 327`} strokeLinecap="round" />
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-3xl font-bold text-gray-900">{overallScore}%</span>
+                      <span className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900">{overallScore}%</span>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500">Overall Proficiency</div>
@@ -141,7 +141,7 @@ export default function ProgressAnalytics() {
                   { label: "Badges", value: badges.length, icon: "emoji_events", color: "var(--color-violet-500, #8b5cf6)" },
                 ].map((s, i) => (
                   <div key={i} className="bg-white dark:bg-background rounded-2xl p-5 border border-gray-100 dark:border-border shadow-sm text-center">
-                    <span className="material-icons text-3xl mb-2" style={{ color: s.color }}>{s.icon}</span>
+                    <span className="material-icons text-lg md:text-2xl lg:text-3xl mb-2" style={{ color: s.color }}>{s.icon}</span>
                     <div className="text-2xl font-bold text-gray-900">{s.value}</div>
                     <div className="text-xs text-gray-500 mt-1">{s.label}</div>
                   </div>
@@ -261,7 +261,7 @@ export default function ProgressAnalytics() {
                 </div>
               ) : (
                 <div className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm text-center text-gray-400">
-                  <span className="material-icons text-4xl mb-2 block">show_chart</span>
+                  <span className="material-icons text-xl md:text-3xl lg:text-4xl mb-2 block">show_chart</span>
                   <p>Complete more exercises to see trends.</p>
                   <p className="text-sm mt-1">At least 2 reading exercises needed.</p>
                 </div>
