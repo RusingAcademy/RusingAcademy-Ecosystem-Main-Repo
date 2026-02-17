@@ -91,15 +91,6 @@ export default function CoachProfile() {
   const [activeTab, setActiveTab] = useState("about");
   const [showReviewModal, setShowReviewModal] = useState(false);
   
-  // Auto-open booking dialog from ?book=trial query param
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("book") === "trial" && coach) {
-      setSessionType("trial");
-      setBookingDialogOpen(true);
-    }
-  }, [coach]);
-
   // Start conversation mutation
   const startConvMutation = trpc.message.startConversation.useMutation();
 
@@ -123,6 +114,15 @@ export default function CoachProfile() {
     { slug: slug || "" },
     { enabled: !!slug }
   );
+
+  // Auto-open booking dialog from ?book=trial query param
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("book") === "trial" && coach) {
+      setSessionType("trial");
+      setBookingDialogOpen(true);
+    }
+  }, [coach]);
 
   // Fetch coach reviews
   const { data: reviews, refetch: refetchReviews } = trpc.coach.reviews.useQuery(
