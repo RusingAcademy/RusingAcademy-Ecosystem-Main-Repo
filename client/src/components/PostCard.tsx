@@ -112,8 +112,7 @@ export default function PostCard({ post }: { post: Post }) {
       {/* Author row */}
       <div className="flex items-center gap-3 mb-4">
         <div className="avatar-ring">
-          <img
-            src={post.author.avatar}
+          <img loading="lazy" decoding="async"             src={post.author.avatar}
             alt={post.author.name}
             className="w-10 h-10 rounded-full object-cover"
           />
@@ -263,8 +262,7 @@ export default function PostCard({ post }: { post: Post }) {
         {/* Thumbnail with overlay */}
         {post.image && (
           <div className="relative w-24 h-20 rounded-xl overflow-hidden shrink-0 hidden sm:block group/thumb">
-            <img
-              src={post.image}
+            <img loading="lazy" decoding="async"               src={post.image}
               alt=""
               className="w-full h-full object-cover transition-transform duration-300 group-hover/thumb:scale-110"
             />

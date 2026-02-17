@@ -402,7 +402,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                   <div className="flex flex-col md:flex-row items-center gap-8">
                     <div className="flex-shrink-0">
                       <div className="relative">
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           loading="lazy" src={testimonial.image} 
                           alt={testimonial.name}
                           className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-teal-200 shadow-xl"
@@ -1108,7 +1108,7 @@ export default function Home() {
                 <div key={index} className="relative group">
                   <div className="text-center">
                     <div className="relative mb-6 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                      <img 
+                      <img loading="lazy" decoding="async" 
                         loading="lazy" src={step.image} 
                         alt={step.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-all duration-500"
@@ -1174,7 +1174,7 @@ export default function Home() {
               ].map((feature, index) => (
                 <div key={index} className="glass-card group hover:shadow-2xl overflow-hidden">
                   <div className="relative -mx-6 -mt-6 mb-6 overflow-hidden">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       loading="lazy" src={feature.image} 
                       alt={feature.title}
                       className="w-full h-40 object-cover group-hover:scale-105 transition-all duration-500"
@@ -1245,7 +1245,7 @@ export default function Home() {
                   <>
                     {/* Video Thumbnail with Photo Carousel */}
                     <div className="relative w-full h-full">
-                      <img 
+                      <img loading="lazy" decoding="async" 
                         loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                         alt="Prof. Steven Barholere - Lingueefy Founder"
                         className="w-full h-full object-cover object-top opacity-90"
@@ -1280,7 +1280,7 @@ export default function Home() {
                     {/* Video Info */}
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <div className="flex items-center gap-4" style={{backgroundColor: 'transparent'}}>
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
                           className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"

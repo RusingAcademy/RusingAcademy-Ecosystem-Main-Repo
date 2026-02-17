@@ -93,7 +93,7 @@ const FloatingCoachBubble = ({
           className={`${sizeClasses[size]} rounded-full overflow-hidden border-4 border-white shadow-2xl transform transition-all duration-500 group-hover:scale-110 group-hover:border-teal-400`}
           style={{ transform: position.rotate ? `rotate(${position.rotate})` : undefined }}
         >
-          <img 
+          <img loading="lazy" decoding="async" 
             loading="lazy" src={photo} 
             alt={name}
             className="w-full h-full object-cover"
@@ -1367,7 +1367,7 @@ export default function LingueefyLanding() {
                 <CardContent className="p-0">
                   {/* Coach photo with overlay */}
                   <div className="relative h-64 overflow-hidden">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       loading="lazy" src={coach.photo} 
                       alt={coach.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -1516,7 +1516,7 @@ export default function LingueefyLanding() {
                   
                   {/* Author */}
                   <div className="flex items-center gap-4">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       loading="lazy" src={testimonial.photo} 
                       alt={testimonial.name}
                       className="w-12 h-12 rounded-full object-cover"

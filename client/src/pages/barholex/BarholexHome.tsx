@@ -299,7 +299,7 @@ export default function BarholexHome() {
                   transition={{ delay: index * 0.1 }}
                   className="relative group rounded-2xl overflow-hidden"
                 >
-                  <img 
+                  <img loading="lazy" decoding="async" 
                     loading="lazy" src={item.image} 
                     alt={language === "en" ? item.titleEn : item.titleFr}
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"

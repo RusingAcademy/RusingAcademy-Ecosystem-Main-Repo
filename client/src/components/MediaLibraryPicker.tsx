@@ -273,7 +273,7 @@ export default function MediaLibraryPicker({
                   <div className="space-y-3">
                     {isImage(selectedItem.mimeType) ? (
                       <div className="aspect-square rounded-lg overflow-hidden border bg-gray-50">
-                        <img src={selectedItem.url} alt={selectedItem.altText || selectedItem.fileName} className="w-full h-full object-contain" />
+                        <img loading="lazy" decoding="async" src={selectedItem.url} alt={selectedItem.altText || selectedItem.fileName} className="w-full h-full object-contain" />
                       </div>
                     ) : (
                       <div className="aspect-square rounded-lg border bg-gray-50 dark:bg-background flex items-center justify-center">
@@ -374,8 +374,7 @@ export default function MediaLibraryPicker({
                 <div className="space-y-2">
                   <Label className="text-xs text-black dark:text-foreground">Preview</Label>
                   <div className="w-48 h-48 rounded-lg border overflow-hidden bg-gray-50">
-                    <img
-                      src={urlInput}
+                    <img loading="lazy" decoding="async"                       src={urlInput}
                       alt="Preview"
                       className="w-full h-full object-contain"
                       onError={(e) => {

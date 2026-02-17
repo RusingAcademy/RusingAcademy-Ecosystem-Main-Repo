@@ -61,7 +61,7 @@ export function VideoPlaceholder({
         
         {/* Thumbnail or Placeholder */}
         {thumbnailUrl ? (
-          <img 
+          <img loading="lazy" decoding="async" 
             loading="lazy" src={thumbnailUrl} 
             alt={displayTitle}
             className="absolute inset-0 w-full h-full object-cover opacity-30"

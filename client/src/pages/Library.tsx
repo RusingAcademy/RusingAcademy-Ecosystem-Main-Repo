@@ -572,8 +572,7 @@ function ProductDetailModal({
             {/* Cover with 3D shadow */}
             <div className="w-32 md:w-40 flex-shrink-0 mx-auto md:mx-0">
               <div className="relative">
-                <img
-                  src={item.cover_image_url}
+                <img loading="lazy" decoding="async"                   src={item.cover_image_url}
                   alt={title}
                   className="w-full rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] border border-white/10"
                 />
@@ -682,8 +681,7 @@ function ProductDetailModal({
                       navigate(`/library/books/${rel.slug}`);
                     }}
                   >
-                    <img
-                      src={rel.cover_image_url}
+                    <img loading="lazy" decoding="async"                       src={rel.cover_image_url}
                       alt={language === "fr" ? rel.title_fr : rel.title_en}
                       className="w-full rounded-lg shadow-md group-hover/related:shadow-lg group-hover/related:scale-105 transition-all duration-300"
                     />

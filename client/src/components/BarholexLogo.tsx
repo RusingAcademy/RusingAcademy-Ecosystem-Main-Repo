@@ -42,7 +42,7 @@ export default function BarholexLogo({
       transition={{ duration: 0.5 }}
     >
       {/* Official Logo Image */}
-      <img 
+      <img loading="lazy" decoding="async" 
         loading="lazy" src={getLogoSrc()}
         alt="Barholex Media Logo"
         style={{ 

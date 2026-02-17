@@ -668,7 +668,7 @@ export default function BecomeCoachNew() {
                   <Card className="relative bg-white dark:bg-background/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/70 rounded-2xl overflow-hidden">
                     {/* Coach Image */}
                     <div className="relative h-80 overflow-hidden">
-                      <img 
+                      <img loading="lazy" decoding="async" 
                         loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/CjhXUMcYuqdkPcpC.jpg" 
                         alt={isEn ? "Become a Lingueefy Coach" : "Devenez coach Lingueefy"}
                         className="w-full h-full object-cover object-top"
