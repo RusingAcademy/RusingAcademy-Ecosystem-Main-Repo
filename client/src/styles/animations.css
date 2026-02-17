@@ -520,6 +520,199 @@
   animation: checkmark var(--animation-slow) var(--ease-out-expo) forwards;
 }
 
+/* ========================================
+   WAVE 5 — Professional Micro-interactions
+   ======================================== */
+
+/* --- Page Transition (route changes) --- */
+@keyframes page-enter {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes page-exit {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+.page-enter {
+  animation: page-enter var(--animation-normal) var(--ease-out-expo) forwards;
+}
+
+.page-exit {
+  animation: page-exit var(--animation-fast) var(--ease-in-out) forwards;
+}
+
+/* --- Scroll Reveal (intersection observer driven) --- */
+@keyframes reveal-up {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-left {
+  0% { opacity: 0; transform: translateX(-24px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes reveal-right {
+  0% { opacity: 0; transform: translateX(24px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes reveal-scale {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+  animation: reveal-up var(--animation-slow) var(--ease-out-expo) forwards;
+}
+
+.scroll-reveal-left.is-visible {
+  animation: reveal-left var(--animation-slow) var(--ease-out-expo) forwards;
+}
+
+.scroll-reveal-right.is-visible {
+  animation: reveal-right var(--animation-slow) var(--ease-out-expo) forwards;
+}
+
+.scroll-reveal-scale.is-visible {
+  animation: reveal-scale var(--animation-slow) var(--ease-out-expo) forwards;
+}
+
+/* --- Stagger Children (cards, list items) --- */
+.stagger-children > * {
+  opacity: 0;
+  animation: reveal-up var(--animation-slow) var(--ease-out-expo) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 480ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 560ms; }
+
+/* --- Button Micro-interactions --- */
+@keyframes button-press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.97); }
+  100% { transform: scale(1); }
+}
+
+.btn-press:active {
+  animation: button-press 150ms var(--ease-out-back);
+}
+
+/* --- Subtle Hover Lift (cards, panels) --- */
+.hover-lift {
+  transition: transform var(--animation-fast) var(--ease-out-expo),
+              box-shadow var(--animation-fast) var(--ease-out-expo);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Notification Slide-in --- */
+@keyframes notification-enter {
+  0% { opacity: 0; transform: translateX(100%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes notification-exit {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+.notification-enter {
+  animation: notification-enter var(--animation-normal) var(--ease-out-expo) forwards;
+}
+
+.notification-exit {
+  animation: notification-exit var(--animation-fast) var(--ease-in-out) forwards;
+}
+
+/* --- Accordion/Collapse --- */
+@keyframes accordion-open {
+  0% { opacity: 0; max-height: 0; }
+  100% { opacity: 1; max-height: 500px; }
+}
+
+@keyframes accordion-close {
+  0% { opacity: 1; max-height: 500px; }
+  100% { opacity: 0; max-height: 0; }
+}
+
+.accordion-content-enter {
+  animation: accordion-open var(--animation-normal) var(--ease-out-expo) forwards;
+  overflow: hidden;
+}
+
+.accordion-content-exit {
+  animation: accordion-close var(--animation-fast) var(--ease-in-out) forwards;
+  overflow: hidden;
+}
+
+/* --- Tooltip Fade --- */
+@keyframes tooltip-show {
+  0% { opacity: 0; transform: translateY(4px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tooltip-enter {
+  animation: tooltip-show var(--animation-fast) var(--ease-out-expo) forwards;
+}
+
+/* --- Progress Bar Fill --- */
+@keyframes progress-fill {
+  0% { width: 0%; }
+  100% { width: var(--progress-value, 100%); }
+}
+
+.animate-progress {
+  animation: progress-fill var(--animation-slow) var(--ease-out-expo) forwards;
+}
+
+/* --- Counter Increment (number animation) --- */
+@keyframes count-up {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count {
+  animation: count-up var(--animation-normal) var(--ease-out-expo) forwards;
+}
+
+/* --- Subtle Pulse for CTAs --- */
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--brand-cta-rgb, 198, 90, 30), 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(var(--brand-cta-rgb, 198, 90, 30), 0); }
+}
+
+.cta-pulse {
+  animation: cta-pulse 2.5s var(--ease-in-out) infinite;
+}
+
+/* --- Tab Indicator Slide --- */
+@keyframes tab-indicator {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+.tab-indicator-active {
+  animation: tab-indicator var(--animation-fast) var(--ease-out-expo) forwards;
+  transform-origin: left;
+}
+
 /* ----------------------------------------
    Responsive Adjustments
    ---------------------------------------- */
