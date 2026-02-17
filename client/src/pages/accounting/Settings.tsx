@@ -85,7 +85,7 @@ export default function Settings() {
         {/* Sidebar Tabs */}
         <div className="w-56 shrink-0">
           {tabs.map((tab) => (
-            <button
+            <button aria-label="Action"
               key={tab.id}
               className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-left mb-1 transition-colors ${
                 activeTab === tab.id ? "bg-green-50 text-green-600 font-medium" : "text-gray-600 hover:bg-gray-50"
@@ -109,7 +109,7 @@ export default function Settings() {
                 ) : (
                   <div className="flex gap-2">
                     <button className="qb-btn-outline" onClick={() => setIsEditing(false)}>Cancel</button>
-                    <button className="qb-btn-green flex items-center gap-1" onClick={handleSave} disabled={updateMutation.isPending}>
+                    <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={handleSave} disabled={updateMutation.isPending}>
                       {updateMutation.isPending ? <Loader2 className="animate-spin" size={14} /> : <Save size={14} />} Save
                     </button>
                   </div>

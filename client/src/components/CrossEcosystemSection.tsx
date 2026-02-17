@@ -896,7 +896,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                                     {language === "en" ? "Watch" : "Regarder"}
                                   </button>
                                 ) : (
-                                  <button
+                                  <button aria-label="Action"
                                     onClick={handleStop}
                                     className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-slate-900/10 backdrop-blur-sm border border-white/10 text-white text-xs font-semibold hover:bg-white dark:bg-slate-900/15 transition-all duration-300"
                                   >

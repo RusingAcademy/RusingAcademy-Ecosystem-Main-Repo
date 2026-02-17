@@ -239,7 +239,7 @@ export function VoiceRecorder({
       {audioUrl && !isRecording && (
         <div className="mb-4">
           <div className="flex items-center gap-3 bg-gray-50 dark:bg-slate-900 rounded-lg p-3">
-            <button
+            <button aria-label="Action"
               onClick={playRecording}
               className="w-10 h-10 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-900 transition-colors flex-shrink-0"
             >
@@ -249,7 +249,7 @@ export function VoiceRecorder({
               <p className="text-sm font-medium text-gray-900">Recording complete</p>
               <p className="text-xs text-gray-500">{formatTime(recordingTime)} recorded</p>
             </div>
-            <button
+            <button aria-label="Action"
               onClick={resetRecording}
               className="text-xs text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1"
             >
@@ -274,7 +274,7 @@ export function VoiceRecorder({
       {/* Controls */}
       <div className="flex items-center justify-center gap-3">
         {!isRecording && !audioUrl && (
-          <button
+          <button aria-label="Action"
             onClick={startRecording}
             className="flex items-center gap-2 px-6 py-3 bg-teal-700 text-white rounded-xl font-semibold text-sm hover:bg-teal-900 transition-colors shadow-md"
           >
@@ -284,13 +284,13 @@ export function VoiceRecorder({
         )}
         {isRecording && (
           <>
-            <button
+            <button aria-label="Action"
               onClick={togglePause}
               className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 flex items-center justify-center hover:bg-gray-200 transition-colors"
             >
               <span className="material-icons text-xl">{isPaused ? "play_arrow" : "pause"}</span>
             </button>
-            <button
+            <button aria-label="Action"
               onClick={stopRecording}
               className="flex items-center gap-2 px-6 py-3 bg-red-500 text-white rounded-xl font-semibold text-sm hover:bg-red-600 transition-colors shadow-md"
             >
@@ -300,7 +300,7 @@ export function VoiceRecorder({
           </>
         )}
         {audioUrl && !isRecording && (
-          <button
+          <button aria-label="Action"
             onClick={startRecording}
             className="flex items-center gap-2 px-6 py-3 bg-teal-700 text-white rounded-xl font-semibold text-sm hover:bg-teal-900 transition-colors"
           >

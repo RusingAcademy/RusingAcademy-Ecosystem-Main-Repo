@@ -196,7 +196,7 @@ export default function CoachPayments() {
                 </div>
               </div>
 
-              <button
+              <button aria-label="Action"
                 onClick={handleConnectStripe}
                 disabled={isConnecting}
                 className="w-full py-4 bg-gradient-to-r from-indigo-600 to-teal-700 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-teal-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
@@ -246,7 +246,7 @@ export default function CoachPayments() {
                 </div>
               </div>
 
-              <button
+              <button aria-label="Action"
                 onClick={handleOpenDashboard}
                 className="w-full py-3 bg-gray-100 dark:bg-slate-800 dark:bg-teal-800 text-black dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-foundation-2 transition-colors flex items-center justify-center gap-2"
               >
@@ -271,7 +271,7 @@ export default function CoachPayments() {
                 </div>
               </div>
 
-              <button
+              <button aria-label="Action"
                 onClick={handleContinueOnboarding}
                 className="w-full py-3 bg-yellow-500 text-white rounded-xl font-medium hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2"
               >

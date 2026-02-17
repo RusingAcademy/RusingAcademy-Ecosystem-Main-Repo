@@ -634,7 +634,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   {aiQuickActions.map((action) => (
-                    <button
+                    <button aria-label="Action"
                       key={action.id}
                       className="flex flex-col items-center gap-1.5 p-3 rounded-lg border hover:bg-muted transition-colors text-center"
                       onClick={() => {

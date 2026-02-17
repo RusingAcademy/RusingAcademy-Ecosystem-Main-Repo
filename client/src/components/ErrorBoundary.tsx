@@ -107,7 +107,7 @@ class ErrorBoundary extends Component<Props, State> {
 
               {!isChunkError && (
                 <>
-                  <button
+                  <button aria-label="Action"
                     onClick={this.handleGoBack}
                     className={cn(
                       "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium",
@@ -119,7 +119,7 @@ class ErrorBoundary extends Component<Props, State> {
                     Go Back
                   </button>
 
-                  <button
+                  <button aria-label="Action"
                     onClick={this.handleGoHome}
                     className={cn(
                       "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium",

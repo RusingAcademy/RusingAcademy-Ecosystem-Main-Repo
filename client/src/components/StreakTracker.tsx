@@ -245,7 +245,7 @@ export function StreakMilestone({
         </div>
       )}
       {onClaim && (
-        <button
+        <button aria-label="Action"
           onClick={onClaim}
           className="px-6 py-2 rounded-full bg-white dark:bg-slate-900 text-orange-600 font-semibold hover:bg-white dark:bg-slate-900/90 transition-colors"
         >

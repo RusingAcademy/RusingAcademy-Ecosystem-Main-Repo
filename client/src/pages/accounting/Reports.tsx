@@ -136,7 +136,7 @@ export default function Reports() {
       <div className="space-y-2">
         {filteredCategories.map((category) => (
           <div key={category.title} className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
-            <button
+            <button aria-label="Action"
               className="w-full flex items-center gap-2 px-4 py-3 hover:bg-gray-50 dark:bg-slate-900 text-left"
               onClick={() => toggleCategory(category.title)}
             >
@@ -165,13 +165,13 @@ export default function Reports() {
                       <FileText size={14} className="text-gray-300 opacity-0 group-hover:opacity-100" />
                     </div>
                     <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100">
-                      <button
+                      <button aria-label="Action"
                         className="p-1 hover:bg-gray-200 rounded"
                         onClick={(e) => { e.stopPropagation(); toast("Added to favourites"); }}
                       >
                         <Star size={14} className="text-gray-400" />
                       </button>
-                      <button
+                      <button aria-label="Action"
                         className="p-1 hover:bg-gray-200 rounded"
                         onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}
                       >

@@ -103,7 +103,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
     return (
       <div className="flex items-center gap-3 bg-gray-50 dark:bg-slate-900 rounded-xl px-4 py-3">
         {audioUrl && <audio ref={audioRef} src={audioUrl} preload="metadata" />}
-        <button
+        <button aria-label="Action"
           onClick={togglePlay}
           className="w-9 h-9 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-900 transition-colors flex-shrink-0"
         >
@@ -148,7 +148,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
         </div>
       )}
       <div className="flex items-center gap-3">
-        <button
+        <button aria-label="Action"
           onClick={togglePlay}
           className="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-900 transition-colors shadow-md flex-shrink-0"
         >

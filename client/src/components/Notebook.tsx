@@ -147,7 +147,7 @@ function EntryDetail({ entry, onBack }: { entry: DisplayEntry; onBack: () => voi
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
-      <button onClick={onBack} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
+      <button aria-label="Action" onClick={onBack} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
         <ArrowLeft className="w-4 h-4" /> Back to notebook
       </button>
 
@@ -330,7 +330,7 @@ function WriteEntryForm({ onClose }: { onClose: () => void }) {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
-      <button onClick={onClose} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
+      <button aria-label="Action" onClick={onClose} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
         <ArrowLeft className="w-4 h-4" /> Back to notebook
       </button>
 

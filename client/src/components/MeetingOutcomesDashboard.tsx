@@ -256,7 +256,7 @@ export default function MeetingOutcomesDashboard() {
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 rounded-lg transition-colors">
+        <button aria-label="Action" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 rounded-lg transition-colors">
           <RefreshCw className="w-4 h-4" />
           {t.refresh}
         </button>
@@ -434,7 +434,7 @@ export default function MeetingOutcomesDashboard() {
             className="space-y-4"
           >
             <div className="flex justify-end mb-4">
-              <button className="flex items-center gap-2 px-4 py-2 bg-cta/20 text-orange-400 rounded-lg hover:bg-cta/30 transition-colors">
+              <button aria-label="Action" className="flex items-center gap-2 px-4 py-2 bg-cta/20 text-orange-400 rounded-lg hover:bg-cta/30 transition-colors">
                 <Bell className="w-4 h-4" />
                 {t.sendAllReminders}
               </button>

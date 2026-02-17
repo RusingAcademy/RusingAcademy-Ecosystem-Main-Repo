@@ -106,7 +106,7 @@ export default function ReconciliationWorkspace() {
           }`}>
             Difference: {fmt(difference)}
           </div>
-          <button
+          <button aria-label="Action"
             className="qb-btn flex items-center gap-1.5"
             disabled={Math.abs(difference) >= 0.01}
             onClick={() => {

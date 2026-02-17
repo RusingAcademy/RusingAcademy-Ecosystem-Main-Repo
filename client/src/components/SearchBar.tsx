@@ -511,7 +511,7 @@ export function SearchBar({
                   <p className="text-xs mb-2">Try searching for:</p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {suggestions.map((suggestion, idx) => (
-                      <button
+                      <button aria-label="Action"
                         key={idx}
                         className="text-xs px-2 py-1 bg-muted rounded-full hover:bg-accent transition-colors"
                         onClick={() => setQuery(suggestion)}

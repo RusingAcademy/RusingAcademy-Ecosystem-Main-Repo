@@ -98,7 +98,7 @@ export default function FileAttachments({ entityType, entityId }: FileAttachment
             onChange={handleFileSelect}
             accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt"
           />
-          <button
+          <button aria-label="Action"
             className="qb-btn-outline flex items-center gap-1.5 text-xs"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}

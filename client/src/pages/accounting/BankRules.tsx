@@ -73,7 +73,7 @@ export default function BankRules() {
             <p className="text-sm text-gray-500">Auto-categorize imported bank transactions</p>
           </div>
         </div>
-        <button className="qb-btn flex items-center gap-1.5" onClick={() => setShowCreate(true)}>
+        <button aria-label="Action" className="qb-btn flex items-center gap-1.5" onClick={() => setShowCreate(true)}>
           <Plus size={14} /> New Rule
         </button>
       </div>

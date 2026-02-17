@@ -114,16 +114,16 @@ export default function CustomerDetail() {
         </div>
         <div className="flex items-center gap-2">
           {!isNew && !isEditing && (
-            <button className="qb-btn-outline flex items-center gap-1" onClick={() => setIsEditing(true)}>
+            <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => setIsEditing(true)}>
               <Edit size={14} /> Edit
             </button>
           )}
           {(isNew || isEditing) && (
             <>
-              <button className="qb-btn-outline flex items-center gap-1" onClick={() => isNew ? navigate("/customers") : setIsEditing(false)}>
+              <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => isNew ? navigate("/customers") : setIsEditing(false)}>
                 <X size={14} /> Cancel
               </button>
-              <button
+              <button aria-label="Action"
                 className="qb-btn-green flex items-center gap-1"
                 onClick={handleSave}
                 disabled={createMutation.isPending || updateMutation.isPending}

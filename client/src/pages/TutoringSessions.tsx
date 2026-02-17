@@ -126,7 +126,7 @@ function CalendlyEmbed({ url, onClose }: { url: string; onClose: () => void }) {
               Schedule Your Session
             </h3>
           </div>
-          <button
+          <button aria-label="Action"
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:bg-slate-800 transition-colors"
           >

@@ -678,7 +678,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
           <Button size="sm" onClick={handleSave} className="h-7 text-xs gap-1">
             <Save className="h-3 w-3" /> Save
           </Button>
-          <button onClick={onClose} className="p-1 rounded hover:bg-gray-200"><X className="h-4 w-4" /></button>
+          <button aria-label="Action" onClick={onClose} className="p-1 rounded hover:bg-gray-200"><X className="h-4 w-4" /></button>
         </div>
       </div>
 

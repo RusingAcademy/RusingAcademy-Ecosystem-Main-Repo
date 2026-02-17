@@ -203,7 +203,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
             <h2 className="text-2xl font-bold">{t.title}</h2>
             <p className="text-cyan-300 mt-1">{t.subtitle}</p>
           </div>
-          <button
+          <button aria-label="Action"
             onClick={onClose}
             className="p-2 hover:bg-white dark:bg-slate-900/10 rounded-lg transition-colors"
           >
@@ -425,7 +425,7 @@ export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: Meeti
           >
             {t.cancel}
           </button>
-          <button
+          <button aria-label="Action"
             onClick={handleSubmit}
             disabled={!outcome || isSubmitting}
             className="flex-1 px-4 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"

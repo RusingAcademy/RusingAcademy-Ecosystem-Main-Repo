@@ -177,7 +177,7 @@ function SignupContent() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4 relative">
       {/* Home Button */}
       <Link href="/">
-        <button className="absolute top-4 left-4 p-3 rounded-full bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 transition-colors border border-white/60">
+        <button aria-label="Action" className="absolute top-4 left-4 p-3 rounded-full bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 transition-colors border border-white/60">
           <Home className="h-5 w-5 text-white" />
         </button>
       </Link>
