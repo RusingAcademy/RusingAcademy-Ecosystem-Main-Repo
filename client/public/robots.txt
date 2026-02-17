@@ -3,5 +3,6 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
+Disallow: /auth/
 
-Sitemap: https://rusingacademy.manus.space/sitemap.xml
+Sitemap: https://www.rusingacademy.com/sitemap.xml
