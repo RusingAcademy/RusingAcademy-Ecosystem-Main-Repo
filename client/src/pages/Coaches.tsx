@@ -59,6 +59,7 @@ export default function Coaches() {
   const [hoveredCoach, setHoveredCoach] = useState<number | null>(null);
   const [imgErrors, setImgErrors] = useState<Set<number>>(new Set());
   const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const [displayLimit, setDisplayLimit] = useState(10);
 
   // Start conversation mutation
   const startConversationMutation = trpc.message.startConversation.useMutation();
@@ -72,6 +73,11 @@ export default function Coaches() {
     search: searchQuery || undefined,
     limit: 50,
   });
+
+  // Reset display limit when filters change
+  useEffect(() => {
+    setDisplayLimit(10);
+  }, [searchQuery, languageFilter, specializationFilter, priceRange]);
 
   // Scroll animation observer
   useEffect(() => {
@@ -164,12 +170,13 @@ export default function Coaches() {
   const hasActiveFilters =
     searchQuery || languageFilter !== "all" || specializationFilter.length > 0 || priceRange !== "all";
 
-  // Get availability status for coach
-  const getAvailability = (coachId: number) => {
-    const mod = coachId % 3;
-    if (mod === 0) return { status: 'available', label: language === 'fr' ? 'Disponible' : 'Available', color: 'green' };
-    if (mod === 1) return { status: 'tomorrow', label: language === 'fr' ? 'Demain' : 'Tomorrow', color: 'amber' };
-    return { status: 'monday', label: language === 'fr' ? 'Lundi' : 'Monday', color: 'blue' };
+  // Get availability status for coach — uses real responseTimeHours data
+  // When real availability slots are populated, this will be upgraded to use coach.availableSlots
+  const getAvailability = (coach: { id: number; responseTimeHours?: number | null; totalSessions?: number | null }) => {
+    const responseTime = coach.responseTimeHours ?? 24;
+    if (responseTime <= 4) return { status: 'available', label: language === 'fr' ? 'Disponible' : 'Available', color: 'green' };
+    if (responseTime <= 12) return { status: 'tomorrow', label: language === 'fr' ? 'Demain' : 'Tomorrow', color: 'amber' };
+    return { status: 'this_week', label: language === 'fr' ? 'Cette semaine' : 'This Week', color: 'blue' };
   };
 
   return (
@@ -402,8 +409,8 @@ export default function Coaches() {
               {/* Coach Cards - Premium Grid */}
               {!isLoading && (
                 <div className="grid gap-6" role="list">
-                  {processedCoaches.map((coach, index) => {
-                    const availability = getAvailability(coach.id);
+                  {processedCoaches.slice(0, displayLimit).map((coach, index) => {
+                    const availability = getAvailability(coach);
                     const isHovered = hoveredCoach === coach.id;
                     
                     return (
@@ -626,6 +633,20 @@ export default function Coaches() {
                       </div>
                     );
                   })}
+                </div>
+              )}
+
+              {/* Load More Button */}
+              {!isLoading && processedCoaches.length > displayLimit && (
+                <div className="flex justify-center mt-8">
+                  <Button
+                    onClick={() => setDisplayLimit(prev => prev + 10)}
+                    className="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-8 py-3 rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-xl transition-all duration-300"
+                  >
+                    {language === 'fr' 
+                      ? `Voir plus de coachs (${processedCoaches.length - displayLimit} restants)` 
+                      : `Load More Coaches (${processedCoaches.length - displayLimit} remaining)`}
+                  </Button>
                 </div>
               )}
 

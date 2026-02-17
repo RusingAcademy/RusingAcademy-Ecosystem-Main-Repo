@@ -17,24 +17,24 @@ interface NavItem {
 }
 
 const mainNav: NavItem[] = [
-  { icon: "dashboard", label: "Dashboard", labelFr: "Tableau de bord", path: "/coach/portal/dashboard" },
-  { icon: "people", label: "My Students", labelFr: "Mes étudiants", path: "/coach/portal/students" },
-  { icon: "event", label: "Sessions", labelFr: "Sessions", path: "/coach/portal/sessions" },
-  { icon: "attach_money", label: "Revenue", labelFr: "Revenus", path: "/coach/portal/revenue" },
-  { icon: "trending_up", label: "Performance", labelFr: "Performance", path: "/coach/portal/performance" },
+  { icon: "dashboard", label: "Dashboard", labelFr: "Tableau de bord", path: "/coach/portal" },
+  { icon: "people", label: "My Students", labelFr: "Mes étudiants", path: "/coach/students" },
+  { icon: "event", label: "Sessions", labelFr: "Sessions", path: "/coach/sessions" },
+  { icon: "attach_money", label: "Revenue", labelFr: "Revenus", path: "/coach/revenue" },
+  { icon: "trending_up", label: "Performance", labelFr: "Performance", path: "/coach/performance" },
 ];
 
 const toolsNav: NavItem[] = [
-  { icon: "menu_book", label: "Resources", labelFr: "Ressources", path: "/coach/portal/resources" },
-  { icon: "rate_review", label: "Feedback", labelFr: "Commentaires", path: "/coach/portal/feedback" },
-  { icon: "chat", label: "Messages", labelFr: "Messages", path: "/coach/portal/messages" },
-  { icon: "calendar_today", label: "Calendar", labelFr: "Calendrier", path: "/coach/portal/calendar" },
+  { icon: "menu_book", label: "Resources", labelFr: "Ressources", path: "/coach/guide" },
+  { icon: "rate_review", label: "Feedback", labelFr: "Commentaires", path: "/coach/earnings" },
+  { icon: "chat", label: "Messages", labelFr: "Messages", path: "/dashboard" },
+  { icon: "calendar_today", label: "Calendar", labelFr: "Calendrier", path: "/coach/sessions" },
 ];
 
 const settingsNav: NavItem[] = [
-  { icon: "person", label: "My Profile", labelFr: "Mon profil", path: "/coach/portal/profile" },
-  { icon: "settings", label: "Settings", labelFr: "Paramètres", path: "/coach/portal/settings" },
-  { icon: "help_outline", label: "Help", labelFr: "Aide", path: "/coach/portal/help" },
+  { icon: "person", label: "My Profile", labelFr: "Mon profil", path: "/app/coach-profile" },
+  { icon: "settings", label: "Settings", labelFr: "Paramètres", path: "/coach/terms" },
+  { icon: "help_outline", label: "Help", labelFr: "Aide", path: "/coach/guide" },
 ];
 
 interface CoachSidebarProps {
@@ -82,7 +82,7 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
 
         {/* Logo Section */}
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
-          <Link href="/coach/portal/dashboard" className="flex items-center gap-3 group">
+          <Link href="/coach/portal" className="flex items-center gap-3 group">
             <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
             <div>
               <span className="text-gray-900 dark:text-gray-100 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
