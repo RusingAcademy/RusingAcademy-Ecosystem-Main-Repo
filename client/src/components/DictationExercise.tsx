@@ -270,7 +270,7 @@ export function DictationExercise({
   if (!currentPhrase) {
     return (
       <Card className="max-w-2xl mx-auto">
-        <CardContent className="py-12 text-center">
+        <CardContent className="py-6 md:py-8 lg:py-12 text-center">
           <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
           <h3 className="text-2xl font-bold mb-2">Exercice terminé!</h3>
           <p className="text-muted-foreground">

@@ -97,7 +97,7 @@ export default function CourseCatalog() {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div
-        className="relative overflow-hidden py-16 px-4"
+        className="relative overflow-hidden py-8 md:py-12 lg:py-16 px-4"
         style={{
           background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464) 0%, #2EC4B6 50%, #FF4B2B 100%)",
         }}
@@ -147,11 +147,11 @@ export default function CourseCatalog() {
 
         {/* Course Grid */}
         {isLoading ? (
-          <div className="flex justify-center py-16">
+          <div className="flex justify-center py-8 md:py-12 lg:py-16">
             <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : !courses?.length ? (
-          <div className="text-center py-16">
+          <div className="text-center py-8 md:py-12 lg:py-16">
             <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <p className="text-muted-foreground text-lg">{t.coursePlayer.noCourses}</p>
           </div>

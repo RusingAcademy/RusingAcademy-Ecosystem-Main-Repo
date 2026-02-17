@@ -405,7 +405,7 @@ export default function Curriculum() {
         <section className="py-16 lg:py-24">
           <div className="container">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">
+              <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">
                 {isEn ? "Choose Your Learning Path" : "Choisissez Votre Parcours"}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -451,8 +451,8 @@ export default function Curriculum() {
         <section className="py-16 lg:py-24 bg-muted/30">
           <div className="container">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">
                   {isEn ? "Why Choose Path Series™?" : "Pourquoi Choisir la Série Path™?"}
                 </h2>
                 <p className="text-muted-foreground">
@@ -545,7 +545,7 @@ export default function Curriculum() {
                 </div>
                 <div className="relative h-64 md:h-auto bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center">
                   <div className="text-center text-white p-8">
-                    <div className="text-5xl font-bold mb-2">95%</div>
+                    <div className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2">95%</div>
                     <div className="text-lg opacity-90">
                       {isEn ? "Success Rate" : "Taux de Réussite"}
                     </div>

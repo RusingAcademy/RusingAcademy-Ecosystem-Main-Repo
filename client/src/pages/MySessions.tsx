@@ -135,7 +135,7 @@ export default function MySessions() {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         {!isInsideAppLayout && <Header />}
-        <main className="flex-1 flex items-center justify-center py-12">
+        <main className="flex-1 flex items-center justify-center py-6 md:py-8 lg:py-12">
           <Card className="max-w-md w-full mx-4 text-center">
             <CardContent className="pt-8 pb-8">
               <AlertCircle className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
@@ -193,7 +193,7 @@ export default function MySessions() {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-3xl font-bold">{l.title}</h1>
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">{l.title}</h1>
               <p className="text-black dark:text-foreground">{l.subtitle}</p>
             </div>
             <Link href="/coaches">
@@ -224,7 +224,7 @@ export default function MySessions() {
             {/* Upcoming Sessions */}
             <TabsContent value="upcoming">
               {loadingUpcoming ? (
-                <div className="flex justify-center py-12">
+                <div className="flex justify-center py-6 md:py-8 lg:py-12">
                   <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
               ) : upcomingSessions && upcomingSessions.length > 0 ? (
@@ -321,7 +321,7 @@ export default function MySessions() {
                 </div>
               ) : (
                 <Card>
-                  <CardContent className="py-12 text-center">
+                  <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                     <Calendar className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
                     <p className="text-black dark:text-foreground mb-4">{l.noUpcoming}</p>
                     <Link href="/coaches">
@@ -335,7 +335,7 @@ export default function MySessions() {
             {/* Past Sessions */}
             <TabsContent value="past">
               {loadingPast ? (
-                <div className="flex justify-center py-12">
+                <div className="flex justify-center py-6 md:py-8 lg:py-12">
                   <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
               ) : pastSessions && pastSessions.length > 0 ? (
@@ -403,7 +403,7 @@ export default function MySessions() {
                 </div>
               ) : (
                 <Card>
-                  <CardContent className="py-12 text-center">
+                  <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                     <History className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
                     <p className="text-black dark:text-foreground">{l.noPast}</p>
                   </CardContent>
@@ -414,7 +414,7 @@ export default function MySessions() {
             {/* Cancelled Sessions */}
             <TabsContent value="cancelled">
               {loadingCancelled ? (
-                <div className="flex justify-center py-12">
+                <div className="flex justify-center py-6 md:py-8 lg:py-12">
                   <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
               ) : cancelledSessions && cancelledSessions.length > 0 ? (
@@ -481,7 +481,7 @@ export default function MySessions() {
                 </div>
               ) : (
                 <Card>
-                  <CardContent className="py-12 text-center">
+                  <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                     <XCircle className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
                     <p className="text-black dark:text-foreground">{l.noCancelled}</p>
                   </CardContent>

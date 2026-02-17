@@ -113,7 +113,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
             </span>
           </div>
           <h2
-            className="text-4xl font-bold text-gray-900 dark:text-foreground mb-4"
+            className="text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-foreground mb-4"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {lang === "fr" ? config.titleFr : config.title}
@@ -159,7 +159,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
           </div>
 
           <h1
-            className="text-3xl font-bold text-gray-900 dark:text-foreground mb-3"
+            className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-foreground mb-3"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {lang === "fr" ? "Bientôt disponible" : "Coming Soon"}

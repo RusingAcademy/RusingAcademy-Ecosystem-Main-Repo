@@ -93,7 +93,7 @@ export default function HRSettings() {
           </div>
           <p className="text-sm text-gray-500">{ui.teamAccessSub}</p>
           <div className="mt-4 p-8 text-center border border-dashed border-gray-200 dark:border-border dark:border-border rounded-lg">
-            <span className="material-icons text-3xl text-gray-300 mb-2">group_add</span>
+            <span className="material-icons text-lg md:text-2xl lg:text-3xl text-gray-300 mb-2">group_add</span>
             <p className="text-sm text-gray-400">{ui.comingSoon}</p>
           </div>
         </div>

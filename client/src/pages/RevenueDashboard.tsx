@@ -37,14 +37,14 @@ export default function RevenueDashboard() {
         </button>
 
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight mb-2" >
             {t.revenue.title}
           </h1>
           <p className="text-muted-foreground">{t.revenue.subtitle}</p>
         </div>
 
         {isLoading ? (
-          <div className="flex justify-center py-16">
+          <div className="flex justify-center py-8 md:py-12 lg:py-16">
             <Loader2 className="w-8 h-8 animate-spin text-indigo-900" />
           </div>
         ) : (

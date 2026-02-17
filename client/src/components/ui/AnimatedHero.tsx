@@ -185,7 +185,7 @@ export function AnimatedHero({
                     transition={{ delay: 0.8 + index * 0.1 }}
                     className="text-center"
                   >
-                    <div className="text-3xl font-bold text-teal-500">{stat.value}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-bold text-teal-500">{stat.value}</div>
                     <div className="text-sm text-black dark:text-foreground dark:text-cyan-300">{stat.label}</div>
                   </motion.div>
                 ))}

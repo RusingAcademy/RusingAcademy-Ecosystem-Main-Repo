@@ -81,7 +81,7 @@ export default function B2BSection() {
   return (
     <section id="b2b" className="scroll-mt-20">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-foundation to-[#1a5a5c] py-20">
+      <div className="bg-gradient-to-br from-foundation to-[#1a5a5c] py-10 md:py-16 lg:py-20">
         <div className="container mx-auto px-6 text-center">
           <Badge className="mb-6 bg-cta/20 text-cta border-cta/30">
             <Building2 className="w-4 h-4 mr-2" aria-hidden="true" />{t.badge}
@@ -96,7 +96,7 @@ export default function B2BSection() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto">
             {t.stats.map((stat, i) => (
               <div key={i} className="text-center p-4 rounded-xl bg-white dark:bg-background/5 border border-white/60">
-                <div className="text-3xl font-bold text-cta">{stat.value}</div>
+                <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cta">{stat.value}</div>
                 <div className="text-sm text-white/90">{stat.label}</div>
               </div>
             ))}
@@ -105,9 +105,9 @@ export default function B2BSection() {
       </div>
 
       {/* Benefits */}
-      <div className="py-16 bg-white dark:bg-background">
+      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
         <div className="container mx-auto px-6">
-          <h3 className="text-3xl font-bold text-foundation text-center mb-12">{t.benefitsTitle}</h3>
+          <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.benefitsTitle}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.benefits.map((benefit, i) => (
               <Card key={i} className="border-gray-200 dark:border-border dark:border-border hover:shadow-lg transition-shadow">
@@ -125,9 +125,9 @@ export default function B2BSection() {
       </div>
 
       {/* Packages */}
-      <div className="py-16 bg-gray-50">
+      <div className="py-8 md:py-12 lg:py-16 bg-gray-50">
         <div className="container mx-auto px-6">
-          <h3 className="text-3xl font-bold text-foundation text-center mb-12">{t.packagesTitle}</h3>
+          <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.packagesTitle}</h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {t.packages.map((pkg, i) => (
               <Card key={i} className={`border-2 ${pkg.popular ? 'border-cta shadow-xl' : 'border-gray-200'} relative`}>
@@ -158,9 +158,9 @@ export default function B2BSection() {
       </div>
 
       {/* Testimonials */}
-      <div className="py-16 bg-white dark:bg-background">
+      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
         <div className="container mx-auto px-6">
-          <h3 className="text-3xl font-bold text-foundation text-center mb-12">{t.testimonialsTitle}</h3>
+          <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.testimonialsTitle}</h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {t.testimonials.map((testimonial, i) => (
               <Card key={i} className="border-gray-200 dark:border-border dark:border-border">
@@ -179,9 +179,9 @@ export default function B2BSection() {
       </div>
 
       {/* Final CTA */}
-      <div className="py-16 bg-gradient-to-br from-foundation to-[#1a5a5c]">
+      <div className="py-8 md:py-12 lg:py-16 bg-gradient-to-br from-foundation to-[#1a5a5c]">
         <div className="container mx-auto px-6 text-center">
-          <h3 className="text-3xl font-bold text-white mb-4">{t.ctaTitle}</h3>
+          <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-4">{t.ctaTitle}</h3>
           <p className="text-white/90 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>
           <Button size="lg" className="bg-cta hover:bg-cta">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />

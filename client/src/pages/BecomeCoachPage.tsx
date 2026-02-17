@@ -27,10 +27,10 @@ export default function BecomeCoachPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative py-10 md:py-16 lg:py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-cta/10 to-cta/10" />
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <span className="inline-block px-4 py-2 bg-amber-100 text-cta800 rounded-full text-sm font-medium mb-4">
               Rejoignez notre équipe de coaches
             </span>
@@ -53,9 +53,9 @@ export default function BecomeCoachPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 px-4 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 px-4 bg-white dark:bg-background">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center text-slate-900 mb-6 md:mb-8 lg:mb-12">
             Pourquoi devenir coach RusingAcademy?
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -75,9 +75,9 @@ export default function BecomeCoachPage() {
       </section>
 
       {/* Requirements Section */}
-      <section className="py-16 px-4 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 px-4 bg-white dark:bg-background">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center text-slate-900 mb-6 md:mb-8 lg:mb-12">
             Critères de sélection
           </h2>
           <Card className="border-2 border-slate-200">
@@ -96,9 +96,9 @@ export default function BecomeCoachPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-cta to-cta">
+      <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-r from-cta to-cta">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
+          <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-6">
             Prêt à transformer des carrières?
           </h2>
           <p className="text-xl text-cta100 mb-8">

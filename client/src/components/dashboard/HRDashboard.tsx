@@ -821,7 +821,7 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
         <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
           <h3 className="text-sm text-black dark:text-foreground mb-2">Active Learners (This Week)</h3>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-black dark:text-foreground">{analytics?.activeThisWeek || 0}</span>
+            <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{analytics?.activeThisWeek || 0}</span>
             {analytics?.activeChange && (
               <span className={`text-sm ${analytics.activeChange >= 0 ? "text-green-600" : "text-red-600"}`}>
                 {analytics.activeChange >= 0 ? "+" : ""}{analytics.activeChange}%
@@ -832,13 +832,13 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
         <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
           <h3 className="text-sm text-black dark:text-foreground mb-2">Completions (This Month)</h3>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-black dark:text-foreground">{analytics?.completionsThisMonth || 0}</span>
+            <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{analytics?.completionsThisMonth || 0}</span>
           </div>
         </div>
         <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
           <h3 className="text-sm text-black dark:text-foreground mb-2">Avg. Time to Complete</h3>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-black dark:text-foreground">{analytics?.avgTimeToComplete || "-"}</span>
+            <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{analytics?.avgTimeToComplete || "-"}</span>
             <span className="text-sm text-black dark:text-foreground">days</span>
           </div>
         </div>

@@ -649,7 +649,7 @@ export default function CoursesPage() {
         {/* Why Path Series Section */}
         <section className="py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {ui.whyTitle} <span className="text-teal-600">Path Series\u2122</span>
               </h2>
@@ -699,7 +699,7 @@ export default function CoursesPage() {
         {/* How It Works Section */}
         <section className="py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {ui.howItWorks}
               </h2>
@@ -903,7 +903,7 @@ export default function CoursesPage() {
 
             {/* No Results */}
             {filteredCourses.length === 0 && (
-              <div className="text-center py-16">
+              <div className="text-center py-8 md:py-12 lg:py-16">
                 <GraduationCap className="w-16 h-16 text-white/90 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-black dark:text-foreground mb-2">{ui.noCourses}</h3>
                 <p className="text-black dark:text-foreground">{ui.noCoursesHint}</p>
@@ -915,7 +915,7 @@ export default function CoursesPage() {
         {/* Testimonials Section */}
         <section className="py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-cta700 text-sm font-medium mb-4">
                 <MessageCircle className="w-4 h-4" />
                 {ui.successStories}

@@ -162,7 +162,7 @@ export default function WeeklyChallenges() {
         ) : displayChallenges.length === 0 ? (
           <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-8 text-center shadow-sm" role="status">
             <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
-              <span className="material-icons text-3xl text-purple-400" aria-hidden="true">{tab === "active" ? "flag" : "emoji_events"}</span>
+              <span className="material-icons text-lg md:text-2xl lg:text-3xl text-purple-400" aria-hidden="true">{tab === "active" ? "flag" : "emoji_events"}</span>
             </div>
             <h3 className="text-sm font-semibold text-gray-700 dark:text-muted-foreground mb-1">
               {tab === "active"

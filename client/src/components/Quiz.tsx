@@ -164,7 +164,7 @@ export function Quiz({
     return (
       <div className="bg-white dark:bg-background rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
         <div className={`p-8 text-center ${passed ? "bg-gradient-to-br from-teal-500 to-teal-600" : "bg-gradient-to-br from-cta to-red-500"} text-white`}>
-          <div className="text-6xl mb-4">{passed ? "🎉" : "📚"}</div>
+          <div className="text-3xl md:text-5xl lg:text-6xl mb-4">{passed ? "🎉" : "📚"}</div>
           <h2 className="text-2xl font-bold mb-2">
             {passed 
               ? (language === "fr" ? "Félicitations !" : "Congratulations!") 
@@ -180,7 +180,7 @@ export function Quiz({
         <div className="p-6">
           {/* Score */}
           <div className="text-center mb-6">
-            <div className="text-5xl font-bold text-black dark:text-foreground mb-2">{percentage}%</div>
+            <div className="text-2xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-2">{percentage}%</div>
             <p className="text-black dark:text-foreground">
               {earnedPoints} / {totalPoints} {language === "fr" ? "points" : "points"}
             </p>

@@ -224,7 +224,7 @@ export default function MyDownloads() {
               <FolderDown className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">{t.title}</h1>
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">{t.title}</h1>
               <p className="text-muted-foreground">{t.subtitle}</p>
             </div>
           </div>
@@ -279,12 +279,12 @@ export default function MyDownloads() {
 
             {/* Resource List */}
             {resourcesLoading ? (
-              <div className="flex items-center justify-center py-12">
+              <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                 <RefreshCw className="h-8 w-8 animate-spin text-primary" />
               </div>
             ) : resourceList.length === 0 ? (
               <Card>
-                <CardContent className="py-12 text-center">
+                <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                   <FolderDown className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                   <h3 className="text-xl font-semibold mb-2">
                     {t.noResources}
@@ -379,12 +379,12 @@ export default function MyDownloads() {
           {/* History Tab */}
           <TabsContent value="history" className="space-y-4">
             {historyLoading ? (
-              <div className="flex items-center justify-center py-12">
+              <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                 <RefreshCw className="h-8 w-8 animate-spin text-primary" />
               </div>
             ) : historyList.length === 0 ? (
               <Card>
-                <CardContent className="py-12 text-center">
+                <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                   <Clock className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                   <h3 className="text-xl font-semibold mb-2">
                     {t.noHistory}

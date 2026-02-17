@@ -172,7 +172,7 @@ Généré par RusingAcademy Learning Ecosystem
       <CardContent className="space-y-6">
         {/* Performance Score */}
         <div className="text-center py-4 bg-slate-800/50 rounded-lg">
-          <div className={`text-5xl font-bold ${performance.color}`}>
+          <div className={`text-2xl md:text-4xl lg:text-5xl font-bold ${performance.color}`}>
             {summary.averageScore}%
           </div>
           <p className="text-slate-400 mt-1">{performance.label}</p>

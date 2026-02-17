@@ -391,9 +391,9 @@ export default function PageBuilder() {
       </div>
 
       {pagesQuery.isLoading ? (
-        <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading pages...</div>
+        <div className="flex items-center gap-2 text-muted-foreground py-6 md:py-8 lg:py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading pages...</div>
       ) : (pagesQuery.data as any[] || []).length === 0 ? (
-        <div className="text-center py-16 text-muted-foreground">
+        <div className="text-center py-8 md:py-12 lg:py-16 text-muted-foreground">
           <FileText className="h-12 w-12 mx-auto mb-3 opacity-30" />
           <p className="mb-4">No pages yet. Create your first page to get started.</p>
           <Button onClick={() => setShowCreateDialog(true)}><Plus className="h-4 w-4 mr-2" /> Create Page</Button>
@@ -471,7 +471,7 @@ export default function PageBuilder() {
   // ─── Editor with DnD + Live Preview ───
   const renderEditor = () => {
     const page = pageQuery.data as any;
-    if (!page) return <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading page...</div>;
+    if (!page) return <div className="flex items-center gap-2 text-muted-foreground py-6 md:py-8 lg:py-12 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading page...</div>;
     const sections = (page.sections || []) as any[];
     const sectionIds = useMemo(() => sections.map((s: any) => s.id), [sections]);
 
@@ -544,7 +544,7 @@ export default function PageBuilder() {
 
             {/* Sortable Sections */}
             {sections.length === 0 ? (
-              <div className="text-center py-12 border-2 border-dashed rounded-lg text-muted-foreground">
+              <div className="text-center py-6 md:py-8 lg:py-12 border-2 border-dashed rounded-lg text-muted-foreground">
                 <Layout className="h-10 w-10 mx-auto mb-2 opacity-30" />
                 <p>No sections yet. Click a section type above to add one.</p>
               </div>
@@ -672,7 +672,7 @@ export default function PageBuilder() {
               </div>
             </div>
           ) : (
-            <div className="text-center py-12 text-muted-foreground border-2 border-dashed rounded-lg">
+            <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground border-2 border-dashed rounded-lg">
               <Navigation className="h-10 w-10 mx-auto mb-2 opacity-30" />
               <p>Select a menu to manage its items, or create a new menu.</p>
             </div>
@@ -849,7 +849,7 @@ export default function PageBuilder() {
         ))}
       </div>
       {activeTab === "pages" && renderPagesList()}
-      {activeTab === "editor" && (editingPageId ? renderEditor() : <div className="text-center py-12 text-muted-foreground"><p>Select a page to edit, or create a new one.</p><Button variant="outline" className="mt-3" onClick={() => setActiveTab("pages")}>Go to Pages</Button></div>)}
+      {activeTab === "editor" && (editingPageId ? renderEditor() : <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground"><p>Select a page to edit, or create a new one.</p><Button variant="outline" className="mt-3" onClick={() => setActiveTab("pages")}>Go to Pages</Button></div>)}
       {activeTab === "navigation" && renderNavigation()}
       {activeTab === "global-styles" && renderGlobalStyles()}
 

@@ -269,7 +269,7 @@ export default function ConversationPractice() {
             </section>
 
             {/* Setup Form */}
-            <section className="py-12">
+            <section className="py-6 md:py-8 lg:py-12">
               <div className="container max-w-3xl">
                 <Card className="shadow-xl border-none">
                   <CardHeader>
@@ -542,7 +542,7 @@ export default function ConversationPractice() {
 
         {/* Session Ended */}
         {sessionState === "ended" && (
-          <section className="py-16">
+          <section className="py-8 md:py-12 lg:py-16">
             <div className="container max-w-2xl">
               <Card className="shadow-xl border-none text-center">
                 <CardContent className="p-10">
@@ -562,7 +562,7 @@ export default function ConversationPractice() {
                       <p className="text-sm font-medium text-foundation mb-2">
                         {isEn ? "Last Score" : "Dernier Score"}
                       </p>
-                      <p className="text-4xl font-bold text-cta">{lastEvaluation.score}/100</p>
+                      <p className="text-xl md:text-3xl lg:text-4xl font-bold text-cta">{lastEvaluation.score}/100</p>
                       {lastEvaluation.feedback && (
                         <p className="text-sm text-muted-foreground mt-2">{lastEvaluation.feedback}</p>
                       )}

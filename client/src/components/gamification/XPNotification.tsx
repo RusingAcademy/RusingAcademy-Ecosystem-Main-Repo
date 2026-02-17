@@ -244,7 +244,7 @@ export function LevelUpCelebration({
 
             {/* Title */}
             <motion.h2
-              className="text-3xl font-bold text-center text-white mt-4 mb-2"
+              className="text-lg md:text-2xl lg:text-3xl font-bold text-center text-white mt-4 mb-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -280,7 +280,7 @@ export function LevelUpCelebration({
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <span className="text-4xl font-black text-white">{newLevel}</span>
+                  <span className="text-xl md:text-3xl lg:text-4xl font-black text-white">{newLevel}</span>
                 </motion.div>
                 <motion.div
                   className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-foundation rounded-full border border-slate-600"

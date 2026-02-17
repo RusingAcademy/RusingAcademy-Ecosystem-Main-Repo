@@ -349,7 +349,7 @@ export default function ThreadDetail() {
             </AnimatePresence>
 
             {posts.length === 0 && (
-              <div className="text-center py-12 text-white/50">
+              <div className="text-center py-6 md:py-8 lg:py-12 text-white/50">
                 <MessageSquare className="w-10 h-10 mx-auto mb-3 opacity-50" />
                 <p>{language === "en" ? "No replies yet. Be the first to respond!" : "Aucune réponse encore. Soyez le premier à répondre!"}</p>
               </div>

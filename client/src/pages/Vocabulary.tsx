@@ -237,9 +237,9 @@ export default function Vocabulary() {
                   <span className="sr-only">{t("skillLabs.loading")}</span>
                 </div>
               ) : filteredItems.length === 0 ? (
-                <div className="text-center py-16" role="status">
+                <div className="text-center py-8 md:py-12 lg:py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                    <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">translate</span>
+                    <span className="material-icons text-xl md:text-3xl lg:text-4xl text-teal-700/60" aria-hidden="true">translate</span>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-700 dark:text-muted-foreground mb-2">
                     {items.length === 0 ? t("vocab.emptyTitle") : (isFr ? "Aucun mot correspondant" : "No matching words")}
@@ -315,16 +315,16 @@ export default function Vocabulary() {
           {/* QUIZ VIEW */}
           {viewMode === "quiz" && (
             quizDone || quizItems.length === 0 ? (
-              <div className="text-center py-16 max-w-md mx-auto" role="status">
+              <div className="text-center py-8 md:py-12 lg:py-16 max-w-md mx-auto" role="status">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
+                  <span className="material-icons text-xl md:text-3xl lg:text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-muted-foreground mb-2">
                   {quizItems.length === 0 ? (isFr ? "Aucun mot à tester !" : "No words to quiz!") : (isFr ? "Quiz terminé !" : "Quiz Complete!")}
                 </h3>
                 {quizScore.total > 0 && (
                   <div className="mb-4">
-                    <div className="text-4xl font-bold text-teal-700 mb-1">{Math.round((quizScore.correct / quizScore.total) * 100)}%</div>
+                    <div className="text-xl md:text-3xl lg:text-4xl font-bold text-teal-700 mb-1">{Math.round((quizScore.correct / quizScore.total) * 100)}%</div>
                     <p className="text-sm text-gray-500">{quizScore.correct}/{quizScore.total} {isFr ? "correct" : "correct"}</p>
                   </div>
                 )}
@@ -352,7 +352,7 @@ export default function Vocabulary() {
                 {/* Quiz card */}
                 <div className="bg-white dark:bg-background rounded-2xl border border-gray-200 dark:border-border dark:border-border shadow-sm p-8 text-center mb-6">
                   <span className="text-[10px] text-gray-400 uppercase tracking-wider mb-4 block">{isFr ? "Traduisez ce mot" : "Translate this word"}</span>
-                  <p className="text-3xl font-bold text-gray-900 dark:text-foreground mb-2">{quizItems[quizIndex]?.word}</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-foreground mb-2">{quizItems[quizIndex]?.word}</p>
                   {quizItems[quizIndex]?.partOfSpeech && (
                     <p className="text-xs text-gray-400 italic mb-4">({quizItems[quizIndex].partOfSpeech})</p>
                   )}

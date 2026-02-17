@@ -392,7 +392,7 @@ export default function TutoringSessions() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td colSpan={6} className="px-4 py-16 text-center">
+                    <td colSpan={6} className="px-4 py-8 md:py-12 lg:py-16 text-center">
                       <span className="material-icons text-[48px] text-gray-300 mb-3 block">event_busy</span>
                       <p className="text-gray-500 text-sm font-medium mb-1">No sessions yet</p>
                       <p className="text-gray-400 text-xs mb-4">

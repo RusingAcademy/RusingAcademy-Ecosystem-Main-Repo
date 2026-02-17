@@ -45,7 +45,7 @@ export default function NotFound() {
             </div>
           </div>
 
-          <h1 className="text-4xl font-bold mb-2">404</h1>
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">404</h1>
 
           <h2 className="text-xl font-semibold mb-4">
             {l.title}

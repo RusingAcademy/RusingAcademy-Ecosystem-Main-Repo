@@ -284,7 +284,7 @@ export default function Programs() {
               <span className="font-semibold text-orange-600">"Learn Fast, Consolidate Deeply"</span>
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-8 lg:mb-12">
               <Button size="lg" className="bg-gradient-to-r from-cta to-cta-2 hover:from-cta hover:to-cta text-white shadow-lg">
                 Explore the Program
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -316,9 +316,9 @@ export default function Programs() {
       </section>
 
       {/* Path Series Methodology */}
-      <section className="py-16 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
         <div className="container">
-          <div className="max-w-4xl mx-auto text-center mb-12">
+          <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-700">Proprietary Framework</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               The Path Series™ Methodology
@@ -404,9 +404,9 @@ export default function Programs() {
       </section>
 
       {/* The Six Paths */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-orange-100 text-cta">Our Crash Courses</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               The Six Paths to Bilingual Mastery
@@ -494,7 +494,7 @@ export default function Programs() {
             </TabsContent>
 
             <TabsContent value="esl">
-              <div className="text-center py-12">
+              <div className="text-center py-6 md:py-8 lg:py-12">
                 <Badge className="mb-4 bg-blue-100 text-blue-700">Coming Soon</Badge>
                 <h3 className="text-2xl font-bold mb-4">English as Second Language Paths</h3>
                 <p className="text-black dark:text-foreground mb-6">
@@ -511,9 +511,9 @@ export default function Programs() {
       </section>
 
       {/* Bundle Packages */}
-      <section className="py-16 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
         <div className="container">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta">
               Save Up to $500
             </Badge>
@@ -555,7 +555,7 @@ export default function Programs() {
                   <div className="mb-4">
                     <span className="text-sm text-black dark:text-foreground line-through">${bundle.originalPrice.toLocaleString()} CAD</span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold text-black dark:text-foreground">${bundle.price.toLocaleString()}</span>
+                      <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">${bundle.price.toLocaleString()}</span>
                       <span className="text-black dark:text-foreground">CAD</span>
                     </div>
                     <Badge className="mt-2 bg-green-100 text-green-700">Save ${bundle.savings}</Badge>
@@ -601,9 +601,9 @@ export default function Programs() {
       </section>
 
       {/* Who Is This Program For */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-700">Target Audience</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Who Is This Program For?</h2>
             <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -638,7 +638,7 @@ export default function Programs() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-cta via-amber-500 to-teal-500">
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-cta via-amber-500 to-teal-500">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">

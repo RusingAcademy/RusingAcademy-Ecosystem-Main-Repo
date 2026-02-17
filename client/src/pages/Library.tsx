@@ -779,7 +779,7 @@ function EmptyState({ language }: { language: string }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="text-center py-20"
+      className="text-center py-10 md:py-16 lg:py-20"
     >
       <div className="w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center shadow-inner">
         <Search className="w-10 h-10 text-slate-300" />

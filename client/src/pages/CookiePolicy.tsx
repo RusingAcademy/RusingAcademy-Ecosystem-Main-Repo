@@ -168,15 +168,15 @@ export default function CookiePolicy() {
     <div className="min-h-screen flex flex-col bg-background">
       
       
-      <main className="flex-1 py-16" id="main-content">
+      <main className="flex-1 py-8 md:py-12 lg:py-16" id="main-content">
         <div className="container max-w-4xl">
-          <h1 className="text-4xl font-bold text-foreground mb-2">{t.title}</h1>
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2">{t.title}</h1>
           <p className="text-muted-foreground mb-8">{t.lastUpdated}</p>
           
-          <p className="text-muted-foreground mb-12 leading-relaxed">{t.intro}</p>
+          <p className="text-muted-foreground mb-6 md:mb-8 lg:mb-12 leading-relaxed">{t.intro}</p>
           
           {t.sections.map((section, index) => (
-            <section key={index} className="mb-10">
+            <section key={index} className="mb-4 md:mb-6 lg:mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4">{section.title}</h2>
               
               {section.content && (

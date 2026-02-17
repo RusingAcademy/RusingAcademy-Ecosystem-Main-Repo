@@ -137,10 +137,10 @@ export default function Terms() {
     <div className="min-h-screen flex flex-col bg-background">
       
 
-      <main id="main-content" className="flex-1 py-16">
+      <main id="main-content" className="flex-1 py-8 md:py-12 lg:py-16">
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl font-bold mb-2">{c.title}</h1>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">{c.title}</h1>
             <p className="text-muted-foreground mb-8">{c.lastUpdated}</p>
 
             <div className="prose prose-gray max-w-none">

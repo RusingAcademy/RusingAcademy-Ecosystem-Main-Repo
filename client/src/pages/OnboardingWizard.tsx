@@ -426,11 +426,11 @@ export default function OnboardingWizard() {
         {/* Step 0: Welcome */}
         {step === 0 && (
           <Card className="border-0 shadow-lg">
-            <CardContent className="py-12 text-center space-y-6">
+            <CardContent className="py-6 md:py-8 lg:py-12 text-center space-y-6">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10">
                 <GraduationCap className="w-10 h-10 text-primary" />
               </div>
-              <h1 className="text-3xl font-bold">{t.welcome.title}</h1>
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">{t.welcome.title}</h1>
               <p className="text-lg text-muted-foreground max-w-md mx-auto">
                 {t.welcome.subtitle}
               </p>
@@ -632,7 +632,7 @@ export default function OnboardingWizard() {
                         <Sparkles className="w-8 h-8 text-primary" />
                       </div>
                       <p className="text-muted-foreground">{t.diagnostic.result}</p>
-                      <div className="text-4xl font-bold text-primary">
+                      <div className="text-xl md:text-3xl lg:text-4xl font-bold text-primary">
                         {t.levels.find((l) => l.value === diagnosticLevel)?.label || diagnosticLevel}
                       </div>
                       <p className="text-sm text-muted-foreground">
@@ -798,11 +798,11 @@ export default function OnboardingWizard() {
         {/* Step 7: Complete */}
         {step === t.steps.length - 1 && (
           <Card className="border-0 shadow-lg">
-            <CardContent className="py-12 text-center space-y-6">
+            <CardContent className="py-6 md:py-8 lg:py-12 text-center space-y-6">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30">
                 <CheckCircle2 className="w-10 h-10 text-green-600" />
               </div>
-              <h1 className="text-3xl font-bold">{t.complete.title}</h1>
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">{t.complete.title}</h1>
               <p className="text-lg text-muted-foreground max-w-md mx-auto">
                 {t.complete.subtitle}
               </p>

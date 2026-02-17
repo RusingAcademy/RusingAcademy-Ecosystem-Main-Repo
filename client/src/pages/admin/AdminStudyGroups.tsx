@@ -105,11 +105,11 @@ const AdminStudyGroups = () => {
             </CardHeader>
             <CardContent>
               {isLoading ? (
-                <div className="flex items-center justify-center py-12">
+                <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                   <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
                 </div>
               ) : !groups || (groups as any[]).length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                   <Users className="mx-auto h-12 w-12 mb-4" />
                   <h3 className="text-lg font-semibold mb-2">No study groups yet</h3>
                   <p className="text-sm">Click "Create Group" to get started.</p>

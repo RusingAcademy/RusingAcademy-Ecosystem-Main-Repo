@@ -120,7 +120,7 @@ export default function MockSLEExam() {
   return (
     <div className="container max-w-5xl py-8 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Mock SLE Exams</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">Mock SLE Exams</h1>
         <p className="text-muted-foreground mt-1">Simulate the official Second Language Evaluation under timed conditions</p>
       </div>
 
@@ -141,7 +141,7 @@ export default function MockSLEExam() {
                     onClick={() => setExamType(type)}
                   >
                     <CardContent className="pt-6 text-center space-y-3">
-                      <div className="text-4xl">{config.icon}</div>
+                      <div className="text-xl md:text-3xl lg:text-4xl">{config.icon}</div>
                       <h3 className="font-semibold">{config.label}</h3>
                       <p className="text-sm text-muted-foreground">{config.labelFr}</p>
                       <p className="text-xs text-muted-foreground">{config.desc}</p>
@@ -177,7 +177,7 @@ export default function MockSLEExam() {
 
           {phase === "generating" && (
             <Card>
-              <CardContent className="py-16 text-center space-y-4">
+              <CardContent className="py-8 md:py-12 lg:py-16 text-center space-y-4">
                 <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto" />
                 <h3 className="text-lg font-semibold">Generating Your Exam...</h3>
                 <p className="text-muted-foreground">AI is creating a personalized {examType} exam at {cefrLevel} level</p>
@@ -278,9 +278,9 @@ export default function MockSLEExam() {
 
           {phase === "results" && score !== null && (
             <Card>
-              <CardContent className="py-12 text-center space-y-6">
-                <div className="text-6xl">{score >= 70 ? "🎉" : score >= 50 ? "📊" : "📚"}</div>
-                <h2 className="text-3xl font-bold">{score}%</h2>
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center space-y-6">
+                <div className="text-3xl md:text-5xl lg:text-6xl">{score >= 70 ? "🎉" : score >= 50 ? "📊" : "📚"}</div>
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-bold">{score}%</h2>
                 <p className="text-lg text-muted-foreground">
                   {score >= 70 ? "Excellent! You passed!" : score >= 50 ? "Good effort! Keep practicing." : "Keep studying — you'll get there!"}
                 </p>
@@ -305,8 +305,8 @@ export default function MockSLEExam() {
         <TabsContent value="history" className="space-y-4">
           {!history.data?.length ? (
             <Card>
-              <CardContent className="py-12 text-center">
-                <div className="text-4xl mb-3">📝</div>
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center">
+                <div className="text-xl md:text-3xl lg:text-4xl mb-3">📝</div>
                 <h3 className="font-semibold">No exams taken yet</h3>
                 <p className="text-muted-foreground text-sm mt-1">Start your first mock SLE exam to see results here</p>
               </CardContent>

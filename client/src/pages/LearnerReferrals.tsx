@@ -19,7 +19,7 @@ export default function LearnerReferrals() {
             <div className="p-2 bg-primary/10 rounded-lg">
               <Users className="h-6 w-6 text-primary" />
             </div>
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">
               {isEn ? "Referral Program" : "Programme de parrainage"}
             </h1>
           </div>

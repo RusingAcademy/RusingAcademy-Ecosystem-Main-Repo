@@ -102,9 +102,9 @@ export default function Organizations() {
         </section>
 
         {/* Benefits Section */}
-        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16">
+        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-8 md:py-12 lg:py-16">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-foreground mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-foreground mb-6 md:mb-8 lg:mb-12 text-center">
               {language === "fr" ? "Avantages du mode organisationnel" : "Organizational Mode Benefits"}
             </h2>
 
@@ -132,9 +132,9 @@ export default function Organizations() {
         </section>
 
         {/* Features Section */}
-        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16">
+        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-8 md:py-12 lg:py-16">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-foreground mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-foreground mb-6 md:mb-8 lg:mb-12 text-center">
               {language === "fr" ? "Fonctionnalités incluses" : "Included Features"}
             </h2>
 
@@ -157,7 +157,7 @@ export default function Organizations() {
         </section>
 
         {/* Contact Section */}
-        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16">
+        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-8 md:py-12 lg:py-16">
           <div className="max-w-2xl mx-auto">
             <div className="p-8 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 border border-teal-200/50 dark:border-teal-800/50 backdrop-blur-sm">
               <h3 className="text-2xl font-bold text-black dark:text-foreground mb-4 text-center">

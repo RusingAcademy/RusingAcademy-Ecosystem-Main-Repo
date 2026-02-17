@@ -88,7 +88,7 @@ export function ApplicationAnalyticsDashboard({
 
   if (!data) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-6 md:py-8 lg:py-12">
         <p className="text-gray-600">{isEn ? "No data available" : "Aucune donnée disponible"}</p>
       </div>
     );
@@ -144,7 +144,7 @@ export function ApplicationAnalyticsDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Total Applications" : "Total des candidatures"}</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-foreground mt-2">{data.approvalStats.total}</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-foreground mt-2">{data.approvalStats.total}</p>
             </div>
             <Users className="text-teal-600" size={32} />
           </div>
@@ -154,7 +154,7 @@ export function ApplicationAnalyticsDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
-              <p className="text-3xl font-bold text-green-600 mt-2">{data.approvalStats.approvalRate}%</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-green-600 mt-2">{data.approvalStats.approvalRate}%</p>
             </div>
             <TrendingUp className="text-green-600" size={32} />
           </div>
@@ -164,7 +164,7 @@ export function ApplicationAnalyticsDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
-              <p className="text-3xl font-bold text-blue-600 mt-2">{data.reviewTime.averageHours}h</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-blue-600 mt-2">{data.reviewTime.averageHours}h</p>
             </div>
             <Clock className="text-blue-600" size={32} />
           </div>
@@ -174,7 +174,7 @@ export function ApplicationAnalyticsDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Under Review" : "En cours d'examen"}</p>
-              <p className="text-3xl font-bold text-amber-600 mt-2">{data.approvalStats.underReview}</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-600 mt-2">{data.approvalStats.underReview}</p>
             </div>
             <div className="text-amber-600 font-bold text-2xl">⏳</div>
           </div>

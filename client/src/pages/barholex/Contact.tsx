@@ -94,7 +94,7 @@ export default function BarholexContact() {
               <div className="w-24 h-24 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mx-auto mb-8 shadow-lg shadow-green-500/20">
                 <CheckCircle2 className="w-12 h-12 text-white" />
               </div>
-              <h1 className="text-4xl font-bold text-white mb-4">
+              <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
                 {language === "en" ? "Message Received!" : "Message reçu!"}
               </h1>
               <p className="text-lg text-white/90 mb-8 leading-relaxed">
@@ -176,7 +176,7 @@ export default function BarholexContact() {
         </section>
 
         {/* Main Content */}
-        <section className="py-12 px-4">
+        <section className="py-6 md:py-8 lg:py-12 px-4">
           <div className="container mx-auto">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -473,10 +473,10 @@ export default function BarholexContact() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 px-4">
+        <section className="py-8 md:py-12 lg:py-16 px-4">
           <div className="container mx-auto">
             <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <h2 className="text-2xl font-bold mb-4">
                   {language === "en" ? "Frequently Asked Questions" : "Questions fréquemment posées"}
                 </h2>

@@ -63,7 +63,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
         {/* Header */}
         <div className="bg-gradient-to-r from-teal-500 to-teal-600 p-6 text-white">
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-3xl">🎯</span>
+            <span className="text-lg md:text-2xl lg:text-3xl">🎯</span>
             <h2 className="text-xl font-bold">Quick Check-In</h2>
           </div>
           <p className="text-teal-100 text-sm">
@@ -88,7 +88,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
                       selectedLevel === level.level ? "ring-2 ring-offset-2 ring-teal-500" : ""
                     }`}
                   >
-                    <div className="text-3xl mb-1">{level.emoji}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl mb-1">{level.emoji}</div>
                     <div className="text-xs text-black dark:text-foreground">{level.label}</div>
                   </button>
                 ))}

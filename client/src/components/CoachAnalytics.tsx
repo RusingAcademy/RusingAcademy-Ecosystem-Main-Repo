@@ -126,7 +126,7 @@ export function CoachAnalytics() {
   
   if (earningsLoading) {
     return (
-      <div className="flex justify-center py-12">
+      <div className="flex justify-center py-6 md:py-8 lg:py-12">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );

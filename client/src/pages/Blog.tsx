@@ -203,12 +203,12 @@ export default function Blog() {
         
         {/* Featured Post */}
         {featuredPost && (
-          <section className="py-12">
+          <section className="py-6 md:py-8 lg:py-12">
             <div className="container max-w-6xl">
               <div className="bg-card rounded-2xl border border-border overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="bg-primary/10 aspect-video md:aspect-auto flex items-center justify-center">
-                    <div className="text-6xl">📚</div>
+                    <div className="text-3xl md:text-5xl lg:text-6xl">📚</div>
                   </div>
                   <div className="p-8 md:p-12 flex flex-col justify-center">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary w-fit mb-4">
@@ -245,7 +245,7 @@ export default function Blog() {
         )}
         
         {/* Blog Grid */}
-        <section className="py-12">
+        <section className="py-6 md:py-8 lg:py-12">
           <div className="container max-w-6xl">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {regularPosts.map((post) => (
@@ -254,7 +254,7 @@ export default function Blog() {
                   className="bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-shadow"
                 >
                   <div className="bg-primary/5 aspect-video flex items-center justify-center">
-                    <div className="text-4xl">
+                    <div className="text-xl md:text-3xl lg:text-4xl">
                       {post.category === 'grammar' && '📝'}
                       {post.category === 'vocabulary' && '📖'}
                       {post.category === 'success' && '🏆'}
@@ -290,7 +290,7 @@ export default function Blog() {
         </section>
         
         {/* Newsletter Subscribe */}
-        <section className="py-16 bg-primary/5">
+        <section className="py-8 md:py-12 lg:py-16 bg-primary/5">
           <div className="container max-w-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               {t.subscribe.title}

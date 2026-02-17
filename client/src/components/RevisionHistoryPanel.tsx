@@ -86,11 +86,11 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
 
         <ScrollArea className="max-h-[55vh]">
           {isLoading ? (
-            <div className="flex items-center justify-center gap-2 py-12 text-sm text-cyan-300">
+            <div className="flex items-center justify-center gap-2 py-6 md:py-8 lg:py-12 text-sm text-cyan-300">
               <Loader2 className="h-4 w-4 animate-spin" /> Loading history...
             </div>
           ) : revisions.length === 0 ? (
-            <div className="text-center py-12">
+            <div className="text-center py-6 md:py-8 lg:py-12">
               <History className="h-8 w-8 text-white/90 mx-auto mb-2" />
               <p className="text-sm text-cyan-300">No revisions yet</p>
               <p className="text-xs text-white/90 mt-1">Changes will appear here when sections are edited</p>

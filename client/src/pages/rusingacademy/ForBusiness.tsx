@@ -252,7 +252,7 @@ export default function ForBusiness() {
         </section>
 
         {/* Industries Section */}
-        <section className="py-12 px-4">
+        <section className="py-6 md:py-8 lg:py-12 px-4">
           <div className="container mx-auto text-center">
             <h2 className="text-xl font-semibold text-black dark:text-foreground mb-6">{t.industriesTitle}</h2>
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
@@ -272,9 +272,9 @@ export default function ForBusiness() {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {t.benefitsTitle}
               </h2>
@@ -301,9 +301,9 @@ export default function ForBusiness() {
         </section>
 
         {/* Packages Section */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {t.packagesTitle}
               </h2>
@@ -337,7 +337,7 @@ export default function ForBusiness() {
                     <h3 className="text-xl font-bold text-black dark:text-foreground">{pkg.name}</h3>
                     <p className="text-sm text-black dark:text-foreground mb-4">{pkg.size}</p>
                     <div className="mb-6">
-                      <span className="text-3xl font-bold text-black dark:text-foreground">{pkg.price}</span>
+                      <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{pkg.price}</span>
                       <span className="text-black dark:text-foreground">{pkg.period}</span>
                     </div>
                     <ul className="space-y-3 mb-6">
@@ -366,9 +366,9 @@ export default function ForBusiness() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {t.testimonialsTitle}
               </h2>
@@ -396,10 +396,10 @@ export default function ForBusiness() {
         </section>
 
         {/* CTA & Contact Form Section */}
-        <section id="contact-form" className="py-20 px-4">
+        <section id="contact-form" className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -426,7 +426,7 @@ export default function ForBusiness() {
                 <p className="text-black dark:text-foreground mb-6">{t.formSubtitle}</p>
 
                 {formSubmitted ? (
-                  <div className="text-center py-12">
+                  <div className="text-center py-6 md:py-8 lg:py-12">
                     <div className="w-16 h-16 rounded-full bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
                       <CheckCircle2 className="w-8 h-8 text-teal-400" />
                     </div>

@@ -45,7 +45,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
 
   return (
     <footer
-      className={`relative py-16 ${
+      className={`relative py-8 md:py-12 lg:py-16 ${
         isGlass
           ? 'bg-obsidian/80 border-t border-white/60'
           : 'bg-white dark:bg-card border-t border-gray-200'
@@ -61,7 +61,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Main footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-6 md:mb-8 lg:mb-12">
           {/* Brand & Tagline */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">

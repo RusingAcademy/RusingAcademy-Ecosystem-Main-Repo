@@ -253,7 +253,7 @@ export default function AICoach() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-teal-100 mb-10 max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-teal-100 mb-4 md:mb-6 lg:mb-10 max-w-3xl mx-auto">
                 {isEn
                   ? "Practice your SLE skills anytime, anywhere with our AI-powered language coach. Get instant feedback, personalized exercises, and track your progress - completely free."
                   : "Pratiquez vos compétences ELS à tout moment, n'importe où avec notre coach linguistique alimenté par l'IA. Obtenez des commentaires instantanés, des exercices personnalisés et suivez vos progrès - entièrement gratuit."}
@@ -281,7 +281,7 @@ export default function AICoach() {
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6 md:mb-8 lg:mb-12">
                 <Button size="lg" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2">
                   <Play className="h-4 w-4" />
                   {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
@@ -309,9 +309,9 @@ export default function AICoach() {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
                 {isEn ? "Features" : "Fonctionnalités"}
               </Badge>
@@ -352,7 +352,7 @@ export default function AICoach() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-white dark:bg-background border-y">
+        <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-background border-y">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <p className="text-center text-sm text-black dark:text-foreground mb-6 uppercase tracking-wider">
               {isEn ? "Trusted by public servants from" : "Utilisé par les fonctionnaires de"}
@@ -369,9 +369,9 @@ export default function AICoach() {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
                 {isEn ? "Simple Process" : "Processus simple"}
               </Badge>
@@ -410,7 +410,7 @@ export default function AICoach() {
         </section>
 
         {/* AI Coach Preview */}
-        <section className="py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -502,9 +502,9 @@ export default function AICoach() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
@@ -542,7 +542,7 @@ export default function AICoach() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
+        <section className="relative py-10 md:py-16 lg:py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

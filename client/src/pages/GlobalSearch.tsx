@@ -37,7 +37,7 @@ export default function GlobalSearch() {
   return (
     <div className="container max-w-4xl py-8 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Search</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">Search</h1>
         <p className="text-muted-foreground mt-1">Search across all your content — notes, vocabulary, and discussions</p>
       </div>
 
@@ -87,8 +87,8 @@ export default function GlobalSearch() {
                 </div>
               ) : !filtered.length ? (
                 <Card>
-                  <CardContent className="py-12 text-center">
-                    <div className="text-4xl mb-3">🔍</div>
+                  <CardContent className="py-6 md:py-8 lg:py-12 text-center">
+                    <div className="text-xl md:text-3xl lg:text-4xl mb-3">🔍</div>
                     <h3 className="font-semibold">No results found</h3>
                     <p className="text-muted-foreground text-sm mt-1">Try a different search term</p>
                   </CardContent>
@@ -126,8 +126,8 @@ export default function GlobalSearch() {
 
       {!searchEnabled && (
         <Card>
-          <CardContent className="py-16 text-center">
-            <div className="text-5xl mb-4">🔍</div>
+          <CardContent className="py-8 md:py-12 lg:py-16 text-center">
+            <div className="text-2xl md:text-4xl lg:text-5xl mb-4">🔍</div>
             <h3 className="text-lg font-semibold">Start typing to search</h3>
             <p className="text-muted-foreground mt-1">Search across your notes, vocabulary, and community discussions</p>
             <div className="flex gap-2 justify-center mt-4 flex-wrap">

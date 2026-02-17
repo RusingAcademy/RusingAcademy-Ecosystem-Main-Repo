@@ -109,7 +109,7 @@ export default function CoachRevenue() {
                 </div>
               ) : ledger.length === 0 ? (
                 <div className="text-center py-8">
-                  <span className="material-icons text-gray-300 text-4xl">receipt_long</span>
+                  <span className="material-icons text-gray-300 text-xl md:text-3xl lg:text-4xl">receipt_long</span>
                   <p className="text-sm text-gray-500 mt-2">
                     {lang === "fr" ? "Aucun paiement pour le moment" : "No payouts yet"}
                   </p>
@@ -153,7 +153,7 @@ export default function CoachRevenue() {
                 <span className="material-icons text-amber-300">emoji_events</span>
                 <h3 className="text-sm font-semibold">{lang === "fr" ? "Niveau de commission" : "Commission Tier"}</h3>
               </div>
-              <p className="text-3xl font-bold mb-1">{tier.name}</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold mb-1">{tier.name}</p>
               <p className="text-sm opacity-80 mb-4">{tier.rate}% {lang === "fr" ? "commission" : "commission rate"}</p>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">

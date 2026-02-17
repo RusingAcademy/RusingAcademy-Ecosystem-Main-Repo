@@ -65,9 +65,9 @@ export default function Channels() {
         </button>
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-10">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight mb-2" >
               {t.channels.title}
             </h1>
             <p className="text-muted-foreground">
@@ -83,7 +83,7 @@ export default function Channels() {
 
         {/* {t.channels.myChannels} */}
         {myChannels && myChannels.length > 0 && (
-          <div className="mb-10">
+          <div className="mb-4 md:mb-6 lg:mb-10">
             <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
               <MessageSquare className="w-5 h-5"  />
               {t.channels.myChannels}
@@ -136,7 +136,7 @@ export default function Channels() {
             {t.channels.allChannels}
           </h2>
           {!allChannels || allChannels.length === 0 ? (
-            <div className="text-center py-12">
+            <div className="text-center py-6 md:py-8 lg:py-12">
               <Hash className="w-16 h-16 text-muted-foreground/20 mx-auto mb-4" />
               <p className="text-muted-foreground">No channels available yet. Check back soon!</p>
             </div>

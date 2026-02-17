@@ -137,7 +137,7 @@ export default function HowItWorks() {
 
       <main id="main-content" className="flex-1">
         {/* Hero */}
-        <section className="py-16 bg-gradient-to-b from-primary/5 to-background">
+        <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-b from-primary/5 to-background">
           <div className="container text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{l.title}</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{l.subtitle}</p>
@@ -148,9 +148,9 @@ export default function HowItWorks() {
         <FeaturedCoaches />
 
         {/* For Learners */}
-        <section className="py-16">
+        <section className="py-8 md:py-12 lg:py-16">
           <div className="container">
-            <h2 className="text-2xl font-bold text-center mb-12">{l.forLearners}</h2>
+            <h2 className="text-2xl font-bold text-center mb-6 md:mb-8 lg:mb-12">{l.forLearners}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {learnerSteps.map((step, i) => (
                 <Card key={i} className="relative">
@@ -179,10 +179,10 @@ export default function HowItWorks() {
         </section>
 
         {/* SLE AI Companion Section */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-8 md:py-12 lg:py-16 bg-muted/30">
           <div className="container">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Bot className="h-8 w-8 text-primary" />
                 </div>
@@ -227,9 +227,9 @@ export default function HowItWorks() {
         </section>
 
         {/* For Coaches */}
-        <section className="py-16">
+        <section className="py-8 md:py-12 lg:py-16">
           <div className="container">
-            <h2 className="text-2xl font-bold text-center mb-12">{l.forCoaches}</h2>
+            <h2 className="text-2xl font-bold text-center mb-6 md:mb-8 lg:mb-12">{l.forCoaches}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {coachSteps.map((step, i) => (
                 <Card key={i} className="relative">
@@ -258,9 +258,9 @@ export default function HowItWorks() {
         </section>
 
         {/* FAQ */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-8 md:py-12 lg:py-16 bg-muted/30">
           <div className="container">
-            <h2 className="text-2xl font-bold text-center mb-12">{l.faqTitle}</h2>
+            <h2 className="text-2xl font-bold text-center mb-6 md:mb-8 lg:mb-12">{l.faqTitle}</h2>
             <div className="max-w-3xl mx-auto space-y-4">
               {faqs.map((faq, i) => (
                 <Card key={i}>

@@ -88,7 +88,7 @@ export default function CoachingPlanSuccess() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/50 via-amber-50/30 to-background dark:from-teal-950/20 dark:via-amber-950/10">
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-6 md:py-8 lg:py-12">
         <div className="container max-w-3xl mx-auto px-4">
           {/* Success Header */}
           <div className="text-center mb-8">

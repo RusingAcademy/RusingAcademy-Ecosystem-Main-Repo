@@ -298,7 +298,7 @@ export default function LeadScoringDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{l.avgScore}</p>
-                  <p className="text-3xl font-bold">{stats.averageScore.toFixed(0)}</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold">{stats.averageScore.toFixed(0)}</p>
                 </div>
                 <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
                   <Star className="h-6 w-6 text-primary" />
@@ -311,7 +311,7 @@ export default function LeadScoringDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{l.hotLeads}</p>
-                  <p className="text-3xl font-bold text-emerald-600">{stats.hotLeads}</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-emerald-600">{stats.hotLeads}</p>
                 </div>
                 <div className="h-12 w-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
                   <Zap className="h-6 w-6 text-emerald-600" />
@@ -324,7 +324,7 @@ export default function LeadScoringDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{l.warmLeads}</p>
-                  <p className="text-3xl font-bold text-amber-600">{stats.warmLeads}</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-600">{stats.warmLeads}</p>
                 </div>
                 <div className="h-12 w-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
                   <TrendingUp className="h-6 w-6 text-amber-600" />
@@ -337,7 +337,7 @@ export default function LeadScoringDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{l.coldLeads}</p>
-                  <p className="text-3xl font-bold text-black dark:text-foreground">{stats.coldLeads}</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{stats.coldLeads}</p>
                 </div>
                 <div className="h-12 w-12 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center">
                   <Clock className="h-6 w-6 text-black dark:text-foreground" />

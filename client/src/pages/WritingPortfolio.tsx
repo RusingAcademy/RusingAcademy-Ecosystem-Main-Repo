@@ -222,7 +222,7 @@ export default function WritingPortfolio() {
                 <div className="space-y-4" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
                   <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-5 shadow-sm">
                     <div className="text-center mb-4">
-                      <div className="text-3xl font-bold text-teal-700">{fb.score}</div>
+                      <div className="text-lg md:text-2xl lg:text-3xl font-bold text-teal-700">{fb.score}</div>
                       <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "Score global" : "Overall Score"}</div>
                     </div>
                     <ScoreBar label={isFr ? "Grammaire" : "Grammar"} score={fb.grammar.score} color="var(--color-blue-500, #3b82f6)" />
@@ -351,7 +351,7 @@ export default function WritingPortfolio() {
                 <span className="material-icons text-teal-700" aria-hidden="true">auto_awesome</span> {isFr ? "Retour IA" : "AI Feedback"}
               </h3>
               <div className="text-center mb-4">
-                <div className="text-4xl font-bold text-teal-700">{feedback.score}</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold text-teal-700">{feedback.score}</div>
                 <div className="text-xs text-gray-400">{isFr ? "Score global" : "Overall Score"}</div>
               </div>
               <p className="text-sm text-gray-700 dark:text-muted-foreground mb-4">{feedback.overallFeedback}</p>
@@ -405,9 +405,9 @@ export default function WritingPortfolio() {
             <span className="sr-only">{t("skillLabs.loading")}</span>
           </div>
         ) : (submissions.data || []).length === 0 ? (
-          <div className="text-center py-12" role="status">
+          <div className="text-center py-6 md:py-8 lg:py-12" role="status">
             <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-              <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">edit_note</span>
+              <span className="material-icons text-xl md:text-3xl lg:text-4xl text-teal-700/60" aria-hidden="true">edit_note</span>
             </div>
             <h3 className="text-lg font-semibold text-gray-700 dark:text-muted-foreground mb-2">{t("writing.emptyTitle")}</h3>
             <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("writing.emptyDesc")}</p>

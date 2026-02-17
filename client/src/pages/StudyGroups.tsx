@@ -48,7 +48,7 @@ export default function StudyGroups() {
     <div className="container max-w-5xl py-8 space-y-6" role="main" aria-label={t("studyGroups.title")}>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">{t("studyGroups.title")}</h1>
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">{t("studyGroups.title")}</h1>
           <p className="text-muted-foreground mt-1">
             {isFr
               ? "Apprenez ensemble avec des collègues fonctionnaires qui se préparent à l'ELS"
@@ -136,16 +136,16 @@ export default function StudyGroups() {
         <TabsContent value="browse" className="space-y-4">
           {publicGroups.isLoading ? (
             <Card>
-              <CardContent className="py-12 text-center" role="status">
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center" role="status">
                 <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
                 <p className="text-sm text-muted-foreground mt-3">{t("skillLabs.loading")}</p>
               </CardContent>
             </Card>
           ) : !publicGroups.data?.length ? (
             <Card>
-              <CardContent className="py-12 text-center" role="status">
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center" role="status">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
-                  <span className="material-icons text-3xl text-blue-400" aria-hidden="true">groups</span>
+                  <span className="material-icons text-lg md:text-2xl lg:text-3xl text-blue-400" aria-hidden="true">groups</span>
                 </div>
                 <h3 className="font-semibold text-gray-700">
                   {isFr ? "Aucun groupe d'étude pour le moment" : "No study groups yet"}
@@ -199,16 +199,16 @@ export default function StudyGroups() {
         <TabsContent value="mine" className="space-y-4">
           {myGroups.isLoading ? (
             <Card>
-              <CardContent className="py-12 text-center" role="status">
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center" role="status">
                 <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
                 <p className="text-sm text-muted-foreground mt-3">{t("skillLabs.loading")}</p>
               </CardContent>
             </Card>
           ) : !myGroups.data?.length ? (
             <Card>
-              <CardContent className="py-12 text-center" role="status">
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center" role="status">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                  <span className="material-icons text-3xl text-teal-700/60" aria-hidden="true">group_add</span>
+                  <span className="material-icons text-lg md:text-2xl lg:text-3xl text-teal-700/60" aria-hidden="true">group_add</span>
                 </div>
                 <h3 className="font-semibold text-gray-700">
                   {isFr ? "Vous n'avez rejoint aucun groupe" : "You haven't joined any groups yet"}

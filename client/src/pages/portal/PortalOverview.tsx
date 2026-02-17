@@ -104,12 +104,12 @@ export default function PortalOverview() {
               </div>
               <div className="hidden md:flex items-center gap-3 bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4">
                 <div className="text-center">
-                  <p className="text-3xl font-bold">45%</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold">45%</p>
                   <p className="text-xs text-blue-200">Niveau B</p>
                 </div>
                 <div className="w-px h-12 bg-white dark:bg-background/20" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold">12</p>
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold">12</p>
                   <p className="text-xs text-blue-200">Sessions</p>
                 </div>
               </div>

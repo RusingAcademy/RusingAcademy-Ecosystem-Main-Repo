@@ -203,7 +203,7 @@ export default function AdminAnalytics() {
                 <p className="text-sm text-muted-foreground">
                   {isEn ? "Total Users" : "Utilisateurs totaux"}
                 </p>
-                <p className="text-3xl font-bold">{analytics.totalUsers.toLocaleString()}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold">{analytics.totalUsers.toLocaleString()}</p>
                 <GrowthIndicator value={analytics.userGrowth} />
               </div>
               <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
@@ -220,7 +220,7 @@ export default function AdminAnalytics() {
                 <p className="text-sm text-muted-foreground">
                   {isEn ? "Active Coaches" : "Coachs actifs"}
                 </p>
-                <p className="text-3xl font-bold">{analytics.activeCoaches}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold">{analytics.activeCoaches}</p>
                 <p className="text-sm text-muted-foreground">
                   {isEn ? "Approved & active" : "Approuvés et actifs"}
                 </p>
@@ -239,7 +239,7 @@ export default function AdminAnalytics() {
                 <p className="text-sm text-muted-foreground">
                   {isEn ? "Sessions This Month" : "Sessions ce mois"}
                 </p>
-                <p className="text-3xl font-bold">{analytics.sessionsThisMonth}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold">{analytics.sessionsThisMonth}</p>
                 <GrowthIndicator value={analytics.sessionGrowth} />
               </div>
               <div className="h-12 w-12 rounded-full bg-foundation-soft flex items-center justify-center">
@@ -256,7 +256,7 @@ export default function AdminAnalytics() {
                 <p className="text-sm text-muted-foreground">
                   {isEn ? "Revenue (MTD)" : "Revenus (MTD)"}
                 </p>
-                <p className="text-3xl font-bold">{formatCurrency(analytics.revenue)}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold">{formatCurrency(analytics.revenue)}</p>
                 <GrowthIndicator value={analytics.revenueGrowth} />
               </div>
               <div className="h-12 w-12 rounded-full bg-amber-100 flex items-center justify-center">
@@ -444,25 +444,25 @@ export default function AdminAnalytics() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <p className="text-3xl font-bold text-primary">78%</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-primary">78%</p>
               <p className="text-sm text-muted-foreground">
                 {isEn ? "Retention Rate" : "Taux de rétention"}
               </p>
             </div>
             <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <p className="text-3xl font-bold text-primary">3.2</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-primary">3.2</p>
               <p className="text-sm text-muted-foreground">
                 {isEn ? "Avg Sessions/User" : "Sessions moy./utilisateur"}
               </p>
             </div>
             <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <p className="text-3xl font-bold text-primary">4.7</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-primary">4.7</p>
               <p className="text-sm text-muted-foreground">
                 {isEn ? "Avg Rating" : "Note moyenne"}
               </p>
             </div>
             <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <p className="text-3xl font-bold text-primary">92%</p>
+              <p className="text-lg md:text-2xl lg:text-3xl font-bold text-primary">92%</p>
               <p className="text-sm text-muted-foreground">
                 {isEn ? "Completion Rate" : "Taux de complétion"}
               </p>

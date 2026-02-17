@@ -29,7 +29,7 @@ const LoadingSpinner = () => (
 const AccessDenied = ({ userRole, requiredRole }: { userRole: UserRole; requiredRole: UserRole }) => (
   <div className="min-h-screen flex items-center justify-center bg-white dark:bg-background">
     <div className="max-w-md w-full bg-white dark:bg-background rounded-xl shadow-lg p-8 text-center">
-      <div className="text-6xl mb-4">🚫</div>
+      <div className="text-3xl md:text-5xl lg:text-6xl mb-4">🚫</div>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-foreground mb-2">Accès Refusé</h1>
       <p className="text-gray-600 mb-6">
         Cette page nécessite un accès de niveau <strong>{requiredRole}</strong>.

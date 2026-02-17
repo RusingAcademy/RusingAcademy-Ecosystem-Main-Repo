@@ -461,7 +461,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg lg:text-xl leading-relaxed mb-10 text-black dark:text-foreground"
+                className="text-lg lg:text-xl leading-relaxed mb-4 md:mb-6 lg:mb-10 text-black dark:text-foreground"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -578,7 +578,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-12 lg:mb-16"
           >
             <motion.h2 
               variants={fadeInUp}
@@ -642,7 +642,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-12 lg:mb-16"
           >
             <span 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
@@ -668,7 +668,7 @@ export default function BarholexMediaLanding() {
           </motion.div>
 
           {/* Expertise tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-8 lg:mb-12">
             {t.expertise.items.map((item, index) => {
               const Icon = iconMap[item.icon];
               return (
@@ -767,7 +767,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-12 lg:mb-16"
           >
             <span 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
@@ -836,7 +836,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
-            className="text-center mb-12"
+            className="text-center mb-6 md:mb-8 lg:mb-12"
           >
             <span 
               className="text-sm font-medium uppercase tracking-wider"
@@ -880,7 +880,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-12 lg:mb-16"
           >
             <span 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
@@ -925,7 +925,7 @@ export default function BarholexMediaLanding() {
                 
                 <div className="text-center">
                   <div 
-                    className="inline-flex items-center justify-center w-24 h-24 rounded-full mb-6 text-3xl font-bold"
+                    className="inline-flex items-center justify-center w-24 h-24 rounded-full mb-6 text-lg md:text-2xl lg:text-3xl font-bold"
                     style={{ 
                       background: colors.goldMuted,
                       color: colors.gold,
@@ -1049,7 +1049,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.cta.title}
             </h2>
-            <p className="text-xl mb-10 text-white/90 max-w-2xl mx-auto" style={{color: 'var(--color-white, #ffffff)'}}>
+            <p className="text-xl mb-4 md:mb-6 lg:mb-10 text-white/90 max-w-2xl mx-auto" style={{color: 'var(--color-white, #ffffff)'}}>
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">

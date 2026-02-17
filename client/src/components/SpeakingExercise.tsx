@@ -185,7 +185,7 @@ export function SpeakingExercise({
       {/* Header */}
       <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-3xl">🎤</span>
+          <span className="text-lg md:text-2xl lg:text-3xl">🎤</span>
           <h2 className="text-xl font-bold">
             {language === "fr" ? "Exercice oral" : "Speaking Exercise"}
           </h2>

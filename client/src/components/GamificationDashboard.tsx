@@ -121,7 +121,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             {/* Level Badge */}
             <div className={`w-20 h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center shadow-lg border-4 border-white/60`}>
               <div className="text-center">
-                <p className="text-3xl font-bold">{stats.levelInfo.current}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold">{stats.levelInfo.current}</p>
                 <p className="text-xs opacity-80">LEVEL</p>
               </div>
             </div>
@@ -134,8 +134,8 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
           
           {/* Streak */}
           <div className="text-center bg-white dark:bg-background/10 rounded-xl p-4 backdrop-blur">
-            <div className="text-4xl mb-1">🔥</div>
-            <p className="text-3xl font-bold">{stats.streak.current}</p>
+            <div className="text-xl md:text-3xl lg:text-4xl mb-1">🔥</div>
+            <p className="text-lg md:text-2xl lg:text-3xl font-bold">{stats.streak.current}</p>
             <p className="text-sm text-teal-200">Day Streak</p>
             {stats.streak.longest > stats.streak.current && (
               <p className="text-xs text-teal-300 mt-1">Best: {stats.streak.longest} days</p>
@@ -193,7 +193,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         
         {stats.badges.total === 0 ? (
           <div className="text-center py-8 text-black dark:text-foreground">
-            <p className="text-4xl mb-2">🏅</p>
+            <p className="text-xl md:text-3xl lg:text-4xl mb-2">🏅</p>
             <p>Complete lessons and maintain streaks to earn badges!</p>
           </div>
         ) : (
@@ -210,7 +210,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                     NEW
                   </span>
                 )}
-                <div className="text-3xl mb-1">
+                <div className="text-lg md:text-2xl lg:text-3xl mb-1">
                   {BADGE_ICONS[badge.badgeType] || "🏅"}
                 </div>
                 <p className="text-xs font-medium text-black dark:text-foreground truncate">{badge.title}</p>

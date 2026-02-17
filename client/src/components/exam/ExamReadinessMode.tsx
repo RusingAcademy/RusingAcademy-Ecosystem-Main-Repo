@@ -50,7 +50,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
     <div className="p-6 bg-slate-950 min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Mode Préparation Examen</h1>
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-white mb-2">Mode Préparation Examen</h1>
           <p className="text-white/60">Simulez les conditions réelles de l'ELS</p>
         </div>
         
@@ -67,7 +67,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
         {/* Readiness Score */}
         <div className="bg-gradient-to-br from-foundation/20 to-teal-700/20 rounded-2xl p-8 mb-8 text-center border border-foundation/30">
           <p className="text-white/60 mb-2">Score de préparation - Niveau {selectedLevel}</p>
-          <div className="text-6xl font-bold text-white mb-4">{Math.round(readinessScore) || '--'}%</div>
+          <div className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">{Math.round(readinessScore) || '--'}%</div>
           <div className="w-full bg-white dark:bg-background/10 rounded-full h-3"><div className="bg-gradient-to-r from-foundation to-teal-700 h-3 rounded-full" style={{ width: `${readinessScore || 0}%` }} /></div>
         </div>
 
@@ -128,7 +128,7 @@ function ExamSimulator({ level, section, onComplete }: { level: string; section:
             <div className="text-center">
               <h2 className="text-2xl font-bold text-white mb-4">Partie {currentPart + 1}: {(SLE_CONFIG.sections.oral.parts[currentPart] || {}).name}</h2>
               <button onClick={() => setIsRecording(!isRecording)} className={`w-24 h-24 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-foundation-soft'} flex items-center justify-center mx-auto`}>
-                <span className="text-3xl">{isRecording ? '⏹' : '🎤'}</span>
+                <span className="text-lg md:text-2xl lg:text-3xl">{isRecording ? '⏹' : '🎤'}</span>
               </button>
               <p className="text-white/60 mt-4">{isRecording ? 'Enregistrement en cours...' : 'Cliquez pour commencer'}</p>
             </div>

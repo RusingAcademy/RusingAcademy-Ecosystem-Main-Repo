@@ -90,8 +90,8 @@ export default function Membership() {
           <ArrowLeft className="w-4 h-4" /> {t.membership.backToCommunity}
         </button>
 
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight mb-3" >
+        <div className="text-center mb-6 md:mb-8 lg:mb-12">
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3" >
             {t.membership.title}
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -158,7 +158,7 @@ export default function Membership() {
                 <CardContent className="text-center">
                   <div className="mb-6">
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-4xl font-extrabold" style={{ color }}>
+                      <span className="text-xl md:text-3xl lg:text-4xl font-extrabold" style={{ color }}>
                         {isFree ? "Free" : `$${tier.priceMonthly}`}
                       </span>
                       {!isFree && <span className="text-muted-foreground text-sm">/month</span>}

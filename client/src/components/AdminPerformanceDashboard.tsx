@@ -181,7 +181,7 @@ export function AdminPerformanceDashboard({
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-600 text-sm">{isEn ? "Total Reviewed" : "Total examinées"}</p>
-                  <p className="text-3xl font-bold text-blue-600 mt-2">
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-blue-600 mt-2">
                     {selectedAdminDetails.averages?.totalReviewed || 0}
                   </p>
                 </div>
@@ -193,7 +193,7 @@ export function AdminPerformanceDashboard({
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-600 text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
-                  <p className="text-3xl font-bold text-green-600 mt-2">
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-green-600 mt-2">
                     {selectedAdminDetails.averages?.approvalRate || 0}%
                   </p>
                 </div>
@@ -205,7 +205,7 @@ export function AdminPerformanceDashboard({
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-600 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
-                  <p className="text-3xl font-bold text-foundation mt-2">
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation mt-2">
                     {selectedAdminDetails.averages?.averageReviewTimeHours || 0}h
                   </p>
                 </div>
@@ -217,7 +217,7 @@ export function AdminPerformanceDashboard({
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-600 text-sm">{isEn ? "Consistency" : "Cohérence"}</p>
-                  <p className="text-3xl font-bold text-amber-600 mt-2">
+                  <p className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-600 mt-2">
                     {selectedAdminDetails.monthsData?.length || 0}
                   </p>
                   <p className="text-xs text-gray-600 mt-1">{isEn ? "months" : "mois"}</p>

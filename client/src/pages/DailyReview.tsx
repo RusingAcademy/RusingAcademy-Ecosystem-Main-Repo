@@ -101,7 +101,7 @@ export default function DailyReview() {
       {/* Header with streak */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">{t("daily.title")}</h1>
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">{t("daily.title")}</h1>
           <p className="text-muted-foreground mt-1">{t("daily.startReview")}</p>
         </div>
         {streakData && (
@@ -173,7 +173,7 @@ export default function DailyReview() {
       {/* Main content */}
       {dueCards.isLoading ? (
         <Card>
-          <CardContent className="py-16 text-center" role="status" aria-label={t("skillLabs.loading")}>
+          <CardContent className="py-8 md:py-12 lg:py-16 text-center" role="status" aria-label={t("skillLabs.loading")}>
             <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto" />
             <p className="text-muted-foreground mt-4">{t("skillLabs.loading")}</p>
           </CardContent>
@@ -208,7 +208,7 @@ export default function DailyReview() {
           <Card>
             <CardContent className="py-8 text-center space-y-6" role="status">
               <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
-                <span className="material-icons text-4xl text-green-500" aria-hidden="true">check_circle</span>
+                <span className="material-icons text-xl md:text-3xl lg:text-4xl text-green-500" aria-hidden="true">check_circle</span>
               </div>
               <h2 className="text-2xl font-bold">{t("flashcards.reviewComplete")}</h2>
               <p className="text-lg text-muted-foreground">
@@ -257,9 +257,9 @@ export default function DailyReview() {
         </div>
       ) : !cards.length ? (
         <Card>
-          <CardContent className="py-16 text-center space-y-4" role="status">
+          <CardContent className="py-8 md:py-12 lg:py-16 text-center space-y-4" role="status">
             <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-              <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">event_available</span>
+              <span className="material-icons text-xl md:text-3xl lg:text-4xl text-teal-700/60" aria-hidden="true">event_available</span>
             </div>
             <h2 className="text-2xl font-bold">{t("daily.emptyTitle")}</h2>
             <p className="text-muted-foreground max-w-sm mx-auto">{t("daily.emptyDesc")}</p>

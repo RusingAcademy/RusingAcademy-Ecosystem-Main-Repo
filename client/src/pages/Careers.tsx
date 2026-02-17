@@ -192,7 +192,7 @@ export default function Careers() {
         </section>
         
         {/* Intro */}
-        <section className="py-16">
+        <section className="py-8 md:py-12 lg:py-16">
           <div className="container max-w-3xl text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
               {t.intro.title}
@@ -204,9 +204,9 @@ export default function Careers() {
         </section>
         
         {/* Values */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-8 md:py-12 lg:py-16 bg-muted/30">
           <div className="container max-w-6xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-6 md:mb-8 lg:mb-12">
               {t.values.title}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -230,9 +230,9 @@ export default function Careers() {
         </section>
         
         {/* Benefits */}
-        <section className="py-16">
+        <section className="py-8 md:py-12 lg:py-16">
           <div className="container max-w-3xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-6 md:mb-8 lg:mb-12">
               {t.benefits.title}
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
@@ -250,9 +250,9 @@ export default function Careers() {
         </section>
         
         {/* Open Positions */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-8 md:py-12 lg:py-16 bg-muted/30">
           <div className="container max-w-4xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-6 md:mb-8 lg:mb-12">
               {t.positions.title}
             </h2>
             
@@ -303,7 +303,7 @@ export default function Careers() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
+              <div className="text-center py-6 md:py-8 lg:py-12">
                 <p className="text-lg text-muted-foreground mb-2">{t.positions.noPositions}</p>
                 <p className="text-muted-foreground">{t.positions.checkBack}</p>
               </div>
@@ -312,7 +312,7 @@ export default function Careers() {
         </section>
         
         {/* Apply CTA */}
-        <section className="py-16">
+        <section className="py-8 md:py-12 lg:py-16">
           <div className="container max-w-2xl text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               {t.apply.title}

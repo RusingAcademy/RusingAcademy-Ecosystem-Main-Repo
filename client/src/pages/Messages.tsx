@@ -241,7 +241,7 @@ export default function Messages() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         <Header />
-        <main className="container mx-auto px-4 py-16">
+        <main className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
           <Card className="max-w-md mx-auto">
             <CardContent className="p-8 text-center">
               <MessageSquare className="h-12 w-12 mx-auto mb-4 text-black dark:text-foreground" />
@@ -272,7 +272,7 @@ export default function Messages() {
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <div className="mb-6">
-            <h1 className="text-3xl font-bold mb-2">
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">
               {isEn ? "Messages" : "Messages"}
             </h1>
             <p className="text-black dark:text-foreground">

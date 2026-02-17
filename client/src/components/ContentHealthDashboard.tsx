@@ -130,7 +130,7 @@ export default function ContentHealthDashboard() {
               </p>
             </div>
             <div className="text-center">
-              <div className={cn("text-4xl font-bold", gradeColors[overallGrade])}>
+              <div className={cn("text-xl md:text-3xl lg:text-4xl font-bold", gradeColors[overallGrade])}>
                 {overallGrade}
               </div>
               <div className="text-sm text-muted-foreground">

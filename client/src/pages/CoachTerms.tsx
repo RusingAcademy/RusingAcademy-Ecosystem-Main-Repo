@@ -266,7 +266,7 @@ export default function CoachTerms() {
       </header>
 
       {/* Content */}
-      <main className="container mx-auto px-4 py-12 max-w-4xl">
+      <main className="container mx-auto px-4 py-6 md:py-8 lg:py-12 max-w-4xl">
         <div className="bg-white dark:bg-card dark:bg-foundation rounded-2xl shadow-xl border border-slate-200 dark:border-teal-800 overflow-hidden">
           {/* Title Section */}
           <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-8 py-8 text-white">

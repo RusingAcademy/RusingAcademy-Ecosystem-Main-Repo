@@ -567,7 +567,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   };
 
   return (
-    <section className="section-dark py-28 px-0 bg-gradient-to-b from-[#031818] via-[#0a3d3d] to-[#031818] relative overflow-hidden">
+    <section className="section-dark py-12 md:py-20 lg:py-28 px-0 bg-gradient-to-b from-[#031818] via-[#0a3d3d] to-[#031818] relative overflow-hidden">
       {/* ── Decorative Background ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Premium gradient orbs */}
@@ -600,7 +600,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="text-center mb-10 px-4"
+          className="text-center mb-4 md:mb-6 lg:mb-10 px-4"
         >
           {/* Badge */}
           <motion.div 
@@ -636,7 +636,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="flex flex-wrap justify-center gap-3 mb-12 px-4"
+          className="flex flex-wrap justify-center gap-3 mb-6 md:mb-8 lg:mb-12 px-4"
         >
           <StatsPill icon={Video} value="10+" label={language === "en" ? "Shorts" : "Shorts"} />
           <StatsPill icon={BookOpen} value="7" label={language === "en" ? "Capsules" : "Capsules"} />
@@ -649,7 +649,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="flex justify-center mb-14 px-4"
+          className="flex justify-center mb-6 md:mb-10 lg:mb-14 px-4"
         >
           <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white dark:bg-background/5 backdrop-blur-xl border border-white/10">
             <button
@@ -709,7 +709,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="mb-16"
+              className="mb-8 md:mb-12 lg:mb-16"
             >
               <motion.div
                 initial="hidden"
@@ -717,7 +717,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                 viewport={{ once: true }}
                 variants={staggerContainer}
               >
-                <motion.div variants={fadeInUp} className="text-center mb-10 px-4">
+                <motion.div variants={fadeInUp} className="text-center mb-4 md:mb-6 lg:mb-10 px-4">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
                     {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
                   </h3>
@@ -771,7 +771,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="mb-16"
+              className="mb-8 md:mb-12 lg:mb-16"
             >
               <motion.div
                 initial="hidden"
@@ -779,7 +779,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                 viewport={{ once: true }}
                 variants={staggerContainer}
               >
-                <motion.div variants={fadeInUp} className="text-center mb-10 px-4">
+                <motion.div variants={fadeInUp} className="text-center mb-4 md:mb-6 lg:mb-10 px-4">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
                     {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
                   </h3>
@@ -966,7 +966,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           className="text-center px-4 mt-4"
         >
           {/* Decorative line */}
-          <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="flex items-center justify-center gap-4 mb-4 md:mb-6 lg:mb-10">
             <div className="h-px w-16 bg-gradient-to-r from-transparent to-white/20" />
             <Sparkles className="w-4 h-4 text-amber-400/50" />
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-white/20" />
