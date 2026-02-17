@@ -14,11 +14,11 @@
 
 :root {
   /* Brand Colors */
-  --color-rusingacademy: #1E9B8A;
+  --color-rusingacademy: var(--teal);
   --color-rusingacademy-glow: rgba(30, 155, 138, 0.3);
-  --color-lingueefy: #17E2C6;
+  --color-lingueefy: var(--lingueefy-accent);
   --color-lingueefy-glow: rgba(23, 226, 198, 0.3);
-  --color-barholex: #D4A853;
+  --color-barholex: var(--barholex-gold);
   --color-barholex-glow: rgba(212, 168, 83, 0.3);
   
   /* Accent Colors */
@@ -30,7 +30,7 @@
   --color-surface-dark: #080a14;
   --color-surface-light: #F4F6F9;
   --color-text-dark: #1A1F2E;
-  --color-text-light: #FFFFFF;
+  --color-text-light: var(--text-inverse);
   --color-text-muted: #5E6A83;
   
   /* Gold Accents */
@@ -204,7 +204,7 @@
 }
 
 .btn-premium-teal {
-  background: linear-gradient(135deg, var(--color-lingueefy) 0%, #0d9488 100%);
+  background: linear-gradient(135deg, var(--color-lingueefy) 0%, var(--teal) 100%);
   color: white;
   font-weight: 700;
   padding: 14px 28px;
@@ -409,7 +409,7 @@
 }
 
 .section-premium-dark {
-  background: linear-gradient(180deg, var(--color-surface-dark) 0%, #041e1e 100%);
+  background: linear-gradient(180deg, var(--color-surface-dark) 0%, var(--brand-obsidian-2) 100%);
   color: var(--color-text-light);
 }
 

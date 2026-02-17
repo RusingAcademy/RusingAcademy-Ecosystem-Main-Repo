@@ -371,7 +371,7 @@ export function SpeakingExercise({
                   setAudioUrl(null);
                   setRecordingTime(0);
                 }}
-                className="text-foundation hover:text-[#145A5B] text-sm font-medium"
+                className="text-foundation hover:text-[var(--brand-foundation-2)] text-sm font-medium"
               >
                 🔄 {language === "fr" ? "Réenregistrer" : "Re-record"}
               </button>

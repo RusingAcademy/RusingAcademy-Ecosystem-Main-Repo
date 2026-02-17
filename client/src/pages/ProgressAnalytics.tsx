@@ -33,10 +33,10 @@ export default function ProgressAnalytics() {
     const vocabMastered = Array.isArray(vocabItems) ? vocabItems.filter((v: any) => v.masteryLevel === "mastered").length : 0;
     const vocabScore = vocabCount > 0 ? Math.round((vocabMastered / vocabCount) * 100) : 0;
     return [
-      { name: "Reading", score: reading, icon: "auto_stories", color: "var(--brand-teal, #008090)", total: readingStats?.totalExercises ?? 0 },
-      { name: "Listening", score: listening, icon: "headphones", color: "var(--color-violet-500, #8b5cf6)", total: listeningStats?.totalExercises ?? 0 },
-      { name: "Grammar", score: grammar, icon: "spellcheck", color: "var(--semantic-warning, #f5a623)", total: grammarStats?.totalDrills ?? 0 },
-      { name: "Vocabulary", score: vocabScore, icon: "translate", color: "var(--semantic-danger, #e74c3c)", total: vocabCount },
+      { name: "Reading", score: reading, icon: "auto_stories", color: "var(--brand-teal, var(--teal))", total: readingStats?.totalExercises ?? 0 },
+      { name: "Listening", score: listening, icon: "headphones", color: "var(--color-violet-500, var(--accent-purple))", total: listeningStats?.totalExercises ?? 0 },
+      { name: "Grammar", score: grammar, icon: "spellcheck", color: "var(--semantic-warning, var(--warning))", total: grammarStats?.totalDrills ?? 0 },
+      { name: "Vocabulary", score: vocabScore, icon: "translate", color: "var(--semantic-danger, var(--danger))", total: vocabCount },
     ];
   }, [readingStats, listeningStats, grammarStats, vocabItems]);
 
@@ -96,8 +96,8 @@ export default function ProgressAnalytics() {
                 <div className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm text-center col-span-1">
                   <div className="relative w-32 h-32 mx-auto mb-4">
                     <svg className="w-32 h-32 -rotate-90" viewBox="0 0 120 120">
-                      <circle cx="60" cy="60" r="52" fill="none" stroke="var(--color-gray-200, #e5e7eb)" strokeWidth="10" />
-                      <circle cx="60" cy="60" r="52" fill="none" stroke="var(--brand-teal, #008090)" strokeWidth="10"
+                      <circle cx="60" cy="60" r="52" fill="none" stroke="var(--color-gray-200, var(--border))" strokeWidth="10" />
+                      <circle cx="60" cy="60" r="52" fill="none" stroke="var(--brand-teal, var(--teal))" strokeWidth="10"
                         strokeDasharray={`${(overallScore / 100) * 327} 327`} strokeLinecap="round" />
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -135,10 +135,10 @@ export default function ProgressAnalytics() {
               {/* Quick Stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
-                  { label: "Level", value: profile?.level ?? 1, icon: "military_tech", color: "var(--semantic-warning, #f5a623)" },
-                  { label: "Total XP", value: profile?.totalXp?.toLocaleString() ?? "0", icon: "stars", color: "var(--brand-teal, #008090)" },
-                  { label: "Streak", value: `${profile?.currentStreak ?? 0}d`, icon: "local_fire_department", color: "var(--semantic-danger, #e74c3c)" },
-                  { label: "Badges", value: badges.length, icon: "emoji_events", color: "var(--color-violet-500, #8b5cf6)" },
+                  { label: "Level", value: profile?.level ?? 1, icon: "military_tech", color: "var(--semantic-warning, var(--warning))" },
+                  { label: "Total XP", value: profile?.totalXp?.toLocaleString() ?? "0", icon: "stars", color: "var(--brand-teal, var(--teal))" },
+                  { label: "Streak", value: `${profile?.currentStreak ?? 0}d`, icon: "local_fire_department", color: "var(--semantic-danger, var(--danger))" },
+                  { label: "Badges", value: badges.length, icon: "emoji_events", color: "var(--color-violet-500, var(--accent-purple))" },
                 ].map((s, i) => (
                   <div key={i} className="bg-white dark:bg-background rounded-2xl p-5 border border-gray-100 dark:border-border shadow-sm text-center">
                     <span className="material-icons text-lg md:text-2xl lg:text-3xl mb-2" style={{ color: s.color }}>{s.icon}</span>
@@ -155,7 +155,7 @@ export default function ProgressAnalytics() {
                   <div className="flex flex-wrap gap-3">
                     {badges.map((b: any, i: number) => (
                       <div key={i} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-50 dark:bg-background border border-gray-100">
-                        <span className="material-icons text-lg" style={{ color: b.color || "var(--brand-teal, #008090)" }}>{b.icon || "emoji_events"}</span>
+                        <span className="material-icons text-lg" style={{ color: b.color || "var(--brand-teal, var(--teal))" }}>{b.icon || "emoji_events"}</span>
                         <span className="text-sm font-medium text-gray-700">{b.name}</span>
                       </div>
                     ))}
@@ -224,7 +224,7 @@ export default function ProgressAnalytics() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-100">
                       {["new", "learning", "familiar", "mastered"].map(level => {
                         const count = vocabItems.filter((v: any) => v.masteryLevel === level).length;
-                        const colors: Record<string, string> = { new: "#94a3b8", learning: "var(--semantic-warning, #f5a623)", familiar: "var(--color-violet-500, #8b5cf6)", mastered: "var(--semantic-success, #22c55e)" };
+                        const colors: Record<string, string> = { new: "#94a3b8", learning: "var(--semantic-warning, var(--warning))", familiar: "var(--color-violet-500, var(--accent-purple))", mastered: "var(--semantic-success, var(--success))" };
                         return (
                           <div key={level} className="text-center">
                             <div className="text-lg font-bold" style={{ color: colors[level] }}>{count}</div>
@@ -251,7 +251,7 @@ export default function ProgressAnalytics() {
                         <div className="text-xs text-gray-500 mb-1">{point.score}%</div>
                         <div className="w-full rounded-t-lg transition-all" style={{
                           height: `${Math.max(point.score, 5)}%`,
-                          backgroundColor: point.score >= 80 ? "var(--semantic-success, #22c55e)" : point.score >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)",
+                          backgroundColor: point.score >= 80 ? "var(--semantic-success, var(--success))" : point.score >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))",
                           opacity: 0.8,
                         }} />
                       </div>
@@ -272,9 +272,9 @@ export default function ProgressAnalytics() {
                 <h3 className="font-semibold text-gray-900 dark:text-foreground mb-4">Study Time by Skill</h3>
                 <div className="space-y-3">
                   {[
-                    { name: "Reading", time: readingStats?.totalTime ?? 0, color: "var(--brand-teal, #008090)" },
-                    { name: "Listening", time: listeningStats?.totalTime ?? 0, color: "var(--color-violet-500, #8b5cf6)" },
-                    { name: "Grammar", time: grammarStats?.totalTime ?? 0, color: "var(--semantic-warning, #f5a623)" },
+                    { name: "Reading", time: readingStats?.totalTime ?? 0, color: "var(--brand-teal, var(--teal))" },
+                    { name: "Listening", time: listeningStats?.totalTime ?? 0, color: "var(--color-violet-500, var(--accent-purple))" },
+                    { name: "Grammar", time: grammarStats?.totalTime ?? 0, color: "var(--semantic-warning, var(--warning))" },
                   ].map((s, i) => {
                     const minutes = Math.round(s.time / 60);
                     const maxTime = Math.max(readingStats?.totalTime ?? 0, listeningStats?.totalTime ?? 0, grammarStats?.totalTime ?? 0, 1);

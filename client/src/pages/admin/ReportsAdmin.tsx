@@ -16,11 +16,11 @@ export default function ReportsAdmin() {
   const { data: engagement } = trpc.kajabiReports.getEngagementReport.useQuery();
 
   const reportTypes = [
-    { name: "Revenue Report", icon: DollarSign, desc: "MRR, ARR, churn, LTV breakdown", color: "var(--semantic-success, #22c55e)" },
-    { name: "User Growth", icon: Users, desc: "Signups, activations, retention", color: "var(--color-blue-500, var(--color-blue-500, #3b82f6))" },
+    { name: "Revenue Report", icon: DollarSign, desc: "MRR, ARR, churn, LTV breakdown", color: "var(--semantic-success, var(--success))" },
+    { name: "User Growth", icon: Users, desc: "Signups, activations, retention", color: "var(--color-blue-500, var(--color-blue-500, var(--semantic-info)))" },
     { name: "Course Performance", icon: BookOpen, desc: "Enrollments, completions, ratings", color: "var(--color-purple-500, #a855f7)" },
-    { name: "Marketing Funnel", icon: TrendingUp, desc: "Conversion rates by channel", color: "var(--semantic-warning, var(--semantic-warning, #f59e0b))" },
-    { name: "Coaching Analytics", icon: Calendar, desc: "Sessions, satisfaction, utilization", color: "var(--semantic-danger, var(--semantic-danger, #ef4444))" },
+    { name: "Marketing Funnel", icon: TrendingUp, desc: "Conversion rates by channel", color: "var(--semantic-warning, var(--semantic-warning, var(--warning)))" },
+    { name: "Coaching Analytics", icon: Calendar, desc: "Sessions, satisfaction, utilization", color: "var(--semantic-danger, var(--semantic-danger, var(--danger)))" },
     { name: "Content Engagement", icon: FileText, desc: "Views, time-on-page, downloads", color: "#06b6d4" },
   ];
 

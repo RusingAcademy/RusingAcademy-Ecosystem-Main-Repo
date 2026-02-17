@@ -168,13 +168,13 @@ export default function MobileNav({ isOpen, onClose, activePage, onPageChange }:
                             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200"
                             style={{
                               background: isActive ? "rgba(27, 20, 100, 0.05)" : "transparent",
-                              color: isActive ? "var(--brand-obsidian, #1B1464)" : undefined,
+                              color: isActive ? "var(--brand-obsidian, var(--accent-purple-deep))" : undefined,
                             }}
                           >
-                            <item.icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 1.8} style={isActive ? { color: "var(--brand-obsidian, #1B1464)" } : undefined} />
+                            <item.icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 1.8} style={isActive ? { color: "var(--brand-obsidian, var(--accent-purple-deep))" } : undefined} />
                             <span className={isActive ? "font-bold" : ""}>{getNavLabel(item.labelKey)}</span>
                             {isActive && (
-                              <div className="ml-auto w-1.5 h-1.5 rounded-full" style={{ background: "var(--brand-gold, #D4AF37)" }} />
+                              <div className="ml-auto w-1.5 h-1.5 rounded-full" style={{ background: "var(--brand-gold, var(--barholex-gold))" }} />
                             )}
                           </button>
                         );

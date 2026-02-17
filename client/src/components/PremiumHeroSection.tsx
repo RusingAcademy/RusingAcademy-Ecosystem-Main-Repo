@@ -47,7 +47,7 @@ export default function PremiumHeroSection({
       case "dark":
         return "bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white";
       case "gradient":
-        return "bg-gradient-to-br from-teal-50/30 via-white to-[#FFFFFF]/30";
+        return "bg-gradient-to-br from-teal-50/30 via-white to-[var(--text-inverse)]/30";
       default:
         return "bg-gradient-to-b from-slate-50 via-white to-white";
     }

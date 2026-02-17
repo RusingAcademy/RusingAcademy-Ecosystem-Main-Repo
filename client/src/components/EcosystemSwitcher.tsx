@@ -25,8 +25,8 @@ const PLATFORMS = [
     taglineFr: "Formation B2B/B2G",
     taglineEn: "B2B/B2G Training",
     icon: GraduationCap,
-    color: "#E07B39",
-    bgGradient: "linear-gradient(135deg, #E07B39 0%, #C45E1A 100%)",
+    color: "var(--barholex-gold-hover)",
+    bgGradient: "linear-gradient(135deg, var(--barholex-gold-hover) 0%, #C45E1A 100%)",
     url: "/rusingacademy",
   },
   {
@@ -262,7 +262,7 @@ export function EcosystemSwitcher({
         style={{
           background: isOpen
             ? "rgba(255, 255, 255, 0.9)"
-            : "linear-gradient(135deg, #E07B39 0%, var(--brand-gold, #D4AF37) 50%, #2DD4BF 100%)",
+            : "linear-gradient(135deg, var(--barholex-gold-hover) 0%, var(--brand-gold, var(--barholex-gold)) 50%, #2DD4BF 100%)",
         }}
         aria-expanded={isOpen}
         aria-label={language === "fr" ? "Ouvrir le menu de l'écosystème" : "Open ecosystem menu"}

@@ -19,10 +19,10 @@ function getFirstDayOfMonth(year: number, month: number) {
 }
 
 const categories = [
-  { name: "Tutoring Sessions", color: "var(--brand-teal, #008090)" },
-  { name: "Events", color: "var(--semantic-success, #10b981)" },
-  { name: "Deadlines", color: "var(--semantic-danger, #ef4444)" },
-  { name: "Holidays", color: "var(--semantic-warning, #f59e0b)" },
+  { name: "Tutoring Sessions", color: "var(--brand-teal, var(--teal))" },
+  { name: "Events", color: "var(--semantic-success, var(--success))" },
+  { name: "Deadlines", color: "var(--semantic-danger, var(--danger))" },
+  { name: "Holidays", color: "var(--semantic-warning, var(--warning))" },
 ];
 
 export default function CalendarPage() {

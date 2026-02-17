@@ -18,11 +18,11 @@ export default function MarketingOverview() {
   };
 
   const channels = [
-    { label: "Email Campaigns", icon: Mail, path: "/admin/email", stat: `${stats.emailsSent30d} sent (30d)`, color: "var(--color-blue-600, var(--color-blue-600, #2563eb))" },
-    { label: "Funnels", icon: Workflow, path: "/admin/funnels", stat: `${stats.activeFunnels} active`, color: "var(--color-violet-600, var(--color-violet-600, #7c3aed))" },
-    { label: "Automations", icon: Zap, path: "/admin/automations", stat: `${stats.activeAutomations} running`, color: "var(--semantic-success, var(--semantic-success, #059669))" },
+    { label: "Email Campaigns", icon: Mail, path: "/admin/email", stat: `${stats.emailsSent30d} sent (30d)`, color: "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))" },
+    { label: "Funnels", icon: Workflow, path: "/admin/funnels", stat: `${stats.activeFunnels} active`, color: "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))" },
+    { label: "Automations", icon: Zap, path: "/admin/automations", stat: `${stats.activeAutomations} running`, color: "var(--semantic-success, var(--semantic-success, var(--success)))" },
     { label: "Forms", icon: Target, path: "/admin/forms", stat: `${stats.totalLeads} leads captured`, color: "#ea580c" },
-    { label: "Events", icon: Calendar, path: "/admin/events", stat: `${stats.upcomingEvents} upcoming`, color: "var(--semantic-danger, var(--semantic-danger, #dc2626))" },
+    { label: "Events", icon: Calendar, path: "/admin/events", stat: `${stats.upcomingEvents} upcoming`, color: "var(--semantic-danger, var(--semantic-danger, var(--danger)))" },
   ];
 
   return (

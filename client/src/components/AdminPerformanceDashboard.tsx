@@ -250,13 +250,13 @@ export function AdminPerformanceDashboard({
                     <Line
                       type="monotone"
                       dataKey="totalApproved"
-                      stroke="var(--semantic-success, #10b981)"
+                      stroke="var(--semantic-success, var(--success))"
                       name={isEn ? "Approved" : "Approuvées"}
                     />
                     <Line
                       type="monotone"
                       dataKey="totalRejected"
-                      stroke="var(--semantic-danger, #ef4444)"
+                      stroke="var(--semantic-danger, var(--danger))"
                       name={isEn ? "Rejected" : "Rejetées"}
                     />
                   </LineChart>
@@ -277,13 +277,13 @@ export function AdminPerformanceDashboard({
                     <Line
                       type="monotone"
                       dataKey="approvalRate"
-                      stroke="var(--semantic-success, #10b981)"
+                      stroke="var(--semantic-success, var(--success))"
                       name={isEn ? "Approval Rate %" : "Taux d'approbation %"}
                     />
                     <Line
                       type="monotone"
                       dataKey="rejectionRate"
-                      stroke="var(--semantic-danger, #ef4444)"
+                      stroke="var(--semantic-danger, var(--danger))"
                       name={isEn ? "Rejection Rate %" : "Taux de rejet %"}
                     />
                   </LineChart>

@@ -7,7 +7,7 @@
  * Layout: 100vh, no scroll, asymmetric split (55% left / 45% right).
  * Left: Cream gradient with CSS MacBook mockup, real logo above, stats below.
  * Right: Deep teal gradient with glassmorphism auth card, floating orbs.
- * Brand: Foundation (#0F3D3E) · Gold (#D4A853) · Cream (#F7F5F0)
+ * Brand: Foundation (var(--brand-foundation)) · Gold (var(--barholex-gold)) · Cream (#F7F5F0)
  * Typography: var(--font-display) (Merriweather) + Inter (UI)
  * Auth: customAuth (email/password) + Google OAuth + Microsoft OAuth
  *
@@ -983,7 +983,7 @@ function LoginContent() {
                   background: isPending
                     ? "linear-gradient(135deg, #1a4a4a 0%, #2a6666 50%, #3a8080 100%)"
                     : loginSuccess
-                      ? "linear-gradient(135deg, #166534 0%, #15803d 50%, #22c55e 100%)"
+                      ? "linear-gradient(135deg, #166534 0%, #15803d 50%, var(--success) 100%)"
                       : "linear-gradient(135deg, var(--brand-foundation) 0%, #1a6060 50%, #2a8080 100%)",
                 }}
               >
@@ -1284,7 +1284,7 @@ function LoginContent() {
                 background: isPending
                   ? "linear-gradient(135deg, #1a4a4a 0%, #2a6666 50%, #3a8080 100%)"
                   : loginSuccess
-                    ? "linear-gradient(135deg, #166534 0%, #15803d 50%, #22c55e 100%)"
+                    ? "linear-gradient(135deg, #166534 0%, #15803d 50%, var(--success) 100%)"
                     : "linear-gradient(135deg, var(--brand-foundation) 0%, #1a6060 50%, #2a8080 100%)",
               }}
             >

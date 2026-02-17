@@ -71,8 +71,8 @@ export default function SignUp() {
             <span>94% Success</span>
           </div>
           <div className="flex flex-col items-center gap-1">
-            <div className="w-10 h-10 rounded-full bg-[#10B981]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-10 h-10 rounded-full bg-[var(--success)]/10 flex items-center justify-center">
+              <svg className="w-5 h-5 text-[var(--success)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>

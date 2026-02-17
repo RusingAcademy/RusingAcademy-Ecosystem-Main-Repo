@@ -393,7 +393,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                         className="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
                         style={{ 
                           width: `${progressPercent}%`,
-                          background: 'linear-gradient(90deg, var(--brand-foundation, #0F3D3E), #1E6B4F)'
+                          background: 'linear-gradient(90deg, var(--brand-foundation, var(--brand-foundation)), #1E6B4F)'
                         }}
                       />
                     </div>
@@ -523,7 +523,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
               {isAuthenticated && (
                 <div className="mt-2 space-y-1">
                   <div className="relative h-1.5 rounded-full bg-border/50 overflow-hidden">
-                    <div className="absolute inset-y-0 left-0 rounded-full" style={{ width: `${progressPercent}%`, background: 'linear-gradient(90deg, var(--brand-foundation, #0F3D3E), #1E6B4F)' }} />
+                    <div className="absolute inset-y-0 left-0 rounded-full" style={{ width: `${progressPercent}%`, background: 'linear-gradient(90deg, var(--brand-foundation, var(--brand-foundation)), #1E6B4F)' }} />
                   </div>
                   <p className="text-[10px] text-muted-foreground">{completedLessons}/{totalLessons} {isEn ? "completed" : "termin\u00e9es"}</p>
                 </div>

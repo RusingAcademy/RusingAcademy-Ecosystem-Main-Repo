@@ -225,9 +225,9 @@ export default function WritingPortfolio() {
                       <div className="text-lg md:text-2xl lg:text-3xl font-bold text-teal-700">{fb.score}</div>
                       <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "Score global" : "Overall Score"}</div>
                     </div>
-                    <ScoreBar label={isFr ? "Grammaire" : "Grammar"} score={fb.grammar.score} color="var(--color-blue-500, #3b82f6)" />
-                    <ScoreBar label={isFr ? "Vocabulaire" : "Vocabulary"} score={fb.vocabulary.score} color="var(--color-violet-500, #8b5cf6)" />
-                    <ScoreBar label={isFr ? "Cohérence" : "Coherence"} score={fb.coherence.score} color="var(--semantic-success, #10b981)" />
+                    <ScoreBar label={isFr ? "Grammaire" : "Grammar"} score={fb.grammar.score} color="var(--color-blue-500, var(--semantic-info))" />
+                    <ScoreBar label={isFr ? "Vocabulaire" : "Vocabulary"} score={fb.vocabulary.score} color="var(--color-violet-500, var(--accent-purple))" />
+                    <ScoreBar label={isFr ? "Cohérence" : "Coherence"} score={fb.coherence.score} color="var(--semantic-success, var(--success))" />
                   </div>
                   <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-5 shadow-sm">
                     <h3 className="text-sm font-semibold text-gray-900 dark:text-foreground mb-2">{isFr ? "Commentaires" : "Feedback"}</h3>
@@ -319,7 +319,7 @@ export default function WritingPortfolio() {
                   aria-valuemin={0} aria-valuemax={WORD_TARGETS[cefrLevel] || 150}>
                   <div className="h-full rounded-full transition-all duration-300" style={{
                     width: `${Math.min(100, (content.trim().split(/\s+/).filter(Boolean).length / (WORD_TARGETS[cefrLevel] || 150)) * 100)}%`,
-                    background: content.trim().split(/\s+/).filter(Boolean).length >= (WORD_TARGETS[cefrLevel] || 150) ? "var(--semantic-success, #22c55e)" : "var(--brand-teal, #008090)"
+                    background: content.trim().split(/\s+/).filter(Boolean).length >= (WORD_TARGETS[cefrLevel] || 150) ? "var(--semantic-success, var(--success))" : "var(--brand-teal, var(--teal))"
                   }} />
                 </div>
                 <span className="text-[11px] text-gray-400 flex items-center gap-1">

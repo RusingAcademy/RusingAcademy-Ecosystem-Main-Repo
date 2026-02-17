@@ -504,7 +504,7 @@ function CoachCard({
       <div 
         className={`absolute -inset-[2px] rounded-[2rem] transition-opacity duration-500 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
         style={{
-          background: 'conic-gradient(from 0deg, #14b8a6, #d4af37, #14b8a6)',
+          background: 'conic-gradient(from 0deg, #14b8a6, var(--barholex-gold), #14b8a6)',
           animation: isHovering ? 'spin 4s linear infinite' : 'none',
         }}
       />
@@ -815,9 +815,9 @@ export default function FeaturedCoaches() {
               className="px-2.5 py-1.5 rounded-full font-medium text-xs transition-all duration-200 flex items-center gap-1 hover:scale-105 active:scale-95 whitespace-nowrap flex-shrink-0"
               style={{
                 background: filter === filterOption.key 
-                  ? 'linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #0D9488 100%)'
+                  ? 'linear-gradient(135deg, var(--teal) 0%, #14B8A6 50%, var(--teal) 100%)'
                   : 'rgba(255, 255, 255, 0.9)',
-                color: filter === filterOption.key ? '#FFFFFF' : 'var(--color-black, #000000)',
+                color: filter === filterOption.key ? 'var(--text-inverse)' : 'var(--color-black, var(--text))',
                 border: filter === filterOption.key 
                   ? '1px solid rgba(20, 184, 166, 0.5)'
                   : '1px solid rgba(212, 175, 55, 0.2)',
@@ -862,8 +862,8 @@ export default function FeaturedCoaches() {
             <button 
               className="group relative px-8 py-4 text-base font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
               style={{
-                background: 'linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #0D9488 100%)',
-                color: '#FFFFFF',
+                background: 'linear-gradient(135deg, var(--teal) 0%, #14B8A6 50%, var(--teal) 100%)',
+                color: 'var(--text-inverse)',
                 boxShadow: '0 4px 16px rgba(13, 148, 136, 0.3)',
               }}
             >
@@ -882,7 +882,7 @@ export default function FeaturedCoaches() {
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(12px)',
                 border: '2px solid rgba(20, 184, 166, 0.3)',
-                color: '#0D9488',
+                color: 'var(--teal)',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
               }}
             >

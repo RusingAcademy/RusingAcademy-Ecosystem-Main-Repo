@@ -15,7 +15,7 @@ function ProgressCircle({ value, size = 40 }: { value: number; size?: number }) 
   const r = (size - 6) / 2;
   const circumference = 2 * Math.PI * r;
   const offset = circumference - (value / 100) * circumference;
-  const color = value === 100 ? "var(--semantic-warning, #f5a623)" : "var(--brand-teal, #008090)";
+  const color = value === 100 ? "var(--semantic-warning, var(--warning))" : "var(--brand-teal, var(--teal))";
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg viewBox={`0 0 ${size} ${size}`} className="-rotate-90" style={{ width: size, height: size }}>
@@ -55,7 +55,7 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
         <div className="w-24 h-1.5 bg-[rgba(0,128,144,0.08)] rounded-full overflow-hidden">
           <div className="h-full rounded-full transition-all duration-500" style={{
             width: `${progress}%`,
-            background: progress === 100 ? "linear-gradient(90deg, var(--semantic-warning, #f5a623), #e8951a)" : "linear-gradient(90deg, var(--brand-teal, #008090), #00a0b0)",
+            background: progress === 100 ? "linear-gradient(90deg, var(--semantic-warning, var(--warning)), #e8951a)" : "linear-gradient(90deg, var(--brand-teal, var(--teal)), #00a0b0)",
           }} />
         </div>
         <span className="text-[10px] text-gray-500 mt-0.5">{progress}%</span>
@@ -105,7 +105,7 @@ export default function LearningMaterials() {
           </div>
           <Link href="/programs">
             <button className="px-4 py-2 rounded-xl text-sm font-semibold text-white flex items-center gap-2 transition-all hover:shadow-lg hover:scale-[1.02]"
-              style={{ background: "linear-gradient(135deg, var(--brand-teal, #008090), #006d7a)" }}>
+              style={{ background: "linear-gradient(135deg, var(--brand-teal, var(--teal)), #006d7a)" }}>
               <span className="material-icons text-base">school</span>
               Browse All Programs
             </button>
@@ -115,9 +115,9 @@ export default function LearningMaterials() {
         {/* Stats Bar */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           {[
-            { icon: "auto_stories", label: "Lessons Done", value: lessonsCompleted, color: "var(--brand-teal, #008090)" },
-            { icon: "star", label: "Total XP", value: totalXP.toLocaleString(), color: "var(--semantic-warning, #f5a623)" },
-            { icon: "school", label: "Active Paths", value: allPaths.filter(p => p.progress > 0 && p.progress < 100).length || 1, color: "var(--brand-teal, #008090)" },
+            { icon: "auto_stories", label: "Lessons Done", value: lessonsCompleted, color: "var(--brand-teal, var(--teal))" },
+            { icon: "star", label: "Total XP", value: totalXP.toLocaleString(), color: "var(--semantic-warning, var(--warning))" },
+            { icon: "school", label: "Active Paths", value: allPaths.filter(p => p.progress > 0 && p.progress < 100).length || 1, color: "var(--brand-teal, var(--teal))" },
           ].map((stat) => (
             <div key={stat.label} className="glass-card rounded-xl p-4 flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `${stat.color}15` }}>
@@ -145,7 +145,7 @@ export default function LearningMaterials() {
             >
               {tab}
               {activeTab === i && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" style={{ background: "linear-gradient(90deg, var(--brand-teal, #008090), var(--semantic-warning, #f5a623))" }} />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" style={{ background: "linear-gradient(90deg, var(--brand-teal, var(--teal)), var(--semantic-warning, var(--warning)))" }} />
               )}
             </button>
           ))}
@@ -228,7 +228,7 @@ export default function LearningMaterials() {
                         "bg-gray-100 dark:bg-card text-gray-500"
                       }`}>{test.status}</span>
                     </td>
-                    <td className="px-4 py-3 text-sm font-medium" style={{ color: test.score !== "-" ? "var(--brand-teal, #008090)" : "var(--color-gray-400, #9ca3af)" }}>
+                    <td className="px-4 py-3 text-sm font-medium" style={{ color: test.score !== "-" ? "var(--brand-teal, var(--teal))" : "var(--color-gray-400, var(--muted-foreground))" }}>
                       {test.score}
                     </td>
                   </tr>
@@ -242,11 +242,11 @@ export default function LearningMaterials() {
         {activeTab === 2 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { name: "Grammar Reference Guide", type: "PDF", icon: "description", category: "Grammar", color: "var(--brand-teal, #008090)" },
-              { name: "Vocabulary Master Lists", type: "PDF", icon: "list_alt", category: "Vocabulary", color: "var(--semantic-warning, #f5a623)" },
-              { name: "Pronunciation Guide", type: "Audio", icon: "headphones", category: "Pronunciation", color: "var(--color-violet-500, #8b5cf6)" },
-              { name: "Cultural Context Notes", type: "PDF", icon: "public", category: "Culture", color: "var(--semantic-success, #059669)" },
-              { name: "SLE Exam Preparation", type: "PDF", icon: "school", category: "Exam Prep", color: "var(--semantic-danger, #e74c3c)" },
+              { name: "Grammar Reference Guide", type: "PDF", icon: "description", category: "Grammar", color: "var(--brand-teal, var(--teal))" },
+              { name: "Vocabulary Master Lists", type: "PDF", icon: "list_alt", category: "Vocabulary", color: "var(--semantic-warning, var(--warning))" },
+              { name: "Pronunciation Guide", type: "Audio", icon: "headphones", category: "Pronunciation", color: "var(--color-violet-500, var(--accent-purple))" },
+              { name: "Cultural Context Notes", type: "PDF", icon: "public", category: "Culture", color: "var(--semantic-success, var(--success))" },
+              { name: "SLE Exam Preparation", type: "PDF", icon: "school", category: "Exam Prep", color: "var(--semantic-danger, var(--danger))" },
               { name: "Professional Writing Templates", type: "DOCX", icon: "edit_document", category: "Writing", color: "#3498db" },
             ].map((ref, i) => (
               <div key={i} className="glass-card rounded-xl p-4 hover:shadow-lg transition-all duration-300 cursor-pointer group">

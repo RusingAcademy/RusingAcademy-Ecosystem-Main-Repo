@@ -220,9 +220,9 @@ export default function GrammarDrillsPage() {
           {stats && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" role="region" aria-label={t("grammar.stats")}>
               {[
-                { label: t("grammar.drills"), value: stats.totalDrills ?? 0, icon: "assignment", color: "var(--brand-teal, #008090)" },
-                { label: t("grammar.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "var(--semantic-warning, #f5a623)" },
-                { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "var(--color-violet-500, #8b5cf6)" },
+                { label: t("grammar.drills"), value: stats.totalDrills ?? 0, icon: "assignment", color: "var(--brand-teal, var(--teal))" },
+                { label: t("grammar.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "var(--semantic-warning, var(--warning))" },
+                { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "var(--color-violet-500, var(--accent-purple))" },
               ].map((s, i) => (
                 <div key={i} className="bg-white dark:bg-background rounded-2xl p-4 border border-gray-100 dark:border-border shadow-sm text-center" role="status">
                   <span className="material-icons text-lg mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
@@ -254,7 +254,7 @@ export default function GrammarDrillsPage() {
                       <span>{h.correctAnswers}/{h.totalQuestions}</span>
                     </div>
                   </div>
-                  <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "var(--semantic-success, #22c55e)" : (h.score ?? 0) >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }} aria-label={`${t("grammar.score")}: ${h.score}%`}>{h.score}%</div>
+                  <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "var(--semantic-success, var(--success))" : (h.score ?? 0) >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))" }} aria-label={`${t("grammar.score")}: ${h.score}%`}>{h.score}%</div>
                 </div>
               ))}
             </div>
@@ -279,7 +279,7 @@ export default function GrammarDrillsPage() {
                     {topicStats.map((ts: any, i: number) => (
                       <div key={i} className="px-3 py-1.5 rounded-lg bg-white dark:bg-background border border-gray-100 dark:border-border text-xs flex items-center gap-2">
                         <span className="font-medium text-gray-700">{ts.topic}</span>
-                        <span className="font-bold" style={{ color: (ts.avgScore ?? 0) >= 80 ? "var(--semantic-success, #22c55e)" : "var(--semantic-warning, #f5a623)" }}>{ts.avgScore}%</span>
+                        <span className="font-bold" style={{ color: (ts.avgScore ?? 0) >= 80 ? "var(--semantic-success, var(--success))" : "var(--semantic-warning, var(--warning))" }}>{ts.avgScore}%</span>
                       </div>
                     ))}
                   </div>
@@ -420,7 +420,7 @@ export default function GrammarDrillsPage() {
                   const total = selectedDrill?.questions.length ?? 1;
                   const score = Math.round((correct / total) * 100);
                   return (
-                    <div className="text-xl md:text-3xl lg:text-4xl font-bold mt-4" style={{ color: score >= 80 ? "var(--semantic-success, #22c55e)" : score >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }} aria-label={`${t("grammar.score")}: ${score}%`}>
+                    <div className="text-xl md:text-3xl lg:text-4xl font-bold mt-4" style={{ color: score >= 80 ? "var(--semantic-success, var(--success))" : score >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))" }} aria-label={`${t("grammar.score")}: ${score}%`}>
                       {score}%
                       <div className="text-sm text-gray-500 font-normal mt-1">{correct}/{total} {t("grammar.correct").toLowerCase()}</div>
                     </div>

@@ -42,7 +42,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
       <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white dark:bg-background border-b border-gray-200 dark:border-border dark:border-border"
         role="banner">
         <button onClick={() => setSidebarCollapsed(false)}
-          className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, #7c3aed))] focus:ring-offset-2"
+          className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))] focus:ring-offset-2"
           aria-label="Open navigation menu">
           <span className="material-icons text-gray-700">menu</span>
         </button>
@@ -60,7 +60,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
         </div>
 
         <footer className="text-center py-4 border-t border-gray-100 dark:border-border bg-white dark:bg-background" role="contentinfo">
-          <SocialLinks size={14} color="var(--color-gray-400, #9ca3af)" className="flex items-center justify-center gap-4 mb-2" />
+          <SocialLinks size={14} color="var(--color-gray-400, var(--muted-foreground))" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">
             © 2026 RusingAcademy — A Division of{" "}
             <span className="font-medium text-violet-600">Rusinga International Consulting Ltd.</span>

@@ -14,16 +14,16 @@ const clerkAppearance = {
   variables: {
     // Primary colors from design-tokens.json
     colorPrimary: '#0A2540', // Navy Blue
-    colorTextOnPrimaryBackground: '#FFFFFF',
+    colorTextOnPrimaryBackground: 'var(--text-inverse)',
     colorBackground: '#FDFBF7', // Ivory/Cream
-    colorInputBackground: '#FFFFFF',
+    colorInputBackground: 'var(--text-inverse)',
     colorInputText: '#1A1A1A',
     colorTextSecondary: '#4A5568',
     
     // Accent colors
-    colorSuccess: '#10B981', // Teal
-    colorDanger: '#EF4444',
-    colorWarning: '#F59E0B',
+    colorSuccess: 'var(--success)', // Teal
+    colorDanger: 'var(--danger)',
+    colorWarning: 'var(--warning)',
     
     // Typography
     fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif',
@@ -64,7 +64,7 @@ const clerkAppearance = {
       color: '#0A2540',
     },
     headerSubtitle: {
-      color: 'var(--color-black, #000000)',
+      color: 'var(--color-black, var(--text))',
     },
     // Social buttons
     socialButtonsBlockButton: {

@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 
-const ACCENT = "var(--color-violet-600, var(--color-violet-600, #7c3aed))";
+const ACCENT = "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))";
 
 function KPICard({ icon, value, label, trend, trendUp, loading }: { icon: string; value: string; label: string; trend?: string; trendUp?: boolean; loading?: boolean }) {
   return (
@@ -149,10 +149,10 @@ export default function CoachDashboardHome() {
             {/* Quick Actions */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { icon: "people", label: lang === "fr" ? "Mes étudiants" : "My Students", href: "/coach/students", color: "var(--color-violet-600, var(--color-violet-600, #7c3aed))" },
-                { icon: "event_note", label: lang === "fr" ? "Mes sessions" : "My Sessions", href: "/coach/sessions", color: "var(--color-blue-600, var(--color-blue-600, #2563eb))" },
-                { icon: "bar_chart", label: lang === "fr" ? "Performance" : "Performance", href: "/coach/performance", color: "var(--semantic-success, var(--semantic-success, #059669))" },
-                { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "var(--semantic-warning, var(--semantic-warning, #d97706))" },
+                { icon: "people", label: lang === "fr" ? "Mes étudiants" : "My Students", href: "/coach/students", color: "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))" },
+                { icon: "event_note", label: lang === "fr" ? "Mes sessions" : "My Sessions", href: "/coach/sessions", color: "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))" },
+                { icon: "bar_chart", label: lang === "fr" ? "Performance" : "Performance", href: "/coach/performance", color: "var(--semantic-success, var(--semantic-success, var(--success)))" },
+                { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "var(--semantic-warning, var(--semantic-warning, var(--warning)))" },
               ].map((action) => (
                 <Link key={action.label} href={action.href}>
                   <button className="w-full flex flex-col items-center gap-2 p-4 bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border hover:shadow-md transition-all group">

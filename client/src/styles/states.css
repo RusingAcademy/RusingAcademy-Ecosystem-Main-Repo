@@ -35,7 +35,7 @@
   background: linear-gradient(
     90deg,
     var(--color-slate-800, #1e293b) 25%,
-    var(--color-slate-700, #334155) 37%,
+    var(--color-slate-700, var(--text-paragraph)) 37%,
     var(--color-slate-800, #1e293b) 63%
   );
   background-size: 200% 100%;
@@ -52,7 +52,7 @@
 .loading-spinner {
   display: inline-block;
   border: 3px solid var(--color-slate-200, #e2e8f0);
-  border-top-color: var(--color-teal-600, #0d9488);
+  border-top-color: var(--color-teal-600, var(--teal));
   border-radius: 50%;
   animation: spin-smooth 0.8s linear infinite;
 }
@@ -76,7 +76,7 @@
 }
 
 .dark .loading-spinner {
-  border-color: var(--color-slate-700, #334155);
+  border-color: var(--color-slate-700, var(--text-paragraph));
   border-top-color: var(--color-teal-400, #2dd4bf);
 }
 
@@ -119,7 +119,7 @@
 }
 
 .state-icon-error {
-  background: linear-gradient(135deg, var(--color-red-50, #fef2f2), var(--color-red-100, #fee2e2));
+  background: linear-gradient(135deg, var(--color-red-50, #fef2f2), var(--color-red-100, var(--danger-soft)));
 }
 
 .state-icon-success {

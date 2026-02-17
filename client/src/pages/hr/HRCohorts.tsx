@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
-const ACCENT = "var(--color-blue-600, #2563eb)";
+const ACCENT = "var(--color-blue-600, var(--semantic-info))";
 
 function LoadingSkeleton() {
   return (

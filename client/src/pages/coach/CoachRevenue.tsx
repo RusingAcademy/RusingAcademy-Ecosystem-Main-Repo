@@ -6,7 +6,7 @@ import CoachLayout from "@/components/CoachLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 
-const ACCENT = "var(--color-violet-600, var(--color-violet-600, #7c3aed))";
+const ACCENT = "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))";
 
 function PayoutStatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {

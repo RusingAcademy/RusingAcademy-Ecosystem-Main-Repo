@@ -90,9 +90,9 @@ export default function HRReports() {
         {/* KPI Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { label: ui.avgProgress, value: "—", icon: "trending_up", color: "var(--color-blue-600, #2563eb)" },
+            { label: ui.avgProgress, value: "—", icon: "trending_up", color: "var(--color-blue-600, var(--semantic-info))" },
             { label: ui.completionRate, value: "—", icon: "check_circle", color: "var(--semantic-success, #16a34a)" },
-            { label: ui.activeParticipants, value: "—", icon: "groups", color: "var(--color-violet-600, #7c3aed)" },
+            { label: ui.activeParticipants, value: "—", icon: "groups", color: "var(--color-violet-600, var(--accent-purple))" },
             { label: ui.totalHours, value: "—", icon: "schedule", color: "#ea580c" },
           ].map((kpi, i) => (
             <div key={i} className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5 hover:shadow-md transition-shadow">

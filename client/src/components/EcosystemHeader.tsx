@@ -324,7 +324,7 @@ export default function EcosystemHeader() {
                 <Button 
                   className="rounded-full px-5 sm:px-8 h-10 font-semibold text-sm transition-all hover:scale-105"
                   style={{ 
-                    background: "linear-gradient(135deg, var(--brand-cta) 0%, #D4A853 100%)",
+                    background: "linear-gradient(135deg, var(--brand-cta) 0%, var(--barholex-gold) 100%)",
                     color: "white",
                     boxShadow: "0 4px 20px rgba(198, 90, 30, 0.4)",
                   }}
@@ -411,7 +411,7 @@ export default function EcosystemHeader() {
                 // Lingueefy - Teal/Turquoise brand color
                 } else if (tile.style === "light-glass") {
                   glassStyle = {
-                    background: "linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)",
+                    background: "linear-gradient(135deg, #14B8A6 0%, var(--teal) 100%)",
                     backdropFilter: "blur(10px)",
                     border: "1px solid rgba(255,255,255,0.2)",
                   };
@@ -425,7 +425,7 @@ export default function EcosystemHeader() {
                     border: "1px solid rgba(139, 119, 101, 0.3)",
                   };
                   textColor = "#0a4040";
-                  subtitleColor = "#4B5563";
+                  subtitleColor = "var(--text-paragraph)";
                 }
                 
                 return (
@@ -604,7 +604,7 @@ export default function EcosystemHeader() {
 
                       {/* Oral Exam Simulations */}
                       <Link href="/ai-coach?mode=simulation" onClick={() => setStevenAIOpen(false)}>
-                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-[#FFFFFF] hover:from-foundation hover:to-orange-600 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-foundation hover:translate-x-1 cursor-pointer">
+                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-[var(--text-inverse)] hover:from-foundation hover:to-orange-600 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-foundation hover:translate-x-1 cursor-pointer">
                           <div className="w-11 h-11 bg-gradient-to-br from-foundation to-teal-700 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
                             <GraduationCap className="w-6 h-6 text-white" />
                           </div>

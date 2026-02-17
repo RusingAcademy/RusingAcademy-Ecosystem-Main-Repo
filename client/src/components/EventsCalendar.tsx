@@ -19,11 +19,11 @@ const IMG_MAP: Record<string, string> = {
 function resolveImage(key: string) { return IMG_MAP[key] || key; }
 
 const typeConfig: Record<string, { icon: typeof Video; label: string; color: string; bg: string }> = {
-  webinar: { icon: Video, label: "Webinar", color: "var(--color-blue-500, #3b82f6)", bg: "rgba(59, 130, 246, 0.06)" },
-  workshop: { icon: Mic, label: "Workshop", color: "var(--color-violet-500, #8b5cf6)", bg: "rgba(139, 92, 246, 0.06)" },
+  webinar: { icon: Video, label: "Webinar", color: "var(--color-blue-500, var(--semantic-info))", bg: "rgba(59, 130, 246, 0.06)" },
+  workshop: { icon: Mic, label: "Workshop", color: "var(--color-violet-500, var(--accent-purple))", bg: "rgba(139, 92, 246, 0.06)" },
   meetup: { icon: Users, label: "Meetup", color: "#2EC4B6", bg: "rgba(46, 196, 182, 0.06)" },
-  livestream: { icon: Radio, label: "Livestream", color: "var(--semantic-danger, #ef4444)", bg: "rgba(239, 68, 68, 0.06)" },
-  "qa-session": { icon: MessageCircle, label: "Q&A Session", color: "var(--semantic-warning, #f59e0b)", bg: "rgba(245, 158, 11, 0.06)" },
+  livestream: { icon: Radio, label: "Livestream", color: "var(--semantic-danger, var(--danger))", bg: "rgba(239, 68, 68, 0.06)" },
+  "qa-session": { icon: MessageCircle, label: "Q&A Session", color: "var(--semantic-warning, var(--warning))", bg: "rgba(245, 158, 11, 0.06)" },
 };
 
 function EventCard({ event }: { event: CommunityEvent }) {
@@ -65,7 +65,7 @@ function EventCard({ event }: { event: CommunityEvent }) {
           <Icon className="w-3 h-3" /> {config.label}
         </div>
         {event.recurring && (
-          <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-bold" style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(8px)", color: "var(--brand-obsidian, #1B1464)" }}>
+          <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-bold" style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(8px)", color: "var(--brand-obsidian, var(--accent-purple-deep))" }}>
             {event.recurring}
           </div>
         )}
@@ -90,10 +90,10 @@ function EventCard({ event }: { event: CommunityEvent }) {
         <div className="mb-3">
           <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-1.5">
             <span className="flex items-center gap-1 font-medium"><Users className="w-3 h-3" />{event.attendees} attending</span>
-            <span className="font-medium" style={{ color: spotsLeft < 10 ? "var(--semantic-danger, #ef4444)" : undefined }}>{spotsLeft} spots left</span>
+            <span className="font-medium" style={{ color: spotsLeft < 10 ? "var(--semantic-danger, var(--danger))" : undefined }}>{spotsLeft} spots left</span>
           </div>
           <div className="h-1.5 rounded-full overflow-hidden" >
-            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${fillPercent}%`, background: fillPercent > 80 ? "linear-gradient(90deg, var(--semantic-danger, #ef4444), var(--color-red-400, #f87171))" : `linear-gradient(90deg, ${config.color}, ${config.color}80)` }} />
+            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${fillPercent}%`, background: fillPercent > 80 ? "linear-gradient(90deg, var(--semantic-danger, var(--danger)), var(--color-red-400, #f87171))" : `linear-gradient(90deg, ${config.color}, ${config.color}80)` }} />
           </div>
         </div>
 
@@ -158,7 +158,7 @@ export default function EventsCalendar() {
         <Button
           onClick={() => toast("Feature coming soon")}
           className="rounded-xl text-sm font-bold text-white border-0"
-          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
+          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
         >
           <Sparkles className="w-3.5 h-3.5 mr-1.5" /> Create Event
         </Button>
@@ -174,9 +174,9 @@ export default function EventsCalendar() {
               onClick={() => setFilter(type)}
               className="shrink-0 px-3.5 py-1.5 rounded-lg text-[11px] font-semibold transition-all duration-200"
               style={{
-                background: isActive ? (config?.color || "linear-gradient(135deg, var(--brand-obsidian, #1B1464), var(--brand-obsidian, #2D2580))") : "transparent",
+                background: isActive ? (config?.color || "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))") : "transparent",
                 color: isActive ? "white" : undefined,
-                boxShadow: isActive ? `0 2px 6px ${config?.color || "var(--brand-obsidian, #1B1464)"}30` : "none",
+                boxShadow: isActive ? `0 2px 6px ${config?.color || "var(--brand-obsidian, var(--accent-purple-deep))"}30` : "none",
               }}
             >
               {type === "all" ? "All Events" : config?.label || type}

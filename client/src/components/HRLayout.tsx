@@ -38,7 +38,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
       <main id="main-content" className="lg:ml-[240px] min-h-screen pt-14 lg:pt-0 flex flex-col" role="main" tabIndex={-1}>
         <div className="flex-1 p-4 lg:p-6">{children}</div>
         <footer className="text-center py-4 border-t border-gray-100 dark:border-border bg-white dark:bg-background" role="contentinfo">
-          <SocialLinks size={14} color="var(--color-gray-400, #9ca3af)" className="flex items-center justify-center gap-4 mb-2" />
+          <SocialLinks size={14} color="var(--color-gray-400, var(--muted-foreground))" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">© 2026 RusingAcademy — A Division of <span className="font-medium text-blue-600">Rusinga International Consulting Ltd.</span></p>
           <p className="text-[10px] text-gray-400 mt-0.5">Version 2.0.0 — Client Portal</p>
         </footer>

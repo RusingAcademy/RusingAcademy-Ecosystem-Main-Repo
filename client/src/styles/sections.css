@@ -15,10 +15,10 @@
    Horizontal Padding: px-4 sm:px-6 lg:px-8
    
    Alternating Backgrounds:
-   - White (#FFFFFF)
-   - Surface (#FEFEF8)
-   - Sand (#F5F1D6)
-   - Foundation Soft (#E7F2F2)
+   - White (var(--text-inverse))
+   - Surface (var(--bg))
+   - Sand (var(--bg-alt))
+   - Foundation Soft (var(--brand-foundation-soft))
    - Obsidian (#062B2B) for dark sections
    ============================================ */
 
@@ -70,27 +70,27 @@
 /* === SECTION BACKGROUNDS === */
 @layer components {
   .eco-bg-white {
-    background-color: #ffffff;
+    background-color: var(--text-inverse);
   }
   .eco-bg-surface {
-    background-color: var(--surface, #FEFEF8);
+    background-color: var(--surface, var(--bg));
   }
   .eco-bg-sand {
-    background-color: var(--sand, #F5F1D6);
+    background-color: var(--sand, var(--bg-alt));
   }
   .eco-bg-foundation-soft {
-    background-color: var(--brand-foundation-soft, #E7F2F2);
+    background-color: var(--brand-foundation-soft, var(--brand-foundation-soft));
   }
   .eco-bg-dark {
     background-color: var(--obsidian, #062B2B);
-    color: #ffffff;
+    color: var(--text-inverse);
   }
   .eco-bg-gradient-teal {
-    background: linear-gradient(135deg, var(--brand-foundation, #0F3D3E) 0%, var(--obsidian, #062B2B) 100%);
-    color: #ffffff;
+    background: linear-gradient(135deg, var(--brand-foundation, var(--brand-foundation)) 0%, var(--obsidian, #062B2B) 100%);
+    color: var(--text-inverse);
   }
   .eco-bg-gradient-warm {
-    background: linear-gradient(135deg, #FFF8F0 0%, var(--surface, #FEFEF8) 100%);
+    background: linear-gradient(135deg, #FFF8F0 0%, var(--surface, var(--bg)) 100%);
   }
 }
 
@@ -181,7 +181,7 @@
     font-weight: 400;
     font-size: 1.125rem;
     line-height: 1.6;
-    color: var(--muted, #6B7280);
+    color: var(--muted, var(--muted-foreground));
     max-width: 40rem;
     margin-left: auto;
     margin-right: auto;
@@ -205,13 +205,13 @@
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--muted, #6B7280);
+    color: var(--muted, var(--muted-foreground));
   }
 
   /* Dark section header */
   .eco-bg-dark .eco-section-header .eco-section-title,
   .eco-bg-gradient-teal .eco-section-header .eco-section-title {
-    color: #ffffff;
+    color: var(--text-inverse);
   }
   .eco-bg-dark .eco-section-header .eco-section-subtitle,
   .eco-bg-gradient-teal .eco-section-header .eco-section-subtitle {
@@ -313,7 +313,7 @@
   .eco-empty-state .empty-icon {
     width: 4rem;
     height: 4rem;
-    color: var(--muted, #6B7280);
+    color: var(--muted, var(--muted-foreground));
     opacity: 0.5;
     margin-bottom: 1rem;
   }
@@ -326,7 +326,7 @@
   }
   .eco-empty-state .empty-description {
     font-size: 0.875rem;
-    color: var(--muted, #6B7280);
+    color: var(--muted, var(--muted-foreground));
     max-width: 24rem;
     line-height: 1.5;
   }
@@ -346,7 +346,7 @@
     width: 2.5rem;
     height: 2.5rem;
     border: 3px solid var(--sand, #E8E4CC);
-    border-top-color: var(--brand-foundation, #0F3D3E);
+    border-top-color: var(--brand-foundation, var(--brand-foundation));
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
@@ -355,7 +355,7 @@
   }
   .eco-loading-text {
     font-size: 0.875rem;
-    color: var(--muted, #6B7280);
+    color: var(--muted, var(--muted-foreground));
   }
 }
 
@@ -372,7 +372,7 @@
   .eco-error-state .error-icon {
     width: 3rem;
     height: 3rem;
-    color: #dc2626;
+    color: var(--danger);
     margin-bottom: 1rem;
   }
   .eco-error-state .error-title {
@@ -383,7 +383,7 @@
   }
   .eco-error-state .error-description {
     font-size: 0.875rem;
-    color: var(--muted, #6B7280);
+    color: var(--muted, var(--muted-foreground));
     max-width: 24rem;
     line-height: 1.5;
     margin-bottom: 1rem;

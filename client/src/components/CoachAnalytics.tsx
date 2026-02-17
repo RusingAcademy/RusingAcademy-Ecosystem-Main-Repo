@@ -289,7 +289,7 @@ export function CoachAnalytics() {
                         cy="50"
                         r="40"
                         fill="none"
-                        stroke={index === 0 ? "var(--color-blue-500, #3b82f6)" : index === 1 ? "var(--semantic-success, #22c55e)" : "var(--color-purple-500, #a855f7)"}
+                        stroke={index === 0 ? "var(--color-blue-500, var(--semantic-info))" : index === 1 ? "var(--semantic-success, var(--success))" : "var(--color-purple-500, #a855f7)"}
                         strokeWidth="20"
                         strokeDasharray={strokeDasharray}
                         strokeDashoffset={strokeDashoffset}

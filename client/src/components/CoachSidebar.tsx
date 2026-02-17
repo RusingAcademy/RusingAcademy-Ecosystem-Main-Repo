@@ -1,6 +1,6 @@
 /**
  * CoachSidebar — RusingAcademy Coach Portal
- * Design: White sidebar with violet (var(--color-violet-600, var(--color-violet-600, #7c3aed))) accents, matching Learner Portal pattern
+ * Design: White sidebar with violet (var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))) accents, matching Learner Portal pattern
  */
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";

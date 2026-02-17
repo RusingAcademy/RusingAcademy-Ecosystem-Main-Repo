@@ -196,10 +196,10 @@ export default function ReadingLab() {
           {stats && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8" role="region" aria-label={t("reading.stats")}>
               {[
-                { label: t("reading.totalExercises"), value: stats.totalExercises ?? 0, icon: "assignment", color: "var(--brand-teal, #008090)" },
-                { label: t("reading.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "var(--semantic-warning, #f5a623)" },
-                { label: isFr ? "MPM moy." : "Avg WPM", value: stats.avgWpm ?? 0, icon: "speed", color: "var(--color-violet-500, #8b5cf6)" },
-                { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "var(--semantic-danger, #e74c3c)" },
+                { label: t("reading.totalExercises"), value: stats.totalExercises ?? 0, icon: "assignment", color: "var(--brand-teal, var(--teal))" },
+                { label: t("reading.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "var(--semantic-warning, var(--warning))" },
+                { label: isFr ? "MPM moy." : "Avg WPM", value: stats.avgWpm ?? 0, icon: "speed", color: "var(--color-violet-500, var(--accent-purple))" },
+                { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "var(--semantic-danger, var(--danger))" },
               ].map((s, i) => (
                 <div key={i} className="bg-white dark:bg-background rounded-2xl p-4 border border-gray-100 dark:border-border shadow-sm text-center" role="status">
                   <span className="material-icons text-2xl mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
@@ -232,7 +232,7 @@ export default function ReadingLab() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "var(--semantic-success, #22c55e)" : (h.score ?? 0) >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }} aria-label={`${t("grammar.score")}: ${h.score}%`}>{h.score}%</div>
+                    <div className="text-lg font-bold" style={{ color: (h.score ?? 0) >= 80 ? "var(--semantic-success, var(--success))" : (h.score ?? 0) >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))" }} aria-label={`${t("grammar.score")}: ${h.score}%`}>{h.score}%</div>
                     <div className="text-xs text-gray-400">{formatTime(h.timeSpentSeconds ?? 0)}</div>
                   </div>
                 </div>
@@ -348,9 +348,9 @@ export default function ReadingLab() {
                     const wpm = Math.round(((passage?.wordCount ?? 0) / totalTime) * 60);
                     const score = Math.round((correct / total) * 100);
                     return [
-                      { label: t("grammar.score"), value: `${score}%`, color: score >= 80 ? "var(--semantic-success, #22c55e)" : score >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" },
-                      { label: isFr ? "Vitesse de lecture" : "Reading Speed", value: `${wpm} ${isFr ? "MPM" : "WPM"}`, color: "var(--color-violet-500, #8b5cf6)" },
-                      { label: isFr ? "Temps" : "Time", value: formatTime(totalTime), color: "var(--brand-teal, #008090)" },
+                      { label: t("grammar.score"), value: `${score}%`, color: score >= 80 ? "var(--semantic-success, var(--success))" : score >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))" },
+                      { label: isFr ? "Vitesse de lecture" : "Reading Speed", value: `${wpm} ${isFr ? "MPM" : "WPM"}`, color: "var(--color-violet-500, var(--accent-purple))" },
+                      { label: isFr ? "Temps" : "Time", value: formatTime(totalTime), color: "var(--brand-teal, var(--teal))" },
                     ].map((r, i) => (
                       <div key={i} role="status">
                         <div className="text-lg md:text-2xl lg:text-3xl font-bold" style={{ color: r.color }}>{r.value}</div>

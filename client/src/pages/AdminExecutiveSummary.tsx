@@ -73,8 +73,8 @@ export default function AdminExecutiveSummary() {
                       className="text-2xl font-bold"
                       style={{
                         color: m.label === "Health Score"
-                          ? (m.value >= 80 ? "var(--semantic-success, #16a34a)" : m.value >= 60 ? "var(--semantic-warning, #d97706)" : "var(--semantic-danger, #dc2626)")
-                          : "var(--brand-teal, #008090)",
+                          ? (m.value >= 80 ? "var(--semantic-success, #16a34a)" : m.value >= 60 ? "var(--semantic-warning, var(--warning))" : "var(--semantic-danger, var(--danger))")
+                          : "var(--brand-teal, var(--teal))",
                       }}
                     >
                       {m.label === "Health Score" ? `${m.value}%` : m.value}
