@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SEOProps {
   title?: string;
@@ -27,6 +28,7 @@ export default function SEO({
   schema,
   noindex = false,
 }: SEOProps) {
+  const { language } = useLanguage();
   const fullTitle = title ? `${title} | ${defaultMeta.siteName}` : defaultMeta.title;
   const metaDescription = description || defaultMeta.description;
   const metaImage = image || defaultMeta.image;
@@ -133,8 +135,9 @@ export default function SEO({
       <meta property="og:image" content={metaImage} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:site_name" content={defaultMeta.siteName} />
-      <meta property="og:locale" content="en_CA" />
-      <meta property="og:locale:alternate" content="fr_CA" />
+      <meta property="og:locale" content={language === "fr" ? "fr_CA" : "en_CA"} />
+      <meta property="og:locale:alternate" content={language === "fr" ? "en_CA" : "fr_CA"} />
+      <html lang={language} />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

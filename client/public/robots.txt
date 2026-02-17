@@ -5,4 +5,4 @@ Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /auth/
 
-Sitemap: https://www.rusingacademy.com/sitemap.xml
+Sitemap: https://www.rusingacademy.ca/sitemap.xml

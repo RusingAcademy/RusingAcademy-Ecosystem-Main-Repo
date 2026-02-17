@@ -38,11 +38,11 @@ export const generateOrganizationSchema = (brand: 'rusingacademy' | 'lingueefy' 
     rusingacademy: {
       '@context': 'https://schema.org',
       '@type': 'EducationalOrganization',
-      '@id': 'https://rusingacademy.com/#organization',
+      '@id': 'https://rusingacademy.ca/#organization',
       name: 'RusingAcademy',
       alternateName: 'Rusinga Academy',
-      url: 'https://rusingacademy.com',
-      logo: 'https://rusingacademy.com/logo.png',
+      url: 'https://rusingacademy.ca',
+      logo: 'https://rusingacademy.ca/logo.png',
       description: "Canada's premier platform for SLE preparation and bilingual excellence training for Canadian public servants.",
       foundingDate: '2024',
       parentOrganization: {
@@ -101,7 +101,7 @@ export const generateCourseSchema = (courseData: {
   provider: {
     '@type': 'Organization',
     name: courseData.provider,
-    sameAs: 'https://rusingacademy.com',
+    sameAs: 'https://rusingacademy.ca',
   },
   timeRequired: courseData.duration,
   educationalLevel: courseData.level,

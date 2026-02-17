@@ -188,7 +188,7 @@ export default function MobileNav({ isOpen, onClose, activePage, onPageChange }:
             {/* External links */}
             <div className="px-3 mt-4 pt-4 space-y-0.5" style={{ borderTop: "1px solid rgba(27, 20, 100, 0.04)" }}>
               <a
-                href="https://www.rusingacademy.com"
+                href="https://www.rusingacademy.ca"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium text-muted-foreground transition-all w-full"

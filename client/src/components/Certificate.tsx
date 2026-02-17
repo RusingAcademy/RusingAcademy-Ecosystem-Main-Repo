@@ -188,7 +188,7 @@ export default function Certificate({
               {content.certificateId}: {certificateNumber}
             </p>
             <p className="text-xs text-cyan-300">
-              {content.verifyAt}: rusingacademy.com/verify/{certificateNumber}
+              {content.verifyAt}: rusingacademy.ca/verify/{certificateNumber}
             </p>
           </div>
         </div>

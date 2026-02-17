@@ -26,7 +26,7 @@ const VARIABLE_PRESETS = [
   { key: "{{coach_name}}", label: "Coach Name", example: "Marie Tremblay" },
   { key: "{{date}}", label: "Current Date", example: new Date().toLocaleDateString() },
   { key: "{{platform_name}}", label: "Platform Name", example: "RusingAcademy" },
-  { key: "{{login_url}}", label: "Login URL", example: "https://app.rusingacademy.com/login" },
+  { key: "{{login_url}}", label: "Login URL", example: "https://app.rusingacademy.ca/login" },
   { key: "{{progress_percent}}", label: "Progress %", example: "75%" },
   { key: "{{next_session_date}}", label: "Next Session", example: "Feb 15, 2026" },
   { key: "{{invoice_amount}}", label: "Invoice Amount", example: "$299.00" },
