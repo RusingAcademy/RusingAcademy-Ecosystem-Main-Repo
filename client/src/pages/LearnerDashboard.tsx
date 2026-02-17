@@ -81,7 +81,7 @@ function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
   return (
     <GlassCard className="p-6" hover={false}>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold text-black dark:text-white flex items-center gap-2">
+        <h3 className="text-lg font-bold text-black dark:text-foreground flex items-center gap-2">
           <Trophy className="h-5 w-5 text-amber-500" />
           {isEn ? "Achievements" : "Accomplissements"}
         </h3>
@@ -142,7 +142,7 @@ function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
     relative overflow-hidden rounded-xl
-    bg-white dark:bg-slate-800 dark:bg-obsidian
+    bg-white dark:bg-card dark:bg-obsidian
     border border-slate-200 dark:border-teal-800
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
@@ -170,11 +170,11 @@ const GlassStatCard = ({
 }) => {
   // Accessible color scheme with high contrast
   const colorClasses = {
-    emerald: "from-teal-800 to-teal-800 text-black dark:text-white bg-slate-100 dark:bg-foundation dark:text-white",
-    blue: "from-teal-800 to-teal-800 text-black dark:text-white bg-slate-100 dark:bg-foundation dark:text-white",
-    purple: "from-teal-800 to-teal-800 text-black dark:text-white bg-slate-100 dark:bg-foundation dark:text-white",
-    amber: "from-teal-800 to-teal-800 text-black dark:text-white bg-slate-100 dark:bg-foundation dark:text-white",
-    rose: "from-teal-800 to-teal-800 text-black dark:text-white bg-slate-100 dark:bg-foundation dark:text-white",
+    emerald: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
+    blue: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
+    purple: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
+    amber: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
+    rose: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
   };
 
   return (
@@ -186,9 +186,9 @@ const GlassStatCard = ({
         <div className={`w-12 h-12 rounded-xl ${colorClasses[color].split(' ').slice(2).join(' ')} flex items-center justify-center mb-3`}>
           <Icon className={`h-6 w-6 ${colorClasses[color].split(' ')[2]}`} />
         </div>
-        <p className="text-3xl font-bold text-black dark:text-white">{value}</p>
-        <p className="text-sm font-medium text-black dark:text-white/90">{label}</p>
-        {sublabel && <p className="text-xs text-black dark:text-white dark:text-cyan-300 mt-1">{sublabel}</p>}
+        <p className="text-3xl font-bold text-black dark:text-foreground">{value}</p>
+        <p className="text-sm font-medium text-black dark:text-foreground/90">{label}</p>
+        {sublabel && <p className="text-xs text-black dark:text-foreground dark:text-cyan-300 mt-1">{sublabel}</p>}
       </div>
     </GlassCard>
   );
@@ -419,7 +419,7 @@ export default function LearnerDashboard() {
               <div className="absolute inset-0 rounded-full border-4 border-emerald-200 dark:border-emerald-800" />
               <div className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-black dark:text-white dark:text-cyan-300 font-medium">
+            <p className="text-black dark:text-foreground dark:text-cyan-300 font-medium">
               {language === "fr" ? "Chargement de votre portail..." : "Loading your portal..."}
             </p>
           </div>
@@ -437,10 +437,10 @@ export default function LearnerDashboard() {
             <div className="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mx-auto mb-6">
               <GraduationCap className="h-8 w-8 text-emerald-600" />
             </div>
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
+            <h2 className="text-2xl font-bold text-black dark:text-foreground mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-black dark:text-white dark:text-cyan-300 mb-6">
+            <p className="text-black dark:text-foreground dark:text-cyan-300 mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à votre portail d'apprentissage"
                 : "Sign in to access your learning portal"}
@@ -482,7 +482,7 @@ export default function LearnerDashboard() {
                     })}
                   </span>
                   {displayStreak > 0 && (
-                    <Badge className="bg-white dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-900/30">
+                    <Badge className="bg-white dark:bg-background/20 text-white border-0 hover:bg-white dark:bg-background/30">
                       <Flame className="h-3 w-3 mr-1" />
                       {displayStreak} {language === "fr" ? "jours" : "days"}
                     </Badge>
@@ -499,14 +499,14 @@ export default function LearnerDashboard() {
                 <RoleSwitcherCompact />
                 {resumePoint && (
                   <Link href={`/courses/${resumePoint.courseId}/lessons/${resumePoint.lessonId}`}>
-                    <Button size="lg" className="bg-white dark:bg-slate-900 text-black dark:text-white hover:bg-slate-100 shadow-lg">
+                    <Button size="lg" className="bg-white dark:bg-background text-black dark:text-foreground hover:bg-slate-100 shadow-lg">
                       <Play className="h-5 w-5 mr-2" />
                       {language === "fr" ? "Reprendre" : "Resume"}
                     </Button>
                   </Link>
                 )}
                 <Link href="/ai-practice">
-                  <Button size="lg" variant={resumePoint ? "outline" : "default"} className={resumePoint ? "border-white/50 text-white hover:bg-white/10" : "bg-white dark:bg-slate-800 text-black dark:text-white hover:bg-slate-100 shadow-lg"}>
+                  <Button size="lg" variant={resumePoint ? "outline" : "default"} className={resumePoint ? "border-white/50 text-white hover:bg-white/10" : "bg-white dark:bg-card text-black dark:text-foreground hover:bg-slate-100 shadow-lg"}>
                     <Bot className="h-5 w-5 mr-2" />
                     {l.startPractice}
                   </Button>
@@ -560,7 +560,7 @@ export default function LearnerDashboard() {
               {/* SLE Progress Card */}
               <GlassCard className="p-6" hover={false}>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-black dark:text-foreground flex items-center gap-2">
                     <Target className="h-5 w-5 text-emerald-600" />
                     {language === "fr" ? "Progression SLE" : "SLE Progress"}
                   </h2>
@@ -585,7 +585,7 @@ export default function LearnerDashboard() {
                   <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50">
                       <p className="text-3xl font-bold bg-gradient-to-r from-teal-800 to-obsidian dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
-                      <p className="text-sm text-black dark:text-white dark:text-cyan-300 mt-1">{l.currentLevel}</p>
+                      <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mt-1">{l.currentLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
                       <p className="text-3xl font-bold text-emerald-600">{displayTargetLevel}</p>
@@ -634,7 +634,7 @@ export default function LearnerDashboard() {
                         <p className="text-sm text-muted-foreground">
                           {language === "fr" ? "Reprendre où vous étiez" : "Pick up where you left off"}
                         </p>
-                        <p className="font-semibold text-black dark:text-white">
+                        <p className="font-semibold text-black dark:text-foreground">
                           {language === "fr" ? (resumePoint.lessonTitleFr || resumePoint.lessonTitle) : resumePoint.lessonTitle}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -656,7 +656,7 @@ export default function LearnerDashboard() {
               {/* Continue Learning Section */}
               <GlassCard className="p-6" hover={false}>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-black dark:text-foreground flex items-center gap-2">
                     <Play className="h-5 w-5 text-blue-600" />
                     {l.continueWhere}
                   </h2>
@@ -684,10 +684,10 @@ export default function LearnerDashboard() {
                               <BookOpen className="h-7 w-7 text-white" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h3 className="font-semibold text-black dark:text-white truncate group-hover:text-blue-600 transition-colors">
+                              <h3 className="font-semibold text-black dark:text-foreground truncate group-hover:text-blue-600 transition-colors">
                                 {course.title}
                               </h3>
-                              <p className="text-sm text-black dark:text-white dark:text-cyan-300 mt-1">
+                              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mt-1">
                                 {course.completedLessons || 0}/{course.totalLessons || 10} {language === "fr" ? "leçons" : "lessons"}
                               </p>
                               <div className="mt-3">
@@ -705,7 +705,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4">
                       <BookOpen className="h-8 w-8 text-blue-600" />
                     </div>
-                    <p className="text-black dark:text-white dark:text-cyan-300 mb-4">{l.noCourses}</p>
+                    <p className="text-black dark:text-foreground dark:text-cyan-300 mb-4">{l.noCourses}</p>
                     <Link href="/courses">
                       <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                         {l.exploreCourses}
@@ -718,7 +718,7 @@ export default function LearnerDashboard() {
               {/* Upcoming Sessions */}
               <GlassCard className="p-6" hover={false}>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-black dark:text-foreground flex items-center gap-2">
                     <Calendar className="h-5 w-5 text-purple-600" />
                     {l.upcomingSessions}
                   </h2>
@@ -753,8 +753,8 @@ export default function LearnerDashboard() {
                             </AvatarFallback>
                           </Avatar>
                           <div>
-                            <p className="font-semibold text-black dark:text-white">{session.coachName || "Coach"}</p>
-                            <p className="text-sm text-black dark:text-white dark:text-cyan-300">
+                            <p className="font-semibold text-black dark:text-foreground">{session.coachName || "Coach"}</p>
+                            <p className="text-sm text-black dark:text-foreground dark:text-cyan-300">
                               {new Date(session.scheduledAt).toLocaleDateString(
                                 language === "fr" ? "fr-CA" : "en-CA",
                                 { weekday: "short", month: "short", day: "numeric" }
@@ -776,7 +776,7 @@ export default function LearnerDashboard() {
                               coachName: session.coachName || "Coach",
                               date: new Date(session.scheduledAt),
                             })}
-                            className="text-black dark:text-white hover:text-purple-600"
+                            className="text-black dark:text-foreground hover:text-purple-600"
                           >
                             <CalendarClock className="h-4 w-4" />
                           </Button>
@@ -789,7 +789,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
                       <Calendar className="h-8 w-8 text-purple-600" />
                     </div>
-                    <p className="text-black dark:text-white dark:text-cyan-300 mb-4">{l.noSessions}</p>
+                    <p className="text-black dark:text-foreground dark:text-cyan-300 mb-4">{l.noSessions}</p>
                     <Link href="/coaches">
                       <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                         {l.viewCoaches}
@@ -816,7 +816,7 @@ export default function LearnerDashboard() {
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-black dark:text-white">{activePlan.planName}</span>
+                        <span className="text-sm font-medium text-black dark:text-foreground">{activePlan.planName}</span>
                         <Badge variant="default" className="bg-emerald-600">
                           {language === "fr" ? "Actif" : "Active"}
                         </Badge>
@@ -826,7 +826,7 @@ export default function LearnerDashboard() {
                           <span className="text-muted-foreground">
                             {language === "fr" ? "Sessions restantes" : "Sessions remaining"}
                           </span>
-                          <span className="font-medium text-black dark:text-white">
+                          <span className="font-medium text-black dark:text-foreground">
                             {activePlan.remainingSessions}/{activePlan.totalSessions}
                           </span>
                         </div>
@@ -860,7 +860,7 @@ export default function LearnerDashboard() {
               
               {/* Quick Actions */}
               <GlassCard className="p-6" hover={false}>
-                <h3 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-black dark:text-foreground mb-4 flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-amber-500" />
                   {l.quickActions}
                 </h3>
@@ -908,7 +908,7 @@ export default function LearnerDashboard() {
               {recentPracticeSessions && recentPracticeSessions.length > 0 && (
                 <GlassCard className="p-6" hover={false}>
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-black dark:text-white flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-black dark:text-foreground flex items-center gap-2">
                       <Bot className="h-5 w-5 text-purple-500" />
                       {language === "fr" ? "Sessions récentes" : "Recent Sessions"}
                     </h3>

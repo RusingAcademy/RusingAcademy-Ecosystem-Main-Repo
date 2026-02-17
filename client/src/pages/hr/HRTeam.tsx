@@ -25,9 +25,9 @@ const STATUS_STYLES: Record<string, { cls: string; en: string; fr: string }> = {
 function LoadingSkeleton() {
   return (
     <div className="animate-pulse space-y-4 max-w-7xl mx-auto">
-      <div className="h-12 bg-gray-100 dark:bg-slate-800 rounded-xl w-1/3" />
-      <div className="h-10 bg-gray-100 dark:bg-slate-800 rounded-lg" />
-      {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-16 bg-gray-100 dark:bg-slate-800 rounded-lg" />)}
+      <div className="h-12 bg-gray-100 dark:bg-card rounded-xl w-1/3" />
+      <div className="h-10 bg-gray-100 dark:bg-card rounded-lg" />
+      {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-16 bg-gray-100 dark:bg-card rounded-lg" />)}
     </div>
   );
 }
@@ -49,7 +49,7 @@ export default function HRTeam() {
       <HRLayout>
         <div className="max-w-2xl mx-auto text-center py-16">
           <span className="material-icons text-6xl text-gray-300 mb-4">lock</span>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-foreground mb-2">
             {lang === "fr" ? "Accès restreint" : "Restricted Access"}
           </h2>
           <p className="text-sm text-gray-500">
@@ -119,7 +119,7 @@ export default function HRTeam() {
               className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
                 statusFilter === tab.key
                   ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white dark:bg-slate-800 text-gray-600 border-gray-200 dark:border-slate-700 hover:border-blue-600/40"
+                  : "bg-white dark:bg-card text-gray-600 border-gray-200 dark:border-border hover:border-blue-600/40"
               }`}
             >
               {tab.label} ({tab.count})
@@ -135,12 +135,12 @@ export default function HRTeam() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={lang === "fr" ? "Rechercher par nom, courriel ou ID employé..." : "Search by name, email or employee ID..."}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
           />
         </div>
 
         {/* Table */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border overflow-hidden">
           {filtered.length === 0 ? (
             <div className="text-center py-12">
               <span className="material-icons text-5xl text-gray-300 mb-3">group_off</span>
@@ -154,7 +154,7 @@ export default function HRTeam() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 dark:bg-slate-900 border-b border-gray-100">
+                  <tr className="bg-gray-50 dark:bg-background border-b border-gray-100">
                     <th className="text-left py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Participant" : "Participant"}</th>
                     <th className="text-left py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Département" : "Department"}</th>
                     <th className="text-center py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Programme" : "Program"}</th>
@@ -167,7 +167,7 @@ export default function HRTeam() {
                   {filtered.map(p => {
                     const st = STATUS_STYLES[p.status ?? "active"] ?? STATUS_STYLES.active;
                     return (
-                      <tr key={p.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 dark:bg-slate-900 cursor-pointer">
+                      <tr key={p.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 dark:bg-background cursor-pointer">
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-2">
                             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-[var(--color-blue-700, #1d4ed8)] flex items-center justify-center text-white text-xs font-bold shrink-0">
@@ -184,12 +184,12 @@ export default function HRTeam() {
                           <span className="text-xs font-medium px-2 py-0.5 rounded bg-blue-50 text-blue-700">{p.program ?? "—"}</span>
                         </td>
                         <td className="py-3 px-2 text-center">
-                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${LEVEL_COLORS[p.currentLevel ?? ""] ?? "bg-gray-50 dark:bg-slate-900 text-gray-600"}`}>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${LEVEL_COLORS[p.currentLevel ?? ""] ?? "bg-gray-50 dark:bg-background text-gray-600"}`}>
                             {p.currentLevel ?? "—"}
                           </span>
                         </td>
                         <td className="py-3 px-2 text-center">
-                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${LEVEL_COLORS[p.targetLevel ?? ""] ?? "bg-gray-50 dark:bg-slate-900 text-gray-600"}`}>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${LEVEL_COLORS[p.targetLevel ?? ""] ?? "bg-gray-50 dark:bg-background text-gray-600"}`}>
                             {p.targetLevel ?? "—"}
                           </span>
                         </td>

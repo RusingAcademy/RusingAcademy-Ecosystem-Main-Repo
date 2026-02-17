@@ -42,7 +42,7 @@ function getFileIcon(mimeType: string) {
   if (mimeType?.startsWith("image/")) return <FileImage className="h-4 w-4 text-blue-500" />;
   if (mimeType?.startsWith("video/")) return <FileVideo className="h-4 w-4 text-purple-500" />;
   if (mimeType?.startsWith("audio/")) return <FileAudio className="h-4 w-4 text-green-500" />;
-  return <File className="h-4 w-4 text-black dark:text-white" />;
+  return <File className="h-4 w-4 text-black dark:text-foreground" />;
 }
 
 function formatFileSize(bytes: number): string {
@@ -170,13 +170,13 @@ export default function MediaLibraryPicker({
               <div className="flex items-center border rounded-md">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 dark:bg-slate-800 text-black" : "text-cyan-300"}`}
+                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 dark:bg-card text-black" : "text-cyan-300"}`}
                 >
                   <Grid3X3 className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 dark:bg-slate-800 text-black" : "text-cyan-300"}`}
+                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 dark:bg-card text-black" : "text-cyan-300"}`}
                 >
                   <LayoutList className="h-4 w-4" />
                 </button>
@@ -220,7 +220,7 @@ export default function MediaLibraryPicker({
                         ) : (
                           <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50">
                             {getFileIcon(item.mimeType)}
-                            <span className="text-xs text-black dark:text-white mt-1 px-2 truncate w-full text-center">{item.fileName}</span>
+                            <span className="text-xs text-black dark:text-foreground mt-1 px-2 truncate w-full text-center">{item.fileName}</span>
                           </div>
                         )}
                         {selectedItem?.id === item.id && (
@@ -244,13 +244,13 @@ export default function MediaLibraryPicker({
                         className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
                           selectedItem?.id === item.id
                             ? "bg-indigo-50 border border-indigo-200"
-                            : "hover:bg-gray-50 dark:bg-slate-900 border border-transparent"
+                            : "hover:bg-gray-50 dark:bg-background border border-transparent"
                         }`}
                       >
                         {isImage(item.mimeType) ? (
                           <img src={item.url} alt={item.altText || item.fileName} className="w-10 h-10 rounded object-cover" loading="lazy" />
                         ) : (
-                          <div className="w-10 h-10 rounded bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
+                          <div className="w-10 h-10 rounded bg-gray-100 dark:bg-card flex items-center justify-center">
                             {getFileIcon(item.mimeType)}
                           </div>
                         )}
@@ -276,40 +276,40 @@ export default function MediaLibraryPicker({
                         <img src={selectedItem.url} alt={selectedItem.altText || selectedItem.fileName} className="w-full h-full object-contain" />
                       </div>
                     ) : (
-                      <div className="aspect-square rounded-lg border bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+                      <div className="aspect-square rounded-lg border bg-gray-50 dark:bg-background flex items-center justify-center">
                         {getFileIcon(selectedItem.mimeType)}
                       </div>
                     )}
                     <div className="space-y-2">
                       <div>
-                        <Label className="text-xs text-black dark:text-white">Filename</Label>
+                        <Label className="text-xs text-black dark:text-foreground">Filename</Label>
                         <p className="text-sm font-medium truncate">{selectedItem.fileName}</p>
                       </div>
                       {selectedItem.altText && (
                         <div>
-                          <Label className="text-xs text-black dark:text-white">Alt Text</Label>
-                          <p className="text-xs text-black dark:text-white">{selectedItem.altText}</p>
+                          <Label className="text-xs text-black dark:text-foreground">Alt Text</Label>
+                          <p className="text-xs text-black dark:text-foreground">{selectedItem.altText}</p>
                         </div>
                       )}
                       <div className="flex gap-3">
                         <div>
-                          <Label className="text-xs text-black dark:text-white">Type</Label>
+                          <Label className="text-xs text-black dark:text-foreground">Type</Label>
                           <p className="text-xs">{selectedItem.mimeType}</p>
                         </div>
                         <div>
-                          <Label className="text-xs text-black dark:text-white">Size</Label>
+                          <Label className="text-xs text-black dark:text-foreground">Size</Label>
                           <p className="text-xs">{formatFileSize(selectedItem.fileSize)}</p>
                         </div>
                       </div>
                       {selectedItem.folder && (
                         <div>
-                          <Label className="text-xs text-black dark:text-white">Folder</Label>
+                          <Label className="text-xs text-black dark:text-foreground">Folder</Label>
                           <Badge variant="outline" className="text-xs">{selectedItem.folder}</Badge>
                         </div>
                       )}
                       {selectedItem.tags && (
                         <div>
-                          <Label className="text-xs text-black dark:text-white">Tags</Label>
+                          <Label className="text-xs text-black dark:text-foreground">Tags</Label>
                           <div className="flex flex-wrap gap-1 mt-0.5">
                             {selectedItem.tags.split(",").map((tag: string, i: number) => (
                               <Badge key={i} variant="secondary" className="text-xs">{tag.trim()}</Badge>
@@ -326,7 +326,7 @@ export default function MediaLibraryPicker({
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-between py-2 border-t shrink-0">
-                <p className="text-xs text-black dark:text-white">
+                <p className="text-xs text-black dark:text-foreground">
                   Showing {page * ITEMS_PER_PAGE + 1}–{Math.min((page + 1) * ITEMS_PER_PAGE, total)} of {total}
                 </p>
                 <div className="flex items-center gap-1">
@@ -339,7 +339,7 @@ export default function MediaLibraryPicker({
                   >
                     <ChevronLeft className="h-3.5 w-3.5" />
                   </Button>
-                  <span className="text-xs text-black dark:text-white px-2">
+                  <span className="text-xs text-black dark:text-foreground px-2">
                     {page + 1} / {totalPages}
                   </span>
                   <Button
@@ -366,13 +366,13 @@ export default function MediaLibraryPicker({
                   placeholder="https://example.com/image.jpg"
                   className="text-sm"
                 />
-                <p className="text-xs text-black dark:text-white">
+                <p className="text-xs text-black dark:text-foreground">
                   Enter a direct URL to an image. Supports JPEG, PNG, WebP, GIF, and SVG formats.
                 </p>
               </div>
               {urlInput && (
                 <div className="space-y-2">
-                  <Label className="text-xs text-black dark:text-white">Preview</Label>
+                  <Label className="text-xs text-black dark:text-foreground">Preview</Label>
                   <div className="w-48 h-48 rounded-lg border overflow-hidden bg-gray-50">
                     <img
                       src={urlInput}

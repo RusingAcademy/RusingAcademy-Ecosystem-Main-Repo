@@ -118,7 +118,7 @@ export default function Suppliers() {
       </div>
 
       {/* Supplier Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">
@@ -140,7 +140,7 @@ export default function Suppliers() {
           </thead>
           <tbody>
             {paginated.map((sup: any) => (
-              <tr key={sup.id} className="hover:bg-gray-50 dark:bg-slate-900 cursor-pointer" onClick={() => navigate(`/suppliers/${sup.id}`)}>
+              <tr key={sup.id} className="hover:bg-gray-50 dark:bg-background cursor-pointer" onClick={() => navigate(`/suppliers/${sup.id}`)}>
                 <td onClick={(e) => e.stopPropagation()}><input type="checkbox" className="rounded" /></td>
                 <td className="text-sky-600 font-medium">{sup.displayName}</td>
                 <td className="text-gray-600">{sup.company || "—"}</td>
@@ -151,7 +151,7 @@ export default function Suppliers() {
                   </span>
                 </td>
                 <td>
-                  <button className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded" onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}>
+                  <button className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>
@@ -169,7 +169,7 @@ export default function Suppliers() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-border dark:border-border bg-gray-50">
             <span className="text-sm text-gray-500">
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>

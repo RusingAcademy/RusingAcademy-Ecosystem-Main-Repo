@@ -29,7 +29,7 @@ export default function AdminControlSidebar() {
   const [location] = useLocation();
 
   return (
-    <aside className="w-[240px] h-screen flex flex-col bg-white dark:bg-slate-900 border-r border-gray-100 dark:border-slate-700 fixed left-0 top-0 z-40">
+    <aside className="w-[240px] h-screen flex flex-col bg-white dark:bg-background border-r border-gray-100 dark:border-border fixed left-0 top-0 z-40">
       {/* Brand Header */}
       <div className="px-5 py-5 border-b border-gray-100">
         <Link href="/admin/control" className="flex items-center gap-2.5 no-underline">
@@ -37,7 +37,7 @@ export default function AdminControlSidebar() {
             A
           </div>
           <div>
-            <p className="text-sm font-bold text-gray-900 dark:text-gray-100 leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <p className="text-sm font-bold text-gray-900 dark:text-foreground leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
               RusingAcademy
             </p>
             <p className="text-[9px] font-semibold tracking-wider uppercase" style={{ color: ACCENT }}>
@@ -60,7 +60,7 @@ export default function AdminControlSidebar() {
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm no-underline transition-all ${
                   isActive
                     ? "text-white font-semibold shadow-sm"
-                    : "text-gray-600 hover:bg-gray-50 dark:bg-slate-900 hover:text-gray-900"
+                    : "text-gray-600 hover:bg-gray-50 dark:bg-background hover:text-gray-900"
                 }`}
                 style={isActive ? { backgroundColor: ACCENT } : {}}>
                 <span className="material-icons text-lg">{item.icon}</span>
@@ -76,12 +76,12 @@ export default function AdminControlSidebar() {
         </p>
         <div className="space-y-0.5">
           <Link href="/admin/control/settings"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-slate-900 hover:text-gray-900 dark:text-gray-100 no-underline transition-all">
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-background hover:text-gray-900 dark:text-foreground no-underline transition-all">
             <span className="material-icons text-lg">settings</span>
             {lang === "fr" ? "Paramètres" : "Settings"}
           </Link>
           <Link href="/admin/control/audit"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-slate-900 hover:text-gray-900 dark:text-gray-100 no-underline transition-all">
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-background hover:text-gray-900 dark:text-foreground no-underline transition-all">
             <span className="material-icons text-lg">history</span>
             {lang === "fr" ? "Journal d'audit" : "Audit Log"}
           </Link>
@@ -92,10 +92,10 @@ export default function AdminControlSidebar() {
       <div className="px-4 py-3 border-t border-gray-100">
         <div className="flex items-center justify-between mb-3">
           <button onClick={() => setLang(lang === "en" ? "fr" : "en")}
-            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-300 transition-colors">
+            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-700 dark:text-muted-foreground transition-colors">
             <span className="material-icons text-sm">translate</span>
             {lang === "fr" ? "Français" : "English"}
-            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-100 dark:bg-slate-800 text-gray-500">
+            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-100 dark:bg-card text-gray-500">
               {lang === "fr" ? "FR" : "EN"}
             </span>
           </button>

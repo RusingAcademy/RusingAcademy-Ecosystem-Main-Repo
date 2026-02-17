@@ -13,9 +13,9 @@ const ACCENT = "var(--color-blue-600, #2563eb)";
 function LoadingSkeleton() {
   return (
     <div className="animate-pulse space-y-6 max-w-7xl mx-auto">
-      <div className="h-12 bg-gray-100 dark:bg-slate-800 rounded-xl w-1/3" />
+      <div className="h-12 bg-gray-100 dark:bg-card rounded-xl w-1/3" />
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {[1, 2, 3].map(i => <div key={i} className="h-48 bg-gray-100 dark:bg-slate-800 rounded-xl" />)}
+        {[1, 2, 3].map(i => <div key={i} className="h-48 bg-gray-100 dark:bg-card rounded-xl" />)}
       </div>
     </div>
   );
@@ -29,7 +29,7 @@ function CohortCard({ cohort, lang }: { cohort: any; lang: string }) {
   const endDate = cohort.endDate ? new Date(cohort.endDate).toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { month: "short", day: "numeric" }) : "—";
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow cursor-pointer group">
+    <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5 hover:shadow-md transition-shadow cursor-pointer group">
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-sm font-semibold text-gray-900">{cohort.name}</p>
@@ -54,21 +54,21 @@ function CohortCard({ cohort, lang }: { cohort: any; lang: string }) {
           <span className="text-gray-500">{lang === "fr" ? "Inscription" : "Enrollment"}</span>
           <span className="font-semibold" style={{ color: ACCENT }}>{enrolled}/{capacity}</span>
         </div>
-        <div className="h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
+        <div className="h-2 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
           <div className="h-full rounded-full transition-all" style={{ width: `${capacity > 0 ? (enrolled / capacity) * 100 : 0}%`, backgroundColor: ACCENT }} />
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center">
-        <div className="bg-gray-50 dark:bg-slate-900 rounded-lg py-2">
+        <div className="bg-gray-50 dark:bg-background rounded-lg py-2">
           <p className="text-sm font-bold text-gray-900">{enrolled}/{capacity}</p>
           <p className="text-[9px] text-gray-500">{lang === "fr" ? "Inscrits" : "Enrolled"}</p>
         </div>
-        <div className="bg-gray-50 dark:bg-slate-900 rounded-lg py-2">
+        <div className="bg-gray-50 dark:bg-background rounded-lg py-2">
           <p className="text-sm font-bold text-gray-900">{startDate}</p>
           <p className="text-[9px] text-gray-500">{lang === "fr" ? "Début" : "Start"}</p>
         </div>
-        <div className="bg-gray-50 dark:bg-slate-900 rounded-lg py-2">
+        <div className="bg-gray-50 dark:bg-background rounded-lg py-2">
           <p className="text-sm font-bold text-gray-900">{endDate}</p>
           <p className="text-[9px] text-gray-500">{lang === "fr" ? "Fin" : "End"}</p>
         </div>
@@ -98,7 +98,7 @@ export default function HRCohorts() {
       <HRLayout>
         <div className="max-w-2xl mx-auto text-center py-16">
           <span className="material-icons text-6xl text-gray-300 mb-4">lock</span>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-foreground mb-2">
             {lang === "fr" ? "Accès restreint" : "Restricted Access"}
           </h2>
           <p className="text-sm text-gray-500">
@@ -140,9 +140,9 @@ export default function HRCohorts() {
         </div>
 
         {allCohorts.length === 0 && (
-          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
+          <div className="text-center py-16 bg-white dark:bg-background rounded-xl border border-gray-100">
             <span className="material-icons text-6xl text-gray-300 mb-4">school</span>
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-2">
               {lang === "fr" ? "Aucune cohorte pour le moment" : "No Cohorts Yet"}
             </h2>
             <p className="text-sm text-gray-500 max-w-md mx-auto">
@@ -156,7 +156,7 @@ export default function HRCohorts() {
         {/* Active Cohorts */}
         {active.length > 0 && (
           <div className="mb-8">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-3 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500" />
               {lang === "fr" ? "Cohortes actives" : "Active Cohorts"} ({active.length})
             </h2>
@@ -169,7 +169,7 @@ export default function HRCohorts() {
         {/* Planned Cohorts */}
         {planned.length > 0 && (
           <div className="mb-8">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-3 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-500" />
               {lang === "fr" ? "Cohortes planifiées" : "Planned Cohorts"} ({planned.length})
             </h2>
@@ -182,7 +182,7 @@ export default function HRCohorts() {
         {/* Completed Cohorts */}
         {completed.length > 0 && (
           <div>
-            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-3 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-blue-500" />
               {lang === "fr" ? "Cohortes terminées" : "Completed Cohorts"} ({completed.length})
             </h2>

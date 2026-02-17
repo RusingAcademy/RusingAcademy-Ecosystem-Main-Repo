@@ -41,8 +41,8 @@ export default function PageShell({
       <Header />
       {decorativeBackground && (
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-card/20 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-card/10 rounded-full blur-3xl" />
         </div>
       )}
       <main id="main-content" className="flex-1 relative">

@@ -594,7 +594,7 @@ export default function PageBuilder() {
           {showLivePreview && (
             <div className="space-y-3">
               <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Live Preview</h3>
-              <div className="border rounded-lg overflow-auto bg-white dark:bg-slate-900 shadow-inner mx-auto" style={{ maxWidth: previewWidth, maxHeight: "calc(100vh - 200px)" }}>
+              <div className="border rounded-lg overflow-auto bg-white dark:bg-background shadow-inner mx-auto" style={{ maxWidth: previewWidth, maxHeight: "calc(100vh - 200px)" }}>
                 {sections.filter((s: any) => s.isVisible !== false).length === 0 ? (
                   <div className="p-16 text-center text-cyan-300 text-sm">No visible sections to preview</div>
                 ) : (
@@ -874,7 +874,7 @@ export default function PageBuilder() {
               </div>
             </DialogTitle>
           </DialogHeader>
-          <div className="border rounded-lg overflow-auto max-h-[70vh] bg-white dark:bg-slate-900 mx-auto" style={{ maxWidth: previewWidth }}>
+          <div className="border rounded-lg overflow-auto max-h-[70vh] bg-white dark:bg-background mx-auto" style={{ maxWidth: previewWidth }}>
             <div className="bg-blue-50 px-4 py-2 border-b text-xs text-blue-700 flex items-center gap-2">
               <Eye className="h-3 w-3" />
               Viewing as: <strong className="capitalize">{previewRole}</strong>

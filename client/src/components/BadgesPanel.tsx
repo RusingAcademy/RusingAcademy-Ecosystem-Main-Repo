@@ -453,7 +453,7 @@ function BadgeIcon({
     )}>
       <Icon className={cn(
         iconSizes[size],
-        earned ? meta.color : "text-black/60 dark:text-white/60",
+        earned ? meta.color : "text-black/60 dark:text-foreground/60",
       )} />
       {earned && (
         <motion.div
@@ -468,7 +468,7 @@ function BadgeIcon({
       )}
       {!earned && (
         <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-muted rounded-full flex items-center justify-center border border-muted-foreground/10">
-          <Lock className="w-1.5 h-1.5 text-black/60 dark:text-white/60" />
+          <Lock className="w-1.5 h-1.5 text-black/60 dark:text-foreground/60" />
         </div>
       )}
     </div>
@@ -636,10 +636,10 @@ export default function BadgesPanel({
       {/* Header with overall progress */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--brand-foundation)]/90 to-[var(--brand-foundation)]/70 p-6 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,255,255,0.08),transparent_50%)]" />
-        <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white dark:bg-slate-900/5 blur-xl" />
+        <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white dark:bg-background/5 blur-xl" />
         
         <div className="relative flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-900/10 backdrop-blur-sm border border-white/60 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-2xl bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60 flex items-center justify-center">
             <Trophy className="h-8 w-8 text-amber-400" />
           </div>
           <div className="flex-1">
@@ -650,7 +650,7 @@ export default function BadgesPanel({
               {totalEarned} / {totalPossible} {isEn ? "badges earned" : "badges obtenus"}
             </p>
             <div className="mt-2">
-              <Progress value={progressPercent} className="h-2 bg-white dark:bg-slate-900/10" />
+              <Progress value={progressPercent} className="h-2 bg-white dark:bg-background/10" />
             </div>
           </div>
           <div className="text-3xl font-bold text-amber-400">
@@ -739,7 +739,7 @@ export default function BadgesPanel({
                                 <div>
                                   <p className={cn(
                                     "text-[11px] font-medium leading-tight",
-                                    earned ? "text-foreground" : "text-black/60 dark:text-white/60",
+                                    earned ? "text-foreground" : "text-black/60 dark:text-foreground/60",
                                   )}>
                                     {earned && badge
                                       ? (isEn ? badge.title : (badge.titleFr || badge.title))
@@ -755,7 +755,7 @@ export default function BadgesPanel({
                                     </p>
                                   )}
                                   {!earned && (
-                                    <p className="text-[9px] text-black/50 dark:text-white/50 mt-0.5 flex items-center justify-center gap-0.5">
+                                    <p className="text-[9px] text-black/50 dark:text-foreground/50 mt-0.5 flex items-center justify-center gap-0.5">
                                       <Lock className="h-2 w-2" />
                                       {isEn ? "Locked" : "Verrouillé"}
                                     </p>

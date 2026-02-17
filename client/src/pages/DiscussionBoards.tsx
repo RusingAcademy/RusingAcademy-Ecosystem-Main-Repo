@@ -73,10 +73,10 @@ export default function DiscussionBoards() {
             <span className="material-icons text-lg">arrow_back</span> Back to Discussions
           </button>
           {thread.isLoading ? (
-            <div className="space-y-4">{[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 dark:bg-slate-800 rounded-xl animate-pulse" />)}</div>
+            <div className="space-y-4">{[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 dark:bg-card rounded-xl animate-pulse" />)}</div>
           ) : t ? (
             <>
-              <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-6 shadow-sm mb-4">
+              <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-6 shadow-sm mb-4">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-medium text-white" style={{ background: catInfo.color }}>{catInfo.label}</span>
@@ -88,8 +88,8 @@ export default function DiscussionBoards() {
                     </button>
                   )}
                 </div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">{t.title}</h1>
-                <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed">{t.content}</p>
+                <h1 className="text-xl font-bold text-gray-900 dark:text-foreground mb-3">{t.title}</h1>
+                <p className="text-sm text-gray-700 dark:text-muted-foreground whitespace-pre-wrap leading-relaxed">{t.content}</p>
                 <div className="flex items-center gap-4 mt-4 text-[11px] text-gray-400">
                   <span className="flex items-center gap-1"><span className="material-icons text-sm">visibility</span>{t.viewCount} views</span>
                   <span className="flex items-center gap-1"><span className="material-icons text-sm">chat_bubble</span>{t.replyCount} replies</span>
@@ -98,7 +98,7 @@ export default function DiscussionBoards() {
 
               <div className="space-y-3 mb-4">
                 {r.map((reply) => (
-                  <div key={reply.id} className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-700 rounded-xl p-4 shadow-sm">
+                  <div key={reply.id} className="bg-white dark:bg-background border border-gray-100 dark:border-border rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-7 h-7 rounded-full bg-teal-700/10 flex items-center justify-center">
                         <span className="material-icons text-teal-700 text-sm">person</span>
@@ -106,7 +106,7 @@ export default function DiscussionBoards() {
                       <span className="text-[11px] text-gray-500">User #{reply.userId}</span>
                       <span className="text-[10px] text-gray-400">{new Date(reply.createdAt).toLocaleDateString()}</span>
                     </div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{reply.content}</p>
+                    <p className="text-sm text-gray-700 dark:text-muted-foreground whitespace-pre-wrap">{reply.content}</p>
                   </div>
                 ))}
                 {r.length === 0 && (
@@ -115,12 +115,12 @@ export default function DiscussionBoards() {
               </div>
 
               {user && (
-                <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-4 shadow-sm">
+                <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-4 shadow-sm">
                   <textarea
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
                     placeholder="Write your reply..."
-                    className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[80px]"
+                    className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[80px]"
                   />
                   <div className="flex justify-end mt-2">
                     <button
@@ -166,7 +166,7 @@ export default function DiscussionBoards() {
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
                 category === cat.id
                   ? "text-white shadow-sm"
-                  : "bg-gray-100 dark:bg-slate-800 text-gray-600 hover:bg-gray-200"
+                  : "bg-gray-100 dark:bg-card text-gray-600 hover:bg-gray-200"
               }`}
               style={category === cat.id ? { background: cat.color } : {}}
             >
@@ -179,7 +179,7 @@ export default function DiscussionBoards() {
         {/* New Thread Modal */}
         {showNewThread && (
           <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl">
+            <div className="bg-white dark:bg-background rounded-2xl p-6 w-full max-w-lg shadow-xl">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-gray-900">New Discussion</h2>
                 <button onClick={() => setShowNewThread(false)} className="text-gray-400 hover:text-gray-600">
@@ -190,12 +190,12 @@ export default function DiscussionBoards() {
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 placeholder="Thread title..."
-                className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
               />
               <select
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
-                className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
               >
                 {CATEGORIES.filter(c => c.id !== "all").map(c => (
                   <option key={c.id} value={c.id}>{c.label}</option>
@@ -205,7 +205,7 @@ export default function DiscussionBoards() {
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
                 placeholder="Share your thoughts, questions, or insights..."
-                className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[120px]"
+                className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[120px]"
               />
               <div className="flex justify-end gap-2 mt-4">
                 <button onClick={() => setShowNewThread(false)} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800">Cancel</button>
@@ -223,11 +223,11 @@ export default function DiscussionBoards() {
 
         {/* Thread List */}
         {threads.isLoading ? (
-          <div className="space-y-3">{[1,2,3,4].map(i => <div key={i} className="h-24 bg-gray-100 dark:bg-slate-800 rounded-xl animate-pulse" />)}</div>
+          <div className="space-y-3">{[1,2,3,4].map(i => <div key={i} className="h-24 bg-gray-100 dark:bg-card rounded-xl animate-pulse" />)}</div>
         ) : (threads.data || []).length === 0 ? (
           <div className="text-center py-16">
             <span className="material-icons text-gray-300 text-5xl mb-3">forum</span>
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">No discussions yet</h3>
+            <h3 className="text-lg font-semibold text-gray-700 dark:text-muted-foreground mb-1">No discussions yet</h3>
             <p className="text-sm text-gray-400">Start the conversation by creating the first thread!</p>
           </div>
         ) : (
@@ -238,7 +238,7 @@ export default function DiscussionBoards() {
                 <button
                   key={t.id}
                   onClick={() => setSelectedThread(t.id)}
-                  className="w-full text-left bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all"
+                  className="w-full text-left bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all"
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: catInfo.color + "15" }}>
@@ -247,7 +247,7 @@ export default function DiscussionBoards() {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         {t.isPinned && <span className="material-icons text-amber-500 text-sm">push_pin</span>}
-                        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{t.title}</h3>
+                        <h3 className="text-sm font-semibold text-gray-900 dark:text-foreground truncate">{t.title}</h3>
                       </div>
                       <p className="text-xs text-gray-500 line-clamp-2">{t.content}</p>
                       <div className="flex items-center gap-3 mt-2 text-[10px] text-gray-400">

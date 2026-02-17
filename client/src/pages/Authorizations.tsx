@@ -55,16 +55,16 @@ export default function Authorizations() {
             <table className="w-full">
               <thead>
                 <tr className="bg-[rgba(0,128,144,0.08)]">
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Module</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Start Date</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">End Date</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Status</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Hours</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Module</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Start Date</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">End Date</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Status</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Hours</th>
                 </tr>
               </thead>
               <tbody>
                 {moduleAuths.map((auth, i) => (
-                  <tr key={i} className={`border-t border-gray-100 dark:border-slate-700 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
+                  <tr key={i} className={`border-t border-gray-100 dark:border-border ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
                     <td className="px-4 py-3 text-sm text-gray-800">{auth.module}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{auth.startDate}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{auth.endDate}</td>
@@ -91,11 +91,11 @@ export default function Authorizations() {
             <table className="w-full">
               <thead>
                 <tr className="bg-[rgba(0,128,144,0.08)]">
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Authorization</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Hours Authorized</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Hours Used</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Hours Remaining</th>
-                  <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Period</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Authorization</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Hours Authorized</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Hours Used</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Hours Remaining</th>
+                  <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Period</th>
                 </tr>
               </thead>
               <tbody>

@@ -44,7 +44,7 @@ export default function ReconciliationWorkspace() {
     return (
       <div className="p-6 max-w-[600px] mx-auto">
         <div className="flex items-center gap-3 mb-6">
-          <button onClick={() => navigate("/reconciliation")} className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded">
+          <button onClick={() => navigate("/reconciliation")} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">Start Reconciliation</h1>
@@ -90,7 +90,7 @@ export default function ReconciliationWorkspace() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => setStarted(false)} className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded">
+          <button onClick={() => setStarted(false)} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>

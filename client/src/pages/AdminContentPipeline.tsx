@@ -257,7 +257,7 @@ export default function AdminContentPipeline() {
                       <TableCell className="capitalize">{q.contentType}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          <div className="w-24 bg-gray-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
+                          <div className="w-24 bg-gray-100 dark:bg-card rounded-full h-2 overflow-hidden">
                             <div
                               className="h-full rounded-full"
                               style={{

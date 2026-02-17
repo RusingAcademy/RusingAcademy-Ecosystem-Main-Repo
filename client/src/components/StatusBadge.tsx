@@ -41,7 +41,7 @@ const STATUS_MAP: Record<StatusVariant, StatusConfig> = {
   draft: {
     label: "Draft",
     labelFr: "Brouillon",
-    className: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700",
+    className: "bg-slate-100 text-slate-700 dark:bg-card dark:text-slate-300 border-slate-200 dark:border-border",
     icon: Clock,
   },
   review: {
@@ -95,7 +95,7 @@ const STATUS_MAP: Record<StatusVariant, StatusConfig> = {
   archived: {
     label: "Archived",
     labelFr: "Archivé",
-    className: "bg-gray-100 dark:bg-slate-800 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-gray-200 dark:border-slate-700 dark:border-gray-700",
+    className: "bg-gray-100 dark:bg-card text-gray-600 dark:bg-card dark:text-muted-foreground border-gray-200 dark:border-border dark:border-border",
     icon: Archive,
   },
   paid: {
@@ -113,7 +113,7 @@ const STATUS_MAP: Record<StatusVariant, StatusConfig> = {
   cancelled: {
     label: "Cancelled",
     labelFr: "Annulé",
-    className: "bg-gray-100 dark:bg-slate-800 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-gray-200 dark:border-slate-700 dark:border-gray-700",
+    className: "bg-gray-100 dark:bg-card text-gray-600 dark:bg-card dark:text-muted-foreground border-gray-200 dark:border-border dark:border-border",
     icon: XCircle,
   },
   submitted: {

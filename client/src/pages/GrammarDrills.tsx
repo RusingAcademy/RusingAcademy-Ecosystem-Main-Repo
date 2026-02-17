@@ -202,7 +202,7 @@ export default function GrammarDrillsPage() {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-foreground flex items-center gap-3">
                 <span className="material-icons text-teal-700" aria-hidden="true">spellcheck</span>
                 {t("grammar.title")}
               </h1>
@@ -224,7 +224,7 @@ export default function GrammarDrillsPage() {
                 { label: t("grammar.avgScore"), value: `${stats.avgScore ?? 0}%`, icon: "grade", color: "var(--semantic-warning, #f5a623)" },
                 { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "var(--color-violet-500, #8b5cf6)" },
               ].map((s, i) => (
-                <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center" role="status">
+                <div key={i} className="bg-white dark:bg-background rounded-2xl p-4 border border-gray-100 dark:border-border shadow-sm text-center" role="status">
                   <span className="material-icons text-lg mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{s.value}</div>
                   <div className="text-xs text-gray-500">{s.label}</div>
@@ -235,17 +235,17 @@ export default function GrammarDrillsPage() {
 
           {showHistory ? (
             <div className="space-y-3">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("grammar.history")}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">{t("grammar.history")}</h2>
               {!history?.length ? (
                 <div className="text-center py-16" role="status">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
                     <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">spellcheck</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("grammar.emptyTitle")}</h3>
+                  <h3 className="text-lg font-semibold text-gray-700 dark:text-muted-foreground mb-2">{t("grammar.emptyTitle")}</h3>
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("grammar.emptyDesc")}</p>
                 </div>
               ) : history.map((h: any, i: number) => (
-                <div key={i} className="bg-white dark:bg-slate-900 rounded-xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm flex items-center justify-between">
+                <div key={i} className="bg-white dark:bg-background rounded-xl p-4 border border-gray-100 dark:border-border shadow-sm flex items-center justify-between">
                   <div>
                     <div className="font-semibold text-gray-900">{h.topic}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
@@ -260,12 +260,12 @@ export default function GrammarDrillsPage() {
             </div>
           ) : phase === "select" ? (
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t("grammar.chooseLevel")}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">{t("grammar.chooseLevel")}</h2>
               <div className="flex gap-3 mb-6 flex-wrap" role="radiogroup" aria-label={t("grammar.chooseLevel")}>
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => setSelectedLevel(level)}
                     role="radio" aria-checked={selectedLevel === level}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white dark:bg-slate-800 text-gray-600 border border-gray-200 dark:border-slate-700 hover:border-teal-700"}`}>
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white dark:bg-card text-gray-600 border border-gray-200 dark:border-border hover:border-teal-700"}`}>
                     {level}
                   </button>
                 ))}
@@ -277,7 +277,7 @@ export default function GrammarDrillsPage() {
                   <h3 className="text-sm font-semibold text-gray-600 mb-3">{isFr ? "Performance par sujet" : "Your Topic Performance"}</h3>
                   <div className="flex gap-2 flex-wrap">
                     {topicStats.map((ts: any, i: number) => (
-                      <div key={i} className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-700 text-xs flex items-center gap-2">
+                      <div key={i} className="px-3 py-1.5 rounded-lg bg-white dark:bg-background border border-gray-100 dark:border-border text-xs flex items-center gap-2">
                         <span className="font-medium text-gray-700">{ts.topic}</span>
                         <span className="font-bold" style={{ color: (ts.avgScore ?? 0) >= 80 ? "var(--semantic-success, #22c55e)" : "var(--semantic-warning, #f5a623)" }}>{ts.avgScore}%</span>
                       </div>
@@ -289,7 +289,7 @@ export default function GrammarDrillsPage() {
               <div className="space-y-4" role="list" aria-label={t("grammar.drills")}>
                 {filteredDrills.map((drill, i) => (
                   <div key={i} role="listitem"
-                    className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
+                    className="bg-white dark:bg-background rounded-2xl p-6 border border-gray-100 dark:border-border shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
                     onClick={() => startDrill(drill)}
                     onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startDrill(drill); }}}
                     tabIndex={0}
@@ -342,15 +342,15 @@ export default function GrammarDrillsPage() {
               </div>
 
               {/* Current Question */}
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm mb-6">
-                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">{selectedDrill.questions[currentQ].prompt}</p>
+              <div className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm mb-6">
+                <p className="text-lg font-semibold text-gray-900 dark:text-foreground mb-6">{selectedDrill.questions[currentQ].prompt}</p>
 
                 {selectedDrill.questions[currentQ].options ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label={isFr ? "Options de réponse" : "Answer options"}>
                     {selectedDrill.questions[currentQ].options!.map((opt, oi) => (
                       <button key={oi} onClick={() => answerCurrent(opt)}
                         role="radio" aria-checked={answers[currentQ] === opt}
-                        className={`p-4 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${answers[currentQ] === opt ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 dark:bg-slate-900 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:bg-slate-800 border border-gray-200"}`}>
+                        className={`p-4 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${answers[currentQ] === opt ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 dark:bg-background text-gray-700 dark:text-muted-foreground hover:bg-gray-100 dark:bg-card border border-gray-200"}`}>
                         {opt}
                       </button>
                     ))}
@@ -361,7 +361,7 @@ export default function GrammarDrillsPage() {
                     <input id="reorder-input" type="text" value={reorderInput} onChange={e => setReorderInput(e.target.value)}
                       onKeyDown={e => { if (e.key === "Enter" && reorderInput.trim()) answerCurrent(reorderInput.trim()); }}
                       placeholder={isFr ? "Tapez la phrase dans le bon ordre..." : "Type the correct sentence order..."}
-                      className="w-full p-4 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                      className="w-full p-4 rounded-xl border border-gray-200 dark:border-border dark:border-border text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                       autoFocus />
                     <button onClick={() => { if (reorderInput.trim()) answerCurrent(reorderInput.trim()); }}
                       className="mt-3 px-4 py-2 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700/30">
@@ -381,7 +381,7 @@ export default function GrammarDrillsPage() {
               <div className="flex justify-between">
                 <button onClick={() => { if (currentQ > 0) { setCurrentQ(currentQ - 1); setReorderInput(""); } }}
                   disabled={currentQ === 0}
-                  className="px-4 py-2 rounded-xl text-sm text-gray-500 hover:text-gray-700 dark:text-gray-300 disabled:opacity-30 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                  className="px-4 py-2 rounded-xl text-sm text-gray-500 hover:text-gray-700 dark:text-muted-foreground disabled:opacity-30 focus:outline-none focus:ring-2 focus:ring-gray-300"
                   aria-label={isFr ? "Précédent" : "Previous"}>
                   {isFr ? "← Précédent" : "← Previous"}
                 </button>
@@ -403,11 +403,11 @@ export default function GrammarDrillsPage() {
           ) : (
             /* Results */
             <div role="region" aria-label={t("grammar.drillComplete")}>
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm text-center mb-8">
+              <div className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm text-center mb-8">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
                   <span className="material-icons text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{t("grammar.drillComplete")}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-foreground mb-2">{t("grammar.drillComplete")}</h2>
                 <p className="text-sm text-gray-400 mb-2">
                   <span className="material-icons text-sm align-middle mr-1" aria-hidden="true">timer</span>
                   {formatTime(Math.floor((Date.now() - startTime) / 1000))}

@@ -27,7 +27,7 @@ export default function JournalEntries() {
         ) : (entries as any[])?.length ? (
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-gray-200 dark:border-slate-700 dark:border-slate-700">
+              <tr className="border-b-2 border-gray-200 dark:border-border dark:border-border">
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Date</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Entry #</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Memo</th>
@@ -36,7 +36,7 @@ export default function JournalEntries() {
             </thead>
             <tbody>
               {(entries as any[]).map((entry: any) => (
-                <tr key={entry.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:bg-slate-900 cursor-pointer">
+                <tr key={entry.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50 dark:bg-background cursor-pointer">
                   <td className="py-3 text-sm text-gray-800">{new Date(entry.entryDate).toLocaleDateString("en-CA")}</td>
                   <td className="py-3 text-sm text-sky-600">{entry.entryNumber || `JE-${entry.id}`}</td>
                   <td className="py-3 text-sm text-gray-600">{entry.memo || "—"}</td>

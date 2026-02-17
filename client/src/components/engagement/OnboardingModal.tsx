@@ -88,8 +88,8 @@ export function OnboardingModal() {
   return (
     <AnimatePresence>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative w-full max-w-2xl mx-4 bg-white dark:bg-slate-900/10 backdrop-blur-xl rounded-2xl border border-white/60 shadow-2xl overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-white dark:bg-slate-900/10">
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative w-full max-w-2xl mx-4 bg-white dark:bg-background/10 backdrop-blur-xl rounded-2xl border border-white/60 shadow-2xl overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-white dark:bg-background/10">
             <motion.div className="h-full bg-gradient-to-r from-foundation to-teal-700" initial={{ width: '0%' }} animate={{ width: currentStep === 'welcome' ? '33%' : currentStep === 'quiz' ? '66%' : '100%' }} transition={{ duration: 0.5 }} />
           </div>
           <div className="p-8">

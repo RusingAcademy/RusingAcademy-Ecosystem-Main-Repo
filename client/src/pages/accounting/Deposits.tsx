@@ -67,7 +67,7 @@ export default function Deposits() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
+      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-border dark:border-border">
         <button
           className={`pb-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "payments" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => { setActiveTab("payments"); setPage(1); }}
@@ -96,10 +96,10 @@ export default function Deposits() {
       </div>
 
       {activeTab === "payments" && (
-        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Reference</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Method</th>
@@ -119,7 +119,7 @@ export default function Deposits() {
                 </tr>
               ) : (
                 paginated.map((p: any) => (
-                  <tr key={p.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50">
+                  <tr key={p.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {p.paymentDate ? new Date(p.paymentDate).toLocaleDateString("en-CA") : "-"}
                     </td>
@@ -136,10 +136,10 @@ export default function Deposits() {
       )}
 
       {activeTab === "transfers" && (
-        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">From</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">To</th>
@@ -159,7 +159,7 @@ export default function Deposits() {
                 </tr>
               ) : (
                 paginated.map((t: any) => (
-                  <tr key={t.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50">
+                  <tr key={t.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {t.transferDate ? new Date(t.transferDate).toLocaleDateString("en-CA") : "-"}
                     </td>
@@ -193,7 +193,7 @@ export default function Deposits() {
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">From Account</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">From Account</label>
               <Select value={transferForm.fromAccountId} onValueChange={v => setTransferForm({ ...transferForm, fromAccountId: v })}>
                 <SelectTrigger><SelectValue placeholder="Select source account" /></SelectTrigger>
                 <SelectContent>
@@ -204,7 +204,7 @@ export default function Deposits() {
               </Select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">To Account</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">To Account</label>
               <Select value={transferForm.toAccountId} onValueChange={v => setTransferForm({ ...transferForm, toAccountId: v })}>
                 <SelectTrigger><SelectValue placeholder="Select destination account" /></SelectTrigger>
                 <SelectContent>
@@ -216,20 +216,20 @@ export default function Deposits() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Amount</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Amount</label>
                 <input type="number" step="0.01" value={transferForm.amount}
                   onChange={e => setTransferForm({ ...transferForm, amount: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" placeholder="0.00" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Date</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Date</label>
                 <input type="date" value={transferForm.transferDate}
                   onChange={e => setTransferForm({ ...transferForm, transferDate: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Memo</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Memo</label>
               <input type="text" value={transferForm.memo}
                 onChange={e => setTransferForm({ ...transferForm, memo: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" placeholder="Optional" />

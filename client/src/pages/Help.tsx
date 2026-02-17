@@ -74,10 +74,10 @@ export default function Help() {
 
         {/* Promoted Articles */}
         <div className="mb-8">
-          <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-3">Promoted Articles</h3>
+          <h3 className="text-base font-medium text-gray-800 dark:text-foreground mb-3">Promoted Articles</h3>
           <div className="glass-card rounded-xl divide-y divide-gray-100">
             {promotedArticles.map((article, i) => (
-              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-slate-900 cursor-pointer flex items-center gap-2">
+              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-background cursor-pointer flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-base">article</span>
                 <span className="text-sm text-gray-700">{article}</span>
               </div>
@@ -87,12 +87,12 @@ export default function Help() {
 
         {/* Recent Activity */}
         <div>
-          <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-3">Recent Activity</h3>
+          <h3 className="text-base font-medium text-gray-800 dark:text-foreground mb-3">Recent Activity</h3>
           <div className="glass-card rounded-xl divide-y divide-gray-100">
             {recentActivity.map((item, i) => (
-              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-slate-900 cursor-pointer">
+              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-background cursor-pointer">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-500">{item.category}</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-card text-gray-500">{item.category}</span>
                   <span className="text-[10px] text-gray-400">{item.time}</span>
                 </div>
                 <p className="text-sm text-gray-700">{item.question}</p>

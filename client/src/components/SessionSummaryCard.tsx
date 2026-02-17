@@ -291,7 +291,7 @@ Généré par RusingAcademy Learning Ecosystem
           )}
           {onStartNewSession && (
             <Button 
-              className="flex-1 bg-amber-500 hover:bg-amber-600 text-black dark:text-white font-semibold"
+              className="flex-1 bg-amber-500 hover:bg-amber-600 text-black dark:text-foreground font-semibold"
               onClick={onStartNewSession}
             >
               Nouvelle session

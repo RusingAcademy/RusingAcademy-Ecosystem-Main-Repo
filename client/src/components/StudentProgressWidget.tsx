@@ -87,8 +87,8 @@ export function StudentProgressWidget({
               <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
+              <CardTitle className="text-lg text-black dark:text-foreground">{l.title}</CardTitle>
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300">{l.subtitle}</p>
             </div>
           </div>
         </div>
@@ -97,22 +97,22 @@ export function StudentProgressWidget({
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{avgProgress}%</p>
-            <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.avgProgress}</p>
+            <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.avgProgress}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
-            <p className="text-2xl font-bold text-black dark:text-white">{students.length}</p>
-            <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.totalStudents}</p>
+            <p className="text-2xl font-bold text-black dark:text-foreground">{students.length}</p>
+            <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.totalStudents}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
             <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{onTrackCount}</p>
-            <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.onTrack}</p>
+            <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.onTrack}</p>
           </div>
         </div>
       </CardHeader>
       
       <CardContent className="p-4 space-y-3 max-h-[400px] overflow-y-auto">
         {students.length === 0 ? (
-          <div className="text-center py-8 text-black dark:text-white dark:text-cyan-300">
+          <div className="text-center py-8 text-black dark:text-foreground dark:text-cyan-300">
             <Users className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noStudents}</p>
           </div>
@@ -122,7 +122,7 @@ export function StudentProgressWidget({
               key={student.id}
               onClick={() => onViewStudent?.(student.id)}
               className={cn(
-                "p-4 rounded-xl border bg-white dark:bg-slate-800 dark:bg-foundation border-slate-200 dark:border-teal-800",
+                "p-4 rounded-xl border bg-white dark:bg-card dark:bg-foundation border-slate-200 dark:border-teal-800",
                 "hover:border-blue-300 dark:hover:border-blue-700 transition-all",
                 onViewStudent && "cursor-pointer"
               )}
@@ -136,12 +136,12 @@ export function StudentProgressWidget({
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-black dark:text-white truncate">
+                    <h4 className="font-semibold text-black dark:text-foreground truncate">
                       {student.name}
                     </h4>
                     {getTrendIcon(student.trend)}
                   </div>
-                  <p className="text-sm text-black dark:text-white dark:text-cyan-300">
+                  <p className="text-sm text-black dark:text-foreground dark:text-cyan-300">
                     {student.sessionsCompleted} {l.sessions}
                   </p>
                 </div>
@@ -165,7 +165,7 @@ export function StudentProgressWidget({
                   value={student.progressPercent} 
                   className="flex-1 h-2 [&>div]:bg-blue-500"
                 />
-                <span className="text-sm font-medium text-black dark:text-white/90 w-12 text-right">
+                <span className="text-sm font-medium text-black dark:text-foreground/90 w-12 text-right">
                   {student.progressPercent}%
                 </span>
               </div>

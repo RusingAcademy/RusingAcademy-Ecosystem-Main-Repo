@@ -276,28 +276,28 @@ export function SLESimulationMode({
   // Pre-exam screen
   if (!isStarted) {
     return (
-      <div ref={containerRef} className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-slate-800 dark:bg-obsidian p-8", className)}>
+      <div ref={containerRef} className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-card dark:bg-obsidian p-8", className)}>
         <div className="text-center max-w-2xl mx-auto">
           {/* Header */}
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-6">
             <ExamIcon className="h-8 w-8 text-white" />
           </div>
-          <h2 className="text-2xl font-bold text-black dark:text-white mb-2">{l.title}</h2>
-          <p className="text-black dark:text-white dark:text-cyan-300 mb-8">{l.subtitle}</p>
+          <h2 className="text-2xl font-bold text-black dark:text-foreground mb-2">{l.title}</h2>
+          <p className="text-black dark:text-foreground dark:text-cyan-300 mb-8">{l.subtitle}</p>
 
           {/* Exam Info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-1">Type</p>
-              <p className="font-semibold text-black dark:text-white">{examTypeLabels[examType]}</p>
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mb-1">Type</p>
+              <p className="font-semibold text-black dark:text-foreground">{examTypeLabels[examType]}</p>
             </div>
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-1">Level</p>
-              <p className="font-semibold text-black dark:text-white">{levelLabels[examLevel]}</p>
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mb-1">Level</p>
+              <p className="font-semibold text-black dark:text-foreground">{levelLabels[examLevel]}</p>
             </div>
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-1">Questions</p>
-              <p className="font-semibold text-black dark:text-white">{questions.length}</p>
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mb-1">Questions</p>
+              <p className="font-semibold text-black dark:text-foreground">{questions.length}</p>
             </div>
           </div>
 
@@ -334,7 +334,7 @@ export function SLESimulationMode({
     const passed = score >= passingScore;
 
     return (
-      <div ref={containerRef} className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-slate-800 dark:bg-obsidian p-8", className)}>
+      <div ref={containerRef} className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-card dark:bg-obsidian p-8", className)}>
         <div className="text-center max-w-2xl mx-auto">
           {/* Result Icon */}
           <div className={cn(
@@ -348,7 +348,7 @@ export function SLESimulationMode({
             )}
           </div>
 
-          <h2 className="text-2xl font-bold text-black dark:text-white mb-2">{l.results}</h2>
+          <h2 className="text-2xl font-bold text-black dark:text-foreground mb-2">{l.results}</h2>
           <p className={cn(
             "text-lg font-medium mb-8",
             passed ? "text-emerald-600" : "text-amber-600"
@@ -357,21 +357,21 @@ export function SLESimulationMode({
           </p>
 
           {/* Score Display */}
-          <div className="text-6xl font-bold text-black dark:text-white mb-8">
+          <div className="text-6xl font-bold text-black dark:text-foreground mb-8">
             {score}%
           </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4 mb-8">
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-1">{l.correctAnswers}</p>
-              <p className="text-2xl font-bold text-black dark:text-white">
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mb-1">{l.correctAnswers}</p>
+              <p className="text-2xl font-bold text-black dark:text-foreground">
                 {correctAnswers}/{questions.length}
               </p>
             </div>
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-1">{l.timeSpent}</p>
-              <p className="text-2xl font-bold text-black dark:text-white">
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mb-1">{l.timeSpent}</p>
+              <p className="text-2xl font-bold text-black dark:text-foreground">
                 {formatTime(totalTimeSpent)}
               </p>
             </div>
@@ -397,7 +397,7 @@ export function SLESimulationMode({
     <div 
       ref={containerRef} 
       className={cn(
-        "rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-slate-800 dark:bg-obsidian overflow-hidden",
+        "rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-card dark:bg-obsidian overflow-hidden",
         isFullscreen && "fixed inset-0 z-50 rounded-none",
         className
       )}
@@ -406,12 +406,12 @@ export function SLESimulationMode({
       <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-teal-800 bg-slate-50 dark:bg-foundation">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <ExamIcon className="h-5 w-5 text-black dark:text-white dark:text-cyan-300" />
-            <span className="font-medium text-black dark:text-white">
+            <ExamIcon className="h-5 w-5 text-black dark:text-foreground dark:text-cyan-300" />
+            <span className="font-medium text-black dark:text-foreground">
               {examTypeLabels[examType]} - {levelLabels[examLevel]}
             </span>
           </div>
-          <div className="text-sm text-black dark:text-white dark:text-cyan-300">
+          <div className="text-sm text-black dark:text-foreground dark:text-cyan-300">
             {l.question} {currentQuestionIndex + 1} {l.of} {questions.length}
           </div>
         </div>
@@ -422,7 +422,7 @@ export function SLESimulationMode({
             "flex items-center gap-2 px-3 py-1.5 rounded-full font-mono",
             timeRemaining <= 60 
               ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" 
-              : "bg-slate-100 text-black dark:text-white dark:bg-teal-800 dark:text-white/90"
+              : "bg-slate-100 text-black dark:text-foreground dark:bg-teal-800 dark:text-foreground/90"
           )}>
             <Clock className="h-4 w-4" />
             {formatTime(timeRemaining)}
@@ -486,7 +486,7 @@ export function SLESimulationMode({
       <div className="p-6 min-h-[400px]">
         {currentQuestion && (
           <div>
-            <p className="text-lg text-black dark:text-white mb-6">
+            <p className="text-lg text-black dark:text-foreground mb-6">
               {currentQuestion.question}
             </p>
 
@@ -504,7 +504,7 @@ export function SLESimulationMode({
                         : "border-slate-200 dark:border-teal-800 hover:border-slate-300 dark:hover:border-slate-600"
                     )}
                   >
-                    <span className="text-black dark:text-white">{option}</span>
+                    <span className="text-black dark:text-foreground">{option}</span>
                   </button>
                 ))}
               </div>
@@ -516,7 +516,7 @@ export function SLESimulationMode({
                 value={answers[currentQuestion.id] || ""}
                 onChange={(e) => handleAnswer(currentQuestion.id, e.target.value)}
                 placeholder="Type your response here..."
-                className="w-full h-48 p-4 rounded-lg border border-slate-200 dark:border-teal-800 bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full h-48 p-4 rounded-lg border border-slate-200 dark:border-teal-800 bg-white dark:bg-card dark:bg-foundation text-black dark:text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             )}
           </div>

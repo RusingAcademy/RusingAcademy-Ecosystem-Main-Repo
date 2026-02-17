@@ -67,12 +67,12 @@ export default function BalanceSheetReport() {
         {items.map((a, i) => (
           <div key={i} className="flex justify-between py-1 text-sm pl-8">
             <span className="text-gray-700">{a.name}</span>
-            <span className="text-gray-800 dark:text-gray-200 font-mono">{fmt(a.amount)}</span>
+            <span className="text-gray-800 dark:text-foreground font-mono">{fmt(a.amount)}</span>
           </div>
         ))}
         <div className="flex justify-between py-1 text-sm font-medium pl-4 border-t border-gray-100">
           <span className="text-gray-600">Total {title}</span>
-          <span className="text-gray-800 dark:text-gray-200 font-mono">{fmt(sectionTotal)}</span>
+          <span className="text-gray-800 dark:text-foreground font-mono">{fmt(sectionTotal)}</span>
         </div>
       </div>
     );
@@ -136,8 +136,8 @@ export default function BalanceSheetReport() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload) return null;
     return (
-      <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg p-3 text-sm">
-        <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">{label}</p>
+      <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg p-3 text-sm">
+        <p className="font-semibold text-gray-800 dark:text-foreground mb-1">{label}</p>
         {payload.map((entry: any, i: number) => (
           <div key={i} className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: entry.color }} />
@@ -153,7 +153,7 @@ export default function BalanceSheetReport() {
     <div className="p-6 max-w-[900px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/reports")} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg">
+          <button onClick={() => navigate("/reports")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
@@ -163,23 +163,23 @@ export default function BalanceSheetReport() {
         </div>
         <div className="flex items-center gap-2">
           {/* View Mode Toggle */}
-          <div className="flex items-center border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg overflow-hidden">
+          <div className="flex items-center border border-gray-200 dark:border-border dark:border-border rounded-lg overflow-hidden">
             <button
-              className={`p-2 ${viewMode === "table" ? "bg-gray-100 dark:bg-slate-800 text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
+              className={`p-2 ${viewMode === "table" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("table")}
               title="Table view"
             >
               <Table2 size={16} />
             </button>
             <button
-              className={`p-2 ${viewMode === "chart" ? "bg-gray-100 dark:bg-slate-800 text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
+              className={`p-2 ${viewMode === "chart" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("chart")}
               title="Chart view"
             >
               <BarChart3 size={16} />
             </button>
           </div>
-          <div className="flex items-center gap-1 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-1.5">
+          <div className="flex items-center gap-1 border border-gray-200 dark:border-border dark:border-border rounded-lg px-3 py-1.5">
             <Calendar size={14} className="text-gray-400" />
             <select
               className="text-sm bg-transparent border-none focus:outline-none"
@@ -210,7 +210,7 @@ export default function BalanceSheetReport() {
           {/* Chart View */}
           {viewMode === "chart" && monthlyData && (
             <div className="qb-card mb-6">
-              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">
+              <h3 className="text-sm font-semibold text-gray-700 dark:text-muted-foreground mb-4">
                 Monthly Balance Sheet Trend — {chartYear}
               </h3>
               <div className="h-72">
@@ -255,7 +255,7 @@ export default function BalanceSheetReport() {
                 {Object.entries(assetGroups).map(([group, items]) => <div key={group}>{renderSection(group, items)}</div>)}
                 <div className="flex justify-between py-2 text-sm font-bold border-t-2 border-gray-300 mt-2">
                   <span className="text-gray-900">Total Assets</span>
-                  <span className="text-gray-900 dark:text-gray-100 font-mono">{fmt(bs.totalAssets)}</span>
+                  <span className="text-gray-900 dark:text-foreground font-mono">{fmt(bs.totalAssets)}</span>
                 </div>
               </div>
 
@@ -268,13 +268,13 @@ export default function BalanceSheetReport() {
                   bs.liabilities.map((a: any, i: number) => (
                     <div key={i} className="flex justify-between py-1.5 text-sm pl-4">
                       <span className="text-gray-700">{a.name}</span>
-                      <span className="text-gray-800 dark:text-gray-200 font-mono">{fmt(a.amount)}</span>
+                      <span className="text-gray-800 dark:text-foreground font-mono">{fmt(a.amount)}</span>
                     </div>
                   ))
                 )}
                 <div className="flex justify-between py-2 text-sm font-bold border-t-2 border-gray-300 mt-2">
                   <span className="text-gray-900">Total Liabilities</span>
-                  <span className="text-gray-900 dark:text-gray-100 font-mono">{fmt(bs.totalLiabilities)}</span>
+                  <span className="text-gray-900 dark:text-foreground font-mono">{fmt(bs.totalLiabilities)}</span>
                 </div>
               </div>
 
@@ -284,12 +284,12 @@ export default function BalanceSheetReport() {
                 {bs.equity.map((a: any, i: number) => (
                   <div key={i} className="flex justify-between py-1.5 text-sm pl-4">
                     <span className="text-gray-700">{a.name}</span>
-                    <span className="text-gray-800 dark:text-gray-200 font-mono">{fmt(a.amount)}</span>
+                    <span className="text-gray-800 dark:text-foreground font-mono">{fmt(a.amount)}</span>
                   </div>
                 ))}
                 <div className="flex justify-between py-2 text-sm font-bold border-t-2 border-gray-300 mt-2">
                   <span className="text-gray-900">Total Equity</span>
-                  <span className="text-gray-900 dark:text-gray-100 font-mono">{fmt(bs.totalEquity)}</span>
+                  <span className="text-gray-900 dark:text-foreground font-mono">{fmt(bs.totalEquity)}</span>
                 </div>
               </div>
 
@@ -297,7 +297,7 @@ export default function BalanceSheetReport() {
               <div className="border-t-2 border-gray-800 pt-3">
                 <div className="flex justify-between text-lg font-bold">
                   <span className="text-gray-900">Total Liabilities + Equity</span>
-                  <span className="text-gray-900 dark:text-gray-100 font-mono">{fmt(bs.totalLiabilities + bs.totalEquity)}</span>
+                  <span className="text-gray-900 dark:text-foreground font-mono">{fmt(bs.totalLiabilities + bs.totalEquity)}</span>
                 </div>
                 {Math.abs(bs.totalAssets - (bs.totalLiabilities + bs.totalEquity)) > 0.01 && (
                   <p className="text-xs text-red-700 mt-1">

@@ -41,7 +41,7 @@ import { Input } from "@/components/ui/input";
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
     relative overflow-hidden rounded-xl
-    bg-white dark:bg-slate-800 dark:bg-obsidian
+    bg-white dark:bg-card dark:bg-obsidian
     border border-slate-200 dark:border-teal-800
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
@@ -159,7 +159,7 @@ export default function LearnerCourses() {
               <div className="absolute inset-0 rounded-full border-4 border-blue-200 dark:border-blue-800" />
               <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-black dark:text-white dark:text-cyan-300 font-medium">
+            <p className="text-black dark:text-foreground dark:text-cyan-300 font-medium">
               {language === "fr" ? "Chargement..." : "Loading..."}
             </p>
           </div>
@@ -178,10 +178,10 @@ export default function LearnerCourses() {
             <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-6">
               <GraduationCap className="h-8 w-8 text-blue-600" />
             </div>
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
+            <h2 className="text-2xl font-bold text-black dark:text-foreground mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-black dark:text-white dark:text-cyan-300 mb-6">
+            <p className="text-black dark:text-foreground dark:text-cyan-300 mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à vos cours"
                 : "Sign in to access your courses"}
@@ -213,11 +213,11 @@ export default function LearnerCourses() {
           <div className="mb-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold text-black dark:text-white flex items-center gap-3">
+                <h1 className="text-3xl font-bold text-black dark:text-foreground flex items-center gap-3">
                   <BookOpen className="h-8 w-8 text-blue-600" />
                   {l.title}
                 </h1>
-                <p className="text-black dark:text-white dark:text-cyan-300 mt-1">{l.subtitle}</p>
+                <p className="text-black dark:text-foreground dark:text-cyan-300 mt-1">{l.subtitle}</p>
               </div>
               <Link href="/curriculum">
                 <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
@@ -236,8 +236,8 @@ export default function LearnerCourses() {
                   <BookOpen className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-black dark:text-white">{courses.length}</p>
-                  <p className="text-xs text-black dark:text-white dark:text-cyan-300">
+                  <p className="text-2xl font-bold text-black dark:text-foreground">{courses.length}</p>
+                  <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">
                     {language === "fr" ? "Cours inscrits" : "Enrolled Courses"}
                   </p>
                 </div>
@@ -250,10 +250,10 @@ export default function LearnerCourses() {
                   <Target className="h-5 w-5 text-amber-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-black dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-foreground">
                     {courses.filter((c: any) => c.progressPercent > 0 && c.progressPercent < 100).length}
                   </p>
-                  <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.inProgress}</p>
+                  <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.inProgress}</p>
                 </div>
               </div>
             </GlassCard>
@@ -264,10 +264,10 @@ export default function LearnerCourses() {
                   <CheckCircle2 className="h-5 w-5 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-black dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-foreground">
                     {courses.filter((c: any) => c.progressPercent === 100).length}
                   </p>
-                  <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.completed}</p>
+                  <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.completed}</p>
                 </div>
               </div>
             </GlassCard>
@@ -278,10 +278,10 @@ export default function LearnerCourses() {
                   <Trophy className="h-5 w-5 text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-black dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-foreground">
                     {plans.filter((p: any) => p.status === "active").length}
                   </p>
-                  <p className="text-xs text-black dark:text-white dark:text-cyan-300">
+                  <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">
                     {language === "fr" ? "Plans actifs" : "Active Plans"}
                   </p>
                 </div>
@@ -354,8 +354,8 @@ export default function LearnerCourses() {
                 <div className="w-20 h-20 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-6">
                   <BookOpen className="h-10 w-10 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-black dark:text-white mb-2">{l.noCourses}</h3>
-                <p className="text-black dark:text-white dark:text-cyan-300 mb-6">{l.noCoursesDesc}</p>
+                <h3 className="text-xl font-semibold text-black dark:text-foreground mb-2">{l.noCourses}</h3>
+                <p className="text-black dark:text-foreground dark:text-cyan-300 mb-6">{l.noCoursesDesc}</p>
                 <Link href="/curriculum">
                   <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                     {l.exploreCourses}
@@ -368,7 +368,7 @@ export default function LearnerCourses() {
           {/* Coaching Plans Section */}
           <GlassCard className="p-6" hover={false}>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
+              <h2 className="text-xl font-bold text-black dark:text-foreground flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-purple-600" />
                 {l.coachingPlans}
               </h2>
@@ -397,8 +397,8 @@ export default function LearnerCourses() {
                 <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
                   <Trophy className="h-8 w-8 text-purple-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-black dark:text-white mb-2">{l.noPlans}</h3>
-                <p className="text-black dark:text-white dark:text-cyan-300 mb-4">{l.noPlansDesc}</p>
+                <h3 className="text-lg font-semibold text-black dark:text-foreground mb-2">{l.noPlans}</h3>
+                <p className="text-black dark:text-foreground dark:text-cyan-300 mb-4">{l.noPlansDesc}</p>
                 <Link href="/ecosystem">
                   <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
                     {l.viewPlans}
@@ -436,7 +436,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
               {labels.inProgress}
             </Badge>
           ) : (
-            <Badge variant="outline" className="text-black dark:text-white">
+            <Badge variant="outline" className="text-black dark:text-foreground">
               {labels.notStarted}
             </Badge>
           )}
@@ -448,18 +448,18 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
         </div>
 
         {/* Course Info */}
-        <h3 className="font-semibold text-black dark:text-white mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+        <h3 className="font-semibold text-black dark:text-foreground mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
           {course.title}
         </h3>
         
-        <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-4 line-clamp-2">
+        <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mb-4 line-clamp-2">
           {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
         </p>
 
         {/* Progress */}
         <div className="mt-auto">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-black dark:text-white dark:text-cyan-300">
+            <span className="text-black dark:text-foreground dark:text-cyan-300">
               {course.completedLessons || 0}/{course.totalLessons || 0} {labels.lessons}
             </span>
             <span className="font-semibold text-blue-600">{course.progressPercent || 0}%</span>
@@ -493,10 +493,10 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-600 transition-colors">
+              <h3 className="font-semibold text-black dark:text-foreground group-hover:text-blue-600 transition-colors">
                 {course.title}
               </h3>
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300 mt-1 line-clamp-1">
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mt-1 line-clamp-1">
                 {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
               </p>
             </div>
@@ -513,7 +513,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
                 {labels.inProgress}
               </Badge>
             ) : (
-              <Badge variant="outline" className="text-black dark:text-white flex-shrink-0">
+              <Badge variant="outline" className="text-black dark:text-foreground flex-shrink-0">
                 {labels.notStarted}
               </Badge>
             )}
@@ -571,9 +571,9 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
       </div>
 
       {/* Plan Info */}
-      <h3 className="font-semibold text-black dark:text-white mb-1">{plan.planName}</h3>
+      <h3 className="font-semibold text-black dark:text-foreground mb-1">{plan.planName}</h3>
       
-      <div className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-cyan-300 mb-4">
+      <div className="flex items-center gap-2 text-sm text-black dark:text-foreground dark:text-cyan-300 mb-4">
         <span className="font-bold text-purple-600">{plan.remainingSessions}</span>
         <span>{labels.sessionsRemaining}</span>
       </div>

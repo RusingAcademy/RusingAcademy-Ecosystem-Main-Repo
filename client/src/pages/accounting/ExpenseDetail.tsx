@@ -168,7 +168,7 @@ export default function ExpenseDetail() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/expenses")} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg">
+          <button onClick={() => navigate("/expenses")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">
@@ -181,8 +181,8 @@ export default function ExpenseDetail() {
               <button className="qb-btn-outline" onClick={() => setIsEditing(true)}>Edit</button>
               <div className="relative group">
                 <button className="qb-btn-outline p-2"><MoreVertical size={14} /></button>
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
+                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
                     <Trash2 size={14} /> Delete Expense
                   </button>
                 </div>
@@ -223,7 +223,7 @@ export default function ExpenseDetail() {
                 list="supplier-list"
               />
             ) : (
-              <p className="text-gray-800 dark:text-gray-200 font-medium">{exp?.payeeName || "—"}</p>
+              <p className="text-gray-800 dark:text-foreground font-medium">{exp?.payeeName || "—"}</p>
             )}
             <datalist id="supplier-list">
               {(suppliers as any[])?.map((s: any) => (
@@ -300,7 +300,7 @@ export default function ExpenseDetail() {
           <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Category Details</h3>
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-gray-200 dark:border-slate-700 dark:border-slate-700">
+              <tr className="border-b-2 border-gray-200 dark:border-border dark:border-border">
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2 w-8">#</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Category</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Description</th>
@@ -316,7 +316,7 @@ export default function ExpenseDetail() {
                   <td className="py-2">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded px-2 py-1.5 text-sm"
+                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-2 py-1.5 text-sm"
                         value={li.accountId || ""}
                         onChange={(e) => updateLineItem(index, "accountId", Number(e.target.value))}
                       >
@@ -335,7 +335,7 @@ export default function ExpenseDetail() {
                     {isEditing ? (
                       <input
                         type="text"
-                        className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded px-2 py-1.5 text-sm"
+                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-2 py-1.5 text-sm"
                         value={li.description}
                         onChange={(e) => updateLineItem(index, "description", e.target.value)}
                         placeholder="Description"
@@ -349,7 +349,7 @@ export default function ExpenseDetail() {
                       <input
                         type="number"
                         step="0.01"
-                        className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded px-2 py-1.5 text-sm text-right"
+                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-2 py-1.5 text-sm text-right"
                         value={li.amount}
                         onChange={(e) => updateLineItem(index, "amount", e.target.value)}
                       />
@@ -360,7 +360,7 @@ export default function ExpenseDetail() {
                   <td className="py-2 text-right">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded px-1 py-1.5 text-xs"
+                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-1 py-1.5 text-xs"
                         value={li.taxCode || ""}
                         onChange={(e) => updateLineItem(index, "taxCode", e.target.value)}
                       >
@@ -395,14 +395,14 @@ export default function ExpenseDetail() {
         <div className="flex justify-between items-start">
           {/* Receipt upload area */}
           {isEditing && (
-            <div className="border-2 border-dashed border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg p-6 text-center w-48">
+            <div className="border-2 border-dashed border-gray-200 dark:border-border dark:border-border rounded-lg p-6 text-center w-48">
               <Upload size={24} className="mx-auto text-gray-400 mb-2" />
               <p className="text-xs text-gray-500">Drag receipt here</p>
               <p className="text-xs text-gray-400">or click to upload</p>
             </div>
           )}
           <div className="w-64">
-            <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-slate-700 dark:border-slate-700">
+            <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-border dark:border-border">
               <span className="text-gray-800">Total</span>
               <span className="text-gray-900">${total.toFixed(2)}</span>
             </div>
@@ -436,7 +436,7 @@ export default function ExpenseDetail() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowDeleteConfirm(false)}>
-          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-background rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
                 <AlertTriangle size={20} className="text-red-600" />

@@ -68,7 +68,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
         <div className="bg-gradient-to-br from-foundation/20 to-teal-700/20 rounded-2xl p-8 mb-8 text-center border border-foundation/30">
           <p className="text-white/60 mb-2">Score de préparation - Niveau {selectedLevel}</p>
           <div className="text-6xl font-bold text-white mb-4">{Math.round(readinessScore) || '--'}%</div>
-          <div className="w-full bg-white dark:bg-slate-900/10 rounded-full h-3"><div className="bg-gradient-to-r from-foundation to-teal-700 h-3 rounded-full" style={{ width: `${readinessScore || 0}%` }} /></div>
+          <div className="w-full bg-white dark:bg-background/10 rounded-full h-3"><div className="bg-gradient-to-r from-foundation to-teal-700 h-3 rounded-full" style={{ width: `${readinessScore || 0}%` }} /></div>
         </div>
 
         {/* Section Cards */}
@@ -136,7 +136,7 @@ function ExamSimulator({ level, section, onComplete }: { level: string; section:
           {section === 'writing' && (
             <div>
               <h2 className="text-xl font-bold text-white mb-4">Rédigez un courriel professionnel</h2>
-              <textarea className="w-full h-64 bg-white dark:bg-slate-900/5 border border-white/10 rounded-xl p-4 text-white resize-none" placeholder="Commencez à écrire..." onChange={(e) => setResponses([e.target.value])} />
+              <textarea className="w-full h-64 bg-white dark:bg-background/5 border border-white/10 rounded-xl p-4 text-white resize-none" placeholder="Commencez à écrire..." onChange={(e) => setResponses([e.target.value])} />
               <p className="text-white/75 text-sm mt-2">Minimum 150 mots</p>
             </div>
           )}

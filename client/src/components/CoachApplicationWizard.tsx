@@ -1190,7 +1190,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
                     "flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors",
                     data.specializations[item.key as keyof Specializations]
                       ? "border-teal-500 bg-teal-50"
-                      : "border-gray-200 dark:border-slate-700 hover:border-gray-300"
+                      : "border-gray-200 dark:border-border hover:border-gray-300"
                   )}
                   onClick={() => updateSpecializations(
                     item.key as keyof Specializations,
@@ -1523,7 +1523,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
             ) : (
               <div className="space-y-3">
                 <Upload className="h-12 w-12 text-cyan-300 mx-auto" />
-                <p className="text-sm text-black dark:text-white">
+                <p className="text-sm text-black dark:text-foreground">
                   {isEn ? "Click to upload photo" : "Cliquez pour télécharger une photo"}
                 </p>
                 <p className="text-xs text-cyan-300">
@@ -1540,7 +1540,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
             />
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-lg p-4">
+          <div className="bg-white dark:bg-background rounded-lg p-4">
             <h4 className="font-medium mb-3 flex items-center gap-2">
               <Camera className="h-4 w-4" />
               {isEn ? "Photo Guidelines" : "Directives pour la photo"}
@@ -1613,7 +1613,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
           )}
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-lg p-4">
+        <div className="bg-white dark:bg-background rounded-lg p-4">
           <h4 className="font-medium mb-3 flex items-center gap-2">
             <Play className="h-4 w-4" />
             {isEn ? "Video Tips" : "Conseils pour la vidéo"}

@@ -41,7 +41,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
   return (
     <Card className={className}>
       <CardContent className="p-6">
-        <h3 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-black dark:text-foreground mb-4 flex items-center gap-2">
           <Target className="h-5 w-5 text-emerald-500" />
           {l.title}
         </h3>
@@ -49,7 +49,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
         {nextMilestone ? (
           <div className="space-y-3">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-black dark:text-white dark:text-cyan-300 flex items-center gap-1.5">
+              <span className="text-black dark:text-foreground dark:text-cyan-300 flex items-center gap-1.5">
                 {nextMilestone.icon && <span>{nextMilestone.icon}</span>}
                 {language === "fr" ? nextMilestone.titleFr || nextMilestone.title : nextMilestone.title}
               </span>
@@ -59,7 +59,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
             </div>
             <Progress value={progressPercent} className="h-3" />
             <div className="flex items-center justify-between">
-              <p className="text-xs text-black dark:text-white dark:text-cyan-300">
+              <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">
                 {data.xpRemaining?.toLocaleString()} {l.remaining}
               </p>
               <Badge variant="outline" className="text-[10px]">

@@ -294,7 +294,7 @@ export default function CoachDashboard() {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
-            <p className="text-black dark:text-white">
+            <p className="text-black dark:text-foreground">
               {language === "fr" ? "Chargement du profil coach..." : "Loading coach profile..."}
             </p>
           </div>
@@ -339,7 +339,7 @@ export default function CoachDashboard() {
               <h2 className="text-2xl font-bold mb-2">
                 {language === "fr" ? "Profil coach non trouvé" : "Coach Profile Not Found"}
               </h2>
-              <p className="text-black dark:text-white mb-6">
+              <p className="text-black dark:text-foreground mb-6">
                 {language === "fr" 
                   ? "Vous n'avez pas encore de profil coach lié à votre compte."
                   : "You don't have a coach profile linked to your account yet."}
@@ -417,7 +417,7 @@ export default function CoachDashboard() {
                       day: 'numeric' 
                     })}
                   </span>
-                  <Badge className="bg-white dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-900/30">
+                  <Badge className="bg-white dark:bg-background/20 text-white border-0 hover:bg-white dark:bg-background/30">
                     <Star className="h-3 w-3 mr-1" />
                     {coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}
                   </Badge>
@@ -435,7 +435,7 @@ export default function CoachDashboard() {
                 <RoleSwitcherCompact />
                 <Button 
                   size="lg" 
-                  className="bg-white dark:bg-slate-900 text-black dark:text-white hover:bg-slate-100 shadow-lg"
+                  className="bg-white dark:bg-background text-black dark:text-foreground hover:bg-slate-100 shadow-lg"
                   onClick={() => setShowSetupWizard(true)}
                 >
                   <Settings className="h-5 w-5 mr-2" />
@@ -447,7 +447,7 @@ export default function CoachDashboard() {
 
           {/* Profile Summary Card - Clean & Accessible */}
           {coachProfile && (
-            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-slate-800 dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm">
+            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-card dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm">
               <div className="flex flex-col md:flex-row">
                 {/* Profile Photo */}
                 <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">
@@ -482,7 +482,7 @@ export default function CoachDashboard() {
                           ))}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-2 text-sm text-black dark:text-white">
+                    <div className="flex flex-col gap-2 text-sm text-black dark:text-foreground">
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
                         <span>{language === "fr" ? "Temps de réponse" : "Response time"}: {coachProfile.responseTimeHours || 24}h</span>
@@ -494,7 +494,7 @@ export default function CoachDashboard() {
                     </div>
                   </div>
                   {coachProfile.bio && (
-                    <p className="text-sm text-black dark:text-white mt-4 line-clamp-2">
+                    <p className="text-sm text-black dark:text-foreground mt-4 line-clamp-2">
                       {coachProfile.bio}
                     </p>
                   )}
@@ -557,7 +557,7 @@ export default function CoachDashboard() {
               title={language === "fr" ? "Commission plateforme" : "Platform Commission"}
               value="30%"
               icon={Percent}
-              iconColor="text-black dark:text-white"
+              iconColor="text-black dark:text-foreground"
               iconBgColor="bg-muted"
               subtitle={language === "fr" ? "Frais de service" : "Service fee"}
             />
@@ -602,14 +602,14 @@ export default function CoachDashboard() {
                             </Avatar>
                             <div>
                               <p className="font-medium">{session.learnerName || "Unknown Learner"}</p>
-                              <p className="text-sm text-black dark:text-white">
+                              <p className="text-sm text-black dark:text-foreground">
                                 {session.sessionType || "Session"} • {session.duration || 30} min
                               </p>
                               <div className="flex items-center gap-2 mt-1">
                                 <Badge variant="secondary" className="text-xs">
                                   {session.status}
                                 </Badge>
-                                <span className="text-sm text-black dark:text-white">
+                                <span className="text-sm text-black dark:text-foreground">
                                   {new Date(session.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                                 </span>
                               </div>
@@ -642,8 +642,8 @@ export default function CoachDashboard() {
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <Calendar className="h-12 w-12 mx-auto text-black dark:text-white mb-4" />
-                      <p className="text-black dark:text-white">{l.noSessionsToday}</p>
+                      <Calendar className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
+                      <p className="text-black dark:text-foreground">{l.noSessionsToday}</p>
                     </div>
                   )}
                 </CardContent>
@@ -678,7 +678,7 @@ export default function CoachDashboard() {
                             </Avatar>
                             <div>
                               <p className="font-medium">{request.learnerName || "Unknown Learner"}</p>
-                              <p className="text-sm text-black dark:text-white">
+                              <p className="text-sm text-black dark:text-foreground">
                                 {request.sessionType || "Session"} • {new Date(request.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")} {language === "fr" ? "à" : "at"} {new Date(request.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                               </p>
                             </div>
@@ -708,8 +708,8 @@ export default function CoachDashboard() {
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <Clock className="h-12 w-12 mx-auto text-black dark:text-white mb-4" />
-                      <p className="text-black dark:text-white">{l.noPendingRequests}</p>
+                      <Clock className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
+                      <p className="text-black dark:text-foreground">{l.noPendingRequests}</p>
                     </div>
                   )}
                 </CardContent>
@@ -761,7 +761,7 @@ export default function CoachDashboard() {
                   <CardContent>
                     {stripeLoading ? (
                       <div className="flex items-center justify-center py-4">
-                        <Loader2 className="h-6 w-6 animate-spin text-black dark:text-white" />
+                        <Loader2 className="h-6 w-6 animate-spin text-black dark:text-foreground" />
                       </div>
                     ) : stripeStatus?.isOnboarded ? (
                       <div className="space-y-3">
@@ -769,7 +769,7 @@ export default function CoachDashboard() {
                           <CheckCircle className="h-5 w-5" />
                           <span className="font-medium">{l.stripeConnected}</span>
                         </div>
-                        <p className="text-sm text-black dark:text-white">{l.stripeComplete}</p>
+                        <p className="text-sm text-black dark:text-foreground">{l.stripeComplete}</p>
                         <Button
                           variant="outline"
                           className="w-full gap-2"
@@ -790,7 +790,7 @@ export default function CoachDashboard() {
                           <AlertCircle className="h-5 w-5" />
                           <span className="font-medium">Setup Incomplete</span>
                         </div>
-                        <p className="text-sm text-black dark:text-white">{l.stripePending}</p>
+                        <p className="text-sm text-black dark:text-foreground">{l.stripePending}</p>
                         <Button
                           className="w-full gap-2"
                           onClick={handleConnectStripe}
@@ -810,7 +810,7 @@ export default function CoachDashboard() {
                           <AlertCircle className="h-5 w-5" />
                           <span className="font-medium">{l.stripeNotConnected}</span>
                         </div>
-                        <p className="text-sm text-black dark:text-white">{l.stripeOnboarding}</p>
+                        <p className="text-sm text-black dark:text-foreground">{l.stripeOnboarding}</p>
                         <Button
                           className="w-full gap-2"
                           onClick={handleConnectStripe}

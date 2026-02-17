@@ -256,7 +256,7 @@ export default function MeetingOutcomesDashboard() {
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 rounded-lg transition-colors">
+        <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background/10 hover:bg-white dark:bg-background/20 rounded-lg transition-colors">
           <RefreshCw className="w-4 h-4" />
           {t.refresh}
         </button>
@@ -329,7 +329,7 @@ export default function MeetingOutcomesDashboard() {
             className="space-y-6"
           >
             {/* Outcome Distribution */}
-            <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+            <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
               <h3 className="text-lg font-semibold mb-4">Outcome Distribution</h3>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <div className="text-center">
@@ -376,7 +376,7 @@ export default function MeetingOutcomesDashboard() {
             
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-foundation-soft/20 rounded-lg">
                     <Target className="w-5 h-5 text-foundation" />
@@ -384,7 +384,7 @@ export default function MeetingOutcomesDashboard() {
                   <span className="font-medium">{t.avgQualScore}</span>
                 </div>
                 <div className="text-4xl font-bold mb-2">{stats.averageQualificationScore}/10</div>
-                <div className="w-full bg-white dark:bg-slate-900/10 rounded-full h-2">
+                <div className="w-full bg-white dark:bg-background/10 rounded-full h-2">
                   <div
                     className="bg-foundation-soft h-2 rounded-full transition-all"
                     style={{ width: `${stats.averageQualificationScore * 10}%` }}
@@ -392,7 +392,7 @@ export default function MeetingOutcomesDashboard() {
                 </div>
               </div>
               
-              <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-green-500/20 rounded-lg">
                     <TrendingUp className="w-5 h-5 text-green-400" />
@@ -400,7 +400,7 @@ export default function MeetingOutcomesDashboard() {
                   <span className="font-medium">{t.conversionRate}</span>
                 </div>
                 <div className="text-4xl font-bold mb-2">{stats.conversionRate}%</div>
-                <div className="w-full bg-white dark:bg-slate-900/10 rounded-full h-2">
+                <div className="w-full bg-white dark:bg-background/10 rounded-full h-2">
                   <div
                     className="bg-green-500 h-2 rounded-full transition-all"
                     style={{ width: `${Math.min(stats.conversionRate * 5, 100)}%` }}
@@ -408,7 +408,7 @@ export default function MeetingOutcomesDashboard() {
                 </div>
               </div>
               
-              <div className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-teal-500/20 rounded-lg">
                     <DollarSign className="w-5 h-5 text-teal-400" />
@@ -450,7 +450,7 @@ export default function MeetingOutcomesDashboard() {
               return (
                 <div
                   key={meeting.id}
-                  className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/60 hover:bg-white dark:bg-slate-900/10 transition-colors"
+                  className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60 hover:bg-white dark:bg-background/10 transition-colors"
                 >
                   <div className="flex items-start justify-between">
                     <div>
@@ -467,7 +467,7 @@ export default function MeetingOutcomesDashboard() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => {/* Send reminder */}}
-                        className="px-3 py-2 bg-white dark:bg-slate-900/10 text-white/90 rounded-lg hover:bg-white dark:bg-slate-900/20 transition-colors text-sm"
+                        className="px-3 py-2 bg-white dark:bg-background/10 text-white/90 rounded-lg hover:bg-white dark:bg-background/20 transition-colors text-sm"
                       >
                         <Bell className="w-4 h-4" />
                       </button>
@@ -511,7 +511,7 @@ export default function MeetingOutcomesDashboard() {
               return (
                 <div
                   key={task.meetingId}
-                  className="bg-white dark:bg-slate-900/5 backdrop-blur-sm rounded-xl p-6 border border-white/60"
+                  className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-4">
@@ -529,18 +529,18 @@ export default function MeetingOutcomesDashboard() {
                         <div className="flex items-center gap-2 mt-2 text-sm text-cyan-300">
                           <Calendar className="w-4 h-4" />
                           {formattedDate}
-                          <span className="text-black dark:text-white">•</span>
+                          <span className="text-black dark:text-foreground">•</span>
                           {t[task.followUpType as keyof typeof t]}
                         </div>
                         {task.nextSteps && (
-                          <div className="mt-3 p-3 bg-white dark:bg-slate-900/5 rounded-lg text-sm">
+                          <div className="mt-3 p-3 bg-white dark:bg-background/5 rounded-lg text-sm">
                             <span className="text-cyan-300">Next steps: </span>
                             {task.nextSteps}
                           </div>
                         )}
                       </div>
                     </div>
-                    <button className="px-4 py-2 bg-white dark:bg-slate-900/10 text-white/90 rounded-lg hover:bg-white dark:bg-slate-900/20 transition-colors text-sm">
+                    <button className="px-4 py-2 bg-white dark:bg-background/10 text-white/90 rounded-lg hover:bg-white dark:bg-background/20 transition-colors text-sm">
                       {t.viewLead}
                     </button>
                   </div>

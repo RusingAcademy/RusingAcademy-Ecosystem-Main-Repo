@@ -44,8 +44,8 @@ export default function HRSettings() {
         </div>
 
         {/* Portal Preferences */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">tune</span>
             {ui.portalPreferences}
           </h3>
@@ -55,7 +55,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.language}</p>
                 <p className="text-xs text-gray-500">{ui.languageSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
+              <select className="text-sm border border-gray-200 dark:border-border dark:border-border rounded-lg px-3 py-2 bg-white dark:bg-background focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
                 <option value="en">English</option>
                 <option value="fr">Français</option>
               </select>
@@ -65,7 +65,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.timezone}</p>
                 <p className="text-xs text-gray-500">{ui.timezoneSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
+              <select className="text-sm border border-gray-200 dark:border-border dark:border-border rounded-lg px-3 py-2 bg-white dark:bg-background focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
                 <option value="America/Toronto">Eastern Time (ET)</option>
                 <option value="America/Winnipeg">Central Time (CT)</option>
                 <option value="America/Edmonton">Mountain Time (MT)</option>
@@ -77,9 +77,9 @@ export default function HRSettings() {
         </div>
 
         {/* Team Access */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground flex items-center gap-2">
               <span className="material-icons text-blue-600">group</span>
               {ui.teamAccess}
             </h3>
@@ -92,15 +92,15 @@ export default function HRSettings() {
             </button>
           </div>
           <p className="text-sm text-gray-500">{ui.teamAccessSub}</p>
-          <div className="mt-4 p-8 text-center border border-dashed border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg">
+          <div className="mt-4 p-8 text-center border border-dashed border-gray-200 dark:border-border dark:border-border rounded-lg">
             <span className="material-icons text-3xl text-gray-300 mb-2">group_add</span>
             <p className="text-sm text-gray-400">{ui.comingSoon}</p>
           </div>
         </div>
 
         {/* Integrations */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">extension</span>
             {ui.integrations}
           </h3>
@@ -112,7 +112,7 @@ export default function HRSettings() {
             ].map((item, i) => (
               <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-card flex items-center justify-center">
                     <span className="material-icons text-gray-500">{item.icon}</span>
                   </div>
                   <div>
@@ -120,22 +120,22 @@ export default function HRSettings() {
                     <p className="text-xs text-gray-500">{item.sub}</p>
                   </div>
                 </div>
-                <span className="text-xs font-medium text-gray-400 bg-gray-100 dark:bg-slate-800 px-2 py-1 rounded-full">{ui.comingSoon}</span>
+                <span className="text-xs font-medium text-gray-400 bg-gray-100 dark:bg-card px-2 py-1 rounded-full">{ui.comingSoon}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Data Export */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-2 flex items-center gap-2">
             <span className="material-icons text-blue-600">cloud_download</span>
             {ui.dataExport}
           </h3>
           <p className="text-sm text-gray-500 mb-4">{ui.dataExportSub}</p>
           <button
             onClick={() => toast.info(isEn ? "Data export request submitted" : "Demande d'exportation de données soumise")}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-muted-foreground bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg hover:bg-gray-50 dark:bg-background transition-colors"
           >
             <span className="material-icons text-sm">download</span>
             {ui.requestExport}

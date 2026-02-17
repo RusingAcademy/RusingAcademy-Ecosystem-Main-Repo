@@ -372,15 +372,15 @@ function VideoModal({
           <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent p-6 transition-all duration-500 ${showControls ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {/* Progress Bar */}
             <div 
-              className="relative h-2 bg-white dark:bg-slate-900/20 rounded-full cursor-pointer mb-4 group"
+              className="relative h-2 bg-white dark:bg-background/20 rounded-full cursor-pointer mb-4 group"
               onClick={handleProgressClick}
             >
-              <div className="absolute inset-0 bg-white dark:bg-slate-900/10 rounded-full" />
+              <div className="absolute inset-0 bg-white dark:bg-background/10 rounded-full" />
               <div 
                 className={`h-full bg-gradient-to-r ${accentColor} rounded-full relative transition-all duration-100`}
                 style={{ width: `${progress}%` }}
               >
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white dark:bg-slate-900 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white dark:bg-background rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
 
@@ -391,7 +391,7 @@ function VideoModal({
                 <button
                   onClick={togglePlay}
                   aria-label={isPlaying ? 'Pause video' : 'Play video'}
-                  className="w-12 h-12 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white dark:bg-slate-900/20 transition-all hover:scale-110 border border-white/60"
+                  className="w-12 h-12 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white dark:bg-background/20 transition-all hover:scale-110 border border-white/60"
                 >
                   {isPlaying ? <Pause className="w-5 h-5" aria-hidden="true" /> : <Play className="w-5 h-5 ml-0.5" aria-hidden="true" />}
                 </button>
@@ -400,7 +400,7 @@ function VideoModal({
                 <button
                   onClick={toggleMute}
                   aria-label={isMuted ? 'Unmute video' : 'Mute video'}
-                  className="w-10 h-10 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white dark:bg-slate-900/20 transition-all hover:scale-110 border border-white/60"
+                  className="w-10 h-10 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white dark:bg-background/20 transition-all hover:scale-110 border border-white/60"
                 >
                   {isMuted ? <VolumeX className="w-5 h-5" aria-hidden="true" /> : <Volume2 className="w-5 h-5" aria-hidden="true" />}
                 </button>
@@ -427,7 +427,7 @@ function VideoModal({
                 <button
                   onClick={handleFullscreen}
                   aria-label="Toggle fullscreen"
-                  className="w-10 h-10 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white dark:bg-slate-900/20 transition-all hover:scale-110 border border-white/60"
+                  className="w-10 h-10 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white dark:bg-background/20 transition-all hover:scale-110 border border-white/60"
                 >
                   <Maximize className="w-5 h-5" aria-hidden="true" />
                 </button>
@@ -508,7 +508,7 @@ function CoachCard({
           animation: isHovering ? 'spin 4s linear infinite' : 'none',
         }}
       />
-      <div className="absolute inset-[2px] rounded-[calc(2rem-2px)] bg-white dark:bg-slate-900 z-0" />
+      <div className="absolute inset-[2px] rounded-[calc(2rem-2px)] bg-white dark:bg-background z-0" />
       
       {/* Premium Hover Glow Effect */}
       <div 
@@ -576,9 +576,9 @@ function CoachCard({
             <div className={`absolute inset-0 bg-gradient-to-br ${coach.accentColor} opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none`} />
 
             {/* Rating Badge - Premium Design */}
-            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white dark:bg-slate-900/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-white/70">
+            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white dark:bg-background/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-white/70">
               <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-              <span className="text-sm font-bold text-black dark:text-white">{coach.rating.toFixed(1)}</span>
+              <span className="text-sm font-bold text-black dark:text-foreground">{coach.rating.toFixed(1)}</span>
             </div>
 
             {/* Sessions Badge */}
@@ -605,7 +605,7 @@ function CoachCard({
                 {/* Animated Ping Ring */}
                 <div className={`absolute inset-0 rounded-full bg-white/40 ${isHovering ? 'animate-ping' : ''}`} style={{ animationDuration: '2s' }} />
                 {/* Play Button */}
-                <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transition-all duration-500 border-2 ${isHovering ? 'bg-white dark:bg-slate-800 border-teal-400 shadow-teal-500/30' : 'bg-white/90 border-white/70'}`}>
+                <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transition-all duration-500 border-2 ${isHovering ? 'bg-white dark:bg-card border-teal-400 shadow-teal-500/30' : 'bg-white/90 border-white/70'}`}>
                   <Play className={`w-7 h-7 ml-1 transition-all duration-500 ${isHovering ? 'text-teal-600 scale-110' : 'text-black'}`} fill="currentColor" />
                 </div>
               </div>
@@ -628,14 +628,14 @@ function CoachCard({
       </div>
 
       {/* Content */}
-      <div className="relative z-20 p-6 bg-white dark:bg-slate-900">
-        <h3 className="text-xl font-bold text-black dark:text-white mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+      <div className="relative z-20 p-6 bg-white dark:bg-background">
+        <h3 className="text-xl font-bold text-black dark:text-foreground mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
           {coach.name}
         </h3>
         <p className={`text-sm font-semibold bg-gradient-to-r ${coach.accentColor} bg-clip-text text-transparent mb-3`}>
           {coach.headline}
         </p>
-        <p className="text-black dark:text-white/90 text-sm line-clamp-2 mb-4">
+        <p className="text-black dark:text-foreground/90 text-sm line-clamp-2 mb-4">
           {coach.bio}
         </p>
 
@@ -645,7 +645,7 @@ function CoachCard({
             {coach.languages.map((lang) => (
               <span 
                 key={lang}
-                className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-slate-800 dark:bg-teal-800/50 rounded-full text-xs font-medium text-black dark:text-white/90"
+                className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-card dark:bg-teal-800/50 rounded-full text-xs font-medium text-black dark:text-foreground/90"
               >
                 <Globe className="w-3 h-3" />
                 {lang === 'french' ? 'French' : 'English'}
@@ -658,7 +658,7 @@ function CoachCard({
               Available Today
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-black dark:text-white/90">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-black dark:text-foreground/90">
               <Calendar className="w-3.5 h-3.5" />
               Next: {coach.availability.nextAvailable}
             </span>
@@ -784,7 +784,7 @@ export default function FeaturedCoaches() {
           </h1>
           
           {/* Tagline - Wide layout for 2 lines max */}
-          <p className="text-sm md:text-base text-black dark:text-white font-medium leading-snug max-w-6xl mx-auto">
+          <p className="text-sm md:text-base text-black dark:text-foreground font-medium leading-snug max-w-6xl mx-auto">
             {language === 'fr' 
               ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Uniquement des spécialistes qui comprennent les critères du Conseil du Trésor.'
               : 'Our coaches are exclusively dedicated to SLE exam preparation. Only specialists who understand Treasury Board criteria and guide you to success.'}

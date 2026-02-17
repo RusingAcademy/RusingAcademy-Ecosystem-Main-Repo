@@ -111,7 +111,7 @@ export function RoleSwitcher() {
         <Button
           variant="outline"
           size="sm"
-          className="gap-2 h-9 px-3 rounded-lg border-slate-200 bg-white dark:bg-slate-900/50 backdrop-blur-sm hover:bg-white dark:bg-slate-900/80"
+          className="gap-2 h-9 px-3 rounded-lg border-slate-200 bg-white dark:bg-background/50 backdrop-blur-sm hover:bg-white dark:bg-background/80"
         >
           <div className={`p-1 rounded ${currentDashboard.color}`}>
             {currentDashboard.icon}

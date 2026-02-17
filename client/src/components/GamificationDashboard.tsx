@@ -70,7 +70,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
   
   if (compact) {
     return (
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 p-4">
+      <div className="bg-white dark:bg-background rounded-xl shadow-sm border border-gray-100 dark:border-border p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Level Badge */}
@@ -78,8 +78,8 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
               {stats.levelInfo.current}
             </div>
             <div>
-              <p className="font-semibold text-black dark:text-white">{stats.levelInfo.title}</p>
-              <p className="text-sm text-black dark:text-white">{stats.xp.total.toLocaleString()} XP</p>
+              <p className="font-semibold text-black dark:text-foreground">{stats.levelInfo.title}</p>
+              <p className="text-sm text-black dark:text-foreground">{stats.xp.total.toLocaleString()} XP</p>
             </div>
           </div>
           
@@ -88,7 +88,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             <span className="text-2xl">🔥</span>
             <div>
               <p className="font-bold text-orange-500">{stats.streak.current}</p>
-              <p className="text-xs text-black dark:text-white">day streak</p>
+              <p className="text-xs text-black dark:text-foreground">day streak</p>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         {/* XP Progress Bar */}
         {stats.levelInfo.nextLevel && (
           <div className="mt-3">
-            <div className="flex justify-between text-xs text-black dark:text-white mb-1">
+            <div className="flex justify-between text-xs text-black dark:text-foreground mb-1">
               <span>Level {stats.levelInfo.current}</span>
               <span>{stats.levelInfo.xpToNextLevel} XP to Level {stats.levelInfo.nextLevel.level}</span>
             </div>
@@ -133,7 +133,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
           </div>
           
           {/* Streak */}
-          <div className="text-center bg-white dark:bg-slate-900/10 rounded-xl p-4 backdrop-blur">
+          <div className="text-center bg-white dark:bg-background/10 rounded-xl p-4 backdrop-blur">
             <div className="text-4xl mb-1">🔥</div>
             <p className="text-3xl font-bold">{stats.streak.current}</p>
             <p className="text-sm text-teal-200">Day Streak</p>
@@ -150,9 +150,9 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
               <span>Progress to Level {stats.levelInfo.nextLevel.level}</span>
               <span>{stats.levelInfo.progressPercent}%</span>
             </div>
-            <div className="h-3 bg-white dark:bg-slate-900/20 rounded-full overflow-hidden">
+            <div className="h-3 bg-white dark:bg-background/20 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-white dark:bg-slate-900 rounded-full transition-all duration-500"
+                className="h-full bg-white dark:bg-background rounded-full transition-all duration-500"
                 style={{ width: `${stats.levelInfo.progressPercent}%` }}
               />
             </div>
@@ -164,11 +164,11 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         
         {/* Weekly/Monthly XP */}
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <div className="bg-white dark:bg-slate-900/10 rounded-xl p-3 text-center">
+          <div className="bg-white dark:bg-background/10 rounded-xl p-3 text-center">
             <p className="text-2xl font-bold">{stats.xp.weekly.toLocaleString()}</p>
             <p className="text-sm text-teal-200">This Week</p>
           </div>
-          <div className="bg-white dark:bg-slate-900/10 rounded-xl p-3 text-center">
+          <div className="bg-white dark:bg-background/10 rounded-xl p-3 text-center">
             <p className="text-2xl font-bold">{stats.xp.monthly.toLocaleString()}</p>
             <p className="text-sm text-teal-200">This Month</p>
           </div>
@@ -176,9 +176,9 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
       </div>
       
       {/* Badges Section */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-background rounded-2xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-black dark:text-white">
+          <h3 className="text-lg font-semibold text-black dark:text-foreground">
             Badges ({stats.badges.total})
           </h3>
           {stats.badges.total > 5 && (
@@ -192,7 +192,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         </div>
         
         {stats.badges.total === 0 ? (
-          <div className="text-center py-8 text-black dark:text-white">
+          <div className="text-center py-8 text-black dark:text-foreground">
             <p className="text-4xl mb-2">🏅</p>
             <p>Complete lessons and maintain streaks to earn badges!</p>
           </div>
@@ -213,7 +213,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                 <div className="text-3xl mb-1">
                   {BADGE_ICONS[badge.badgeType] || "🏅"}
                 </div>
-                <p className="text-xs font-medium text-black dark:text-white truncate">{badge.title}</p>
+                <p className="text-xs font-medium text-black dark:text-foreground truncate">{badge.title}</p>
                 
                 {/* Tooltip */}
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-obsidian text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
@@ -227,18 +227,18 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
       </div>
       
       {/* Leaderboard */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-background rounded-2xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-black dark:text-white">Leaderboard</h3>
-          <div className="flex gap-1 bg-gray-100 dark:bg-slate-800 rounded-lg p-1">
+          <h3 className="text-lg font-semibold text-black dark:text-foreground">Leaderboard</h3>
+          <div className="flex gap-1 bg-gray-100 dark:bg-card rounded-lg p-1">
             {(["weekly", "monthly", "allTime"] as const).map((period) => (
               <button
                 key={period}
                 onClick={() => setLeaderboardPeriod(period)}
                 className={`px-3 py-1 text-sm rounded-md transition-colors ${
                   leaderboardPeriod === period
-                    ? "bg-white dark:bg-slate-800 text-teal-600 shadow-sm font-medium"
-                    : "text-black dark:text-white hover:text-black"
+                    ? "bg-white dark:bg-card text-teal-600 shadow-sm font-medium"
+                    : "text-black dark:text-foreground hover:text-black"
                 }`}
               >
                 {period === "weekly" ? "Week" : period === "monthly" ? "Month" : "All Time"}
@@ -264,8 +264,8 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                 {entry.rank}
               </div>
               <div className="flex-1">
-                <p className="font-medium text-black dark:text-white">{entry.name || "Anonymous"}</p>
-                <p className="text-sm text-black dark:text-white">Level {entry.level} • {entry.levelTitle}</p>
+                <p className="font-medium text-black dark:text-foreground">{entry.name || "Anonymous"}</p>
+                <p className="text-sm text-black dark:text-foreground">Level {entry.level} • {entry.levelTitle}</p>
               </div>
               <div className="text-right">
                 <p className="font-bold text-teal-600">{entry.xp?.toLocaleString() || 0} XP</p>

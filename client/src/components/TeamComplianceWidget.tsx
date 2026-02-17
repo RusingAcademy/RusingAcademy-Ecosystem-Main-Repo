@@ -95,8 +95,8 @@ export function TeamComplianceWidget({
               <Building2 className="h-5 w-5 text-violet-600 dark:text-violet-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
+              <CardTitle className="text-lg text-black dark:text-foreground">{l.title}</CardTitle>
+              <p className="text-sm text-black dark:text-foreground dark:text-cyan-300">{l.subtitle}</p>
             </div>
           </div>
           <Badge variant="outline" className="text-violet-600 border-violet-300 dark:text-violet-400 dark:border-violet-700">
@@ -111,35 +111,35 @@ export function TeamComplianceWidget({
             <p className={cn("text-2xl font-bold", getComplianceColor(overallComplianceRate))}>
               {overallComplianceRate}%
             </p>
-            <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.overallCompliance}</p>
+            <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.overallCompliance}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30">
             <div className="flex items-center justify-center gap-1">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
               <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400">{totalCompliant}</p>
             </div>
-            <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.compliant}</p>
+            <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.compliant}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-amber-50 dark:bg-amber-950/30">
             <div className="flex items-center justify-center gap-1">
               <AlertTriangle className="h-4 w-4 text-amber-500" />
               <p className="text-xl font-bold text-amber-600 dark:text-amber-400">{totalInProgress}</p>
             </div>
-            <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.inProgress}</p>
+            <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.inProgress}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-red-50 dark:bg-red-950/30">
             <div className="flex items-center justify-center gap-1">
               <XCircle className="h-4 w-4 text-red-500" />
               <p className="text-xl font-bold text-red-600 dark:text-red-400">{totalNonCompliant}</p>
             </div>
-            <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.nonCompliant}</p>
+            <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.nonCompliant}</p>
           </div>
         </div>
       </CardHeader>
       
       <CardContent className="p-4 space-y-3 max-h-[400px] overflow-y-auto">
         {departments.length === 0 ? (
-          <div className="text-center py-8 text-black dark:text-white dark:text-cyan-300">
+          <div className="text-center py-8 text-black dark:text-foreground dark:text-cyan-300">
             <Building2 className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noDepartments}</p>
           </div>
@@ -158,13 +158,13 @@ export function TeamComplianceWidget({
                   "p-4 rounded-xl border transition-all",
                   meetsTarget
                     ? "bg-emerald-50/50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800/50"
-                    : "bg-white dark:bg-slate-800 border-slate-200 dark:bg-foundation dark:border-teal-800",
+                    : "bg-white dark:bg-card border-slate-200 dark:bg-foundation dark:border-teal-800",
                   onDepartmentClick && "cursor-pointer hover:border-violet-300 dark:hover:border-violet-700"
                 )}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-black dark:text-white">
+                    <h4 className="font-semibold text-black dark:text-foreground">
                       {language === "fr" && dept.nameFr ? dept.nameFr : dept.name}
                     </h4>
                     {meetsTarget && (
@@ -173,7 +173,7 @@ export function TeamComplianceWidget({
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-cyan-300" />
-                    <span className="text-sm text-black dark:text-white dark:text-cyan-300">
+                    <span className="text-sm text-black dark:text-foreground dark:text-cyan-300">
                       {dept.totalEmployees} {l.employees}
                     </span>
                   </div>

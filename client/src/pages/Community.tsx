@@ -221,7 +221,7 @@ export default function Community() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900/5 border border-white/60 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-background/5 border border-white/60 mb-6">
               <Users className="w-4 h-4 text-teal-400" />
               <span className="text-sm font-medium text-white/90">
                 {language === "en" ? "Join 5,200+ members" : "Rejoignez 5 200+ membres"}
@@ -258,7 +258,7 @@ export default function Community() {
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-white dark:bg-slate-900/5 text-white border-white/60 px-8 py-6 text-base font-bold rounded-xl hover:bg-white dark:bg-slate-900/10 transition-all"
+                className="bg-white dark:bg-background/5 text-white border-white/60 px-8 py-6 text-base font-bold rounded-xl hover:bg-white dark:bg-background/10 transition-all"
               >
                 {language === "en" ? "Learn More" : "En savoir plus"}
               </Button>
@@ -275,7 +275,7 @@ export default function Community() {
             {communityStats.map((stat, index) => (
               <div
                 key={index}
-                className="text-center p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/60"
+                className="text-center p-6 rounded-2xl bg-white dark:bg-background/5 border border-white/60"
               >
                 <div className="text-3xl md:text-4xl font-black text-teal-400 mb-2">
                   {stat.value}
@@ -292,7 +292,7 @@ export default function Community() {
       {/* Tab Navigation */}
       <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-8">
         <div className="flex justify-center">
-          <div className="inline-flex bg-white dark:bg-slate-900/5 rounded-2xl p-2 border border-white/60">
+          <div className="inline-flex bg-white dark:bg-background/5 rounded-2xl p-2 border border-white/60">
             {[
               { id: "events", icon: Calendar, label: { en: "Events", fr: "Événements" } },
               { id: "forum", icon: MessageSquare, label: { en: "Forum", fr: "Forum" } },
@@ -348,7 +348,7 @@ export default function Community() {
                     <motion.div
                       key={event.id}
                       whileHover={{ y: -5 }}
-                      className="group relative p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/60 hover:border-teal-400/30 transition-all"
+                      className="group relative p-6 rounded-2xl bg-white dark:bg-background/5 border border-white/60 hover:border-teal-400/30 transition-all"
                     >
                       {/* Event type badge */}
                       <div 
@@ -400,7 +400,7 @@ export default function Community() {
                               ? "bg-green-500 text-white hover:bg-green-500" 
                               : status === "error"
                               ? "bg-red-500 text-white hover:bg-red-500"
-                              : "bg-teal-400 text-black dark:text-white hover:bg-teal-400/90"
+                              : "bg-teal-400 text-black dark:text-foreground hover:bg-teal-400/90"
                           }`}
                         >
                           {status === "loading" ? (
@@ -425,7 +425,7 @@ export default function Community() {
 
                       {/* Progress bar for spots */}
                       {event.maxCapacity && (
-                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white dark:bg-slate-900/5 rounded-b-2xl overflow-hidden">
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white dark:bg-background/5 rounded-b-2xl overflow-hidden">
                           <div 
                             className="h-full bg-teal-400/50 transition-all"
                             style={{ width: `${((event.currentRegistrations || 0) / event.maxCapacity) * 100}%` }}
@@ -466,7 +466,7 @@ export default function Community() {
                   }
                   setShowNewThreadModal(true);
                 }}
-                className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold"
+                className="bg-teal-400 text-black dark:text-foreground hover:bg-teal-400/90 font-bold"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {language === "en" ? "New Discussion" : "Nouvelle discussion"}
@@ -486,7 +486,7 @@ export default function Community() {
                   return (
                     <Link key={category.id} href={`/community/category/${category.id}`}>                    <motion.div
                       whileHover={{ y: -5 }}
-                      className="group p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/60 hover:border-white/60 transition-all cursor-pointer"
+                      className="group p-6 rounded-2xl bg-white dark:bg-background/5 border border-white/60 hover:border-white/60 transition-all cursor-pointer"
                     >
                       <div className="flex items-start gap-4">
                         <div 
@@ -578,7 +578,7 @@ export default function Community() {
                 <motion.div
                   key={resource.id}
                   whileHover={{ y: -5 }}
-                  className="group p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/60 hover:border-white/60 transition-all"
+                  className="group p-6 rounded-2xl bg-white dark:bg-background/5 border border-white/60 hover:border-white/60 transition-all"
                 >
                   <div className="flex items-start gap-4">
                     <div 
@@ -656,7 +656,7 @@ export default function Community() {
                       ? "Our comprehensive toolkit includes study guides, practice tests, vocabulary lists, and exam strategies - everything you need to succeed."
                       : "Notre trousse complète comprend des guides d'étude, des tests pratiques, des listes de vocabulaire et des stratégies d'examen - tout ce dont vous avez besoin pour réussir."}
                   </p>
-                  <Button className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold">
+                  <Button className="bg-teal-400 text-black dark:text-foreground hover:bg-teal-400/90 font-bold">
                     {language === "en" ? "Get Free Access" : "Obtenir un accès gratuit"}
                     <ChevronRight className="ml-1 w-4 h-4" />
                   </Button>
@@ -700,7 +700,7 @@ export default function Community() {
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-white dark:bg-slate-900/5 text-white border-white/60 px-8 py-6 text-base font-bold rounded-xl hover:bg-white dark:bg-slate-900/10 transition-all"
+                className="bg-white dark:bg-background/5 text-white border-white/60 px-8 py-6 text-base font-bold rounded-xl hover:bg-white dark:bg-background/10 transition-all"
               >
                 {language === "en" ? "Contact Us" : "Nous contacter"}
               </Button>
@@ -733,7 +733,7 @@ export default function Community() {
                 <button
                   onClick={() => setShowNewThreadModal(false)}
                   aria-label="Close dialog"
-                  className="p-2 rounded-lg hover:bg-white dark:bg-slate-900/10 transition-colors"
+                  className="p-2 rounded-lg hover:bg-white dark:bg-background/10 transition-colors"
                 >
                   <X className="w-5 h-5" aria-hidden="true" />
                 </button>
@@ -775,7 +775,7 @@ export default function Community() {
                     value={newThreadTitle}
                     onChange={(e) => setNewThreadTitle(e.target.value)}
                     placeholder={language === "en" ? "What's your question or topic?" : "Quelle est votre question ou sujet?"}
-                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900/5 border border-white/60 focus:border-teal-400 focus:outline-none text-white placeholder-white/40"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-background/5 border border-white/60 focus:border-teal-400 focus:outline-none text-white placeholder-white/40"
                   />
                 </div>
 
@@ -789,7 +789,7 @@ export default function Community() {
                     onChange={(e) => setNewThreadContent(e.target.value)}
                     placeholder={language === "en" ? "Share more details..." : "Partagez plus de détails..."}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900/5 border border-white/60 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-background/5 border border-white/60 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none"
                   />
                 </div>
 
@@ -798,14 +798,14 @@ export default function Community() {
                   <Button
                     variant="outline"
                     onClick={() => setShowNewThreadModal(false)}
-                    className="flex-1 bg-white dark:bg-slate-900/5 border-white/60 text-white hover:bg-white dark:bg-slate-900/10"
+                    className="flex-1 bg-white dark:bg-background/5 border-white/60 text-white hover:bg-white dark:bg-background/10"
                   >
                     {language === "en" ? "Cancel" : "Annuler"}
                   </Button>
                   <Button
                     onClick={handleCreateThread}
                     disabled={!selectedCategoryId || !newThreadTitle.trim() || !newThreadContent.trim() || createThreadMutation.isPending}
-                    className="flex-1 bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold disabled:opacity-50"
+                    className="flex-1 bg-teal-400 text-black dark:text-foreground hover:bg-teal-400/90 font-bold disabled:opacity-50"
                   >
                     {createThreadMutation.isPending ? (
                       <Loader2 className="w-4 h-4 animate-spin" />

@@ -11,11 +11,11 @@ import { toast } from "sonner";
 function LoadingSkeleton() {
   return (
     <div className="animate-pulse space-y-6 max-w-7xl mx-auto">
-      <div className="h-12 bg-gray-100 dark:bg-slate-800 rounded-xl w-1/3" />
+      <div className="h-12 bg-gray-100 dark:bg-card rounded-xl w-1/3" />
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[1, 2, 3].map(i => <div key={i} className="h-28 bg-gray-100 dark:bg-slate-800 rounded-xl" />)}
+        {[1, 2, 3].map(i => <div key={i} className="h-28 bg-gray-100 dark:bg-card rounded-xl" />)}
       </div>
-      <div className="h-64 bg-gray-100 dark:bg-slate-800 rounded-xl" />
+      <div className="h-64 bg-gray-100 dark:bg-card rounded-xl" />
     </div>
   );
 }
@@ -51,7 +51,7 @@ export default function HRCompliance() {
       <HRLayout>
         <div className="max-w-2xl mx-auto text-center py-16">
           <span className="material-icons text-6xl text-gray-300 mb-4">lock</span>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-foreground mb-2">
             {lang === "fr" ? "Accès restreint" : "Restricted Access"}
           </h2>
           <p className="text-sm text-gray-500">
@@ -100,7 +100,7 @@ export default function HRCompliance() {
 
         {/* Risk Summary */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-red-100 p-5">
+          <div className="bg-white dark:bg-background rounded-xl border border-red-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center">
                 <span className="material-icons text-red-500 text-xl">error</span>
@@ -112,7 +112,7 @@ export default function HRCompliance() {
             </div>
             <p className="text-[10px] text-gray-400">{lang === "fr" ? "Écart significatif, intervention urgente" : "Significant gap, urgent intervention needed"}</p>
           </div>
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-amber-100 p-5">
+          <div className="bg-white dark:bg-background rounded-xl border border-amber-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
                 <span className="material-icons text-amber-500 text-xl">warning</span>
@@ -124,7 +124,7 @@ export default function HRCompliance() {
             </div>
             <p className="text-[10px] text-gray-400">{lang === "fr" ? "En progression, suivi nécessaire" : "Progressing, monitoring needed"}</p>
           </div>
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-green-100 p-5">
+          <div className="bg-white dark:bg-background rounded-xl border border-green-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
                 <span className="material-icons text-green-500 text-xl">check_circle</span>
@@ -139,7 +139,7 @@ export default function HRCompliance() {
         </div>
 
         {/* Compliance Table */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border overflow-hidden">
           {allRecords.length === 0 ? (
             <div className="text-center py-12">
               <span className="material-icons text-5xl text-gray-300 mb-3">verified</span>
@@ -156,7 +156,7 @@ export default function HRCompliance() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 dark:bg-slate-900 border-b border-gray-100">
+                  <tr className="bg-gray-50 dark:bg-background border-b border-gray-100">
                     <th className="text-left py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Participant" : "Participant"}</th>
                     <th className="text-center py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Profil requis" : "Required Profile"}</th>
                     <th className="text-center py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Profil actuel" : "Current Profile"}</th>
@@ -177,7 +177,7 @@ export default function HRCompliance() {
                       <td className="py-3 px-4 text-center">
                         <span className="text-xs font-bold px-2 py-1 rounded-lg bg-blue-600/10 text-blue-600">{rec.targetResult ?? "—"}</span>
                       </td>
-                      <td className="py-3 px-4 text-center text-sm text-gray-700 dark:text-gray-300 font-mono">{rec.currentResult ?? "—"}</td>
+                      <td className="py-3 px-4 text-center text-sm text-gray-700 dark:text-muted-foreground font-mono">{rec.currentResult ?? "—"}</td>
                       <td className="py-3 px-4 text-xs text-gray-600">{rec.notes ?? "—"}</td>
                       <td className="py-3 px-4 text-center text-sm text-gray-700">
                         {rec.nextAssessmentDate ?? "—"}
@@ -194,7 +194,7 @@ export default function HRCompliance() {
         {/* Recommendations */}
         {allRecords.length > 0 && (highRisk > 0 || medRisk > 0) && (
           <div className="mt-6 bg-gradient-to-br from-blue-600/5 to-blue-600/10 rounded-xl border border-blue-600/15 p-5">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-3 flex items-center gap-2">
               <span className="material-icons text-blue-600">lightbulb</span>
               {lang === "fr" ? "Recommandations" : "Recommendations"}
             </h2>

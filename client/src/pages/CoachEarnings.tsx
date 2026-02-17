@@ -230,7 +230,7 @@ export default function CoachEarnings() {
           {/* Page Header */}
           <div className="mb-8">
             <h1 className="text-2xl font-bold">{l.title}</h1>
-            <p className="text-black dark:text-white">{l.subtitle}</p>
+            <p className="text-black dark:text-foreground">{l.subtitle}</p>
           </div>
 
           {/* Stripe Setup Banner */}
@@ -272,7 +272,7 @@ export default function CoachEarnings() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold">{formatCurrency(earnings.totalNet)}</p>
-                    <p className="text-xs text-black dark:text-white">{l.netEarnings}</p>
+                    <p className="text-xs text-black dark:text-foreground">{l.netEarnings}</p>
                   </div>
                 </div>
               </CardContent>
@@ -286,7 +286,7 @@ export default function CoachEarnings() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold">{formatCurrency(earnings.pendingPayout)}</p>
-                    <p className="text-xs text-black dark:text-white">{l.pendingPayout}</p>
+                    <p className="text-xs text-black dark:text-foreground">{l.pendingPayout}</p>
                   </div>
                 </div>
               </CardContent>
@@ -300,7 +300,7 @@ export default function CoachEarnings() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold">{earnings.sessionCount}</p>
-                    <p className="text-xs text-black dark:text-white">{l.sessionsCompleted}</p>
+                    <p className="text-xs text-black dark:text-foreground">{l.sessionsCompleted}</p>
                   </div>
                 </div>
               </CardContent>
@@ -314,7 +314,7 @@ export default function CoachEarnings() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold">{100 - commissionPercent}%</p>
-                    <p className="text-xs text-black dark:text-white">{l.commissionRate}</p>
+                    <p className="text-xs text-black dark:text-foreground">{l.commissionRate}</p>
                   </div>
                 </div>
               </CardContent>
@@ -336,7 +336,7 @@ export default function CoachEarnings() {
                         <Badge variant={commission?.tier?.tierType === "verified_sle" ? "default" : "secondary"}>
                           {commission?.tier?.tierType === "verified_sle" ? l.verifiedSLE : l.standard}
                         </Badge>
-                        <span className="text-sm text-black dark:text-white">
+                        <span className="text-sm text-black dark:text-foreground">
                           {commission?.tier?.name || "Standard - Tier 1"}
                         </span>
                       </div>
@@ -349,10 +349,10 @@ export default function CoachEarnings() {
                     {commission?.tier?.tierType === "standard" && (
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-black dark:text-white">
+                          <span className="text-black dark:text-foreground">
                             {earnings.sessionCount} {language === "fr" ? "heures complétées" : "hours completed"}
                           </span>
-                          <span className="text-black dark:text-white">
+                          <span className="text-black dark:text-foreground">
                             {commission?.tier?.maxHours || 100} {l.hoursToNextTier}
                           </span>
                         </div>
@@ -366,8 +366,8 @@ export default function CoachEarnings() {
                     {/* Commission breakdown explanation */}
                     <div className="bg-muted/50 rounded-lg p-4 mt-4">
                       <div className="flex items-start gap-2">
-                        <Info className="h-4 w-4 text-black dark:text-white mt-0.5" />
-                        <div className="text-sm text-black dark:text-white">
+                        <Info className="h-4 w-4 text-black dark:text-foreground mt-0.5" />
+                        <div className="text-sm text-black dark:text-foreground">
                           {language === "fr" ? (
                             <>
                               <p className="mb-2">
@@ -431,7 +431,7 @@ export default function CoachEarnings() {
                                   ? l.refund
                                   : l.payout}
                               </p>
-                              <p className="text-xs text-black dark:text-white">
+                              <p className="text-xs text-black dark:text-foreground">
                                 {formatDate(entry.createdAt)}
                                 {entry.isTrialSession && (
                                   <Badge variant="outline" className="ml-2 text-xs">
@@ -449,7 +449,7 @@ export default function CoachEarnings() {
                               {formatCurrency(entry.netAmount)}
                             </p>
                             {entry.transactionType === "session_payment" && (
-                              <p className="text-xs text-black dark:text-white">
+                              <p className="text-xs text-black dark:text-foreground">
                                 {l.gross}: {formatCurrency(entry.grossAmount)} • {l.fee}: {formatCurrency(entry.platformFee)}
                               </p>
                             )}
@@ -459,8 +459,8 @@ export default function CoachEarnings() {
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <Receipt className="h-12 w-12 mx-auto text-black dark:text-white mb-4" />
-                      <p className="text-black dark:text-white">{l.noTransactions}</p>
+                      <Receipt className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
+                      <p className="text-black dark:text-foreground">{l.noTransactions}</p>
                     </div>
                   )}
                 </CardContent>
@@ -501,7 +501,7 @@ export default function CoachEarnings() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-black dark:text-white">{l.referralDescription}</p>
+                  <p className="text-sm text-black dark:text-foreground">{l.referralDescription}</p>
 
                   {referralLink ? (
                     <>
@@ -531,11 +531,11 @@ export default function CoachEarnings() {
                       <div className="grid grid-cols-2 gap-4 pt-2">
                         <div className="text-center p-3 bg-muted/50 rounded-lg">
                           <p className="text-2xl font-bold">{referralLink.clickCount || 0}</p>
-                          <p className="text-xs text-black dark:text-white">{l.referralClicks}</p>
+                          <p className="text-xs text-black dark:text-foreground">{l.referralClicks}</p>
                         </div>
                         <div className="text-center p-3 bg-muted/50 rounded-lg">
                           <p className="text-2xl font-bold">{referralLink.bookingCount || 0}</p>
-                          <p className="text-xs text-black dark:text-white">{l.referralConversions}</p>
+                          <p className="text-xs text-black dark:text-foreground">{l.referralConversions}</p>
                         </div>
                       </div>
 
@@ -567,11 +567,11 @@ export default function CoachEarnings() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-black dark:text-white">{l.totalEarnings}</span>
+                    <span className="text-sm text-black dark:text-foreground">{l.totalEarnings}</span>
                     <span className="font-medium">{formatCurrency(earnings.totalGross)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-black dark:text-white">{l.platformFees}</span>
+                    <span className="text-sm text-black dark:text-foreground">{l.platformFees}</span>
                     <span className="font-medium text-red-600">-{formatCurrency(earnings.totalFees)}</span>
                   </div>
                   <div className="border-t pt-3">
