@@ -117,7 +117,7 @@ function CalendlyEmbed({ url, onClose }: { url: string; onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div className="flex items-center gap-3">
@@ -215,7 +215,7 @@ export default function TutoringSessions() {
                 </div>
                 <button
                   onClick={() => handleBook("https://calendly.com/steven-barholere/30min")}
-                  className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 dark:bg-slate-900 transition-colors flex items-center gap-2 whitespace-nowrap"
+                  className="bg-white dark:bg-slate-900 text-teal-700 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 dark:bg-slate-900 transition-colors flex items-center gap-2 whitespace-nowrap"
                 >
                   <span className="material-icons text-lg">phone_in_talk</span>
                   Book Free Discovery Call

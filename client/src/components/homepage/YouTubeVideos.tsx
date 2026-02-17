@@ -251,7 +251,7 @@ function ShortVideoCard({ video, language, index }: { video: Video; language: st
         
         {/* Play Button */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="h-14 w-14 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/90 flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+          <div className="h-14 w-14 rounded-full bg-white dark:bg-slate-900/90 flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
             <Play className="h-6 w-6 text-red-600 ml-1" fill="currentColor" />
           </div>
         </div>
@@ -312,7 +312,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
             {/* Barholex Logo Badge */}
             <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1.5">
               <div className="h-6 w-6 rounded-full bg-cta flex items-center justify-center">
-                <span className="text-sm font-bold text-black dark:text-white dark:text-white">B</span>
+                <span className="text-sm font-bold text-black dark:text-white">B</span>
               </div>
               <span className="text-white text-xs font-medium">Barholex</span>
             </div>

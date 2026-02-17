@@ -100,7 +100,7 @@ export default function HRCompliance() {
 
         {/* Risk Summary */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-red-100 p-5">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-red-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center">
                 <span className="material-icons text-red-500 text-xl">error</span>
@@ -112,7 +112,7 @@ export default function HRCompliance() {
             </div>
             <p className="text-[10px] text-gray-400">{lang === "fr" ? "Écart significatif, intervention urgente" : "Significant gap, urgent intervention needed"}</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-amber-100 p-5">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-amber-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
                 <span className="material-icons text-amber-500 text-xl">warning</span>
@@ -124,7 +124,7 @@ export default function HRCompliance() {
             </div>
             <p className="text-[10px] text-gray-400">{lang === "fr" ? "En progression, suivi nécessaire" : "Progressing, monitoring needed"}</p>
           </div>
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-green-100 p-5">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-green-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
                 <span className="material-icons text-green-500 text-xl">check_circle</span>
@@ -139,7 +139,7 @@ export default function HRCompliance() {
         </div>
 
         {/* Compliance Table */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
           {allRecords.length === 0 ? (
             <div className="text-center py-12">
               <span className="material-icons text-5xl text-gray-300 mb-3">verified</span>

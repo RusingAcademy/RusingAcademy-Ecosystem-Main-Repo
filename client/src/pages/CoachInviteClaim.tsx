@@ -103,7 +103,7 @@ export default function CoachInviteClaim() {
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
-            <p className="text-sm text-black dark:text-white dark:text-white">
+            <p className="text-sm text-black dark:text-white">
               Expirée le: {new Date(invitation.expiresAt).toLocaleDateString('fr-CA')}
             </p>
             <Button onClick={() => setLocation("/")} variant="outline">
@@ -160,7 +160,7 @@ export default function CoachInviteClaim() {
         <CardContent className="space-y-6">
           {/* Coach Profile Preview */}
           <div className="bg-slate-50 dark:bg-foundation/50 rounded-lg p-4 border">
-            <h3 className="font-semibold text-lg text-black dark:text-white dark:text-white">
+            <h3 className="font-semibold text-lg text-black dark:text-white">
               {invitation.coachName}
             </h3>
             {invitation.coachHeadline && (
@@ -172,7 +172,7 @@ export default function CoachInviteClaim() {
 
           {/* What you'll get */}
           <div className="space-y-3">
-            <h4 className="font-medium text-black dark:text-white dark:text-white">
+            <h4 className="font-medium text-black dark:text-white">
               En réclamant ce profil, vous pourrez :
             </h4>
             <ul className="space-y-2 text-sm text-black dark:text-white dark:text-cyan-300">
@@ -200,7 +200,7 @@ export default function CoachInviteClaim() {
             <div className="flex items-start gap-3">
               <DollarSign className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
               <div>
-                <h4 className="font-semibold text-black dark:text-white dark:text-white text-sm">
+                <h4 className="font-semibold text-black dark:text-white text-sm">
                   Commission de la plateforme : 30%
                 </h4>
                 <p className="text-xs text-black dark:text-white dark:text-cyan-300 mt-1">
@@ -222,7 +222,7 @@ export default function CoachInviteClaim() {
               <div className="flex-1">
                 <label 
                   htmlFor="terms" 
-                  className="text-sm text-black dark:text-white dark:text-white/90 cursor-pointer"
+                  className="text-sm text-black dark:text-white/90 cursor-pointer"
                 >
                   J'ai lu et j'accepte les{" "}
                   <Link href="/terms" className="text-teal-600 hover:underline font-medium">
@@ -235,7 +235,7 @@ export default function CoachInviteClaim() {
           </div>
 
           {/* Expiration notice */}
-          <p className="text-xs text-black dark:text-white dark:text-white text-center">
+          <p className="text-xs text-black dark:text-white text-center">
             Cette invitation expire le {new Date(invitation.expiresAt).toLocaleDateString('fr-CA')}
           </p>
 
@@ -271,7 +271,7 @@ export default function CoachInviteClaim() {
                   Se connecter pour réclamer
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-                <p className="text-xs text-black dark:text-white dark:text-white text-center">
+                <p className="text-xs text-black dark:text-white text-center">
                   Vous devrez vous connecter ou créer un compte pour réclamer ce profil
                 </p>
               </>

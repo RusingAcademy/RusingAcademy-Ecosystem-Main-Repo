@@ -140,7 +140,7 @@ export default function HRTeam() {
         </div>
 
         {/* Table */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
           {filtered.length === 0 ? (
             <div className="text-center py-12">
               <span className="material-icons text-5xl text-gray-300 mb-3">group_off</span>

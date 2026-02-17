@@ -44,7 +44,7 @@ export default function HRSettings() {
         </div>
 
         {/* Portal Preferences */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">tune</span>
             {ui.portalPreferences}
@@ -55,7 +55,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.language}</p>
                 <p className="text-xs text-gray-500">{ui.languageSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900 focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
+              <select className="text-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
                 <option value="en">English</option>
                 <option value="fr">Français</option>
               </select>
@@ -65,7 +65,7 @@ export default function HRSettings() {
                 <p className="text-sm font-medium text-gray-900">{ui.timezone}</p>
                 <p className="text-xs text-gray-500">{ui.timezoneSub}</p>
               </div>
-              <select className="text-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900 focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
+              <select className="text-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600">
                 <option value="America/Toronto">Eastern Time (ET)</option>
                 <option value="America/Winnipeg">Central Time (CT)</option>
                 <option value="America/Edmonton">Mountain Time (MT)</option>
@@ -77,7 +77,7 @@ export default function HRSettings() {
         </div>
 
         {/* Team Access */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
               <span className="material-icons text-blue-600">group</span>
@@ -99,7 +99,7 @@ export default function HRSettings() {
         </div>
 
         {/* Integrations */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">extension</span>
             {ui.integrations}
@@ -127,7 +127,7 @@ export default function HRSettings() {
         </div>
 
         {/* Data Export */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
             <span className="material-icons text-blue-600">cloud_download</span>
             {ui.dataExport}
@@ -135,7 +135,7 @@ export default function HRSettings() {
           <p className="text-sm text-gray-500 mb-4">{ui.dataExportSub}</p>
           <button
             onClick={() => toast.info(isEn ? "Data export request submitted" : "Demande d'exportation de données soumise")}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-colors"
           >
             <span className="material-icons text-sm">download</span>
             {ui.requestExport}

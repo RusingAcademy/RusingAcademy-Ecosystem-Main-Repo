@@ -536,7 +536,7 @@ function PathForm({
       {activeTab === "basic" && (
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.pathTitle} *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.pathTitle} *</label>
             <input
               type="text"
               value={form.title}
@@ -547,7 +547,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.pathTitleFr}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.pathTitleFr}</label>
             <input
               type="text"
               value={form.titleFr}
@@ -556,7 +556,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.slug} *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.slug} *</label>
             <input
               type="text"
               value={form.slug}
@@ -565,7 +565,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.level} *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.level} *</label>
             <select
               value={form.level}
               onChange={(e) => setForm({ ...form, level: e.target.value })}
@@ -577,7 +577,7 @@ function PathForm({
             </select>
           </div>
           <div className="col-span-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.subtitle}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.subtitle}</label>
             <input
               type="text"
               value={form.subtitle}
@@ -586,7 +586,7 @@ function PathForm({
             />
           </div>
           <div className="col-span-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.subtitleFr}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.subtitleFr}</label>
             <input
               type="text"
               value={form.subtitleFr}
@@ -595,7 +595,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.description}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.description}</label>
             <textarea
               rows={4}
               value={form.description}
@@ -604,7 +604,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.descriptionFr}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.descriptionFr}</label>
             <textarea
               rows={4}
               value={form.descriptionFr}
@@ -613,7 +613,7 @@ function PathForm({
             />
           </div>
           <div className="col-span-2 flex items-center gap-4">
-            <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300">
+            <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
               <input
                 type="checkbox"
                 checked={form.isFeatured}
@@ -639,7 +639,7 @@ function PathForm({
       {activeTab === "pricing" && (
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.price} *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.price} *</label>
             <input
               type="text"
               value={form.price}
@@ -648,7 +648,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.originalPrice}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.originalPrice}</label>
             <input
               type="text"
               value={form.originalPrice}
@@ -657,7 +657,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.discount}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.discount}</label>
             <input
               type="number"
               value={form.discountPercentage}
@@ -666,7 +666,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.duration}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.duration}</label>
             <input
               type="number"
               value={form.durationWeeks}
@@ -675,7 +675,7 @@ function PathForm({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">{ui.hours}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{ui.hours}</label>
             <input
               type="number"
               value={form.structuredHours}

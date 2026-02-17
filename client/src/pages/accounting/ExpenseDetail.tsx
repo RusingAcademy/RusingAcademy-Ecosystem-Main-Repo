@@ -181,7 +181,7 @@ export default function ExpenseDetail() {
               <button className="qb-btn-outline" onClick={() => setIsEditing(true)}>Edit</button>
               <div className="relative group">
                 <button className="qb-btn-outline p-2"><MoreVertical size={14} /></button>
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
                   <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
                     <Trash2 size={14} /> Delete Expense
                   </button>
@@ -436,7 +436,7 @@ export default function ExpenseDetail() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowDeleteConfirm(false)}>
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
                 <AlertTriangle size={20} className="text-red-600" />

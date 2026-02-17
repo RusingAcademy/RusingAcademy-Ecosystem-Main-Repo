@@ -97,11 +97,11 @@ export function ProgressCelebration({ celebration, language = "en", onComplete }
         </div>
         
         {/* Title */}
-        <h2 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-2">{title}</h2>
+        <h2 className="text-2xl font-bold text-black dark:text-white mb-2">{title}</h2>
         
         {/* Subtitle */}
         {subtitle && (
-          <p className="text-black dark:text-white dark:text-white mb-4">{subtitle}</p>
+          <p className="text-black dark:text-white mb-4">{subtitle}</p>
         )}
         
         {/* XP Award */}

@@ -49,11 +49,11 @@ export default function AIPredictive() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-black dark:text-white dark:text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-black dark:text-white flex items-center gap-2">
             <Brain className="w-7 h-7 text-violet-600" />
             AI Predictive Analytics
           </h1>
-          <p className="text-black dark:text-white dark:text-white mt-1">
+          <p className="text-black dark:text-white mt-1">
             Student success predictions, churn risk analysis, and actionable recommendations
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function AIPredictive() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-black dark:text-white dark:text-white">At Risk</p>
+                <p className="text-sm text-black dark:text-white">At Risk</p>
                 <p className="text-3xl font-bold text-red-600">{summary?.atRiskCount || 0}</p>
               </div>
               <AlertTriangle className="w-8 h-8 text-red-200" />
@@ -80,7 +80,7 @@ export default function AIPredictive() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-black dark:text-white dark:text-white">Needs Attention</p>
+                <p className="text-sm text-black dark:text-white">Needs Attention</p>
                 <p className="text-3xl font-bold text-amber-600">{summary?.needsAttentionCount || 0}</p>
               </div>
               <Target className="w-8 h-8 text-amber-200" />
@@ -92,7 +92,7 @@ export default function AIPredictive() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-black dark:text-white dark:text-white">High Performers</p>
+                <p className="text-sm text-black dark:text-white">High Performers</p>
                 <p className="text-3xl font-bold text-emerald-600">{summary?.highPerformersCount || 0}</p>
               </div>
               <Star className="w-8 h-8 text-emerald-200" />
@@ -104,7 +104,7 @@ export default function AIPredictive() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-black dark:text-white dark:text-white">Total Tracked</p>
+                <p className="text-sm text-black dark:text-white">Total Tracked</p>
                 <p className="text-3xl font-bold text-violet-600">{(predictions as any[])?.length || 0}</p>
               </div>
               <Users className="w-8 h-8 text-violet-200" />
@@ -145,7 +145,7 @@ export default function AIPredictive() {
               );
             })}
           </div>
-          <div className="flex items-center gap-4 mt-2 text-xs text-black dark:text-white dark:text-white">
+          <div className="flex items-center gap-4 mt-2 text-xs text-black dark:text-white">
             <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500" /> Critical ({riskDistribution.critical})</span>
             <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-orange-500" /> High ({riskDistribution.high})</span>
             <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400" /> Medium ({riskDistribution.medium})</span>
@@ -166,7 +166,7 @@ export default function AIPredictive() {
           <CardContent>
             <div className="space-y-3">
               {summary.recommendations.map((rec: any, idx: number) => (
-                <div key={idx} className="flex items-start gap-3 p-3 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border">
+                <div key={idx} className="flex items-start gap-3 p-3 bg-white dark:bg-slate-900 rounded-lg border">
                   <Badge
                     variant={rec.priority === "high" ? "destructive" : rec.priority === "medium" ? "default" : "secondary"}
                     className="mt-0.5 text-xs"
@@ -174,8 +174,8 @@ export default function AIPredictive() {
                     {rec.priority}
                   </Badge>
                   <div>
-                    <h4 className="font-medium text-sm text-black dark:text-white dark:text-white">{rec.action}</h4>
-                    <p className="text-xs text-black dark:text-white dark:text-white mt-0.5">{rec.description}</p>
+                    <h4 className="font-medium text-sm text-black dark:text-white">{rec.action}</h4>
+                    <p className="text-xs text-black dark:text-white mt-0.5">{rec.description}</p>
                   </div>
                 </div>
               ))}
@@ -219,25 +219,25 @@ export default function AIPredictive() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900 flex items-center justify-center border">
+                        <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center border">
                           <span className="text-sm font-bold">{(s.name || "?")[0]}</span>
                         </div>
                         <div>
                           <h4 className="font-medium text-sm">{s.name}</h4>
-                          <p className="text-xs text-black dark:text-white dark:text-white">{s.email}</p>
+                          <p className="text-xs text-black dark:text-white">{s.email}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-center">
-                          <div className="text-xs text-black dark:text-white dark:text-white">Risk</div>
+                          <div className="text-xs text-black dark:text-white">Risk</div>
                           <div className={`text-lg font-bold ${rc.text}`}>{s.riskScore}%</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-xs text-black dark:text-white dark:text-white">Success</div>
+                          <div className="text-xs text-black dark:text-white">Success</div>
                           <div className="text-lg font-bold text-emerald-600">{s.successProbability}%</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-xs text-black dark:text-white dark:text-white">Progress</div>
+                          <div className="text-xs text-black dark:text-white">Progress</div>
                           <div className="text-lg font-bold text-violet-600">{Math.round(parseFloat(s.avgProgress) || 0)}%</div>
                         </div>
                         <Badge variant="outline" className={`capitalize ${rc.text} ${rc.border}`}>
@@ -248,20 +248,20 @@ export default function AIPredictive() {
                     </div>
                     {selectedStudent?.id === s.id && (
                       <div className="mt-3 pt-3 border-t border-gray-200 dark:border-slate-700 dark:border-slate-700/50 grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <div className="p-2 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg">
-                          <div className="text-xs text-black dark:text-white dark:text-white">Enrolled Courses</div>
+                        <div className="p-2 bg-white dark:bg-slate-900 rounded-lg">
+                          <div className="text-xs text-black dark:text-white">Enrolled Courses</div>
                           <div className="font-bold">{s.enrolledCourses}</div>
                         </div>
-                        <div className="p-2 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg">
-                          <div className="text-xs text-black dark:text-white dark:text-white">Practice Sessions</div>
+                        <div className="p-2 bg-white dark:bg-slate-900 rounded-lg">
+                          <div className="text-xs text-black dark:text-white">Practice Sessions</div>
                           <div className="font-bold">{s.practiceCount}</div>
                         </div>
-                        <div className="p-2 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg">
-                          <div className="text-xs text-black dark:text-white dark:text-white">Days Since Practice</div>
+                        <div className="p-2 bg-white dark:bg-slate-900 rounded-lg">
+                          <div className="text-xs text-black dark:text-white">Days Since Practice</div>
                           <div className="font-bold">{s.daysSinceLastPractice === 999 ? "Never" : `${s.daysSinceLastPractice}d`}</div>
                         </div>
-                        <div className="p-2 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg">
-                          <div className="text-xs text-black dark:text-white dark:text-white">Recommendation</div>
+                        <div className="p-2 bg-white dark:bg-slate-900 rounded-lg">
+                          <div className="text-xs text-black dark:text-white">Recommendation</div>
                           <div className="text-xs font-medium">{s.recommendation}</div>
                         </div>
                       </div>
@@ -286,12 +286,12 @@ export default function AIPredictive() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-2 px-3 font-medium text-black dark:text-white dark:text-white">Cohort</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Students</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Avg Progress</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Completions</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Never Started</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Completion Rate</th>
+                    <th className="text-left py-2 px-3 font-medium text-black dark:text-white">Cohort</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Students</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Avg Progress</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Completions</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Never Started</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Completion Rate</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -330,10 +330,10 @@ export default function AIPredictive() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-2 px-3 font-medium text-black dark:text-white dark:text-white">Date</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Sessions</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Unique Users</th>
-                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white dark:text-white">Avg Duration</th>
+                    <th className="text-left py-2 px-3 font-medium text-black dark:text-white">Date</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Sessions</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Unique Users</th>
+                    <th className="text-right py-2 px-3 font-medium text-black dark:text-white">Avg Duration</th>
                   </tr>
                 </thead>
                 <tbody>

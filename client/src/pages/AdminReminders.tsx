@@ -327,10 +327,10 @@ export default function AdminReminders() {
             <div className="space-y-2">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation border border-slate-200 dark:border-teal-800">
-                  <Bell className="h-7 w-7 text-black dark:text-white dark:text-white/90" />
+                  <Bell className="h-7 w-7 text-black dark:text-white/90" />
                 </div>
                 <div>
-                  <h1 className="text-3xl lg:text-4xl font-bold text-black dark:text-white dark:text-white">
+                  <h1 className="text-3xl lg:text-4xl font-bold text-black dark:text-white">
                     {t.title}
                   </h1>
                   <p className="text-black dark:text-white dark:text-cyan-300 mt-1">{t.subtitle}</p>
@@ -366,14 +366,14 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.totalSent}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white dark:text-white">{totalSent}</p>
+                    <p className="text-3xl font-bold text-black dark:text-white">{totalSent}</p>
                     <div className="flex items-center gap-1 text-xs text-black dark:text-white dark:text-cyan-300">
                       <ArrowUpRight className="h-3 w-3" />
                       <span>+12% vs last week</span>
                     </div>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
-                    <Mail className="h-6 w-6 text-black dark:text-white dark:text-white/90" />
+                    <Mail className="h-6 w-6 text-black dark:text-white/90" />
                   </div>
                 </div>
               </CardContent>
@@ -385,7 +385,7 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.openRate}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white dark:text-white">{openRate}%</p>
+                    <p className="text-3xl font-bold text-black dark:text-white">{openRate}%</p>
                     <div className="w-full bg-slate-200 dark:bg-teal-800 rounded-full h-2 overflow-hidden">
                       <div 
                         className="h-full bg-teal-800 dark:bg-slate-400 rounded-full transition-all duration-500"
@@ -394,7 +394,7 @@ export default function AdminReminders() {
                     </div>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
-                    <Eye className="h-6 w-6 text-black dark:text-white dark:text-white/90" />
+                    <Eye className="h-6 w-6 text-black dark:text-white/90" />
                   </div>
                 </div>
               </CardContent>
@@ -406,7 +406,7 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.clickRate}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white dark:text-white">{clickRate}%</p>
+                    <p className="text-3xl font-bold text-black dark:text-white">{clickRate}%</p>
                     <div className="w-full bg-slate-200 dark:bg-teal-800 rounded-full h-2 overflow-hidden">
                       <div 
                         className="h-full bg-teal-800 dark:bg-slate-400 rounded-full transition-all duration-500"
@@ -415,7 +415,7 @@ export default function AdminReminders() {
                     </div>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
-                    <MousePointer className="h-6 w-6 text-black dark:text-white dark:text-white/90" />
+                    <MousePointer className="h-6 w-6 text-black dark:text-white/90" />
                   </div>
                 </div>
               </CardContent>
@@ -427,14 +427,14 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.failedReminders}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white dark:text-white">{totalFailed}</p>
+                    <p className="text-3xl font-bold text-black dark:text-white">{totalFailed}</p>
                     <div className="flex items-center gap-1 text-xs text-black dark:text-white dark:text-cyan-300">
                       <AlertTriangle className="h-3 w-3" />
                       <span>{isEn ? "Needs attention" : "Nécessite attention"}</span>
                     </div>
                   </div>
                   <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
-                    <XCircle className="h-6 w-6 text-black dark:text-white dark:text-white/90" />
+                    <XCircle className="h-6 w-6 text-black dark:text-white/90" />
                   </div>
                 </div>
               </CardContent>
@@ -445,7 +445,7 @@ export default function AdminReminders() {
           <motion.div variants={itemVariants}>
             <Card className="bg-white dark:bg-slate-800 dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm">
               <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-2 text-lg font-semibold text-black dark:text-white dark:text-white">
+                <CardTitle className="flex items-center gap-2 text-lg font-semibold text-black dark:text-white">
                   <Filter className="h-5 w-5 text-black dark:text-white dark:text-cyan-300" />
                   {isEn ? "Filters" : "Filtres"}
                 </CardTitle>
@@ -453,7 +453,7 @@ export default function AdminReminders() {
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-black dark:text-white dark:text-white/90">{t.filters.type}</label>
+                    <label className="text-sm font-medium text-black dark:text-white/90">{t.filters.type}</label>
                     <Select value={typeFilter} onValueChange={setTypeFilter}>
                       <SelectTrigger className="bg-white dark:bg-slate-800 dark:bg-obsidian border-slate-200 dark:border-teal-800 focus:ring-primary/20">
                         <SelectValue />
@@ -467,7 +467,7 @@ export default function AdminReminders() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-black dark:text-white dark:text-white/90">{t.filters.channel}</label>
+                    <label className="text-sm font-medium text-black dark:text-white/90">{t.filters.channel}</label>
                     <Select value={channelFilter} onValueChange={setChannelFilter}>
                       <SelectTrigger className="bg-white dark:bg-slate-800 dark:bg-obsidian border-slate-200 dark:border-teal-800 focus:ring-primary/20">
                         <SelectValue />
@@ -481,7 +481,7 @@ export default function AdminReminders() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-black dark:text-white dark:text-white/90">{t.filters.status}</label>
+                    <label className="text-sm font-medium text-black dark:text-white/90">{t.filters.status}</label>
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
                       <SelectTrigger className="bg-white dark:bg-slate-800 dark:bg-obsidian border-slate-200 dark:border-teal-800 focus:ring-primary/20">
                         <SelectValue />
@@ -506,14 +506,14 @@ export default function AdminReminders() {
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-slate-50/80 dark:bg-obsidian/80 hover:bg-slate-50/80 dark:hover:bg-obsidian/80">
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.learner}</TableHead>
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.coach}</TableHead>
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.session}</TableHead>
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.type}</TableHead>
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.channel}</TableHead>
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.status}</TableHead>
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.sentAt}</TableHead>
-                      <TableHead className="font-semibold text-black dark:text-white dark:text-white/90">{t.table.engagement}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.learner}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.coach}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.session}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.type}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.channel}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.status}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.sentAt}</TableHead>
+                      <TableHead className="font-semibold text-black dark:text-white/90">{t.table.engagement}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -535,14 +535,14 @@ export default function AdminReminders() {
                           transition={{ delay: index * 0.05 }}
                           className="border-b border-slate-100 dark:border-teal-800 hover:bg-slate-50/50 dark:hover:bg-foundation/50 transition-colors"
                         >
-                          <TableCell className="font-medium text-black dark:text-white dark:text-white">
+                          <TableCell className="font-medium text-black dark:text-white">
                             {reminder.learnerName}
                           </TableCell>
-                          <TableCell className="text-black dark:text-white dark:text-white/90">
+                          <TableCell className="text-black dark:text-white/90">
                             {reminder.coachName}
                           </TableCell>
                           <TableCell>
-                            <div className="flex items-center gap-2 text-black dark:text-white dark:text-white/90">
+                            <div className="flex items-center gap-2 text-black dark:text-white/90">
                               <Calendar className="h-4 w-4 text-cyan-300" />
                               <span className="text-sm">
                                 {format(reminder.sessionDate, "PP", { locale: dateLocale })}
@@ -571,7 +571,7 @@ export default function AdminReminders() {
                             </Badge>
                           </TableCell>
                           <TableCell>{getStatusBadge(reminder.status)}</TableCell>
-                          <TableCell className="text-sm text-black dark:text-white dark:text-white/90">
+                          <TableCell className="text-sm text-black dark:text-white/90">
                             {reminder.sentAt
                               ? format(reminder.sentAt, "Pp", { locale: dateLocale })
                               : "-"}

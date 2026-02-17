@@ -131,7 +131,7 @@ export default function PronunciationLab() {
         </div>
 
         {/* Exercise Card */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-2xl p-8 shadow-sm mb-4">
+        <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-2xl p-8 shadow-sm mb-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[10px] text-gray-400 uppercase tracking-wider">Exercise {currentIndex + 1} of {exercises.length}</span>
             <span className="px-2 py-0.5 bg-teal-700/10 text-teal-700 rounded-full text-[10px] font-semibold">Level {level}</span>

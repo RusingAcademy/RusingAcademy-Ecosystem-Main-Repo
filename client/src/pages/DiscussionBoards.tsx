@@ -76,7 +76,7 @@ export default function DiscussionBoards() {
             <div className="space-y-4">{[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 dark:bg-slate-800 rounded-xl animate-pulse" />)}</div>
           ) : t ? (
             <>
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-6 shadow-sm mb-4">
+              <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-6 shadow-sm mb-4">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-medium text-white" style={{ background: catInfo.color }}>{catInfo.label}</span>
@@ -98,7 +98,7 @@ export default function DiscussionBoards() {
 
               <div className="space-y-3 mb-4">
                 {r.map((reply) => (
-                  <div key={reply.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-100 dark:border-slate-700 rounded-xl p-4 shadow-sm">
+                  <div key={reply.id} className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-700 rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-7 h-7 rounded-full bg-teal-700/10 flex items-center justify-center">
                         <span className="material-icons text-teal-700 text-sm">person</span>
@@ -115,7 +115,7 @@ export default function DiscussionBoards() {
               </div>
 
               {user && (
-                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-4 shadow-sm">
+                <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-4 shadow-sm">
                   <textarea
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
@@ -179,7 +179,7 @@ export default function DiscussionBoards() {
         {/* New Thread Modal */}
         {showNewThread && (
           <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-gray-900">New Discussion</h2>
                 <button onClick={() => setShowNewThread(false)} className="text-gray-400 hover:text-gray-600">
@@ -238,7 +238,7 @@ export default function DiscussionBoards() {
                 <button
                   key={t.id}
                   onClick={() => setSelectedThread(t.id)}
-                  className="w-full text-left bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all"
+                  className="w-full text-left bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all"
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: catInfo.color + "15" }}>

@@ -63,24 +63,24 @@ export default function Achievements() {
               <h1 className="text-2xl font-bold">{isFr ? "Vitrine des réalisations" : "Achievement Showcase"}</h1>
               <p className="text-white/70 text-sm mt-1">{isFr ? "Les étapes de votre parcours d'apprentissage" : "Your learning journey milestones"}</p>
             </div>
-            <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/10 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-900/10 flex items-center justify-center">
               <span className="material-icons text-3xl">emoji_events</span>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-xl p-3 text-center">
+            <div className="bg-white dark:bg-slate-900/10 rounded-xl p-3 text-center">
               <div className="text-2xl font-bold">{totalXp.toLocaleString()}</div>
               <div className="text-[10px] text-white/60 uppercase tracking-wider">XP {isFr ? "total" : "Total"}</div>
             </div>
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-xl p-3 text-center">
+            <div className="bg-white dark:bg-slate-900/10 rounded-xl p-3 text-center">
               <div className="text-2xl font-bold">{currentLevel}</div>
               <div className="text-[10px] text-white/60 uppercase tracking-wider">{isFr ? "Niveau" : "Level"}</div>
             </div>
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-xl p-3 text-center">
+            <div className="bg-white dark:bg-slate-900/10 rounded-xl p-3 text-center">
               <div className="text-2xl font-bold">{earnedBadgeIds.size}</div>
               <div className="text-[10px] text-white/60 uppercase tracking-wider">{isFr ? "Badges" : "Badges"}</div>
             </div>
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 rounded-xl p-3 text-center">
+            <div className="bg-white dark:bg-slate-900/10 rounded-xl p-3 text-center">
               <div className="text-2xl font-bold">{streak.data?.currentStreak || 0}</div>
               <div className="text-[10px] text-white/60 uppercase tracking-wider">{isFr ? "Jours de série" : "Day Streak"}</div>
             </div>
@@ -203,7 +203,7 @@ export default function Achievements() {
         {/* Stats Tab */}
         {tab === "stats" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" role="tabpanel">
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-1">
                 <span className="material-icons text-teal-700 text-base">school</span>
                 {isFr ? "Statistiques d'apprentissage" : "Learning Stats"}
@@ -227,7 +227,7 @@ export default function Achievements() {
                 </div>
               </div>
             </div>
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-1">
                 <span className="material-icons text-amber-500 text-base">local_fire_department</span>
                 {isFr ? "Statistiques de série" : "Streak Stats"}
@@ -255,7 +255,7 @@ export default function Achievements() {
                 </div>
               </div>
             </div>
-            <div className="sm:col-span-2 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+            <div className="sm:col-span-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-1">
                 <span className="material-icons text-violet-500 text-base">trending_up</span>
                 {isFr ? "Aperçu de la progression" : "Progress Overview"}

@@ -38,7 +38,7 @@ export function ApplicationResubmissionPrompt({
           </p>
 
           {/* Rejection Reason Box */}
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-orange-100 rounded-lg p-4 mb-4">
+          <div className="bg-white dark:bg-slate-900 border border-orange-100 rounded-lg p-4 mb-4">
             <div className="flex items-start gap-3">
               <div className="text-amber-600 font-semibold">
                 {isEn ? "Feedback:" : "Commentaires :"}
@@ -82,7 +82,7 @@ export function ApplicationResubmissionPrompt({
                 </button>
                 <button
                   onClick={() => setShowDetails(!showDetails)}
-                  className="px-4 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-amber-300 text-amber-700 rounded-lg hover:bg-amber-50 transition-colors font-medium"
+                  className="px-4 py-2 bg-white dark:bg-slate-900 border border-amber-300 text-amber-700 rounded-lg hover:bg-amber-50 transition-colors font-medium"
                 >
                   {isEn ? "View Details" : "Voir les détails"}
                 </button>
@@ -101,7 +101,7 @@ export function ApplicationResubmissionPrompt({
 
           {/* Tips Section */}
           {showDetails && (
-            <div className="mt-4 p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-orange-100 rounded-lg">
+            <div className="mt-4 p-4 bg-white dark:bg-slate-900 border border-orange-100 rounded-lg">
               <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
                 {isEn ? "Tips for Improvement:" : "Conseils d'amélioration :"}
               </h4>

@@ -133,7 +133,7 @@ function ChallengeItem({
           <div className="flex items-center gap-2 mb-1">
             <h4 className={cn(
               "font-semibold text-sm",
-              challenge.isCompleted ? "text-emerald-700 dark:text-emerald-300" : "text-black dark:text-white dark:text-white"
+              challenge.isCompleted ? "text-emerald-700 dark:text-emerald-300" : "text-black dark:text-white"
             )}>
               {title}
             </h4>
@@ -295,7 +295,7 @@ export function WeeklyChallengesCard({
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-full text-black dark:text-white dark:text-white hover:text-black dark:text-white dark:text-white"
+                className="w-full text-black dark:text-white hover:text-black dark:text-white"
                 onClick={() => setShowAll(!showAll)}
               >
                 {showAll ? l.showLess : `${l.viewAll} (${challenges.length - 3} more)`}

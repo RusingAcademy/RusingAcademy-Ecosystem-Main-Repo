@@ -95,7 +95,7 @@ export function TeamComplianceWidget({
               <Building2 className="h-5 w-5 text-violet-600 dark:text-violet-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-black dark:text-white dark:text-white">{l.title}</CardTitle>
+              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
               <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
             </div>
           </div>
@@ -164,7 +164,7 @@ export function TeamComplianceWidget({
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-black dark:text-white dark:text-white">
+                    <h4 className="font-semibold text-black dark:text-white">
                       {language === "fr" && dept.nameFr ? dept.nameFr : dept.name}
                     </h4>
                     {meetsTarget && (

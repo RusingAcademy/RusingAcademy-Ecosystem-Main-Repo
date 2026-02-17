@@ -548,10 +548,10 @@ function PromoBanner({ lang }: { lang: 'en' | 'fr' }) {
             <Gift className="w-5 h-5 text-yellow-300" />
             <span className="text-white font-bold text-sm uppercase tracking-wider">{t.banner}</span>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-white dark:bg-slate-800 dark:bg-slate-900/30" />
+          <div className="hidden sm:block w-px h-4 bg-white dark:bg-slate-900/30" />
           <span className="text-white/95 text-sm font-medium">{t.tagline}</span>
-          <div className="hidden sm:block w-px h-4 bg-white dark:bg-slate-800 dark:bg-slate-900/30" />
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/20 backdrop-blur-sm text-white text-xs font-bold border border-white/30">
+          <div className="hidden sm:block w-px h-4 bg-white dark:bg-slate-900/30" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-slate-900/20 backdrop-blur-sm text-white text-xs font-bold border border-white/30">
             <Flame className="w-3.5 h-3.5 text-yellow-300" />
             {t.badge}
           </span>
@@ -824,7 +824,7 @@ export default function RusingAcademyLanding() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 border-2 border-teal-200 hover:border-teal-400 hover:bg-teal-50 shadow-lg"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-slate-900 text-teal-700 border-2 border-teal-200 hover:border-teal-400 hover:bg-teal-50 shadow-lg"
                 >
                   <Calendar className="w-5 h-5" />
                   {t.hero.cta2}
@@ -857,7 +857,7 @@ export default function RusingAcademyLanding() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -872,7 +872,7 @@ export default function RusingAcademyLanding() {
                 </div>
               </div>
               
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <div className="flex items-center gap-2">
                   <div className="flex">
                     {[1, 2, 3, 4, 5].map((i) => (
@@ -883,7 +883,7 @@ export default function RusingAcademyLanding() {
                 </div>
               </div>
               
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -999,7 +999,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ PATH SERIES SECTION — Premium Redesign ═══ */}
-      <section className="py-24 bg-white dark:bg-slate-800 dark:bg-slate-900 relative overflow-x-clip">
+      <section className="py-24 bg-white dark:bg-slate-900 relative overflow-x-clip">
         <div 
           className="absolute inset-0 opacity-20"
           style={{ background: subtleGradient }}
@@ -1171,7 +1171,7 @@ export default function RusingAcademyLanding() {
                     </button>
                     <Link
                       href="/curriculum"
-                      className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-all hover:scale-[1.02] bg-white dark:bg-slate-800 dark:bg-slate-900 text-slate-900 border-2 border-gray-200 dark:border-slate-700 dark:border-slate-700 hover:border-teal-400 hover:text-teal-600 text-lg shadow-sm"
+                      className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-all hover:scale-[1.02] bg-white dark:bg-slate-900 text-slate-900 border-2 border-gray-200 dark:border-slate-700 dark:border-slate-700 hover:border-teal-400 hover:text-teal-600 text-lg shadow-sm"
                     >
                       {lang === 'fr' ? 'Voir le curriculum' : 'View Full Curriculum'}
                     </Link>
@@ -1322,7 +1322,7 @@ export default function RusingAcademyLanding() {
                 key={index}
                 variants={animationVariants.fadeInUp}
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
-                className="group relative p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/80 backdrop-blur-xl border border-white/70 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                className="group relative p-6 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-white/70 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               >
                 <div 
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
@@ -1350,7 +1350,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ WHY CHOOSE US SECTION ═══ */}
-      <section className="py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
@@ -1506,7 +1506,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ OFFERINGS SECTION ═══ */}
-      <section className="py-20 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
@@ -1621,7 +1621,7 @@ export default function RusingAcademyLanding() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all"
+                    className="p-6 rounded-2xl bg-white dark:bg-slate-900/90 backdrop-blur-sm border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start gap-4">
                       <Quote className="w-8 h-8 text-teal-500 flex-shrink-0 mt-1" />
@@ -1684,7 +1684,7 @@ export default function RusingAcademyLanding() {
                 href="https://calendly.com/steven-barholere/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-slate-800 dark:bg-slate-900 text-slate-900 shadow-xl hover:shadow-2xl"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-slate-900 text-slate-900 shadow-xl hover:shadow-2xl"
               >
                 {t.cta.button1}
                 <ArrowRight className="w-4 h-4" />
@@ -1693,7 +1693,7 @@ export default function RusingAcademyLanding() {
                 href="https://calendly.com/steven-barholere/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-slate-800 dark:bg-slate-900/10 text-white border-2 border-white/60 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/20 backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-slate-900/10 text-white border-2 border-white/60 hover:bg-white dark:bg-slate-900/20 backdrop-blur-sm"
               >
                 {t.cta.button2}
               </a>

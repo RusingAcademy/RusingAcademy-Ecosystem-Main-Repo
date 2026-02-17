@@ -198,7 +198,7 @@ export default function ExchangeRates() {
           <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Latest Rates by Pair</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {ratePairs.map((r: any) => (
-              <div key={`${r.fromCurrency}-${r.toCurrency}`} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-3 hover:shadow-sm transition-shadow">
+              <div key={`${r.fromCurrency}-${r.toCurrency}`} className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-3 hover:shadow-sm transition-shadow">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-bold text-gray-800">{r.fromCurrency}/{r.toCurrency}</span>
                   <span className="text-xs text-gray-400">{r.source || "Manual"}</span>
@@ -224,7 +224,7 @@ export default function ExchangeRates() {
           <p className="text-sm text-gray-400">Add rates to enable multi-currency transactions</p>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">

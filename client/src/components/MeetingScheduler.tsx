@@ -191,7 +191,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
-          className="bg-white dark:bg-slate-800 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+          className="bg-white dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
           onClick={e => e.stopPropagation()}
         >
           {/* Header */}
@@ -204,7 +204,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
           </div>
           
           {/* Quick Templates */}
-          <div className="p-6 border-b border-slate-200 bg-white dark:bg-slate-800 dark:bg-slate-900">
+          <div className="p-6 border-b border-slate-200 bg-white dark:bg-slate-900">
             <p className="text-sm font-medium text-slate-600 mb-3">{t.quickTemplates}</p>
             <div className="flex flex-wrap gap-2">
               {(Object.keys(meetingTemplates) as Array<keyof typeof meetingTemplates>).map(key => (
@@ -212,7 +212,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
                   key={key}
                   type="button"
                   onClick={() => handleTemplateSelect(key)}
-                  className="px-3 py-1.5 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-slate-200 rounded-full text-sm text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-700 transition-colors"
+                  className="px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 rounded-full text-sm text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-700 transition-colors"
                 >
                   {t.templates[key]}
                 </button>

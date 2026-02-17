@@ -448,7 +448,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-black dark:text-white dark:text-white"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-black dark:text-white"
               >
                 {t.hero.title}
                 <br />
@@ -461,7 +461,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg lg:text-xl leading-relaxed mb-10 text-black dark:text-white dark:text-white"
+                className="text-lg lg:text-xl leading-relaxed mb-10 text-black dark:text-white"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -485,7 +485,7 @@ export default function BarholexMediaLanding() {
                 </a>
                 <a
                   href="#expertise"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-black dark:text-white dark:text-white bg-white dark:bg-slate-800 dark:bg-slate-900 border-2 border-slate-200 hover:border-amber-400 shadow-sm"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-black dark:text-white bg-white dark:bg-slate-900 border-2 border-slate-200 hover:border-amber-400 shadow-sm"
                 >
                   {t.hero.cta2}
                 </a>
@@ -609,7 +609,7 @@ export default function BarholexMediaLanding() {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="relative p-8 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="relative p-8 rounded-2xl bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300"
                 >
                   <div 
                     className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"

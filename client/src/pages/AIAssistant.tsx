@@ -85,7 +85,7 @@ export default function AIAssistant() {
           {/* Right Panel — Recommendations & Quick Actions */}
           <div className="space-y-4">
             {/* Recommendations */}
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-teal-700" >auto_awesome</span>
                 {t("dashboard.recommended")}
@@ -111,7 +111,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Quick Topics */}
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                 <span className="material-icons text-amber-500" >tips_and_updates</span>
                 {lang === "fr" ? "Sujets rapides" : "Quick Topics"}

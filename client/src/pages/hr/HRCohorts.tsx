@@ -29,7 +29,7 @@ function CohortCard({ cohort, lang }: { cohort: any; lang: string }) {
   const endDate = cohort.endDate ? new Date(cohort.endDate).toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { month: "short", day: "numeric" }) : "—";
 
   return (
-    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow cursor-pointer group">
+    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow cursor-pointer group">
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-sm font-semibold text-gray-900">{cohort.name}</p>
@@ -140,7 +140,7 @@ export default function HRCohorts() {
         </div>
 
         {allCohorts.length === 0 && (
-          <div className="text-center py-16 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100">
+          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
             <span className="material-icons text-6xl text-gray-300 mb-4">school</span>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
               {lang === "fr" ? "Aucune cohorte pour le moment" : "No Cohorts Yet"}

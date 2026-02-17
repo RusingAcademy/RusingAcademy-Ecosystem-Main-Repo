@@ -350,7 +350,7 @@ export default function Practice() {
               <div className="w-16 h-16 rounded-2xl bg-rose-100 dark:bg-rose-900/50 flex items-center justify-center mx-auto mb-6">
                 <Gamepad2 className="h-8 w-8 text-rose-600" />
               </div>
-              <h2 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-2">
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
                 {l.loginRequired}
               </h2>
               <p className="text-black dark:text-white dark:text-cyan-300 mb-6">
@@ -416,7 +416,7 @@ export default function Practice() {
                 <Gamepad2 className="h-7 w-7 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-black dark:text-white dark:text-white">{l.title}</h1>
+                <h1 className="text-3xl font-bold text-black dark:text-white">{l.title}</h1>
                 <p className="text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
               </div>
             </div>
@@ -460,7 +460,7 @@ export default function Practice() {
                           }`}
                         >
                           <Icon className={`h-8 w-8 mb-3 ${isSelected ? iconColors[exam.color] : "text-cyan-300"}`} />
-                          <h3 className="font-semibold text-black dark:text-white dark:text-white mb-1">{exam.label}</h3>
+                          <h3 className="font-semibold text-black dark:text-white mb-1">{exam.label}</h3>
                           <p className="text-sm text-black dark:text-white dark:text-cyan-300">{exam.desc}</p>
                           {isSelected && (
                             <CheckCircle className={`h-5 w-5 mt-3 ${iconColors[exam.color]}`} />
@@ -500,7 +500,7 @@ export default function Practice() {
                             <Badge variant={isSelected ? "default" : "secondary"} className={isSelected ? "bg-rose-600" : ""}>
                               {lvl.label}
                             </Badge>
-                            <span className="text-sm text-black dark:text-white dark:text-white">{lvl.passingScore}% {l.passingScore}</span>
+                            <span className="text-sm text-black dark:text-white">{lvl.passingScore}% {l.passingScore}</span>
                           </div>
                           <p className="text-sm text-black dark:text-white dark:text-cyan-300 mb-3">{lvl.desc}</p>
                           {selectedType && (

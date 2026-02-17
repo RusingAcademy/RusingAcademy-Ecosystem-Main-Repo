@@ -303,7 +303,7 @@ export default function CoachEarningsHistory() {
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
-              <Wallet className="w-12 h-12 mx-auto text-black dark:text-white dark:text-white mb-4" />
+              <Wallet className="w-12 h-12 mx-auto text-black dark:text-white mb-4" />
               <CardTitle>{l.signInRequired}</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
@@ -327,7 +327,7 @@ export default function CoachEarningsHistory() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-bold">{l.title}</h1>
-            <p className="text-black dark:text-white dark:text-white">{l.subtitle}</p>
+            <p className="text-black dark:text-white">{l.subtitle}</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" asChild>
@@ -345,11 +345,11 @@ export default function CoachEarningsHistory() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{l.totalEarnings}</CardTitle>
-              <DollarSign className="h-4 w-4 text-black dark:text-white dark:text-white" />
+              <DollarSign className="h-4 w-4 text-black dark:text-white" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{formatCurrency(earnings.totalEarnings)}</div>
-              <p className="text-xs text-black dark:text-white dark:text-white flex items-center">
+              <p className="text-xs text-black dark:text-white flex items-center">
                 <ArrowUpRight className="w-3 h-3 text-green-500 mr-1" />
                 {earnings.sessionsCompleted} sessions completed
               </p>
@@ -359,11 +359,11 @@ export default function CoachEarningsHistory() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{l.thisMonth}</CardTitle>
-              <Calendar className="h-4 w-4 text-black dark:text-white dark:text-white" />
+              <Calendar className="h-4 w-4 text-black dark:text-white" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{formatCurrency(earnings.thisMonthEarnings)}</div>
-              <p className="text-xs text-black dark:text-white dark:text-white">
+              <p className="text-xs text-black dark:text-white">
                 Avg: {formatCurrency(earnings.averageSessionValue)}/session
               </p>
             </CardContent>
@@ -372,11 +372,11 @@ export default function CoachEarningsHistory() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{l.pendingPayouts}</CardTitle>
-              <Clock className="h-4 w-4 text-black dark:text-white dark:text-white" />
+              <Clock className="h-4 w-4 text-black dark:text-white" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-yellow-600">{formatCurrency(earnings.pendingPayouts)}</div>
-              <p className="text-xs text-black dark:text-white dark:text-white">
+              <p className="text-xs text-black dark:text-white">
                 Processing in 2-3 business days
               </p>
             </CardContent>
@@ -385,11 +385,11 @@ export default function CoachEarningsHistory() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{l.completedPayouts}</CardTitle>
-              <CheckCircle className="h-4 w-4 text-black dark:text-white dark:text-white" />
+              <CheckCircle className="h-4 w-4 text-black dark:text-white" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-600">{formatCurrency(earnings.completedPayouts)}</div>
-              <p className="text-xs text-black dark:text-white dark:text-white">
+              <p className="text-xs text-black dark:text-white">
                 Transferred to your bank
               </p>
             </CardContent>
@@ -436,9 +436,9 @@ export default function CoachEarningsHistory() {
           <CardContent>
             {filteredTransactions.length === 0 ? (
               <div className="text-center py-12">
-                <BarChart3 className="w-12 h-12 mx-auto text-black dark:text-white dark:text-white mb-4" />
+                <BarChart3 className="w-12 h-12 mx-auto text-black dark:text-white mb-4" />
                 <h3 className="text-lg font-medium mb-2">{l.noTransactions}</h3>
-                <p className="text-black dark:text-white dark:text-white">{l.noTransactionsDesc}</p>
+                <p className="text-black dark:text-white">{l.noTransactionsDesc}</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
@@ -476,7 +476,7 @@ export default function CoachEarningsHistory() {
                         <TableCell className="text-right font-medium">
                           {formatCurrency(transaction.grossAmount)}
                         </TableCell>
-                        <TableCell className="text-right text-black dark:text-white dark:text-white">
+                        <TableCell className="text-right text-black dark:text-white">
                           -{formatCurrency(transaction.platformFee)}
                           <span className="text-xs ml-1">({transaction.commissionRate}%)</span>
                         </TableCell>

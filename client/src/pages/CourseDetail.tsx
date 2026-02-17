@@ -229,7 +229,7 @@ export default function CourseDetail() {
           <Button
             variant="outline"
             size="sm"
-            className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-amber-600 hover:bg-amber-50 border-white"
+            className="bg-white dark:bg-slate-900 text-amber-600 hover:bg-amber-50 border-white"
             onClick={() => window.close()}
           >
             {isEn ? "Exit Preview" : "Quitter l'aperçu"}
@@ -396,8 +396,8 @@ export default function CourseDetail() {
                         rel="noopener noreferrer"
                         className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition-opacity"
                       >
-                        <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/90 flex items-center justify-center">
-                          <Play className="h-8 w-8 text-black dark:text-white dark:text-white ml-1" />
+                        <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-900/90 flex items-center justify-center">
+                          <Play className="h-8 w-8 text-black dark:text-white ml-1" />
                         </div>
                       </a>
                     )}

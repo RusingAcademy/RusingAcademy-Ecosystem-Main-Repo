@@ -318,7 +318,7 @@ function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility
       } ${isDragging ? "shadow-lg z-50" : ""}`}
       onClick={onSelect}
     >
-      <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing p-0.5 -ml-1 text-cyan-300 hover:text-black dark:text-white dark:text-white">
+      <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing p-0.5 -ml-1 text-cyan-300 hover:text-black dark:text-white">
         <GripVertical className="h-3.5 w-3.5" />
       </div>
       <div className={`w-6 h-6 rounded flex items-center justify-center text-white shrink-0 ${typeInfo?.color || "bg-teal-800"}`}>
@@ -330,10 +330,10 @@ function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility
       </div>
       <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
         <button onClick={(e) => { e.stopPropagation(); onToggleVisibility(); }} className="p-1 rounded hover:bg-gray-200" title={section.isVisible === false || section.isVisible === 0 ? "Show" : "Hide"}>
-          {section.isVisible === false || section.isVisible === 0 ? <EyeOff className="h-3 w-3 text-cyan-300" /> : <Eye className="h-3 w-3 text-black dark:text-white dark:text-white" />}
+          {section.isVisible === false || section.isVisible === 0 ? <EyeOff className="h-3 w-3 text-cyan-300" /> : <Eye className="h-3 w-3 text-black dark:text-white" />}
         </button>
         <button onClick={(e) => { e.stopPropagation(); onDuplicate(); }} className="p-1 rounded hover:bg-gray-200" title="Duplicate">
-          <Copy className="h-3 w-3 text-black dark:text-white dark:text-white" />
+          <Copy className="h-3 w-3 text-black dark:text-white" />
         </button>
         <button onClick={(e) => { e.stopPropagation(); onCopyToPage(); }} className="p-1 rounded hover:bg-indigo-100" title="Copy/Move to Page">
           <ArrowRight className="h-3 w-3 text-indigo-500" />
@@ -383,7 +383,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">{section.title || "Hero Title"}</h1>
               {section.subtitle && <p className="text-base md:text-lg opacity-80 max-w-2xl mx-auto mb-6">{section.subtitle}</p>}
               {content.ctaText && (
-                <button className="px-6 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900/20 backdrop-blur-sm border border-white/60 text-white rounded-lg font-medium hover:bg-white dark:bg-slate-800 dark:bg-slate-900/30 transition-colors">
+                <button className="px-6 py-3 bg-white dark:bg-slate-900/20 backdrop-blur-sm border border-white/60 text-white rounded-lg font-medium hover:bg-white dark:bg-slate-900/30 transition-colors">
                   {content.ctaText}
                 </button>
               )}
@@ -407,7 +407,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
             {section.subtitle && <p className="text-base opacity-70 text-center mb-8 max-w-2xl mx-auto">{section.subtitle}</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((f: any, i: number) => (
-                <div key={i} className="p-5 rounded-xl border bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm">
+                <div key={i} className="p-5 rounded-xl border bg-white dark:bg-slate-900/5 backdrop-blur-sm">
                   {f.icon && <div className="text-2xl mb-2">{f.icon}</div>}
                   <h3 className="text-base font-semibold mb-1">{f.title || `Feature ${i + 1}`}</h3>
                   <p className="text-sm opacity-70">{f.description || ""}</p>
@@ -424,7 +424,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
             {section.title && <h2 className="text-2xl font-bold text-center mb-8">{section.title}</h2>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {testimonials.map((t: any, i: number) => (
-                <div key={i} className="p-5 border rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 backdrop-blur-sm">
+                <div key={i} className="p-5 border rounded-xl bg-white dark:bg-slate-900/5 backdrop-blur-sm">
                   <div className="flex gap-0.5 mb-3">{Array.from({ length: t.rating || 5 }).map((_, j) => <span key={j} className="text-yellow-400">★</span>)}</div>
                   <p className="text-sm italic mb-3">"{t.quote || t.text || "Testimonial"}"</p>
                   <div><p className="font-semibold text-sm">{t.name || "Anonymous"}</p>{t.role && <p className="text-xs opacity-60">{t.role}</p>}</div>
@@ -440,8 +440,8 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
             {section.title && <h2 className="text-2xl md:text-3xl font-bold mb-3">{section.title}</h2>}
             {section.subtitle && <p className="text-base opacity-80 mb-6">{section.subtitle}</p>}
             <div className="flex flex-wrap gap-3 justify-center">
-              {content.ctaText && <button className="px-6 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900 text-indigo-700 rounded-lg font-semibold hover:bg-gray-100 dark:bg-slate-800 transition-colors">{content.ctaText}</button>}
-              {content.secondaryCtaText && <button className="px-6 py-3 border border-white/60 text-white rounded-lg font-medium hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 transition-colors">{content.secondaryCtaText}</button>}
+              {content.ctaText && <button className="px-6 py-3 bg-white dark:bg-slate-900 text-indigo-700 rounded-lg font-semibold hover:bg-gray-100 dark:bg-slate-800 transition-colors">{content.ctaText}</button>}
+              {content.secondaryCtaText && <button className="px-6 py-3 border border-white/60 text-white rounded-lg font-medium hover:bg-white dark:bg-slate-900/10 transition-colors">{content.secondaryCtaText}</button>}
             </div>
           </div>
         );
@@ -540,8 +540,8 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
             {section.title && <h2 className="text-2xl font-bold mb-3">{section.title}</h2>}
             {section.subtitle && <p className="text-sm opacity-80 mb-6">{section.subtitle}</p>}
             <div className="flex gap-2">
-              <div className="flex-1 h-10 bg-white dark:bg-slate-800 dark:bg-slate-900/20 rounded-lg border border-white/60" />
-              <button className="px-5 py-2 bg-white dark:bg-slate-800 dark:bg-slate-900 text-indigo-700 rounded-lg text-sm font-semibold">{content.buttonText || "Subscribe"}</button>
+              <div className="flex-1 h-10 bg-white dark:bg-slate-900/20 rounded-lg border border-white/60" />
+              <button className="px-5 py-2 bg-white dark:bg-slate-900 text-indigo-700 rounded-lg text-sm font-semibold">{content.buttonText || "Subscribe"}</button>
             </div>
           </div>
         );
@@ -583,7 +583,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
       {/* Hidden sections overlay */}
       {(section.isVisible === false || section.isVisible === 0) && (
         <div className="absolute inset-0 z-10 bg-obsidian/50 flex items-center justify-center">
-          <Badge variant="outline" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-black dark:text-white dark:text-white"><EyeOff className="h-3 w-3 mr-1" /> Hidden</Badge>
+          <Badge variant="outline" className="bg-white dark:bg-slate-900 text-black dark:text-white"><EyeOff className="h-3 w-3 mr-1" /> Hidden</Badge>
         </div>
       )}
       {renderContent()}
@@ -665,7 +665,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
   const typeInfo = SECTION_TYPES.find(s => s.type === section.sectionType);
 
   return (
-    <div className="h-full flex flex-col bg-white dark:bg-slate-800 dark:bg-slate-900">
+    <div className="h-full flex flex-col bg-white dark:bg-slate-900">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
         <div className="flex items-center gap-2">
@@ -711,7 +711,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {/* Section-specific content fields */}
               {(section.sectionType === "hero" || section.sectionType === "cta") && (
                 <div className="space-y-3 p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
-                  <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">CTA Button</Label>
+                  <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">CTA Button</Label>
                   <div className="space-y-1.5">
                     <Label className="text-xs">Button Text</Label>
                     <Input value={localData.content.ctaText || ""} onChange={(e) => updateContent("ctaText", e.target.value)} placeholder="Start Now | Commencer" className="text-sm" />
@@ -767,7 +767,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {section.sectionType === "features" && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Feature Items</Label>
+                    <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Feature Items</Label>
                     <Button size="sm" variant="outline" className="h-6 text-xs" onClick={() => addContentItem("items", { title: "New Feature | Nouvelle fonctionnalité", description: "Description here | Description ici", icon: "✨" })}>
                       <Plus className="h-3 w-3 mr-1" /> Add
                     </Button>
@@ -786,7 +786,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {section.sectionType === "testimonials" && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Testimonials</Label>
+                    <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Testimonials</Label>
                     <Button size="sm" variant="outline" className="h-6 text-xs" onClick={() => addContentItem("items", { name: "Name", role: "Role", quote: "Testimonial text", rating: 5 })}>
                       <Plus className="h-3 w-3 mr-1" /> Add
                     </Button>
@@ -805,7 +805,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {section.sectionType === "faq" && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">FAQ Items</Label>
+                    <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">FAQ Items</Label>
                     <Button size="sm" variant="outline" className="h-6 text-xs" onClick={() => addContentItem("items", { question: "New Question | Nouvelle question", answer: "Answer here | Réponse ici" })}>
                       <Plus className="h-3 w-3 mr-1" /> Add
                     </Button>
@@ -823,7 +823,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {section.sectionType === "stats" && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Stats</Label>
+                    <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Stats</Label>
                     <Button size="sm" variant="outline" className="h-6 text-xs" onClick={() => addContentItem("items", { label: "New Stat | Nouvelle stat", value: "0", icon: "📊" })}>
                       <Plus className="h-3 w-3 mr-1" /> Add
                     </Button>
@@ -843,7 +843,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
 
               {section.sectionType === "video" && (
                 <div className="space-y-3 p-3 bg-gray-50 dark:bg-slate-900 rounded-lg">
-                  <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Video Settings</Label>
+                  <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Video Settings</Label>
                   <div className="space-y-1.5">
                     <Label className="text-xs">Video URL</Label>
                     <Input value={localData.content.videoUrl || ""} onChange={(e) => updateContent("videoUrl", e.target.value)} placeholder="https://youtube.com/watch?v=..." className="text-sm" />
@@ -885,7 +885,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {section.sectionType === "pricing_table" && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Pricing Plans</Label>
+                    <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Pricing Plans</Label>
                     <Button size="sm" variant="outline" className="h-6 text-xs" onClick={() => {
                       setLocalData((d: any) => ({
                         ...d,
@@ -936,7 +936,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {section.sectionType === "team" && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Team Members</Label>
+                    <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Team Members</Label>
                     <Button size="sm" variant="outline" className="h-6 text-xs" onClick={() => {
                       setLocalData((d: any) => ({
                         ...d,
@@ -993,7 +993,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
 
             <TabsContent value="style" className="space-y-4 mt-3">
               <div className="space-y-3">
-                <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Colors</Label>
+                <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Colors</Label>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
                     <Label className="text-xs">Background</Label>
@@ -1012,7 +1012,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
                 </div>
               </div>
               <div className="space-y-3">
-                <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Spacing</Label>
+                <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Spacing</Label>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
                     <Label className="text-xs">Padding Top (px)</Label>
@@ -1026,7 +1026,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               </div>
               {/* Animation Preset */}
               <div className="space-y-2">
-                <Label className="text-xs font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">Animation</Label>
+                <Label className="text-xs font-semibold text-black dark:text-white uppercase tracking-wider">Animation</Label>
                 <div className="flex items-center gap-2">
                   <Badge variant="outline" className="text-[10px]">
                     {section.animation && section.animation !== "none" ? section.animation : "None"}
@@ -1266,7 +1266,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
 
    if (pageQuery.isLoading) {
     return createPortal(
-      <div className="fixed inset-0 z-[100] bg-white dark:bg-slate-800 dark:bg-slate-900 flex items-center justify-center">
+      <div className="fixed inset-0 z-[100] bg-white dark:bg-slate-900 flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
       </div>,
       document.body
@@ -1274,7 +1274,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
   }
   if (!page) {
     return createPortal(
-      <div className="fixed inset-0 z-[100] bg-white dark:bg-slate-800 dark:bg-slate-900 flex items-center justify-center">
+      <div className="fixed inset-0 z-[100] bg-white dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <AlertCircle className="h-12 w-12 text-red-400 mx-auto mb-4" />
           <p className="text-lg font-medium">Page not found</p>
@@ -1286,9 +1286,9 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] bg-white dark:bg-slate-800 dark:bg-slate-900 flex flex-col">
+    <div className="fixed inset-0 z-[100] bg-white dark:bg-slate-900 flex flex-col">
       {/* ─── Top Toolbar ─── */}
-      <div className="h-14 border-b bg-white dark:bg-slate-800 dark:bg-slate-900 flex items-center justify-between px-4 shrink-0 shadow-sm">
+      <div className="h-14 border-b bg-white dark:bg-slate-900 flex items-center justify-between px-4 shrink-0 shadow-sm">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={onBack} className="gap-1">
             <ArrowLeft className="h-4 w-4" /> Back
@@ -1432,7 +1432,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
         {/* Center: Live Preview */}
         <div className="flex-1 bg-gray-100 dark:bg-slate-800 overflow-auto flex justify-center" onClick={() => setSelectedSectionId(null)}>
           <div
-            className="bg-white dark:bg-slate-800 dark:bg-slate-900 shadow-lg my-4 overflow-auto transition-all duration-300"
+            className="bg-white dark:bg-slate-900 shadow-lg my-4 overflow-auto transition-all duration-300"
             style={{
               width: previewWidth,
               maxWidth: previewWidth === "100%" ? undefined : previewWidth,
@@ -1463,7 +1463,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
 
         {/* Right Panel: Section Editor */}
         {selectedSection && (
-          <div className="w-80 border-l bg-white dark:bg-slate-800 dark:bg-slate-900 shrink-0 overflow-hidden">
+          <div className="w-80 border-l bg-white dark:bg-slate-900 shrink-0 overflow-hidden">
             <SectionEditorPanel
               section={selectedSection}
               onUpdate={handleUpdateSection}
@@ -1490,7 +1490,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
               <FileText className="h-5 w-5 text-indigo-600" />
               <div className="flex-1">
                 <p className="text-sm font-medium">Current Version</p>
-                <p className="text-xs text-black dark:text-white dark:text-white">Status: {page?.status || "draft"}</p>
+                <p className="text-xs text-black dark:text-white">Status: {page?.status || "draft"}</p>
               </div>
               <Badge>Active</Badge>
             </div>
@@ -1512,7 +1512,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
                       <History className="h-4 w-4 text-cyan-300 shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium">v{v.versionNumber}</p>
-                        {v.note && <p className="text-xs text-black dark:text-white dark:text-white truncate">{v.note}</p>}
+                        {v.note && <p className="text-xs text-black dark:text-white truncate">{v.note}</p>}
                         <p className="text-xs text-cyan-300">{v.createdAt ? new Date(v.createdAt).toLocaleString() : "—"}</p>
                       </div>
                       <Button variant="outline" size="sm" className="h-7 text-xs shrink-0"

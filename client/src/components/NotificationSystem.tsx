@@ -43,7 +43,7 @@ export function NotificationBell() {
         {unreadCount > 0 && <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">{unreadCount}</span>}
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow-xl border border-slate-200 z-50 max-h-96 overflow-y-auto">
+        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-900 rounded-lg shadow-xl border border-slate-200 z-50 max-h-96 overflow-y-auto">
           <div className="p-4 border-b border-slate-200"><h3 className="font-semibold text-slate-900">Notifications</h3></div>
           {notifications.length === 0 ? <p className="p-4 text-slate-500 text-center">No notifications</p> : notifications.slice(0, 10).map(n => {
             const Icon = iconMap[n.type];

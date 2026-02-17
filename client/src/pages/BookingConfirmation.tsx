@@ -112,7 +112,7 @@ export default function BookingConfirmation() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-black dark:text-white dark:text-white mb-6"
+                className="text-xl text-black dark:text-white mb-6"
               >
                 {l.subtitle}
               </motion.p>
@@ -122,7 +122,7 @@ export default function BookingConfirmation() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-lg text-black dark:text-white dark:text-white mb-8"
+                className="text-lg text-black dark:text-white mb-8"
               >
                 {l.confirmationMessage}
               </motion.p>
@@ -161,7 +161,7 @@ export default function BookingConfirmation() {
                               <Icon className="w-6 h-6 text-primary" />
                             </div>
                             <h3 className="font-semibold text-lg">{step.title}</h3>
-                            <p className="text-sm text-black dark:text-white dark:text-white">{step.desc}</p>
+                            <p className="text-sm text-black dark:text-white">{step.desc}</p>
                           </div>
                         </CardContent>
                       </Card>

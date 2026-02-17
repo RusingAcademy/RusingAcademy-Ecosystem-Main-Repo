@@ -267,18 +267,18 @@ export default function Programs() {
             </Badge>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="text-black dark:text-white dark:text-white">Discover Your Path to</span>
+              <span className="text-black dark:text-white">Discover Your Path to</span>
               <br />
               <span className="bg-gradient-to-r from-cta via-amber-500 to-teal-500 bg-clip-text text-transparent">
                 Bilingual Excellence
               </span>
             </h1>
             
-            <h2 className="text-2xl md:text-3xl font-semibold text-black dark:text-white dark:text-white mb-4">
+            <h2 className="text-2xl md:text-3xl font-semibold text-black dark:text-white mb-4">
               GC Bilingual Mastery Series
             </h2>
             
-            <p className="text-lg md:text-xl text-black dark:text-white dark:text-white mb-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-black dark:text-white mb-8 max-w-3xl mx-auto">
               An Accelerated Language Training for Canadian Public Service Excellence.
               <br />
               <span className="font-semibold text-orange-600">"Learn Fast, Consolidate Deeply"</span>
@@ -307,7 +307,7 @@ export default function Programs() {
                   <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cta to-teal-500 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
-                  <div className="text-xs md:text-sm text-black dark:text-white dark:text-white">{stat.label}</div>
+                  <div className="text-xs md:text-sm text-black dark:text-white">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -316,14 +316,14 @@ export default function Programs() {
       </section>
 
       {/* Path Series Methodology */}
-      <section className="py-16 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-16 bg-white dark:bg-slate-900">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-700">Proprietary Framework</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               The Path Series™ Methodology
             </h2>
-            <p className="text-lg text-black dark:text-white dark:text-white">
+            <p className="text-lg text-black dark:text-white">
               At the heart of our program lies the Path Series™, an innovative pedagogical framework that transforms language learning from a passive, classroom-based experience into an active, task-oriented journey.
             </p>
           </div>
@@ -358,7 +358,7 @@ export default function Programs() {
                   <CardTitle className="text-xl">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-black dark:text-white dark:text-white text-center">{item.description}</p>
+                  <p className="text-black dark:text-white text-center">{item.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -378,7 +378,7 @@ export default function Programs() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-black dark:text-white dark:text-white">
+                  <p className="text-black dark:text-white">
                     Self-paced digital modules featuring video instruction, interactive exercises, quizzes, and multimedia resources accessible 24/7
                   </p>
                 </CardContent>
@@ -393,7 +393,7 @@ export default function Programs() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-black dark:text-white dark:text-white">
+                  <p className="text-black dark:text-white">
                     Individual and group sessions with certified language instructors who provide personalized feedback, conduct simulations, and prepare you for exam scenarios
                   </p>
                 </CardContent>
@@ -411,7 +411,7 @@ export default function Programs() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               The Six Paths to Bilingual Mastery
             </h2>
-            <p className="text-lg text-black dark:text-white dark:text-white max-w-3xl mx-auto">
+            <p className="text-lg text-black dark:text-white max-w-3xl mx-auto">
               Each Path is a comprehensive, intensive 4-week learning experience designed to advance your competency by one full CEFR level.
             </p>
           </div>
@@ -443,21 +443,21 @@ export default function Programs() {
                         </Badge>
                       </div>
                       <CardTitle className="text-lg">{path.name}</CardTitle>
-                      <CardDescription className="text-xs text-black dark:text-white dark:text-white">
+                      <CardDescription className="text-xs text-black dark:text-white">
                         {path.level.split(" | ")[0]}
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pb-2">
-                      <p className="text-sm font-medium text-black dark:text-white dark:text-white mb-3">{path.tagline}</p>
+                      <p className="text-sm font-medium text-black dark:text-white mb-3">{path.tagline}</p>
                       
                       {selectedPath === path.id && (
                         <div className="mt-4 space-y-3 animate-in fade-in duration-300">
-                          <p className="text-sm text-black dark:text-white dark:text-white">{path.description}</p>
+                          <p className="text-sm text-black dark:text-white">{path.description}</p>
                           <div className="space-y-1">
-                            <p className="text-xs font-semibold text-black dark:text-white dark:text-white">Key Learning Outcomes:</p>
+                            <p className="text-xs font-semibold text-black dark:text-white">Key Learning Outcomes:</p>
                             <ul className="space-y-1">
                               {path.outcomes.slice(0, 3).map((outcome, i) => (
-                                <li key={i} className="flex items-start gap-2 text-xs text-black dark:text-white dark:text-white">
+                                <li key={i} className="flex items-start gap-2 text-xs text-black dark:text-white">
                                   <CheckCircle2 className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
                                   {outcome}
                                 </li>
@@ -468,11 +468,11 @@ export default function Programs() {
                       )}
 
                       <div className="grid grid-cols-2 gap-2 mt-4 text-xs">
-                        <div className="flex items-center gap-1 text-black dark:text-white dark:text-white">
+                        <div className="flex items-center gap-1 text-black dark:text-white">
                           <Clock className="w-3 h-3" />
                           {path.duration}
                         </div>
-                        <div className="flex items-center gap-1 text-black dark:text-white dark:text-white">
+                        <div className="flex items-center gap-1 text-black dark:text-white">
                           <BookOpen className="w-3 h-3" />
                           {path.structuredHours}
                         </div>
@@ -480,8 +480,8 @@ export default function Programs() {
                     </CardContent>
                     <CardFooter className="flex items-center justify-between pt-2 border-t">
                       <div>
-                        <span className="text-2xl font-bold text-black dark:text-white dark:text-white">${path.price}</span>
-                        <span className="text-sm text-black dark:text-white dark:text-white ml-1">CAD</span>
+                        <span className="text-2xl font-bold text-black dark:text-white">${path.price}</span>
+                        <span className="text-sm text-black dark:text-white ml-1">CAD</span>
                       </div>
                       <Button size="sm" className={`bg-gradient-to-r ${path.color} text-white border-0`}>
                         Enroll
@@ -497,7 +497,7 @@ export default function Programs() {
               <div className="text-center py-12">
                 <Badge className="mb-4 bg-blue-100 text-blue-700">Coming Soon</Badge>
                 <h3 className="text-2xl font-bold mb-4">English as Second Language Paths</h3>
-                <p className="text-black dark:text-white dark:text-white mb-6">
+                <p className="text-black dark:text-white mb-6">
                   Our ESL program mirrors the FSL Path Series™ methodology, designed specifically for Francophone public servants.
                 </p>
                 <Button variant="outline">
@@ -511,14 +511,14 @@ export default function Programs() {
       </section>
 
       {/* Bundle Packages */}
-      <section className="py-16 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-16 bg-white dark:bg-slate-900">
         <div className="container">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta">
               Save Up to $500
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Bundle Packages</h2>
-            <p className="text-lg text-black dark:text-white dark:text-white">
+            <p className="text-lg text-black dark:text-white">
               Commit to your complete bilingual journey and save significantly
             </p>
           </div>
@@ -553,18 +553,18 @@ export default function Programs() {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-4">
-                    <span className="text-sm text-black dark:text-white dark:text-white line-through">${bundle.originalPrice.toLocaleString()} CAD</span>
+                    <span className="text-sm text-black dark:text-white line-through">${bundle.originalPrice.toLocaleString()} CAD</span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold text-black dark:text-white dark:text-white">${bundle.price.toLocaleString()}</span>
-                      <span className="text-black dark:text-white dark:text-white">CAD</span>
+                      <span className="text-3xl font-bold text-black dark:text-white">${bundle.price.toLocaleString()}</span>
+                      <span className="text-black dark:text-white">CAD</span>
                     </div>
                     <Badge className="mt-2 bg-green-100 text-green-700">Save ${bundle.savings}</Badge>
                   </div>
 
                   <div className="space-y-2 mb-4">
-                    <p className="text-sm font-semibold text-black dark:text-white dark:text-white">Includes:</p>
+                    <p className="text-sm font-semibold text-black dark:text-white">Includes:</p>
                     {bundle.paths.map((path, i) => (
-                      <div key={i} className="flex items-center gap-2 text-sm text-black dark:text-white dark:text-white">
+                      <div key={i} className="flex items-center gap-2 text-sm text-black dark:text-white">
                         <CheckCircle2 className="w-4 h-4 text-green-500" />
                         {path}
                       </div>
@@ -573,7 +573,7 @@ export default function Programs() {
 
                   <div className="space-y-2 pt-4 border-t">
                     {bundle.features.map((feature, i) => (
-                      <div key={i} className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+                      <div key={i} className="flex items-start gap-2 text-sm text-black dark:text-white">
                         <Star className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
                         {feature}
                       </div>
@@ -606,7 +606,7 @@ export default function Programs() {
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-700">Target Audience</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Who Is This Program For?</h2>
-            <p className="text-lg text-black dark:text-white dark:text-white max-w-3xl mx-auto">
+            <p className="text-lg text-black dark:text-white max-w-3xl mx-auto">
               The GC Bilingual Mastery Series is specifically designed for dedicated professionals in Canada's federal public service who are committed to achieving bilingual excellence
             </p>
           </div>
@@ -621,10 +621,10 @@ export default function Programs() {
                   <CardTitle className="text-lg">{profile.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-black dark:text-white dark:text-white mb-4">{profile.description}</p>
+                  <p className="text-sm text-black dark:text-white mb-4">{profile.description}</p>
                   <div className="space-y-1">
                     {profile.examples.map((example, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-black dark:text-white dark:text-white">
+                      <div key={i} className="flex items-center gap-2 text-xs text-black dark:text-white">
                         <div className="w-1.5 h-1.5 rounded-full bg-orange-400" />
                         {example}
                       </div>
@@ -649,13 +649,13 @@ export default function Programs() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/request-proposal">
-                <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-orange-600 hover:bg-gray-100">
+                <Button size="lg" className="bg-white dark:bg-slate-900 text-orange-600 hover:bg-gray-100">
                   Book Free Assessment
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/rusingacademy">
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10">
+                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white dark:bg-slate-900/10">
                   Learn More
                 </Button>
               </Link>

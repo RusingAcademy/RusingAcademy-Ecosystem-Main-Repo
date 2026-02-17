@@ -101,9 +101,9 @@ const FloatingCoachBubble = ({
         </div>
         
         {/* Info tooltip on hover */}
-        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-2 whitespace-nowrap z-10">
-          <div className="font-semibold text-black dark:text-white dark:text-white text-sm">{name}</div>
-          <div className="text-xs text-black dark:text-white dark:text-white">{specialty}</div>
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 rounded-lg shadow-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-2 whitespace-nowrap z-10">
+          <div className="font-semibold text-black dark:text-white text-sm">{name}</div>
+          <div className="text-xs text-black dark:text-white">{specialty}</div>
           <div className="flex items-center gap-1 mt-1">
             <Star className="w-3 h-3 fill-amber-400 text-cta400" />
             <span className="text-xs font-medium">{rating}</span>
@@ -929,26 +929,26 @@ export default function LingueefyLanding() {
             
             {/* Title with typewriter effect */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-black dark:text-white dark:text-white">{c.hero.title}</span>
+              <span className="text-black dark:text-white">{c.hero.title}</span>
               <br />
               <span className="bg-gradient-to-r from-teal-600 via-violet-500 to-amber-500 bg-clip-text text-transparent">
                 {displayedText}
                 {isTyping && <span className="animate-pulse">|</span>}
               </span>
               <br />
-              <span className="text-black dark:text-white dark:text-white text-3xl md:text-4xl lg:text-5xl font-medium">
+              <span className="text-black dark:text-white text-3xl md:text-4xl lg:text-5xl font-medium">
                 {c.hero.subtitle}
               </span>
             </h1>
             
             {/* Description - more breathing room */}
-            <p className="text-lg md:text-xl text-black dark:text-white dark:text-white mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-black dark:text-white mb-10 max-w-2xl mx-auto leading-relaxed">
               {c.hero.description}
             </p>
             
             {/* Search bar - inspired by Preply */}
             <div className="max-w-3xl mx-auto mb-10">
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
                 <div className="flex-1 relative">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-cyan-300" />
                   <Input 
@@ -960,7 +960,7 @@ export default function LingueefyLanding() {
                 </div>
                 <div className="flex gap-2">
                   <select 
-                    className="h-14 px-4 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900 border-0 text-black dark:text-white dark:text-white font-medium cursor-pointer hover:bg-slate-100 transition-colors"
+                    className="h-14 px-4 rounded-xl bg-white dark:bg-slate-900 border-0 text-black dark:text-white font-medium cursor-pointer hover:bg-slate-100 transition-colors"
                     value={selectedLevel}
                     onChange={(e) => setSelectedLevel(e.target.value)}
                   >
@@ -993,11 +993,11 @@ export default function LingueefyLanding() {
               {c.hero.stats.map((stat, index) => (
                 <div 
                   key={index} 
-                  className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
                   <stat.icon className="w-6 h-6 text-teal-600 mx-auto mb-2" />
-                  <div className="text-2xl md:text-3xl font-bold text-black dark:text-white dark:text-white">{stat.value}</div>
-                  <div className="text-sm text-black dark:text-white dark:text-white">{stat.label}</div>
+                  <div className="text-2xl md:text-3xl font-bold text-black dark:text-white">{stat.value}</div>
+                  <div className="text-sm text-black dark:text-white">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -1006,7 +1006,7 @@ export default function LingueefyLanding() {
         
         {/* Trusted by logos - subtle */}
         <div className="container mx-auto px-4 mt-16">
-          <p className="text-center text-sm text-black dark:text-white dark:text-white mb-6 uppercase tracking-wider">
+          <p className="text-center text-sm text-black dark:text-white mb-6 uppercase tracking-wider">
             {c.hero.trustedBy}
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
@@ -1018,7 +1018,7 @@ export default function LingueefyLanding() {
       </section>
 
       {/* How It Works - Editorial rhythm with asymmetry */}
-      <section className="py-20 md:py-28 bg-white dark:bg-slate-800 dark:bg-slate-900 relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-white dark:bg-slate-900 relative overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 right-10 w-40 h-40 border border-teal-200 rounded-full" />
@@ -1027,9 +1027,9 @@ export default function LingueefyLanding() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-slate-100 text-black dark:text-white dark:text-white">How It Works</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">{c.howItWorks.title}</h2>
-            <p className="text-xl text-black dark:text-white dark:text-white max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
+            <Badge className="mb-4 bg-slate-100 text-black dark:text-white">How It Works</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.howItWorks.title}</h2>
+            <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
           </div>
           
           {/* Steps with connecting line and asymmetric cards */}
@@ -1048,14 +1048,14 @@ export default function LingueefyLanding() {
                     {index + 1}
                   </div>
                   
-                  <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white dark:bg-slate-800 dark:bg-slate-900">
+                  <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white dark:bg-slate-900">
                     <CardContent className="p-6 text-center">
                       <div className="w-16 h-16 bg-gradient-to-br from-teal-100 to-teal-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <step.icon className="w-8 h-8 text-teal-600" />
                       </div>
-                      <h3 className="text-xl font-semibold text-black dark:text-white dark:text-white mb-2">{step.title}</h3>
-                      <p className="text-black dark:text-white dark:text-white mb-3">{step.description}</p>
-                      <Badge variant="secondary" className="bg-slate-100 text-black dark:text-white dark:text-white">
+                      <h3 className="text-xl font-semibold text-black dark:text-white mb-2">{step.title}</h3>
+                      <p className="text-black dark:text-white mb-3">{step.description}</p>
+                      <Badge variant="secondary" className="bg-slate-100 text-black dark:text-white">
                         <Clock className="w-3 h-3 mr-1" />
                         {step.duration}
                       </Badge>
@@ -1079,23 +1079,23 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-teal-100 text-teal-700">{c.learningPath.badge}</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">{c.learningPath.title}</h2>
-            <p className="text-xl text-black dark:text-white dark:text-white max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.learningPath.title}</h2>
+            <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
           </div>
           
           {/* Two Path Options */}
           <div className="max-w-5xl mx-auto mb-16">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Marketplace Option */}
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-3xl p-8 border-2 border-slate-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group">
+              <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border-2 border-slate-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group">
                 <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Users className="w-8 h-8 text-teal-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-3">{c.learningPath.marketplace.title}</h3>
-                <p className="text-black dark:text-white dark:text-white mb-6">{c.learningPath.marketplace.description}</p>
+                <h3 className="text-2xl font-bold text-black dark:text-white mb-3">{c.learningPath.marketplace.title}</h3>
+                <p className="text-black dark:text-white mb-6">{c.learningPath.marketplace.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.marketplace.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-black dark:text-white dark:text-white">
+                    <li key={i} className="flex items-center gap-3 text-black dark:text-white">
                       <CheckCircle className="w-5 h-5 text-teal-500 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -1117,11 +1117,11 @@ export default function LingueefyLanding() {
                 <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <GraduationCap className="w-8 h-8 text-cta600" />
                 </div>
-                <h3 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-3">{c.learningPath.plans.title}</h3>
-                <p className="text-black dark:text-white dark:text-white mb-6">{c.learningPath.plans.description}</p>
+                <h3 className="text-2xl font-bold text-black dark:text-white mb-3">{c.learningPath.plans.title}</h3>
+                <p className="text-black dark:text-white mb-6">{c.learningPath.plans.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.plans.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-black dark:text-white dark:text-white">
+                    <li key={i} className="flex items-center gap-3 text-black dark:text-white">
                       <CheckCircle className="w-5 h-5 text-cta500 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -1141,8 +1141,8 @@ export default function LingueefyLanding() {
           {/* Pricing Plans */}
           <div id="pricing-plans" className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-black dark:text-white dark:text-white mb-3">{c.learningPath.pricing.title}</h3>
-              <p className="text-lg text-black dark:text-white dark:text-white">{c.learningPath.pricing.subtitle}</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-3">{c.learningPath.pricing.title}</h3>
+              <p className="text-lg text-black dark:text-white">{c.learningPath.pricing.subtitle}</p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
@@ -1161,17 +1161,17 @@ export default function LingueefyLanding() {
                     </div>
                   )}
                   <CardContent className="p-8">
-                    <h4 className="text-xl font-bold text-black dark:text-white dark:text-white mb-2">{plan.name}</h4>
-                    <p className="text-black dark:text-white dark:text-white text-sm mb-6">{plan.description}</p>
+                    <h4 className="text-xl font-bold text-black dark:text-white mb-2">{plan.name}</h4>
+                    <p className="text-black dark:text-white text-sm mb-6">{plan.description}</p>
                     
                     <div className="mb-6">
-                      <span className="text-4xl font-bold text-black dark:text-white dark:text-white">{plan.price}</span>
-                      <span className="text-black dark:text-white dark:text-white ml-2">{plan.period}</span>
+                      <span className="text-4xl font-bold text-black dark:text-white">{plan.price}</span>
+                      <span className="text-black dark:text-white ml-2">{plan.period}</span>
                     </div>
                     
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3 text-black dark:text-white dark:text-white text-sm">
+                        <li key={i} className="flex items-start gap-3 text-black dark:text-white text-sm">
                           <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-cyan-300'}`} />
                           <span>{feature}</span>
                         </li>
@@ -1202,8 +1202,8 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-emerald-100 text-emerald-700">{c.transformation.badge}</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">{c.transformation.title}</h2>
-            <p className="text-xl text-black dark:text-white dark:text-white max-w-2xl mx-auto">{c.transformation.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.transformation.title}</h2>
+            <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.transformation.subtitle}</p>
           </div>
           
           <div className="max-w-5xl mx-auto">
@@ -1218,7 +1218,7 @@ export default function LingueefyLanding() {
                   {c.transformation.before.items.map((item, index) => (
                     <div key={index} className="flex items-center gap-4 group">
                       <span className="text-2xl group-hover:scale-110 transition-transform">{item.emoji}</span>
-                      <span className="text-lg text-black dark:text-white dark:text-white font-medium">{item.text}</span>
+                      <span className="text-lg text-black dark:text-white font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -1234,7 +1234,7 @@ export default function LingueefyLanding() {
                   {c.transformation.after.items.map((item, index) => (
                     <div key={index} className="flex items-center gap-4 group">
                       <span className="text-2xl group-hover:scale-110 transition-transform">{item.emoji}</span>
-                      <span className="text-lg text-black dark:text-white dark:text-white font-medium">{item.text}</span>
+                      <span className="text-lg text-black dark:text-white font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -1255,9 +1255,9 @@ export default function LingueefyLanding() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-slate-100 text-black dark:text-white dark:text-white">{c.sleLevels.badge}</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">{c.sleLevels.title}</h2>
-            <p className="text-xl text-black dark:text-white dark:text-white max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
+            <Badge className="mb-4 bg-slate-100 text-black dark:text-white">{c.sleLevels.badge}</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.sleLevels.title}</h2>
+            <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
           </div>
           
           <div className="max-w-6xl mx-auto">
@@ -1302,23 +1302,23 @@ export default function LingueefyLanding() {
                         <Badge className={`${colors.badge} text-white border-0 px-4 py-1 text-sm font-bold`}>
                           {level.level}
                         </Badge>
-                        <div className="flex items-center gap-2 text-black dark:text-white dark:text-white text-sm">
+                        <div className="flex items-center gap-2 text-black dark:text-white text-sm">
                           <Clock className="w-4 h-4" />
                           <span>{level.duration}</span>
                         </div>
                       </div>
                       
                       {/* Level Name & Description */}
-                      <h3 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-3">{level.name}</h3>
-                      <p className="text-black dark:text-white dark:text-white mb-6 leading-relaxed">{level.description}</p>
+                      <h3 className="text-2xl font-bold text-black dark:text-white mb-3">{level.name}</h3>
+                      <p className="text-black dark:text-white mb-6 leading-relaxed">{level.description}</p>
                       
                       {/* Skills List */}
                       <div className="space-y-3 mb-8">
-                        <p className="text-sm font-semibold text-black dark:text-white dark:text-white uppercase tracking-wider">You'll master:</p>
+                        <p className="text-sm font-semibold text-black dark:text-white uppercase tracking-wider">You'll master:</p>
                         {level.skills.map((skill, i) => (
                           <div key={i} className="flex items-start gap-3">
                             <CheckCircle className={`w-5 h-5 ${colors.check} flex-shrink-0 mt-0.5`} />
-                            <span className="text-black dark:text-white dark:text-white text-sm">{skill}</span>
+                            <span className="text-black dark:text-white text-sm">{skill}</span>
                           </div>
                         ))}
                       </div>
@@ -1345,8 +1345,8 @@ export default function LingueefyLanding() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <div>
               <Badge className="mb-4 bg-amber-100 text-cta700">Expert Coaches</Badge>
-              <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-2">{c.coaches.title}</h2>
-              <p className="text-xl text-black dark:text-white dark:text-white">{c.coaches.subtitle}</p>
+              <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-2">{c.coaches.title}</h2>
+              <p className="text-xl text-black dark:text-white">{c.coaches.subtitle}</p>
             </div>
             <Link href="/coaches">
               <Button variant="outline" className="mt-4 md:mt-0 border-2 border-slate-300 hover:border-teal-600 hover:text-teal-600">
@@ -1381,11 +1381,11 @@ export default function LingueefyLanding() {
                     
                     {/* Quick actions */}
                     <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="w-10 h-10 bg-white dark:bg-slate-800 dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-800 dark:bg-slate-900 transition-colors">
-                        <Heart className="w-5 h-5 text-black dark:text-white dark:text-white" />
+                      <button className="w-10 h-10 bg-white dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-900 transition-colors">
+                        <Heart className="w-5 h-5 text-black dark:text-white" />
                       </button>
-                      <button className="w-10 h-10 bg-white dark:bg-slate-800 dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-800 dark:bg-slate-900 transition-colors">
-                        <Video className="w-5 h-5 text-black dark:text-white dark:text-white" />
+                      <button className="w-10 h-10 bg-white dark:bg-slate-900/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-slate-900 transition-colors">
+                        <Video className="w-5 h-5 text-black dark:text-white" />
                       </button>
                     </div>
                     
@@ -1401,18 +1401,18 @@ export default function LingueefyLanding() {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
                         <Star className="w-5 h-5 fill-amber-400 text-cta400" />
-                        <span className="font-bold text-black dark:text-white dark:text-white">{coach.rating}</span>
-                        <span className="text-black dark:text-white dark:text-white">({coach.reviews} reviews)</span>
+                        <span className="font-bold text-black dark:text-white">{coach.rating}</span>
+                        <span className="text-black dark:text-white">({coach.reviews} reviews)</span>
                       </div>
                       <div className="text-right">
-                        <span className="text-2xl font-bold text-black dark:text-white dark:text-white">${coach.price}</span>
-                        <span className="text-black dark:text-white dark:text-white">/hr</span>
+                        <span className="text-2xl font-bold text-black dark:text-white">${coach.price}</span>
+                        <span className="text-black dark:text-white">/hr</span>
                       </div>
                     </div>
                     
                     <div className="flex flex-wrap gap-2 mb-4">
                       {coach.languages.map((lang, i) => (
-                        <Badge key={i} variant="secondary" className="bg-slate-100 text-black dark:text-white dark:text-white">
+                        <Badge key={i} variant="secondary" className="bg-slate-100 text-black dark:text-white">
                           <Globe className="w-3 h-3 mr-1" />
                           {lang}
                         </Badge>
@@ -1434,12 +1434,12 @@ export default function LingueefyLanding() {
       </section>
 
       {/* Services - Color-coded cards with asymmetry */}
-      <section className="py-20 md:py-28 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-cta-soft text-cta">Our Services</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">{c.services.title}</h2>
-            <p className="text-xl text-black dark:text-white dark:text-white">{c.services.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.services.title}</h2>
+            <p className="text-xl text-black dark:text-white">{c.services.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -1462,11 +1462,11 @@ export default function LingueefyLanding() {
                     <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${colors.split(' ')[2]} ${colors.split(' ')[3]}`}>
                       <service.icon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-2xl font-semibold text-black dark:text-white dark:text-white mb-3">{service.title}</h3>
-                    <p className="text-black dark:text-white dark:text-white mb-6">{service.description}</p>
+                    <h3 className="text-2xl font-semibold text-black dark:text-white mb-3">{service.title}</h3>
+                    <p className="text-black dark:text-white mb-6">{service.description}</p>
                     <ul className="space-y-3">
                       {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-center text-black dark:text-white dark:text-white">
+                        <li key={i} className="flex items-center text-black dark:text-white">
                           <CheckCircle2 className={`w-5 h-5 mr-3 flex-shrink-0 ${colors.split(' ')[3]}`} />
                           {feature}
                         </li>
@@ -1485,8 +1485,8 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-foundation-soft text-foundation">Success Stories</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">{c.testimonials.title}</h2>
-            <p className="text-xl text-black dark:text-white dark:text-white">{c.testimonials.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.testimonials.title}</h2>
+            <p className="text-xl text-black dark:text-white">{c.testimonials.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -1512,7 +1512,7 @@ export default function LingueefyLanding() {
                   </div>
                   
                   {/* Quote */}
-                  <p className="text-black dark:text-white dark:text-white mb-6 italic leading-relaxed">"{testimonial.quote}"</p>
+                  <p className="text-black dark:text-white mb-6 italic leading-relaxed">"{testimonial.quote}"</p>
                   
                   {/* Author */}
                   <div className="flex items-center gap-4">
@@ -1522,8 +1522,8 @@ export default function LingueefyLanding() {
                       className="w-12 h-12 rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold text-black dark:text-white dark:text-white">{testimonial.name}</div>
-                      <div className="text-sm text-black dark:text-white dark:text-white">{testimonial.role}</div>
+                      <div className="font-semibold text-black dark:text-white">{testimonial.name}</div>
+                      <div className="text-sm text-black dark:text-white">{testimonial.role}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -1534,11 +1534,11 @@ export default function LingueefyLanding() {
       </section>
 
       {/* FAQ - Clean, accessible */}
-      <section className="py-20 md:py-28 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-slate-100 text-black dark:text-white dark:text-white">FAQ</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">{c.faq.title}</h2>
+            <Badge className="mb-4 bg-slate-100 text-black dark:text-white">FAQ</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.faq.title}</h2>
           </div>
           
           <div className="max-w-3xl mx-auto space-y-4">
@@ -1549,7 +1549,7 @@ export default function LingueefyLanding() {
                     className="w-full p-6 text-left flex items-center justify-between"
                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   >
-                    <span className="font-semibold text-black dark:text-white dark:text-white pr-4">{item.question}</span>
+                    <span className="font-semibold text-black dark:text-white pr-4">{item.question}</span>
                     <ChevronDown 
                       className={`w-5 h-5 text-black dark:text-white transition-transform flex-shrink-0 ${
                         openFaq === index ? 'rotate-180' : ''
@@ -1557,7 +1557,7 @@ export default function LingueefyLanding() {
                     />
                   </button>
                   {openFaq === index && (
-                    <div className="px-6 pb-6 text-black dark:text-white dark:text-white leading-relaxed">
+                    <div className="px-6 pb-6 text-black dark:text-white leading-relaxed">
                       {item.answer}
                     </div>
                   )}
@@ -1572,8 +1572,8 @@ export default function LingueefyLanding() {
       <section className="py-20 md:py-28 bg-gradient-to-br from-teal-600 via-teal-700 to-teal-800 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-40 h-40 bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-full blur-2xl" />
-          <div className="absolute bottom-10 right-10 w-60 h-60 bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-full blur-2xl" />
+          <div className="absolute top-10 left-10 w-40 h-40 bg-white dark:bg-slate-900/5 rounded-full blur-2xl" />
+          <div className="absolute bottom-10 right-10 w-60 h-60 bg-white dark:bg-slate-900/5 rounded-full blur-2xl" />
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -1582,7 +1582,7 @@ export default function LingueefyLanding() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/courses">
-              <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-teal-700 hover:bg-teal-50 px-10 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all">
+              <Button size="lg" className="bg-white dark:bg-slate-900 text-teal-700 hover:bg-teal-50 px-10 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all">
                 {c.cta.button}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

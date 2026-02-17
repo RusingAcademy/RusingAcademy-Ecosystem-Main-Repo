@@ -144,7 +144,7 @@ export default function Vocabulary() {
     <div className="flex h-screen bg-gray-50">
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
       <main className="flex-1 lg:ml-[240px] overflow-y-auto" role="main" aria-label={t("vocab.title")}>
-        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 sticky top-0 z-30">
+        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 sticky top-0 z-30">
           <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100" aria-label="Toggle sidebar">
             <span className="material-icons text-gray-600" aria-hidden="true">menu</span>
           </button>
@@ -210,7 +210,7 @@ export default function Vocabulary() {
                   <div className="text-[10px] text-gray-500 uppercase tracking-wider">{isFr ? config.labelFr : config.label}</div>
                 </button>
               ))}
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 text-center" role="status">
+              <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 text-center" role="status">
                 <span className="material-icons text-lg mb-1 text-teal-700" aria-hidden="true">analytics</span>
                 <div className="text-xl font-bold text-gray-900">{stats.total}</div>
                 <div className="text-[10px] text-gray-500 uppercase tracking-wider">{t("vocab.totalWords")}</div>
@@ -227,7 +227,7 @@ export default function Vocabulary() {
                 <div className="relative">
                   <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" aria-hidden="true">search</span>
                   <input id="vocab-search" type="text" placeholder={isFr ? "Rechercher des mots..." : "Search words..."} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-white dark:bg-slate-800 dark:bg-slate-900 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700" />
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700" />
                 </div>
               </div>
 
@@ -260,7 +260,7 @@ export default function Vocabulary() {
                   {filteredItems.map(item => {
                     const mastery = MASTERY_CONFIG[item.mastery] ?? MASTERY_CONFIG.new;
                     return (
-                      <div key={item.id} role="listitem" className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 group hover:shadow-sm transition-all">
+                      <div key={item.id} role="listitem" className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 group hover:shadow-sm transition-all">
                         <div className="flex items-start gap-4">
                           <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: mastery.color + "15" }}>
                             <span className="material-icons text-lg" style={{ color: mastery.color }} aria-hidden="true">{mastery.icon}</span>
@@ -350,7 +350,7 @@ export default function Vocabulary() {
                 </div>
 
                 {/* Quiz card */}
-                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 shadow-sm p-8 text-center mb-6">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 shadow-sm p-8 text-center mb-6">
                   <span className="text-[10px] text-gray-400 uppercase tracking-wider mb-4 block">{isFr ? "Traduisez ce mot" : "Translate this word"}</span>
                   <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">{quizItems[quizIndex]?.word}</p>
                   {quizItems[quizIndex]?.partOfSpeech && (
@@ -411,7 +411,7 @@ export default function Vocabulary() {
           {/* Add Word Modal */}
           {showForm && (
             <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={t("vocab.addWord")} onClick={resetForm}>
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
                 <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">{t("vocab.addWord")}</h2>
 
                 <div className="space-y-3">

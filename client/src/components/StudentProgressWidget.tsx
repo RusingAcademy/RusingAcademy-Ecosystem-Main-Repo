@@ -87,7 +87,7 @@ export function StudentProgressWidget({
               <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-black dark:text-white dark:text-white">{l.title}</CardTitle>
+              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
               <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
             </div>
           </div>
@@ -100,7 +100,7 @@ export function StudentProgressWidget({
             <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.avgProgress}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
-            <p className="text-2xl font-bold text-black dark:text-white dark:text-white">{students.length}</p>
+            <p className="text-2xl font-bold text-black dark:text-white">{students.length}</p>
             <p className="text-xs text-black dark:text-white dark:text-cyan-300">{l.totalStudents}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
@@ -136,7 +136,7 @@ export function StudentProgressWidget({
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-black dark:text-white dark:text-white truncate">
+                    <h4 className="font-semibold text-black dark:text-white truncate">
                       {student.name}
                     </h4>
                     {getTrendIcon(student.trend)}
@@ -165,7 +165,7 @@ export function StudentProgressWidget({
                   value={student.progressPercent} 
                   className="flex-1 h-2 [&>div]:bg-blue-500"
                 />
-                <span className="text-sm font-medium text-black dark:text-white dark:text-white/90 w-12 text-right">
+                <span className="text-sm font-medium text-black dark:text-white/90 w-12 text-right">
                   {student.progressPercent}%
                 </span>
               </div>

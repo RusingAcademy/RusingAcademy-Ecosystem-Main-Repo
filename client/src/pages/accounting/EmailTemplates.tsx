@@ -220,7 +220,7 @@ export default function EmailTemplates() {
       {/* Editor Modal */}
       {editingTemplate && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
               <h2 className="text-lg font-bold text-gray-800">
                 {editingTemplate.isNew ? "Create Template" : "Edit Template"}
@@ -301,7 +301,7 @@ export default function EmailTemplates() {
                       <Copy size={12} /> Insert merge field
                     </button>
                     {showMergeFields && (
-                      <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg z-10 py-1 w-64 max-h-64 overflow-y-auto">
+                      <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg z-10 py-1 w-64 max-h-64 overflow-y-auto">
                         {MERGE_FIELDS.map(mf => (
                           <button
                             key={mf.field}
@@ -339,7 +339,7 @@ export default function EmailTemplates() {
               {showPreview && (
                 <div className="border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg p-4 bg-gray-50">
                   <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Preview</h4>
-                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4 border border-gray-200 dark:border-slate-700 dark:border-slate-700">
+                  <div className="bg-white dark:bg-slate-900 rounded-lg p-4 border border-gray-200 dark:border-slate-700 dark:border-slate-700">
                     <p className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-3 pb-2 border-b border-gray-100">
                       Subject: {previewBody(editingTemplate.subject)}
                     </p>
@@ -436,7 +436,7 @@ export default function EmailTemplates() {
             return (
               <div
                 key={template.id}
-                className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-4 hover:border-gray-300 transition-colors"
+                className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-4 hover:border-gray-300 transition-colors"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">

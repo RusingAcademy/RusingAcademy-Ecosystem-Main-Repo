@@ -166,7 +166,7 @@ export default function BookingForm() {
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
                 {l.title}
               </h1>
-              <p className="text-lg text-black dark:text-white dark:text-white">
+              <p className="text-lg text-black dark:text-white">
                 {l.subtitle}
               </p>
             </motion.div>
@@ -302,7 +302,7 @@ export default function BookingForm() {
                     </div>
 
                     {/* Required Fields Note */}
-                    <p className="text-sm text-black dark:text-white dark:text-white">{l.required}</p>
+                    <p className="text-sm text-black dark:text-white">{l.required}</p>
 
                     {/* Submit Button */}
                     <Button 

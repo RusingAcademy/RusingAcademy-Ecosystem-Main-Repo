@@ -224,7 +224,7 @@ export function StreakRecovery({
             </div>
             <p className="text-2xl font-bold text-orange-600">
               {currentStreak}
-              <span className="text-sm font-normal text-black dark:text-white dark:text-white ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-black dark:text-white ml-1">{l.days}</span>
             </p>
           </div>
 
@@ -235,15 +235,15 @@ export function StreakRecovery({
             </div>
             <p className="text-2xl font-bold text-purple-600">
               {longestStreak}
-              <span className="text-sm font-normal text-black dark:text-white dark:text-white ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-black dark:text-white ml-1">{l.days}</span>
             </p>
           </div>
         </div>
 
         <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-teal-800">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-black dark:text-white dark:text-white/90">{l.streakFreezes}</span>
-            <span className="text-xs text-black dark:text-white dark:text-white">{streakFreezes} {l.available}</span>
+            <span className="text-sm font-medium text-black dark:text-white/90">{l.streakFreezes}</span>
+            <span className="text-xs text-black dark:text-white">{streakFreezes} {l.available}</span>
           </div>
           
           <div className="flex gap-1 mb-3">
@@ -319,7 +319,7 @@ export function StreakRecovery({
                   <DialogDescription>{l.purchaseDesc}</DialogDescription>
                 </DialogHeader>
                 <div className="space-y-3">
-                  <p className="text-sm font-medium text-black dark:text-white dark:text-white/90">{l.earnMethods}:</p>
+                  <p className="text-sm font-medium text-black dark:text-white/90">{l.earnMethods}:</p>
                   <div className="space-y-2">
                     <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
                       <CheckCircle2 className="h-5 w-5 text-emerald-500" />

@@ -268,7 +268,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
             </div>
             {showFilters && (
               <div className="space-y-1.5 pt-1">
-                <Label className="text-[10px] text-black dark:text-white dark:text-white">Brand</Label>
+                <Label className="text-[10px] text-black dark:text-white">Brand</Label>
                 <div className="flex flex-wrap gap-1">
                   {[
                     { value: "all", label: "All" },

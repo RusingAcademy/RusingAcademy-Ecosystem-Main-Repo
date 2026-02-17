@@ -14,7 +14,7 @@ const ACCENT = "var(--color-blue-600, var(--color-blue-600, #2563eb))";
 
 function KPICard({ icon, label, value, sub, trend }: { icon: string; label: string; value: string; sub: string; trend?: string }) {
   return (
-    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-3">
         <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${ACCENT}10` }}>
           <span className="material-icons text-xl" style={{ color: ACCENT }}>{icon}</span>
@@ -175,7 +175,7 @@ export default function HRDashboardHome() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* SLE Compliance Overview */}
-          <div className="lg:col-span-2 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
+          <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-semibold text-gray-900">
                 {lang === "fr" ? "Conformité ELS par statut" : "SLE Compliance by Status"}
@@ -223,7 +223,7 @@ export default function HRDashboardHome() {
           </div>
 
           {/* Contract & Billing Summary */}
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
             <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4">
               {lang === "fr" ? "Résumé financier" : "Financial Summary"}
             </h2>
@@ -262,7 +262,7 @@ export default function HRDashboardHome() {
         </div>
 
         {/* Session Stats */}
-        <div className="mt-6 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
+        <div className="mt-6 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-gray-900">
               {lang === "fr" ? "Sessions de coaching" : "Coaching Sessions"}
@@ -292,7 +292,7 @@ export default function HRDashboardHome() {
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <button
             onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-            className="p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
+            className="p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
             <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">person_add</span>
             <p className="text-sm font-semibold text-gray-900">{lang === "fr" ? "Inscrire un participant" : "Enroll a Participant"}</p>
@@ -300,7 +300,7 @@ export default function HRDashboardHome() {
           </button>
           <button
             onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-            className="p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
+            className="p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
             <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">download</span>
             <p className="text-sm font-semibold text-gray-900">{lang === "fr" ? "Télécharger un rapport" : "Download Report"}</p>
@@ -308,7 +308,7 @@ export default function HRDashboardHome() {
           </button>
           <button
             onClick={() => setShowCalendly(true)}
-            className="p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
+            className="p-4 bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
             <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">calendar_month</span>
             <p className="text-sm font-semibold text-gray-900">{lang === "fr" ? "Réserver une consultation" : "Book a Consultation"}</p>

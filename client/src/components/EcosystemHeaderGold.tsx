@@ -388,7 +388,7 @@ export default function EcosystemHeaderGold() {
                       ) : (
                         <Sun className="h-5 w-5 text-amber-600" />
                       )}
-                      <span className="font-medium text-black dark:text-white dark:text-white">
+                      <span className="font-medium text-black dark:text-white">
                         {language === "en" ? "Theme" : "Thème"}
                       </span>
                     </div>
@@ -429,7 +429,7 @@ export default function EcosystemHeaderGold() {
                   {/* Brand Navigation */}
                   {brandTiles.map((brand) => (
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
-                      <div className="p-4 rounded-xl border hover:bg-white dark:bg-slate-800 dark:bg-slate-900 dark:hover:bg-foundation transition-colors">
+                      <div className="p-4 rounded-xl border hover:bg-white dark:bg-slate-900 dark:hover:bg-foundation transition-colors">
                         <div className="font-semibold">{brand.name}</div>
                         <div className="text-sm text-black dark:text-white dark:text-cyan-300">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}

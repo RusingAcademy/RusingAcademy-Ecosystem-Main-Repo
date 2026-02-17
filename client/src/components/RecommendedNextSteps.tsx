@@ -96,11 +96,11 @@ export function RecommendedNextSteps({ language, className }: RecommendedNextSte
               className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 hover:bg-slate-100 dark:hover:bg-foundation transition-colors"
             >
               <div className="mt-0.5 p-2 rounded-lg bg-white dark:bg-slate-800 dark:bg-teal-800 shadow-sm">
-                <Icon className="h-4 w-4 text-black dark:text-white dark:text-white/90" />
+                <Icon className="h-4 w-4 text-black dark:text-white/90" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <p className="text-sm font-medium text-black dark:text-white dark:text-white truncate">
+                  <p className="text-sm font-medium text-black dark:text-white truncate">
                     {language === "fr" ? step.titleFr : step.title}
                   </p>
                   <Badge className={`text-[10px] px-1.5 py-0 ${PRIORITY_COLORS[step.priority]}`}>

@@ -130,7 +130,7 @@ function LibraryHero({ language }: { language: string }) {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-10 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"
       />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white dark:bg-slate-800 dark:bg-slate-900/[0.02] rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white dark:bg-slate-900/[0.02] rounded-full blur-3xl" />
 
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -147,7 +147,7 @@ function LibraryHero({ language }: { language: string }) {
         >
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-6">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-md text-white/90 border border-white/15 shadow-lg">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900/10 backdrop-blur-md text-white/90 border border-white/15 shadow-lg">
               <BookOpen className="w-4 h-4 text-orange-500" />
               {language === "fr" ? "Collection RusingAcademy" : "RusingAcademy Collection"}
             </span>
@@ -155,7 +155,7 @@ function LibraryHero({ language }: { language: string }) {
 
           {/* Title with glassmorphism */}
           <motion.div variants={fadeInUp}>
-            <div className="inline-block px-8 py-6 md:px-12 md:py-8 rounded-3xl bg-white dark:bg-slate-800 dark:bg-slate-900/[0.07] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] mb-8">
+            <div className="inline-block px-8 py-6 md:px-12 md:py-8 rounded-3xl bg-white dark:bg-slate-900/[0.07] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] mb-8">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                 {language === "fr" ? (
                   <>
@@ -190,7 +190,7 @@ function LibraryHero({ language }: { language: string }) {
                 key={i}
                 whileHover={{ y: -4, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="flex flex-col items-center gap-1.5 px-6 py-4 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/[0.08] backdrop-blur-md border border-white/10 min-w-[100px]"
+                className="flex flex-col items-center gap-1.5 px-6 py-4 rounded-2xl bg-white dark:bg-slate-900/[0.08] backdrop-blur-md border border-white/10 min-w-[100px]"
               >
                 <stat.icon className="w-5 h-5 text-orange-500" />
                 <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
@@ -280,7 +280,7 @@ function FilterBar({
     filters.search !== "";
 
   return (
-    <section className="sticky top-0 z-30 bg-white dark:bg-slate-800 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+    <section className="sticky top-0 z-30 bg-white dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
       <div className="container mx-auto px-6 md:px-8 py-4">
         {/* Search + Toggle */}
         <div className="flex items-center gap-4">
@@ -346,7 +346,7 @@ function FilterBar({
                     key={filter.key}
                     value={filter.value}
                     onChange={(e) => setFilters({ ...filters, [filter.key]: e.target.value })}
-                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white dark:bg-slate-800 dark:bg-slate-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20 outline-none transition-all duration-200 hover:border-slate-300"
+                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white dark:bg-slate-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20 outline-none transition-all duration-200 hover:border-slate-300"
                   >
                     {filter.options.map((o) => (
                       <option key={o.value} value={o.value}>{o.label}</option>
@@ -411,7 +411,7 @@ function ProductCard({
   return (
     <motion.div variants={cardVariant}>
       <Card
-        className="group relative overflow-hidden border border-slate-200/80 hover:border-orange-500/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] transition-all duration-500 cursor-pointer bg-white dark:bg-slate-800 dark:bg-slate-900 h-full flex flex-col rounded-2xl"
+        className="group relative overflow-hidden border border-slate-200/80 hover:border-orange-500/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] transition-all duration-500 cursor-pointer bg-white dark:bg-slate-900 h-full flex flex-col rounded-2xl"
         onClick={() => onSelect(item)}
         tabIndex={0}
         role="button"
@@ -453,7 +453,7 @@ function ProductCard({
 
           {/* Language badge */}
           <div className="absolute top-3 right-3">
-            <Badge variant="secondary" className="bg-white dark:bg-slate-800 dark:bg-slate-900/90 backdrop-blur-sm text-slate-700 text-xs shadow-sm">
+            <Badge variant="secondary" className="bg-white dark:bg-slate-900/90 backdrop-blur-sm text-slate-700 text-xs shadow-sm">
               <Globe className="w-3 h-3 mr-1" />
               {langBadge}
             </Badge>
@@ -463,7 +463,7 @@ function ProductCard({
           <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400">
             <Button
               size="sm"
-              className="w-full bg-white dark:bg-slate-800 dark:bg-slate-900/95 backdrop-blur-md text-foundation hover:bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-full font-medium text-xs shadow-lg"
+              className="w-full bg-white dark:bg-slate-900/95 backdrop-blur-md text-foundation hover:bg-white dark:bg-slate-900 rounded-full font-medium text-xs shadow-lg"
             >
               <Eye className="w-3.5 h-3.5 mr-1.5" />
               {language === "fr" ? "Aperçu rapide" : "Quick View"}
@@ -591,10 +591,10 @@ function ProductDetailModal({
                       {language === "fr" ? "Nouveau" : "New"}
                     </Badge>
                   )}
-                  <Badge className="bg-white dark:bg-slate-800 dark:bg-slate-900/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                  <Badge className="bg-white dark:bg-slate-900/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                     {item.format}
                   </Badge>
-                  <Badge className="bg-white dark:bg-slate-800 dark:bg-slate-900/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                  <Badge className="bg-white dark:bg-slate-900/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                     <Globe className="w-3 h-3 mr-1" />
                     {item.language === "BILINGUAL" ? (language === "fr" ? "Bilingue" : "Bilingual") : item.language}
                   </Badge>

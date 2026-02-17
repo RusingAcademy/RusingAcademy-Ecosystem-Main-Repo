@@ -237,7 +237,7 @@ export default function Flashcards() {
                 { label: t("flashcards.streak"), value: streak?.currentStreak ?? 0, icon: "local_fire_department", color: "text-orange-600", bg: "bg-orange-50" },
                 { label: t("flashcards.accuracy"), value: `${streak?.accuracy ?? 0}%`, icon: "target", color: "text-purple-600", bg: "bg-purple-50" },
               ].map((s, i) => (
-                <div key={i} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 text-center hover:shadow-sm transition-all" role="listitem">
+                <div key={i} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 text-center hover:shadow-sm transition-all" role="listitem">
                   <div className={`w-10 h-10 mx-auto mb-2 rounded-xl ${s.bg} flex items-center justify-center`}>
                     <span className={`material-icons text-lg ${s.color}`} aria-hidden="true">{s.icon}</span>
                   </div>
@@ -251,7 +251,7 @@ export default function Flashcards() {
           {/* Deck Form Modal */}
           {showDeckForm && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" role="dialog" aria-modal="true" aria-label={t("flashcards.newDeck")}>
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
                 <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">{t("flashcards.newDeck")}</h2>
                 <div className="space-y-4">
                   <div>
@@ -281,7 +281,7 @@ export default function Flashcards() {
           {/* Card Form Modal */}
           {showCardForm && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" role="dialog" aria-modal="true" aria-label={t("flashcards.addCard")}>
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
                 <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">{t("flashcards.addCard")}</h2>
                 <div className="space-y-4">
                   <div>
@@ -331,7 +331,7 @@ export default function Flashcards() {
                 {decks.map((deck: any) => {
                   const color = getColor(deck.category || "teal");
                   return (
-                    <div key={deck.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden cursor-pointer group hover:shadow-md transition-all focus-within:ring-2 focus-within:ring-teal-700/30"
+                    <div key={deck.id} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden cursor-pointer group hover:shadow-md transition-all focus-within:ring-2 focus-within:ring-teal-700/30"
                       onClick={() => { setSelectedDeckId(deck.id); setViewMode("cards"); }}
                       role="listitem"
                       aria-label={`${deck.title} — ${deck.cardCount} ${t("flashcards.cards")}`}
@@ -401,7 +401,7 @@ export default function Flashcards() {
                     mastered: t("flashcards.mastered"),
                   };
                   return (
-                    <div key={card.id} role="listitem" className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 flex items-start gap-4 group hover:shadow-sm transition-all">
+                    <div key={card.id} role="listitem" className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-4 flex items-start gap-4 group hover:shadow-sm transition-all">
                       <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-slate-900 flex items-center justify-center text-xs font-bold text-gray-400 shrink-0" aria-hidden="true">
                         {i + 1}
                       </div>
@@ -469,7 +469,7 @@ export default function Flashcards() {
 
                 {/* Card */}
                 <div
-                  className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 shadow-sm min-h-[300px] flex flex-col items-center justify-center p-8 cursor-pointer transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                  className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 shadow-sm min-h-[300px] flex flex-col items-center justify-center p-8 cursor-pointer transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                   onClick={() => setIsFlipped(!isFlipped)}
                   onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setIsFlipped(!isFlipped); }}}
                   tabIndex={0}
@@ -536,21 +536,21 @@ export default function Flashcards() {
               <p className="text-sm text-gray-500 mb-8">{t("flashcards.greatSession")}</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
+                <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
                   <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-blue-50 flex items-center justify-center">
                     <span className="material-icons text-lg text-blue-600" aria-hidden="true">content_copy</span>
                   </div>
                   <p className="text-2xl font-bold text-gray-900">{sessionTotal}</p>
                   <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">{t("flashcards.cardsReviewed")}</p>
                 </div>
-                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
+                <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
                   <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-green-50 flex items-center justify-center">
                     <span className="material-icons text-lg text-green-600" aria-hidden="true">check_circle</span>
                   </div>
                   <p className="text-2xl font-bold text-gray-900">{sessionTotal > 0 ? Math.round((sessionCorrect / sessionTotal) * 100) : 0}%</p>
                   <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">{t("flashcards.correctRate")}</p>
                 </div>
-                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
+                <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
                   <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-purple-50 flex items-center justify-center">
                     <span className="material-icons text-lg text-purple-600" aria-hidden="true">timer</span>
                   </div>

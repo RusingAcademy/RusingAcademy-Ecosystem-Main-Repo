@@ -83,17 +83,17 @@ export default function PeerReview() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center">
               <span className="material-icons text-2xl mb-1 text-amber-500">pending</span>
               <div className="text-xl font-bold text-gray-900">{pendingReviews?.length ?? 0}</div>
               <div className="text-xs text-gray-500">Pending</div>
             </div>
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center">
               <span className="material-icons text-2xl mb-1 text-green-500">check_circle</span>
               <div className="text-xl font-bold text-gray-900">{completedReviews?.length ?? 0}</div>
               <div className="text-xs text-gray-500">Completed</div>
             </div>
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-gray-100 dark:border-slate-700 shadow-sm text-center">
               <span className="material-icons text-2xl mb-1 text-teal-700">stars</span>
               <div className="text-xl font-bold text-gray-900">{(completedReviews?.length ?? 0) * 25}</div>
               <div className="text-xs text-gray-500">XP Earned</div>
@@ -101,7 +101,7 @@ export default function PeerReview() {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-1 mb-6 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl p-1 border border-gray-100 dark:border-slate-700 shadow-sm w-fit">
+          <div className="flex gap-1 mb-6 bg-white dark:bg-slate-900 rounded-xl p-1 border border-gray-100 dark:border-slate-700 shadow-sm w-fit">
             {(["guide", "pending", "completed"] as const).map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
                 className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${activeTab === tab ? "bg-teal-700 text-white shadow-md" : "text-gray-500 hover:text-gray-700"}`}>
@@ -111,7 +111,7 @@ export default function PeerReview() {
           </div>
 
           {activeTab === "guide" && (
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm">
               <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
                 <span className="material-icons text-teal-700">school</span>
                 Peer Review Guide
@@ -160,14 +160,14 @@ export default function PeerReview() {
                     <span className="material-icons text-base">arrow_back</span> Back to list
                   </button>
 
-                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Submission to Review</h3>
                     <div className="p-4 bg-gray-50 dark:bg-slate-900 rounded-xl text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-serif whitespace-pre-wrap">
                       {activeReview.content || "No content available for this submission."}
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm">
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Your Evaluation</h3>
                     <div className="space-y-5">
                       <ScoreSlider label="Grammar" value={grammarScore} onChange={setGrammarScore} color="var(--brand-teal, #008090)" />
@@ -180,7 +180,7 @@ export default function PeerReview() {
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm space-y-4">
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm space-y-4">
                     <div>
                       <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Detailed Feedback *</label>
                       <textarea value={feedback} onChange={e => setFeedback(e.target.value)} rows={4}
@@ -223,7 +223,7 @@ export default function PeerReview() {
                       <p className="text-sm mt-1">Check back later for new submissions to review.</p>
                     </div>
                   ) : pendingReviews.map((review: any) => (
-                    <div key={review.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl p-5 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                    <div key={review.id} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                       onClick={() => { setActiveReview(review); setGrammarScore(70); setVocabularyScore(70); setCoherenceScore(70); setFeedback(""); setStrengths(""); setImprovements(""); }}>
                       <div className="flex items-center justify-between">
                         <div>
@@ -248,7 +248,7 @@ export default function PeerReview() {
                   <p className="text-sm mt-1">Complete a peer review to see it here.</p>
                 </div>
               ) : completedReviews.map((review: any) => (
-                <div key={review.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl p-5 border border-gray-100 dark:border-slate-700 shadow-sm">
+                <div key={review.id} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-gray-100 dark:border-slate-700 shadow-sm">
                   <div className="flex items-center justify-between mb-3">
                     <div className="font-semibold text-gray-900">Submission #{review.submissionId}</div>
                     <div className="text-lg font-bold" style={{ color: (review.overallScore ?? 0) >= 80 ? "var(--semantic-success, #22c55e)" : (review.overallScore ?? 0) >= 60 ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }}>

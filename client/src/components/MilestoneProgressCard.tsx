@@ -41,7 +41,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
   return (
     <Card className={className}>
       <CardContent className="p-6">
-        <h3 className="text-lg font-bold text-black dark:text-white dark:text-white mb-4 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
           <Target className="h-5 w-5 text-emerald-500" />
           {l.title}
         </h3>
