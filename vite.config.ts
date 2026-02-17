@@ -200,7 +200,6 @@ export default defineConfig({
             '@tiptap/extension-text-style', '@tiptap/extension-underline',
             '@tiptap/extension-text-align', '@tiptap/extension-highlight',
             '@tiptap/extension-code-block-lowlight', '@tiptap/extension-bubble-menu',
-            '@tiptap/pm',
           ],
           // Drag & drop — admin only
           'vendor-dnd': ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
