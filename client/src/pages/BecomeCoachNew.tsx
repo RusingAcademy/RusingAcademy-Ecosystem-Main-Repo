@@ -714,14 +714,14 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* How It Works Section - Premium Editorial Layout */}
-        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50">
           <div className="container">
             <div className="text-center mb-10 md:mb-16 lg:mb-20">
               <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 mb-4">
                 <Sparkles className="h-3 w-3 mr-1" />
                 {isEn ? "Simple Process" : "Processus Simple"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">{l.howItWorksTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">{l.howItWorksTitle}</h2>
               <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">{l.howItWorksSubtitle}</p>
             </div>
 
@@ -759,7 +759,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Requirements Section - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 relative overflow-hidden" style={{background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'}}>
+        <section className="py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden" style={{background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'}}>
           {/* Decorative background */}
           <div className="absolute inset-0 opacity-50">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-100 rounded-full blur-3xl" />
@@ -772,7 +772,7 @@ export default function BecomeCoachNew() {
                 <Award className="h-3 w-3 mr-1" />
                 {isEn ? "Join Our Team" : "Rejoignez Notre Équipe"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">{l.requirementsTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">{l.requirementsTitle}</h2>
               <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">{l.requirementsSubtitle}</p>
             </div>
 
@@ -841,7 +841,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Safety & Trust Section - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-obsidian via-teal-900 to-emerald-900 relative overflow-hidden">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-br from-obsidian via-teal-900 to-emerald-900 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
@@ -854,7 +854,7 @@ export default function BecomeCoachNew() {
                 <Shield className="h-4 w-4 mr-2" />
                 {isEn ? "Your Security Matters" : "Votre sécurité compte"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{l.safetyTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{l.safetyTitle}</h2>
               <p className="text-lg max-w-2xl mx-auto" style={{color: 'var(--color-white, var(--text-inverse))'}}>{l.safetySubtitle}</p>
             </div>
 
@@ -882,14 +882,14 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Why Coaches Love Lingueefy - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative">
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 border-emerald-200">
                 <Star className="h-3 w-3 mr-1 fill-emerald-500" />
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black dark:text-foreground">{l.whyJoinTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black dark:text-foreground">{l.whyJoinTitle}</h2>
               <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
             </div>
 
@@ -929,7 +929,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Earning Potential - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0 opacity-30">
             <div className="absolute top-1/4 right-0 w-96 h-96 bg-emerald-100 rounded-full blur-3xl" />
@@ -944,7 +944,7 @@ export default function BecomeCoachNew() {
                     <DollarSign className="h-3 w-3 mr-1" />
                     {isEn ? "Earning Potential" : "Potentiel de revenus"}
                   </Badge>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-black dark:text-foreground">{l.earningTitle}</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-black dark:text-foreground">{l.earningTitle}</h2>
                   <p className="text-lg text-black dark:text-foreground mb-8 leading-relaxed">{l.earningSubtitle}</p>
 
                   <div className="space-y-5">
@@ -994,14 +994,14 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Testimonials - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50 relative">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50 relative">
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta700 border-orange-100">
                 <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black dark:text-foreground">{l.testimonialsTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black dark:text-foreground">{l.testimonialsTitle}</h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -1050,14 +1050,14 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* FAQ Section - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background">
+        <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-white dark:bg-background">
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-white dark:bg-background text-emerald-700 border-emerald-200 shadow-sm">
                 <HelpCircle className="h-3 w-3 mr-1" />
                 {isEn ? "FAQ" : "FAQ"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">{l.faqTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">{l.faqTitle}</h2>
             </div>
 
             <div className="max-w-3xl mx-auto space-y-4">
@@ -1104,7 +1104,7 @@ export default function BecomeCoachNew() {
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {l.ctaTitle}
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto" style={{color: '#f9fafa'}}>

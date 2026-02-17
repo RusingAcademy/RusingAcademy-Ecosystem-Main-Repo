@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { XCircle, ArrowLeft, RefreshCw, MessageCircle, HelpCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { BackToTop } from "@/components/mobile";
 
 export default function PaymentError() {
   const { language } = useLanguage();
@@ -100,6 +101,7 @@ export default function PaymentError() {
         </div>
       </main>
       <Footer />
-    </div>
+          <BackToTop threshold={300} />
+</div>
   );
 }

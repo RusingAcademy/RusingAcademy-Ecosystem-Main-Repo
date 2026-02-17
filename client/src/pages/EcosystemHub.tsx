@@ -188,7 +188,7 @@ function TrilemmeSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -213,7 +213,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
@@ -349,7 +349,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -374,7 +374,7 @@ function EcosystemSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
@@ -390,7 +390,7 @@ function EcosystemSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           {pillars.map((pillar) => (
             <motion.div
@@ -475,7 +475,7 @@ function MethodologySection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -500,7 +500,7 @@ function MethodologySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             {language === "en" ? "Our 3-Step Method" : "Notre méthode en 3 étapes"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
@@ -514,7 +514,7 @@ function MethodologySection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           {steps.map((step, index) => (
             <motion.div
@@ -602,7 +602,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -627,7 +627,7 @@ function OffersSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             {language === "en" ? "The RusingAcademy Solution" : "La solution RusingAcademy"}
           </h2>
         </motion.div>
@@ -638,7 +638,7 @@ function OffersSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           {offers.map((offer) => (
             <motion.div
@@ -735,7 +735,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-obsidian to-teal-900">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-obsidian to-teal-900">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -760,7 +760,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
             Who benefits most from this program?
           </h2>
         </motion.div>
@@ -863,7 +863,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -888,7 +888,7 @@ function TestimonialsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             Trusted by public servants
           </h2>
         </motion.div>
@@ -899,7 +899,7 @@ function TestimonialsSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8"
         >
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -955,7 +955,7 @@ function TestimonialsSection({ language }: { language: string }) {
 // ============================================================================
 function LeadershipSection({ language }: { language: string }) {
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -993,7 +993,7 @@ function LeadershipSection({ language }: { language: string }) {
 
               {/* Content */}
               <motion.div variants={fadeInUp} className="p-8 md:p-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-6">
                   Who is Steven Barholere?
                 </h2>
 
@@ -1053,7 +1053,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
 
   return (
     <>
-      <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden">
+      <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
@@ -1293,7 +1293,7 @@ function ValueSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1318,7 +1318,7 @@ function ValueSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             Why Choose RusingAcademy?
           </h2>
         </motion.div>
@@ -1408,7 +1408,7 @@ function TeamSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1433,7 +1433,7 @@ function TeamSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             Meet our experts
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
@@ -1449,7 +1449,7 @@ function TeamSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
         >
           {team.map((member, index) => (
             <motion.div
@@ -1488,7 +1488,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1499,7 +1499,7 @@ function FinalCTASection({ language }: { language: string }) {
         >
           {/* Header */}
           <motion.div variants={fadeInUp}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
               {language === "en" ? "Ready to take the next step?" : "Prêt à franchir l'étape suivante ?"}
             </h2>
             <p className="text-xl text-white/90 mb-6 md:mb-8 lg:mb-12">
@@ -1590,7 +1590,7 @@ function FAQSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1615,7 +1615,7 @@ function FAQSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             {language === "en" ? "Frequently Asked Questions" : "Questions fréquemment posées"}
           </h2>
         </motion.div>

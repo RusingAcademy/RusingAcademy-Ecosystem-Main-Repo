@@ -233,7 +233,7 @@ export default function Invoices() {
 
       {/* Money Bar Summary */}
       <div className="qb-card mb-6">
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           <div>
             <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Unpaid Last 365 Days</h3>
             <div className="qb-money-bar mb-3">

@@ -325,7 +325,7 @@ export default function ForDepartments() {
                     key={i}
                     className="bg-white dark:bg-background/10 backdrop-blur-md rounded-2xl p-6 border border-white/60 hover:bg-white dark:bg-background/15 transition-all duration-300"
                   >
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-white/90 font-medium">{stat.label}</div>
                   </div>
                 ))}
@@ -342,7 +342,7 @@ export default function ForDepartments() {
         >
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.benefitsTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t.benefitsTitle}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
             </div>
 
@@ -402,7 +402,7 @@ export default function ForDepartments() {
         >
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.processTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t.processTitle}</h2>
               <p className="text-muted-foreground">{t.processSubtitle}</p>
             </div>
 
@@ -437,7 +437,7 @@ export default function ForDepartments() {
         >
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.packagesTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t.packagesTitle}</h2>
               <p className="text-muted-foreground">{t.packagesSubtitle}</p>
             </div>
 
@@ -510,7 +510,7 @@ export default function ForDepartments() {
               <Badge className="bg-orange-100 text-orange-700 border-orange-200 mb-4">
                 Success Stories
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold">{t.testimonialsTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">{t.testimonialsTitle}</h2>
             </div>
 
             <div className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${
@@ -548,7 +548,7 @@ export default function ForDepartments() {
           <div className="container">
             <div className="max-w-2xl mx-auto">
               <div className="text-center mb-6 md:mb-8 lg:mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.contactTitle}</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t.contactTitle}</h2>
                 <p className="text-muted-foreground">{t.contactSubtitle}</p>
               </div>
 
@@ -617,7 +617,7 @@ export default function ForDepartments() {
         >
           <div className="container">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.faqTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t.faqTitle}</h2>
             </div>
 
             <div className={`max-w-3xl mx-auto space-y-4 transition-all duration-700 ${
@@ -664,7 +664,7 @@ export default function ForDepartments() {
                 <span>{t.finalCtaBadge}</span>
               </div>
               
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">
                 {t.finalCtaTitle}
               </h2>
               

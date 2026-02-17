@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import FooterInstitutional from "@/components/FooterInstitutional";
 import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
+import { BackToTop, WaveDivider, SectionLabel, TrustBadges } from "@/components/mobile";
 // ProfStevenChatbot removed - replaced by SLE AI Companion widget in header
 // Removed duplicate sections that exist on hub (/)
 // TrustedByPublicServants, TheyTrustedUs, MeetOurExperts, LearningCapsules
@@ -512,7 +513,7 @@ function FAQSection() {
 
   return (
     <section 
-      className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
+      className="py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
       aria-labelledby="faq-title"
     >
       <div className="container mx-auto px-4 relative z-10">
@@ -521,7 +522,7 @@ function FAQSection() {
             <HelpCircle className="h-4 w-4" />
             {language === 'fr' ? 'Questions Fréquentes' : 'Frequently Asked Questions'}
           </div>
-          <h2 id="faq-title" className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 id="faq-title" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             {language === 'fr' ? 'Tout ce que vous devez savoir sur l\'ELS' : 'Everything You Need to Know About the SLE'}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
@@ -667,31 +668,47 @@ export default function Home() {
         {/* Featured Coaches Section - Now the Hero */}
         <FeaturedCoaches />
 
-        {/* Animated Statistics Section - Reduced vertical height */}
-        <section className="py-10 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
+        {/* Wave Divider: Hero → Statistics */}
+        <WaveDivider
+          fillColor="var(--brand-foundation, #0F3D3E)"
+          bgColor="transparent"
+          variant="organic"
+          height={48}
+        />
+
+        {/* Animated Statistics Section — 2x2 grid on mobile, 4-col on desktop */}
+        <section className="py-10 sm:py-12 md:py-16 bg-gradient-to-br from-[var(--brand-foundation,#0F3D3E)] to-[var(--brand-foundation-2,#145A5B)] relative overflow-hidden">
           {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-40 h-40 bg-white dark:bg-background rounded-full -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-60 h-60 bg-white dark:bg-background rounded-full translate-x-1/3 translate-y-1/3" />
+          <div className="absolute inset-0 opacity-10" aria-hidden="true">
+            <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/3 translate-y-1/3" />
           </div>
           
-          <div className="container mx-auto px-4 relative z-10" style={{backgroundColor: 'var(--color-white, var(--text-inverse))'}}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
               {statistics.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white dark:bg-background/20 mb-2">
-                    <stat.icon className="h-6 w-6 text-white" />
+                  <div className="inline-flex items-center justify-center h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-white/10 mb-3">
+                    <stat.icon className="h-6 w-6 sm:h-7 sm:w-7 text-white/80" />
                   </div>
-                  <div className="text-3xl md:text-4xl font-black text-white mb-1">
+                  <div className="font-serif font-black text-3xl sm:text-4xl md:text-5xl text-white mb-1 leading-none">
                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="text-base font-semibold text-white/90">{stat.label}</p>
-                  <p className="text-xs text-white/90 mt-0.5 hidden md:block">{stat.description}</p>
+                  <p className="text-xs sm:text-sm font-semibold text-white/60 uppercase tracking-[0.15em] mt-2">{stat.label}</p>
+                  <p className="text-xs text-white/50 mt-1 hidden sm:block">{stat.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Wave Divider: Statistics → Plans */}
+        <WaveDivider
+          fillColor="var(--bg, #F7F6F3)"
+          bgColor="var(--brand-foundation, #0F3D3E)"
+          variant="soft"
+          height={48}
+        />
 
         {/* Video Presentation Section - MOVED TO END OF PAGE */}
 
@@ -705,16 +722,13 @@ export default function Home() {
 
         {/* Plans Maison Section - Coaching Packages */}
         <section 
-          className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
+          className="py-10 sm:py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
           aria-labelledby="plans-title"
         >
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
-                <Shield className="h-4 w-4" />
-                {t("plans.badge")}
-              </div>
-              <h2 id="plans-title" className="text-3xl md:text-4xl font-bold mb-4">{t("plans.title")}</h2>
+              <SectionLabel text={language === 'fr' ? 'NOS FORFAITS' : 'OUR PLANS'} icon={Shield} variant="foundation" />
+              <h2 id="plans-title" className="font-serif text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t("plans.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("plans.subtitle")}
               </p>
@@ -782,9 +796,9 @@ export default function Home() {
             </div>
 
             {/* Pricing Plans */}
-            <div id="pricing-plans" className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div id="pricing-plans" className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
               {/* Starter Plan */}
-              <div className="bg-white dark:bg-background rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white dark:bg-background rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.starter.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.starter.description")}</p>
@@ -817,7 +831,7 @@ export default function Home() {
               </div>
 
               {/* Accelerator Plan - Featured */}
-              <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-3xl p-8 shadow-2xl text-white relative transform md:-translate-y-4">
+              <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-2xl text-white relative transform md:-translate-y-4">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black dark:text-foreground text-xs font-bold px-4 py-1 rounded-full">
                   {t("plans.mostPopular")}
                 </div>
@@ -853,7 +867,7 @@ export default function Home() {
               </div>
 
               {/* Immersion Plan */}
-              <div className="bg-white dark:bg-background rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white dark:bg-background rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.immersion.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.immersion.description")}</p>
@@ -904,18 +918,32 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Trust Badges — Adapted from MgCréa's trust section */}
+            <div className="mt-10 sm:mt-12">
+              <TrustBadges variant="grid" theme="glass" />
+            </div>
           </div>
         </section>
 
+        {/* Wave Divider: Plans → Transformation */}
+        <WaveDivider
+          fillColor="var(--surface, #FFFFFF)"
+          bgColor="transparent"
+          variant="organic"
+          height={48}
+        />
+
         {/* Transformation Section - Before/After */}
         <section 
-          className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-teal-50/20"
+          className="py-10 sm:py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-teal-50/20"
           aria-labelledby="transformation-title"
         >
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
             {/* Section Header */}
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <h2 id="transformation-title" className="text-3xl md:text-4xl font-bold mb-4">
+              <SectionLabel text={language === 'fr' ? 'VOTRE TRANSFORMATION' : 'YOUR TRANSFORMATION'} variant="cta" />
+              <h2 id="transformation-title" className="font-serif text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {t("transformation.title")}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
@@ -924,9 +952,9 @@ export default function Home() {
             </div>
 
             {/* Before/After Comparison */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
               {/* BEFORE Column */}
-              <div className="bg-gradient-to-br from-orange-50 to-orange-50 rounded-3xl p-8 shadow-lg border border-cta">
+              <div className="bg-gradient-to-br from-orange-50 to-orange-50 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg border border-cta">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-6 w-6 bg-cta-soft rounded" aria-hidden="true" />
                   <h3 className="text-xl font-bold text-cta tracking-wide">
@@ -950,7 +978,7 @@ export default function Home() {
               </div>
 
               {/* AFTER Column */}
-              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 shadow-lg border border-emerald-100">
+              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg border border-emerald-100">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-6 w-6 bg-emerald-500 rounded" aria-hidden="true" />
                   <h3 className="text-xl font-bold text-emerald-600 tracking-wide">
@@ -976,22 +1004,31 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Wave Divider: Transformation → SLE Levels */}
+        <WaveDivider
+          fillColor="var(--bg, #F7F6F3)"
+          bgColor="transparent"
+          variant="soft"
+          height={40}
+        />
+
         {/* SLE Levels Section */}
         <section 
-          className="py-10 md:py-16 lg:py-20 relative overflow-hidden"
+          className="py-10 sm:py-12 md:py-16 lg:py-20 relative overflow-hidden"
           aria-labelledby="sle-title"
         >
           <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
           
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <h2 id="sle-title" className="text-3xl md:text-4xl font-bold mb-4">{t("sle.title")}</h2>
+              <SectionLabel text={language === 'fr' ? 'NIVEAUX ELS' : 'SLE LEVELS'} variant="foundation" />
+              <h2 id="sle-title" className="font-serif text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t("sle.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("sle.description")}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {[
                 {
                   level: "A",
@@ -1069,20 +1106,29 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Wave Divider: SLE → How It Works */}
+        <WaveDivider
+          fillColor="var(--surface, #FFFFFF)"
+          bgColor="transparent"
+          variant="organic"
+          height={40}
+        />
+
         {/* How It Works */}
         <section 
-          className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-background"
+          className="py-10 sm:py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-background"
           aria-labelledby="how-title"
         >
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-10 md:mb-16 lg:mb-20">
-              <h2 id="how-title" className="text-3xl md:text-4xl font-bold mb-4">{t("how.title")}</h2>
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="text-center mb-8 sm:mb-10 md:mb-16 lg:mb-20">
+              <SectionLabel text={language === 'fr' ? 'COMMENT ÇA MARCHE' : 'HOW IT WORKS'} variant="cta" />
+              <h2 id="how-title" className="font-serif text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t("how.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("how.description")}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
               {[
                 {
                   image: "https://rusingacademy-cdn.b-cdn.net/images/how-it-works-1.jpg",
@@ -1134,22 +1180,31 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Wave Divider: How It Works → Why Choose */}
+        <WaveDivider
+          fillColor="var(--bg, #F7F6F3)"
+          bgColor="transparent"
+          variant="soft"
+          height={40}
+        />
+
         {/* Why Choose Lingueefy */}
         <section 
-          className="py-12 md:py-16 lg:py-24 relative overflow-hidden"
+          className="py-10 sm:py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden"
           aria-labelledby="features-title"
         >
           <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
           
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-10 md:mb-16 lg:mb-20">
-              <h2 id="features-title" className="text-3xl md:text-4xl font-bold mb-4">{t("features.title")}</h2>
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="text-center mb-8 sm:mb-10 md:mb-16 lg:mb-20">
+              <SectionLabel text={language === 'fr' ? 'POURQUOI NOUS CHOISIR' : 'WHY CHOOSE US'} variant="foundation" />
+              <h2 id="features-title" className="font-serif text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{t("features.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("features.description")}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
               {[
                 {
                   image: "https://rusingacademy-cdn.b-cdn.net/images/why-choose-1.jpg",
@@ -1224,11 +1279,20 @@ export default function Home() {
         {/* FAQ Section */}
         <FAQSection />
 
+        {/* Wave Divider: FAQ → Video */}
+        <WaveDivider
+          fillColor="var(--surface, #FFFFFF)"
+          bgColor="transparent"
+          variant="organic"
+          height={40}
+        />
+
         {/* Video Presentation Section - Moved here from after statistics */}
-        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative overflow-hidden">
-          <div className="container mx-auto px-4">
+        <section className="py-10 sm:py-10 sm:py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative overflow-hidden">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <SectionLabel text={language === 'fr' ? 'RENCONTREZ LE FONDATEUR' : 'MEET THE FOUNDER'} variant="gold" />
+              <h2 className="font-serif text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 Meet Prof. Steven Barholere
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
@@ -1343,20 +1407,28 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Wave Divider: Video → CTA */}
+        <WaveDivider
+          fillColor="var(--brand-foundation, #0F3D3E)"
+          bgColor="transparent"
+          variant="organic"
+          height={48}
+        />
+
         {/* CTA Section */}
         <section 
-          className="py-12 md:py-16 lg:py-24 relative overflow-hidden mesh-gradient"
+          className="py-10 sm:py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden mesh-gradient"
           aria-labelledby="cta-title"
         >
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="glass-card max-w-4xl mx-auto text-center">
-              <div className="space-y-8">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="glass-card max-w-4xl mx-auto text-center p-6 sm:p-8 md:p-10">
+              <div className="space-y-6 sm:space-y-8">
                 <div className="inline-flex items-center gap-2 glass-badge rounded-full px-5 py-2 text-sm font-medium text-teal-700">
                   <Sparkles className="h-4 w-4" aria-hidden="true" />
                   {t("hero.badge")}
                 </div>
                 
-                <h2 id="cta-title" className="text-3xl md:text-4xl font-bold">{t("cta.title")}</h2>
+                <h2 id="cta-title" className="font-serif text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold">{t("cta.title")}</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                   {t("cta.description")}
                 </p>
@@ -1383,6 +1455,9 @@ export default function Home() {
       <CrossEcosystemSection variant="hub" />
 
       <FooterInstitutional />
+      
+      {/* Back to Top Button */}
+      <BackToTop threshold={400} />
       
       {/* ProfStevenChatbot removed - replaced by SLE AI Companion widget in header */}
 

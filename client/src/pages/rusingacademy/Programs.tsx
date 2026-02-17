@@ -320,7 +320,7 @@ export default function Programs() {
         <div className="container">
           <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-700">Proprietary Framework</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               The Path Series™ Methodology
             </h2>
             <p className="text-lg text-black dark:text-foreground">
@@ -367,7 +367,7 @@ export default function Programs() {
           {/* Double-Modality */}
           <div className="mt-16 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-center mb-8">Double-Modality Learning Architecture</h3>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
               <Card className="border-2 border-orange-100 bg-orange-50/50">
                 <CardHeader>
                   <div className="flex items-center gap-3">
@@ -408,7 +408,7 @@ export default function Programs() {
         <div className="container">
           <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-orange-100 text-cta">Our Crash Courses</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               The Six Paths to Bilingual Mastery
             </h2>
             <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -517,7 +517,7 @@ export default function Programs() {
             <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta">
               Save Up to $500
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Bundle Packages</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Bundle Packages</h2>
             <p className="text-lg text-black dark:text-foreground">
               Commit to your complete bilingual journey and save significantly
             </p>
@@ -605,7 +605,7 @@ export default function Programs() {
         <div className="container">
           <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-700">Target Audience</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Who Is This Program For?</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Who Is This Program For?</h2>
             <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
               The GC Bilingual Mastery Series is specifically designed for dedicated professionals in Canada's federal public service who are committed to achieving bilingual excellence
             </p>
@@ -641,7 +641,7 @@ export default function Programs() {
       <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-cta via-amber-500 to-teal-500">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               Start Your Journey Today
             </h2>
             <p className="text-lg mb-8 text-white/90">

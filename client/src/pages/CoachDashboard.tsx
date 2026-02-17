@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { BackToTop } from "@/components/mobile";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,7 @@ export default function CoachDashboard() {
         <Header />
         {children}
         <Footer />
+      <BackToTop threshold={300} />
       </div>
     );
   };
@@ -422,7 +424,7 @@ export default function CoachDashboard() {
                     {coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}
                   </Badge>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
                   {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}! 👋
                 </h1>
                 <p className="text-white/90 text-lg max-w-xl">

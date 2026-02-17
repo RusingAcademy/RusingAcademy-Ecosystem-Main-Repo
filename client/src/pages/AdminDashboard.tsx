@@ -120,6 +120,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { BackToTop } from "@/components/mobile";
 
 interface CoachApplication {
   id: number;
@@ -185,7 +186,8 @@ function SortableLessonItem({ lesson, idx, moduleIdx, language, onEdit, onDelete
         >
           <X className="h-3 w-3" />
         </Button>
-      </div>
+            <BackToTop threshold={300} />
+</div>
     </div>
   );
 }

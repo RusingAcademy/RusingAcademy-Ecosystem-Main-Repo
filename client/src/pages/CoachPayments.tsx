@@ -17,6 +17,7 @@ import {
   Zap,
   RefreshCw,
 } from "lucide-react";
+import { BackToTop } from "@/components/mobile";
 
 export default function CoachPayments() {
   const { user } = useAuth();
@@ -367,6 +368,7 @@ export default function CoachPayments() {
       </main>
 
       <Footer />
-    </div>
+          <BackToTop threshold={300} />
+</div>
   );
 }

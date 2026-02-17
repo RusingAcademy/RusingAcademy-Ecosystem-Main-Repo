@@ -224,7 +224,7 @@ export default function SLEDiagnostic() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">{l.whatIsTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">{l.whatIsTitle}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 {l.whatIsDesc}
               </p>
@@ -241,7 +241,7 @@ export default function SLEDiagnostic() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-8">{l.whoIsTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8">{l.whoIsTitle}</h2>
               <div className="grid gap-4">
                 {l.whoIsItems.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4">
@@ -263,7 +263,7 @@ export default function SLEDiagnostic() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-8">{l.whatYouGetTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8">{l.whatYouGetTitle}</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {l.whatYouGetItems.map((item, idx) => (
                   <Card key={idx}>
@@ -289,7 +289,7 @@ export default function SLEDiagnostic() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">{l.successTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">{l.successTitle}</h2>
               <div className="grid md:grid-cols-3 gap-6">
                 {testimonials.map((testimonial, idx) => (
                   <Card key={idx}>
@@ -325,7 +325,7 @@ export default function SLEDiagnostic() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.pricingTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.pricingTitle}</h2>
               <p className="text-lg text-muted-foreground mb-8">{l.pricingDesc}</p>
               <Card className="max-w-md mx-auto">
                 <CardContent className="pt-8">
@@ -355,7 +355,7 @@ export default function SLEDiagnostic() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">{l.faqTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">{l.faqTitle}</h2>
               <div className="space-y-4">
                 {l.faqItems.map((item, idx) => (
                   <Card 
@@ -392,7 +392,7 @@ export default function SLEDiagnostic() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {language === 'en' ? 'Ready to get started?' : 'Prêt à commencer?'}
               </h2>
               <p className="text-lg text-muted-foreground mb-8">

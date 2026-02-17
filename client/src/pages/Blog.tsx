@@ -247,7 +247,7 @@ export default function Blog() {
         {/* Blog Grid */}
         <section className="py-6 md:py-8 lg:py-12">
           <div className="container max-w-6xl">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {regularPosts.map((post) => (
                 <article 
                   key={post.id}
