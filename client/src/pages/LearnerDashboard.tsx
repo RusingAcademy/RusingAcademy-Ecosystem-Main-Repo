@@ -469,7 +469,7 @@ export default function LearnerDashboard() {
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           
           {/* Hero Section - Welcome Banner - Professional & Accessible */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-teal-800/50">
+          <div className="learner-hero relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-teal-800/50">
             <div className="absolute inset-0 bg-gradient-to-br from-teal-800/50 to-obsidian/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
@@ -482,7 +482,7 @@ export default function LearnerDashboard() {
                     })}
                   </span>
                   {displayStreak > 0 && (
-                    <Badge className="bg-white dark:bg-background/20 text-white border-0 hover:bg-white dark:bg-background/30">
+                    <Badge className="bg-white/15 dark:bg-background/20 text-white border-0 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm">
                       <Flame className="h-3 w-3 mr-1" />
                       {displayStreak} {language === "fr" ? "jours" : "days"}
                     </Badge>

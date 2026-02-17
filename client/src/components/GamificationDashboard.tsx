@@ -128,17 +128,17 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             <div>
               <h2 className="text-2xl font-bold">{stats.levelInfo.title}</h2>
               <p className="text-teal-100">{stats.levelInfo.titleFr}</p>
-              <p className="text-sm text-teal-200 mt-1">{stats.xp.total.toLocaleString()} Total XP</p>
+              <p className="text-sm text-teal-100 mt-1">{stats.xp.total.toLocaleString()} Total XP</p>
             </div>
           </div>
           
           {/* Streak */}
-          <div className="text-center bg-white dark:bg-background/10 rounded-xl p-4 backdrop-blur">
+          <div className="text-center bg-white/15 dark:bg-background/10 rounded-xl p-4 backdrop-blur">
             <div className="text-xl md:text-3xl lg:text-4xl mb-1">🔥</div>
             <p className="text-lg md:text-2xl lg:text-3xl font-bold">{stats.streak.current}</p>
-            <p className="text-sm text-teal-200">Day Streak</p>
+            <p className="text-sm text-teal-100">Day Streak</p>
             {stats.streak.longest > stats.streak.current && (
-              <p className="text-xs text-teal-300 mt-1">Best: {stats.streak.longest} days</p>
+              <p className="text-xs text-teal-100 mt-1">Best: {stats.streak.longest} days</p>
             )}
           </div>
         </div>
@@ -156,7 +156,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                 style={{ width: `${stats.levelInfo.progressPercent}%` }}
               />
             </div>
-            <p className="text-sm text-teal-200 mt-2">
+            <p className="text-sm text-teal-100 mt-2">
               {stats.levelInfo.xpToNextLevel.toLocaleString()} XP needed to become {stats.levelInfo.nextLevel.title}
             </p>
           </div>
@@ -164,13 +164,13 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         
         {/* Weekly/Monthly XP */}
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <div className="bg-white dark:bg-background/10 rounded-xl p-3 text-center">
+          <div className="bg-white/15 dark:bg-background/10 rounded-xl p-3 text-center">
             <p className="text-2xl font-bold">{stats.xp.weekly.toLocaleString()}</p>
-            <p className="text-sm text-teal-200">This Week</p>
+            <p className="text-sm text-teal-100">This Week</p>
           </div>
-          <div className="bg-white dark:bg-background/10 rounded-xl p-3 text-center">
+          <div className="bg-white/15 dark:bg-background/10 rounded-xl p-3 text-center">
             <p className="text-2xl font-bold">{stats.xp.monthly.toLocaleString()}</p>
-            <p className="text-sm text-teal-200">This Month</p>
+            <p className="text-sm text-teal-100">This Month</p>
           </div>
         </div>
       </div>

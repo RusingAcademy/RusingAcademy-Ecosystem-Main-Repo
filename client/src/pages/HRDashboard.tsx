@@ -507,7 +507,7 @@ export default function HRDashboard() {
                       day: 'numeric' 
                     })}
                   </span>
-                  <Badge className="bg-white dark:bg-background/20 text-white border-0 hover:bg-white dark:bg-background/30">
+                  <Badge className="bg-white/15 dark:bg-background/20 text-white border-0 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm">
                     <Users className="h-3 w-3 mr-1" />
                     {mockTeamMembers.length} {language === "fr" ? "apprenants" : "learners"}
                   </Badge>
@@ -531,7 +531,7 @@ export default function HRDashboard() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="bg-white dark:bg-background/20 text-white border-white/60 hover:bg-white dark:bg-background/30"
+                    className="bg-white/15 dark:bg-background/20 text-white border-white/30 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm"
                     onClick={() => handleExport("csv")}
                     disabled={isExporting}
                   >
@@ -541,7 +541,7 @@ export default function HRDashboard() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="bg-white dark:bg-background/20 text-white border-white/60 hover:bg-white dark:bg-background/30"
+                    className="bg-white/15 dark:bg-background/20 text-white border-white/30 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm"
                     onClick={() => handleExport("pdf")}
                     disabled={isExporting}
                   >
