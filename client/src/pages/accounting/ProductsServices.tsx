@@ -30,7 +30,7 @@ export default function ProductsServices() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Products and services</h1>
         <div className="flex items-center gap-2">
-          <button className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/products-services/new")}>
+          <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/products-services/new")}>
             <Plus size={16} /> New
           </button>
           <button className="qb-btn-outline" onClick={() => toast("Feature coming soon")}>
@@ -70,7 +70,7 @@ export default function ProductsServices() {
                   {prod.price ? `$${Number(prod.price).toFixed(2)}` : "—"}
                 </td>
                 <td>
-                  <button className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={() => toast("Feature coming soon")}>
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={() => toast("Feature coming soon")}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>

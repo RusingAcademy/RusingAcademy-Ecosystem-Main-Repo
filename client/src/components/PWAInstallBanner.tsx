@@ -64,7 +64,7 @@ export function PWAInstallBanner() {
 
             {/* Install Button */}
             {canInstall ? (
-              <button
+              <button aria-label="Action"
                 onClick={installApp}
                 className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white dark:bg-background px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white dark:bg-background/90 hover:shadow-xl active:scale-95"
               >

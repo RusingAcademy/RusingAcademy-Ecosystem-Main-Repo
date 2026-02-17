@@ -510,7 +510,7 @@ function PathForm({
         <h2 className="text-xl font-bold text-gray-900 dark:text-foreground dark:text-foreground">
           {pathData ? ui.editPath : ui.createPath}
         </h2>
-        <button onClick={onCancel} className="p-2 text-gray-400 hover:text-gray-600 rounded-lg">
+        <button aria-label="Action" onClick={onCancel} className="p-2 text-gray-400 hover:text-gray-600 rounded-lg">
           <X className="w-5 h-5" />
         </button>
       </div>
@@ -702,7 +702,7 @@ function PathForm({
         >
           {ui.cancel}
         </button>
-        <button
+        <button aria-label="Action"
           onClick={handleSubmit}
           disabled={isLoading}
           className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"

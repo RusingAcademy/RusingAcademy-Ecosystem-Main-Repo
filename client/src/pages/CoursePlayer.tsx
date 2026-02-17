@@ -159,7 +159,7 @@ export default function CoursePlayer() {
       {/* Top Bar */}
       <header className="sticky top-0 z-30 bg-card border-b border-border px-4 py-3 flex items-center gap-4">
         <Link href="/courses">
-          <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <button aria-label="Action" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ChevronLeft className="w-4 h-4" />
             {t.coursePlayer.catalog}
           </button>

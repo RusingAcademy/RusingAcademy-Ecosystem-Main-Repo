@@ -155,7 +155,7 @@ export default function CoachDashboardHome() {
                 { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "var(--semantic-warning, var(--semantic-warning, var(--warning)))" },
               ].map((action) => (
                 <Link key={action.label} href={action.href}>
-                  <button className="w-full flex flex-col items-center gap-2 p-4 bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border hover:shadow-md transition-all group">
+                  <button aria-label="Action" className="w-full flex flex-col items-center gap-2 p-4 bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border hover:shadow-md transition-all group">
                     <span className="material-icons text-2xl transition-transform group-hover:scale-110" style={{ color: action.color }}>
                       {action.icon}
                     </span>

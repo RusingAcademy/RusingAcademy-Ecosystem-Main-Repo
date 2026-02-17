@@ -146,7 +146,7 @@ export default function PronunciationLab() {
 
           {/* Controls */}
           <div className="flex items-center justify-center gap-4 mb-6">
-            <button
+            <button aria-label="Action"
               onClick={speakPhrase}
               disabled={isPlaying}
               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white rounded-xl hover:opacity-90 disabled:opacity-50 transition-all shadow-sm"
@@ -154,7 +154,7 @@ export default function PronunciationLab() {
               <span className="material-icons">{isPlaying ? "volume_up" : "play_arrow"}</span>
               {isPlaying ? "Playing..." : "Listen"}
             </button>
-            <button
+            <button aria-label="Action"
               onClick={isRecording ? stopRecording : startRecording}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all shadow-sm ${
                 isRecording
@@ -188,7 +188,7 @@ export default function PronunciationLab() {
 
           {/* Navigation */}
           <div className="flex items-center justify-between">
-            <button onClick={prevExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 transition-colors">
+            <button aria-label="Action" onClick={prevExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 transition-colors">
               <span className="material-icons text-lg">chevron_left</span> Previous
             </button>
             <div className="flex gap-1">
@@ -196,7 +196,7 @@ export default function PronunciationLab() {
                 <div key={i} className={`w-2 h-2 rounded-full transition-colors ${i === currentIndex ? "bg-teal-700" : "bg-gray-200"}`} />
               ))}
             </div>
-            <button onClick={nextExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 transition-colors">
+            <button aria-label="Action" onClick={nextExercise} className="flex items-center gap-1 text-sm text-gray-500 hover:text-teal-700 transition-colors">
               Next <span className="material-icons text-lg">chevron_right</span>
             </button>
           </div>

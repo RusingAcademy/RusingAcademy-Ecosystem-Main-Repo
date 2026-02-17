@@ -226,14 +226,14 @@ export default function EmailTemplates() {
                 {editingTemplate.isNew ? "Create Template" : "Edit Template"}
               </h2>
               <div className="flex items-center gap-2">
-                <button
+                <button aria-label="Action"
                   className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg text-gray-500"
                   onClick={() => setShowPreview(!showPreview)}
                   title="Preview"
                 >
                   <Eye size={16} />
                 </button>
-                <button
+                <button aria-label="Action"
                   className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg text-gray-500"
                   onClick={() => setEditingTemplate(null)}
                 >
@@ -294,7 +294,7 @@ export default function EmailTemplates() {
                 <div className="flex items-center justify-between mb-1">
                   <label className="text-sm font-medium text-gray-700">Email Body</label>
                   <div className="relative">
-                    <button
+                    <button aria-label="Action"
                       className="text-xs text-sky-600 hover:underline flex items-center gap-1"
                       onClick={() => setShowMergeFields(!showMergeFields)}
                     >
@@ -359,7 +359,7 @@ export default function EmailTemplates() {
               >
                 Cancel
               </button>
-              <button
+              <button aria-label="Action"
                 className="qb-btn-green flex items-center gap-1"
                 onClick={handleSave}
                 disabled={createMutation.isPending || updateMutation.isPending}
@@ -377,14 +377,14 @@ export default function EmailTemplates() {
           <h3 className="text-lg font-semibold text-gray-800">Email Templates</h3>
           <p className="text-sm text-gray-500">Customize email templates for invoices, estimates, receipts, and reminders</p>
         </div>
-        <button className="qb-btn-green flex items-center gap-1" onClick={() => handleNew()}>
+        <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => handleNew()}>
           <Plus size={14} /> New Template
         </button>
       </div>
 
       {/* Type Filter */}
       <div className="flex items-center gap-2 mb-4">
-        <button
+        <button aria-label="Action"
           className={`px-3 py-1 rounded-full text-xs font-medium border ${
             typeFilter === "all" ? "bg-green-600 text-white border-green-600" : "bg-white dark:bg-card text-gray-600 border-gray-300 hover:border-gray-400"
           }`}
@@ -393,7 +393,7 @@ export default function EmailTemplates() {
           All
         </button>
         {TEMPLATE_TYPES.map(t => (
-          <button
+          <button aria-label="Action"
             key={t.value}
             className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 ${
               typeFilter === t.value ? "bg-green-600 text-white border-green-600" : "bg-white dark:bg-card text-gray-600 border-gray-300 hover:border-gray-400"
@@ -419,7 +419,7 @@ export default function EmailTemplates() {
           <p className="text-sm text-gray-400 mb-4">Create templates to streamline your email communications</p>
           <div className="flex items-center justify-center gap-2">
             {TEMPLATE_TYPES.map(t => (
-              <button
+              <button aria-label="Action"
                 key={t.value}
                 className="qb-btn-outline text-sm flex items-center gap-1"
                 onClick={() => handleNew(t.value)}
@@ -460,14 +460,14 @@ export default function EmailTemplates() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1">
-                    <button
+                    <button aria-label="Action"
                       className="p-1.5 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
                       onClick={() => handleEdit(template)}
                       title="Edit"
                     >
                       <Edit2 size={14} />
                     </button>
-                    <button
+                    <button aria-label="Action"
                       className="p-1.5 hover:bg-red-50 rounded text-gray-400 hover:text-red-500"
                       onClick={() => handleDelete(template.id)}
                       title="Delete"

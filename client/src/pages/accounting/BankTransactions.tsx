@@ -209,14 +209,14 @@ export default function BankTransactions() {
                   <td>
                     {txn.status === "For Review" ? (
                       <div className="flex items-center gap-1">
-                        <button
+                        <button aria-label="Action"
                           className="p-1 bg-green-50 hover:bg-green-100 rounded text-green-600"
                           onClick={() => updateMutation.mutate({ id: txn.id, status: "Categorized" })}
                           title="Categorize"
                         >
                           <Check size={14} />
                         </button>
-                        <button
+                        <button aria-label="Action"
                           className="p-1 bg-red-50 hover:bg-red-100 rounded text-red-600"
                           onClick={() => updateMutation.mutate({ id: txn.id, status: "Excluded" })}
                           title="Exclude"

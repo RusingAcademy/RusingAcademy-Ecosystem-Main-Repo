@@ -340,7 +340,7 @@ export default function SequenceAnalyticsDashboard() {
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background/10 hover:bg-white dark:bg-background/20 rounded-lg transition-colors">
+        <button aria-label="Action" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background/10 hover:bg-white dark:bg-background/20 rounded-lg transition-colors">
           <RefreshCw className="w-4 h-4" />
           {t.refresh}
         </button>

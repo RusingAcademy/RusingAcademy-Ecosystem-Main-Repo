@@ -55,8 +55,8 @@ function CalendarWidget({ sessions, lang }: { sessions: any[]; lang: string }) {
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm font-semibold text-gray-800">{MONTHS_EN[month]} {year}</span>
         <div className="flex gap-1">
-          <button onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded"><span className="material-icons text-lg text-gray-500">chevron_left</span></button>
-          <button onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded"><span className="material-icons text-lg text-gray-500">chevron_right</span></button>
+          <button aria-label="Action" onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded"><span className="material-icons text-lg text-gray-500">chevron_left</span></button>
+          <button aria-label="Action" onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded"><span className="material-icons text-lg text-gray-500">chevron_right</span></button>
         </div>
       </div>
       <div className="grid grid-cols-7 gap-0 text-center text-[10px] text-gray-400 mb-1">

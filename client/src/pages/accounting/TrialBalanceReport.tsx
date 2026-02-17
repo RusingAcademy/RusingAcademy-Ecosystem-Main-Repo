@@ -32,7 +32,7 @@ export default function TrialBalanceReport() {
     <div className="p-6 max-w-[1000px] mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <Link href="/reports">
-          <button className="p-1.5 hover:bg-gray-100 dark:bg-card rounded-full">
+          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-card rounded-full">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
         </Link>

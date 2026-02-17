@@ -138,7 +138,7 @@ export function BadgeConfigurationPanel({
                         >
                           <Edit2 size={18} />
                         </button>
-                        <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                        <button aria-label="Action" className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
                           <Trash2 size={18} />
                         </button>
                       </div>

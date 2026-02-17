@@ -164,14 +164,14 @@ export default function BalanceSheetReport() {
         <div className="flex items-center gap-2">
           {/* View Mode Toggle */}
           <div className="flex items-center border border-gray-200 dark:border-border dark:border-border rounded-lg overflow-hidden">
-            <button
+            <button aria-label="Action"
               className={`p-2 ${viewMode === "table" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("table")}
               title="Table view"
             >
               <Table2 size={16} />
             </button>
-            <button
+            <button aria-label="Action"
               className={`p-2 ${viewMode === "chart" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("chart")}
               title="Chart view"
@@ -192,10 +192,10 @@ export default function BalanceSheetReport() {
               <option value="last_year">End of Last Year</option>
             </select>
           </div>
-          <button className="qb-btn-outline flex items-center gap-1" onClick={() => window.print()}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => window.print()}>
             <Printer size={14} /> Print
           </button>
-          <button className="qb-btn-outline flex items-center gap-1" onClick={handleExport}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={handleExport}>
             <Download size={14} /> Export
           </button>
         </div>

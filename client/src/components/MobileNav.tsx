@@ -137,7 +137,7 @@ export default function MobileNav({ isOpen, onClose, activePage, onPageChange }:
                   <p className="text-[8px] text-muted-foreground font-bold tracking-[0.1em] uppercase">{t.nav.communityHub}</p>
                 </div>
               </div>
-              <button
+              <button aria-label="Action"
                 onClick={onClose}
                 className="p-1.5 rounded-xl transition-all duration-200"
                 style={{ background: "rgba(27, 20, 100, 0.03)" }}

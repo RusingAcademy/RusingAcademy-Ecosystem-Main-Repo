@@ -75,7 +75,7 @@ export function StreakMilestoneProgress({ currentStreak }: { currentStreak: numb
 
 export function StreakFreezeButton({ available, onUse }: { available: boolean; onUse: () => void }) {
   return (
-    <button onClick={onUse} disabled={!available} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${available ? 'bg-blue-500 hover:bg-blue-600' : 'bg-teal-800 cursor-not-allowed'}`}>
+    <button aria-label="Action" onClick={onUse} disabled={!available} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${available ? 'bg-blue-500 hover:bg-blue-600' : 'bg-teal-800 cursor-not-allowed'}`}>
       <span>❄️</span>
       <span>{available ? 'Utiliser Streak Freeze' : 'Aucun freeze disponible'}</span>
     </button>

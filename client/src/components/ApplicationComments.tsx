@@ -169,7 +169,7 @@ export function ApplicationComments({
                 </label>
               )}
 
-              <button
+              <button aria-label="Action"
                 onClick={handleSubmitComment}
                 disabled={!newComment.trim()}
                 className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium"
@@ -253,7 +253,7 @@ function CommentThread({
                 >
                   <Edit2 size={16} />
                 </button>
-                <button
+                <button aria-label="Action"
                   onClick={onDelete}
                   className="p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded"
                   title={isEn ? "Delete" : "Supprimer"}

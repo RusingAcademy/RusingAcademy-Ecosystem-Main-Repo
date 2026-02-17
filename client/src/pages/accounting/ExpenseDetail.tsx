@@ -180,9 +180,9 @@ export default function ExpenseDetail() {
             <>
               <button className="qb-btn-outline" onClick={() => setIsEditing(true)}>Edit</button>
               <div className="relative group">
-                <button className="qb-btn-outline p-2"><MoreVertical size={14} /></button>
+                <button aria-label="Action" className="qb-btn-outline p-2"><MoreVertical size={14} /></button>
                 <div className="absolute right-0 top-full mt-1 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
-                  <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
                     <Trash2 size={14} /> Delete Expense
                   </button>
                 </div>
@@ -375,7 +375,7 @@ export default function ExpenseDetail() {
                   </td>
                   {isEditing && (
                     <td className="py-2 text-center">
-                      <button className="p-1 hover:bg-red-50 rounded text-gray-400 hover:text-red-500" onClick={() => removeLineItem(index)}>
+                      <button aria-label="Action" className="p-1 hover:bg-red-50 rounded text-gray-400 hover:text-red-500" onClick={() => removeLineItem(index)}>
                         <Trash2 size={14} />
                       </button>
                     </td>
@@ -385,7 +385,7 @@ export default function ExpenseDetail() {
             </tbody>
           </table>
           {isEditing && (
-            <button className="mt-3 text-sm text-sky-600 hover:underline flex items-center gap-1" onClick={addLineItem}>
+            <button aria-label="Action" className="mt-3 text-sm text-sky-600 hover:underline flex items-center gap-1" onClick={addLineItem}>
               <Plus size={14} /> Add a line
             </button>
           )}

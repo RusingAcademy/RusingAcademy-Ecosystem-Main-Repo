@@ -198,7 +198,7 @@ export default function PostCard({ post }: { post: Post }) {
                 border: "1px solid rgba(27, 20, 100, 0.06)",
               }}
             >
-              <button
+              <button aria-label="Action"
                 className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-105 active:scale-95"
                 style={{
                   background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))",
