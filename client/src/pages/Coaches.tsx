@@ -227,7 +227,7 @@ export default function Coaches() {
                   <div className="p-6 space-y-6">
                     {/* Language Filter */}
                     <div>
-                      <Label className="text-sm font-medium text-black dark:text-white dark:text-white/90 mb-3 flex items-center gap-2">
+                      <Label className="text-sm font-medium text-black dark:text-white/90 mb-3 flex items-center gap-2">
                         <Globe className="w-4 h-4 text-teal-600" />
                         {language === 'fr' ? 'Langue' : 'Language'}
                       </Label>
@@ -251,7 +251,7 @@ export default function Coaches() {
 
                     {/* Specialization Filter */}
                     <div>
-                      <Label className="text-sm font-medium text-black dark:text-white dark:text-white/90 mb-3 flex items-center gap-2">
+                      <Label className="text-sm font-medium text-black dark:text-white/90 mb-3 flex items-center gap-2">
                         <Sparkles className="w-4 h-4 text-teal-600" />
                         {language === 'fr' ? 'Spécialisation SLE' : 'SLE Specialization'}
                       </Label>
@@ -275,7 +275,7 @@ export default function Coaches() {
 
                     {/* Price Range */}
                     <div>
-                      <Label className="text-sm font-medium text-black dark:text-white dark:text-white/90 mb-3 flex items-center gap-2">
+                      <Label className="text-sm font-medium text-black dark:text-white/90 mb-3 flex items-center gap-2">
                         <Zap className="w-4 h-4 text-teal-600" />
                         {language === 'fr' ? 'Prix par heure' : 'Price per hour'}
                       </Label>
@@ -347,7 +347,7 @@ export default function Coaches() {
 
               {/* Results Count */}
               <div className="flex items-center justify-between mb-6">
-                <p className="text-black dark:text-white dark:text-white">
+                <p className="text-black dark:text-white">
                   {isLoading ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
@@ -368,7 +368,7 @@ export default function Coaches() {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-r from-red-100 to-orange-100 dark:from-red-900/50 dark:to-orange-900/50 flex items-center justify-center mx-auto mb-6">
                     <X className="h-10 w-10 text-red-500" />
                   </div>
-                  <h3 className="text-xl font-semibold text-black dark:text-white dark:text-white mb-2">
+                  <h3 className="text-xl font-semibold text-black dark:text-white mb-2">
                     {language === "fr" ? "Erreur de chargement" : "Loading Error"}
                   </h3>
                   <p className="text-black dark:text-white dark:text-cyan-300 mb-6 max-w-md mx-auto">
@@ -392,7 +392,7 @@ export default function Coaches() {
                     <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center mx-auto mb-4 animate-pulse">
                       <Loader2 className="h-8 w-8 animate-spin text-white" />
                     </div>
-                    <p className="text-black dark:text-white dark:text-white">
+                    <p className="text-black dark:text-white">
                       {language === "fr" ? "Recherche des meilleurs coachs..." : "Finding the best coaches..."}
                     </p>
                   </div>
@@ -460,7 +460,7 @@ export default function Coaches() {
                                     : 'bg-blue-500/90 text-white'
                                 }`}>
                                   {availability.color === 'green' && (
-                                    <span className="w-2 h-2 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900 animate-pulse" />
+                                    <span className="w-2 h-2 rounded-full bg-white dark:bg-slate-900 animate-pulse" />
                                   )}
                                   {availability.color !== 'green' && <Calendar className="w-3 h-3" />}
                                   {availability.label}
@@ -487,7 +487,7 @@ export default function Coaches() {
                           <div className="flex-1 p-6 lg:p-8">
                             {/* Name & Headline - Desktop */}
                             <div className="hidden lg:block mb-4">
-                              <h3 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
+                              <h3 className="text-2xl font-bold text-black dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
                               <p className="font-medium coach-headline-dark">
@@ -499,17 +499,17 @@ export default function Coaches() {
                             <div className="flex flex-wrap items-center gap-4 mb-5">
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Users className="w-4 h-4 text-teal-600" />
-                                <span className="font-medium text-black dark:text-white dark:text-white">{coach.totalSessions || 324}</span>
-                                <span className="text-black dark:text-white dark:text-white/90">{language === 'fr' ? 'sessions' : 'sessions'}</span>
+                                <span className="font-medium text-black dark:text-white">{coach.totalSessions || 324}</span>
+                                <span className="text-black dark:text-white/90">{language === 'fr' ? 'sessions' : 'sessions'}</span>
                               </div>
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Clock className="w-4 h-4 text-teal-600" />
-                                <span className="text-black dark:text-white dark:text-white/90">{language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h</span></div>
+                                <span className="text-black dark:text-white/90">{language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h</span></div>
                               {coach.successRate && coach.successRate > 0 && (
                                 <div className="flex items-center gap-1.5 text-sm">
                                   <TrendingUp className="w-4 h-4 text-emerald-600" />
                                   <span className="font-medium text-emerald-600">{coach.successRate}%</span>
-                                  <span className="text-black dark:text-white dark:text-white/90">{language === 'fr' ? 'réussite' : 'success'}</span>
+                                  <span className="text-black dark:text-white/90">{language === 'fr' ? 'réussite' : 'success'}</span>
                                 </div>
                               )}
                             </div>
@@ -523,13 +523,13 @@ export default function Coaches() {
                                 <Badge 
                                   key={spec} 
                                   variant="outline" 
-                                  className="border-teal-300 dark:border-teal-700 text-black dark:text-white dark:text-white bg-teal-100 dark:bg-teal-800 px-3 py-1 font-medium"
+                                  className="border-teal-300 dark:border-teal-700 text-black dark:text-white bg-teal-100 dark:bg-teal-800 px-3 py-1 font-medium"
                                 >
                                   {getSpecLabel(spec)}
                                 </Badge>
                               ))}
                               {coach.specializationsArray.length > 4 && (
-                                <Badge variant="outline" className="border-slate-200 dark:border-teal-800 text-black dark:text-white dark:text-white px-3 py-1">
+                                <Badge variant="outline" className="border-slate-200 dark:border-teal-800 text-black dark:text-white px-3 py-1">
                                   +{coach.specializationsArray.length - 4}
                                 </Badge>
                               )}
@@ -554,11 +554,11 @@ export default function Coaches() {
                               {/* Price */}
                               <div className="text-center lg:text-left mb-6">
                                 <div className="flex items-baseline justify-center lg:justify-start gap-1">
-                                  <span className="text-3xl font-bold text-black dark:text-white dark:text-white">
+                                  <span className="text-3xl font-bold text-black dark:text-white">
                                     ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                                   </span>
-                                  <span className="text-black dark:text-white dark:text-white/90 text-sm font-medium">/{language === 'fr' ? 'heure' : 'hour'}</span></div>
-                                <p className="text-sm text-black dark:text-white dark:text-white/90 mt-1">
+                                  <span className="text-black dark:text-white/90 text-sm font-medium">/{language === 'fr' ? 'heure' : 'hour'}</span></div>
+                                <p className="text-sm text-black dark:text-white/90 mt-1">
                                   {language === 'fr' ? 'Session d\'essai' : 'Trial session'}: 
                                   <span className="font-medium text-teal-600 ml-1">
                                     ${((coach.trialRate || 2500) / 100).toFixed(0)}
@@ -635,10 +635,10 @@ export default function Coaches() {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-r from-teal-100 to-emerald-100 dark:from-teal-900/50 dark:to-emerald-900/50 flex items-center justify-center mx-auto mb-6">
                     <Search className="h-10 w-10 text-teal-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-black dark:text-white dark:text-white mb-2">
+                  <h3 className="text-xl font-semibold text-black dark:text-white mb-2">
                     {language === "fr" ? "Aucun coach trouvé" : "No coaches found"}
                   </h3>
-                  <p className="text-black dark:text-white dark:text-white mb-6 max-w-md mx-auto">
+                  <p className="text-black dark:text-white mb-6 max-w-md mx-auto">
                     {language === "fr" 
                       ? "Essayez d'ajuster vos filtres pour voir plus de résultats."
                       : "Try adjusting your filters to see more results."}

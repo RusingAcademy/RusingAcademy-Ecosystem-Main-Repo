@@ -114,7 +114,7 @@ export function CertificationExpiryWidget({
             <Award className="h-5 w-5 text-amber-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-black dark:text-white dark:text-white">{l.title}</h3>
+            <h3 className="font-semibold text-black dark:text-white">{l.title}</h3>
             <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
           </div>
         </div>
@@ -180,7 +180,7 @@ export function CertificationExpiryWidget({
                       {typeLabels[cert.type]}
                     </span>
                     <div>
-                      <p className="font-semibold text-black dark:text-white dark:text-white">
+                      <p className="font-semibold text-black dark:text-white">
                         {cert.name} - {cert.level}
                       </p>
                       <p className="text-sm text-black dark:text-white dark:text-cyan-300">

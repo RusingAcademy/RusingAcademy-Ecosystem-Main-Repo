@@ -122,7 +122,7 @@ export default function SalesTax() {
 
       {/* Filing History */}
       <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Filing History</h2>
-      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-50 dark:bg-slate-900 border-b">

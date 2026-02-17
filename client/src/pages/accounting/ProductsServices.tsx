@@ -39,7 +39,7 @@ export default function ProductsServices() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">

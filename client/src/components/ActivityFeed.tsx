@@ -106,7 +106,7 @@ export function ActivityFeed({ language, className }: ActivityFeedProps) {
                 <Icon className="h-3.5 w-3.5 text-black dark:text-white dark:text-cyan-300" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-black dark:text-white dark:text-white/90 truncate">
+                <p className="text-sm text-black dark:text-white/90 truncate">
                   {item.description}
                 </p>
               </div>

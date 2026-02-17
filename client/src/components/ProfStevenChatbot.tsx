@@ -162,7 +162,7 @@ export default function ProfStevenChatbot() {
           <div>
             <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
               Prof. Steven 
-              <span className="bg-white dark:bg-slate-800 dark:bg-slate-900/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
+              <span className="bg-white dark:bg-slate-900/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
                 AI Assistant
               </span>
             </h3>
@@ -170,7 +170,7 @@ export default function ProfStevenChatbot() {
           </div>
           <button 
             onClick={togglePopup}
-            className="absolute top-3 right-3 w-8 h-8 bg-white dark:bg-slate-800 dark:bg-slate-900/20 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
+            className="absolute top-3 right-3 w-8 h-8 bg-white dark:bg-slate-900/20 hover:bg-white dark:bg-slate-900/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
             aria-label="Close chatbot"
           >
             <X className="w-5 h-5" />
@@ -181,8 +181,8 @@ export default function ProfStevenChatbot() {
         <div className="p-5">
           {/* Welcome */}
           <div className="text-center mb-4">
-            <h4 className="text-base font-extrabold text-black dark:text-white dark:text-white mb-2">👋 {t.welcome}</h4>
-            <p className="text-sm text-black dark:text-white dark:text-white leading-relaxed">{t.welcomeDesc}</p>
+            <h4 className="text-base font-extrabold text-black dark:text-white mb-2">👋 {t.welcome}</h4>
+            <p className="text-sm text-black dark:text-white leading-relaxed">{t.welcomeDesc}</p>
           </div>
 
           {/* 3 Main Options */}
@@ -194,8 +194,8 @@ export default function ProfStevenChatbot() {
                   <Mic className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-black dark:text-white dark:text-white">{t.voicePractice}</h5>
-                  <p className="text-xs text-black dark:text-white dark:text-white">{t.voicePracticeDesc}</p>
+                  <h5 className="text-sm font-extrabold text-black dark:text-white">{t.voicePractice}</h5>
+                  <p className="text-xs text-black dark:text-white">{t.voicePracticeDesc}</p>
                 </div>
               </div>
             </Link>
@@ -207,8 +207,8 @@ export default function ProfStevenChatbot() {
                   <ClipboardCheck className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-black dark:text-white dark:text-white">{t.placementTest}</h5>
-                  <p className="text-xs text-black dark:text-white dark:text-white">{t.placementTestDesc}</p>
+                  <h5 className="text-sm font-extrabold text-black dark:text-white">{t.placementTest}</h5>
+                  <p className="text-xs text-black dark:text-white">{t.placementTestDesc}</p>
                 </div>
               </div>
             </Link>
@@ -220,8 +220,8 @@ export default function ProfStevenChatbot() {
                   <GraduationCap className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-black dark:text-white dark:text-white">{t.examSimulation}</h5>
-                  <p className="text-xs text-black dark:text-white dark:text-white">{t.examSimulationDesc}</p>
+                  <h5 className="text-sm font-extrabold text-black dark:text-white">{t.examSimulation}</h5>
+                  <p className="text-xs text-black dark:text-white">{t.examSimulationDesc}</p>
                 </div>
               </div>
             </Link>
@@ -229,8 +229,8 @@ export default function ProfStevenChatbot() {
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 bg-white dark:bg-slate-800 dark:bg-slate-900 text-center border-t border-gray-100">
-          <span className="text-xs text-black dark:text-white dark:text-white">⚡ {t.poweredBy}</span>
+        <div className="px-5 py-3 bg-white dark:bg-slate-900 text-center border-t border-gray-100">
+          <span className="text-xs text-black dark:text-white">⚡ {t.poweredBy}</span>
         </div>
       </div>
 

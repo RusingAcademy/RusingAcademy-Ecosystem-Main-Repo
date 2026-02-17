@@ -33,7 +33,7 @@ export const SemanticColors = {
   },
   neutral: {
     bg: "bg-gray-50 dark:bg-slate-900 dark:bg-gray-950/30",
-    text: "text-gray-700 dark:text-gray-300 dark:text-gray-300",
+    text: "text-gray-700 dark:text-gray-300",
     border: "border-gray-200 dark:border-slate-700 dark:border-gray-800",
     accent: "bg-gray-500",
   },

@@ -198,7 +198,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
       {/* Timeline */}
       {timeline && timeline.length > 0 && (
         <div className="bg-white dark:bg-slate-800 dark:bg-obsidian rounded-lg border border-slate-200 dark:border-teal-800 p-6">
-          <h3 className="text-lg font-bold mb-6 text-black dark:text-white dark:text-white">
+          <h3 className="text-lg font-bold mb-6 text-black dark:text-white">
             {language === 'fr' ? 'Historique de candidature' : 'Application Timeline'}
           </h3>
           
@@ -222,14 +222,14 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
                 {/* Event content */}
                 <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-teal-800">
                   <div className="flex items-start justify-between mb-2">
-                    <h4 className="font-semibold text-black dark:text-white dark:text-white">
+                    <h4 className="font-semibold text-black dark:text-white">
                       {event.message}
                     </h4>
                     <span className="text-xs text-black dark:text-white dark:text-cyan-300 whitespace-nowrap ml-2">
                       {formatDate(new Date(event.timestamp))}
                     </span>
                   </div>
-                  <p className="text-sm text-black dark:text-white dark:text-white/90">
+                  <p className="text-sm text-black dark:text-white/90">
                     {language === 'fr' ? 'Étape ' : 'Step '} {index + 1} {language === 'fr' ? 'de' : 'of'} {timeline.length}
                   </p>
                 </div>

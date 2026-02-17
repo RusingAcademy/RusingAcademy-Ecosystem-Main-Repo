@@ -102,7 +102,7 @@ export default function CategoryThreads() {
               if (!user) { window.location.href = getLoginUrl(); return; }
               setShowNewThread(true);
             }}
-            className="bg-teal-400 text-black dark:text-white dark:text-white hover:bg-teal-400/90 font-bold"
+            className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold"
           >
             <Plus className="w-4 h-4 mr-2" />
             {language === "en" ? "New Discussion" : "Nouvelle discussion"}
@@ -116,7 +116,7 @@ export default function CategoryThreads() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mb-6 p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-teal-400/30"
+              className="mb-6 p-6 rounded-2xl bg-white dark:bg-slate-900/5 border border-teal-400/30"
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold">{language === "en" ? "Start a New Discussion" : "Commencer une nouvelle discussion"}</h3>
@@ -129,20 +129,20 @@ export default function CategoryThreads() {
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 placeholder={language === "en" ? "Discussion title..." : "Titre de la discussion..."}
-                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 mb-3"
               />
               <textarea
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
                 placeholder={language === "en" ? "Share more details..." : "Partagez plus de détails..."}
-                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
                 rows={4}
               />
               <div className="flex justify-end">
                 <Button
                   onClick={handleCreateThread}
                   disabled={!newTitle.trim() || !newContent.trim() || createThreadMutation.isPending}
-                  className="bg-teal-400 text-black dark:text-white dark:text-white hover:bg-teal-400/90 font-bold"
+                  className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold"
                 >
                   {createThreadMutation.isPending && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
                   {language === "en" ? "Post Discussion" : "Publier la discussion"}
@@ -167,7 +167,7 @@ export default function CategoryThreads() {
                 transition={{ delay: index * 0.03 }}
               >
                 <Link href={`/community/thread/${thread.id}`}>
-                  <div className="group p-5 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900/5 border border-white/10 hover:border-teal-400/30 transition-all cursor-pointer">
+                  <div className="group p-5 rounded-xl bg-white dark:bg-slate-900/5 border border-white/10 hover:border-teal-400/30 transition-all cursor-pointer">
                     <div className="flex items-start gap-4">
                       {/* Author avatar */}
                       <div className="hidden sm:block">
@@ -214,7 +214,7 @@ export default function CategoryThreads() {
             {user && (
               <Button
                 onClick={() => setShowNewThread(true)}
-                className="bg-teal-400 text-black dark:text-white dark:text-white hover:bg-teal-400/90 font-bold"
+                className="bg-teal-400 text-black dark:text-white hover:bg-teal-400/90 font-bold"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {language === "en" ? "Start the First Discussion" : "Commencer la première discussion"}

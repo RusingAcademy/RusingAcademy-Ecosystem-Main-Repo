@@ -126,7 +126,7 @@ export default function AdminLeads() {
       <DashboardLayout>
         <div className="flex flex-col items-center justify-center h-64 gap-4">
           <XCircle className="w-16 h-16 text-red-500" />
-          <h2 className="text-2xl font-bold text-black dark:text-white dark:text-white">Access Denied</h2>
+          <h2 className="text-2xl font-bold text-black dark:text-white">Access Denied</h2>
           <p className="text-black dark:text-white dark:text-cyan-300">This page is only accessible to administrators.</p>
         </div>
       </DashboardLayout>
@@ -139,7 +139,7 @@ export default function AdminLeads() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-black dark:text-white dark:text-white">Lead Management</h1>
+            <h1 className="text-2xl font-bold text-black dark:text-white">Lead Management</h1>
             <p className="text-black dark:text-white dark:text-cyan-300">Manage contact form submissions and leads</p>
           </div>
           <Button onClick={() => refetch()} variant="outline" className="gap-2">
@@ -261,10 +261,10 @@ export default function AdminLeads() {
                       <TableRow key={lead.id} className="cursor-pointer hover:bg-slate-50 dark:hover:bg-foundation" onClick={() => setSelectedLead(lead)}>
                         <TableCell>
                           <div className="flex flex-col">
-                            <span className="font-medium text-black dark:text-white dark:text-white">
+                            <span className="font-medium text-black dark:text-white">
                               {lead.firstName} {lead.lastName}
                             </span>
-                            <span className="text-sm text-black dark:text-white dark:text-white">{lead.email}</span>
+                            <span className="text-sm text-black dark:text-white">{lead.email}</span>
                           </div>
                         </TableCell>
                         <TableCell>
@@ -284,7 +284,7 @@ export default function AdminLeads() {
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm text-black dark:text-white dark:text-white">
+                          <span className="text-sm text-black dark:text-white">
                             {lead.createdAt ? format(new Date(lead.createdAt), "MMM d, yyyy") : "N/A"}
                           </span>
                         </TableCell>
@@ -372,7 +372,7 @@ export default function AdminLeads() {
 
                 {/* Message */}
                 <div>
-                  <h4 className="text-sm font-medium text-black dark:text-white dark:text-white/90 mb-2">Message</h4>
+                  <h4 className="text-sm font-medium text-black dark:text-white/90 mb-2">Message</h4>
                   <div className="p-4 bg-slate-50 dark:bg-foundation rounded-lg">
                     <p className="text-sm text-black dark:text-white dark:text-cyan-300 whitespace-pre-wrap">
                       {selectedLead.message}
@@ -382,7 +382,7 @@ export default function AdminLeads() {
 
                 {/* Status Update */}
                 <div>
-                  <h4 className="text-sm font-medium text-black dark:text-white dark:text-white/90 mb-2">Update Status</h4>
+                  <h4 className="text-sm font-medium text-black dark:text-white/90 mb-2">Update Status</h4>
                   <div className="flex gap-2 flex-wrap">
                     {(Object.keys(statusConfig) as LeadStatus[]).map((status) => (
                       <Button

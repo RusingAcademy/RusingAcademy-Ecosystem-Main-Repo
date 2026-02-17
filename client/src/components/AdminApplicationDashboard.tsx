@@ -334,7 +334,7 @@ export function AdminApplicationDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-black dark:text-white dark:text-white">{l.title}</h1>
+        <h1 className="text-3xl font-bold text-black dark:text-white">{l.title}</h1>
         <p className="text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
       </div>
 
@@ -342,7 +342,7 @@ export function AdminApplicationDashboard() {
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {[
-            { value: stats.total, label: l.total, color: "text-black dark:text-white dark:text-white" },
+            { value: stats.total, label: l.total, color: "text-black dark:text-white" },
             { value: stats.submitted, label: l.submitted, color: "text-blue-600" },
             { value: stats.underReview, label: l.underReview, color: "text-yellow-600" },
             { value: stats.approved, label: l.approved, color: "text-green-600" },
@@ -378,7 +378,7 @@ export function AdminApplicationDashboard() {
                 placeholder={l.search}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white dark:text-white"
+                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white"
               />
             </div>
 
@@ -386,7 +386,7 @@ export function AdminApplicationDashboard() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white"
             >
               <option value="all">{l.status}: All</option>
               <option value="submitted">{l.submitted}</option>
@@ -399,7 +399,7 @@ export function AdminApplicationDashboard() {
             <select
               value={languageFilter}
               onChange={(e) => setLanguageFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white"
             >
               <option value="all">{l.language}: All</option>
               <option value="french">French</option>
@@ -411,7 +411,7 @@ export function AdminApplicationDashboard() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white"
             >
               <option value="createdAt">
                 {l.sortBy}: {l.date}
@@ -432,7 +432,7 @@ export function AdminApplicationDashboard() {
         <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-black dark:text-white dark:text-white">
+              <div className="text-sm font-medium text-black dark:text-white">
                 {selectedApplications.size} {l.selected}
               </div>
               <div className="flex gap-2">
@@ -479,19 +479,19 @@ export function AdminApplicationDashboard() {
                         )}
                       </button>
                     </th>
-                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white dark:text-white">{l.applicationName}</th>
-                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white dark:text-white">{l.applicationEmail}</th>
-                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white dark:text-white">{l.applicationLanguage}</th>
-                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white dark:text-white">{l.applicationStatus}</th>
-                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white dark:text-white">{l.applicationDate}</th>
-                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white dark:text-white">{l.actions}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">{l.applicationName}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">{l.applicationEmail}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">{l.applicationLanguage}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">{l.applicationStatus}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">{l.applicationDate}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">{l.actions}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {applications.map((app: Application) => (
                     <tr
                       key={app.id}
-                      className="border-b border-slate-200 dark:border-teal-800 hover:bg-white dark:bg-slate-800 dark:bg-slate-900 dark:hover:bg-foundation"
+                      className="border-b border-slate-200 dark:border-teal-800 hover:bg-white dark:bg-slate-900 dark:hover:bg-foundation"
                     >
                       <td className="py-3 px-4">
                         <button onClick={() => toggleApplicationSelection(app.id)}>
@@ -515,7 +515,7 @@ export function AdminApplicationDashboard() {
                               {(app.firstName || app.fullName || "?")[0]}
                             </div>
                           )}
-                          <span className="font-medium text-black dark:text-white dark:text-white">
+                          <span className="font-medium text-black dark:text-white">
                             {app.fullName || `${app.firstName} ${app.lastName}`}
                           </span>
                         </div>
@@ -614,7 +614,7 @@ export function AdminApplicationDashboard() {
                   </div>
                 )}
                 <div>
-                  <h3 className="text-lg font-bold text-black dark:text-white dark:text-white">
+                  <h3 className="text-lg font-bold text-black dark:text-white">
                     {selectedApplication.fullName ||
                       `${selectedApplication.firstName} ${selectedApplication.lastName}`}
                   </h3>
@@ -626,31 +626,31 @@ export function AdminApplicationDashboard() {
 
               {/* Personal Info */}
               <div>
-                <h4 className="font-semibold text-black dark:text-white dark:text-white mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-black dark:text-white mb-3 flex items-center gap-2">
                   <Globe className="w-4 h-4" /> {l.personalInfo}
                 </h4>
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div>
                     <span className="text-muted-foreground">Teaching Language:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white capitalize">
+                    <span className="ml-2 font-medium text-black dark:text-white capitalize">
                       {selectedApplication.teachingLanguage}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Native Language:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                    <span className="ml-2 font-medium text-black dark:text-white">
                       {selectedApplication.nativeLanguage || "—"}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Province:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                    <span className="ml-2 font-medium text-black dark:text-white">
                       {selectedApplication.province || "—"}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Applied:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                    <span className="ml-2 font-medium text-black dark:text-white">
                       {formatDate(new Date(selectedApplication.createdAt))}
                     </span>
                   </div>
@@ -659,26 +659,26 @@ export function AdminApplicationDashboard() {
 
               {/* Qualifications */}
               <div>
-                <h4 className="font-semibold text-black dark:text-white dark:text-white mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-black dark:text-white mb-3 flex items-center gap-2">
                   <Award className="w-4 h-4" /> {l.qualifications}
                 </h4>
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div>
                     <span className="text-muted-foreground">Years Teaching:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                    <span className="ml-2 font-medium text-black dark:text-white">
                       {selectedApplication.yearsTeaching || "—"}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Certifications:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                    <span className="ml-2 font-medium text-black dark:text-white">
                       {selectedApplication.certifications || "—"}
                     </span>
                   </div>
                   {selectedApplication.sleOralLevel && (
                     <div>
                       <span className="text-muted-foreground">SLE Oral:</span>
-                      <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                      <span className="ml-2 font-medium text-black dark:text-white">
                         {selectedApplication.sleOralLevel}
                       </span>
                     </div>
@@ -686,7 +686,7 @@ export function AdminApplicationDashboard() {
                   {selectedApplication.sleWrittenLevel && (
                     <div>
                       <span className="text-muted-foreground">SLE Written:</span>
-                      <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                      <span className="ml-2 font-medium text-black dark:text-white">
                         {selectedApplication.sleWrittenLevel}
                       </span>
                     </div>
@@ -694,7 +694,7 @@ export function AdminApplicationDashboard() {
                   {selectedApplication.sleReadingLevel && (
                     <div>
                       <span className="text-muted-foreground">SLE Reading:</span>
-                      <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                      <span className="ml-2 font-medium text-black dark:text-white">
                         {selectedApplication.sleReadingLevel}
                       </span>
                     </div>
@@ -716,19 +716,19 @@ export function AdminApplicationDashboard() {
 
               {/* Pricing */}
               <div>
-                <h4 className="font-semibold text-black dark:text-white dark:text-white mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-black dark:text-white mb-3 flex items-center gap-2">
                   <DollarSign className="w-4 h-4" /> {l.pricing}
                 </h4>
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div>
                     <span className="text-muted-foreground">Hourly Rate:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                    <span className="ml-2 font-medium text-black dark:text-white">
                       ${selectedApplication.hourlyRate || "—"}/hr
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Trial Rate:</span>
-                    <span className="ml-2 font-medium text-black dark:text-white dark:text-white">
+                    <span className="ml-2 font-medium text-black dark:text-white">
                       ${selectedApplication.trialRate || "—"}/hr
                     </span>
                   </div>
@@ -737,25 +737,25 @@ export function AdminApplicationDashboard() {
 
               {/* Content */}
               <div>
-                <h4 className="font-semibold text-black dark:text-white dark:text-white mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-black dark:text-white mb-3 flex items-center gap-2">
                   <FileText className="w-4 h-4" /> {l.content}
                 </h4>
                 {selectedApplication.headline && (
                   <div className="mb-2">
                     <span className="text-muted-foreground text-sm">Headline (EN):</span>
-                    <p className="text-black dark:text-white dark:text-white">{selectedApplication.headline}</p>
+                    <p className="text-black dark:text-white">{selectedApplication.headline}</p>
                   </div>
                 )}
                 {selectedApplication.headlineFr && (
                   <div className="mb-2">
                     <span className="text-muted-foreground text-sm">Headline (FR):</span>
-                    <p className="text-black dark:text-white dark:text-white">{selectedApplication.headlineFr}</p>
+                    <p className="text-black dark:text-white">{selectedApplication.headlineFr}</p>
                   </div>
                 )}
                 {selectedApplication.bio && (
                   <div className="mb-2">
                     <span className="text-muted-foreground text-sm">Bio (EN):</span>
-                    <p className="text-black dark:text-white dark:text-white text-sm whitespace-pre-wrap">
+                    <p className="text-black dark:text-white text-sm whitespace-pre-wrap">
                       {selectedApplication.bio}
                     </p>
                   </div>
@@ -763,7 +763,7 @@ export function AdminApplicationDashboard() {
                 {selectedApplication.bioFr && (
                   <div className="mb-2">
                     <span className="text-muted-foreground text-sm">Bio (FR):</span>
-                    <p className="text-black dark:text-white dark:text-white text-sm whitespace-pre-wrap">
+                    <p className="text-black dark:text-white text-sm whitespace-pre-wrap">
                       {selectedApplication.bioFr}
                     </p>
                   </div>
@@ -771,7 +771,7 @@ export function AdminApplicationDashboard() {
                 {selectedApplication.teachingPhilosophy && (
                   <div className="mb-2">
                     <span className="text-muted-foreground text-sm">Teaching Philosophy:</span>
-                    <p className="text-black dark:text-white dark:text-white text-sm whitespace-pre-wrap">
+                    <p className="text-black dark:text-white text-sm whitespace-pre-wrap">
                       {selectedApplication.teachingPhilosophy}
                     </p>
                   </div>
@@ -794,7 +794,7 @@ export function AdminApplicationDashboard() {
               {selectedApplication.reviewNotes && (
                 <div className="bg-amber-50 dark:bg-amber-900/20 p-3 rounded-lg">
                   <span className="text-muted-foreground text-sm font-medium">Review Notes:</span>
-                  <p className="text-black dark:text-white dark:text-white text-sm mt-1">
+                  <p className="text-black dark:text-white text-sm mt-1">
                     {selectedApplication.reviewNotes}
                   </p>
                 </div>
@@ -845,7 +845,7 @@ export function AdminApplicationDashboard() {
                 placeholder={l.rejectReason}
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white dark:text-white"
+                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white"
                 rows={4}
                 autoFocus
               />
@@ -888,7 +888,7 @@ export function AdminApplicationDashboard() {
                 placeholder={bulkAction === "approve" ? l.approveNotes : l.rejectReason}
                 value={bulkNotes}
                 onChange={(e) => setBulkNotes(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white dark:text-white"
+                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation text-black dark:text-white"
                 rows={4}
               />
               <div className="flex gap-2">

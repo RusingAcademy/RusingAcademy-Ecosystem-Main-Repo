@@ -81,7 +81,7 @@ function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
   return (
     <GlassCard className="p-6" hover={false}>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold text-black dark:text-white dark:text-white flex items-center gap-2">
+        <h3 className="text-lg font-bold text-black dark:text-white flex items-center gap-2">
           <Trophy className="h-5 w-5 text-amber-500" />
           {isEn ? "Achievements" : "Accomplissements"}
         </h3>
@@ -186,8 +186,8 @@ const GlassStatCard = ({
         <div className={`w-12 h-12 rounded-xl ${colorClasses[color].split(' ').slice(2).join(' ')} flex items-center justify-center mb-3`}>
           <Icon className={`h-6 w-6 ${colorClasses[color].split(' ')[2]}`} />
         </div>
-        <p className="text-3xl font-bold text-black dark:text-white dark:text-white">{value}</p>
-        <p className="text-sm font-medium text-black dark:text-white dark:text-white/90">{label}</p>
+        <p className="text-3xl font-bold text-black dark:text-white">{value}</p>
+        <p className="text-sm font-medium text-black dark:text-white/90">{label}</p>
         {sublabel && <p className="text-xs text-black dark:text-white dark:text-cyan-300 mt-1">{sublabel}</p>}
       </div>
     </GlassCard>
@@ -437,7 +437,7 @@ export default function LearnerDashboard() {
             <div className="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mx-auto mb-6">
               <GraduationCap className="h-8 w-8 text-emerald-600" />
             </div>
-            <h2 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-2">
+            <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
             <p className="text-black dark:text-white dark:text-cyan-300 mb-6">
@@ -482,7 +482,7 @@ export default function LearnerDashboard() {
                     })}
                   </span>
                   {displayStreak > 0 && (
-                    <Badge className="bg-white dark:bg-slate-800 dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/30">
+                    <Badge className="bg-white dark:bg-slate-900/20 text-white border-0 hover:bg-white dark:bg-slate-900/30">
                       <Flame className="h-3 w-3 mr-1" />
                       {displayStreak} {language === "fr" ? "jours" : "days"}
                     </Badge>
@@ -499,7 +499,7 @@ export default function LearnerDashboard() {
                 <RoleSwitcherCompact />
                 {resumePoint && (
                   <Link href={`/courses/${resumePoint.courseId}/lessons/${resumePoint.lessonId}`}>
-                    <Button size="lg" className="bg-white dark:bg-slate-800 dark:bg-slate-900 text-black dark:text-white dark:text-white hover:bg-slate-100 shadow-lg">
+                    <Button size="lg" className="bg-white dark:bg-slate-900 text-black dark:text-white hover:bg-slate-100 shadow-lg">
                       <Play className="h-5 w-5 mr-2" />
                       {language === "fr" ? "Reprendre" : "Resume"}
                     </Button>
@@ -560,7 +560,7 @@ export default function LearnerDashboard() {
               {/* SLE Progress Card */}
               <GlassCard className="p-6" hover={false}>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-black dark:text-white dark:text-white flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
                     <Target className="h-5 w-5 text-emerald-600" />
                     {language === "fr" ? "Progression SLE" : "SLE Progress"}
                   </h2>
@@ -634,7 +634,7 @@ export default function LearnerDashboard() {
                         <p className="text-sm text-muted-foreground">
                           {language === "fr" ? "Reprendre où vous étiez" : "Pick up where you left off"}
                         </p>
-                        <p className="font-semibold text-black dark:text-white dark:text-white">
+                        <p className="font-semibold text-black dark:text-white">
                           {language === "fr" ? (resumePoint.lessonTitleFr || resumePoint.lessonTitle) : resumePoint.lessonTitle}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -656,7 +656,7 @@ export default function LearnerDashboard() {
               {/* Continue Learning Section */}
               <GlassCard className="p-6" hover={false}>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-black dark:text-white dark:text-white flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
                     <Play className="h-5 w-5 text-blue-600" />
                     {l.continueWhere}
                   </h2>
@@ -684,7 +684,7 @@ export default function LearnerDashboard() {
                               <BookOpen className="h-7 w-7 text-white" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h3 className="font-semibold text-black dark:text-white dark:text-white truncate group-hover:text-blue-600 transition-colors">
+                              <h3 className="font-semibold text-black dark:text-white truncate group-hover:text-blue-600 transition-colors">
                                 {course.title}
                               </h3>
                               <p className="text-sm text-black dark:text-white dark:text-cyan-300 mt-1">
@@ -718,7 +718,7 @@ export default function LearnerDashboard() {
               {/* Upcoming Sessions */}
               <GlassCard className="p-6" hover={false}>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-black dark:text-white dark:text-white flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
                     <Calendar className="h-5 w-5 text-purple-600" />
                     {l.upcomingSessions}
                   </h2>
@@ -753,7 +753,7 @@ export default function LearnerDashboard() {
                             </AvatarFallback>
                           </Avatar>
                           <div>
-                            <p className="font-semibold text-black dark:text-white dark:text-white">{session.coachName || "Coach"}</p>
+                            <p className="font-semibold text-black dark:text-white">{session.coachName || "Coach"}</p>
                             <p className="text-sm text-black dark:text-white dark:text-cyan-300">
                               {new Date(session.scheduledAt).toLocaleDateString(
                                 language === "fr" ? "fr-CA" : "en-CA",
@@ -776,7 +776,7 @@ export default function LearnerDashboard() {
                               coachName: session.coachName || "Coach",
                               date: new Date(session.scheduledAt),
                             })}
-                            className="text-black dark:text-white dark:text-white hover:text-purple-600"
+                            className="text-black dark:text-white hover:text-purple-600"
                           >
                             <CalendarClock className="h-4 w-4" />
                           </Button>
@@ -816,7 +816,7 @@ export default function LearnerDashboard() {
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-black dark:text-white dark:text-white">{activePlan.planName}</span>
+                        <span className="text-sm font-medium text-black dark:text-white">{activePlan.planName}</span>
                         <Badge variant="default" className="bg-emerald-600">
                           {language === "fr" ? "Actif" : "Active"}
                         </Badge>
@@ -826,7 +826,7 @@ export default function LearnerDashboard() {
                           <span className="text-muted-foreground">
                             {language === "fr" ? "Sessions restantes" : "Sessions remaining"}
                           </span>
-                          <span className="font-medium text-black dark:text-white dark:text-white">
+                          <span className="font-medium text-black dark:text-white">
                             {activePlan.remainingSessions}/{activePlan.totalSessions}
                           </span>
                         </div>
@@ -860,7 +860,7 @@ export default function LearnerDashboard() {
               
               {/* Quick Actions */}
               <GlassCard className="p-6" hover={false}>
-                <h3 className="text-lg font-bold text-black dark:text-white dark:text-white mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-amber-500" />
                   {l.quickActions}
                 </h3>
@@ -908,7 +908,7 @@ export default function LearnerDashboard() {
               {recentPracticeSessions && recentPracticeSessions.length > 0 && (
                 <GlassCard className="p-6" hover={false}>
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-black dark:text-white dark:text-white flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-black dark:text-white flex items-center gap-2">
                       <Bot className="h-5 w-5 text-purple-500" />
                       {language === "fr" ? "Sessions récentes" : "Recent Sessions"}
                     </h3>

@@ -119,7 +119,7 @@ export function TeamOverviewWidget({
             </Badge>
           )}
         </div>
-        <p className="text-2xl font-bold text-black dark:text-white dark:text-white">
+        <p className="text-2xl font-bold text-black dark:text-white">
           {value}{suffix}
         </p>
         <p className="text-sm text-black dark:text-white dark:text-cyan-300">{label}</p>
@@ -135,7 +135,7 @@ export function TeamOverviewWidget({
             <Users className="h-5 w-5 text-black dark:text-white dark:text-cyan-300" />
           </div>
           <div>
-            <CardTitle className="text-lg text-black dark:text-white dark:text-white">{l.title}</CardTitle>
+            <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
             <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
           </div>
         </div>
@@ -188,7 +188,7 @@ export function TeamOverviewWidget({
             <div className="flex items-center justify-between mb-2">
               <BookOpen className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
             </div>
-            <p className="text-2xl font-bold text-black dark:text-white dark:text-white mb-1">
+            <p className="text-2xl font-bold text-black dark:text-white mb-1">
               {stats.targetCompletionRate}%
             </p>
             <Progress 

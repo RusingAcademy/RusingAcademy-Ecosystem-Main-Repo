@@ -177,7 +177,7 @@ function SignupContent() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4 relative">
       {/* Home Button */}
       <Link href="/">
-        <button className="absolute top-4 left-4 p-3 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/10 hover:bg-white dark:bg-slate-800 dark:bg-slate-900/20 transition-colors border border-white/60">
+        <button className="absolute top-4 left-4 p-3 rounded-full bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 transition-colors border border-white/60">
           <Home className="h-5 w-5 text-white" />
         </button>
       </Link>
@@ -211,7 +211,7 @@ function SignupContent() {
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-white dark:bg-slate-800 dark:bg-slate-900 hover:bg-gray-100 dark:bg-slate-800 text-black dark:text-white dark:text-white border-gray-300"
+              className="w-full bg-white dark:bg-slate-900 hover:bg-gray-100 dark:bg-slate-800 text-black dark:text-white border-gray-300"
               onClick={handleGoogleSignUp}
               disabled={signupMutation.isPending}
             >
@@ -366,7 +366,7 @@ function SignupContent() {
               Sign in
             </Link>
           </div>
-          <div className="text-center text-xs text-black dark:text-white dark:text-white">
+          <div className="text-center text-xs text-black dark:text-white">
             By creating an account, you agree to our{" "}
             <Link to="/terms" className="text-teal-400 hover:text-teal-300">
               Terms of Service
@@ -376,7 +376,7 @@ function SignupContent() {
               Privacy Policy
             </Link>
           </div>
-          <div className="text-center text-xs text-black dark:text-white dark:text-white pt-4 border-t border-teal-800">
+          <div className="text-center text-xs text-black dark:text-white pt-4 border-t border-teal-800">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

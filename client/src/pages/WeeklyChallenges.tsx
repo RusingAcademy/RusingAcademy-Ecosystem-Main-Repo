@@ -105,7 +105,7 @@ export default function WeeklyChallenges() {
     <DashboardLayout>
       <div className="max-w-[900px] space-y-5" role="main" aria-label={t("challenges.title")}>
         {/* Header */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-6 md:p-8 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-6 md:p-8 shadow-sm">
           <div className="flex items-center gap-3 mb-2">
             <span className="material-icons text-violet-500" style={{ fontSize: "28px" }} aria-hidden="true">flag</span>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -155,12 +155,12 @@ export default function WeeklyChallenges() {
 
         {/* Challenge Cards */}
         {challengesQuery.isLoading ? (
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-8 text-center shadow-sm" role="status">
+          <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-8 text-center shadow-sm" role="status">
             <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
             <p className="text-sm text-gray-400 mt-3">{t("skillLabs.loading")}</p>
           </div>
         ) : displayChallenges.length === 0 ? (
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-8 text-center shadow-sm" role="status">
+          <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-8 text-center shadow-sm" role="status">
             <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
               <span className="material-icons text-3xl text-purple-400" aria-hidden="true">{tab === "active" ? "flag" : "emoji_events"}</span>
             </div>
@@ -184,7 +184,7 @@ export default function WeeklyChallenges() {
         )}
 
         {/* How It Works */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-xl p-5 shadow-sm">
           <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
             <span className="material-icons text-teal-700"  aria-hidden="true">help_outline</span>
             {isFr ? "Comment fonctionnent les défis hebdomadaires" : "How Weekly Challenges Work"}

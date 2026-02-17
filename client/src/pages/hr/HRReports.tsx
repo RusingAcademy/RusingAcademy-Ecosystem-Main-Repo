@@ -54,7 +54,7 @@ export default function HRReports() {
           <div className="flex gap-2">
             <button
               onClick={() => toast.info(isEn ? "CSV export coming soon" : "Export CSV bientôt disponible")}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:bg-slate-900 transition-colors"
             >
               <span className="material-icons text-sm">download</span>
               {ui.exportCsv}
@@ -95,7 +95,7 @@ export default function HRReports() {
             { label: ui.activeParticipants, value: "—", icon: "groups", color: "var(--color-violet-600, #7c3aed)" },
             { label: ui.totalHours, value: "—", icon: "schedule", color: "#ea580c" },
           ].map((kpi, i) => (
-            <div key={i} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
+            <div key={i} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${kpi.color}10` }}>
                   <span className="material-icons text-xl" style={{ color: kpi.color }}>{kpi.icon}</span>
@@ -108,7 +108,7 @@ export default function HRReports() {
         </div>
 
         {/* Empty State */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-3xl text-blue-600">assessment</span>
           </div>

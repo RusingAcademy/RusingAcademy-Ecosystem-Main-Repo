@@ -89,7 +89,7 @@ const AdminDailyReview = () => {
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Accuracy</th>
                           </tr>
                         </thead>
-                        <tbody className="bg-white dark:bg-slate-800 dark:bg-slate-900 divide-y divide-gray-200">
+                        <tbody className="bg-white dark:bg-slate-900 divide-y divide-gray-200">
                           {(stats.topLearners as any[]).map((l: any, i: number) => (
                             <tr key={l.userId}>
                               <td className="px-4 py-3 text-sm font-bold text-gray-900">

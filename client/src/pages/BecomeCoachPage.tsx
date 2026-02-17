@@ -53,7 +53,7 @@ export default function BecomeCoachPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 px-4 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
             Pourquoi devenir coach RusingAcademy?
@@ -75,7 +75,7 @@ export default function BecomeCoachPage() {
       </section>
 
       {/* Requirements Section */}
-      <section className="py-16 px-4 bg-white dark:bg-slate-800 dark:bg-slate-900">
+      <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
             Critères de sélection

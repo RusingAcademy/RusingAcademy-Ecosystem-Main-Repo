@@ -293,7 +293,7 @@ export default function ComponentLab() {
           <div className="relative z-10">
             {/* We import EcosystemSwitcher but it manages its own UI */}
             <div className="flex items-center justify-center min-h-screen">
-              <Card className="w-full max-w-2xl mx-4 bg-white dark:bg-slate-800 dark:bg-slate-900 shadow-2xl">
+              <Card className="w-full max-w-2xl mx-4 bg-white dark:bg-slate-900 shadow-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>Ecosystem Navigator</CardTitle>

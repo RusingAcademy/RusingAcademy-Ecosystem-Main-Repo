@@ -46,7 +46,7 @@ export function VideoPlaceholder({
   };
   
   return (
-    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden max-w-4xl mx-auto">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden max-w-4xl mx-auto">
       {/* Video Preview Area */}
       <div className="relative aspect-video bg-gradient-to-br from-foundation via-teal-700 to-[#1A6B6C]">
         {/* Background Pattern */}
@@ -76,7 +76,7 @@ export function VideoPlaceholder({
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
           {/* Play Button (Disabled) */}
           <div className="relative mb-6">
-            <div className="w-20 h-20 rounded-full bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-sm flex items-center justify-center border-2 border-white/60">
+            <div className="w-20 h-20 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-sm flex items-center justify-center border-2 border-white/60">
               <Play className="w-10 h-10 text-white/90 ml-1" />
             </div>
             {/* Pulsing Ring */}
@@ -84,7 +84,7 @@ export function VideoPlaceholder({
           </div>
           
           {/* Coming Soon Badge */}
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-md rounded-full px-6 py-2 mb-4 border border-white/60">
+          <div className="bg-white dark:bg-slate-900/10 backdrop-blur-md rounded-full px-6 py-2 mb-4 border border-white/60">
             <span className="text-lg font-semibold tracking-wide">
               {language === "fr" ? "Bientôt disponible" : "Coming Soon"}
             </span>
@@ -107,11 +107,11 @@ export function VideoPlaceholder({
       {/* Content Section */}
       <div className="p-6">
         {/* Title */}
-        <h3 className="text-xl font-bold text-black dark:text-white dark:text-white mb-2">{displayTitle}</h3>
+        <h3 className="text-xl font-bold text-black dark:text-white mb-2">{displayTitle}</h3>
         
         {/* Description */}
         {displayDescription && (
-          <p className="text-black dark:text-white dark:text-white mb-4 line-clamp-2">{displayDescription}</p>
+          <p className="text-black dark:text-white mb-4 line-clamp-2">{displayDescription}</p>
         )}
         
         {/* Info Cards */}
@@ -123,7 +123,7 @@ export function VideoPlaceholder({
                 {language === "fr" ? "Format" : "Format"}
               </span>
             </div>
-            <p className="text-black dark:text-white dark:text-white text-sm">
+            <p className="text-black dark:text-white text-sm">
               {language === "fr" ? "Vidéo HD avec sous-titres" : "HD Video with subtitles"}
             </p>
           </div>
@@ -135,7 +135,7 @@ export function VideoPlaceholder({
                 {language === "fr" ? "Durée" : "Duration"}
               </span>
             </div>
-            <p className="text-black dark:text-white dark:text-white text-sm">
+            <p className="text-black dark:text-white text-sm">
               {duration} {language === "fr" ? "minutes" : "minutes"}
             </p>
           </div>
@@ -143,11 +143,11 @@ export function VideoPlaceholder({
         
         {/* What You'll Learn */}
         <div className="bg-gray-50 dark:bg-slate-900 rounded-xl p-4 mb-6">
-          <h4 className="font-semibold text-black dark:text-white dark:text-white mb-3">
+          <h4 className="font-semibold text-black dark:text-white mb-3">
             {language === "fr" ? "Ce que vous apprendrez" : "What you'll learn"}
           </h4>
           <ul className="space-y-2">
-            <li className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+            <li className="flex items-start gap-2 text-sm text-black dark:text-white">
               <CheckCircle className="w-4 h-4 text-foundation mt-0.5 flex-shrink-0" />
               <span>
                 {language === "fr" 
@@ -155,7 +155,7 @@ export function VideoPlaceholder({
                   : "Advanced pronunciation techniques"}
               </span>
             </li>
-            <li className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+            <li className="flex items-start gap-2 text-sm text-black dark:text-white">
               <CheckCircle className="w-4 h-4 text-foundation mt-0.5 flex-shrink-0" />
               <span>
                 {language === "fr" 
@@ -163,7 +163,7 @@ export function VideoPlaceholder({
                   : "Professional vocabulary in context"}
               </span>
             </li>
-            <li className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+            <li className="flex items-start gap-2 text-sm text-black dark:text-white">
               <CheckCircle className="w-4 h-4 text-foundation mt-0.5 flex-shrink-0" />
               <span>
                 {language === "fr" 
@@ -198,7 +198,7 @@ export function VideoPlaceholder({
         </Button>
         
         {/* Alternative Content Notice */}
-        <p className="text-center text-sm text-black dark:text-white dark:text-white mt-4">
+        <p className="text-center text-sm text-black dark:text-white mt-4">
           {language === "fr" 
             ? "En attendant, explorez nos autres leçons et exercices disponibles." 
             : "In the meantime, explore our other available lessons and exercises."}

@@ -301,7 +301,7 @@ export default function InvoiceDetail() {
                 <button className="qb-btn-outline p-2">
                   <MoreVertical size={14} />
                 </button>
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
                   <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-slate-900 flex items-center gap-2" onClick={() => handleStatusChange("Paid")}>
                     <CheckCircle size={14} className="text-green-600" /> Mark as Paid
                   </button>
@@ -629,7 +629,7 @@ export default function InvoiceDetail() {
       {/* Record Payment Dialog */}
       {showPaymentDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowPaymentDialog(false)}>
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Record Payment</h3>
             <div className="space-y-4">
               <div>
@@ -685,7 +685,7 @@ export default function InvoiceDetail() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowDeleteConfirm(false)}>
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
                 <AlertTriangle size={20} className="text-red-600" />
@@ -715,7 +715,7 @@ export default function InvoiceDetail() {
       {/* Email Invoice Dialog */}
       {showEmailDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowEmailDialog(false)}>
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                 <Send size={20} className="text-sky-600" />

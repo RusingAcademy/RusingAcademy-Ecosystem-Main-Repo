@@ -99,7 +99,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
               <Trophy className="h-5 w-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-black dark:text-white dark:text-white">{l.title}</CardTitle>
+              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
               <p className="text-sm text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
             </div>
           </div>
@@ -148,7 +148,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-semibold text-black dark:text-white dark:text-white truncate">
+                      <h4 className="font-semibold text-black dark:text-white truncate">
                         {language === "fr" && challenge.nameFr ? challenge.nameFr : challenge.name}
                       </h4>
                       {isComplete && (
@@ -170,7 +170,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                           )}
                         />
                       </div>
-                      <span className="text-sm font-medium text-black dark:text-white dark:text-white/90 whitespace-nowrap">
+                      <span className="text-sm font-medium text-black dark:text-white/90 whitespace-nowrap">
                         {challenge.currentProgress}/{challenge.targetValue}
                       </span>
                     </div>
@@ -197,7 +197,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     )}
                     
                     {isClaimed && (
-                      <Badge variant="outline" className="text-black dark:text-white dark:text-white border-slate-300">
+                      <Badge variant="outline" className="text-black dark:text-white border-slate-300">
                         <CheckCircle2 className="h-3 w-3 mr-1" />
                         {l.claimed}
                       </Badge>

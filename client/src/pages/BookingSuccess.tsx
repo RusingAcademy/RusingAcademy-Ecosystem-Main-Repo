@@ -180,7 +180,7 @@ END:VCALENDAR`;
               <CheckCircle2 className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
             </div>
             <h1 className="text-3xl font-bold mb-2">{l.title}</h1>
-            <p className="text-black dark:text-white dark:text-white text-lg">{l.subtitle}</p>
+            <p className="text-black dark:text-white text-lg">{l.subtitle}</p>
             
             {user?.email && (
               <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-950/30 rounded-full text-sm text-blue-700 dark:text-blue-300">
@@ -203,30 +203,30 @@ END:VCALENDAR`;
                 <div className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                      <User className="h-5 w-5 text-black dark:text-white dark:text-white" />
+                      <User className="h-5 w-5 text-black dark:text-white" />
                       <div>
-                        <p className="text-sm text-black dark:text-white dark:text-white">{l.coach}</p>
+                        <p className="text-sm text-black dark:text-white">{l.coach}</p>
                         <p className="font-medium">{sessionData.coachName}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                      <Calendar className="h-5 w-5 text-black dark:text-white dark:text-white" />
+                      <Calendar className="h-5 w-5 text-black dark:text-white" />
                       <div>
-                        <p className="text-sm text-black dark:text-white dark:text-white">{l.date}</p>
+                        <p className="text-sm text-black dark:text-white">{l.date}</p>
                         <p className="font-medium">{sessionData.date}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                      <Clock className="h-5 w-5 text-black dark:text-white dark:text-white" />
+                      <Clock className="h-5 w-5 text-black dark:text-white" />
                       <div>
-                        <p className="text-sm text-black dark:text-white dark:text-white">{l.time}</p>
+                        <p className="text-sm text-black dark:text-white">{l.time}</p>
                         <p className="font-medium">{sessionData.time}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                      <DollarSign className="h-5 w-5 text-black dark:text-white dark:text-white" />
+                      <DollarSign className="h-5 w-5 text-black dark:text-white" />
                       <div>
-                        <p className="text-sm text-black dark:text-white dark:text-white">{l.price}</p>
+                        <p className="text-sm text-black dark:text-white">{l.price}</p>
                         <p className="font-medium">${sessionData.price.toFixed(2)} CAD</p>
                       </div>
                     </div>
@@ -278,7 +278,7 @@ END:VCALENDAR`;
                   </Button>
                 </div>
               ) : (
-                <div className="text-center py-8 text-black dark:text-white dark:text-white">
+                <div className="text-center py-8 text-black dark:text-white">
                   {isEn ? "Loading session details..." : "Chargement des détails..."}
                 </div>
               )}
@@ -297,7 +297,7 @@ END:VCALENDAR`;
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-medium shrink-0">
                       {index + 1}
                     </span>
-                    <span className="text-black dark:text-white dark:text-white">{step}</span>
+                    <span className="text-black dark:text-white">{step}</span>
                   </li>
                 ))}
               </ol>

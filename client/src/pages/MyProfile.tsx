@@ -275,7 +275,7 @@ export default function MyProfile() {
 
         <div className="space-y-6">
           {/* ── Personal Information ── */}
-          <section className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-personal">
+          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-personal">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-personal" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">person</span>
@@ -343,7 +343,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── SLE Proficiency Levels ── */}
-          <section className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-sle">
+          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-sle">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-sle" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">assessment</span>
@@ -411,7 +411,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── Learning Goals ── */}
-          <section className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-goals">
+          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-goals">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-goals" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">flag</span>
@@ -484,7 +484,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── SLE Certification ── */}
-          <section className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-cert">
+          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-cert">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-cert" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">verified</span>
@@ -538,7 +538,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── Preferences ── */}
-          <section className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-prefs">
+          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-prefs">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-prefs" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">settings</span>

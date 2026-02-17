@@ -56,7 +56,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
     <div className="space-y-8">
       {/* Department Overview */}
       {departments.length > 0 && (
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="flex items-center gap-2 mb-6">
             <Users size={24} className="text-blue-500" />
             <h3 className="text-xl font-semibold text-gray-900">
@@ -97,7 +97,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
       )}
 
       {/* Team Benchmarking */}
-      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <BarChart3 size={24} className="text-green-500" />
@@ -169,7 +169,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
       {/* Team Detail Modal */}
       {selectedTeam && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-8 max-w-2xl w-full mx-4">
+          <div className="bg-white dark:bg-slate-900 rounded-lg p-8 max-w-2xl w-full mx-4">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">{selectedTeam.teamName}</h2>
               <button
@@ -199,7 +199,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
               </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4 mb-6">
+            <div className="bg-white dark:bg-slate-900 rounded-lg p-4 mb-6">
               <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">{isEn ? "Performance Metrics" : "Métriques de performance"}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">

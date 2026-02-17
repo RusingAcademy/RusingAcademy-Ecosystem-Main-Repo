@@ -61,7 +61,7 @@ export default function TrialBalanceReport() {
         </button>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
         <div className="text-center py-4 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
           <h2 className="text-lg font-bold text-gray-800">RusingAcademy</h2>
           <p className="text-sm text-gray-500">Trial Balance</p>

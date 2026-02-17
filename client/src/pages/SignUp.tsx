@@ -18,13 +18,13 @@ export default function SignUp() {
           <h1 className="text-3xl font-bold text-slate-900 mb-2">
             Join RusingAcademy
           </h1>
-          <p className="text-black dark:text-white dark:text-white">
+          <p className="text-black dark:text-white">
             Start your journey to bilingual excellence
           </p>
         </div>
 
         {/* Clerk Sign-Up component */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
+        <div className="bg-white dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
           <ClerkSignUp
             routing="path"
             path="/sign-up"
@@ -40,7 +40,7 @@ export default function SignUp() {
         </div>
 
         {/* Additional links */}
-        <div className="mt-6 text-center text-sm text-black dark:text-white dark:text-white">
+        <div className="mt-6 text-center text-sm text-black dark:text-white">
           <p>
             Already have an account?{' '}
             <button
@@ -53,7 +53,7 @@ export default function SignUp() {
         </div>
 
         {/* Benefits */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center text-xs text-black dark:text-white dark:text-white">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center text-xs text-black dark:text-white">
           <div className="flex flex-col items-center gap-1">
             <div className="w-10 h-10 rounded-full bg-[#0A2540]/10 flex items-center justify-center">
               <svg className="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">

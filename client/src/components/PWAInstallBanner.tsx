@@ -34,7 +34,7 @@ export function PWAInstallBanner() {
           {/* Dismiss button */}
           <button
             onClick={dismissInstall}
-            className="absolute right-2 top-2 rounded-full p-1 text-white/60 transition-colors hover:bg-white dark:bg-slate-800 dark:bg-slate-900/10 hover:text-white"
+            className="absolute right-2 top-2 rounded-full p-1 text-white/60 transition-colors hover:bg-white dark:bg-slate-900/10 hover:text-white"
             aria-label={isEn ? "Dismiss install banner" : "Fermer la bannière d'installation"}
           >
             <X className="h-4 w-4" />
@@ -66,7 +66,7 @@ export function PWAInstallBanner() {
             {canInstall ? (
               <button
                 onClick={installApp}
-                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white dark:bg-slate-800 dark:bg-slate-900/90 hover:shadow-xl active:scale-95"
+                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white dark:bg-slate-900/90 hover:shadow-xl active:scale-95"
               >
                 <Download className="h-4 w-4" />
                 {isEn ? 'Install' : 'Installer'}
@@ -74,7 +74,7 @@ export function PWAInstallBanner() {
             ) : isIOS ? (
               <button
                 onClick={() => setShowIOSInstructions(true)}
-                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white dark:bg-slate-800 dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white dark:bg-slate-800 dark:bg-slate-900/90 hover:shadow-xl active:scale-95"
+                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white dark:bg-slate-900/90 hover:shadow-xl active:scale-95"
               >
                 <Download className="h-4 w-4" />
                 {isEn ? 'Install' : 'Installer'}

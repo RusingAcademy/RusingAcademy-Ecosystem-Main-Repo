@@ -29,7 +29,7 @@ export default function AdminControlSidebar() {
   const [location] = useLocation();
 
   return (
-    <aside className="w-[240px] h-screen flex flex-col bg-white dark:bg-slate-800 dark:bg-slate-900 border-r border-gray-100 dark:border-slate-700 fixed left-0 top-0 z-40">
+    <aside className="w-[240px] h-screen flex flex-col bg-white dark:bg-slate-900 border-r border-gray-100 dark:border-slate-700 fixed left-0 top-0 z-40">
       {/* Brand Header */}
       <div className="px-5 py-5 border-b border-gray-100">
         <Link href="/admin/control" className="flex items-center gap-2.5 no-underline">

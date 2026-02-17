@@ -70,7 +70,7 @@ export function BadgeConfigurationPanel({
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg shadow">
+    <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
       {/* Header */}
       <div className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 p-6">
         <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ export function BadgeConfigurationPanel({
                   <p className="text-gray-600">{isEn ? "No criteria configured yet" : "Aucun critère configuré"}</p>
                 ) : (
                   badges.map((badge) => (
-                    <div key={badge.id} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4 flex items-center justify-between">
+                    <div key={badge.id} className="bg-white dark:bg-slate-900 rounded-lg p-4 flex items-center justify-between">
                       <div className="flex-1">
                         <p className="font-semibold text-gray-900">{badge.badgeName}</p>
                         <p className="text-sm text-gray-600">

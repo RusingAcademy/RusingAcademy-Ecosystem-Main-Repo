@@ -58,7 +58,7 @@ export function TestimonialCard({
       )}
 
       {/* Quote text */}
-      <blockquote className="text-black dark:text-white dark:text-white/90 text-sm leading-relaxed mb-6 italic">
+      <blockquote className="text-black dark:text-white/90 text-sm leading-relaxed mb-6 italic">
         "{quote}"
       </blockquote>
 
@@ -77,7 +77,7 @@ export function TestimonialCard({
           </div>
         )}
         <div>
-          <div className="font-semibold text-black dark:text-white dark:text-white">{author}</div>
+          <div className="font-semibold text-black dark:text-white">{author}</div>
           <div className="text-xs text-black dark:text-white dark:text-cyan-300">{role}</div>
           <div className="text-xs text-teal-500">{organization}</div>
         </div>

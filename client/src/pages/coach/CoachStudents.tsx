@@ -90,7 +90,7 @@ export default function CoachStudents() {
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-16 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100">
+          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
             <span className="material-icons text-gray-300 text-5xl">school</span>
             <p className="text-sm text-gray-500 mt-2">
               {search
@@ -112,7 +112,7 @@ export default function CoachStudents() {
               const sessions = student.sessionsCompleted || 0;
               const level = student.level || student.currentLevel || "—";
               return (
-                <div key={student.id || student.learnerId} className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow group">
+                <div key={student.id || student.learnerId} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow group">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, var(--color-purple-600, #9333ea))] flex items-center justify-center text-white font-bold text-sm">

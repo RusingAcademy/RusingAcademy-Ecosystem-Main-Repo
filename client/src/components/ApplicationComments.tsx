@@ -88,7 +88,7 @@ export function ApplicationComments({
   return (
     <div className="space-y-6">
       {/* Comments Section */}
-      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 p-6">
         <div className="flex items-center gap-2 mb-6">
           <MessageSquare size={20} className="text-teal-600" />
           <h3 className="text-lg font-semibold text-gray-900">
@@ -216,7 +216,7 @@ function CommentThread({
 
   return (
     <div className="space-y-3">
-      <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4">
+      <div className="bg-white dark:bg-slate-900 rounded-lg p-4">
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-teal-200 rounded-full flex items-center justify-center text-sm font-semibold text-teal-700">

@@ -54,7 +54,7 @@ export default function HRHelp() {
         </div>
 
         {/* FAQ */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">help_outline</span>
             {ui.faq}
@@ -82,7 +82,7 @@ export default function HRHelp() {
         </div>
 
         {/* Contact Support */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
             <span className="material-icons text-blue-600">support_agent</span>
             {ui.contactSupport}
@@ -111,7 +111,7 @@ export default function HRHelp() {
         </div>
 
         {/* Resources */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span className="material-icons text-blue-600">menu_book</span>
             {ui.resources}

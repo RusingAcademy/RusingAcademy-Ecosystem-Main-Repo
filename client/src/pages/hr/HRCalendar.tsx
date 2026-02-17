@@ -74,7 +74,7 @@ export default function HRCalendar() {
         </div>
 
         {/* Calendar Navigation */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <button onClick={prevMonth} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg transition-colors">
               <span className="material-icons text-gray-600">chevron_left</span>
@@ -135,7 +135,7 @@ export default function HRCalendar() {
         </div>
 
         {/* Empty State */}
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-3xl text-blue-600">event_note</span>
           </div>

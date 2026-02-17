@@ -228,7 +228,7 @@ export function AnimatedStreak({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <p className={cn(config.text, "font-bold text-black dark:text-white dark:text-white")}>
+        <p className={cn(config.text, "font-bold text-black dark:text-white")}>
           {currentStreak}
         </p>
         <p className="text-sm text-black dark:text-white dark:text-cyan-300 font-medium">

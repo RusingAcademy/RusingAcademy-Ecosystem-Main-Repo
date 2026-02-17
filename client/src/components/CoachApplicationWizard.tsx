@@ -1523,7 +1523,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
             ) : (
               <div className="space-y-3">
                 <Upload className="h-12 w-12 text-cyan-300 mx-auto" />
-                <p className="text-sm text-black dark:text-white dark:text-white">
+                <p className="text-sm text-black dark:text-white">
                   {isEn ? "Click to upload photo" : "Cliquez pour télécharger une photo"}
                 </p>
                 <p className="text-xs text-cyan-300">
@@ -1540,7 +1540,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
             />
           </div>
 
-          <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-lg p-4">
             <h4 className="font-medium mb-3 flex items-center gap-2">
               <Camera className="h-4 w-4" />
               {isEn ? "Photo Guidelines" : "Directives pour la photo"}
@@ -1613,7 +1613,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
           )}
         </div>
 
-        <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-lg p-4">
+        <div className="bg-white dark:bg-slate-900 rounded-lg p-4">
           <h4 className="font-medium mb-3 flex items-center gap-2">
             <Play className="h-4 w-4" />
             {isEn ? "Video Tips" : "Conseils pour la vidéo"}

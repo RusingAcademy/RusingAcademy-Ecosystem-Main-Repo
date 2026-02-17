@@ -79,7 +79,7 @@ export default function CoachPayments() {
         <Header />
         <main className="max-w-4xl mx-auto px-4 py-16 text-center">
           <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-2">
+          <h1 className="text-2xl font-bold text-black dark:text-white mb-2">
             Please Sign In
           </h1>
           <p className="text-black dark:text-white dark:text-cyan-300">
@@ -102,7 +102,7 @@ export default function CoachPayments() {
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black dark:text-white dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-black dark:text-white mb-2">
             Payments & Payouts
           </h1>
           <p className="text-black dark:text-white dark:text-cyan-300">
@@ -118,7 +118,7 @@ export default function CoachPayments() {
                 <CreditCard className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-black dark:text-white dark:text-white">
+                <h2 className="text-xl font-semibold text-black dark:text-white">
                   Stripe Connect
                 </h2>
                 <p className="text-sm text-black dark:text-white dark:text-cyan-300">
@@ -156,7 +156,7 @@ export default function CoachPayments() {
           {!hasAccount ? (
             <div className="space-y-6">
               <div className="bg-gradient-to-r from-indigo-50 to-[#FFFFFF] dark:from-indigo-900/20 dark:to-teal-700/20 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-black dark:text-white dark:text-white mb-4">
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">
                   Why Connect with Stripe?
                 </h3>
                 <div className="grid md:grid-cols-3 gap-4">
@@ -165,7 +165,7 @@ export default function CoachPayments() {
                       <Zap className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-black dark:text-white dark:text-white">Fast Payouts</h4>
+                      <h4 className="font-medium text-black dark:text-white">Fast Payouts</h4>
                       <p className="text-sm text-black dark:text-white dark:text-cyan-300">
                         Receive payments within 2-3 business days
                       </p>
@@ -176,7 +176,7 @@ export default function CoachPayments() {
                       <Shield className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-black dark:text-white dark:text-white">Secure</h4>
+                      <h4 className="font-medium text-black dark:text-white">Secure</h4>
                       <p className="text-sm text-black dark:text-white dark:text-cyan-300">
                         Bank-level security and fraud protection
                       </p>
@@ -187,7 +187,7 @@ export default function CoachPayments() {
                       <TrendingUp className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-black dark:text-white dark:text-white">Track Earnings</h4>
+                      <h4 className="font-medium text-black dark:text-white">Track Earnings</h4>
                       <p className="text-sm text-black dark:text-white dark:text-cyan-300">
                         Full dashboard with detailed analytics
                       </p>
@@ -248,7 +248,7 @@ export default function CoachPayments() {
 
               <button
                 onClick={handleOpenDashboard}
-                className="w-full py-3 bg-gray-100 dark:bg-slate-800 dark:bg-teal-800 text-black dark:text-white dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-foundation-2 transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gray-100 dark:bg-slate-800 dark:bg-teal-800 text-black dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-foundation-2 transition-colors flex items-center justify-center gap-2"
               >
                 <ExternalLink className="w-5 h-5" />
                 Open Stripe Dashboard
@@ -292,7 +292,7 @@ export default function CoachPayments() {
                 </div>
                 <span className="text-sm text-black dark:text-white dark:text-cyan-300">Total Earned</span>
               </div>
-              <div className="text-2xl font-bold text-black dark:text-white dark:text-white">
+              <div className="text-2xl font-bold text-black dark:text-white">
                 ${((earnings.totalEarned || 0) / 100).toFixed(2)}
               </div>
             </div>
@@ -304,7 +304,7 @@ export default function CoachPayments() {
                 </div>
                 <span className="text-sm text-black dark:text-white dark:text-cyan-300">This Month</span>
               </div>
-              <div className="text-2xl font-bold text-black dark:text-white dark:text-white">
+              <div className="text-2xl font-bold text-black dark:text-white">
                 ${((earnings.thisMonth || 0) / 100).toFixed(2)}
               </div>
             </div>
@@ -316,7 +316,7 @@ export default function CoachPayments() {
                 </div>
                 <span className="text-sm text-black dark:text-white dark:text-cyan-300">Pending</span>
               </div>
-              <div className="text-2xl font-bold text-black dark:text-white dark:text-white">
+              <div className="text-2xl font-bold text-black dark:text-white">
                 ${((earnings.pending || 0) / 100).toFixed(2)}
               </div>
             </div>
@@ -328,7 +328,7 @@ export default function CoachPayments() {
                 </div>
                 <span className="text-sm text-black dark:text-white dark:text-cyan-300">Sessions</span>
               </div>
-              <div className="text-2xl font-bold text-black dark:text-white dark:text-white">
+              <div className="text-2xl font-bold text-black dark:text-white">
                 {earnings.totalSessions || 0}
               </div>
             </div>
@@ -337,27 +337,27 @@ export default function CoachPayments() {
 
         {/* Commission Info */}
         <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 dark:border-teal-800 p-6">
-          <h3 className="text-lg font-semibold text-black dark:text-white dark:text-white mb-4">
+          <h3 className="text-lg font-semibold text-black dark:text-white mb-4">
             Commission Structure
           </h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-slate-700 dark:border-teal-800">
               <div>
-                <span className="font-medium text-black dark:text-white dark:text-white">Standard Rate</span>
+                <span className="font-medium text-black dark:text-white">Standard Rate</span>
                 <p className="text-sm text-black dark:text-white dark:text-cyan-300">Platform fee on each session</p>
               </div>
-              <span className="text-lg font-semibold text-black dark:text-white dark:text-white">15%</span>
+              <span className="text-lg font-semibold text-black dark:text-white">15%</span>
             </div>
             <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-slate-700 dark:border-teal-800">
               <div>
-                <span className="font-medium text-black dark:text-white dark:text-white">Verified SLE Coach</span>
+                <span className="font-medium text-black dark:text-white">Verified SLE Coach</span>
                 <p className="text-sm text-black dark:text-white dark:text-cyan-300">With official SLE certification</p>
               </div>
               <span className="text-lg font-semibold text-green-600 dark:text-green-400">10%</span>
             </div>
             <div className="flex items-center justify-between py-3">
               <div>
-                <span className="font-medium text-black dark:text-white dark:text-white">High Volume (50+ hrs/month)</span>
+                <span className="font-medium text-black dark:text-white">High Volume (50+ hrs/month)</span>
                 <p className="text-sm text-black dark:text-white dark:text-cyan-300">For active coaches</p>
               </div>
               <span className="text-lg font-semibold text-green-600 dark:text-green-400">12%</span>

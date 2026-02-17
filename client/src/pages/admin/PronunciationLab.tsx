@@ -159,7 +159,7 @@ const PronunciationLab = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-slate-800 dark:bg-slate-900 divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-slate-900 divide-y divide-gray-200">
                     {filteredExercises.length > 0 ? filteredExercises.map((exercise) => (
                       <tr key={exercise.id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{exercise.phrase}</td>

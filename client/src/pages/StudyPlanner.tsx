@@ -140,7 +140,7 @@ export default function StudyPlanner() {
     <div className="flex h-screen bg-gray-50">
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
       <main className="flex-1 lg:ml-[240px] overflow-y-auto">
-        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-slate-800 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 sticky top-0 z-30">
+        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 sticky top-0 z-30">
           <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100">
             <span className="material-icons text-gray-600">menu</span>
           </button>
@@ -166,7 +166,7 @@ export default function StudyPlanner() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Calendar */}
             <div className="lg:col-span-2">
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 overflow-hidden">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 overflow-hidden">
                 {/* Calendar header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                   <button onClick={prevMonth} className="p-1.5 rounded-lg hover:bg-gray-100">
@@ -236,7 +236,7 @@ export default function StudyPlanner() {
             <div className="space-y-4">
               {/* Selected date sessions */}
               {selectedDate && (
-                <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-sm font-bold text-gray-900">
                       {new Date(selectedDate + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
@@ -289,7 +289,7 @@ export default function StudyPlanner() {
               )}
 
               {/* Upcoming sessions */}
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
                 <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                   <span className="material-icons text-teal-700 text-base">upcoming</span>
                   Upcoming (7 days)
@@ -319,7 +319,7 @@ export default function StudyPlanner() {
               </div>
 
               {/* Quick stats */}
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
                 <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3">This Month</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="text-center p-3 rounded-xl bg-gray-50">
@@ -338,7 +338,7 @@ export default function StudyPlanner() {
           {/* Session Form Modal */}
           {showForm && (
             <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4" onClick={resetForm}>
-              <div className="bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full p-6" onClick={e => e.stopPropagation()}>
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full p-6" onClick={e => e.stopPropagation()}>
                 <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">{editingId ? "Edit Session" : "New Study Session"}</h2>
 
                 <input type="text" placeholder="Session title..." value={formTitle} onChange={e => setFormTitle(e.target.value)}

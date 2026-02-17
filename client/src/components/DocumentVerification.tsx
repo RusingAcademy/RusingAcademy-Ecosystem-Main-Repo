@@ -196,7 +196,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
           <div className="grid md:grid-cols-2 gap-4">
             {/* Document Type */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Document Type *
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -223,7 +223,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
             {/* Title */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Document Title *
               </label>
               <input
@@ -237,7 +237,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
             {/* Issuing Authority */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Issuing Authority
               </label>
               <input
@@ -251,7 +251,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
             {/* Issue Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Issue Date
               </label>
               <input
@@ -264,7 +264,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
             {/* Expiry Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Expiry Date (if applicable)
               </label>
               <input
@@ -277,7 +277,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
             {/* Description */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Description (optional)
               </label>
               <textarea
@@ -291,7 +291,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
             {/* File Upload */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Upload File *
               </label>
               <div
@@ -339,7 +339,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 resetForm();
                 setShowUploadForm(false);
               }}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               Cancel
             </button>

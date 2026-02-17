@@ -163,13 +163,13 @@ function AccessDenied({ message }: { message: string }) {
   const [, setLocation] = useLocation();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-800 dark:bg-slate-900">
-      <div className="max-w-md w-full bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-xl shadow-lg p-8 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900">
+      <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-xl shadow-lg p-8 text-center">
         <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <ShieldAlert className="w-8 h-8 text-red-600" />
         </div>
-        <h1 className="text-2xl font-bold text-black dark:text-white dark:text-white mb-2">Access Denied</h1>
-        <p className="text-black dark:text-white dark:text-white mb-6">{message}</p>
+        <h1 className="text-2xl font-bold text-black dark:text-white mb-2">Access Denied</h1>
+        <p className="text-black dark:text-white mb-6">{message}</p>
         <button
           onClick={() => setLocation("/dashboard")}
           className="px-6 py-2 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors"

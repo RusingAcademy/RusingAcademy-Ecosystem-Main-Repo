@@ -126,14 +126,14 @@ export function AnimatedHero({
 
             <motion.h1
               variants={heroTextVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-black dark:text-white dark:text-white"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-black dark:text-white"
             >
               {renderTitle()}
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-black dark:text-white dark:text-white/90 max-w-xl"
+              className="text-lg md:text-xl text-black dark:text-white/90 max-w-xl"
             >
               {subtitle}
             </motion.p>
@@ -163,7 +163,7 @@ export function AnimatedHero({
                     initial="idle"
                     whileHover="hover"
                     whileTap="tap"
-                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 dark:border-slate-600 text-black dark:text-white dark:text-white font-semibold rounded-xl hover:border-teal-500 hover:text-teal-500 transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 dark:border-slate-600 text-black dark:text-white font-semibold rounded-xl hover:border-teal-500 hover:text-teal-500 transition-colors"
                   >
                     {secondaryCTA.icon}
                     {secondaryCTA.text}

@@ -87,21 +87,21 @@ export default function RusingAcademyContact() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center p-12 rounded-3xl bg-white dark:bg-slate-800 dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50 shadow-xl"
+              className="text-center p-12 rounded-3xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50 shadow-xl"
             >
               <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle2 className="w-10 h-10 text-green-600" />
               </div>
-              <h1 className="text-3xl font-bold text-black dark:text-white dark:text-white mb-4">
+              <h1 className="text-3xl font-bold text-black dark:text-white mb-4">
                 {language === "en" ? "Thank You!" : "Merci!"}
               </h1>
-              <p className="text-lg text-black dark:text-white dark:text-white mb-6">
+              <p className="text-lg text-black dark:text-white mb-6">
                 {language === "en"
                   ? "Your proposal request has been received. Our team will contact you within 24-48 business hours."
                   : "Votre demande de proposition a été reçue. Notre équipe vous contactera dans les 24-48 heures ouvrables."
                 }
               </p>
-              <div className="flex items-center justify-center gap-2 text-sm text-black dark:text-white dark:text-white">
+              <div className="flex items-center justify-center gap-2 text-sm text-black dark:text-white">
                 <Clock className="w-4 h-4" />
                 {language === "en" ? "Expected response: 24-48 hours" : "Réponse attendue: 24-48 heures"}
               </div>
@@ -122,14 +122,14 @@ export default function RusingAcademyContact() {
           <div className="max-w-6xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">
-              <span className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-white dark:text-white text-sm">
+              <span className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-white text-sm">
                 <Building2 className="w-4 h-4 text-cta-2" />
                 {language === "en" ? "B2B/B2G Solutions" : "Solutions B2B/B2G"}
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-black dark:text-white dark:text-white mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-4">
                 {language === "en" ? "Request a Proposal" : "Demander une proposition"}
               </h1>
-              <p className="text-lg text-black dark:text-white dark:text-white max-w-2xl mx-auto">
+              <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
                 {language === "en"
                   ? "Tell us about your organization's bilingual training needs and we'll create a customized solution"
                   : "Parlez-nous des besoins de formation bilingue de votre organisation et nous créerons une solution personnalisée"
@@ -176,24 +176,24 @@ export default function RusingAcademyContact() {
                     </div>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-white dark:bg-slate-800 dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50">
-                    <h3 className="font-bold text-black dark:text-white dark:text-white mb-4">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50">
+                    <h3 className="font-bold text-black dark:text-white mb-4">
                       {language === "en" ? "What to Expect" : "À quoi s'attendre"}
                     </h3>
                     <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+                      <li className="flex items-start gap-2 text-sm text-black dark:text-white">
                         <CheckCircle2 className="w-4 h-4 text-cta-2 flex-shrink-0 mt-0.5" />
                         {language === "en" ? "Response within 24-48 hours" : "Réponse dans 24-48 heures"}
                       </li>
-                      <li className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+                      <li className="flex items-start gap-2 text-sm text-black dark:text-white">
                         <CheckCircle2 className="w-4 h-4 text-cta-2 flex-shrink-0 mt-0.5" />
                         {language === "en" ? "Free needs assessment call" : "Appel d'évaluation des besoins gratuit"}
                       </li>
-                      <li className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+                      <li className="flex items-start gap-2 text-sm text-black dark:text-white">
                         <CheckCircle2 className="w-4 h-4 text-cta-2 flex-shrink-0 mt-0.5" />
                         {language === "en" ? "Customized proposal within 5 days" : "Proposition personnalisée dans 5 jours"}
                       </li>
-                      <li className="flex items-start gap-2 text-sm text-black dark:text-white dark:text-white">
+                      <li className="flex items-start gap-2 text-sm text-black dark:text-white">
                         <CheckCircle2 className="w-4 h-4 text-cta-2 flex-shrink-0 mt-0.5" />
                         {language === "en" ? "No obligation to proceed" : "Aucune obligation de poursuivre"}
                       </li>
@@ -204,11 +204,11 @@ export default function RusingAcademyContact() {
 
               {/* Form */}
               <div className="lg:col-span-2">
-                <form onSubmit={handleSubmit} className="p-8 rounded-3xl bg-white dark:bg-slate-800 dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50 shadow-xl">
+                <form onSubmit={handleSubmit} className="p-8 rounded-3xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50 shadow-xl">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Organization Name */}
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Organization Name" : "Nom de l'organisation"} *
                       </label>
                       <input
@@ -224,7 +224,7 @@ export default function RusingAcademyContact() {
 
                     {/* Contact Name */}
                     <div>
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Contact Name" : "Nom du contact"} *
                       </label>
                       <input
@@ -240,7 +240,7 @@ export default function RusingAcademyContact() {
 
                     {/* Email */}
                     <div>
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Email Address" : "Adresse courriel"} *
                       </label>
                       <input
@@ -256,7 +256,7 @@ export default function RusingAcademyContact() {
 
                     {/* Phone */}
                     <div>
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Phone Number" : "Numéro de téléphone"}
                       </label>
                       <input
@@ -271,7 +271,7 @@ export default function RusingAcademyContact() {
 
                     {/* Organization Type */}
                     <div>
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Organization Type" : "Type d'organisation"} *
                       </label>
                       <select
@@ -292,7 +292,7 @@ export default function RusingAcademyContact() {
 
                     {/* Team Size */}
                     <div>
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Team Size" : "Taille de l'équipe"} *
                       </label>
                       <select
@@ -313,7 +313,7 @@ export default function RusingAcademyContact() {
 
                     {/* Current Level */}
                     <div>
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Current Level (Average)" : "Niveau actuel (moyenne)"}
                       </label>
                       <select
@@ -333,7 +333,7 @@ export default function RusingAcademyContact() {
 
                     {/* Target Level */}
                     <div>
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Target Level" : "Niveau cible"} *
                       </label>
                       <select
@@ -354,7 +354,7 @@ export default function RusingAcademyContact() {
 
                     {/* Timeline */}
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Desired Timeline" : "Échéancier souhaité"} *
                       </label>
                       <select
@@ -375,7 +375,7 @@ export default function RusingAcademyContact() {
 
                     {/* Message */}
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-black dark:text-white dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-black dark:text-white mb-2">
                         {language === "en" ? "Additional Information" : "Informations supplémentaires"}
                       </label>
                       <textarea

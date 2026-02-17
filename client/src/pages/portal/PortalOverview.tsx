@@ -88,8 +88,8 @@ export default function PortalOverview() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Welcome Section */}
         <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-teal-700 rounded-2xl p-6 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-1/2 w-32 h-32 bg-white dark:bg-slate-800 dark:bg-slate-900/5 rounded-full translate-y-1/2" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-slate-900/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-1/2 w-32 h-32 bg-white dark:bg-slate-900/5 rounded-full translate-y-1/2" />
           
           <div className="relative z-10">
             <div className="flex items-start justify-between">
@@ -102,12 +102,12 @@ export default function PortalOverview() {
                   Continuez votre progression vers le niveau B. Vous avez une session de coaching aujourd'hui!
                 </p>
               </div>
-              <div className="hidden md:flex items-center gap-3 bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-4">
+              <div className="hidden md:flex items-center gap-3 bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-4">
                 <div className="text-center">
                   <p className="text-3xl font-bold">45%</p>
                   <p className="text-xs text-blue-200">Niveau B</p>
                 </div>
-                <div className="w-px h-12 bg-white dark:bg-slate-800 dark:bg-slate-900/20" />
+                <div className="w-px h-12 bg-white dark:bg-slate-900/20" />
                 <div className="text-center">
                   <p className="text-3xl font-bold">12</p>
                   <p className="text-xs text-blue-200">Sessions</p>
@@ -117,7 +117,7 @@ export default function PortalOverview() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
               {quickStats.map((stat) => (
-                <div key={stat.label} className="bg-white dark:bg-slate-800 dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-3 flex items-center gap-3">
+                <div key={stat.label} className="bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-3 flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-lg ${stat.bg} flex items-center justify-center`}>
                     <stat.icon className={`h-5 w-5 ${stat.color}`} />
                   </div>
@@ -157,7 +157,7 @@ export default function PortalOverview() {
                           <h4 className="font-medium text-slate-900 truncate">{session.title}</h4>
                           {session.isLive && (
                             <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500 text-white text-xs font-medium rounded-full">
-                              <span className="w-1.5 h-1.5 bg-white dark:bg-slate-800 dark:bg-slate-900 rounded-full animate-pulse" />
+                              <span className="w-1.5 h-1.5 bg-white dark:bg-slate-900 rounded-full animate-pulse" />
                               En direct
                             </span>
                           )}
