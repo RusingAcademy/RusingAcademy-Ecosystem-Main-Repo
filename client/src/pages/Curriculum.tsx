@@ -353,7 +353,7 @@ export default function Curriculum() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">      <main id="main-content" className="flex-1">
-      <SEO title="Curriculum" description="Explore RusingAcademy's structured bilingual curriculum from foundations to executive-level French." canonical="/curriculum" />
+      <SEO title={isEn ? "Curriculum" : "Programme d'études"} description={isEn ? "Explore RusingAcademy's structured bilingual curriculum from foundations to executive-level French." : "Découvrez le programme bilingue structuré de RusingAcademy, des fondations au français de niveau exécutif."} canonical="/curriculum" />
         <Breadcrumb 
           items={[
             { label: "Discover Our Courses", labelFr: "Découvrez nos cours" }
