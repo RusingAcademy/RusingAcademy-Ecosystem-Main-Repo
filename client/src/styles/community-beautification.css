@@ -1,0 +1,264 @@
+/* ============================================
+   COMMUNITY PLATFORM BEAUTIFICATION
+   ============================================
+   Wave 3: Community Platform Integration
+   Premium styling for community forums, channels,
+   threads, messages, and moderation interfaces
+   ============================================ */
+
+/* === COMMUNITY DESIGN TOKENS === */
+:root {
+  /* Community-specific accent colors */
+  --community-primary: #0F3D3E;
+  --community-primary-light: #1A5C5D;
+  --community-primary-soft: rgba(15, 61, 62, 0.06);
+  --community-accent: #6366F1;
+  --community-accent-soft: rgba(99, 102, 241, 0.08);
+  --community-warm: #C65A1E;
+  --community-warm-soft: rgba(198, 90, 30, 0.06);
+
+  /* Community surfaces */
+  --community-bg: #FAFAF8;
+  --community-surface: #FFFFFF;
+  --community-thread-bg: #FDFCFA;
+  --community-border: #E8E4DF;
+  --community-hover: rgba(15, 61, 62, 0.04);
+
+  /* Community shadows */
+  --community-card-shadow: 0 2px 12px rgba(15, 61, 62, 0.05);
+  --community-thread-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* === COMMUNITY THREAD CARDS === */
+.community-thread-card {
+  background: var(--community-surface);
+  border: 1px solid var(--community-border);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--community-thread-shadow);
+}
+
+.community-thread-card:hover {
+  border-color: var(--community-primary-light);
+  box-shadow: var(--community-card-shadow);
+  transform: translateY(-1px);
+}
+
+.community-thread-card .thread-title {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.community-thread-card .thread-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* === COMMUNITY CHANNEL SIDEBAR === */
+.community-channel-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.community-channel-item:hover {
+  background: var(--community-primary-soft);
+}
+
+.community-channel-item.active {
+  background: var(--community-primary);
+  color: white;
+  font-weight: 600;
+}
+
+.community-channel-item .unread-badge {
+  margin-left: auto;
+  background: var(--community-warm);
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 0.125rem 0.375rem;
+  border-radius: 9999px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* === COMMUNITY MESSAGE BUBBLES === */
+.community-message {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.community-message:last-child {
+  border-bottom: none;
+}
+
+.community-message .avatar-ring {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 2px solid var(--community-primary-soft);
+  flex-shrink: 0;
+}
+
+.community-message .message-author {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.community-message .message-time {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-left: 0.5rem;
+}
+
+.community-message .message-body {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* === COMMUNITY BADGES === */
+.community-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.675rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.community-badge.moderator {
+  background: var(--community-accent-soft);
+  color: var(--community-accent);
+}
+
+.community-badge.coach {
+  background: var(--community-primary-soft);
+  color: var(--community-primary);
+}
+
+.community-badge.admin {
+  background: var(--community-warm-soft);
+  color: var(--community-warm);
+}
+
+.community-badge.new-member {
+  background: rgba(16, 185, 129, 0.08);
+  color: #059669;
+}
+
+/* === COMMUNITY COMPOSER === */
+.community-composer {
+  background: var(--community-surface);
+  border: 1px solid var(--community-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.community-composer:focus-within {
+  border-color: var(--community-primary);
+  box-shadow: 0 0 0 3px var(--community-primary-soft);
+}
+
+.community-composer textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: transparent;
+  min-height: 80px;
+}
+
+.community-composer .composer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--community-border);
+  margin-top: 0.75rem;
+}
+
+/* === COMMUNITY MODERATION PANEL === */
+.community-mod-card {
+  background: var(--community-surface);
+  border: 1px solid var(--community-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border-left: 3px solid var(--community-warm);
+}
+
+.community-mod-card.resolved {
+  border-left-color: #059669;
+  opacity: 0.7;
+}
+
+/* === DARK MODE === */
+.dark .community-thread-card,
+.dark .community-composer,
+.dark .community-mod-card {
+  background: var(--brand-obsidian, #1a1a2e);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .community-thread-card .thread-title,
+.dark .community-message .message-author,
+.dark .community-message .message-body {
+  color: white;
+}
+
+.dark .community-thread-card .thread-meta,
+.dark .community-message .message-time {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .community-channel-item {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .community-channel-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .community-channel-item.active {
+  background: var(--community-primary);
+  color: white;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .community-thread-card {
+    padding: 0.75rem 1rem;
+  }
+  
+  .community-message {
+    gap: 0.5rem;
+  }
+  
+  .community-message .avatar-ring {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
