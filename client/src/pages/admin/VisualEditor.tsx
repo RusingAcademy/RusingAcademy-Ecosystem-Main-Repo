@@ -383,7 +383,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">{section.title || "Hero Title"}</h1>
               {section.subtitle && <p className="text-base md:text-lg opacity-80 max-w-2xl mx-auto mb-6">{section.subtitle}</p>}
               {content.ctaText && (
-                <button className="px-6 py-3 bg-white dark:bg-background/20 backdrop-blur-sm border border-white/60 text-white rounded-lg font-medium hover:bg-white dark:bg-background/30 transition-colors">
+                <button className="px-6 py-3 bg-white dark:bg-background/20 backdrop-blur-sm border border-white/60 text-gray-800 dark:text-white rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-background/30 transition-colors">
                   {content.ctaText}
                 </button>
               )}

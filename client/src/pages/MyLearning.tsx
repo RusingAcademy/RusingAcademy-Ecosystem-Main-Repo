@@ -192,7 +192,7 @@ export default function MyLearning() {
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                   <div className="flex-1">
-                    <Badge className="bg-white dark:bg-background/20 text-white mb-2">
+                    <Badge className="bg-white/20 dark:bg-background/20 text-white mb-2 backdrop-blur-sm">
                       {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
                     </Badge>
                     <h2 className="text-xl font-bold mb-2">{continueFrom.course.title}</h2>

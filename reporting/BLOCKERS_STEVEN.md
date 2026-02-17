@@ -31,3 +31,9 @@
 4. Copy the **Signing secret** and update `STRIPE_WEBHOOK_SECRET` in Railway variables
 
 **Verification:** Create a test checkout session and verify the webhook is received (check Railway deploy logs for webhook processing messages).
+
+---
+
+## Wave 0 Status
+
+**No new blockers from Wave 0.** All 24 contrast fixes applied successfully. PR #197 ready for review.

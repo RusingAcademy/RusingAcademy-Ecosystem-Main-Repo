@@ -340,7 +340,7 @@ export default function SequenceAnalyticsDashboard() {
           </h1>
           <p className="text-cyan-300 mt-1">{t.subtitle}</p>
         </div>
-        <button aria-label="Action" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background/10 hover:bg-white dark:bg-background/20 rounded-lg transition-colors">
+        <button aria-label="Action" className="flex items-center gap-2 px-4 py-2 bg-white/10 dark:bg-background/10 hover:bg-white/20 dark:bg-background/20 rounded-lg transition-colors text-white">
           <RefreshCw className="w-4 h-4" />
           {t.refresh}
         </button>
@@ -375,7 +375,7 @@ export default function SequenceAnalyticsDashboard() {
           >
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
+              <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/15">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-teal-500/20 rounded-lg">
                     <BarChart3 className="w-5 h-5 text-teal-400" />
@@ -386,7 +386,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-sm text-cyan-300">{analytics.activeSequences} {t.active.toLowerCase()}</div>
               </div>
               
-              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
+              <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/15">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-blue-500/20 rounded-lg">
                     <Users className="w-5 h-5 text-blue-400" />
@@ -396,7 +396,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-2xl font-bold">{analytics.totalEnrollments}</div>
               </div>
               
-              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
+              <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/15">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-foundation-soft/20 rounded-lg">
                     <Mail className="w-5 h-5 text-foundation" />
@@ -406,7 +406,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-2xl font-bold">{analytics.totalEmailsSent}</div>
               </div>
               
-              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
+              <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-4 border border-white/15">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-cta/20 rounded-lg">
                     <Target className="w-5 h-5 text-orange-400" />
@@ -419,7 +419,7 @@ export default function SequenceAnalyticsDashboard() {
             
             {/* Rate Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+              <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/15">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Eye className="w-5 h-5 text-teal-400" />
@@ -439,7 +439,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-xs text-cyan-300 mt-2">{t.benchmark}: 30-45%</div>
               </div>
               
-              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+              <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/15">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <MousePointer className="w-5 h-5 text-blue-400" />
@@ -459,7 +459,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-xs text-cyan-300 mt-2">{t.benchmark}: 10-15%</div>
               </div>
               
-              <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+              <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/15">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Target className="w-5 h-5 text-orange-400" />
@@ -512,7 +512,7 @@ export default function SequenceAnalyticsDashboard() {
             </div>
             
             {/* Recent Activity Chart */}
-            <div className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
+            <div className="bg-white/10 dark:bg-background/5 backdrop-blur-sm rounded-xl p-6 border border-white/15">
               <h3 className="text-lg font-semibold mb-4">{t.recentActivity}</h3>
               <div className="flex items-end gap-2 h-48">
                 {analytics.recentActivity.map((day, index) => (

@@ -467,7 +467,7 @@ export default function MeetingOutcomesDashboard() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => {/* Send reminder */}}
-                        className="px-3 py-2 bg-white dark:bg-background/10 text-white/90 rounded-lg hover:bg-white dark:bg-background/20 transition-colors text-sm"
+                        className="px-3 py-2 bg-white/10 dark:bg-background/10 text-white/90 rounded-lg hover:bg-white/20 dark:bg-background/20 transition-colors text-sm"
                       >
                         <Bell className="w-4 h-4" />
                       </button>
@@ -529,7 +529,7 @@ export default function MeetingOutcomesDashboard() {
                         <div className="flex items-center gap-2 mt-2 text-sm text-cyan-300">
                           <Calendar className="w-4 h-4" />
                           {formattedDate}
-                          <span className="text-black dark:text-foreground">•</span>
+                          <span className="text-white/60 dark:text-foreground">•</span>
                           {t[task.followUpType as keyof typeof t]}
                         </div>
                         {task.nextSteps && (
@@ -540,7 +540,7 @@ export default function MeetingOutcomesDashboard() {
                         )}
                       </div>
                     </div>
-                    <button className="px-4 py-2 bg-white dark:bg-background/10 text-white/90 rounded-lg hover:bg-white dark:bg-background/20 transition-colors text-sm">
+                    <button className="px-4 py-2 bg-white/10 dark:bg-background/10 text-white/90 rounded-lg hover:bg-white/20 dark:bg-background/20 transition-colors text-sm">
                       {t.viewLead}
                     </button>
                   </div>
