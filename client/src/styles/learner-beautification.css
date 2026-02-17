@@ -1,0 +1,302 @@
+/* ============================================
+   LEARNER PORTAL BEAUTIFICATION
+   ============================================
+   Wave 2: Learner Portal Integration
+   Premium styling for learner-facing dashboards
+   ============================================ */
+
+/* === LEARNER DESIGN TOKENS === */
+:root {
+  /* Learner-specific accent colors */
+  --learner-teal: #0F3D3E;
+  --learner-teal-light: #1A5C5D;
+  --learner-teal-soft: rgba(15, 61, 62, 0.08);
+  --learner-copper: #C65A1E;
+  --learner-copper-soft: rgba(198, 90, 30, 0.08);
+  --learner-success: #059669;
+  --learner-success-soft: rgba(5, 150, 105, 0.08);
+  --learner-gold: #D4A853;
+  --learner-gold-soft: rgba(212, 168, 83, 0.08);
+
+  /* Learner surface colors */
+  --learner-bg: #FAFAF8;
+  --learner-surface: #FFFFFF;
+  --learner-surface-warm: #FDF8F3;
+  --learner-border: #E8E4DF;
+
+  /* Learner gradients */
+  --learner-hero-gradient: linear-gradient(135deg, #0F3D3E 0%, #1A5C5D 50%, #0F3D3E 100%);
+  --learner-card-glow: 0 4px 24px rgba(15, 61, 62, 0.06);
+  --learner-progress-gradient: linear-gradient(90deg, #0F3D3E, #1A5C5D, #C65A1E);
+}
+
+/* === LEARNER DASHBOARD HERO === */
+.learner-hero {
+  background: var(--learner-hero-gradient);
+  color: white;
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.learner-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(198, 90, 30, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.learner-hero h1 {
+  font-family: var(--font-serif, 'Merriweather', Georgia, serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white !important;
+  margin-bottom: 0.5rem;
+}
+
+.learner-hero p {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 0.95rem;
+}
+
+/* === LEARNER PROGRESS BAR === */
+.learner-progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.learner-progress-bar .progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--learner-progress-gradient);
+  background-size: 200% 100%;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === LEARNER STAT CARDS === */
+.learner-stat-card {
+  background: var(--learner-surface);
+  border: 1px solid var(--learner-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: var(--learner-card-glow);
+  transition: all 0.2s ease;
+}
+
+.learner-stat-card:hover {
+  box-shadow: 0 8px 32px rgba(15, 61, 62, 0.1);
+  transform: translateY(-2px);
+}
+
+.learner-stat-card .stat-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.learner-stat-card .stat-icon.teal {
+  background: var(--learner-teal-soft);
+  color: var(--learner-teal);
+}
+
+.learner-stat-card .stat-icon.copper {
+  background: var(--learner-copper-soft);
+  color: var(--learner-copper);
+}
+
+.learner-stat-card .stat-icon.success {
+  background: var(--learner-success-soft);
+  color: var(--learner-success);
+}
+
+.learner-stat-card .stat-icon.gold {
+  background: var(--learner-gold-soft);
+  color: var(--learner-gold);
+}
+
+.learner-stat-card .stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.learner-stat-card .stat-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+/* === LEARNER COURSE CARDS === */
+.learner-course-card {
+  background: var(--learner-surface);
+  border: 1px solid var(--learner-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.learner-course-card:hover {
+  box-shadow: 0 12px 40px rgba(15, 61, 62, 0.08);
+  transform: translateY(-3px);
+  border-color: var(--learner-teal-light);
+}
+
+.learner-course-card .course-progress {
+  height: 4px;
+  background: var(--learner-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.learner-course-card .course-progress .fill {
+  height: 100%;
+  background: var(--learner-progress-gradient);
+  background-size: 200% 100%;
+  border-radius: 2px;
+}
+
+/* === LEARNER ACHIEVEMENT BADGES === */
+.learner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.learner-badge.streak {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+}
+
+.learner-badge.level {
+  background: linear-gradient(135deg, var(--learner-teal), var(--learner-teal-light));
+  color: white;
+}
+
+.learner-badge.achievement {
+  background: linear-gradient(135deg, var(--learner-copper), #E06B2A);
+  color: white;
+}
+
+/* === LEARNER SIDEBAR NAVIGATION === */
+.learner-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  transition: all 0.15s ease;
+}
+
+.learner-nav-item:hover {
+  background: var(--learner-teal-soft);
+  color: var(--learner-teal);
+}
+
+.learner-nav-item.active {
+  background: var(--learner-teal);
+  color: white;
+  font-weight: 600;
+}
+
+/* === LEARNER SECTION DIVIDERS === */
+.learner-section-title {
+  font-family: var(--font-serif, 'Merriweather', Georgia, serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--learner-teal-soft);
+}
+
+/* === LEARNER GAMIFICATION === */
+.learner-xp-bar {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--learner-border);
+  overflow: hidden;
+  position: relative;
+}
+
+.learner-xp-bar .xp-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--learner-gold), #E8C06A);
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.learner-xp-bar .xp-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* === DARK MODE OVERRIDES === */
+.dark .learner-stat-card,
+.dark .learner-course-card {
+  background: var(--brand-obsidian, #1a1a2e);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .learner-stat-card .stat-value,
+.dark .learner-course-card h3 {
+  color: white;
+}
+
+.dark .learner-stat-card .stat-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .learner-section-title {
+  color: white;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .learner-hero {
+    padding: 1.5rem 1rem;
+  }
+  
+  .learner-hero h1 {
+    font-size: 1.375rem;
+  }
+  
+  .learner-stat-card .stat-value {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .learner-hero {
+    padding: 1rem 0.75rem;
+    border-radius: 0.75rem;
+  }
+  
+  .learner-hero h1 {
+    font-size: 1.125rem;
+  }
+}
