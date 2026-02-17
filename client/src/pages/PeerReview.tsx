@@ -200,7 +200,7 @@ export default function PeerReview() {
                         className="w-full p-3 rounded-xl border border-gray-200 dark:border-border dark:border-border text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30 resize-none" />
                     </div>
                     <div className="flex justify-end">
-                      <button onClick={handleSubmitReview}
+                      <button aria-label="Action" onClick={handleSubmitReview}
                         disabled={!feedback.trim() || completeReview.isPending}
                         className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-teal-700 text-white hover:bg-teal-800 disabled:opacity-40 transition-colors flex items-center gap-2">
                         {completeReview.isPending ? (

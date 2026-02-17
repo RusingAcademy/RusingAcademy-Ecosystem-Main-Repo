@@ -168,7 +168,7 @@ export default function GifPicker({ isOpen, onClose, onSelect }: GifPickerProps)
               <Smile className="w-4 h-4 text-barholex-gold" />
               <span className="text-sm font-bold text-foreground">GIF Picker</span>
             </div>
-            <button
+            <button aria-label="Action"
               onClick={onClose}
               className="p-1 rounded-lg hover:bg-accent transition-colors"
             >

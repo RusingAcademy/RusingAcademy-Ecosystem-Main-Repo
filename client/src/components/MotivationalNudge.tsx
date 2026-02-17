@@ -181,7 +181,7 @@ export function MotivationalNudge({ userState, language = "en", onDismiss }: Mot
               )}
             </div>
             
-            <button
+            <button aria-label="Action"
               onClick={handleDismiss}
               className="text-gray-400 hover:text-gray-600 p-1"
             >

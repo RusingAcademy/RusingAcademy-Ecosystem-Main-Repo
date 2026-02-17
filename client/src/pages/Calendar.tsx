@@ -90,13 +90,13 @@ export default function CalendarPage() {
         <div className="glass-card rounded-xl overflow-hidden">
           {/* Month Navigation */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-            <button onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+            <button aria-label="Action" onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
               <span className="material-icons text-gray-500">chevron_left</span>
             </button>
             <h2 className="text-lg font-medium text-gray-800">
               {MONTHS[month]} {year}
             </h2>
-            <button onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+            <button aria-label="Action" onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
               <span className="material-icons text-gray-500">chevron_right</span>
             </button>
           </div>

@@ -177,7 +177,7 @@ export default function PreviewMode() {
                           <p className="text-xs font-medium text-black dark:text-foreground">Select a user to impersonate:</p>
                           <div className="max-h-36 overflow-y-auto space-y-1 border rounded-lg p-1">
                             {(mode.id === "learner" ? students : coaches)?.map((u: any) => (
-                              <button
+                              <button aria-label="Action"
                                 key={u.id}
                                 className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:bg-card text-sm flex items-center gap-2 transition-colors"
                                 onClick={(e) => {

@@ -425,7 +425,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
                   {learner.lastActiveAt ? new Date(learner.lastActiveAt).toLocaleDateString() : "Never"}
                 </td>
                 <td className="px-4 py-3">
-                  <button className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded">
                     <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>
@@ -596,7 +596,7 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <button className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded">
                     <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>

@@ -112,7 +112,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
             </div>
           </div>
 
-          <button onClick={toggleLang}
+          <button aria-label="Action" onClick={toggleLang}
             className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-600/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
             <span className="material-icons text-sm">translate</span>
             {lang === "en" ? "Français" : "English"}

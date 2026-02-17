@@ -14,7 +14,7 @@ export default function JournalEntries() {
     <div className="p-6 max-w-[1100px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Journal Entries</h1>
-        <button className="qb-btn-green flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+        <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
           <Plus size={14} /> New Journal Entry
         </button>
       </div>

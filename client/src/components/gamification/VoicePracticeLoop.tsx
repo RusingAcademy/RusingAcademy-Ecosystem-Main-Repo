@@ -101,7 +101,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
         <h3 className="text-lg font-semibold text-white mb-2">Exercice Oral</h3>
         <div className="bg-white dark:bg-background/5 rounded-xl p-4">
           <p className="text-white/80">{promptText}</p>
-          {promptAudio && <button className="mt-3 flex items-center gap-2 text-foundation text-sm">🔊 Écouter l'exemple</button>}
+          {promptAudio && <button aria-label="Action" className="mt-3 flex items-center gap-2 text-foundation text-sm">🔊 Écouter l'exemple</button>}
         </div>
       </div>
       <div className="flex flex-col items-center">

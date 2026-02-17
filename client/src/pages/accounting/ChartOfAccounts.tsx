@@ -163,14 +163,14 @@ export default function ChartOfAccounts() {
                     </td>
                     <td>
                       <div className="flex items-center gap-1">
-                        <button
+                        <button aria-label="Action"
                           className="p-1 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
                           onClick={(e) => openEdit(acc, e)}
                           title="Edit"
                         >
                           <Edit size={14} />
                         </button>
-                        <button
+                        <button aria-label="Action"
                           className="p-1 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
                           onClick={(e) => {
                             e.stopPropagation();

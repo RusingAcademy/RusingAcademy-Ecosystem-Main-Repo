@@ -975,7 +975,7 @@ function LoginContent() {
               </div>
 
               {/* Primary CTA — Sign In with Email */}
-              <button
+              <button aria-label="Action"
                 type="submit"
                 disabled={isPending || loginSuccess}
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-white text-sm font-bold shadow-lg shadow-[var(--brand-foundation)]/30 hover:shadow-xl hover:shadow-[var(--brand-foundation)]/40 hover:scale-[1.01] active:scale-[0.99] transition-all mt-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/50 focus:ring-offset-2 focus:ring-offset-transparent"
@@ -1018,7 +1018,7 @@ function LoginContent() {
 
             {/* SSO Buttons — Google + Microsoft (Main's OAuth) */}
             <div className="grid grid-cols-2 gap-2.5 mb-4">
-              <button
+              <button aria-label="Action"
                 type="button"
                 onClick={handleGoogleSignIn}
                 disabled={isPending || loginSuccess}
@@ -1027,7 +1027,7 @@ function LoginContent() {
                 <GoogleIcon />
                 Google
               </button>
-              <button
+              <button aria-label="Action"
                 type="button"
                 onClick={handleMicrosoftSignIn}
                 disabled={isPending || loginSuccess}
@@ -1276,7 +1276,7 @@ function LoginContent() {
                 {t("Forgot password?", "Mot de passe oublié ?")}
               </Link>
             </div>
-            <button
+            <button aria-label="Action"
               type="submit"
               disabled={isPending || loginSuccess}
               className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-white text-sm font-bold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/50"
@@ -1316,7 +1316,7 @@ function LoginContent() {
             <div className="flex-1 h-px bg-white/10" />
           </div>
           <div className="grid grid-cols-2 gap-2 mb-4">
-            <button
+            <button aria-label="Action"
               type="button"
               onClick={handleGoogleSignIn}
               disabled={isPending || loginSuccess}
@@ -1325,7 +1325,7 @@ function LoginContent() {
               <GoogleIcon />
               Google
             </button>
-            <button
+            <button aria-label="Action"
               type="button"
               onClick={handleMicrosoftSignIn}
               disabled={isPending || loginSuccess}

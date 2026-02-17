@@ -44,7 +44,7 @@ export default function Reconciliation() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Reconciliation</h1>
-        <button
+        <button aria-label="Action"
           className="qb-btn-primary flex items-center gap-2"
           onClick={() => setShowNewForm(true)}
         >

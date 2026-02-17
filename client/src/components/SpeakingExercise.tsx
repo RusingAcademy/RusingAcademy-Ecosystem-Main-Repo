@@ -218,7 +218,7 @@ export function SpeakingExercise({
             {/* AI Pronunciation Button */}
             <div className="flex items-center gap-3">
               {!generatedAudioUrl ? (
-                <button
+                <button aria-label="Action"
                   onClick={handleGeneratePronunciation}
                   disabled={isGeneratingAudio}
                   className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-foundation to-teal-700 text-white rounded-lg hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
@@ -246,7 +246,7 @@ export function SpeakingExercise({
                   />
                   
                   {/* Play/Pause Button */}
-                  <button
+                  <button aria-label="Action"
                     onClick={isPlayingGenerated ? pauseGeneratedAudio : playGeneratedAudio}
                     className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-foundation to-teal-700 text-white rounded-full hover:opacity-90 transition-all shadow-md"
                   >
@@ -258,7 +258,7 @@ export function SpeakingExercise({
                   </button>
                   
                   {/* Replay Button */}
-                  <button
+                  <button aria-label="Action"
                     onClick={replayGeneratedAudio}
                     className="flex items-center justify-center w-10 h-10 bg-gray-100 dark:bg-card text-black dark:text-foreground rounded-full hover:bg-gray-200 transition-all"
                     title={language === "fr" ? "Rejouer" : "Replay"}
@@ -296,7 +296,7 @@ export function SpeakingExercise({
           {!audioUrl ? (
             <>
               {/* Recording Button */}
-              <button
+              <button aria-label="Action"
                 onClick={isRecording ? stopRecording : startRecording}
                 className={`w-24 h-24 rounded-full flex items-center justify-center transition-all ${
                   isRecording 
@@ -339,7 +339,7 @@ export function SpeakingExercise({
                   className="hidden"
                 />
                 <div className="flex items-center justify-center gap-4">
-                  <button
+                  <button aria-label="Action"
                     onClick={playRecording}
                     disabled={isPlaying}
                     className="w-12 h-12 rounded-full bg-gradient-to-r from-foundation to-teal-700 text-white flex items-center justify-center hover:opacity-90 disabled:opacity-50"

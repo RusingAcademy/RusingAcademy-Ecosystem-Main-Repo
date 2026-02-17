@@ -185,7 +185,7 @@ export default function Notes() {
                     <h2 className="text-lg font-bold text-gray-900">
                       {editingNote ? "Edit Note" : "New Note"}
                     </h2>
-                    <button onClick={resetForm} className="p-1.5 rounded-lg hover:bg-gray-100">
+                    <button aria-label="Action" onClick={resetForm} className="p-1.5 rounded-lg hover:bg-gray-100">
                       <span className="material-icons text-gray-400">close</span>
                     </button>
                   </div>

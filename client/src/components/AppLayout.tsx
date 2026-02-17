@@ -430,7 +430,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <Tooltip key={item.id}>
                 <TooltipTrigger asChild>
                   <Link href={item.path}>
-                    <button
+                    <button aria-label="Action"
                       className={cn(
                         "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors",
                         isActive(item.path)
@@ -478,7 +478,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <Tooltip key={item.id}>
             <TooltipTrigger asChild>
               <Link href={item.path}>
-                <button
+                <button aria-label="Action"
                   className={cn(
                     "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors",
                     isActive(item.path)

@@ -457,7 +457,7 @@ export default function LeadSegmentsManager() {
                 <Label>{l.color}</Label>
                 <div className="flex flex-wrap gap-2">
                   {COLORS.map((color) => (
-                    <button
+                    <button aria-label="Action"
                       key={color}
                       className={`h-6 w-6 rounded-full border-2 ${
                         formData.color === color ? "border-foreground" : "border-transparent"

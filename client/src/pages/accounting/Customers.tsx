@@ -78,7 +78,7 @@ export default function Customers() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Customers</h1>
-        <button className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/customers/new")}>
+        <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/customers/new")}>
           <Plus size={16} /> New customer
         </button>
       </div>
@@ -123,7 +123,7 @@ export default function Customers() {
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500/30"
           />
         </div>
-        <button className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+        <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
           <Filter size={14} /> Filter
         </button>
       </div>
@@ -135,14 +135,14 @@ export default function Customers() {
             <tr className="bg-gray-50">
               <th className="w-8"><input type="checkbox" className="rounded" /></th>
               <th>
-                <button className="flex items-center gap-1 hover:text-gray-900" onClick={() => toggleSort("name")}>
+                <button aria-label="Action" className="flex items-center gap-1 hover:text-gray-900" onClick={() => toggleSort("name")}>
                   Customer <ArrowUpDown size={12} className={sortField === "name" ? "text-green-600" : "text-gray-400"} />
                 </button>
               </th>
               <th>Company</th>
               <th>Phone</th>
               <th className="text-right">
-                <button className="flex items-center gap-1 ml-auto hover:text-gray-900" onClick={() => toggleSort("balance")}>
+                <button aria-label="Action" className="flex items-center gap-1 ml-auto hover:text-gray-900" onClick={() => toggleSort("balance")}>
                   Open Balance <ArrowUpDown size={12} className={sortField === "balance" ? "text-green-600" : "text-gray-400"} />
                 </button>
               </th>
@@ -162,7 +162,7 @@ export default function Customers() {
                   </span>
                 </td>
                 <td>
-                  <button className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}>
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>
@@ -185,7 +185,7 @@ export default function Customers() {
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>
             <div className="flex items-center gap-1">
-              <button
+              <button aria-label="Action"
                 className="p-1.5 rounded hover:bg-gray-200 disabled:opacity-40"
                 disabled={page === 1}
                 onClick={() => setPage(p => p - 1)}
@@ -195,7 +195,7 @@ export default function Customers() {
               {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
                 const pageNum = totalPages <= 5 ? i + 1 : Math.max(1, Math.min(page - 2, totalPages - 4)) + i;
                 return (
-                  <button
+                  <button aria-label="Action"
                     key={pageNum}
                     className={`w-8 h-8 rounded text-sm ${page === pageNum ? "bg-green-600 text-white" : "hover:bg-gray-200 text-gray-700"}`}
                     onClick={() => setPage(pageNum)}
@@ -204,7 +204,7 @@ export default function Customers() {
                   </button>
                 );
               })}
-              <button
+              <button aria-label="Action"
                 className="p-1.5 rounded hover:bg-gray-200 disabled:opacity-40"
                 disabled={page === totalPages}
                 onClick={() => setPage(p => p + 1)}

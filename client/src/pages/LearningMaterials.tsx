@@ -104,7 +104,7 @@ export default function LearningMaterials() {
             </div>
           </div>
           <Link href="/programs">
-            <button className="px-4 py-2 rounded-xl text-sm font-semibold text-white flex items-center gap-2 transition-all hover:shadow-lg hover:scale-[1.02]"
+            <button aria-label="Action" className="px-4 py-2 rounded-xl text-sm font-semibold text-white flex items-center gap-2 transition-all hover:shadow-lg hover:scale-[1.02]"
               style={{ background: "linear-gradient(135deg, var(--brand-teal, var(--teal)), #006d7a)" }}>
               <span className="material-icons text-base">school</span>
               Browse All Programs

@@ -111,7 +111,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
         {/* Book a Session CTA */}
         <div className="px-4 py-3">
-          <button className="w-full py-2.5 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-md hover:brightness-105"
+          <button aria-label="Action" className="w-full py-2.5 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-md hover:brightness-105"
             >
             <span className="material-icons text-base">event</span>
             Book a Session
@@ -242,14 +242,14 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
           </Link>
 
           {/* Language Toggle */}
-          <button onClick={toggleLang}
+          <button aria-label="Action" onClick={toggleLang}
             className="w-full mt-2 py-2 rounded-lg text-[11px] font-medium text-gray-500 hover:text-teal-700 hover:bg-teal-700/5 transition-all flex items-center justify-center gap-2 border border-gray-100">
             <span className="material-icons text-sm">translate</span>
             {lang === "en" ? "Français" : "English"}
             <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-teal-700/10 text-teal-700 font-bold uppercase">{lang}</span>
           </button>
 
-          <button onClick={handleLogout} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-background transition-all flex items-center justify-center gap-1.5">
+          <button aria-label="Action" onClick={handleLogout} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-background transition-all flex items-center justify-center gap-1.5">
             <span className="material-icons text-sm">logout</span>
             {t("common.signOut")}
           </button>

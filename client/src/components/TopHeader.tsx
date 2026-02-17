@@ -58,7 +58,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
     >
       <div className="flex items-center justify-between h-16 px-4 lg:px-6">
         {/* Mobile menu button */}
-        <button
+        <button aria-label="Action"
           onClick={onMenuToggle}
           className="lg:hidden p-2.5 rounded-xl transition-all duration-200 hover:bg-accent active:scale-95"
         >
@@ -133,7 +133,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
         <div className="flex items-center gap-1.5">
           {/* Dark mode toggle */}
           {switchable && toggleTheme && (
-            <button
+            <button aria-label="Action"
               onClick={toggleTheme}
               className="relative p-2.5 rounded-xl transition-all duration-200 hover:bg-accent active:scale-95 group"
               title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -182,7 +182,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
                 <Plus className="w-4 h-4" strokeWidth={2.5} />
                 {t.common.create}
               </Button>
-              <button
+              <button aria-label="Action"
                 onClick={onCreatePost}
                 className="sm:hidden p-2.5 rounded-xl transition-all duration-200 active:scale-95"
                 style={{
@@ -198,7 +198,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
               {/* User dropdown — avatar with gradient ring */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 rounded-xl hover:bg-accent transition-all duration-200 p-1 pr-3 active:scale-[0.97]">
+                  <button aria-label="Action" className="flex items-center gap-2 rounded-xl hover:bg-accent transition-all duration-200 p-1 pr-3 active:scale-[0.97]">
                     <div className="avatar-ring">
                       {user.avatarUrl ? (
                         <img

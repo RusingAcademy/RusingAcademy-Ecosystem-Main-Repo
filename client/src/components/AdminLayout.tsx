@@ -248,7 +248,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     <Tooltip key={item.id}>
                       <TooltipTrigger asChild>
                         <Link href={item.path}>
-                          <button className={cn(
+                          <button aria-label="Action" className={cn(
                             "w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
                             isActive(item.path)
                               ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
@@ -277,7 +277,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Tooltip key={item.id}>
                 <TooltipTrigger asChild>
                   <Link href={item.path}>
-                    <button className={cn(
+                    <button aria-label="Action" className={cn(
                       "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors",
                       isActive(item.path)
                         ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"

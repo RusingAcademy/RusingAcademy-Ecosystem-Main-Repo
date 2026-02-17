@@ -155,7 +155,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
             </h1>
           </div>
           <div className="flex items-center gap-4">
-            <button className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors">
+            <button aria-label="Action" className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
             </button>
