@@ -211,10 +211,10 @@ export default function Coaches() {
 
         {/* Main Content */}
         <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-8 lg:h-[calc(100vh-12rem)] lg:overflow-hidden">
             {/* Filters Sidebar - Premium */}
-            <aside className={`lg:w-80 lg:self-start ${showFilters ? 'block' : 'hidden lg:block'}`}>
-              <div className="sticky top-24 space-y-6">
+            <aside className={`lg:w-80 lg:overflow-y-auto ${showFilters ? 'block' : 'hidden lg:block'}`}>
+              <div className="space-y-6">
                 {/* Filter Card */}
                 <div className="bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden">
                   <div className="p-6 border-b border-slate-100 dark:border-teal-800">
@@ -331,7 +331,7 @@ export default function Coaches() {
             </aside>
 
             {/* Coach List */}
-            <div className="flex-1">
+            <div className="flex-1 lg:overflow-y-auto">
               {/* Mobile Filter Toggle */}
               <div className="lg:hidden mb-6">
                 <Button
