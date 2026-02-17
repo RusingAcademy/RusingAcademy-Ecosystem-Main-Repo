@@ -228,7 +228,7 @@ export default function AICoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge with coach photo */}
-              <Badge className="mb-6 bg-white dark:bg-background/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white/20 dark:bg-background/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <img 
                   loading="lazy" src={coachPhotos[0]} 
                   alt="SLE AI Coach" 
@@ -286,7 +286,7 @@ export default function AICoach() {
                   <Play className="h-4 w-4" />
                   {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-background/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/20 dark:hover:bg-background/10 gap-2">
                   <MessageSquare className="h-4 w-4" />
                   {isEn ? "Try Demo" : "Essayer la démo"}
                 </Button>
@@ -297,10 +297,10 @@ export default function AICoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white dark:bg-background/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
+                    className="bg-white/20 dark:bg-background/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
-                    <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
-                    <div className="text-sm text-teal-200">{stat.label}</div>
+                    <div className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-slate-800 dark:text-teal-200">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -477,19 +477,19 @@ export default function AICoach() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-lg p-4">
-                      <p className="text-sm text-teal-100">
+                    <div className="bg-white/20 dark:bg-background/10 backdrop-blur-sm rounded-lg p-4">
+                      <p className="text-sm text-slate-800 dark:text-teal-100">
                         {isEn
                           ? '"Hello! I\'m your SLE AI Companion. How can I help you prepare for your SLE exam today?"'
                           : '"Bonjour! Je suis votre Compagnon IA ELS. Comment puis-je vous aider à préparer votre examen ELS aujourd\'hui?"'}
                       </p>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-white dark:bg-background/20 hover:bg-white dark:bg-background/30 text-white border-0">
+                      <Button size="sm" className="bg-white/20 dark:bg-background/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
                         <Mic className="h-4 w-4 mr-2" />
                         {isEn ? "Oral Practice" : "Pratique orale"}
                       </Button>
-                      <Button size="sm" className="bg-white dark:bg-background/20 hover:bg-white dark:bg-background/30 text-white border-0">
+                      <Button size="sm" className="bg-white/20 dark:bg-background/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
                         <PenTool className="h-4 w-4 mr-2" />
                         {isEn ? "Written" : "Écrit"}
                       </Button>
@@ -550,7 +550,7 @@ export default function AICoach() {
           </div>
 
           <div className="container max-w-6xl mx-auto px-6 md:px-12 relative text-center">
-            <Badge className="mb-6 bg-white dark:bg-background/10 text-white border-white/60 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/20 dark:bg-background/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Free Today" : "Commencez gratuitement aujourd'hui"}
             </Badge>
@@ -582,7 +582,7 @@ export default function AICoach() {
                 {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
               </Button>
               <a href="/coaches">
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-background/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/20 dark:hover:bg-background/10 gap-2">
                   <Users className="h-4 w-4" />
                   {isEn ? "Or Find a Human Coach" : "Ou trouver un coach humain"}
                 </Button>

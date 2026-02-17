@@ -356,7 +356,7 @@ export default function BecomeCoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
-              <Badge className="mb-6 bg-white dark:bg-background/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white/20 dark:bg-background/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <Sparkles className="h-4 w-4 mr-2" />
                 {isEn ? "Join Our Coach Network" : "Rejoignez notre réseau de coachs"}
               </Badge>
@@ -398,7 +398,7 @@ export default function BecomeCoach() {
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 )}
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-background/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/20 dark:hover:bg-background/10 gap-2">
                   <Video className="h-4 w-4" />
                   {isEn ? "Watch Video" : "Voir la vidéo"}
                 </Button>
@@ -409,10 +409,10 @@ export default function BecomeCoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white dark:bg-background/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
+                    className="bg-white/20 dark:bg-background/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
-                    <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
-                    <div className="text-sm text-teal-200">{stat.label}</div>
+                    <div className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-slate-800 dark:text-teal-200">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -693,7 +693,7 @@ export default function BecomeCoach() {
           </div>
 
           <div className="container relative text-center">
-            <Badge className="mb-6 bg-white dark:bg-background/10 text-white border-white/60 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/20 dark:bg-background/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>
