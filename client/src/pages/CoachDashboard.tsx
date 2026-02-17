@@ -417,7 +417,7 @@ export default function CoachDashboard() {
                       day: 'numeric' 
                     })}
                   </span>
-                  <Badge className="bg-white dark:bg-background/20 text-white border-0 hover:bg-white dark:bg-background/30">
+                  <Badge className="bg-white/15 dark:bg-background/20 text-white border-0 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm">
                     <Star className="h-3 w-3 mr-1" />
                     {coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}
                   </Badge>

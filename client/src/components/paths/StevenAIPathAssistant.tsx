@@ -225,12 +225,12 @@ export const StevenAIPathAssistant: React.FC<StevenAIProps> = ({
         {/* Context badges */}
         <div className="flex gap-2 mt-2">
           {currentPathId && (
-            <Badge variant="secondary" className="bg-white dark:bg-background/20 text-white text-xs">
+            <Badge variant="secondary" className="bg-white/20 dark:bg-background/20 text-white text-xs backdrop-blur-sm">
               <BookOpen className="h-3 w-3 mr-1" />
               Path {currentPathId.replace('path-', '')}
             </Badge>
           )}
-          <Badge variant="secondary" className="bg-white dark:bg-background/20 text-white text-xs">
+          <Badge variant="secondary" className="bg-white/20 dark:bg-background/20 text-white text-xs backdrop-blur-sm">
             <Target className="h-3 w-3 mr-1" />
             {language === 'fr' ? 'Niveau' : 'Level'} {userLevel}
           </Badge>

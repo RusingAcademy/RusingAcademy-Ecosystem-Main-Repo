@@ -102,8 +102,8 @@ export default function DashboardOverview() {
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">Welcome back. Here's your ecosystem overview.</p>
+          <h1 className="admin-page-title">Dashboard</h1>
+          <p className="admin-subtitle">Welcome back. Here's your ecosystem overview.</p>
         </div>
         <Button size="sm" variant="outline" onClick={() => navigate("/admin/preview")}>
           <Eye className="h-4 w-4 mr-1.5" /> Preview as Student
