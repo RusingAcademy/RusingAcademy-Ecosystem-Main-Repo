@@ -718,7 +718,7 @@ function App() {
                   <Toaster />
                   <PostLoginRedirect />
                   {/* Skip link for keyboard navigation accessibility */}
-                  <a href="#main-content" className="skip-link">
+                  <a href="#main-content" className="skip-to-content">
                     Skip to main content
                   </a>
                   <EcosystemLayout>
