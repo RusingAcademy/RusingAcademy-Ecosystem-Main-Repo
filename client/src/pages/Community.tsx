@@ -277,7 +277,7 @@ export default function Community() {
                 key={index}
                 className="text-center p-6 rounded-2xl bg-white dark:bg-background/5 border border-white/60"
               >
-                <div className="text-3xl md:text-4xl font-black text-teal-400 mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-black text-teal-400 mb-2">
                   {stat.value}
                 </div>
                 <div className="text-sm text-white/90">

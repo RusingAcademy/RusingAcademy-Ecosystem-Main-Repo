@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import { BackToTop } from "@/components/mobile";
 
 export default function BookingSuccess() {
   const [, navigate] = useLocation();
@@ -322,6 +323,7 @@ END:VCALENDAR`;
       </main>
 
       <Footer />
-    </div>
+          <BackToTop threshold={300} />
+</div>
   );
 }

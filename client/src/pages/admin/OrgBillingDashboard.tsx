@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Building2, Users, CreditCard, Receipt, TrendingUp, ArrowRight } from "lucide-react";
+import { BackToTop } from "@/components/mobile";
 
 export default function OrgBillingDashboard() {
 
@@ -180,6 +181,7 @@ export default function OrgBillingDashboard() {
           )}
         </CardContent>
       </Card>
-    </div>
+          <BackToTop threshold={300} />
+</div>
   );
 }

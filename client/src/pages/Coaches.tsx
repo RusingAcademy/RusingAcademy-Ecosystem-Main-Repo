@@ -16,6 +16,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // Header is provided by EcosystemLayout
 import Footer from "@/components/Footer";
+import { BackToTop, WaveDivider, SectionLabel } from "@/components/mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Search,
@@ -186,8 +187,8 @@ export default function Coaches() {
 
       <main id="main-content" className="flex-1">
         {/* Search Bar Section */}
-        <section className="py-6">
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
+        <section className="py-4 sm:py-6">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
             <div className="max-w-2xl mx-auto">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
@@ -210,7 +211,7 @@ export default function Coaches() {
         </section>
 
         {/* Main Content */}
-        <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-16 sm:pb-20">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Filters Sidebar - Premium */}
             <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
@@ -678,6 +679,7 @@ export default function Coaches() {
       </main>
 
       <Footer />
+      <BackToTop threshold={300} />
     </div>
   );
 }

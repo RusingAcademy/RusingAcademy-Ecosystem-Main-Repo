@@ -9,6 +9,7 @@
  */
 import { lazy, Suspense } from "react";
 import AppLayout from "@/components/AppLayout";
+import { BackToTop } from "@/components/mobile";
 
 // ── Skeleton loader ──────────────────────────────────────────────────
 function SectionSkeleton() {
@@ -22,7 +23,8 @@ function SectionSkeleton() {
         ))}
       </div>
       <div className="h-64 bg-muted rounded-lg" />
-    </div>
+          <BackToTop threshold={300} />
+</div>
   );
 }
 

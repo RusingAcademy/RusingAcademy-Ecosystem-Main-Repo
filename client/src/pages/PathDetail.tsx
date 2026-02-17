@@ -495,7 +495,7 @@ export default function PathDetail() {
                 </div>
               </div>
               
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">
                 {t && displayPath.titleFr ? displayPath.titleFr : displayPath.title}
               </h1>
               
@@ -709,7 +709,7 @@ export default function PathDetail() {
       {/* CTA Section */}
       <section className={`py-8 md:py-12 lg:py-16 bg-gradient-to-r ${displayPath.colorGradient || "from-amber-600 to-orange-600"}`}>
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer?" : "Ready to Begin?"}
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">

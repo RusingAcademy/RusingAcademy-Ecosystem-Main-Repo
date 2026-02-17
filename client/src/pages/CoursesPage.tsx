@@ -8,6 +8,7 @@ import { PATH_SERIES_PRICES, ESL_PATH_SERIES_PRICES } from '@shared/pricing';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import { EcosystemFooter } from '../components/EcosystemFooter';
+import { BackToTop } from "@/components/mobile";
 import { 
   BookOpen, 
   Clock, 
@@ -778,7 +779,7 @@ export default function CoursesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
               >
                 {filteredCourses.map((course, index) => (
                   <motion.div
@@ -1020,6 +1021,7 @@ export default function CoursesPage() {
         </section>
 
         <EcosystemFooter lang="en" theme="light" activeBrand="rusingacademy" />
+        <BackToTop threshold={300} />
       </div>
     </>
   );

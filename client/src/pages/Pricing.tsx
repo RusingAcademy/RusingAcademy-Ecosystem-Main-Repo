@@ -416,7 +416,7 @@ export default function Pricing() {
             <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('why') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyChooseUs}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.whyChooseUs}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">{l.whySubtitle}</p>
             </div>
 
@@ -465,7 +465,7 @@ export default function Pricing() {
           data-section="learners"
         >
           <div className="container">
-            <h2 id="learners-title" className="text-3xl md:text-4xl font-bold mb-4 text-center">
+            <h2 id="learners-title" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center">
               {l.forLearners}
             </h2>
             <p className="text-muted-foreground text-center mb-6 md:mb-8 lg:mb-12 max-w-2xl mx-auto">
@@ -578,7 +578,7 @@ export default function Pricing() {
                   {language === "fr" ? "Témoignages" : "Success Stories"}
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.testimonialsTitle}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.testimonialsTitle}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">{l.testimonialsSubtitle}</p>
             </div>
 
@@ -626,7 +626,7 @@ export default function Pricing() {
             <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('coaches') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              <h2 id="coaches-title" className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 id="coaches-title" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {l.coachTitle}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">{l.coachSubtitle}</p>
@@ -725,7 +725,7 @@ export default function Pricing() {
                 <HelpCircle className="h-4 w-4 text-teal-600" />
                 <span className="text-sm font-medium text-teal-700">FAQ</span>
               </div>
-              <h2 id="faq-title" className="text-3xl md:text-4xl font-bold">
+              <h2 id="faq-title" className="text-2xl sm:text-3xl md:text-4xl font-bold">
                 {l.faqTitle}
               </h2>
             </div>
@@ -784,7 +784,7 @@ export default function Pricing() {
                 </span>
               </div>
               
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
                 <span className="italic font-serif">{l.ctaTitle.split(' ')[0]}</span>{" "}
                 <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
                   {l.ctaTitle.split(' ').slice(1, -1).join(' ')}

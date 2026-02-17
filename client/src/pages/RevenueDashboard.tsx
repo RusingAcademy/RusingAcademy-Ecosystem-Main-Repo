@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Loader2, DollarSign, TrendingUp, Users, BarChart3, Activity, BookOpen, Calendar, Sparkles, Hash } from "lucide-react";
 import { useLocation } from "wouter";
 import { useState, useMemo } from "react";
+import { BackToTop } from "@/components/mobile";
 
 export default function RevenueDashboard() {
   const { t } = useLocale();
@@ -214,7 +215,8 @@ export default function RevenueDashboard() {
             </div>
           </>
         )}
-      </div>
+            <BackToTop threshold={300} />
+</div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function ProgramSelect() {
             <img src={LOGO_URL} alt="RusingAcademy" className="w-10 h-10 rounded-lg" />
             <span className="text-xs font-bold uppercase tracking-widest text-teal-700">Learning Portal</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
             Choose Your Program
           </h1>
           <p className="text-gray-500 mt-2 max-w-xl text-sm">

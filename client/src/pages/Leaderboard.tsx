@@ -120,7 +120,7 @@ export default function Leaderboard() {
             <Trophy className="w-5 h-5" />
             <span className="font-medium">Community Rankings</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Leaderboard</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Leaderboard</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             See how you rank among fellow learners. Earn XP by completing lessons, 
             quizzes, and maintaining your learning streak.

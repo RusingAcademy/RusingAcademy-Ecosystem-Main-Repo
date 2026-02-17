@@ -106,7 +106,7 @@ export default function B2BSection() {
 
       {/* Benefits */}
       <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.benefitsTitle}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.benefits.map((benefit, i) => (
@@ -126,7 +126,7 @@ export default function B2BSection() {
 
       {/* Packages */}
       <div className="py-8 md:py-12 lg:py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.packagesTitle}</h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {t.packages.map((pkg, i) => (
@@ -159,7 +159,7 @@ export default function B2BSection() {
 
       {/* Testimonials */}
       <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.testimonialsTitle}</h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {t.testimonials.map((testimonial, i) => (

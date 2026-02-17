@@ -2,6 +2,7 @@ import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
+import { BackToTop } from "@/components/mobile";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
@@ -378,7 +379,7 @@ export default function About() {
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-cta/20 rounded-full blur-3xl" />
               
               <div className="relative p-12 md:p-16 text-center text-white">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.ctaTitle}</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.ctaTitle}</h2>
                 <p className="text-white/90 mb-8 max-w-xl mx-auto text-lg">
                   {l.ctaDescription}
                 </p>
@@ -395,6 +396,7 @@ export default function About() {
       </main>
 
       <Footer />
+      <BackToTop threshold={300} />
     </div>
   );
 }

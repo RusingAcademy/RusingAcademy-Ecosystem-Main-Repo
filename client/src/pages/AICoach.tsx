@@ -315,7 +315,7 @@ export default function AICoach() {
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
                 {isEn ? "Features" : "Fonctionnalités"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {isEn ? "Everything You Need to Succeed" : "Tout ce dont vous avez besoin pour réussir"}
               </h2>
               <p className="text-black dark:text-foreground max-w-2xl mx-auto">
@@ -375,7 +375,7 @@ export default function AICoach() {
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
                 {isEn ? "Simple Process" : "Processus simple"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {isEn ? "How It Works" : "Comment ça marche"}
               </h2>
               <p className="text-black dark:text-foreground max-w-2xl mx-auto">
@@ -418,7 +418,7 @@ export default function AICoach() {
                   <Badge className="mb-4 bg-foundation-soft text-foundation border-foundation">
                     {isEn ? "Meet Your AI Coach" : "Rencontrez votre coach IA"}
                   </Badge>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                     {isEn ? "Your Personal AI Language Coach" : "Votre coach linguistique IA personnel"}
                   </h2>
                   <p className="text-black dark:text-foreground mb-6">
@@ -508,7 +508,7 @@ export default function AICoach() {
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {isEn ? "What Our Users Say" : "Ce que disent nos utilisateurs"}
               </h2>
             </div>
@@ -567,7 +567,7 @@ export default function AICoach() {
               ))}
             </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {isEn ? "Ready to Improve Your SLE Skills?" : "Prêt à améliorer vos compétences ELS?"}
             </h2>
             <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">

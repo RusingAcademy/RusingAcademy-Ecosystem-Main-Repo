@@ -200,7 +200,7 @@ export default function CourseSuccess() {
               {l.badge}
             </Badge>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">
               {l.title}
             </h1>
             

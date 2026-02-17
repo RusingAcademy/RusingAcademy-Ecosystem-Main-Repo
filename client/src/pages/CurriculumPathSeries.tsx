@@ -936,7 +936,7 @@ export default function CurriculumPathSeries() {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 {/* Platform Learning */}
                 <Card className="border-none shadow-xl overflow-hidden">
                   <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
@@ -1159,7 +1159,7 @@ export default function CurriculumPathSeries() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="grid lg:grid-cols-3 gap-8"
+                className="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
               >
                 {/* Path Info */}
                 <div className="lg:col-span-2 space-y-6">

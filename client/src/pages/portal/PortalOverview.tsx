@@ -22,6 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PortalLayout from "@/components/portal/PortalLayout";
 import ProgressTracker from "@/components/portal/ProgressTracker";
+import { BackToTop } from "@/components/mobile";
 
 const upcomingSessions = [
   {
@@ -264,7 +265,8 @@ export default function PortalOverview() {
             </Card>
           </div>
         </div>
-      </div>
+            <BackToTop threshold={300} />
+    </div>
     </PortalLayout>
   );
                   }

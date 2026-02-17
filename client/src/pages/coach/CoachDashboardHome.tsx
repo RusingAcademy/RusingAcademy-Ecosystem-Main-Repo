@@ -6,6 +6,7 @@ import CoachLayout from "@/components/CoachLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
+import { BackToTop } from "@/components/mobile";
 
 const ACCENT = "var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))";
 
@@ -28,7 +29,8 @@ function KPICard({ icon, value, label, trend, trendUp, loading }: { icon: string
         <p className="text-2xl font-bold text-gray-900 dark:text-foreground mt-3">{value}</p>
       )}
       <p className="text-xs text-gray-500 mt-1">{label}</p>
-    </div>
+          <BackToTop threshold={300} />
+</div>
   );
 }
 

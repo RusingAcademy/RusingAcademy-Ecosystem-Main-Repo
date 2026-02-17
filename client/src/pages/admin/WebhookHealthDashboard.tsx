@@ -17,6 +17,7 @@ import {
   Shield,
   Timer,
 } from "lucide-react";
+import { BackToTop } from "@/components/mobile";
 
 const t = {
   en: {
@@ -324,6 +325,7 @@ export default function WebhookHealthDashboard() {
           )}
         </CardContent>
       </Card>
-    </div>
+          <BackToTop threshold={300} />
+</div>
   );
 }

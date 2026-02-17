@@ -150,7 +150,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
         backgroundSize: "40px 40px",
       }} />
 
-      <div className="container mx-auto px-6 md:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
         <Breadcrumb title={title} language={language} />
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 items-start">
@@ -318,7 +318,7 @@ function WhySection({ item, language }: { item: LibraryItem; language: string })
       {/* Subtle decorative element */}
       <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-orange-500 via-[#fb923c] to-orange-500/30" />
 
-      <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-orange-500/10 text-orange-500 text-sm font-semibold mb-6 border border-orange-500/15">
             <Zap className="w-4 h-4" />
@@ -342,7 +342,7 @@ function DetailsSection({ item, language }: { item: LibraryItem; language: strin
   const targetAudience = language === "fr" ? item.target_audience_fr : item.target_audience_en;
 
   return (
-    <section className="container mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-20">
+    <section className="container mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-20">
       <div className="grid md:grid-cols-5 gap-12 lg:gap-16">
         {/* Left: Description */}
         <motion.div
@@ -529,7 +529,7 @@ function RelatedProducts({
 
   return (
     <section className="bg-slate-50 border-t border-slate-200">
-      <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center flex items-center justify-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center">
             <Heart className="w-4 h-4 text-orange-500" />

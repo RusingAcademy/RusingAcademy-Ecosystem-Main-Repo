@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
+import { BackToTop } from "@/components/mobile";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
 import { FREE_ACCESS_MODE } from "@shared/const";
 
@@ -432,7 +433,7 @@ export default function Paths() {
       {/* CTA Section */}
       <section className={`py-8 md:py-12 lg:py-16 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-600 to-indigo-600' : 'from-amber-600 to-orange-600'}`}>
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer Votre Parcours?" : "Ready to Start Your Journey?"}
           </h2>
           <p className="text-lg text-amber-100 mb-8 max-w-2xl mx-auto">
@@ -458,6 +459,7 @@ export default function Paths() {
       </section>
 
       <EcosystemFooter lang={language === "fr" ? "fr" : "en"} theme="light" activeBrand="rusingacademy" />
+        <BackToTop threshold={300} />
     </div>
   );
 }

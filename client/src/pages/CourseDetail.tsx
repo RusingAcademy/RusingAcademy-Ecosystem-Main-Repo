@@ -290,7 +290,7 @@ export default function CourseDetail() {
                 </div>
                 
                 {/* Title */}
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
                   {course.title}
                 </h1>
                 
