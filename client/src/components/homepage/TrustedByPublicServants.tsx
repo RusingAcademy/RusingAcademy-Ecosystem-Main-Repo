@@ -59,7 +59,7 @@ export default function TrustedByPublicServants() {
   const { language } = useLanguage();
 
   return (
-    <section className="py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
+    <section className="py-24 bg-white dark:bg-background relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
@@ -70,10 +70,10 @@ export default function TrustedByPublicServants() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-4 font-serif italic">
+          <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-foreground mb-4 font-serif italic">
             {language === 'fr' ? 'La confiance des fonctionnaires' : 'Trusted by Public Servants'}
           </h2>
-          <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
+          <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Découvrez les histoires de réussite de nos étudiants dans la fonction publique canadienne'
               : 'Discover the success stories of our students in the Canadian public service'}
@@ -123,17 +123,17 @@ export default function TrustedByPublicServants() {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-black dark:text-white text-sm leading-relaxed mb-6 italic min-h-[120px]">
+              <blockquote className="text-black dark:text-foreground text-sm leading-relaxed mb-6 italic min-h-[120px]">
                 "{language === 'fr' ? testimonial.quote : testimonial.quoteEn}"
               </blockquote>
 
               {/* Author Info */}
               <div className="text-center border-t border-slate-100 pt-4">
-                <p className="font-bold text-black dark:text-white">{testimonial.name}</p>
+                <p className="font-bold text-black dark:text-foreground">{testimonial.name}</p>
                 <p className="text-xs text-teal-600 font-medium mt-1">
                   {language === 'fr' ? testimonial.role : testimonial.roleEn}
                 </p>
-                <p className="text-xs text-black dark:text-white mt-1">{testimonial.organization}</p>
+                <p className="text-xs text-black dark:text-foreground mt-1">{testimonial.organization}</p>
               </div>
             </div>
           ))}

@@ -123,7 +123,7 @@ function CoachCard({ coach, language, onClick }: CoachCardProps) {
         }`}
       >
         <div 
-          className="w-20 h-20 rounded-full flex items-center justify-center bg-white dark:bg-slate-900/20 hover:bg-white dark:bg-slate-900/30 transition-all duration-300 hover:scale-110"
+          className="w-20 h-20 rounded-full flex items-center justify-center bg-white dark:bg-background/20 hover:bg-white dark:bg-background/30 transition-all duration-300 hover:scale-110"
           style={{ 
             backdropFilter: "blur(8px)",
             border: "2px solid rgba(255,255,255,0.3)",
@@ -195,7 +195,7 @@ function VideoModal({ coach, language, onClose }: VideoModalProps) {
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white dark:bg-slate-900/10 hover:bg-white dark:bg-slate-900/20 flex items-center justify-center transition-colors z-10"
+        className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white dark:bg-background/10 hover:bg-white dark:bg-background/20 flex items-center justify-center transition-colors z-10"
         aria-label={language === "fr" ? "Fermer" : "Close"}
       >
         <X className="w-6 h-6 text-white" />
@@ -226,7 +226,7 @@ function VideoModal({ coach, language, onClose }: VideoModalProps) {
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={togglePlay}
-              className="w-12 h-12 rounded-full bg-white dark:bg-slate-900/20 hover:bg-white dark:bg-slate-900/30 flex items-center justify-center transition-colors"
+              className="w-12 h-12 rounded-full bg-white dark:bg-background/20 hover:bg-white dark:bg-background/30 flex items-center justify-center transition-colors"
               aria-label={isPlaying ? (language === "fr" ? "Pause" : "Pause") : (language === "fr" ? "Lecture" : "Play")}
             >
               {isPlaying ? (
@@ -238,7 +238,7 @@ function VideoModal({ coach, language, onClose }: VideoModalProps) {
             
             <button
               onClick={toggleMute}
-              className="w-12 h-12 rounded-full bg-white dark:bg-slate-900/20 hover:bg-white dark:bg-slate-900/30 flex items-center justify-center transition-colors"
+              className="w-12 h-12 rounded-full bg-white dark:bg-background/20 hover:bg-white dark:bg-background/30 flex items-center justify-center transition-colors"
               aria-label={isMuted ? (language === "fr" ? "Activer le son" : "Unmute") : (language === "fr" ? "Couper le son" : "Mute")}
             >
               {isMuted ? (

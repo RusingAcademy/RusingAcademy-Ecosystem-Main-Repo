@@ -69,7 +69,7 @@ export function AdminPerformanceDashboard({
   return (
     <div className="space-y-8">
       {/* Leaderboard */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <Trophy size={24} className="text-yellow-500" />
@@ -84,7 +84,7 @@ export function AdminPerformanceDashboard({
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 sortBy === "totalReviewed"
                   ? "bg-teal-600 text-white"
-                  : "bg-gray-200 text-gray-800 dark:text-gray-200 hover:bg-gray-300"
+                  : "bg-gray-200 text-gray-800 dark:text-foreground hover:bg-gray-300"
               }`}
             >
               {isEn ? "Most Reviewed" : "Plus examinées"}
@@ -94,7 +94,7 @@ export function AdminPerformanceDashboard({
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 sortBy === "speed"
                   ? "bg-teal-600 text-white"
-                  : "bg-gray-200 text-gray-800 dark:text-gray-200 hover:bg-gray-300"
+                  : "bg-gray-200 text-gray-800 dark:text-foreground hover:bg-gray-300"
               }`}
             >
               {isEn ? "Fastest" : "Plus rapides"}
@@ -104,7 +104,7 @@ export function AdminPerformanceDashboard({
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 sortBy === "approvalRate"
                   ? "bg-teal-600 text-white"
-                  : "bg-gray-200 text-gray-800 dark:text-gray-200 hover:bg-gray-300"
+                  : "bg-gray-200 text-gray-800 dark:text-foreground hover:bg-gray-300"
               }`}
             >
               {isEn ? "Highest Approval" : "Approbation la plus élevée"}
@@ -115,7 +115,7 @@ export function AdminPerformanceDashboard({
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
+              <tr className="border-b border-gray-200 dark:border-border dark:border-border">
                 <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Rank" : "Classement"}</th>
                 <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Admin" : "Administrateur"}</th>
                 <th className="text-center py-3 px-4 font-semibold text-gray-900">{isEn ? "Reviewed" : "Examinées"}</th>
@@ -133,7 +133,7 @@ export function AdminPerformanceDashboard({
                     setSelectedAdminId(admin.adminId);
                     onSelectAdmin?.(admin.adminId);
                   }}
-                  className="border-b border-gray-100 dark:border-slate-700 hover:bg-white dark:bg-slate-900 cursor-pointer transition-colors"
+                  className="border-b border-gray-100 dark:border-border hover:bg-white dark:bg-background cursor-pointer transition-colors"
                 >
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-2">
@@ -170,8 +170,8 @@ export function AdminPerformanceDashboard({
 
       {/* Individual Admin Details */}
       {selectedAdminDetails && (
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-foreground mb-6">
             {isEn ? "Performance Details" : "Détails de performance"} - {selectedAdminDetails.adminName}
           </h3>
 
@@ -231,7 +231,7 @@ export function AdminPerformanceDashboard({
           {selectedAdminDetails.monthsData && selectedAdminDetails.monthsData.length > 0 && (
             <div className="space-y-6">
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
                   {isEn ? "Review Volume Trend" : "Tendance du volume d'examen"}
                 </h4>
                 <ResponsiveContainer width="100%" height={300}>
@@ -264,7 +264,7 @@ export function AdminPerformanceDashboard({
               </div>
 
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
                   {isEn ? "Approval Rate Trend" : "Tendance du taux d'approbation"}
                 </h4>
                 <ResponsiveContainer width="100%" height={300}>

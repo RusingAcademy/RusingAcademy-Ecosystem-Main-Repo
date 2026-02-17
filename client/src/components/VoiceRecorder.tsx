@@ -189,7 +189,7 @@ export function VoiceRecorder({
       {prompt && (
         <div className="bg-[rgba(0,128,144,0.05)] rounded-lg p-3 mb-4">
           <p className="text-xs text-gray-500 mb-1 font-medium">Read aloud or respond to:</p>
-          <p className="text-sm text-gray-800 dark:text-gray-200 italic">"{prompt}"</p>
+          <p className="text-sm text-gray-800 dark:text-foreground italic">"{prompt}"</p>
         </div>
       )}
 
@@ -213,7 +213,7 @@ export function VoiceRecorder({
             <span>{formatTime(recordingTime)}</span>
             <span>{formatTime(maxDuration)}</span>
           </div>
-          <div className="w-full h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-teal-700 to-[#00a0b0] rounded-full transition-all duration-1000"
               style={{ width: `${progress}%` }}
@@ -238,7 +238,7 @@ export function VoiceRecorder({
       {/* Recorded Audio Playback */}
       {audioUrl && !isRecording && (
         <div className="mb-4">
-          <div className="flex items-center gap-3 bg-gray-50 dark:bg-slate-900 rounded-lg p-3">
+          <div className="flex items-center gap-3 bg-gray-50 dark:bg-background rounded-lg p-3">
             <button
               onClick={playRecording}
               className="w-10 h-10 rounded-full bg-teal-700 text-white flex items-center justify-center hover:bg-teal-900 transition-colors flex-shrink-0"
@@ -262,7 +262,7 @@ export function VoiceRecorder({
 
       {/* Transcript */}
       {showTranscript && transcript && (
-        <div className="mb-4 bg-gray-50 dark:bg-slate-900 rounded-lg p-3">
+        <div className="mb-4 bg-gray-50 dark:bg-background rounded-lg p-3">
           <p className="text-xs text-gray-500 mb-1 font-medium flex items-center gap-1">
             <span className="material-icons text-sm">subtitles</span>
             Live Transcript
@@ -286,7 +286,7 @@ export function VoiceRecorder({
           <>
             <button
               onClick={togglePause}
-              className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 flex items-center justify-center hover:bg-gray-200 transition-colors"
+              className="w-10 h-10 rounded-full bg-gray-100 dark:bg-card text-gray-700 dark:text-muted-foreground flex items-center justify-center hover:bg-gray-200 transition-colors"
             >
               <span className="material-icons text-xl">{isPaused ? "play_arrow" : "pause"}</span>
             </button>

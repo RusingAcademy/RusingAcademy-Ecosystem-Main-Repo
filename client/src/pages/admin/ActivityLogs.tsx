@@ -174,7 +174,7 @@ export default function ActivityLogs() {
             </div>
           ) : filteredEntries.length === 0 ? (
             <div className="p-12 text-center">
-              <Activity className="h-12 w-12 text-black/30 dark:text-white/30 mx-auto mb-4" />
+              <Activity className="h-12 w-12 text-black/30 dark:text-foreground/30 mx-auto mb-4" />
               <p className="font-medium text-lg">No activity recorded yet</p>
               <p className="text-sm text-muted-foreground mt-2 max-w-md mx-auto">
                 Admin actions, system events, and user changes will appear here as they occur.
@@ -249,7 +249,7 @@ export default function ActivityLogs() {
 
                         {/* IP / User Agent */}
                         {(log.ipAddress || log.userAgent) && (
-                          <div className="mt-1 text-[10px] text-black/70 dark:text-white/70">
+                          <div className="mt-1 text-[10px] text-black/70 dark:text-foreground/70">
                             {log.ipAddress && <span>IP: {log.ipAddress}</span>}
                             {log.ipAddress && log.userAgent && <span> · </span>}
                             {log.userAgent && <span className="truncate max-w-[300px] inline-block align-bottom">{log.userAgent}</span>}

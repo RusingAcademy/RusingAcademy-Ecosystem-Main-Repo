@@ -256,9 +256,9 @@ export function LearnerMetricsPanel({ language, className }: LearnerMetricsPanel
               </div>
             ) : !learners || learners.length === 0 ? (
               <div className="text-center py-8">
-                <Users className="h-12 w-12 mx-auto text-black/50 dark:text-white/50 mb-3" />
+                <Users className="h-12 w-12 mx-auto text-black/50 dark:text-foreground/50 mb-3" />
                 <p className="text-sm font-medium text-muted-foreground">{l.noLearners}</p>
-                <p className="text-xs text-black/80 dark:text-white/80 mt-1">{l.noLearnersDesc}</p>
+                <p className="text-xs text-black/80 dark:text-foreground/80 mt-1">{l.noLearnersDesc}</p>
               </div>
             ) : (
               <div className="space-y-3">

@@ -56,7 +56,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
     <div className="space-y-8">
       {/* Department Overview */}
       {departments.length > 0 && (
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
           <div className="flex items-center gap-2 mb-6">
             <Users size={24} className="text-blue-500" />
             <h3 className="text-xl font-semibold text-gray-900">
@@ -67,7 +67,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {departments.map((dept) => (
               <div key={dept.department} className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
-                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">{dept.department}</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-foreground mb-3">{dept.department}</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">{isEn ? "Teams" : "Équipes"}:</span>
@@ -97,7 +97,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
       )}
 
       {/* Team Benchmarking */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <BarChart3 size={24} className="text-green-500" />
@@ -108,7 +108,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 dark:text-muted-foreground hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="performance">{isEn ? "Performance Score" : "Score de performance"}</option>
             <option value="volume">{isEn ? "Volume" : "Volume"}</option>
@@ -169,12 +169,12 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
       {/* Team Detail Modal */}
       {selectedTeam && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-900 rounded-lg p-8 max-w-2xl w-full mx-4">
+          <div className="bg-white dark:bg-background rounded-lg p-8 max-w-2xl w-full mx-4">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">{selectedTeam.teamName}</h2>
               <button
                 onClick={() => setSelectedTeam(null)}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-300 text-2xl"
+                className="text-gray-500 hover:text-gray-700 dark:text-muted-foreground text-2xl"
               >
                 ×
               </button>
@@ -199,8 +199,8 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
               </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 rounded-lg p-4 mb-6">
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">{isEn ? "Performance Metrics" : "Métriques de performance"}</h3>
+            <div className="bg-white dark:bg-background rounded-lg p-4 mb-6">
+              <h3 className="font-semibold text-gray-900 dark:text-foreground mb-3">{isEn ? "Performance Metrics" : "Métriques de performance"}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">{isEn ? "Average Review Time" : "Temps moyen d'examen"}:</span>

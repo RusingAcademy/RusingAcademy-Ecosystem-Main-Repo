@@ -456,7 +456,7 @@ export default function DealPipelineKanban() {
   };
 
   const getScoreColor = (score: number | null) => {
-    if (!score) return "bg-gray-100 dark:bg-slate-800 text-black";
+    if (!score) return "bg-gray-100 dark:bg-card text-black";
     if (score >= 70) return "bg-green-100 text-green-700";
     if (score >= 40) return "bg-amber-100 text-amber-700";
     return "bg-red-100 text-red-700";
@@ -719,7 +719,7 @@ export default function DealPipelineKanban() {
                       setSelectedLead(lead);
                       setShowLeadDialog(true);
                     }}
-                    className={`bg-white dark:bg-slate-800 dark:bg-obsidian rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
+                    className={`bg-white dark:bg-card dark:bg-obsidian rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
                       draggedLead?.id === lead.id ? "opacity-50" : ""
                     }`}
                   >
@@ -916,11 +916,11 @@ export default function DealPipelineKanban() {
 
               {/* Metrics */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation">
+                <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation">
                   <p className="text-xs text-muted-foreground">{l.score}</p>
                   <p className="text-lg font-bold">{selectedLead.leadScore || 0}</p>
                 </div>
-                <div className="p-3 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation">
+                <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation">
                   <p className="text-xs text-muted-foreground">{l.dealValue}</p>
                   <p className="text-lg font-bold">
                     {selectedLead.dealValue

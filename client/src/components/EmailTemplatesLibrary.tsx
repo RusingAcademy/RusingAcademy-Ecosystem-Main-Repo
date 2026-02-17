@@ -734,13 +734,13 @@ export default function EmailTemplatesLibrary() {
           </DialogHeader>
           {previewTemplate && (
             <div className="space-y-4">
-              <div className="p-4 bg-white dark:bg-slate-800 dark:bg-obsidian rounded-lg">
+              <div className="p-4 bg-white dark:bg-card dark:bg-obsidian rounded-lg">
                 <p className="text-sm text-muted-foreground mb-1">Subject:</p>
                 <p className="font-medium">
                   {renderPreviewContent(previewTemplate.subject)}
                 </p>
               </div>
-              <div className="p-4 bg-white dark:bg-slate-800 dark:bg-obsidian border rounded-lg">
+              <div className="p-4 bg-white dark:bg-card dark:bg-obsidian border rounded-lg">
                 <pre className="whitespace-pre-wrap font-sans text-sm">
                   {renderPreviewContent(previewTemplate.body)}
                 </pre>

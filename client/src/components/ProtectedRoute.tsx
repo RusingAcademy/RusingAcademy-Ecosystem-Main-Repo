@@ -19,10 +19,10 @@ export default function ProtectedRoute({ children, fallback }: ProtectedRoutePro
     if (!isLoaded) {
         return (
             fallback || (
-                <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900">
+                <div className="min-h-screen flex items-center justify-center bg-white dark:bg-background">
                     <div className="flex flex-col items-center gap-4">
                         <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-                        <p className="text-black dark:text-white font-medium">Loading...</p>
+                        <p className="text-black dark:text-foreground font-medium">Loading...</p>
                     </div>
                 </div>
             )

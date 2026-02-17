@@ -99,11 +99,11 @@ export default function ProgressTracker({
   }
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <div className="bg-white dark:bg-background rounded-2xl border border-slate-200 p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-black dark:text-white">Progression SLE</h3>
-          <p className="text-sm text-black dark:text-white">Votre parcours vers la maîtrise bilingue</p>
+          <h3 className="text-lg font-semibold text-black dark:text-foreground">Progression SLE</h3>
+          <p className="text-sm text-black dark:text-foreground">Votre parcours vers la maîtrise bilingue</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-foundation-soft rounded-full">
           <Trophy className="h-4 w-4 text-foundation" />
@@ -152,7 +152,7 @@ export default function ProgressTracker({
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-black dark:text-white">{level.name}</h4>
+                    <h4 className="font-semibold text-black dark:text-foreground">{level.name}</h4>
                     {isActive && (
                       <span className={cn("text-xs font-medium px-2 py-0.5 rounded-full", colors.bgLight, colors.text)}>
                         En cours
@@ -164,12 +164,12 @@ export default function ProgressTracker({
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-black dark:text-white mb-3">{level.description}</p>
+                  <p className="text-sm text-black dark:text-foreground mb-3">{level.description}</p>
 
                   {!isLocked && (
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-black dark:text-white">
+                        <span className="text-black dark:text-foreground">
                           {level.modules.filter(m => m.completed).length}/{level.modules.length} modules
                         </span>
                         <span className={cn("font-medium", colors.text)}>{level.progress}%</span>
@@ -190,7 +190,7 @@ export default function ProgressTracker({
                           key={idx}
                           className={cn(
                             "flex items-center gap-2 text-xs p-2 rounded-lg",
-                            module.completed ? "bg-white dark:bg-slate-800 text-black" : "bg-white/50 text-black"
+                            module.completed ? "bg-white dark:bg-card text-black" : "bg-white/50 text-black"
                           )}
                         >
                           {module.completed ? (

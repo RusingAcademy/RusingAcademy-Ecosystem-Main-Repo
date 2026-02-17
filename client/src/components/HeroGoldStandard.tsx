@@ -245,7 +245,7 @@ export default function HeroGoldStandard() {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                           >
                             <h2
-                              className="text-xl sm:text-2xl lg:text-[1.65rem] xl:text-[1.85rem] font-normal text-black dark:text-white italic leading-[1.2] pt-1"
+                              className="text-xl sm:text-2xl lg:text-[1.65rem] xl:text-[1.85rem] font-normal text-black dark:text-foreground italic leading-[1.2] pt-1"
                               style={{ 
                                 fontFamily: "'Playfair Display', Georgia, serif",
                               }}
@@ -253,7 +253,7 @@ export default function HeroGoldStandard() {
                               {labels.line3[language]}
                             </h2>
                             <h2
-                              className="text-xl sm:text-2xl lg:text-[1.65rem] xl:text-[1.85rem] font-normal text-black dark:text-white italic leading-[1.2]"
+                              className="text-xl sm:text-2xl lg:text-[1.65rem] xl:text-[1.85rem] font-normal text-black dark:text-foreground italic leading-[1.2]"
                               style={{ 
                                 fontFamily: "'Playfair Display', Georgia, serif",
                               }}
@@ -305,7 +305,7 @@ export default function HeroGoldStandard() {
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: 0.2 }}
-                          className="text-[13px] sm:text-sm lg:text-[13.5px] text-black dark:text-white leading-[1.75] max-w-[380px]"
+                          className="text-[13px] sm:text-sm lg:text-[13.5px] text-black dark:text-foreground leading-[1.75] max-w-[380px]"
                         >
                           {labels.subtitle[language]}
                         </motion.p>

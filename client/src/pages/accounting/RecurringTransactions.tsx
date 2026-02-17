@@ -11,7 +11,7 @@ const typeColors: Record<string, string> = {
   Invoice: "bg-blue-100 text-blue-700",
   Expense: "bg-orange-100 text-orange-700",
   Bill: "bg-purple-100 text-purple-700",
-  "Journal Entry": "bg-gray-100 dark:bg-slate-800 text-gray-700",
+  "Journal Entry": "bg-gray-100 dark:bg-card text-gray-700",
 };
 
 const CURRENCIES = ["CAD", "USD", "EUR", "GBP", "JPY", "AUD", "CHF", "CNY", "MXN"];
@@ -168,7 +168,7 @@ export default function RecurringTransactions() {
       )}
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 mb-4">
+      <div className="flex border-b border-gray-200 dark:border-border dark:border-border mb-4">
         <button className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${activeTab === "templates" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => setActiveTab("templates")}>
           <RefreshCw size={14} className="inline mr-1.5" />Templates
@@ -218,10 +218,10 @@ export default function RecurringTransactions() {
           </div>
 
           {/* Table */}
-          <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+          <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
+                <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Template Name</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Type</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Frequency</th>
@@ -245,9 +245,9 @@ export default function RecurringTransactions() {
                   const amount = tpl?.total || tpl?.amount;
                   const isDue = rec.isActive && rec.nextDate && new Date(rec.nextDate) <= new Date();
                   return (
-                    <tr key={rec.id} className={`border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:bg-slate-900 ${isDue ? "bg-amber-50/50" : ""}`}>
+                    <tr key={rec.id} className={`border-b border-gray-100 dark:border-border hover:bg-gray-50 dark:bg-background ${isDue ? "bg-amber-50/50" : ""}`}>
                       <td className="px-4 py-3"><div className="flex items-center gap-2"><RefreshCw size={14} className="text-gray-400" /><span className="text-sm font-medium text-gray-800">{rec.templateName}</span></div></td>
-                      <td className="px-4 py-3"><span className={`px-2 py-0.5 rounded-full text-xs font-medium ${typeColors[rec.transactionType] || "bg-gray-100 dark:bg-slate-800 text-gray-600"}`}>{rec.transactionType}</span></td>
+                      <td className="px-4 py-3"><span className={`px-2 py-0.5 rounded-full text-xs font-medium ${typeColors[rec.transactionType] || "bg-gray-100 dark:bg-card text-gray-600"}`}>{rec.transactionType}</span></td>
                       <td className="px-4 py-3 text-sm text-gray-600">Every {rec.intervalCount > 1 ? `${rec.intervalCount} ` : ""}{rec.frequency?.toLowerCase()}</td>
                       <td className="px-4 py-3 text-sm text-gray-600">
                         <div className="flex items-center gap-1.5">
@@ -260,7 +260,7 @@ export default function RecurringTransactions() {
                         {amount ? `$${parseFloat(amount).toLocaleString("en-CA", { minimumFractionDigits: 2 })}` : "—"}
                       </td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${rec.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-slate-800 text-gray-500"}`}>
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${rec.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-card text-gray-500"}`}>
                           {rec.isActive ? "Active" : "Paused"}
                         </span>
                       </td>
@@ -298,10 +298,10 @@ export default function RecurringTransactions() {
 
       {/* Generation Log Tab */}
       {activeTab === "log" && (
-        <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Template</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Type</th>
@@ -322,7 +322,7 @@ export default function RecurringTransactions() {
               ) : (generationLog as any[]).map((log: any) => {
                 const template = (recurring || []).find((r: any) => r.id === log.recurringTransactionId);
                 return (
-                  <tr key={log.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50">
+                  <tr key={log.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm text-gray-600">{log.generatedAt ? new Date(log.generatedAt).toLocaleString("en-CA") : "—"}</td>
                     <td className="px-4 py-3 text-sm font-medium text-gray-800">{template?.templateName || `Template #${log.recurringTransactionId}`}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{log.generatedEntityType}</td>
@@ -355,13 +355,13 @@ export default function RecurringTransactions() {
           <DialogHeader><DialogTitle>New Recurring Transaction</DialogTitle></DialogHeader>
           <div className="space-y-4 py-2">
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Template Name</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Template Name</label>
               <input type="text" value={form.templateName} onChange={e => setForm({ ...form, templateName: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" placeholder="e.g., Monthly Consulting Invoice" />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Transaction Type</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Transaction Type</label>
                 <Select value={form.transactionType} onValueChange={v => setForm({ ...form, transactionType: v })}>
                   <SelectTrigger><SelectValue placeholder="Select type" /></SelectTrigger>
                   <SelectContent>
@@ -373,7 +373,7 @@ export default function RecurringTransactions() {
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Frequency</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Frequency</label>
                 <Select value={form.frequency} onValueChange={v => setForm({ ...form, frequency: v })}>
                   <SelectTrigger><SelectValue placeholder="Select frequency" /></SelectTrigger>
                   <SelectContent>
@@ -387,17 +387,17 @@ export default function RecurringTransactions() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Interval</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Interval</label>
                 <input type="number" min={1} value={form.intervalCount} onChange={e => setForm({ ...form, intervalCount: parseInt(e.target.value) || 1 })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Start Date</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Start Date</label>
                 <input type="date" value={form.startDate} onChange={e => setForm({ ...form, startDate: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">End Date (optional)</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">End Date (optional)</label>
                 <input type="date" value={form.endDate} onChange={e => setForm({ ...form, endDate: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
               </div>
@@ -405,11 +405,11 @@ export default function RecurringTransactions() {
 
             {/* Invoice-specific template fields */}
             {form.transactionType === "Invoice" && (
-              <div className="border-t border-gray-200 dark:border-slate-700 dark:border-slate-700 pt-4 space-y-4">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2"><FileText size={14} /> Invoice Template Details</h3>
+              <div className="border-t border-gray-200 dark:border-border dark:border-border pt-4 space-y-4">
+                <h3 className="text-sm font-semibold text-gray-700 dark:text-muted-foreground flex items-center gap-2"><FileText size={14} /> Invoice Template Details</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                   <div>
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Customer</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Customer</label>
                     <select value={form.customerId} onChange={e => setForm({ ...form, customerId: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
                       <option value="">Select customer</option>
@@ -417,20 +417,20 @@ export default function RecurringTransactions() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Currency</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Currency</label>
                     <select value={form.currency} onChange={e => setForm({ ...form, currency: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
                       {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Net Terms (days)</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Net Terms (days)</label>
                     <input type="number" min={0} value={form.netTermsDays} onChange={e => setForm({ ...form, netTermsDays: parseInt(e.target.value) || 30 })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Line Items</label>
+                  <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-2 block">Line Items</label>
                   <div className="space-y-2">
                     {form.lineItems.map((li, idx) => (
                       <div key={idx} className="grid grid-cols-12 gap-2 items-center">
@@ -450,7 +450,7 @@ export default function RecurringTransactions() {
                   <div className="flex justify-end mt-2 text-sm font-semibold text-gray-700">Total: ${lineItemsTotal.toFixed(2)} {form.currency}</div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Notes</label>
+                  <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Notes</label>
                   <textarea value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" rows={2} placeholder="Notes to include on generated invoices" />
                 </div>

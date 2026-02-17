@@ -100,7 +100,7 @@ export default function CustomerDetail() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/customers")} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg">
+          <button onClick={() => navigate("/customers")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
@@ -150,7 +150,7 @@ export default function CustomerDetail() {
                 {isEditing ? (
                   <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
                 ) : (
-                  <p className="text-sm text-gray-800 dark:text-gray-200 font-medium">{c?.displayName}</p>
+                  <p className="text-sm text-gray-800 dark:text-foreground font-medium">{c?.displayName}</p>
                 )}
               </div>
               <div>
@@ -182,7 +182,7 @@ export default function CustomerDetail() {
                 {isEditing ? (
                   <input type="email" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={email} onChange={(e) => setEmail(e.target.value)} />
                 ) : (
-                  <p className="text-sm text-gray-800 dark:text-gray-200 flex items-center gap-1">{c?.email ? <><Mail size={12} className="text-gray-400" />{c.email}</> : "—"}</p>
+                  <p className="text-sm text-gray-800 dark:text-foreground flex items-center gap-1">{c?.email ? <><Mail size={12} className="text-gray-400" />{c.email}</> : "—"}</p>
                 )}
               </div>
               <div>
@@ -190,7 +190,7 @@ export default function CustomerDetail() {
                 {isEditing ? (
                   <input type="tel" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={phone} onChange={(e) => setPhone(e.target.value)} />
                 ) : (
-                  <p className="text-sm text-gray-800 dark:text-gray-200 flex items-center gap-1">{c?.phone ? <><Phone size={12} className="text-gray-400" />{c.phone}</> : "—"}</p>
+                  <p className="text-sm text-gray-800 dark:text-foreground flex items-center gap-1">{c?.phone ? <><Phone size={12} className="text-gray-400" />{c.phone}</> : "—"}</p>
                 )}
               </div>
               <div>
@@ -206,7 +206,7 @@ export default function CustomerDetail() {
                 {isEditing ? (
                   <input type="url" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={website} onChange={(e) => setWebsite(e.target.value)} />
                 ) : (
-                  <p className="text-sm text-gray-800 dark:text-gray-200 flex items-center gap-1">{c?.website ? <><Globe size={12} className="text-gray-400" />{c.website}</> : "—"}</p>
+                  <p className="text-sm text-gray-800 dark:text-foreground flex items-center gap-1">{c?.website ? <><Globe size={12} className="text-gray-400" />{c.website}</> : "—"}</p>
                 )}
               </div>
               <div className="col-span-2">
@@ -214,7 +214,7 @@ export default function CustomerDetail() {
                 {isEditing ? (
                   <textarea className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" rows={2} value={billingAddress} onChange={(e) => setBillingAddress(e.target.value)} />
                 ) : (
-                  <p className="text-sm text-gray-800 dark:text-gray-200 flex items-start gap-1">{c?.billingAddress ? <><MapPin size={12} className="text-gray-400 mt-0.5" />{c.billingAddress}</> : "—"}</p>
+                  <p className="text-sm text-gray-800 dark:text-foreground flex items-start gap-1">{c?.billingAddress ? <><MapPin size={12} className="text-gray-400 mt-0.5" />{c.billingAddress}</> : "—"}</p>
                 )}
               </div>
               <div className="col-span-2">
@@ -235,7 +235,7 @@ export default function CustomerDetail() {
               {(invoices as any[])?.length ? (
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b-2 border-gray-200 dark:border-slate-700 dark:border-slate-700">
+                    <tr className="border-b-2 border-gray-200 dark:border-border dark:border-border">
                       <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Date</th>
                       <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Type</th>
                       <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Number</th>
@@ -248,7 +248,7 @@ export default function CustomerDetail() {
                     {(invoices as any[])?.map((inv: any) => (
                       <tr
                         key={inv.id}
-                        className="border-b border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:bg-slate-900 cursor-pointer"
+                        className="border-b border-gray-100 dark:border-border hover:bg-gray-50 dark:bg-background cursor-pointer"
                         onClick={() => navigate(`/invoices/${inv.id}`)}
                       >
                         <td className="py-2 text-sm text-gray-800">{new Date(inv.invoiceDate).toLocaleDateString("en-CA")}</td>
@@ -259,7 +259,7 @@ export default function CustomerDetail() {
                             inv.status === "Overdue" ? "bg-orange-100 text-orange-700" :
                             inv.status === "Deposited" || inv.status === "Paid" ? "bg-green-100 text-green-700" :
                             inv.status === "Sent" ? "bg-blue-100 text-blue-700" :
-                            "bg-gray-100 dark:bg-slate-800 text-gray-600"
+                            "bg-gray-100 dark:bg-card text-gray-600"
                           }`}>
                             {inv.status}
                           </span>
@@ -282,13 +282,13 @@ export default function CustomerDetail() {
           <div>
             <div className="qb-card">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Balance</h3>
-              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">${Number(c.balance || 0).toFixed(2)}</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-foreground mb-2">${Number(c.balance || 0).toFixed(2)}</p>
               <p className="text-xs text-gray-500">Outstanding balance</p>
               <hr className="my-4" />
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-500">Invoices</span>
-                  <span className="text-gray-800 dark:text-gray-200 font-medium">{(invoices as any[])?.length || 0}</span>
+                  <span className="text-gray-800 dark:text-foreground font-medium">{(invoices as any[])?.length || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">Overdue</span>

@@ -122,7 +122,7 @@ export default function PronunciationLab() {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 level === l
                   ? "bg-teal-700 text-white shadow-sm"
-                  : "bg-gray-100 dark:bg-slate-800 text-gray-600 hover:bg-gray-200"
+                  : "bg-gray-100 dark:bg-card text-gray-600 hover:bg-gray-200"
               }`}
             >
               {l}
@@ -131,7 +131,7 @@ export default function PronunciationLab() {
         </div>
 
         {/* Exercise Card */}
-        <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-2xl p-8 shadow-sm mb-4">
+        <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-2xl p-8 shadow-sm mb-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[10px] text-gray-400 uppercase tracking-wider">Exercise {currentIndex + 1} of {exercises.length}</span>
             <span className="px-2 py-0.5 bg-teal-700/10 text-teal-700 rounded-full text-[10px] font-semibold">Level {level}</span>
@@ -139,7 +139,7 @@ export default function PronunciationLab() {
 
           {/* Phrase */}
           <div className="text-center py-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">{current.phrase}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-foreground mb-3">{current.phrase}</h2>
             <p className="text-sm text-gray-500 mb-1">{current.translation}</p>
             <p className="text-xs text-teal-700 font-mono">{current.ipa}</p>
           </div>
@@ -159,7 +159,7 @@ export default function PronunciationLab() {
               className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all shadow-sm ${
                 isRecording
                   ? "bg-red-500 text-white animate-pulse"
-                  : "bg-white dark:bg-slate-800 border-2 border-teal-700 text-teal-700 hover:bg-teal-700/5"
+                  : "bg-white dark:bg-card border-2 border-teal-700 text-teal-700 hover:bg-teal-700/5"
               }`}
             >
               <span className="material-icons">{isRecording ? "stop" : "mic"}</span>
@@ -169,7 +169,7 @@ export default function PronunciationLab() {
 
           {/* Recorded Audio Playback */}
           {recordedUrl && (
-            <div className="bg-gray-50 dark:bg-slate-900 rounded-xl p-4 mb-4">
+            <div className="bg-gray-50 dark:bg-background rounded-xl p-4 mb-4">
               <div className="flex items-center gap-3">
                 <span className="material-icons text-teal-700">headphones</span>
                 <span className="text-sm text-gray-600 flex-1">Your recording</span>
@@ -179,7 +179,7 @@ export default function PronunciationLab() {
                 <button onClick={speakPhrase} className="flex-1 text-xs text-teal-700 bg-teal-700/5 rounded-lg py-2 hover:bg-teal-700/10 transition-colors">
                   <span className="material-icons text-sm align-middle mr-1">compare_arrows</span>Compare with model
                 </button>
-                <button onClick={startRecording} className="flex-1 text-xs text-gray-600 bg-gray-100 dark:bg-slate-800 rounded-lg py-2 hover:bg-gray-200 transition-colors">
+                <button onClick={startRecording} className="flex-1 text-xs text-gray-600 bg-gray-100 dark:bg-card rounded-lg py-2 hover:bg-gray-200 transition-colors">
                   <span className="material-icons text-sm align-middle mr-1">replay</span>Try again
                 </button>
               </div>

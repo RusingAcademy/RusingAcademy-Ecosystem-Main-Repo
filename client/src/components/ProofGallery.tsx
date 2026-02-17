@@ -180,13 +180,13 @@ export default function ProofGallery() {
           </span>
           <h2 
             id="proof-gallery-title" 
-            className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4"
+            className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4"
           >
             {language === "fr" 
               ? "Témoignages et Capsules d'Apprentissage" 
               : "Testimonials & Learning Capsules"}
           </h2>
-          <p className="text-black dark:text-white max-w-2xl mx-auto text-lg">
+          <p className="text-black dark:text-foreground max-w-2xl mx-auto text-lg">
             {language === "fr"
               ? "Découvrez les témoignages de fonctionnaires qui ont atteint leurs objectifs linguistiques et explorez nos capsules d'apprentissage."
               : "Watch testimonials from public servants who achieved their language goals and explore our learning capsules."}
@@ -202,7 +202,7 @@ export default function ProofGallery() {
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 activeFilter === option.value
                   ? "bg-teal-600 text-white shadow-md"
-                  : "bg-white dark:bg-slate-800 text-black dark:text-white border border-gray-200 dark:border-slate-700 hover:border-teal-300 hover:bg-teal-50"
+                  : "bg-white dark:bg-card text-black dark:text-foreground border border-gray-200 dark:border-border hover:border-teal-300 hover:bg-teal-50"
               }`}
               aria-pressed={activeFilter === option.value}
             >
@@ -217,7 +217,7 @@ export default function ProofGallery() {
             <button
               key={video.id}
               onClick={() => handleVideoClick(video)}
-              className="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-lg hover:border-teal-200 transition-all duration-300 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+              className="group bg-white dark:bg-background rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-border hover:shadow-lg hover:border-teal-200 transition-all duration-300 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
             >
               {/* Thumbnail */}
               <div className="relative aspect-video overflow-hidden">
@@ -228,7 +228,7 @@ export default function ProofGallery() {
                   loading="lazy"                 />
                 {/* Play overlay */}
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-14 w-14 rounded-full bg-white dark:bg-slate-900/90 flex items-center justify-center">
+                  <div className="h-14 w-14 rounded-full bg-white dark:bg-background/90 flex items-center justify-center">
                     <Play className="h-6 w-6 text-teal-600 fill-teal-600 ml-1" />
                   </div>
                 </div>
@@ -246,10 +246,10 @@ export default function ProofGallery() {
               
               {/* Content */}
               <div className="p-4">
-                <h3 className="font-semibold text-black dark:text-white mb-1 line-clamp-2 group-hover:text-teal-600 transition-colors">
+                <h3 className="font-semibold text-black dark:text-foreground mb-1 line-clamp-2 group-hover:text-teal-600 transition-colors">
                   {language === "fr" ? video.titleFr : video.title}
                 </h3>
-                <p className="text-sm text-black dark:text-white line-clamp-2">
+                <p className="text-sm text-black dark:text-foreground line-clamp-2">
                   {language === "fr" ? video.descriptionFr : video.description}
                 </p>
                 {video.views && (
@@ -284,22 +284,22 @@ export default function ProofGallery() {
           aria-label={language === "fr" ? selectedVideo.titleFr : selectedVideo.title}
         >
           <div
-            className="relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl"
+            className="relative bg-white dark:bg-background rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <div>
-                <h3 className="font-semibold text-black dark:text-white">
+                <h3 className="font-semibold text-black dark:text-foreground">
                   {language === "fr" ? selectedVideo.titleFr : selectedVideo.title}
                 </h3>
-                <p className="text-sm text-black dark:text-white">
+                <p className="text-sm text-black dark:text-foreground">
                   {language === "fr" ? selectedVideo.descriptionFr : selectedVideo.description}
                 </p>
               </div>
               <button
                 onClick={handleCloseModal}
-                className="h-10 w-10 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-black dark:text-white hover:bg-gray-200 hover:text-black dark:text-white transition-colors"
+                className="h-10 w-10 rounded-full bg-gray-100 dark:bg-card flex items-center justify-center text-black dark:text-foreground hover:bg-gray-200 hover:text-black dark:text-foreground transition-colors"
                 aria-label={language === "fr" ? "Fermer" : "Close"}
               >
                 <X className="h-5 w-5" />

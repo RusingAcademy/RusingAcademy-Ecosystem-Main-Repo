@@ -54,16 +54,16 @@ export default function Progress() {
           <table className="w-full">
             <thead>
               <tr className="bg-[rgba(0,128,144,0.08)]">
-                <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Module</th>
-                <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Total Activities</th>
-                <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Completed</th>
-                <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Progress</th>
-                <th className="text-left text-xs font-medium text-gray-700 dark:text-gray-300 px-4 py-3">Last Accessed</th>
+                <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Module</th>
+                <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Total Activities</th>
+                <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Completed</th>
+                <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Progress</th>
+                <th className="text-left text-xs font-medium text-gray-700 dark:text-muted-foreground px-4 py-3">Last Accessed</th>
               </tr>
             </thead>
             <tbody>
               {progressData.map((item, i) => (
-                <tr key={i} className={`border-t border-gray-100 dark:border-slate-700 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
+                <tr key={i} className={`border-t border-gray-100 dark:border-border ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
                   <td className="px-4 py-3 text-sm text-gray-800">{item.module}</td>
                   <td className="px-4 py-3 text-sm text-gray-600">{item.totalActivities}</td>
                   <td className="px-4 py-3 text-sm text-gray-600">{item.completed}</td>

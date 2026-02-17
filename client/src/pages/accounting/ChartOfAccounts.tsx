@@ -111,7 +111,7 @@ export default function ChartOfAccounts() {
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white dark:bg-slate-900"
+          className="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white dark:bg-background"
         >
           {accountTypes.map((t) => (
             <option key={t as string} value={t as string}>{t as string}</option>
@@ -126,7 +126,7 @@ export default function ChartOfAccounts() {
       <div className="text-sm text-gray-500 mb-2">{filtered.length} accounts</div>
 
       {/* Account Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
         <table className="w-full qb-table">
           <thead>
             <tr className="bg-gray-50">
@@ -141,14 +141,14 @@ export default function ChartOfAccounts() {
             {Object.entries(grouped).map(([type, accts]) => (
               <>{/* Group header + rows */}
                 <tr key={`header-${type}`} className="bg-gray-50">
-                  <td colSpan={5} className="font-bold text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider py-2">
+                  <td colSpan={5} className="font-bold text-gray-700 dark:text-muted-foreground text-xs uppercase tracking-wider py-2">
                     {type} ({(accts as any[]).length})
                   </td>
                 </tr>
                 {(accts as any[]).map((acc: any) => (
                   <tr
                     key={acc.id}
-                    className={`hover:bg-gray-50 dark:bg-slate-900 cursor-pointer ${acc.isActive === false ? "opacity-50" : ""}`}
+                    className={`hover:bg-gray-50 dark:bg-background cursor-pointer ${acc.isActive === false ? "opacity-50" : ""}`}
                     onClick={() => navigate(`/accounts/${acc.id}/register`)}
                   >
                     <td className="text-sky-600 font-medium">
@@ -164,14 +164,14 @@ export default function ChartOfAccounts() {
                     <td>
                       <div className="flex items-center gap-1">
                         <button
-                          className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded text-gray-400 hover:text-gray-600"
+                          className="p-1 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
                           onClick={(e) => openEdit(acc, e)}
                           title="Edit"
                         >
                           <Edit size={14} />
                         </button>
                         <button
-                          className="p-1 hover:bg-gray-100 dark:bg-slate-800 rounded text-gray-400 hover:text-gray-600"
+                          className="p-1 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
                           onClick={(e) => {
                             e.stopPropagation();
                             updateMutation.mutate({ id: acc.id, isActive: acc.isActive === false ? true : false });
@@ -203,7 +203,7 @@ export default function ChartOfAccounts() {
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Account Name</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Account Name</label>
               <input
                 type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
@@ -211,7 +211,7 @@ export default function ChartOfAccounts() {
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Account Type</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Account Type</label>
               <Select value={form.accountType} onValueChange={v => setForm({ ...form, accountType: v })}>
                 <SelectTrigger><SelectValue placeholder="Select type" /></SelectTrigger>
                 <SelectContent>
@@ -220,7 +220,7 @@ export default function ChartOfAccounts() {
               </Select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Detail Type</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Detail Type</label>
               <input
                 type="text" value={form.detailType} onChange={e => setForm({ ...form, detailType: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
@@ -229,14 +229,14 @@ export default function ChartOfAccounts() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Account Number</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Account Number</label>
                 <input
                   type="text" value={form.accountNumber} onChange={e => setForm({ ...form, accountNumber: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Description</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Description</label>
                 <input
                   type="text" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
@@ -266,14 +266,14 @@ export default function ChartOfAccounts() {
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Account Name</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Account Name</label>
               <input
                 type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Account Type</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Account Type</label>
               <Select value={form.accountType} onValueChange={v => setForm({ ...form, accountType: v })}>
                 <SelectTrigger><SelectValue placeholder="Select type" /></SelectTrigger>
                 <SelectContent>
@@ -282,14 +282,14 @@ export default function ChartOfAccounts() {
               </Select>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Detail Type</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Detail Type</label>
               <input
                 type="text" value={form.detailType} onChange={e => setForm({ ...form, detailType: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">Description</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1 block">Description</label>
               <input
                 type="text" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"

@@ -120,7 +120,7 @@ const ui = {
 
 function LevelBadge({ level }: { level: string }) {
   const colors: Record<string, string> = {
-    X: "bg-gray-100 dark:bg-slate-800 text-gray-600 border-gray-300",
+    X: "bg-gray-100 dark:bg-card text-gray-600 border-gray-300",
     A: "bg-blue-50 text-blue-700 border-blue-300",
     B: "bg-emerald-50 text-emerald-700 border-emerald-300",
     C: "bg-amber-50 text-amber-700 border-amber-300",
@@ -263,7 +263,7 @@ export default function MyProfile() {
             onClick={() => setIsEditing(!isEditing)}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               isEditing
-                ? "bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200"
+                ? "bg-gray-100 dark:bg-card text-gray-700 dark:text-muted-foreground hover:bg-gray-200"
                 : "bg-teal-700/10 text-teal-700 hover:bg-teal-700/20"
             }`}
             aria-label={isEditing ? t.viewMode : t.editMode}
@@ -275,9 +275,9 @@ export default function MyProfile() {
 
         <div className="space-y-6">
           {/* ── Personal Information ── */}
-          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-personal">
+          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-personal">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
-              <h2 id="section-personal" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              <h2 id="section-personal" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">person</span>
                 {t.personal}
               </h2>
@@ -290,15 +290,15 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.name}</label>
                       {isEditing ? (
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                           aria-label={t.name} />
                       ) : (
-                        <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{name || t.notSet}</p>
+                        <p className="text-sm text-gray-800 dark:text-foreground py-2">{name || t.notSet}</p>
                       )}
                     </div>
                     <div>
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.email}</label>
-                      <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{profile?.email || t.notSet}</p>
+                      <p className="text-sm text-gray-800 dark:text-foreground py-2">{profile?.email || t.notSet}</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -306,23 +306,23 @@ export default function MyProfile() {
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.department}</label>
                       {isEditing ? (
                         <select value={department} onChange={(e) => setDepartment(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                           aria-label={t.department}>
                           <option value="">—</option>
                           {DEPARTMENTS.map((d) => <option key={d} value={d}>{d}</option>)}
                         </select>
                       ) : (
-                        <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{department || t.notSet}</p>
+                        <p className="text-sm text-gray-800 dark:text-foreground py-2">{department || t.notSet}</p>
                       )}
                     </div>
                     <div>
                       <label className="text-xs font-medium text-gray-500 mb-1 block">{t.position}</label>
                       {isEditing ? (
                         <input type="text" value={position} onChange={(e) => setPosition(e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                           aria-label={t.position} />
                       ) : (
-                        <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{position || t.notSet}</p>
+                        <p className="text-sm text-gray-800 dark:text-foreground py-2">{position || t.notSet}</p>
                       )}
                     </div>
                   </div>
@@ -343,9 +343,9 @@ export default function MyProfile() {
           </section>
 
           {/* ── SLE Proficiency Levels ── */}
-          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-sle">
+          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-sle">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
-              <h2 id="section-sle" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              <h2 id="section-sle" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">assessment</span>
                 {t.sleLevels}
               </h2>
@@ -354,7 +354,7 @@ export default function MyProfile() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Current Levels */}
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t.currentLevels}</h3>
+                  <h3 className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-3">{t.currentLevels}</h3>
                   <div className="space-y-3">
                     {([["reading", currentReading, setCurrentReading, t.reading],
                        ["writing", currentWriting, setCurrentWriting, t.writing],
@@ -366,7 +366,7 @@ export default function MyProfile() {
                             {SLE_LEVELS.map((lvl) => (
                               <button key={lvl} onClick={() => (setter as (v: string) => void)(lvl)}
                                 className={`w-8 h-8 rounded-full text-xs font-bold border transition-all ${
-                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-slate-800 text-gray-500 border-gray-300 hover:border-teal-700"
+                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-card text-gray-500 border-gray-300 hover:border-teal-700"
                                 }`} aria-label={`${label}: ${lvl}`}>
                                 {lvl}
                               </button>
@@ -381,7 +381,7 @@ export default function MyProfile() {
                 </div>
                 {/* Target Levels */}
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t.targetLevels}</h3>
+                  <h3 className="text-sm font-medium text-gray-700 dark:text-muted-foreground mb-3">{t.targetLevels}</h3>
                   <div className="space-y-3">
                     {([["reading", targetReading, setTargetReading, t.reading],
                        ["writing", targetWriting, setTargetWriting, t.writing],
@@ -393,7 +393,7 @@ export default function MyProfile() {
                             {SLE_LEVELS.map((lvl) => (
                               <button key={lvl} onClick={() => (setter as (v: string) => void)(lvl)}
                                 className={`w-8 h-8 rounded-full text-xs font-bold border transition-all ${
-                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-slate-800 text-gray-500 border-gray-300 hover:border-teal-700"
+                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-card text-gray-500 border-gray-300 hover:border-teal-700"
                                 }`} aria-label={`${label}: ${lvl}`}>
                                 {lvl}
                               </button>
@@ -411,9 +411,9 @@ export default function MyProfile() {
           </section>
 
           {/* ── Learning Goals ── */}
-          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-goals">
+          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-goals">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
-              <h2 id="section-goals" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              <h2 id="section-goals" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">flag</span>
                 {t.learningGoals}
               </h2>
@@ -424,10 +424,10 @@ export default function MyProfile() {
                 {isEditing ? (
                   <textarea value={learningGoals} onChange={(e) => setLearningGoals(e.target.value)}
                     rows={3} placeholder={t.goalsPlaceholder}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700 resize-none"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700 resize-none"
                     aria-label={t.goals} />
                 ) : (
-                  <p className="text-sm text-gray-800 dark:text-gray-200 py-2 whitespace-pre-wrap">{learningGoals || t.notSet}</p>
+                  <p className="text-sm text-gray-800 dark:text-foreground py-2 whitespace-pre-wrap">{learningGoals || t.notSet}</p>
                 )}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -435,27 +435,27 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.primaryFocus}</label>
                   {isEditing ? (
                     <select value={primaryFocus} onChange={(e) => setPrimaryFocus(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.primaryFocus}>
                       {FOCUS_OPTIONS.map((f) => (
                         <option key={f} value={f}>{t.focusLabels[f]}</option>
                       ))}
                     </select>
                   ) : (
-                    <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{t.focusLabels[primaryFocus as keyof typeof t.focusLabels] || t.notSet}</p>
+                    <p className="text-sm text-gray-800 dark:text-foreground py-2">{t.focusLabels[primaryFocus as keyof typeof t.focusLabels] || t.notSet}</p>
                   )}
                 </div>
                 <div>
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.targetLanguage}</label>
                   {isEditing ? (
                     <select value={targetLanguage} onChange={(e) => setTargetLanguage(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.targetLanguage}>
                       <option value="french">{t.french}</option>
                       <option value="english">{t.english}</option>
                     </select>
                   ) : (
-                    <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{targetLanguage === "french" ? t.french : t.english}</p>
+                    <p className="text-sm text-gray-800 dark:text-foreground py-2">{targetLanguage === "french" ? t.french : t.english}</p>
                   )}
                 </div>
                 <div>
@@ -463,10 +463,10 @@ export default function MyProfile() {
                   {isEditing ? (
                     <input type="number" min={1} max={40} value={weeklyStudyHours}
                       onChange={(e) => setWeeklyStudyHours(Number(e.target.value))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.weeklyHours} />
                   ) : (
-                    <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{weeklyStudyHours} {t.hoursPerWeek}</p>
+                    <p className="text-sm text-gray-800 dark:text-foreground py-2">{weeklyStudyHours} {t.hoursPerWeek}</p>
                   )}
                 </div>
               </div>
@@ -474,19 +474,19 @@ export default function MyProfile() {
                 <label className="text-xs font-medium text-gray-500 mb-1 block">{t.examDate}</label>
                 {isEditing ? (
                   <input type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)}
-                    className="w-full sm:w-auto border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                    className="w-full sm:w-auto border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                     aria-label={t.examDate} />
                 ) : (
-                  <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{examDate || t.notSet}</p>
+                  <p className="text-sm text-gray-800 dark:text-foreground py-2">{examDate || t.notSet}</p>
                 )}
               </div>
             </div>
           </section>
 
           {/* ── SLE Certification ── */}
-          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-cert">
+          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-cert">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
-              <h2 id="section-cert" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              <h2 id="section-cert" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">verified</span>
                 {t.certification}
               </h2>
@@ -538,9 +538,9 @@ export default function MyProfile() {
           </section>
 
           {/* ── Preferences ── */}
-          <section className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 overflow-hidden" aria-labelledby="section-prefs">
+          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-prefs">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
-              <h2 id="section-prefs" className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              <h2 id="section-prefs" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">settings</span>
                 {t.preferences}
               </h2>
@@ -551,13 +551,13 @@ export default function MyProfile() {
                   <label className="text-xs font-medium text-gray-500 mb-1 block">{t.prefLang}</label>
                   {isEditing ? (
                     <select value={preferredLanguage} onChange={(e) => setPreferredLanguage(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-foreground focus:ring-2 focus:ring-teal-700/30 focus:border-teal-700"
                       aria-label={t.prefLang}>
                       <option value="en">English</option>
                       <option value="fr">Français</option>
                     </select>
                   ) : (
-                    <p className="text-sm text-gray-800 dark:text-gray-200 py-2">{preferredLanguage === "fr" ? "Français" : "English"}</p>
+                    <p className="text-sm text-gray-800 dark:text-foreground py-2">{preferredLanguage === "fr" ? "Français" : "English"}</p>
                   )}
                 </div>
               </div>
@@ -568,7 +568,7 @@ export default function MyProfile() {
           {isEditing && (
             <div className="flex justify-end gap-3 pb-8">
               <button onClick={() => setIsEditing(false)}
-                className="px-6 py-2.5 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 transition-colors">
+                className="px-6 py-2.5 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 dark:bg-card hover:bg-gray-200 transition-colors">
                 {t.viewMode}
               </button>
               <button onClick={handleSave} disabled={updateProfile.isPending}

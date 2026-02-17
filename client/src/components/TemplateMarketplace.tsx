@@ -86,7 +86,7 @@ const BRAND_COLORS: Record<string, string> = {
   rusingacademy: "bg-blue-100 text-blue-700",
   lingueefy: "bg-teal-100 text-teal-700",
   barholex: "bg-amber-100 text-amber-700",
-  universal: "bg-gray-100 dark:bg-slate-800 text-black",
+  universal: "bg-gray-100 dark:bg-card text-black",
 };
 
 const BRAND_LABELS: Record<string, string> = {
@@ -190,13 +190,13 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
   return (
     <div className="flex flex-col h-full">
       {/* Tab Switcher */}
-      <div className="flex border-b border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-gray-50/50">
+      <div className="flex border-b border-gray-200 dark:border-border dark:border-border bg-gray-50/50">
         <button
           onClick={() => setActiveTab("templates")}
           className={`flex-1 px-3 py-2 text-[11px] font-medium transition-colors ${
             activeTab === "templates"
               ? "text-indigo-700 border-b-2 border-indigo-600 bg-white"
-              : "text-black dark:text-white hover:text-black"
+              : "text-black dark:text-foreground hover:text-black"
           }`}
         >
           <Package className="h-3 w-3 inline mr-1" /> Templates
@@ -206,7 +206,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
           className={`flex-1 px-3 py-2 text-[11px] font-medium transition-colors ${
             activeTab === "blank"
               ? "text-indigo-700 border-b-2 border-indigo-600 bg-white"
-              : "text-black dark:text-white hover:text-black"
+              : "text-black dark:text-foreground hover:text-black"
           }`}
         >
           <Plus className="h-3 w-3 inline mr-1" /> Blank Block
@@ -224,7 +224,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
               <button
                 key={st.type}
                 onClick={() => onAddBlankSection(st.type)}
-                className="w-full flex items-center gap-2.5 p-2.5 rounded-lg border border-dashed border-gray-200 dark:border-slate-700 dark:border-slate-700 hover:border-indigo-300 hover:bg-indigo-50/50 transition-all text-left"
+                className="w-full flex items-center gap-2.5 p-2.5 rounded-lg border border-dashed border-gray-200 dark:border-border dark:border-border hover:border-indigo-300 hover:bg-indigo-50/50 transition-all text-left"
               >
                 <div className={`w-7 h-7 rounded flex items-center justify-center text-white shrink-0 ${st.color}`}>
                   <st.icon className="h-3.5 w-3.5" />
@@ -254,7 +254,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] font-medium transition-colors ${
-                  showFilters ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 dark:bg-slate-800 text-black dark:text-white hover:bg-gray-200"
+                  showFilters ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 dark:bg-card text-black dark:text-foreground hover:bg-gray-200"
                 }`}
               >
                 <Filter className="h-3 w-3" /> Filters
@@ -268,7 +268,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
             </div>
             {showFilters && (
               <div className="space-y-1.5 pt-1">
-                <Label className="text-[10px] text-black dark:text-white">Brand</Label>
+                <Label className="text-[10px] text-black dark:text-foreground">Brand</Label>
                 <div className="flex flex-wrap gap-1">
                   {[
                     { value: "all", label: "All" },
@@ -282,7 +282,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                       className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors ${
                         brandFilter === b.value
                           ? "bg-indigo-600 text-white"
-                          : "bg-gray-100 dark:bg-slate-800 text-black dark:text-white hover:bg-gray-200"
+                          : "bg-gray-100 dark:bg-card text-black dark:text-foreground hover:bg-gray-200"
                       }`}
                     >
                       {b.label}
@@ -303,7 +303,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                   className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors ${
                     activeCategory === cat.value
                       ? "bg-indigo-600 text-white"
-                      : "bg-gray-50 dark:bg-slate-900 text-black dark:text-white hover:bg-gray-100 dark:bg-slate-800 hover:text-black"
+                      : "bg-gray-50 dark:bg-background text-black dark:text-foreground hover:bg-gray-100 dark:bg-card hover:text-black"
                   }`}
                 >
                   {cat.label}
@@ -342,7 +342,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                   return (
                     <div
                       key={template.id}
-                      className="group relative rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700 hover:border-indigo-300 hover:shadow-sm transition-all overflow-hidden"
+                      className="group relative rounded-lg border border-gray-200 dark:border-border dark:border-border hover:border-indigo-300 hover:shadow-sm transition-all overflow-hidden"
                     >
                       {/* Template Card */}
                       <button
@@ -360,7 +360,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                               <p className="text-[10px] text-cyan-300 mt-0.5 line-clamp-2">{template.description}</p>
                             )}
                             <div className="flex items-center gap-1 mt-1.5 flex-wrap">
-                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-slate-700 dark:border-slate-700">
+                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-border dark:border-border">
                                 {template.sectionType.replace(/_/g, " ")}
                               </Badge>
                               {template.brand !== "universal" && (
@@ -368,7 +368,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                                   {BRAND_LABELS[template.brand]}
                                 </Badge>
                               )}
-                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-slate-700 dark:border-slate-700">
+                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-border dark:border-border">
                                 <Globe className="h-2.5 w-2.5 mr-0.5" />
                                 {LANGUAGE_LABELS[template.language] || template.language}
                               </Badge>

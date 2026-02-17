@@ -294,8 +294,8 @@ export default function BookSession() {
 
           <Card className="max-w-lg mx-auto text-center p-8">
             <CreditCard className="h-16 w-16 mx-auto text-cyan-300 mb-4" />
-            <h2 className="text-xl font-semibold text-black dark:text-white mb-2">{l.noPlan}</h2>
-            <p className="text-black dark:text-white dark:text-cyan-300 mb-6">{l.noPlanDesc}</p>
+            <h2 className="text-xl font-semibold text-black dark:text-foreground mb-2">{l.noPlan}</h2>
+            <p className="text-black dark:text-foreground dark:text-cyan-300 mb-6">{l.noPlanDesc}</p>
             <Link href="/ecosystem">
               <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                 {l.viewPlans}
@@ -321,8 +321,8 @@ export default function BookSession() {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black dark:text-white mb-2">{l.title}</h1>
-          <p className="text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
+          <h1 className="text-3xl font-bold text-black dark:text-foreground mb-2">{l.title}</h1>
+          <p className="text-black dark:text-foreground dark:text-cyan-300">{l.subtitle}</p>
         </div>
 
         {/* Plan Info Card */}
@@ -333,8 +333,8 @@ export default function BookSession() {
                 <Sparkles className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="font-semibold text-black dark:text-white">{activePlan.planName}</h3>
-                <p className="text-sm text-black dark:text-white dark:text-cyan-300">
+                <h3 className="font-semibold text-black dark:text-foreground">{activePlan.planName}</h3>
+                <p className="text-sm text-black dark:text-foreground dark:text-cyan-300">
                   {l.validUntil} {new Date(activePlan.expiresAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
                 </p>
               </div>
@@ -370,7 +370,7 @@ export default function BookSession() {
         {/* Step 1: Select Coach */}
         {currentStep === 1 && (
           <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-black dark:text-white">{l.step1}</h2>
+            <h2 className="text-xl font-semibold text-black dark:text-foreground">{l.step1}</h2>
             
             {/* Search and Filters */}
             <div className="flex flex-col sm:flex-row gap-4">
@@ -443,14 +443,14 @@ export default function BookSession() {
                 <ChevronLeft className="h-4 w-4 mr-2" />
                 {l.step1}
               </Button>
-              <h2 className="text-xl font-semibold text-black dark:text-white">{l.step2}</h2>
+              <h2 className="text-xl font-semibold text-black dark:text-foreground">{l.step2}</h2>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Calendar */}
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-black dark:text-white">
+                  <h3 className="font-semibold text-black dark:text-foreground">
                     {MONTHS[language as keyof typeof MONTHS]?.[currentDate.getMonth()] || MONTHS.en[currentDate.getMonth()]} {currentDate.getFullYear()}
                   </h3>
                   <div className="flex gap-2">
@@ -465,7 +465,7 @@ export default function BookSession() {
 
                 <div className="grid grid-cols-7 gap-1 mb-2">
                   {(DAYS_OF_WEEK[language as keyof typeof DAYS_OF_WEEK] || DAYS_OF_WEEK.en).map((day) => (
-                    <div key={day} className="text-center text-xs font-medium text-black dark:text-white py-2">
+                    <div key={day} className="text-center text-xs font-medium text-black dark:text-foreground py-2">
                       {day}
                     </div>
                   ))}
@@ -494,12 +494,12 @@ export default function BookSession() {
 
               {/* Time Slots */}
               <Card className="p-6">
-                <h3 className="font-semibold text-black dark:text-white mb-4">
+                <h3 className="font-semibold text-black dark:text-foreground mb-4">
                   {selectedDate ? l.availableSlots : l.selectDate}
                 </h3>
 
                 {!selectedDate ? (
-                  <div className="text-center py-8 text-black dark:text-white">
+                  <div className="text-center py-8 text-black dark:text-foreground">
                     <Calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
                     <p>{l.selectDate}</p>
                   </div>
@@ -510,7 +510,7 @@ export default function BookSession() {
                     ))}
                   </div>
                 ) : !availableSlots?.length ? (
-                  <div className="text-center py-8 text-black dark:text-white">
+                  <div className="text-center py-8 text-black dark:text-foreground">
                     <Clock className="h-12 w-12 mx-auto mb-2 opacity-50" />
                     <p>{l.noSlots}</p>
                   </div>
@@ -560,11 +560,11 @@ export default function BookSession() {
                 <ChevronLeft className="h-4 w-4 mr-2" />
                 {l.step2}
               </Button>
-              <h2 className="text-xl font-semibold text-black dark:text-white">{l.step3}</h2>
+              <h2 className="text-xl font-semibold text-black dark:text-foreground">{l.step3}</h2>
             </div>
 
             <Card className="max-w-lg mx-auto p-6">
-              <h3 className="font-semibold text-black dark:text-white mb-6">{l.bookingDetails}</h3>
+              <h3 className="font-semibold text-black dark:text-foreground mb-6">{l.bookingDetails}</h3>
               
               <div className="space-y-4">
                 {/* Coach */}
@@ -575,16 +575,16 @@ export default function BookSession() {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="text-sm text-black dark:text-white">{l.coach}</p>
-                    <p className="font-semibold text-black dark:text-white">{selectedCoach?.name}</p>
+                    <p className="text-sm text-black dark:text-foreground">{l.coach}</p>
+                    <p className="font-semibold text-black dark:text-foreground">{selectedCoach?.name}</p>
                   </div>
                 </div>
 
                 {/* Date & Time */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
-                    <p className="text-sm text-black dark:text-white">{l.date}</p>
-                    <p className="font-semibold text-black dark:text-white">
+                    <p className="text-sm text-black dark:text-foreground">{l.date}</p>
+                    <p className="font-semibold text-black dark:text-foreground">
                       {selectedDate?.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                         weekday: "long", 
                         year: "numeric", 
@@ -594,8 +594,8 @@ export default function BookSession() {
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
-                    <p className="text-sm text-black dark:text-white">{l.time}</p>
-                    <p className="font-semibold text-black dark:text-white">
+                    <p className="text-sm text-black dark:text-foreground">{l.time}</p>
+                    <p className="font-semibold text-black dark:text-foreground">
                       {selectedSlot?.startTime} - {selectedSlot?.endTime}
                     </p>
                   </div>
@@ -603,15 +603,15 @@ export default function BookSession() {
 
                 {/* Duration */}
                 <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation/50">
-                  <p className="text-sm text-black dark:text-white">{l.duration}</p>
-                  <p className="font-semibold text-black dark:text-white">60 {l.minutes}</p>
+                  <p className="text-sm text-black dark:text-foreground">{l.duration}</p>
+                  <p className="font-semibold text-black dark:text-foreground">60 {l.minutes}</p>
                 </div>
 
                 {/* Plan Credits */}
                 <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
                   <p className="text-sm text-purple-600 dark:text-purple-400">{l.planCredits}</p>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="text-black dark:text-white dark:text-cyan-300">{l.afterBooking}</span>
+                    <span className="text-black dark:text-foreground dark:text-cyan-300">{l.afterBooking}</span>
                     <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
                       {activePlan.remainingSessions - 1} {l.sessionsRemaining}
                     </Badge>
@@ -662,7 +662,7 @@ function CoachCard({ coach, isSelected, onSelect, labels, language }: {
         "p-4 rounded-xl border-2 cursor-pointer transition-all",
         isSelected 
           ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20" 
-          : "border-slate-200 dark:border-teal-800 hover:border-purple-300 bg-white dark:bg-slate-800 dark:bg-foundation"
+          : "border-slate-200 dark:border-teal-800 hover:border-purple-300 bg-white dark:bg-card dark:bg-foundation"
       )}
     >
       <div className="flex items-start gap-4">
@@ -672,14 +672,14 @@ function CoachCard({ coach, isSelected, onSelect, labels, language }: {
           className="w-16 h-16 rounded-full object-cover"
         />
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-black dark:text-white truncate">{coach.name}</h3>
-          <p className="text-sm text-black dark:text-white dark:text-cyan-300 line-clamp-2">{coach.headline}</p>
+          <h3 className="font-semibold text-black dark:text-foreground truncate">{coach.name}</h3>
+          <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 line-clamp-2">{coach.headline}</p>
           
           <div className="flex items-center gap-3 mt-2">
             {coach.rating && (
               <div className="flex items-center gap-1 text-sm">
                 <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                <span className="text-black dark:text-white dark:text-cyan-300">{coach.rating}</span>
+                <span className="text-black dark:text-foreground dark:text-cyan-300">{coach.rating}</span>
               </div>
             )}
             <Badge variant="outline" className="text-xs">

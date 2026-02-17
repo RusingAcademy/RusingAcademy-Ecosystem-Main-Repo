@@ -56,7 +56,7 @@ export function XPProgressBar({ currentXP, showDetails = true, size = 'default' 
           </div>
         </div>
       )}
-      <div className="w-full bg-white dark:bg-slate-900/10 rounded-full overflow-hidden h-3">
+      <div className="w-full bg-white dark:bg-background/10 rounded-full overflow-hidden h-3">
         <motion.div initial={{ width: 0 }} animate={{ width: progressPercent + '%' }} className="h-full bg-gradient-to-r from-foundation to-teal-700 rounded-full" />
       </div>
     </div>

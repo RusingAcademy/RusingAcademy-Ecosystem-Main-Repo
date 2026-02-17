@@ -413,7 +413,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                       </div>
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <p className="text-xl md:text-2xl text-black dark:text-white leading-relaxed mb-6 italic">
+                      <p className="text-xl md:text-2xl text-black dark:text-foreground leading-relaxed mb-6 italic">
                         "{testimonial.quote}"
                       </p>
                       <div className="flex gap-1 justify-center md:justify-start mb-4">
@@ -435,14 +435,14 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
       </div>
       <button 
         onClick={goToPrev}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-slate-900 shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-background shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
         aria-label="Previous testimonial"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button 
         onClick={goToNext}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-slate-900 shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-background shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
         aria-label="Next testimonial"
       >
         <ChevronRight className="h-6 w-6" />
@@ -535,7 +535,7 @@ function FAQSection() {
           {faqs.map((faq, index) => (
             <div 
               key={index}
-              className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-md"
+              className="bg-white dark:bg-background rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-md"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -671,15 +671,15 @@ export default function Home() {
         <section className="py-10 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-40 h-40 bg-white dark:bg-slate-900 rounded-full -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-60 h-60 bg-white dark:bg-slate-900 rounded-full translate-x-1/3 translate-y-1/3" />
+            <div className="absolute top-0 left-0 w-40 h-40 bg-white dark:bg-background rounded-full -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-60 h-60 bg-white dark:bg-background rounded-full translate-x-1/3 translate-y-1/3" />
           </div>
           
           <div className="container mx-auto px-4 relative z-10" style={{backgroundColor: 'var(--color-white, #ffffff)'}}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {statistics.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white dark:bg-slate-900/20 mb-2">
+                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white dark:bg-background/20 mb-2">
                     <stat.icon className="h-6 w-6 text-white" />
                   </div>
                   <div className="text-3xl md:text-4xl font-black text-white mb-1">
@@ -723,7 +723,7 @@ export default function Home() {
             {/* Two Options: Marketplace vs Plans Maison */}
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
               {/* Marketplace Option */}
-              <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-shadow">
+              <div className="bg-white dark:bg-background rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-cta-2 to-cta flex items-center justify-center shadow-lg">
                     <UserCircle className="h-7 w-7 text-white" />
@@ -784,7 +784,7 @@ export default function Home() {
             {/* Pricing Plans */}
             <div id="pricing-plans" className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Starter Plan */}
-              <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white dark:bg-background rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.starter.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.starter.description")}</p>
@@ -818,7 +818,7 @@ export default function Home() {
 
               {/* Accelerator Plan - Featured */}
               <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-3xl p-8 shadow-2xl text-white relative transform md:-translate-y-4">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black dark:text-white text-xs font-bold px-4 py-1 rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black dark:text-foreground text-xs font-bold px-4 py-1 rounded-full">
                   {t("plans.mostPopular")}
                 </div>
                 <div className="text-center mb-8">
@@ -839,7 +839,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Button 
-                  className="w-full bg-white dark:bg-slate-900 text-teal-600 hover:bg-teal-50 rounded-full font-semibold"
+                  className="w-full bg-white dark:bg-background text-teal-600 hover:bg-teal-50 rounded-full font-semibold"
                   onClick={() => handlePlanPurchase('accelerator-plan')}
                   disabled={purchasingPlan === 'accelerator-plan'}
                 >
@@ -853,7 +853,7 @@ export default function Home() {
               </div>
 
               {/* Immersion Plan */}
-              <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="bg-white dark:bg-background rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.immersion.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.immersion.description")}</p>
@@ -889,7 +889,7 @@ export default function Home() {
 
             {/* Guarantees */}
             <div className="mt-16 text-center">
-              <div className="inline-flex flex-wrap justify-center gap-6 bg-white dark:bg-slate-900 rounded-2xl px-8 py-4 shadow-lg">
+              <div className="inline-flex flex-wrap justify-center gap-6 bg-white dark:bg-background rounded-2xl px-8 py-4 shadow-lg">
                 <div className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-teal-600" />
                   <span className="text-sm font-medium">{t("plans.guarantee1")}</span>
@@ -943,7 +943,7 @@ export default function Home() {
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-4 pb-5 border-b border-cta/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
-                      <span className="text-black dark:text-white font-medium">{item.text}</span>
+                      <span className="text-black dark:text-foreground font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -967,7 +967,7 @@ export default function Home() {
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-4 pb-5 border-b border-emerald-200/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
-                      <span className="text-black dark:text-white font-medium">{item.text}</span>
+                      <span className="text-black dark:text-foreground font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -1049,14 +1049,14 @@ export default function Home() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{item.icon}</span>
-                        <h3 className="font-bold text-2xl text-black dark:text-white">{item.title}</h3>
+                        <h3 className="font-bold text-2xl text-black dark:text-foreground">{item.title}</h3>
                       </div>
-                      <Badge className="glass-badge text-xs mt-2 bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200">{t("sle.skills")}</Badge>
+                      <Badge className="glass-badge text-xs mt-2 bg-white dark:bg-background/80 backdrop-blur-sm border border-slate-200">{t("sle.skills")}</Badge>
                     </div>
                   </div>
                   
                   {/* Description with better typography */}
-                  <p className="text-black dark:text-white leading-relaxed text-base relative z-10">{item.description}</p>
+                  <p className="text-black dark:text-foreground leading-relaxed text-base relative z-10">{item.description}</p>
                   
                   {/* Bottom accent line */}
                   <div 
@@ -1071,7 +1071,7 @@ export default function Home() {
 
         {/* How It Works */}
         <section 
-          className="py-24 relative overflow-hidden bg-white dark:bg-slate-900"
+          className="py-24 relative overflow-hidden bg-white dark:bg-background"
           aria-labelledby="how-title"
         >
           <div className="container mx-auto px-4 relative z-10">
@@ -1225,7 +1225,7 @@ export default function Home() {
         <FAQSection />
 
         {/* Video Presentation Section - Moved here from after statistics */}
-        <section className="py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
+        <section className="py-24 bg-white dark:bg-background relative overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -1328,7 +1328,7 @@ export default function Home() {
                   { icon: Award, title: "SLE Expert", desc: "Deep knowledge of exam criteria" },
                   { icon: Users, title: "2,500+ Public Servants", desc: "Achieved their bilingual goals" },
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 rounded-xl">
+                  <div key={index} className="flex items-center gap-4 p-4 bg-white dark:bg-background rounded-xl">
                     <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
                       <item.icon className="h-6 w-6 text-teal-600" />
                     </div>
@@ -1439,7 +1439,7 @@ export default function Home() {
             {/* Close Button */}
             <button
               onClick={() => setYoutubeModalOpen(false)}
-              className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-sm border border-white/60 flex items-center justify-center text-white hover:bg-white dark:bg-slate-900/20 transition-all duration-200 group"
+              className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60 flex items-center justify-center text-white hover:bg-white dark:bg-background/20 transition-all duration-200 group"
               aria-label="Close video"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1477,7 +1477,7 @@ export default function Home() {
 
             {/* Keyboard hint */}
             <p className="text-center text-white/90 text-xs mt-4">
-              Press <kbd className="px-1.5 py-0.5 bg-white dark:bg-slate-900/10 rounded text-white/90">ESC</kbd> to close
+              Press <kbd className="px-1.5 py-0.5 bg-white dark:bg-background/10 rounded text-white/90">ESC</kbd> to close
             </p>
           </div>
         </div>

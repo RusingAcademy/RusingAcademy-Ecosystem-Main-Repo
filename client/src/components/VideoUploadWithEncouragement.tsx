@@ -63,7 +63,7 @@ export default function VideoUploadWithEncouragement({ videoUrl, onVideoChange, 
           <h4 className="text-lg font-semibold mb-4">{t.encouragementTitle}</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {t.benefits.map((b, i) => (
-              <div key={i} className="bg-white dark:bg-slate-900 rounded-lg p-4 shadow-sm">
+              <div key={i} className="bg-white dark:bg-background rounded-lg p-4 shadow-sm">
                 <b.icon className="w-8 h-8 text-amber-500 mb-2" />
                 <h5 className="font-semibold text-sm">{b.title}</h5>
                 <p className="text-xs text-gray-600 mt-1">{b.description}</p>

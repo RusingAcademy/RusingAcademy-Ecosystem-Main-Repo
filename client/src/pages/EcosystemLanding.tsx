@@ -220,7 +220,7 @@ export default function EcosystemLanding() {
       bg: "bg-[#F4F6F9]",
       text: "text-[#1A1F2E]",
       textSecondary: "text-black",
-      surface: "bg-white dark:bg-slate-800 border border-[#E2E8F0] shadow-lg",
+      surface: "bg-white dark:bg-card border border-[#E2E8F0] shadow-lg",
       surfaceHover: "hover:bg-[#F8FAFC]",
       heroOverlay: "bg-gradient-to-br from-white/95 to-white/80",
       glow: "opacity-15",

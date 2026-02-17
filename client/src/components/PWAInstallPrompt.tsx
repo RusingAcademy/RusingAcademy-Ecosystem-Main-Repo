@@ -84,10 +84,10 @@ export default function PWAInstallPrompt() {
   if (showBanner) {
     return (
       <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md animate-in slide-in-from-bottom-4 duration-300">
-        <div className="relative rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 shadow-lg">
+        <div className="relative rounded-xl border border-gray-200 dark:border-border dark:border-border bg-white dark:bg-background p-4 shadow-lg">
           <button
             onClick={handleDismiss}
-            className="absolute right-3 top-3 rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:bg-slate-800 hover:text-gray-600 transition-colors"
+            className="absolute right-3 top-3 rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:bg-card hover:text-gray-600 transition-colors"
             aria-label="Dismiss install prompt"
           >
             <X size={16} />
@@ -131,10 +131,10 @@ export default function PWAInstallPrompt() {
   if (showIOSGuide) {
     return (
       <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md animate-in slide-in-from-bottom-4 duration-300">
-        <div className="relative rounded-xl border border-gray-200 dark:border-slate-700 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 shadow-lg">
+        <div className="relative rounded-xl border border-gray-200 dark:border-border dark:border-border bg-white dark:bg-background p-4 shadow-lg">
           <button
             onClick={handleDismiss}
-            className="absolute right-3 top-3 rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:bg-slate-800 hover:text-gray-600 transition-colors"
+            className="absolute right-3 top-3 rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:bg-card hover:text-gray-600 transition-colors"
             aria-label="Dismiss install guide"
           >
             <X size={16} />
@@ -155,7 +155,7 @@ export default function PWAInstallPrompt() {
           </div>
 
           <div className="mt-3 space-y-2">
-            <div className="flex items-center gap-3 rounded-lg bg-gray-50 dark:bg-slate-900 px-3 py-2">
+            <div className="flex items-center gap-3 rounded-lg bg-gray-50 dark:bg-background px-3 py-2">
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-sky-600">
                 <Share size={14} className="text-white" />
               </div>
@@ -164,7 +164,7 @@ export default function PWAInstallPrompt() {
                 <strong>Share</strong> button in Safari's toolbar
               </p>
             </div>
-            <div className="flex items-center gap-3 rounded-lg bg-gray-50 dark:bg-slate-900 px-3 py-2">
+            <div className="flex items-center gap-3 rounded-lg bg-gray-50 dark:bg-background px-3 py-2">
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-foundation">
                 <Plus size={14} className="text-white" />
               </div>

@@ -244,11 +244,11 @@ export default function Messages() {
         <main className="container mx-auto px-4 py-16">
           <Card className="max-w-md mx-auto">
             <CardContent className="p-8 text-center">
-              <MessageSquare className="h-12 w-12 mx-auto mb-4 text-black dark:text-white" />
+              <MessageSquare className="h-12 w-12 mx-auto mb-4 text-black dark:text-foreground" />
               <h2 className="text-xl font-semibold mb-2">
                 {isEn ? "Sign in to view messages" : "Connectez-vous pour voir les messages"}
               </h2>
-              <p className="text-black dark:text-white mb-4">
+              <p className="text-black dark:text-foreground mb-4">
                 {isEn 
                   ? "You need to be signed in to access your messages."
                   : "Vous devez être connecté pour accéder à vos messages."}
@@ -275,7 +275,7 @@ export default function Messages() {
             <h1 className="text-3xl font-bold mb-2">
               {isEn ? "Messages" : "Messages"}
             </h1>
-            <p className="text-black dark:text-white">
+            <p className="text-black dark:text-foreground">
               {isEn 
                 ? "Communicate with your coaches and learners"
                 : "Communiquez avec vos coachs et apprenants"}
@@ -293,7 +293,7 @@ export default function Messages() {
                 {/* Search & Filter Header */}
                 <div className="p-4 border-b space-y-3">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black dark:text-white" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black dark:text-foreground" />
                     <Input
                       placeholder={isEn ? "Search conversations..." : "Rechercher..."}
                       value={searchQuery}
@@ -335,10 +335,10 @@ export default function Messages() {
                 <ScrollArea className="flex-1">
                   {conversationsLoading ? (
                     <div className="flex items-center justify-center py-8">
-                      <Loader2 className="h-6 w-6 animate-spin text-black dark:text-white" />
+                      <Loader2 className="h-6 w-6 animate-spin text-black dark:text-foreground" />
                     </div>
                   ) : filteredConversations.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-8 text-black dark:text-white">
+                    <div className="flex flex-col items-center justify-center py-8 text-black dark:text-foreground">
                       <MessageSquare className="h-8 w-8 mb-2 opacity-50" />
                       <p className="text-sm">
                         {searchQuery 
@@ -369,12 +369,12 @@ export default function Messages() {
                                 <span className="font-medium truncate">
                                   {conv.participantName}
                                 </span>
-                                <span className="text-xs text-black dark:text-white whitespace-nowrap">
+                                <span className="text-xs text-black dark:text-foreground whitespace-nowrap">
                                   {formatMessageDate(new Date(conv.lastMessageAt))}
                                 </span>
                               </div>
                               <div className="flex items-center justify-between gap-2 mt-0.5">
-                                <p className="text-sm text-black dark:text-white truncate">
+                                <p className="text-sm text-black dark:text-foreground truncate">
                                   {conv.lastMessage}
                                 </p>
                                 {conv.unreadCount > 0 && (
@@ -443,7 +443,7 @@ export default function Messages() {
                     {showSearch && (
                       <div className="p-3 border-b bg-muted/30">
                         <div className="relative">
-                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black dark:text-white" />
+                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black dark:text-foreground" />
                           <Input
                             placeholder={isEn ? "Search in conversation..." : "Rechercher dans la conversation..."}
                             value={messageSearchQuery}
@@ -463,7 +463,7 @@ export default function Messages() {
                           )}
                         </div>
                         {messageSearchQuery && (
-                          <p className="text-xs text-black dark:text-white mt-2">
+                          <p className="text-xs text-black dark:text-foreground mt-2">
                             {filteredMessages.length} {isEn ? "results found" : "résultats trouvés"}
                           </p>
                         )}
@@ -474,10 +474,10 @@ export default function Messages() {
                     <ScrollArea className="flex-1 p-4">
                       {messagesLoading ? (
                         <div className="flex items-center justify-center py-8">
-                          <Loader2 className="h-6 w-6 animate-spin text-black dark:text-white" />
+                          <Loader2 className="h-6 w-6 animate-spin text-black dark:text-foreground" />
                         </div>
                       ) : filteredMessages.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-8 text-black dark:text-white">
+                        <div className="flex flex-col items-center justify-center py-8 text-black dark:text-foreground">
                           <MessageSquare className="h-8 w-8 mb-2 opacity-50" />
                           <p className="text-sm">
                             {messageSearchQuery
@@ -514,7 +514,7 @@ export default function Messages() {
                                   )}>
                                     <span className={cn(
                                       "text-xs",
-                                      isOwn ? "text-primary-foreground/70" : "text-black dark:text-white"
+                                      isOwn ? "text-primary-foreground/70" : "text-black dark:text-foreground"
                                     )}>
                                       {format(new Date(msg.createdAt), "HH:mm", { locale })}
                                     </span>
@@ -571,7 +571,7 @@ export default function Messages() {
                     </div>
                   </>
                 ) : (
-                  <div className="flex-1 flex flex-col items-center justify-center text-black dark:text-white">
+                  <div className="flex-1 flex flex-col items-center justify-center text-black dark:text-foreground">
                     <MessageSquare className="h-12 w-12 mb-4 opacity-50" />
                     <h3 className="text-lg font-medium mb-1">
                       {isEn ? "Select a conversation" : "Sélectionnez une conversation"}

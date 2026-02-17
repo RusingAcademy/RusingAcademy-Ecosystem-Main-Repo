@@ -200,7 +200,7 @@ export default function CoachingHub() {
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold text-slate-900">Session en cours</h3>
                           <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500 text-white text-xs font-medium rounded-full">
-                            <span className="w-1.5 h-1.5 bg-white dark:bg-slate-900 rounded-full animate-pulse" />
+                            <span className="w-1.5 h-1.5 bg-white dark:bg-background rounded-full animate-pulse" />
                             En direct
                           </span>
                         </div>
@@ -238,7 +238,7 @@ export default function CoachingHub() {
                           <h4 className="font-medium text-slate-900">{session.title}</h4>
                           {session.status === "live" && (
                             <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500 text-white text-xs font-medium rounded-full">
-                              <span className="w-1.5 h-1.5 bg-white dark:bg-slate-900 rounded-full animate-pulse" />
+                              <span className="w-1.5 h-1.5 bg-white dark:bg-background rounded-full animate-pulse" />
                               En direct
                             </span>
                           )}

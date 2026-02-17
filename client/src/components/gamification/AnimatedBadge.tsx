@@ -284,7 +284,7 @@ export function AnimatedBadge({
       <motion.span
         className={cn(
           "text-xs font-medium mt-2 text-center line-clamp-2 max-w-[80px]",
-          isUnlocked ? "text-black dark:text-white" : "text-cyan-300 dark:text-black"
+          isUnlocked ? "text-black dark:text-foreground" : "text-cyan-300 dark:text-black"
         )}
         initial={showAnimation && isNew ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}

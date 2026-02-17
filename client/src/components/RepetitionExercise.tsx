@@ -192,7 +192,7 @@ export default function RepetitionExercise({
       <CardContent className="p-6 space-y-6">
         {/* Phrase Display */}
         <div className="text-center py-4">
-          <p className="text-2xl font-medium text-gray-900 dark:text-gray-100 dark:text-white mb-2">
+          <p className="text-2xl font-medium text-gray-900 dark:text-foreground dark:text-foreground mb-2">
             {currentPhrase.textFr}
           </p>
           <p className="text-lg text-muted-foreground">

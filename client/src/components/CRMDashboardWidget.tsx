@@ -193,11 +193,11 @@ export default function CRMDashboardWidget({ onNavigateToCRM }: CRMDashboardWidg
                 {sequenceData ? (
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation/50">
                         <div className="text-2xl font-bold">{sequenceData.activeSequences}</div>
                         <div className="text-xs text-muted-foreground">{l.activeSequences}</div>
                       </div>
-                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation/50">
                         <div className="text-2xl font-bold">{sequenceData.totalEnrollments}</div>
                         <div className="text-xs text-muted-foreground">{l.totalEnrollments}</div>
                       </div>
@@ -252,14 +252,14 @@ export default function CRMDashboardWidget({ onNavigateToCRM }: CRMDashboardWidg
                 {outcomeData ? (
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation/50">
                         <div className="flex items-center gap-1">
                           <Clock className="h-4 w-4 text-amber-500" />
                           <span className="text-2xl font-bold">{pendingMeetings.length}</span>
                         </div>
                         <div className="text-xs text-muted-foreground">{l.pendingOutcomes}</div>
                       </div>
-                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800 dark:bg-foundation/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation/50">
                         <div className="flex items-center gap-1">
                           <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                           <span className="text-2xl font-bold">{outcomeData.completedMeetings}</span>

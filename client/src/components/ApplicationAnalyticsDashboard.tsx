@@ -97,7 +97,7 @@ export function ApplicationAnalyticsDashboard({
   return (
     <div className="space-y-8">
       {/* Date Range Filter */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
         <div className="flex items-center gap-2 mb-4">
           <Calendar size={20} className="text-teal-600" />
           <h3 className="text-lg font-semibold text-gray-900">
@@ -106,7 +106,7 @@ export function ApplicationAnalyticsDashboard({
         </div>
         <div className="flex gap-4">
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1">
               {isEn ? "Start Date" : "Date de début"}
             </label>
             <input
@@ -117,7 +117,7 @@ export function ApplicationAnalyticsDashboard({
             />
           </div>
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1">
               {isEn ? "End Date" : "Date de fin"}
             </label>
             <input
@@ -140,17 +140,17 @@ export function ApplicationAnalyticsDashboard({
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Total Applications" : "Total des candidatures"}</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-2">{data.approvalStats.total}</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-foreground mt-2">{data.approvalStats.total}</p>
             </div>
             <Users className="text-teal-600" size={32} />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
@@ -160,7 +160,7 @@ export function ApplicationAnalyticsDashboard({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
@@ -170,7 +170,7 @@ export function ApplicationAnalyticsDashboard({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Under Review" : "En cours d'examen"}</p>
@@ -183,8 +183,8 @@ export function ApplicationAnalyticsDashboard({
 
       {/* Status Distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
             {isEn ? "Application Status Distribution" : "Distribution du statut des candidatures"}
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -213,8 +213,8 @@ export function ApplicationAnalyticsDashboard({
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
             {isEn ? "Teaching Language Distribution" : "Distribution des langues d'enseignement"}
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -230,8 +230,8 @@ export function ApplicationAnalyticsDashboard({
       </div>
 
       {/* Monthly Trends */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
           {isEn ? "Monthly Application Trends" : "Tendances mensuelles des candidatures"}
         </h3>
         <ResponsiveContainer width="100%" height={400}>
@@ -249,8 +249,8 @@ export function ApplicationAnalyticsDashboard({
       </div>
 
       {/* Experience Distribution */}
-      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
           {isEn ? "Teaching Experience Distribution" : "Distribution de l'expérience d'enseignement"}
         </h3>
         <ResponsiveContainer width="100%" height={300}>

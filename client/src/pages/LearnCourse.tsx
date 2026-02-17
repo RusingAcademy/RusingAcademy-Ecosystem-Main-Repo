@@ -109,7 +109,7 @@ export default function LearnCourse() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Header */}
-      <div className="border-b bg-white dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-10">
+      <div className="border-b bg-white dark:bg-background/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container max-w-5xl py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -142,7 +142,7 @@ export default function LearnCourse() {
             <GraduationCap className="h-3 w-3 mr-1" />
             {course.level || "All Levels"}
           </Badge>
-          <h1 className="text-3xl font-bold text-black dark:text-white mb-2">{course.title}</h1>
+          <h1 className="text-3xl font-bold text-black dark:text-foreground mb-2">{course.title}</h1>
           <p className="text-lg text-muted-foreground">{course.description}</p>
           
           {/* Progress Section */}

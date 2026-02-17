@@ -84,7 +84,7 @@ export default function ProductDetail() {
     <div className="p-6 max-w-[700px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/products-services")} className="p-2 hover:bg-gray-100 dark:bg-slate-800 rounded-lg">
+          <button onClick={() => navigate("/products-services")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">
@@ -117,7 +117,7 @@ export default function ProductDetail() {
             {isEditing ? (
               <input type="text" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={name} onChange={(e) => setName(e.target.value)} />
             ) : (
-              <p className="text-gray-800 dark:text-gray-200 font-medium">{p?.name}</p>
+              <p className="text-gray-800 dark:text-foreground font-medium">{p?.name}</p>
             )}
           </div>
 
@@ -159,7 +159,7 @@ export default function ProductDetail() {
               {isEditing ? (
                 <input type="number" step="0.01" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600" value={price} onChange={(e) => setPrice(e.target.value)} />
               ) : (
-                <p className="text-gray-800 dark:text-gray-200 font-medium">${Number(p?.price || 0).toFixed(2)}</p>
+                <p className="text-gray-800 dark:text-foreground font-medium">${Number(p?.price || 0).toFixed(2)}</p>
               )}
             </div>
             <div>
@@ -182,12 +182,12 @@ export default function ProductDetail() {
 
           <div className="flex items-center gap-2">
             {isEditing ? (
-              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
+              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-muted-foreground cursor-pointer">
                 <input type="checkbox" checked={isTaxable} onChange={(e) => setIsTaxable(e.target.checked)} className="rounded border-gray-300" />
                 Taxable
               </label>
             ) : (
-              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${p?.isTaxable ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-slate-800 text-gray-600"}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${p?.isTaxable ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-card text-gray-600"}`}>
                 {p?.isTaxable ? "Taxable" : "Non-taxable"}
               </span>
             )}

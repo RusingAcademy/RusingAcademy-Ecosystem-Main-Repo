@@ -81,13 +81,13 @@ export default function CoachRevenue() {
               sub: `${tier.name} ${lang === "fr" ? "Niveau" : "Tier"}`,
             },
           ].map(kpi => (
-            <div key={kpi.label} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
+            <div key={kpi.label} className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5 hover:shadow-md transition-shadow">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${ACCENT}10` }}>
                 <span className="material-icons text-xl" style={{ color: ACCENT }}>{kpi.icon}</span>
               </div>
               <p className="text-xs text-gray-500 mb-1">{kpi.label}</p>
               {isLoading ? (
-                <div className="h-8 w-20 bg-gray-100 dark:bg-slate-800 rounded animate-pulse" />
+                <div className="h-8 w-20 bg-gray-100 dark:bg-card rounded animate-pulse" />
               ) : (
                 <p className="text-2xl font-bold text-gray-900">{kpi.value}</p>
               )}
@@ -99,13 +99,13 @@ export default function CoachRevenue() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Payout Ledger */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
-              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5">
+              <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-4">
                 {lang === "fr" ? "Historique des paiements" : "Payout History"}
               </h2>
               {ledgerQuery.isLoading ? (
                 <div className="space-y-3">
-                  {[1, 2, 3].map((i) => <div key={i} className="h-12 bg-gray-50 dark:bg-slate-900 rounded animate-pulse" />)}
+                  {[1, 2, 3].map((i) => <div key={i} className="h-12 bg-gray-50 dark:bg-background rounded animate-pulse" />)}
                 </div>
               ) : ledger.length === 0 ? (
                 <div className="text-center py-8">
@@ -132,7 +132,7 @@ export default function CoachRevenue() {
                           <td className="py-3 text-sm text-gray-900">
                             {entry.date ? new Date(entry.date).toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA") : "—"}
                           </td>
-                          <td className="py-3 text-sm text-gray-700 dark:text-gray-300 capitalize">{entry.transactionType || entry.type || "—"}</td>
+                          <td className="py-3 text-sm text-gray-700 dark:text-muted-foreground capitalize">{entry.transactionType || entry.type || "—"}</td>
                           <td className="text-right text-sm text-gray-700">${(entry.grossAmount || 0).toLocaleString()}</td>
                           <td className="text-right text-sm font-semibold text-gray-900">${(entry.netAmount || 0).toLocaleString()}</td>
                           <td className="text-right"><PayoutStatusBadge status={entry.status || "pending"} /></td>
@@ -166,8 +166,8 @@ export default function CoachRevenue() {
                       <span className="opacity-70">{lang === "fr" ? "Prochain niveau" : "Next Tier"}</span>
                       <span className="font-semibold">{tier.next} ({tier.nextCount}+)</span>
                     </div>
-                    <div className="mt-3 h-2 bg-white dark:bg-slate-900/20 rounded-full overflow-hidden">
-                      <div className="h-full bg-white dark:bg-slate-900/80 rounded-full" style={{ width: `${Math.min((learnerCount / tier.nextCount) * 100, 100)}%` }} />
+                    <div className="mt-3 h-2 bg-white dark:bg-background/20 rounded-full overflow-hidden">
+                      <div className="h-full bg-white dark:bg-background/80 rounded-full" style={{ width: `${Math.min((learnerCount / tier.nextCount) * 100, 100)}%` }} />
                     </div>
                     <p className="text-[10px] opacity-60 mt-1">
                       {learnerCount}/{tier.nextCount} {lang === "fr" ? `étudiants pour ${tier.next}` : `students to ${tier.next}`}
@@ -178,13 +178,13 @@ export default function CoachRevenue() {
             </div>
 
             {/* Earnings Breakdown */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-5">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
+            <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-foreground mb-3">
                 {lang === "fr" ? "Détails des revenus" : "Earnings Breakdown"}
               </h3>
               {isLoading ? (
                 <div className="space-y-3">
-                  {[1, 2, 3].map((i) => <div key={i} className="h-6 bg-gray-50 dark:bg-slate-900 rounded animate-pulse" />)}
+                  {[1, 2, 3].map((i) => <div key={i} className="h-6 bg-gray-50 dark:bg-background rounded animate-pulse" />)}
                 </div>
               ) : (
                 <div className="space-y-3">

@@ -586,7 +586,7 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
     return (
       <div className="space-y-3">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-14 bg-gray-100 dark:bg-slate-800 rounded-lg animate-pulse" />
+          <div key={i} className="h-14 bg-gray-100 dark:bg-card rounded-lg animate-pulse" />
         ))}
       </div>
     );
@@ -605,7 +605,7 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
     return (
       <div className="space-y-2">
         {placeholderModules.map((mod, i) => (
-          <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-slate-900 hover:bg-gray-100 dark:bg-slate-800 transition-colors">
+          <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-background hover:bg-gray-100 dark:bg-card transition-colors">
             <div className="w-8 h-8 rounded-full bg-cta/10 text-cta flex items-center justify-center font-bold text-sm">
               {i + 1}
             </div>
@@ -623,7 +623,7 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
         <div key={mod.id}>
           <button
             onClick={() => setExpandedModule(expandedModule === mod.id ? null : mod.id)}
-            className="w-full flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-slate-900 hover:bg-gray-100 dark:bg-slate-800 transition-colors text-left"
+            className="w-full flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-background hover:bg-gray-100 dark:bg-card transition-colors text-left"
           >
             {mod.thumbnailUrl ? (
               <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 ring-1 ring-border">
@@ -746,19 +746,19 @@ export default function CurriculumPathSeries() {
 
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
-                <div className="bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-cta">6</div>
                   <div className="text-sm text-white/90">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
                 </div>
-                <div className="bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-cta">180</div>
                   <div className="text-sm text-white/90">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
                 </div>
-                <div className="bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-cta">3-4x</div>
                   <div className="text-sm text-white/90">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
                 </div>
-                <div className="bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-cta">94%</div>
                   <div className="text-sm text-white/90">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
                 </div>
@@ -774,7 +774,7 @@ export default function CurriculumPathSeries() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Link href="/ecosystem">
-                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10">
+                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-background/10">
                     {isEn ? "Talk to a Coach" : "Parler à un Coach"}
                   </Button>
                 </Link>
@@ -784,7 +784,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* About the Program Section */}
-        <section className="py-16 bg-white dark:bg-slate-900">
+        <section className="py-16 bg-white dark:bg-background">
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
@@ -833,7 +833,7 @@ export default function CurriculumPathSeries() {
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 md:p-10 shadow-lg mb-12">
+              <div className="bg-white dark:bg-background rounded-2xl p-8 md:p-10 shadow-lg mb-12">
                 <p className="text-lg text-foundation leading-relaxed">
                   {isEn 
                     ? "Each Path (I through VI) corresponds to a specific CEFR level and is designed as a self-contained, intensive learning experience that builds systematically on previous competencies. This ensures that every learner progresses at the optimal pace while maintaining the depth of understanding required for true bilingual proficiency."
@@ -855,7 +855,7 @@ export default function CurriculumPathSeries() {
                 </p>
                 <div className="grid md:grid-cols-3 gap-6">
                   {pathDifferentiators.map((diff, index) => (
-                    <div key={index} className="bg-white dark:bg-slate-900/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                    <div key={index} className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-xl p-6 text-center">
                       <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-cta flex items-center justify-center text-white font-bold text-xl">
                         {index + 1}
                       </div>
@@ -874,7 +874,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Curriculum Design Philosophy Section */}
-        <section className="py-16 bg-white dark:bg-slate-900">
+        <section className="py-16 bg-white dark:bg-background">
           <div className="container">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
@@ -941,7 +941,7 @@ export default function CurriculumPathSeries() {
                 <Card className="border-none shadow-xl overflow-hidden">
                   <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-900/20 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-white dark:bg-background/20 flex items-center justify-center">
                         <Video className="h-8 w-8" />
                       </div>
                       <div>
@@ -985,7 +985,7 @@ export default function CurriculumPathSeries() {
                 <Card className="border-none shadow-xl overflow-hidden">
                   <div className="bg-gradient-to-r from-cta to-cta p-6 text-white">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-16 h-16 rounded-full bg-white dark:bg-slate-900/20 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-white dark:bg-background/20 flex items-center justify-center">
                         <Headphones className="h-8 w-8" />
                       </div>
                       <div>
@@ -1030,7 +1030,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Why Path Series Section */}
-        <section className="py-16 bg-white dark:bg-slate-900">
+        <section className="py-16 bg-white dark:bg-background">
           <div className="container">
             <div className="text-center mb-12">
               <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
@@ -1107,7 +1107,7 @@ export default function CurriculumPathSeries() {
           <div className="container">
             {/* FSL / ESL Program Toggle */}
             <div className="flex justify-center mb-8">
-              <div className="inline-flex rounded-2xl bg-white dark:bg-slate-900 p-1.5 gap-1 shadow-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700">
+              <div className="inline-flex rounded-2xl bg-white dark:bg-background p-1.5 gap-1 shadow-sm border border-gray-200 dark:border-border dark:border-border">
                 <button
                   onClick={() => { setProgramTab('fsl'); setSelectedPath('path-i'); }}
                   className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
@@ -1142,7 +1142,7 @@ export default function CurriculumPathSeries() {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedPath === path.id
                       ? "bg-cta text-white shadow-lg"
-                      : "bg-white dark:bg-slate-800 text-foundation hover:bg-cta/10 border border-gray-200"
+                      : "bg-white dark:bg-card text-foundation hover:bg-cta/10 border border-gray-200"
                   }`}
                 >
                   <span className="mr-2">{path.icon}</span>
@@ -1190,22 +1190,22 @@ export default function CurriculumPathSeries() {
 
                   {/* Course Stats */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-white dark:bg-slate-900 rounded-lg p-4 shadow-sm">
+                    <div className="bg-white dark:bg-background rounded-lg p-4 shadow-sm">
                       <Calendar className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "Duration" : "Durée"}</div>
                       <div className="font-semibold text-foundation">{currentPath.duration}</div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 rounded-lg p-4 shadow-sm">
+                    <div className="bg-white dark:bg-background rounded-lg p-4 shadow-sm">
                       <Clock className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
                       <div className="font-semibold text-foundation">{currentPath.structuredHours}</div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 rounded-lg p-4 shadow-sm">
+                    <div className="bg-white dark:bg-background rounded-lg p-4 shadow-sm">
                       <Brain className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "Practice" : "Pratique"}</div>
                       <div className="font-semibold text-foundation">{currentPath.autonomousPractice || currentPath.practiceExams}</div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 rounded-lg p-4 shadow-sm">
+                    <div className="bg-white dark:bg-background rounded-lg p-4 shadow-sm">
                       <BookMarked className="h-5 w-5 text-cta mb-2" />
                       <div className="text-sm text-muted-foreground">{isEn ? "PFL2 Level" : "Niveau PFL2"}</div>
                       <div className="font-semibold text-foundation">{currentPath.pfl2Level || currentPath.coachingSessions}</div>
@@ -1213,7 +1213,7 @@ export default function CurriculumPathSeries() {
                   </div>
 
                   {/* Learning Outcomes */}
-                  <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm">
+                  <div className="bg-white dark:bg-background rounded-xl p-6 shadow-sm">
                     <h3 className="font-semibold text-lg text-foundation mb-4 flex items-center gap-2">
                       <Target className="h-5 w-5 text-cta" />
                       {isEn ? "Key Learning Outcomes" : "Résultats d'Apprentissage Clés"}
@@ -1244,7 +1244,7 @@ export default function CurriculumPathSeries() {
                   </div>
 
                   {/* Course Modules Preview */}
-                  <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm">
+                  <div className="bg-white dark:bg-background rounded-xl p-6 shadow-sm">
                     <h3 className="font-semibold text-lg text-foundation mb-4 flex items-center gap-2">
                       <Layers className="h-5 w-5 text-cta" />
                       {isEn ? "Course Modules" : "Modules du Cours"}
@@ -1284,7 +1284,7 @@ export default function CurriculumPathSeries() {
                         )}
                       </div>
                       {!FREE_ACCESS_MODE && (
-                        <Badge className="mt-2 bg-white dark:bg-slate-900/20 text-white">
+                        <Badge className="mt-2 bg-white dark:bg-background/20 text-white">
                           {Math.round((1 - currentPath.price / currentPath.originalPrice) * 100)}% OFF
                         </Badge>
                       )}
@@ -1339,7 +1339,7 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-16 bg-white dark:bg-slate-900">
+        <section className="py-16 bg-white dark:bg-background">
           <div className="container">
             <div className="text-center mb-12">
               <p className="text-sm font-medium text-cta uppercase tracking-wider mb-2">
@@ -1405,7 +1405,7 @@ export default function CurriculumPathSeries() {
                 </Button>
               </Link>
               <Link href="/ecosystem">
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-slate-900/10">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-background/10">
                   {isEn ? "Find a Coach" : "Trouver un Coach"}
                 </Button>
               </Link>

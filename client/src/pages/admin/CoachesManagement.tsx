@@ -315,7 +315,7 @@ export default function CoachesManagement() {
           </div>
           <div className="flex items-center justify-between gap-2 overflow-x-auto">
             {[
-              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100 dark:bg-slate-800", textColor: "text-slate-600 dark:text-slate-300", icon: UserPlus },
+              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100 dark:bg-card", textColor: "text-slate-600 dark:text-slate-300", icon: UserPlus },
               { label: "Pending", count: pending.length, color: "bg-amber-50 dark:bg-amber-900/20", textColor: "text-amber-600", icon: Clock },
               { label: "Under Review", count: underReview.length, color: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-600", icon: Eye },
               { label: "Approved", count: approved.length, color: "bg-emerald-50 dark:bg-emerald-900/20", textColor: "text-emerald-600", icon: CheckCircle },

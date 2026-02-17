@@ -385,7 +385,7 @@ export default function WeeklyChallenges() {
                       </div>
                     </div>
                     {/* Progress bar */}
-                    <div className="mt-3 h-1.5 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div className="mt-3 h-1.5 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all"
                         style={{ width: `${completionRate}%` }}

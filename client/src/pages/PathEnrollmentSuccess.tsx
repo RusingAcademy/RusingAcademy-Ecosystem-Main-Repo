@@ -162,11 +162,11 @@ export default function PathEnrollmentSuccess() {
               {t ? "Inscription Confirmée" : "Enrollment Confirmed"}
             </Badge>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">
               {t ? "Félicitations!" : "Congratulations!"}
             </h1>
             
-            <p className="text-xl text-black dark:text-white mb-6">
+            <p className="text-xl text-black dark:text-foreground mb-6">
               {t
                 ? `Vous êtes maintenant inscrit à ${path?.title || "ce parcours"}.`
                 : `You are now enrolled in ${path?.title || "this path"}.`}
@@ -174,16 +174,16 @@ export default function PathEnrollmentSuccess() {
             
             {/* Path Summary Card */}
             {path && (
-              <Card className="max-w-md mx-auto mb-8 border-green-200 bg-white dark:bg-slate-900/80 backdrop-blur">
+              <Card className="max-w-md mx-auto mb-8 border-green-200 bg-white dark:bg-background/80 backdrop-blur">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
                     {/* @ts-ignore - TS2339: auto-suppressed during TS cleanup */}
                     <span className="text-4xl">{path?.icon || "📚"}</span>
                     <div className="text-left">
-                      <h3 className="font-semibold text-black dark:text-white">
+                      <h3 className="font-semibold text-black dark:text-foreground">
                         {t && path.titleFr ? path.titleFr : path.title}
                       </h3>
-                      <div className="flex items-center gap-3 text-sm text-black dark:text-white mt-1">
+                      <div className="flex items-center gap-3 text-sm text-black dark:text-foreground mt-1">
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
                           {path.durationWeeks || 4} {t ? "sem." : "wks"}
@@ -200,7 +200,7 @@ export default function PathEnrollmentSuccess() {
             )}
             
             {/* Email Confirmation Notice */}
-            <div className="flex items-center justify-center gap-2 text-sm text-black dark:text-white mb-8">
+            <div className="flex items-center justify-center gap-2 text-sm text-black dark:text-foreground mb-8">
               <Mail className="w-4 h-4" />
               <span>
                 {t
@@ -213,9 +213,9 @@ export default function PathEnrollmentSuccess() {
       </section>
 
       {/* Next Steps Section */}
-      <section className="py-16 bg-white dark:bg-slate-900">
+      <section className="py-16 bg-white dark:bg-background">
         <div className="container px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-8 text-center">
             {t ? "Prochaines Étapes" : "Next Steps"}
           </h2>
           
@@ -237,7 +237,7 @@ export default function PathEnrollmentSuccess() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-black dark:text-white mb-4">{step.description}</p>
+                    <p className="text-black dark:text-foreground mb-4">{step.description}</p>
                     <Link href={step.href}>
                       <Button
                         variant={step.primary ? "default" : "outline"}
@@ -269,7 +269,7 @@ export default function PathEnrollmentSuccess() {
               : "Your transformation toward bilingual excellence starts now. Access your content and start learning today."}
           </p>
           <Link href="/app">
-            <Button size="lg" variant="secondary" className="bg-white dark:bg-slate-900 text-amber-700 hover:bg-amber-50">
+            <Button size="lg" variant="secondary" className="bg-white dark:bg-background text-amber-700 hover:bg-amber-50">
               <BookOpen className="w-5 h-5 mr-2" />
               {t ? "Accéder à Mon Dashboard" : "Go to My Dashboard"}
             </Button>

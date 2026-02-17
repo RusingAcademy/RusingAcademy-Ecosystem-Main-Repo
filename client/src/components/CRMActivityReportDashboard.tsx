@@ -345,7 +345,7 @@ export default function CRMActivityReportDashboard() {
             {data.pipelineMovements.map((movement, index) => (
               <div 
                 key={index}
-                className="flex items-center justify-between p-3 bg-white dark:bg-slate-800 dark:bg-obsidian rounded-lg"
+                className="flex items-center justify-between p-3 bg-white dark:bg-card dark:bg-obsidian rounded-lg"
               >
                 <div className="flex items-center gap-3">
                   <Badge variant="outline">{stageLabels[movement.from] || movement.from}</Badge>

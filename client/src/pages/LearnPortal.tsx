@@ -218,10 +218,10 @@ function PortalSkeleton() {
       {/* Hero skeleton */}
       <div className="bg-gradient-to-br from-foundation via-teal-700 to-foundation px-6 py-12">
         <div className="max-w-4xl mx-auto">
-          <Skeleton className="w-full h-48 rounded-2xl bg-white dark:bg-slate-900/10 mb-6" />
-          <Skeleton className="h-8 w-2/3 bg-white dark:bg-slate-900/10 mb-3" />
-          <Skeleton className="h-4 w-1/2 bg-white dark:bg-slate-900/10 mb-6" />
-          <Skeleton className="h-10 w-40 bg-white dark:bg-slate-900/10 rounded-lg" />
+          <Skeleton className="w-full h-48 rounded-2xl bg-white dark:bg-background/10 mb-6" />
+          <Skeleton className="h-8 w-2/3 bg-white dark:bg-background/10 mb-3" />
+          <Skeleton className="h-4 w-1/2 bg-white dark:bg-background/10 mb-6" />
+          <Skeleton className="h-10 w-40 bg-white dark:bg-background/10 rounded-lg" />
         </div>
       </div>
       {/* Content skeleton */}
@@ -446,7 +446,7 @@ export default function LearnPortal() {
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute -top-20 -right-20 w-80 h-80 bg-cta/20 rounded-full blur-3xl" />
                 <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white dark:bg-slate-900/5 rounded-full blur-2xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white dark:bg-background/5 rounded-full blur-2xl" />
               </div>
               <div className="relative z-10 max-w-4xl mx-auto px-6 py-12 md:py-16">
                 <HeroContent
@@ -856,7 +856,7 @@ function HeroContent({
         {/* Course icon (only when no banner) */}
         {!course.thumbnailUrl && !(course as any).heroImageUrl && (
           <div className="flex-shrink-0">
-            <div className="w-20 h-20 rounded-2xl bg-white dark:bg-slate-900/10 backdrop-blur-sm ring-2 ring-white/20 flex items-center justify-center shadow-xl">
+            <div className="w-20 h-20 rounded-2xl bg-white dark:bg-background/10 backdrop-blur-sm ring-2 ring-white/20 flex items-center justify-center shadow-xl">
               <GraduationCap className="h-10 w-10 text-white/90" />
             </div>
           </div>
@@ -865,12 +865,12 @@ function HeroContent({
         {/* Course Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2 flex-wrap">
-            <Badge className="bg-white dark:bg-slate-900/15 text-white border-white/60 backdrop-blur-sm text-xs">
+            <Badge className="bg-white dark:bg-background/15 text-white border-white/60 backdrop-blur-sm text-xs">
               <GraduationCap className="h-3 w-3 mr-1" />
               {course.level || "All Levels"}
             </Badge>
             {course.modules && (
-              <Badge className="bg-white dark:bg-slate-900/15 text-white border-white/60 backdrop-blur-sm text-xs">
+              <Badge className="bg-white dark:bg-background/15 text-white border-white/60 backdrop-blur-sm text-xs">
                 <Layers className="h-3 w-3 mr-1" />
                 {course.modules.length} {isEn ? "Modules" : "Modules"}
               </Badge>
@@ -926,7 +926,7 @@ function HeroContent({
         )}
         {isAuthenticated && hasStarted && (
           <>
-            <Separator orientation="vertical" className="h-4 bg-white dark:bg-slate-900/20" />
+            <Separator orientation="vertical" className="h-4 bg-white dark:bg-background/20" />
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
               {completedLessons}/{totalLessons}{" "}
@@ -937,7 +937,7 @@ function HeroContent({
         {/* Mobile progress ring */}
         {isAuthenticated && hasStarted && (
           <div className="md:hidden flex items-center gap-2">
-            <Separator orientation="vertical" className="h-4 bg-white dark:bg-slate-900/20" />
+            <Separator orientation="vertical" className="h-4 bg-white dark:bg-background/20" />
             <div className="flex items-center gap-1.5">
               <div className="w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center">
                 <span className="text-[9px] font-bold text-white">
@@ -965,7 +965,7 @@ function HeroContent({
                   ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/25 hover:shadow-emerald-600/30"
                   : hasStarted
                   ? "bg-cta hover:bg-[#E06B2D] text-white shadow-orange-700/25 hover:shadow-orange-700/30"
-                  : "bg-white dark:bg-slate-800 text-foundation hover:bg-white/90 shadow-white/25 hover:shadow-white/30"
+                  : "bg-white dark:bg-card text-foundation hover:bg-white/90 shadow-white/25 hover:shadow-white/30"
               }`}
               onClick={() =>
                 setLocation(`/learn/${slug}/lessons/${resumeTarget.id}`)
@@ -997,7 +997,7 @@ function HeroContent({
         ) : !isAuthenticated ? (
           <Button
             size="lg"
-            className="bg-white dark:bg-slate-900 text-foundation hover:bg-white dark:bg-slate-900/90 shadow-lg shadow-white/25"
+            className="bg-white dark:bg-background text-foundation hover:bg-white dark:bg-background/90 shadow-lg shadow-white/25"
             onClick={() => setLocation("/login")}
           >
             <Shield className="h-4 w-4 mr-2" />

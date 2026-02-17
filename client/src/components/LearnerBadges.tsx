@@ -198,7 +198,7 @@ export function LearnerBadges({ language = "en", compact = false }: LearnerBadge
         {/* Badges Grid */}
         {badges.length === 0 ? (
           <div className="text-center py-8">
-            <Trophy className="h-12 w-12 mx-auto text-black/60 dark:text-white/60 mb-2" />
+            <Trophy className="h-12 w-12 mx-auto text-black/60 dark:text-foreground/60 mb-2" />
             <p className="text-muted-foreground">{t.noBadges}</p>
           </div>
         ) : (

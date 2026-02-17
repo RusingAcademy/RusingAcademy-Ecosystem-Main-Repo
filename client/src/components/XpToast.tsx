@@ -77,9 +77,9 @@ export function XpToast({ amount, reason, leveledUp, newLevel, onClose }: XpToas
         
         {/* Level up celebration */}
         {leveledUp && newLevel && (
-          <div className="bg-white dark:bg-slate-900/20 backdrop-blur p-4 border-t border-white/60">
+          <div className="bg-white dark:bg-background/20 backdrop-blur p-4 border-t border-white/60">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full bg-white dark:bg-background flex items-center justify-center">
                 <span className="text-2xl">🎉</span>
               </div>
               <div>
@@ -93,9 +93,9 @@ export function XpToast({ amount, reason, leveledUp, newLevel, onClose }: XpToas
         )}
         
         {/* Progress bar animation */}
-        <div className="h-1 bg-white dark:bg-slate-900/20">
+        <div className="h-1 bg-white dark:bg-background/20">
           <div 
-            className="h-full bg-white dark:bg-slate-900 transition-all duration-[4000ms] ease-linear"
+            className="h-full bg-white dark:bg-background transition-all duration-[4000ms] ease-linear"
             style={{ width: isVisible && !isExiting ? "0%" : "100%" }}
           />
         </div>

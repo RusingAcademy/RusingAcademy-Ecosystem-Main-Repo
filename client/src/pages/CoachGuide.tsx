@@ -486,7 +486,7 @@ export default function CoachGuide() {
               </div>
               <div>
                 <h1 className="text-3xl font-bold">{c.title}</h1>
-                <p className="text-black dark:text-white">{c.subtitle}</p>
+                <p className="text-black dark:text-foreground">{c.subtitle}</p>
               </div>
             </div>
           </div>
@@ -544,11 +544,11 @@ export default function CoachGuide() {
                                     </Badge>
                                   </div>
                                   <h3 className="font-semibold mt-2">{step.title}</h3>
-                                  <p className="text-sm text-black dark:text-white mt-1">
+                                  <p className="text-sm text-black dark:text-foreground mt-1">
                                     {step.description}
                                   </p>
                                 </div>
-                                <ChevronRight className="h-5 w-5 text-black dark:text-white" />
+                                <ChevronRight className="h-5 w-5 text-black dark:text-foreground" />
                               </div>
                             </CardContent>
                           </Card>
@@ -585,7 +585,7 @@ export default function CoachGuide() {
                     {c.profile.sections.map((section, index) => (
                       <div key={index} className="border-b pb-6 last:border-0 last:pb-0">
                         <h3 className="font-semibold mb-2">{section.title}</h3>
-                        <p className="text-black dark:text-white">{section.content}</p>
+                        <p className="text-black dark:text-foreground">{section.content}</p>
                       </div>
                     ))}
                   </CardContent>
@@ -607,7 +607,7 @@ export default function CoachGuide() {
                         </h3>
                         <ul className="space-y-2">
                           {topic.items.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-black dark:text-white">
+                            <li key={i} className="flex items-start gap-2 text-black dark:text-foreground">
                               <CheckCircle2 className="h-4 w-4 text-emerald-500 mt-0.5 shrink-0" />
                               {item}
                             </li>
@@ -665,7 +665,7 @@ export default function CoachGuide() {
                               <td className="py-3 px-4 text-right font-semibold text-primary">
                                 {tier.rate}
                               </td>
-                              <td className="py-3 px-4 text-sm text-black dark:text-white">
+                              <td className="py-3 px-4 text-sm text-black dark:text-foreground">
                                 {tier.note}
                               </td>
                             </tr>
@@ -682,7 +682,7 @@ export default function CoachGuide() {
                       <CardTitle className="text-lg">{c.payments.payouts.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-black dark:text-white">{c.payments.payouts.content}</p>
+                      <p className="text-black dark:text-foreground">{c.payments.payouts.content}</p>
                     </CardContent>
                   </Card>
 
@@ -718,7 +718,7 @@ export default function CoachGuide() {
                               </div>
                               <h3 className="font-semibold">{tip.title}</h3>
                             </div>
-                            <p className="text-sm text-black dark:text-white">{tip.description}</p>
+                            <p className="text-sm text-black dark:text-foreground">{tip.description}</p>
                           </CardContent>
                         </Card>
                       ))}
@@ -743,7 +743,7 @@ export default function CoachGuide() {
                           <AccordionTrigger className="text-left">
                             {item.q}
                           </AccordionTrigger>
-                          <AccordionContent className="text-black dark:text-white">
+                          <AccordionContent className="text-black dark:text-foreground">
                             {item.a}
                           </AccordionContent>
                         </AccordionItem>
@@ -762,7 +762,7 @@ export default function CoachGuide() {
                     <h3 className="font-semibold text-lg">
                       {isEn ? "Ready to start coaching?" : "Prêt à commencer à coacher?"}
                     </h3>
-                    <p className="text-black dark:text-white">
+                    <p className="text-black dark:text-foreground">
                       {isEn 
                         ? "Complete your profile setup and start accepting sessions today."
                         : "Complétez la configuration de votre profil et commencez à accepter des séances dès aujourd'hui."}

@@ -48,7 +48,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
       className={`relative py-16 ${
         isGlass
           ? 'bg-obsidian/80 border-t border-white/60'
-          : 'bg-white dark:bg-slate-800 border-t border-gray-200'
+          : 'bg-white dark:bg-card border-t border-gray-200'
       }`}
     >
       {/* Ambient glow */}
@@ -95,7 +95,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/rusingacademy"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-white/90 hover:text-orange-400' : 'text-black dark:text-white hover:text-orange-600'
+                    isGlass ? 'text-white/90 hover:text-orange-400' : 'text-black dark:text-foreground hover:text-orange-600'
                   }`}
                   style={{ color: activeBrand === 'rusingacademy' ? brandColors.rusingacademy.primary : undefined }}
                 >
@@ -106,7 +106,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/ecosystem"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-white/90 hover:text-teal-400' : 'text-black dark:text-white hover:text-teal-600'
+                    isGlass ? 'text-white/90 hover:text-teal-400' : 'text-black dark:text-foreground hover:text-teal-600'
                   }`}
                   style={{ color: activeBrand === 'lingueefy' ? brandColors.lingueefy.primary : undefined }}
                 >
@@ -117,7 +117,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/barholex-media"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-white/90 hover:text-foundation' : 'text-black dark:text-white hover:text-foundation'
+                    isGlass ? 'text-white/90 hover:text-foundation' : 'text-black dark:text-foreground hover:text-foundation'
                   }`}
                   style={{ color: activeBrand === 'barholexMedia' ? brandColors.barholexMedia.primary : undefined }}
                 >
@@ -137,7 +137,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/privacy"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-white/90 hover:text-white' : 'text-black dark:text-white hover:text-black'
+                    isGlass ? 'text-white/90 hover:text-white' : 'text-black dark:text-foreground hover:text-black'
                   }`}
                 >
                   {t.privacy}
@@ -147,7 +147,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/terms"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-white/90 hover:text-white' : 'text-black dark:text-white hover:text-black'
+                    isGlass ? 'text-white/90 hover:text-white' : 'text-black dark:text-foreground hover:text-black'
                   }`}
                 >
                   {t.terms}
@@ -157,7 +157,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/accessibility"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-white/90 hover:text-white' : 'text-black dark:text-white hover:text-black'
+                    isGlass ? 'text-white/90 hover:text-white' : 'text-black dark:text-foreground hover:text-black'
                   }`}
                 >
                   {t.accessibility}

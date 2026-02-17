@@ -69,14 +69,14 @@ export function ApplicationExportButton({
   return (
     <div className="relative">
       {showDatePicker && (
-        <div className="absolute right-0 top-full mt-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 dark:border-slate-700 rounded-lg shadow-lg p-4 z-50 w-80">
+        <div className="absolute right-0 top-full mt-2 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg p-4 z-50 w-80">
           <h3 className="font-semibold mb-4 text-gray-900">
             {isEn ? "Filter by Date Range" : "Filtrer par plage de dates"}
           </h3>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1">
                 {isEn ? "Start Date" : "Date de début"}
               </label>
               <input
@@ -90,7 +90,7 @@ export function ApplicationExportButton({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-muted-foreground mb-1">
                 {isEn ? "End Date" : "Date de fin"}
               </label>
               <input
@@ -113,7 +113,7 @@ export function ApplicationExportButton({
               </button>
               <button
                 onClick={() => setShowDatePicker(false)}
-                className="flex-1 px-4 py-2 bg-gray-200 text-gray-900 dark:text-gray-100 rounded-lg hover:bg-gray-300 transition-colors"
+                className="flex-1 px-4 py-2 bg-gray-200 text-gray-900 dark:text-foreground rounded-lg hover:bg-gray-300 transition-colors"
               >
                 {isEn ? "Cancel" : "Annuler"}
               </button>

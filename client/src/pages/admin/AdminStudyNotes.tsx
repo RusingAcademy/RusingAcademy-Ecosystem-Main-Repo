@@ -47,7 +47,7 @@ const AdminStudyNotes = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-gray-50/50 min-h-screen">
-      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-6 border-b border-gray-200 dark:border-slate-700 dark:border-slate-700">
+      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-6 border-b border-gray-200 dark:border-border dark:border-border">
         <div className="flex items-center space-x-4">
           <div className="p-3 bg-blue-100 rounded-lg">
             <StickyNote className="w-8 h-8 text-blue-600" />

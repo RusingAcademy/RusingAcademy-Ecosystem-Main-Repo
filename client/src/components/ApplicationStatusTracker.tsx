@@ -197,8 +197,8 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
 
       {/* Timeline */}
       {timeline && timeline.length > 0 && (
-        <div className="bg-white dark:bg-slate-800 dark:bg-obsidian rounded-lg border border-slate-200 dark:border-teal-800 p-6">
-          <h3 className="text-lg font-bold mb-6 text-black dark:text-white">
+        <div className="bg-white dark:bg-card dark:bg-obsidian rounded-lg border border-slate-200 dark:border-teal-800 p-6">
+          <h3 className="text-lg font-bold mb-6 text-black dark:text-foreground">
             {language === 'fr' ? 'Historique de candidature' : 'Application Timeline'}
           </h3>
           
@@ -210,7 +210,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
             {timeline.map((event, index) => (
               <div key={event.id} className="relative pl-20">
                 {/* Timeline dot */}
-                <div className="absolute left-0 top-1 w-12 h-12 bg-white dark:bg-slate-800 dark:bg-obsidian border-4 border-teal-500 rounded-full flex items-center justify-center">
+                <div className="absolute left-0 top-1 w-12 h-12 bg-white dark:bg-card dark:bg-obsidian border-4 border-teal-500 rounded-full flex items-center justify-center">
                   <div className="text-teal-600 dark:text-teal-400">
                     {event.icon === 'check' && <CheckCircle2 className="w-5 h-5" />}
                     {event.icon === 'clock' && <Clock className="w-5 h-5 animate-spin" />}
@@ -220,16 +220,16 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
                 </div>
 
                 {/* Event content */}
-                <div className="bg-white dark:bg-slate-800 dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-teal-800">
+                <div className="bg-white dark:bg-card dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-teal-800">
                   <div className="flex items-start justify-between mb-2">
-                    <h4 className="font-semibold text-black dark:text-white">
+                    <h4 className="font-semibold text-black dark:text-foreground">
                       {event.message}
                     </h4>
-                    <span className="text-xs text-black dark:text-white dark:text-cyan-300 whitespace-nowrap ml-2">
+                    <span className="text-xs text-black dark:text-foreground dark:text-cyan-300 whitespace-nowrap ml-2">
                       {formatDate(new Date(event.timestamp))}
                     </span>
                   </div>
-                  <p className="text-sm text-black dark:text-white/90">
+                  <p className="text-sm text-black dark:text-foreground/90">
                     {language === 'fr' ? 'Étape ' : 'Step '} {index + 1} {language === 'fr' ? 'de' : 'of'} {timeline.length}
                   </p>
                 </div>
@@ -241,7 +241,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
 
       {/* Auto-refresh indicator */}
       {autoRefresh && applicationStatus.status !== 'approved' && (
-        <div className="text-center text-sm text-black dark:text-white dark:text-cyan-300">
+        <div className="text-center text-sm text-black dark:text-foreground dark:text-cyan-300">
           <Loader className="w-4 h-4 inline animate-spin mr-2" />
           {language === 'fr' ? 'Mise à jour automatique toutes les 30 secondes' : 'Auto-refreshing every 30 seconds'}
         </div>

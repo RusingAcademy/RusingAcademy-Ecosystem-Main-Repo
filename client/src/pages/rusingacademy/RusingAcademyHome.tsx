@@ -217,7 +217,7 @@ export default function RusingAcademyHome() {
               className="max-w-4xl mx-auto text-center"
             >
               <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-white">
+                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-foreground">
                   <Sparkles className="w-4 h-4 text-cta-2" />
                   {language === "en" ? "B2B/B2G Training Excellence" : "Excellence en formation B2B/B2G"}
                 </span>
@@ -225,7 +225,7 @@ export default function RusingAcademyHome() {
               
               <motion.h1 
                 variants={fadeInUp}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black dark:text-white"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black dark:text-foreground"
               >
                 {language === "en" ? "Build a Bilingual Workforce" : "Bâtissez une main-d'œuvre bilingue"}{" "}
                 <span className="text-cta-2">
@@ -235,7 +235,7 @@ export default function RusingAcademyHome() {
               
               <motion.p 
                 variants={fadeInUp}
-                className="text-lg md:text-xl text-black dark:text-white mb-8 max-w-3xl mx-auto leading-relaxed"
+                className="text-lg md:text-xl text-black dark:text-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
               >
                 {language === "en"
                   ? "Structured bilingual training programs for government and enterprise. SLE preparation, corporate language solutions, and measurable results."
@@ -261,24 +261,24 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-gray-200 dark:border-slate-700 dark:border-slate-700/50 bg-white dark:bg-slate-900/50 backdrop-blur-sm">
+        <section className="py-8 border-y border-gray-200 dark:border-border dark:border-border/50 bg-white dark:bg-background/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={successRate.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{successRate.count}%</div>
-                <div className="text-sm text-black dark:text-white">{language === "en" ? "Success Rate" : "Taux de réussite"}</div>
+                <div className="text-sm text-black dark:text-foreground">{language === "en" ? "Success Rate" : "Taux de réussite"}</div>
               </div>
               <div ref={coaches.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{coaches.count}+</div>
-                <div className="text-sm text-black dark:text-white">{language === "en" ? "Expert Coaches" : "Coachs experts"}</div>
+                <div className="text-sm text-black dark:text-foreground">{language === "en" ? "Expert Coaches" : "Coachs experts"}</div>
               </div>
               <div ref={organizations.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{organizations.count}+</div>
-                <div className="text-sm text-black dark:text-white">{language === "en" ? "Organizations" : "Organisations"}</div>
+                <div className="text-sm text-black dark:text-foreground">{language === "en" ? "Organizations" : "Organisations"}</div>
               </div>
               <div ref={learners.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-cta-2 mb-1">{learners.count}+</div>
-                <div className="text-sm text-black dark:text-white">{language === "en" ? "Learners Trained" : "Apprenants formés"}</div>
+                <div className="text-sm text-black dark:text-foreground">{language === "en" ? "Learners Trained" : "Apprenants formés"}</div>
               </div>
             </div>
           </div>
@@ -288,10 +288,10 @@ export default function RusingAcademyHome() {
         <section className="py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {language === "en" ? "GC Bilingual Mastery Series" : "Série Maîtrise Bilingue GC"}
               </h2>
-              <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
+              <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
                 {language === "en"
                   ? "Six structured paths from beginner to SLE mastery, each 4 weeks of intensive training"
                   : "Six parcours structurés du débutant à la maîtrise ELS, chacun de 4 semaines de formation intensive"
@@ -306,7 +306,7 @@ export default function RusingAcademyHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="relative p-4 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50 shadow-lg text-center group hover:shadow-xl transition-all"
+                  className="relative p-4 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg text-center group hover:shadow-xl transition-all"
                 >
                   <div 
                     className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center text-white font-bold"
@@ -314,9 +314,9 @@ export default function RusingAcademyHome() {
                   >
                     {index + 1}
                   </div>
-                  <h3 className="font-bold text-black dark:text-white mb-1">{path.path}</h3>
+                  <h3 className="font-bold text-black dark:text-foreground mb-1">{path.path}</h3>
                   <p className="text-sm text-cta-2 font-medium mb-1">{path.level}</p>
-                  <p className="text-xs text-black dark:text-white">{path.duration}</p>
+                  <p className="text-xs text-black dark:text-foreground">{path.duration}</p>
                 </motion.div>
               ))}
             </div>
@@ -324,7 +324,7 @@ export default function RusingAcademyHome() {
             <div className="mt-10 text-center">
               <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-gradient-to-r from-[#E07B39] to-[#2DD4BF] text-white">
                 <span className="font-semibold">70% {language === "en" ? "Platform" : "Plateforme"}</span>
-                <span className="w-px h-6 bg-white dark:bg-slate-900/30" />
+                <span className="w-px h-6 bg-white dark:bg-background/30" />
                 <span className="font-semibold">30% {language === "en" ? "Live Coaching" : "Coaching en direct"}</span>
               </div>
             </div>
@@ -335,7 +335,7 @@ export default function RusingAcademyHome() {
         <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy?"}
               </h2>
             </div>
@@ -347,15 +347,15 @@ export default function RusingAcademyHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-gray-200 dark:border-slate-700 dark:border-slate-700/50 shadow-lg"
+                  className="p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg"
                 >
                   <div className="w-12 h-12 rounded-xl bg-cta-2/10 flex items-center justify-center mb-4">
                     <feature.icon className="w-6 h-6 text-cta-2" />
                   </div>
-                  <h3 className="font-bold text-black dark:text-white mb-2">
+                  <h3 className="font-bold text-black dark:text-foreground mb-2">
                     {language === "en" ? feature.titleEn : feature.titleFr}
                   </h3>
-                  <p className="text-sm text-black dark:text-white">
+                  <p className="text-sm text-black dark:text-foreground">
                     {language === "en" ? feature.descEn : feature.descFr}
                   </p>
                 </motion.div>
@@ -368,10 +368,10 @@ export default function RusingAcademyHome() {
         <section className="py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {language === "en" ? "Flexible Packages" : "Forfaits flexibles"}
               </h2>
-              <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
+              <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
                 {language === "en"
                   ? "Choose the plan that fits your organization's needs"
                   : "Choisissez le plan qui correspond aux besoins de votre organisation"
@@ -389,7 +389,7 @@ export default function RusingAcademyHome() {
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
                       ? "border-cta-2 bg-gradient-to-br from-orange-50 to-white shadow-xl" 
-                      : "border-gray-200 dark:border-slate-700 bg-white/80"
+                      : "border-gray-200 dark:border-border bg-white/80"
                   }`}
                 >
                   {pkg.popular && (
@@ -399,16 +399,16 @@ export default function RusingAcademyHome() {
                       </span>
                     </div>
                   )}
-                  <h3 className="text-xl font-bold text-black dark:text-white mb-2">
+                  <h3 className="text-xl font-bold text-black dark:text-foreground mb-2">
                     {language === "en" ? pkg.nameEn : pkg.nameFr}
                   </h3>
                   <div className="mb-4">
-                    <span className="text-3xl font-bold text-black dark:text-white">{pkg.price}</span>
-                    <span className="text-black dark:text-white">{language === "en" ? pkg.periodEn : pkg.periodFr}</span>
+                    <span className="text-3xl font-bold text-black dark:text-foreground">{pkg.price}</span>
+                    <span className="text-black dark:text-foreground">{language === "en" ? pkg.periodEn : pkg.periodFr}</span>
                   </div>
                   <ul className="space-y-3 mb-6">
                     {(language === "en" ? pkg.featuresEn : pkg.featuresFr).map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-black dark:text-white">
+                      <li key={i} className="flex items-start gap-2 text-sm text-black dark:text-foreground">
                         <CheckCircle2 className="w-4 h-4 text-cta-2 flex-shrink-0 mt-0.5" />
                         {feature}
                       </li>
@@ -419,7 +419,7 @@ export default function RusingAcademyHome() {
                       className={`w-full rounded-full ${
                         pkg.popular 
                           ? "bg-cta-2 hover:bg-cta text-white" 
-                          : "bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 text-black"
+                          : "bg-gray-100 dark:bg-card hover:bg-gray-200 text-black"
                       }`}
                     >
                       {language === "en" ? "Get Started" : "Commencer"}
@@ -447,7 +447,7 @@ export default function RusingAcademyHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-900/10 backdrop-blur-sm border border-white/60"
+                  className="p-6 rounded-2xl bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60"
                 >
                   <Quote className="w-8 h-8 text-cta-2 mb-4" />
                   <p className="text-white/90 mb-4 italic">
@@ -483,7 +483,7 @@ export default function RusingAcademyHome() {
               <Link href="/rusingacademy/contact">
                 <Button 
                   size="lg" 
-                  className="rounded-full px-8 h-14 text-lg font-semibold bg-white dark:bg-slate-900 text-cta-2 hover:bg-orange-50"
+                  className="rounded-full px-8 h-14 text-lg font-semibold bg-white dark:bg-background text-cta-2 hover:bg-orange-50"
                 >
                   {language === "en" ? "Request a Proposal" : "Demander une proposition"}
                   <ArrowRight className="ml-2 h-5 w-5" />

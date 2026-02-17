@@ -41,9 +41,9 @@ export default function HROrganization() {
       <HRLayout>
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="animate-pulse space-y-6">
-            <div className="h-10 bg-gray-100 dark:bg-slate-800 rounded-xl w-1/3" />
-            <div className="h-64 bg-gray-100 dark:bg-slate-800 rounded-xl" />
-            <div className="h-48 bg-gray-100 dark:bg-slate-800 rounded-xl" />
+            <div className="h-10 bg-gray-100 dark:bg-card rounded-xl w-1/3" />
+            <div className="h-64 bg-gray-100 dark:bg-card rounded-xl" />
+            <div className="h-48 bg-gray-100 dark:bg-card rounded-xl" />
           </div>
         </div>
       </HRLayout>
@@ -71,8 +71,8 @@ export default function HROrganization() {
         {org ? (
           <>
             {/* Department Information */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+            <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4 flex items-center gap-2">
                 <span className="material-icons text-blue-600">business</span>
                 {ui.departmentInfo}
               </h3>
@@ -93,8 +93,8 @@ export default function HROrganization() {
             </div>
 
             {/* Contract Details */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+            <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4 flex items-center gap-2">
                 <span className="material-icons text-blue-600">description</span>
                 {ui.contractDetails}
               </h3>
@@ -115,11 +115,11 @@ export default function HROrganization() {
           </>
         ) : (
           /* Empty State */
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 p-12 text-center">
+          <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-12 text-center">
             <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
               <span className="material-icons text-3xl text-blue-600">business</span>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{ui.noOrg}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-2">{ui.noOrg}</h3>
             <p className="text-sm text-gray-500 max-w-md mx-auto mb-4">{ui.noOrgSub}</p>
             <a href="mailto:support@rusingacademy.com" className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
               <span className="material-icons text-sm">support_agent</span>
