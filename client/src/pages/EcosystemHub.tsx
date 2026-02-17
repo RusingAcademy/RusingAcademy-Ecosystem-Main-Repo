@@ -809,7 +809,7 @@ function TargetAudienceSection({ language }: { language: string }) {
               size="lg"
               className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
             >
-              Book your free assessment
+              {language === "en" ? "Book your free assessment" : "Réservez votre évaluation gratuite"}
               <ArrowRight className="w-5 h-5" />
             </Button>
           </Link>
