@@ -1,0 +1,337 @@
+/**
+ * Admin Beautification System — Wave 1
+ * RusingAcademy Ecosystem
+ * 
+ * Inspired by MgCréa design principles:
+ * - Warmer premium palette (terracotta accents, muted gold, deep blue)
+ * - Dual typography (serif for headings, sans-serif for body)
+ * - Generous whitespace and vertical rhythm
+ * - Consistent sections with organic transitions
+ * 
+ * This file extends the existing admin-tokens.css without overriding
+ * any existing functionality. All additions are purely additive.
+ * 
+ * @version 1.0.0
+ * @wave Wave 1 — Admin Structure & Kajabi Blueprint
+ */
+
+/* ============================================
+   PREMIUM ADMIN PALETTE EXTENSIONS
+   ============================================ */
+:root {
+  /* Terracotta Accent (warm, premium, inspired by MgCréa) */
+  --admin-terracotta: #C65A1E;
+  --admin-terracotta-light: #E06B2D;
+  --admin-terracotta-soft: #FFF1E8;
+  --admin-terracotta-muted: #D4845C;
+  
+  /* Muted Gold (premium, institutional) */
+  --admin-gold: #D4A853;
+  --admin-gold-light: #E8C878;
+  --admin-gold-soft: #FFF8E8;
+  --admin-gold-muted: #C49843;
+  
+  /* Deep Blue (trust, authority) */
+  --admin-deep-blue: #1E3A5F;
+  --admin-deep-blue-light: #2B5A8F;
+  --admin-deep-blue-soft: #E8F0FA;
+  
+  /* Warm Neutrals */
+  --admin-warm-bg: #FAFAF7;
+  --admin-warm-surface: #FFFFFF;
+  --admin-warm-border: #E8E4DE;
+  --admin-warm-text: #2D2A26;
+  --admin-warm-muted: #8A8580;
+  
+  /* Premium Gradients */
+  --admin-gradient-warm: linear-gradient(135deg, #FAFAF7 0%, #F5F0E8 100%);
+  --admin-gradient-header: linear-gradient(135deg, var(--brand-foundation) 0%, var(--admin-deep-blue) 100%);
+  --admin-gradient-accent: linear-gradient(135deg, var(--admin-terracotta) 0%, var(--admin-terracotta-light) 100%);
+  --admin-gradient-gold: linear-gradient(135deg, var(--admin-gold-muted) 0%, var(--admin-gold) 100%);
+}
+
+/* Dark mode warm palette */
+.dark {
+  --admin-warm-bg: #0F1419;
+  --admin-warm-surface: #1A2332;
+  --admin-warm-border: #2D3748;
+  --admin-warm-text: #F0EDE8;
+  --admin-warm-muted: #9CA3AF;
+  --admin-terracotta-soft: #3D2A1A;
+  --admin-gold-soft: #3D3520;
+  --admin-deep-blue-soft: #1A2D4A;
+  --admin-gradient-warm: linear-gradient(135deg, #0F1419 0%, #1A2332 100%);
+}
+
+/* ============================================
+   ADMIN TYPOGRAPHY ENHANCEMENTS
+   ============================================ */
+
+/* Premium headings in admin context use serif display font */
+.admin-heading-premium {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--admin-warm-text);
+}
+
+/* Admin page titles */
+.admin-page-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--admin-warm-text);
+}
+
+/* Admin section headings */
+.admin-section-heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--admin-warm-text);
+}
+
+/* Admin subtitle */
+.admin-subtitle {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--admin-warm-muted);
+}
+
+/* ============================================
+   ADMIN CARD ENHANCEMENTS
+   ============================================ */
+
+/* Premium admin card with warm styling */
+.admin-card-premium {
+  background: var(--admin-warm-surface);
+  border: 1px solid var(--admin-warm-border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.admin-card-premium:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.03);
+  transform: translateY(-1px);
+}
+
+/* Admin card with terracotta accent top border */
+.admin-card-accent-terracotta {
+  border-top: 3px solid var(--admin-terracotta);
+}
+
+/* Admin card with gold accent top border */
+.admin-card-accent-gold {
+  border-top: 3px solid var(--admin-gold);
+}
+
+/* Admin card with foundation accent top border */
+.admin-card-accent-foundation {
+  border-top: 3px solid var(--brand-foundation);
+}
+
+/* ============================================
+   ADMIN STAT CARD ENHANCEMENTS
+   ============================================ */
+
+.admin-stat-premium {
+  background: var(--admin-warm-surface);
+  border: 1px solid var(--admin-warm-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-stat-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--admin-gradient-accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.admin-stat-premium:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   ADMIN SIDEBAR ENHANCEMENTS
+   ============================================ */
+
+/* Premium sidebar section divider */
+.admin-sidebar-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--admin-warm-border), transparent);
+  margin: 0.5rem 1rem;
+}
+
+/* Premium sidebar active indicator */
+.admin-sidebar-active {
+  position: relative;
+}
+
+.admin-sidebar-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--admin-terracotta);
+  border-radius: 0 2px 2px 0;
+}
+
+/* ============================================
+   ADMIN TABLE ENHANCEMENTS
+   ============================================ */
+
+.admin-table-premium {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.admin-table-premium thead th {
+  background: var(--admin-warm-bg);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--admin-warm-muted);
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--admin-warm-border);
+}
+
+.admin-table-premium tbody td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--admin-warm-border);
+  font-size: 0.875rem;
+  color: var(--admin-warm-text);
+}
+
+.admin-table-premium tbody tr:hover {
+  background: var(--admin-warm-bg);
+}
+
+/* ============================================
+   ADMIN BADGE ENHANCEMENTS
+   ============================================ */
+
+.admin-badge-terracotta {
+  background: var(--admin-terracotta-soft);
+  color: var(--admin-terracotta);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.admin-badge-gold {
+  background: var(--admin-gold-soft);
+  color: var(--admin-gold-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.admin-badge-foundation {
+  background: var(--brand-foundation-soft);
+  color: var(--brand-foundation);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+/* ============================================
+   ADMIN BUTTON ENHANCEMENTS
+   ============================================ */
+
+.admin-btn-terracotta {
+  background: var(--admin-gradient-accent);
+  color: white;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 2px 8px rgba(198, 90, 30, 0.25);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.admin-btn-terracotta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(198, 90, 30, 0.35);
+}
+
+.admin-btn-gold-outline {
+  background: transparent;
+  color: var(--admin-gold);
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--admin-gold);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.admin-btn-gold-outline:hover {
+  background: var(--admin-gold-soft);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   ADMIN SPACING & LAYOUT UTILITIES
+   ============================================ */
+
+.admin-section-spacing {
+  padding: 2rem 0;
+}
+
+.admin-section-spacing + .admin-section-spacing {
+  border-top: 1px solid var(--admin-warm-border);
+}
+
+/* Generous whitespace container */
+.admin-content-area {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ============================================
+   ADMIN ORGANIC DIVIDERS
+   ============================================ */
+
+.admin-wave-divider {
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+}
+
+.admin-wave-divider::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--admin-warm-bg);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}

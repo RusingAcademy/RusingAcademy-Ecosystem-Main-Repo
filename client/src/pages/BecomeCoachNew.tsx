@@ -1099,7 +1099,7 @@ export default function BecomeCoachNew() {
           </div>
 
           <div className="container relative text-center">
-            <Badge className="mb-6 bg-white dark:bg-background/10 text-white border-white/60 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/15 dark:bg-background/10 text-white border-white/30 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>

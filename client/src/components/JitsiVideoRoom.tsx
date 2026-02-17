@@ -397,7 +397,7 @@ export function JitsiVideoRoom({
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full h-12 w-12 bg-white dark:bg-background/10 hover:bg-white dark:bg-background/20 text-white"
+            className="rounded-full h-12 w-12 bg-white/15 dark:bg-background/10 hover:bg-white/25 dark:bg-background/20 text-white backdrop-blur-sm"
             onClick={toggleFullscreen}
           >
             <Maximize2 className="h-5 w-5" />

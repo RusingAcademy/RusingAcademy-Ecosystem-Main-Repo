@@ -498,23 +498,13 @@ button span {
 /**
  * If dark mode is enabled, these rules should be overridden
  */
-@media (prefers-color-scheme: dark) {
-  /* Dark mode overrides - invert the logic */
-  .bg-teal-50,
-  .bg-teal-100,
-  .bg-emerald-50,
-  .bg-emerald-100 {
-    background-color: #0f172a !important;
-    color: #f0fdfa !important;
-  }
-  
-  .bg-teal-50 *,
-  .bg-teal-100 *,
-  .bg-emerald-50 *,
-  .bg-emerald-100 * {
-    color: #f0fdfa !important;
-  }
-}
+/*
+ * Dark mode handling: Removed aggressive global override.
+ * Dark mode styling is now handled by Tailwind's dark: variants
+ * directly in components for precise, per-component control.
+ * This prevents the previous issue where light text was forced
+ * on components that should remain light-themed.
+ */
 
 /* ==========================================================================
    PRINT STYLES
