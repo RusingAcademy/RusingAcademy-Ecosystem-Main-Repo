@@ -216,7 +216,7 @@ function PortalSkeleton() {
   return (
     <div className="min-h-full animate-pulse">
       {/* Hero skeleton */}
-      <div className="bg-gradient-to-br from-foundation via-teal-700 to-foundation px-6 py-12">
+      <div className="bg-gradient-to-br from-foundation via-teal-700 to-foundation px-6 py-6 md:py-8 lg:py-12">
         <div className="max-w-4xl mx-auto">
           <Skeleton className="w-full h-48 rounded-2xl bg-white dark:bg-slate-900/10 mb-6" />
           <Skeleton className="h-8 w-2/3 bg-white dark:bg-slate-900/10 mb-3" />

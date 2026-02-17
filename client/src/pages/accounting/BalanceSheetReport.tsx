@@ -202,7 +202,7 @@ export default function BalanceSheetReport() {
       </div>
 
       {isLoading ? (
-        <div className="flex items-center justify-center py-12">
+        <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
           <Loader2 className="animate-spin text-gray-400" size={24} />
         </div>
       ) : bs ? (
@@ -313,7 +313,7 @@ export default function BalanceSheetReport() {
           )}
         </>
       ) : (
-        <div className="text-center py-12 text-gray-400">No data available</div>
+        <div className="text-center py-6 md:py-8 lg:py-12 text-gray-400">No data available</div>
       )}
     </div>
   );

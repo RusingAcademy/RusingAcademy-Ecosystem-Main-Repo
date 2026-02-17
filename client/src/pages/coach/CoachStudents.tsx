@@ -90,8 +90,8 @@ export default function CoachStudents() {
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
-            <span className="material-icons text-gray-300 text-5xl">school</span>
+          <div className="text-center py-8 md:py-12 lg:py-16 bg-white dark:bg-slate-900 rounded-xl border border-gray-100">
+            <span className="material-icons text-gray-300 text-2xl md:text-4xl lg:text-5xl">school</span>
             <p className="text-sm text-gray-500 mt-2">
               {search
                 ? (lang === "fr" ? "Aucun étudiant trouvé pour cette recherche" : "No students found for this search")

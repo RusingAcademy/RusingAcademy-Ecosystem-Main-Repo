@@ -285,7 +285,7 @@ export default function LearningPathBuilder() {
 
       {/* Path List */}
       {paths.length === 0 && !pathsQuery.isLoading ? (
-        <div className="text-center py-16 bg-white dark:bg-slate-800 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-gray-700">
+        <div className="text-center py-8 md:py-12 lg:py-16 bg-white dark:bg-slate-800 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-slate-700 dark:border-gray-700">
           <Layers className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-white">{ui.noPathsYet}</h3>
           <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">{ui.noPathsDesc}</p>

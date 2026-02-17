@@ -171,7 +171,7 @@ export default function CourseDetail() {
     return (
       <div className="min-h-screen bg-background">
         
-        <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+        <div className="max-w-4xl mx-auto px-4 py-10 md:py-16 lg:py-20 text-center">
           <AlertCircle className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
           <h1 className="text-2xl font-bold mb-2">
             {isEn ? "Course Not Found" : "Cours non trouvé"}
@@ -407,7 +407,7 @@ export default function CourseDetail() {
                     {/* Price */}
                     <div className="mb-6">
                       <div className="flex items-baseline gap-3">
-                        <span className="text-3xl font-black text-foreground">
+                        <span className="text-lg md:text-2xl lg:text-3xl font-black text-foreground">
                           {formatPrice(course.price)}
                         </span>
                         {course.originalPrice && course.originalPrice > (course.price || 0) && (
@@ -791,7 +791,7 @@ export default function CourseDetail() {
       </section>
       
       {/* CTA Section */}
-      <section className="py-12 bg-gradient-to-r from-[#0d9488] to-[#14b8a6]">
+      <section className="py-6 md:py-8 lg:py-12 bg-gradient-to-r from-[#0d9488] to-[#14b8a6]">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {isEn ? "Ready to Start Learning?" : "Prêt à commencer ?"}

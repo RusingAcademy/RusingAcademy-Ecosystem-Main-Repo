@@ -141,7 +141,7 @@ export default function ReconciliationWorkspace() {
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
+        <div className="flex justify-center py-6 md:py-8 lg:py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
       ) : (
         <div className="grid grid-cols-2 gap-6">
           {/* Uncleared Transactions */}

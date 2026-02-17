@@ -199,7 +199,7 @@ export default function EmailPage() {
                   {[1, 2, 3, 4, 5].map(i => <Skeleton key={i} className="h-12 w-full" />)}
                 </div>
               ) : !logsData?.logs?.length ? (
-                <div className="py-12 text-center text-muted-foreground">
+                <div className="py-6 md:py-8 lg:py-12 text-center text-muted-foreground">
                   <Mail className="h-12 w-12 mx-auto mb-3 opacity-30" />
                   <p>No email logs found</p>
                   <p className="text-sm mt-1">Email delivery logs will appear here as emails are sent.</p>

@@ -117,11 +117,11 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
             {/* Notifications List */}
             <div className="flex-1 overflow-y-auto">
               {isLoading ? (
-                <div className="flex justify-center py-12">
+                <div className="flex justify-center py-6 md:py-8 lg:py-12">
                   <Loader2 className="w-6 h-6 animate-spin text-barholex-gold" />
                 </div>
               ) : (notifications as any[]).length === 0 ? (
-                <div className="text-center py-16 text-muted-foreground">
+                <div className="text-center py-8 md:py-12 lg:py-16 text-muted-foreground">
                   <Bell className="w-12 h-12 mx-auto mb-3 opacity-20" />
                   <p className="text-sm font-medium">No notifications yet</p>
                   <p className="text-xs mt-1">

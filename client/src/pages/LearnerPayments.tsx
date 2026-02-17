@@ -173,7 +173,7 @@ export default function LearnerPayments() {
         <div className="container max-w-5xl mx-auto px-4">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold flex items-center gap-3">
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold flex items-center gap-3">
               <CreditCard className="h-8 w-8 text-primary" />
               {t.title}
             </h1>
@@ -181,11 +181,11 @@ export default function LearnerPayments() {
           </div>
           
           {isLoading ? (
-            <div className="flex justify-center py-12">
+            <div className="flex justify-center py-6 md:py-8 lg:py-12">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : pastSessions.length === 0 ? (
-            <Card className="text-center py-12">
+            <Card className="text-center py-6 md:py-8 lg:py-12">
               <CardContent>
                 <Receipt className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
                 <h3 className="text-xl font-semibold mb-2">{t.noPayments}</h3>

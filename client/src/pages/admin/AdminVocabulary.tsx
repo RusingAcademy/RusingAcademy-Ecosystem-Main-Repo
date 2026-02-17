@@ -118,11 +118,11 @@ export default function AdminVocabulary() {
             </CardHeader>
             <CardContent>
               {isLoadingWords ? (
-                <div className="flex items-center justify-center py-12">
+                <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                   <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
                 </div>
               ) : !words || (words as any[]).length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                   <BookOpen className="mx-auto h-12 w-12 mb-4" />
                   <h3 className="text-lg font-semibold mb-2">No vocabulary words yet</h3>
                   <p className="text-sm">Click "Seed SLE Words" to create starter vocabulary for learners.</p>
@@ -171,11 +171,11 @@ export default function AdminVocabulary() {
             </CardHeader>
             <CardContent>
               {isLoadingCategories ? (
-                <div className="flex items-center justify-center py-12">
+                <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                   <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
                 </div>
               ) : !categories || (categories as any[]).length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                   <Library className="mx-auto h-12 w-12 mb-4" />
                   <p>No categories yet. Categories appear automatically as words are added.</p>
                 </div>

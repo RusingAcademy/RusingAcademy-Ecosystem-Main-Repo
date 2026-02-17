@@ -167,7 +167,7 @@ export default function Footer() {
       
       {/* Contact Form Section */}
       <div className="border-b border-teal-800/50">
-        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-12">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-6 md:py-8 lg:py-12">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-teal-600 to-teal-500 rounded-2xl p-8 md:p-10 shadow-2xl shadow-teal-500/20">
               <div className="grid md:grid-cols-2 gap-8 items-center">

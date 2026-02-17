@@ -152,7 +152,7 @@ export default function EnterpriseMode() {
               {orgsLoading ? (
                 <p className="text-sm text-muted-foreground py-8 text-center">Loading organizations...</p>
               ) : !orgs || (orgs as any[]).length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <Building2 className="h-12 w-12 mx-auto text-black/40 dark:text-white/40 mb-3" />
                   <p className="font-medium">No organizations yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Create your first enterprise organization</p>

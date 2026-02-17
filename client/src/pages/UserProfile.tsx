@@ -134,7 +134,7 @@ export default function UserProfile() {
               </div>
               <div className="text-center md:text-left flex-1">
                 <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <h1 className="text-3xl font-bold">{profile.name || "Anonymous Learner"}</h1>
+                  <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">{profile.name || "Anonymous Learner"}</h1>
                   {isOwnProfile && <Badge>You</Badge>}
                 </div>
                 <p className="text-xl text-muted-foreground mb-4">{profile.levelTitle}</p>

@@ -496,7 +496,7 @@ export function SessionWaitingRoom({
                 ? "Session starts in"
                 : "La session commence dans"}
             </p>
-            <div className="text-4xl font-mono font-bold text-teal-600 mb-6">
+            <div className="text-xl md:text-3xl lg:text-4xl font-mono font-bold text-teal-600 mb-6">
               {countdown}
             </div>
             <Button size="lg" disabled className="w-full">

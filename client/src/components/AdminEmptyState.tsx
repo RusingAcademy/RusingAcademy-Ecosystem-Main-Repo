@@ -51,8 +51,8 @@ export function AdminEmptyState({
 }: AdminEmptyStateProps) {
   const sizeClasses = {
     sm: "py-8",
-    md: "py-16",
-    lg: "py-24",
+    md: "py-8 md:py-12 lg:py-16",
+    lg: "py-12 md:py-16 lg:py-24",
   };
 
   const iconSizes = {

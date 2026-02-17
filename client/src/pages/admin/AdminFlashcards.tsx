@@ -70,7 +70,7 @@ const AdminFlashcards = () => {
 
         <TabsContent value="overview">
           {isLoadingStats ? (
-            <div className="flex items-center justify-center py-12">
+            <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
               <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
             </div>
           ) : (
@@ -143,11 +143,11 @@ const AdminFlashcards = () => {
             </CardHeader>
             <CardContent>
               {isLoadingDecks ? (
-                <div className="flex items-center justify-center py-12">
+                <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                   <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
                 </div>
               ) : !decks || decks.length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <Layers className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                   <h3 className="text-lg font-semibold mb-2">No flashcard decks yet</h3>
                   <p className="text-muted-foreground mb-4">Click "Seed SLE Deck" to create a starter deck for learners.</p>

@@ -132,7 +132,7 @@ export default function AdminReviews() {
         <CardHeader><CardTitle className="text-lg">Course Reviews ({filtered.length})</CardTitle></CardHeader>
         <CardContent>
           {filtered.length === 0 ? (
-            <div className="py-12 text-center text-muted-foreground">
+            <div className="py-6 md:py-8 lg:py-12 text-center text-muted-foreground">
               <Star className="h-12 w-12 mx-auto mb-3 opacity-30" />
               <p>No reviews found</p>
               <p className="text-sm mt-1">Reviews will appear here when learners rate courses.</p>

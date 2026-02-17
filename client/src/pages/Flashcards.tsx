@@ -309,14 +309,14 @@ export default function Flashcards() {
           {/* DECKS VIEW */}
           {viewMode === "decks" && (
             decksLoading ? (
-              <div className="text-center py-16" role="status">
+              <div className="text-center py-8 md:py-12 lg:py-16" role="status">
                 <div className="animate-spin w-8 h-8 mx-auto border-2 border-teal-700 border-t-transparent rounded-full" />
                 <span className="sr-only">{t("skillLabs.loading")}</span>
               </div>
             ) : decks.length === 0 ? (
-              <div className="text-center py-16" role="status">
+              <div className="text-center py-8 md:py-12 lg:py-16" role="status">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">style</span>
+                  <span className="material-icons text-xl md:text-3xl lg:text-4xl text-teal-700/60" aria-hidden="true">style</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("flashcards.emptyTitle")}</h3>
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("flashcards.emptyDesc")}</p>
@@ -369,9 +369,9 @@ export default function Flashcards() {
           {/* CARDS VIEW */}
           {viewMode === "cards" && (
             cards.length === 0 ? (
-              <div className="text-center py-16" role="status">
+              <div className="text-center py-8 md:py-12 lg:py-16" role="status">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-teal-700/60" aria-hidden="true">content_copy</span>
+                  <span className="material-icons text-xl md:text-3xl lg:text-4xl text-teal-700/60" aria-hidden="true">content_copy</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("flashcards.emptyCards")}</h3>
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("flashcards.emptyCardsDesc")}</p>
@@ -434,9 +434,9 @@ export default function Flashcards() {
           {/* REVIEW VIEW */}
           {viewMode === "review" && (
             dueCards.length === 0 ? (
-              <div className="text-center py-16" role="status">
+              <div className="text-center py-8 md:py-12 lg:py-16" role="status">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
-                  <span className="material-icons text-4xl text-green-500" aria-hidden="true">check_circle</span>
+                  <span className="material-icons text-xl md:text-3xl lg:text-4xl text-green-500" aria-hidden="true">check_circle</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("daily.emptyTitle")}</h3>
                 <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{t("daily.emptyDesc")}</p>
@@ -530,7 +530,7 @@ export default function Flashcards() {
           {viewMode === "summary" && (
             <div className="max-w-lg mx-auto text-center py-8" role="region" aria-label={t("flashcards.sessionSummary")}>
               <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
-                <span className="material-icons text-4xl text-green-500" aria-hidden="true">emoji_events</span>
+                <span className="material-icons text-xl md:text-3xl lg:text-4xl text-green-500" aria-hidden="true">emoji_events</span>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{t("flashcards.sessionSummary")}</h2>
               <p className="text-sm text-gray-500 mb-8">{t("flashcards.greatSession")}</p>
@@ -563,7 +563,7 @@ export default function Flashcards() {
               {streak && streak.currentStreak > 0 && (
                 <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl border border-orange-100 p-5 mb-8">
                   <div className="flex items-center justify-center gap-3">
-                    <span className="material-icons text-3xl text-orange-500" aria-hidden="true">local_fire_department</span>
+                    <span className="material-icons text-lg md:text-2xl lg:text-3xl text-orange-500" aria-hidden="true">local_fire_department</span>
                     <div className="text-left">
                       <p className="text-2xl font-bold text-orange-600">{streak.currentStreak} {t("flashcards.streak")}</p>
                       <p className="text-xs text-orange-500/70">{t("flashcards.keepGoing")}</p>

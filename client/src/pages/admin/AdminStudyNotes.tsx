@@ -114,7 +114,7 @@ const AdminStudyNotes = () => {
               <CardTitle>Usage Overview</CardTitle>
               <CardDescription>Analytics and trends for study note creation and usage.</CardDescription>
             </CardHeader>
-            <CardContent className="text-center text-gray-500 py-12">
+            <CardContent className="text-center text-gray-500 py-6 md:py-8 lg:py-12">
               <p>TODO: Implement charts for note creation trends and tag distribution.</p>
               <p className="text-sm">This area will feature visualizations of study note activity over time.</p>
             </CardContent>
@@ -181,7 +181,7 @@ const AdminStudyNotes = () => {
             </CardHeader>
             <CardContent>
               {/* TODO: Implement shared resources list */}
-              <div className="text-center text-gray-500 py-12">
+              <div className="text-center text-gray-500 py-6 md:py-8 lg:py-12">
                 <p>No shared resources published yet.</p>
                 <Button variant="link" className="mt-2">Publish a new resource</Button>
               </div>

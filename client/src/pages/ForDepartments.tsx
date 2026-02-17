@@ -273,7 +273,7 @@ export default function ForDepartments() {
           {/* Grid pattern overlay */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
           
-          <div className="container relative z-10 py-20">
+          <div className="container relative z-10 py-10 md:py-16 lg:py-20">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900/10 backdrop-blur-sm border border-white/60 text-white/90 text-sm mb-8">
@@ -290,12 +290,12 @@ export default function ForDepartments() {
               </h1>
               
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-white/90 mb-4 md:mb-6 lg:mb-10 max-w-3xl mx-auto leading-relaxed">
                 {t.subtitle}
               </p>
               
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 md:mb-12 lg:mb-16">
                 <Button 
                   size="lg" 
                   className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg shadow-teal-500/25 border-0 px-8"
@@ -336,12 +336,12 @@ export default function ForDepartments() {
 
         {/* Why Choose Us Section */}
         <section 
-          className="py-20 bg-gradient-to-b from-white to-slate-50"
+          className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50"
           ref={(el) => { if (el) sectionRefs.current.set('benefits', el); }}
           data-section="benefits"
         >
           <div className="container">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.benefitsTitle}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
             </div>
@@ -377,7 +377,7 @@ export default function ForDepartments() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-white dark:bg-slate-900 border-y border-slate-100">
+        <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-slate-900 border-y border-slate-100">
           <div className="container">
             <p className="text-center text-sm text-muted-foreground tracking-wider mb-8">{t.trustedBy}</p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
@@ -396,12 +396,12 @@ export default function ForDepartments() {
 
         {/* How It Works Section */}
         <section 
-          className="py-20 bg-white dark:bg-slate-900"
+          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900"
           ref={(el) => { if (el) sectionRefs.current.set('process', el); }}
           data-section="process"
         >
           <div className="container">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.processTitle}</h2>
               <p className="text-muted-foreground">{t.processSubtitle}</p>
             </div>
@@ -431,12 +431,12 @@ export default function ForDepartments() {
 
         {/* Packages Section */}
         <section 
-          className="py-20 bg-gradient-to-b from-slate-50 to-white"
+          className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-slate-50 to-white"
           ref={(el) => { if (el) sectionRefs.current.set('packages', el); }}
           data-section="packages"
         >
           <div className="container">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.packagesTitle}</h2>
               <p className="text-muted-foreground">{t.packagesSubtitle}</p>
             </div>
@@ -469,7 +469,7 @@ export default function ForDepartments() {
                   </div>
                   
                   <div className="text-center mb-6">
-                    <div className={`text-4xl font-bold ${pkg.popular ? 'text-white' : ''}`}>{pkg.price}</div>
+                    <div className={`text-xl md:text-3xl lg:text-4xl font-bold ${pkg.popular ? 'text-white' : ''}`}>{pkg.price}</div>
                     <div className={`text-sm ${pkg.popular ? 'text-white/90' : 'text-muted-foreground'}`}>{pkg.period}</div>
                   </div>
                   
@@ -501,12 +501,12 @@ export default function ForDepartments() {
 
         {/* Testimonials Section */}
         <section 
-          className="py-20 bg-white dark:bg-slate-900"
+          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900"
           ref={(el) => { if (el) sectionRefs.current.set('testimonials', el); }}
           data-section="testimonials"
         >
           <div className="container">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="bg-orange-100 text-orange-700 border-orange-200 mb-4">
                 Success Stories
               </Badge>
@@ -541,13 +541,13 @@ export default function ForDepartments() {
 
         {/* Contact Form Section */}
         <section 
-          className="py-20 bg-gradient-to-b from-slate-50 to-white"
+          className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-slate-50 to-white"
           ref={(el) => { if (el) sectionRefs.current.set('contact', el); }}
           data-section="contact"
         >
           <div className="container">
             <div className="max-w-2xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.contactTitle}</h2>
                 <p className="text-muted-foreground">{t.contactSubtitle}</p>
               </div>
@@ -611,12 +611,12 @@ export default function ForDepartments() {
 
         {/* FAQ Section */}
         <section 
-          className="py-20 bg-white dark:bg-slate-900"
+          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-slate-900"
           ref={(el) => { if (el) sectionRefs.current.set('faq', el); }}
           data-section="faq"
         >
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.faqTitle}</h2>
             </div>
 
@@ -650,7 +650,7 @@ export default function ForDepartments() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-obsidian via-teal-900 to-obsidian relative overflow-hidden">
+        <section className="py-10 md:py-16 lg:py-20 bg-gradient-to-br from-obsidian via-teal-900 to-obsidian relative overflow-hidden">
           {/* Background elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
@@ -668,11 +668,11 @@ export default function ForDepartments() {
                 {t.finalCtaTitle}
               </h2>
               
-              <p className="text-lg text-white/90 mb-10">
+              <p className="text-lg text-white/90 mb-4 md:mb-6 lg:mb-10">
                 {t.finalCtaSubtitle}
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 md:mb-6 lg:mb-10">
                 <Button 
                   size="lg" 
                   className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg shadow-teal-500/25 border-0 px-8"

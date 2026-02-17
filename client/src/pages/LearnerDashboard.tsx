@@ -186,7 +186,7 @@ const GlassStatCard = ({
         <div className={`w-12 h-12 rounded-xl ${colorClasses[color].split(' ').slice(2).join(' ')} flex items-center justify-center mb-3`}>
           <Icon className={`h-6 w-6 ${colorClasses[color].split(' ')[2]}`} />
         </div>
-        <p className="text-3xl font-bold text-black dark:text-white">{value}</p>
+        <p className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{value}</p>
         <p className="text-sm font-medium text-black dark:text-white/90">{label}</p>
         {sublabel && <p className="text-xs text-black dark:text-white dark:text-cyan-300 mt-1">{sublabel}</p>}
       </div>
@@ -584,15 +584,15 @@ export default function LearnerDashboard() {
                   </div>
                   <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50">
-                      <p className="text-3xl font-bold bg-gradient-to-r from-teal-800 to-obsidian dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
+                      <p className="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-800 to-obsidian dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
                       <p className="text-sm text-black dark:text-white dark:text-cyan-300 mt-1">{l.currentLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
-                      <p className="text-3xl font-bold text-emerald-600">{displayTargetLevel}</p>
+                      <p className="text-lg md:text-2xl lg:text-3xl font-bold text-emerald-600">{displayTargetLevel}</p>
                       <p className="text-sm text-emerald-600/70 mt-1">{l.targetLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/50 dark:to-amber-950/30 border border-amber-200/50 dark:border-amber-700/50">
-                      <p className="text-3xl font-bold text-amber-600">{displayDaysUntilExam ?? "—"}</p>
+                      <p className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-600">{displayDaysUntilExam ?? "—"}</p>
                       <p className="text-sm text-amber-600/70 mt-1">{l.daysUntilExam}</p>
                     </div>
                   </div>

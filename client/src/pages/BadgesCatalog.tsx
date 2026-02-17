@@ -297,7 +297,7 @@ export default function BadgesCatalog() {
     return (
       <div className="container py-8 max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">
             {isEn ? "Badge Showcase" : "Vitrine des Badges"}
           </h1>
           <p className="text-muted-foreground">
@@ -322,7 +322,7 @@ export default function BadgesCatalog() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold mb-2">
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">
           {isEn ? "Badge Showcase" : "Vitrine des Badges"}
         </h1>
         <p className="text-muted-foreground">

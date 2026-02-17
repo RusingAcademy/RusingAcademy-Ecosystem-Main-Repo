@@ -77,7 +77,7 @@ export default function CoachPayments() {
     return (
       <div className="min-h-screen bg-white dark:bg-slate-800 dark:bg-obsidian">
         <Header />
-        <main className="max-w-4xl mx-auto px-4 py-16 text-center">
+        <main className="max-w-4xl mx-auto px-4 py-8 md:py-12 lg:py-16 text-center">
           <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-black dark:text-white mb-2">
             Please Sign In
@@ -102,7 +102,7 @@ export default function CoachPayments() {
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black dark:text-white mb-2">
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white mb-2">
             Payments & Payouts
           </h1>
           <p className="text-black dark:text-white dark:text-cyan-300">

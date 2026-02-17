@@ -65,7 +65,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-foundation/10 to-teal-700/10 border border-foundation/20">
       <div className="text-center mb-6">
-        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', delay: 0.2 }} className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 text-3xl mb-4">
+        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', delay: 0.2 }} className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 text-lg md:text-2xl lg:text-3xl mb-4">
           {performance.score >= 80 ? '🎉' : performance.score >= 60 ? '👍' : '💪'}
         </motion.div>
         <h3 className="text-xl font-bold text-white">{performance.score >= 80 ? 'Excellent travail!' : performance.score >= 60 ? 'Bien joué!' : 'Continue comme ça!'}</h3>
@@ -79,7 +79,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="space-y-4">
           <div className="p-4 rounded-xl bg-white dark:bg-slate-900/5 border border-white/10">
             <div className="flex items-start gap-4">
-              <div className="text-3xl">{primaryReco.icon}</div>
+              <div className="text-lg md:text-2xl lg:text-3xl">{primaryReco.icon}</div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-foundation-soft/30 text-foundation">Recommandé</span>

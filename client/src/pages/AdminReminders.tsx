@@ -366,7 +366,7 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.totalSent}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white">{totalSent}</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{totalSent}</p>
                     <div className="flex items-center gap-1 text-xs text-black dark:text-white dark:text-cyan-300">
                       <ArrowUpRight className="h-3 w-3" />
                       <span>+12% vs last week</span>
@@ -385,7 +385,7 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.openRate}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white">{openRate}%</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{openRate}%</p>
                     <div className="w-full bg-slate-200 dark:bg-teal-800 rounded-full h-2 overflow-hidden">
                       <div 
                         className="h-full bg-teal-800 dark:bg-slate-400 rounded-full transition-all duration-500"
@@ -406,7 +406,7 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.clickRate}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white">{clickRate}%</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{clickRate}%</p>
                     <div className="w-full bg-slate-200 dark:bg-teal-800 rounded-full h-2 overflow-hidden">
                       <div 
                         className="h-full bg-teal-800 dark:bg-slate-400 rounded-full transition-all duration-500"
@@ -427,7 +427,7 @@ export default function AdminReminders() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
                     <p className="text-sm font-medium text-black dark:text-white dark:text-cyan-300">{t.stats.failedReminders}</p>
-                    <p className="text-3xl font-bold text-black dark:text-white">{totalFailed}</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{totalFailed}</p>
                     <div className="flex items-center gap-1 text-xs text-black dark:text-white dark:text-cyan-300">
                       <AlertTriangle className="h-3 w-3" />
                       <span>{isEn ? "Needs attention" : "Nécessite attention"}</span>

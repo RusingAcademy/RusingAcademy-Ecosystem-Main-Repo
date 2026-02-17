@@ -281,7 +281,7 @@ export default function BarholexPortfolio() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-white/85 max-w-3xl mx-auto leading-relaxed mb-12"
+                className="text-lg md:text-xl text-white/85 max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8 lg:mb-12"
               >
                 {language === "en"
                   ? "From learning platforms to video production, every project in our ecosystem is designed to advance bilingual excellence. Explore the tools, content, and innovations we've built for Canadian professionals."
@@ -348,7 +348,7 @@ export default function BarholexPortfolio() {
         </section>
 
         {/* ─── Projects Grid ─── Light background with premium cards */}
-        <section className="py-16 px-4 bg-stone-50">
+        <section className="py-8 md:py-12 lg:py-16 px-4 bg-stone-50">
           <div className="container mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
@@ -447,14 +447,14 @@ export default function BarholexPortfolio() {
         </section>
 
         {/* ─── Testimonials Section ─── Warm cream background with glassmorphism cards */}
-        <section className="py-24 px-4 bg-gradient-to-b from-[#F5F5F3] to-[#FAFAF8] relative overflow-hidden">
+        <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-[#F5F5F3] to-[#FAFAF8] relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-gold, #D4AF37)]/20 to-transparent" />
           <div className="absolute top-20 right-[10%] w-64 h-64 bg-barholex-gold/5 rounded-full blur-[80px]" />
           <div className="absolute bottom-20 left-[10%] w-48 h-48 bg-teal-500/5 rounded-full blur-[60px]" />
           
           <div className="container mx-auto relative z-10">
-            <div className="text-center mb-14">
+            <div className="text-center mb-6 md:mb-10 lg:mb-14">
               <motion.span
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -547,7 +547,7 @@ export default function BarholexPortfolio() {
         </section>
 
         {/* ─── CTA Section ─── Dark navy with gold gradient accent */}
-        <section className="py-24 px-4 relative overflow-hidden bg-slate-900">
+        <section className="py-12 md:py-16 lg:py-24 px-4 relative overflow-hidden bg-slate-900">
           {/* Background texture */}
           <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(212,175,55,0.03)_25%,transparent_25%,transparent_50%,rgba(212,175,55,0.03)_50%,rgba(212,175,55,0.03)_75%,transparent_75%)] bg-[size:24px_24px]" />
           {/* Gold accent line at top */}
@@ -584,7 +584,7 @@ export default function BarholexPortfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-white/75 mb-10 leading-relaxed"
+                className="text-lg md:text-xl text-white/75 mb-4 md:mb-6 lg:mb-10 leading-relaxed"
               >
                 {language === "en"
                   ? "Whether you need a learning platform, video content, or a complete EdTech strategy — let's build something meaningful together."

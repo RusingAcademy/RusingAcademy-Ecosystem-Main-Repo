@@ -49,8 +49,8 @@ export default function HRCompliance() {
   if (error && (error.message.includes("FORBIDDEN") || error.message.includes("hr_manager"))) {
     return (
       <HRLayout>
-        <div className="max-w-2xl mx-auto text-center py-16">
-          <span className="material-icons text-6xl text-gray-300 mb-4">lock</span>
+        <div className="max-w-2xl mx-auto text-center py-8 md:py-12 lg:py-16">
+          <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-gray-300 mb-4">lock</span>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             {lang === "fr" ? "Accès restreint" : "Restricted Access"}
           </h2>
@@ -141,8 +141,8 @@ export default function HRCompliance() {
         {/* Compliance Table */}
         <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
           {allRecords.length === 0 ? (
-            <div className="text-center py-12">
-              <span className="material-icons text-5xl text-gray-300 mb-3">verified</span>
+            <div className="text-center py-6 md:py-8 lg:py-12">
+              <span className="material-icons text-2xl md:text-4xl lg:text-5xl text-gray-300 mb-3">verified</span>
               <p className="text-sm text-gray-500">
                 {lang === "fr" ? "Aucun dossier de conformité pour le moment." : "No compliance records yet."}
               </p>

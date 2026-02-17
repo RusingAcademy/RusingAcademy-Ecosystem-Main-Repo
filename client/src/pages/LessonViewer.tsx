@@ -350,7 +350,7 @@ export default function LessonViewer() {
     return (
       <div className={`${isInsideLearnLayout ? 'h-full' : 'min-h-screen'} bg-background`}>
         {!isInsideLearnLayout && <Header />}
-        <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+        <div className="max-w-4xl mx-auto px-4 py-8 md:py-12 lg:py-16 text-center">
           <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">{isEn ? "Lesson not found" : "Leçon introuvable"}</h1>
           <p className="text-muted-foreground mb-6">

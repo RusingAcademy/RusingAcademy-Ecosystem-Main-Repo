@@ -51,7 +51,7 @@ export const PathHeader: React.FC<PathHeaderProps> = ({ path, userProgress }) =>
               <Badge variant="secondary">CECR {path.level.cecr}</Badge>
               <Badge variant="secondary">SLE Niveau {path.level.sle}</Badge>
             </div>
-            <CardTitle className="text-3xl">{path.titleFr}</CardTitle>
+            <CardTitle className="text-lg md:text-2xl lg:text-3xl">{path.titleFr}</CardTitle>
             <CardDescription className="text-lg">{path.title}</CardDescription>
           </div>
           

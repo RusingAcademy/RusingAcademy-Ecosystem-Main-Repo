@@ -371,14 +371,14 @@ export default function YouTubeVideos() {
   return (
     <>
       {/* Short-Form Videos Section */}
-      <section className="py-24 bg-gradient-to-br from-obsidian via-teal-900 to-obsidian relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-obsidian via-teal-900 to-obsidian relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-cta/10 rounded-full blur-3xl" />
         
         <div className="container relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <div className="inline-flex items-center gap-2 bg-red-600/20 border border-red-500/30 rounded-full px-4 py-2 mb-4">
               <svg className="w-5 h-5 text-red-500" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.77 10.32l-1.2-.5L18 9.06c1.84-.96 2.53-3.23 1.56-5.06s-3.24-2.53-5.07-1.56L6 6.94c-1.29.68-2.07 2.04-2 3.49.07 1.42.93 2.67 2.22 3.25.03.01 1.2.5 1.2.5L6 14.93c-1.83.97-2.53 3.24-1.56 5.07.97 1.83 3.24 2.53 5.07 1.56l8.5-4.5c1.29-.68 2.06-2.04 1.99-3.49-.07-1.42-.94-2.68-2.23-3.25z"/>
@@ -448,14 +448,14 @@ export default function YouTubeVideos() {
       </section>
 
       {/* Long-Form Videos Section */}
-      <section className="py-24 bg-gradient-to-b from-obsidian to-teal-900 relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-obsidian to-teal-900 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl" />
         <div className="absolute top-1/4 right-0 w-64 h-64 bg-cta/5 rounded-full blur-3xl" />
         
         <div className="container relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <div className="inline-flex items-center gap-2 bg-amber-600/20 border border-amber-500/30 rounded-full px-4 py-2 mb-4">
               <Play className="w-4 h-4 text-amber-500" fill="currentColor" />
               <span className="text-amber-400 font-semibold text-sm">Barholex Media</span>

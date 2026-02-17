@@ -577,19 +577,19 @@ export default function GlobalCRMDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardContent className="p-6 text-center">
-                <div className="text-4xl font-bold text-primary mb-2">{kpis.newLeadsThisWeek}</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">{kpis.newLeadsThisWeek}</div>
                 <p className="text-sm text-muted-foreground">{labels.newLeads} {labels.thisWeek}</p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6 text-center">
-                <div className="text-4xl font-bold text-green-600 mb-2">{kpis.wonDeals}</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold text-green-600 mb-2">{kpis.wonDeals}</div>
                 <p className="text-sm text-muted-foreground">{labels.wonDeals} {labels.thisMonth}</p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6 text-center">
-                <div className="text-4xl font-bold text-blue-600 mb-2">{kpis.dealsInProgress}</div>
+                <div className="text-xl md:text-3xl lg:text-4xl font-bold text-blue-600 mb-2">{kpis.dealsInProgress}</div>
                 <p className="text-sm text-muted-foreground">{labels.dealsInProgress}</p>
               </CardContent>
             </Card>

@@ -46,11 +46,11 @@ export default function Referrals() {
         </button>
 
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-4 md:mb-6 lg:mb-10">
           <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "var(--brand-gold, #D4AF37)" + "20" }}>
             <Gift className="w-8 h-8"  />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2" >
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight mb-2" >
             {t.referrals.title}
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto">

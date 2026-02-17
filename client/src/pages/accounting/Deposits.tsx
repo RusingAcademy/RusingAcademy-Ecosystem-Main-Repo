@@ -112,7 +112,7 @@ export default function Deposits() {
                 <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-400"><Loader2 className="animate-spin inline mr-2" size={16} />Loading...</td></tr>
               ) : paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-12 text-center">
+                  <td colSpan={5} className="px-4 py-6 md:py-8 lg:py-12 text-center">
                     <DollarSign size={40} className="mx-auto text-gray-300 mb-3" />
                     <p className="text-gray-500 text-sm">No payments recorded yet</p>
                   </td>
@@ -152,7 +152,7 @@ export default function Deposits() {
                 <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-400"><Loader2 className="animate-spin inline mr-2" size={16} />Loading...</td></tr>
               ) : paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-12 text-center">
+                  <td colSpan={5} className="px-4 py-6 md:py-8 lg:py-12 text-center">
                     <ArrowRightLeft size={40} className="mx-auto text-gray-300 mb-3" />
                     <p className="text-gray-500 text-sm">No transfers yet</p>
                   </td>

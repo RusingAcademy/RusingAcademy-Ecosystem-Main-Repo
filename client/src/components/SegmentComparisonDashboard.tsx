@@ -516,7 +516,7 @@ export default function SegmentComparisonDashboard() {
         </>
       ) : (
         <Card>
-          <CardContent className="py-12">
+          <CardContent className="py-6 md:py-8 lg:py-12">
             <p className="text-center text-muted-foreground">{l.selectAtLeast}</p>
           </CardContent>
         </Card>

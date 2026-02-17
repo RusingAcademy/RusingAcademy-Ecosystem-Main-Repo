@@ -296,7 +296,7 @@ export default function ContentPipeline() {
                   ))}
                 </div>
               ) : !activity || activity.length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                   <Clock className="h-12 w-12 mx-auto mb-3 opacity-30" />
                   <p>No recent content activity</p>
                 </div>
@@ -374,7 +374,7 @@ export default function ContentPipeline() {
                   ))}
                 </div>
               ) : !calendar || calendar.length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                   <Calendar className="h-12 w-12 mx-auto mb-3 opacity-30" />
                   <p>No content events this month</p>
                 </div>
@@ -489,7 +489,7 @@ export default function ContentPipeline() {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className={`text-4xl font-bold ${
+                    <p className={`text-xl md:text-3xl lg:text-4xl font-bold ${
                       qualityScores.overall >= 80 ? "text-emerald-600" :
                       qualityScores.overall >= 60 ? "text-yellow-600" :
                       "text-red-600"

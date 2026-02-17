@@ -239,21 +239,21 @@ export default function Accessibility() {
     <div className="min-h-screen flex flex-col bg-background">
       
       
-      <main className="flex-1 py-16" id="main-content">
+      <main className="flex-1 py-8 md:py-12 lg:py-16" id="main-content">
         <div className="container max-w-4xl">
-          <h1 className="text-4xl font-bold text-foreground mb-2">{t.title}</h1>
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2">{t.title}</h1>
           <p className="text-muted-foreground mb-8">{t.lastUpdated}</p>
           
-          <p className="text-lg text-muted-foreground mb-12 leading-relaxed">{t.intro}</p>
+          <p className="text-lg text-muted-foreground mb-6 md:mb-8 lg:mb-12 leading-relaxed">{t.intro}</p>
           
           {/* Commitment */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.commitment.title}</h2>
             <p className="text-muted-foreground leading-relaxed">{t.commitment.content}</p>
           </section>
           
           {/* Standards */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.standards.title}</h2>
             <p className="text-muted-foreground mb-6">{t.standards.content}</p>
             <div className="grid md:grid-cols-2 gap-6">
@@ -275,7 +275,7 @@ export default function Accessibility() {
           </section>
           
           {/* Features */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.features.title}</h2>
             <p className="text-muted-foreground mb-6">{t.features.content}</p>
             <ul className="space-y-3">
@@ -290,7 +290,7 @@ export default function Accessibility() {
           </section>
           
           {/* AI Accessibility */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.aiAccessibility.title}</h2>
             <p className="text-muted-foreground mb-4">{t.aiAccessibility.content}</p>
             <ul className="space-y-2">
@@ -304,7 +304,7 @@ export default function Accessibility() {
           </section>
           
           {/* Limitations */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.limitations.title}</h2>
             <p className="text-muted-foreground mb-4">{t.limitations.content}</p>
             <ul className="space-y-2">
@@ -318,7 +318,7 @@ export default function Accessibility() {
           </section>
           
           {/* Feedback */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.feedback.title}</h2>
             <p className="text-muted-foreground mb-4">{t.feedback.content}</p>
             <div className="bg-primary/5 rounded-lg p-6 mb-4">
@@ -341,13 +341,13 @@ export default function Accessibility() {
           </section>
           
           {/* Enforcement */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.enforcement.title}</h2>
             <p className="text-muted-foreground leading-relaxed">{t.enforcement.content}</p>
           </section>
           
           {/* Resources */}
-          <section className="mb-12">
+          <section className="mb-6 md:mb-8 lg:mb-12">
             <h2 className="text-2xl font-semibold text-foreground mb-4">{t.resources.title}</h2>
             <ul className="space-y-3">
               {t.resources.items.map((resource, index) => (

@@ -328,7 +328,7 @@ export default function FAQ() {
         {/* Contact Section */}
         <section className="py-12 lg:py-16 bg-muted/50">
           <div className="container max-w-4xl text-center">
-            <h2 className="text-3xl font-bold mb-4">{content.contact.title}</h2>
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">{content.contact.title}</h2>
             <p className="text-lg text-muted-foreground mb-8">{content.contact.description}</p>
             <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors">
               {content.contact.button}

@@ -376,7 +376,7 @@ export default function PracticeHistory() {
           <Card className="bg-white dark:bg-slate-900/5 border-white/60">
             <CardContent className="p-8 text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-teal-800/20 flex items-center justify-center">
-                <span className="text-3xl">🎯</span>
+                <span className="text-lg md:text-2xl lg:text-3xl">🎯</span>
               </div>
               <h3 className="text-white font-semibold mb-2">Aucune session trouvée</h3>
               <p className="text-cyan-300 mb-4">

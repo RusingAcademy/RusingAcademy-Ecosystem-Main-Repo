@@ -174,8 +174,8 @@ export default function QuizPage() {
   if (!program || !path || !currentModule) {
     return (
       <DashboardLayout>
-        <div className="text-center py-20">
-          <span className="material-icons text-6xl text-gray-300">error_outline</span>
+        <div className="text-center py-10 md:py-16 lg:py-20">
+          <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-gray-300">error_outline</span>
           <p className="text-gray-500 mt-4">Quiz not found.</p>
           <Link href="/programs" className="text-teal-700 text-sm mt-2 inline-block hover:underline">&larr; Back</Link>
         </div>
@@ -216,7 +216,7 @@ export default function QuizPage() {
             <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center mb-4" style={{
               background: "linear-gradient(135deg, rgba(0,128,144,0.1), rgba(245,166,35,0.1))",
             }}>
-              <span className="material-icons text-4xl" style={{ color: "var(--brand-teal, #008090)" }}>quiz</span>
+              <span className="material-icons text-xl md:text-3xl lg:text-4xl" style={{ color: "var(--brand-teal, #008090)" }}>quiz</span>
             </div>
 
             <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -303,7 +303,7 @@ export default function QuizPage() {
               background: passed ? "linear-gradient(135deg, var(--semantic-warning, #f5a623), #ffd700)" : "rgba(231,76,60,0.1)",
               boxShadow: passed ? "0 8px 32px rgba(245,166,35,0.3)" : "none",
             }}>
-              <span className="material-icons text-4xl" style={{ color: passed ? "white" : "var(--semantic-danger, #e74c3c)" }}>
+              <span className="material-icons text-xl md:text-3xl lg:text-4xl" style={{ color: passed ? "white" : "var(--semantic-danger, #e74c3c)" }}>
                 {passed ? "emoji_events" : "replay"}
               </span>
             </div>
@@ -311,7 +311,7 @@ export default function QuizPage() {
             <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
               {passed ? "Congratulations!" : "Keep Going!"}
             </h2>
-            <p className="text-5xl font-bold mt-3" style={{ color: passed ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }}>{pct}%</p>
+            <p className="text-2xl md:text-4xl lg:text-5xl font-bold mt-3" style={{ color: passed ? "var(--semantic-warning, #f5a623)" : "var(--semantic-danger, #e74c3c)" }}>{pct}%</p>
             
             {!isDbQuiz && (
               <p className="text-sm text-gray-500 mt-2">{clientScore}/{questions.length} correct answers</p>

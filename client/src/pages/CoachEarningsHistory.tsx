@@ -326,7 +326,7 @@ export default function CoachEarningsHistory() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold">{l.title}</h1>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">{l.title}</h1>
             <p className="text-black dark:text-white">{l.subtitle}</p>
           </div>
           <div className="flex gap-2">
@@ -435,7 +435,7 @@ export default function CoachEarningsHistory() {
           </CardHeader>
           <CardContent>
             {filteredTransactions.length === 0 ? (
-              <div className="text-center py-12">
+              <div className="text-center py-6 md:py-8 lg:py-12">
                 <BarChart3 className="w-12 h-12 mx-auto text-black dark:text-white mb-4" />
                 <h3 className="text-lg font-medium mb-2">{l.noTransactions}</h3>
                 <p className="text-black dark:text-white">{l.noTransactionsDesc}</p>

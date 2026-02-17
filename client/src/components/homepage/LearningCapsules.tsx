@@ -117,7 +117,7 @@ export default function LearningCapsules() {
   };
 
   return (
-    <section className="py-24 bg-slate-100 relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-slate-100 relative overflow-hidden">
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-6">

@@ -72,7 +72,7 @@ export function XPGainAnimation({ amount, source, onComplete }) {
 export function LevelUpAnimation({ newLevel, onComplete }) {
   const [visible, setVisible] = useState(true);
   useEffect(() => { const timer = setTimeout(() => { setVisible(false); onComplete?.(); }, 4000); return () => clearTimeout(timer); }, []);
-  return visible ? <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"><div className="text-8xl">{newLevel.icon}</div><h2 className="text-3xl text-white">Niveau {newLevel.level}!</h2></motion.div> : null;
+  return visible ? <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"><div className="text-8xl">{newLevel.icon}</div><h2 className="text-lg md:text-2xl lg:text-3xl text-white">Niveau {newLevel.level}!</h2></motion.div> : null;
 }
 
 export { XP_CONFIG };

@@ -78,7 +78,7 @@ export default function AccountRegister() {
           </thead>
           <tbody>
             <tr>
-              <td colSpan={8} className="py-12 text-center text-sm text-gray-400">
+              <td colSpan={8} className="py-6 md:py-8 lg:py-12 text-center text-sm text-gray-400">
                 Register entries will be populated as journal entries are created.
                 <br />
                 <span className="text-xs">This feature is part of Sprint 17 — Journal Entries & Rules</span>

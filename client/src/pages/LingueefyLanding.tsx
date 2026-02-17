@@ -942,12 +942,12 @@ export default function LingueefyLanding() {
             </h1>
             
             {/* Description - more breathing room */}
-            <p className="text-lg md:text-xl text-black dark:text-white mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-black dark:text-white mb-4 md:mb-6 lg:mb-10 max-w-2xl mx-auto leading-relaxed">
               {c.hero.description}
             </p>
             
             {/* Search bar - inspired by Preply */}
-            <div className="max-w-3xl mx-auto mb-10">
+            <div className="max-w-3xl mx-auto mb-4 md:mb-6 lg:mb-10">
               <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
                 <div className="flex-1 relative">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-cyan-300" />
@@ -979,7 +979,7 @@ export default function LingueefyLanding() {
             </div>
             
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6 md:mb-8 lg:mb-12">
               <Link href="/ai-coach">
                 <Button size="lg" variant="outline" className="border-2 border-teal-600 text-teal-600 hover:bg-teal-50 px-8 py-6 text-lg rounded-xl">
                   <Sparkles className="mr-2 w-5 h-5" />
@@ -1026,7 +1026,7 @@ export default function LingueefyLanding() {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-slate-100 text-black dark:text-white">How It Works</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.howItWorks.title}</h2>
             <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
@@ -1077,14 +1077,14 @@ export default function LingueefyLanding() {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-teal-100 text-teal-700">{c.learningPath.badge}</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.learningPath.title}</h2>
             <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
           </div>
           
           {/* Two Path Options */}
-          <div className="max-w-5xl mx-auto mb-16">
+          <div className="max-w-5xl mx-auto mb-8 md:mb-12 lg:mb-16">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Marketplace Option */}
               <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border-2 border-slate-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group">
@@ -1140,7 +1140,7 @@ export default function LingueefyLanding() {
           
           {/* Pricing Plans */}
           <div id="pricing-plans" className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h3 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-3">{c.learningPath.pricing.title}</h3>
               <p className="text-lg text-black dark:text-white">{c.learningPath.pricing.subtitle}</p>
             </div>
@@ -1165,7 +1165,7 @@ export default function LingueefyLanding() {
                     <p className="text-black dark:text-white text-sm mb-6">{plan.description}</p>
                     
                     <div className="mb-6">
-                      <span className="text-4xl font-bold text-black dark:text-white">{plan.price}</span>
+                      <span className="text-xl md:text-3xl lg:text-4xl font-bold text-black dark:text-white">{plan.price}</span>
                       <span className="text-black dark:text-white ml-2">{plan.period}</span>
                     </div>
                     
@@ -1200,7 +1200,7 @@ export default function LingueefyLanding() {
       {/* Transformation Section - Before/After */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-emerald-100 text-emerald-700">{c.transformation.badge}</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.transformation.title}</h2>
             <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.transformation.subtitle}</p>
@@ -1254,7 +1254,7 @@ export default function LingueefyLanding() {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-slate-100 text-black dark:text-white">{c.sleLevels.badge}</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.sleLevels.title}</h2>
             <p className="text-xl text-black dark:text-white max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
@@ -1342,7 +1342,7 @@ export default function LingueefyLanding() {
       {/* Featured Coaches - Humanized cards */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 lg:mb-12">
             <div>
               <Badge className="mb-4 bg-amber-100 text-cta700">Expert Coaches</Badge>
               <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-2">{c.coaches.title}</h2>
@@ -1436,7 +1436,7 @@ export default function LingueefyLanding() {
       {/* Services - Color-coded cards with asymmetry */}
       <section className="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-cta-soft text-cta">Our Services</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.services.title}</h2>
             <p className="text-xl text-black dark:text-white">{c.services.subtitle}</p>
@@ -1483,7 +1483,7 @@ export default function LingueefyLanding() {
       {/* Testimonials - More human, with photos */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-foundation-soft text-foundation">Success Stories</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.testimonials.title}</h2>
             <p className="text-xl text-black dark:text-white">{c.testimonials.subtitle}</p>
@@ -1536,7 +1536,7 @@ export default function LingueefyLanding() {
       {/* FAQ - Clean, accessible */}
       <section className="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-slate-100 text-black dark:text-white">FAQ</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-4">{c.faq.title}</h2>
           </div>
@@ -1578,7 +1578,7 @@ export default function LingueefyLanding() {
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{c.cta.title}</h2>
-          <p className="text-xl text-teal-100 mb-10 max-w-2xl mx-auto">{c.cta.description}</p>
+          <p className="text-xl text-teal-100 mb-4 md:mb-6 lg:mb-10 max-w-2xl mx-auto">{c.cta.description}</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/courses">

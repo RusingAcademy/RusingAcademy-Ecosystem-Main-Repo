@@ -88,11 +88,11 @@ export default function DictationPractice() {
           </div>
           
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
                 <Headphones className="h-8 w-8 text-primary" />
               </div>
-              <h1 className="text-3xl font-bold mb-2">Exercices de Dictée</h1>
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-2">Exercices de Dictée</h1>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Améliorez votre compréhension orale et votre orthographe en écoutant
                 des phrases et en les transcrivant. Choisissez votre niveau pour commencer.
@@ -243,15 +243,15 @@ export default function DictationPractice() {
                 {/* Score Summary */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-3xl font-bold text-primary">{avgAccuracy}%</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-primary">{avgAccuracy}%</p>
                     <p className="text-sm text-muted-foreground">Score moyen</p>
                   </div>
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-3xl font-bold text-green-600">{perfectCount}</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-green-600">{perfectCount}</p>
                     <p className="text-sm text-muted-foreground">Parfaits (100%)</p>
                   </div>
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="text-3xl font-bold text-yellow-600">{goodCount}</p>
+                    <p className="text-lg md:text-2xl lg:text-3xl font-bold text-yellow-600">{goodCount}</p>
                     <p className="text-sm text-muted-foreground">Bons (≥80%)</p>
                   </div>
                 </div>
@@ -327,7 +327,7 @@ export default function DictationPractice() {
         
         {/* Exercise */}
         {isLoading ? (
-          <div className="flex items-center justify-center py-12">
+          <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
         // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
@@ -348,7 +348,7 @@ export default function DictationPractice() {
           />
         ) : (
           <Card className="max-w-md mx-auto">
-            <CardContent className="py-12 text-center">
+            <CardContent className="py-6 md:py-8 lg:py-12 text-center">
               <p className="text-muted-foreground">
                 Aucune phrase disponible pour ce niveau.
               </p>

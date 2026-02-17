@@ -94,7 +94,7 @@ export default function Courses() {
       
       
       {/* Hero Section */}
-      <section className="relative py-16 bg-gradient-to-br from-primary/10 via-background to-background">
+      <section className="relative py-8 md:py-12 lg:py-16 bg-gradient-to-br from-primary/10 via-background to-background">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -167,14 +167,14 @@ export default function Courses() {
       </section>
 
       {/* Courses Grid */}
-      <section className="py-12">
+      <section className="py-6 md:py-8 lg:py-12">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           {isLoading ? (
-            <div className="flex items-center justify-center py-20">
+            <div className="flex items-center justify-center py-10 md:py-16 lg:py-20">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : displayCourses.length === 0 ? (
-            <div className="text-center py-20">
+            <div className="text-center py-10 md:py-16 lg:py-20">
               <BookOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
               <h3 className="text-xl font-semibold mb-2">
                 {isEn ? "No courses found" : "Aucun cours trouvé"}
@@ -325,7 +325,7 @@ export default function Courses() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary/5">
+      <section className="py-8 md:py-12 lg:py-16 bg-primary/5">
         <div className="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             {isEn 

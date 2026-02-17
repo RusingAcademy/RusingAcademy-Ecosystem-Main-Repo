@@ -119,7 +119,7 @@ export default function VideoSession() {
   // Post-session feedback form
   if (sessionEnded) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-12">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-6 md:py-8 lg:py-12">
         <div className="container max-w-2xl mx-auto px-4">
           <Card>
             <CardHeader className="text-center pb-2">

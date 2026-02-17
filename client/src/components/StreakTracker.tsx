@@ -96,7 +96,7 @@ export function StreakTracker({
       <div className="text-center mb-6">
         <div className="flex items-center justify-center gap-2 mb-2">
           <Flame className={cn("h-8 w-8", getFlameColor())} />
-          <span className="text-5xl font-bold text-black dark:text-white">{currentStreak}</span>
+          <span className="text-2xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white">{currentStreak}</span>
         </div>
         <p className="text-black dark:text-white dark:text-cyan-300">
           {currentStreak === 1 ? l.day : l.days}

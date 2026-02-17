@@ -74,9 +74,9 @@ export default function InvoicePdf() {
       <div className="max-w-[800px] mx-auto my-8 print:my-0 bg-white dark:bg-slate-900 shadow-lg print:shadow-none">
         <div className="p-10">
           {/* Header */}
-          <div className="flex justify-between items-start mb-10">
+          <div className="flex justify-between items-start mb-4 md:mb-6 lg:mb-10">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900">
                 {company?.companyName || "RusingAcademy"}
               </h1>
               {company?.address && (

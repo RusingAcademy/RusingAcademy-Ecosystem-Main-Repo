@@ -92,7 +92,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
   
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-12">
+      <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
         <Loader2 className="w-8 h-8 animate-spin text-foundation" />
       </div>
     );

@@ -24,7 +24,7 @@ const STREAK_MILESTONES = [
 ];
 
 export function StreakDisplay({ streak, size = 'default' }: { streak: StreakData; size?: string }) {
-  const flameSize = size === 'compact' ? 'text-2xl' : 'text-4xl';
+  const flameSize = size === 'compact' ? 'text-2xl' : 'text-xl md:text-3xl lg:text-4xl';
   const isActive = new Date(streak.lastActivityDate).toDateString() === new Date().toDateString();
   
   return (

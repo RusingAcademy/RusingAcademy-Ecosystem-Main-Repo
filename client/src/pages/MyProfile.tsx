@@ -230,7 +230,7 @@ export default function MyProfile() {
       <DashboardLayout>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center space-y-4 max-w-md">
-            <span className="material-icons text-teal-700 text-5xl">person_add</span>
+            <span className="material-icons text-teal-700 text-2xl md:text-4xl lg:text-5xl">person_add</span>
             <h2 className="text-xl font-bold text-gray-900">{t.noProfile}</h2>
             <Link href="/onboarding">
               <button className="bg-teal-700 text-white px-6 py-2 rounded-lg hover:bg-teal-800 transition-colors">
@@ -333,7 +333,7 @@ export default function MyProfile() {
                     {profile?.avatarUrl ? (
                       <img src={profile.avatarUrl} alt={name} className="w-full h-full rounded-full object-cover" />
                     ) : (
-                      <span className="material-icons text-teal-700 text-4xl">person</span>
+                      <span className="material-icons text-teal-700 text-xl md:text-3xl lg:text-4xl">person</span>
                     )}
                   </div>
                   <p className="text-xs text-gray-500 text-center mt-1">{profile?.email}</p>

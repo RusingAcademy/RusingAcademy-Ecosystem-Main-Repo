@@ -216,9 +216,9 @@ export default function ExchangeRates() {
       {/* Full Rate History Table */}
       <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Rate History</h3>
       {isLoading ? (
-        <div className="flex justify-center py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
+        <div className="flex justify-center py-6 md:py-8 lg:py-12"><Loader2 className="animate-spin text-gray-400" size={24} /></div>
       ) : items.length === 0 ? (
-        <div className="qb-card text-center py-12">
+        <div className="qb-card text-center py-6 md:py-8 lg:py-12">
           <Globe size={32} className="mx-auto text-gray-300 mb-3" />
           <p className="text-gray-500 mb-1">No exchange rates configured</p>
           <p className="text-sm text-gray-400">Add rates to enable multi-currency transactions</p>

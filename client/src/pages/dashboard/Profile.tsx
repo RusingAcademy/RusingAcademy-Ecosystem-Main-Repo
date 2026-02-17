@@ -68,7 +68,7 @@ function ProfileContent() {
                         <Card className="bg-white dark:bg-slate-900 shadow-sm border-slate-200">
                             <CardContent className="pt-6">
                                 <div className="flex flex-col items-center text-center">
-                                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-teal-700 flex items-center justify-center text-white text-3xl font-bold mb-4">
+                                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-teal-700 flex items-center justify-center text-white text-lg md:text-2xl lg:text-3xl font-bold mb-4">
                                         {user.firstName?.[0] || user.emailAddresses[0]?.emailAddress[0]?.toUpperCase()}
                                     </div>
                                     <h2 className="text-xl font-semibold text-black dark:text-white">

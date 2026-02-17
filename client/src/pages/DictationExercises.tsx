@@ -127,7 +127,7 @@ export default function DictationExercises() {
   return (
     <div className="container max-w-4xl py-8 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Dictation Exercises</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">Dictation Exercises</h1>
         <p className="text-muted-foreground mt-1">Improve your listening and spelling by transcribing French sentences</p>
       </div>
 
@@ -168,7 +168,7 @@ export default function DictationExercises() {
 
           {phase === "generating" && (
             <Card>
-              <CardContent className="py-16 text-center space-y-4">
+              <CardContent className="py-8 md:py-12 lg:py-16 text-center space-y-4">
                 <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto" />
                 <h3 className="text-lg font-semibold">Generating Sentences...</h3>
                 <p className="text-muted-foreground">AI is preparing dictation sentences at {cefrLevel} level</p>
@@ -248,11 +248,11 @@ export default function DictationExercises() {
           {phase === "results" && (
             <div className="space-y-4">
               <Card>
-                <CardContent className="py-12 text-center space-y-4">
-                  <div className="text-5xl">
+                <CardContent className="py-6 md:py-8 lg:py-12 text-center space-y-4">
+                  <div className="text-2xl md:text-4xl lg:text-5xl">
                     {results.filter(r => r.correct).length >= results.length * 0.7 ? "🎉" : "📝"}
                   </div>
-                  <h2 className="text-3xl font-bold">
+                  <h2 className="text-lg md:text-2xl lg:text-3xl font-bold">
                     {results.filter(r => r.correct).length} / {results.length} correct
                   </h2>
                   <p className="text-lg text-muted-foreground">
@@ -289,8 +289,8 @@ export default function DictationExercises() {
         <TabsContent value="history" className="space-y-4">
           {!history.data?.length ? (
             <Card>
-              <CardContent className="py-12 text-center">
-                <div className="text-4xl mb-3">📝</div>
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center">
+                <div className="text-xl md:text-3xl lg:text-4xl mb-3">📝</div>
                 <h3 className="font-semibold">No dictation history yet</h3>
                 <p className="text-muted-foreground text-sm mt-1">Complete your first dictation exercise to see results here</p>
               </CardContent>

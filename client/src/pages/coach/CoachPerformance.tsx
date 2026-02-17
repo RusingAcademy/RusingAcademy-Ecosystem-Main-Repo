@@ -125,7 +125,7 @@ export default function CoachPerformance() {
               </div>
             ) : learners.length === 0 ? (
               <div className="text-center py-8">
-                <span className="material-icons text-gray-300 text-4xl">people</span>
+                <span className="material-icons text-gray-300 text-xl md:text-3xl lg:text-4xl">people</span>
                 <p className="text-sm text-gray-500 mt-2">
                   {lang === "fr" ? "Aucun étudiant pour le moment" : "No students yet"}
                 </p>

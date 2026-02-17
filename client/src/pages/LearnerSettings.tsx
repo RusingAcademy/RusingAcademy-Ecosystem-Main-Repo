@@ -268,7 +268,7 @@ export default function LearnerSettings() {
         <div className="container max-w-4xl mx-auto px-4">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold flex items-center gap-3">
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold flex items-center gap-3">
               <Settings className="h-8 w-8" />
               {t.title}
             </h1>
@@ -276,7 +276,7 @@ export default function LearnerSettings() {
           </div>
           
           {profileLoading ? (
-            <div className="flex justify-center py-12">
+            <div className="flex justify-center py-6 md:py-8 lg:py-12">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : (

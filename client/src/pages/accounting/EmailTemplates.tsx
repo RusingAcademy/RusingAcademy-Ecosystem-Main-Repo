@@ -413,7 +413,7 @@ export default function EmailTemplates() {
           ))}
         </div>
       ) : filteredTemplates.length === 0 ? (
-        <div className="text-center py-12 bg-gray-50 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700">
+        <div className="text-center py-6 md:py-8 lg:py-12 bg-gray-50 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 dark:border-slate-700">
           <Mail size={32} className="mx-auto text-gray-300 mb-3" />
           <p className="text-gray-500 mb-2">No email templates yet</p>
           <p className="text-sm text-gray-400 mb-4">Create templates to streamline your email communications</p>

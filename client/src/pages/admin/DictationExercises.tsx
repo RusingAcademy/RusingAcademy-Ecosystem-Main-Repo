@@ -156,7 +156,7 @@ export default function DictationExercises() {
               {isLoading ? (
                 <p>Loading exercises...</p>
               ) : exercises.length === 0 ? (
-                <div className="text-center py-12">
+                <div className="text-center py-6 md:py-8 lg:py-12">
                   <p className="text-muted-foreground">No exercises found.</p>
                   <Button onClick={handleAddExercise} className="mt-4">Add First Exercise</Button>
                 </div>

@@ -119,7 +119,7 @@ export default function PathEnrollmentSuccess() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-<div className="container py-16 px-4">
+<div className="container py-8 md:py-12 lg:py-16 px-4">
           <div className="animate-pulse space-y-8 max-w-2xl mx-auto">
             <div className="h-16 bg-slate-200 rounded-full w-16 mx-auto" />
             <div className="h-8 bg-slate-200 rounded w-3/4 mx-auto" />
@@ -178,7 +178,7 @@ export default function PathEnrollmentSuccess() {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
                     {/* @ts-ignore - TS2339: auto-suppressed during TS cleanup */}
-                    <span className="text-4xl">{path?.icon || "📚"}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl">{path?.icon || "📚"}</span>
                     <div className="text-left">
                       <h3 className="font-semibold text-black dark:text-white">
                         {t && path.titleFr ? path.titleFr : path.title}
@@ -213,7 +213,7 @@ export default function PathEnrollmentSuccess() {
       </section>
 
       {/* Next Steps Section */}
-      <section className="py-16 bg-white dark:bg-slate-900">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-slate-900">
         <div className="container px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white mb-8 text-center">
             {t ? "Prochaines Étapes" : "Next Steps"}
@@ -257,7 +257,7 @@ export default function PathEnrollmentSuccess() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-600 to-orange-600">
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-amber-600 to-orange-600">
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
           <GraduationCap className="w-12 h-12 text-white/90 mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">

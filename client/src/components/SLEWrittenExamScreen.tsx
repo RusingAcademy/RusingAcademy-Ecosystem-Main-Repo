@@ -497,7 +497,7 @@ export function SLEWrittenExamScreen({
           {/* Score Card */}
           <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
             <Trophy className="w-10 h-10 mx-auto mb-3 text-amber-400" />
-            <div className="text-4xl font-bold text-white mb-1">
+            <div className="text-xl md:text-3xl lg:text-4xl font-bold text-white mb-1">
               {Math.round(results.score * 100)}%
             </div>
             <div className="text-gray-300 text-sm mb-4">

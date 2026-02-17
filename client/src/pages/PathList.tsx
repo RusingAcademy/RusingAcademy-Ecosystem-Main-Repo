@@ -17,8 +17,8 @@ export default function PathList() {
   if (!program) {
     return (
       <DashboardLayout>
-        <div className="text-center py-20">
-          <span className="material-icons text-6xl text-gray-300">error_outline</span>
+        <div className="text-center py-10 md:py-16 lg:py-20">
+          <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-gray-300">error_outline</span>
           <p className="text-gray-500 mt-4">Program not found.</p>
           <Link href="/programs" className="text-teal-700 text-sm mt-2 inline-block hover:underline">← Back to Programs</Link>
         </div>
@@ -55,7 +55,7 @@ export default function PathList() {
                 {isESL ? "English as a Second Language" : "Français langue seconde"}
               </span>
             </div>
-            <h1 className="text-3xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
               {program.title}
             </h1>
             <p className="text-white/70 mt-1 text-sm max-w-lg">{program.description}</p>
@@ -119,7 +119,7 @@ export default function PathList() {
                       </div>
                       {isLocked && (
                         <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-                          <span className="material-icons text-white text-3xl">lock</span>
+                          <span className="material-icons text-white text-lg md:text-2xl lg:text-3xl">lock</span>
                         </div>
                       )}
                     </div>

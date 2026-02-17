@@ -41,7 +41,7 @@ export default function MyCertificates() {
 
       {certs.length === 0 ? (
         <Card className="border-dashed">
-          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
+          <CardContent className="flex flex-col items-center justify-center py-8 md:py-12 lg:py-16 text-center">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
               <Award className="w-8 h-8 text-primary" />
             </div>

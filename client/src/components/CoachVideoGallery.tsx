@@ -288,7 +288,7 @@ export default function CoachVideoGallery() {
   
   return (
     <section 
-      className="py-24 relative overflow-hidden"
+      className="py-12 md:py-16 lg:py-24 relative overflow-hidden"
       style={{ 
         background: "linear-gradient(180deg, #0B1220 0%, var(--brand-foundation, #0F3D3E) 50%, #0B1220 100%)",
       }}
@@ -306,7 +306,7 @@ export default function CoachVideoGallery() {
       
       <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <span 
             className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6"
             style={{ 

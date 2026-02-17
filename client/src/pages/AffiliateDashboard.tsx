@@ -27,9 +27,9 @@ export default function AffiliateDashboard() {
 
   if (!isAuthenticated) {
     return (
-      <div className="container py-16 text-center">
+      <div className="container py-8 md:py-12 lg:py-16 text-center">
         <Gift className="h-16 w-16 mx-auto mb-4 text-amber-500" />
-        <h1 className="text-3xl font-bold mb-4">RusingAcademy Affiliate Program</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">RusingAcademy Affiliate Program</h1>
         <p className="text-muted-foreground mb-6 max-w-md mx-auto">
           Earn commissions by referring professionals to our bilingual training programs.
         </p>
@@ -46,7 +46,7 @@ export default function AffiliateDashboard() {
   return (
     <div className="container py-8 max-w-5xl mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Affiliate Dashboard</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight">Affiliate Dashboard</h1>
         <p className="text-muted-foreground">Welcome back, {user?.name}. Track your referrals and earnings.</p>
       </div>
 

@@ -97,7 +97,7 @@ export default function AcceptInvitation() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30">
         <Card className="w-full max-w-md mx-4">
-          <CardContent className="flex flex-col items-center py-12">
+          <CardContent className="flex flex-col items-center py-6 md:py-8 lg:py-12">
             <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
             <p className="text-muted-foreground">Verifying your invitation...</p>
           </CardContent>
@@ -110,7 +110,7 @@ export default function AcceptInvitation() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30">
         <Card className="w-full max-w-md mx-4">
-          <CardContent className="flex flex-col items-center py-12 text-center">
+          <CardContent className="flex flex-col items-center py-6 md:py-8 lg:py-12 text-center">
             <XCircle className="h-12 w-12 text-destructive mb-4" />
             <h2 className="text-xl font-bold mb-2">Invalid Invitation</h2>
             <p className="text-muted-foreground mb-6">
@@ -129,7 +129,7 @@ export default function AcceptInvitation() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30">
         <Card className="w-full max-w-md mx-4">
-          <CardContent className="flex flex-col items-center py-12 text-center">
+          <CardContent className="flex flex-col items-center py-6 md:py-8 lg:py-12 text-center">
             <CheckCircle2 className="h-12 w-12 text-green-500 mb-4" />
             <h2 className="text-xl font-bold mb-2">Already Accepted</h2>
             <p className="text-muted-foreground mb-6">
@@ -148,7 +148,7 @@ export default function AcceptInvitation() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30">
         <Card className="w-full max-w-md mx-4">
-          <CardContent className="flex flex-col items-center py-12 text-center">
+          <CardContent className="flex flex-col items-center py-6 md:py-8 lg:py-12 text-center">
             <AlertTriangle className="h-12 w-12 text-amber-500 mb-4" />
             <h2 className="text-xl font-bold mb-2">Invitation Revoked</h2>
             <p className="text-muted-foreground mb-6">
@@ -167,7 +167,7 @@ export default function AcceptInvitation() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30">
         <Card className="w-full max-w-md mx-4">
-          <CardContent className="flex flex-col items-center py-12 text-center">
+          <CardContent className="flex flex-col items-center py-6 md:py-8 lg:py-12 text-center">
             <Clock className="h-12 w-12 text-muted-foreground mb-4" />
             <h2 className="text-xl font-bold mb-2">Invitation Expired</h2>
             <p className="text-muted-foreground mb-6">

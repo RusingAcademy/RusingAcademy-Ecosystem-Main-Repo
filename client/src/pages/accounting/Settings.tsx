@@ -117,7 +117,7 @@ export default function Settings() {
               </div>
 
               {isLoading ? (
-                <div className="flex items-center justify-center py-12">
+                <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                   <Loader2 className="animate-spin text-gray-400" size={24} />
                 </div>
               ) : (
@@ -192,7 +192,7 @@ export default function Settings() {
           )}
 
           {!(["company", "exchange-rates", "audit-trail", "email-templates"].includes(activeTab)) && (
-            <div className="qb-card text-center py-12">
+            <div className="qb-card text-center py-6 md:py-8 lg:py-12">
               <p className="text-gray-500 mb-1">This section is coming soon</p>
               <p className="text-sm text-gray-400">We're working on bringing you more settings options</p>
             </div>

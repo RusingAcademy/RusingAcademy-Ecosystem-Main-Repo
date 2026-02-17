@@ -440,7 +440,7 @@ export default function FunnelBuilder() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {filtered.length === 0 ? (
-          <div className="col-span-full text-center py-12">
+          <div className="col-span-full text-center py-6 md:py-8 lg:py-12">
             <Workflow className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
             <p className="text-lg font-medium">No funnels yet</p>
             <p className="text-sm text-muted-foreground mb-4">Create your first funnel from a template</p>

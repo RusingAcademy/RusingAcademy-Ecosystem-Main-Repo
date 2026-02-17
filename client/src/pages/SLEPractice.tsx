@@ -162,7 +162,7 @@ export default function SLEPractice() {
               <Target className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold">
                 {isEn ? "SLE Practice Lab" : "Laboratoire de pratique ELS"}
               </h1>
               <p className="text-white/90">
@@ -238,12 +238,12 @@ export default function SLEPractice() {
           {/* Listening Exercise */}
           <TabsContent value="listening" className="mt-6">
             {isLoading ? (
-              <div className="flex items-center justify-center py-12">
+              <div className="flex items-center justify-center py-6 md:py-8 lg:py-12">
                 <Loader2 className="h-8 w-8 animate-spin text-foundation" />
               </div>
             ) : phrases.length === 0 ? (
               <Card>
-                <CardContent className="py-12 text-center">
+                <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                   <Volume2 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">
                     {isEn ? "No audio available for this level yet." : "Aucun audio disponible pour ce niveau."}
@@ -388,7 +388,7 @@ export default function SLEPractice() {
                     : "Écoutez la phrase, puis enregistrez-vous en la répétant"}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="py-12 text-center">
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                 <div className="w-20 h-20 rounded-full bg-foundation-soft flex items-center justify-center mx-auto mb-4">
                   <Mic className="h-10 w-10 text-foundation" />
                 </div>
@@ -418,7 +418,7 @@ export default function SLEPractice() {
                     : "Écoutez l'audio et répondez aux questions sur ce que vous avez entendu"}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="py-12 text-center">
+              <CardContent className="py-6 md:py-8 lg:py-12 text-center">
                 <div className="w-20 h-20 rounded-full bg-foundation-soft flex items-center justify-center mx-auto mb-4">
                   <MessageSquare className="h-10 w-10 text-foundation" />
                 </div>

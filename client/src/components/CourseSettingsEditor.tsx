@@ -146,7 +146,7 @@ export default function CourseSettingsEditor({ courseId, onBack }: CourseSetting
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-16 text-muted-foreground">
+      <div className="flex items-center justify-center py-8 md:py-12 lg:py-16 text-muted-foreground">
         <Loader2 className="h-6 w-6 animate-spin mr-2" /> Loading course settings...
       </div>
     );
@@ -154,7 +154,7 @@ export default function CourseSettingsEditor({ courseId, onBack }: CourseSetting
 
   if (!course) {
     return (
-      <div className="text-center py-16 text-muted-foreground">
+      <div className="text-center py-8 md:py-12 lg:py-16 text-muted-foreground">
         <p>Course not found</p>
         <Button variant="outline" className="mt-4" onClick={onBack}>
           <ArrowLeft className="h-4 w-4 mr-2" /> Back

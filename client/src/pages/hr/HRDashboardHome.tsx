@@ -75,8 +75,8 @@ export default function HRDashboardHome() {
   if (error && (error.message.includes("FORBIDDEN") || error.message.includes("hr_manager"))) {
     return (
       <HRLayout>
-        <div className="max-w-2xl mx-auto text-center py-16">
-          <span className="material-icons text-6xl text-gray-300 mb-4">lock</span>
+        <div className="max-w-2xl mx-auto text-center py-8 md:py-12 lg:py-16">
+          <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-gray-300 mb-4">lock</span>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             {lang === "fr" ? "Accès restreint" : "Restricted Access"}
           </h2>

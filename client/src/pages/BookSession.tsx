@@ -321,7 +321,7 @@ export default function BookSession() {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black dark:text-white mb-2">{l.title}</h1>
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white mb-2">{l.title}</h1>
           <p className="text-black dark:text-white dark:text-cyan-300">{l.subtitle}</p>
         </div>
 

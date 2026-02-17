@@ -286,7 +286,7 @@ export default function ForGovernment() {
         </section>
 
         {/* Compliance Section */}
-        <section className="py-12 px-4">
+        <section className="py-6 md:py-8 lg:py-12 px-4">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -312,9 +312,9 @@ export default function ForGovernment() {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.benefitsTitle}
               </h2>
@@ -341,9 +341,9 @@ export default function ForGovernment() {
         </section>
 
         {/* Path Series Section */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.pathsTitle}
               </h2>
@@ -383,9 +383,9 @@ export default function ForGovernment() {
         </section>
 
         {/* Packages Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
+        <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.packagesTitle}
               </h2>
@@ -419,7 +419,7 @@ export default function ForGovernment() {
                     <h3 className="text-xl font-bold text-black dark:text-white">{pkg.name}</h3>
                     <p className="text-sm text-black dark:text-white mb-4">{pkg.size}</p>
                     <div className="mb-6">
-                      <span className="text-3xl font-bold text-black dark:text-white">{pkg.price}</span>
+                      <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-white">{pkg.price}</span>
                       <span className="text-black dark:text-white">{pkg.period}</span>
                     </div>
                     <ul className="space-y-3 mb-6">
@@ -448,9 +448,9 @@ export default function ForGovernment() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 px-4">
+        <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
                 {t.testimonialsTitle}
               </h2>
@@ -478,10 +478,10 @@ export default function ForGovernment() {
         </section>
 
         {/* CTA & Contact Form Section */}
-        <section id="contact-form" className="py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
+        <section id="contact-form" className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-6 md:mb-8 lg:mb-12">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -508,7 +508,7 @@ export default function ForGovernment() {
                 <p className="text-black dark:text-white mb-6">{t.formSubtitle}</p>
 
                 {formSubmitted ? (
-                  <div className="text-center py-12">
+                  <div className="text-center py-6 md:py-8 lg:py-12">
                     <div className="w-16 h-16 rounded-full bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
                       <CheckCircle2 className="w-8 h-8 text-teal-400" />
                     </div>

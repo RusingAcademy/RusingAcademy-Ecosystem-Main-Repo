@@ -38,7 +38,7 @@ export default function BookingCancelled() {
     <div className="min-h-screen flex flex-col bg-background">
       
 
-      <main className="flex-1 flex items-center justify-center py-12">
+      <main className="flex-1 flex items-center justify-center py-6 md:py-8 lg:py-12">
         <div className="container max-w-lg mx-auto px-4">
           <Card className="text-center">
             <CardContent className="pt-8 pb-8">

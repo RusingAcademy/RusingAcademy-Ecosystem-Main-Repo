@@ -118,7 +118,7 @@ export default function Notifications() {
             ))}
           </div>
         ) : filteredNotifications.length === 0 ? (
-          <div className="text-center py-16">
+          <div className="text-center py-8 md:py-12 lg:py-16">
             <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center mx-auto mb-4">
               <span className="material-icons text-gray-300" style={{ fontSize: "32px" }}>notifications_none</span>
             </div>

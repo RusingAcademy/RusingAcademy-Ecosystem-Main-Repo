@@ -183,19 +183,19 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
             <div className="grid grid-cols-2 gap-6 mb-6">
               <div className="bg-blue-50 rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Team Members" : "Membres de l'équipe"}</p>
-                <p className="text-3xl font-bold text-blue-600">{selectedTeam.memberCount}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-blue-600">{selectedTeam.memberCount}</p>
               </div>
               <div className="bg-green-50 rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Performance Score" : "Score de performance"}</p>
-                <p className="text-3xl font-bold text-green-600">{selectedTeam.performanceScore}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-green-600">{selectedTeam.performanceScore}</p>
               </div>
               <div className="bg-foundation-soft rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Applications Reviewed" : "Candidatures examinées"}</p>
-                <p className="text-3xl font-bold text-foundation">{selectedTeam.totalApplicationsReviewed}</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation">{selectedTeam.totalApplicationsReviewed}</p>
               </div>
               <div className="bg-orange-50 rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
-                <p className="text-3xl font-bold text-orange-600">{selectedTeam.teamApprovalRate}%</p>
+                <p className="text-lg md:text-2xl lg:text-3xl font-bold text-orange-600">{selectedTeam.teamApprovalRate}%</p>
               </div>
             </div>
 

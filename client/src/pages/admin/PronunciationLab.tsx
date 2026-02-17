@@ -122,7 +122,7 @@ const PronunciationLab = () => {
                 </CardHeader>
                 <CardContent>
                     {/* TODO: Add charts and more detailed stats */}
-                    <div className="text-center text-muted-foreground py-12">
+                    <div className="text-center text-muted-foreground py-6 md:py-8 lg:py-12">
                         <BarChart3 className="mx-auto h-12 w-12 mb-4" />
                         <p>Detailed analytics and charts will be displayed here.</p>
                     </div>
@@ -183,7 +183,7 @@ const PronunciationLab = () => {
                       </tr>
                     )) : (
                         <tr>
-                            <td colSpan={5} className="text-center py-12 text-muted-foreground">
+                            <td colSpan={5} className="text-center py-6 md:py-8 lg:py-12 text-muted-foreground">
                                 <Mic className="mx-auto h-12 w-12 mb-4" />
                                 <p>No exercises found. Start by adding a new one.</p>
                             </td>

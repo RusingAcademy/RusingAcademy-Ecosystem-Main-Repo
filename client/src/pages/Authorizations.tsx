@@ -100,7 +100,7 @@ export default function Authorizations() {
               </thead>
               <tbody>
                 <tr>
-                  <td colSpan={5} className="px-4 py-12 text-center text-sm text-gray-400">
+                  <td colSpan={5} className="px-4 py-6 md:py-8 lg:py-12 text-center text-sm text-gray-400">
                     No pre-authorized hours found.
                   </td>
                 </tr>

@@ -164,7 +164,7 @@ export function MotivationalNudge({ userState, language = "en", onDismiss }: Mot
         
         <div className="p-4">
           <div className="flex items-start gap-3">
-            <div className="text-3xl flex-shrink-0">{nudge.icon}</div>
+            <div className="text-lg md:text-2xl lg:text-3xl flex-shrink-0">{nudge.icon}</div>
             <div className="flex-1">
               <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{message}</p>
               
