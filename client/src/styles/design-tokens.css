@@ -116,9 +116,9 @@
   --text-on-teal: #FFFFFF;               /* White text on teal backgrounds */
   
   /* === BACKGROUND COLORS === */
-  --bg-base: #FFFFFF;                    /* Pure white for cards/modals */
+  --bg-base: #EFECE9;                    /* HAZY warm cream for page bg */
   --bg-surface: var(--cream-pale);       /* Default page background */
-  --bg-elevated: #FFFFFF;                /* Elevated surfaces (cards, modals) */
+  --bg-elevated: #FFFFFF;                 /* Pure white for elevated cards/modals */
   --bg-overlay: rgba(0, 0, 0, 0.5);      /* Modal overlays */
   
   /* === GLASSMORPHISM VALUES === */

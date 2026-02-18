@@ -24,7 +24,7 @@
 
   /* Sales surfaces */
   --sales-bg: #FAFAF8;
-  --sales-surface: #FFFFFF;
+  --sales-surface: #FAFAF8;
   --sales-border: #E8E4DF;
   --sales-card-shadow: 0 2px 12px rgba(15, 61, 62, 0.05);
 }

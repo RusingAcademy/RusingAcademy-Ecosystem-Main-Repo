@@ -14,11 +14,12 @@
    Container Width: max-w-7xl (1280px) for main content
    Horizontal Padding: px-4 sm:px-6 lg:px-8
    
-   Alternating Backgrounds:
-   - White (var(--text-inverse))
-   - Surface (var(--bg))
-   - Sand (var(--bg-alt))
-   - Foundation Soft (var(--brand-foundation-soft))
+   Alternating Backgrounds (HAZY rhythm):
+   - Cream (var(--bg)) — #EFECE9 warm cream
+   - White (var(--surface)) — #FFFFFF elevated cards
+   - Sand (var(--bg-alt)) — #E8E4DE deeper warm
+   - Mint (var(--mint)) — #D1EBDB pedagogical
+   - Foundation Soft — teal tint
    - Obsidian (#062B2B) for dark sections
    ============================================ */
 
@@ -70,13 +71,19 @@
 /* === SECTION BACKGROUNDS === */
 @layer components {
   .eco-bg-white {
-    background-color: var(--text-inverse);
+    background-color: var(--surface);  /* Pure white — elevated cards/surfaces */
+  }
+  .eco-bg-cream {
+    background-color: var(--bg);  /* HAZY warm cream — page-level sections */
   }
   .eco-bg-surface {
     background-color: var(--surface, var(--bg));
   }
   .eco-bg-sand {
-    background-color: var(--sand, var(--bg-alt));
+    background-color: var(--sand, var(--bg-alt));  /* Deeper warm — alternating sections */
+  }
+  .eco-bg-mint {
+    background-color: var(--mint, #D1EBDB);  /* Pedagogical calm sections */
   }
   .eco-bg-foundation-soft {
     background-color: var(--brand-foundation-soft, var(--brand-foundation-soft));
@@ -90,7 +97,7 @@
     color: var(--text-inverse);
   }
   .eco-bg-gradient-warm {
-    background: linear-gradient(135deg, #FFF8F0 0%, var(--surface, var(--bg)) 100%);
+    background: linear-gradient(135deg, var(--bg) 0%, var(--sand) 100%);
   }
 }
 
