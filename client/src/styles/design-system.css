@@ -151,7 +151,8 @@
   
   /* === GLASSMORPHISM TOKENS === */
   --glass-fill: rgba(239, 236, 233, 0.60);
-  --glass-border: 1px solid rgba(25, 37, 36, 0.12);
+  --glass-bg: rgba(239, 236, 233, 0.60);         /* HAZY cream translucent */
+  --glass-border: rgba(25, 37, 36, 0.12);         /* Ink-based border */
   --glass-blur: blur(16px);
   --glass-blur-strong: blur(20px);
   

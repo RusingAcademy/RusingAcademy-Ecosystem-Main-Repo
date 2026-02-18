@@ -21,18 +21,46 @@
    - Focus-visible for keyboard navigation
    ============================================ */
 
-/* === 1. GLASS CARD (Premium Glassmorphism) === */
+/* === 0. UNIFIED GLASS UTILITY (HAZY Recipe) === */
+@layer components {
+  .eco-glass {
+    background: var(--glass-bg, rgba(239, 236, 233, 0.60));
+    border: 1px solid var(--glass-border, rgba(25, 37, 36, 0.12));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow:
+      0 10px 30px rgba(25, 37, 36, 0.10),
+      0 2px 8px rgba(25, 37, 36, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .eco-glass:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 14px 36px rgba(25, 37, 36, 0.14),
+      0 4px 12px rgba(25, 37, 36, 0.10);
+  }
+  /* Copper glow variant for featured/CTA glass */
+  .eco-glass-copper {
+    box-shadow:
+      0 10px 30px rgba(25, 37, 36, 0.10),
+      0 2px 8px rgba(25, 37, 36, 0.08),
+      0 12px 28px rgba(184, 115, 51, 0.20);
+  }
+}
+
+/* === 1. GLASS CARD (Premium Glassmorphism — HAZY Recipe) === */
 @layer components {
   .eco-card-glass {
     position: relative;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: var(--glass-bg, rgba(239, 236, 233, 0.60));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border, rgba(25, 37, 36, 0.12));
     border-radius: var(--radius-xl, 1rem);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.06),
-      0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow:
+      0 10px 30px rgba(25, 37, 36, 0.10),
+      0 2px 8px rgba(25, 37, 36, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
   }
@@ -41,14 +69,14 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
     pointer-events: none;
   }
   .eco-card-glass:hover {
     transform: translateY(-4px);
-    box-shadow: 
-      0 16px 48px rgba(0, 0, 0, 0.1),
-      0 4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 16px 48px rgba(25, 37, 36, 0.14),
+      0 4px 12px rgba(25, 37, 36, 0.10);
   }
 
   /* Glass card on dark backgrounds */
@@ -85,7 +113,27 @@
     border-color: rgba(15, 61, 62, 0.3);
   }
 
-  /* Glass card with gold accent */
+  /* Glass card with copper accent (replaces gold) */
+  .eco-card-glass-copper {
+    background: var(--glass-bg, rgba(239, 236, 233, 0.60));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(184, 115, 51, 0.25);
+    border-radius: var(--radius-xl, 1rem);
+    box-shadow:
+      0 10px 30px rgba(25, 37, 36, 0.10),
+      0 12px 28px rgba(184, 115, 51, 0.20);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .eco-card-glass-copper:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 16px 48px rgba(25, 37, 36, 0.14),
+      0 16px 36px rgba(184, 115, 51, 0.25);
+    border-color: rgba(184, 115, 51, 0.40);
+  }
+
+  /* Glass card with gold accent (legacy, kept for backward compat) */
   .eco-card-glass-gold {
     background: rgba(212, 175, 55, 0.08);
     backdrop-filter: blur(16px);
@@ -217,19 +265,23 @@
 @layer components {
   .eco-card-feature {
     position: relative;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: var(--glass-bg, rgba(239, 236, 233, 0.60));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border, rgba(25, 37, 36, 0.12));
     border-radius: var(--radius-xl, 1rem);
     padding: 2rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    box-shadow:
+      0 10px 30px rgba(25, 37, 36, 0.10),
+      0 2px 8px rgba(25, 37, 36, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
   }
   .eco-card-feature:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 16px 40px rgba(25, 37, 36, 0.14),
+      0 4px 12px rgba(25, 37, 36, 0.10);
   }
   .eco-card-feature .feature-icon {
     width: 3rem;
@@ -320,6 +372,10 @@
 }
 
 /* === DARK MODE === */
+.dark .eco-glass {
+  background: rgba(6, 43, 43, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
 .dark .eco-card-glass {
   background: rgba(6, 43, 43, 0.6);
   border-color: rgba(255, 255, 255, 0.1);
@@ -354,9 +410,10 @@
 /* === FOCUS VISIBLE FOR INTERACTIVE CARDS === */
 a[class*="eco-card"]:focus-visible,
 button[class*="eco-card"]:focus-visible,
-[role="button"][class*="eco-card"]:focus-visible {
+[role="button"][class*="eco-card"]:focus-visible,
+.eco-glass:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.3);
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25); /* Copper focus ring */
 }
 
 /* === CARD LOADING SKELETON === */
