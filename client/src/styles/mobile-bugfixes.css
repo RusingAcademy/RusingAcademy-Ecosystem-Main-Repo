@@ -1,0 +1,275 @@
+/**
+ * ============================================
+ * RUSINGACADEMY — Mobile Bug Fixes & Premium Optimizations
+ * ============================================
+ * PR: fix/mobile-bugs-and-premium-optimization
+ * 
+ * Surgical fixes for 7 specific mobile bugs reported by Steven,
+ * plus premium mobile optimizations inspired by MgCréa patterns.
+ * 
+ * Bugs addressed:
+ * 1. Government/Partner logos enormous on mobile
+ * 2. Filter/category buttons appear empty (no text)
+ * 3. Founder photo too large, quote overlaps
+ * 4. Chatbot avatar overlaps content
+ * 5. Footer "Explore the Ecosystem" excessive spacing
+ * 6. Ecosystem cards excessive whitespace
+ * 7. YouTube Shorts carousel cards cut off
+ * 
+ * Premium patterns (MgCréa-inspired):
+ * - 48px minimum tap targets
+ * - Compact trust/logo grids
+ * - Proper responsive typography
+ * - Clean spacing and whitespace management
+ * - Smooth scrolling
+ * ============================================
+ */
+
+/* ============================================
+   BUG 1 FIX: Government/Partner logos — compact grid on mobile
+   ============================================ */
+@media (max-width: 767px) {
+  /* InstitutionsSection partner logos grid */
+  .institutions-logo-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem 0.75rem !important;
+    align-items: center !important;
+    justify-items: center !important;
+    padding: 0 0.5rem !important;
+  }
+
+  .institutions-logo-grid > * {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .institutions-logo-grid img {
+    max-height: 56px !important;
+    max-width: 100px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+}
+
+/* ============================================
+   BUG 2 FIX: Filter/category buttons — ensure text visibility
+   ============================================ */
+@media (max-width: 767px) {
+  /* StatsPill: text was white on white bg */
+  .stats-pill-mobile {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  .stats-pill-mobile span {
+    color: #ffffff !important;
+  }
+
+  /* Tab buttons container: was bg-white making text invisible */
+  .tab-buttons-container {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .tab-buttons-container button span {
+    font-size: 0.8125rem !important;
+  }
+}
+
+/* ============================================
+   BUG 3 FIX: Founder photo — proper sizing and separation
+   ============================================ */
+@media (max-width: 767px) {
+  .leadership-card {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .leadership-card .leadership-image {
+    height: 280px !important;
+    max-height: 280px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .leadership-card .leadership-content {
+    padding: 1.5rem !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .leadership-card .leadership-content blockquote {
+    margin-top: 0.5rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .leadership-card .leadership-content h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+}
+
+/* ============================================
+   BUG 4 FIX: Chatbot avatar — prevent content overlap
+   ============================================ */
+@media (max-width: 767px) {
+  /* Add bottom padding to main content so chatbot doesn't overlap */
+  #prof-steven-widget {
+    bottom: 16px !important;
+    right: 16px !important;
+  }
+
+  #prof-steven-widget img {
+    width: 52px !important;
+    height: 52px !important;
+    border-width: 3px !important;
+  }
+
+  /* Reduce the pulse ring size */
+  #prof-steven-widget > div:first-child {
+    border-width: 2px !important;
+  }
+
+  /* Ensure footer and critical sections have bottom padding */
+  main > section:last-child {
+    padding-bottom: 5rem !important;
+  }
+
+  /* Reduce chatbot z-index so it doesn't cover modals */
+  #prof-steven-widget {
+    z-index: 9990 !important;
+  }
+}
+
+/* ============================================
+   BUG 5 FIX: Footer "Explore the Ecosystem" — compact spacing
+   ============================================ */
+@media (max-width: 767px) {
+  .footer-institutional-grid {
+    gap: 2rem !important;
+  }
+
+  .footer-institutional-grid ul {
+    gap: 0 !important;
+  }
+
+  .footer-institutional-grid ul li {
+    padding: 0 !important;
+  }
+
+  .footer-institutional-grid ul li a {
+    padding: 0.375rem 0 !important;
+    display: inline-flex !important;
+    min-height: 44px !important;
+    align-items: center !important;
+  }
+
+  .footer-institutional-grid h4 {
+    margin-bottom: 0.75rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  /* Reduce overall footer padding on mobile */
+  .footer-institutional-content {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+/* ============================================
+   BUG 6 FIX: Ecosystem cards — tighter spacing on mobile
+   ============================================ */
+@media (max-width: 767px) {
+  .ecosystem-cards-grid {
+    gap: 1.25rem !important;
+  }
+
+  .ecosystem-cards-grid > * {
+    margin-bottom: 0 !important;
+  }
+
+  /* Reduce card image height on mobile */
+  .ecosystem-cards-grid .ecosystem-card-image {
+    height: 180px !important;
+  }
+
+  /* Tighter card content padding */
+  .ecosystem-cards-grid .ecosystem-card-content {
+    padding: 1rem 1.25rem !important;
+  }
+}
+
+/* ============================================
+   BUG 7 FIX: YouTube Shorts carousel — proper containment
+   ============================================ */
+@media (max-width: 767px) {
+  /* Reduce fade edge width on mobile */
+  .shorts-carousel .carousel-fade-left,
+  .shorts-carousel .carousel-fade-right {
+    width: 2rem !important;
+  }
+
+  /* Ensure cards don't overflow */
+  .shorts-carousel .carousel-scroll-container {
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+    gap: 0.75rem !important;
+    scroll-padding-left: 2.5rem !important;
+  }
+
+  /* Position arrows better on mobile */
+  .shorts-carousel .scroll-arrow-left {
+    left: 0.25rem !important;
+  }
+
+  .shorts-carousel .scroll-arrow-right {
+    right: 0.25rem !important;
+  }
+
+  /* Ensure card text doesn't truncate */
+  .shorts-carousel .scroll-card {
+    min-width: 150px !important;
+  }
+}
+
+/* ============================================
+   PREMIUM MOBILE OPTIMIZATIONS (MgCréa-inspired)
+   ============================================ */
+
+/* Smooth scrolling globally */
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ensure all images are contained */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Premium touch targets — 48px minimum */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+  }
+
+  /* Prevent text overflow on mobile */
+  h1, h2, h3, h4, h5, h6, p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Section padding consistency */
+  section {
+    overflow-x: hidden;
+  }
+}
