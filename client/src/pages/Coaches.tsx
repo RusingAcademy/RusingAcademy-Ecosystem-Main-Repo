@@ -225,8 +225,8 @@ export default function Coaches() {
               </div>
             </div>
           </div>
-        </ScrollAnimationWrapper>
         </section>
+        </ScrollAnimationWrapper>
 
         {/* Main Content */}
         <ScrollAnimationWrapper animation="fade-up" duration={700} delay={150}>

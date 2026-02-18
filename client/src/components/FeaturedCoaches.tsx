@@ -784,7 +784,7 @@ export default function FeaturedCoaches() {
           </h1>
           
           {/* Tagline - Wide layout for 2 lines max */}
-          <p className="text-sm md:text-base text-black dark:text-foreground font-medium leading-snug max-w-6xl mx-auto">
+          <p className="text-sm md:text-base text-white dark:text-white font-medium leading-snug max-w-6xl mx-auto">
             {language === 'fr' 
               ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Uniquement des spécialistes qui comprennent les critères du Conseil du Trésor.'
               : 'Our coaches are exclusively dedicated to SLE exam preparation. Only specialists who understand Treasury Board criteria and guide you to success.'}

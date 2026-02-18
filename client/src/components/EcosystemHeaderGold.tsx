@@ -461,10 +461,11 @@ export default function EcosystemHeaderGold() {
                   className="relative rounded-2xl cursor-pointer"
                   style={{
                     padding: isScrolled ? "0.75rem 1.25rem" : "1.25rem",
-                    background: "rgba(255, 255, 255, 0.95)",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    backdropFilter: "blur(8px)",
                     border: hoveredCard === brand.id 
-                      ? "2px solid rgba(255, 255, 255, 0.6)" 
-                      : "1px solid rgba(255, 255, 255, 0.9)",
+                      ? "2px solid rgba(255, 255, 255, 0.15)" 
+                      : "1px solid rgba(255, 255, 255, 0.15)",
                     boxShadow: hoveredCard === brand.id 
                       ? "0 0 24px rgba(0, 0, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08)"
                       : "0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04)",
