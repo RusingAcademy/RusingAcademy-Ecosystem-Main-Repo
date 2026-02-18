@@ -170,16 +170,41 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Core React runtime
-          'vendor-react': ['react', 'react-dom'],
-          // UI framework
-          'vendor-ui': ['@radix-ui/react-dialog', '@radix-ui/react-tooltip', '@radix-ui/react-popover', '@radix-ui/react-select', '@radix-ui/react-tabs', '@radix-ui/react-accordion'],
-          // Charts & visualization
-          'vendor-charts': ['recharts'],
-          // Form & validation
+          // Core React runtime — loaded on every page
+          'vendor-react': ['react', 'react-dom', 'react/jsx-runtime'],
+          // Routing — loaded on every page
+          'vendor-router': ['wouter', 'react-helmet-async'],
+          // State management — loaded on every page
+          'vendor-query': ['@tanstack/react-query'],
+          // UI primitives — loaded on most pages
+          'vendor-ui': [
+            '@radix-ui/react-dialog', '@radix-ui/react-tooltip',
+            '@radix-ui/react-popover', '@radix-ui/react-select',
+            '@radix-ui/react-tabs', '@radix-ui/react-accordion',
+            '@radix-ui/react-dropdown-menu', '@radix-ui/react-avatar',
+            '@radix-ui/react-label', '@radix-ui/react-switch',
+            '@radix-ui/react-checkbox', '@radix-ui/react-separator',
+            '@radix-ui/react-scroll-area', '@radix-ui/react-slot',
+          ],
+          // Animation — used across many pages
+          'vendor-motion': ['framer-motion'],
+          // Form & validation — loaded on form pages
           'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
-          // Rich text & markdown
-          'vendor-editor': ['@tiptap/react', '@tiptap/starter-kit', '@tiptap/extension-placeholder'],
+          // Charts & visualization — admin/dashboard only
+          'vendor-charts': ['recharts'],
+          // Rich text editor — admin only (single file usage)
+          'vendor-editor': [
+            '@tiptap/react', '@tiptap/starter-kit',
+            '@tiptap/extension-placeholder', '@tiptap/extension-link',
+            '@tiptap/extension-image', '@tiptap/extension-color',
+            '@tiptap/extension-text-style', '@tiptap/extension-underline',
+            '@tiptap/extension-text-align', '@tiptap/extension-highlight',
+            '@tiptap/extension-code-block-lowlight', '@tiptap/extension-bubble-menu',
+          ],
+          // Drag & drop — admin only
+          'vendor-dnd': ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
+          // Date utilities
+          'vendor-date': ['date-fns'],
         },
       },
     },
