@@ -280,6 +280,11 @@ textarea:focus-visible,
 h1, h2, h3, .heading {
   font-family: var(--font-display);
   font-weight: 700;
+}
+
+/* Default heading color — applied only when no explicit color class is set.
+   Uses :where() for zero specificity so Tailwind text-* utilities always win. */
+:where(h1, h2, h3, h4, h5, h6, .heading) {
   color: var(--text);
 }
 
@@ -769,8 +774,8 @@ p, .prose p, article p { color: #1f2937; }
 .bg-background p, .bg-background .text-muted-foreground,
 .bg-porcelain p, .bg-porcelain .text-muted-foreground,
 .bg-surface p, .bg-surface .text-muted-foreground,
-section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) p,
-section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) .text-muted-foreground {
+section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]):not([class*="from-obsidian"]):not([class*="from-teal"]):not([class*="from-slate"]) p,
+section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]):not([class*="from-obsidian"]):not([class*="from-teal"]):not([class*="from-slate"]) .text-muted-foreground {
   color: #374151 !important;
 }
 
@@ -780,7 +785,68 @@ section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidia
 .dark .card p, .dark .card .text-muted-foreground,
 .dark [class*="Card"] p, .dark [class*="Card"] .text-muted-foreground { color: #9CA3AF !important; }
 
-/* Ensure text on dark sections remains light — DARK MODE ONLY (Audit 1 fix) */
+/* ============================================
+   DARK BACKGROUND SECTIONS — LIGHT TEXT (Light + Dark mode)
+   Ensures white/light text on obsidian, teal-900, slate-900,
+   and gradient dark sections in BOTH light and dark mode.
+   ============================================ */
+
+/* Headings on dark backgrounds */
+[class*="bg-obsidian"] h1, [class*="bg-obsidian"] h2, [class*="bg-obsidian"] h3,
+[class*="bg-obsidian"] h4, [class*="bg-obsidian"] h5, [class*="bg-obsidian"] h6,
+[class*="bg-teal-900"] h1, [class*="bg-teal-900"] h2, [class*="bg-teal-900"] h3,
+[class*="bg-teal-900"] h4, [class*="bg-teal-900"] h5, [class*="bg-teal-900"] h6,
+[class*="bg-teal-800"] h1, [class*="bg-teal-800"] h2, [class*="bg-teal-800"] h3,
+[class*="bg-slate-900"] h1, [class*="bg-slate-900"] h2, [class*="bg-slate-900"] h3,
+[class*="bg-slate-800"] h1, [class*="bg-slate-800"] h2, [class*="bg-slate-800"] h3,
+[class*="bg-gray-900"] h1, [class*="bg-gray-900"] h2, [class*="bg-gray-900"] h3,
+[class*="from-obsidian"] h1, [class*="from-obsidian"] h2, [class*="from-obsidian"] h3,
+[class*="from-obsidian"] h4, [class*="from-obsidian"] h5, [class*="from-obsidian"] h6,
+[class*="from-teal-900"] h1, [class*="from-teal-900"] h2, [class*="from-teal-900"] h3,
+[class*="from-slate-900"] h1, [class*="from-slate-900"] h2, [class*="from-slate-900"] h3,
+.section-obsidian h1, .section-obsidian h2, .section-obsidian h3,
+.section-obsidian h4, .section-obsidian h5, .section-obsidian h6 {
+  color: #FFFFFF !important;
+}
+
+/* Paragraphs and body text on dark backgrounds */
+[class*="bg-obsidian"] p, [class*="bg-obsidian"] span, [class*="bg-obsidian"] li,
+[class*="bg-teal-900"] p, [class*="bg-teal-900"] span, [class*="bg-teal-900"] li,
+[class*="bg-teal-800"] p, [class*="bg-teal-800"] span,
+[class*="bg-slate-900"] p, [class*="bg-slate-900"] span,
+[class*="bg-slate-800"] p, [class*="bg-slate-800"] span,
+[class*="bg-gray-900"] p, [class*="bg-gray-900"] span,
+[class*="from-obsidian"] p, [class*="from-obsidian"] span, [class*="from-obsidian"] li,
+[class*="from-teal-900"] p, [class*="from-teal-900"] span,
+[class*="from-slate-900"] p, [class*="from-slate-900"] span,
+.section-obsidian p, .section-obsidian span, .section-obsidian li {
+  color: rgba(255, 255, 255, 0.90) !important;
+}
+
+/* Muted/secondary text on dark backgrounds */
+[class*="bg-obsidian"] .text-muted-foreground,
+[class*="bg-teal-900"] .text-muted-foreground,
+[class*="bg-teal-800"] .text-muted-foreground,
+[class*="bg-slate-900"] .text-muted-foreground,
+[class*="bg-slate-800"] .text-muted-foreground,
+[class*="bg-gray-900"] .text-muted-foreground,
+[class*="from-obsidian"] .text-muted-foreground,
+[class*="from-teal-900"] .text-muted-foreground,
+[class*="from-slate-900"] .text-muted-foreground,
+.section-obsidian .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.70) !important;
+}
+
+/* Links on dark backgrounds */
+[class*="bg-obsidian"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
+[class*="from-obsidian"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
+[class*="bg-teal-900"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
+[class*="from-teal-900"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
+.section-obsidian a:not(.eco-btn-cta):not(.eco-btn-outline-cta) {
+  color: rgba(255, 255, 255, 0.90) !important;
+}
+
+/* Dark mode inherits same rules (backward compat) */
 .dark [class*="bg-slate-900"] p, .dark [class*="bg-slate-900"] .text-muted-foreground,
 .dark [class*="bg-teal-900"] p, .dark [class*="bg-teal-900"] .text-muted-foreground,
 .dark [class*="bg-obsidian"] p, .dark [class*="bg-obsidian"] .text-muted-foreground,
