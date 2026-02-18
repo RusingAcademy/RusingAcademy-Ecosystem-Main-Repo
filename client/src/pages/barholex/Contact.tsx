@@ -179,7 +179,7 @@ export default function BarholexContact() {
         <section className="py-6 md:py-8 lg:py-12 px-4">
           <div className="container mx-auto">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Contact Info Sidebar */}
                 <div className="lg:col-span-1">
                   <div className="sticky top-24 space-y-6">

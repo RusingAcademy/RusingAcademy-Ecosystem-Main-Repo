@@ -9,7 +9,6 @@ import LearnerDashboardContent from "@/components/dashboard/LearnerDashboard";
 import CoachDashboardContent from "@/components/dashboard/CoachDashboard";
 import AdminDashboardContent from "@/components/dashboard/AdminDashboard";
 import { HRDashboard } from "@/components/dashboard/HRDashboard";
-import { BackToTop } from "@/components/mobile";
 
 type DashboardView = "admin" | "hr" | "coach" | "learner";
 
@@ -126,8 +125,7 @@ export default function Dashboard() {
       <div className="flex flex-col items-center gap-4">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
         <p className="text-muted-foreground">Loading your dashboard...</p>
-            <BackToTop threshold={300} />
-</div>
+      </div>
     </div>
   );
 }

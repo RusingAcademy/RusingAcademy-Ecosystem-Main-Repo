@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { BackToTop } from "@/components/mobile";
 
 export default function PricingCheckout() {
   const [createOpen, setCreateOpen] = useState(false);
@@ -63,7 +62,6 @@ export default function PricingCheckout() {
           </table></div>
         )}
       </CardContent></Card>
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }

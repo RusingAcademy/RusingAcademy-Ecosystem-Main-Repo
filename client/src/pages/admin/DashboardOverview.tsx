@@ -10,7 +10,6 @@ import {
   BarChart3, Calendar, Zap, Shield,
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { BackToTop } from "@/components/mobile";
 
 function StatCard({ title, value, icon: Icon, subtitle, trend, trendLabel }: {
   title: string; value: string | number; icon: React.ElementType; subtitle?: string;
@@ -61,8 +60,7 @@ function MiniBarChart({ data, maxHeight = 40 }: { data: { label: string; value: 
           <span className="text-[9px] text-muted-foreground truncate w-full text-center">{d.label}</span>
         </div>
       ))}
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }
 

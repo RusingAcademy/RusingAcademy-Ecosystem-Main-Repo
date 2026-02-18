@@ -18,7 +18,6 @@ import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { toast } from "sonner";
 import { Send, CheckCircle } from "lucide-react";
-import { BackToTop } from "@/components/mobile";
 
 export default function BookingForm() {
   const { language } = useLanguage();
@@ -164,7 +163,7 @@ export default function BookingForm() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
                 {l.title}
               </h1>
               <p className="text-lg text-black dark:text-foreground">
@@ -350,7 +349,6 @@ export default function BookingForm() {
       </main>
 
       <Footer />
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }

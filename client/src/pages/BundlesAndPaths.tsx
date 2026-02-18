@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
-import { BackToTop } from "@/components/mobile";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
 
 // Bundle definitions
@@ -442,7 +441,6 @@ export default function BundlesAndPaths() {
         </section>
       </main>
       <EcosystemFooter lang={isEn ? "en" : "fr"} theme="light" activeBrand="rusingacademy" />
-        <BackToTop threshold={300} />
     </div>
   );
 }

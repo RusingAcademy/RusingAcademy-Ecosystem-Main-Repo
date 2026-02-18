@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Footer from "@/components/Footer";
-import { BackToTop } from "@/components/mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -438,7 +437,7 @@ export default function BecomeCoach() {
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.whyJoin}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyJoin}</h2>
               <p className="text-black dark:text-foreground max-w-2xl mx-auto">
                 {isEn 
                   ? "Join a platform designed with coaches in mind. We handle the business side so you can focus on what you do best."
@@ -497,7 +496,7 @@ export default function BecomeCoach() {
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
                 {isEn ? "Simple Process" : "Processus simple"}
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.howItWorks}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.howItWorks}</h2>
               <p className="text-black dark:text-foreground max-w-2xl mx-auto">
                 {isEn 
                   ? "Getting started is easy. Follow these four simple steps to begin your coaching journey."
@@ -530,7 +529,7 @@ export default function BecomeCoach() {
                 <Badge className="mb-4 bg-amber-100 text-amber-700 border-orange-100">
                   {isEn ? "Requirements" : "Exigences"}
                 </Badge>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.requirements}</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.requirements}</h2>
               </div>
 
               <div className="space-y-4">
@@ -559,7 +558,7 @@ export default function BecomeCoach() {
                   <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
                     {isEn ? "Earning Potential" : "Potentiel de revenus"}
                   </Badge>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     {isEn ? "Earn What You Deserve" : "Gagnez ce que vous méritez"}
                   </h2>
                   <p className="text-black dark:text-foreground mb-6">
@@ -631,7 +630,7 @@ export default function BecomeCoach() {
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.testimonials}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.testimonials}</h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -669,7 +668,7 @@ export default function BecomeCoach() {
               <Badge className="mb-4 bg-foundation-soft text-foundation border-foundation">
                 FAQ
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{l.faq}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.faq}</h2>
             </div>
 
             <div className="max-w-3xl mx-auto space-y-4">
@@ -699,7 +698,7 @@ export default function BecomeCoach() {
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {isEn ? "Ready to Start Your Coaching Journey?" : "Prêt à commencer votre parcours de coach?"}
             </h2>
             <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
@@ -748,7 +747,6 @@ export default function BecomeCoach() {
       </main>
 
       <Footer />
-      <BackToTop threshold={300} />
     </div>
   );
 }

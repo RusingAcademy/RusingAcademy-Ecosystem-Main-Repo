@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Users, DollarSign, TrendingUp, Copy, Gift, Award, ArrowRight } from "lucide-react";
-import { BackToTop } from "@/components/mobile";
 
 export default function AffiliateDashboard() {
   const { user, isAuthenticated } = useAuth();
@@ -147,7 +146,6 @@ export default function AffiliateDashboard() {
           )}
         </CardContent>
       </Card>
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }

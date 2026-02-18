@@ -55,7 +55,6 @@ import { trpc } from "@/lib/trpc";
 import { StatCard } from "@/components/dashboard";
 import { TeamOverviewWidget } from "@/components/TeamOverviewWidget";
 import { TeamComplianceWidget } from "@/components/TeamComplianceWidget";
-import { BackToTop } from "@/components/mobile";
 
 // Mock data for HR dashboard
 const mockTeamMembers = [
@@ -191,7 +190,6 @@ export default function HRDashboard() {
         <Header />
         {children}
         <Footer />
-      <BackToTop threshold={300} />
       </div>
     );
   };
@@ -514,7 +512,7 @@ export default function HRDashboard() {
                     {mockTeamMembers.length} {language === "fr" ? "apprenants" : "learners"}
                   </Badge>
                 </div>
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
                   <Building2 className="h-8 w-8" />
                   {l.dashboard}
                 </h1>

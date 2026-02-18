@@ -215,21 +215,21 @@ export default function BarholexHome() {
         {/* Stats Section */}
         <section className="py-8 border-y border-white/60 bg-white dark:bg-background/5 backdrop-blur-sm">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={projects.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{projects.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{projects.count}+</div>
                 <div className="text-sm text-cyan-300">{language === "en" ? "Projects Delivered" : "Projets livrés"}</div>
               </div>
               <div ref={clients.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{clients.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{clients.count}+</div>
                 <div className="text-sm text-cyan-300">{language === "en" ? "Happy Clients" : "Clients satisfaits"}</div>
               </div>
               <div ref={awards.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{awards.count}</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{awards.count}</div>
                 <div className="text-sm text-cyan-300">{language === "en" ? "Industry Awards" : "Prix de l'industrie"}</div>
               </div>
               <div ref={years.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{years.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-barholex-gold mb-1">{years.count}+</div>
                 <div className="text-sm text-cyan-300">{language === "en" ? "Years Experience" : "Années d'expérience"}</div>
               </div>
             </div>
@@ -240,7 +240,7 @@ export default function BarholexHome() {
         <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Our Services" : "Nos services"}
               </h2>
               <p className="text-lg text-cyan-300 max-w-2xl mx-auto">
@@ -279,7 +279,7 @@ export default function BarholexHome() {
         <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-obsidian to-teal-950">
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Featured Work" : "Travaux en vedette"}
               </h2>
               <p className="text-lg text-cyan-300 max-w-2xl mx-auto">
@@ -331,7 +331,7 @@ export default function BarholexHome() {
         <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Trusted By" : "Ils nous font confiance"}
               </h2>
             </div>
@@ -356,7 +356,7 @@ export default function BarholexHome() {
         <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-r from-barholex-gold to-amber-600">
           <div className="container mx-auto">
             <div className="max-w-3xl mx-auto text-center text-black dark:text-foreground">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {language === "en" ? "Ready to Create Something Amazing?" : "Prêt à créer quelque chose d'incroyable?"}
               </h2>
               <p className="text-xl text-black dark:text-foreground/80 mb-4 md:mb-6 lg:mb-10">

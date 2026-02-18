@@ -31,7 +31,6 @@ import {
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import FooterInstitutional from '@/components/FooterInstitutional';
-import { BackToTop } from "@/components/mobile";
 import CrossEcosystemSection from '@/components/CrossEcosystemSection';
 
 // Premium color palette - refined and authoritative
@@ -602,7 +601,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+            className="grid md:grid-cols-3 gap-8"
           >
             {t.positioning.points.map((point, index) => {
               const Icon = iconMap[point.icon];
@@ -792,7 +791,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+            className="grid md:grid-cols-3 gap-8"
           >
             {t.insights.items.map((item, index) => (
               <motion.article
@@ -911,7 +910,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+            className="grid md:grid-cols-3 gap-8"
           >
             {t.approach.steps.map((step, index) => (
               <motion.div
@@ -1095,7 +1094,6 @@ export default function BarholexMediaLanding() {
 
       {/* Footer */}
       <FooterInstitutional />
-      <BackToTop threshold={300} />
     </div>
   );
 }

@@ -63,7 +63,6 @@ import {
   Shield,
 } from "lucide-react";
 import { FREE_ACCESS_MODE } from "@shared/const";
-import { BackToTop } from "@/components/mobile";
 
 // ─── 7-Slot Template Definition ─────────────────────────────────
 const SLOT_TEMPLATE = [
@@ -134,8 +133,7 @@ function ProgressRing({
         <span className="text-[10px] text-white/90 uppercase tracking-wider">
           complete
         </span>
-            <BackToTop threshold={300} />
-</div>
+      </div>
     </div>
   );
 }

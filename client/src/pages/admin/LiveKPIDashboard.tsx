@@ -12,7 +12,6 @@ import {
   Zap, Clock, BookOpen, Shield, Webhook, Cpu, AlertTriangle,
   CheckCircle2, XCircle, Gauge, Mic, MessageSquare, Volume2,
 } from "lucide-react";
-import { BackToTop } from "@/components/mobile";
 
 // ============================================================================
 // SHARED COMPONENTS
@@ -59,8 +58,7 @@ function ProgressBar({ label, value, max, color }: { label: string; value: numbe
       </div>
       <div className="h-2 bg-muted rounded-full overflow-hidden">
         <div className={`h-full rounded-full transition-all ${color}`} style={{ width: `${pct}%` }} />
-            <BackToTop threshold={300} />
-</div>
+      </div>
     </div>
   );
 }

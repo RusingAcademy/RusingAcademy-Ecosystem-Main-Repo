@@ -182,7 +182,7 @@ export default function VerifyCertificate() {
           )}
 
           {/* Info Section */}
-          <div className="mt-16 grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div className="mt-16 grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <svg className="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

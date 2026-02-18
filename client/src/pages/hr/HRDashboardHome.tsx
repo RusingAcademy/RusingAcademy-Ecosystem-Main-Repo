@@ -9,7 +9,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useState } from "react";
-import { BackToTop } from "@/components/mobile";
 
 const ACCENT = "var(--color-blue-600, var(--color-blue-600, var(--semantic-info)))";
 
@@ -25,8 +24,7 @@ function KPICard({ icon, label, value, sub, trend }: { icon: string; label: stri
       <p className="text-xs text-gray-500 mb-1">{label}</p>
       <p className="text-2xl font-bold text-gray-900">{value}</p>
       <p className="text-[10px] text-gray-400 mt-1">{sub}</p>
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }
 

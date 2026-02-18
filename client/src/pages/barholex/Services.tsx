@@ -346,7 +346,7 @@ export default function BarholexServices() {
               <span className="inline-block px-4 py-1.5 rounded-full bg-barholex-gold/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "Our Expertise" : "Notre expertise"}
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Services That Drive Results" : "Services qui génèrent des résultats"}
               </h2>
               <p className="text-lg text-white/90 max-w-2xl mx-auto">
@@ -481,7 +481,7 @@ export default function BarholexServices() {
               <span className="inline-block px-4 py-1.5 rounded-full bg-barholex-gold/10 text-barholex-gold text-sm font-medium mb-4">
                 {language === "en" ? "How We Work" : "Comment nous travaillons"}
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Our Proven Process" : "Notre processus éprouvé"}
               </h2>
               <p className="text-lg text-white/90 max-w-2xl mx-auto">
@@ -584,7 +584,7 @@ export default function BarholexServices() {
           
           <div className="container mx-auto relative z-10">
             <div className="max-w-3xl mx-auto text-center text-black dark:text-foreground">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {language === "en" ? "Ready to Transform Your Learning Experience?" : "Prêt à transformer votre expérience d'apprentissage?"}
               </h2>
               <p className="text-xl text-black dark:text-foreground/80 mb-4 md:mb-6 lg:mb-10">

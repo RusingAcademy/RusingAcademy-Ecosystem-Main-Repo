@@ -69,7 +69,6 @@ const BUNDLE_IDS: Record<string, string> = {
   'Bilingual Excellence': 'bundle-excellence',
 };
 import FooterInstitutional from '../components/FooterInstitutional';
-import { BackToTop } from "@/components/mobile";
 import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
 // Path Series Images
@@ -744,7 +743,7 @@ export default function RusingAcademyLanding() {
           />
         </div>
 
-        <div className="relative max-w-5xl mx-auto px-6 md:px-8 lg:px-12 py-10 sm:py-12 md:py-16 lg:py-24 text-center">
+        <div className="relative max-w-5xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16 lg:py-24 text-center">
           <div className="flex flex-col items-center">
             <motion.div
               style={{ opacity: heroOpacity, scale: heroScale }}
@@ -913,7 +912,7 @@ export default function RusingAcademyLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-6 md:mb-8 lg:mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               {t.problem.title}
             </h2>
             <p className="text-lg max-w-2xl mx-auto text-slate-600">
@@ -1000,7 +999,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ PATH SERIES SECTION — Premium Redesign ═══ */}
-      <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative overflow-x-clip">
+      <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative overflow-x-clip">
         <div 
           className="absolute inset-0 opacity-20"
           style={{ background: subtleGradient }}
@@ -1360,7 +1359,7 @@ export default function RusingAcademyLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-8 md:mb-12 lg:mb-16"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               {t.whyUs.title}
             </h2>
             <p className="text-lg max-w-2xl mx-auto text-slate-600">
@@ -1396,7 +1395,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ BUNDLES SECTION — With Strikethrough Pricing ═══ */}
-      <section className="py-10 sm:py-12 md:py-16 lg:py-24 bg-stone-50 relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-24 bg-stone-50 relative overflow-hidden">
         <div 
           className="absolute inset-0 opacity-10"
           style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(13, 148, 136, 0.2) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(124, 58, 237, 0.2) 0%, transparent 60%)' }}
@@ -1516,7 +1515,7 @@ export default function RusingAcademyLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-6 md:mb-10 lg:mb-14"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               {t.offerings.title}
             </h2>
             <p className="text-lg max-w-2xl mx-auto text-slate-600">
@@ -1524,7 +1523,7 @@ export default function RusingAcademyLanding() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {t.offerings.items.map((item, index) => {
               const Icon = iconMap[item.icon];
               return (
@@ -1606,7 +1605,7 @@ export default function RusingAcademyLanding() {
                 variants={animationVariants.fadeInUp}
                 className="mb-4 md:mb-6 lg:mb-10"
               >
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
                   {t.testimonials.title}
                 </h2>
                 <p className="text-lg text-slate-600">
@@ -1654,7 +1653,7 @@ export default function RusingAcademyLanding() {
 
       {/* ═══ FINAL CTA SECTION ═══ */}
       <section 
-        className="py-10 sm:py-12 md:py-16 lg:py-24 relative overflow-hidden"
+        className="py-12 md:py-16 lg:py-24 relative overflow-hidden"
         style={{ background: premiumGradient }}
       >
         <div className="absolute inset-0 opacity-10">
@@ -1674,7 +1673,7 @@ export default function RusingAcademyLanding() {
             variants={animationVariants.fadeInUp}
           >
             <Building2 className="w-12 h-12 mx-auto mb-6 text-white/90" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               {t.cta.title}
             </h2>
             <p className="text-lg mb-8 text-white/90 max-w-2xl mx-auto">
@@ -1708,7 +1707,6 @@ export default function RusingAcademyLanding() {
 
       {/* Footer */}
       <FooterInstitutional />
-      <BackToTop threshold={300} />
     </div>
   );
 }

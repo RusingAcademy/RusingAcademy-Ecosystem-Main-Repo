@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
-import { BackToTop } from "@/components/mobile";
 
 export default function LearnerPayments() {
   const { isInsideAppLayout } = useAppLayout();
@@ -307,7 +306,6 @@ export default function LearnerPayments() {
       </main>
       
       {!isInsideAppLayout && <Footer />}
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }

@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
 import { CheckCircle, Mail, Clock, Phone, ArrowRight, Home } from "lucide-react";
-import { BackToTop } from "@/components/mobile";
 
 export default function BookingConfirmation() {
   const { language } = useLanguage();
@@ -140,7 +139,7 @@ export default function BookingConfirmation() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 lg:mb-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 lg:mb-12 text-center">
                 {l.nextSteps}
               </h2>
 
@@ -242,7 +241,6 @@ export default function BookingConfirmation() {
       </main>
 
       <Footer />
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }

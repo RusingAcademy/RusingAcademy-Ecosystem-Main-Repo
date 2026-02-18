@@ -25,7 +25,6 @@ import {
   Sparkles, GraduationCap, Globe
 } from "lucide-react";
 import { toast } from "sonner";
-import { BackToTop } from "@/components/mobile";
 
 export default function ContentPipelineDashboard() {
   const [activeTab, setActiveTab] = useState("health");
@@ -201,8 +200,7 @@ export default function ContentPipelineDashboard() {
           onClose={() => setPreviewCourseId(null)}
         />
       )}
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }
 

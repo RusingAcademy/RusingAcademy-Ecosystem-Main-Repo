@@ -55,7 +55,6 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
-import { BackToTop } from "@/components/mobile";
 import {
   LIBRARY_ITEMS,
   LIBRARY_CATEGORIES,
@@ -139,7 +138,7 @@ function LibraryHero({ language }: { language: string }) {
         backgroundSize: "40px 40px",
       }} />
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+      <div className="container mx-auto px-6 md:px-8 relative z-10">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -282,7 +281,7 @@ function FilterBar({
 
   return (
     <section className="sticky top-0 z-30 bg-white dark:bg-background/95 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4">
+      <div className="container mx-auto px-6 md:px-8 py-4">
         {/* Search + Toggle */}
         <div className="flex items-center gap-4">
           <div className="relative flex-1 max-w-xl">
@@ -930,10 +929,10 @@ export default function Library() {
         />
 
         {/* Content */}
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+        <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">
           {/* If no active filters, show curated sections */}
           {!hasActiveFilters ? (
-            <div className="space-y-12 sm:space-y-16 md:space-y-20">
+            <div className="space-y-20">
               {/* Featured Section */}
               {featuredItems.length > 0 && (
                 <section>
@@ -947,7 +946,7 @@ export default function Library() {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-50px" }}
                     variants={staggerContainer}
-                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
+                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-6"
                   >
                     {featuredItems.map((item) => (
                       <ProductCard
@@ -974,7 +973,7 @@ export default function Library() {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-50px" }}
                     variants={staggerContainer}
-                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
+                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-6"
                   >
                     {newItems.map((item) => (
                       <ProductCard
@@ -1009,7 +1008,7 @@ export default function Library() {
                       whileInView="visible"
                       viewport={{ once: true, margin: "-50px" }}
                       variants={staggerContainer}
-                      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
+                      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-6"
                     >
                       {catItems.map((item) => (
                         <ProductCard
@@ -1098,7 +1097,6 @@ export default function Library() {
           theme="light"
           activeBrand="rusingacademy"
         />
-        <BackToTop threshold={300} />
       </div>
     </>
   );

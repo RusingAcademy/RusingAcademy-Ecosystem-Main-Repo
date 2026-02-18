@@ -3,7 +3,6 @@ import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 // Header removed - using EcosystemLayout sub-header instead
 import Footer from "@/components/Footer";
-import { BackToTop } from "@/components/mobile";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -356,7 +355,6 @@ export default function Courses() {
       </section>
 
       <Footer />
-      <BackToTop threshold={300} />
     </div>
   );
 }

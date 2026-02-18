@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import FooterInstitutional from "@/components/FooterInstitutional";
 import CrossEcosystemSection from "@/components/CrossEcosystemSection";
-import { BackToTop, WaveDivider, SectionLabel } from "@/components/mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   GraduationCap,
@@ -937,7 +936,7 @@ export default function LingueefyLanding() {
                 {isTyping && <span className="animate-pulse">|</span>}
               </span>
               <br />
-              <span className="text-black dark:text-foreground text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium">
+              <span className="text-black dark:text-foreground text-3xl md:text-4xl lg:text-5xl font-medium">
                 {c.hero.subtitle}
               </span>
             </h1>
@@ -1038,7 +1037,7 @@ export default function LingueefyLanding() {
             {/* Connecting line */}
             <div className="hidden md:block absolute top-24 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-teal-200 via-teal-400 to-teal-200" />
             
-            <div className="grid md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid md:grid-cols-4 gap-8">
               {c.howItWorks.steps.map((step, index) => (
                 <div 
                   key={index} 
@@ -1086,7 +1085,7 @@ export default function LingueefyLanding() {
           
           {/* Two Path Options */}
           <div className="max-w-5xl mx-auto mb-8 md:mb-12 lg:mb-16">
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Marketplace Option */}
               <div className="bg-white dark:bg-background rounded-3xl p-8 border-2 border-slate-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group">
                 <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -1262,7 +1261,7 @@ export default function LingueefyLanding() {
           </div>
           
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               {c.sleLevels.levels.map((level, index) => {
                 const colorClasses = {
                   emerald: {
@@ -1357,7 +1356,7 @@ export default function LingueefyLanding() {
             </Link>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {c.coaches.items.map((coach, index) => (
               <Card 
                 key={index} 
@@ -1602,7 +1601,6 @@ export default function LingueefyLanding() {
       <CrossEcosystemSection variant="lingueefy" />
 
       <FooterInstitutional />
-      <BackToTop threshold={400} />
     </div>
   );
 }

@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { trpc } from '@/lib/trpc';
 import PortalLayout from '@/components/portal/PortalLayout';
-import { BackToTop } from "@/components/mobile";
 
 // Types
 interface Session {
@@ -109,8 +108,7 @@ const SessionCard = ({ session }: { session: Session }) => {
         <button className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 dark:text-muted-foreground rounded-lg hover:bg-white dark:bg-background text-sm font-medium">
           Notes
         </button>
-            <BackToTop threshold={300} />
-</div>
+      </div>
     </div>
   );
 };

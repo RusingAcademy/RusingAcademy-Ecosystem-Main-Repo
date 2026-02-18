@@ -302,7 +302,7 @@ export default function CoachAvailabilityPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
               {/* Weekly Availability */}

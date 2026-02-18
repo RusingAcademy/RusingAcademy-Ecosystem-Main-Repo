@@ -35,7 +35,6 @@ import {
 } from "recharts";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { BackToTop } from "@/components/mobile";
 
 // ─── Types ───────────────────────────────────────────────────────────
 type Language = "fr" | "en";
@@ -725,8 +724,7 @@ export default function SLEProgressDashboard() {
             </div>
           )}
         </motion.div>
-            <BackToTop threshold={300} />
-</div>
+      </div>
     </div>
   );
 }

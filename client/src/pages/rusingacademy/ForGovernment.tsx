@@ -264,21 +264,21 @@ export default function ForGovernment() {
         {/* Stats Section */}
         <section className="py-8 border-y border-gray-200 dark:border-border dark:border-border/50 bg-white dark:bg-background/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={departments.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-400 mb-1">{departments.count}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{departments.count}+</div>
                 <div className="text-sm text-black dark:text-foreground">{t.stats[0].label}</div>
               </div>
               <div ref={passRate.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-400 mb-1">{passRate.count}%</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{passRate.count}%</div>
                 <div className="text-sm text-black dark:text-foreground">{t.stats[1].label}</div>
               </div>
               <div ref={servants.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-400 mb-1">{servants.count.toLocaleString()}+</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{servants.count.toLocaleString()}+</div>
                 <div className="text-sm text-black dark:text-foreground">{t.stats[2].label}</div>
               </div>
               <div ref={satisfaction.ref} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-400 mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
+                <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
                 <div className="text-sm text-black dark:text-foreground">{t.stats[3].label}</div>
               </div>
             </div>
@@ -315,7 +315,7 @@ export default function ForGovernment() {
         <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {t.benefitsTitle}
               </h2>
             </div>
@@ -344,7 +344,7 @@ export default function ForGovernment() {
         <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {t.pathsTitle}
               </h2>
               <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
@@ -386,7 +386,7 @@ export default function ForGovernment() {
         <section className="py-10 md:py-16 lg:py-20 px-4 bg-gradient-to-br from-gray-50 to-stone-50">
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {t.packagesTitle}
               </h2>
               <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">
@@ -451,7 +451,7 @@ export default function ForGovernment() {
         <section className="py-10 md:py-16 lg:py-20 px-4">
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                 {t.testimonialsTitle}
               </h2>
             </div>
@@ -491,7 +491,7 @@ export default function ForGovernment() {
                     {isEn ? "Get Started Today" : "Commencez aujourd'hui"}
                   </span>
                 </motion.div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
                   {t.ctaTitle}
                 </h2>
                 <p className="text-lg text-black dark:text-foreground max-w-2xl mx-auto">

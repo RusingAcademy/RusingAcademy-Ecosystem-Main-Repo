@@ -447,7 +447,7 @@ export default function BarholexPortfolio() {
         </section>
 
         {/* ─── Testimonials Section ─── Warm cream background with glassmorphism cards */}
-        <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-[#F5F5F3] to-[#FAFAF8] relative overflow-hidden">
+        <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-[#F5F5F3] to-[#FAFAF8] relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-gold, var(--barholex-gold))]/20 to-transparent" />
           <div className="absolute top-20 right-[10%] w-64 h-64 bg-barholex-gold/5 rounded-full blur-[80px]" />
@@ -547,7 +547,7 @@ export default function BarholexPortfolio() {
         </section>
 
         {/* ─── CTA Section ─── Dark navy with gold gradient accent */}
-        <section className="py-10 sm:py-12 md:py-16 lg:py-24 px-4 relative overflow-hidden bg-slate-900">
+        <section className="py-12 md:py-16 lg:py-24 px-4 relative overflow-hidden bg-slate-900">
           {/* Background texture */}
           <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(212,175,55,0.03)_25%,transparent_25%,transparent_50%,rgba(212,175,55,0.03)_50%,rgba(212,175,55,0.03)_75%,transparent_75%)] bg-[size:24px_24px]" />
           {/* Gold accent line at top */}

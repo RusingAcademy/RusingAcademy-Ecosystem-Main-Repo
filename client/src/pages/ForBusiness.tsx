@@ -294,7 +294,7 @@ export default function ForBusiness() {
                 { value: t.stat4Value, label: t.stat4Label },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-600 dark:text-teal-400 mb-1">{stat.value}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-teal-600 dark:text-teal-400 mb-1">{stat.value}</div>
                   <div className="text-sm text-black dark:text-foreground dark:text-cyan-300">{stat.label}</div>
                 </div>
               ))}
@@ -307,7 +307,7 @@ export default function ForBusiness() {
       <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-card dark:bg-obsidian">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.benefitsTitle}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.benefitsTitle}</h2>
             <p className="text-lg text-black dark:text-foreground dark:text-cyan-300 max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
           </div>
           
@@ -331,7 +331,7 @@ export default function ForBusiness() {
       <section ref={setSectionRef('packages')} data-section="packages" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.packagesTitle}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.packagesTitle}</h2>
             <p className="text-lg text-black dark:text-foreground dark:text-cyan-300 max-w-2xl mx-auto">{t.packagesSubtitle}</p>
           </div>
           
@@ -377,7 +377,7 @@ export default function ForBusiness() {
       <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-card dark:bg-obsidian">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.industriesTitle}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.industriesTitle}</h2>
             <p className="text-lg text-black dark:text-foreground dark:text-cyan-300 max-w-2xl mx-auto">{t.industriesSubtitle}</p>
           </div>
           
@@ -401,7 +401,7 @@ export default function ForBusiness() {
       <section ref={setSectionRef('testimonials')} data-section="testimonials" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.testimonialsTitle}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.testimonialsTitle}</h2>
           </div>
           
           <div className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -431,7 +431,7 @@ export default function ForBusiness() {
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.formTitle}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.formTitle}</h2>
               <p className="text-lg text-black dark:text-foreground dark:text-cyan-300">{t.formSubtitle}</p>
             </div>
             
@@ -500,7 +500,7 @@ export default function ForBusiness() {
       {/* Final CTA Section */}
       <section className="py-20 md:py-28 bg-gradient-to-r from-teal-600 to-emerald-600">
         <div className="container text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">{t.ctaTitle}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{t.ctaTitle}</h2>
           <p className="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">{t.ctaSubtitle}</p>
           <Button size="lg" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 shadow-lg hover:shadow-xl transition-all duration-300 px-8">
             <Calendar className="w-5 h-5 mr-2" />

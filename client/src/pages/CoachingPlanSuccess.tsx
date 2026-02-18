@@ -95,7 +95,7 @@ export default function CoachingPlanSuccess() {
             <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-teal-100 to-orange-50 dark:from-teal-900/30 dark:to-amber-900/30 mb-6 shadow-lg">
               <CheckCircle2 className="h-12 w-12 text-teal-600 dark:text-teal-400" />
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-teal-700 to-cta bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-teal-700 to-cta bg-clip-text text-transparent">
               {l.title}
             </h1>
             <p className="text-black dark:text-foreground text-lg">{l.subtitle}</p>

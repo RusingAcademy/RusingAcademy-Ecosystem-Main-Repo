@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { DollarSign, CreditCard, TrendingUp, ArrowUpRight, RefreshCw, Search, Download, Users, Receipt } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
-import { BackToTop } from "@/components/mobile";
 
 export default function PaymentsAdmin() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -70,7 +69,6 @@ export default function PaymentsAdmin() {
           <EmptyState icon={DollarSign} title="One-Time Purchases" description="Track coaching plan purchases, course purchases, and other one-time payments." />
         </TabsContent>
       </Tabs>
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }

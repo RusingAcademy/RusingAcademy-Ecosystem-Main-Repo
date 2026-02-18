@@ -14,7 +14,6 @@ import LearningCapsules from "@/components/homepage/LearningCapsules";
 import YouTubeVideos from "@/components/homepage/YouTubeVideos";
 import TrilemmaSection from "@/components/homepage/TrilemmaSection";
 import FooterInstitutional from "@/components/FooterInstitutional";
-import { BackToTop, WaveDivider } from "@/components/mobile";
 import ProofGallery from "@/components/ProofGallery";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
@@ -388,7 +387,7 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Real Training in Action - Proof Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-16 md:py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -489,7 +488,7 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-16 md:py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -792,7 +791,6 @@ export default function EcosystemLanding() {
 
       {/* Footer - Institutional */}
       <FooterInstitutional />
-      <BackToTop threshold={400} />
     </div>
   );
 }

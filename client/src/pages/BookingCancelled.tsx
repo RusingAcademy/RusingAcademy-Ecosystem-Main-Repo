@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { XCircle, ArrowLeft, HelpCircle, MessageSquare } from "lucide-react";
-import { BackToTop } from "@/components/mobile";
 
 export default function BookingCancelled() {
   const { language } = useLanguage();
@@ -79,7 +78,6 @@ export default function BookingCancelled() {
       </main>
 
       <Footer />
-          <BackToTop threshold={300} />
-</div>
+    </div>
   );
 }

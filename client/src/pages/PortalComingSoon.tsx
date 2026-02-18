@@ -3,7 +3,6 @@
  * Used for Coach Portal, HR Portal, and Admin Control System
  */
 import { useLocation } from "wouter";
-import { BackToTop } from "@/components/mobile";
 
 const LOGO_ICON = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mrXRaWLUDJGHdcjc.png";
 
@@ -220,8 +219,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
           <p className="text-center text-[10px] text-gray-300 mt-1">
             Rusinga International Consulting Ltd.
           </p>
-              <BackToTop threshold={300} />
-</div>
+        </div>
       </div>
     </div>
   );

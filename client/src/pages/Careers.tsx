@@ -209,7 +209,7 @@ export default function Careers() {
             <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-6 md:mb-8 lg:mb-12">
               {t.values.title}
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {t.values.items.map((value, index) => {
                 const Icon = iconMap[value.icon as keyof typeof iconMap];
                 return (

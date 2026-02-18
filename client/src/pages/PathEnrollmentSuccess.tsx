@@ -162,7 +162,7 @@ export default function PathEnrollmentSuccess() {
               {t ? "Inscription Confirmée" : "Enrollment Confirmed"}
             </Badge>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-foreground mb-4">
               {t ? "Félicitations!" : "Congratulations!"}
             </h1>
             

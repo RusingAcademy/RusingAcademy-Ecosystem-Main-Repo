@@ -148,7 +148,7 @@ function SectionRenderer({ section }: { section: any }) {
           <div className="container max-w-6xl mx-auto px-6">
             {section.title && <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-4">{section.title}</h2>}
             {section.subtitle && <p className="text-lg opacity-70 text-center mb-6 md:mb-8 lg:mb-12 max-w-2xl mx-auto">{section.subtitle}</p>}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((f: any, i: number) => (
                 <div key={i} className="p-6 rounded-xl border bg-white dark:bg-background/5 backdrop-blur-sm">
                   {f.icon && <div className="text-lg md:text-2xl lg:text-3xl mb-3">{f.icon}</div>}
@@ -189,7 +189,7 @@ function SectionRenderer({ section }: { section: any }) {
       return (
         <section style={sectionStyle}>
           <div className="container max-w-4xl mx-auto px-6 text-center">
-            {section.title && <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{section.title}</h2>}
+            {section.title && <h2 className="text-3xl md:text-4xl font-bold mb-4">{section.title}</h2>}
             {section.subtitle && <p className="text-lg opacity-80 mb-8 max-w-xl mx-auto">{section.subtitle}</p>}
             <div className="flex flex-wrap gap-4 justify-center">
               {content.primaryText && (
