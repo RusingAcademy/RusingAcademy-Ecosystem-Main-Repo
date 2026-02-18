@@ -258,7 +258,7 @@ export default function RightSidebar() {
           Professional courses for bilingual excellence in Canada's public service.
         </p>
         <a
-          href="https://www.rusingacademy.com"
+          href="https://www.rusingacademy.ca"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-xs font-bold px-5 py-2.5 rounded-xl text-white transition-all duration-300 hover:shadow-md active:scale-[0.97]"

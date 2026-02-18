@@ -273,7 +273,7 @@ export default function Footer() {
                 <span className="text-sm font-medium">Ottawa, Ontario, Canada</span>
               </div>
               <a 
-                href="https://www.rusingacademy.com" 
+                href="https://www.rusingacademy.ca" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-white/90 hover:text-teal-400 transition-colors group"
@@ -281,7 +281,7 @@ export default function Footer() {
                 <div className="h-10 w-10 rounded-xl bg-foundation/80 border border-teal-800 flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
                   <Globe className="h-5 w-5" />
                 </div>
-                <span className="text-sm font-medium">www.rusingacademy.com</span>
+                <span className="text-sm font-medium">www.rusingacademy.ca</span>
               </a>
             </div>
             
@@ -348,7 +348,7 @@ export default function Footer() {
                 {language === "fr" ? "Une entreprise de" : "A company of"}
               </span>
               <a 
-                href="https://www.rusingacademy.com" 
+                href="https://www.rusingacademy.ca" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-sm font-bold text-teal-400 hover:text-teal-300 transition-colors"

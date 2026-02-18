@@ -256,7 +256,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
 
         {/* External link */}
         <a
-          href="https://www.rusingacademy.com"
+          href="https://www.rusingacademy.ca"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-all w-full group"

@@ -709,7 +709,7 @@ function PostLoginRedirect() {
 // Wave 7: Canonical URL Hook for SEO
 function useCanonicalUrl() {
   const [location] = useLocation();
-  const baseUrl = 'https://www.rusingacademy.com';
+  const baseUrl = 'https://www.rusingacademy.ca';
 
   useEffect(() => {
     // Remove existing canonical link

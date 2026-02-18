@@ -257,7 +257,7 @@ export default function LearningCapsules() {
         {/* CTA Button */}
         <div className="text-center mt-12">
           <a 
-            href="https://www.rusingacademy.com/products/communities/v2/slecommunity/home"
+            href="https://www.rusingacademy.ca/products/communities/v2/slecommunity/home"
             target="_blank"
             rel="noopener noreferrer"
           >

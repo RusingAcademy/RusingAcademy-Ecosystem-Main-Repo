@@ -17,7 +17,7 @@ const brands: Brand[] = [
     logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/sYQuXPkCMPOJjHEZ.png",
     description: "Expert SLE coaching and structured learning paths for federal public servants",
     descriptionFr: "Coaching SLE expert et parcours d'apprentissage structurés pour les fonctionnaires fédéraux",
-    url: "https://www.rusingacademy.com",
+    url: "https://www.rusingacademy.ca",
     bgColor: "bg-cta",
     textColor: "text-white",
   },

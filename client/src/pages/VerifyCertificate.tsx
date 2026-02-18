@@ -238,8 +238,8 @@ export default function VerifyCertificate() {
                 <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:text-white text-sm">
                   rusing.academy
                 </a>
-                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:text-white text-sm">
-                  rusingacademy.com
+                <a href="https://rusingacademy.ca" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:text-white text-sm">
+                  rusingacademy.ca
                 </a>
               </div>
             </div>
