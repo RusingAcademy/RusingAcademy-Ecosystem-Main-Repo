@@ -30,15 +30,16 @@
 :root {
   /* === PRIMARY BRAND COLORS === */
   
-  /* Foundation (Deep Forest Teal — preserved from brand) */
-  --brand-foundation: #0F3D3E;
-  --brand-foundation-2: #145A5B;
+  /* Foundation (Deep Forest Teal — HAZY-adjusted) */
+  --brand-foundation: #1a3d3d;
+  --brand-foundation-2: #2d5858;
   --brand-foundation-soft: #E7F2F2;
   
-  /* CTA (Electric Copper/Orange — preserved from brand) */
-  --brand-cta: #C65A1E;
-  --brand-cta-2: #E06B2D;
-  --brand-cta-soft: #FFF1E8;
+  /* CTA (Copper Premium — Hybrid) */
+  --brand-cta: #B87333;
+  --brand-cta-2: #8F5626;
+  --brand-cta-glow: #E7C2A1;
+  --brand-cta-soft: #FFF8F3;
   
   /* Premium Dark (Obsidian Grey) */
   --brand-obsidian: #062b2b;
@@ -105,8 +106,8 @@
   --color-accent-soft: var(--brand-cta-soft);
   
   /* === TEXT COLORS === */
-  --text-primary: #0B1220;               /* Near black for maximum contrast */
-  --text-secondary: #374151;             /* Dark grey for secondary text */
+  --text-primary: #192524;               /* HAZY ink for maximum contrast */
+  --text-secondary: #3C5759;             /* HAZY secondary text */
   --text-muted: #6B7280;                 /* Medium grey for muted text */
   --text-inverse: #FFFFFF;               /* White for dark backgrounds */
   --text-on-sage: #1F2937;               /* Dark text on sage backgrounds */
@@ -369,7 +370,7 @@ body[data-brand="barholex"],
 /* === Focus States === */
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.4);
+  box-shadow: 0 0 0 3px rgba(26, 61, 61, 0.25);
 }
 
 a:focus-visible,
@@ -380,11 +381,11 @@ textarea:focus-visible,
 [role="button"]:focus-visible,
 [tabindex]:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.4);
+  box-shadow: 0 0 0 3px rgba(26, 61, 61, 0.25);
 }
 
 /* CTA buttons get copper focus ring */
 .btn-cta:focus-visible,
 [data-cta]:focus-visible {
-  box-shadow: 0 0 0 3px rgba(198, 90, 30, 0.4);
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25);
 }

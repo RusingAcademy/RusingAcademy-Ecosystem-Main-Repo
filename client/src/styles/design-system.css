@@ -3,17 +3,18 @@
  * RUSINGACADEMY ECOSYSTEM - UNIFIED DESIGN SYSTEM
  * ============================================
  * 
- * Version: 6.0.0 (Wave 1 — Unified)
- * Design System: Néo-Institutionnel / Light Luxury
+ * Version: 7.0.0 (Hybrid — HAZY + Copper + Glassmorphism)
+ * Design System: Premium Hybrid / Glassmorphism
  * 
  * This file is the SINGLE SOURCE OF TRUTH for all design tokens.
- * It merges the original tokens.css (v3.0) with light-luxury-tokens.css (v5.0).
- * Where values conflict, light-luxury-tokens.css values take precedence.
- * 
- * Palette: Deep Forest Teal + Electric Copper + Obsidian + Light Luxury
+ * Palette: HAZY base (#EFECE9) + Copper CTA (#B87333) + Teal nav (#0D9488)
  * Typography: Merriweather (display) + Inter (UI)
  * 
- * DO NOT create additional token files. All design tokens belong here.
+ * RULES:
+ * - Teal = navigation, links, info badges, structural elements
+ * - Copper = CTA primary, pricing featured, critical actions
+ * - HAZY neutrals = reading surfaces, pedagogical sections
+ * - DO NOT create additional token files. All design tokens belong here.
  */
 
 /* ============================================
@@ -21,25 +22,29 @@
    ============================================ */
 :root {
   /* === FOUNDATION / TRUST (Deep Forest Teal — "Vert Laurentides") === */
-  --brand-foundation: #0F3D3E;
-  --brand-foundation-2: #145A5B;
+  --brand-foundation: #1a3d3d;
+  --brand-foundation-2: #2d5858;
   --brand-foundation-soft: #E7F2F2;
   
-  /* === INNOVATION / CTA (Electric Copper — "Cuivre Électrique") === */
-  --brand-cta: #C65A1E;
-  --brand-cta-2: #E06B2D;
-  --brand-cta-soft: #FFF1E8;
+  /* === INNOVATION / CTA (Copper Premium — "Cuivre Raffiné") === */
+  --brand-cta: #B87333;
+  --brand-cta-2: #8F5626;
+  --brand-cta-glow: #E7C2A1;
+  --brand-cta-soft: #FFF8F3;
   
-  /* === PREMIUM DARK (Obsidian Grey) === */
-  --brand-obsidian: #111827;
-  --brand-obsidian-2: #0B1220;
+  /* === PREMIUM DARK (Obsidian) === */
+  --brand-obsidian: #062b2b;
+  --brand-obsidian-2: #041e1e;
   
-  /* === CORE BACKGROUNDS (Light Luxury) === */
-  --bg: #FEFEF8;              /* Main background - warm ivory (Light Luxury) */
-  --bg-alt: #F5F1D6;          /* Alternate background - soft cream */
+  /* === CORE BACKGROUNDS (HAZY Warm Cream) === */
+  --bg: #EFECE9;              /* Main background - HAZY warm cream */
+  --bg-alt: #E8E4DE;          /* Alternate background - adjusted sand */
   --surface: #FFFFFF;          /* Cards, modals - pure white */
-  --sand: #EEE9DF;             /* Sand accent (from tokens.css) */
-  --border: #E6E6E0;           /* Borders - soft gray (Light Luxury) */
+  --surface-soft: #D0D5CE;    /* HAZY silver sage */
+  --sand: #E8E4DE;             /* Sand accent - harmonized */
+  --mint: #D1EBDB;             /* HAZY mint - pedagogical sections */
+  --border: rgba(25, 37, 36, 0.12); /* HAZY glass border */
+  --border-solid: #E5E7EB;    /* Solid border fallback */
   
 
   /* === ACCENT COLORS (Wave 3) === */
@@ -49,15 +54,16 @@
   --semantic-info: #2563EB;
   --semantic-info-light: #DBEAFE;
 
-  /* === TEXT COLORS (HIGH CONTRAST) === */
-  --text: #0a0a0a;             /* Primary text - near black for max contrast */
+  /* === TEXT COLORS (HAZY Hierarchy + WCAG AA) === */
+  --text: #192524;             /* Ink - HAZY primary text */
+  --text-secondary: #3C5759;   /* HAZY secondary text */
   --text-inverse: #FFFFFF;     /* Text on dark/colored backgrounds */
   --text-on-dark: #F7F6F3;     /* Text on dark sections */
-  --text-muted: #374151;       /* Secondary text - dark gray */
-  --text-paragraph: #1f2937;   /* Paragraph text - very dark gray */
-  --muted: #1f2937;            /* Dark gray for text - HIGH CONTRAST (from tokens.css) */
+  --text-muted: #6B7280;       /* WCAG-safe muted (NOT #959D90) */
+  --text-paragraph: #3C5759;   /* Paragraph text - HAZY secondary */
+  --muted: #6B7280;            /* WCAG-safe muted */
   --muted-on-dark: rgba(255, 255, 255, 0.85);
-  --muted-foreground: #374151; /* TEXT muted - DARK GRAY for contrast */
+  --muted-foreground: #6B7280; /* WCAG-safe muted foreground */
   
   /* === BRAND ACCENTS === */
   /* RusingAcademy (Formation/LMS) - Uses CTA Copper */
@@ -82,15 +88,17 @@
   --barholex-gold-light: #FEF9EE;
   --barholex-ink: #111827;
   
-  /* RusingAcademy - Teal (Light Luxury aliases) */
-  --teal: #008090;
-  --teal-hover: #00A0A0;
-  --teal-light: #E6F5F5;
+  /* RusingAcademy - Teal (Navigation / Info) */
+  --teal: #0D9488;
+  --teal-hover: #0F766E;
+  --teal-light: #5EEAD4;
+  --teal-soft: #CCFBF1;
   
-  /* === CTA COLORS (Orange Only — Light Luxury) === */
-  --cta: #F08800;
-  --cta-hover: #D97A00;
-  --cta-light: #FEF3E6;
+  /* === CTA COLORS (Copper — Hybrid) === */
+  --cta: #B87333;
+  --cta-hover: #8F5626;
+  --cta-glow: #E7C2A1;
+  --cta-light: #FFF8F3;
   
   /* === AI COMPANION (Violet Only) === */
   --ai-violet: #6D28D9;
@@ -126,16 +134,26 @@
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
   
-  /* === SHADOWS === */
-  --shadow-sm: 0 1px 2px rgba(8, 32, 56, 0.05);
-  --shadow-md: 0 4px 6px rgba(8, 32, 56, 0.07);
-  --shadow-lg: 0 10px 15px rgba(8, 32, 56, 0.10);
-  --shadow-xl: 0 20px 25px rgba(8, 32, 56, 0.15);
+  /* === SHADOWS (HAZY sophisticated) === */
+  --shadow-sm: 0 1px 2px rgba(25, 37, 36, 0.05);
+  --shadow-md: 0 4px 6px rgba(25, 37, 36, 0.07);
+  --shadow-lg: 0 10px 15px rgba(25, 37, 36, 0.10);
+  --shadow-xl: 0 20px 25px rgba(25, 37, 36, 0.15);
+  --shadow-soft: 0 10px 30px rgba(25, 37, 36, 0.10);
+  --shadow-tight: 0 2px 8px rgba(25, 37, 36, 0.08);
+  --shadow-cta: 0 12px 28px rgba(184, 115, 51, 0.20);
+  --shadow-cta-hover: 0 16px 32px rgba(184, 115, 51, 0.25);
   
-  /* === FOCUS RING === */
-  --ring: rgba(15, 61, 62, 0.4);
-  --ring-cta: rgba(198, 90, 30, 0.4);
+  /* === FOCUS RING (Copper accent) === */
+  --ring: rgba(26, 61, 61, 0.25);
+  --ring-cta: 0 0 0 3px rgba(184, 115, 51, 0.25);
   --ring-offset: 2px;
+  
+  /* === GLASSMORPHISM TOKENS === */
+  --glass-fill: rgba(239, 236, 233, 0.60);
+  --glass-border: 1px solid rgba(25, 37, 36, 0.12);
+  --glass-blur: blur(16px);
+  --glass-blur-strong: blur(20px);
   
   /* === LINKS === */
   --link: var(--brand-foundation);
@@ -606,35 +624,56 @@ body, p, span, div, li, a, button, input, select, textarea {
    ============================================ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0B1220;
-    --surface: #1F2937;
-    --sand: #374151;
+    --bg: #041e1e;
+    --bg-alt: #0a2e2e;
+    --surface: #0a4040;
+    --surface-soft: #0a6969;
+    --sand: #0a6969;
+    --mint: #0a3a2e;
     --text: #F7F6F3;
-    --text-inverse: #0B1220;
+    --text-secondary: #D0D5CE;
+    --text-inverse: #041e1e;
     --muted: #9CA3AF;
-    --border: #374151;
+    --muted-foreground: #9CA3AF;
+    --border: rgba(255, 255, 255, 0.1);
+    --border-solid: #374151;
+    --glass-fill: rgba(4, 30, 30, 0.80);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.40);
+    --shadow-tight: 0 2px 8px rgba(0, 0, 0, 0.30);
   }
 }
 
 /* Manual dark mode class */
 .dark {
-  --bg: #0B1220;
-  --surface: #1F2937;
-  --sand: #374151;
+  --bg: #041e1e;
+  --bg-alt: #0a2e2e;
+  --surface: #0a4040;
+  --surface-soft: #0a6969;
+  --sand: #0a6969;
+  --mint: #0a3a2e;
   --text: #F7F6F3;
-  --text-inverse: #0B1220;
+  --text-secondary: #D0D5CE;
+  --text-inverse: #041e1e;
   --muted: #9CA3AF;
-  --border: #374151;
+  --muted-foreground: #9CA3AF;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-solid: #374151;
   
   --brand-foundation-soft: #1a4a4b;
   --brand-cta-soft: #3d2a1a;
+  
+  --glass-fill: rgba(4, 30, 30, 0.80);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.40);
+  --shadow-tight: 0 2px 8px rgba(0, 0, 0, 0.30);
   
-  --ring: rgba(23, 226, 198, 0.5);
+  --ring: rgba(13, 148, 136, 0.5);
 }
 
 /* Dark mode body styles */
