@@ -749,7 +749,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                       const instanceKey = isDuplicate ? `${short.id}-dup` : short.id;
                       const realIndex = isDuplicate ? i - featuredShorts.length : i;
                       return (
-                        <div key={instanceKey} className="scroll-card shrink-0 w-[150px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
+                        <div key={instanceKey} className="scroll-card shrink-0 w-[165px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
                           {renderShortCard(short, realIndex, instanceKey)}
                         </div>
                       );

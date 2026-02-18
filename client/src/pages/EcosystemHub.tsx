@@ -403,7 +403,7 @@ function EcosystemSection({ language }: { language: string }) {
                 <img
                   loading="lazy" src={pillar.image}
                   alt={language === "en" ? pillar.nameEn : pillar.nameFr}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full max-h-[150px] sm:max-h-none object-contain sm:object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${pillar.gradient} opacity-60`} />
                 <div className="absolute bottom-4 left-4">

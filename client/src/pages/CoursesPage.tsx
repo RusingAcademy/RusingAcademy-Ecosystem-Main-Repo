@@ -668,9 +668,9 @@ export default function CoursesPage() {
                   </div>
                   <h3 className="text-lg font-bold text-black dark:text-foreground mb-2">{prop.title}</h3>
                   <p className="text-black dark:text-foreground text-sm">{prop.description}</p>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </StaggeredChildren>
           </div>
         </section>
 
@@ -722,18 +722,21 @@ export default function CoursesPage() {
                   {index < howItWorksSteps.length - 1 && (
                     <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-teal-200" />
                   )}
-                           <div className="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center mb-6">
-                    <prop.icon className="w-6 h-6 text-teal-600" />
+                  <div className="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center mb-6">
+                    <step.icon className="w-6 h-6 text-teal-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-foundation mb-3">{prop.title}</h3>
+                  <h3 className="text-xl font-bold text-foundation mb-3">{step.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                    {prop.description}
+                    {step.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </StaggeredChildren>
+            </div>
           </div>
-        </section>ction id="courses" className="py-8 border-b border-gray-100 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md sticky top-0 z-40 shadow-sm">
+        </section>
+
+        {/* Filter Section */}
+        <section id="courses" className="py-8 border-b border-gray-100 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md sticky top-0 z-40 shadow-sm">
           <div className="container">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-black dark:text-foreground">
