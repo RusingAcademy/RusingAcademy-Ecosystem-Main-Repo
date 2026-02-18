@@ -485,7 +485,7 @@ export default function EcosystemHeaderGold() {
                         transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                       }}
                     >
-                      <img 
+                      <img loading="lazy" decoding="async" 
                         loading="lazy" src={brand.iconSrc} 
                         alt={brand.name}
                         className="object-contain"

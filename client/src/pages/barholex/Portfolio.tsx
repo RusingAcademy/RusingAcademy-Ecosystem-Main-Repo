@@ -370,7 +370,7 @@ export default function BarholexPortfolio() {
                     onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
                   >
                     {/* Image */}
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       loading="lazy" src={project.image} 
                       alt={language === "en" ? project.titleEn : project.titleFr}
                       className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${

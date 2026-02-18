@@ -219,7 +219,7 @@ function CourseCard({ course, isEn, onEnroll, isLoading }: {
       className={`group overflow-hidden border-2 ${course.borderColor} hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
     >
       <div className="relative h-48 overflow-hidden">
-        <img 
+        <img loading="lazy" decoding="async" 
           loading="lazy" 
           src={course.image} 
           alt={isEn ? course.title : course.titleFr}

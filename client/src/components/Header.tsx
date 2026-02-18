@@ -109,7 +109,7 @@ export default function Header() {
                   glassEffect={true}
                 />
               ) : (
-                <img 
+                <img loading="lazy" decoding="async" 
                   loading="lazy" src={LOGO_URL}
                   alt="Lingueefy" 
                   className="h-12 sm:h-14 lg:h-16 w-auto object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
@@ -285,7 +285,7 @@ export default function Header() {
                 <div className="flex flex-col h-full">
                   {/* Mobile Header */}
                   <div className="p-6 border-b border-gray-100/50">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       loading="lazy" src={LOGO_URL}
                       alt="Lingueefy" 
                       className="h-12 w-auto"

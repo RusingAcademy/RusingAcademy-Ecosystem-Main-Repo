@@ -466,7 +466,7 @@ export default function EcosystemLanding() {
             className="relative"
           >
             <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: theme === "glass" ? "0 25px 50px rgba(0,0,0,0.4)" : "0 15px 40px rgba(0,0,0,0.1)" }}>
-              <img 
+              <img loading="lazy" decoding="async" 
                 loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/hero/steven-class.jpeg" 
                 alt={language === "en" ? "Real training session with Canadian public servants" : "Session de formation réelle avec des fonctionnaires canadiens"}
                 className="w-full h-auto object-cover"
@@ -607,7 +607,7 @@ export default function EcosystemLanding() {
                     {/* Author */}
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0">
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           loading="lazy" src={testimonial.image} 
                           alt={testimonial.author}
                           className="w-full h-full object-cover"
@@ -727,7 +727,7 @@ export default function EcosystemLanding() {
                 >
                   {/* SLE AI Companion Image or Placeholder */}
                   <div className="relative w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       loading="lazy" src="/coaches/steven-profile.jpg" 
                       alt="SLE AI Companion AI"
                       className="w-full h-full object-cover"

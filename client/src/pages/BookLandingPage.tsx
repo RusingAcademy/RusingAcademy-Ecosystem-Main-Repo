@@ -167,8 +167,7 @@ function BookHero({ item, language }: { item: LibraryItem; language: string }) {
               className="relative group"
               style={{ perspective: "1000px" }}
             >
-              <img
-                src={item.cover_image_url}
+              <img loading="lazy" decoding="async"                 src={item.cover_image_url}
                 alt={title}
                 className="w-full rounded-xl shadow-[0_25px_60px_rgba(0,0,0,0.4)] border border-white/10 group-hover:shadow-[0_30px_70px_rgba(249,115,22,0.2)] transition-shadow duration-500"
               />

@@ -252,8 +252,7 @@ export function BunnyVideoManager({
     return (
       <div className="flex items-center gap-3 p-3 rounded-lg border bg-card">
         <div className="relative w-24 h-16 rounded overflow-hidden bg-muted flex-shrink-0">
-          <img
-            src={selectedVideo.thumbnailUrl}
+          <img loading="lazy" decoding="async"             src={selectedVideo.thumbnailUrl}
             alt={selectedVideo.title}
             className="w-full h-full object-cover"
             onError={(e) => {
