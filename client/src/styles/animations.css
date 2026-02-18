@@ -726,3 +726,197 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ============================================
+   MONTH 2: ADVANCED INTERACTIONS & ANIMATIONS
+   ============================================
+   
+   Deliverable 3: Floating Cards & Dynamic Hover Effects
+   Deliverable 4: Minimalist Entry Points
+   Deliverable 5: Micro-interactions (Enhanced)
+   ============================================ */
+
+/* --- Enhanced Floating Card Effect --- */
+.floating-card-month2 {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.floating-card-month2:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Glassmorphism Intensity Adjustment --- */
+.glass-card-interactive {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.7);
+  transition: backdrop-filter 0.3s ease,
+              background 0.3s ease,
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: backdrop-filter, background, transform;
+}
+
+.glass-card-interactive:hover {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-4px);
+}
+
+/* --- Magnetic Cursor Effect (Desktop Only) --- */
+@media (hover: hover) and (pointer: fine) {
+  .magnetic-cta-month2 {
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .magnetic-cta-month2:hover {
+    transform: scale(1.05);
+  }
+
+  .magnetic-cta-month2::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    opacity: 0;
+    background: radial-gradient(circle at center, rgba(198, 90, 30, 0.1) 0%, transparent 70%);
+    transition: opacity 0.3s ease;
+  }
+
+  .magnetic-cta-month2:hover::before {
+    opacity: 1;
+  }
+}
+
+/* --- Touch-Friendly Alternative --- */
+@media (hover: none) {
+  .magnetic-cta-month2:active {
+    transform: scale(0.98);
+  }
+}
+
+/* --- Section Divider with Geometric Pattern --- */
+.section-divider-month2 {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--sage-primary) 50%, 
+    transparent 100%);
+  margin: 4rem 0;
+}
+
+.section-divider-month2::before,
+.section-divider-month2::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--sage-primary);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.section-divider-month2::before {
+  left: 0;
+}
+
+.section-divider-month2::after {
+  right: 0;
+}
+
+/* --- Animated Underline for Navigation --- */
+.nav-underline-animated {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-underline-animated::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-underline-animated:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* --- Breadcrumb Smooth Transitions --- */
+.breadcrumb-item-month2 {
+  transition: color 0.2s ease,
+              transform 0.2s ease;
+}
+
+.breadcrumb-item-month2:hover {
+  color: var(--brand-cta);
+  transform: translateX(2px);
+}
+
+/* --- Enhanced Form Input Glow --- */
+.input-glow-month2 {
+  transition: box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.input-glow-month2:focus {
+  box-shadow: 0 0 0 3px rgba(198, 90, 30, 0.1),
+              0 0 20px rgba(198, 90, 30, 0.05);
+  border-color: var(--brand-cta);
+  outline: none;
+}
+
+/* --- Enhanced Ripple Button --- */
+.ripple-button-month2 {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-button-month2::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ripple-button-month2:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ============================================
+   ACCESSIBILITY: REDUCED MOTION (Month 2)
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-card-month2:hover,
+  .glass-card-interactive:hover,
+  .magnetic-cta-month2:hover {
+    transform: none;
+  }
+
+  .nav-underline-animated::before {
+    transition: none;
+  }
+
+  .breadcrumb-item-month2:hover {
+    transform: none;
+  }
+}

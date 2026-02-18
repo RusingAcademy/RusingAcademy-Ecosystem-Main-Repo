@@ -9,6 +9,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import SLEAICompanionWidget from "./SLEAICompanionWidgetMultiCoach";
 
+/* Month 1: Design Tokens Applied - Glassmorphism Enhanced */
 /**
  * EcosystemHeaderGold - Ultra-Premium Corporate Luxury Header v7.0
  * 
@@ -159,9 +160,9 @@ export default function EcosystemHeaderGold() {
               style={{
                 width: isScrolled ? "2.5rem" : "3rem",
                 height: isScrolled ? "2.5rem" : "3rem",
-                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: homeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
-                backdropFilter: homeHovered ? "blur(16px)" : "blur(8px)",
+                transition: "all var(--transition-slower)",
+                background: homeHovered ? "var(--glass-bg-heavy)" : "var(--glass-bg-medium)",
+                backdropFilter: homeHovered ? "blur(var(--glass-blur-lg))" : "blur(var(--glass-blur-sm))",
                 border: homeHovered ? "2px solid rgba(212, 175, 55, 0.6)" : "1px solid rgba(255, 255, 255, 0.9)",
                 boxShadow: homeHovered 
                   ? "0 0 20px rgba(212, 175, 55, 0.3), 0 8px 24px rgba(0, 0, 0, 0.1)" 
@@ -175,7 +176,7 @@ export default function EcosystemHeaderGold() {
                   width: isScrolled ? "1rem" : "1.25rem",
                   height: isScrolled ? "1rem" : "1.25rem",
                   color: homeHovered ? "#B8860B" : "var(--color-black, var(--text))", 
-                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                  transition: "all var(--transition-slower)" 
                 }} 
                 aria-hidden="true"
               />
@@ -216,9 +217,9 @@ export default function EcosystemHeaderGold() {
               style={{
                 width: isScrolled ? "2.25rem" : "2.5rem",
                 height: isScrolled ? "2.25rem" : "2.5rem",
-                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: searchHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
-                backdropFilter: searchHovered ? "blur(16px)" : "blur(8px)",
+                transition: "all var(--transition-slower)",
+                background: searchHovered ? "var(--glass-bg-heavy)" : "var(--glass-bg-medium)",
+                backdropFilter: searchHovered ? "blur(var(--glass-blur-lg))" : "blur(var(--glass-blur-sm))",
                 border: searchHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.9)",
                 boxShadow: searchHovered 
                   ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
@@ -232,7 +233,7 @@ export default function EcosystemHeaderGold() {
                   width: isScrolled ? "0.875rem" : "1rem",
                   height: isScrolled ? "0.875rem" : "1rem",
                   color: searchHovered ? "#B8860B" : "var(--color-black, var(--text))", 
-                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                  transition: "all var(--transition-slower)" 
                 }} 
                 aria-hidden="true"
               />
@@ -248,9 +249,9 @@ export default function EcosystemHeaderGold() {
                 padding: isScrolled ? "0 1rem" : "0 1.25rem",
                 height: isScrolled ? "2rem" : "2.5rem",
                 fontSize: isScrolled ? "0.8rem" : "0.875rem",
-                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: langHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
-                backdropFilter: langHovered ? "blur(16px)" : "blur(8px)",
+                transition: "all var(--transition-slower)",
+                background: langHovered ? "var(--glass-bg-heavy)" : "var(--glass-bg-medium)",
+                backdropFilter: langHovered ? "blur(var(--glass-blur-lg))" : "blur(var(--glass-blur-sm))",
                 border: langHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.9)",
                 color: langHovered ? "#B8860B" : "#1e40af",
                 boxShadow: langHovered 
@@ -278,9 +279,9 @@ export default function EcosystemHeaderGold() {
               style={{
                 width: isScrolled ? "2.25rem" : "2.5rem",
                 height: isScrolled ? "2.25rem" : "2.5rem",
-                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: themeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
-                backdropFilter: themeHovered ? "blur(16px)" : "blur(8px)",
+                transition: "all var(--transition-slower)",
+                background: themeHovered ? "var(--glass-bg-heavy)" : "var(--glass-bg-medium)",
+                backdropFilter: themeHovered ? "blur(var(--glass-blur-lg))" : "blur(var(--glass-blur-sm))",
                 border: themeHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.9)",
                 boxShadow: themeHovered 
                   ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
@@ -295,7 +296,7 @@ export default function EcosystemHeaderGold() {
                     width: isScrolled ? "0.875rem" : "1rem",
                     height: isScrolled ? "0.875rem" : "1rem",
                     color: themeHovered ? "var(--brand-gold, var(--barholex-gold))" : "var(--warning)", 
-                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                    transition: "all var(--transition-slower)" 
                   }} 
                   aria-hidden="true"
                 />
@@ -305,7 +306,7 @@ export default function EcosystemHeaderGold() {
                     width: isScrolled ? "0.875rem" : "1rem",
                     height: isScrolled ? "0.875rem" : "1rem",
                     color: themeHovered ? "#B8860B" : "var(--color-black, var(--text))", 
-                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                    transition: "all var(--transition-slower)" 
                   }} 
                   aria-hidden="true"
                 />
@@ -322,7 +323,7 @@ export default function EcosystemHeaderGold() {
                     padding: isScrolled ? "0 1.25rem" : "0 1.5rem",
                     height: isScrolled ? "2.25rem" : "2.75rem",
                     fontSize: isScrolled ? "0.8rem" : "0.875rem",
-                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transition: "all var(--transition-slower)",
                     background: loginHovered 
                       ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 246, 240, 0.98) 100%)"
                       : "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 246, 240, 0.92) 100%)",
@@ -337,7 +338,7 @@ export default function EcosystemHeaderGold() {
                   onMouseEnter={() => setLoginHovered(true)}
                   onMouseLeave={() => setLoginHovered(false)}
                 >
-                  <User style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} aria-hidden="true" />
+                  <User style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all var(--transition-slower)" }} aria-hidden="true" />
                   {user.name?.split(' ')[0] || 'Dashboard'}
                 </button>
               </Link>
@@ -350,7 +351,7 @@ export default function EcosystemHeaderGold() {
                     padding: isScrolled ? "0 1.5rem" : "0 2rem",
                     height: isScrolled ? "2.25rem" : "2.75rem",
                     fontSize: isScrolled ? "0.8rem" : "0.875rem",
-                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transition: "all var(--transition-slower)",
                     background: loginHovered 
                       ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 246, 240, 0.98) 100%)"
                       : "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 246, 240, 0.92) 100%)",
@@ -365,7 +366,7 @@ export default function EcosystemHeaderGold() {
                   onMouseEnter={() => setLoginHovered(true)}
                   onMouseLeave={() => setLoginHovered(false)}
                 >
-                  <LogIn style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} aria-hidden="true" />
+                  <LogIn style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all var(--transition-slower)" }} aria-hidden="true" />
                   Login
                 </button>
               </Link>
@@ -470,7 +471,7 @@ export default function EcosystemHeaderGold() {
                       ? "0 0 24px rgba(0, 0, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08)"
                       : "0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04)",
                     transform: hoveredCard === brand.id ? "translateY(-4px)" : "translateY(0)",
-                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transition: "all var(--transition-slower)",
                   }}
                   onMouseEnter={() => setHoveredCard(brand.id)}
                   onMouseLeave={() => setHoveredCard(null)}
@@ -483,7 +484,7 @@ export default function EcosystemHeaderGold() {
                         height: isScrolled ? "2.5rem" : "3rem",
                         background: "rgba(0, 0, 0, 0.05)",
                         border: "1px solid rgba(0, 0, 0, 0.1)",
-                        transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                        transition: "all var(--transition-slower)",
                       }}
                     >
                       <img loading="lazy" decoding="async" 
@@ -493,7 +494,7 @@ export default function EcosystemHeaderGold() {
                         style={{
                           width: isScrolled ? "1.5rem" : "2rem",
                           height: isScrolled ? "1.5rem" : "2rem",
-                          transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                          transition: "all var(--transition-slower)",
                         }}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';

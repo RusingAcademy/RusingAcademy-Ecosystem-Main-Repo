@@ -181,14 +181,14 @@ export default function Coaches() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-teal-50/30 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">
+    <div className="min-h-screen flex flex-col section-bg-1">
       <SEO title="Our Coaches" description="Meet RusingÂcademy's certified bilingual coaches specializing in SLE preparation and professional French training." canonical="/coaches" />
       
 
       <main id="main-content" className="flex-1">
         {/* Premium Hero Section with Scroll Animation */}
         <ScrollAnimationWrapper animation="fade-up" duration={800}>
-          <section className="py-8 md:py-12 bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-950/50 dark:to-emerald-950/50 border-b border-teal-200/50 dark:border-white/15">
+          <section className="py-8 md:py-12 section-bg-2 border-b border-teal-200/50 dark:border-white/15">
             <div className="container mx-auto px-6 md:px-8 lg:px-12 text-center">
               <h1 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-3">
                 {language === 'fr' ? 'Nos Coachs Certifiés' : 'Our Certified Coaches'}

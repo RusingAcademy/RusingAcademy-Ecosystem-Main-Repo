@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+/* Month 1: Design Tokens Applied */
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize, Subtitles, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";

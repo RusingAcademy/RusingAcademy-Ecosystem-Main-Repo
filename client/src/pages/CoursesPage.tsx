@@ -548,7 +548,7 @@ export default function CoursesPage() {
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Language Toggle - FSL vs ESL */}
-        <section className="py-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-100 dark:border-white/15 sticky top-0 z-50">
+        <section className="py-4 section-bg-3 border-b border-gray-100 dark:border-white/15 sticky top-0 z-50">
           <div className="container">
             <div className="flex justify-center">
               <div className="inline-flex rounded-xl bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 p-1 gap-1">
@@ -556,7 +556,7 @@ export default function CoursesPage() {
                   onClick={() => { setLangTab('fsl'); setSelectedLevel('all'); }}
                   className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     langTab === 'fsl'
-                      ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-teal-700 shadow-md'
+                      ? 'section-bg-3 dark:border-white/15 text-teal-700 shadow-md'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -567,7 +567,7 @@ export default function CoursesPage() {
                   onClick={() => { setLangTab('esl'); setSelectedLevel('all'); }}
                   className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     langTab === 'esl'
-                      ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-blue-700 shadow-md'
+                      ? 'section-bg-3 dark:border-white/15 text-blue-700 shadow-md'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >

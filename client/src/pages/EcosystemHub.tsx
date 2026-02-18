@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { Parallax, ParallaxLayer } from "@/components/Parallax";
 import PinchZoomImage from "@/components/PinchZoomImage";
 import {
   ArrowRight,
@@ -75,11 +76,11 @@ const scaleIn = {
 function HeroSection({ language }: { language: string }) {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
-      {/* Background decorative elements */}
+      {/* Background decorative elements with parallax */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cta/5 rounded-full blur-3xl" />
+        <ParallaxLayer speed={0.3} className="absolute top-20 left-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" />
+        <ParallaxLayer speed={0.5} className="absolute bottom-20 right-10 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
+        <ParallaxLayer speed={0.2} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cta/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -188,7 +189,7 @@ function TrilemmeSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-1">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -349,7 +350,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-2">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -475,7 +476,7 @@ function MethodologySection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-3">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -602,7 +603,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-4">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -735,7 +736,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-obsidian to-teal-900">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-5">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -760,7 +761,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
             Who benefits most from this program?
           </h2>
         </motion.div>
@@ -863,7 +864,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-6">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -955,7 +956,7 @@ function TestimonialsSection({ language }: { language: string }) {
 // ============================================================================
 function LeadershipSection({ language }: { language: string }) {
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-1">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1053,7 +1054,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
 
   return (
     <>
-      <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-2 relative overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
@@ -1203,7 +1204,7 @@ function InstitutionsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-8 md:py-12 lg:py-16 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-8 md:py-12 lg:py-16 px-4 section-bg-3">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1293,7 +1294,7 @@ function ValueSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-4">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1408,7 +1409,7 @@ function TeamSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-5">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -1590,7 +1591,7 @@ function FAQSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-12 md:py-16 lg:py-24 px-4 section-bg-6">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div

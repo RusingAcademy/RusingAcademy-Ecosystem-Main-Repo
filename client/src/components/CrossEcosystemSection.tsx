@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Play, ChevronRight, ChevronLeft, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X, Square, BookOpen, Flame } from "lucide-react";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+/* Month 1: Design Tokens Applied */
 import { Link } from "wouter";
 import { DiscussionEmbed } from 'disqus-react';
 
