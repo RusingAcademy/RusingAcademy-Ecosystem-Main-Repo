@@ -15,7 +15,7 @@ COPY package.json pnpm-lock.yaml ./
 COPY patches/ ./patches/
 
 # Install pnpm and dependencies
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@10.4.1 --activate
 RUN pnpm install --frozen-lockfile --prod=false
 
 # ---------------------------------------------------------------------------
@@ -30,7 +30,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build the application (Vite frontend + esbuild backend)
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@10.4.1 --activate
 RUN pnpm run build
 
 # ---------------------------------------------------------------------------
@@ -47,7 +47,7 @@ RUN addgroup --system --gid 1001 nodejs && \
 # Install production dependencies only
 COPY package.json pnpm-lock.yaml ./
 COPY patches/ ./patches/
-RUN corepack enable && corepack prepare pnpm@latest --activate && \
+RUN corepack enable && corepack prepare pnpm@10.4.1 --activate && \
     pnpm install --frozen-lockfile --prod && \
     pnpm store prune
 

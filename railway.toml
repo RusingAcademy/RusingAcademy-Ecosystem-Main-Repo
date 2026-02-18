@@ -1,13 +1,13 @@
 # =============================================================================
-# RusingÂcademy Ecosystem — Railway Deployment Configuration
+# RusingAcademy Ecosystem — Railway Deployment Configuration
 # =============================================================================
-# This file provides explicit configuration for Railway deployments,
-# overriding auto-detection for deterministic builds.
+# Uses the multi-stage Dockerfile for deterministic, reproducible builds.
+# The Dockerfile handles install + build internally via multi-stage.
 # =============================================================================
 
 [build]
-builder = "nixpacks"
-buildCommand = "pnpm install --frozen-lockfile && pnpm run build"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "node dist/index.js"
