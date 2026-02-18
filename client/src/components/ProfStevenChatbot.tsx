@@ -315,17 +315,21 @@ export default function ProfStevenChatbot() {
         /* Mobile responsive */
         @media (max-width: 768px) {
           #prof-steven-widget {
-            bottom: 20px;
-            right: 20px;
+            bottom: 16px;
+            right: 16px;
           }
           #prof-steven-widget img {
-            width: 60px;
-            height: 60px;
+            width: 48px;
+            height: 48px;
+            border-width: 3px;
+          }
+          #prof-steven-widget .animate-ringPulse {
+            border-width: 2px;
           }
           #prof-steven-popup {
-            bottom: 100px;
-            right: 15px;
-            left: 15px;
+            bottom: 80px;
+            right: 12px;
+            left: 12px;
             width: auto;
           }
         }
