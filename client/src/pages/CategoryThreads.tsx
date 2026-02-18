@@ -76,7 +76,7 @@ export default function CategoryThreads() {
   };
 
   return (
-    <div className="min-h-screen text-white" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
+    <div className="min-h-screen text-white dark-page" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
       {/* Header — Premium glassmorphism */}
       <div style={{ borderBottom: "1px solid rgba(60, 87, 89, 0.15)" }}>
         <div className="max-w-[900px] mx-auto px-6 pt-8 pb-8">

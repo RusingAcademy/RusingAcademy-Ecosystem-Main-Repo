@@ -762,21 +762,34 @@ body, p, span, div, li, a, button, input, select, textarea {
 /* Force text-muted-foreground to be dark gray */
 .text-muted-foreground { color: #374151 !important; }
 
-/* Force all paragraphs to be readable */
-p, .prose p, article p { color: #1f2937; }
+/* Force all paragraphs to be readable — uses :where() for zero specificity
+   so that inherited color from .text-white containers wins naturally. */
+:where(p, .prose p, article p) { color: #1f2937; }
 
 /* Ensure card descriptions are readable */
 .card p, .card .text-muted-foreground,
 [class*="Card"] p, [class*="Card"] .text-muted-foreground { color: #374151 !important; }
 
-/* Fix for sections with white/light backgrounds */
+/* Fix for sections with white/light backgrounds.
+   The section:not() selector excludes ANY section that contains a dark-bg
+   keyword in its class list (obsidian, teal-9, teal-8, slate-9, slate-8, gray-9)
+   or the .dark-page marker class. */
 .bg-white p, .bg-white .text-muted-foreground,
 .bg-background p, .bg-background .text-muted-foreground,
 .bg-porcelain p, .bg-porcelain .text-muted-foreground,
 .bg-surface p, .bg-surface .text-muted-foreground,
-section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]):not([class*="from-obsidian"]):not([class*="from-teal"]):not([class*="from-slate"]) p,
-section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]):not([class*="from-obsidian"]):not([class*="from-teal"]):not([class*="from-slate"]) .text-muted-foreground {
+section:not([class*="obsidian"]):not([class*="teal-9"]):not([class*="teal-8"]):not([class*="slate-9"]):not([class*="slate-8"]):not([class*="gray-9"]):not(.dark-page) p,
+section:not([class*="obsidian"]):not([class*="teal-9"]):not([class*="teal-8"]):not([class*="slate-9"]):not([class*="slate-8"]):not([class*="gray-9"]):not(.dark-page) .text-muted-foreground {
   color: #374151 !important;
+}
+
+/* Exclude sections inside .dark-page containers (Community, Forum pages
+   that use inline-style dark backgrounds instead of Tailwind bg-* classes).
+   Specificity must exceed section:not(x7) p = (0,7,2). We use
+   .dark-page.dark-page.dark-page ... to boost class specificity. */
+.dark-page.dark-page.dark-page.dark-page.dark-page.dark-page.dark-page.dark-page section p,
+.dark-page.dark-page.dark-page.dark-page.dark-page.dark-page.dark-page.dark-page section .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.90) !important;
 }
 
 /* Dark mode: ensure text is light on dark backgrounds */
@@ -787,53 +800,77 @@ section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidia
 
 /* ============================================
    DARK BACKGROUND SECTIONS — LIGHT TEXT (Light + Dark mode)
-   Ensures white/light text on obsidian, teal-900, slate-900,
-   and gradient dark sections in BOTH light and dark mode.
+   Ensures white/light text on dark-bg sections in BOTH light and dark mode.
+   Uses specific [class*="bg-obsidian"], [class*="from-obsidian"] selectors
+   to avoid matching dark:-prefixed classes on light-bg elements.
+   The .dark-page marker class handles inline-style dark backgrounds
+   and pages using via-obsidian/to-obsidian without from-obsidian.
    ============================================ */
 
 /* Headings on dark backgrounds */
 [class*="bg-obsidian"] h1, [class*="bg-obsidian"] h2, [class*="bg-obsidian"] h3,
 [class*="bg-obsidian"] h4, [class*="bg-obsidian"] h5, [class*="bg-obsidian"] h6,
-[class*="bg-teal-900"] h1, [class*="bg-teal-900"] h2, [class*="bg-teal-900"] h3,
-[class*="bg-teal-900"] h4, [class*="bg-teal-900"] h5, [class*="bg-teal-900"] h6,
-[class*="bg-teal-800"] h1, [class*="bg-teal-800"] h2, [class*="bg-teal-800"] h3,
-[class*="bg-slate-900"] h1, [class*="bg-slate-900"] h2, [class*="bg-slate-900"] h3,
-[class*="bg-slate-800"] h1, [class*="bg-slate-800"] h2, [class*="bg-slate-800"] h3,
-[class*="bg-gray-900"] h1, [class*="bg-gray-900"] h2, [class*="bg-gray-900"] h3,
 [class*="from-obsidian"] h1, [class*="from-obsidian"] h2, [class*="from-obsidian"] h3,
 [class*="from-obsidian"] h4, [class*="from-obsidian"] h5, [class*="from-obsidian"] h6,
+[class*="bg-teal-900"] h1, [class*="bg-teal-900"] h2, [class*="bg-teal-900"] h3,
+[class*="bg-teal-900"] h4, [class*="bg-teal-900"] h5, [class*="bg-teal-900"] h6,
 [class*="from-teal-900"] h1, [class*="from-teal-900"] h2, [class*="from-teal-900"] h3,
+[class*="bg-teal-800"] h1, [class*="bg-teal-800"] h2, [class*="bg-teal-800"] h3,
+[class*="bg-slate-900"] h1, [class*="bg-slate-900"] h2, [class*="bg-slate-900"] h3,
 [class*="from-slate-900"] h1, [class*="from-slate-900"] h2, [class*="from-slate-900"] h3,
+[class*="bg-slate-800"] h1, [class*="bg-slate-800"] h2, [class*="bg-slate-800"] h3,
+[class*="bg-gray-900"] h1, [class*="bg-gray-900"] h2, [class*="bg-gray-900"] h3,
 .section-obsidian h1, .section-obsidian h2, .section-obsidian h3,
-.section-obsidian h4, .section-obsidian h5, .section-obsidian h6 {
+.section-obsidian h4, .section-obsidian h5, .section-obsidian h6,
+.dark-page h1, .dark-page h2, .dark-page h3,
+.dark-page h4, .dark-page h5, .dark-page h6 {
   color: #FFFFFF !important;
 }
 
 /* Paragraphs and body text on dark backgrounds */
 [class*="bg-obsidian"] p, [class*="bg-obsidian"] span, [class*="bg-obsidian"] li,
+[class*="from-obsidian"] p, [class*="from-obsidian"] span, [class*="from-obsidian"] li,
 [class*="bg-teal-900"] p, [class*="bg-teal-900"] span, [class*="bg-teal-900"] li,
+[class*="from-teal-900"] p, [class*="from-teal-900"] span,
 [class*="bg-teal-800"] p, [class*="bg-teal-800"] span,
 [class*="bg-slate-900"] p, [class*="bg-slate-900"] span,
+[class*="from-slate-900"] p, [class*="from-slate-900"] span,
 [class*="bg-slate-800"] p, [class*="bg-slate-800"] span,
 [class*="bg-gray-900"] p, [class*="bg-gray-900"] span,
-[class*="from-obsidian"] p, [class*="from-obsidian"] span, [class*="from-obsidian"] li,
-[class*="from-teal-900"] p, [class*="from-teal-900"] span,
-[class*="from-slate-900"] p, [class*="from-slate-900"] span,
-.section-obsidian p, .section-obsidian span, .section-obsidian li {
+.section-obsidian p, .section-obsidian span, .section-obsidian li,
+.dark-page p, .dark-page span:not(.accent), .dark-page li {
   color: rgba(255, 255, 255, 0.90) !important;
+}
+
+/* Override: light-bg sections inside .dark-page get dark text back */
+.dark-page .bg-white p, .dark-page .bg-white span,
+.dark-page .bg-white li, .dark-page .bg-white h1,
+.dark-page .bg-white h2, .dark-page .bg-white h3,
+.dark-page .bg-white h4, .dark-page .bg-white h5, .dark-page .bg-white h6,
+.dark-page [class*="barholex-gold"] p, .dark-page [class*="barholex-gold"] span,
+.dark-page [class*="barholex-gold"] h1, .dark-page [class*="barholex-gold"] h2, .dark-page [class*="barholex-gold"] h3,
+.dark-page [class*="from-amber"] p, .dark-page [class*="from-amber"] span,
+.dark-page [class*="from-amber"] h1, .dark-page [class*="from-amber"] h2, .dark-page [class*="from-amber"] h3 {
+  color: #1f2937 !important;
+}
+.dark-page .bg-white .text-muted-foreground,
+.dark-page [class*="barholex-gold"] .text-muted-foreground,
+.dark-page [class*="from-amber"] .text-muted-foreground {
+  color: #374151 !important;
 }
 
 /* Muted/secondary text on dark backgrounds */
 [class*="bg-obsidian"] .text-muted-foreground,
+[class*="from-obsidian"] .text-muted-foreground,
 [class*="bg-teal-900"] .text-muted-foreground,
+[class*="from-teal-900"] .text-muted-foreground,
 [class*="bg-teal-800"] .text-muted-foreground,
 [class*="bg-slate-900"] .text-muted-foreground,
+[class*="from-slate-900"] .text-muted-foreground,
 [class*="bg-slate-800"] .text-muted-foreground,
 [class*="bg-gray-900"] .text-muted-foreground,
-[class*="from-obsidian"] .text-muted-foreground,
-[class*="from-teal-900"] .text-muted-foreground,
-[class*="from-slate-900"] .text-muted-foreground,
-.section-obsidian .text-muted-foreground {
+.section-obsidian .text-muted-foreground,
+.dark-page .text-muted-foreground {
   color: rgba(255, 255, 255, 0.70) !important;
 }
 
@@ -842,7 +879,10 @@ section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidia
 [class*="from-obsidian"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
 [class*="bg-teal-900"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
 [class*="from-teal-900"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
-.section-obsidian a:not(.eco-btn-cta):not(.eco-btn-outline-cta) {
+[class*="bg-slate-900"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
+[class*="from-slate-900"] a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
+.section-obsidian a:not(.eco-btn-cta):not(.eco-btn-outline-cta),
+.dark-page a:not(.eco-btn-cta):not(.eco-btn-outline-cta) {
   color: rgba(255, 255, 255, 0.90) !important;
 }
 

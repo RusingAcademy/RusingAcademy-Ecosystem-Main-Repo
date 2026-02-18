@@ -118,7 +118,7 @@ export default function ThreadDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
+      <div className="min-h-screen flex items-center justify-center dark-page" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
         <Loader2 className="w-8 h-8 animate-spin" style={{ color: "#17E2C6" }} />
       </div>
     );
@@ -126,7 +126,7 @@ export default function ThreadDetail() {
 
   if (error || !data) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-white" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-white dark-page" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
         <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background: "rgba(255, 107, 107, 0.08)" }}>
           <AlertCircle className="w-8 h-8" style={{ color: "#FF6B6B" }} aria-hidden="true" />
         </div>
@@ -146,7 +146,7 @@ export default function ThreadDetail() {
   const isAuthor = user?.id === thread.authorId;
 
   return (
-    <div className="min-h-screen text-white" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
+    <div className="min-h-screen text-white dark-page" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
       {/* Header — Premium glassmorphism */}
       <div style={{ borderBottom: "1px solid rgba(60, 87, 89, 0.15)" }}>
         <div className="max-w-[900px] mx-auto px-6 pt-8 pb-8">

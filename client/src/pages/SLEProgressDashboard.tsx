@@ -254,7 +254,7 @@ export default function SLEProgressDashboard() {
   // ─── Loading State ─────────────────────────────────────────────────
   if (summaryQuery.isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white p-6">
+      <div className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white dark-page p-6">
         <div className="max-w-6xl mx-auto space-y-6">
           <Skeleton className="h-10 w-64 bg-foundation" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -271,7 +271,7 @@ export default function SLEProgressDashboard() {
   // ─── Empty State ───────────────────────────────────────────────────
   if (!summary || summary.totalSessions === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white dark-page flex items-center justify-center p-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -300,7 +300,7 @@ export default function SLEProgressDashboard() {
   const trendLabel = summary.recentTrend === "improving" ? l.improving : summary.recentTrend === "declining" ? l.declining : l.stable;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white dark-page">
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">

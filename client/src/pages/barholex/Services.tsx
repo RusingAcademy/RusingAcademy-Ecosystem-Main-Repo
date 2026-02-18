@@ -235,7 +235,7 @@ export default function BarholexServices() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white dark-page">
       
       <main id="main-content">
         {/* Hero Section - Premium Design */}

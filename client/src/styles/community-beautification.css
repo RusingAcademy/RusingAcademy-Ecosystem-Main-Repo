@@ -115,6 +115,7 @@
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .community-hero-title .accent {

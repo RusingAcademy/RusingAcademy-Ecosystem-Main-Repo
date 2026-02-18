@@ -232,7 +232,7 @@ export default function PrivacyPolicy() {
   const t = content[lang];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
+    <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian dark-page">
       {/* Header */}
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-obsidian/80 border-b border-white/60">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
