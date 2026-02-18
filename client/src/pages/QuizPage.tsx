@@ -300,7 +300,7 @@ export default function QuizPage() {
             border: passed ? "1px solid rgba(245,166,35,0.3)" : "1px solid rgba(231,76,60,0.2)",
           }}>
             <div className="w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-4" style={{
-              background: passed ? "linear-gradient(135deg, var(--semantic-warning, var(--warning)), #ffd700)" : "rgba(231,76,60,0.1)",
+              background: passed ? "linear-gradient(135deg, var(--semantic-warning, var(--warning)), var(--barholex-gold))" : "rgba(231,76,60,0.1)",
               boxShadow: passed ? "0 8px 32px rgba(245,166,35,0.3)" : "none",
             }}>
               <span className="material-icons text-xl md:text-3xl lg:text-4xl" style={{ color: passed ? "white" : "var(--semantic-danger, var(--danger))" }}>

@@ -243,7 +243,7 @@ export default function EcosystemLanding() {
       />
       <div
         className={`fixed bottom-[-20%] right-[-10%] w-[70%] h-[70%] rounded-full pointer-events-none z-0 ${t.glow}`}
-        style={{ background: "radial-gradient(circle, #8B5CFF, transparent 60%)" }}
+        style={{ background: "radial-gradient(circle, var(--accent-purple), transparent 60%)" }}
       />
 
       {/* Global Header is now rendered by EcosystemLayout wrapper */}
@@ -713,7 +713,7 @@ export default function EcosystemLanding() {
                 {/* Glowing circle background */}
                 <div 
                   className="absolute inset-0 rounded-full blur-3xl opacity-30"
-                  style={{ background: "radial-gradient(circle, var(--lingueefy-accent), #8B5CFF)" }}
+                  style={{ background: "radial-gradient(circle, var(--lingueefy-accent), var(--accent-purple))" }}
                 />
                 
                 {/* Avatar container */}

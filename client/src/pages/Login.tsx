@@ -336,7 +336,7 @@ function MacBookMockup({
         <div
           className="relative rounded-t-xl overflow-hidden mx-auto"
           style={{
-            background: "linear-gradient(180deg, #2d2d2d 0%, #1a1a1a 100%)",
+            background: "linear-gradient(180deg, #2d2d2d 0%, var(--text) 100%)",
             padding: "8px 8px 5px 8px",
             boxShadow:
               "0 -2px 30px rgba(0,0,0,0.2), 0 8px 40px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.08)",
