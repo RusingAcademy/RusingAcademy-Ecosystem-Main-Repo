@@ -29,7 +29,7 @@ export default function AffiliateDashboard() {
     return (
       <div className="container py-8 md:py-12 lg:py-16 text-center">
         <Gift className="h-16 w-16 mx-auto mb-4 text-amber-500" />
-        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">RusingAcademy Affiliate Program</h1>
+        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">RusingÂcademy Affiliate Program</h1>
         <p className="text-muted-foreground mb-6 max-w-md mx-auto">
           Earn commissions by referring professionals to our bilingual training programs.
         </p>
@@ -56,7 +56,7 @@ export default function AffiliateDashboard() {
             <div className="flex-1">
               <p className="text-sm font-medium mb-1">Your Referral Link</p>
               <div className="flex gap-2">
-                <Input readOnly value={dashboard?.referralLink || "Loading..."} className="bg-white dark:bg-card dark:bg-background" />
+                <Input readOnly value={dashboard?.referralLink || "Loading..."} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md" />
                 <Button variant="outline" onClick={() => {
                   navigator.clipboard.writeText(dashboard?.referralLink || "");
                   toast.success("Referral link copied to clipboard.");

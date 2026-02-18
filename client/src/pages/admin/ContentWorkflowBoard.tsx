@@ -89,7 +89,7 @@ const statusConfig: Record<Status, { color: string; bgColor: string; icon: any }
   draft: { color: "text-yellow-600", bgColor: "bg-yellow-50 dark:bg-yellow-950/30 border-yellow-200 dark:border-yellow-800", icon: FileText },
   review: { color: "text-blue-600", bgColor: "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800", icon: Eye },
   published: { color: "text-green-600", bgColor: "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800", icon: CheckCircle2 },
-  archived: { color: "text-gray-500", bgColor: "bg-gray-50 dark:bg-background dark:bg-gray-950/30 border-gray-200 dark:border-border dark:border-gray-800", icon: Archive },
+  archived: { color: "text-gray-500", bgColor: "bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-gray-950/30 border-gray-200 dark:border-white/15 dark:border-gray-800", icon: Archive },
 };
 
 const statusOrder: Status[] = ["draft", "review", "published", "archived"];

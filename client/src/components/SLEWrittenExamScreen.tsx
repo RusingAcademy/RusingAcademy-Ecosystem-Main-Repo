@@ -533,7 +533,7 @@ export function SLEWrittenExamScreen({
               </div>
               <div className="text-xs text-gray-300">{l.incorrect}</div>
             </div>
-            <div className="bg-gray-500/10 border border-gray-500/20 rounded-xl p-3 text-center">
+            <div className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm0/10 border border-gray-500/20 rounded-xl p-3 text-center">
               <Clock className="w-5 h-5 mx-auto mb-1 text-gray-400" />
               <div className="text-lg font-bold text-gray-300">
                 {formatTime(results.timeSpent)}
@@ -675,7 +675,7 @@ export function SLEWrittenExamScreen({
                   ? "bg-emerald-500"
                   : qr.selectedAnswer !== null
                   ? "bg-red-500"
-                  : "bg-gray-500";
+                  : "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm0";
               }
             } else if (isAnswered) {
               dotColor = "bg-cyan-500";

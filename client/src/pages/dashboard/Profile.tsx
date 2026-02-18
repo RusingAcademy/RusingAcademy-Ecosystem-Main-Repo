@@ -36,9 +36,9 @@ function ProfileContent() {
     }
   
     return (
-        <div className="min-h-screen bg-white dark:bg-background">
+        <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
             {/* Header */}
-            <header className="bg-white dark:bg-background border-b border-slate-200 sticky top-0 z-10">
+            <header className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-slate-200 sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4">
@@ -65,7 +65,7 @@ function ProfileContent() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Profile Summary Card */}
                     <div className="lg:col-span-1">
-                        <Card className="bg-white dark:bg-background shadow-sm border-slate-200">
+                        <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-sm border-slate-200">
                             <CardContent className="pt-6">
                                 <div className="flex flex-col items-center text-center">
                                     <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-teal-700 flex items-center justify-center text-white text-lg md:text-2xl lg:text-3xl font-bold mb-4">
@@ -104,7 +104,7 @@ function ProfileContent() {
                         </Card>
                         
                         {/* Account Info Card */}
-                        <Card className="bg-white dark:bg-background shadow-sm border-slate-200 mt-6">
+                        <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-sm border-slate-200 mt-6">
                             <CardHeader>
                                 <CardTitle className="text-lg flex items-center gap-2">
                                     <Shield className="h-5 w-5 text-black dark:text-foreground" />
@@ -145,7 +145,7 @@ function ProfileContent() {
                     
                     {/* Clerk UserProfile Component */}
                     <div className="lg:col-span-2">
-                        <Card className="bg-white dark:bg-background shadow-sm border-slate-200 overflow-hidden">
+                        <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-sm border-slate-200 overflow-hidden">
                             <CardContent className="p-0">
                                 <UserProfile 
                                     appearance={{

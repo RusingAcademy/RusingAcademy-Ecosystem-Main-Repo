@@ -94,7 +94,7 @@ export const membershipRouter = router({
           currency: (tier.currency ?? "cad").toLowerCase(),
           product_data: {
             name: `${tier.name} Membership (${input.billingCycle})`,
-            description: tier.description ?? `RusingAcademy ${tier.name} Plan`,
+            description: tier.description ?? `RusingÂcademy ${tier.name} Plan`,
           },
           unit_amount: amount,
           recurring: {
@@ -287,7 +287,7 @@ export const membershipRouter = router({
     let productId = tier.stripeProductId;
     if (!productId) {
       const product = await stripe.products.create({
-        name: `RusingAcademy ${tier.name} Membership`,
+        name: `RusingÂcademy ${tier.name} Membership`,
         description: tier.description ?? undefined,
         metadata: { tier_id: tier.id.toString(), tier_slug: tier.slug },
       });

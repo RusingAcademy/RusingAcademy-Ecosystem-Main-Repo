@@ -127,7 +127,7 @@ export const SkeletonCoachCard: React.FC<{ className?: string }> = ({ className 
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl',
-        'bg-white/60 dark:bg-foundation/60',
+        'bg-white/60 dark:bg-white/[0.08] dark:backdrop-blur-md/60',
         'backdrop-blur-xl',
         'border border-white/60 dark:border-white/60',
         'shadow-lg',
@@ -177,7 +177,7 @@ export const SkeletonPricingCard: React.FC<{ className?: string }> = ({ classNam
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl',
-        'bg-white/70 dark:bg-foundation/70',
+        'bg-white/70 dark:bg-white/[0.08] dark:backdrop-blur-md/70',
         'backdrop-blur-xl',
         'border border-white/60 dark:border-white/60',
         'shadow-lg',
@@ -216,7 +216,7 @@ export const SkeletonTestimonialCard: React.FC<{ className?: string }> = ({ clas
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl',
-        'bg-white/60 dark:bg-foundation/60',
+        'bg-white/60 dark:bg-white/[0.08] dark:backdrop-blur-md/60',
         'backdrop-blur-xl',
         'border border-white/60 dark:border-white/60',
         'shadow-lg',

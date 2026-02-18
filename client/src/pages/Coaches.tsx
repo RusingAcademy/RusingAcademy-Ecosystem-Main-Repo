@@ -182,13 +182,13 @@ export default function Coaches() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-teal-50/30 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">
-      <SEO title="Our Coaches" description="Meet RusingAcademy's certified bilingual coaches specializing in SLE preparation and professional French training." canonical="/coaches" />
+      <SEO title="Our Coaches" description="Meet RusingÂcademy's certified bilingual coaches specializing in SLE preparation and professional French training." canonical="/coaches" />
       
 
       <main id="main-content" className="flex-1">
         {/* Premium Hero Section with Scroll Animation */}
         <ScrollAnimationWrapper animation="fade-up" duration={800}>
-          <section className="py-8 md:py-12 bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-950/50 dark:to-emerald-950/50 border-b border-teal-200/50 dark:border-teal-800/50">
+          <section className="py-8 md:py-12 bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-950/50 dark:to-emerald-950/50 border-b border-teal-200/50 dark:border-white/15">
             <div className="container mx-auto px-6 md:px-8 lg:px-12 text-center">
               <h1 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-3">
                 {language === 'fr' ? 'Nos Coachs Certifiés' : 'Our Certified Coaches'}
@@ -209,7 +209,7 @@ export default function Coaches() {
             <div className="max-w-2xl mx-auto">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
-                <div className="relative flex items-center bg-white dark:bg-card dark:bg-obsidian rounded-xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden backdrop-blur-sm" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9))' }}>
+                <div className="relative flex items-center bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-xl border border-slate-200/50 dark:border-white/15 overflow-hidden backdrop-blur-sm" style={{ background: 'rgba(255, 255, 255, 0.10)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
                   <Search className="w-5 h-5 text-teal-600 ml-4" />
                   <Input
                     type="text"
@@ -236,7 +236,7 @@ export default function Coaches() {
             <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
               <div className="lg:sticky lg:top-24 space-y-6">
                 {/* Filter Card - Premium Glassmorphism */}
-                <div className="bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden backdrop-blur-md" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95))' }}>
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl border border-slate-200/50 dark:border-white/15 overflow-hidden backdrop-blur-md" style={{ background: 'rgba(255, 255, 255, 0.10)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
                   <div className="p-6 border-b border-slate-100 dark:border-teal-800">
                     <div className="flex items-center justify-between">
                       <h2 className="font-semibold text-lg flex items-center gap-2">
@@ -267,7 +267,7 @@ export default function Coaches() {
                             className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                               languageFilter === lang
                                 ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg shadow-teal-500/25'
-                                : 'bg-slate-100 dark:bg-foundation text-black dark:text-foreground dark:text-cyan-300 hover:bg-slate-200 dark:hover:bg-foundation-2'
+                                : 'bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground dark:text-cyan-300 hover:bg-slate-200 dark:hover:bg-foundation-2'
                             }`}
                           >
                             {lang === 'all' ? (language === 'fr' ? 'Tous' : 'All') : getLangLabel(lang)}
@@ -291,7 +291,7 @@ export default function Coaches() {
                             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                               specializationFilter.includes(spec)
                                 ? 'bg-teal-600 text-white'
-                                : 'bg-slate-100 dark:bg-foundation text-black dark:text-foreground dark:text-cyan-300 hover:bg-teal-100 hover:text-teal-700'
+                                : 'bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground dark:text-cyan-300 hover:bg-teal-100 hover:text-teal-700'
                             }`}
                           >
                             {getSpecLabel(spec)}
@@ -307,7 +307,7 @@ export default function Coaches() {
                         {language === 'fr' ? 'Prix par heure' : 'Price per hour'}
                       </Label>
                       <Select value={priceRange} onValueChange={setPriceRange}>
-                        <SelectTrigger className="w-full bg-white dark:bg-card dark:bg-foundation border-slate-200 dark:border-teal-800" style={{color: 'var(--color-black, var(--text))'}}>
+                        <SelectTrigger className="w-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800" style={{color: 'var(--color-black, var(--text))'}}>
                           <SelectValue placeholder={language === 'fr' ? 'Tous les prix' : 'Any Price'} />
                         </SelectTrigger>
                         <SelectContent>
@@ -357,7 +357,7 @@ export default function Coaches() {
                 <Button
                   variant="outline"
                   onClick={() => setShowFilters(!showFilters)}
-                  className="w-full justify-between bg-white dark:bg-card dark:bg-obsidian border-slate-200 dark:border-teal-800"
+                  className="w-full justify-between bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800"
                 >
                   <span className="flex items-center gap-2">
                     <Filter className="h-4 w-4" />
@@ -391,7 +391,7 @@ export default function Coaches() {
 
               {/* Error State */}
               {error && !isLoading && (
-                <div className="bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-xl border border-red-200/50 dark:border-red-700/50 p-12 text-center">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl border border-red-200/50 dark:border-red-700/50 p-12 text-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-r from-red-100 to-orange-100 dark:from-red-900/50 dark:to-orange-900/50 flex items-center justify-center mx-auto mb-6">
                     <X className="h-10 w-10 text-red-500" />
                   </div>
@@ -439,7 +439,7 @@ export default function Coaches() {
                         data-coach-id={coach.id}
                         onMouseEnter={() => setHoveredCoach(coach.id)}
                         onMouseLeave={() => setHoveredCoach(null)}
-                        className={`group relative bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-lg hover:shadow-2xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden transition-all duration-500 ${
+                        className={`group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl border border-slate-200/50 dark:border-white/15 overflow-hidden transition-all duration-500 ${
                           visibleCards.has(coach.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}
                         style={{ transitionDelay: `${index * 100}ms` }}
@@ -447,13 +447,13 @@ export default function Coaches() {
                       >
                         {/* Gradient Border Effect on Hover */}
                         <div className={`absolute inset-0 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} style={{ padding: '2px' }}>
-                          <div className="absolute inset-[2px] bg-white dark:bg-card dark:bg-obsidian rounded-[14px]" />
+                          <div className="absolute inset-[2px] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-[14px]" />
                         </div>
 
                         <div className="relative flex flex-col lg:flex-row">
                           {/* Coach Photo Section */}
                           <div className="lg:w-64 relative overflow-hidden">
-                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full min-h-[200px] lg:min-h-[240px] relative bg-slate-100 dark:bg-foundation">
+                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full min-h-[200px] lg:min-h-[240px] relative bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                               {/* Photo */}
                               {imgErrors.has(coach.id) ? (
                                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-100 to-emerald-100 dark:from-teal-900/30 dark:to-emerald-900/30">
@@ -487,7 +487,7 @@ export default function Coaches() {
                                     : 'bg-blue-500/90 text-white'
                                 }`}>
                                   {availability.color === 'green' && (
-                                    <span className="w-2 h-2 rounded-full bg-white dark:bg-background animate-pulse" />
+                                    <span className="w-2 h-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md animate-pulse" />
                                   )}
                                   {availability.color !== 'green' && <Calendar className="w-3 h-3" />}
                                   {availability.label}
@@ -496,7 +496,7 @@ export default function Coaches() {
 
                               {/* Rating Badge */}
                               <div className="absolute top-4 right-4">
-                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-obsidian/90 backdrop-blur-md" style={{color: 'var(--color-black, var(--text))'}}>
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-white/[0.08] dark:backdrop-blur-md backdrop-blur-md" style={{color: 'var(--color-black, var(--text))'}}>
                                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                                   {coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : '5.0'}
                                 </span>
@@ -576,7 +576,7 @@ export default function Coaches() {
                           </div>
 
                           {/* Pricing & Actions Section */}
-                          <div className="lg:w-64 p-4 lg:p-5 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-teal-900/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-teal-800/50 flex flex-col justify-between">
+                          <div className="lg:w-64 p-4 lg:p-5 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-teal-900/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-white/15 flex flex-col justify-between">
                             <div>
                               {/* Price */}
                               <div className="text-center lg:text-left mb-4">
@@ -672,7 +672,7 @@ export default function Coaches() {
 
               {/* Empty State */}
               {!isLoading && processedCoaches.length === 0 && (
-                <div className="bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 p-12 text-center">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl border border-slate-200/50 dark:border-white/15 p-12 text-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-r from-teal-100 to-emerald-100 dark:from-teal-900/50 dark:to-emerald-900/50 flex items-center justify-center mx-auto mb-6">
                     <Search className="h-10 w-10 text-teal-600" />
                   </div>

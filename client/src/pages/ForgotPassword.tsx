@@ -68,7 +68,7 @@ export default function ForgotPassword() {
           <div className="mx-auto mb-4">
             <img
               loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
-              alt="RusingAcademy"
+              alt="RusingÂcademy"
               className="h-16 w-auto"
             />
           </div>
@@ -128,7 +128,7 @@ export default function ForgotPassword() {
             </Link>
           </div>
           <div className="text-center text-xs text-black dark:text-foreground pt-4 border-t border-teal-800">
-            Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
+            Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
           </div>
         </CardFooter>
       </Card>

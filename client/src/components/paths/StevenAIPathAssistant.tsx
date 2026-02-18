@@ -196,7 +196,7 @@ export const StevenAIPathAssistant: React.FC<StevenAIProps> = ({
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 border-2 border-white">
               <AvatarImage src="/steven-ai-avatar.png" />
-              <AvatarFallback className="bg-white dark:bg-background text-blue-600">
+              <AvatarFallback className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-blue-600">
                 <Bot className="h-5 w-5" />
               </AvatarFallback>
             </Avatar>
@@ -208,14 +208,14 @@ export const StevenAIPathAssistant: React.FC<StevenAIProps> = ({
             </div>
           </div>
           <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={toggleSpeech} className="text-white hover:bg-white dark:bg-background/20">
+            <Button variant="ghost" size="icon" onClick={toggleSpeech} className="text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20">
               {isSpeaking ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setIsMinimized(true)} className="text-white hover:bg-white dark:bg-background/20">
+            <Button variant="ghost" size="icon" onClick={() => setIsMinimized(true)} className="text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20">
               <Minimize2 className="h-4 w-4" />
             </Button>
             {onClose && (
-              <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-white dark:bg-background/20">
+              <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20">
                 <X className="h-4 w-4" />
               </Button>
             )}
@@ -225,12 +225,12 @@ export const StevenAIPathAssistant: React.FC<StevenAIProps> = ({
         {/* Context badges */}
         <div className="flex gap-2 mt-2">
           {currentPathId && (
-            <Badge variant="secondary" className="bg-white/20 dark:bg-background/20 text-white text-xs backdrop-blur-sm">
+            <Badge variant="secondary" className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-white text-xs backdrop-blur-sm">
               <BookOpen className="h-3 w-3 mr-1" />
               Path {currentPathId.replace('path-', '')}
             </Badge>
           )}
-          <Badge variant="secondary" className="bg-white/20 dark:bg-background/20 text-white text-xs backdrop-blur-sm">
+          <Badge variant="secondary" className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-white text-xs backdrop-blur-sm">
             <Target className="h-3 w-3 mr-1" />
             {language === 'fr' ? 'Niveau' : 'Level'} {userLevel}
           </Badge>
@@ -255,7 +255,7 @@ export const StevenAIPathAssistant: React.FC<StevenAIProps> = ({
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                   {message.sources && message.sources.length > 0 && (
-                    <div className="mt-2 pt-2 border-t border-gray-200 dark:border-border dark:border-border">
+                    <div className="mt-2 pt-2 border-t border-gray-200 dark:border-white/15 dark:border-white/15">
                       <p className="text-xs text-muted-foreground flex items-center gap-1">
                         <Lightbulb className="h-3 w-3" />
                         {language === 'fr' ? 'Sources:' : 'Sources:'} {message.sources.join(', ')}

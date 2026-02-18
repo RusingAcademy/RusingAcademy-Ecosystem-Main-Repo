@@ -122,7 +122,7 @@ export default function StreakCard() {
               <span>{isEn ? "Next milestone" : "Prochain jalon"}</span>
               <span>{nextMilestone.label[language]} (+{nextMilestone.points} pts)</span>
             </div>
-            <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div className="h-2 bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded-full overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-cta-2 to-red-500 transition-all duration-500"
                 style={{ width: `${Math.min(progressToMilestone, 100)}%` }}

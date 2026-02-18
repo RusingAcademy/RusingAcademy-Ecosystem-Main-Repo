@@ -194,7 +194,7 @@ export const contactRouter = router({
 
         const brandLabels: Record<string, string> = {
           ecosystem: "Ecosystem Hub",
-          rusingacademy: "RusingAcademy",
+          rusingacademy: "RusingÂcademy",
           lingueefy: "Lingueefy",
           barholex: "Barholex Media",
         };

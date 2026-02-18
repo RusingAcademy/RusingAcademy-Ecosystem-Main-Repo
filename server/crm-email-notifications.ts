@@ -26,7 +26,7 @@ interface AdminInfo {
 // Source display names
 const sourceNames: Record<string, { en: string; fr: string }> = {
   lingueefy: { en: "Lingueefy", fr: "Lingueefy" },
-  rusingacademy: { en: "RusingAcademy", fr: "RusingAcademy" },
+  rusingacademy: { en: "RusingÂcademy", fr: "RusingÂcademy" },
   barholex: { en: "Barholex Media", fr: "Barholex Media" },
   ecosystem_hub: { en: "Ecosystem Hub", fr: "Hub Écosystème" },
   external: { en: "External", fr: "Externe" },

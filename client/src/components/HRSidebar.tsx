@@ -1,7 +1,7 @@
 /**
- * HRSidebar — RusingAcademy Client Portal (for Government Departments / Organizations)
+ * HRSidebar — RusingÂcademy Client Portal (for Government Departments / Organizations)
  * This is NOT an internal HR tool — it's a client-facing portal for departments
- * that have contracted RusingAcademy for language training services.
+ * that have contracted RusingÂcademy for language training services.
  * Design: White sidebar with blue (var(--color-blue-600, var(--semantic-info))) accents
  */
 import { Link, useLocation } from "wouter";
@@ -56,7 +56,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
       <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
         isActive(item.path)
           ? "bg-blue-600/8 text-blue-600 font-semibold border-l-[3px] border-blue-600"
-          : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-background border-l-[3px] border-transparent"
+          : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-l-[3px] border-transparent"
       }`}>
         <span className={`material-icons text-lg ${isActive(item.path) ? "text-blue-600" : "text-gray-400 group-hover:text-gray-600"}`}>
           {item.icon}
@@ -70,15 +70,15 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
     <>
       {!collapsed && <div className="fixed inset-0 bg-black/20 z-40 lg:hidden" onClick={onToggle} />}
 
-      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-transform duration-200 w-[240px] bg-white dark:bg-card border-r border-gray-200 dark:border-border ${collapsed ? "-translate-x-full lg:translate-x-0" : "translate-x-0"}`}
+      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-transform duration-200 w-[240px] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-r border-gray-200 dark:border-white/15 ${collapsed ? "-translate-x-full lg:translate-x-0" : "translate-x-0"}`}
         role="navigation" aria-label={lang === "fr" ? "Navigation du portail client" : "Client portal navigation"}>
 
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
           <Link href="/hr/portal/dashboard" className="flex items-center gap-3">
-            <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
+            <img src={LOGO_ICON} alt="RusingÂcademy" className="w-8 h-8 rounded-lg" />
             <div>
               <span className="text-gray-900 dark:text-foreground font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
-                RusingAcademy
+                RusingÂcademy
               </span>
               <span className="block text-[10px] text-blue-600 tracking-wider uppercase font-medium">
                 {lang === "fr" ? "Portail Client" : "Client Portal"}
@@ -102,7 +102,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
         </nav>
 
         <div className="p-4 border-t border-gray-100">
-          <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 dark:bg-background transition-all cursor-pointer">
+          <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-all cursor-pointer">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-[var(--color-blue-700, #1d4ed8)] flex items-center justify-center text-white font-bold text-sm shadow-sm">
               {user?.name?.charAt(0) || "C"}
             </div>
@@ -125,7 +125,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
             {lang === "fr" ? "Portail Apprenant" : "Learner Portal"}
           </button>
 
-          <button onClick={() => setLocation("/")} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-background transition-all flex items-center justify-center gap-1.5">
+          <button onClick={() => setLocation("/")} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-all flex items-center justify-center gap-1.5">
             <span className="material-icons text-sm">logout</span>
             {t("common.signOut")}
           </button>
@@ -135,7 +135,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
           </div>
 
           <div className="text-center mt-2">
-            <span className="text-[9px] text-gray-400">v2.0.0 — RusingAcademy</span>
+            <span className="text-[9px] text-gray-400">v2.0.0 — RusingÂcademy</span>
           </div>
         </div>
       </aside>

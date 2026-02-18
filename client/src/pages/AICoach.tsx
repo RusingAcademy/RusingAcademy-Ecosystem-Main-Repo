@@ -213,7 +213,7 @@ export default function AICoach() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-background">
+    <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
 
       <main>
         {/* Hero Section - Premium Dark Gradient */}
@@ -228,7 +228,7 @@ export default function AICoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge with coach photo */}
-              <Badge className="mb-6 bg-white/20 dark:bg-background/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <img loading="lazy" decoding="async" 
                   loading="lazy" src={coachPhotos[0]} 
                   alt="SLE AI Coach" 
@@ -282,7 +282,7 @@ export default function AICoach() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6 md:mb-8 lg:mb-12">
-                <Button size="lg" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2">
+                <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2">
                   <Play className="h-4 w-4" />
                   {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
                 </Button>
@@ -297,7 +297,7 @@ export default function AICoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white/20 dark:bg-background/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
+                    className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-slate-800 dark:text-teal-200">{stat.label}</div>
@@ -309,7 +309,7 @@ export default function AICoach() {
         </section>
 
         {/* Features Section */}
-        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
@@ -352,7 +352,7 @@ export default function AICoach() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-background border-y">
+        <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-y">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <p className="text-center text-sm text-black dark:text-foreground mb-6 uppercase tracking-wider">
               {isEn ? "Trusted by public servants from" : "Utilisé par les fonctionnaires de"}
@@ -369,7 +369,7 @@ export default function AICoach() {
         </section>
 
         {/* How It Works */}
-        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
@@ -410,7 +410,7 @@ export default function AICoach() {
         </section>
 
         {/* AI Coach Preview */}
-        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -477,7 +477,7 @@ export default function AICoach() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="bg-white/20 dark:bg-background/10 backdrop-blur-sm rounded-lg p-4">
+                    <div className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm rounded-lg p-4">
                       <p className="text-sm text-slate-800 dark:text-teal-100">
                         {isEn
                           ? '"Hello! I\'m your SLE AI Companion. How can I help you prepare for your SLE exam today?"'
@@ -485,11 +485,11 @@ export default function AICoach() {
                       </p>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-white/20 dark:bg-background/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
+                      <Button size="sm" className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
                         <Mic className="h-4 w-4 mr-2" />
                         {isEn ? "Oral Practice" : "Pratique orale"}
                       </Button>
-                      <Button size="sm" className="bg-white/20 dark:bg-background/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
+                      <Button size="sm" className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
                         <PenTool className="h-4 w-4 mr-2" />
                         {isEn ? "Written" : "Écrit"}
                       </Button>
@@ -502,7 +502,7 @@ export default function AICoach() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
+        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
@@ -550,7 +550,7 @@ export default function AICoach() {
           </div>
 
           <div className="container max-w-6xl mx-auto px-6 md:px-12 relative text-center">
-            <Badge className="mb-6 bg-white/20 dark:bg-background/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Free Today" : "Commencez gratuitement aujourd'hui"}
             </Badge>
@@ -577,7 +577,7 @@ export default function AICoach() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button size="lg" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 shadow-xl gap-2">
+              <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl gap-2">
                 <Play className="h-4 w-4" />
                 {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
               </Button>

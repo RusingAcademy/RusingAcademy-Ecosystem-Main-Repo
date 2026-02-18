@@ -87,7 +87,7 @@ export default function RusingAcademyContact() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center p-12 rounded-3xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-xl"
+              className="text-center p-12 rounded-3xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-xl"
             >
               <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle2 className="w-10 h-10 text-green-600" />
@@ -176,7 +176,7 @@ export default function RusingAcademyContact() {
                     </div>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50">
                     <h3 className="font-bold text-black dark:text-foreground mb-4">
                       {language === "en" ? "What to Expect" : "À quoi s'attendre"}
                     </h3>
@@ -204,7 +204,7 @@ export default function RusingAcademyContact() {
 
               {/* Form */}
               <div className="lg:col-span-2">
-                <form onSubmit={handleSubmit} className="p-8 rounded-3xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-xl">
+                <form onSubmit={handleSubmit} className="p-8 rounded-3xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-xl">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Organization Name */}
                     <div className="md:col-span-2">
@@ -217,7 +217,7 @@ export default function RusingAcademyContact() {
                         required
                         value={formData.organizationName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                         placeholder={language === "en" ? "Enter organization name" : "Entrez le nom de l'organisation"}
                       />
                     </div>
@@ -233,7 +233,7 @@ export default function RusingAcademyContact() {
                         required
                         value={formData.contactName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                         placeholder={language === "en" ? "Your full name" : "Votre nom complet"}
                       />
                     </div>
@@ -249,7 +249,7 @@ export default function RusingAcademyContact() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                         placeholder="email@organization.gc.ca"
                       />
                     </div>
@@ -264,7 +264,7 @@ export default function RusingAcademyContact() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                         placeholder="+1 (613) 555-1234"
                       />
                     </div>
@@ -279,7 +279,7 @@ export default function RusingAcademyContact() {
                         required
                         value={formData.organizationType}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                       >
                         <option value="">{language === "en" ? "Select type" : "Sélectionnez le type"}</option>
                         {organizationTypes.map((type) => (
@@ -300,7 +300,7 @@ export default function RusingAcademyContact() {
                         required
                         value={formData.teamSize}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                       >
                         <option value="">{language === "en" ? "Select size" : "Sélectionnez la taille"}</option>
                         {teamSizes.map((size) => (
@@ -320,7 +320,7 @@ export default function RusingAcademyContact() {
                         name="currentLevel"
                         value={formData.currentLevel}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                       >
                         <option value="">{language === "en" ? "Select level" : "Sélectionnez le niveau"}</option>
                         {levels.map((level) => (
@@ -341,7 +341,7 @@ export default function RusingAcademyContact() {
                         required
                         value={formData.targetLevel}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                       >
                         <option value="">{language === "en" ? "Select target" : "Sélectionnez la cible"}</option>
                         {levels.map((level) => (
@@ -362,7 +362,7 @@ export default function RusingAcademyContact() {
                         required
                         value={formData.timeline}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all"
                       >
                         <option value="">{language === "en" ? "Select timeline" : "Sélectionnez l'échéancier"}</option>
                         {timelines.map((timeline) => (
@@ -383,7 +383,7 @@ export default function RusingAcademyContact() {
                         rows={4}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all resize-none"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all resize-none"
                         placeholder={language === "en" 
                           ? "Tell us more about your training needs, specific requirements, or any questions..."
                           : "Parlez-nous de vos besoins de formation, exigences spécifiques ou questions..."

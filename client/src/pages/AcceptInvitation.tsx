@@ -39,7 +39,7 @@ export default function AcceptInvitation() {
   // Accept mutation
   const acceptInvite = trpc.admin.invitations.accept.useMutation({
     onSuccess: (data) => {
-      toast.success(`Welcome to RusingAcademy, ${data.user.name}!`, {
+      toast.success(`Welcome to RusingÂcademy, ${data.user.name}!`, {
         description: `You've been set up as ${data.user.role}`,
       });
       // Redirect to dashboard after a brief delay
@@ -195,7 +195,7 @@ export default function AcceptInvitation() {
           <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
             <ShieldCheck className="h-6 w-6 text-primary" />
           </div>
-          <CardTitle className="text-2xl">Welcome to RusingAcademy</CardTitle>
+          <CardTitle className="text-2xl">Welcome to RusingÂcademy</CardTitle>
           <CardDescription>
             You've been invited to join as{" "}
             <Badge variant="secondary" className="ml-1">

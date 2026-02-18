@@ -1,7 +1,7 @@
 /**
  * Steven AI Widget - RAG-Powered Chatbot
  * 
- * Intelligent assistant connected to RusingAcademy's
+ * Intelligent assistant connected to RusingÂcademy's
  * proprietary methodology and pedagogical documents.
  * 
  * @component StevenAIWidget
@@ -63,7 +63,7 @@ export const StevenAIWidget: React.FC<StevenAIWidgetProps> = ({
         role: 'assistant',
         content: `Bonjour${user?.firstName ? ` ${user.firstName}` : ''}! 👋
 
-Je suis **Steven**, votre assistant IA pédagogique de RusingAcademy.
+Je suis **Steven**, votre assistant IA pédagogique de RusingÂcademy.
 
 Je suis spécialisé dans la préparation aux examens linguistiques du gouvernement canadien (SLE). Je peux vous aider avec:
 
@@ -155,7 +155,7 @@ Comment puis-je vous aider aujourd'hui?`,
             <div style={{ width: '40px', height: '40px', borderRadius: tokens.borderRadius.full, backgroundColor: tokens.colors.background, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>🎓</div>
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 600, fontSize: '16px' }}>Steven AI</div>
-              <div style={{ fontSize: '12px', opacity: 0.9 }}>Assistant pédagogique RusingAcademy</div>
+              <div style={{ fontSize: '12px', opacity: 0.9 }}>Assistant pédagogique RusingÂcademy</div>
             </div>
             <button onClick={() => setIsOpen(false)} style={{ background: 'none', border: 'none', color: tokens.colors.background, cursor: 'pointer', fontSize: '20px', padding: tokens.spacing.xs }} aria-label="Fermer le chat">✕</button>
           </div>

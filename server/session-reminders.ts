@@ -213,8 +213,8 @@ async function sendReminderEmail(
       <p style="color: #666; font-size: 14px; margin-top: 24px;">
         ${
           isEn
-            ? "Best regards,<br>The RusingAcademy Team"
-            : "Cordialement,<br>L'équipe RusingAcademy"
+            ? "Best regards,<br>The RusingÂcademy Team"
+            : "Cordialement,<br>L'équipe RusingÂcademy"
         }
       </p>
     </div>

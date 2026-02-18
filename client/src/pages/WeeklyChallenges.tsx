@@ -1,5 +1,5 @@
 /**
- * Weekly Challenges — RusingAcademy Learning Portal
+ * Weekly Challenges — RusingÂcademy Learning Portal
  * Wave F: Full bilingual (EN/FR), WCAG 2.1 AA accessibility, professional empty states
  */
 import DashboardLayout from "@/components/DashboardLayout";
@@ -35,7 +35,7 @@ function ChallengeCard({ challenge, isFr }: { challenge: {
   const daysLeft = getDaysRemaining(challenge.weekEndDate);
 
   return (
-    <div className={`bg-white dark:bg-card border border-gray-200 dark:border-border rounded-xl p-5 transition-all duration-300 hover:shadow-md ${challenge.isCompleted ? "ring-1 ring-[var(--semantic-success, var(--success))]/30" : ""}`}
+    <div className={`bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-gray-200 dark:border-white/15 rounded-xl p-5 transition-all duration-300 hover:shadow-md ${challenge.isCompleted ? "ring-1 ring-[var(--semantic-success, var(--success))]/30" : ""}`}
       style={{ borderLeft: `4px solid ${color}` }}
       role="article"
       aria-label={isFr ? challenge.titleFr : challenge.title}>
@@ -64,7 +64,7 @@ function ChallengeCard({ challenge, isFr }: { challenge: {
             {challenge.isCompleted ? (isFr ? "Complété !" : "Completed!") : `${Math.round(progress)}%`}
           </span>
         </div>
-        <div className="h-2.5 rounded-full overflow-hidden bg-gray-100" role="progressbar" aria-valuenow={challenge.currentValue} aria-valuemin={0} aria-valuemax={challenge.targetValue}>
+        <div className="h-2.5 rounded-full overflow-hidden bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm" role="progressbar" aria-valuenow={challenge.currentValue} aria-valuemin={0} aria-valuemax={challenge.targetValue}>
           <div className="h-full rounded-full transition-all duration-700 ease-out" style={{
             width: `${progress}%`,
             background: challenge.isCompleted ? "linear-gradient(90deg, var(--semantic-success, var(--success)), var(--color-emerald-400, #34d399))" : `linear-gradient(90deg, ${color}, ${color}cc)`,
@@ -105,7 +105,7 @@ export default function WeeklyChallenges() {
     <DashboardLayout>
       <div className="max-w-[900px] space-y-5" role="main" aria-label={t("challenges.title")}>
         {/* Header */}
-        <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-6 md:p-8 shadow-sm">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-6 md:p-8 shadow-sm">
           <div className="flex items-center gap-3 mb-2">
             <span className="material-icons text-violet-500" style={{ fontSize: "28px" }} aria-hidden="true">flag</span>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -139,14 +139,14 @@ export default function WeeklyChallenges() {
         <div className="flex gap-2" role="tablist" aria-label={isFr ? "Filtrer les défis" : "Filter challenges"}>
           <button onClick={() => setTab("active")} role="tab" aria-selected={tab === "active"}
             className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${
-              tab === "active" ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-card text-gray-500 border-gray-200 dark:border-border hover:border-teal-700 hover:text-teal-700"
+              tab === "active" ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500 border-gray-200 dark:border-white/15 hover:border-teal-700 hover:text-teal-700"
             }`}>
             <span className="material-icons align-middle mr-1"  aria-hidden="true">flag</span>
             {isFr ? "Actifs" : "Active"} ({activeChallenges.length})
           </button>
           <button onClick={() => setTab("completed")} role="tab" aria-selected={tab === "completed"}
             className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-[var(--semantic-success, var(--success))]/30 ${
-              tab === "completed" ? "bg-emerald-500 text-white border-emerald-500" : "bg-white dark:bg-card text-gray-500 border-gray-200 dark:border-border hover:border-emerald-500 hover:text-emerald-500"
+              tab === "completed" ? "bg-emerald-500 text-white border-emerald-500" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500 border-gray-200 dark:border-white/15 hover:border-emerald-500 hover:text-emerald-500"
             }`}>
             <span className="material-icons align-middle mr-1"  aria-hidden="true">check_circle</span>
             {isFr ? "Complétés" : "Completed"} ({completedChallenges.length})
@@ -155,12 +155,12 @@ export default function WeeklyChallenges() {
 
         {/* Challenge Cards */}
         {challengesQuery.isLoading ? (
-          <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-8 text-center shadow-sm" role="status">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-8 text-center shadow-sm" role="status">
             <div className="animate-spin w-8 h-8 border-2 border-teal-700 border-t-transparent rounded-full mx-auto" />
             <p className="text-sm text-gray-400 mt-3">{t("skillLabs.loading")}</p>
           </div>
         ) : displayChallenges.length === 0 ? (
-          <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-8 text-center shadow-sm" role="status">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-8 text-center shadow-sm" role="status">
             <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
               <span className="material-icons text-lg md:text-2xl lg:text-3xl text-purple-400" aria-hidden="true">{tab === "active" ? "flag" : "emoji_events"}</span>
             </div>
@@ -184,7 +184,7 @@ export default function WeeklyChallenges() {
         )}
 
         {/* How It Works */}
-        <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-5 shadow-sm">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm">
           <h2 className="text-sm font-bold text-gray-900 dark:text-foreground mb-3 flex items-center gap-2">
             <span className="material-icons text-teal-700"  aria-hidden="true">help_outline</span>
             {isFr ? "Comment fonctionnent les défis hebdomadaires" : "How Weekly Challenges Work"}

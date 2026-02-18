@@ -73,7 +73,7 @@ export function SLEVelocityWidget({
   const l = labels[language];
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-card dark:bg-obsidian p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -108,7 +108,7 @@ export function SLEVelocityWidget({
               />
             </div>
             <div 
-              className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white dark:bg-background border-2 border-blue-500 rounded-full shadow-md"
+              className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-2 border-blue-500 rounded-full shadow-md"
               style={{ left: `calc(${(currentProgress / targetProgress) * 100}% - 8px)` }}
             />
           </div>
@@ -121,21 +121,21 @@ export function SLEVelocityWidget({
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="flex items-center gap-2 mb-1">
             <Clock className="h-4 w-4 text-black dark:text-foreground" />
             <span className="text-sm text-black dark:text-foreground dark:text-cyan-300">{l.weeklyHours}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-foreground">{weeklyHours}h</p>
         </div>
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="flex items-center gap-2 mb-1">
             <TrendingUp className="h-4 w-4 text-black dark:text-foreground" />
             <span className="text-sm text-black dark:text-foreground dark:text-cyan-300">{l.avgProgress}</span>
           </div>
           <p className="text-2xl font-bold text-black dark:text-foreground">+{averageProgress}%</p>
         </div>
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
+        <div className="p-4 rounded-lg bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="flex items-center gap-2 mb-1">
             <Calendar className="h-4 w-4 text-black dark:text-foreground" />
             <span className="text-sm text-black dark:text-foreground dark:text-cyan-300">{l.estimatedReady}</span>
@@ -145,7 +145,7 @@ export function SLEVelocityWidget({
           </p>
         </div>
         {daysUntilExam && (
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-foundation">
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-black dark:text-foreground" />
               <span className="text-sm text-black dark:text-foreground dark:text-cyan-300">{l.daysUntilExam}</span>

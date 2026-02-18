@@ -364,7 +364,7 @@ describe("Template Marketplace — CRUD Operations", () => {
       category: "hero",
       sectionType: "hero",
       config: {
-        title: "Welcome to RusingAcademy",
+        title: "Welcome to RusingÂcademy",
         subtitle: "Bilingual Excellence",
         content: { ctaText: "Start Learning", ctaUrl: "/courses" },
         backgroundColor: "#1e1b4b",
@@ -384,7 +384,7 @@ describe("Template Marketplace — CRUD Operations", () => {
     expect(found!.language).toBe("bilingual");
     expect(found!.brand).toBe("rusingacademy");
     expect(found!.config).toBeDefined();
-    expect(found!.config.title).toBe("Welcome to RusingAcademy");
+    expect(found!.config.title).toBe("Welcome to RusingÂcademy");
   });
 
   it("should allow admin to update a template", async () => {

@@ -339,7 +339,7 @@ export default function WeeklyChallenges() {
                   <CardContent className="p-5">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100"}`}>
+                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}>
                           <TypeIcon className="h-5 w-5" />
                         </div>
                         <div>
@@ -385,7 +385,7 @@ export default function WeeklyChallenges() {
                       </div>
                     </div>
                     {/* Progress bar */}
-                    <div className="mt-3 h-1.5 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+                    <div className="mt-3 h-1.5 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all"
                         style={{ width: `${completionRate}%` }}
@@ -416,7 +416,7 @@ export default function WeeklyChallenges() {
                   <CardContent className="p-5">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100"}`}>
+                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}>
                           <TypeIcon className="h-5 w-5" />
                         </div>
                         <div>

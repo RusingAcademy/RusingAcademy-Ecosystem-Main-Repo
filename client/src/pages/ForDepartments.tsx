@@ -276,7 +276,7 @@ export default function ForDepartments() {
           <div className="container relative z-10 py-10 md:py-16 lg:py-20">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60 text-white/90 text-sm mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm border border-white/60 text-white/90 text-sm mb-8">
                 <Building2 className="h-4 w-4 text-teal-400" />
                 <span>{t.badge}</span>
               </div>
@@ -306,7 +306,7 @@ export default function ForDepartments() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white/60 text-white hover:bg-white dark:bg-background/10 backdrop-blur-sm px-8"
+                  className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm px-8"
                 >
                   <FileText className="h-4 w-4 mr-2" />
                   {t.ctaSecondary}
@@ -323,7 +323,7 @@ export default function ForDepartments() {
                 ].map((stat, i) => (
                   <div 
                     key={i}
-                    className="bg-white dark:bg-background/10 backdrop-blur-md rounded-2xl p-6 border border-white/60 hover:bg-white dark:bg-background/15 transition-all duration-300"
+                    className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md rounded-2xl p-6 border border-white/60 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/15 transition-all duration-300"
                   >
                     <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-white/90 font-medium">{stat.label}</div>
@@ -361,7 +361,7 @@ export default function ForDepartments() {
                 };
                 return (
                   <div                    key={i}
-                    className="bg-white dark:bg-background rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                    className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >
                     <div className={`h-12 w-12 rounded-xl ${colorClasses[benefit.color]} flex items-center justify-center mb-4`}>
@@ -377,7 +377,7 @@ export default function ForDepartments() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-background border-y border-slate-100">
+        <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-y border-slate-100">
           <div className="container">
             <p className="text-center text-sm text-muted-foreground tracking-wider mb-8">{t.trustedBy}</p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
@@ -396,7 +396,7 @@ export default function ForDepartments() {
 
         {/* How It Works Section */}
         <section 
-          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background"
+          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md"
           ref={(el) => { if (el) sectionRefs.current.set('process', el); }}
           data-section="process"
         >
@@ -450,7 +450,7 @@ export default function ForDepartments() {
                   className={`relative rounded-2xl p-8 ${
                     pkg.popular 
                       ? 'bg-gradient-to-br from-teal-600 to-emerald-600 text-white shadow-xl shadow-teal-500/25 scale-105' 
-                      : 'bg-white dark:bg-card border border-slate-200 shadow-sm'
+                      : 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-slate-200 shadow-sm'
                   }`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
@@ -485,7 +485,7 @@ export default function ForDepartments() {
                   <Button 
                     className={`w-full ${
                       pkg.popular 
-                        ? 'bg-white dark:bg-card text-teal-600 hover:bg-white/90' 
+                        ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-teal-600 hover:bg-white/90' 
                         : 'bg-teal-600 text-white hover:bg-teal-700'
                     }`}
                     size="lg"
@@ -501,7 +501,7 @@ export default function ForDepartments() {
 
         {/* Testimonials Section */}
         <section 
-          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background"
+          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md"
           ref={(el) => { if (el) sectionRefs.current.set('testimonials', el); }}
           data-section="testimonials"
         >
@@ -560,7 +560,7 @@ export default function ForDepartments() {
                   <p className="text-lg font-medium">{t.formSuccess}</p>
                 </div>
               ) : (
-                <div className="bg-white dark:bg-background rounded-2xl p-8 shadow-lg border border-slate-100">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg border border-slate-100">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
@@ -611,7 +611,7 @@ export default function ForDepartments() {
 
         {/* FAQ Section */}
         <section 
-          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background"
+          className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md"
           ref={(el) => { if (el) sectionRefs.current.set('faq', el); }}
           data-section="faq"
         >
@@ -626,7 +626,7 @@ export default function ForDepartments() {
               {t.faqs.map((faq, i) => (
                 <div 
                   key={i} 
-                  className="bg-white dark:bg-background rounded-xl overflow-hidden border border-slate-100 hover:border-teal-200 transition-colors cursor-pointer"
+                  className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl overflow-hidden border border-slate-100 hover:border-teal-200 transition-colors cursor-pointer"
                   style={{ transitionDelay: `${i * 100}ms` }}
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
@@ -659,7 +659,7 @@ export default function ForDepartments() {
           
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60 text-white/90 text-sm mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm border border-white/60 text-white/90 text-sm mb-8">
                 <Sparkles className="h-4 w-4 text-teal-400" />
                 <span>{t.finalCtaBadge}</span>
               </div>
@@ -683,7 +683,7 @@ export default function ForDepartments() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white/60 text-white hover:bg-white dark:bg-background/10 backdrop-blur-sm px-8"
+                  className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm px-8"
                 >
                   <Phone className="h-4 w-4 mr-2" />
                   {t.finalCtaSecondary}

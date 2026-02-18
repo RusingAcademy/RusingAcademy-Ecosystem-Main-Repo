@@ -123,7 +123,7 @@ export default function RightSidebar() {
                   e.stopPropagation();
                   toast("Feature coming soon");
                 }}
-                className="p-1.5 rounded-lg hover:bg-white dark:bg-background transition-all duration-200 opacity-0 group-hover:opacity-100"
+                className="p-1.5 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-all duration-200 opacity-0 group-hover:opacity-100"
               >
                 <Bookmark className="w-4 h-4 text-muted-foreground" strokeWidth={1.8} />
               </button>
@@ -224,7 +224,7 @@ export default function RightSidebar() {
         </button>
       </motion.div>
 
-      {/* Visit RusingAcademy — premium gradient card */}
+      {/* Visit RusingÂcademy — premium gradient card */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -252,7 +252,7 @@ export default function RightSidebar() {
           <GraduationCap className="w-6 h-6"  />
         </div>
         <h3 className="text-sm font-bold text-foreground mb-1">
-          Explore RusingAcademy
+          Explore RusingÂcademy
         </h3>
         <p className="text-[11px] text-muted-foreground mb-4 leading-relaxed">
           Professional courses for bilingual excellence in Canada's public service.

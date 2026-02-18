@@ -208,7 +208,7 @@ export default function CourseDetail() {
     <div className="min-h-screen bg-background">
       <SEO
         title={course?.title || "Course"}
-        description={course?.description?.slice(0, 160) || "Explore this course on RusingAcademy"}
+        description={course?.description?.slice(0, 160) || "Explore this course on RusingÂcademy"}
         canonical={`/courses/${slug}`}
         type="product"
         schema={course ? generateCourseSchema({
@@ -229,7 +229,7 @@ export default function CourseDetail() {
           <Button
             variant="outline"
             size="sm"
-            className="bg-white dark:bg-background text-amber-600 hover:bg-amber-50 border-white"
+            className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-amber-600 hover:bg-amber-50 border-white"
             onClick={() => window.close()}
           >
             {isEn ? "Exit Preview" : "Quitter l'aperçu"}
@@ -375,7 +375,7 @@ export default function CourseDetail() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="sticky top-24 bg-white dark:bg-card dark:bg-foundation shadow-2xl border-0">
+                <Card className="sticky top-24 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md shadow-2xl border-0">
                   {/* Thumbnail */}
                   <div className="relative aspect-video bg-slate-200 dark:bg-teal-800 overflow-hidden rounded-t-lg">
                     {course.thumbnailUrl ? (
@@ -396,7 +396,7 @@ export default function CourseDetail() {
                         rel="noopener noreferrer"
                         className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition-opacity"
                       >
-                        <div className="w-16 h-16 rounded-full bg-white dark:bg-background/90 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 flex items-center justify-center">
                           <Play className="h-8 w-8 text-black dark:text-foreground ml-1" />
                         </div>
                       </a>

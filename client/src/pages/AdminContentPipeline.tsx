@@ -81,7 +81,7 @@ export default function AdminContentPipeline() {
         {s && s.total > 0 && (
           <Card className="border border-gray-100">
             <CardContent className="p-4">
-              <div className="flex h-4 rounded-full overflow-hidden bg-gray-100">
+              <div className="flex h-4 rounded-full overflow-hidden bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                 {[
                   { count: s.draft, color: "var(--color-gray-400, var(--muted-foreground))", label: "Draft" },
                   { count: s.review, color: "var(--color-blue-500, var(--semantic-info))", label: "Review" },
@@ -257,7 +257,7 @@ export default function AdminContentPipeline() {
                       <TableCell className="capitalize">{q.contentType}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          <div className="w-24 bg-gray-100 dark:bg-card rounded-full h-2 overflow-hidden">
+                          <div className="w-24 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full h-2 overflow-hidden">
                             <div
                               className="h-full rounded-full"
                               style={{

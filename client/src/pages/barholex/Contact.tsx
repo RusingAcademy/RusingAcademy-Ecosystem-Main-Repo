@@ -245,7 +245,7 @@ export default function BarholexContact() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 }}
-                      className="p-6 rounded-2xl bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60"
+                      className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60"
                     >
                       <h3 className="font-bold text-white mb-4">
                         {language === "en" ? "Our Services" : "Nos services"}
@@ -270,7 +270,7 @@ export default function BarholexContact() {
                       {TRUST_SIGNALS.map((signal, index) => (
                         <div
                           key={index}
-                          className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-background/5 border border-white/60"
+                          className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60"
                         >
                           <signal.icon className="w-5 h-5 text-barholex-gold" />
                           <span className="text-sm text-white/90">
@@ -312,7 +312,7 @@ export default function BarholexContact() {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-background/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
                           placeholder={language === "en" ? "John Doe" : "Jean Dupont"}
                         />
                       </div>
@@ -328,7 +328,7 @@ export default function BarholexContact() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-background/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
                           placeholder="email@company.com"
                         />
                       </div>
@@ -343,7 +343,7 @@ export default function BarholexContact() {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-background/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
                           placeholder={language === "en" ? "Company name" : "Nom de l'entreprise"}
                         />
                       </div>
@@ -358,7 +358,7 @@ export default function BarholexContact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-background/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
                           placeholder="+1 (613) 555-1234"
                         />
                       </div>
@@ -373,7 +373,7 @@ export default function BarholexContact() {
                           required
                           value={formData.projectType}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-background/5 border border-white/60 text-white focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60 text-white focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
                         >
                           <option value="" className="bg-obsidian">{language === "en" ? "Select type" : "Sélectionnez le type"}</option>
                           {projectTypes.map((type) => (
@@ -393,7 +393,7 @@ export default function BarholexContact() {
                           name="budget"
                           value={formData.budget}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-background/5 border border-white/60 text-white focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60 text-white focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
                         >
                           <option value="" className="bg-obsidian">{language === "en" ? "Select budget" : "Sélectionnez le budget"}</option>
                           {budgets.map((budget) => (
@@ -439,7 +439,7 @@ export default function BarholexContact() {
                           required
                           value={formData.message}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-background/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all resize-none"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60 text-white placeholder-white/50 focus:border-barholex-gold focus:ring-2 focus:ring-amber-500/20 outline-none transition-all resize-none"
                           placeholder={language === "en" 
                             ? "Tell us about your project, goals, and any specific requirements..."
                             : "Parlez-nous de votre projet, vos objectifs et toute exigence spécifique..."
@@ -505,7 +505,7 @@ export default function BarholexContact() {
                 ].map((faq, index) => (
                   <div
                     key={index}
-                    className="p-6 rounded-2xl bg-white dark:bg-background/5 border border-white/60"
+                    className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60"
                   >
                     <h3 className="font-bold text-white mb-2">
                       {language === "en" ? faq.qEn : faq.qFr}

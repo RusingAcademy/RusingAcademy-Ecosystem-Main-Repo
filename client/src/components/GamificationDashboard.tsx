@@ -70,7 +70,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
   
   if (compact) {
     return (
-      <div className="bg-white dark:bg-background rounded-xl shadow-sm border border-gray-100 dark:border-border p-4">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-sm border border-gray-100 dark:border-white/15 p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Level Badge */}
@@ -133,7 +133,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
           </div>
           
           {/* Streak */}
-          <div className="text-center bg-white/15 dark:bg-background/10 rounded-xl p-4 backdrop-blur">
+          <div className="text-center bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 backdrop-blur">
             <div className="text-xl md:text-3xl lg:text-4xl mb-1">🔥</div>
             <p className="text-lg md:text-2xl lg:text-3xl font-bold">{stats.streak.current}</p>
             <p className="text-sm text-teal-100">Day Streak</p>
@@ -150,9 +150,9 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
               <span>Progress to Level {stats.levelInfo.nextLevel.level}</span>
               <span>{stats.levelInfo.progressPercent}%</span>
             </div>
-            <div className="h-3 bg-white dark:bg-background/20 rounded-full overflow-hidden">
+            <div className="h-3 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-white dark:bg-background rounded-full transition-all duration-500"
+                className="h-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full transition-all duration-500"
                 style={{ width: `${stats.levelInfo.progressPercent}%` }}
               />
             </div>
@@ -164,11 +164,11 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         
         {/* Weekly/Monthly XP */}
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <div className="bg-white/15 dark:bg-background/10 rounded-xl p-3 text-center">
+          <div className="bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-3 text-center">
             <p className="text-2xl font-bold">{stats.xp.weekly.toLocaleString()}</p>
             <p className="text-sm text-teal-100">This Week</p>
           </div>
-          <div className="bg-white/15 dark:bg-background/10 rounded-xl p-3 text-center">
+          <div className="bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-3 text-center">
             <p className="text-2xl font-bold">{stats.xp.monthly.toLocaleString()}</p>
             <p className="text-sm text-teal-100">This Month</p>
           </div>
@@ -176,7 +176,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
       </div>
       
       {/* Badges Section */}
-      <div className="bg-white dark:bg-background rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-black dark:text-foreground">
             Badges ({stats.badges.total})
@@ -227,17 +227,17 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
       </div>
       
       {/* Leaderboard */}
-      <div className="bg-white dark:bg-background rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-black dark:text-foreground">Leaderboard</h3>
-          <div className="flex gap-1 bg-gray-100 dark:bg-card rounded-lg p-1">
+          <div className="flex gap-1 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg p-1">
             {(["weekly", "monthly", "allTime"] as const).map((period) => (
               <button
                 key={period}
                 onClick={() => setLeaderboardPeriod(period)}
                 className={`px-3 py-1 text-sm rounded-md transition-colors ${
                   leaderboardPeriod === period
-                    ? "bg-white dark:bg-card text-teal-600 shadow-sm font-medium"
+                    ? "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-teal-600 shadow-sm font-medium"
                     : "text-black dark:text-foreground hover:text-black"
                 }`}
               >

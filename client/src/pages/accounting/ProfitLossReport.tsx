@@ -104,7 +104,7 @@ export default function ProfitLossReport() {
     if (!pnl) return;
     const rows = [
       ["Profit and Loss Report"],
-      [(company as any)?.companyName || "RusingAcademy"],
+      [(company as any)?.companyName || "RusingÂcademy"],
       [periodLabel()],
       [""],
       ["INCOME"],
@@ -129,7 +129,7 @@ export default function ProfitLossReport() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload) return null;
     return (
-      <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg p-3 text-sm">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg shadow-lg p-3 text-sm">
         <p className="font-semibold text-gray-800 dark:text-foreground mb-1">{label}</p>
         {payload.map((entry: any, i: number) => (
           <div key={i} className="flex items-center gap-2">
@@ -147,26 +147,26 @@ export default function ProfitLossReport() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/reports")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
+          <button onClick={() => navigate("/reports")} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
             <h1 className="text-2xl font-bold text-gray-800">Profit and Loss</h1>
-            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingAcademy"}</p>
+            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingÂcademy"}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           {/* View Mode Toggle */}
-          <div className="flex items-center border border-gray-200 dark:border-border dark:border-border rounded-lg overflow-hidden">
+          <div className="flex items-center border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg overflow-hidden">
             <button aria-label="Action"
-              className={`p-2 ${viewMode === "table" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
+              className={`p-2 ${viewMode === "table" ? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("table")}
               title="Table view"
             >
               <Table2 size={16} />
             </button>
             <button aria-label="Action"
-              className={`p-2 ${viewMode === "chart" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
+              className={`p-2 ${viewMode === "chart" ? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("chart")}
               title="Chart view"
             >
@@ -175,14 +175,14 @@ export default function ProfitLossReport() {
           </div>
           {/* YoY Toggle */}
           <button aria-label="Action"
-            className={`flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border ${showYoY ? "bg-green-50 border-green-600 text-green-600" : "border-gray-200 dark:border-border text-gray-500 hover:text-gray-700"}`}
+            className={`flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border ${showYoY ? "bg-green-50 border-green-600 text-green-600" : "border-gray-200 dark:border-white/15 text-gray-500 hover:text-gray-700"}`}
             onClick={() => setShowYoY(!showYoY)}
             title="Year-over-Year comparison"
           >
             <GitCompareArrows size={14} /> YoY
           </button>
           {/* Period Picker */}
-          <div className="flex items-center gap-1 border border-gray-200 dark:border-border dark:border-border rounded-lg px-3 py-1.5">
+          <div className="flex items-center gap-1 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg px-3 py-1.5">
             <Calendar size={14} className="text-gray-400" />
             <select
               className="text-sm bg-transparent border-none focus:outline-none"
@@ -205,7 +205,7 @@ export default function ProfitLossReport() {
 
       {/* Custom Date Range */}
       {period === "custom" && (
-        <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-background rounded-lg">
+        <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
           <label className="text-sm text-gray-600">From:</label>
           <input
             type="date"
@@ -294,7 +294,7 @@ export default function ProfitLossReport() {
                     </div>
                   ))
                 )}
-                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 dark:border-border dark:border-border mt-2">
+                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 dark:border-white/15 dark:border-white/15 mt-2">
                   <span className="text-gray-800">Total Income</span>
                   <span className="text-gray-900 dark:text-foreground font-mono">{fmt(pnl.totalIncome)}</span>
                 </div>
@@ -329,7 +329,7 @@ export default function ProfitLossReport() {
                       </div>
                     ))
                 )}
-                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 dark:border-border dark:border-border mt-2">
+                <div className="flex justify-between py-2 text-sm font-bold border-t border-gray-200 dark:border-white/15 dark:border-white/15 mt-2">
                   <span className="text-gray-800">Total Expenses</span>
                   <span className="text-gray-900 dark:text-foreground font-mono">{fmt(pnl.totalExpenses)}</span>
                 </div>

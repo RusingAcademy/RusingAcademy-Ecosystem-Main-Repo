@@ -20,7 +20,7 @@ const typeConfig: Record<NotifType, { icon: any; color: string; bg: string }> = 
   payment: { icon: DollarSign, color: "text-emerald-600", bg: "bg-emerald-50" },
   enrollment: { icon: UserPlus, color: "text-violet-600", bg: "bg-violet-50" },
   review: { icon: Star, color: "text-yellow-600", bg: "bg-yellow-50" },
-  system: { icon: Bell, color: "text-black", bg: "bg-gray-50" },
+  system: { icon: Bell, color: "text-black", bg: "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm" },
 };
 
 export default function NotificationsCenter() {

@@ -84,7 +84,7 @@ export default function ProductDetail() {
     <div className="p-6 max-w-[700px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/products-services")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
+          <button onClick={() => navigate("/products-services")} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">
@@ -187,7 +187,7 @@ export default function ProductDetail() {
                 Taxable
               </label>
             ) : (
-              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${p?.isTaxable ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-card text-gray-600"}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${p?.isTaxable ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"}`}>
                 {p?.isTaxable ? "Taxable" : "Non-taxable"}
               </span>
             )}

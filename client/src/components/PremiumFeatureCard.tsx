@@ -88,11 +88,11 @@ export default function PremiumFeatureCard({
       case "glass":
         return "glass-card";
       case "bordered":
-        return `bg-white dark:bg-card border-2 ${colors.border} rounded-2xl`;
+        return `bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-2 ${colors.border} rounded-2xl`;
       case "elevated":
-        return "bg-white dark:bg-card rounded-2xl shadow-xl hover:shadow-2xl";
+        return "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-2xl shadow-xl hover:shadow-2xl";
       default:
-        return "bg-white dark:bg-card rounded-2xl shadow-md hover:shadow-lg border border-slate-100";
+        return "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-2xl shadow-md hover:shadow-lg border border-slate-100";
     }
   };
 

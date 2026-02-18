@@ -676,7 +676,7 @@ export default function LessonViewer() {
                     {/* Speaking Exercise Content */}
                     {isSpeakingLesson && !showSpeaking && (
                       <div className="p-8 text-center">
-                        <div className="w-20 h-20 rounded-full bg-foundation-soft dark:bg-foundation-soft/30 flex items-center justify-center mx-auto mb-4">
+                        <div className="w-20 h-20 rounded-full bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md-soft/30 flex items-center justify-center mx-auto mb-4">
                           <Mic className="h-10 w-10 text-foundation dark:text-foundation" />
                         </div>
                         <h3 className="text-xl font-semibold mb-2">

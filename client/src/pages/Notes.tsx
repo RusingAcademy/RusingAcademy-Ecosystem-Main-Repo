@@ -114,12 +114,12 @@ export default function Notes() {
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
       <main className="flex-1 lg:ml-[240px] overflow-y-auto">
         {/* Mobile header */}
-        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-background border-b border-gray-200 dark:border-border dark:border-border sticky top-0 z-30">
-          <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100">
+        <div className="lg:hidden flex items-center gap-3 p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-200 dark:border-white/15 dark:border-white/15 sticky top-0 z-30">
+          <button onClick={() => setCollapsed(!collapsed)} className="p-2 rounded-lg hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
             <span className="material-icons text-gray-600">menu</span>
           </button>
           <h1 className="text-lg font-semibold text-gray-900">Study Notes</h1>
@@ -154,13 +154,13 @@ export default function Notes() {
                 placeholder="Search notes..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-border dark:border-border bg-white dark:bg-background text-sm text-gray-900 dark:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-sm text-gray-900 dark:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setSelectedTag(null)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${!selectedTag ? "bg-teal-700 text-white" : "bg-gray-100 dark:bg-card text-gray-600 hover:bg-gray-200"}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${!selectedTag ? "bg-teal-700 text-white" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 hover:bg-gray-200"}`}
               >
                 All
               </button>
@@ -168,7 +168,7 @@ export default function Notes() {
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${selectedTag === tag ? "bg-teal-700 text-white" : "bg-gray-100 dark:bg-card text-gray-600 hover:bg-gray-200"}`}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${selectedTag === tag ? "bg-teal-700 text-white" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 hover:bg-gray-200"}`}
                 >
                   #{tag}
                 </button>
@@ -179,13 +179,13 @@ export default function Notes() {
           {/* Editor Modal */}
           {showEditor && (
             <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4" onClick={() => resetForm()}>
-              <div className="bg-white dark:bg-background rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-bold text-gray-900">
                       {editingNote ? "Edit Note" : "New Note"}
                     </h2>
-                    <button aria-label="Action" onClick={resetForm} className="p-1.5 rounded-lg hover:bg-gray-100">
+                    <button aria-label="Action" onClick={resetForm} className="p-1.5 rounded-lg hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                       <span className="material-icons text-gray-400">close</span>
                     </button>
                   </div>
@@ -195,7 +195,7 @@ export default function Notes() {
                     placeholder="Note title..."
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border text-gray-900 dark:text-foreground font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 text-gray-900 dark:text-foreground font-medium text-base mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700"
                   />
 
                   <textarea
@@ -203,7 +203,7 @@ export default function Notes() {
                     value={content}
                     onChange={e => setContent(e.target.value)}
                     rows={10}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-border dark:border-border text-gray-900 dark:text-foreground text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700 resize-none font-mono"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 text-gray-900 dark:text-foreground text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700 resize-none font-mono"
                   />
 
                   {/* Tags */}
@@ -225,9 +225,9 @@ export default function Notes() {
                         value={tagInput}
                         onChange={e => setTagInput(e.target.value)}
                         onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); handleAddTag(); } }}
-                        className="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-border dark:border-border text-sm text-gray-900 dark:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-700/20"
+                        className="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 text-sm text-gray-900 dark:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-700/20"
                       />
-                      <button onClick={handleAddTag} className="px-3 py-2 rounded-lg bg-gray-100 dark:bg-card text-gray-600 text-sm hover:bg-gray-200">
+                      <button onClick={handleAddTag} className="px-3 py-2 rounded-lg bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 text-sm hover:bg-gray-200">
                         Add
                       </button>
                     </div>
@@ -247,7 +247,7 @@ export default function Notes() {
                   </div>
 
                   <div className="flex justify-end gap-3">
-                    <button onClick={resetForm} className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100">
+                    <button onClick={resetForm} className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                       Cancel
                     </button>
                     <button
@@ -268,7 +268,7 @@ export default function Notes() {
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[1,2,3,4,5,6].map(i => (
-                <div key={i} className="h-48 rounded-2xl bg-gray-100 dark:bg-card animate-pulse" />
+                <div key={i} className="h-48 rounded-2xl bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 animate-pulse" />
               ))}
             </div>
           ) : filteredNotes.length === 0 ? (
@@ -332,13 +332,13 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }: {
     <div className={`${colorClasses.bg} border ${colorClasses.border} rounded-2xl p-5 transition-all hover:shadow-md group relative`}>
       {/* Actions */}
       <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button onClick={() => onTogglePin(note.id, note.isPinned)} className="p-1.5 rounded-lg hover:bg-white dark:bg-background/80" title={note.isPinned ? "Unpin" : "Pin"}>
+        <button onClick={() => onTogglePin(note.id, note.isPinned)} className="p-1.5 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80" title={note.isPinned ? "Unpin" : "Pin"}>
           <span className={`material-icons text-sm ${note.isPinned ? "text-teal-700" : "text-gray-400"}`}>push_pin</span>
         </button>
-        <button onClick={() => onEdit(note)} className="p-1.5 rounded-lg hover:bg-white dark:bg-background/80" title="Edit">
+        <button onClick={() => onEdit(note)} className="p-1.5 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80" title="Edit">
           <span className="material-icons text-sm text-gray-400">edit</span>
         </button>
-        <button onClick={() => { if (confirm("Delete this note?")) onDelete(note.id); }} className="p-1.5 rounded-lg hover:bg-white dark:bg-background/80" title="Delete">
+        <button onClick={() => { if (confirm("Delete this note?")) onDelete(note.id); }} className="p-1.5 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80" title="Delete">
           <span className="material-icons text-sm text-red-400">delete</span>
         </button>
       </div>

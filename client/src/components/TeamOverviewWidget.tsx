@@ -129,7 +129,7 @@ export function TeamOverviewWidget({
 
   return (
     <Card className={cn("overflow-hidden", className)}>
-      <CardHeader className="bg-gradient-to-r from-slate-500/10 to-slate-600/10 dark:from-slate-500/20 dark:to-slate-600/20 border-b border-slate-200/50 dark:border-teal-800/50">
+      <CardHeader className="bg-gradient-to-r from-slate-500/10 to-slate-600/10 dark:from-slate-500/20 dark:to-slate-600/20 border-b border-slate-200/50 dark:border-white/15">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-teal-800/20 dark:bg-teal-800/30">
             <Users className="h-5 w-5 text-black dark:text-foreground dark:text-cyan-300" />

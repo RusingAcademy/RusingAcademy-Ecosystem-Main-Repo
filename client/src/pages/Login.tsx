@@ -474,7 +474,7 @@ function LanguageSwitcher({
                 className={`block w-full text-left px-4 py-2 text-xs transition-colors ${
                   lang === l
                     ? "bg-[var(--brand-foundation)]/10 text-[var(--brand-foundation)] font-semibold"
-                    : "text-gray-700 hover:bg-gray-50"
+                    : "text-gray-700 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                 }`}
               >
                 {l === "en" ? "English" : "Français"}
@@ -1022,7 +1022,7 @@ function LoginContent() {
                 type="button"
                 onClick={handleGoogleSignIn}
                 disabled={isPending || loginSuccess}
-                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white text-[#333] text-xs font-semibold shadow-sm hover:shadow-lg hover:bg-gray-50 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/50"
+                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white text-[#333] text-xs font-semibold shadow-sm hover:shadow-lg hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/50"
               >
                 <GoogleIcon />
                 Google

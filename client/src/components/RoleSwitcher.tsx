@@ -111,7 +111,7 @@ export function RoleSwitcher() {
         <Button
           variant="outline"
           size="sm"
-          className="gap-2 h-9 px-3 rounded-lg border-slate-200 bg-white dark:bg-background/50 backdrop-blur-sm hover:bg-white dark:bg-background/80"
+          className="gap-2 h-9 px-3 rounded-lg border-slate-200 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/50 backdrop-blur-sm hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80"
         >
           <div className={`p-1 rounded ${currentDashboard.color}`}>
             {currentDashboard.icon}
@@ -134,7 +134,7 @@ export function RoleSwitcher() {
               key={option.id}
               asChild
               className={`cursor-pointer rounded-lg px-2 py-2.5 ${
-                isActive ? "bg-slate-100" : ""
+                isActive ? "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm" : ""
               }`}
             >
               <Link href={option.href} onClick={() => setOpen(false)}>

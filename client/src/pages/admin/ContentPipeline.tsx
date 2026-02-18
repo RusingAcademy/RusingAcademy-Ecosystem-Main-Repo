@@ -329,7 +329,7 @@ export default function ContentPipeline() {
                             item.status === "published" ? "border-emerald-300 text-emerald-700 bg-emerald-50" :
                             item.status === "review" ? "border-blue-300 text-blue-700 bg-blue-50" :
                             item.status === "draft" ? "border-yellow-300 text-yellow-700 bg-yellow-50" :
-                            "border-gray-300 text-gray-700 dark:text-muted-foreground bg-gray-50"
+                            "border-gray-300 text-gray-700 dark:text-muted-foreground bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                           }
                         >
                           {item.status}
@@ -439,7 +439,7 @@ export default function ContentPipeline() {
                 <Card key={template.id} className="hover:shadow-md transition-shadow">
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
-                      <Badge className={`${categoryColors[template.category] ?? "bg-gray-100 dark:bg-card text-gray-600"} border`}>
+                      <Badge className={`${categoryColors[template.category] ?? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"} border`}>
                         <span className="mr-1">{categoryIcons[template.category]}</span>
                         {template.category}
                       </Badge>

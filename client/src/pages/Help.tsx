@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal - Help Page
+ * RusingÂcademy Learning Portal - Help Page
  * Design: Zendesk-style help center with categories and search
  */
 import DashboardLayout from "@/components/DashboardLayout";
@@ -14,17 +14,17 @@ const categories = [
 ];
 
 const promotedArticles = [
-  "How to Use the RusingAcademy Support Form Efficiently",
-  "RusingAcademy Learning Portal Introduction",
-  "How to navigate the RusingAcademy portal?",
+  "How to Use the RusingÂcademy Support Form Efficiently",
+  "RusingÂcademy Learning Portal Introduction",
+  "How to navigate the RusingÂcademy portal?",
   "Is there a guide available for using the learning materials/modules?",
 ];
 
 const recentActivity = [
   { category: "Chat and Support Form", question: "How can I contact a live agent for support?", time: "2 months ago" },
   { category: "Tutoring sessions", question: "May I continue my training at my own expense...", time: "4 months ago" },
-  { category: "Tutoring sessions", question: "Is it possible to extend my current contract with RusingAcademy?", time: "4 months ago" },
-  { category: "RusingAcademy Learning Portal", question: "How do I correct a registration form I just submitted?", time: "4 months ago" },
+  { category: "Tutoring sessions", question: "Is it possible to extend my current contract with RusingÂcademy?", time: "4 months ago" },
+  { category: "RusingÂcademy Learning Portal", question: "How do I correct a registration form I just submitted?", time: "4 months ago" },
   { category: "Tutoring sessions", question: "What is the passing grade for the End-of-Module (EOM) exam?", time: "4 months ago" },
 ];
 
@@ -77,7 +77,7 @@ export default function Help() {
           <h3 className="text-base font-medium text-gray-800 dark:text-foreground mb-3">Promoted Articles</h3>
           <div className="glass-card rounded-xl divide-y divide-gray-100">
             {promotedArticles.map((article, i) => (
-              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-background cursor-pointer flex items-center gap-2">
+              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-base">article</span>
                 <span className="text-sm text-gray-700">{article}</span>
               </div>
@@ -90,9 +90,9 @@ export default function Help() {
           <h3 className="text-base font-medium text-gray-800 dark:text-foreground mb-3">Recent Activity</h3>
           <div className="glass-card rounded-xl divide-y divide-gray-100">
             {recentActivity.map((item, i) => (
-              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-background cursor-pointer">
+              <div key={i} className="px-4 py-3 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-card text-gray-500">{item.category}</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500">{item.category}</span>
                   <span className="text-[10px] text-gray-400">{item.time}</span>
                 </div>
                 <p className="text-sm text-gray-700">{item.question}</p>

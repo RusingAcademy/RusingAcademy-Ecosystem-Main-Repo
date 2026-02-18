@@ -46,7 +46,7 @@ export function VideoPlaceholder({
   };
   
   return (
-    <div className="bg-white dark:bg-background rounded-2xl shadow-lg overflow-hidden max-w-4xl mx-auto">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-lg overflow-hidden max-w-4xl mx-auto">
       {/* Video Preview Area */}
       <div className="relative aspect-video bg-gradient-to-br from-foundation via-teal-700 to-[#1A6B6C]">
         {/* Background Pattern */}
@@ -76,7 +76,7 @@ export function VideoPlaceholder({
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
           {/* Play Button (Disabled) */}
           <div className="relative mb-6">
-            <div className="w-20 h-20 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm flex items-center justify-center border-2 border-white/60">
+            <div className="w-20 h-20 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm flex items-center justify-center border-2 border-white/60">
               <Play className="w-10 h-10 text-white/90 ml-1" />
             </div>
             {/* Pulsing Ring */}
@@ -84,7 +84,7 @@ export function VideoPlaceholder({
           </div>
           
           {/* Coming Soon Badge */}
-          <div className="bg-white dark:bg-background/10 backdrop-blur-md rounded-full px-6 py-2 mb-4 border border-white/60">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md rounded-full px-6 py-2 mb-4 border border-white/60">
             <span className="text-lg font-semibold tracking-wide">
               {language === "fr" ? "Bientôt disponible" : "Coming Soon"}
             </span>
@@ -142,7 +142,7 @@ export function VideoPlaceholder({
         </div>
         
         {/* What You'll Learn */}
-        <div className="bg-gray-50 dark:bg-background rounded-xl p-4 mb-6">
+        <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-4 mb-6">
           <h4 className="font-semibold text-black dark:text-foreground mb-3">
             {language === "fr" ? "Ce que vous apprendrez" : "What you'll learn"}
           </h4>

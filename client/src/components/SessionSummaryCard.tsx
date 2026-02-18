@@ -91,11 +91,11 @@ export default function SessionSummaryCard({
   const handleShare = async () => {
     setIsSharing(true);
     try {
-      const shareText = `J'ai terminé une session de pratique SLE avec ${summary.coachName}!\n\nNiveau: ${summary.level}\nCompétence: ${skillLabel}\nScore moyen: ${summary.averageScore}%\n\n#RusingAcademy #SLE #Bilinguisme`;
+      const shareText = `J'ai terminé une session de pratique SLE avec ${summary.coachName}!\n\nNiveau: ${summary.level}\nCompétence: ${skillLabel}\nScore moyen: ${summary.averageScore}%\n\n#RusingÂcademy #SLE #Bilinguisme`;
       
       if (navigator.share) {
         await navigator.share({
-          title: "Ma session SLE - RusingAcademy",
+          title: "Ma session SLE - RusingÂcademy",
           text: shareText,
         });
       } else {
@@ -111,7 +111,7 @@ export default function SessionSummaryCard({
   
   const handleDownload = () => {
     const summaryText = `
-RÉSUMÉ DE SESSION SLE - RusingAcademy
+RÉSUMÉ DE SESSION SLE - RusingÂcademy
 ======================================
 
 Coach: ${summary.coachName}
@@ -139,7 +139,7 @@ RECOMMANDATIONS
 ${summary.recommendations.map(r => `• ${r}`).join("\n")}
 
 ======================================
-Généré par RusingAcademy Learning Ecosystem
+Généré par RusingÂcademy Learning Ecosystem
     `.trim();
     
     const blob = new Blob([summaryText], { type: "text/plain" });

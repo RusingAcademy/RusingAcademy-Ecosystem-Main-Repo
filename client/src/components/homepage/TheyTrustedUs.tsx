@@ -116,7 +116,7 @@ export default function TheyTrustedUs() {
               <motion.div 
                 key={index}
                 role="listitem"
-                className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white dark:bg-background rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 w-full max-w-[180px] sm:max-w-[200px] min-h-[120px] sm:min-h-[140px] group border border-slate-100 hover:border-slate-200"
+                className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 w-full max-w-[180px] sm:max-w-[200px] min-h-[120px] sm:min-h-[140px] group border border-slate-100 hover:border-slate-200"
                 title={language === 'fr' ? org.nameFr : org.nameEn}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -150,8 +150,8 @@ export default function TheyTrustedUs() {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           {language === 'fr' 
-            ? '*Logos officiels des institutions fédérales canadiennes. RusingAcademy est une initiative entrepreneuriale privée.'
-            : '*Official logos of Canadian federal institutions. RusingAcademy is a private entrepreneurial initiative.'}
+            ? '*Logos officiels des institutions fédérales canadiennes. RusingÂcademy est une initiative entrepreneuriale privée.'
+            : '*Official logos of Canadian federal institutions. RusingÂcademy is a private entrepreneurial initiative.'}
         </motion.p>
       </div>
 

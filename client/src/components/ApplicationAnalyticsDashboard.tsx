@@ -97,7 +97,7 @@ export function ApplicationAnalyticsDashboard({
   return (
     <div className="space-y-8">
       {/* Date Range Filter */}
-      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
         <div className="flex items-center gap-2 mb-4">
           <Calendar size={20} className="text-teal-600" />
           <h3 className="text-lg font-semibold text-gray-900">
@@ -140,7 +140,7 @@ export function ApplicationAnalyticsDashboard({
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Total Applications" : "Total des candidatures"}</p>
@@ -150,7 +150,7 @@ export function ApplicationAnalyticsDashboard({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
@@ -160,7 +160,7 @@ export function ApplicationAnalyticsDashboard({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
@@ -170,7 +170,7 @@ export function ApplicationAnalyticsDashboard({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-600 text-sm">{isEn ? "Under Review" : "En cours d'examen"}</p>
@@ -183,7 +183,7 @@ export function ApplicationAnalyticsDashboard({
 
       {/* Status Distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
             {isEn ? "Application Status Distribution" : "Distribution du statut des candidatures"}
           </h3>
@@ -213,7 +213,7 @@ export function ApplicationAnalyticsDashboard({
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
             {isEn ? "Teaching Language Distribution" : "Distribution des langues d'enseignement"}
           </h3>
@@ -230,7 +230,7 @@ export function ApplicationAnalyticsDashboard({
       </div>
 
       {/* Monthly Trends */}
-      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
           {isEn ? "Monthly Application Trends" : "Tendances mensuelles des candidatures"}
         </h3>
@@ -249,7 +249,7 @@ export function ApplicationAnalyticsDashboard({
       </div>
 
       {/* Experience Distribution */}
-      <div className="bg-white dark:bg-background rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow p-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
           {isEn ? "Teaching Experience Distribution" : "Distribution de l'expérience d'enseignement"}
         </h3>

@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal - Progress Page
+ * RusingÂcademy Learning Portal - Progress Page
  * Design: Summary of modules accessed with progress table
  */
 import DashboardLayout from "@/components/DashboardLayout";
@@ -63,7 +63,7 @@ export default function Progress() {
             </thead>
             <tbody>
               {progressData.map((item, i) => (
-                <tr key={i} className={`border-t border-gray-100 dark:border-border ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
+                <tr key={i} className={`border-t border-gray-100 dark:border-white/15 ${i % 2 === 0 ? "bg-white" : "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50"} hover:bg-teal-50`}>
                   <td className="px-4 py-3 text-sm text-gray-800">{item.module}</td>
                   <td className="px-4 py-3 text-sm text-gray-600">{item.totalActivities}</td>
                   <td className="px-4 py-3 text-sm text-gray-600">{item.completed}</td>

@@ -394,18 +394,18 @@ export default function CoachDashboard() {
   }
 
   return (
-    <Wrap className="bg-slate-50 dark:bg-obsidian">
+    <Wrap className="bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-foundation/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-foundation/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           {/* Hero Banner - Professional & Accessible */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-teal-800/50">
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-white/[0.08] dark:backdrop-blur-md p-8 md:p-10 border border-teal-800/50">
             <div className="absolute inset-0 bg-gradient-to-br from-teal-800/50 to-obsidian/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
@@ -417,7 +417,7 @@ export default function CoachDashboard() {
                       day: 'numeric' 
                     })}
                   </span>
-                  <Badge className="bg-white/15 dark:bg-background/20 text-white border-0 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm">
+                  <Badge className="bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-white border-0 hover:bg-white/25 dark:bg-white/[0.08] dark:backdrop-blur-md/30 backdrop-blur-sm">
                     <Star className="h-3 w-3 mr-1" />
                     {coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}
                   </Badge>
@@ -435,7 +435,7 @@ export default function CoachDashboard() {
                 <RoleSwitcherCompact />
                 <Button 
                   size="lg" 
-                  className="bg-white dark:bg-background text-black dark:text-foreground hover:bg-slate-100 shadow-lg"
+                  className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm shadow-lg"
                   onClick={() => setShowSetupWizard(true)}
                 >
                   <Settings className="h-5 w-5 mr-2" />
@@ -447,7 +447,7 @@ export default function CoachDashboard() {
 
           {/* Profile Summary Card - Clean & Accessible */}
           {coachProfile && (
-            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-card dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm">
+            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border border-slate-200 dark:border-teal-800 shadow-sm">
               <div className="flex flex-col md:flex-row">
                 {/* Profile Photo */}
                 <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">

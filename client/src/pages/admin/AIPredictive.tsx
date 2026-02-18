@@ -166,7 +166,7 @@ export default function AIPredictive() {
           <CardContent>
             <div className="space-y-3">
               {summary.recommendations.map((rec: any, idx: number) => (
-                <div key={idx} className="flex items-start gap-3 p-3 bg-white dark:bg-background rounded-lg border">
+                <div key={idx} className="flex items-start gap-3 p-3 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border">
                   <Badge
                     variant={rec.priority === "high" ? "destructive" : rec.priority === "medium" ? "default" : "secondary"}
                     className="mt-0.5 text-xs"
@@ -219,7 +219,7 @@ export default function AIPredictive() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-white dark:bg-background flex items-center justify-center border">
+                        <div className="w-10 h-10 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-center border">
                           <span className="text-sm font-bold">{(s.name || "?")[0]}</span>
                         </div>
                         <div>
@@ -247,20 +247,20 @@ export default function AIPredictive() {
                       </div>
                     </div>
                     {selectedStudent?.id === s.id && (
-                      <div className="mt-3 pt-3 border-t border-gray-200 dark:border-border dark:border-border/50 grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <div className="p-2 bg-white dark:bg-background rounded-lg">
+                      <div className="mt-3 pt-3 border-t border-gray-200 dark:border-white/15 dark:border-white/15/50 grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div className="p-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                           <div className="text-xs text-black dark:text-foreground">Enrolled Courses</div>
                           <div className="font-bold">{s.enrolledCourses}</div>
                         </div>
-                        <div className="p-2 bg-white dark:bg-background rounded-lg">
+                        <div className="p-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                           <div className="text-xs text-black dark:text-foreground">Practice Sessions</div>
                           <div className="font-bold">{s.practiceCount}</div>
                         </div>
-                        <div className="p-2 bg-white dark:bg-background rounded-lg">
+                        <div className="p-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                           <div className="text-xs text-black dark:text-foreground">Days Since Practice</div>
                           <div className="font-bold">{s.daysSinceLastPractice === 999 ? "Never" : `${s.daysSinceLastPractice}d`}</div>
                         </div>
-                        <div className="p-2 bg-white dark:bg-background rounded-lg">
+                        <div className="p-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                           <div className="text-xs text-black dark:text-foreground">Recommendation</div>
                           <div className="text-xs font-medium">{s.recommendation}</div>
                         </div>
@@ -298,7 +298,7 @@ export default function AIPredictive() {
                   {(cohorts as any[]).map((c: any) => {
                     const completionRate = c.students > 0 ? Math.round((c.completions / c.students) * 100) : 0;
                     return (
-                      <tr key={c.cohort} className="border-b hover:bg-gray-50">
+                      <tr key={c.cohort} className="border-b hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                         <td className="py-2 px-3 font-medium">{c.cohort}</td>
                         <td className="py-2 px-3 text-right">{c.students}</td>
                         <td className="py-2 px-3 text-right">{Math.round(parseFloat(c.avgProgress) || 0)}%</td>
@@ -338,7 +338,7 @@ export default function AIPredictive() {
                 </thead>
                 <tbody>
                   {(trends as any[]).slice(0, 14).map((t: any) => (
-                    <tr key={t.date} className="border-b hover:bg-gray-50">
+                    <tr key={t.date} className="border-b hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                       <td className="py-2 px-3 font-medium">{new Date(t.date).toLocaleDateString()}</td>
                       <td className="py-2 px-3 text-right">{t.sessions}</td>
                       <td className="py-2 px-3 text-right">{t.uniqueUsers}</td>

@@ -16,9 +16,9 @@ import SEO from "@/components/SEO";
 
 export default function Hub() {
   return (
-    <div className="min-h-screen bg-white dark:bg-background">
+    <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <SEO
-        title="RusingAcademy Learning Ecosystem - Hub"
+        title="RusingÂcademy Learning Ecosystem - Hub"
         description="Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd."
         canonical="https://www.rusingacademy.ca"
       />

@@ -165,8 +165,8 @@ const longFormVideos: Video[] = [
   },
   {
     id: "OkO00QpxxOU",
-    titleFr: "De la promesse au lancement – RusingAcademy",
-    titleEn: "From Promise to Launch – RusingAcademy",
+    titleFr: "De la promesse au lancement – RusingÂcademy",
+    titleEn: "From Promise to Launch – RusingÂcademy",
     thumbnail: "https://i.ytimg.com/vi/OkO00QpxxOU/hqdefault.jpg",
     duration: "21:40",
     views: "97",
@@ -251,7 +251,7 @@ function ShortVideoCard({ video, language, index }: { video: Video; language: st
         
         {/* Play Button */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="h-14 w-14 rounded-full bg-white dark:bg-background/90 flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+          <div className="h-14 w-14 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
             <Play className="h-6 w-6 text-red-600 ml-1" fill="currentColor" />
           </div>
         </div>

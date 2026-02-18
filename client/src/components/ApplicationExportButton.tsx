@@ -69,7 +69,7 @@ export function ApplicationExportButton({
   return (
     <div className="relative">
       {showDatePicker && (
-        <div className="absolute right-0 top-full mt-2 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg p-4 z-50 w-80">
+        <div className="absolute right-0 top-full mt-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg shadow-lg p-4 z-50 w-80">
           <h3 className="font-semibold mb-4 text-gray-900">
             {isEn ? "Filter by Date Range" : "Filtrer par plage de dates"}
           </h3>

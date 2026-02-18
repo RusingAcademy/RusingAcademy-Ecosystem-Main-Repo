@@ -121,17 +121,17 @@ export default function CoachOnboardingWizard() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-background py-8 px-4">
+    <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md py-8 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 mb-2">Devenir Coach RusingAcademy</h1>
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 mb-2">Devenir Coach RusingÂcademy</h1>
           <Progress value={progress} className="h-2" />
           <p className="text-sm text-slate-600 mt-2">Étape {currentStep} sur {STEPS.length}</p>
         </div>
         
         <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
           {STEPS.map((step) => (
-            <div key={step.id} className={`flex items-center gap-2 px-3 py-2 rounded-lg ${currentStep === step.id ? "bg-amber-100 text-amber-800" : currentStep > step.id ? "bg-green-100 text-green-800" : "bg-slate-100 text-slate-500"}`}>
+            <div key={step.id} className={`flex items-center gap-2 px-3 py-2 rounded-lg ${currentStep === step.id ? "bg-amber-100 text-amber-800" : currentStep > step.id ? "bg-green-100 text-green-800" : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-slate-500"}`}>
               <step.icon className="h-4 w-4" />
               <span className="text-sm whitespace-nowrap">{step.title}</span>
             </div>
@@ -177,7 +177,7 @@ export default function CoachOnboardingWizard() {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Checkbox checked={formData.acceptedTerms} onCheckedChange={(c) => updateFormData("acceptedTerms", c)} />
-                  <Label>J'accepte les Termes et Conditions de RusingAcademy</Label>
+                  <Label>J'accepte les Termes et Conditions de RusingÂcademy</Label>
                 </div>
                 <div className="flex items-start gap-3">
                   <Checkbox checked={formData.acceptedCommission} onCheckedChange={(c) => updateFormData("acceptedCommission", c)} />

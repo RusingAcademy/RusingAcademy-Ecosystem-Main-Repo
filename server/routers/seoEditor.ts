@@ -134,7 +134,7 @@ export const seoEditorRouter = router({
             url: pageUrl,
             provider: {
               "@type": "Organization",
-              name: "RusingAcademy",
+              name: "RusingÂcademy",
               url: baseUrl,
             },
             inLanguage: ["en", "fr"],
@@ -149,7 +149,7 @@ export const seoEditorRouter = router({
           structuredData = {
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "RusingAcademy",
+            name: "RusingÂcademy",
             alternateName: "Rusinga International Consulting Ltd.",
             url: baseUrl,
             logo: row.og_image || "",
@@ -203,7 +203,7 @@ export const seoEditorRouter = router({
             url: pageUrl,
             provider: {
               "@type": "Organization",
-              name: "RusingAcademy",
+              name: "RusingÂcademy",
               url: baseUrl,
             },
             areaServed: {
@@ -224,11 +224,11 @@ export const seoEditorRouter = router({
             image: row.og_image || "",
             author: {
               "@type": "Organization",
-              name: "RusingAcademy",
+              name: "RusingÂcademy",
             },
             publisher: {
               "@type": "Organization",
-              name: "RusingAcademy",
+              name: "RusingÂcademy",
               url: baseUrl,
             },
             inLanguage: "en",
@@ -245,7 +245,7 @@ export const seoEditorRouter = router({
             inLanguage: ["en", "fr"],
             isPartOf: {
               "@type": "WebSite",
-              name: "RusingAcademy",
+              name: "RusingÂcademy",
               url: baseUrl,
             },
           };

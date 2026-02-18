@@ -112,7 +112,7 @@ const labItems = [
     icon: Globe,
     bucket: "plug-and-play",
     lines: 282,
-    description: "Brand navigation overlay with animated platform cards (RusingAcademy, Lingueefy, Barholex Media) and notification indicators.",
+    description: "Brand navigation overlay with animated platform cards (RusingÂcademy, Lingueefy, Barholex Media) and notification indicators.",
     origin: "client/src/components/EcosystemSwitcher.tsx",
   },
   {
@@ -169,7 +169,7 @@ export default function ComponentLab() {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-slate-100">
+                  <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                     <item.icon className="h-4 w-4 text-slate-600" />
                   </div>
                   <div>
@@ -199,14 +199,14 @@ export default function ComponentLab() {
 
               {/* Live Demo */}
               {activeDemo === item.id && (
-                <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
+                <div className="mt-4 p-4 rounded-lg bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm border border-slate-200">
                   {item.id === "typewriter" && (
                     <div className="space-y-4">
                       <p className="text-xs text-slate-500 mb-2">Live demo with sound (click to hear):</p>
                       <div className="text-xl font-bold text-slate-900">
                         <TypewriterText
                           text="Master French 3–4× faster"
-                          highlightText="with RusingAcademy."
+                          highlightText="with RusingÂcademy."
                           highlightClassName="text-cta-2"
                           speed={60}
                           delay={500}
@@ -293,7 +293,7 @@ export default function ComponentLab() {
           <div className="relative z-10">
             {/* We import EcosystemSwitcher but it manages its own UI */}
             <div className="flex items-center justify-center min-h-screen">
-              <Card className="w-full max-w-2xl mx-4 bg-white dark:bg-background shadow-2xl">
+              <Card className="w-full max-w-2xl mx-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>Ecosystem Navigator</CardTitle>
@@ -307,7 +307,7 @@ export default function ComponentLab() {
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {[
-                      { name: "RusingAcademy", color: "var(--barholex-gold-hover)", desc: "Formation B2B/B2G" },
+                      { name: "RusingÂcademy", color: "var(--barholex-gold-hover)", desc: "Formation B2B/B2G" },
                       { name: "Lingueefy", color: "var(--brand-foundation-2)", desc: "Coaching personnalisé" },
                       { name: "Barholex Media", color: "#1E3A5F", desc: "EdTech & Contenu" },
                     ].map((brand) => (

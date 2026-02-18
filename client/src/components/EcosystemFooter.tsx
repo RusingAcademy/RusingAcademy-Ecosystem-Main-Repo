@@ -10,7 +10,7 @@ interface EcosystemFooterProps {
 const labels = {
   en: {
     ecosystem: 'Ecosystem',
-    rusingacademy: 'RusingAcademy',
+    rusingacademy: 'RusingÂcademy',
     lingueefy: 'Lingueefy',
     barholex: 'Barholex Media',
     legal: 'Legal',
@@ -24,7 +24,7 @@ const labels = {
   },
   fr: {
     ecosystem: 'Écosystème',
-    rusingacademy: 'RusingAcademy',
+    rusingacademy: 'RusingÂcademy',
     lingueefy: 'Lingueefy',
     barholex: 'Barholex Media',
     legal: 'Légal',
@@ -48,7 +48,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
       className={`relative py-8 md:py-12 lg:py-16 ${
         isGlass
           ? 'bg-obsidian/80 border-t border-white/60'
-          : 'bg-white dark:bg-card border-t border-gray-200'
+          : 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-t border-gray-200'
       }`}
     >
       {/* Ambient glow */}
@@ -180,7 +180,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity"
                   style={{ background: brandColors.rusingacademy.gradient }}
-                  title="RusingAcademy"
+                  title="RusingÂcademy"
                 >
                   <span className="text-white text-xs font-bold">RA</span>
                 </div>

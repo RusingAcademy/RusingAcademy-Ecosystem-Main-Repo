@@ -192,13 +192,13 @@ export default function MyLearning() {
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                   <div className="flex-1">
-                    <Badge className="bg-white/20 dark:bg-background/20 text-white mb-2 backdrop-blur-sm">
+                    <Badge className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-white mb-2 backdrop-blur-sm">
                       {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
                     </Badge>
                     <h2 className="text-xl font-bold mb-2">{continueFrom.course.title}</h2>
                     <div className="flex items-center gap-4 mb-3">
                       <div className="flex items-center gap-1">
-                        <Progress value={continueFrom.progressPercent || 0} className="w-32 h-2 bg-white dark:bg-background/30" />
+                        <Progress value={continueFrom.progressPercent || 0} className="w-32 h-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/30" />
                         <span className="text-sm">{continueFrom.progressPercent || 0}%</span>
                       </div>
                       <span className="text-sm text-white/90">
@@ -208,7 +208,7 @@ export default function MyLearning() {
                   </div>
                   <Button 
                     size="lg" 
-                    className="bg-white dark:bg-background text-teal-600 hover:bg-white dark:bg-background/90"
+                    className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-600 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90"
                     onClick={() => setLocation(`/courses/${continueFrom.course?.slug}`)}
                   >
                     <Play className="h-5 w-5 mr-2" />
@@ -286,7 +286,7 @@ export default function MyLearning() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-foundation-soft dark:bg-foundation-soft/30 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md-soft/30 flex items-center justify-center">
                   <Award className="h-6 w-6 text-foundation" />
                 </div>
                 <div>
@@ -554,8 +554,8 @@ function LeaderboardSection({ isEn }: { isEn: boolean }) {
         </div>
         <CardDescription>
           {isEn 
-            ? "Top learners in the RusingAcademy community"
-            : "Meilleurs apprenants de la communauté RusingAcademy"}
+            ? "Top learners in the RusingÂcademy community"
+            : "Meilleurs apprenants de la communauté RusingÂcademy"}
         </CardDescription>
       </CardHeader>
       <CardContent>

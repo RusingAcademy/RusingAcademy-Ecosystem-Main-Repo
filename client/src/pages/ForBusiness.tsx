@@ -279,7 +279,7 @@ export default function ForBusiness() {
                 {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="border-slate-300 dark:border-border hover:bg-white dark:bg-background dark:hover:bg-foundation">
+              <Button size="lg" variant="outline" className="border-slate-300 dark:border-white/15 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:hover:bg-foundation">
                 <FileText className="w-5 h-5 mr-2" />
                 {t.ctaSecondary}
               </Button>
@@ -304,7 +304,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Benefits Section */}
-      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-card dark:bg-obsidian">
+      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.benefitsTitle}</h2>
@@ -374,7 +374,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Industries Section */}
-      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-card dark:bg-obsidian">
+      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.industriesTitle}</h2>
@@ -406,7 +406,7 @@ export default function ForBusiness() {
           
           <div className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {t.testimonials.map((testimonial, i) => (
-              <Card key={i} className="border-slate-200 dark:border-teal-800 bg-white dark:bg-card dark:bg-foundation">
+              <Card key={i} className="border-slate-200 dark:border-teal-800 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <CardContent className="p-6">
                   <Quote className="w-10 h-10 text-teal-200 dark:text-teal-800 mb-4" />
                   <p className="text-black dark:text-foreground/90 mb-6 italic">"{testimonial.quote}"</p>
@@ -427,7 +427,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Contact Form Section */}
-      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-card dark:bg-obsidian">
+      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
@@ -449,27 +449,27 @@ export default function ForBusiness() {
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="company">{t.formCompany}</Label>
-                        <Input id="company" required className="border-slate-300 dark:border-border" />
+                        <Input id="company" required className="border-slate-300 dark:border-white/15" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="name">{t.formName}</Label>
-                        <Input id="name" required className="border-slate-300 dark:border-border" />
+                        <Input id="name" required className="border-slate-300 dark:border-white/15" />
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="email">{t.formEmail}</Label>
-                        <Input id="email" type="email" required className="border-slate-300 dark:border-border" />
+                        <Input id="email" type="email" required className="border-slate-300 dark:border-white/15" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="phone">{t.formPhone}</Label>
-                        <Input id="phone" type="tel" className="border-slate-300 dark:border-border" />
+                        <Input id="phone" type="tel" className="border-slate-300 dark:border-white/15" />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="teamSize">{t.formTeamSize}</Label>
                       <Select>
-                        <SelectTrigger className="border-slate-300 dark:border-border">
+                        <SelectTrigger className="border-slate-300 dark:border-white/15">
                           <SelectValue placeholder="Select team size" />
                         </SelectTrigger>
                         <SelectContent>
@@ -483,7 +483,7 @@ export default function ForBusiness() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="message">{t.formMessage}</Label>
-                      <Textarea id="message" rows={4} className="border-slate-300 dark:border-border" />
+                      <Textarea id="message" rows={4} className="border-slate-300 dark:border-white/15" />
                     </div>
                     <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white">
                       {t.formSubmit}
@@ -502,7 +502,7 @@ export default function ForBusiness() {
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{t.ctaTitle}</h2>
           <p className="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">{t.ctaSubtitle}</p>
-          <Button size="lg" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 shadow-lg hover:shadow-xl transition-all duration-300 px-8">
+          <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-lg hover:shadow-xl transition-all duration-300 px-8">
             <Calendar className="w-5 h-5 mr-2" />
             {t.ctaButton}
           </Button>

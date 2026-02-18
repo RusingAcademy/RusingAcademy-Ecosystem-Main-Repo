@@ -222,7 +222,7 @@ export default function CourseSuccess() {
       </section>
 
       {/* Next Steps Section */}
-      <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-background">
+      <section className="py-6 md:py-8 lg:py-12 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-8 text-center">
             {l.nextStepsTitle}
@@ -240,11 +240,11 @@ export default function CourseSuccess() {
                   <CardContent className="p-6">
                     <div className="flex flex-col items-center text-center">
                       <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
-                        index === 0 ? "bg-teal-100" : "bg-slate-100"
+                        index === 0 ? "bg-teal-100" : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                       }`}>
                         <span className="text-lg font-bold text-teal-600">{index + 1}</span>
                       </div>
-                      <div className={`p-2 rounded-lg mb-3 ${index === 0 ? "bg-teal-100" : "bg-slate-100"}`}>
+                      <div className={`p-2 rounded-lg mb-3 ${index === 0 ? "bg-teal-100" : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}>
                         <step.icon className={`w-5 h-5 ${index === 0 ? "text-teal-600" : "text-black"}`} />
                       </div>
                       <h3 className="font-semibold text-black dark:text-foreground mb-2">{step.title}</h3>
@@ -272,7 +272,7 @@ export default function CourseSuccess() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="flex items-center gap-3 p-4 bg-white dark:bg-background rounded-lg border border-slate-200 shadow-sm"
+                className="flex items-center gap-3 p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-slate-200 shadow-sm"
               >
                 <div className="p-2 bg-amber-100 rounded-lg shrink-0">
                   <feature.icon className="w-5 h-5 text-amber-600" />
@@ -315,13 +315,13 @@ export default function CourseSuccess() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/app">
-              <Button size="lg" variant="secondary" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50">
+              <Button size="lg" variant="secondary" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50">
                 <BookOpen className="w-5 h-5 mr-2" />
                 {l.ctaDashboard}
               </Button>
             </Link>
             <Link href="/coaches">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white dark:bg-background/10">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
                 <Users className="w-5 h-5 mr-2" />
                 {l.ctaCoaches}
               </Button>

@@ -1,5 +1,5 @@
 /**
- * Sidebar — RusingAcademy Learning Portal
+ * Sidebar — RusingÂcademy Learning Portal
  * Design: Clean white sidebar with teal accents, LRDG-inspired light theme
  */
 import { Link, useLocation } from "wouter";
@@ -93,16 +93,16 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         <div className="fixed inset-0 bg-black/20 z-40 lg:hidden" onClick={onToggle} />
       )}
 
-      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-transform duration-200 w-[240px] bg-white dark:bg-card border-r border-gray-200 dark:border-border ${collapsed ? "-translate-x-full lg:translate-x-0" : "translate-x-0"}`}
+      <aside className={`fixed top-0 left-0 h-full z-50 flex flex-col transition-transform duration-200 w-[240px] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-r border-gray-200 dark:border-white/15 ${collapsed ? "-translate-x-full lg:translate-x-0" : "translate-x-0"}`}
         role="navigation" aria-label="Main navigation">
 
         {/* Logo Section */}
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
+            <img src={LOGO_ICON} alt="RusingÂcademy" className="w-8 h-8 rounded-lg" />
             <div>
               <span className="text-gray-900 dark:text-foreground font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
-                RusingAcademy
+                RusingÂcademy
               </span>
               <span className="block text-[10px] text-teal-700 tracking-wider uppercase font-medium">Learning Portal</span>
             </div>
@@ -119,7 +119,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         </div>
 
         {/* Gamification Mini-Bar */}
-        <div className="mx-4 mb-3 p-3 rounded-xl bg-gray-50 dark:bg-background border border-gray-100">
+        <div className="mx-4 mb-3 p-3 rounded-xl bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-100">
           <div className="flex items-center justify-between mb-1.5">
             <div className="flex items-center gap-1.5">
               <span className="text-teal-700 text-xs font-bold">Lv.{level}</span>
@@ -147,7 +147,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
               <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
                 isActive(item.path)
                   ? "bg-teal-700/8 text-teal-700 font-semibold border-l-[3px] border-teal-700"
-                  : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-background border-l-[3px] border-transparent"
+                  : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-l-[3px] border-transparent"
               }`}>
                 <span className={`material-icons text-lg ${isActive(item.path) ? "text-teal-700" : "text-gray-400 group-hover:text-gray-600"}`}>
                   {item.icon}
@@ -170,7 +170,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
               <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
                 isActive(item.path)
                   ? "bg-teal-700/8 text-teal-700 font-semibold border-l-[3px] border-teal-700"
-                  : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-background border-l-[3px] border-transparent"
+                  : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-l-[3px] border-transparent"
               }`}>
                 <span className={`material-icons text-lg ${isActive(item.path) ? "text-teal-700" : "text-gray-400 group-hover:text-gray-600"}`}>
                   {item.icon}
@@ -188,7 +188,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
               <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
                 isActive(item.path)
                   ? "bg-teal-700/8 text-teal-700 font-semibold border-l-[3px] border-teal-700"
-                  : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-background border-l-[3px] border-transparent"
+                  : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-l-[3px] border-transparent"
               }`}>
                 <span className={`material-icons text-lg ${isActive(item.path) ? "text-teal-700" : "text-gray-400 group-hover:text-gray-600"}`}>
                   {item.icon}
@@ -213,7 +213,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
                   <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 group ${
                     isActive(item.path)
                       ? "bg-purple-50 text-purple-600 font-semibold border-l-[3px] border-purple-500"
-                      : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-background border-l-[3px] border-transparent"
+                      : "text-gray-600 hover:text-gray-900 dark:text-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-l-[3px] border-transparent"
                   }`}>
                     <span className={`material-icons text-lg ${isActive(item.path) ? "text-purple-500" : "text-gray-400 group-hover:text-gray-600"}`}>
                       {item.icon}
@@ -229,7 +229,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         {/* User Profile Section */}
         <div className="p-4 border-t border-gray-100">
           <Link href="/profile">
-            <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 dark:bg-background transition-all cursor-pointer group">
+            <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-all cursor-pointer group">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-700 to-[#00a0b0] flex items-center justify-center text-white font-bold text-sm shadow-sm">
                 SB
               </div>
@@ -249,13 +249,13 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-teal-700/10 text-teal-700 font-bold uppercase">{lang}</span>
           </button>
 
-          <button aria-label="Action" onClick={handleLogout} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-background transition-all flex items-center justify-center gap-1.5">
+          <button aria-label="Action" onClick={handleLogout} className="w-full mt-2 py-1.5 rounded-lg text-[11px] font-medium text-gray-400 hover:text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-all flex items-center justify-center gap-1.5">
             <span className="material-icons text-sm">logout</span>
             {t("common.signOut")}
           </button>
 
           <div className="text-center mt-2">
-            <span className="text-[9px] text-gray-400">v2.0.0 — RusingAcademy</span>
+            <span className="text-[9px] text-gray-400">v2.0.0 — RusingÂcademy</span>
           </div>
         </div>
       </aside>

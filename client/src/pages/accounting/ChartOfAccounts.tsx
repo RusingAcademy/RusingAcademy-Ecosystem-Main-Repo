@@ -111,7 +111,7 @@ export default function ChartOfAccounts() {
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white dark:bg-background"
+          className="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white dark:bg-white/[0.08] dark:backdrop-blur-md"
         >
           {accountTypes.map((t) => (
             <option key={t as string} value={t as string}>{t as string}</option>
@@ -126,10 +126,10 @@ export default function ChartOfAccounts() {
       <div className="text-sm text-gray-500 mb-2">{filtered.length} accounts</div>
 
       {/* Account Table */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
-            <tr className="bg-gray-50">
+            <tr className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th>Name</th>
               <th>Type</th>
               <th>Detail Type</th>
@@ -140,7 +140,7 @@ export default function ChartOfAccounts() {
           <tbody>
             {Object.entries(grouped).map(([type, accts]) => (
               <>{/* Group header + rows */}
-                <tr key={`header-${type}`} className="bg-gray-50">
+                <tr key={`header-${type}`} className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   <td colSpan={5} className="font-bold text-gray-700 dark:text-muted-foreground text-xs uppercase tracking-wider py-2">
                     {type} ({(accts as any[]).length})
                   </td>
@@ -148,7 +148,7 @@ export default function ChartOfAccounts() {
                 {(accts as any[]).map((acc: any) => (
                   <tr
                     key={acc.id}
-                    className={`hover:bg-gray-50 dark:bg-background cursor-pointer ${acc.isActive === false ? "opacity-50" : ""}`}
+                    className={`hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer ${acc.isActive === false ? "opacity-50" : ""}`}
                     onClick={() => navigate(`/accounts/${acc.id}/register`)}
                   >
                     <td className="text-sky-600 font-medium">
@@ -164,14 +164,14 @@ export default function ChartOfAccounts() {
                     <td>
                       <div className="flex items-center gap-1">
                         <button aria-label="Action"
-                          className="p-1 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
+                          className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded text-gray-400 hover:text-gray-600"
                           onClick={(e) => openEdit(acc, e)}
                           title="Edit"
                         >
                           <Edit size={14} />
                         </button>
                         <button aria-label="Action"
-                          className="p-1 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
+                          className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded text-gray-400 hover:text-gray-600"
                           onClick={(e) => {
                             e.stopPropagation();
                             updateMutation.mutate({ id: acc.id, isActive: acc.isActive === false ? true : false });

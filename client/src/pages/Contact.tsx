@@ -72,7 +72,7 @@ export default function Contact() {
       brand: "Which brand are you contacting?",
       brands: {
         ecosystem: "Ecosystem Hub (General)",
-        rusingacademy: "RusingAcademy",
+        rusingacademy: "RusingÂcademy",
         lingueefy: "Lingueefy",
         barholex: "Barholex Media",
       },
@@ -135,7 +135,7 @@ export default function Contact() {
       brand: "Quelle marque contactez-vous?",
       brands: {
         ecosystem: "Ecosystem Hub (Général)",
-        rusingacademy: "RusingAcademy",
+        rusingacademy: "RusingÂcademy",
         lingueefy: "Lingueefy",
         barholex: "Barholex Media",
       },
@@ -204,8 +204,8 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-background">      <main id="main-content" className="flex-1">
-      <SEO title="Contact Us" description="Get in touch with RusingAcademy for bilingual training inquiries, SLE preparation, and coaching partnerships." canonical="/contact" />
+    <div className="min-h-screen flex flex-col bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">      <main id="main-content" className="flex-1">
+      <SEO title="Contact Us" description="Get in touch with RusingÂcademy for bilingual training inquiries, SLE preparation, and coaching partnerships." canonical="/contact" />
         <Breadcrumb 
           items={[
             { label: "Contact", labelFr: "Contact" }
@@ -265,12 +265,12 @@ export default function Contact() {
         </section>
 
         {/* Contact Form & Info */}
-        <section className="py-16 lg:py-24 bg-slate-50/50">
+        <section className="py-16 lg:py-24 bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50">
           <div className="container">
             <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <Card className="bg-white dark:bg-background border-slate-200 shadow-lg shadow-slate-200/50">
+                <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 shadow-lg shadow-slate-200/50">
                   <CardHeader className="pb-4">
                     <CardTitle className="text-2xl text-black dark:text-foreground">{l.formTitle}</CardTitle>
                     <CardDescription className="text-black dark:text-foreground">{l.formDescription}</CardDescription>
@@ -286,7 +286,7 @@ export default function Contact() {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder={l.namePlaceholder}
-                            className="bg-white dark:bg-background border-slate-200 focus:border-teal-500 focus:ring-teal-500"
+                            className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 focus:border-teal-500 focus:ring-teal-500"
                             required
                           />
                         </div>
@@ -299,7 +299,7 @@ export default function Contact() {
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder={l.emailPlaceholder}
-                            className="bg-white dark:bg-background border-slate-200 focus:border-teal-500 focus:ring-teal-500"
+                            className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 focus:border-teal-500 focus:ring-teal-500"
                             required
                           />
                         </div>
@@ -315,7 +315,7 @@ export default function Contact() {
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             placeholder={l.phonePlaceholder}
-                            className="bg-white dark:bg-background border-slate-200 focus:border-teal-500 focus:ring-teal-500"
+                            className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 focus:border-teal-500 focus:ring-teal-500"
                           />
                         </div>
                         <div className="space-y-2">
@@ -325,7 +325,7 @@ export default function Contact() {
                             value={formData.brand}
                             onValueChange={(value) => setFormData({ ...formData, brand: value })}
                           >
-                            <SelectTrigger id="brand" className="bg-white dark:bg-background border-slate-200">
+                            <SelectTrigger id="brand" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -346,7 +346,7 @@ export default function Contact() {
                           onValueChange={(value) => setFormData({ ...formData, subject: value })}
                           required
                         >
-                          <SelectTrigger id="subject" className="bg-white dark:bg-background border-slate-200">
+                          <SelectTrigger id="subject" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200">
                             <SelectValue placeholder={l.subjectPlaceholder} />
                           </SelectTrigger>
                           <SelectContent>
@@ -370,7 +370,7 @@ export default function Contact() {
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           placeholder={l.messagePlaceholder}
                           rows={6}
-                          className="bg-white dark:bg-background border-slate-200 focus:border-teal-500 focus:ring-teal-500 resize-none"
+                          className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 focus:border-teal-500 focus:ring-teal-500 resize-none"
                           required
                         />
                       </div>
@@ -392,7 +392,7 @@ export default function Contact() {
               {/* Contact Info Sidebar */}
               <div className="space-y-6">
                 {/* Contact Information Card */}
-                <Card className="bg-white dark:bg-background border-slate-200 shadow-lg shadow-slate-200/50">
+                <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 shadow-lg shadow-slate-200/50">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg text-black dark:text-foreground">{l.contactInfo}</CardTitle>
                   </CardHeader>
@@ -451,7 +451,7 @@ export default function Contact() {
                   <h3 className="text-sm font-semibold text-black dark:text-foreground uppercase tracking-wider">{l.quickLinks}</h3>
                   
                   <Link href="/faq">
-                    <Card className="bg-white dark:bg-background border-slate-200 hover:border-teal-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
+                    <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 hover:border-teal-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
                       <CardContent className="p-5">
                         <div className="flex items-center gap-4">
                           <div className="p-2 rounded-lg bg-teal-50 group-hover:bg-teal-100 transition-colors">
@@ -468,7 +468,7 @@ export default function Contact() {
                   </Link>
 
                   <Link href="/become-a-coach">
-                    <Card className="bg-white dark:bg-background border-slate-200 hover:border-violet-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
+                    <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 hover:border-violet-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
                       <CardContent className="p-5">
                         <div className="flex items-center gap-4">
                           <div className="p-2 rounded-lg bg-violet-50 group-hover:bg-violet-100 transition-colors">
@@ -485,7 +485,7 @@ export default function Contact() {
                   </Link>
 
                   <Link href="/for-business">
-                    <Card className="bg-white dark:bg-background border-slate-200 hover:border-amber-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
+                    <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 hover:border-amber-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
                       <CardContent className="p-5">
                         <div className="flex items-center gap-4">
                           <div className="p-2 rounded-lg bg-amber-50 group-hover:bg-amber-100 transition-colors">
@@ -519,7 +519,7 @@ export default function Contact() {
                   ? 'Schedule a 30-minute discovery call with our team to discuss your bilingual training needs and find the right program for you.'
                   : 'Planifiez un appel découverte de 30 minutes avec notre équipe pour discuter de vos besoins en formation bilingue et trouver le bon programme pour vous.'}
               </p>
-              <div className="bg-white dark:bg-background rounded-2xl p-6 lg:p-8 shadow-xl">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-6 lg:p-8 shadow-xl">
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                   <div className="text-center p-4">
                     <div className="w-12 h-12 rounded-full bg-cta/10 flex items-center justify-center mx-auto mb-3">
@@ -555,7 +555,7 @@ export default function Contact() {
         </section>
 
         {/* Map Section (Optional - can be added later) */}
-        <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+        <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container">
             <div className="max-w-6xl mx-auto">
               <div className="bg-gradient-to-br from-slate-100 to-slate-50 rounded-2xl p-8 lg:p-12 text-center">

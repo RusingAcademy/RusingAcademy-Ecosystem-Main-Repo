@@ -548,15 +548,15 @@ export default function CoursesPage() {
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Language Toggle - FSL vs ESL */}
-        <section className="py-4 bg-white dark:bg-background border-b border-gray-100 dark:border-border sticky top-0 z-50">
+        <section className="py-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-100 dark:border-white/15 sticky top-0 z-50">
           <div className="container">
             <div className="flex justify-center">
-              <div className="inline-flex rounded-xl bg-gray-100 dark:bg-card p-1 gap-1">
+              <div className="inline-flex rounded-xl bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 p-1 gap-1">
                 <button
                   onClick={() => { setLangTab('fsl'); setSelectedLevel('all'); }}
                   className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     langTab === 'fsl'
-                      ? 'bg-white dark:bg-card text-teal-700 shadow-md'
+                      ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-teal-700 shadow-md'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -567,7 +567,7 @@ export default function CoursesPage() {
                   onClick={() => { setLangTab('esl'); setSelectedLevel('all'); }}
                   className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     langTab === 'esl'
-                      ? 'bg-white dark:bg-card text-blue-700 shadow-md'
+                      ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-blue-700 shadow-md'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -592,7 +592,7 @@ export default function CoursesPage() {
           <div className="container relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-background/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                 <Sparkles className="w-4 h-4 text-teal-300" />                {langTab === 'esl' ? ui.eslBadge : ui.badge}      </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -611,7 +611,7 @@ export default function CoursesPage() {
                 {ui.stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="px-6 py-4 rounded-2xl bg-white dark:bg-background/10 backdrop-blur-md border border-white/60"
+                    className="px-6 py-4 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md border border-white/60"
                   >
                     <p className="text-2xl lg:text-3xl font-bold text-white">{stat.value}</p>
                     <p className="text-sm text-white/90">{stat.label}</p>
@@ -623,7 +623,7 @@ export default function CoursesPage() {
               <div className="flex flex-wrap justify-center gap-4 mt-10">
                 <a
                   href="#courses"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-background text-foundation hover:bg-gray-100 dark:bg-card transition-all hover:scale-105 shadow-xl"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-foundation hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 transition-all hover:scale-105 shadow-xl"
                 >
                   <BookOpen className="w-5 h-5" />
                   Browse Courses
@@ -632,7 +632,7 @@ export default function CoursesPage() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-background/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-background/20 transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 transition-all hover:scale-105"
                 >
                   <Calendar className="w-5 h-5" />
                   {ui.freeAssessment}
@@ -644,7 +644,7 @@ export default function CoursesPage() {
         </ScrollAnimationWrapper>
 
         {/* Why Path Series Section with Staggered Animation */}
-        <section className="py-16 lg:py-20 bg-white dark:bg-background">
+        <section className="py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container">
             <ScrollAnimationWrapper animation="fade-up">
               <div className="text-center max-w-3xl mx-auto mb-16">
@@ -661,7 +661,7 @@ export default function CoursesPage() {
               {valueProps.map((prop, index) => (
                 <div
                   key={index}
-                  className="p-8 rounded-2xl bg-gray-50 dark:bg-card border border-gray-100 dark:border-border hover:shadow-xl transition-all duration-300"
+                  className="p-8 rounded-2xl bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-gray-100 dark:border-white/15 hover:shadow-xl transition-all duration-300"
                 >
                   <div className="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <prop.icon className="w-6 h-6" />
@@ -675,7 +675,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-10 bg-white dark:bg-background border-y border-gray-100">
+        <section className="py-10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-y border-gray-100">
           <div className="container">
             <p className="text-center text-sm font-medium text-black dark:text-foreground mb-6 uppercase tracking-wider">
               {ui.trustedBy}
@@ -692,7 +692,7 @@ export default function CoursesPage() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-16 lg:py-20 bg-white dark:bg-background">
+        <section className="py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-foreground mb-4">
@@ -733,7 +733,7 @@ export default function CoursesPage() {
               ))}
             </StaggeredChildren>
           </div>
-        </section>ction id="courses" className="py-8 border-b border-gray-100 dark:border-border bg-white dark:bg-background sticky top-0 z-40 shadow-sm">
+        </section>ction id="courses" className="py-8 border-b border-gray-100 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md sticky top-0 z-40 shadow-sm">
           <div className="container">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-black dark:text-foreground">
@@ -750,7 +750,7 @@ export default function CoursesPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedLevel === filter.id
                         ? 'bg-teal-600 text-white shadow-lg'
-                        : 'bg-gray-100 dark:bg-card text-black dark:text-foreground hover:bg-gray-200'
+                        : 'bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground hover:bg-gray-200'
                     }`}
                   >
                     {filter.label}
@@ -762,7 +762,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Courses Grid */}
-        <section className="py-16 lg:py-24 bg-white dark:bg-background">
+        <section className="py-16 lg:py-24 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container">
             <AnimatePresence mode="wait">
               <motion.div
@@ -779,7 +779,7 @@ export default function CoursesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="group relative bg-white dark:bg-background rounded-2xl shadow-lg border border-gray-100 dark:border-border overflow-hidden hover:shadow-2xl transition-all duration-300"
+                    className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-lg border border-gray-100 dark:border-white/15 overflow-hidden hover:shadow-2xl transition-all duration-300"
                   >
                     {/* Popular Badge */}
                     {course.popular && (
@@ -806,7 +806,7 @@ export default function CoursesPage() {
                         style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? 'var(--semantic-success, var(--success))' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? 'var(--color-blue-500, var(--semantic-info))' : course.color.includes('teal') ? 'var(--color-violet-500, var(--accent-purple))' : course.color.includes('teal') ? 'var(--color-purple-500, #a855f7)' : 'var(--semantic-warning, var(--warning))'} 0%, transparent 100%)` }}
                       />
                       <div className="absolute bottom-4 left-4">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white dark:bg-background/90 backdrop-blur-sm text-sm font-bold text-black dark:text-foreground">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm text-sm font-bold text-black dark:text-foreground">
                           Path {course.id}
                         </span>
                       </div>
@@ -834,7 +834,7 @@ export default function CoursesPage() {
                       <p className="text-sm text-teal-600 font-medium italic mb-3">"{course.tagline}"</p>
                       
                       {/* For Whom & Outcome */}
-                      <div className="space-y-2 mb-4 p-3 rounded-xl bg-white dark:bg-background">
+                      <div className="space-y-2 mb-4 p-3 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                         <div className="flex items-start gap-2 text-sm">
                           <Users className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
                           <span className="text-black dark:text-foreground"><strong>{ui.forLabel}</strong> {course.forWhom}</span>
@@ -906,7 +906,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-16 lg:py-20 bg-white dark:bg-background">
+        <section className="py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-cta700 text-sm font-medium mb-4">
@@ -929,7 +929,7 @@ export default function CoursesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background border border-gray-100"
+                  className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-100"
                 >
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-4">
@@ -943,7 +943,7 @@ export default function CoursesPage() {
                   <p className="text-black dark:text-foreground mb-4">{testimonial.quote}</p>
                   
                   {/* Author */}
-                  <div className="pt-4 border-t border-gray-200 dark:border-border dark:border-border">
+                  <div className="pt-4 border-t border-gray-200 dark:border-white/15 dark:border-white/15">
                     <p className="font-semibold text-black dark:text-foreground">{testimonial.author}</p>
                     <p className="text-sm text-black dark:text-foreground">{testimonial.role}</p>
                     <span className="inline-block mt-2 px-2 py-1 rounded-full bg-teal-100 text-teal-700 text-xs font-medium">
@@ -959,10 +959,10 @@ export default function CoursesPage() {
         {/* CTA Section */}
         <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[var(--color-blue-500, var(--semantic-info))]' : 'from-foundation via-[#1a4a4b] to-[var(--teal)]'}`}>
           <div className="container">
-            <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60">
+            <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60">
               <div className="relative z-10 text-center max-w-3xl mx-auto">
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-background/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                   <Sparkles className="w-4 h-4 text-teal-300" />
                   {ui.startToday}
                 </div>
@@ -979,14 +979,14 @@ export default function CoursesPage() {
                     href="https://calendly.com/steven-barholere/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-background text-foundation hover:bg-gray-100 dark:bg-card transition-all hover:scale-105 shadow-xl"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-foundation hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 transition-all hover:scale-105 shadow-xl"
                   >
                     {ui.bookDiagnostic}
                     <ArrowRight className="w-5 h-5" />
                   </a>
                   <Link
                     href="/rusingacademy"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-background/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-background/20 transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 transition-all hover:scale-105"
                   >
                     {ui.viewAll}
                   </Link>

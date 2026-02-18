@@ -161,8 +161,8 @@ const AdminContentManagement = lazy(() => import("./pages/AdminContentManagement
 const AdminControlCenter = lazy(() => import("./pages/AdminControlCenter"));
 const AppDashboard = lazy(() => import("./pages/AppDashboard"));
 
-// Ecosystem Pages - RusingAcademy
-const RusingAcademyHome = lazy(() => import("./pages/rusingacademy/RusingAcademyHome"));
+// Ecosystem Pages - RusingÂcademy
+const RusingÂcademyHome = lazy(() => import("./pages/rusingacademy/RusingAcademyHome"));
 const RusingAcademyPrograms = lazy(() => import("./pages/rusingacademy/Programs"));
 const RusingAcademyContact = lazy(() => import("./pages/rusingacademy/Contact"));
 const RusingAcademyForBusiness = lazy(() => import("./pages/rusingacademy/ForBusiness"));
@@ -542,7 +542,7 @@ function Router() {
       <Route path="/admin/leads">{() => <L><AdminLeads /></L>}</Route>
       <Route path="/dashboard/admin/leads">{() => <L><AdminLeads /></L>}</Route>
       
-      {/* Ecosystem - RusingAcademy */}
+      {/* Ecosystem - RusingÂcademy */}
       <Route path="/rusingacademy">{() => <L><RusingAcademyLanding /></L>}</Route>
       <Route path="/rusingacademy/old">{() => <L><RusingAcademyHome /></L>}</Route>
       <Route path="/rusingacademy/programs">{() => <L><RusingAcademyPrograms /></L>}</Route>

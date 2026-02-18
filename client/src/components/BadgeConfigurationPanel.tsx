@@ -70,9 +70,9 @@ export function BadgeConfigurationPanel({
   }
 
   return (
-    <div className="bg-white dark:bg-background rounded-lg shadow">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-border dark:border-border p-6">
+      <div className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 p-6">
         <div className="flex items-center gap-2">
           <Settings size={24} className="text-teal-600" />
           <h2 className="text-2xl font-bold text-gray-900">
@@ -82,7 +82,7 @@ export function BadgeConfigurationPanel({
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200 dark:border-border dark:border-border flex">
+      <div className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 flex">
         <button
           onClick={() => setActiveTab("criteria")}
           className={`flex-1 py-4 px-6 font-medium text-center transition-colors ${
@@ -119,7 +119,7 @@ export function BadgeConfigurationPanel({
                   <p className="text-gray-600">{isEn ? "No criteria configured yet" : "Aucun critère configuré"}</p>
                 ) : (
                   badges.map((badge) => (
-                    <div key={badge.id} className="bg-white dark:bg-background rounded-lg p-4 flex items-center justify-between">
+                    <div key={badge.id} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 flex items-center justify-between">
                       <div className="flex-1">
                         <p className="font-semibold text-gray-900">{badge.badgeName}</p>
                         <p className="text-sm text-gray-600">
@@ -240,7 +240,7 @@ export function BadgeConfigurationPanel({
                   className={`cursor-pointer rounded-lg p-4 border-2 transition-all ${
                     selectedTemplate?.id === template.id
                       ? "border-teal-600 bg-teal-50"
-                      : "border-gray-200 dark:border-border bg-white dark:bg-card hover:border-teal-300"
+                      : "border-gray-200 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:border-teal-300"
                   }`}
                 >
                   <div className="flex items-start justify-between mb-2">

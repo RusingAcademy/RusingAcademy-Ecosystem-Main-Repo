@@ -276,7 +276,7 @@ export default function CoachAvailabilityPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
       {!isInsideAppLayout && <Header />}
       <main className="flex-1">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1200px] mx-auto">

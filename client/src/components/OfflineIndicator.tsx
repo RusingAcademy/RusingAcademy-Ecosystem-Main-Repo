@@ -68,7 +68,7 @@ export function OfflineIndicator() {
         </div>
         <button
           onClick={() => setDismissed(true)}
-          className="p-1 hover:bg-white dark:bg-background/20 rounded transition-colors flex-shrink-0"
+          className="p-1 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded transition-colors flex-shrink-0"
           aria-label={isEn ? "Dismiss" : "Fermer"}
         >
           <X className="h-4 w-4" />

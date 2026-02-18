@@ -308,11 +308,11 @@ export default function AdminReminders() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-obsidian">
+    <div className="min-h-screen bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-foundation/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-foundation/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
@@ -326,7 +326,7 @@ export default function AdminReminders() {
           <motion.div variants={itemVariants} className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="space-y-2">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation border border-slate-200 dark:border-teal-800">
+                <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md border border-slate-200 dark:border-teal-800">
                   <Bell className="h-7 w-7 text-black dark:text-foreground/90" />
                 </div>
                 <div>
@@ -343,7 +343,7 @@ export default function AdminReminders() {
                 variant="outline" 
                 onClick={handleRefresh} 
                 disabled={isRefreshing}
-                className="bg-white dark:bg-card dark:bg-foundation border-slate-200 dark:border-teal-800 hover:bg-slate-50 dark:hover:bg-foundation-2 transition-all duration-200"
+                className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800 hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-foundation-2 transition-all duration-200"
               >
                 <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
                 {t.actions.refresh}
@@ -361,7 +361,7 @@ export default function AdminReminders() {
           {/* Stats Cards - Glassmorphism Style */}
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {/* Total Sent */}
-            <Card className="relative overflow-hidden bg-white dark:bg-card dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
+            <Card className="relative overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
@@ -372,7 +372,7 @@ export default function AdminReminders() {
                       <span>+12% vs last week</span>
                     </div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                     <Mail className="h-6 w-6 text-black dark:text-foreground/90" />
                   </div>
                 </div>
@@ -380,7 +380,7 @@ export default function AdminReminders() {
             </Card>
 
             {/* Open Rate */}
-            <Card className="relative overflow-hidden bg-white dark:bg-card dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
+            <Card className="relative overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
@@ -393,7 +393,7 @@ export default function AdminReminders() {
                       />
                     </div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                     <Eye className="h-6 w-6 text-black dark:text-foreground/90" />
                   </div>
                 </div>
@@ -401,7 +401,7 @@ export default function AdminReminders() {
             </Card>
 
             {/* Click Rate */}
-            <Card className="relative overflow-hidden bg-white dark:bg-card dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
+            <Card className="relative overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
@@ -414,7 +414,7 @@ export default function AdminReminders() {
                       />
                     </div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                     <MousePointer className="h-6 w-6 text-black dark:text-foreground/90" />
                   </div>
                 </div>
@@ -422,7 +422,7 @@ export default function AdminReminders() {
             </Card>
 
             {/* Failed */}
-            <Card className="relative overflow-hidden bg-white dark:bg-card dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
+            <Card className="relative overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border border-slate-200 dark:border-teal-800 shadow-sm hover:shadow-md transition-all duration-200">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
@@ -433,7 +433,7 @@ export default function AdminReminders() {
                       <span>{isEn ? "Needs attention" : "Nécessite attention"}</span>
                     </div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-foundation">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                     <XCircle className="h-6 w-6 text-black dark:text-foreground/90" />
                   </div>
                 </div>
@@ -443,7 +443,7 @@ export default function AdminReminders() {
 
           {/* Filters */}
           <motion.div variants={itemVariants}>
-            <Card className="bg-white dark:bg-card dark:bg-obsidian border border-slate-200 dark:border-teal-800 shadow-sm">
+            <Card className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border border-slate-200 dark:border-teal-800 shadow-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-black dark:text-foreground">
                   <Filter className="h-5 w-5 text-black dark:text-foreground dark:text-cyan-300" />
@@ -455,7 +455,7 @@ export default function AdminReminders() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-black dark:text-foreground/90">{t.filters.type}</label>
                     <Select value={typeFilter} onValueChange={setTypeFilter}>
-                      <SelectTrigger className="bg-white dark:bg-card dark:bg-obsidian border-slate-200 dark:border-teal-800 focus:ring-primary/20">
+                      <SelectTrigger className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800 focus:ring-primary/20">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -469,7 +469,7 @@ export default function AdminReminders() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-black dark:text-foreground/90">{t.filters.channel}</label>
                     <Select value={channelFilter} onValueChange={setChannelFilter}>
-                      <SelectTrigger className="bg-white dark:bg-card dark:bg-obsidian border-slate-200 dark:border-teal-800 focus:ring-primary/20">
+                      <SelectTrigger className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800 focus:ring-primary/20">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -483,7 +483,7 @@ export default function AdminReminders() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-black dark:text-foreground/90">{t.filters.status}</label>
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
-                      <SelectTrigger className="bg-white dark:bg-card dark:bg-obsidian border-slate-200 dark:border-teal-800 focus:ring-primary/20">
+                      <SelectTrigger className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800 focus:ring-primary/20">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -501,11 +501,11 @@ export default function AdminReminders() {
 
           {/* Reminders Table */}
           <motion.div variants={itemVariants}>
-            <Card className="bg-white/70 dark:bg-foundation/70 backdrop-blur-xl border-white/70 dark:border-teal-800/50 shadow-xl overflow-hidden">
+            <Card className="bg-white/70 dark:bg-white/[0.08] dark:backdrop-blur-md/70 backdrop-blur-xl border-white/70 dark:border-white/15 shadow-xl overflow-hidden">
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-slate-50/80 dark:bg-obsidian/80 hover:bg-slate-50/80 dark:hover:bg-obsidian/80">
+                    <TableRow className="bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/80 dark:bg-white/[0.08] dark:backdrop-blur-md hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/80 dark:hover:bg-obsidian/80">
                       <TableHead className="font-semibold text-black dark:text-foreground/90">{t.table.learner}</TableHead>
                       <TableHead className="font-semibold text-black dark:text-foreground/90">{t.table.coach}</TableHead>
                       <TableHead className="font-semibold text-black dark:text-foreground/90">{t.table.session}</TableHead>
@@ -533,7 +533,7 @@ export default function AdminReminders() {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.05 }}
-                          className="border-b border-slate-100 dark:border-teal-800 hover:bg-slate-50/50 dark:hover:bg-foundation/50 transition-colors"
+                          className="border-b border-slate-100 dark:border-teal-800 hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 dark:hover:bg-foundation/50 transition-colors"
                         >
                           <TableCell className="font-medium text-black dark:text-foreground">
                             {reminder.learnerName}
@@ -550,13 +550,13 @@ export default function AdminReminders() {
                             </div>
                           </TableCell>
                           <TableCell>
-                            <Badge variant="outline" className="bg-slate-100/50 dark:bg-foundation/50 border-slate-200 dark:border-teal-800">
+                            <Badge variant="outline" className="bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 border-slate-200 dark:border-teal-800">
                               <Clock className="h-3 w-3 mr-1" />
                               {reminder.type === "24h" ? t.filters.type24h : t.filters.type1h}
                             </Badge>
                           </TableCell>
                           <TableCell>
-                            <Badge variant="secondary" className="bg-slate-100 dark:bg-foundation">
+                            <Badge variant="secondary" className="bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                               {reminder.channel === "email" ? (
                                 <>
                                   <Mail className="h-3 w-3 mr-1" />

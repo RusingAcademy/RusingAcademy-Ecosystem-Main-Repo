@@ -59,7 +59,7 @@ export default function CoachInviteClaim() {
   // Loading state
   if (isLoading || authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
           <p className="text-black dark:text-foreground dark:text-cyan-300">Chargement de l'invitation...</p>
@@ -71,7 +71,7 @@ export default function CoachInviteClaim() {
   // Error state
   if (error || !invitation) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
@@ -93,7 +93,7 @@ export default function CoachInviteClaim() {
   // Expired state
   if (invitation.isExpired) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <Clock className="w-16 h-16 text-amber-500 mx-auto mb-4" />
@@ -118,7 +118,7 @@ export default function CoachInviteClaim() {
   // Already claimed state
   if (invitation.isClaimed) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
@@ -145,7 +145,7 @@ export default function CoachInviteClaim() {
 
   // Valid invitation - show claim form
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center p-4">
       <Card className="max-w-lg w-full">
         <CardHeader className="text-center">
           <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -153,13 +153,13 @@ export default function CoachInviteClaim() {
           </div>
           <CardTitle className="text-2xl">Réclamez votre profil coach</CardTitle>
           <CardDescription className="text-base">
-            Vous avez été invité(e) à prendre le contrôle de votre profil coach sur RusingAcademy
+            Vous avez été invité(e) à prendre le contrôle de votre profil coach sur RusingÂcademy
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-6">
           {/* Coach Profile Preview */}
-          <div className="bg-slate-50 dark:bg-foundation/50 rounded-lg p-4 border">
+          <div className="bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 rounded-lg p-4 border">
             <h3 className="font-semibold text-lg text-black dark:text-foreground">
               {invitation.coachName}
             </h3>
@@ -211,7 +211,7 @@ export default function CoachInviteClaim() {
           </div>
 
           {/* Terms Acceptance Checkbox */}
-          <div className="bg-slate-50 dark:bg-foundation/50 border border-slate-200 dark:border-teal-800 rounded-lg p-4">
+          <div className="bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 border border-slate-200 dark:border-teal-800 rounded-lg p-4">
             <div className="flex items-start gap-3">
               <Checkbox 
                 id="terms" 

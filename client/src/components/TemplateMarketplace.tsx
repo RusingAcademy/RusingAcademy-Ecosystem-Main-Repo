@@ -2,7 +2,7 @@
  * TemplateMarketplace — Section Template Marketplace for the Visual Editor
  * 
  * Replaces the simple "Add Block" list with a categorized, searchable marketplace.
- * Supports: bilingual FR/EN, brand-specific templates (RusingAcademy, Lingueefy, Barholex),
+ * Supports: bilingual FR/EN, brand-specific templates (RusingÂcademy, Lingueefy, Barholex),
  * saving existing sections as templates, and filtering by category/brand/language.
  */
 import { useState, useMemo } from "react";
@@ -86,11 +86,11 @@ const BRAND_COLORS: Record<string, string> = {
   rusingacademy: "bg-blue-100 text-blue-700",
   lingueefy: "bg-teal-100 text-teal-700",
   barholex: "bg-amber-100 text-amber-700",
-  universal: "bg-gray-100 dark:bg-card text-black",
+  universal: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black",
 };
 
 const BRAND_LABELS: Record<string, string> = {
-  rusingacademy: "RusingAcademy",
+  rusingacademy: "RusingÂcademy",
   lingueefy: "Lingueefy",
   barholex: "Barholex",
   universal: "Universal",
@@ -190,7 +190,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
   return (
     <div className="flex flex-col h-full">
       {/* Tab Switcher */}
-      <div className="flex border-b border-gray-200 dark:border-border dark:border-border bg-gray-50/50">
+      <div className="flex border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50">
         <button
           onClick={() => setActiveTab("templates")}
           className={`flex-1 px-3 py-2 text-[11px] font-medium transition-colors ${
@@ -224,7 +224,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
               <button
                 key={st.type}
                 onClick={() => onAddBlankSection(st.type)}
-                className="w-full flex items-center gap-2.5 p-2.5 rounded-lg border border-dashed border-gray-200 dark:border-border dark:border-border hover:border-indigo-300 hover:bg-indigo-50/50 transition-all text-left"
+                className="w-full flex items-center gap-2.5 p-2.5 rounded-lg border border-dashed border-gray-200 dark:border-white/15 dark:border-white/15 hover:border-indigo-300 hover:bg-indigo-50/50 transition-all text-left"
               >
                 <div className={`w-7 h-7 rounded flex items-center justify-center text-white shrink-0 ${st.color}`}>
                   <st.icon className="h-3.5 w-3.5" />
@@ -254,7 +254,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] font-medium transition-colors ${
-                  showFilters ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 dark:bg-card text-black dark:text-foreground hover:bg-gray-200"
+                  showFilters ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground hover:bg-gray-200"
                 }`}
               >
                 <Filter className="h-3 w-3" /> Filters
@@ -272,7 +272,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                 <div className="flex flex-wrap gap-1">
                   {[
                     { value: "all", label: "All" },
-                    { value: "rusingacademy", label: "RusingAcademy" },
+                    { value: "rusingacademy", label: "RusingÂcademy" },
                     { value: "lingueefy", label: "Lingueefy" },
                     { value: "barholex", label: "Barholex" },
                   ].map(b => (
@@ -282,7 +282,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                       className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors ${
                         brandFilter === b.value
                           ? "bg-indigo-600 text-white"
-                          : "bg-gray-100 dark:bg-card text-black dark:text-foreground hover:bg-gray-200"
+                          : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground hover:bg-gray-200"
                       }`}
                     >
                       {b.label}
@@ -303,7 +303,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                   className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors ${
                     activeCategory === cat.value
                       ? "bg-indigo-600 text-white"
-                      : "bg-gray-50 dark:bg-background text-black dark:text-foreground hover:bg-gray-100 dark:bg-card hover:text-black"
+                      : "bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:text-black"
                   }`}
                 >
                   {cat.label}
@@ -342,7 +342,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                   return (
                     <div
                       key={template.id}
-                      className="group relative rounded-lg border border-gray-200 dark:border-border dark:border-border hover:border-indigo-300 hover:shadow-sm transition-all overflow-hidden"
+                      className="group relative rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 hover:border-indigo-300 hover:shadow-sm transition-all overflow-hidden"
                     >
                       {/* Template Card */}
                       <button
@@ -360,7 +360,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                               <p className="text-[10px] text-cyan-300 mt-0.5 line-clamp-2">{template.description}</p>
                             )}
                             <div className="flex items-center gap-1 mt-1.5 flex-wrap">
-                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-border dark:border-border">
+                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-white/15 dark:border-white/15">
                                 {template.sectionType.replace(/_/g, " ")}
                               </Badge>
                               {template.brand !== "universal" && (
@@ -368,7 +368,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                                   {BRAND_LABELS[template.brand]}
                                 </Badge>
                               )}
-                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-border dark:border-border">
+                              <Badge variant="outline" className="text-[9px] py-0 h-4 border-gray-200 dark:border-white/15 dark:border-white/15">
                                 <Globe className="h-2.5 w-2.5 mr-0.5" />
                                 {LANGUAGE_LABELS[template.language] || template.language}
                               </Badge>
@@ -465,7 +465,7 @@ export function SaveAsTemplateDialog({ open, onClose, sectionId, sectionTitle, s
             <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., RusingAcademy Hero with CTA"
+              placeholder="e.g., RusingÂcademy Hero with CTA"
               className="mt-1"
             />
           </div>
@@ -519,7 +519,7 @@ export function SaveAsTemplateDialog({ open, onClose, sectionId, sectionTitle, s
               </SelectTrigger>
               <SelectContent className="z-[300]">
                 <SelectItem value="universal">Universal (All Brands)</SelectItem>
-                <SelectItem value="rusingacademy">RusingAcademy</SelectItem>
+                <SelectItem value="rusingacademy">RusingÂcademy</SelectItem>
                 <SelectItem value="lingueefy">Lingueefy</SelectItem>
                 <SelectItem value="barholex">Barholex Media</SelectItem>
               </SelectContent>

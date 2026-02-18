@@ -30,11 +30,11 @@ const tabs: { key: TabKey; title: string; desc: string; icon: any }[] = [
 ];
 
 const DEFAULTS: Record<string, string> = {
-  site_name: "RusingAcademy Learning Ecosystem",
+  site_name: "RusingÂcademy Learning Ecosystem",
   site_tagline: "Bilingual Excellence for Canadian Public Servants",
   site_url: "https://www.rusingacademy.ca",
   site_contact_email: "info@rusingacademy.ca",
-  seo_title: "RusingAcademy — Professional Bilingual Training",
+  seo_title: "RusingÂcademy — Professional Bilingual Training",
   seo_description: "Secure your C level. Propel your federal career.",
   seo_keywords: "SLE, bilingual, public service, French, English",
   brand_primary_color: "var(--brand-foundation, var(--brand-foundation))",
@@ -49,7 +49,7 @@ const DEFAULTS: Record<string, string> = {
   auth_max_login_attempts: "5",
   auth_lockout_duration: "30",
   stripe_currency: "CAD",
-  email_from_name: "RusingAcademy",
+  email_from_name: "RusingÂcademy",
   email_from_address: "noreply@rusingacademy.ca",
   email_reply_to: "info@rusingacademy.ca",
   api_rate_limit: "60",
@@ -188,13 +188,13 @@ export default function AdminSettings() {
         return (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {renderField("site_name", "Site Name", "text", "RusingAcademy Learning Ecosystem")}
+              {renderField("site_name", "Site Name", "text", "RusingÂcademy Learning Ecosystem")}
               {renderField("site_tagline", "Tagline", "text", "Bilingual Excellence for Canadian Public Servants")}
               {renderField("site_url", "Site URL", "text", "https://www.rusingacademy.ca")}
               {renderField("site_contact_email", "Contact Email", "text", "info@rusingacademy.ca")}
             </div>
             <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider pt-2">SEO Settings</h3>
-            {renderField("seo_title", "Meta Title", "text", "RusingAcademy — Professional Bilingual Training")}
+            {renderField("seo_title", "Meta Title", "text", "RusingÂcademy — Professional Bilingual Training")}
             {renderField("seo_description", "Meta Description", "textarea", "Secure your C level. Propel your federal career.")}
             {renderField("seo_keywords", "Keywords", "text", "SLE, bilingual, public service, French, English")}
             {renderField("seo_og_image", "OG Image URL", "text", "https://...")}
@@ -285,7 +285,7 @@ export default function AdminSettings() {
             </CardContent></Card>
             <Card><CardContent className="p-4 space-y-4">
               <h3 className="font-semibold">Email Configuration</h3>
-              {renderField("email_from_name", "From Name", "text", "RusingAcademy")}
+              {renderField("email_from_name", "From Name", "text", "RusingÂcademy")}
               {renderField("email_from_address", "From Email", "text", "noreply@rusingacademy.ca")}
               {renderField("email_reply_to", "Reply-To", "text", "info@rusingacademy.ca")}
             </CardContent></Card>

@@ -87,7 +87,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
                     className={`flex items-center gap-1 text-[10px] px-2 py-1 rounded-full ${
                       isReached
                         ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-                        : "bg-slate-100 text-cyan-300 dark:bg-foundation dark:text-black"
+                        : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-cyan-300 dark:bg-white/[0.08] dark:backdrop-blur-md dark:text-black"
                     }`}
                     title={`${m.xpThreshold} XP`}
                   >

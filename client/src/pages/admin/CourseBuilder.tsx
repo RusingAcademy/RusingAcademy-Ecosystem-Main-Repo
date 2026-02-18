@@ -115,7 +115,7 @@ function QualityBadge({ status }: { status: string }) {
 
 function SlotDot({ filled, published, hasFr }: { filled: boolean; published: boolean; hasFr: boolean }) {
   if (!filled) return (
-    <div className="w-3 h-3 rounded-full border-2 border-dashed border-gray-300 bg-gray-50" title="Empty slot" />
+    <div className="w-3 h-3 rounded-full border-2 border-dashed border-gray-300 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm" title="Empty slot" />
   );
   if (published && hasFr) return (
     <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 shadow-sm shadow-emerald-200" title="Published + Bilingual" />
@@ -154,7 +154,7 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                       ? isPublished
                         ? `${slot.bgLight} ${slot.borderColor} hover:shadow-md hover:-translate-y-0.5`
                         : "bg-amber-50/80 border-amber-200 hover:shadow-md hover:-translate-y-0.5"
-                      : "bg-gray-50/50 border-dashed border-gray-200 dark:border-border hover:border-gray-400 hover:bg-gray-100/50"
+                      : "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 border-dashed border-gray-200 dark:border-white/15 hover:border-gray-400 hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm/50"
                     }
                   `}
                 >
@@ -1582,7 +1582,7 @@ export default function CourseBuilder() {
       <div className="p-6 max-w-5xl mx-auto space-y-6">
         {/* Header with glassmorphism accent */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-foundation/5 via-transparent to-cta/5 border p-6">
-          <div className="absolute inset-0 bg-white dark:bg-background/60 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/60 backdrop-blur-sm" />
           <div className="relative flex items-center gap-4">
             <Button variant="ghost" size="icon" onClick={() => setEditingCourseId(null)} className="shrink-0">
               <ArrowLeft className="h-5 w-5" />
@@ -1887,7 +1887,7 @@ export default function CourseBuilder() {
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-foundation/5 via-transparent to-cta/5 border p-6">
-        <div className="absolute inset-0 bg-white dark:bg-background/60 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/60 backdrop-blur-sm" />
         <div className="relative flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
@@ -1910,7 +1910,7 @@ export default function CourseBuilder() {
           { label: "Published", value: stats.published, color: "text-emerald-600", bg: "bg-emerald-50" },
           { label: "In Review", value: stats.review, color: "text-blue-600", bg: "bg-blue-50" },
           { label: "Drafts", value: stats.draft, color: "text-amber-600", bg: "bg-amber-50" },
-          { label: "Archived", value: stats.archived, color: "text-cyan-300", bg: "bg-gray-50" },
+          { label: "Archived", value: stats.archived, color: "text-cyan-300", bg: "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm" },
         ].map((stat, i) => (
           <Card key={i} className="overflow-hidden hover:shadow-md transition-shadow">
             <CardContent className={`p-4 ${stat.bg}`}>
@@ -1988,9 +1988,9 @@ export default function CourseBuilder() {
                       {course.status}
                     </Badge>
                     {course.price > 0 ? (
-                      <Badge className="text-[10px] bg-white dark:bg-background/90 text-emerald-700 border-0">${(course.price / 100).toFixed(0)} CAD</Badge>
+                      <Badge className="text-[10px] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 text-emerald-700 border-0">${(course.price / 100).toFixed(0)} CAD</Badge>
                     ) : (
-                      <Badge className="text-[10px] bg-white dark:bg-background/90 text-blue-700 border-0">Free</Badge>
+                      <Badge className="text-[10px] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 text-blue-700 border-0">Free</Badge>
                     )}
                   </div>
                 </div>

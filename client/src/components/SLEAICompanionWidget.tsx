@@ -338,7 +338,7 @@ export default function SLEAICompanionWidget() {
 
                     {/* Speaking Indicator */}
                     <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-500/90 rounded-full flex items-center gap-1.5 shadow-lg">
-                      <div className="w-2 h-2 bg-white dark:bg-background rounded-full animate-pulse" />
+                      <div className="w-2 h-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full animate-pulse" />
                       <span className="text-white text-xs font-medium">Speaking...</span>
                     </div>
                   </div>

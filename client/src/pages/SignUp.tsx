@@ -16,7 +16,7 @@ export default function SignUp() {
         {/* Logo and branding */}
         <div className="text-center mb-8">
           <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 mb-2">
-            Join RusingAcademy
+            Join RusingÂcademy
           </h1>
           <p className="text-black dark:text-foreground">
             Start your journey to bilingual excellence
@@ -24,7 +24,7 @@ export default function SignUp() {
         </div>
 
         {/* Clerk Sign-Up component */}
-        <div className="bg-white dark:bg-background/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
           <ClerkSignUp
             routing="path"
             path="/sign-up"

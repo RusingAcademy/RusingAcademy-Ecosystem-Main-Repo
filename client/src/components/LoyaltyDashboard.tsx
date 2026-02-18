@@ -51,7 +51,7 @@ interface PointTransaction {
 
 const tierConfig = {
   bronze: { icon: Star, color: "text-amber-600", bg: "bg-amber-100", min: 0, max: 499 },
-  silver: { icon: Zap, color: "text-black", bg: "bg-gray-100", min: 500, max: 1999 },
+  silver: { icon: Zap, color: "text-black", bg: "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm", min: 500, max: 1999 },
   gold: { icon: Crown, color: "text-yellow-500", bg: "bg-yellow-100", min: 2000, max: 4999 },
   platinum: { icon: Sparkles, color: "text-foundation", bg: "bg-foundation-soft", min: 5000, max: Infinity },
 };

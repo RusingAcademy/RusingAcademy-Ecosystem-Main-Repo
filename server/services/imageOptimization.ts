@@ -1,6 +1,6 @@
 /**
  * Image Optimization Utilities
- * RusingAcademy Learning Ecosystem
+ * RusingÂcademy Learning Ecosystem
  * 
  * This module provides utilities for optimizing images to improve
  * Core Web Vitals scores (LCP, CLS) and reduce page load times.

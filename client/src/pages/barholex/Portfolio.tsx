@@ -42,8 +42,8 @@ export default function BarholexPortfolio() {
   const PROJECTS = [
     {
       id: 1,
-      titleEn: "RusingAcademy Learning Ecosystem",
-      titleFr: "Écosystème d'apprentissage RusingAcademy",
+      titleEn: "RusingÂcademy Learning Ecosystem",
+      titleFr: "Écosystème d'apprentissage RusingÂcademy",
       categoryEn: "Full-Stack LMS Platform",
       categoryFr: "Plateforme LMS complète",
       descEn: "A comprehensive bilingual learning management system with 6 structured Paths (A1–C1 + Exam Prep), AI-powered coaching, progress tracking, and SLE exam preparation for Canadian public servants.",
@@ -51,8 +51,8 @@ export default function BarholexPortfolio() {
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-rusingacademy.jpg",
       filter: "platform",
       featured: true,
-      clientEn: "RusingAcademy (Internal)",
-      clientFr: "RusingAcademy (Interne)",
+      clientEn: "RusingÂcademy (Internal)",
+      clientFr: "RusingÂcademy (Interne)",
       yearEn: "2024–2026",
       yearFr: "2024–2026",
       resultsEn: ["6 structured learning Paths", "96 lessons with evaluations", "AI coaching integration"],
@@ -89,8 +89,8 @@ export default function BarholexPortfolio() {
       image: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_01.jpg",
       filter: "video",
       featured: false,
-      clientEn: "RusingAcademy (Internal)",
-      clientFr: "RusingAcademy (Interne)",
+      clientEn: "RusingÂcademy (Internal)",
+      clientFr: "RusingÂcademy (Interne)",
       yearEn: "2025–2026",
       yearFr: "2025–2026",
       resultsEn: ["10+ Shorts produced", "Cross-platform distribution", "High engagement rate"],
@@ -108,8 +108,8 @@ export default function BarholexPortfolio() {
       image: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_03.jpg",
       filter: "video",
       featured: false,
-      clientEn: "RusingAcademy (Internal)",
-      clientFr: "RusingAcademy (Interne)",
+      clientEn: "RusingÂcademy (Internal)",
+      clientFr: "RusingÂcademy (Interne)",
       yearEn: "2025",
       yearFr: "2025",
       resultsEn: ["7 capsules produced", "Studio-quality production", "Expert-led instruction"],
@@ -159,8 +159,8 @@ export default function BarholexPortfolio() {
       titleFr: "Identité de marque de l'écosystème",
       categoryEn: "Brand Design System",
       categoryFr: "Système de design de marque",
-      descEn: "Complete brand identity design for the three-pillar ecosystem: RusingAcademy (academic orange), Lingueefy (coaching teal), and Barholex Media (consulting gold). Includes logos, color systems, typography, and visual guidelines.",
-      descFr: "Conception complète de l'identité de marque pour l'écosystème à trois piliers : RusingAcademy (orange académique), Lingueefy (sarcelle coaching) et Barholex Media (or consulting). Comprend logos, systèmes de couleurs, typographie et directives visuelles.",
+      descEn: "Complete brand identity design for the three-pillar ecosystem: RusingÂcademy (academic orange), Lingueefy (coaching teal), and Barholex Media (consulting gold). Includes logos, color systems, typography, and visual guidelines.",
+      descFr: "Conception complète de l'identité de marque pour l'écosystème à trois piliers : RusingÂcademy (orange académique), Lingueefy (sarcelle coaching) et Barholex Media (or consulting). Comprend logos, systèmes de couleurs, typographie et directives visuelles.",
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-barholex.jpg",
       filter: "branding",
       featured: false,
@@ -182,8 +182,8 @@ export default function BarholexPortfolio() {
       image: "https://rusingacademy-cdn.b-cdn.net/images/generated/classroom-training.jpg",
       filter: "edtech",
       featured: false,
-      clientEn: "RusingAcademy (Internal)",
-      clientFr: "RusingAcademy (Interne)",
+      clientEn: "RusingÂcademy (Internal)",
+      clientFr: "RusingÂcademy (Interne)",
       yearEn: "2025",
       yearFr: "2025",
       resultsEn: ["Multi-skill assessment", "SLE-aligned standards", "Personalized Path recommendation"],
@@ -194,8 +194,8 @@ export default function BarholexPortfolio() {
 
   const TESTIMONIALS = [
     {
-      quoteEn: "The RusingAcademy platform transformed how I prepare for my SLE exams. The structured Paths and AI coaching gave me the confidence I needed to succeed.",
-      quoteFr: "La plateforme RusingAcademy a transformé ma façon de me préparer aux examens ELS. Les Parcours structurés et le coaching IA m'ont donné la confiance dont j'avais besoin pour réussir.",
+      quoteEn: "The RusingÂcademy platform transformed how I prepare for my SLE exams. The structured Paths and AI coaching gave me the confidence I needed to succeed.",
+      quoteFr: "La plateforme RusingÂcademy a transformé ma façon de me préparer aux examens ELS. Les Parcours structurés et le coaching IA m'ont donné la confiance dont j'avais besoin pour réussir.",
       authorEn: "Satisfied Learner",
       authorFr: "Apprenant satisfait",
       roleEn: "Federal Public Servant",
@@ -257,7 +257,7 @@ export default function BarholexPortfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-center mb-8"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-background/10 backdrop-blur-md border border-white/20 text-barholex-gold font-medium text-sm shadow-lg shadow-black/10">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md border border-white/20 text-barholex-gold font-medium text-sm shadow-lg shadow-black/10">
                   <Award className="w-4 h-4" />
                   {language === "en" ? "Our Work in Action" : "Nos réalisations en action"}
                 </span>
@@ -304,7 +304,7 @@ export default function BarholexPortfolio() {
                 ].map((stat, i) => (
                   <div
                     key={i}
-                    className="relative p-4 rounded-2xl bg-white dark:bg-background/[0.07] backdrop-blur-md border border-white/15 hover:bg-white dark:bg-background/[0.12] transition-all duration-300 group"
+                    className="relative p-4 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/[0.07] backdrop-blur-md border border-white/15 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/[0.12] transition-all duration-300 group"
                   >
                     <stat.icon className="w-5 h-5 text-barholex-gold/60 mb-2 mx-auto group-hover:text-barholex-gold transition-colors" />
                     <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
@@ -336,7 +336,7 @@ export default function BarholexPortfolio() {
                   className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                     activeFilter === filter.id
                       ? "bg-gradient-to-r from-barholex-gold to-amber-600 text-white shadow-lg shadow-amber-500/25"
-                      : "bg-white dark:bg-card text-slate-600 hover:bg-[#F0EDE8] border border-stone-200 hover:border-barholex-gold/30"
+                      : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-slate-600 hover:bg-[#F0EDE8] border border-stone-200 hover:border-barholex-gold/30"
                   }`}
                 >
                   <filter.icon className="w-4 h-4" aria-hidden="true" />
@@ -411,7 +411,7 @@ export default function BarholexPortfolio() {
                       } overflow-hidden`}>
                         <div className="flex flex-wrap gap-2 mb-4">
                           {(language === "en" ? project.resultsEn : project.resultsFr).map((result, i) => (
-                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-background/15 backdrop-blur-sm text-white text-xs font-medium">
+                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/15 backdrop-blur-sm text-white text-xs font-medium">
                               <CheckCircle className="w-3 h-3 text-barholex-gold" />
                               {result}
                             </span>
@@ -483,7 +483,7 @@ export default function BarholexPortfolio() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
-                    className="p-8 md:p-12 rounded-3xl bg-white dark:bg-background/80 backdrop-blur-xl border border-stone-200 shadow-xl shadow-black/5"
+                    className="p-8 md:p-12 rounded-3xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-xl border border-stone-200 shadow-xl shadow-black/5"
                   >
                     <Quote className="w-12 h-12 text-barholex-gold/25 mb-6" />
                     
@@ -514,7 +514,7 @@ export default function BarholexPortfolio() {
                   <button
                     onClick={prevTestimonial}
                     aria-label="Previous testimonial"
-                    className="w-12 h-12 rounded-full bg-white dark:bg-background border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
+                    className="w-12 h-12 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
                   >
                     <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                   </button>
@@ -536,7 +536,7 @@ export default function BarholexPortfolio() {
                   <button
                     onClick={nextTestimonial}
                     aria-label="Next testimonial"
-                    className="w-12 h-12 rounded-full bg-white dark:bg-background border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
+                    className="w-12 h-12 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-stone-200 flex items-center justify-center hover:bg-stone-100 hover:border-barholex-gold/30 transition-all text-slate-600 shadow-sm"
                   >
                     <ChevronRight className="w-5 h-5" aria-hidden="true" />
                   </button>
@@ -612,7 +612,7 @@ export default function BarholexPortfolio() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/20 text-white hover:bg-white dark:bg-background/10 hover:border-white/30 transition-all duration-300"
+                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/20 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:border-white/30 transition-all duration-300"
                   >
                     {language === "en" ? "View Our Services" : "Voir nos services"}
                   </Button>

@@ -47,7 +47,7 @@ export function AnimatedHero({
       case 'dark':
         return 'bg-obsidian';
       default:
-        return 'bg-white dark:bg-card dark:bg-obsidian';
+        return 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md';
     }
   };
 
@@ -163,7 +163,7 @@ export function AnimatedHero({
                     initial="idle"
                     whileHover="hover"
                     whileTap="tap"
-                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 dark:border-border text-black dark:text-foreground font-semibold rounded-xl hover:border-teal-500 hover:text-teal-500 transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 dark:border-white/15 text-black dark:text-foreground font-semibold rounded-xl hover:border-teal-500 hover:text-teal-500 transition-colors"
                   >
                     {secondaryCTA.icon}
                     {secondaryCTA.text}

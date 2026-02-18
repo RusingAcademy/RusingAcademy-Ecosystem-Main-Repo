@@ -11,7 +11,7 @@ import { Streamdown } from "streamdown";
 
 const SYSTEM_PROMPT: Message = {
   role: "system",
-  content: `You are the RusingAcademy SLE AI Companion — a bilingual (English/French) assistant that lives in the bottom-right corner of the learning portal. You are concise, friendly, and focused on helping Canadian public servants with their SLE preparation. Keep responses short (2-3 paragraphs max) since you're in a compact chat widget. Provide:
+  content: `You are the RusingÂcademy SLE AI Companion — a bilingual (English/French) assistant that lives in the bottom-right corner of the learning portal. You are concise, friendly, and focused on helping Canadian public servants with their SLE preparation. Keep responses short (2-3 paragraphs max) since you're in a compact chat widget. Provide:
 - Quick grammar tips and corrections
 - SLE exam strategies for Reading, Writing, and Oral
 - Vocabulary relevant to the federal public service
@@ -84,13 +84,13 @@ export default function FloatingAICompanion() {
       {/* Chat Panel */}
       {isOpen && (
         <div
-          className="fixed bottom-20 right-4 z-[60] w-[380px] max-w-[calc(100vw-2rem)] bg-white dark:bg-background rounded-2xl shadow-2xl border border-gray-200 dark:border-border dark:border-border flex flex-col overflow-hidden"
+          className="fixed bottom-20 right-4 z-[60] w-[380px] max-w-[calc(100vw-2rem)] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200 dark:border-white/15 dark:border-white/15 flex flex-col overflow-hidden"
           style={{ height: "520px", animation: "fadeInUp 0.25s ease-out" }}
         >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-teal-700 to-[#006d7a] text-white flex-shrink-0">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-white dark:bg-background/20 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 flex items-center justify-center">
                 <span className="material-icons" >smart_toy</span>
               </div>
               <div>
@@ -103,14 +103,14 @@ export default function FloatingAICompanion() {
                 onClick={() => {
                   setMessages([SYSTEM_PROMPT]);
                 }}
-                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-background/15 flex items-center justify-center transition-colors"
+                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/15 flex items-center justify-center transition-colors"
                 title="New conversation"
               >
                 <span className="material-icons" >refresh</span>
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-background/15 flex items-center justify-center transition-colors"
+                className="w-7 h-7 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/15 flex items-center justify-center transition-colors"
                 title="Close"
               >
                 <span className="material-icons" >close</span>
@@ -119,7 +119,7 @@ export default function FloatingAICompanion() {
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-gray-50/50">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50">
             {displayMessages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-4">
                 <div className="w-14 h-14 rounded-full bg-teal-700/10 flex items-center justify-center mb-4">
@@ -134,7 +134,7 @@ export default function FloatingAICompanion() {
                     <button
                       key={qp.label}
                       onClick={() => handleSend(qp.prompt)}
-                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 dark:border-border dark:border-border bg-white dark:bg-background hover:border-teal-700/30 hover:bg-teal-700/5 transition-all text-left"
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md hover:border-teal-700/30 hover:bg-teal-700/5 transition-all text-left"
                     >
                       <span className="material-icons text-teal-700" >{qp.icon}</span>
                       <span className="text-[11px] font-medium text-gray-700">{qp.label}</span>
@@ -155,7 +155,7 @@ export default function FloatingAICompanion() {
                       className={`max-w-[80%] rounded-xl px-3 py-2 text-sm leading-relaxed ${
                         msg.role === "user"
                           ? "bg-teal-700 text-white rounded-br-sm"
-                          : "bg-white dark:bg-card border border-gray-200 dark:border-border text-gray-800 dark:text-foreground rounded-bl-sm shadow-sm"
+                          : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-gray-200 dark:border-white/15 text-gray-800 dark:text-foreground rounded-bl-sm shadow-sm"
                       }`}
                     >
                       {msg.role === "assistant" ? (
@@ -173,7 +173,7 @@ export default function FloatingAICompanion() {
                     <div className="w-6 h-6 rounded-full bg-teal-700/10 flex items-center justify-center mr-2 flex-shrink-0">
                       <span className="material-icons text-teal-700" >smart_toy</span>
                     </div>
-                    <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl rounded-bl-sm px-4 py-3 shadow-sm">
+                    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl rounded-bl-sm px-4 py-3 shadow-sm">
                       <div className="flex gap-1.5">
                         <div className="w-2 h-2 rounded-full bg-teal-700/40 animate-bounce" style={{ animationDelay: "0ms" }} />
                         <div className="w-2 h-2 rounded-full bg-teal-700/40 animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -187,7 +187,7 @@ export default function FloatingAICompanion() {
           </div>
 
           {/* Input */}
-          <div className="px-3 py-3 border-t border-gray-100 dark:border-border bg-white dark:bg-background flex-shrink-0">
+          <div className="px-3 py-3 border-t border-gray-100 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md flex-shrink-0">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -202,7 +202,7 @@ export default function FloatingAICompanion() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything..."
                 rows={1}
-                className="flex-1 resize-none rounded-xl border border-gray-200 dark:border-border dark:border-border px-3 py-2 text-sm text-gray-900 dark:text-foreground placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700/40 max-h-20 bg-gray-50"
+                className="flex-1 resize-none rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 px-3 py-2 text-sm text-gray-900 dark:text-foreground placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-700/20 focus:border-teal-700/40 max-h-20 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
               />
               <button
                 type="submit"

@@ -303,7 +303,7 @@ export default function RepetitionExercise({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="p-4 rounded-xl border-2 border-foundation bg-foundation-soft dark:bg-foundation/20"
+              className="p-4 rounded-xl border-2 border-foundation bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md/20"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-8 rounded-full bg-foundation text-white flex items-center justify-center text-sm font-bold">

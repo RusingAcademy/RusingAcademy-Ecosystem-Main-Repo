@@ -84,7 +84,7 @@ export function CalendarSettingsCard({
   };
   
   return (
-    <div className="bg-white dark:bg-background rounded-xl shadow-sm border border-gray-100 dark:border-border p-6">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-sm border border-gray-100 dark:border-white/15 p-6">
       <h3 className="text-lg font-semibold text-black dark:text-foreground mb-2">{t.title}</h3>
       <p className="text-sm text-black dark:text-foreground mb-6">{t.description}</p>
       
@@ -94,7 +94,7 @@ export function CalendarSettingsCard({
           className={`flex items-start gap-4 p-4 rounded-lg border-2 cursor-pointer transition-all ${
             calendarType === 'internal' 
               ? 'border-teal-500 bg-teal-50' 
-              : 'border-gray-200 dark:border-border hover:border-gray-300'
+              : 'border-gray-200 dark:border-white/15 hover:border-gray-300'
           }`}
         >
           <input
@@ -124,7 +124,7 @@ export function CalendarSettingsCard({
           className={`flex items-start gap-4 p-4 rounded-lg border-2 cursor-pointer transition-all ${
             calendarType === 'calendly' 
               ? 'border-teal-500 bg-teal-50' 
-              : 'border-gray-200 dark:border-border hover:border-gray-300'
+              : 'border-gray-200 dark:border-white/15 hover:border-gray-300'
           }`}
         >
           <input

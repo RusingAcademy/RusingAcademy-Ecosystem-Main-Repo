@@ -174,7 +174,7 @@ export default function PathEnrollmentSuccess() {
             
             {/* Path Summary Card */}
             {path && (
-              <Card className="max-w-md mx-auto mb-8 border-green-200 bg-white dark:bg-background/80 backdrop-blur">
+              <Card className="max-w-md mx-auto mb-8 border-green-200 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
                     {/* @ts-ignore - TS2339: auto-suppressed during TS cleanup */}
@@ -213,7 +213,7 @@ export default function PathEnrollmentSuccess() {
       </section>
 
       {/* Next Steps Section */}
-      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-8 text-center">
             {t ? "Prochaines Étapes" : "Next Steps"}
@@ -230,7 +230,7 @@ export default function PathEnrollmentSuccess() {
                 <Card className={`h-full ${step.primary ? "border-amber-300 bg-amber-50/50" : ""}`}>
                   <CardHeader className="pb-2">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${step.primary ? "bg-amber-100" : "bg-slate-100"}`}>
+                      <div className={`p-2 rounded-lg ${step.primary ? "bg-amber-100" : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}>
                         {step.icon && <step.icon className={`w-5 h-5 ${step.primary ? "text-amber-600" : "text-black"}`} />}
                       </div>
                       <CardTitle className="text-lg">{step.title}</CardTitle>
@@ -269,7 +269,7 @@ export default function PathEnrollmentSuccess() {
               : "Your transformation toward bilingual excellence starts now. Access your content and start learning today."}
           </p>
           <Link href="/app">
-            <Button size="lg" variant="secondary" className="bg-white dark:bg-background text-amber-700 hover:bg-amber-50">
+            <Button size="lg" variant="secondary" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-amber-700 hover:bg-amber-50">
               <BookOpen className="w-5 h-5 mr-2" />
               {t ? "Accéder à Mon Dashboard" : "Go to My Dashboard"}
             </Button>

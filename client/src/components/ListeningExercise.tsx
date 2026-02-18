@@ -184,7 +184,7 @@ export default function ListeningExercise({
       
       <CardContent className="p-6 space-y-6">
         {/* Audio Player */}
-        <div className="bg-gray-50 dark:bg-background dark:bg-card rounded-xl p-6">
+        <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl p-6">
           <div className="flex items-center justify-center gap-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -229,7 +229,7 @@ export default function ListeningExercise({
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 p-4 bg-white dark:bg-card dark:bg-muted rounded-lg text-left"
+                  className="mt-4 p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded-lg text-left"
                 >
                   <p className="text-sm">{isEn ? audioText : audioTextFr}</p>
                 </motion.div>
@@ -260,8 +260,8 @@ export default function ListeningExercise({
                       ? "border-red-500 bg-red-50 dark:bg-red-900/20"
                       : "border-gray-200"
                     : selectedAnswer === index
-                    ? "border-foundation bg-foundation-soft dark:bg-foundation/20"
-                    : "border-gray-200 dark:border-border hover:border-foundation/50"
+                    ? "border-foundation bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md/20"
+                    : "border-gray-200 dark:border-white/15 hover:border-foundation/50"
                 }`}
               >
                 <RadioGroupItem value={index.toString()} id={`option-${index}`} />

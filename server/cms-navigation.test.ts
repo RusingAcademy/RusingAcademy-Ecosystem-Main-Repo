@@ -106,7 +106,7 @@ describe("Fallback Navigation Items", () => {
     { id: "ra-5", href: "/coaches", labelEn: "Our Team", labelFr: "Notre équipe", icon: "Users" },
   ];
 
-  it("should have 5 fallback items for RusingAcademy", () => {
+  it("should have 5 fallback items for RusingÂcademy", () => {
     expect(FALLBACK_RUSINGACADEMY.length).toBe(5);
   });
 

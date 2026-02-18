@@ -34,7 +34,7 @@ export function PWAInstallBanner() {
           {/* Dismiss button */}
           <button
             onClick={dismissInstall}
-            className="absolute right-2 top-2 rounded-full p-1 text-white/60 transition-colors hover:bg-white dark:bg-background/10 hover:text-white"
+            className="absolute right-2 top-2 rounded-full p-1 text-white/60 transition-colors hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:text-white"
             aria-label={isEn ? "Dismiss install banner" : "Fermer la bannière d'installation"}
           >
             <X className="h-4 w-4" />
@@ -45,7 +45,7 @@ export function PWAInstallBanner() {
             <div className="flex-shrink-0">
               <img
                 src="/icons/icon-192x192.png"
-                alt="RusingAcademy"
+                alt="RusingÂcademy"
                 className="h-12 w-12 rounded-xl shadow-lg"
               />
             </div>
@@ -53,7 +53,7 @@ export function PWAInstallBanner() {
             {/* Content */}
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-semibold text-white">
-                {isEn ? 'Install RusingAcademy' : 'Installer RusingAcademy'}
+                {isEn ? 'Install RusingÂcademy' : 'Installer RusingÂcademy'}
               </h3>
               <p className="text-xs text-white/70 mt-0.5">
                 {isEn
@@ -90,11 +90,11 @@ export function PWAInstallBanner() {
           <div className="w-full max-w-md rounded-t-3xl bg-white dark:bg-gray-900 p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-bold text-gray-900 dark:text-foreground">
-                {isEn ? 'Install RusingAcademy' : 'Installer RusingAcademy'}
+                {isEn ? 'Install RusingÂcademy' : 'Installer RusingÂcademy'}
               </h3>
               <button
                 onClick={() => setShowIOSInstructions(false)}
-                className="rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:bg-gray-800"
+                className="rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:bg-gray-800"
               >
                 <X className="h-5 w-5" />
               </button>

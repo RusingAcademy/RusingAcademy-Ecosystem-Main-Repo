@@ -100,9 +100,9 @@ export function ActivityFeed({ language, className }: ActivityFeedProps) {
           return (
             <div
               key={idx}
-              className="flex items-center gap-3 py-2 px-2 rounded-md hover:bg-slate-50 dark:hover:bg-foundation/50 transition-colors"
+              className="flex items-center gap-3 py-2 px-2 rounded-md hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-foundation/50 transition-colors"
             >
-              <div className="p-1.5 rounded-md bg-slate-100 dark:bg-foundation">
+              <div className="p-1.5 rounded-md bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <Icon className="h-3.5 w-3.5 text-black dark:text-foreground dark:text-cyan-300" />
               </div>
               <div className="flex-1 min-w-0">

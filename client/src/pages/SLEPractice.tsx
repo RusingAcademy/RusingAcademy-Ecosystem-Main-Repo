@@ -152,13 +152,13 @@ export default function SLEPractice() {
         {/* Back Link */}
         <Link href="/rusingacademy" className="inline-flex items-center text-foundation hover:underline mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          {isEn ? "Back to RusingAcademy" : "Retour à RusingAcademy"}
+          {isEn ? "Back to RusingÂcademy" : "Retour à RusingÂcademy"}
         </Link>
         
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-foundation to-teal-700 rounded-3xl p-8 mb-8 text-white">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 rounded-2xl bg-white dark:bg-background/20 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 flex items-center justify-center">
               <Target className="h-8 w-8" />
             </div>
             <div>
@@ -175,15 +175,15 @@ export default function SLEPractice() {
           
           {/* Session Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-            <div className="bg-white dark:bg-background/10 rounded-xl p-4 text-center">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{completedPhrases.size}</div>
               <div className="text-sm text-white/90">{isEn ? "Completed" : "Terminées"}</div>
             </div>
-            <div className="bg-white dark:bg-background/10 rounded-xl p-4 text-center">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{sessionScore}</div>
               <div className="text-sm text-white/90">{isEn ? "Points" : "Points"}</div>
             </div>
-            <div className="bg-white dark:bg-background/10 rounded-xl p-4 text-center">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{Math.round(progress)}%</div>
               <div className="text-sm text-white/90">{isEn ? "Progress" : "Progrès"}</div>
             </div>
@@ -201,8 +201,8 @@ export default function SLEPractice() {
               }}
               className={`p-6 rounded-2xl border-2 transition-all ${
                 selectedLevel === level
-                  ? "border-foundation bg-foundation-soft dark:bg-foundation/20"
-                  : "border-gray-200 dark:border-border hover:border-foundation/50"
+                  ? "border-foundation bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md/20"
+                  : "border-gray-200 dark:border-white/15 hover:border-foundation/50"
               }`}
             >
               <div className="flex items-center gap-3 mb-2">

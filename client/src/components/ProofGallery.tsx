@@ -202,7 +202,7 @@ export default function ProofGallery() {
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 activeFilter === option.value
                   ? "bg-teal-600 text-white shadow-md"
-                  : "bg-white dark:bg-card text-black dark:text-foreground border border-gray-200 dark:border-border hover:border-teal-300 hover:bg-teal-50"
+                  : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground border border-gray-200 dark:border-white/15 hover:border-teal-300 hover:bg-teal-50"
               }`}
               aria-pressed={activeFilter === option.value}
             >
@@ -217,7 +217,7 @@ export default function ProofGallery() {
             <button
               key={video.id}
               onClick={() => handleVideoClick(video)}
-              className="group bg-white dark:bg-background rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-border hover:shadow-lg hover:border-teal-200 transition-all duration-300 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-white/15 hover:shadow-lg hover:border-teal-200 transition-all duration-300 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
             >
               {/* Thumbnail */}
               <div className="relative aspect-video overflow-hidden">
@@ -228,7 +228,7 @@ export default function ProofGallery() {
                   loading="lazy"                 />
                 {/* Play overlay */}
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-14 w-14 rounded-full bg-white dark:bg-background/90 flex items-center justify-center">
+                  <div className="h-14 w-14 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 flex items-center justify-center">
                     <Play className="h-6 w-6 text-teal-600 fill-teal-600 ml-1" />
                   </div>
                 </div>
@@ -284,7 +284,7 @@ export default function ProofGallery() {
           aria-label={language === "fr" ? selectedVideo.titleFr : selectedVideo.title}
         >
           <div
-            className="relative bg-white dark:bg-background rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl"
+            className="relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -299,7 +299,7 @@ export default function ProofGallery() {
               </div>
               <button
                 onClick={handleCloseModal}
-                className="h-10 w-10 rounded-full bg-gray-100 dark:bg-card flex items-center justify-center text-black dark:text-foreground hover:bg-gray-200 hover:text-black dark:text-foreground transition-colors"
+                className="h-10 w-10 rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 flex items-center justify-center text-black dark:text-foreground hover:bg-gray-200 hover:text-black dark:text-foreground transition-colors"
                 aria-label={language === "fr" ? "Fermer" : "Close"}
               >
                 <X className="h-5 w-5" />

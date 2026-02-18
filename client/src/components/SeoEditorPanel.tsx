@@ -100,7 +100,7 @@ function GoogleSnippetPreview({
   const displayDesc = description || "Add a meta description to improve your search appearance...";
 
   return (
-    <div className="bg-white dark:bg-background rounded-lg p-4 border border-gray-200 dark:border-border dark:border-border space-y-1">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 border border-gray-200 dark:border-white/15 dark:border-white/15 space-y-1">
       <div className="text-xs text-black dark:text-foreground flex items-center gap-1">
         <Globe className="w-3 h-3" />
         <span className="truncate">{displayUrl}</span>
@@ -137,9 +137,9 @@ function SocialCardPreview({
 
   if (platform === "twitter") {
     return (
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden max-w-[400px]">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden max-w-[400px]">
         {image ? (
-          <div className="h-[200px] bg-gray-100 dark:bg-card relative">
+          <div className="h-[200px] bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 relative">
             <img src={image} alt="OG" className="w-full h-full object-cover" />
           </div>
         ) : (
@@ -160,9 +160,9 @@ function SocialCardPreview({
   }
 
   return (
-    <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden max-w-[400px]">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden max-w-[400px]">
       {image ? (
-        <div className="h-[210px] bg-gray-100 dark:bg-card relative">
+        <div className="h-[210px] bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 relative">
           <img src={image} alt="OG" className="w-full h-full object-cover" />
         </div>
       ) : (

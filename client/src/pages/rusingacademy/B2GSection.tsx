@@ -41,7 +41,7 @@ export default function B2GSection() {
       ],
       testimonialsTitle: "Success Stories from the Public Sector",
       testimonials: [
-        { quote: "RusingAcademy helped our team of 15 analysts achieve bilingual requirements in just 6 months.", author: "Director, Policy Branch", dept: "Treasury Board Secretariat" },
+        { quote: "RusingÂcademy helped our team of 15 analysts achieve bilingual requirements in just 6 months.", author: "Director, Policy Branch", dept: "Treasury Board Secretariat" },
         { quote: "The SLE-specific approach and coach quality are unmatched. Our pass rates have never been higher.", author: "HR Director", dept: "Health Canada" }
       ],
       trustedBy: "TRUSTED BY FEDERAL DEPARTMENTS",
@@ -82,7 +82,7 @@ export default function B2GSection() {
       ],
       testimonialsTitle: "Histoires de réussite du secteur public",
       testimonials: [
-        { quote: "RusingAcademy a aidé notre équipe de 15 analystes à atteindre les exigences bilingues en seulement 6 mois.", author: "Directeur, Direction des politiques", dept: "Secrétariat du Conseil du Trésor" },
+        { quote: "RusingÂcademy a aidé notre équipe de 15 analystes à atteindre les exigences bilingues en seulement 6 mois.", author: "Directeur, Direction des politiques", dept: "Secrétariat du Conseil du Trésor" },
         { quote: "L'approche spécifique à l'ELS et la qualité des coachs sont inégalées.", author: "Directrice RH", dept: "Santé Canada" }
       ],
       trustedBy: "LA CONFIANCE DES MINISTÈRES FÉDÉRAUX",
@@ -111,7 +111,7 @@ export default function B2GSection() {
           </Button>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto">
             {t.stats.map((stat, i) => (
-              <div key={i} className="text-center p-4 rounded-xl bg-white dark:bg-background/5 border border-white/60">
+              <div key={i} className="text-center p-4 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60">
                 <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cta">{stat.value}</div>
                 <div className="text-sm text-white/90">{stat.label}</div>
               </div>
@@ -121,12 +121,12 @@ export default function B2GSection() {
       </div>
 
       {/* Compliance */}
-      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container mx-auto px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.complianceTitle}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.compliance.map((item, i) => (
-              <Card key={i} className="border-gray-200 dark:border-border dark:border-border hover:shadow-lg transition-shadow">
+              <Card key={i} className="border-gray-200 dark:border-white/15 dark:border-white/15 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-xl bg-foundation/10 flex items-center justify-center mb-4">
                     <item.icon className="w-6 h-6 text-foundation" aria-hidden="true" />
@@ -141,12 +141,12 @@ export default function B2GSection() {
       </div>
 
       {/* SLE Levels */}
-      <div className="py-8 md:py-12 lg:py-16 bg-gray-50">
+      <div className="py-8 md:py-12 lg:py-16 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.sleTitle}</h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {t.sleLevels.map((level, i) => (
-              <Card key={i} className="border-gray-200 dark:border-border dark:border-border">
+              <Card key={i} className="border-gray-200 dark:border-white/15 dark:border-white/15">
                 <CardContent className="p-6">
                   <Badge className={`mb-4 ${i === 0 ? 'bg-blue-100 text-blue-700' : i === 1 ? 'bg-emerald-100 text-emerald-700' : 'bg-cta/10 text-cta'}`}>
                     {level.level}
@@ -167,7 +167,7 @@ export default function B2GSection() {
       </div>
 
       {/* Trusted Departments */}
-      <div className="py-8 bg-white dark:bg-background">
+      <div className="py-8 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container mx-auto px-6 text-center">
           <p className="text-sm font-semibold text-black dark:text-foreground tracking-wider mb-6">{t.trustedBy}</p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -179,7 +179,7 @@ export default function B2GSection() {
       </div>
 
       {/* Packages */}
-      <div className="py-8 md:py-12 lg:py-16 bg-gray-50">
+      <div className="py-8 md:py-12 lg:py-16 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.packagesTitle}</h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -212,12 +212,12 @@ export default function B2GSection() {
       </div>
 
       {/* Testimonials */}
-      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container mx-auto px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.testimonialsTitle}</h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {t.testimonials.map((testimonial, i) => (
-              <Card key={i} className="border-gray-200 dark:border-border dark:border-border">
+              <Card key={i} className="border-gray-200 dark:border-white/15 dark:border-white/15">
                 <CardContent className="p-6">
                   <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[var(--brand-cta)] text-cta" />)}

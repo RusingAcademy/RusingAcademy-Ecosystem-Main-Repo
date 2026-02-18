@@ -32,7 +32,7 @@ interface BrandTile {
 const brandTiles: BrandTile[] = [
   {
     id: "rusingacademy",
-    name: "RusingAcademy",
+    name: "RusingÂcademy",
     subtitle: {
       en: "Professional Courses & LMS",
       fr: "Cours professionnels & LMS",
@@ -41,7 +41,7 @@ const brandTiles: BrandTile[] = [
     logo: (
       <img loading="lazy" decoding="async" 
         loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
-        alt="RusingAcademy" 
+        alt="RusingÂcademy" 
         className="w-10 h-10 rounded-lg object-cover"
       />
     ),
@@ -203,10 +203,10 @@ export default function EcosystemHeader() {
               href="/"
               className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
-              {/* RusingAcademy Logo */}
+              {/* RusingÂcademy Logo */}
               <img loading="lazy" decoding="async" 
                 loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
-                alt="RusingAcademy" 
+                alt="RusingÂcademy" 
                 className="w-10 h-10 rounded-lg object-cover"
               />
               <div className="flex flex-col">
@@ -214,7 +214,7 @@ export default function EcosystemHeader() {
                   className="font-serif text-lg font-bold tracking-wide"
                   style={{ color: "var(--text-inverse)" }}
                 >
-                  RusingAcademy
+                  RusingÂcademy
                 </span>
                 <span 
                   className="hidden sm:inline text-xs font-medium"
@@ -232,7 +232,7 @@ export default function EcosystemHeader() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setSearchOpen(true)}
-                className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-background/10"
+                className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.1)",
                   border: "1px solid rgba(255,255,255,0.2)",
@@ -248,7 +248,7 @@ export default function EcosystemHeader() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="gap-1.5 rounded-full px-3 h-10 font-medium transition-all hover:bg-white dark:bg-background/10"
+                    className="gap-1.5 rounded-full px-3 h-10 font-medium transition-all hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10"
                     style={{ 
                       backgroundColor: "rgba(255,255,255,0.1)",
                       border: "1px solid rgba(255,255,255,0.2)",
@@ -298,7 +298,7 @@ export default function EcosystemHeader() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-background/10 hover:scale-105"
+                className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:scale-105"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.1)",
                   border: "1px solid rgba(255,255,255,0.2)",
@@ -345,7 +345,7 @@ export default function EcosystemHeader() {
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-background/10"
+                    className="rounded-full h-10 w-10 transition-all hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10"
                     aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                   >
                     <Menu className="h-5 w-5 text-white" aria-hidden="true" />
@@ -399,7 +399,7 @@ export default function EcosystemHeader() {
                 let textColor = "white";
                 let subtitleColor = "rgba(255,255,255,0.7)";
                 
-                // RusingAcademy - Orange/Coral brand color
+                // RusingÂcademy - Orange/Coral brand color
                 if (tile.style === "dark-glass") {
                   glassStyle = {
                     background: "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
@@ -535,7 +535,7 @@ export default function EcosystemHeader() {
                   role="dialog"
                   aria-modal="true"
                   aria-label={language === "fr" ? "SLE AI Coach" : "SLE AI Coach"}
-                  className="absolute top-full right-0 mt-4 w-[380px] bg-white dark:bg-background rounded-2xl shadow-2xl z-[100] overflow-hidden"
+                  className="absolute top-full right-0 mt-4 w-[380px] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-2xl z-[100] overflow-hidden"
                   style={{ boxShadow: "0 25px 50px rgba(0,0,0,0.3)" }}
                 >
                   {/* Header */}
@@ -551,7 +551,7 @@ export default function EcosystemHeader() {
                     <div>
                       <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
                         SLE AI Coach
-                        <span className="bg-white dark:bg-background/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
+                        <span className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
                           Powered by Lingueefy
                         </span>
                       </h3>
@@ -559,7 +559,7 @@ export default function EcosystemHeader() {
                     </div>
                     <button 
                       onClick={() => setStevenAIOpen(false)}
-                      className="absolute top-3 right-3 w-8 h-8 bg-white dark:bg-background/20 hover:bg-white dark:bg-background/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
+                      className="absolute top-3 right-3 w-8 h-8 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
                       aria-label={language === "fr" ? "Fermer" : "Close"}
                     >
                       <X className="w-5 h-5" />
@@ -618,7 +618,7 @@ export default function EcosystemHeader() {
                   </div>
 
                   {/* Footer */}
-                  <div className="px-5 py-3 bg-white dark:bg-background text-center border-t border-gray-100">
+                  <div className="px-5 py-3 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-center border-t border-gray-100">
                     <span className="text-xs text-black dark:text-foreground">⚡ {t.poweredBy}</span>
                   </div>
                 </div>

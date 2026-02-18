@@ -71,7 +71,7 @@ const STATUS_NAMES: Record<string, string> = {
 // Source display names
 const SOURCE_NAMES: Record<string, string> = {
   lingueefy: "Lingueefy",
-  rusingacademy: "RusingAcademy",
+  rusingacademy: "RusingÂcademy",
   barholex: "Barholex Media",
   ecosystem_hub: "Ecosystem Hub",
   external: "External",

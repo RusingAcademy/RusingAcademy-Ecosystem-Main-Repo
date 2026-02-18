@@ -22,7 +22,7 @@ export default function GeneralLedgerReport() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <Link href="/reports">
-          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-card rounded-full">
+          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
         </Link>
@@ -55,9 +55,9 @@ export default function GeneralLedgerReport() {
         </button>
       </div>
 
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
-        <div className="text-center py-4 border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
-          <h2 className="text-lg font-bold text-gray-800">RusingAcademy</h2>
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
+        <div className="text-center py-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+          <h2 className="text-lg font-bold text-gray-800">RusingÂcademy</h2>
           <p className="text-sm text-gray-500">General Ledger</p>
         </div>
 
@@ -67,8 +67,8 @@ export default function GeneralLedgerReport() {
           <div className="px-4 py-8 text-center text-gray-400">No journal entries found</div>
         ) : (
           Object.entries(grouped).map(([accountName, lines]) => (
-            <div key={accountName} className="border-b border-gray-200 dark:border-border dark:border-border">
-              <div className="bg-gray-50 dark:bg-background px-4 py-2">
+            <div key={accountName} className="border-b border-gray-200 dark:border-white/15 dark:border-white/15">
+              <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md px-4 py-2">
                 <h3 className="text-sm font-bold text-gray-700">{accountName}</h3>
               </div>
               <table className="w-full">
@@ -83,7 +83,7 @@ export default function GeneralLedgerReport() {
                 </thead>
                 <tbody>
                   {(lines as any[]).map((line: any, i: number) => (
-                    <tr key={i} className="border-b border-gray-50 hover:bg-gray-50">
+                    <tr key={i} className="border-b border-gray-50 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                       <td className="px-4 py-2 text-sm text-gray-600">
                         {line.entryDate ? new Date(line.entryDate).toLocaleDateString("en-CA") : "-"}
                       </td>

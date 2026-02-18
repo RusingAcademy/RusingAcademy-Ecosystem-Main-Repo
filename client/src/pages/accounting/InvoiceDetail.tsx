@@ -254,7 +254,7 @@ export default function InvoiceDetail() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/invoices")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
+          <button onClick={() => navigate("/invoices")} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
@@ -267,7 +267,7 @@ export default function InvoiceDetail() {
                 inv?.status === "Deposited" || inv?.status === "Paid" ? "bg-green-100 text-green-700" :
                 inv?.status === "Sent" ? "bg-blue-100 text-blue-700" :
                 inv?.status === "Voided" ? "bg-red-100 text-red-700" :
-                "bg-gray-100 dark:bg-card text-gray-600"
+                "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"
               }`}>
                 {inv?.status}
               </span>
@@ -301,27 +301,27 @@ export default function InvoiceDetail() {
                 <button aria-label="Action" className="qb-btn-outline p-2">
                   <MoreVertical size={14} />
                 </button>
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
-                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background flex items-center gap-2" onClick={() => handleStatusChange("Paid")}>
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg shadow-lg py-1 w-48 hidden group-hover:block z-50">
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => handleStatusChange("Paid")}>
                     <CheckCircle size={14} className="text-green-600" /> Mark as Paid
                   </button>
-                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background flex items-center gap-2" onClick={() => handleStatusChange("Deposited")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => handleStatusChange("Deposited")}>
                     <Download size={14} className="text-green-600" /> Mark as Deposited
                   </button>
-                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background flex items-center gap-2" onClick={() => toast("Feature coming soon")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => toast("Feature coming soon")}>
                     <Copy size={14} /> Duplicate
                   </button>
-                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background flex items-center gap-2" onClick={() => {
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => {
                     setPaymentAmount(inv?.amountDue || inv?.total || "0");
                     setShowPaymentDialog(true);
                   }}>
                     <DollarSign size={14} className="text-green-600" /> Record Payment
                   </button>
                   <hr className="my-1" />
-                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background text-red-600 flex items-center gap-2" onClick={() => handleStatusChange("Voided")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md text-red-600 flex items-center gap-2" onClick={() => handleStatusChange("Voided")}>
                     <XCircle size={14} /> Void Invoice
                   </button>
-                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-background text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md text-red-600 flex items-center gap-2" onClick={() => setShowDeleteConfirm(true)}>
                     <Trash2 size={14} /> Delete Invoice
                   </button>
                 </div>
@@ -455,7 +455,7 @@ export default function InvoiceDetail() {
         <div className="mb-6">
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-gray-200 dark:border-border dark:border-border">
+              <tr className="border-b-2 border-gray-200 dark:border-white/15 dark:border-white/15">
                 <th className="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-2 w-8">#</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-2">Product/Service</th>
                 <th className="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-2">Description</th>
@@ -473,7 +473,7 @@ export default function InvoiceDetail() {
                   <td className="py-2">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.productId || ""}
                         onChange={(e) => selectProduct(index, Number(e.target.value))}
                       >
@@ -492,7 +492,7 @@ export default function InvoiceDetail() {
                     {isEditing ? (
                       <input
                         type="text"
-                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.description}
                         onChange={(e) => updateLineItem(index, "description", e.target.value)}
                         placeholder="Description"
@@ -505,7 +505,7 @@ export default function InvoiceDetail() {
                     {isEditing ? (
                       <input
                         type="number"
-                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.quantity}
                         onChange={(e) => updateLineItem(index, "quantity", e.target.value)}
                       />
@@ -518,7 +518,7 @@ export default function InvoiceDetail() {
                       <input
                         type="number"
                         step="0.01"
-                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded px-2 py-1.5 text-sm text-right focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.rate}
                         onChange={(e) => updateLineItem(index, "rate", e.target.value)}
                       />
@@ -532,7 +532,7 @@ export default function InvoiceDetail() {
                   <td className="py-2 text-right">
                     {isEditing ? (
                       <select
-                        className="w-full border border-gray-200 dark:border-border dark:border-border rounded px-1 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-green-600"
+                        className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded px-1 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-green-600"
                         value={li.taxCode || ""}
                         onChange={(e) => updateLineItem(index, "taxCode", e.target.value)}
                       >
@@ -583,7 +583,7 @@ export default function InvoiceDetail() {
                 <span className="text-gray-800 dark:text-foreground font-medium">${taxAmount.toFixed(2)}</span>
               </div>
             )}
-            <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-border dark:border-border mt-1">
+            <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-white/15 dark:border-white/15 mt-1">
               <span className="text-gray-800">Total</span>
               <span className="text-gray-900">${total.toFixed(2)}</span>
             </div>
@@ -593,7 +593,7 @@ export default function InvoiceDetail() {
                   <span className="text-gray-500">Amount Paid</span>
                   <span className="text-gray-800">${Number(inv.amountPaid || 0).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-border dark:border-border">
+                <div className="flex justify-between py-2 text-base font-bold border-t border-gray-200 dark:border-white/15 dark:border-white/15">
                   <span className="text-green-600">Amount Due</span>
                   <span className="text-green-600">${Number(inv.amountDue || total).toFixed(2)}</span>
                 </div>
@@ -629,7 +629,7 @@ export default function InvoiceDetail() {
       {/* Record Payment Dialog */}
       {showPaymentDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowPaymentDialog(false)}>
-          <div className="bg-white dark:bg-background rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-lg font-bold text-gray-800 dark:text-foreground mb-4">Record Payment</h3>
             <div className="space-y-4">
               <div>
@@ -685,7 +685,7 @@ export default function InvoiceDetail() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowDeleteConfirm(false)}>
-          <div className="bg-white dark:bg-background rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
                 <AlertTriangle size={20} className="text-red-600" />
@@ -715,7 +715,7 @@ export default function InvoiceDetail() {
       {/* Email Invoice Dialog */}
       {showEmailDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowEmailDialog(false)}>
-          <div className="bg-white dark:bg-background rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                 <Send size={20} className="text-sky-600" />
@@ -740,7 +740,7 @@ export default function InvoiceDetail() {
                         const tmpl = (emailTemplates as any[]).find((t: any) => t.id === id);
                         if (tmpl) {
                           const body = tmpl.body
-                            .replace(/\{\{company_name\}\}/g, "RusingAcademy")
+                            .replace(/\{\{company_name\}\}/g, "RusingÂcademy")
                             .replace(/\{\{customer_name\}\}/g, (customers as any[])?.find((c: any) => c.id === inv?.customerId)?.displayName || "")
                             .replace(/\{\{customer_email\}\}/g, (customers as any[])?.find((c: any) => c.id === inv?.customerId)?.email || "")
                             .replace(/\{\{invoice_number\}\}/g, inv?.invoiceNumber || "")
@@ -782,7 +782,7 @@ export default function InvoiceDetail() {
                   onChange={(e) => setEmailMessage(e.target.value)}
                 />
               </div>
-              <div className="bg-gray-50 dark:bg-background rounded-lg p-3 text-sm text-gray-600">
+              <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-3 text-sm text-gray-600">
                 <p><strong>Invoice:</strong> #{inv?.invoiceNumber}</p>
                 <p><strong>Amount Due:</strong> ${Number(inv?.amountDue || inv?.total || 0).toFixed(2)}</p>
                 <p><strong>Due Date:</strong> {inv?.dueDate ? new Date(inv.dueDate).toLocaleDateString("en-CA") : "N/A"}</p>

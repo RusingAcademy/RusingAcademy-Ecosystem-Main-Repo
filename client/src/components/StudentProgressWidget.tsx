@@ -95,15 +95,15 @@ export function StudentProgressWidget({
         
         {/* Summary Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-white/[0.08] dark:backdrop-blur-md/50">
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{avgProgress}%</p>
             <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.avgProgress}</p>
           </div>
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-white/[0.08] dark:backdrop-blur-md/50">
             <p className="text-2xl font-bold text-black dark:text-foreground">{students.length}</p>
             <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.totalStudents}</p>
           </div>
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-foundation/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-white/[0.08] dark:backdrop-blur-md/50">
             <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{onTrackCount}</p>
             <p className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.onTrack}</p>
           </div>
@@ -122,7 +122,7 @@ export function StudentProgressWidget({
               key={student.id}
               onClick={() => onViewStudent?.(student.id)}
               className={cn(
-                "p-4 rounded-xl border bg-white dark:bg-card dark:bg-foundation border-slate-200 dark:border-teal-800",
+                "p-4 rounded-xl border bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800",
                 "hover:border-blue-300 dark:hover:border-blue-700 transition-all",
                 onViewStudent && "cursor-pointer"
               )}

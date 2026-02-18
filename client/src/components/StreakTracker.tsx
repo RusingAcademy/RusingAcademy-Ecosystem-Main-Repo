@@ -70,7 +70,7 @@ export function StreakTracker({
   };
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-card dark:bg-obsidian p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-teal-800 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -114,7 +114,7 @@ export function StreakTracker({
                   "w-10 h-10 rounded-full flex items-center justify-center transition-all",
                   completed
                     ? "bg-gradient-to-br from-amber-400 to-orange-500 shadow-md"
-                    : "bg-slate-100 dark:bg-foundation"
+                    : "bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md"
                 )}
               >
                 {completed ? (
@@ -136,7 +136,7 @@ export function StreakTracker({
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation">
+        <div className="p-3 rounded-lg bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="flex items-center gap-2 mb-1">
             <Trophy className="h-4 w-4 text-amber-500" />
             <span className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.longestStreak}</span>
@@ -147,7 +147,7 @@ export function StreakTracker({
         </div>
         
         {nextMilestone && (
-          <div className="p-3 rounded-lg bg-slate-50 dark:bg-foundation">
+          <div className="p-3 rounded-lg bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-blue-500" />
               <span className="text-xs text-black dark:text-foreground dark:text-cyan-300">{l.nextMilestone}</span>
@@ -228,7 +228,7 @@ export function StreakMilestone({
       "p-6 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white text-center",
       className
     )}>
-      <div className="w-16 h-16 rounded-full bg-white dark:bg-background/20 flex items-center justify-center mx-auto mb-4">
+      <div className="w-16 h-16 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 flex items-center justify-center mx-auto mb-4">
         <Flame className="h-8 w-8" />
       </div>
       <h3 className="text-xl font-bold mb-2">{l.congratulations}</h3>
@@ -236,7 +236,7 @@ export function StreakMilestone({
         {l.reached} <span className="font-bold text-2xl">{milestone}</span> {l.dayStreak}
       </p>
       {reward && (
-        <div className="p-3 rounded-lg bg-white dark:bg-background/20 mb-4">
+        <div className="p-3 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 mb-4">
           <p className="text-sm opacity-90 mb-1">{l.reward}</p>
           <p className="font-semibold flex items-center justify-center gap-2">
             <Gift className="h-4 w-4" />
@@ -247,7 +247,7 @@ export function StreakMilestone({
       {onClaim && (
         <button aria-label="Action"
           onClick={onClaim}
-          className="px-6 py-2 rounded-full bg-white dark:bg-background text-orange-600 font-semibold hover:bg-white dark:bg-background/90 transition-colors"
+          className="px-6 py-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-orange-600 font-semibold hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 transition-colors"
         >
           {l.claim}
         </button>

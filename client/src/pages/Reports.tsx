@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal - Reports & Analytics Page
+ * RusingÂcademy Learning Portal - Reports & Analytics Page
  * Features: XP over time, quiz trends, path progress, SLE readiness, activity heatmap
  * Uses inline SVG charts for zero-dependency visualization
  */
@@ -275,7 +275,7 @@ export default function Reports() {
         </p>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 dark:border-border dark:border-border mb-6">
+        <div className="flex border-b border-gray-200 dark:border-white/15 dark:border-white/15 mb-6">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -353,7 +353,7 @@ export default function Reports() {
                         <span className="text-sm font-medium text-gray-700">{path.name}</span>
                         <span className="text-xs text-gray-500">{path.completed}/{path.total} lessons ({pct}%)</span>
                       </div>
-                      <div className="w-full h-3 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+                      <div className="w-full h-3 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-500"
                           style={{
@@ -401,7 +401,7 @@ export default function Reports() {
                   <div
                     key={m.name}
                     className={`rounded-xl p-3 text-center transition-all ${
-                      m.done ? "bg-[rgba(0,128,144,0.08)] border border-[rgba(0,128,144,0.2)]" : "bg-gray-50 dark:bg-background border border-gray-100 dark:border-border opacity-50"
+                      m.done ? "bg-[rgba(0,128,144,0.08)] border border-[rgba(0,128,144,0.2)]" : "bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-100 dark:border-white/15 opacity-50"
                     }`}
                   >
                     <span className={`material-icons text-2xl mb-1 ${m.done ? "text-teal-700" : "text-gray-300"}`}>
@@ -470,7 +470,7 @@ export default function Reports() {
                         Level {level} — {skill.value}%
                       </span>
                     </div>
-                    <div className="w-full h-2.5 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+                    <div className="w-full h-2.5 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
                       <div className="h-full rounded-full" style={{ width: `${skill.value}%`, backgroundColor: levelColor }} />
                     </div>
                     <p className="text-[10px] text-gray-500 mt-2">
@@ -518,7 +518,7 @@ export default function Reports() {
                   return (
                     <div key={day} className="text-center">
                       <p className="text-[10px] text-gray-500 mb-1">{day}</p>
-                      <div className="w-full h-16 bg-gray-50 dark:bg-background rounded-lg flex items-end justify-center pb-1">
+                      <div className="w-full h-16 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg flex items-end justify-center pb-1">
                         <div
                           className="w-4 rounded-t-md transition-all"
                           style={{

@@ -101,7 +101,7 @@ export function AudioPlayer({ audioUrl, text, language = "en-US", title, compact
 
   if (compact) {
     return (
-      <div className="flex items-center gap-3 bg-gray-50 dark:bg-background rounded-xl px-4 py-3">
+      <div className="flex items-center gap-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl px-4 py-3">
         {audioUrl && <audio ref={audioRef} src={audioUrl} preload="metadata" />}
         <button aria-label="Action"
           onClick={togglePlay}

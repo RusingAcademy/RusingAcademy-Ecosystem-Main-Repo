@@ -117,7 +117,7 @@ export default function LearningCapsules() {
   };
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 bg-slate-100 relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm relative overflow-hidden">
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-6">
@@ -145,7 +145,7 @@ export default function LearningCapsules() {
           {/* Navigation Arrows */}
           <button
             onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-background/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-background hover:scale-110 transition-all duration-300 -translate-x-4 md:translate-x-0"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md hover:scale-110 transition-all duration-300 -translate-x-4 md:translate-x-0"
             aria-label="Previous capsule"
           >
             <ChevronLeft className="h-6 w-6 text-black dark:text-foreground" />
@@ -153,7 +153,7 @@ export default function LearningCapsules() {
           
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-background/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-background hover:scale-110 transition-all duration-300 translate-x-4 md:translate-x-0"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md hover:scale-110 transition-all duration-300 translate-x-4 md:translate-x-0"
             aria-label="Next capsule"
           >
             <ChevronRight className="h-6 w-6 text-black dark:text-foreground" />
@@ -182,7 +182,7 @@ export default function LearningCapsules() {
                     <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color}`} />
                     
                     {/* Decorative elements */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-background/10 rounded-full -translate-y-32 translate-x-32" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-full -translate-y-32 translate-x-32" />
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-24 -translate-x-24" />
                     
                     {/* Content */}

@@ -228,7 +228,7 @@ export default function BundlesAndPaths() {
           <div className="container">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <div className="flex justify-center mb-4 md:mb-6 lg:mb-10">
-                <TabsList className="bg-white dark:bg-background shadow-md">
+                <TabsList className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-md">
                   <TabsTrigger value="bundles" className="gap-2">
                     <Package className="h-4 w-4" />
                     {isEn ? "Course Bundles" : "Forfaits de Cours"}
@@ -270,7 +270,7 @@ export default function BundlesAndPaths() {
                             <span className="text-lg md:text-2xl lg:text-3xl font-bold">${bundle.bundlePrice}</span>
                             <span className="text-lg line-through opacity-60">${bundle.originalPrice}</span>
                           </div>
-                          <Badge className="mt-2 bg-white/15 dark:bg-background/20 text-white backdrop-blur-sm">
+                          <Badge className="mt-2 bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-white backdrop-blur-sm">
                             <Gift className="h-3 w-3 mr-1" />
                             {isEn ? `Save $${bundle.savings}` : `Économisez ${bundle.savings}$`}
                           </Badge>
@@ -432,7 +432,7 @@ export default function BundlesAndPaths() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-background/10">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
                   {isEn ? "Talk to an Advisor" : "Parler à un Conseiller"}
                 </Button>
               </Link>

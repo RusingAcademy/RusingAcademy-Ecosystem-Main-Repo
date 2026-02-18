@@ -29,7 +29,7 @@ export default function AdminControlSidebar() {
   const [location] = useLocation();
 
   return (
-    <aside className="w-[240px] h-screen flex flex-col bg-white dark:bg-background border-r border-gray-100 dark:border-border fixed left-0 top-0 z-40">
+    <aside className="w-[240px] h-screen flex flex-col bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-r border-gray-100 dark:border-white/15 fixed left-0 top-0 z-40">
       {/* Brand Header */}
       <div className="px-5 py-5 border-b border-gray-100">
         <Link href="/admin/control" className="flex items-center gap-2.5 no-underline">
@@ -38,7 +38,7 @@ export default function AdminControlSidebar() {
           </div>
           <div>
             <p className="text-sm font-bold text-gray-900 dark:text-foreground leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-              RusingAcademy
+              RusingÂcademy
             </p>
             <p className="text-[9px] font-semibold tracking-wider uppercase" style={{ color: ACCENT }}>
               ADMIN CONTROL
@@ -60,7 +60,7 @@ export default function AdminControlSidebar() {
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm no-underline transition-all ${
                   isActive
                     ? "text-white font-semibold shadow-sm"
-                    : "text-gray-600 hover:bg-gray-50 dark:bg-background hover:text-gray-900"
+                    : "text-gray-600 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md hover:text-gray-900"
                 }`}
                 style={isActive ? { backgroundColor: ACCENT } : {}}>
                 <span className="material-icons text-lg">{item.icon}</span>
@@ -76,12 +76,12 @@ export default function AdminControlSidebar() {
         </p>
         <div className="space-y-0.5">
           <Link href="/admin/control/settings"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-background hover:text-gray-900 dark:text-foreground no-underline transition-all">
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md hover:text-gray-900 dark:text-foreground no-underline transition-all">
             <span className="material-icons text-lg">settings</span>
             {lang === "fr" ? "Paramètres" : "Settings"}
           </Link>
           <Link href="/admin/control/audit"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-background hover:text-gray-900 dark:text-foreground no-underline transition-all">
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md hover:text-gray-900 dark:text-foreground no-underline transition-all">
             <span className="material-icons text-lg">history</span>
             {lang === "fr" ? "Journal d'audit" : "Audit Log"}
           </Link>
@@ -95,7 +95,7 @@ export default function AdminControlSidebar() {
             className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-700 dark:text-muted-foreground transition-colors">
             <span className="material-icons text-sm">translate</span>
             {lang === "fr" ? "Français" : "English"}
-            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-100 dark:bg-card text-gray-500">
+            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500">
               {lang === "fr" ? "FR" : "EN"}
             </span>
           </button>
@@ -106,7 +106,7 @@ export default function AdminControlSidebar() {
           {lang === "fr" ? "Retour au portail" : "Back to Portal"}
         </Link>
         <SocialLinks size={12} color="var(--color-gray-300, #d1d5db)" className="flex items-center gap-3 mt-3" />
-        <p className="text-[9px] text-gray-300 mt-2">v2.0.0 — RusingAcademy</p>
+        <p className="text-[9px] text-gray-300 mt-2">v2.0.0 — RusingÂcademy</p>
       </div>
     </aside>
   );

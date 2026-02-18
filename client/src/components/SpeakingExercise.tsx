@@ -181,7 +181,7 @@ export function SpeakingExercise({
   };
   
   return (
-    <div className="bg-white dark:bg-background rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
       {/* Header */}
       <div className="bg-gradient-to-r from-foundation to-teal-700 p-6 text-white">
         <div className="flex items-center gap-3 mb-2">
@@ -209,7 +209,7 @@ export function SpeakingExercise({
         
         {/* Target Phrase with AI Pronunciation */}
         {targetPhrase && (
-          <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-4 mb-6">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-4 mb-6">
             <p className="text-sm text-black dark:text-foreground mb-1">
               {language === "fr" ? "Phrase à pratiquer :" : "Phrase to practice:"}
             </p>
@@ -260,7 +260,7 @@ export function SpeakingExercise({
                   {/* Replay Button */}
                   <button aria-label="Action"
                     onClick={replayGeneratedAudio}
-                    className="flex items-center justify-center w-10 h-10 bg-gray-100 dark:bg-card text-black dark:text-foreground rounded-full hover:bg-gray-200 transition-all"
+                    className="flex items-center justify-center w-10 h-10 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground rounded-full hover:bg-gray-200 transition-all"
                     title={language === "fr" ? "Rejouer" : "Replay"}
                   >
                     <RotateCcw className="w-4 h-4" />
@@ -331,7 +331,7 @@ export function SpeakingExercise({
           ) : (
             <>
               {/* Playback */}
-              <div className="bg-gray-100 dark:bg-card rounded-xl p-4 mb-4">
+              <div className="bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl p-4 mb-4">
                 <audio
                   ref={audioRef}
                   src={audioUrl}
@@ -381,7 +381,7 @@ export function SpeakingExercise({
         
         {/* Tips */}
         {displayTips && displayTips.length > 0 && (
-          <div className="border-t border-gray-200 dark:border-border dark:border-border pt-4 mt-4">
+          <div className="border-t border-gray-200 dark:border-white/15 dark:border-white/15 pt-4 mt-4">
             <button
               onClick={() => setShowTips(!showTips)}
               className="flex items-center gap-2 text-sm text-black dark:text-foreground hover:text-black dark:text-foreground"
@@ -413,7 +413,7 @@ export function SpeakingExercise({
       </div>
       
       {/* Footer */}
-      <div className="border-t border-gray-200 dark:border-border dark:border-border p-4 flex justify-between">
+      <div className="border-t border-gray-200 dark:border-white/15 dark:border-white/15 p-4 flex justify-between">
         <button
           onClick={onSkip}
           className="px-4 py-2 text-black dark:text-foreground hover:text-black dark:text-foreground"

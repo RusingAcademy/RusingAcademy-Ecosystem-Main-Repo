@@ -495,7 +495,7 @@ describe("Visual Editor Section Templates", () => {
   it("should have bilingual content patterns (EN | FR)", () => {
     const bilingualPattern = /\|/;
     const sampleTitles = [
-      "Welcome to RusingAcademy | Bienvenue chez RusingAcademy",
+      "Welcome to RusingÂcademy | Bienvenue chez RusingÂcademy",
       "Why Choose Us | Pourquoi nous choisir",
       "Ready to Start? | Prêt à commencer?",
       "What Our Learners Say | Ce que disent nos apprenants",

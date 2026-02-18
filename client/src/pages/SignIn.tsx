@@ -19,12 +19,12 @@ export default function SignIn() {
             Welcome Back
           </h1>
           <p className="text-black dark:text-foreground">
-            Sign in to your RusingAcademy account
+            Sign in to your RusingÂcademy account
           </p>
         </div>
 
         {/* Clerk Sign-In component */}
-        <div className="bg-white dark:bg-background/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-900/10 p-2">
           <ClerkSignIn
             routing="path"
             path="/sign-in"

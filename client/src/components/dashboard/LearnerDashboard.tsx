@@ -55,7 +55,7 @@ const LESSON_TYPE_ICONS: Record<string, { icon: React.ComponentType<{ className?
   video: { icon: Video, label: "Video", labelFr: "Vidéo", color: "text-blue-600", bgColor: "bg-blue-100 dark:bg-blue-900/30" },
   audio: { icon: Headphones, label: "Audio", labelFr: "Audio", color: "text-purple-600", bgColor: "bg-purple-100 dark:bg-purple-900/30" },
   quiz: { icon: HelpCircle, label: "Quiz", labelFr: "Quiz", color: "text-amber-600", bgColor: "bg-amber-100 dark:bg-amber-900/30" },
-  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-black", bgColor: "bg-slate-100 dark:bg-obsidian/30" },
+  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-black", bgColor: "bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md" },
   pdf: { icon: Download, label: "PDF", labelFr: "PDF", color: "text-red-600", bgColor: "bg-red-100 dark:bg-red-900/30" },
   assignment: { icon: PenTool, label: "Assignment", labelFr: "Devoir", color: "text-green-600", bgColor: "bg-green-100 dark:bg-green-900/30" },
   download: { icon: Download, label: "Download", labelFr: "Téléchargement", color: "text-indigo-600", bgColor: "bg-indigo-100 dark:bg-indigo-900/30" },
@@ -199,7 +199,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
         <section className="relative overflow-hidden bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 text-white">
           {/* Decorative elements */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-96 h-96 bg-white dark:bg-background rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute top-0 left-0 w-96 h-96 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-300 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
           </div>
           
@@ -207,15 +207,15 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
             {enrollmentsLoading ? (
               <div className="flex items-center justify-center py-8">
                 <div className="animate-pulse flex flex-col items-center gap-4">
-                  <div className="h-8 w-64 bg-white dark:bg-background/20 rounded-lg" />
-                  <div className="h-4 w-48 bg-white dark:bg-background/10 rounded" />
+                  <div className="h-8 w-64 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded-lg" />
+                  <div className="h-4 w-48 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded" />
                 </div>
               </div>
             ) : lastCourse ? (
               /* User has a course in progress - Show Continue Your Journey */
               <div className="flex flex-col lg:flex-row items-center gap-8">
                 <div className="flex-1 text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-background/10 text-sm mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-sm mb-4">
                     <Sparkles className="h-4 w-4 text-amber-300" />
                     <span>{labels.greeting}</span>
                   </div>
@@ -227,9 +227,9 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   </p>
                   
                   {/* Current Course Card with Next Lesson */}
-                  <div className="bg-white dark:bg-background/10 backdrop-blur-sm rounded-2xl p-5 border border-white/60 max-w-xl mx-auto lg:mx-0">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm rounded-2xl p-5 border border-white/60 max-w-xl mx-auto lg:mx-0">
                     <div className="flex items-start gap-4">
-                      <div className="h-14 w-14 rounded-xl bg-white dark:bg-background/20 flex items-center justify-center flex-shrink-0">
+                      <div className="h-14 w-14 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 flex items-center justify-center flex-shrink-0">
                         <GraduationCap className="h-7 w-7 text-white" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -237,13 +237,13 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                           {isEn ? lastCourse.title : (lastCourse.titleFr || lastCourse.title)}
                         </h2>
                         <div className="flex items-center gap-3 mb-3">
-                          <Progress value={lastCourse.progressPercent} className="flex-1 h-2 bg-white dark:bg-background/20" />
+                          <Progress value={lastCourse.progressPercent} className="flex-1 h-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20" />
                           <span className="text-sm font-medium">{Math.round(lastCourse.progressPercent)}%</span>
                         </div>
                         
                         {/* Next Lesson Info with Type Icon and Duration */}
                         {nextLesson && !nextLessonLoading && (
-                          <div className="bg-white dark:bg-background/10 rounded-lg p-3 mt-2">
+                          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg p-3 mt-2">
                             <div className="text-xs text-white/90 uppercase tracking-wide mb-1">{labels.nextLesson}</div>
                             <div className="flex items-center gap-3">
                               {/* Lesson Type Icon */}
@@ -292,7 +292,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   <Link href={`/courses/${lastCourse.courseId}${nextLesson ? `?lesson=${nextLesson.lessonId}` : ''}`}>
                     <Button 
                       size="lg" 
-                      className="bg-white dark:bg-background text-teal-700 hover:bg-white dark:bg-background/90 shadow-xl shadow-black/20 text-lg px-8 py-6 h-auto gap-3 font-semibold"
+                      className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 shadow-xl shadow-black/20 text-lg px-8 py-6 h-auto gap-3 font-semibold"
                     >
                       <Play className="h-6 w-6" />
                       {labels.resume}
@@ -304,7 +304,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
             ) : (
               /* New user - no courses started - Intelligent Empty State */
               <div className="text-center max-w-2xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-background/10 text-sm mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-sm mb-4">
                   <Sparkles className="h-4 w-4 text-amber-300" />
                   <span>{labels.greeting}</span>
                 </div>
@@ -317,7 +317,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                 <Link href="/courses">
                   <Button 
                     size="lg" 
-                    className="bg-white dark:bg-background text-teal-700 hover:bg-white dark:bg-background/90 shadow-xl shadow-black/20 text-lg px-8 py-6 h-auto gap-3 font-semibold"
+                    className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 shadow-xl shadow-black/20 text-lg px-8 py-6 h-auto gap-3 font-semibold"
                   >
                     <Compass className="h-6 w-6" />
                     {labels.emptyCoursesAction}

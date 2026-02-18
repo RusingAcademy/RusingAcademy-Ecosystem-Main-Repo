@@ -88,7 +88,7 @@ export function ApplicationComments({
   return (
     <div className="space-y-6">
       {/* Comments Section */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 p-6">
         <div className="flex items-center gap-2 mb-6">
           <MessageSquare size={20} className="text-teal-600" />
           <h3 className="text-lg font-semibold text-gray-900">
@@ -128,7 +128,7 @@ export function ApplicationComments({
         </div>
 
         {/* Add Comment Form */}
-        <div className="border-t border-gray-200 dark:border-border dark:border-border pt-6">
+        <div className="border-t border-gray-200 dark:border-white/15 dark:border-white/15 pt-6">
           <div className="space-y-4">
             {replyingTo && (
               <div className="flex items-center gap-2 text-sm text-teal-600 bg-teal-50 p-3 rounded-lg">
@@ -216,7 +216,7 @@ function CommentThread({
 
   return (
     <div className="space-y-3">
-      <div className="bg-white dark:bg-background rounded-lg p-4">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4">
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-teal-200 rounded-full flex items-center justify-center text-sm font-semibold text-teal-700">
@@ -302,7 +302,7 @@ function CommentThread({
 
       {/* Replies */}
       {comment.replies && comment.replies.length > 0 && (
-        <div className="ml-6 space-y-3 border-l-2 border-gray-200 dark:border-border dark:border-border pl-4">
+        <div className="ml-6 space-y-3 border-l-2 border-gray-200 dark:border-white/15 dark:border-white/15 pl-4">
           {comment.replies.map((reply) => (
             <CommentThread
               key={reply.id}

@@ -281,11 +281,11 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">      
-      <SEO title="Frequently Asked Questions" description="Find answers to common questions about RusingAcademy's SLE preparation programs, coaching services, and bilingual training." canonical="/faq" />
+      <SEO title="Frequently Asked Questions" description="Find answers to common questions about RusingÂcademy's SLE preparation programs, coaching services, and bilingual training." canonical="/faq" />
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-obsidian dark:to-teal-900">
+        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg">
           <div className="container max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.title}</h1>
             <p className="text-lg text-muted-foreground">{content.subtitle}</p>

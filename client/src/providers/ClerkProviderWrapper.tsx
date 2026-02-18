@@ -8,7 +8,7 @@ if (!PUBLISHABLE_KEY) {
   console.warn('Missing VITE_CLERK_PUBLISHABLE_KEY - Clerk authentication disabled');
 }
 
-// Custom theme matching RusingAcademy design tokens
+// Custom theme matching RusingÂcademy design tokens
 const clerkAppearance = {
   baseTheme: undefined,
   variables: {

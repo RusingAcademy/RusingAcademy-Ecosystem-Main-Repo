@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Analytics Module
+ * RusingÂcademy Analytics Module
  * 
  * Unified analytics interface for:
  * - Google Analytics 4 (GA4)

@@ -129,10 +129,10 @@ export default function Customers() {
       </div>
 
       {/* Customer Table */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
-            <tr className="bg-gray-50">
+            <tr className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="w-8"><input type="checkbox" className="rounded" /></th>
               <th>
                 <button aria-label="Action" className="flex items-center gap-1 hover:text-gray-900" onClick={() => toggleSort("name")}>
@@ -151,7 +151,7 @@ export default function Customers() {
           </thead>
           <tbody>
             {paginated.map((cust: any) => (
-              <tr key={cust.id} className="hover:bg-gray-50 dark:bg-background cursor-pointer" onClick={() => navigate(`/customers/${cust.id}`)}>
+              <tr key={cust.id} className="hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer" onClick={() => navigate(`/customers/${cust.id}`)}>
                 <td onClick={(e) => e.stopPropagation()}><input type="checkbox" className="rounded" /></td>
                 <td className="text-sky-600 font-medium">{cust.displayName}</td>
                 <td className="text-gray-600">{cust.company || "—"}</td>
@@ -162,7 +162,7 @@ export default function Customers() {
                   </span>
                 </td>
                 <td>
-                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}>
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded" onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>
@@ -180,7 +180,7 @@ export default function Customers() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-border dark:border-border bg-gray-50">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
             <span className="text-sm text-gray-500">
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>

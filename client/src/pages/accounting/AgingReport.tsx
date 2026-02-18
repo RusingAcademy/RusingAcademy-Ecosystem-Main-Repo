@@ -49,7 +49,7 @@ export default function AgingReport() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <Link href="/reports">
-          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-card rounded-full">
+          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
         </Link>
@@ -99,7 +99,7 @@ export default function AgingReport() {
       {/* Summary Buckets */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 mb-6">
         {buckets.map((b) => (
-          <div key={b} className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border p-4 text-center">
+          <div key={b} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 p-4 text-center">
             <p className="text-xs text-gray-500 mb-1">{b === "Current" ? "Current" : `${b} days`}</p>
             <p className="text-lg font-bold text-gray-800">
               ${bucketTotals[b].toLocaleString("en-CA", { minimumFractionDigits: 2 })}
@@ -115,10 +115,10 @@ export default function AgingReport() {
       </div>
 
       {/* Detail Table */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">
                 {reportType === "receivable" ? "Customer" : "Supplier"}
               </th>
@@ -151,7 +151,7 @@ export default function AgingReport() {
                 }, {} as Record<string, number>);
                 const nameTotal = (nameItems as any[]).reduce((sum: number, i: any) => sum + i.amount, 0);
                 return (
-                  <tr key={name} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+                  <tr key={name} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                     <td className="px-4 py-3 text-sm font-medium text-gray-800">{name}</td>
                     {buckets.map((b) => (
                       <td key={b} className="px-4 py-3 text-sm text-right text-gray-600">
@@ -167,7 +167,7 @@ export default function AgingReport() {
             )}
           </tbody>
           <tfoot>
-            <tr className="border-t-2 border-gray-300 bg-gray-50 dark:bg-background font-bold">
+            <tr className="border-t-2 border-gray-300 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md font-bold">
               <td className="px-4 py-3 text-sm text-gray-800">Total</td>
               {buckets.map((b) => (
                 <td key={b} className="px-4 py-3 text-sm text-right text-gray-800">

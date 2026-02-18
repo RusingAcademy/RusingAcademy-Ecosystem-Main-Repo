@@ -11,7 +11,7 @@ export default function Terms() {
       sections: [
         {
           title: "1. Acceptance of Terms",
-          content: `By accessing or using Lingueefy ("the Platform"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Platform. Lingueefy is operated by Rusinga International Consulting Ltd., commercially known as RusingAcademy.`,
+          content: `By accessing or using Lingueefy ("the Platform"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Platform. Lingueefy is operated by Rusinga International Consulting Ltd., commercially known as RusingÂcademy.`,
         },
         {
           title: "2. Description of Service",
@@ -43,7 +43,7 @@ export default function Terms() {
         },
         {
           title: "9. Intellectual Property",
-          content: `All content on the Platform, including text, graphics, logos, and software, is the property of Rusinga International Consulting Ltd. (commercially known as RusingAcademy) or its licensors. You may not reproduce, distribute, or create derivative works without express permission.`,
+          content: `All content on the Platform, including text, graphics, logos, and software, is the property of Rusinga International Consulting Ltd. (commercially known as RusingÂcademy) or its licensors. You may not reproduce, distribute, or create derivative works without express permission.`,
         },
         {
           title: "10. Limitation of Liability",
@@ -73,7 +73,7 @@ export default function Terms() {
       sections: [
         {
           title: "1. Acceptation des conditions",
-          content: `En accédant ou en utilisant Lingueefy (« la Plateforme »), vous acceptez d'être lié par ces Conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser la Plateforme. Lingueefy est exploité par Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingAcademy.`,
+          content: `En accédant ou en utilisant Lingueefy (« la Plateforme »), vous acceptez d'être lié par ces Conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser la Plateforme. Lingueefy est exploité par Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingÂcademy.`,
         },
         {
           title: "2. Description du service",
@@ -105,7 +105,7 @@ export default function Terms() {
         },
         {
           title: "9. Propriété intellectuelle",
-          content: `Tout le contenu de la Plateforme, y compris les textes, graphiques, logos et logiciels, est la propriété de Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingAcademy) ou de ses concédants de licence. Vous ne pouvez pas reproduire, distribuer ou créer des œuvres dérivées sans autorisation expresse.`,
+          content: `Tout le contenu de la Plateforme, y compris les textes, graphiques, logos et logiciels, est la propriété de Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingÂcademy) ou de ses concédants de licence. Vous ne pouvez pas reproduire, distribuer ou créer des œuvres dérivées sans autorisation expresse.`,
         },
         {
           title: "10. Limitation de responsabilité",

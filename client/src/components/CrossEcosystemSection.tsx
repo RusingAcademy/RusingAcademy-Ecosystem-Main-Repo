@@ -367,7 +367,7 @@ function FloatingParticles() {
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-white dark:bg-background"
+          className="absolute rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
@@ -651,7 +651,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           variants={fadeInUp}
           className="flex justify-center mb-6 md:mb-10 lg:mb-14 px-4"
         >
-          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/10 dark:bg-background/5 backdrop-blur-xl border border-white/15 tab-buttons-container">
+          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/10 dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-xl border border-white/15 tab-buttons-container">
             <button
               onClick={() => handleTabSwitch("shorts")}
               className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
@@ -898,7 +898,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                                 ) : (
                                   <button aria-label="Action"
                                     onClick={handleStop}
-                                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-background/10 backdrop-blur-sm border border-white/10 text-white text-xs font-semibold hover:bg-white dark:bg-background/15 transition-all duration-300"
+                                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm border border-white/10 text-white text-xs font-semibold hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/15 transition-all duration-300"
                                   >
                                     <Square className="w-3 h-3" fill="white" />
                                     {language === "en" ? "Stop" : "Arrêter"}
@@ -916,7 +916,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                             
                             {/* Comments Section (Expandable) */}
                             {isCommentsOpen && (
-                              <div className="border-t border-white/10 bg-white dark:bg-background">
+                              <div className="border-t border-white/10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                                 <div className="p-3 border-b border-slate-200 flex items-center justify-between">
                                   <div className="flex items-center gap-2">
                                     <MessageCircle className="w-3.5 h-3.5 text-black dark:text-foreground" />

@@ -99,7 +99,7 @@ export default function ProgressTracker({
   }
 
   return (
-    <div className="bg-white dark:bg-background rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl border border-slate-200 p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-lg font-semibold text-black dark:text-foreground">Progression SLE</h3>
@@ -190,7 +190,7 @@ export default function ProgressTracker({
                           key={idx}
                           className={cn(
                             "flex items-center gap-2 text-xs p-2 rounded-lg",
-                            module.completed ? "bg-white dark:bg-card text-black" : "bg-white/50 text-black"
+                            module.completed ? "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black" : "bg-white/50 text-black"
                           )}
                         >
                           {module.completed ? (

@@ -82,7 +82,7 @@ async function sendDiagnosticReportEmail(lead: LeadData, pdfUrl: string): Promis
     to: lead.email,
     from: {
       email: 'noreply@rusingacademy.com',
-      name: 'RusingAcademy',
+      name: 'RusingÂcademy',
     },
     subject: `${lead.firstName}, votre rapport de diagnostic linguistique est prêt`,
     html: generateDiagnosticReportHtml(lead, pdfUrl),
@@ -105,7 +105,7 @@ async function sendSuccessStoryEmail(lead: LeadData): Promise<void> {
     to: lead.email,
     from: {
       email: 'noreply@rusingacademy.com',
-      name: 'RusingAcademy',
+      name: 'RusingÂcademy',
     },
     subject: `${lead.firstName}, découvrez comment Marie a obtenu son niveau C en 10 semaines`,
     html: generateSuccessStoryHtml(lead),
@@ -130,7 +130,7 @@ async function sendFreeCoachingInvitationEmail(
     to: lead.email,
     from: {
       email: 'noreply@rusingacademy.com',
-      name: 'RusingAcademy',
+      name: 'RusingÂcademy',
     },
     subject: `${lead.firstName}, votre session de coaching gratuite vous attend`,
     html: generateFreeCoachingHtml(lead, calendarUrl),
@@ -164,7 +164,7 @@ function generateDiagnosticReportHtml(lead: LeadData, pdfUrl: string): string {
     <body>
       <div class="container">
         <div class="header">
-          <h1 style="margin: 0; font-size: 24px;">RusingAcademy</h1>
+          <h1 style="margin: 0; font-size: 24px;">RusingÂcademy</h1>
           <p style="margin: 10px 0 0; opacity: 0.9;">Votre Diagnostic Linguistique</p>
         </div>
         <div class="content">
@@ -180,7 +180,7 @@ function generateDiagnosticReportHtml(lead: LeadData, pdfUrl: string): string {
           <center>
             <a href="${pdfUrl}" class="cta-button">Télécharger Mon Rapport PDF</a>
           </center>
-          <p>À bientôt,<br><strong>L'équipe RusingAcademy</strong></p>
+          <p>À bientôt,<br><strong>L'équipe RusingÂcademy</strong></p>
         </div>
         <div class="footer">
           <p>© 2026 Rusinga International Consulting Ltd.</p>
@@ -210,14 +210,14 @@ function generateSuccessStoryHtml(lead: LeadData): string {
     <body>
       <div class="container">
         <div class="header">
-          <h1 style="margin: 0; font-size: 24px;">RusingAcademy</h1>
+          <h1 style="margin: 0; font-size: 24px;">RusingÂcademy</h1>
           <p style="margin: 10px 0 0; opacity: 0.9;">Histoires de Réussite</p>
         </div>
         <div class="content">
           <p>Bonjour ${lead.firstName},</p>
           <p>Hier, vous avez découvert votre niveau actuel. Aujourd'hui, je voulais vous partager l'histoire de Marie.</p>
           <div class="testimonial">
-            <p style="font-style: italic; margin-top: 0;">"J'avais échoué deux fois à l'ELS niveau C. Après 10 semaines avec RusingAcademy, j'ai obtenu C-C-C."</p>
+            <p style="font-style: italic; margin-top: 0;">"J'avais échoué deux fois à l'ELS niveau C. Après 10 semaines avec RusingÂcademy, j'ai obtenu C-C-C."</p>
             <p style="margin-bottom: 0;"><strong>— Marie L.</strong><br>
             <span style="color: #6B7280;">Directrice, Ministère des Finances</span></p>
           </div>
@@ -225,7 +225,7 @@ function generateSuccessStoryHtml(lead: LeadData): string {
           <center>
             <a href="https://rusingacademy.com/programs" class="cta-button">Découvrir Nos Programmes</a>
           </center>
-          <p>À demain,<br><strong>L'équipe RusingAcademy</strong></p>
+          <p>À demain,<br><strong>L'équipe RusingÂcademy</strong></p>
         </div>
         <div class="footer">
           <p>© 2026 Rusinga International Consulting Ltd.</p>
@@ -255,7 +255,7 @@ function generateFreeCoachingHtml(lead: LeadData, calendarUrl: string): string {
     <body>
       <div class="container">
         <div class="header">
-          <h1 style="margin: 0; font-size: 24px;">RusingAcademy</h1>
+          <h1 style="margin: 0; font-size: 24px;">RusingÂcademy</h1>
           <p style="margin: 10px 0 0; opacity: 0.9;">Invitation Exclusive</p>
         </div>
         <div class="content">
@@ -270,7 +270,7 @@ function generateFreeCoachingHtml(lead: LeadData, calendarUrl: string): string {
             <a href="${calendarUrl}" class="cta-button">Réserver Ma Session Gratuite →</a>
           </center>
           <p style="text-align: center; color: #6B7280; font-size: 14px;">Places limitées — Offre valable 7 jours</p>
-          <p>À très bientôt,<br><strong>L'équipe RusingAcademy</strong></p>
+          <p>À très bientôt,<br><strong>L'équipe RusingÂcademy</strong></p>
         </div>
         <div class="footer">
           <p>© 2026 Rusinga International Consulting Ltd.</p>

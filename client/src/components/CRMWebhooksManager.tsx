@@ -303,7 +303,7 @@ export default function CRMWebhooksManager() {
                     <div className={`p-2 rounded-lg ${
                       webhook.type === "slack" ? "bg-foundation-soft text-foundation" :
                       webhook.type === "discord" ? "bg-indigo-100 text-indigo-600" :
-                      "bg-gray-100 dark:bg-card text-black"
+                      "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black"
                     }`}>
                       {getTypeIcon(webhook.type)}
                     </div>

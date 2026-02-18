@@ -184,7 +184,7 @@ export default function ResourceLibrary() {
 
         <div className="flex items-center gap-2 overflow-x-auto pb-2">
           {categories.map((category) => (
-            <button key={category.id} onClick={() => setActiveCategory(category.id)} className={cn("flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap", activeCategory === category.id ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200")}>
+            <button key={category.id} onClick={() => setActiveCategory(category.id)} className={cn("flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap", activeCategory === category.id ? "bg-blue-600 text-white" : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-slate-600 hover:bg-slate-200")}>
               <category.icon className={cn("h-4 w-4", activeCategory === category.id ? "text-white" : category.color)} />
               {category.name}
               <span className={cn("px-1.5 py-0.5 rounded text-xs", activeCategory === category.id ? "bg-blue-500" : "bg-slate-200")}>{category.count}</span>
@@ -239,7 +239,7 @@ export default function ResourceLibrary() {
                   {favoriteResources.map((resource) => {
                     const typeInfo = typeIcons[resource.type];
                     return (
-                      <div key={resource.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-white dark:bg-background cursor-pointer">
+                      <div key={resource.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer">
                         <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center", typeInfo.bg)}>
                           <typeInfo.icon className={cn("h-4 w-4", typeInfo.color)} />
                         </div>

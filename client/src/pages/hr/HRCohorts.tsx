@@ -13,9 +13,9 @@ const ACCENT = "var(--color-blue-600, var(--semantic-info))";
 function LoadingSkeleton() {
   return (
     <div className="animate-pulse space-y-6 max-w-7xl mx-auto">
-      <div className="h-12 bg-gray-100 dark:bg-card rounded-xl w-1/3" />
+      <div className="h-12 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl w-1/3" />
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {[1, 2, 3].map(i => <div key={i} className="h-48 bg-gray-100 dark:bg-card rounded-xl" />)}
+        {[1, 2, 3].map(i => <div key={i} className="h-48 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl" />)}
       </div>
     </div>
   );
@@ -29,7 +29,7 @@ function CohortCard({ cohort, lang }: { cohort: any; lang: string }) {
   const endDate = cohort.endDate ? new Date(cohort.endDate).toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { month: "short", day: "numeric" }) : "—";
 
   return (
-    <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5 hover:shadow-md transition-shadow cursor-pointer group">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5 hover:shadow-md transition-shadow cursor-pointer group">
       <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-sm font-semibold text-gray-900">{cohort.name}</p>
@@ -54,21 +54,21 @@ function CohortCard({ cohort, lang }: { cohort: any; lang: string }) {
           <span className="text-gray-500">{lang === "fr" ? "Inscription" : "Enrollment"}</span>
           <span className="font-semibold" style={{ color: ACCENT }}>{enrolled}/{capacity}</span>
         </div>
-        <div className="h-2 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+        <div className="h-2 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
           <div className="h-full rounded-full transition-all" style={{ width: `${capacity > 0 ? (enrolled / capacity) * 100 : 0}%`, backgroundColor: ACCENT }} />
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center">
-        <div className="bg-gray-50 dark:bg-background rounded-lg py-2">
+        <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg py-2">
           <p className="text-sm font-bold text-gray-900">{enrolled}/{capacity}</p>
           <p className="text-[9px] text-gray-500">{lang === "fr" ? "Inscrits" : "Enrolled"}</p>
         </div>
-        <div className="bg-gray-50 dark:bg-background rounded-lg py-2">
+        <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg py-2">
           <p className="text-sm font-bold text-gray-900">{startDate}</p>
           <p className="text-[9px] text-gray-500">{lang === "fr" ? "Début" : "Start"}</p>
         </div>
-        <div className="bg-gray-50 dark:bg-background rounded-lg py-2">
+        <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg py-2">
           <p className="text-sm font-bold text-gray-900">{endDate}</p>
           <p className="text-[9px] text-gray-500">{lang === "fr" ? "Fin" : "End"}</p>
         </div>
@@ -103,8 +103,8 @@ export default function HRCohorts() {
           </h2>
           <p className="text-sm text-gray-500">
             {lang === "fr"
-              ? "Contactez votre administrateur RusingAcademy pour obtenir l'accès."
-              : "Contact your RusingAcademy administrator for access."}
+              ? "Contactez votre administrateur RusingÂcademy pour obtenir l'accès."
+              : "Contact your RusingÂcademy administrator for access."}
           </p>
         </div>
       </HRLayout>
@@ -140,15 +140,15 @@ export default function HRCohorts() {
         </div>
 
         {allCohorts.length === 0 && (
-          <div className="text-center py-8 md:py-12 lg:py-16 bg-white dark:bg-background rounded-xl border border-gray-100">
+          <div className="text-center py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100">
             <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-gray-300 mb-4">school</span>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-2">
               {lang === "fr" ? "Aucune cohorte pour le moment" : "No Cohorts Yet"}
             </h2>
             <p className="text-sm text-gray-500 max-w-md mx-auto">
               {lang === "fr"
-                ? "Les cohortes de formation apparaîtront ici une fois créées par votre gestionnaire de compte RusingAcademy."
-                : "Training cohorts will appear here once created by your RusingAcademy account manager."}
+                ? "Les cohortes de formation apparaîtront ici une fois créées par votre gestionnaire de compte RusingÂcademy."
+                : "Training cohorts will appear here once created by your RusingÂcademy account manager."}
             </p>
           </div>
         )}

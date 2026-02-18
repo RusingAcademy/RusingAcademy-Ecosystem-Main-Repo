@@ -596,7 +596,7 @@ export default function SLEAICompanionWidget() {
               <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(6,182,212,0.4), rgba(139,92,246,0.3), transparent)', animation: 'shimmerBorder 3s ease-in-out infinite' }} />
               <div className="flex items-center gap-3 relative" style={{ zIndex: 1 }}>
                 {currentScreen === "session" && (
-                  <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white dark:bg-background/10 transition-all duration-200" aria-label="Back">
+                  <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 transition-all duration-200" aria-label="Back">
                     <svg className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
@@ -626,7 +626,7 @@ export default function SLEAICompanionWidget() {
                     </svg>
                   </button>
                 )}
-                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white dark:bg-background/10 transition-all duration-200" aria-label="Close">
+                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 transition-all duration-200" aria-label="Close">
                   <svg className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>

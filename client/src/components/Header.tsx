@@ -127,7 +127,7 @@ export default function Header() {
             role="navigation"
             aria-label={language === "fr" ? "Navigation principale" : "Main navigation"}
           >
-            <div className="flex items-center gap-1 p-1.5 rounded-full bg-white dark:bg-background/40 backdrop-blur-md border border-white/60 shadow-sm">
+            <div className="flex items-center gap-1 p-1.5 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/40 backdrop-blur-md border border-white/60 shadow-sm">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -153,7 +153,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="gap-1.5 text-black dark:text-foreground hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white dark:bg-background/40 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-background/60 hover:border-teal-200/50 transition-all duration-300"
+                  className="gap-1.5 text-black dark:text-foreground hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/40 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/60 hover:border-teal-200/50 transition-all duration-300"
                   aria-label={language === "fr" ? "Changer de plateforme" : "Switch platform"}
                 >
                   <MessageCircle className="h-4 w-4 text-teal-600" aria-hidden="true" />
@@ -161,7 +161,7 @@ export default function Header() {
                   <ChevronDown className="h-3 w-3 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 rounded-2xl shadow-xl border-white/70 bg-white dark:bg-background/95 backdrop-blur-xl p-2">
+              <DropdownMenuContent align="end" className="w-56 rounded-2xl shadow-xl border-white/70 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/95 backdrop-blur-xl p-2">
                 {ECOSYSTEM_PLATFORMS.map((platform) => (
                   <DropdownMenuItem
                     key={platform.slug}
@@ -198,7 +198,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="gap-1.5 text-black dark:text-foreground hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white dark:bg-background/40 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-background/60 hover:border-teal-200/50 transition-all duration-300"
+                  className="gap-1.5 text-black dark:text-foreground hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/40 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/60 hover:border-teal-200/50 transition-all duration-300"
                   aria-label={language === "fr" ? "Changer de langue" : "Change language"}
                 >
                   <Globe className="h-4 w-4" aria-hidden="true" />
@@ -206,7 +206,7 @@ export default function Header() {
                   <ChevronDown className="h-3 w-3 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-44 rounded-2xl shadow-xl border-white/70 bg-white dark:bg-background/90 backdrop-blur-xl p-2">
+              <DropdownMenuContent align="end" className="w-44 rounded-2xl shadow-xl border-white/70 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-xl p-2">
                 <DropdownMenuItem 
                   onClick={() => setLanguage("en")}
                   className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "en" ? "bg-teal-50 text-teal-700" : "hover:bg-white"}`}
@@ -275,13 +275,13 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="icon"
-                  className="rounded-full h-11 w-11 text-black dark:text-foreground hover:text-teal-700 bg-white dark:bg-background/40 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-background/60 transition-all duration-300"
+                  className="rounded-full h-11 w-11 text-black dark:text-foreground hover:text-teal-700 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/40 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/60 transition-all duration-300"
                   aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                 >
                   <Menu className="h-5 w-5" aria-hidden="true" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80 p-0 bg-white dark:bg-background/95 backdrop-blur-xl">
+              <SheetContent side="right" className="w-80 p-0 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/95 backdrop-blur-xl">
                 <div className="flex flex-col h-full">
                   {/* Mobile Header */}
                   <div className="p-6 border-b border-gray-100/50">

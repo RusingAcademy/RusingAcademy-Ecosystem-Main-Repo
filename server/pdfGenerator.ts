@@ -195,7 +195,7 @@ export async function generateInvoicePdf(invoiceId: number): Promise<Buffer> {
           {
             width: "*",
             stack: [
-              { text: company?.companyName || "RusingAcademy", style: "companyName" },
+              { text: company?.companyName || "RusingÂcademy", style: "companyName" },
               ...companyLines.map((line) => ({ text: line, style: "companyInfo" })),
             ],
           },

@@ -18,7 +18,7 @@ const experts: Expert[] = [
     name: "Steven Barholere",
     title: "Visionary Founder & CEO",
     titleFr: "Fondateur visionnaire et PDG",
-    company: "RusingAcademy",
+    company: "RusingÂcademy",
     bio: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations. As a visionary leader, he transforms language training into practical tools for career growth.",
     bioFr: "Avec plus de 15 ans de formation pour adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir leurs évaluations linguistiques officielles.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/IESRfLtQoBVnbaaW.jpg",
@@ -28,7 +28,7 @@ const experts: Expert[] = [
     name: "Sue-Anne Richer",
     title: "Chief Learning Officer",
     titleFr: "Directrice de l'apprentissage",
-    company: "RusingAcademy",
+    company: "RusingÂcademy",
     bio: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
     bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français grâce à des parcours d'apprentissage clairs et une préparation aux examens.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/aHIxrJVESuSWCixM.jpg",
@@ -83,7 +83,7 @@ export default function MeetOurExperts() {
           {experts.map((expert, index) => (
             <div 
               key={index}
-              className="group bg-white dark:bg-background rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100"
             >
               {/* Photo with metallic frame effect */}
               <div className="relative aspect-[4/5] overflow-hidden">
@@ -105,7 +105,7 @@ export default function MeetOurExperts() {
               </div>
 
               {/* Info Card */}
-              <div className="p-6 bg-white dark:bg-background">
+              <div className="p-6 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <h3 className="text-xl font-bold text-black dark:text-foreground mb-1 font-serif">
                   {expert.name}
                 </h3>

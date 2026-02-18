@@ -47,7 +47,7 @@ const ACTION_COLORS: Record<string, string> = {
   assigned: "bg-indigo-100 text-indigo-700",
   tag_added: "bg-teal-100 text-teal-700",
   tag_removed: "bg-orange-100 text-orange-700",
-  note_added: "bg-gray-100 dark:bg-card text-black",
+  note_added: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black",
   email_sent: "bg-cyan-100 text-cyan-700",
   meeting_scheduled: "bg-cta-soft text-cta",
   imported: "bg-emerald-100 text-emerald-700",
@@ -151,7 +151,7 @@ export default function LeadHistoryTimeline({ leadId }: LeadHistoryTimelineProps
                     {/* Timeline dot */}
                     <div
                       className={`absolute left-2 w-5 h-5 rounded-full flex items-center justify-center ${
-                        ACTION_COLORS[item.action] || "bg-gray-100"
+                        ACTION_COLORS[item.action] || "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                       }`}
                     >
                       {ACTION_ICONS[item.action] || <Edit className="h-3 w-3" />}

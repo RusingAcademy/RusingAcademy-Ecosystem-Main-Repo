@@ -99,8 +99,8 @@ describe("Certificate PDF Service", () => {
     expect(pdfServiceCode).toContain("Certificat");
   });
 
-  it("should include RusingAcademy branding", () => {
-    expect(pdfServiceCode).toContain("RusingAcademy");
+  it("should include RusingÂcademy branding", () => {
+    expect(pdfServiceCode).toContain("RusingÂcademy");
   });
 });
 

@@ -234,7 +234,7 @@ export default function ModerationPage() {
                         className={`px-2 py-0.5 rounded-full ${
                           report.status === "resolved"
                             ? "bg-green-100 text-green-700"
-                            : "bg-gray-100 dark:bg-card text-gray-600"
+                            : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"
                         }`}
                       >
                         {report.status}
@@ -298,7 +298,7 @@ export default function ModerationPage() {
                           className={`text-xs px-2 py-0.5 rounded-full ${
                             isActive
                               ? "bg-red-100 text-red-700"
-                              : "bg-gray-100 dark:bg-card text-gray-600"
+                              : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"
                           }`}
                         >
                           {isActive ? "Active" : "Expired"}

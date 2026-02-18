@@ -60,7 +60,7 @@ export default function ForBusiness() {
       badge: "B2B Corporate Solutions",
       title: "Build a Bilingual Workforce",
       highlight: "For Your Business",
-      subtitle: "Empower your team with professional language training. RusingAcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
+      subtitle: "Empower your team with professional language training. RusingÂcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
       cta: "Request a Consultation",
       viewPrograms: "View Programs",
       stats: [
@@ -69,7 +69,7 @@ export default function ForBusiness() {
         { label: "Completion Rate" },
         { label: "Client Satisfaction" }
       ],
-      benefitsTitle: "Why Businesses Choose RusingAcademy",
+      benefitsTitle: "Why Businesses Choose RusingÂcademy",
       benefits: [
         { icon: Target, title: "Industry-Specific Training", desc: "Customized curricula for finance, healthcare, legal, and tech sectors." },
         { icon: Clock, title: "Flexible Learning", desc: "On-site, virtual, or hybrid. Self-paced and live coaching sessions." },
@@ -87,12 +87,12 @@ export default function ForBusiness() {
       ],
       testimonialsTitle: "Trusted by Leading Canadian Businesses",
       testimonials: [
-        { quote: "RusingAcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
+        { quote: "RusingÂcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
         { quote: "The industry-specific curriculum opened new market opportunities for our consultants.", author: "Managing Partner", company: "Top-10 Consulting Firm" },
         { quote: "Our employees love the flexible learning options. We've seen a 60% increase in bilingual staff.", author: "HR Director", company: "Tech Startup Inc." }
       ],
       ctaTitle: "Ready to Transform Your Workforce?",
-      ctaSubtitle: "Join 200+ Canadian businesses that have achieved bilingual excellence with RusingAcademy.",
+      ctaSubtitle: "Join 200+ Canadian businesses that have achieved bilingual excellence with RusingÂcademy.",
       formTitle: "Request a Consultation",
       formSubtitle: "Fill out the form below and our team will contact you within 24 hours.",
       formFields: {
@@ -111,7 +111,7 @@ export default function ForBusiness() {
       badge: "Solutions corporatives B2B",
       title: "Bâtissez une main-d'œuvre bilingue",
       highlight: "Pour votre entreprise",
-      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingAcademy aide les entreprises canadiennes à développer des talents bilingues.",
+      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingÂcademy aide les entreprises canadiennes à développer des talents bilingues.",
       cta: "Demander une consultation",
       viewPrograms: "Voir les programmes",
       stats: [
@@ -120,7 +120,7 @@ export default function ForBusiness() {
         { label: "Taux de complétion" },
         { label: "Satisfaction client" }
       ],
-      benefitsTitle: "Pourquoi les entreprises choisissent RusingAcademy",
+      benefitsTitle: "Pourquoi les entreprises choisissent RusingÂcademy",
       benefits: [
         { icon: Target, title: "Formation par industrie", desc: "Programmes personnalisés pour finance, santé, juridique et tech." },
         { icon: Clock, title: "Apprentissage flexible", desc: "Sur site, virtuel ou hybride. Auto-formation et coaching en direct." },
@@ -138,12 +138,12 @@ export default function ForBusiness() {
       ],
       testimonialsTitle: "La confiance des grandes entreprises canadiennes",
       testimonials: [
-        { quote: "RusingAcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
+        { quote: "RusingÂcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
         { quote: "Le curriculum spécifique à notre industrie a ouvert de nouvelles opportunités de marché.", author: "Associé directeur", company: "Cabinet de conseil Top-10" },
         { quote: "Nos employés adorent les options d'apprentissage flexibles. Nous avons vu une augmentation de 60% du personnel bilingue.", author: "Directrice RH", company: "Tech Startup Inc." }
       ],
       ctaTitle: "Prêt à transformer votre équipe?",
-      ctaSubtitle: "Rejoignez plus de 200 entreprises canadiennes qui ont atteint l'excellence bilingue avec RusingAcademy.",
+      ctaSubtitle: "Rejoignez plus de 200 entreprises canadiennes qui ont atteint l'excellence bilingue avec RusingÂcademy.",
       formTitle: "Demander une consultation",
       formSubtitle: "Remplissez le formulaire ci-dessous et notre équipe vous contactera dans les 24 heures.",
       formFields: {
@@ -228,7 +228,7 @@ export default function ForBusiness() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-gray-200 dark:border-border dark:border-border/50 bg-white dark:bg-background/50 backdrop-blur-sm">
+        <section className="py-8 border-y border-gray-200 dark:border-white/15 dark:border-white/15/50 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={clients.ref} className="text-center">
@@ -262,7 +262,7 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.05 }}
-                  className="px-4 py-2 rounded-full bg-white dark:bg-background/80 border border-gray-200 dark:border-border dark:border-border/50 text-black dark:text-foreground text-sm shadow-sm"
+                  className="px-4 py-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 border border-gray-200 dark:border-white/15 dark:border-white/15/50 text-black dark:text-foreground text-sm shadow-sm"
                 >
                   {industry}
                 </motion.span>
@@ -287,7 +287,7 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="w-12 h-12 rounded-xl bg-cta-2/10 flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-cta-2" />
@@ -322,7 +322,7 @@ export default function ForBusiness() {
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
                       ? "border-cta-2 bg-gradient-to-br from-orange-50 to-white shadow-xl scale-105" 
-                      : "border-gray-200 dark:border-border bg-white/80"
+                      : "border-gray-200 dark:border-white/15 bg-white/80"
                   }`}
                 >
                   {pkg.popular && (
@@ -352,7 +352,7 @@ export default function ForBusiness() {
                       className={`w-full rounded-full ${
                         pkg.popular 
                           ? "bg-cta-2 hover:bg-cta text-white" 
-                          : "bg-gray-100 dark:bg-card hover:bg-gray-200 text-black"
+                          : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:bg-gray-200 text-black"
                       }`}
                       onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                     >
@@ -381,7 +381,7 @@ export default function ForBusiness() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg"
+                  className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-lg"
                 >
                   <Quote className="w-8 h-8 text-cta-2/30 mb-4" />
                   <p className="text-black dark:text-foreground mb-6 italic">"{testimonial.quote}"</p>
@@ -420,7 +420,7 @@ export default function ForBusiness() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="p-8 rounded-3xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-xl"
+                className="p-8 rounded-3xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-xl"
               >
                 <h3 className="text-xl font-bold text-black dark:text-foreground mb-2">{t.formTitle}</h3>
                 <p className="text-black dark:text-foreground mb-6">{t.formSubtitle}</p>
@@ -437,30 +437,30 @@ export default function ForBusiness() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.company} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-orange-500"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.employees} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-orange-500"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-orange-500"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-cta-2 focus:ring-orange-500"
+                      className="min-h-[120px] rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-cta-2 focus:ring-orange-500"
                       rows={4}
                     />
                     <Button 

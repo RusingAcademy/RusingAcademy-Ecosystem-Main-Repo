@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal - Calendar Page
+ * RusingÂcademy Learning Portal - Calendar Page
  * Design: Full month calendar view with category filters
  * Categories: Tutoring Sessions, Events, Deadlines, Holidays
  */
@@ -76,7 +76,7 @@ export default function CalendarPage() {
               className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                 activeCategories.includes(cat.name)
                   ? "border-transparent text-white"
-                  : "border-gray-200 dark:border-border text-gray-500 bg-white"
+                  : "border-gray-200 dark:border-white/15 text-gray-500 bg-white"
               }`}
               style={activeCategories.includes(cat.name) ? { backgroundColor: cat.color } : {}}
             >
@@ -90,13 +90,13 @@ export default function CalendarPage() {
         <div className="glass-card rounded-xl overflow-hidden">
           {/* Month Navigation */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-            <button aria-label="Action" onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+            <button aria-label="Action" onClick={prevMonth} className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded">
               <span className="material-icons text-gray-500">chevron_left</span>
             </button>
             <h2 className="text-lg font-medium text-gray-800">
               {MONTHS[month]} {year}
             </h2>
-            <button aria-label="Action" onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+            <button aria-label="Action" onClick={nextMonth} className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded">
               <span className="material-icons text-gray-500">chevron_right</span>
             </button>
           </div>
@@ -117,7 +117,7 @@ export default function CalendarPage() {
                 key={i}
                 className={`min-h-[80px] border-b border-r border-gray-50 p-2 ${
                   day === today && isCurrentMonth ? "bg-blue-50/50" : ""
-                } ${!day ? "bg-gray-50/30" : "hover:bg-gray-50"}`}
+                } ${!day ? "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/30" : "hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}
               >
                 {day && (
                   <span className={`text-sm ${

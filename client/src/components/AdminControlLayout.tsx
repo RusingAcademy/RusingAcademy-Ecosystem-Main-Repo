@@ -7,7 +7,7 @@ interface Props { children: React.ReactNode; }
 
 export default function AdminControlLayout({ children }: Props) {
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
       <AdminControlSidebar />
       <main className="flex-1 ml-[240px] p-6 overflow-y-auto">
         {children}

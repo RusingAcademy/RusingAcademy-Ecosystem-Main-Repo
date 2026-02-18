@@ -170,13 +170,13 @@ export default function MediaLibraryPicker({
               <div className="flex items-center border rounded-md">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 dark:bg-card text-black" : "text-cyan-300"}`}
+                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black" : "text-cyan-300"}`}
                 >
                   <Grid3X3 className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 dark:bg-card text-black" : "text-cyan-300"}`}
+                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black" : "text-cyan-300"}`}
                 >
                   <LayoutList className="h-4 w-4" />
                 </button>
@@ -218,7 +218,7 @@ export default function MediaLibraryPicker({
                             loading="lazy"
                           />
                         ) : (
-                          <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50">
+                          <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                             {getFileIcon(item.mimeType)}
                             <span className="text-xs text-black dark:text-foreground mt-1 px-2 truncate w-full text-center">{item.fileName}</span>
                           </div>
@@ -244,13 +244,13 @@ export default function MediaLibraryPicker({
                         className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
                           selectedItem?.id === item.id
                             ? "bg-indigo-50 border border-indigo-200"
-                            : "hover:bg-gray-50 dark:bg-background border border-transparent"
+                            : "hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border border-transparent"
                         }`}
                       >
                         {isImage(item.mimeType) ? (
                           <img src={item.url} alt={item.altText || item.fileName} className="w-10 h-10 rounded object-cover" loading="lazy" />
                         ) : (
-                          <div className="w-10 h-10 rounded bg-gray-100 dark:bg-card flex items-center justify-center">
+                          <div className="w-10 h-10 rounded bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 flex items-center justify-center">
                             {getFileIcon(item.mimeType)}
                           </div>
                         )}
@@ -272,11 +272,11 @@ export default function MediaLibraryPicker({
                 <div className="w-56 shrink-0 border-l pl-4 flex flex-col">
                   <div className="space-y-3">
                     {isImage(selectedItem.mimeType) ? (
-                      <div className="aspect-square rounded-lg overflow-hidden border bg-gray-50">
+                      <div className="aspect-square rounded-lg overflow-hidden border bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                         <img loading="lazy" decoding="async" src={selectedItem.url} alt={selectedItem.altText || selectedItem.fileName} className="w-full h-full object-contain" />
                       </div>
                     ) : (
-                      <div className="aspect-square rounded-lg border bg-gray-50 dark:bg-background flex items-center justify-center">
+                      <div className="aspect-square rounded-lg border bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-center">
                         {getFileIcon(selectedItem.mimeType)}
                       </div>
                     )}
@@ -373,7 +373,7 @@ export default function MediaLibraryPicker({
               {urlInput && (
                 <div className="space-y-2">
                   <Label className="text-xs text-black dark:text-foreground">Preview</Label>
-                  <div className="w-48 h-48 rounded-lg border overflow-hidden bg-gray-50">
+                  <div className="w-48 h-48 rounded-lg border overflow-hidden bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                     <img loading="lazy" decoding="async"                       src={urlInput}
                       alt="Preview"
                       className="w-full h-full object-contain"
