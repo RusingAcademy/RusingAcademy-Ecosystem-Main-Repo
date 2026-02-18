@@ -989,7 +989,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             <Link href="/#videos">
               <motion.button 
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-background/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-cta/50 hover:bg-white dark:bg-background/10 hover:shadow-xl hover:shadow-orange-700/10 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/30 text-white font-semibold rounded-full hover:border-cta/50 hover:bg-white/20 hover:shadow-xl hover:shadow-orange-700/10 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
