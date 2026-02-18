@@ -2,6 +2,7 @@
 // Header et Footer sont gérés par le layout existant
 import { Button } from "@/components/ui/button";
 import HeroGoldStandard from "@/components/HeroGoldStandard";
+import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -2091,47 +2092,75 @@ export default function EcosystemHubContent() {
       {/* Section 0: Hero - Golden Standard (immutable) */}
       <HeroGoldStandard />
 
-      {/* Section 1: Trilemme */}
-      <TrilemmeSection language={language} />
+      {/* Section 1: Trilemme — fade up */}
+      <ScrollAnimationWrapper animation="fade-up" duration={800}>
+        <TrilemmeSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 2: Écosystème */}
-      <EcosystemSection language={language} />
+      {/* Section 2: Écosystème — fade up */}
+      <ScrollAnimationWrapper animation="fade-up" duration={800} delay={100}>
+        <EcosystemSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 3: Méthodologie */}
-      <MethodologySection language={language} />
+      {/* Section 3: Méthodologie — slide from left */}
+      <ScrollAnimationWrapper animation="fade-left" duration={800}>
+        <MethodologySection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 4: Offres */}
-      <OffersSection language={language} />
+      {/* Section 4: Offres — scale in */}
+      <ScrollAnimationWrapper animation="scale-in" duration={800}>
+        <OffersSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 5: Cibles */}
-      <TargetAudienceSection language={language} />
+      {/* Section 5: Cibles — fade from right */}
+      <ScrollAnimationWrapper animation="fade-right" duration={800}>
+        <TargetAudienceSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 6: Témoignages */}
-      <TestimonialsSection language={language} />
+      {/* Section 6: Témoignages — fade up */}
+      <ScrollAnimationWrapper animation="fade-up" duration={800}>
+        <TestimonialsSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 7: Leadership */}
-      <LeadershipSection language={language} />
+      {/* Section 7: Leadership — fade from left */}
+      <ScrollAnimationWrapper animation="fade-left" duration={800}>
+        <LeadershipSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 7b: Kudoboard Testimonials */}
-      <KudoboardTestimonialsSection language={language} />
+      {/* Section 7b: Kudoboard Testimonials — fade up */}
+      <ScrollAnimationWrapper animation="fade-up" duration={800}>
+        <KudoboardTestimonialsSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 8: Institutions */}
-      <InstitutionsSection language={language} />
+      {/* Section 8: Institutions — scale in */}
+      <ScrollAnimationWrapper animation="scale-in" duration={800}>
+        <InstitutionsSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 9: Valeur */}
-      <ValueSection language={language} />
+      {/* Section 9: Valeur — fade from right */}
+      <ScrollAnimationWrapper animation="fade-right" duration={800}>
+        <ValueSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 10: Équipe */}
-      <TeamSection language={language} />
+      {/* Section 10: Équipe — fade up */}
+      <ScrollAnimationWrapper animation="fade-up" duration={800}>
+        <TeamSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 11: Cross-Ecosystem Section (Single Source of Truth) */}
-      <CrossEcosystemSection variant="hub" />
+      {/* Section 11: Cross-Ecosystem Section — fade up */}
+      <ScrollAnimationWrapper animation="fade-up" duration={800}>
+        <CrossEcosystemSection variant="hub" />
+      </ScrollAnimationWrapper>
 
-      {/* Section 12: FAQ */}
-      <FAQSection language={language} />
+      {/* Section 12: FAQ — fade up */}
+      <ScrollAnimationWrapper animation="fade-up" duration={800}>
+        <FAQSection language={language} />
+      </ScrollAnimationWrapper>
 
-      {/* Section 13: CTA Final (dernière section avant footer) */}
-      <FinalCTASection language={language} />
+      {/* Section 13: CTA Final — scale in */}
+      <ScrollAnimationWrapper animation="scale-in" duration={800}>
+        <FinalCTASection language={language} />
+      </ScrollAnimationWrapper>
     </main>
   );
 }
