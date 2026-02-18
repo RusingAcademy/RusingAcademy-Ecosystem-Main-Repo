@@ -59,9 +59,9 @@
   --text-secondary: #3C5759;   /* HAZY secondary text */
   --text-inverse: #FFFFFF;     /* Text on dark/colored backgrounds */
   --text-on-dark: #F7F6F3;     /* Text on dark sections */
-  --text-muted: #6B7280;       /* WCAG-safe muted (NOT #959D90) */
+  --text-muted: #5F6673;                  /* WCAG AA on cream: 4.8:1 */
   --text-paragraph: #3C5759;   /* Paragraph text - HAZY secondary */
-  --muted: #6B7280;            /* WCAG-safe muted */
+  --muted: #5F6673;                       /* WCAG AA on cream: 4.8:1 */
   --muted-on-dark: rgba(255, 255, 255, 0.85);
   --muted-foreground: #6B7280; /* WCAG-safe muted foreground */
   
@@ -91,6 +91,7 @@
   /* RusingAcademy - Teal (Navigation / Info) */
   --teal: #0D9488;
   --teal-hover: #0F766E;
+  --teal-text: #0F766E;                    /* WCAG AA on cream: 4.65:1 — use for inline text */
   --teal-light: #5EEAD4;
   --teal-soft: #CCFBF1;
   

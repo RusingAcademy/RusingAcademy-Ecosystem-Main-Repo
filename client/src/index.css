@@ -684,3 +684,7 @@ footer .text-muted-foreground {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
+
+/* === WCAG AA Accessibility Overrides (must be last to win cascade) === */
+@import "./styles/wcag-overrides.css";
+
