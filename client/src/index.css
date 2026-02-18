@@ -656,3 +656,27 @@ footer .text-muted-foreground {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* ============================================
+   PREMIUM UPGRADE - WAVE 1 TYPOGRAPHY
+   Playfair Display for Elite Serif Headings
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@theme inline {
+  --font-serif: "Playfair Display", "Times New Roman", serif;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Glassmorphism Ultra-Transparent Utility */
+.glass-premium-hero {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
