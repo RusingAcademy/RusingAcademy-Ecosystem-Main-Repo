@@ -1353,15 +1353,15 @@ export default function Home() {
           aria-labelledby="cta-title"
         >
           <div className="container mx-auto px-4 relative z-10">
-            <div className="glass-card max-w-4xl mx-auto text-center">
+            <div className="glass-card max-w-4xl mx-auto text-center p-8 md:p-12">
               <div className="space-y-8">
-                <div className="inline-flex items-center gap-2 glass-badge rounded-full px-5 py-2 text-sm font-medium text-teal-700">
+                <div className="inline-flex items-center gap-2 glass-badge rounded-full px-5 py-2 text-sm font-medium text-teal-700 dark:text-teal-300">
                   <Sparkles className="h-4 w-4" aria-hidden="true" />
                   {t("hero.badge")}
                 </div>
                 
-                <h2 id="cta-title" className="text-3xl md:text-4xl font-bold">{t("cta.title")}</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                <h2 id="cta-title" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{t("cta.title")}</h2>
+                <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
                   {t("cta.description")}
                 </p>
 

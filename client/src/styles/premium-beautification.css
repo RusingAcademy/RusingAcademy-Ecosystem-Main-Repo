@@ -101,12 +101,39 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition: all var(--transition-normal);
 }
-
 .glass-card:hover {
   transform: translateY(-4px);
   box-shadow: 
     0 30px 60px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.glass-card h1, .glass-card h2, .glass-card h3,
+.glass-card h4, .glass-card h5, .glass-card h6 {
+  color: #111827 !important;
+}
+.glass-card p, .glass-card span, .glass-card li {
+  color: #374151 !important;
+}
+.glass-card .text-muted-foreground {
+  color: #4B5563 !important;
+}
+.dark .glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.85) 0%,
+    rgba(15, 23, 42, 0.90) 100%
+  );
+  border-color: rgba(148, 163, 184, 0.2);
+}
+.dark .glass-card h1, .dark .glass-card h2, .dark .glass-card h3,
+.dark .glass-card h4, .dark .glass-card h5, .dark .glass-card h6 {
+  color: #F9FAFB !important;
+}
+.dark .glass-card p, .dark .glass-card span, .dark .glass-card li {
+  color: #D1D5DB !important;
+}
+.dark .glass-card .text-muted-foreground {
+  color: #9CA3AF !important;
 }
 
 .glass-badge {
@@ -115,6 +142,11 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(23, 226, 198, 0.2);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.dark .glass-badge {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(94, 234, 212, 0.3);
+  color: #5eead4;
 }
 
 /* Glass Button (Wave 17) */
@@ -135,6 +167,51 @@
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   transform: translateY(-1px);
+}
+
+/* Glass Button Outline — visible outline variant for CTA sections */
+.glass-btn-outline {
+  background: transparent;
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 2px solid rgba(13, 148, 136, 0.6);
+  border-radius: 9999px;
+  color: #0d9488 !important;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.glass-btn-outline:hover {
+  background: rgba(13, 148, 136, 0.08);
+  border-color: #0d9488;
+  color: #0f766e !important;
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.15);
+  transform: translateY(-1px);
+}
+.dark .glass-btn-outline {
+  border-color: rgba(94, 234, 212, 0.5);
+  color: #5eead4 !important;
+}
+.dark .glass-btn-outline:hover {
+  background: rgba(94, 234, 212, 0.1);
+  border-color: #5eead4;
+  color: #99f6e4 !important;
+}
+
+/* Mesh Gradient — decorative background for CTA sections */
+.mesh-gradient {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(13, 148, 136, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(20, 184, 166, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(15, 118, 110, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #f0fdfa 0%, #f8fafc 50%, #f0fdfa 100%);
+}
+.dark .mesh-gradient {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(13, 148, 136, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(20, 184, 166, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(15, 118, 110, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, var(--brand-obsidian) 0%, #0a1a19 50%, var(--brand-obsidian) 100%);
 }
 
 /* Glass Fill (Wave 17) */

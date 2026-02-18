@@ -204,58 +204,72 @@ export default function RusingAcademyHome() {
       {/* Header removed - using EcosystemHeaderGold from layout */}
       
       <main id="main-content">
-        {/* Hero Section */}
-        <section className="pt-24 pb-20 px-4 relative overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-cta-2/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
+        {/* Hero Section — Full-bleed classroom photo with glassmorphism panel */}
+        <section className="relative min-h-[85vh] md:min-h-[80vh] flex items-center overflow-hidden">
+          {/* Full-bleed background image */}
+          <div className="absolute inset-0">
+            <img
+              src="https://rusingacademy-cdn.b-cdn.net/images/hero/steven-class.jpeg"
+              alt="Steven Barholere teaching a bilingual training class"
+              className="w-full h-full object-cover object-center"
+              loading="eager"
+              fetchPriority="high"
+            />
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
+          </div>
           
-          <div className="container mx-auto relative z-10">
+          {/* Glassmorphism text panel — left-aligned */}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-24 md:py-32">
             <motion.div 
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
-              className="max-w-4xl mx-auto text-center"
+              className="max-w-xl lg:max-w-2xl"
             >
-              <motion.div variants={fadeInUp}>
-                <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-cta-2/10 border border-cta-2/20 text-black dark:text-foreground">
-                  <Sparkles className="w-4 h-4 text-cta-2" />
-                  {language === "en" ? "B2B/B2G Training Excellence" : "Excellence en formation B2B/B2G"}
-                </span>
-              </motion.div>
-              
-              <motion.h1 
-                variants={fadeInUp}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black dark:text-foreground"
-              >
-                {language === "en" ? "Build a Bilingual Workforce" : "Bâtissez une main-d'œuvre bilingue"}{" "}
-                <span className="text-cta-2">
-                  {language === "en" ? "At Scale" : "À grande échelle"}
-                </span>
-              </motion.h1>
-              
-              <motion.p 
-                variants={fadeInUp}
-                className="text-lg md:text-xl text-black dark:text-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
-              >
-                {language === "en"
-                  ? "Structured bilingual training programs for government and enterprise. SLE preparation, corporate language solutions, and measurable results."
-                  : "Programmes de formation bilingue structurés pour le gouvernement et les entreprises. Préparation ELS, solutions linguistiques corporatives et résultats mesurables."
-                }
-              </motion.p>
-              
-              <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4">
-                <Link href="/rusingacademy/contact">
-                  <Button size="lg" className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-orange-500/20 rounded-full">
-                    {language === "en" ? "Request a Proposal" : "Demander une proposition"}
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </Link>
-                <Link href="/rusingacademy/programs">
-                  <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 rounded-full">
-                    {language === "en" ? "View Programs" : "Voir les programmes"}
-                  </Button>
-                </Link>
-              </motion.div>
+              <div className="backdrop-blur-xl bg-white/[0.12] border border-white/[0.18] rounded-3xl p-8 md:p-10 lg:p-12 shadow-2xl">
+                <motion.div variants={fadeInUp}>
+                  <span className="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/25 text-white text-sm font-medium">
+                    <Sparkles className="w-4 h-4 text-cta-2" />
+                    {language === "en" ? "B2B/B2G Training Excellence" : "Excellence en formation B2B/B2G"}
+                  </span>
+                </motion.div>
+                
+                <motion.h1 
+                  variants={fadeInUp}
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 leading-tight text-white"
+                >
+                  {language === "en" ? "Build a Bilingual Workforce" : "Bâtissez une main-d'œuvre bilingue"}{" "}
+                  <span className="text-cta-2">
+                    {language === "en" ? "At Scale" : "À grande échelle"}
+                  </span>
+                </motion.h1>
+                
+                <motion.p 
+                  variants={fadeInUp}
+                  className="text-base md:text-lg text-white/90 mb-8 leading-relaxed"
+                >
+                  {language === "en"
+                    ? "Structured bilingual training programs for government and enterprise. SLE preparation, corporate language solutions, and measurable results."
+                    : "Programmes de formation bilingue structurés pour le gouvernement et les entreprises. Préparation ELS, solutions linguistiques corporatives et résultats mesurables."
+                  }
+                </motion.p>
+                
+                <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+                  <Link href="/rusingacademy/contact">
+                    <Button size="lg" className="bg-cta-2 hover:bg-cta text-white gap-2 px-8 h-12 text-base shadow-lg shadow-orange-500/25 rounded-full font-semibold">
+                      {language === "en" ? "Request a Proposal" : "Demander une proposition"}
+                      <ArrowRight className="w-5 h-5" />
+                    </Button>
+                  </Link>
+                  <Link href="/rusingacademy/programs">
+                    <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 border-white/40 text-white hover:bg-white/15 hover:border-white/60 rounded-full font-medium backdrop-blur-sm">
+                      {language === "en" ? "View Programs" : "Voir les programmes"}
+                    </Button>
+                  </Link>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
