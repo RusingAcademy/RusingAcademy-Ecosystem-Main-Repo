@@ -906,10 +906,10 @@ function LeadershipSection({ language }: { language: string }) {
           variants={staggerContainer}
           className="max-w-5xl mx-auto"
         >
-          <div className="bg-white dark:bg-background rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+            <div className="bg-white dark:bg-background rounded-3xl shadow-xl overflow-hidden border border-slate-100 leadership-card">
             <div className="grid md:grid-cols-2">
               {/* Image */}
-              <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
+              <motion.div variants={scaleIn} className="relative h-80 md:h-auto leadership-image">
                 <img
                   loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.png"
                   alt="Steven Barholere"
@@ -919,7 +919,7 @@ function LeadershipSection({ language }: { language: string }) {
               </motion.div>
 
               {/* Content */}
-              <motion.div variants={fadeInUp} className="p-8 md:p-12">
+              <motion.div variants={fadeInUp} className="p-8 md:p-12 leadership-content">
                 <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-6">
                   Meet Steven Barholere.
                 </h2>
