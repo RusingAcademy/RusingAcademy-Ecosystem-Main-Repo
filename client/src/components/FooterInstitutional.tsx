@@ -100,8 +100,8 @@ export default function FooterInstitutional() {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-600/5 rounded-full blur-3xl" aria-hidden="true" />
       
       {/* Main Footer Content */}
-      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-16 lg:py-20 footer-institutional-content">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 footer-institutional-grid">
           
           {/* Brand Column */}
           <div className="space-y-6">
@@ -165,12 +165,12 @@ export default function FooterInstitutional() {
               {language === "fr" ? "Explorer l'Écosystème" : "Explore the Ecosystem"}
             </h4>
             <nav aria-label={language === "fr" ? "Liens de l'écosystème" : "Ecosystem links"}>
-              <ul className="space-y-3" role="list">
+              <ul className="space-y-1" role="list">
                 {ecosystemLinks.map((link) => (
                   <li key={link.href}>
                     <Link 
                       href={link.href} 
-                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block py-1.5"
                     >
                       {link.label}
                     </Link>
@@ -186,12 +186,12 @@ export default function FooterInstitutional() {
               {language === "fr" ? "Obtenir de l'Aide" : "Get Help"}
             </h4>
             <nav aria-label={language === "fr" ? "Liens d'aide" : "Help links"}>
-              <ul className="space-y-3" role="list">
+              <ul className="space-y-1" role="list">
                 {helpLinks.map((link) => (
                   <li key={link.href}>
                     <Link 
                       href={link.href} 
-                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block py-1.5"
                     >
                       {link.label}
                     </Link>
@@ -207,12 +207,12 @@ export default function FooterInstitutional() {
               {language === "fr" ? "À Propos & Légal" : "About & Legal"}
             </h4>
             <nav aria-label={language === "fr" ? "Liens légaux" : "Legal links"}>
-              <ul className="space-y-3" role="list">
+              <ul className="space-y-1" role="list">
                 {legalLinks.map((link) => (
                   <li key={link.href}>
                     <Link 
                       href={link.href} 
-                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block py-1.5"
                     >
                       {link.label}
                     </Link>
