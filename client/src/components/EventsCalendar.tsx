@@ -1,4 +1,4 @@
-// DESIGN: Premium Events — glass cards, branded gradients, refined RSVP, elevated styling
+// DESIGN: Premium Events — HAZY glassmorphism, branded gradients, refined RSVP, elevated styling
 import { motion } from "framer-motion";
 import { useLocale } from "@/i18n/LocaleContext";
 import { Calendar, Clock, Users, Video, Mic, MessageCircle, Radio, CheckCircle2, Loader2, Sparkles } from "lucide-react";
@@ -19,11 +19,11 @@ const IMG_MAP: Record<string, string> = {
 function resolveImage(key: string) { return IMG_MAP[key] || key; }
 
 const typeConfig: Record<string, { icon: typeof Video; label: string; color: string; bg: string }> = {
-  webinar: { icon: Video, label: "Webinar", color: "var(--color-blue-500, var(--semantic-info))", bg: "rgba(59, 130, 246, 0.06)" },
-  workshop: { icon: Mic, label: "Workshop", color: "var(--color-violet-500, var(--accent-purple))", bg: "rgba(139, 92, 246, 0.06)" },
-  meetup: { icon: Users, label: "Meetup", color: "#2EC4B6", bg: "rgba(46, 196, 182, 0.06)" },
-  livestream: { icon: Radio, label: "Livestream", color: "var(--semantic-danger, var(--danger))", bg: "rgba(239, 68, 68, 0.06)" },
-  "qa-session": { icon: MessageCircle, label: "Q&A Session", color: "var(--semantic-warning, var(--warning))", bg: "rgba(245, 158, 11, 0.06)" },
+  webinar: { icon: Video, label: "Webinar", color: "#3B82F6", bg: "rgba(59, 130, 246, 0.08)" },
+  workshop: { icon: Mic, label: "Workshop", color: "#8B5CF6", bg: "rgba(139, 92, 246, 0.08)" },
+  meetup: { icon: Users, label: "Meetup", color: "#17E2C6", bg: "rgba(23, 226, 198, 0.08)" },
+  livestream: { icon: Radio, label: "Livestream", color: "#EF4444", bg: "rgba(239, 68, 68, 0.08)" },
+  "qa-session": { icon: MessageCircle, label: "Q&A Session", color: "#D4AF37", bg: "rgba(212, 175, 55, 0.08)" },
 };
 
 function EventCard({ event }: { event: CommunityEvent }) {
@@ -51,9 +51,13 @@ function EventCard({ event }: { event: CommunityEvent }) {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -3, boxShadow: "0 12px 32px rgba(27, 20, 100, 0.08)" }}
-      className="rounded-2xl overflow-hidden transition-all duration-300"
-      style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)", boxShadow: "var(--shadow-card)" }}
+      whileHover={{ y: -3 }}
+      className="rounded-2xl overflow-hidden transition-all duration-300 group"
+      style={{
+        background: "rgba(255, 255, 255, 0.03)",
+        border: "1px solid rgba(60, 87, 89, 0.12)",
+        backdropFilter: "blur(12px)",
+      }}
     >
       <div className="relative h-40 overflow-hidden">
         <img src={resolveImage(event.image)} alt={event.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -62,58 +66,92 @@ function EventCard({ event }: { event: CommunityEvent }) {
           className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white"
           style={{ backgroundColor: config.color, boxShadow: `0 2px 8px ${config.color}40` }}
         >
-          <Icon className="w-3 h-3" /> {config.label}
+          <Icon className="w-3 h-3" aria-hidden="true" /> {config.label}
         </div>
         {event.recurring && (
-          <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-bold" style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(8px)", color: "var(--brand-obsidian, var(--accent-purple-deep))" }}>
+          <div
+            className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-bold"
+            style={{ background: "rgba(255,255,255,0.9)", backdropFilter: "blur(8px)", color: "#192524" }}
+          >
             {event.recurring}
           </div>
         )}
         <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white text-[11px] font-medium">
-          <Calendar className="w-3.5 h-3.5" />
+          <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
           <span>{event.date}</span>
           <span className="opacity-50">·</span>
-          <Clock className="w-3.5 h-3.5" />
+          <Clock className="w-3.5 h-3.5" aria-hidden="true" />
           <span>{event.time} {event.timezone}</span>
         </div>
       </div>
 
       <div className="p-4">
-        <h3 className="font-bold text-foreground text-sm mb-2 line-clamp-2 tracking-tight">{event.title}</h3>
-        <p className="text-xs text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{event.description}</p>
+        <h3 className="font-bold text-sm mb-2 line-clamp-2 tracking-tight" style={{ color: "rgba(255, 255, 255, 0.9)" }}>{event.title}</h3>
+        <p className="text-xs mb-3 line-clamp-2 leading-relaxed" style={{ color: "rgba(255, 255, 255, 0.45)" }}>{event.description}</p>
 
         <div className="flex items-center gap-2 mb-3">
-          <img src={event.host.avatar} alt={event.host.name} className="w-6 h-6 rounded-lg object-cover" style={{ border: "1px solid rgba(27, 20, 100, 0.05)" }} />
-          <span className="text-[11px] text-muted-foreground">Hosted by <span className="font-bold text-foreground">{event.host.name}</span></span>
+          <img src={event.host.avatar} alt={event.host.name} className="w-6 h-6 rounded-lg object-cover" style={{ border: "1px solid rgba(60, 87, 89, 0.15)" }} />
+          <span className="text-[11px]" style={{ color: "rgba(255, 255, 255, 0.45)" }}>
+            Hosted by <span className="font-bold" style={{ color: "rgba(255, 255, 255, 0.75)" }}>{event.host.name}</span>
+          </span>
         </div>
 
         <div className="mb-3">
-          <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-1.5">
-            <span className="flex items-center gap-1 font-medium"><Users className="w-3 h-3" />{event.attendees} attending</span>
-            <span className="font-medium" style={{ color: spotsLeft < 10 ? "var(--semantic-danger, var(--danger))" : undefined }}>{spotsLeft} spots left</span>
+          <div className="flex items-center justify-between text-[11px] mb-1.5">
+            <span className="flex items-center gap-1 font-medium" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+              <Users className="w-3 h-3" aria-hidden="true" />{event.attendees} attending
+            </span>
+            <span className="font-medium" style={{ color: spotsLeft < 10 ? "#FF6B6B" : "rgba(255, 255, 255, 0.4)" }}>
+              {spotsLeft} spots left
+            </span>
           </div>
-          <div className="h-1.5 rounded-full overflow-hidden" >
-            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${fillPercent}%`, background: fillPercent > 80 ? "linear-gradient(90deg, var(--semantic-danger, var(--danger)), var(--color-red-400, #f87171))" : `linear-gradient(90deg, ${config.color}, ${config.color}80)` }} />
+          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255, 255, 255, 0.06)" }}>
+            <div
+              className="h-full rounded-full transition-all duration-500"
+              style={{
+                width: `${fillPercent}%`,
+                background: fillPercent > 80
+                  ? "linear-gradient(90deg, #FF6B6B, #FF8E8E)"
+                  : `linear-gradient(90deg, ${config.color}, ${config.color}80)`,
+              }}
+            />
           </div>
         </div>
 
         {event.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-3">
             {event.tags.map((tag) => (
-              <span key={tag} className="px-2 py-0.5 rounded-md text-[10px] font-medium" style={{ background: "rgba(27, 20, 100, 0.03)", color: "var(--muted-foreground)" }}>{tag}</span>
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-md text-[10px] font-medium"
+                style={{ background: "rgba(60, 87, 89, 0.06)", color: "rgba(255, 255, 255, 0.4)" }}
+              >
+                {tag}
+              </span>
             ))}
           </div>
         )}
 
         {registered ? (
-          <Button disabled className="w-full rounded-xl text-sm font-bold" style={{ background: "rgba(34, 197, 94, 0.06)", color: "var(--semantic-success, #16a34a)", border: "1px solid rgba(34, 197, 94, 0.12)" }}>
-            <CheckCircle2 className="w-4 h-4 mr-2" /> Registered
+          <Button
+            disabled
+            className="w-full rounded-xl text-sm font-bold"
+            style={{
+              background: "rgba(34, 197, 94, 0.08)",
+              color: "#22C55E",
+              border: "1px solid rgba(34, 197, 94, 0.15)",
+            }}
+          >
+            <CheckCircle2 className="w-4 h-4 mr-2" aria-hidden="true" /> Registered
           </Button>
         ) : (
           <Button
             onClick={handleRegister}
-            className="w-full rounded-xl text-sm font-bold text-white border-0"
-            style={{ background: `linear-gradient(135deg, ${config.color}, ${config.color}cc)`, boxShadow: `0 2px 8px ${config.color}30` }}
+            className="w-full rounded-xl text-sm font-bold text-white border-0 transition-all"
+            style={{
+              background: `linear-gradient(135deg, ${config.color}, ${config.color}cc)`,
+              boxShadow: `0 2px 8px ${config.color}30`,
+            }}
           >
             Register — Free
           </Button>
@@ -152,34 +190,41 @@ export default function EventsCalendar() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-bold text-foreground tracking-tight">Events</h2>
-          <p className="text-sm text-muted-foreground">Live sessions, workshops, and community meetups</p>
+          <h2 className="text-lg font-bold tracking-tight" style={{ color: "rgba(255, 255, 255, 0.9)" }}>Events</h2>
+          <p className="text-sm" style={{ color: "rgba(255, 255, 255, 0.45)" }}>Live sessions, workshops, and community meetups</p>
         </div>
         <Button
           onClick={() => toast("Feature coming soon")}
-          className="rounded-xl text-sm font-bold text-white border-0"
-          style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))", boxShadow: "0 2px 8px rgba(27, 20, 100, 0.15)" }}
+          className="community-btn-primary rounded-xl text-sm font-bold"
         >
-          <Sparkles className="w-3.5 h-3.5 mr-1.5" /> Create Event
+          <Sparkles className="w-3.5 h-3.5 mr-1.5" aria-hidden="true" /> Create Event
         </Button>
       </div>
 
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-hide p-0.5 rounded-xl w-fit" style={{ background: "rgba(27, 20, 100, 0.03)" }}>
+      {/* Filter tabs — Premium glassmorphism */}
+      <div
+        className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-hide p-1 rounded-xl w-fit"
+        style={{ background: "rgba(255, 255, 255, 0.03)", border: "1px solid rgba(60, 87, 89, 0.08)" }}
+        role="tablist"
+        aria-label="Event type filter"
+      >
         {types.map((type) => {
           const isActive = filter === type;
-          const config = typeConfig[type];
+          const cfg = typeConfig[type];
           return (
             <button
               key={type}
+              role="tab"
+              aria-selected={isActive}
               onClick={() => setFilter(type)}
               className="shrink-0 px-3.5 py-1.5 rounded-lg text-[11px] font-semibold transition-all duration-200"
               style={{
-                background: isActive ? (config?.color || "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))") : "transparent",
-                color: isActive ? "white" : undefined,
-                boxShadow: isActive ? `0 2px 6px ${config?.color || "var(--brand-obsidian, var(--accent-purple-deep))"}30` : "none",
+                background: isActive ? (cfg?.color || "#3C5759") : "transparent",
+                color: isActive ? "white" : "rgba(255, 255, 255, 0.5)",
+                boxShadow: isActive ? `0 2px 6px ${cfg?.color || "#3C5759"}30` : "none",
               }}
             >
-              {type === "all" ? "All Events" : config?.label || type}
+              {type === "all" ? "All Events" : cfg?.label || type}
             </button>
           );
         })}
@@ -188,12 +233,16 @@ export default function EventsCalendar() {
       {isLoading && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="rounded-2xl overflow-hidden animate-pulse" style={{ background: "white", border: "1px solid rgba(27, 20, 100, 0.05)" }}>
-              <div className="h-40"  />
+            <div
+              key={i}
+              className="rounded-2xl overflow-hidden animate-pulse"
+              style={{ background: "rgba(255, 255, 255, 0.03)", border: "1px solid rgba(60, 87, 89, 0.08)" }}
+            >
+              <div className="h-40" style={{ background: "rgba(60, 87, 89, 0.06)" }} />
               <div className="p-4 space-y-2">
-                <div className="h-4 rounded w-3/4"  />
-                <div className="h-3 rounded w-full"  />
-                <div className="h-8 rounded-xl w-full mt-2"  />
+                <div className="h-4 rounded w-3/4" style={{ background: "rgba(60, 87, 89, 0.06)" }} />
+                <div className="h-3 rounded w-full" style={{ background: "rgba(60, 87, 89, 0.04)" }} />
+                <div className="h-8 rounded-xl w-full mt-2" style={{ background: "rgba(60, 87, 89, 0.04)" }} />
               </div>
             </div>
           ))}
@@ -209,11 +258,14 @@ export default function EventsCalendar() {
       )}
 
       {!isLoading && filtered.length === 0 && (
-        <div className="text-center py-6 md:py-8 lg:py-12">
-          <div className="w-16 h-16 rounded-2xl mx-auto mb-3 flex items-center justify-center" style={{ background: "rgba(27, 20, 100, 0.03)" }}>
-            <Calendar className="w-8 h-8 text-muted-foreground opacity-30" />
+        <div className="text-center py-8 md:py-12">
+          <div
+            className="w-16 h-16 rounded-2xl mx-auto mb-3 flex items-center justify-center"
+            style={{ background: "rgba(255, 255, 255, 0.04)" }}
+          >
+            <Calendar className="w-8 h-8" style={{ color: "rgba(255, 255, 255, 0.2)" }} aria-hidden="true" />
           </div>
-          <p className="text-sm text-muted-foreground font-medium">No events found for this category</p>
+          <p className="text-sm font-medium" style={{ color: "rgba(255, 255, 255, 0.4)" }}>No events found for this category</p>
         </div>
       )}
     </div>

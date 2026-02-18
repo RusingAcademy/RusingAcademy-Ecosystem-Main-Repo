@@ -1,8 +1,14 @@
+# RusingÂcademy — Robots.txt
+# Month 4 — SEO, Performance & Accessibility
+
 User-agent: *
 Allow: /
+
+# Block private areas
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /auth/
 
+# Sitemap location
 Sitemap: https://www.rusingacademy.ca/sitemap.xml

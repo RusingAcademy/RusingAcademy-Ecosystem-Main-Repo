@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700;900&display=swap');
+
+/* Month 1: Design Foundation & Color System */
+@import "./styles/design-tokens.css";
+
 /* Wave 7: Mobile-First, Bilingual Support & Critical Contrast Fix */
 @import "./styles/mobile-first.css";
 @import "./styles/bilingual-safe.css";

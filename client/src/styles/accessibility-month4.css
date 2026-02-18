@@ -1,0 +1,193 @@
+/**
+ * ════════════════════════════════════════════════════════════════════════════
+ * ACCESSIBILITY ENHANCEMENTS — Month 4
+ * ════════════════════════════════════════════════════════════════════════════
+ * 
+ * WCAG 2.1 AA Compliance Utilities
+ * - Skip navigation links
+ * - Keyboard navigation support
+ * - Focus indicators
+ * - Color contrast verification
+ * - Screen reader optimization
+ * - Motion preferences
+ * - Touch target sizing
+ * 
+ * Version: 4.0.0
+ * Last Updated: 2026-02-18
+ */
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SKIP NAVIGATION LINKS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: 0 0 4px 0;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.skip-to-main:focus {
+  top: 0;
+  outline: 3px solid #4299e1;
+  outline-offset: 2px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   KEYBOARD NAVIGATION & FOCUS STATES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #4299e1;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TOUCH TARGET SIZING (WCAG 2.1 Level AAA)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+button,
+a[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+[role="button"],
+[role="link"],
+[role="menuitem"],
+[role="tab"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SCREEN READER OPTIMIZATION
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.sr-only,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.visually-hidden:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MOTION & ANIMATION PREFERENCES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   FORM ACCESSIBILITY
+   ════════════════════════════════════════════════════════════════════════════ */
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+label[for] {
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #4299e1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   IMAGES & MEDIA
+   ════════════════════════════════════════════════════════════════════════════ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   DARK MODE ACCESSIBILITY
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+
+  a {
+    color: #66b3ff;
+  }
+
+  button:focus,
+  a:focus,
+  input:focus {
+    outline-color: #66b3ff;
+  }
+}

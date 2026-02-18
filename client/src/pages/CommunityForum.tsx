@@ -1,25 +1,50 @@
 /**
  * Community Forum — RusingÂcademy Learning Portal
+ * Premium Redesign: HAZY glassmorphism, elevated typography, refined cards
  * Enhanced social features: forum categories, study groups, member stats, recent posts
- * Design: Clean white light theme, accessible
  */
 import DashboardLayout from "@/components/DashboardLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
+import {
+  MessageSquare,
+  Users,
+  BookOpen,
+  Clock,
+  ChevronRight,
+  Plus,
+  Heart,
+  Sparkles,
+  GraduationCap,
+  Lightbulb,
+  Wrench,
+  MessageCircle,
+  Trophy,
+} from "lucide-react";
 
 const FORUM_IMG = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/LzjUWTpKyElhbGdI.png";
 
 type Tab = "categories" | "groups" | "recent";
 
+const categoryIconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+  school: GraduationCap,
+  spellcheck: BookOpen,
+  lightbulb: Lightbulb,
+  build: Wrench,
+  forum: MessageCircle,
+  emoji_events: Trophy,
+};
+
 const forumCategories = [
-  { name: "SLE Preparation", nameFr: "Préparation ELS", icon: "school", description: "Discuss SLE exam strategies, share tips, and support each other.", descFr: "Discutez des stratégies d'examen ELS, partagez des conseils.", topics: 24, posts: 156, color: "var(--brand-teal, var(--teal))" },
-  { name: "Grammar & Vocabulary", nameFr: "Grammaire et vocabulaire", icon: "spellcheck", description: "Ask grammar questions, share vocabulary exercises, and learn together.", descFr: "Posez des questions de grammaire, partagez des exercices de vocabulaire.", topics: 18, posts: 89, color: "var(--color-violet-500, var(--accent-purple))" },
-  { name: "Study Tips & Resources", nameFr: "Conseils et ressources", icon: "lightbulb", description: "Share useful resources, study tips, and learning materials.", descFr: "Partagez des ressources utiles et des conseils d'étude.", topics: 15, posts: 67, color: "var(--semantic-warning, var(--warning))" },
-  { name: "Technical Support", nameFr: "Support technique", icon: "build", description: "Get help with portal features and technical issues.", descFr: "Obtenez de l'aide avec les fonctionnalités du portail.", topics: 8, posts: 31, color: "var(--semantic-danger, var(--danger))" },
-  { name: "General Discussion", nameFr: "Discussion générale", icon: "forum", description: "Connect with other learners, share experiences, and ask questions.", descFr: "Connectez-vous avec d'autres apprenants, partagez vos expériences.", topics: 22, posts: 134, color: "var(--semantic-success, var(--success))" },
-  { name: "Success Stories", nameFr: "Histoires de réussite", icon: "emoji_events", description: "Celebrate achievements and inspire others with your bilingual journey.", descFr: "Célébrez vos réussites et inspirez les autres.", topics: 6, posts: 28, color: "var(--semantic-warning, var(--warning))" },
+  { name: "SLE Preparation", nameFr: "Préparation ELS", icon: "school", description: "Discuss SLE exam strategies, share tips, and support each other.", descFr: "Discutez des stratégies d'examen ELS, partagez des conseils.", topics: 24, posts: 156, color: "#17E2C6" },
+  { name: "Grammar & Vocabulary", nameFr: "Grammaire et vocabulaire", icon: "spellcheck", description: "Ask grammar questions, share vocabulary exercises, and learn together.", descFr: "Posez des questions de grammaire, partagez des exercices de vocabulaire.", topics: 18, posts: 89, color: "#8B5CFF" },
+  { name: "Study Tips & Resources", nameFr: "Conseils et ressources", icon: "lightbulb", description: "Share useful resources, study tips, and learning materials.", descFr: "Partagez des ressources utiles et des conseils d'étude.", topics: 15, posts: 67, color: "#D4AF37" },
+  { name: "Technical Support", nameFr: "Support technique", icon: "build", description: "Get help with portal features and technical issues.", descFr: "Obtenez de l'aide avec les fonctionnalités du portail.", topics: 8, posts: 31, color: "#FF6B6B" },
+  { name: "General Discussion", nameFr: "Discussion générale", icon: "forum", description: "Connect with other learners, share experiences, and ask questions.", descFr: "Connectez-vous avec d'autres apprenants, partagez vos expériences.", topics: 22, posts: 134, color: "#10B981" },
+  { name: "Success Stories", nameFr: "Histoires de réussite", icon: "emoji_events", description: "Celebrate achievements and inspire others with your bilingual journey.", descFr: "Célébrez vos réussites et inspirez les autres.", topics: 6, posts: 28, color: "#F59E0B" },
 ];
 
 const studyGroups = [
@@ -44,113 +69,169 @@ export default function CommunityForum() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-[1100px] space-y-5">
-        {/* Header */}
-        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl overflow-hidden shadow-sm">
-          <div className="relative h-[140px]">
+      <div className="max-w-[1100px] space-y-6">
+        {/* Header — Premium glassmorphism banner */}
+        <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(60, 87, 89, 0.15)" }}>
+          <div className="relative h-[160px]">
             <img src={FORUM_IMG} alt="" className="w-full h-full object-cover" aria-hidden="true" />
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-700/85 to-teal-700/40 flex items-center">
+            <div className="absolute inset-0 flex items-center" style={{ background: "linear-gradient(135deg, rgba(25, 37, 36, 0.9), rgba(60, 87, 89, 0.7))" }}>
               <div className="px-6 md:px-8">
+                <div className="flex items-center gap-2 mb-3">
+                  <Sparkles className="w-4 h-4" style={{ color: "#17E2C6" }} aria-hidden="true" />
+                  <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "rgba(23, 226, 198, 0.8)" }}>
+                    {lang === "fr" ? "Espace communautaire" : "Community Space"}
+                  </span>
+                </div>
                 <h1 className="text-white text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>
                   {t("community.title")}
                 </h1>
-                <p className="text-white/80 text-sm mt-1">{t("community.subtitle")}</p>
+                <p className="text-sm mt-1" style={{ color: "rgba(255, 255, 255, 0.7)" }}>{t("community.subtitle")}</p>
               </div>
             </div>
           </div>
 
-          {/* Stats Bar */}
-          <div className="flex items-center justify-between px-6 py-3 border-t border-gray-100 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+          {/* Stats Bar — Premium glassmorphism */}
+          <div className="flex items-center justify-between px-6 py-3.5" style={{ background: "rgba(25, 37, 36, 0.04)", borderTop: "1px solid rgba(60, 87, 89, 0.1)" }}>
             <div className="flex items-center gap-6">
               {[
-                { label: lang === "fr" ? "Sujets" : "Topics", value: "93", icon: "topic" },
-                { label: lang === "fr" ? "Publications" : "Posts", value: "505", icon: "chat_bubble" },
-                { label: lang === "fr" ? "Membres" : "Members", value: "142", icon: "people" },
-                { label: lang === "fr" ? "En ligne" : "Online", value: "18", icon: "circle", color: "var(--semantic-success, var(--success))" },
-              ].map((stat) => (
-                <div key={stat.label} className="flex items-center gap-1.5">
-                  <span className="material-icons" style={{ fontSize: "14px", color: stat.color ?? "var(--color-gray-400, var(--muted-foreground))" }}>{stat.icon}</span>
-                  <span className="text-sm font-bold text-gray-900">{stat.value}</span>
-                  <span className="text-[10px] text-gray-400">{stat.label}</span>
-                </div>
-              ))}
+                { label: lang === "fr" ? "Sujets" : "Topics", value: "93", icon: MessageSquare },
+                { label: lang === "fr" ? "Publications" : "Posts", value: "505", icon: MessageCircle },
+                { label: lang === "fr" ? "Membres" : "Members", value: "142", icon: Users },
+                { label: lang === "fr" ? "En ligne" : "Online", value: "18", icon: Users, isOnline: true },
+              ].map((stat) => {
+                const StatIcon = stat.icon;
+                return (
+                  <div key={stat.label} className="flex items-center gap-1.5">
+                    <StatIcon className="w-3.5 h-3.5" style={{ color: stat.isOnline ? "#10B981" : "var(--muted-foreground)" }} aria-hidden="true" />
+                    <span className="text-sm font-bold" style={{ color: "var(--foreground)" }}>{stat.value}</span>
+                    <span className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{stat.label}</span>
+                  </div>
+                );
+              })}
             </div>
-            <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-teal-700 hover:brightness-105 transition-all flex items-center gap-1.5">
-              <span className="material-icons" >add</span>
+            <button
+              onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-white flex items-center gap-1.5 transition-all hover:opacity-90"
+              style={{ background: "linear-gradient(135deg, #3C5759, #4A6B6D)", boxShadow: "0 2px 8px rgba(60, 87, 89, 0.3)" }}
+              aria-label={lang === "fr" ? "Nouvelle publication" : "New post"}
+            >
+              <Plus className="w-3.5 h-3.5" aria-hidden="true" />
               {t("community.newPost")}
             </button>
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex gap-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-1 shadow-sm">
+        {/* Tab Navigation — Premium pills */}
+        <div className="flex gap-1 rounded-xl p-1" style={{ background: "rgba(60, 87, 89, 0.04)", border: "1px solid rgba(60, 87, 89, 0.1)" }}>
           {([
-            { key: "categories" as Tab, label: lang === "fr" ? "Catégories" : "Categories", icon: "category" },
-            { key: "groups" as Tab, label: t("community.studyGroups"), icon: "groups" },
-            { key: "recent" as Tab, label: lang === "fr" ? "Publications récentes" : "Recent Posts", icon: "schedule" },
-          ]).map((tab) => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === tab.key
-                  ? "bg-teal-700 text-white shadow-sm"
-                  : "text-gray-500 hover:text-teal-700 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
-              }`}>
-              <span className="material-icons" >{tab.icon}</span>
-              {tab.label}
-            </button>
-          ))}
+            { key: "categories" as Tab, label: lang === "fr" ? "Catégories" : "Categories", icon: BookOpen },
+            { key: "groups" as Tab, label: t("community.studyGroups"), icon: Users },
+            { key: "recent" as Tab, label: lang === "fr" ? "Publications récentes" : "Recent Posts", icon: Clock },
+          ]).map((tab) => {
+            const TabIcon = tab.icon;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                role="tab"
+                aria-selected={activeTab === tab.key}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all"
+                style={{
+                  background: activeTab === tab.key ? "linear-gradient(135deg, #3C5759, #4A6B6D)" : "transparent",
+                  color: activeTab === tab.key ? "white" : "var(--muted-foreground)",
+                  boxShadow: activeTab === tab.key ? "0 2px 8px rgba(60, 87, 89, 0.2)" : "none",
+                }}
+              >
+                <TabIcon className="w-3.5 h-3.5" aria-hidden="true" />
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Categories Tab */}
+        {/* Categories Tab — Premium glassmorphism cards */}
         {activeTab === "categories" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {forumCategories.map((cat, i) => (
-              <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-teal-700/20 transition-all cursor-pointer group">
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${cat.color}10` }}>
-                    <span className="material-icons" style={{ color: cat.color, fontSize: "22px" }}>{cat.icon}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-gray-900 dark:text-foreground group-hover:text-teal-700 transition-colors">
-                      {lang === "fr" ? cat.nameFr : cat.name}
-                    </h3>
-                    <p className="text-[11px] text-gray-400 mt-1 line-clamp-2">
-                      {lang === "fr" ? cat.descFr : cat.description}
-                    </p>
-                    <div className="flex items-center gap-4 mt-2">
-                      <span className="text-[10px] text-gray-400">
-                        <strong className="text-gray-600">{cat.topics}</strong> {lang === "fr" ? "sujets" : "topics"}
-                      </span>
-                      <span className="text-[10px] text-gray-400">
-                        <strong className="text-gray-600">{cat.posts}</strong> {lang === "fr" ? "publications" : "posts"}
-                      </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {forumCategories.map((cat, i) => {
+              const CatIcon = categoryIconMap[cat.icon] || MessageSquare;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.06 }}
+                  whileHover={{ y: -3 }}
+                  className="rounded-xl p-5 cursor-pointer group transition-all"
+                  style={{
+                    background: "var(--card, white)",
+                    border: "1px solid rgba(60, 87, 89, 0.1)",
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+                  }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                      style={{ background: `${cat.color}12` }}
+                    >
+                      <CatIcon className="w-5 h-5" style={{ color: cat.color }} aria-hidden="true" />
                     </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-bold transition-colors group-hover:text-[#3C5759]" style={{ color: "var(--foreground)" }}>
+                        {lang === "fr" ? cat.nameFr : cat.name}
+                      </h3>
+                      <p className="text-[11px] mt-1 line-clamp-2" style={{ color: "var(--muted-foreground)" }}>
+                        {lang === "fr" ? cat.descFr : cat.description}
+                      </p>
+                      <div className="flex items-center gap-4 mt-2.5">
+                        <span className="text-[10px] flex items-center gap-1" style={{ color: "var(--muted-foreground)" }}>
+                          <MessageSquare className="w-3 h-3" aria-hidden="true" />
+                          <strong style={{ color: "var(--foreground)" }}>{cat.topics}</strong> {lang === "fr" ? "sujets" : "topics"}
+                        </span>
+                        <span className="text-[10px] flex items-center gap-1" style={{ color: "var(--muted-foreground)" }}>
+                          <Users className="w-3 h-3" aria-hidden="true" />
+                          <strong style={{ color: "var(--foreground)" }}>{cat.posts}</strong> {lang === "fr" ? "publications" : "posts"}
+                        </span>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 flex-shrink-0 transition-all duration-200 group-hover:translate-x-1" style={{ color: "var(--muted-foreground)" }} aria-hidden="true" />
                   </div>
-                  <span className="material-icons text-gray-300 group-hover:text-teal-700 transition-colors" >chevron_right</span>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         )}
 
-        {/* Study Groups Tab */}
+        {/* Study Groups Tab — Premium cards */}
         {activeTab === "groups" && (
           <div className="space-y-3">
             {studyGroups.map((group, i) => (
-              <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm flex items-center justify-between">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="rounded-xl p-5 flex items-center justify-between transition-all"
+                style={{
+                  background: "var(--card, white)",
+                  border: "1px solid rgba(60, 87, 89, 0.1)",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+                }}
+              >
                 <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${group.active ? "bg-emerald-500/10" : "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}>
-                    <span className={`material-icons ${group.active ? "text-emerald-500" : "text-gray-400"}`} style={{ fontSize: "20px" }}>groups</span>
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: group.active ? "rgba(16, 185, 129, 0.08)" : "rgba(60, 87, 89, 0.06)" }}
+                  >
+                    <Users className="w-5 h-5" style={{ color: group.active ? "#10B981" : "var(--muted-foreground)" }} aria-hidden="true" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-gray-900">{group.name}</h3>
+                    <h3 className="text-sm font-bold" style={{ color: "var(--foreground)" }}>{group.name}</h3>
                     <div className="flex items-center gap-3 mt-1">
-                      <span className="text-[10px] text-gray-400">{group.members} {lang === "fr" ? "membres" : "members"}</span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500 font-medium">{group.language}</span>
+                      <span className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{group.members} {lang === "fr" ? "membres" : "members"}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium" style={{ background: "rgba(60, 87, 89, 0.06)", color: "var(--muted-foreground)" }}>{group.language}</span>
                       {group.active && (
-                        <span className="text-[10px] text-emerald-500 flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        <span className="text-[10px] flex items-center gap-1" style={{ color: "#10B981" }}>
+                          <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#10B981" }} aria-hidden="true" />
                           {lang === "fr" ? "Actif" : "Active"}
                         </span>
                       )}
@@ -158,52 +239,72 @@ export default function CommunityForum() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] text-gray-400">{lang === "fr" ? "Prochaine séance" : "Next session"}</p>
-                  <p className="text-xs font-medium text-gray-700">{group.nextSession}</p>
-                  <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-                    className="mt-1 px-3 py-1 rounded-lg text-[10px] font-semibold text-teal-700 border border-teal-700/20 hover:bg-teal-700/5 transition-all">
+                  <p className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{lang === "fr" ? "Prochaine séance" : "Next session"}</p>
+                  <p className="text-xs font-medium" style={{ color: "var(--foreground)" }}>{group.nextSession}</p>
+                  <button
+                    onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+                    className="mt-1 px-3 py-1 rounded-lg text-[10px] font-semibold transition-all hover:opacity-80"
+                    style={{ color: "#3C5759", border: "1px solid rgba(60, 87, 89, 0.2)" }}
+                  >
                     {t("community.joinGroup")}
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-            <button onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
-              className="w-full py-3 rounded-xl border-2 border-dashed border-gray-200 dark:border-white/15 dark:border-white/15 text-sm font-medium text-gray-400 hover:text-teal-700 hover:border-teal-700/30 transition-all flex items-center justify-center gap-2">
-              <span className="material-icons" >add</span>
+            <button
+              onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+              className="w-full py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-all hover:opacity-80"
+              style={{ border: "2px dashed rgba(60, 87, 89, 0.15)", color: "var(--muted-foreground)" }}
+            >
+              <Plus className="w-4 h-4" aria-hidden="true" />
               {t("community.createGroup")}
             </button>
           </div>
         )}
 
-        {/* Recent Posts Tab */}
+        {/* Recent Posts Tab — Premium cards */}
         {activeTab === "recent" && (
           <div className="space-y-3">
             {recentPosts.map((post, i) => (
-              <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="rounded-xl p-5 cursor-pointer group transition-all"
+                style={{
+                  background: "var(--card, white)",
+                  border: "1px solid rgba(60, 87, 89, 0.1)",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+                }}
+              >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-700 to-[#00a0b0] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+                    style={{ background: "linear-gradient(135deg, #3C5759, #4A6B6D)" }}
+                  >
                     {post.avatar}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-gray-900 dark:text-foreground group-hover:text-teal-700 transition-colors">{post.title}</h3>
-                    <div className="flex items-center gap-3 mt-1.5">
-                      <span className="text-[10px] text-gray-500">{post.author}</span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-teal-700/8 text-teal-700 font-medium">{post.category}</span>
-                      <span className="text-[10px] text-gray-400">{post.time}</span>
+                    <h3 className="text-sm font-bold transition-colors group-hover:text-[#3C5759]" style={{ color: "var(--foreground)" }}>{post.title}</h3>
+                    <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                      <span className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{post.author}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium" style={{ background: "rgba(60, 87, 89, 0.06)", color: "#3C5759" }}>{post.category}</span>
+                      <span className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{post.time}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 flex-shrink-0">
-                    <div className="flex items-center gap-1 text-gray-400">
-                      <span className="material-icons" >chat_bubble_outline</span>
+                    <div className="flex items-center gap-1" style={{ color: "var(--muted-foreground)" }}>
+                      <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
                       <span className="text-xs">{post.replies}</span>
                     </div>
-                    <div className="flex items-center gap-1 text-gray-400">
-                      <span className="material-icons" >favorite_border</span>
+                    <div className="flex items-center gap-1" style={{ color: "var(--muted-foreground)" }}>
+                      <Heart className="w-3.5 h-3.5" aria-hidden="true" />
                       <span className="text-xs">{post.likes}</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
