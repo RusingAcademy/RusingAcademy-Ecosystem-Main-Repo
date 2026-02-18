@@ -367,16 +367,16 @@ function EcosystemSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-3 gap-4 md:gap-8 ecosystem-cards-grid"
         >
           {pillars.map((pillar) => (
             <motion.div
               key={pillar.id}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group relative bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 ecosystem-card"
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-44 md:h-56 overflow-hidden ecosystem-card-image">
                 <img
                   loading="lazy" src={pillar.image}
                   alt={language === "en" ? pillar.nameEn : pillar.nameFr}
@@ -393,14 +393,14 @@ function EcosystemSection({ language }: { language: string }) {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-4 md:p-6 ecosystem-card-content">
                 <p className="text-sm font-medium text-black dark:text-foreground mb-1">
                   {language === "en" ? pillar.nameEn : pillar.nameFr}
                 </p>
-                <h3 className="text-xl font-bold text-black dark:text-foreground mb-3">
+                <h3 className="text-lg md:text-xl font-bold text-black dark:text-foreground mb-2 md:mb-3">
                   {language === "en" ? pillar.brandEn : pillar.brandFr}
                 </h3>
-                <p className="text-black dark:text-foreground mb-4 leading-relaxed">
+                <p className="text-sm md:text-base text-black dark:text-foreground mb-3 md:mb-4 leading-relaxed">
                   {language === "en" ? pillar.descEn : pillar.descFr}
                 </p>
                 <Link href={pillar.link}>
