@@ -124,7 +124,7 @@ export default function TheyTrustedUs() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -4 }}
               >
-                <img loading="lazy" decoding="async" 
+                <img loading="lazy" decoding="async"
                   src={org.logo}
                   alt={language === 'fr' ? org.altFr : org.altEn}
                   className="h-10 sm:h-12 md:h-14 w-auto max-w-full object-contain grayscale-[50%] group-hover:grayscale-0 transition-all duration-300 contrast-125"

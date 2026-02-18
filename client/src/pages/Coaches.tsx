@@ -208,27 +208,27 @@ export default function Coaches() {
         {/* Search Bar Section */}
         <ScrollAnimationWrapper animation="fade-up" duration={700} delay={100}>
           <section className="py-6">
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
-            <div className="max-w-2xl mx-auto">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
-                <div className="relative flex items-center bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-xl border border-slate-200/50 dark:border-white/15 overflow-hidden backdrop-blur-sm" style={{ background: 'rgba(255, 255, 255, 0.10)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
-                  <Search className="w-5 h-5 text-teal-600 ml-4" />
-                  <Input
-                    type="text"
-                    placeholder={language === 'fr' ? 'Rechercher par nom, spécialité...' : 'Search by name, specialty...'}
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white/60"
-                  />
-                  <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
-                    {language === 'fr' ? 'Rechercher' : 'Search'}
-                  </Button>
+            <div className="container mx-auto px-6 md:px-8 lg:px-12">
+              <div className="max-w-2xl mx-auto">
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
+                  <div className="relative flex items-center bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-xl border border-slate-200/50 dark:border-white/15 overflow-hidden backdrop-blur-sm" style={{ background: 'rgba(255, 255, 255, 0.10)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+                    <Search className="w-5 h-5 text-teal-600 ml-4" />
+                    <Input
+                      type="text"
+                      placeholder={language === 'fr' ? 'Rechercher par nom, spécialité...' : 'Search by name, specialty...'}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white/60"
+                    />
+                    <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
+                      {language === 'fr' ? 'Rechercher' : 'Search'}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
         </ScrollAnimationWrapper>
 
         {/* Main Content */}

@@ -370,8 +370,8 @@ export default function BarholexPortfolio() {
                     onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
                   >
                     {/* Image */}
-                    <img loading="lazy" decoding="async" 
-                      loading="lazy" src={project.image} 
+                    <img loading="lazy" decoding="async"
+                      src={project.image} 
                       alt={language === "en" ? project.titleEn : project.titleFr}
                       className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
                         project.featured ? "h-[400px] md:h-full" : "h-72"
@@ -493,7 +493,7 @@ export default function BarholexPortfolio() {
                     
                     <div className="flex items-center gap-4">
                       <img
-                        loading="lazy" src={TESTIMONIALS[testimonialIndex].image}
+                        src={TESTIMONIALS[testimonialIndex].image}
                         alt={TESTIMONIALS[testimonialIndex].authorEn}
                         className="w-14 h-14 rounded-full object-cover border-2 border-barholex-gold shadow-md"
                       />

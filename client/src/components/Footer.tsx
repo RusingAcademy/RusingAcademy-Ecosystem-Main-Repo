@@ -247,8 +247,8 @@ export default function Footer() {
           {/* Brand Column — always static, not CMS-driven */}
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-xl">
-              <img loading="lazy" decoding="async" 
-                loading="lazy" src={LOGO_URL}
+              <img loading="lazy" decoding="async"
+                src={LOGO_URL}
                 alt="RusingÂcademy" 
                 className="h-14 w-auto brightness-110"
               />

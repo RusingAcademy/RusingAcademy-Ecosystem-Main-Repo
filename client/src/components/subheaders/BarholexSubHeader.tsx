@@ -59,8 +59,8 @@ export default function BarholexSubHeader() {
 
           {/* Logo/Brand */}
           <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300 ml-3">
-            <img loading="lazy" decoding="async" 
-              loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vQofylSAnWOMKrec.png" 
+            <img loading="lazy" decoding="async"
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vQofylSAnWOMKrec.png" 
               alt="RusingÂcademy Logo"
               className="transition-all duration-300 rounded-lg object-contain"
               style={{ 

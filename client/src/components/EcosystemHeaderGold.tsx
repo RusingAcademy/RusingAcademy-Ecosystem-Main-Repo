@@ -487,8 +487,8 @@ export default function EcosystemHeaderGold() {
                         transition: "all var(--transition-slower)",
                       }}
                     >
-                      <img loading="lazy" decoding="async" 
-                        loading="lazy" src={brand.iconSrc} 
+                      <img loading="lazy" decoding="async"
+                        src={brand.iconSrc} 
                         alt={brand.name}
                         className="object-contain"
                         style={{

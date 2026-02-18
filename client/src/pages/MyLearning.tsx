@@ -444,8 +444,8 @@ function CourseCard({
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <div className="aspect-video bg-muted relative">
         {course.thumbnailUrl ? (
-          <img loading="lazy" decoding="async" 
-            loading="lazy" src={course.thumbnailUrl} 
+          <img loading="lazy" decoding="async"
+            src={course.thumbnailUrl} 
             alt={course.title}
             className="w-full h-full object-cover"
           />

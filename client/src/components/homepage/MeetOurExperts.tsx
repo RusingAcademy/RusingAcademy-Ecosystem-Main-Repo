@@ -94,8 +94,8 @@ export default function MeetOurExperts() {
                 <div className="absolute bottom-3 right-3 w-3 h-3 rounded-full bg-gradient-to-br from-slate-300 to-slate-400 shadow-inner z-10" />
                 
                 {/* Photo */}
-                <img loading="lazy" decoding="async" 
-                  loading="lazy" src={expert.image}
+                <img loading="lazy" decoding="async"
+                  src={expert.image}
                   alt={expert.name}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />

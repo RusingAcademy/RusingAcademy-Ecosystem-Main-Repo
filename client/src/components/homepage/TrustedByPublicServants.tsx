@@ -96,8 +96,8 @@ export default function TrustedByPublicServants() {
               <div className="flex justify-center mb-6 pt-4">
                 <div className="relative">
                   <div className="h-24 w-24 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 overflow-hidden ring-4 ring-white shadow-lg">
-                    <img loading="lazy" decoding="async" 
-                      loading="lazy" src={testimonial.image} 
+                    <img loading="lazy" decoding="async"
+                      src={testimonial.image} 
                       alt={testimonial.name}
                       className="h-full w-full object-cover"
                       onError={(e) => {
