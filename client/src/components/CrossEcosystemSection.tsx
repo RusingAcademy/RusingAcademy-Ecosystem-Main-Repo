@@ -411,10 +411,10 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
 // ─── Stats Pill ──────────────────────────────────────────────────────────────
 function StatsPill({ icon: IconComp, value, label }: { icon: React.ElementType; value: string; label: string }) {
   return (
-    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-background/5 backdrop-blur-sm border border-white/10">
+    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 stats-pill-mobile">
       <IconComp className="w-4 h-4 text-amber-400" />
       <span className="text-sm font-bold text-white">{value}</span>
-      <span className="text-xs text-white/60">{label}</span>
+      <span className="text-xs text-white/70">{label}</span>
     </div>
   );
 }
@@ -651,13 +651,13 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           variants={fadeInUp}
           className="flex justify-center mb-6 md:mb-10 lg:mb-14 px-4"
         >
-          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white dark:bg-background/5 backdrop-blur-xl border border-white/10">
+          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/10 dark:bg-background/5 backdrop-blur-xl border border-white/15 tab-buttons-container">
             <button
               onClick={() => handleTabSwitch("shorts")}
               className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
                 activeTab === "shorts"
                   ? "text-white"
-                  : "text-white/60 hover:text-white/90"
+                  : "text-white/70 hover:text-white/90"
               }`}
             >
               {activeTab === "shorts" && (
@@ -679,7 +679,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
                 activeTab === "capsules"
                   ? "text-white"
-                  : "text-white/60 hover:text-white/90"
+                  : "text-white/70 hover:text-white/90"
               }`}
             >
               {activeTab === "capsules" && (
