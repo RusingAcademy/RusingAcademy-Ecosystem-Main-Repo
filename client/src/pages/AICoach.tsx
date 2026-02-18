@@ -231,8 +231,8 @@ export default function AICoach() {
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge with coach photo */}
               <Badge className="mb-6 bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-slate-900 dark:text-white border-white/60 backdrop-blur-sm px-4 py-2">
-                <img loading="lazy" decoding="async" 
-                  loading="lazy" src={coachPhotos[0]} 
+                <img loading="lazy" decoding="async"
+                  src={coachPhotos[0]} 
                   alt="SLE AI Coach" 
                   className="h-5 w-5 rounded-full object-cover mr-2 ring-1 ring-white/30"
                 />
@@ -265,8 +265,8 @@ export default function AICoach() {
               <div className="flex justify-center items-center gap-3 mb-8">
                 {coachPhotos.map((photo, i) => (
                   <div key={i} className="relative">
-                    <img loading="lazy" decoding="async" 
-                      loading="lazy" src={photo} 
+                    <img loading="lazy" decoding="async"
+                      src={photo} 
                       alt={`SLE AI Coach ${i + 1}`}
                       className={`h-14 w-14 rounded-full object-cover ring-2 shadow-lg transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-teal-400/30 ${i === 0 ? 'ring-teal-400' : 'ring-white/30'}`}
                     />
@@ -338,8 +338,8 @@ export default function AICoach() {
                         <div className={`h-12 w-12 rounded-xl ${feature.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                           <Icon className="h-6 w-6" />
                         </div>
-                        <img loading="lazy" decoding="async" 
-                          loading="lazy" src={coachPhotos[feature.coachIndex]} 
+                        <img loading="lazy" decoding="async"
+                          src={coachPhotos[feature.coachIndex]} 
                           alt="AI Coach"
                           className="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:ring-teal-400 group-hover:shadow-lg group-hover:shadow-teal-400/20"
                         />
@@ -395,8 +395,8 @@ export default function AICoach() {
                     <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-gradient-to-r from-teal-300 to-teal-200" />
                   )}
                   <div className="relative z-10 mb-4">
-                    <img loading="lazy" decoding="async" 
-                      loading="lazy" src={coachPhotos[step.coachIndex]} 
+                    <img loading="lazy" decoding="async"
+                      src={coachPhotos[step.coachIndex]} 
                       alt={`Step ${step.step} Coach`}
                       className="h-16 w-16 rounded-full object-cover mx-auto ring-4 ring-teal-100 shadow-lg transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-xl hover:shadow-teal-400/30"
                     />
@@ -464,8 +464,8 @@ export default function AICoach() {
                 <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian rounded-2xl p-8 text-white">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="relative">
-                      <img loading="lazy" decoding="async" 
-                        loading="lazy" src={coachPhotos[0]} 
+                      <img loading="lazy" decoding="async"
+                        src={coachPhotos[0]} 
                         alt="SLE AI Coach"
                         className="h-16 w-16 rounded-full object-cover ring-4 ring-teal-400/50 transition-all duration-300 hover:scale-110 hover:ring-teal-300 hover:shadow-xl hover:shadow-teal-400/40"
                       />
@@ -527,8 +527,8 @@ export default function AICoach() {
                     </div>
                     <p className="mb-6 italic text-black dark:text-foreground">"{testimonial.quote}"</p>
                     <div className="flex items-center gap-3">
-                      <img loading="lazy" decoding="async" 
-                        loading="lazy" src={coachPhotos[i % coachPhotos.length]} 
+                      <img loading="lazy" decoding="async"
+                        src={coachPhotos[i % coachPhotos.length]} 
                         alt={testimonial.name}
                         className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100 transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-lg hover:shadow-teal-400/20"
                       />
@@ -561,8 +561,8 @@ export default function AICoach() {
             {/* Coach Photos */}
             <div className="flex justify-center items-center gap-2 mb-6">
               {coachPhotos.map((photo, i) => (
-                <img loading="lazy" decoding="async" 
-                  loading="lazy" key={i}
+                <img loading="lazy" decoding="async"
+                  key={i}
                   src={photo} 
                   alt={`Coach ${i + 1}`}
                   className="h-12 w-12 rounded-full object-cover ring-2 ring-white/30 shadow-lg transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-teal-400/30"

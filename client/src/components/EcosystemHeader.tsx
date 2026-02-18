@@ -39,8 +39,8 @@ const brandTiles: BrandTile[] = [
     },
     path: "/rusingacademy",
     logo: (
-      <img loading="lazy" decoding="async" 
-        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
+      <img loading="lazy" decoding="async"
+        src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
         alt="RusingÂcademy" 
         className="w-10 h-10 rounded-lg object-cover"
       />
@@ -56,8 +56,8 @@ const brandTiles: BrandTile[] = [
     },
     path: "/lingueefy",
     logo: (
-      <img loading="lazy" decoding="async" 
-        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png" 
+      <img loading="lazy" decoding="async"
+        src="https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png" 
         alt="Lingueefy" 
         className="w-10 h-10 object-contain"
       />
@@ -73,8 +73,8 @@ const brandTiles: BrandTile[] = [
     },
     path: "/barholex-media",
     logo: (
-      <img loading="lazy" decoding="async" 
-        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png" 
+      <img loading="lazy" decoding="async"
+        src="https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png" 
         alt="Barholex Media" 
         className="w-10 h-10 rounded-lg object-cover"
       />
@@ -204,8 +204,8 @@ export default function EcosystemHeader() {
               className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
               {/* RusingÂcademy Logo */}
-              <img loading="lazy" decoding="async" 
-                loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
+              <img loading="lazy" decoding="async"
+                src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
                 alt="RusingÂcademy" 
                 className="w-10 h-10 rounded-lg object-cover"
               />
@@ -498,8 +498,8 @@ export default function EcosystemHeader() {
                       boxShadow: "0 0 20px rgba(23, 226, 198, 0.4)",
                     }}
                   >
-                    <img loading="lazy" decoding="async" 
-                      loading="lazy" src={STEVEN_AVATAR}
+                    <img loading="lazy" decoding="async"
+                      src={STEVEN_AVATAR}
                       alt="Steven Barholere"
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -543,8 +543,8 @@ export default function EcosystemHeader() {
                     className="p-5 flex items-center gap-3 relative"
                     style={{ background: "linear-gradient(135deg, var(--lingueefy-accent) 0%, #0F9D8E 100%)" }}
                   >
-                    <img loading="lazy" decoding="async" 
-                      loading="lazy" src={STEVEN_AVATAR} 
+                    <img loading="lazy" decoding="async"
+                      src={STEVEN_AVATAR} 
                       alt="Prof. Steven Barholere"
                       className="w-14 h-14 rounded-full object-cover border-3 border-white shadow-lg"
                     />
@@ -755,8 +755,8 @@ function MobileMenu({
               className="w-10 h-10 rounded-full overflow-hidden border-2"
               style={{ borderColor: "var(--lingueefy-accent)" }}
             >
-              <img loading="lazy" decoding="async" 
-                loading="lazy" src={STEVEN_AVATAR}
+              <img loading="lazy" decoding="async"
+                src={STEVEN_AVATAR}
                 alt="Prof Steven AI"
                 className="w-full h-full object-cover"
               />
