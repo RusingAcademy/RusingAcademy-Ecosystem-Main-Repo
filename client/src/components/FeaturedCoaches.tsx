@@ -289,7 +289,7 @@ function VideoModal({
             <div className="relative">
               <div className={`absolute inset-0 bg-gradient-to-r ${accentColor} rounded-full blur-md opacity-60 animate-pulse`} />
               <img loading="lazy" decoding="async" 
-                loading="lazy" src={photoUrl} 
+                src={photoUrl} 
                 alt={coachName}
                 className="relative w-14 h-14 rounded-full object-cover border-2 border-white/60 shadow-xl"
               />
@@ -550,7 +550,7 @@ function CoachCard({
           <>
             {/* Thumbnail Image - Always visible as fallback */}
             <img loading="lazy" decoding="async" 
-              loading="lazy" src={coach.thumbnailUrl}
+              src={coach.thumbnailUrl}
               alt={coach.name}
               className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && bunnyHoverUrl ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}`}
             />
