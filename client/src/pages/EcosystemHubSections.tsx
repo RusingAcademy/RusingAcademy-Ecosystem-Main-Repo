@@ -1,6 +1,7 @@
 // Sections exportées individuellement pour intégration dans Home.tsx
 // Header et Footer sont gérés par le layout existant
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import HeroGoldStandard from "@/components/HeroGoldStandard";
 import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -2091,72 +2092,72 @@ export default function EcosystemHubContent() {
     <main id="main-content">
       {/* Section 0: Hero - Golden Standard (immutable) */}
       <HeroGoldStandard />
-
+      <WaveDivider variant="smooth" color="#f8fafc" backgroundColor="transparent" orientation="bottom" />
       {/* Section 1: Trilemme — fade up */}
-      <ScrollAnimationWrapper animation="fade-up" duration={800}>
+       <ScrollAnimationWrapper animation="fade-up" duration={800}>
         <TrilemmeSection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="asymmetric" color="white" backgroundColor="#f8fafc" orientation="bottom" />
       {/* Section 2: Écosystème — fade up */}
-      <ScrollAnimationWrapper animation="fade-up" duration={800} delay={100}>
+       <ScrollAnimationWrapper animation="fade-up" duration={800} delay={100}>
         <EcosystemSection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
       {/* Section 3: Méthodologie — slide from left */}
       <ScrollAnimationWrapper animation="fade-left" duration={800}>
         <MethodologySection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="double" color="white" backgroundColor="#f8fafc" orientation="bottom" />
       {/* Section 4: Offres — scale in */}
       <ScrollAnimationWrapper animation="scale-in" duration={800}>
         <OffersSection language={language} />
       </ScrollAnimationWrapper>
-
-      {/* Section 5: Cibles — fade from right */}
+      <WaveDivider variant="smooth" color="#f8fafc" backgroundColor="white" orientation="bottom" />
+        {/* Section 5: Cibles — fade from right */}
       <ScrollAnimationWrapper animation="fade-right" duration={800}>
         <TargetAudienceSection language={language} />
       </ScrollAnimationWrapper>
-
-      {/* Section 6: Témoignages — fade up */}
+      <WaveDivider variant="sharp" color="white" backgroundColor="#f8fafc" orientation="bottom" />
+        {/* Section 6: Témoignages — fade up */}
       <ScrollAnimationWrapper animation="fade-up" duration={800}>
         <TestimonialsSection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="layered" color="#f8fafc" backgroundColor="white" orientation="bottom" />
       {/* Section 7: Leadership — fade from left */}
       <ScrollAnimationWrapper animation="fade-left" duration={800}>
         <LeadershipSection language={language} />
       </ScrollAnimationWrapper>
-
-      {/* Section 7b: Kudoboard Testimonials — fade up */}
+      <WaveDivider variant="smooth" color="white" backgroundColor="#f8fafc" orientation="bottom" />
+        {/* Section 7b: Kudoboard Testimonials — fade up */}
       <ScrollAnimationWrapper animation="fade-up" duration={800}>
         <KudoboardTestimonialsSection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
       {/* Section 8: Institutions — scale in */}
       <ScrollAnimationWrapper animation="scale-in" duration={800}>
         <InstitutionsSection language={language} />
       </ScrollAnimationWrapper>
-
-      {/* Section 9: Valeur — fade from right */}
+      <WaveDivider variant="asymmetric" color="white" backgroundColor="#f8fafc" orientation="bottom" />
+       {/* Section 9: Valeur — fade from right */}
       <ScrollAnimationWrapper animation="fade-right" duration={800}>
         <ValueSection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="double" color="#f8fafc" backgroundColor="white" orientation="bottom" />
       {/* Section 10: Équipe — fade up */}
       <ScrollAnimationWrapper animation="fade-up" duration={800}>
         <TeamSection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="smooth" color="#031818" backgroundColor="#f8fafc" orientation="bottom" />
       {/* Section 11: Cross-Ecosystem Section — fade up */}
       <ScrollAnimationWrapper animation="fade-up" duration={800}>
         <CrossEcosystemSection variant="hub" />
       </ScrollAnimationWrapper>
-
-      {/* Section 12: FAQ — fade up */}
+      <WaveDivider variant="layered" color="white" backgroundColor="#031818" orientation="bottom" />
+       {/* Section 12: FAQ — fade up */}
       <ScrollAnimationWrapper animation="fade-up" duration={800}>
         <FAQSection language={language} />
       </ScrollAnimationWrapper>
-
+      <WaveDivider variant="smooth" color="#f8fafc" backgroundColor="white" orientation="bottom" />
       {/* Section 13: CTA Final — scale in */}
       <ScrollAnimationWrapper animation="scale-in" duration={800}>
         <FinalCTASection language={language} />

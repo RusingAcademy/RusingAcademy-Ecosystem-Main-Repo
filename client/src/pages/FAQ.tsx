@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 import { ChevronDown } from "lucide-react";
+import WaveDivider from "@/components/WaveDivider";
 import { useState } from "react";
 import { COACH_RATES } from "@shared/pricing";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -285,7 +286,8 @@ export default function FAQ() {
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg">
+        <section className="relative py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg">
+          <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
           <div className="container max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.title}</h1>
             <p className="text-lg text-muted-foreground">{content.subtitle}</p>
@@ -326,7 +328,8 @@ export default function FAQ() {
         </section>
 
         {/* Contact Section */}
-        <section className="py-12 lg:py-16 bg-muted/50">
+        <section className="relative py-12 lg:py-16 bg-muted/50">
+          <WaveDivider variant="organic" color="white" backgroundColor="#f8fafc" orientation="top" />
           <div className="container max-w-4xl text-center">
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">{content.contact.title}</h2>
             <p className="text-lg text-muted-foreground mb-8">{content.contact.description}</p>

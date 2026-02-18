@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { 
@@ -200,6 +201,7 @@ export default function Community() {
       
       {/* Hero Section — Premium Glassmorphism */}
       <section className="community-hero relative pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
+        <WaveDivider variant="smooth" color="#0d1020" backgroundColor="transparent" orientation="bottom" />
         {/* Ambient background orbs */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute top-16 left-[15%] w-[28rem] h-[28rem] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(23, 226, 198, 0.1), transparent 70%)" }} />
@@ -289,6 +291,7 @@ export default function Community() {
 
       {/* Tab Navigation — Premium glassmorphism pills */}
       <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-8">
+        <WaveDivider variant="organic" color="#080a14" backgroundColor="#0d1020" orientation="bottom" />
         <div className="flex justify-center">
           <div className="community-tabs" role="tablist" aria-label={language === "en" ? "Community sections" : "Sections de la communauté"}>
             {[

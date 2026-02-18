@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -218,6 +219,7 @@ export default function AICoach() {
       <main>
         {/* Hero Section - Premium Dark Gradient */}
         <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian text-white overflow-hidden">
+          <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" />
@@ -308,8 +310,9 @@ export default function AICoach() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+                {/* Features Section */}
+        <section className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+          <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">

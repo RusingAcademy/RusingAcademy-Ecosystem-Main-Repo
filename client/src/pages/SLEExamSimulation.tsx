@@ -14,6 +14,7 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -709,6 +710,7 @@ export default function SLEExamSimulation() {
   if (phase === "setup") {
     return (
       <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white">
+        <WaveDivider variant="smooth" color="#0d1020" backgroundColor="transparent" orientation="bottom" />
         <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-12">
           {/* Header */}
           <motion.div
@@ -896,6 +898,7 @@ export default function SLEExamSimulation() {
 
     return (
       <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-teal-950 via-obsidian to-teal-950 text-white">
+        <WaveDivider variant="organic" color="#0d1020" backgroundColor="transparent" orientation="bottom" />
         <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-12">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center mb-4 md:mb-6 lg:mb-10">
             <div className={cn(

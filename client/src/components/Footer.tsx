@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin, Globe, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { useState, useMemo } from "react";
 import { useFooterNavigation, type NavItem } from "@/hooks/useNavigation";
 
@@ -160,6 +161,7 @@ export default function Footer() {
       role="contentinfo"
       aria-label={language === "fr" ? "Pied de page" : "Footer"}
     >
+      <WaveDivider variant="organic" color="#0d1020" backgroundColor="transparent" orientation="top" className="opacity-50" />
       {/* Decorative gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-obsidian" aria-hidden="true" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
