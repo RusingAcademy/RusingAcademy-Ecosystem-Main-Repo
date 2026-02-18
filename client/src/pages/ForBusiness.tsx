@@ -1,5 +1,6 @@
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -253,6 +254,7 @@ export default function ForBusiness() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">      {/* Hero Section */}
       <SEO title="For Business" description="Enterprise bilingual training solutions for organizations. Custom SLE preparation programs and team coaching." canonical="/for-business" />
       <section className="relative overflow-hidden">
+        <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
         <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-transparent to-orange-50/30 dark:from-teal-950/30 dark:to-[#431407]/20" />
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-teal-100/20 to-transparent dark:from-teal-900/10" />
         
@@ -305,6 +307,7 @@ export default function ForBusiness() {
 
       {/* Benefits Section */}
       <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
+        <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.benefitsTitle}</h2>

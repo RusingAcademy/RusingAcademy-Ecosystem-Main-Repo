@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
@@ -186,6 +187,7 @@ export default function SLEDiagnostic() {
 
         {/* Hero Section */}
         <section className="py-16 lg:py-24 hero-gradient">
+          <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
           <div className="container text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -234,6 +236,7 @@ export default function SLEDiagnostic() {
 
         {/* Who is it for section */}
         <section className="py-16 lg:py-24 bg-muted/50">
+          <WaveDivider variant="organic" color="white" backgroundColor="#f8fafc" orientation="top" />
           <div className="container max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

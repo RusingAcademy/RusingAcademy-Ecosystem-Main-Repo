@@ -1,5 +1,6 @@
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { Badge } from "@/components/ui/badge";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -337,6 +338,7 @@ export default function Pricing() {
 
         {/* Hero Section - Premium Dark Gradient */}
         <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
+          <WaveDivider variant="smooth" color="#f8fafc" backgroundColor="transparent" orientation="bottom" />
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
@@ -412,6 +414,7 @@ export default function Pricing() {
           ref={(el) => { if (el) sectionRefs.current.set('why', el); }}
           data-section="why"
         >
+          <WaveDivider variant="organic" color="white" backgroundColor="#f8fafc" orientation="top" />
           <div className="container">
             <div className={`text-center mb-6 md:mb-8 lg:mb-12 transition-all duration-700 ${
               visibleSections.has('why') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'

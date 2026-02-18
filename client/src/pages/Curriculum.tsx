@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -362,6 +363,7 @@ export default function Curriculum() {
 
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 lg:py-24 mesh-gradient">
+          <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" aria-hidden="true" />
           
@@ -403,6 +405,7 @@ export default function Curriculum() {
 
         {/* Courses Section with Tabs */}
         <section className="py-16 lg:py-24">
+          <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
           <div className="container">
             <div className="text-center mb-8">
               <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4">
@@ -449,6 +452,7 @@ export default function Curriculum() {
 
         {/* Why RusingÂcademy Section */}
         <section className="py-16 lg:py-24 bg-muted/30">
+          <WaveDivider variant="layered" color="white" backgroundColor="#f8fafc" orientation="bottom" />
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-6 md:mb-8 lg:mb-12">

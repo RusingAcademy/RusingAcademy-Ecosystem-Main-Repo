@@ -49,6 +49,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -117,6 +118,7 @@ const cardVariant = {
 function LibraryHero({ language }: { language: string }) {
   return (
     <section className="relative overflow-hidden py-20 md:py-28 lg:py-32">
+      <WaveDivider variant="smooth" color="#f8fafc" backgroundColor="transparent" orientation="bottom" />
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-foundation via-[#1a5c5e] to-[#0d2f30]" />
 
@@ -920,6 +922,7 @@ export default function Library() {
         <ScrollAnimationWrapper animation="fade-in" duration={1000}>
           <LibraryHero language={language} />
         </ScrollAnimationWrapper>
+        <WaveDivider variant="organic" color="white" backgroundColor="#f8fafc" orientation="top" />
 
         {/* Filter Bar with Scroll Animation */}
         <ScrollAnimationWrapper animation="fade-up" delay={200}>

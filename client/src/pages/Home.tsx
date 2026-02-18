@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -666,6 +667,7 @@ export default function Home() {
       <main id="main-content" className="flex-1">
         {/* Featured Coaches Section - Now the Hero */}
         <FeaturedCoaches />
+        <WaveDivider variant="smooth" color="#0d9488" backgroundColor="white" orientation="bottom" />
 
         {/* Animated Statistics Section - Reduced vertical height */}
         <section className="py-10 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
@@ -692,6 +694,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <WaveDivider variant="organic" color="white" backgroundColor="#0d9488" orientation="bottom" />
 
         {/* Video Presentation Section - MOVED TO END OF PAGE */}
 
@@ -708,6 +711,7 @@ export default function Home() {
           className="py-12 md:py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
           aria-labelledby="plans-title"
         >
+          <WaveDivider variant="layered" color="#f8fafc" backgroundColor="white" orientation="top" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">

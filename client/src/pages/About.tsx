@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import WaveDivider from "@/components/WaveDivider";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -193,6 +194,7 @@ export default function About() {
 
         {/* Hero Section with Glassmorphism */}
         <section className="relative py-20 lg:py-28 overflow-hidden">
+          <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
           {/* Decorative orbs */}
           <div className="orb orb-teal w-[500px] h-[500px] -top-64 -right-64 animate-float-slow" />
           <div className="orb orb-orange w-72 h-72 top-20 -left-36 animate-float-medium opacity-40" />
@@ -226,6 +228,7 @@ export default function About() {
           ref={(el) => { if (el) sectionRefs.current.set('mission', el); }}
           data-section="mission"
         >
+          <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
           <div className="container">
             <div className={`max-w-3xl mx-auto transition-all duration-700 ${
               visibleSections.has('mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
