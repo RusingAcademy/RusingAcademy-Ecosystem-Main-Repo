@@ -72,7 +72,7 @@ export const EXPERIMENTS: ABExperiment[] = [
     description: "Test CTA button color variations for optimal conversion.",
     hypothesis: "High-contrast orange CTA will outperform teal CTA by 10% in click-through rate.",
     variants: [
-      { id: "control", name: "Brand Orange (#C65A1E)", weight: 50 },
+      { id: "control", name: "Brand Copper (#B87333)", weight: 50 },
       { id: "variant-a", name: "Emerald Green (#059669)", weight: 50 },
     ],
     conversionGoal: "hero_cta_click",

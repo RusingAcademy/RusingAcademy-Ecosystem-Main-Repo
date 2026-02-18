@@ -20,8 +20,8 @@
    ============================================ */
 :root {
   /* Terracotta Accent (warm, premium, inspired by MgCréa) */
-  --admin-terracotta: #C65A1E;
-  --admin-terracotta-light: #E06B2D;
+  --admin-terracotta: #B87333;
+  --admin-terracotta-light: #8F5626;
   --admin-terracotta-soft: #FFF1E8;
   --admin-terracotta-muted: #D4845C;
   
@@ -270,14 +270,14 @@
   padding: 0.625rem 1.25rem;
   border-radius: 0.5rem;
   border: none;
-  box-shadow: 0 2px 8px rgba(198, 90, 30, 0.25);
+  box-shadow: 0 2px 8px rgba(184, 115, 51, 0.25);
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .admin-btn-terracotta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(198, 90, 30, 0.35);
+  box-shadow: 0 4px 16px rgba(184, 115, 51, 0.35);
 }
 
 .admin-btn-gold-outline {

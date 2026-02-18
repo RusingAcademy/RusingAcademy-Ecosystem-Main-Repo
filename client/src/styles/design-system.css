@@ -573,7 +573,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* Brand tile active states */
 .tile-active-rusingacademy {
-  box-shadow: 0 0 0 3px rgba(198, 90, 30, 0.5), var(--shadow-lg);
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.5), var(--shadow-lg);
 }
 .tile-active-lingueefy {
   box-shadow: 0 0 0 3px rgba(23, 226, 198, 0.5), var(--shadow-lg);

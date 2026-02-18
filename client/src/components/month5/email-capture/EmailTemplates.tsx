@@ -211,7 +211,7 @@ export function generateEmailHTML(
     .header h1 { color: #ffffff; font-size: 24px; margin: 0; }
     .body { padding: 32px; color: #1B3A4B; line-height: 1.6; }
     .body p { margin: 0 0 16px 0; font-size: 16px; }
-    .cta { display: inline-block; padding: 14px 32px; background: #C65A1E; color: #ffffff !important; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; }
+    .cta { display: inline-block; padding: 14px 32px; background: #B87333; color: #ffffff !important; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; }
     .cta:hover { background: #A84A18; }
     .footer { padding: 24px 32px; background: #f5f5f0; text-align: center; font-size: 12px; color: #6B7280; }
     .footer a { color: #1B3A4B; }

@@ -326,7 +326,7 @@ export default function EcosystemHeader() {
                   style={{ 
                     background: "linear-gradient(135deg, var(--brand-cta) 0%, var(--barholex-gold) 100%)",
                     color: "white",
-                    boxShadow: "0 4px 20px rgba(198, 90, 30, 0.4)",
+                    boxShadow: "0 4px 20px rgba(184, 115, 51, 0.4)",
                   }}
                   aria-label={language === "fr" ? "Rejoindre notre communauté" : "Join Our Community"}
                 >
@@ -379,7 +379,7 @@ export default function EcosystemHeader() {
         <div 
           className="absolute inset-0 opacity-20 pointer-events-none"
           style={{
-            backgroundImage: "radial-gradient(ellipse at 20% 50%, rgba(198, 90, 30, 0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212, 168, 83, 0.2) 0%, transparent 50%)",
+            backgroundImage: "radial-gradient(ellipse at 20% 50%, rgba(184, 115, 51, 0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212, 168, 83, 0.2) 0%, transparent 50%)",
           }}
         />
         

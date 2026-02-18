@@ -301,7 +301,7 @@ export default function CoachVideoGallery() {
       />
       <div 
         className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(198, 90, 30, 0.4) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(184, 115, 51, 0.4) 0%, transparent 70%)" }}
       />
       
       <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10">

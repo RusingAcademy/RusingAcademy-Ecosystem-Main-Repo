@@ -49,8 +49,8 @@ const COLOR_TOKENS: { category: string; categoryFr: string; tokens: ColorToken[]
     category: "CTA / Accent",
     categoryFr: "CTA / Accent",
     tokens: [
-      { name: "CTA Copper", variable: "--brand-cta", value: "#C65A1E", darkValue: "#E07B3D", usage: "Call-to-action buttons, highlights" },
-      { name: "CTA Copper 2", variable: "--brand-cta-2", value: "#E06B2D", darkValue: "#F09050", usage: "CTA hover states" },
+      { name: "CTA Copper", variable: "--brand-cta", value: "#B87333", darkValue: "#E07B3D", usage: "Call-to-action buttons, highlights" },
+      { name: "CTA Copper 2", variable: "--brand-cta-2", value: "#8F5626", darkValue: "#F09050", usage: "CTA hover states" },
       { name: "CTA Soft", variable: "--brand-cta-soft", value: "#FFF1E8", darkValue: "rgba(224,123,61,0.15)", usage: "CTA backgrounds" },
     ],
   },

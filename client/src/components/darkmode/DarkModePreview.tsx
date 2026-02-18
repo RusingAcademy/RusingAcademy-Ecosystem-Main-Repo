@@ -30,7 +30,7 @@ const DARK_MODE_PALETTE: ColorSwatch[] = [
   { name: "Text Secondary", lightVar: "--text-secondary", darkVar: "--dark-text-secondary", lightValue: "#374151", darkValue: "#B0BDB5" },
   { name: "Text Muted", lightVar: "--text-muted", darkVar: "--dark-text-muted", lightValue: "#6B7280", darkValue: "#7A8D82" },
   { name: "Brand Foundation", lightVar: "--brand-foundation", darkVar: "--dark-brand-foundation", lightValue: "#0F3D3E", darkValue: "#1A7A7B" },
-  { name: "Brand CTA", lightVar: "--brand-cta", darkVar: "--dark-brand-cta", lightValue: "#C65A1E", darkValue: "#E07B3D" },
+  { name: "Brand CTA", lightVar: "--brand-cta", darkVar: "--dark-brand-cta", lightValue: "#B87333", darkValue: "#E07B3D" },
   { name: "Section BG 1", lightVar: "--section-bg-1", darkVar: "--dark-section-bg-1", lightValue: "#FBF9F7", darkValue: "#0D1B1A" },
   { name: "Section BG 2", lightVar: "--section-bg-2", darkVar: "--dark-section-bg-2", lightValue: "#E8EBE7", darkValue: "#111F1E" },
   { name: "Section BG 3", lightVar: "--section-bg-3", darkVar: "--dark-section-bg-3", lightValue: "#EFF9F4", darkValue: "#0F2E2A" },
