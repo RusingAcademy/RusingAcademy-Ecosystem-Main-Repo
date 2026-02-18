@@ -1181,7 +1181,7 @@ function InstitutionsSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-8"
+          className="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-8 institutions-logo-grid"
         >
           {/* Government of Canada */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Canada" : "Gouvernement du Canada"}>
