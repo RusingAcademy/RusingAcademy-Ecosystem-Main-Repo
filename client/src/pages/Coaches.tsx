@@ -1,5 +1,6 @@
 import SEO from "@/components/SEO";
 import { useState, useMemo, useEffect, useRef } from "react";
+import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -185,14 +186,31 @@ export default function Coaches() {
       
 
       <main id="main-content" className="flex-1">
+        {/* Premium Hero Section with Scroll Animation */}
+        <ScrollAnimationWrapper animation="fade-up" duration={800}>
+          <section className="py-8 md:py-12 bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-950/50 dark:to-emerald-950/50 border-b border-teal-200/50 dark:border-teal-800/50">
+            <div className="container mx-auto px-6 md:px-8 lg:px-12 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-3">
+                {language === 'fr' ? 'Nos Coachs Certifiés' : 'Our Certified Coaches'}
+              </h1>
+              <p className="text-lg text-black/70 dark:text-foreground/70 max-w-2xl mx-auto">
+                {language === 'fr' 
+                  ? 'Trouvez le coach parfait pour vos objectifs SLE et développement professionnel'
+                  : 'Find the perfect coach for your SLE goals and professional development'}
+              </p>
+            </div>
+          </section>
+        </ScrollAnimationWrapper>
+
         {/* Search Bar Section */}
-        <section className="py-6">
+        <ScrollAnimationWrapper animation="fade-up" duration={700} delay={100}>
+          <section className="py-6">
           <div className="container mx-auto px-6 md:px-8 lg:px-12">
             <div className="max-w-2xl mx-auto">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
-                <div className="relative flex items-center bg-white dark:bg-card dark:bg-obsidian rounded-xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden">
-                  <Search className="w-5 h-5 text-cyan-300 ml-4" />
+                <div className="relative flex items-center bg-white dark:bg-card dark:bg-obsidian rounded-xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden backdrop-blur-sm" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9))' }}>
+                  <Search className="w-5 h-5 text-teal-600 ml-4" />
                   <Input
                     type="text"
                     placeholder={language === 'fr' ? 'Rechercher par nom, spécialité...' : 'Search by name, specialty...'}
@@ -207,16 +225,18 @@ export default function Coaches() {
               </div>
             </div>
           </div>
+        </ScrollAnimationWrapper>
         </section>
 
         {/* Main Content */}
-        <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
-          <div className="flex flex-col lg:flex-row gap-8">
+        <ScrollAnimationWrapper animation="fade-up" duration={700} delay={150}>
+          <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
+            <div className="flex flex-col lg:flex-row gap-8">
             {/* Filters Sidebar - Premium */}
             <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
               <div className="lg:sticky lg:top-24 space-y-6">
-                {/* Filter Card */}
-                <div className="bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden">
+                {/* Filter Card - Premium Glassmorphism */}
+                <div className="bg-white dark:bg-card dark:bg-obsidian rounded-2xl shadow-xl border border-slate-200/50 dark:border-teal-800/50 overflow-hidden backdrop-blur-md" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95))' }}>
                   <div className="p-6 border-b border-slate-100 dark:border-teal-800">
                     <div className="flex items-center justify-between">
                       <h2 className="font-semibold text-lg flex items-center gap-2">
@@ -675,6 +695,7 @@ export default function Coaches() {
             </div>
           </div>
         </div>
+        </ScrollAnimationWrapper>
       </main>
 
       <Footer />

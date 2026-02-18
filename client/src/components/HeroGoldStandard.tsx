@@ -142,11 +142,11 @@ export default function HeroGoldStandard() {
               initial={{ opacity: 0, x: -30, scale: 0.98 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="w-full max-w-[440px] lg:max-w-[470px] xl:max-w-[500px] ml-8 sm:ml-12 lg:ml-20 xl:ml-28"
+              className="w-full max-w-[440px] lg:max-w-[470px] xl:max-w-[500px] mx-auto sm:ml-12 lg:ml-20 xl:ml-28"
             >
               {/* Ultra-Transparent Glass Panel — MgCréa Style */}
               <div 
-                className="relative rounded-[24px] p-7 sm:p-9 lg:p-10 overflow-hidden"
+                className="relative rounded-[24px] p-6 sm:p-9 lg:p-10 overflow-hidden"
                 style={{
                   background: `
                     linear-gradient(
