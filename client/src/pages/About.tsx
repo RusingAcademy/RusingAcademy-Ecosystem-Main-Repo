@@ -193,7 +193,7 @@ export default function About() {
         />
 
         {/* Hero Section with Glassmorphism */}
-        <section className="relative py-20 lg:py-28 overflow-hidden">
+        <section className="relative py-10 lg:py-14 overflow-hidden">
           <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
           {/* Decorative orbs */}
           <div className="orb orb-teal w-[500px] h-[500px] -top-64 -right-64 animate-float-slow" />

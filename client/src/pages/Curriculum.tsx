@@ -361,7 +361,7 @@ export default function Curriculum() {
         />
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-16 lg:py-24 mesh-gradient">
+        <section className="relative overflow-hidden py-8 lg:py-12 mesh-gradient">
           <WaveDivider variant="smooth" color="white" backgroundColor="transparent" orientation="bottom" />
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl" aria-hidden="true" />
@@ -403,7 +403,7 @@ export default function Curriculum() {
         </section>
 
         {/* Courses Section with Tabs */}
-        <section className="py-16 lg:py-24">
+        <section className="py-8 lg:py-12">
           <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
           <div className="container">
             <div className="text-center mb-8">
@@ -450,7 +450,7 @@ export default function Curriculum() {
         </section>
 
         {/* Why RusingÂcademy Section */}
-        <section className="py-16 lg:py-24 bg-muted/30">
+        <section className="py-8 lg:py-12 bg-muted/30">
           <WaveDivider variant="layered" color="white" backgroundColor="#f8fafc" orientation="bottom" />
           <div className="container">
             <div className="max-w-4xl mx-auto">
@@ -517,7 +517,7 @@ export default function Curriculum() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-24">
+        <section className="py-8 lg:py-12">
           <div className="container">
             <Card className="max-w-4xl mx-auto overflow-hidden">
               <div className="grid md:grid-cols-2">
