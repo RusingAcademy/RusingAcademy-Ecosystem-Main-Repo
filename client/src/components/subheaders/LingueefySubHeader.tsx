@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ArrowRight, Home } from "lucide-react";
+import { Menu, ArrowRight, Home, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@/hooks/useNavigation";
 import { NavDropdown, MobileNavDropdown } from "./NavDropdown";
@@ -86,6 +86,36 @@ export default function LingueefySubHeader() {
             ))}
           </nav>
 
+          {/* Community Button - Desktop */}
+          <Link href="/community">
+            <button
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-[1.03]"
+              style={{
+                background: location === "/community" ? "var(--lingueefy-accent-soft, rgba(20, 201, 176, 0.1))" : "transparent",
+                color: location === "/community" ? "var(--lingueefy-accent-2)" : "var(--muted)",
+                border: "1px solid transparent",
+              }}
+              onMouseEnter={(e) => {
+                if (location !== "/community") {
+                  e.currentTarget.style.background = "rgba(20, 201, 176, 0.06)";
+                  e.currentTarget.style.borderColor = "rgba(20, 201, 176, 0.12)";
+                  e.currentTarget.style.color = "var(--lingueefy-accent-2)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (location !== "/community") {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.borderColor = "transparent";
+                  e.currentTarget.style.color = "var(--muted)";
+                }
+              }}
+              aria-label={language === "fr" ? "Communauté" : "Community"}
+            >
+              <Users className="h-4 w-4" aria-hidden="true" />
+              <span>{language === "fr" ? "Communauté" : "Community"}</span>
+            </button>
+          </Link>
+
           {/* CTA - Desktop (Menthe local action) */}
           <div className="hidden lg:block">
             <Link href="/coaches">
@@ -140,6 +170,20 @@ export default function LingueefySubHeader() {
                       onNavigate={() => setMobileOpen(false)}
                     />
                   ))}
+                  {/* Community Button - Mobile */}
+                  <Link href="/community" onClick={() => setMobileOpen(false)}>
+                    <button
+                      className="flex items-center gap-2 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
+                      style={{
+                        background: location === "/community" ? "var(--lingueefy-accent-soft, rgba(20, 201, 176, 0.1))" : "transparent",
+                        color: location === "/community" ? "var(--lingueefy-accent-2)" : "var(--foreground)",
+                      }}
+                      aria-label={language === "fr" ? "Communauté" : "Community"}
+                    >
+                      <Users className="h-4 w-4" aria-hidden="true" />
+                      <span>{language === "fr" ? "Communauté" : "Community"}</span>
+                    </button>
+                  </Link>
                   <div 
                     className="mt-4 px-4"
                     style={{ borderTop: "1px solid var(--sand)", paddingTop: "1rem" }}
