@@ -1182,7 +1182,7 @@ function InstitutionsSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-8 institutions-logo-grid"
+          className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-12 mb-8 institutions-logo-grid"
         >
           {/* Government of Canada */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Canada" : "Gouvernement du Canada"}>
@@ -1748,7 +1748,7 @@ function ProofGallerySection({ language }: { language: string }) {
                   onMouseLeave={() => setHoveredVideo(null)}
                 >
                   <div 
-                    className={`relative w-[280px] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 cursor-pointer ${
+                    className={`relative w-[240px] sm:w-[280px] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 cursor-pointer ${
                       hoveredVideo === short.id ? 'scale-105 shadow-amber-500/30' : ''
                     }`}
                     style={{ aspectRatio: '9/16' }}

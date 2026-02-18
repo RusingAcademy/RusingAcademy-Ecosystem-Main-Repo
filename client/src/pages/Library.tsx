@@ -55,6 +55,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
+import ScrollAnimationWrapper, { StaggeredChildren } from "@/components/ScrollAnimationWrapper";
 import {
   LIBRARY_ITEMS,
   LIBRARY_CATEGORIES,
@@ -915,16 +916,20 @@ export default function Library() {
       </Helmet>
 
       <div className="min-h-screen bg-slate-50">
-        {/* Hero */}
-        <LibraryHero language={language} />
+        {/* Hero with Scroll Animation */}
+        <ScrollAnimationWrapper animation="fade-in" duration={1000}>
+          <LibraryHero language={language} />
+        </ScrollAnimationWrapper>
 
-        {/* Filter Bar */}
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          language={language}
-          resultCount={filteredItems.length}
-        />
+        {/* Filter Bar with Scroll Animation */}
+        <ScrollAnimationWrapper animation="fade-up" delay={200}>
+          <FilterBar
+            filters={filters}
+            setFilters={setFilters}
+            language={language}
+            resultCount={filteredItems.length}
+          />
+        </ScrollAnimationWrapper>
 
         {/* Content */}
         <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">

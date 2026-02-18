@@ -8,6 +8,7 @@ import { PATH_SERIES_PRICES, ESL_PATH_SERIES_PRICES } from '@shared/pricing';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import { EcosystemFooter } from '../components/EcosystemFooter';
+import ScrollAnimationWrapper, { StaggeredChildren } from '@/components/ScrollAnimationWrapper';
 import { 
   BookOpen, 
   Clock, 
@@ -578,7 +579,8 @@ export default function CoursesPage() {
           </div>
         </section>
 
-        {/* Hero Section */}
+        {/* Hero Section with Scroll Animation */}
+        <ScrollAnimationWrapper animation="fade-up" duration={800}>
         <section className={`relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[var(--color-blue-500, var(--semantic-info))]' : 'from-foundation via-[#1a4a4b] to-[var(--teal)]'} transition-colors duration-500`}>
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
@@ -588,12 +590,7 @@ export default function CoursesPage() {
           </div>
 
           <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center max-w-4xl mx-auto"
-            >
+            <div className="text-center max-w-4xl mx-auto">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-background/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                 <Sparkles className="w-4 h-4 text-teal-300" />                {langTab === 'esl' ? ui.eslBadge : ui.badge}      </div>
@@ -609,21 +606,18 @@ export default function CoursesPage() {
                 {langTab === 'esl' ? ui.eslHeroDesc : ui.heroDesc}
               </p>
 
-              {/* Stats with Glassmorphism */}
-              <div className="flex flex-wrap justify-center gap-4 lg:gap-6 mt-10">
+              {/* Stats with Glassmorphism and Staggered Animation */}
+              <StaggeredChildren animation="scale-in" staggerDelay={100} className="flex flex-wrap justify-center gap-4 lg:gap-6 mt-10">
                 {ui.stats.map((stat, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 + index * 0.1 }}
                     className="px-6 py-4 rounded-2xl bg-white dark:bg-background/10 backdrop-blur-md border border-white/60"
                   >
                     <p className="text-2xl lg:text-3xl font-bold text-white">{stat.value}</p>
                     <p className="text-sm text-white/90">{stat.label}</p>
-                  </motion.div>
+                  </div>
                 ))}
-              </div>
+              </StaggeredChildren>
 
               {/* CTAs */}
               <div className="flex flex-wrap justify-center gap-4 mt-10">
@@ -644,31 +638,30 @@ export default function CoursesPage() {
                   {ui.freeAssessment}
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
+        </ScrollAnimationWrapper>
 
-        {/* Why Path Series Section */}
+        {/* Why Path Series Section with Staggered Animation */}
         <section className="py-16 lg:py-20 bg-white dark:bg-background">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-foreground mb-4">
-                {ui.whyTitle} <span className="text-teal-600">Path Series\u2122</span>
-              </h2>
-              <p className="text-lg text-black dark:text-foreground">
-                {ui.whySubtitle}
-              </p>
-            </div>
+            <ScrollAnimationWrapper animation="fade-up">
+              <div className="text-center max-w-3xl mx-auto mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold text-foundation mb-4">
+                  {ui.whyTitle} <span className="text-teal-600">Path Series™</span>
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-400">
+                  {ui.whySubtitle}
+                </p>
+              </div>
+            </ScrollAnimationWrapper>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StaggeredChildren animation="scale-in" staggerDelay={100} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {valueProps.map((prop, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background border border-gray-100 dark:border-border hover:border-teal-200 hover:shadow-lg transition-all group"
+                  className="p-8 rounded-2xl bg-gray-50 dark:bg-card border border-gray-100 dark:border-border hover:shadow-xl transition-all duration-300"
                 >
                   <div className="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <prop.icon className="w-6 h-6" />
@@ -729,20 +722,18 @@ export default function CoursesPage() {
                   {index < howItWorksSteps.length - 1 && (
                     <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-teal-200" />
                   )}
-                  
-                  <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4">
-                    <step.icon className="w-6 h-6" />
+                           <div className="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center mb-6">
+                    <prop.icon className="w-6 h-6 text-teal-600" />
                   </div>
-                  <h3 className="text-lg font-bold text-black dark:text-foreground mb-2">{step.title}</h3>
-                  <p className="text-black dark:text-foreground text-sm">{step.description}</p>
-                </motion.div>
+                  <h3 className="text-xl font-bold text-foundation mb-3">{prop.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {prop.description}
+                  </p>
+                </div>
               ))}
-            </div>
+            </StaggeredChildren>
           </div>
-        </section>
-
-        {/* Filter Section */}
-        <section id="courses" className="py-8 border-b border-gray-100 dark:border-border bg-white dark:bg-background sticky top-0 z-40 shadow-sm">
+        </section>ction id="courses" className="py-8 border-b border-gray-100 dark:border-border bg-white dark:bg-background sticky top-0 z-40 shadow-sm">
           <div className="container">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-black dark:text-foreground">
