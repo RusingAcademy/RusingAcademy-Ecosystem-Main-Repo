@@ -280,7 +280,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
               src={video.thumbnail}
               alt={language === 'fr' ? video.titleFr : video.titleEn}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"             />
+                           />
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
             

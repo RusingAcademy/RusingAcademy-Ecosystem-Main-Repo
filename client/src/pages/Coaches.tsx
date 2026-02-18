@@ -46,6 +46,9 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+import { PremiumCard, ParallaxHero, MagneticButton } from "@/components/Month3Components";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export default function Coaches() {
   const { language, t } = useLanguage();
