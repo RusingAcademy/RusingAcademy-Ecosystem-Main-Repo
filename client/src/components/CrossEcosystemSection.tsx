@@ -411,10 +411,10 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
 // ─── Stats Pill ──────────────────────────────────────────────────────────────
 function StatsPill({ icon: IconComp, value, label }: { icon: React.ElementType; value: string; label: string }) {
   return (
-    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-background/5 backdrop-blur-sm border border-white/10">
+    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 stats-pill-mobile">
       <IconComp className="w-4 h-4 text-amber-400" />
       <span className="text-sm font-bold text-white">{value}</span>
-      <span className="text-xs text-white/60">{label}</span>
+      <span className="text-xs text-white/70">{label}</span>
     </div>
   );
 }
@@ -651,13 +651,13 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           variants={fadeInUp}
           className="flex justify-center mb-6 md:mb-10 lg:mb-14 px-4"
         >
-          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white dark:bg-background/5 backdrop-blur-xl border border-white/10">
+          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/10 dark:bg-background/5 backdrop-blur-xl border border-white/15 tab-buttons-container">
             <button
               onClick={() => handleTabSwitch("shorts")}
               className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
                 activeTab === "shorts"
                   ? "text-white"
-                  : "text-white/60 hover:text-white/90"
+                  : "text-white/70 hover:text-white/90"
               }`}
             >
               {activeTab === "shorts" && (
@@ -679,7 +679,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
                 activeTab === "capsules"
                   ? "text-white"
-                  : "text-white/60 hover:text-white/90"
+                  : "text-white/70 hover:text-white/90"
               }`}
             >
               {activeTab === "capsules" && (
@@ -734,13 +734,13 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   <ScrollArrow direction="right" onClick={() => shortsScroll.scrollByAmount('right')} />
                   
                   {/* Fade edges */}
-                  <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
-                  <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
                   
                   <div
                     ref={shortsScroll.scrollRef}
                     {...shortsScroll.handlers}
-                    className="flex flex-nowrap gap-5 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
+                    className="flex flex-nowrap gap-3 md:gap-5 overflow-x-auto scrollbar-hide px-6 md:px-20 py-4 cursor-grab select-none shorts-carousel"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                   >
                     {/* Duplicate for seamless loop — each gets a UNIQUE instanceKey */}
@@ -749,7 +749,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                       const instanceKey = isDuplicate ? `${short.id}-dup` : short.id;
                       const realIndex = isDuplicate ? i - featuredShorts.length : i;
                       return (
-                        <div key={instanceKey} className="scroll-card shrink-0 w-[160px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
+                        <div key={instanceKey} className="scroll-card shrink-0 w-[150px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
                           {renderShortCard(short, realIndex, instanceKey)}
                         </div>
                       );
@@ -794,13 +794,13 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   <ScrollArrow direction="left" onClick={() => capsulesScroll.scrollByAmount('left')} />
                   <ScrollArrow direction="right" onClick={() => capsulesScroll.scrollByAmount('right')} />
                   
-                  <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
-                  <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
                   
                   <div
                     ref={capsulesScroll.scrollRef}
                     {...capsulesScroll.handlers}
-                    className="flex flex-nowrap gap-6 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
+                    className="flex flex-nowrap gap-4 md:gap-6 overflow-x-auto scrollbar-hide px-6 md:px-20 py-4 cursor-grab select-none capsules-carousel"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                   >
                     {[...learningCapsules, ...learningCapsules].map((capsule, idx) => {

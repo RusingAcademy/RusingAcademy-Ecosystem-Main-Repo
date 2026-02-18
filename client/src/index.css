@@ -25,6 +25,7 @@
 @import "./styles/forms.css";
 @import "./styles/micro-animations.css";
 @import "./styles/print.css";
+@import "./styles/mobile-bugfixes.css";
 
 @custom-variant dark (&:is(.dark *));
 

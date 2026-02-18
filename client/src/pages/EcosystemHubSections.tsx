@@ -367,16 +367,16 @@ function EcosystemSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-3 gap-4 md:gap-8 ecosystem-cards-grid"
         >
           {pillars.map((pillar) => (
             <motion.div
               key={pillar.id}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group relative bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 ecosystem-card"
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-44 md:h-56 overflow-hidden ecosystem-card-image">
                 <img
                   loading="lazy" src={pillar.image}
                   alt={language === "en" ? pillar.nameEn : pillar.nameFr}
@@ -393,14 +393,14 @@ function EcosystemSection({ language }: { language: string }) {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-4 md:p-6 ecosystem-card-content">
                 <p className="text-sm font-medium text-black dark:text-foreground mb-1">
                   {language === "en" ? pillar.nameEn : pillar.nameFr}
                 </p>
-                <h3 className="text-xl font-bold text-black dark:text-foreground mb-3">
+                <h3 className="text-lg md:text-xl font-bold text-black dark:text-foreground mb-2 md:mb-3">
                   {language === "en" ? pillar.brandEn : pillar.brandFr}
                 </h3>
-                <p className="text-black dark:text-foreground mb-4 leading-relaxed">
+                <p className="text-sm md:text-base text-black dark:text-foreground mb-3 md:mb-4 leading-relaxed">
                   {language === "en" ? pillar.descEn : pillar.descFr}
                 </p>
                 <Link href={pillar.link}>
@@ -906,10 +906,10 @@ function LeadershipSection({ language }: { language: string }) {
           variants={staggerContainer}
           className="max-w-5xl mx-auto"
         >
-          <div className="bg-white dark:bg-background rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+            <div className="bg-white dark:bg-background rounded-3xl shadow-xl overflow-hidden border border-slate-100 leadership-card">
             <div className="grid md:grid-cols-2">
               {/* Image */}
-              <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
+              <motion.div variants={scaleIn} className="relative h-80 md:h-auto leadership-image">
                 <img
                   loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.png"
                   alt="Steven Barholere"
@@ -919,7 +919,7 @@ function LeadershipSection({ language }: { language: string }) {
               </motion.div>
 
               {/* Content */}
-              <motion.div variants={fadeInUp} className="p-8 md:p-12">
+              <motion.div variants={fadeInUp} className="p-8 md:p-12 leadership-content">
                 <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-6">
                   Meet Steven Barholere.
                 </h2>
@@ -1181,7 +1181,7 @@ function InstitutionsSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-8"
+          className="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-8 institutions-logo-grid"
         >
           {/* Government of Canada */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Canada" : "Gouvernement du Canada"}>
