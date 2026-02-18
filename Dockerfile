@@ -27,6 +27,9 @@ WORKDIR /app
 
 # Copy dependencies from previous stage
 COPY --from=deps /app/node_modules ./node_modules
+
+# Cache-bust: invalidate Docker layer cache when source changes
+ARG CACHEBUST=1
 COPY . .
 
 # Build the application (Vite frontend + esbuild backend)
