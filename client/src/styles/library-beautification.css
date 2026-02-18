@@ -12,8 +12,8 @@
   --library-primary: #0F3D3E;
   --library-primary-light: #1A5C5D;
   --library-primary-soft: rgba(15, 61, 62, 0.06);
-  --library-copper: #C65A1E;
-  --library-copper-soft: rgba(198, 90, 30, 0.06);
+  --library-copper: #B87333;
+  --library-copper-soft: rgba(184, 115, 51, 0.06);
   --library-gold: #D4A853;
   --library-gold-soft: rgba(212, 168, 83, 0.08);
   --library-parchment: #FDF8F3;
@@ -264,7 +264,7 @@
 
 .dark .library-section-header {
   color: white;
-  border-bottom-color: rgba(198, 90, 30, 0.2);
+  border-bottom-color: rgba(184, 115, 51, 0.2);
 }
 
 .dark .library-filter-bar {

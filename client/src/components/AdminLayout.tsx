@@ -253,7 +253,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                           <button aria-label={language === 'fr' && item.labelFr ? item.labelFr : item.label} className={cn(
                             "w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
                             isActive(item.path)
-                              ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium border-l-3 border-[var(--admin-terracotta,#C65A1E)]"
+                              ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium border-l-3 border-[var(--admin-terracotta,#B87333)]"
                               : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                             collapsed && "justify-center px-0"
                           )}>

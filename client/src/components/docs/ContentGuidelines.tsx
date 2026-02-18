@@ -146,8 +146,8 @@ const CONTENT_GUIDELINES: GuidelineSection[] = [
       {
         title: "Color Usage",
         titleFr: "Utilisation des couleurs",
-        description: "Foundation Teal (#0F3D3E) for primary brand. CTA Copper (#C65A1E) for call-to-action. HAZY palette for backgrounds and accents.",
-        descriptionFr: "Sarcelle fondation (#0F3D3E) pour la marque principale. Cuivre CTA (#C65A1E) pour les appels à l'action. Palette HAZY pour les arrière-plans et les accents.",
+        description: "Foundation Teal (#0F3D3E) for primary brand. CTA Copper (#B87333) for call-to-action. HAZY palette for backgrounds and accents.",
+        descriptionFr: "Sarcelle fondation (#0F3D3E) pour la marque principale. Cuivre CTA (#B87333) pour les appels à l'action. Palette HAZY pour les arrière-plans et les accents.",
       },
       {
         title: "Typography",

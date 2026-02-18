@@ -22,8 +22,8 @@
   --community-primary-soft: rgba(60, 87, 89, 0.08);
   --community-accent: #D1EBDB;
   --community-accent-soft: rgba(209, 235, 219, 0.15);
-  --community-warm: #C65A1E;
-  --community-warm-soft: rgba(198, 90, 30, 0.06);
+  --community-warm: #B87333;
+  --community-warm-soft: rgba(184, 115, 51, 0.06);
   --community-teal: #17E2C6;
 
   /* Community surfaces — glassmorphism */
@@ -442,9 +442,9 @@
 }
 
 .community-badge.admin {
-  background: rgba(198, 90, 30, 0.1);
+  background: rgba(184, 115, 51, 0.1);
   color: #E8854A;
-  border: 1px solid rgba(198, 90, 30, 0.2);
+  border: 1px solid rgba(184, 115, 51, 0.2);
 }
 
 .community-badge.new-member {
@@ -503,7 +503,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
   padding: 1.25rem;
-  border-left: 3px solid rgba(198, 90, 30, 0.6);
+  border-left: 3px solid rgba(184, 115, 51, 0.6);
   transition: all 0.3s var(--community-ease);
 }
 

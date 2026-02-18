@@ -11,8 +11,8 @@
   --learner-teal: #0F3D3E;
   --learner-teal-light: #1A5C5D;
   --learner-teal-soft: rgba(15, 61, 62, 0.08);
-  --learner-copper: #C65A1E;
-  --learner-copper-soft: rgba(198, 90, 30, 0.08);
+  --learner-copper: #B87333;
+  --learner-copper-soft: rgba(184, 115, 51, 0.08);
   --learner-success: #059669;
   --learner-success-soft: rgba(5, 150, 105, 0.08);
   --learner-gold: #D4A853;
@@ -27,7 +27,7 @@
   /* Learner gradients */
   --learner-hero-gradient: linear-gradient(135deg, #0F3D3E 0%, #1A5C5D 50%, #0F3D3E 100%);
   --learner-card-glow: 0 4px 24px rgba(15, 61, 62, 0.06);
-  --learner-progress-gradient: linear-gradient(90deg, #0F3D3E, #1A5C5D, #C65A1E);
+  --learner-progress-gradient: linear-gradient(90deg, #0F3D3E, #1A5C5D, #B87333);
 }
 
 /* === LEARNER DASHBOARD HERO === */
@@ -47,7 +47,7 @@
   right: -20%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(198, 90, 30, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(184, 115, 51, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 

@@ -46,29 +46,37 @@
 
   [class*="eco-btn"]:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.3);
+    box-shadow: 0 0 0 3px rgba(26, 61, 61, 0.25);
   }
 }
 
-/* === 1. CTA BUTTON (Electric Copper) === */
+/* === 1. CTA BUTTON (Copper Premium) === */
 /* Primary conversion: "Enroll Now", "Start Free Trial", "Book Session" */
+/* Rule: Copper = CTA / action / value */
 @layer components {
   .eco-btn-cta {
-    background-color: var(--brand-cta, var(--brand-cta));
-    color: var(--text-inverse);
+    background-color: var(--brand-cta);
+    color: var(--bg, #EFECE9);
     padding: 0.75rem 1.5rem;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
     border-radius: 9999px;
-    box-shadow: 0 4px 14px -2px rgba(198, 90, 30, 0.4);
+    border: none;
+    box-shadow: var(--shadow-cta, 0 12px 28px rgba(184, 115, 51, 0.20));
+    transition: all var(--transition-base, 200ms cubic-bezier(0.4, 0, 0.2, 1));
   }
   .eco-btn-cta:hover {
-    background-color: var(--brand-cta-2, var(--brand-cta-2));
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px -2px rgba(198, 90, 30, 0.5);
+    background-color: var(--brand-cta-2);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-cta-hover, 0 16px 32px rgba(184, 115, 51, 0.25));
   }
   .eco-btn-cta:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(198, 90, 30, 0.3);
+    box-shadow: 0 2px 8px rgba(184, 115, 51, 0.20);
+  }
+  .eco-btn-cta:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25), var(--shadow-cta, 0 12px 28px rgba(184, 115, 51, 0.20));
   }
 
   /* CTA sizes */
@@ -146,18 +154,24 @@
     font-size: 1rem;
   }
 
-  /* Outline CTA variant (copper border) */
+  /* Ghost Copper variant (outline CTA) */
   .eco-btn-outline-cta {
-    background-color: transparent;
-    color: var(--brand-cta, var(--brand-cta));
+    background: transparent;
+    color: var(--brand-cta);
     padding: 0.625rem 1.25rem;
     font-size: 0.875rem;
-    border: 2px solid var(--brand-cta, var(--brand-cta));
+    font-weight: 600;
+    border: 1.5px solid rgba(184, 115, 51, 0.55);
     border-radius: 9999px;
+    transition: all var(--transition-fast, 150ms cubic-bezier(0.4, 0, 0.2, 1));
   }
   .eco-btn-outline-cta:hover {
-    background-color: var(--brand-cta, var(--brand-cta));
-    color: var(--text-inverse);
+    background: var(--brand-cta-soft, #FFF8F3);
+    border-color: var(--brand-cta);
+  }
+  .eco-btn-outline-cta:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25);
   }
 }
 
@@ -224,24 +238,27 @@
 /* === PREMIUM GRADIENT BUTTONS (hero sections) === */
 @layer components {
   .eco-btn-premium-cta {
-    background: linear-gradient(135deg, var(--brand-cta, var(--brand-cta)) 0%, var(--barholex-gold-hover) 50%, #FF9A5C 100%);
-    color: var(--text-inverse);
+    background: linear-gradient(135deg, var(--brand-cta) 0%, var(--brand-cta-glow, #E7C2A1) 100%);
+    color: var(--bg, #EFECE9);
     font-weight: 700;
     padding: 1rem 2rem;
     font-size: 1rem;
     border-radius: 9999px;
     border: none;
     box-shadow: 
-      0 10px 25px -5px rgba(198, 90, 30, 0.45),
-      0 4px 8px rgba(0, 0, 0, 0.06),
+      var(--shadow-cta, 0 12px 28px rgba(184, 115, 51, 0.20)),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all var(--transition-base, 200ms cubic-bezier(0.4, 0, 0.2, 1));
   }
   .eco-btn-premium-cta:hover {
     transform: translateY(-2px);
     box-shadow: 
-      0 15px 35px -5px rgba(198, 90, 30, 0.5),
-      0 6px 12px rgba(0, 0, 0, 0.08),
+      var(--shadow-cta-hover, 0 16px 32px rgba(184, 115, 51, 0.25)),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .eco-btn-premium-cta:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25), var(--shadow-cta);
   }
 
   .eco-btn-premium-teal {

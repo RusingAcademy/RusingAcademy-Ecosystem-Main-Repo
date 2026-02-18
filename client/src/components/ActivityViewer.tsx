@@ -202,7 +202,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
         // Fire confetti burst
         const duration = 2500;
         const end = Date.now() + duration;
-        const colors = ['var(--brand-foundation, #0F3D3E)', '#C65A1E', '#17E2C6', '#F59E0B', '#10B981'];
+        const colors = ['var(--brand-foundation, #1a3d3d)', '#B87333', '#17E2C6', '#F59E0B', '#10B981'];
         (function frame() {
           confetti({
             particleCount: 3,
