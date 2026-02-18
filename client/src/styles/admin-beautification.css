@@ -38,7 +38,7 @@
   
   /* Warm Neutrals */
   --admin-warm-bg: #FAFAF7;
-  --admin-warm-surface: #FFFFFF;
+  --admin-warm-surface: #FAFAF8;  /* Warm white for admin cards */
   --admin-warm-border: #E8E4DE;
   --admin-warm-text: #2D2A26;
   --admin-warm-muted: #8A8580;

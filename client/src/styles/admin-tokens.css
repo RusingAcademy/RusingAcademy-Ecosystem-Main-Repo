@@ -13,7 +13,7 @@
    ============================================ */
 :root {
   /* Admin card surfaces */
-  --admin-card-bg: #FFFFFF;
+  --admin-card-bg: #FAFAF8;  /* Warm white for admin cards */
   --admin-card-border: #E5E7EB;
   --admin-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --admin-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);

@@ -39,7 +39,7 @@
   /* === CORE BACKGROUNDS (HAZY Warm Cream) === */
   --bg: #EFECE9;              /* Main background - HAZY warm cream */
   --bg-alt: #E8E4DE;          /* Alternate background - adjusted sand */
-  --surface: #FFFFFF;          /* Cards, modals - pure white */
+  --surface: #FFFFFF;          /* Cards, modals - pure white (intentional contrast on cream bg) */
   --surface-soft: #D0D5CE;    /* HAZY silver sage */
   --sand: #E8E4DE;             /* Sand accent - harmonized */
   --mint: #D1EBDB;             /* HAZY mint - pedagogical sections */
@@ -278,6 +278,12 @@ textarea:focus-visible,
 h1, h2, h3, .heading {
   font-family: var(--font-display);
   font-weight: 700;
+  color: var(--text);
+}
+
+/* Body background — HAZY warm cream */
+html, body {
+  background-color: var(--bg);
   color: var(--text);
 }
 
