@@ -220,10 +220,10 @@
    Glass Morphism
    ---------------------------------------- */
 
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.glass { /* HAZY glass recipe */
+  background: var(--glass-bg, rgba(239, 236, 233, 0.60));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -236,8 +236,8 @@
 
 .glass-teal {
   background: rgba(30, 155, 138, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(30, 155, 138, 0.3);
 }
 
