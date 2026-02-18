@@ -239,7 +239,7 @@ export default function BarholexPortfolio() {
       
       <main id="main-content">
         {/* ─── Hero Section ─── Premium dark header with gold accents */}
-        <section className="relative pt-24 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0F2035] to-[#0A1628]">
+        <section className="relative pt-24 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0F2035] to-[#0A1628] dark-page">
           {/* Decorative orbs */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-10 left-[15%] w-80 h-80 bg-barholex-gold/12 rounded-full blur-[100px] animate-pulse" />

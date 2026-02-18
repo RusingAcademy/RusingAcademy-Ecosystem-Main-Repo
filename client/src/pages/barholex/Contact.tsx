@@ -83,7 +83,7 @@ export default function BarholexContact() {
 
   if (formSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white">
+      <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white dark-page">
         <main className="pt-24 pb-20 px-4">
           <div className="container mx-auto max-w-2xl">
             <motion.div
@@ -119,7 +119,7 @@ export default function BarholexContact() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-obsidian via-gray-950 to-teal-950 text-white dark-page">
       <main id="main-content">
         {/* Hero Section */}
         <section className="relative pt-20 pb-12 px-4 overflow-hidden">
