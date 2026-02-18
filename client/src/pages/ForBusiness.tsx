@@ -258,7 +258,7 @@ export default function ForBusiness() {
         <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-transparent to-orange-50/30 dark:from-teal-950/30 dark:to-[#431407]/20" />
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-teal-100/20 to-transparent dark:from-teal-900/10" />
         
-        <div className="container relative pt-20 pb-24 md:pt-28 md:pb-32">
+        <div className="container relative pt-10 pb-12 md:pt-14 md:pb-16">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800 px-4 py-1.5 text-sm font-medium">
               <Building2 className="w-4 h-4 mr-2" />
@@ -306,7 +306,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Benefits Section */}
-      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
+      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-10 md:py-14 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <WaveDivider variant="organic" color="#f8fafc" backgroundColor="white" orientation="bottom" />
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
@@ -331,7 +331,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Packages Section */}
-      <section ref={setSectionRef('packages')} data-section="packages" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
+      <section ref={setSectionRef('packages')} data-section="packages" className="py-10 md:py-14 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.packagesTitle}</h2>
@@ -377,7 +377,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Industries Section */}
-      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
+      <section ref={setSectionRef('industries')} data-section="industries" className="py-10 md:py-14 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.industriesTitle}</h2>
@@ -401,7 +401,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Testimonials Section */}
-      <section ref={setSectionRef('testimonials')} data-section="testimonials" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
+      <section ref={setSectionRef('testimonials')} data-section="testimonials" className="py-10 md:py-14 bg-gradient-to-b from-slate-50 to-white dark:from-teal-950 dark:to-obsidian">
         <div className="container">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">{t.testimonialsTitle}</h2>
@@ -430,7 +430,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Contact Form Section */}
-      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
+      <section ref={setSectionRef('contact')} data-section="contact" className="py-10 md:py-14 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
@@ -501,7 +501,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-r from-teal-600 to-emerald-600">
+      <section className="py-10 md:py-14 bg-gradient-to-r from-teal-600 to-emerald-600">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{t.ctaTitle}</h2>
           <p className="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">{t.ctaSubtitle}</p>

@@ -759,27 +759,28 @@ body, p, span, div, li, a, button, input, select, textarea {
    GLOBAL TEXT CONTRAST FIX
    ============================================ */
 
-/* Force text-muted-foreground to be dark gray */
-.text-muted-foreground { color: #374151 !important; }
+/* Force text-muted-foreground to be dark gray — LIGHT MODE ONLY */
+:root:not(.dark) .text-muted-foreground { color: #374151 !important; }
 
 /* Force all paragraphs to be readable — uses :where() for zero specificity
    so that inherited color from .text-white containers wins naturally. */
 :where(p, .prose p, article p) { color: #1f2937; }
 
-/* Ensure card descriptions are readable */
-.card p, .card .text-muted-foreground,
-[class*="Card"] p, [class*="Card"] .text-muted-foreground { color: #374151 !important; }
+/* Ensure card descriptions are readable — LIGHT MODE ONLY */
+:root:not(.dark) .card p, :root:not(.dark) .card .text-muted-foreground,
+:root:not(.dark) [class*="Card"] p, :root:not(.dark) [class*="Card"] .text-muted-foreground { color: #374151 !important; }
 
-/* Fix for sections with white/light backgrounds.
+/* Fix for sections with white/light backgrounds — LIGHT MODE ONLY.
    The section:not() selector excludes ANY section that contains a dark-bg
    keyword in its class list (obsidian, teal-9, teal-8, slate-9, slate-8, gray-9)
-   or the .dark-page marker class. */
-.bg-white p, .bg-white .text-muted-foreground,
-.bg-background p, .bg-background .text-muted-foreground,
-.bg-porcelain p, .bg-porcelain .text-muted-foreground,
-.bg-surface p, .bg-surface .text-muted-foreground,
-section:not([class*="obsidian"]):not([class*="teal-9"]):not([class*="teal-8"]):not([class*="slate-9"]):not([class*="slate-8"]):not([class*="gray-9"]):not(.dark-page) p,
-section:not([class*="obsidian"]):not([class*="teal-9"]):not([class*="teal-8"]):not([class*="slate-9"]):not([class*="slate-8"]):not([class*="gray-9"]):not(.dark-page) .text-muted-foreground {
+   or the .dark-page marker class.
+   Scoped to :root:not(.dark) so it does NOT override dark mode text. */
+:root:not(.dark) .bg-white p, :root:not(.dark) .bg-white .text-muted-foreground,
+:root:not(.dark) .bg-background p, :root:not(.dark) .bg-background .text-muted-foreground,
+:root:not(.dark) .bg-porcelain p, :root:not(.dark) .bg-porcelain .text-muted-foreground,
+:root:not(.dark) .bg-surface p, :root:not(.dark) .bg-surface .text-muted-foreground,
+:root:not(.dark) section:not([class*="obsidian"]):not([class*="teal-9"]):not([class*="teal-8"]):not([class*="slate-9"]):not([class*="slate-8"]):not([class*="gray-9"]):not(.dark-page) p,
+:root:not(.dark) section:not([class*="obsidian"]):not([class*="teal-9"]):not([class*="teal-8"]):not([class*="slate-9"]):not([class*="slate-8"]):not([class*="gray-9"]):not(.dark-page) .text-muted-foreground {
   color: #374151 !important;
 }
 
@@ -792,11 +793,28 @@ section:not([class*="obsidian"]):not([class*="teal-9"]):not([class*="teal-8"]):n
   color: rgba(255, 255, 255, 0.90) !important;
 }
 
-/* Dark mode: ensure text is light on dark backgrounds */
+/* ============================================
+   DARK MODE TEXT — Comprehensive overrides
+   All rules use !important to win over any light-mode remnants.
+   ============================================ */
 .dark .text-muted-foreground { color: #9CA3AF !important; }
-.dark p, .dark .prose p, .dark article p { color: #E5E7EB; }
-.dark .card p, .dark .card .text-muted-foreground,
-.dark [class*="Card"] p, .dark [class*="Card"] .text-muted-foreground { color: #9CA3AF !important; }
+.dark p, .dark .prose p, .dark article p,
+.dark span:not(.accent):not([class*="bg-clip"]),
+.dark li { color: #E5E7EB !important; }
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 { color: #F7F6F3 !important; }
+.dark .card p, .dark .card span, .dark .card li,
+.dark .card .text-muted-foreground,
+.dark [class*="Card"] p, .dark [class*="Card"] span,
+.dark [class*="Card"] .text-muted-foreground { color: #D1D5DB !important; }
+.dark .card h1, .dark .card h2, .dark .card h3,
+.dark .card h4, .dark .card h5, .dark .card h6,
+.dark [class*="Card"] h1, .dark [class*="Card"] h2,
+.dark [class*="Card"] h3, .dark [class*="Card"] h4 { color: #F9FAFB !important; }
+/* Dark mode: preserve gradient text (bg-clip-text + text-transparent) */
+.dark [class*="bg-clip-text"] { color: transparent !important; }
+/* Dark mode: preserve button text that's explicitly white */
+.dark button .text-white, .dark a.text-white,
+.dark [role="button"] .text-white { color: #FFFFFF !important; }
 
 /* ============================================
    DARK BACKGROUND SECTIONS — LIGHT TEXT (Light + Dark mode)

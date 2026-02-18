@@ -56,7 +56,7 @@ export default function WaveDivider({
       <svg
         viewBox="0 0 1920 320"
         preserveAspectRatio="none"
-        className="block w-full h-[60px] sm:h-[80px] md:h-[100px]"
+        className="block w-full h-[24px] sm:h-[32px] md:h-[40px]"
         style={{ transform: flip }}
       >
         <path d={path} fill={color} />

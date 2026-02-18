@@ -337,7 +337,7 @@ export default function Pricing() {
         />
 
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
+        <section className="relative py-10 lg:py-14 overflow-hidden bg-gradient-to-br from-obsidian via-teal-900 to-obsidian">
           <WaveDivider variant="smooth" color="#f8fafc" backgroundColor="transparent" orientation="bottom" />
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">

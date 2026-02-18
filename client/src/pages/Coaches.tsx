@@ -2,7 +2,6 @@ import SEO from "@/components/SEO";
 import { useState, useMemo, useEffect, useRef } from "react";
 import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 import { Button } from "@/components/ui/button";
-import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -187,27 +186,22 @@ export default function Coaches() {
       
 
       <main id="main-content" className="flex-1">
-        <WaveDivider variant="smooth" color="#f0fdfa" backgroundColor="transparent" orientation="bottom" />
-        {/* Premium Hero Section with Scroll Animation */}
-        <ScrollAnimationWrapper animation="fade-up" duration={800}>
-          <section className="py-8 md:py-12 section-bg-2 border-b border-teal-200/50 dark:border-white/15">
+        {/* Compact Hero Section — profiles visible immediately */}
+          <section className="pt-4 pb-3 md:pt-6 md:pb-4 section-bg-2 border-b border-teal-200/50 dark:border-white/15">
             <div className="container mx-auto px-6 md:px-8 lg:px-12 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-3">
+              <h1 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-2">
                 {language === 'fr' ? 'Nos Coachs Certifiés' : 'Our Certified Coaches'}
               </h1>
-              <p className="text-lg text-black/70 dark:text-foreground/70 max-w-2xl mx-auto">
+              <p className="text-base text-black/70 dark:text-foreground/70 max-w-2xl mx-auto">
                 {language === 'fr' 
                   ? 'Trouvez le coach parfait pour vos objectifs SLE et développement professionnel'
                   : 'Find the perfect coach for your SLE goals and professional development'}
               </p>
             </div>
           </section>
-        </ScrollAnimationWrapper>
-        <WaveDivider variant="organic" color="white" backgroundColor="#f0fdfa" orientation="bottom" />
 
         {/* Search Bar Section */}
-        <ScrollAnimationWrapper animation="fade-up" duration={700} delay={100}>
-          <section className="py-6">
+          <section className="py-3">
             <div className="container mx-auto px-6 md:px-8 lg:px-12">
               <div className="max-w-2xl mx-auto">
                 <div className="relative group">
@@ -228,11 +222,8 @@ export default function Coaches() {
                 </div>
               </div>
             </div>
-          </section>
-        </ScrollAnimationWrapper>
-
+           </section>
         {/* Main Content */}
-        <ScrollAnimationWrapper animation="fade-up" duration={700} delay={150}>
           <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
             <div className="flex flex-col lg:flex-row gap-8">
             {/* Filters Sidebar - Premium */}
@@ -698,7 +689,6 @@ export default function Coaches() {
             </div>
           </div>
         </div>
-        </ScrollAnimationWrapper>
       </main>
 
       <Footer />
