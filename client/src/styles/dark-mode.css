@@ -1,0 +1,354 @@
+/**
+ * ============================================
+ * RUSINGÂCADEMY ECOSYSTEM — DARK MODE
+ * ============================================
+ * Month 6 — Polish, Scale & Launch
+ * 
+ * Complete dark mode color palette using design tokens.
+ * Premium aesthetic matching light mode quality.
+ * Glassmorphism effects adapted for dark backgrounds.
+ * Smooth transitions between light and dark modes.
+ * Respects prefers-color-scheme system preference.
+ *
+ * HAZY Palette Dark Adaptation:
+ *   Light #EFECE9 → Dark #0D1B1A
+ *   Light #D0D5CE → Dark #162726
+ *   Light #D1EBDB → Dark #0F2E2A
+ *   Light #959D90 → Dark #3A4A3E
+ *   Light #3C5759 → Dark #5A8587
+ *   Light #192524 → Dark #C8D5D0
+ */
+
+/* ============================================
+   DARK MODE DESIGN TOKENS
+   ============================================ */
+:root {
+  /* Transition for smooth theme switching */
+  --theme-transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                      box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark {
+  /* === DARK PALETTE — HAZY-Inspired === */
+  --dark-bg-deepest: #070F0E;
+  --dark-bg-base: #0D1B1A;
+  --dark-bg-surface: #111F1E;
+  --dark-bg-elevated: #162726;
+  --dark-bg-card: #1A2E2D;
+  --dark-bg-overlay: rgba(0, 0, 0, 0.7);
+
+  /* === DARK SECTION BACKGROUNDS === */
+  --dark-section-bg-1: #0D1B1A;
+  --dark-section-bg-2: #111F1E;
+  --dark-section-bg-3: #0F2E2A;
+  --dark-section-bg-4: #142523;
+  --dark-section-bg-5: #162726;
+  --dark-section-bg-6: #0E1918;
+
+  /* === DARK TEXT COLORS === */
+  --dark-text-primary: #E8EDE9;
+  --dark-text-secondary: #B0BDB5;
+  --dark-text-muted: #7A8D82;
+  --dark-text-inverse: #0B1220;
+  --dark-text-on-sage: #D1DCCF;
+  --dark-text-on-mint: #C8E8D5;
+  --dark-text-on-cream: #D5D0C8;
+  --dark-text-on-teal: #FFFFFF;
+
+  /* === DARK BRAND COLORS === */
+  --dark-brand-foundation: #1A7A7B;
+  --dark-brand-foundation-2: #22A0A1;
+  --dark-brand-foundation-soft: rgba(26, 122, 123, 0.15);
+  --dark-brand-cta: #E07B3D;
+  --dark-brand-cta-2: #F09050;
+  --dark-brand-cta-soft: rgba(224, 123, 61, 0.15);
+  --dark-brand-obsidian: #0A3535;
+  --dark-brand-obsidian-2: #082828;
+
+  /* === DARK SAGE/MINT/CREAM === */
+  --dark-sage-primary: #3A4A3E;
+  --dark-sage-light: #4D5E51;
+  --dark-sage-soft: rgba(58, 74, 62, 0.3);
+  --dark-mint-primary: #1A4A3D;
+  --dark-mint-light: #245A4C;
+  --dark-mint-soft: rgba(26, 74, 61, 0.25);
+  --dark-cream-primary: #2A2520;
+  --dark-cream-light: #3A342E;
+  --dark-cream-soft: rgba(42, 37, 32, 0.3);
+
+  /* === DARK GLASSMORPHISM === */
+  --dark-glass-bg-light: rgba(13, 27, 26, 0.65);
+  --dark-glass-bg-medium: rgba(13, 27, 26, 0.80);
+  --dark-glass-bg-heavy: rgba(13, 27, 26, 0.92);
+  --dark-glass-bg-accent: rgba(26, 122, 123, 0.12);
+  --dark-glass-border-light: rgba(255, 255, 255, 0.06);
+  --dark-glass-border-medium: rgba(255, 255, 255, 0.10);
+  --dark-glass-border-accent: rgba(26, 122, 123, 0.25);
+  --dark-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --dark-glass-shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.45);
+
+  /* === DARK BORDERS === */
+  --dark-border-color-light: rgba(255, 255, 255, 0.06);
+  --dark-border-color-medium: rgba(255, 255, 255, 0.12);
+  --dark-border-color-dark: rgba(255, 255, 255, 0.20);
+
+  /* === DARK SHADOWS === */
+  --dark-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --dark-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --dark-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --dark-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --dark-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.45), 0 8px 10px -6px rgba(0, 0, 0, 0.35);
+
+  /* === DARK SEMANTIC STATES === */
+  --dark-danger: #F87171;
+  --dark-danger-light: rgba(248, 113, 113, 0.2);
+  --dark-danger-soft: rgba(248, 113, 113, 0.1);
+  --dark-success: #34D399;
+  --dark-success-light: rgba(52, 211, 153, 0.2);
+  --dark-success-soft: rgba(52, 211, 153, 0.1);
+  --dark-warning: #FBBF24;
+  --dark-warning-light: rgba(251, 191, 36, 0.2);
+  --dark-warning-soft: rgba(251, 191, 36, 0.1);
+  --dark-info: #60A5FA;
+  --dark-info-light: rgba(96, 165, 250, 0.2);
+  --dark-info-soft: rgba(96, 165, 250, 0.1);
+
+  /* === DARK ECOSYSTEM ACCENTS === */
+  --dark-lingueefy-accent: #20F0D4;
+  --dark-lingueefy-accent-2: #18D4BA;
+  --dark-barholex-gold: #E0B860;
+  --dark-barholex-gold-2: #D0A850;
+}
+
+/* ============================================
+   DARK MODE — GLOBAL OVERRIDES
+   ============================================ */
+
+/* Smooth transition on theme change */
+html {
+  transition: var(--theme-transition);
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: var(--dark-bg-base);
+  color: var(--dark-text-primary);
+}
+
+/* ============================================
+   DARK MODE — GLASSMORPHISM EFFECTS
+   ============================================ */
+.dark .glass-light {
+  background: var(--dark-glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur-md));
+  -webkit-backdrop-filter: blur(var(--glass-blur-md));
+  border-color: var(--dark-glass-border-light);
+  box-shadow: var(--dark-glass-shadow);
+}
+
+.dark .glass-medium {
+  background: var(--dark-glass-bg-medium);
+  backdrop-filter: blur(var(--glass-blur-md));
+  -webkit-backdrop-filter: blur(var(--glass-blur-md));
+  border-color: var(--dark-glass-border-medium);
+  box-shadow: var(--dark-glass-shadow);
+}
+
+.dark .glass-heavy {
+  background: var(--dark-glass-bg-heavy);
+  backdrop-filter: blur(var(--glass-blur-lg));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg));
+  border-color: var(--dark-glass-border-medium);
+  box-shadow: var(--dark-glass-shadow);
+}
+
+.dark .glass-dark {
+  background: rgba(7, 15, 14, 0.85);
+  backdrop-filter: blur(var(--glass-blur-lg));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg));
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--dark-glass-shadow-elevated);
+}
+
+/* Premium glassmorphism card for dark mode */
+.dark .glass-card-premium {
+  background: linear-gradient(
+    135deg,
+    rgba(13, 27, 26, 0.75) 0%,
+    rgba(22, 39, 38, 0.65) 50%,
+    rgba(15, 46, 42, 0.55) 100%
+  );
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.dark .glass-card-premium:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   DARK MODE — SECTION BACKGROUNDS
+   ============================================ */
+.dark .section-bg-1 { background-color: var(--dark-section-bg-1); }
+.dark .section-bg-2 { background-color: var(--dark-section-bg-2); }
+.dark .section-bg-3 { background-color: var(--dark-section-bg-3); }
+.dark .section-bg-4 { background-color: var(--dark-section-bg-4); }
+.dark .section-bg-5 { background-color: var(--dark-section-bg-5); }
+.dark .section-bg-6 { background-color: var(--dark-section-bg-6); }
+
+/* ============================================
+   DARK MODE — TEXT UTILITIES
+   ============================================ */
+.dark .text-primary { color: var(--dark-text-primary); }
+.dark .text-secondary { color: var(--dark-text-secondary); }
+.dark .text-muted { color: var(--dark-text-muted); }
+.dark .text-inverse { color: var(--dark-text-inverse); }
+
+/* ============================================
+   DARK MODE — BACKGROUND UTILITIES
+   ============================================ */
+.dark .bg-base { background-color: var(--dark-bg-base); }
+.dark .bg-surface { background-color: var(--dark-bg-surface); }
+.dark .bg-elevated { background-color: var(--dark-bg-elevated); }
+
+/* ============================================
+   DARK MODE — FOCUS STATES
+   ============================================ */
+.dark :focus-visible {
+  box-shadow: 0 0 0 3px rgba(26, 122, 123, 0.5);
+}
+
+.dark .btn-cta:focus-visible,
+.dark [data-cta]:focus-visible {
+  box-shadow: 0 0 0 3px rgba(224, 123, 61, 0.5);
+}
+
+/* ============================================
+   DARK MODE — SCROLLBAR
+   ============================================ */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--dark-bg-surface);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--dark-border-color-dark);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   DARK MODE — FORM ELEMENTS
+   ============================================ */
+.dark input,
+.dark textarea,
+.dark select {
+  color-scheme: dark;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: var(--dark-text-muted);
+}
+
+/* ============================================
+   DARK MODE — BRAND OVERLAYS
+   ============================================ */
+.dark [data-brand="ecosystem"] {
+  --brand-accent: var(--dark-brand-foundation);
+  --brand-accent-2: var(--dark-brand-foundation-2);
+  --brand-accent-soft: var(--dark-brand-foundation-soft);
+}
+
+.dark [data-brand="rusingacademy"] {
+  --brand-accent: var(--dark-brand-cta);
+  --brand-accent-2: var(--dark-brand-cta-2);
+  --brand-accent-soft: var(--dark-brand-cta-soft);
+}
+
+.dark [data-brand="lingueefy"] {
+  --brand-accent: var(--dark-lingueefy-accent);
+  --brand-accent-2: var(--dark-lingueefy-accent-2);
+  --brand-accent-soft: rgba(32, 240, 212, 0.12);
+}
+
+.dark [data-brand="barholex"] {
+  --brand-accent: var(--dark-barholex-gold);
+  --brand-accent-2: var(--dark-barholex-gold-2);
+  --brand-accent-soft: rgba(224, 184, 96, 0.12);
+}
+
+/* ============================================
+   DARK MODE — MONTH 2 ANIMATION OVERRIDES
+   ============================================ */
+.dark .floating-card-month2 {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.dark .floating-card-month2:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.dark .glass-card-interactive {
+  background: var(--dark-glass-bg-light);
+  border-color: var(--dark-glass-border-light);
+}
+
+.dark .glass-card-interactive:hover {
+  background: var(--dark-glass-bg-medium);
+  border-color: var(--dark-glass-border-medium);
+}
+
+.dark .magnetic-cta-month2:hover {
+  box-shadow: 0 0 30px rgba(224, 123, 61, 0.25);
+}
+
+.dark .section-divider-month2::before,
+.dark .section-divider-month2::after {
+  border-color: var(--dark-border-color-light);
+}
+
+.dark .input-glow-month2:focus {
+  box-shadow: 0 0 0 3px rgba(26, 122, 123, 0.3), 0 0 20px rgba(26, 122, 123, 0.1);
+}
+
+/* ============================================
+   DARK MODE — SELECTION
+   ============================================ */
+.dark ::selection {
+  background: rgba(26, 122, 123, 0.4);
+  color: #FFFFFF;
+}
+
+/* ============================================
+   DARK MODE — REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html.dark {
+    transition: none;
+  }
+  
+  html * {
+    transition-duration: 0.01ms !important;
+  }
+}
