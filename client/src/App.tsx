@@ -14,6 +14,8 @@ import { usePageTracking } from "./hooks/useAnalytics";
 import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
 import PWAInstallBanner from "./components/PWAInstallBanner";
+import { ScrollToTopButton } from "./components/ScrollToTopButton";
+import { SkipToContent } from "./components/SkipToContent";
 
 // ─── Shared Loading Skeleton ───────────────────────────────────────────────
 function PageSkeleton() {
@@ -756,7 +758,9 @@ function App() {
                   <SLEAICompanionMobileButton />
                   <NotificationPermission />
                   <OfflineIndicator />
+                  <SkipToContent />
                   <PWAInstallBanner />
+                  <ScrollToTopButton />
                 </GamificationProvider>
               </NotificationProvider>
             </TooltipProvider>
