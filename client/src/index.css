@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* Month 1: Design Foundation & Color System */
 @import "./styles/design-tokens.css";
@@ -666,7 +666,7 @@ footer .text-muted-foreground {
    Playfair Display for Elite Serif Headings
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+/* Playfair Display font moved to consolidated @import on line 1 */
 
 @theme inline {
   --font-serif: "Playfair Display", "Times New Roman", serif;

@@ -68,12 +68,12 @@ ENV NODE_ENV=production
 ENV PORT=5000
 ENV NODE_OPTIONS="--max-old-space-size=512"
 
-# Expose the application port
-EXPOSE 5000
+# Expose the application port (Railway overrides via $PORT env var)
+EXPOSE ${PORT}
 
-# Health check
+# Health check — uses $PORT so it works regardless of Railway's assigned port
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:5000/api/health || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/api/health || exit 1
 
 # Start the application
 CMD ["node", "dist/index.js"]
