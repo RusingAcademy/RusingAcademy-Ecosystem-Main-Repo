@@ -1,10 +1,10 @@
 /**
  * Project Tracker Dashboard
- * Real-time tracking of RusingAcademy Ecosystem Development
+ * Real-time tracking of RusingÂcademy Ecosystem Development
  * 
  * @route /admin/project-tracker
  * @access Admin only (Clerk protected)
- * @brand RusingAcademy
+ * @brand RusingÂcademy
  * @copyright Rusinga International Consulting Ltd.
  */
 
@@ -89,7 +89,7 @@ const PROJECT_DATA = {
   },
 
   branches: [
-    { name: 'RusingAcademy', description: 'Pilier Académique & Formation', status: 'production', features: ['6 Paths', '96 Leçons', 'RAG AI'] },
+    { name: 'RusingÂcademy', description: 'Pilier Académique & Formation', status: 'production', features: ['6 Paths', '96 Leçons', 'RAG AI'] },
     { name: 'Lingueefy', description: 'Coaching Humain & IA', status: 'production', features: ['Booking', 'Coaches', 'Messaging', 'Commission'] },
     { name: 'Barholex Media', description: 'EdTech, Consulting & Innovation', status: 'production', features: ['Services', 'Portfolio', 'Contact', 'B2B/B2G'] },
   ],
@@ -108,7 +108,7 @@ const PROJECT_DATA = {
 
 // KPI Card Component
 const KPICard = ({ icon: Icon, label, value, subtitle, progress }: { icon: any; label: string; value: string | number; subtitle: string; progress?: number; }) => (
-  <div className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 hover:bg-white dark:bg-background/10 transition-all duration-300">
+  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 transition-all duration-300">
     <div className="flex items-center justify-between mb-4">
       <span className="text-cyan-300 text-sm">{label}</span>
       <Icon className="w-6 h-6 text-emerald-400" />
@@ -179,12 +179,12 @@ export default function ProjectTrackerDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-obsidian via-teal-900 to-obsidian text-white">
-      <header className="bg-white dark:bg-background/5 backdrop-blur-sm border-b border-white/60 sticky top-0 z-50 px-6 py-4">
+      <header className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border-b border-white/60 sticky top-0 z-50 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-lg flex items-center justify-center font-bold text-xl">R</div>
             <div>
-              <h1 className="text-xl font-bold">RusingAcademy Ecosystem</h1>
+              <h1 className="text-xl font-bold">RusingÂcademy Ecosystem</h1>
               <p className="text-xs text-cyan-300">Project Tracker Dashboard</p>
             </div>
           </div>
@@ -204,11 +204,11 @@ export default function ProjectTrackerDashboard() {
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-2 bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+          <div className="lg:col-span-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><BarChart3 className="w-6 h-6 text-emerald-400" /> État des Branches</h2>
             <div className="space-y-4">
               {data.branches.map((branch, index) => (
-                <div key={index} className="bg-white dark:bg-background/5 rounded-xl p-4">
+                <div key={index} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold ${index === 0 ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : index === 1 ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 'bg-gradient-to-br from-foundation to-orange-600'}`}>{branch.name.substring(0, 2)}</div>
@@ -224,7 +224,7 @@ export default function ProjectTrackerDashboard() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Calendar className="w-6 h-6 text-emerald-400" /> Progression</h2>
             <div className="flex flex-col items-center justify-center h-64">
               <div className="relative w-48 h-48">
@@ -242,7 +242,7 @@ export default function ProjectTrackerDashboard() {
           </div>
         </div>
 
-        <section className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><BookOpen className="w-6 h-6 text-emerald-400" /> The Path Series</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.paths.map((path) => (<PathCard key={path.id} path={path} />))}
@@ -250,14 +250,14 @@ export default function ProjectTrackerDashboard() {
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Package className="w-6 h-6 text-emerald-400" /> Stack Technique</h2>
             <div className="space-y-3">
-              {data.techStack.map((tech, index) => (<div key={index} className="flex items-center justify-between bg-white dark:bg-background/5 rounded-lg p-3"><span className="text-cyan-300">{tech.name}</span><span className="text-emerald-400">{tech.value}</span></div>))}
+              {data.techStack.map((tech, index) => (<div key={index} className="flex items-center justify-between bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 rounded-lg p-3"><span className="text-cyan-300">{tech.name}</span><span className="text-emerald-400">{tech.value}</span></div>))}
             </div>
           </div>
 
-          <div className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><AlertTriangle className="w-6 h-6 text-amber-400" /> Éléments Manquants</h2>
             <div className="space-y-3">
               {data.missingItems.map((item, index) => (<div key={index} className={`flex items-center justify-between rounded-lg p-3 border ${item.severity === 'critical' ? 'bg-red-500/10 border-red-500/30' : item.severity === 'warning' ? 'bg-cta/10 border-amber-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}><span className="text-white/90">{item.item}</span><span className={item.severity === 'critical' ? 'text-red-400' : item.severity === 'warning' ? 'text-amber-400' : 'text-blue-400'}>{item.count ? `${item.count} à produire` : 'À développer'}</span></div>))}
@@ -265,13 +265,13 @@ export default function ProjectTrackerDashboard() {
           </div>
         </div>
 
-        <section className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Clock className="w-6 h-6 text-emerald-400" /> Sprints Récents</h2>
           <div className="space-y-4">
             {data.sprints.slice(0, 6).map((sprint) => (
               <div key={sprint.id} className="flex items-start gap-4">
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold shrink-0 ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-cta/20 text-amber-400' : 'bg-white0/20 text-cyan-300'}`}>{sprint.id > 0 ? sprint.id : sprint.id === 0 ? 'SP' : 'PF'}</div>
-                <div className="flex-1 bg-white dark:bg-background/5 rounded-xl p-4">
+                <div className="flex-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="font-semibold text-white">{sprint.name}</h3>
                     <span className={`text-xs px-2 py-1 rounded ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-cta/20 text-amber-400' : 'bg-white0/20 text-cyan-300'}`}>{sprint.status === 'completed' ? 'Complété' : sprint.status === 'in-progress' ? 'En cours' : 'Planifié'}</span>
@@ -283,7 +283,7 @@ export default function ProjectTrackerDashboard() {
           </div>
         </section>
 
-        <section className="bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+        <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Video className="w-6 h-6 text-emerald-400" /> Estimation Production Média</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center"><div className="text-2xl md:text-4xl lg:text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-cyan-300 mt-2">Assets Média Total</p><p className="text-xs text-black dark:text-foreground">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
@@ -293,7 +293,7 @@ export default function ProjectTrackerDashboard() {
         </section>
       </main>
 
-      <footer className="bg-white dark:bg-background/5 border-t border-white/60 mt-8 px-6 py-4">
+      <footer className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border-t border-white/60 mt-8 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-sm text-cyan-300">
           <span>© 2026 Rusinga International Consulting Ltd.</span>
           <span>Dashboard généré par Manus AI</span>

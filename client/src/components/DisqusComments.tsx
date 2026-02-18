@@ -20,7 +20,7 @@ interface DisqusCommentsProps {
   className?: string;
 }
 
-// Disqus shortname for RusingAcademy Learning Ecosystem
+// Disqus shortname for RusingÂcademy Learning Ecosystem
 const DISQUS_SHORTNAME = 'rusingacademy-learning-ecosystem';
 
 export default function DisqusComments({

@@ -17,7 +17,7 @@ export default function AuditLog() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <Link href="/settings">
-          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-card rounded-full">
+          <button aria-label="Action" className="p-1.5 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
         </Link>
@@ -27,10 +27,10 @@ export default function AuditLog() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Timestamp</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">User</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Action</th>
@@ -51,7 +51,7 @@ export default function AuditLog() {
               </tr>
             ) : (
               (logs || []).map((log: any) => (
-                <tr key={log.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+                <tr key={log.id} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   <td className="px-4 py-3 text-sm text-gray-600">
                     <div className="flex items-center gap-1.5">
                       <Clock size={13} className="text-gray-400" />
@@ -60,7 +60,7 @@ export default function AuditLog() {
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-800">{log.userName || `User #${log.userId}`}</td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${actionColors[log.action] || "bg-gray-100 dark:bg-card text-gray-600"}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${actionColors[log.action] || "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"}`}>
                       {log.action}
                     </span>
                   </td>

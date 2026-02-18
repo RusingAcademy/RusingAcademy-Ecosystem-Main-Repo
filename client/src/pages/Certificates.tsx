@@ -62,7 +62,7 @@ export default function Certificates() {
                     {/* Decorative border */}
                     <div className="absolute inset-2 border-2 border-barholex-gold/30 rounded-lg pointer-events-none" />
 
-                    <img src={RA_LOGO} alt="RusingAcademy" className="w-12 h-12 mx-auto mb-3 rounded-lg" />
+                    <img src={RA_LOGO} alt="RusingÂcademy" className="w-12 h-12 mx-auto mb-3 rounded-lg" />
                     <p className="text-xs uppercase tracking-widest text-barholex-gold font-bold mb-2">Certificate of Completion</p>
                     <h3 className="text-xl font-bold mb-1">{certificate.title}</h3>
                     <p className="text-sm text-white/70 mb-3">Awarded to <strong className="text-white">{certificate.recipientName}</strong></p>

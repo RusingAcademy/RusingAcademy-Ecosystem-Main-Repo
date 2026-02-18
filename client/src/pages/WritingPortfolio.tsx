@@ -137,10 +137,10 @@ export default function WritingPortfolio() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "draft": return "bg-gray-100 dark:bg-card text-gray-600";
+      case "draft": return "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600";
       case "submitted": return "bg-blue-100 text-blue-700";
       case "reviewed": return "bg-green-100 text-green-700";
-      default: return "bg-gray-100 dark:bg-card text-gray-600";
+      default: return "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600";
     }
   };
 
@@ -159,7 +159,7 @@ export default function WritingPortfolio() {
         <span className="text-gray-600">{label}</span>
         <span className="font-semibold" style={{ color }}>{score}/100</span>
       </div>
-      <div className="h-2 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+      <div className="h-2 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${score}%`, background: color }} />
       </div>
     </div>
@@ -180,13 +180,13 @@ export default function WritingPortfolio() {
           </button>
           {submission.isLoading ? (
             <div className="space-y-4" role="status" aria-label={t("skillLabs.loading")}>
-              {[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 dark:bg-card rounded-xl animate-pulse" />)}
+              {[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl animate-pulse" />)}
               <span className="sr-only">{t("skillLabs.loading")}</span>
             </div>
           ) : s ? (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="lg:col-span-2">
-                <article className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-6 shadow-sm">
+                <article className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-6 shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <h1 className="text-xl font-bold text-gray-900">{s.title}</h1>
                     <div className="flex items-center gap-2">
@@ -220,7 +220,7 @@ export default function WritingPortfolio() {
               </div>
               {fb && (
                 <div className="space-y-4" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
-                  <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-5 shadow-sm">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm">
                     <div className="text-center mb-4">
                       <div className="text-lg md:text-2xl lg:text-3xl font-bold text-teal-700">{fb.score}</div>
                       <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isFr ? "Score global" : "Overall Score"}</div>
@@ -229,7 +229,7 @@ export default function WritingPortfolio() {
                     <ScoreBar label={isFr ? "Vocabulaire" : "Vocabulary"} score={fb.vocabulary.score} color="var(--color-violet-500, var(--accent-purple))" />
                     <ScoreBar label={isFr ? "Cohérence" : "Coherence"} score={fb.coherence.score} color="var(--semantic-success, var(--success))" />
                   </div>
-                  <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-5 shadow-sm">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm">
                     <h3 className="text-sm font-semibold text-gray-900 dark:text-foreground mb-2">{isFr ? "Commentaires" : "Feedback"}</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">{fb.overallFeedback}</p>
                   </div>
@@ -269,7 +269,7 @@ export default function WritingPortfolio() {
             <span className="material-icons text-lg" aria-hidden="true">arrow_back</span>
             {isFr ? "Retour au portfolio" : "Back to Portfolio"}
           </button>
-          <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-6 shadow-sm">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-6 shadow-sm">
             <h2 className="text-lg font-bold text-gray-900 dark:text-foreground mb-4">
               {editingId
                 ? (isFr ? "Modifier la soumission" : "Edit Submission")
@@ -279,7 +279,7 @@ export default function WritingPortfolio() {
               <div>
                 <label htmlFor="writing-lang" className="sr-only">{isFr ? "Langue" : "Language"}</label>
                 <select id="writing-lang" value={language} onChange={(e) => setLanguage(e.target.value as any)}
-                  className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30">
+                  className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   <option value="fr">{isFr ? "Français" : "French"}</option>
                   <option value="en">{isFr ? "Anglais" : "English"}</option>
                 </select>
@@ -287,7 +287,7 @@ export default function WritingPortfolio() {
               <div>
                 <label htmlFor="writing-level" className="sr-only">{isFr ? "Niveau CECR" : "CEFR Level"}</label>
                 <select id="writing-level" value={cefrLevel} onChange={(e) => setCefrLevel(e.target.value)}
-                  className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30">
+                  className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   {CEFR_LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
                 </select>
               </div>
@@ -298,7 +298,7 @@ export default function WritingPortfolio() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={isFr ? "Titre de votre texte..." : "Title of your writing..."}
-              className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+              className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg p-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-teal-700/30"
             />
             <label htmlFor="writing-content" className="sr-only">{isFr ? "Contenu" : "Content"}</label>
             <textarea
@@ -306,7 +306,7 @@ export default function WritingPortfolio() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder={isFr ? "Commencez à écrire ici..." : "Start writing here..."}
-              className="w-full border border-gray-200 dark:border-border dark:border-border rounded-lg p-4 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[300px] leading-relaxed"
+              className="w-full border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg p-4 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-700/30 min-h-[300px] leading-relaxed"
             />
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center gap-4">
@@ -314,7 +314,7 @@ export default function WritingPortfolio() {
                   {content.trim().split(/\s+/).filter(Boolean).length} / {WORD_TARGETS[cefrLevel] || 150} {isFr ? "mots" : "words"}
                 </span>
                 {/* Word count progress bar (Sprint F3) */}
-                <div className="w-24 h-1.5 bg-gray-100 dark:bg-card rounded-full overflow-hidden" role="progressbar"
+                <div className="w-24 h-1.5 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden" role="progressbar"
                   aria-valuenow={content.trim().split(/\s+/).filter(Boolean).length}
                   aria-valuemin={0} aria-valuemax={WORD_TARGETS[cefrLevel] || 150}>
                   <div className="h-full rounded-full transition-all duration-300" style={{
@@ -346,7 +346,7 @@ export default function WritingPortfolio() {
           </div>
 
           {feedback && (
-            <div className="mt-4 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-6 shadow-sm" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
+            <div className="mt-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-6 shadow-sm" role="region" aria-label={isFr ? "Retour IA" : "AI Feedback"}>
               <h3 className="text-lg font-bold text-gray-900 dark:text-foreground mb-4 flex items-center gap-2">
                 <span className="material-icons text-teal-700" aria-hidden="true">auto_awesome</span> {isFr ? "Retour IA" : "AI Feedback"}
               </h3>
@@ -387,7 +387,7 @@ export default function WritingPortfolio() {
                 key={i}
                 role="listitem"
                 onClick={() => openEditor(prompt)}
-                className="text-left bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-4 hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                className="text-left bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-4 hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                 aria-label={`${prompt.level}: ${language === "fr" ? prompt.fr : prompt.en}`}
               >
                 <span className="px-2 py-0.5 bg-teal-700/10 text-teal-700 rounded-full text-[10px] font-semibold">{prompt.level}</span>
@@ -401,7 +401,7 @@ export default function WritingPortfolio() {
         <h2 className="text-sm font-semibold text-gray-700 dark:text-muted-foreground mb-3">{t("writing.history")}</h2>
         {submissions.isLoading ? (
           <div className="space-y-3" role="status" aria-label={t("skillLabs.loading")}>
-            {[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 dark:bg-card rounded-xl animate-pulse" />)}
+            {[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl animate-pulse" />)}
             <span className="sr-only">{t("skillLabs.loading")}</span>
           </div>
         ) : (submissions.data || []).length === 0 ? (
@@ -419,7 +419,7 @@ export default function WritingPortfolio() {
                 key={s.id}
                 role="listitem"
                 onClick={() => openDetail(s.id)}
-                className="w-full text-left bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                className="w-full text-left bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-teal-700/30 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
               >
                 <div className="flex items-start justify-between">
                   <div className="min-w-0 flex-1">

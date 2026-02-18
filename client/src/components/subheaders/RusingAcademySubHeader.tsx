@@ -53,7 +53,7 @@ export default function RusingAcademySubHeader() {
           style={{ height: isScrolled ? "44px" : "44px" }}
         >
           {/* Home Button - Left */}
-          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-foundation dark:hover:bg-foundation-2" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
+          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm hover:bg-slate-200 dark:bg-white/[0.08] dark:backdrop-blur-md dark:hover:bg-foundation-2" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
             <Home className="h-5 w-5 text-black dark:text-foreground dark:text-cyan-300" />
           </Link>
 
@@ -61,7 +61,7 @@ export default function RusingAcademySubHeader() {
           <Link href="/rusingacademy" className="flex items-center transition-all duration-300 ml-3">
             <img loading="lazy" decoding="async" 
               loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vQofylSAnWOMKrec.png" 
-              alt="RusingAcademy Logo"
+              alt="RusingÂcademy Logo"
               className="transition-all duration-300 rounded-lg"
               style={{ 
                 width: isScrolled ? "36px" : "40px",
@@ -75,7 +75,7 @@ export default function RusingAcademySubHeader() {
           <nav 
             className="hidden lg:flex items-center gap-1"
             role="navigation"
-            aria-label={language === "fr" ? "Navigation RusingAcademy" : "RusingAcademy Navigation"}
+            aria-label={language === "fr" ? "Navigation RusingÂcademy" : "RusingÂcademy Navigation"}
           >
             {navItems.map((link) => (
               <NavDropdown

@@ -13,7 +13,7 @@ interface Brand {
 
 const brands: Brand[] = [
   {
-    name: "RusingAcademy",
+    name: "RusingÂcademy",
     logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/sYQuXPkCMPOJjHEZ.png",
     description: "Expert SLE coaching and structured learning paths for federal public servants",
     descriptionFr: "Coaching SLE expert et parcours d'apprentissage structurés pour les fonctionnaires fédéraux",
@@ -48,8 +48,8 @@ export default function EcosystemBrands() {
     <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-slate-600 via-slate-500 to-slate-600 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-white dark:bg-background rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-white dark:bg-background rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full blur-3xl" />
       </div>
 
       <div className="container relative z-10">

@@ -40,7 +40,7 @@ interface BrandTile {
 }
 
 const brandTiles: BrandTile[] = [
-  { id: "rusingacademy", name: "RusingAcademy", subtitle: { en: "Professional Courses & LMS", fr: "Cours professionnels & LMS" }, path: "/rusingacademy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png", accentColor: "#F97316" },
+  { id: "rusingacademy", name: "RusingÂcademy", subtitle: { en: "Professional Courses & LMS", fr: "Cours professionnels & LMS" }, path: "/rusingacademy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png", accentColor: "#F97316" },
   { id: "lingueefy", name: "Lingueefy", subtitle: { en: "Human & AI Coaching", fr: "Coaching humain & IA" }, path: "/lingueefy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png", accentColor: "#14B8A6" },
   { id: "barholex", name: "Barholex Media", subtitle: { en: "EdTech Consulting & Studio", fr: "Consultation EdTech & Studio" }, path: "/barholex-media", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png", accentColor: "#8B7355" },
 ];
@@ -429,7 +429,7 @@ export default function EcosystemHeaderGold() {
                   {/* Brand Navigation */}
                   {brandTiles.map((brand) => (
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
-                      <div className="p-4 rounded-xl border hover:bg-white dark:bg-background dark:hover:bg-foundation transition-colors">
+                      <div className="p-4 rounded-xl border hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:hover:bg-foundation transition-colors">
                         <div className="font-semibold">{brand.name}</div>
                         <div className="text-sm text-black dark:text-foreground dark:text-cyan-300">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}

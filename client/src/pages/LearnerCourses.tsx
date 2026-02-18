@@ -41,7 +41,7 @@ import { Input } from "@/components/ui/input";
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
     relative overflow-hidden rounded-xl
-    bg-white dark:bg-card dark:bg-obsidian
+    bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md
     border border-slate-200 dark:border-teal-800
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
@@ -151,7 +151,7 @@ export default function LearnerCourses() {
   // Loading state
   if (authLoading) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
@@ -171,7 +171,7 @@ export default function LearnerCourses() {
   // Not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <Header />
         <main className="flex-1 flex items-center justify-center px-4">
           <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
@@ -198,7 +198,7 @@ export default function LearnerCourses() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <Header />
 
       {/* Background decoration */}
@@ -336,7 +336,7 @@ export default function LearnerCourses() {
             {coursesLoading ? (
               <div className={viewMode === "grid" ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}>
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="h-48 rounded-xl bg-slate-100 dark:bg-foundation animate-pulse" />
+                  <div key={i} className="h-48 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md animate-pulse" />
                 ))}
               </div>
             ) : filteredCourses.length > 0 ? (
@@ -383,7 +383,7 @@ export default function LearnerCourses() {
             {plansLoading ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2].map((i) => (
-                  <div key={i} className="h-40 rounded-xl bg-slate-100 dark:bg-foundation animate-pulse" />
+                  <div key={i} className="h-40 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md animate-pulse" />
                 ))}
               </div>
             ) : plans.length > 0 ? (
@@ -422,7 +422,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-white/15 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Status Badge */}
         <div className="absolute top-4 right-4">
           {isCompleted ? (
@@ -483,7 +483,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-white/15 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Course Icon */}
         <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
           <BookOpen className="h-8 w-8 text-white" />
@@ -560,7 +560,7 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
     <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-teal-800 opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian`}>
       {/* Status Badge */}
       <div className="absolute top-4 right-4">
-        <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-black"}>
+        <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black"}>
           {isActive ? labels.active : labels.expired}
         </Badge>
       </div>

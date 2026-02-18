@@ -120,7 +120,7 @@ const t = {
 const statusColors: Record<string, string> = {
   draft: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
   published: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-  archived: "bg-gray-100 dark:bg-card text-gray-600 dark:bg-card dark:text-muted-foreground",
+  archived: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:text-muted-foreground",
 };
 
 const statusIcons: Record<string, any> = {
@@ -241,7 +241,7 @@ export default function LearningPathBuilder() {
             placeholder={ui.searchPaths}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg bg-white dark:bg-card dark:bg-card text-gray-900 dark:text-foreground dark:text-foreground"
+            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-900 dark:text-foreground dark:text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -253,7 +253,7 @@ export default function LearningPathBuilder() {
               className={`px-3 py-1.5 text-sm rounded-full transition-colors ${
                 statusFilter === status
                   ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300"
-                  : "bg-gray-100 dark:bg-card text-gray-600 dark:bg-card dark:text-muted-foreground hover:bg-gray-200"
+                  : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:text-muted-foreground hover:bg-gray-200"
               }`}
             >
               {status === "all" ? ui.all : status === "draft" ? ui.draft : status === "published" ? ui.published : ui.archived}
@@ -285,7 +285,7 @@ export default function LearningPathBuilder() {
 
       {/* Path List */}
       {paths.length === 0 && !pathsQuery.isLoading ? (
-        <div className="text-center py-8 md:py-12 lg:py-16 bg-white dark:bg-card dark:bg-card rounded-xl border border-gray-200 dark:border-border dark:border-border">
+        <div className="text-center py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15">
           <Layers className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground dark:text-foreground">{ui.noPathsYet}</h3>
           <p className="text-gray-500 dark:text-muted-foreground mt-2 max-w-md mx-auto">{ui.noPathsDesc}</p>
@@ -306,7 +306,7 @@ export default function LearningPathBuilder() {
             return (
               <div
                 key={path.id}
-                className="bg-white dark:bg-card dark:bg-card rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden"
+                className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden"
               >
                 {/* Path Card Header */}
                 <div className="p-5">
@@ -332,7 +332,7 @@ export default function LearningPathBuilder() {
                             <StatusIcon className="w-3 h-3 inline mr-1" />
                             {path.status || "draft"}
                           </span>
-                          <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${levelColors[path.level] || "bg-gray-100 dark:bg-card text-gray-700"}`}>
+                          <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${levelColors[path.level] || "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700"}`}>
                             {path.level}
                           </span>
                           {path.isFeatured && (
@@ -404,7 +404,7 @@ export default function LearningPathBuilder() {
                       </button>
                       <button
                         onClick={() => setExpandedPath(isExpanded ? null : path.id)}
-                        className="p-2 text-gray-500 hover:bg-gray-100 dark:bg-card dark:hover:bg-gray-700 rounded-lg"
+                        className="p-2 text-gray-500 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-gray-700 rounded-lg"
                       >
                         {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                       </button>
@@ -414,7 +414,7 @@ export default function LearningPathBuilder() {
 
                 {/* Expanded Section: Course Manager + Analytics */}
                 {isExpanded && (
-                  <div className="border-t border-gray-200 dark:border-border dark:border-border p-5 bg-gray-50 dark:bg-background dark:bg-background/50">
+                  <div className="border-t border-gray-200 dark:border-white/15 dark:border-white/15 p-5 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-white/[0.08] dark:backdrop-blur-md/50">
                     {/* Analytics Row */}
                     {analyticsQuery.data && (
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -424,7 +424,7 @@ export default function LearningPathBuilder() {
                           { label: ui.completedEnrollments, value: analyticsQuery.data.completedEnrollments, color: "text-purple-600" },
                           { label: ui.completionRate, value: `${analyticsQuery.data.completionRate}%`, color: "text-indigo-600" },
                         ].map((stat, i) => (
-                          <div key={i} className="bg-white dark:bg-card dark:bg-card rounded-lg p-3 border border-gray-200 dark:border-border dark:border-border">
+                          <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg p-3 border border-gray-200 dark:border-white/15 dark:border-white/15">
                             <p className="text-xs text-gray-500">{stat.label}</p>
                             <p className={`text-xl font-bold ${stat.color}`}>{stat.value}</p>
                           </div>
@@ -505,7 +505,7 @@ function PathForm({
   };
 
   return (
-    <div className="bg-white dark:bg-card dark:bg-card rounded-xl border border-gray-200 dark:border-border dark:border-border p-6">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-foreground dark:text-foreground">
           {pathData ? ui.editPath : ui.createPath}
@@ -516,7 +516,7 @@ function PathForm({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 border-b border-gray-200 dark:border-border dark:border-border">
+      <div className="flex gap-1 mb-6 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
         {(["basic", "pricing", "content"] as const).map((tab) => (
           <button
             key={tab}
@@ -543,7 +543,7 @@ function PathForm({
               onChange={(e) => {
                 setForm({ ...form, title: e.target.value, slug: form.slug || generateSlug(e.target.value) });
               }}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -552,7 +552,7 @@ function PathForm({
               type="text"
               value={form.titleFr}
               onChange={(e) => setForm({ ...form, titleFr: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -561,7 +561,7 @@ function PathForm({
               type="text"
               value={form.slug}
               onChange={(e) => setForm({ ...form, slug: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -569,7 +569,7 @@ function PathForm({
             <select
               value={form.level}
               onChange={(e) => setForm({ ...form, level: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             >
               {["A1", "A2", "B1", "B2", "C1", "exam_prep"].map((l) => (
                 <option key={l} value={l}>{l === "exam_prep" ? "Exam Prep" : l}</option>
@@ -582,7 +582,7 @@ function PathForm({
               type="text"
               value={form.subtitle}
               onChange={(e) => setForm({ ...form, subtitle: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div className="col-span-2">
@@ -591,7 +591,7 @@ function PathForm({
               type="text"
               value={form.subtitleFr}
               onChange={(e) => setForm({ ...form, subtitleFr: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -600,7 +600,7 @@ function PathForm({
               rows={4}
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -609,7 +609,7 @@ function PathForm({
               rows={4}
               value={form.descriptionFr}
               onChange={(e) => setForm({ ...form, descriptionFr: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div className="col-span-2 flex items-center gap-4">
@@ -625,7 +625,7 @@ function PathForm({
             <select
               value={form.status}
               onChange={(e) => setForm({ ...form, status: e.target.value })}
-              className="px-3 py-1.5 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground text-sm"
+              className="px-3 py-1.5 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground text-sm"
             >
               <option value="draft">{ui.draft}</option>
               <option value="published">{ui.published}</option>
@@ -644,7 +644,7 @@ function PathForm({
               type="text"
               value={form.price}
               onChange={(e) => setForm({ ...form, price: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -653,7 +653,7 @@ function PathForm({
               type="text"
               value={form.originalPrice}
               onChange={(e) => setForm({ ...form, originalPrice: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -662,7 +662,7 @@ function PathForm({
               type="number"
               value={form.discountPercentage}
               onChange={(e) => setForm({ ...form, discountPercentage: parseInt(e.target.value) || 0 })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -671,7 +671,7 @@ function PathForm({
               type="number"
               value={form.durationWeeks}
               onChange={(e) => setForm({ ...form, durationWeeks: parseInt(e.target.value) || 0 })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
           <div>
@@ -680,7 +680,7 @@ function PathForm({
               type="number"
               value={form.structuredHours}
               onChange={(e) => setForm({ ...form, structuredHours: parseInt(e.target.value) || 0 })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground"
             />
           </div>
         </div>
@@ -695,10 +695,10 @@ function PathForm({
       )}
 
       {/* Actions */}
-      <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200 dark:border-border dark:border-border">
+      <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200 dark:border-white/15 dark:border-white/15">
         <button
           onClick={onCancel}
-          className="px-4 py-2 text-gray-600 dark:text-muted-foreground hover:bg-gray-100 dark:bg-card dark:hover:bg-gray-700 rounded-lg"
+          className="px-4 py-2 text-gray-600 dark:text-muted-foreground hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-gray-700 rounded-lg"
         >
           {ui.cancel}
         </button>
@@ -744,7 +744,7 @@ function CourseManager({
           {ui.pathCourses} ({pathCourses.length})
         </h4>
         {pathCourses.length === 0 ? (
-          <div className="text-center py-8 bg-gray-100 dark:bg-card dark:bg-card rounded-lg border-2 border-dashed border-gray-300 dark:border-border">
+          <div className="text-center py-8 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg border-2 border-dashed border-gray-300 dark:border-white/15">
             <BookOpen className="w-8 h-8 text-gray-300 mx-auto mb-2" />
             <p className="text-sm text-gray-500">{ui.noCourses}</p>
           </div>
@@ -753,7 +753,7 @@ function CourseManager({
             {pathCourses.map((course, index) => (
               <div
                 key={course.courseId}
-                className="flex items-center gap-3 p-3 bg-white dark:bg-card dark:bg-card rounded-lg border border-gray-200 dark:border-border dark:border-border"
+                className="flex items-center gap-3 p-3 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15"
               >
                 <GripVertical className="w-4 h-4 text-gray-400 cursor-grab" />
                 <span className="w-6 h-6 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center text-xs font-bold">
@@ -762,7 +762,7 @@ function CourseManager({
                 {course.courseThumbnail ? (
                   <img src={course.courseThumbnail} alt="" className="w-10 h-7 object-cover rounded" />
                 ) : (
-                  <div className="w-10 h-7 bg-gray-200 dark:bg-muted rounded" />
+                  <div className="w-10 h-7 bg-gray-200 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded" />
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-foreground dark:text-foreground truncate">
@@ -772,7 +772,7 @@ function CourseManager({
                     {course.courseTotalLessons || 0} lessons · {course.courseTotalDuration || 0} min
                   </p>
                 </div>
-                <span className={`text-xs px-2 py-0.5 rounded-full ${course.isRequired ? "bg-blue-100 text-blue-700" : "bg-gray-100 dark:bg-card text-gray-600"}`}>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${course.isRequired ? "bg-blue-100 text-blue-700" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"}`}>
                   {course.isRequired ? ui.required : ui.optional}
                 </span>
                 <button
@@ -798,12 +798,12 @@ function CourseManager({
           {availableCourses.map((course) => (
             <div
               key={course.id}
-              className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-background dark:bg-background/50 rounded-lg border border-gray-200 dark:border-border dark:border-border hover:border-green-300 transition-colors"
+              className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-white/[0.08] dark:backdrop-blur-md/50 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 hover:border-green-300 transition-colors"
             >
               {course.thumbnailUrl ? (
                 <img src={course.thumbnailUrl} alt="" className="w-10 h-7 object-cover rounded" />
               ) : (
-                <div className="w-10 h-7 bg-gray-200 dark:bg-muted rounded" />
+                <div className="w-10 h-7 bg-gray-200 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded" />
               )}
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 dark:text-foreground dark:text-foreground truncate">

@@ -14,7 +14,7 @@ const content = {
       {
         icon: Shield,
         title: 'Introduction',
-        content: `Rusinga International Consulting Ltd. ("we", "our", or "us") operates the RusingAcademy ecosystem, including Lingueefy and Barholex Media platforms. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our websites and use our services.
+        content: `Rusinga International Consulting Ltd. ("we", "our", or "us") operates the RusingÂcademy ecosystem, including Lingueefy and Barholex Media platforms. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our websites and use our services.
 
 We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this policy or our practices with regards to your personal information, please contact us.`
       },
@@ -124,7 +124,7 @@ We will respond to your request within 30 days.`
       {
         icon: Shield,
         title: 'Introduction',
-        content: `Rusinga International Consulting Ltd. (« nous », « notre » ou « nos ») exploite l'écosystème RusingAcademy, y compris les plateformes Lingueefy et Barholex Media. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous visitez nos sites Web et utilisez nos services.
+        content: `Rusinga International Consulting Ltd. (« nous », « notre » ou « nos ») exploite l'écosystème RusingÂcademy, y compris les plateformes Lingueefy et Barholex Media. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous visitez nos sites Web et utilisez nos services.
 
 Nous nous engageons à protéger vos informations personnelles et votre droit à la vie privée. Si vous avez des questions ou des préoccupations concernant cette politique ou nos pratiques concernant vos informations personnelles, veuillez nous contacter.`
       },
@@ -239,16 +239,16 @@ export default function PrivacyPolicy() {
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3">
               <RusingAcademyLogo className="w-10 h-10" />
-              <span className="text-white font-semibold text-lg hidden sm:block">RusingAcademy</span>
+              <span className="text-white font-semibold text-lg hidden sm:block">RusingÂcademy</span>
             </Link>
             
             <div className="flex items-center gap-4">
               {/* Language Toggle */}
-              <div className="flex items-center gap-1 bg-white dark:bg-background/10 rounded-full p-1">
+              <div className="flex items-center gap-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-full p-1">
                 <button
                   onClick={() => setLang('en')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'en' ? 'bg-white dark:bg-card text-black' : 'text-white/90 hover:text-white'
+                    lang === 'en' ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   EN
@@ -256,7 +256,7 @@ export default function PrivacyPolicy() {
                 <button
                   onClick={() => setLang('fr')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'fr' ? 'bg-white dark:bg-card text-black' : 'text-white/90 hover:text-white'
+                    lang === 'fr' ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   FR
@@ -310,7 +310,7 @@ export default function PrivacyPolicy() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white dark:bg-background/5 backdrop-blur-sm rounded-2xl border border-white/60 p-6 sm:p-8"
+                  className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm rounded-2xl border border-white/60 p-6 sm:p-8"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/20 to-cyan-500/20 flex items-center justify-center">

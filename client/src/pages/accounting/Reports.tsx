@@ -102,9 +102,9 @@ export default function Reports() {
         <div className="flex items-center gap-4">
           <h1 className="text-2xl font-bold text-gray-800">Reports</h1>
           <div className="flex items-center gap-2 text-sm">
-            <button className="px-3 py-1.5 bg-gray-100 dark:bg-card rounded-md font-medium text-gray-800">Standard reports</button>
-            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-background rounded-md" onClick={() => toast("Feature coming soon")}>Custom reports</button>
-            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-background rounded-md" onClick={() => toast("Feature coming soon")}>Management reports</button>
+            <button className="px-3 py-1.5 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-md font-medium text-gray-800">Standard reports</button>
+            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-md" onClick={() => toast("Feature coming soon")}>Custom reports</button>
+            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-md" onClick={() => toast("Feature coming soon")}>Management reports</button>
           </div>
         </div>
       </div>
@@ -135,9 +135,9 @@ export default function Reports() {
       {/* Report Categories */}
       <div className="space-y-2">
         {filteredCategories.map((category) => (
-          <div key={category.title} className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+          <div key={category.title} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
             <button aria-label="Action"
-              className="w-full flex items-center gap-2 px-4 py-3 hover:bg-gray-50 dark:bg-background text-left"
+              className="w-full flex items-center gap-2 px-4 py-3 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md text-left"
               onClick={() => toggleCategory(category.title)}
             >
               {expandedCategories.includes(category.title) ? (
@@ -153,7 +153,7 @@ export default function Reports() {
                 {category.reports.map((report, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 dark:bg-background cursor-pointer group"
+                    className="flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer group"
                     onClick={() => {
                       const route = reportRoutes[report];
                       if (route) navigate(route);

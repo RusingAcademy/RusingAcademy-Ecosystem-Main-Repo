@@ -570,7 +570,7 @@ export default function BecomeCoachNew() {
   if (showApplication && isAuthenticated) {
     return (
       <>
-        <div className="container py-8 bg-white dark:bg-background min-h-screen">
+        <div className="container py-8 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md min-h-screen">
           <ApplicationStatusTracker 
             onResubmit={() => setIsResubmitting(true)}
           />
@@ -594,7 +594,7 @@ export default function BecomeCoachNew() {
 
   return (
     <>
-      <main className="bg-white dark:bg-background">
+      <main className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         {/* Hero Section - Premium Design with Light Green Background */}
         <section className="relative overflow-hidden" style={{background: 'linear-gradient(135deg, #f0fdf4 0%, var(--success-soft) 25%, #d1fae5 50%, #ecfdf5 75%, #f0fdf4 100%)'}}>
           {/* Decorative elements */}
@@ -612,7 +612,7 @@ export default function BecomeCoachNew() {
               {/* Left Column - Content */}
               <div className="max-w-xl">
                 {/* Premium Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-background/80 backdrop-blur-sm border border-emerald-200 shadow-sm mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-emerald-200 shadow-sm mb-6">
                   <Sparkles className="h-4 w-4 text-emerald-600" />
                   <span className="text-sm font-medium text-emerald-700">{isEn ? "Canada's #1 SLE Coaching Platform" : "Plateforme #1 de coaching ELS au Canada"}</span>
                 </div>
@@ -636,7 +636,7 @@ export default function BecomeCoachNew() {
                     return (
                       <div 
                         key={i} 
-                        className="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-background/60 backdrop-blur-sm border border-white/80 shadow-sm hover:shadow-md hover:bg-white dark:bg-background/80 transition-all duration-300"
+                        className="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/60 backdrop-blur-sm border border-white/80 shadow-sm hover:shadow-md hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 transition-all duration-300"
                       >
                         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
                           <Icon className="h-5 w-5 text-white" />
@@ -665,7 +665,7 @@ export default function BecomeCoachNew() {
                 <div className="relative">
                   {/* Glow effect behind card */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-20" />
-                  <Card className="relative bg-white dark:bg-background/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/70 rounded-2xl overflow-hidden">
+                  <Card className="relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/70 rounded-2xl overflow-hidden">
                     {/* Coach Image */}
                     <div className="relative h-80 overflow-hidden">
                       <img loading="lazy" decoding="async" 
@@ -744,7 +744,7 @@ export default function BecomeCoachNew() {
                   </div>
                   
                   {/* Content with card styling */}
-                  <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-background shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-300">
+                  <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-300">
                     <h3 className="text-2xl font-bold text-black dark:text-foreground mb-3">{step.title}</h3>
                     <p className="text-black dark:text-foreground mb-6 leading-relaxed text-lg">{step.description}</p>
                     <Badge className="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 border-emerald-200 px-4 py-2">
@@ -768,7 +768,7 @@ export default function BecomeCoachNew() {
           
           <div className="container relative">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <Badge className="bg-white dark:bg-background text-emerald-700 border-emerald-200 shadow-sm mb-4">
+              <Badge className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-emerald-700 border-emerald-200 shadow-sm mb-4">
                 <Award className="h-3 w-3 mr-1" />
                 {isEn ? "Join Our Team" : "Rejoignez Notre Équipe"}
               </Badge>
@@ -778,7 +778,7 @@ export default function BecomeCoachNew() {
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Qualifications */}
-              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white dark:bg-background/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
+              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
                 <CardContent className="p-8">
                   <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center mb-6 shadow-lg shadow-teal-500/20 group-hover:scale-110 transition-transform duration-300">
                     <GraduationCap className="h-7 w-7 text-white" />
@@ -798,7 +798,7 @@ export default function BecomeCoachNew() {
               </Card>
 
               {/* Content Needed */}
-              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white dark:bg-background/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
+              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
                 <CardContent className="p-8">
                   <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
                     <Camera className="h-7 w-7 text-white" />
@@ -818,7 +818,7 @@ export default function BecomeCoachNew() {
               </Card>
 
               {/* Timeline */}
-              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white dark:bg-background/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
+              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
                 <CardContent className="p-8">
                   <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
                     <Clock className="h-7 w-7 text-white" />
@@ -850,7 +850,7 @@ export default function BecomeCoachNew() {
           
           <div className="container relative">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <Badge className="mb-4 bg-white dark:bg-background/10 text-emerald-300 border-emerald-500/30 backdrop-blur-sm">
+              <Badge className="mb-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-emerald-300 border-emerald-500/30 backdrop-blur-sm">
                 <Shield className="h-4 w-4 mr-2" />
                 {isEn ? "Your Security Matters" : "Votre sécurité compte"}
               </Badge>
@@ -868,7 +868,7 @@ export default function BecomeCoachNew() {
                   "from-cta to-orange-600",
                 ];
                 return (
-                  <div key={i} className="group text-center p-8 rounded-2xl bg-white dark:bg-background/5 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-background/10 hover:border-white/60 transition-all duration-300">
+                  <div key={i} className="group text-center p-8 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm border border-white/60 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:border-white/60 transition-all duration-300">
                     <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${gradients[i]} flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <Icon className="h-8 w-8 text-white" />
                     </div>
@@ -882,7 +882,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Why Coaches Love Lingueefy - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative">
+        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md relative">
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <Badge className="mb-4 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 border-emerald-200">
@@ -953,7 +953,7 @@ export default function BecomeCoachNew() {
                       const gradients = ["from-teal-500 to-emerald-600", "from-emerald-500 to-green-600", "from-cta to-cta"];
                       const Icon = icons[i];
                       return (
-                        <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-background shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl transition-shadow duration-300">
+                        <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl transition-shadow duration-300">
                           <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${gradients[i]} flex items-center justify-center shadow-lg`}>
                             <Icon className="h-6 w-6 text-white" />
                           </div>
@@ -972,7 +972,7 @@ export default function BecomeCoachNew() {
                   <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-30" />
                   <div className="relative bg-gradient-to-br from-emerald-900 via-teal-800 to-obsidian rounded-3xl p-10 text-white shadow-2xl">
                     <div className="flex items-center gap-3 mb-8">
-                      <div className="h-10 w-10 rounded-xl bg-white dark:bg-background/10 flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 flex items-center justify-center">
                         <TrendingUp className="h-5 w-5 text-emerald-300" />
                       </div>
                       <h3 className="text-xl font-bold">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
@@ -1006,7 +1006,7 @@ export default function BecomeCoachNew() {
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {l.coachTestimonials.map((testimonial, i) => (
-                <Card key={i} className="group border-0 shadow-xl shadow-slate-200/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 rounded-2xl overflow-hidden bg-white dark:bg-background">
+                <Card key={i} className="group border-0 shadow-xl shadow-slate-200/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 rounded-2xl overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                   <CardContent className="p-8">
                     {/* Quote icon */}
                     <div className="mb-6">
@@ -1050,10 +1050,10 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* FAQ Section - Premium Design */}
-        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background">
+        <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container">
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <Badge className="mb-4 bg-white dark:bg-background text-emerald-700 border-emerald-200 shadow-sm">
+              <Badge className="mb-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-emerald-700 border-emerald-200 shadow-sm">
                 <HelpCircle className="h-3 w-3 mr-1" />
                 {isEn ? "FAQ" : "FAQ"}
               </Badge>
@@ -1066,7 +1066,7 @@ export default function BecomeCoachNew() {
                   key={i} 
                   className={cn(
                     "border-0 shadow-lg shadow-slate-200/50 transition-all duration-300 cursor-pointer rounded-xl overflow-hidden",
-                    expandedFaq === i ? "shadow-xl bg-white dark:bg-card ring-2 ring-emerald-500/20" : "bg-white dark:bg-card hover:shadow-xl"
+                    expandedFaq === i ? "shadow-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 ring-2 ring-emerald-500/20" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:shadow-xl"
                   )}
                   onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
                 >
@@ -1075,7 +1075,7 @@ export default function BecomeCoachNew() {
                       <h3 className="font-bold text-black dark:text-foreground text-lg">{faq.q}</h3>
                       <div className={cn(
                         "h-8 w-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300",
-                        expandedFaq === i ? "bg-emerald-500 text-white rotate-180" : "bg-slate-100 text-black"
+                        expandedFaq === i ? "bg-emerald-500 text-white rotate-180" : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black"
                       )}>
                         <ChevronDown className="h-5 w-5" />
                       </div>
@@ -1099,7 +1099,7 @@ export default function BecomeCoachNew() {
           </div>
 
           <div className="container relative text-center">
-            <Badge className="mb-6 bg-white/15 dark:bg-background/10 text-white border-white/30 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-white border-white/30 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>
@@ -1114,7 +1114,7 @@ export default function BecomeCoachNew() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               {!isAuthenticated ? (
                 <a href={getSignupUrl()}>
-                  <Button size="lg" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 shadow-xl gap-2 w-full sm:w-auto">
+                  <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl gap-2 w-full sm:w-auto">
                     {l.ctaLoginButton}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
@@ -1122,7 +1122,7 @@ export default function BecomeCoachNew() {
               ) : (
                 <Button
                   size="lg"
-                  className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 shadow-xl gap-2"
+                  className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl gap-2"
                   onClick={() => setShowApplication(true)}
                 >
                   {l.ctaButton}

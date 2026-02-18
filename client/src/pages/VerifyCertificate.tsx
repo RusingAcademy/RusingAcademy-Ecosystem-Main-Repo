@@ -35,20 +35,20 @@ export default function VerifyCertificate() {
   return (
     <>
       <Helmet>
-        <title>Verify Certificate | RusingAcademy</title>
-        <meta name="description" content="Verify the authenticity of a RusingAcademy certificate" />
+        <title>Verify Certificate | RusingÂcademy</title>
+        <meta name="description" content="Verify the authenticity of a RusingÂcademy certificate" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Header */}
-        <header className="bg-white dark:bg-background shadow-sm border-b border-gray-100">
+        <header className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-sm border-b border-gray-100">
           <div className="max-w-4xl mx-auto px-4 py-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">R</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-black dark:text-foreground">RusingAcademy</h1>
+                <h1 className="text-xl font-bold text-black dark:text-foreground">RusingÂcademy</h1>
                 <p className="text-sm text-black dark:text-foreground">Certificate Verification</p>
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function VerifyCertificate() {
               Verify Certificate Authenticity
             </h2>
             <p className="text-black dark:text-foreground mb-8 max-w-2xl mx-auto">
-              Enter a certificate number to verify its authenticity. All RusingAcademy certificates 
+              Enter a certificate number to verify its authenticity. All RusingÂcademy certificates 
               are digitally signed and can be verified using this tool.
             </p>
 
@@ -112,7 +112,7 @@ export default function VerifyCertificate() {
                 <div className="bg-green-50 border border-green-200 rounded-xl overflow-hidden">
                   {/* Valid Badge */}
                   <div className="bg-green-600 text-white px-6 py-4 flex items-center gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-background/20 rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded-full flex items-center justify-center">
                       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -171,7 +171,7 @@ export default function VerifyCertificate() {
                         </div>
                         <div>
                           <p className="font-medium text-black dark:text-foreground">Prof. Steven Rusinga</p>
-                          <p className="text-sm text-black dark:text-foreground">Founder & Lead Instructor, RusingAcademy</p>
+                          <p className="text-sm text-black dark:text-foreground">Founder & Lead Instructor, RusingÂcademy</p>
                         </div>
                       </div>
                     </div>
@@ -229,10 +229,10 @@ export default function VerifyCertificate() {
                 <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold">R</span>
                 </div>
-                <span className="font-semibold">RusingAcademy</span>
+                <span className="font-semibold">RusingÂcademy</span>
               </div>
               <p className="text-cyan-300 text-sm">
-                © {new Date().getFullYear()} RusingAcademy. All rights reserved.
+                © {new Date().getFullYear()} RusingÂcademy. All rights reserved.
               </p>
               <div className="flex gap-4">
                 <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:text-white text-sm">

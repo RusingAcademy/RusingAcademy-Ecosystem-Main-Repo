@@ -270,8 +270,8 @@ const BADGE_CATALOG: Record<string, {
     borderColor: "border-amber-500/40",
     glowColor: "shadow-amber-500/30",
     category: "special",
-    description: "Founding member of RusingAcademy",
-    descriptionFr: "Membre fondateur de RusingAcademy",
+    description: "Founding member of RusingÂcademy",
+    descriptionFr: "Membre fondateur de RusingÂcademy",
   },
   beta_tester: {
     icon: Sparkles,
@@ -636,10 +636,10 @@ export default function BadgesPanel({
       {/* Header with overall progress */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--brand-foundation)]/90 to-[var(--brand-foundation)]/70 p-6 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,255,255,0.08),transparent_50%)]" />
-        <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white dark:bg-background/5 blur-xl" />
+        <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 blur-xl" />
         
         <div className="relative flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm border border-white/60 flex items-center justify-center">
             <Trophy className="h-8 w-8 text-amber-400" />
           </div>
           <div className="flex-1">
@@ -650,7 +650,7 @@ export default function BadgesPanel({
               {totalEarned} / {totalPossible} {isEn ? "badges earned" : "badges obtenus"}
             </p>
             <div className="mt-2">
-              <Progress value={progressPercent} className="h-2 bg-white dark:bg-background/10" />
+              <Progress value={progressPercent} className="h-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10" />
             </div>
           </div>
           <div className="text-lg md:text-2xl lg:text-3xl font-bold text-amber-400">

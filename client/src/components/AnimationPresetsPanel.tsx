@@ -116,7 +116,7 @@ function AnimationPreviewBox({ presetId, duration }: { presetId: string; duratio
 
   if (!preset || presetId === "none") {
     return (
-      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 dark:border-border dark:border-border flex items-center justify-center text-cyan-300 text-xs">
+      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 dark:border-white/15 dark:border-white/15 flex items-center justify-center text-cyan-300 text-xs">
         No animation selected
       </div>
     );
@@ -140,7 +140,7 @@ function AnimationPreviewBox({ presetId, duration }: { presetId: string; duratio
 
   return (
     <div className="space-y-2">
-      <div className="w-full h-24 rounded-lg border border-gray-200 dark:border-border dark:border-border bg-gradient-to-br from-indigo-50 to-white overflow-hidden flex items-center justify-center relative">
+      <div className="w-full h-24 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 bg-gradient-to-br from-indigo-50 to-white overflow-hidden flex items-center justify-center relative">
         <div
           style={animationStyle}
           className="w-3/4 h-16 rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white text-xs font-medium shadow-sm"
@@ -270,7 +270,7 @@ export default function AnimationPresetsPanel({
                       className={`flex items-center gap-2 p-2.5 rounded-lg border text-left transition-all ${
                         selectedPreset === preset.id
                           ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-200"
-                          : "border-gray-200 dark:border-border hover:border-gray-300 hover:bg-gray-50"
+                          : "border-gray-200 dark:border-white/15 hover:border-gray-300 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                       }`}
                     >
                       <Icon className="h-4 w-4 text-black dark:text-foreground shrink-0" />
@@ -297,7 +297,7 @@ export default function AnimationPresetsPanel({
                       className={`flex items-center gap-2 p-2.5 rounded-lg border text-left transition-all ${
                         selectedPreset === preset.id
                           ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-200"
-                          : "border-gray-200 dark:border-border hover:border-gray-300 hover:bg-gray-50"
+                          : "border-gray-200 dark:border-white/15 hover:border-gray-300 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                       }`}
                     >
                       <Icon className="h-4 w-4 text-black dark:text-foreground shrink-0" />
@@ -324,7 +324,7 @@ export default function AnimationPresetsPanel({
                       className={`flex items-center gap-2 p-2.5 rounded-lg border text-left transition-all ${
                         selectedPreset === preset.id
                           ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-200"
-                          : "border-gray-200 dark:border-border hover:border-gray-300 hover:bg-gray-50"
+                          : "border-gray-200 dark:border-white/15 hover:border-gray-300 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                       }`}
                     >
                       <Icon className="h-4 w-4 text-black dark:text-foreground shrink-0" />

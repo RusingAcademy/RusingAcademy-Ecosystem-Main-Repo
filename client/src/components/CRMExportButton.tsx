@@ -29,7 +29,7 @@ const translations = {
     cancel: "Cancel",
     exporting: "Exporting...",
     lingueefy: "Lingueefy",
-    rusingacademy: "RusingAcademy",
+    rusingacademy: "RusingÂcademy",
     barholex: "Barholex Media",
     ecosystem_hub: "Ecosystem Hub",
     new: "New",
@@ -59,7 +59,7 @@ const translations = {
     cancel: "Annuler",
     exporting: "Exportation...",
     lingueefy: "Lingueefy",
-    rusingacademy: "RusingAcademy",
+    rusingacademy: "RusingÂcademy",
     barholex: "Barholex Media",
     ecosystem_hub: "Hub Écosystème",
     new: "Nouveau",
@@ -188,7 +188,7 @@ export default function CRMExportButton() {
                       type="date"
                       value={filters.startDate}
                       onChange={(e) => setFilters(prev => ({ ...prev, startDate: e.target.value }))}
-                      className="w-full px-3 py-2 bg-white dark:bg-background/10 rounded-lg border border-slate-300 dark:border-white/10 text-gray-900 dark:text-white focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg border border-slate-300 dark:border-white/10 text-gray-900 dark:text-white focus:border-teal-500 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -197,7 +197,7 @@ export default function CRMExportButton() {
                       type="date"
                       value={filters.endDate}
                       onChange={(e) => setFilters(prev => ({ ...prev, endDate: e.target.value }))}
-                      className="w-full px-3 py-2 bg-white dark:bg-background/10 rounded-lg border border-slate-300 dark:border-white/10 text-gray-900 dark:text-white focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg border border-slate-300 dark:border-white/10 text-gray-900 dark:text-white focus:border-teal-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export default function CRMExportButton() {
               <div className="flex gap-3">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="flex-1 px-4 py-2 bg-white dark:bg-background/10 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-background/20 transition-colors border border-slate-300 dark:border-white/10"
+                  className="flex-1 px-4 py-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-background/20 transition-colors border border-slate-300 dark:border-white/10"
                 >
                   {t.cancel}
                 </button>
@@ -366,7 +366,7 @@ Cold (<40),55
 
 Leads by Source
 Lingueefy,78
-RusingAcademy,45
+RusingÂcademy,45
 Barholex Media,28
 Ecosystem Hub,5
 

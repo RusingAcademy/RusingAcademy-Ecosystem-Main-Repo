@@ -4,7 +4,7 @@ import rateLimit from "express-rate-limit";
 import type { Express, Request, Response, NextFunction } from "express";
 
 /**
- * Security middleware for the RusingAcademy ecosystem.
+ * Security middleware for the RusingÂcademy ecosystem.
  * Sprint 2 — Production-readiness hardening.
  *
  * IMPORTANT: Helmet CSP is applied ONLY to /api/ routes.

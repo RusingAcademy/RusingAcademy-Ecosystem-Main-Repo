@@ -191,11 +191,11 @@ export default function Invoices() {
                 Change status
               </button>
               {showBulkStatusMenu && (
-                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg z-20 py-1 w-40">
+                <div className="absolute right-0 top-full mt-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg shadow-lg z-20 py-1 w-40">
                   {["Draft", "Sent", "Paid", "Overdue", "Voided"].map(status => (
                     <button
                       key={status}
-                      className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:bg-background text-gray-700"
+                      className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md text-gray-700"
                       onClick={() => handleBulkStatus(status)}
                     >
                       {status}
@@ -276,7 +276,7 @@ export default function Invoices() {
 
       {/* Filter Tabs + Search */}
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4 border-b border-gray-200 dark:border-border dark:border-border">
+        <div className="flex items-center gap-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
           {["All", "Draft", "Sent", "Overdue", "Partial", "Paid", "Deposited", "Voided"].map(tab => (
             <button
               key={tab}
@@ -309,10 +309,10 @@ export default function Invoices() {
       </div>
 
       {/* Invoice Table */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
-            <tr className="bg-gray-50">
+            <tr className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="w-8">
                 <input
                   type="checkbox"
@@ -334,7 +334,7 @@ export default function Invoices() {
             {paginated.map((inv: any) => (
               <tr
                 key={inv.id}
-                className={`hover:bg-gray-50 dark:bg-background cursor-pointer ${selectedIds.has(inv.id) ? "bg-blue-50" : ""}`}
+                className={`hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer ${selectedIds.has(inv.id) ? "bg-blue-50" : ""}`}
                 onClick={() => navigate(`/invoices/${inv.id}`)}
               >
                 <td onClick={(e) => e.stopPropagation()}>
@@ -353,7 +353,7 @@ export default function Invoices() {
                   <StatusBadge status={inv.status} />
                 </td>
                 <td onClick={(e) => e.stopPropagation()}>
-                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={() => navigate(`/invoices/${inv.id}`)}>
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded" onClick={() => navigate(`/invoices/${inv.id}`)}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>
@@ -371,7 +371,7 @@ export default function Invoices() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-border dark:border-border bg-gray-50">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
             <span className="text-sm text-gray-500">
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>

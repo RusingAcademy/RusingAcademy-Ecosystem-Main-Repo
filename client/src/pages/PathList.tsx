@@ -1,5 +1,5 @@
 /**
- * PathList — RusingAcademy Learning Portal
+ * PathList — RusingÂcademy Learning Portal
  * Shows all 6 Paths for a selected program with progress and gamification
  * Design: Premium glassmorphism, teal/gold, accessible
  */
@@ -51,7 +51,7 @@ export default function PathList() {
           }} />
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/20 dark:bg-background/20 text-white backdrop-blur-sm">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-white backdrop-blur-sm">
                 {isESL ? "English as a Second Language" : "Français langue seconde"}
               </span>
             </div>

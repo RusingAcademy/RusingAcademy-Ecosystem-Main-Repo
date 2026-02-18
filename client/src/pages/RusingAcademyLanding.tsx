@@ -308,7 +308,7 @@ const labels = {
           level: 'CBC',
         },
         {
-          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingAcademy programs.',
+          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingÂcademy programs.',
           name: 'Learning Coordinator',
           org: 'Central Agency',
           level: 'BBB',
@@ -548,10 +548,10 @@ function PromoBanner({ lang }: { lang: 'en' | 'fr' }) {
             <Gift className="w-5 h-5 text-yellow-300" />
             <span className="text-white font-bold text-sm uppercase tracking-wider">{t.banner}</span>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-white dark:bg-background/30" />
+          <div className="hidden sm:block w-px h-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/30" />
           <span className="text-white/95 text-sm font-medium">{t.tagline}</span>
-          <div className="hidden sm:block w-px h-4 bg-white dark:bg-background/30" />
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-background/20 backdrop-blur-sm text-white text-xs font-bold border border-white/30">
+          <div className="hidden sm:block w-px h-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/30" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 backdrop-blur-sm text-white text-xs font-bold border border-white/30">
             <Flame className="w-3.5 h-3.5 text-yellow-300" />
             {t.badge}
           </span>
@@ -561,7 +561,7 @@ function PromoBanner({ lang }: { lang: 'en' | 'fr' }) {
   );
 }
 
-export default function RusingAcademyLanding() {
+export default function RusingÂcademyLanding() {
   const [lang, setLang] = useState<'en' | 'fr'>('en');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [selectedPath, setSelectedPath] = useState(0);
@@ -579,7 +579,7 @@ export default function RusingAcademyLanding() {
   const t = labels[lang];
   const brand = brandColors.rusingacademy;
 
-  // Premium gradient for RusingAcademy
+  // Premium gradient for RusingÂcademy
   const premiumGradient = 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, #DB2777 100%)';
   const subtleGradient = 'linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(124, 58, 237, 0.1) 50%, rgba(219, 39, 119, 0.1) 100%)';
 
@@ -644,7 +644,7 @@ export default function RusingAcademyLanding() {
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[var(--text)] text-white' : 'bg-stone-50'}`}>
       <SEO
-        title="RusingAcademy - Path Series\u2122 SLE Training | RusingAcademy"
+        title="RusingÂcademy - Path Series\u2122 SLE Training | RusingÂcademy"
         description="Intensive SLE preparation courses for Canadian public servants. Achieve BBB, CBC, or CCC certification 3-4x faster with our proven Path Series\u2122 methodology."
         // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
         keywords="SLE training, French language training, public service, Level C, BBB, CBC, CCC, federal government, bilingual certification"
@@ -824,7 +824,7 @@ export default function RusingAcademyLanding() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-background text-teal-700 border-2 border-teal-200 hover:border-teal-400 hover:bg-teal-50 shadow-lg"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 border-2 border-teal-200 hover:border-teal-400 hover:bg-teal-50 shadow-lg"
                 >
                   <Calendar className="w-5 h-5" />
                   {t.hero.cta2}
@@ -857,7 +857,7 @@ export default function RusingAcademyLanding() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-background/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -872,7 +872,7 @@ export default function RusingAcademyLanding() {
                 </div>
               </div>
               
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-background/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <div className="flex items-center gap-2">
                   <div className="flex">
                     {[1, 2, 3, 4, 5].map((i) => (
@@ -883,7 +883,7 @@ export default function RusingAcademyLanding() {
                 </div>
               </div>
               
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-background/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -926,7 +926,7 @@ export default function RusingAcademyLanding() {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-8 rounded-3xl bg-gray-50 dark:bg-background border border-gray-200 dark:border-border dark:border-border relative overflow-hidden"
+              className="p-8 rounded-3xl bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-gray-200 rounded-full blur-3xl opacity-50" />
               <div className="relative">
@@ -940,7 +940,7 @@ export default function RusingAcademyLanding() {
                 </div>
                 <div className="space-y-4">
                   {t.problem.comparison.traditional.items.map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center py-3 border-b border-gray-200 dark:border-border dark:border-border last:border-0">
+                    <div key={idx} className="flex justify-between items-center py-3 border-b border-gray-200 dark:border-white/15 dark:border-white/15 last:border-0">
                       <span className="text-gray-600 font-medium">{item.label}</span>
                       <span className="text-gray-500 text-right text-sm">{item.value}</span>
                     </div>
@@ -949,7 +949,7 @@ export default function RusingAcademyLanding() {
               </div>
             </motion.div>
 
-            {/* RusingAcademy Method */}
+            {/* RusingÂcademy Method */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -999,7 +999,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ PATH SERIES SECTION — Premium Redesign ═══ */}
-      <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative overflow-x-clip">
+      <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md relative overflow-x-clip">
         <div 
           className="absolute inset-0 opacity-20"
           style={{ background: subtleGradient }}
@@ -1028,12 +1028,12 @@ export default function RusingAcademyLanding() {
 
             {/* FSL / ESL Toggle */}
             <div className="flex justify-center mt-8">
-              <div className="inline-flex rounded-2xl bg-gray-100 dark:bg-card p-1.5 gap-1 shadow-inner">
+              <div className="inline-flex rounded-2xl bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 p-1.5 gap-1 shadow-inner">
                 <button
                   onClick={() => { setProgramTab('fsl'); setSelectedPath(0); }}
                   className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
                     programTab === 'fsl'
-                      ? 'bg-white dark:bg-card text-teal-700 shadow-lg scale-105'
+                      ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-teal-700 shadow-lg scale-105'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -1044,7 +1044,7 @@ export default function RusingAcademyLanding() {
                   onClick={() => { setProgramTab('esl'); setSelectedPath(0); }}
                   className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
                     programTab === 'esl'
-                      ? 'bg-white dark:bg-card text-blue-700 shadow-lg scale-105'
+                      ? 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-blue-700 shadow-lg scale-105'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -1064,13 +1064,13 @@ export default function RusingAcademyLanding() {
                 className={`relative px-4 py-2.5 rounded-full font-medium transition-all text-sm md:text-base ${
                   selectedPath === index
                     ? 'text-white shadow-lg scale-105'
-                    : 'bg-white dark:bg-card text-slate-900 border border-gray-200 dark:border-border hover:border-teal-300 hover:bg-teal-50/50 shadow-sm'
+                    : 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-slate-900 border border-gray-200 dark:border-white/15 hover:border-teal-300 hover:bg-teal-50/50 shadow-sm'
                 }`}
                 style={selectedPath === index ? { background: premiumGradient } : {}}
               >
                 <span className="flex items-center gap-1.5">
                   <span className={`w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
-                    selectedPath === index ? 'bg-white/20' : 'bg-gray-100'
+                    selectedPath === index ? 'bg-white/20' : 'bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm'
                   }`}>
                     {path.id}
                   </span>
@@ -1171,7 +1171,7 @@ export default function RusingAcademyLanding() {
                     </button>
                     <Link
                       href="/curriculum"
-                      className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-all hover:scale-[1.02] bg-white dark:bg-background text-slate-900 border-2 border-gray-200 dark:border-border dark:border-border hover:border-teal-400 hover:text-teal-600 text-lg shadow-sm"
+                      className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-all hover:scale-[1.02] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-slate-900 border-2 border-gray-200 dark:border-white/15 dark:border-white/15 hover:border-teal-400 hover:text-teal-600 text-lg shadow-sm"
                     >
                       {lang === 'fr' ? 'Voir le curriculum' : 'View Full Curriculum'}
                     </Link>
@@ -1190,7 +1190,7 @@ export default function RusingAcademyLanding() {
                           >
                             Path {currentPath.id}
                           </span>
-                          <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-card text-slate-700">
+                          <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-slate-700">
                             {currentPath.level}
                           </span>
                         </div>
@@ -1274,7 +1274,7 @@ export default function RusingAcademyLanding() {
                         ? 'text-white scale-110 shadow-xl ring-4 ring-teal-100'
                         : index < selectedPath
                         ? 'bg-gradient-to-br from-teal-100 to-teal-50 text-teal-700 shadow-md'
-                        : 'bg-gray-100 dark:bg-card text-gray-400 group-hover:bg-gray-200'
+                        : 'bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-400 group-hover:bg-gray-200'
                     }`}
                     style={selectedPath === index ? { background: premiumGradient } : {}}
                   >
@@ -1322,7 +1322,7 @@ export default function RusingAcademyLanding() {
                 key={index}
                 variants={animationVariants.fadeInUp}
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
-                className="group relative p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-xl border border-white/70 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                className="group relative p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-xl border border-white/70 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               >
                 <div 
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
@@ -1350,7 +1350,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ WHY CHOOSE US SECTION ═══ */}
-      <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
+      <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
@@ -1377,7 +1377,7 @@ export default function RusingAcademyLanding() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="group relative p-7 rounded-2xl bg-gradient-to-br from-gray-50/80 to-white border border-gray-100 dark:border-border hover:border-teal-200 transition-all hover:shadow-xl hover:-translate-y-1"
+                  className="group relative p-7 rounded-2xl bg-gradient-to-br from-gray-50/80 to-white border border-gray-100 dark:border-white/15 hover:border-teal-200 transition-all hover:shadow-xl hover:-translate-y-1"
                 >
                   <div 
                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-lg"
@@ -1481,7 +1481,7 @@ export default function RusingAcademyLanding() {
                           ? 'text-white shadow-lg'
                           : FREE_ACCESS_MODE
                           ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
-                          : 'bg-gray-100 dark:bg-card text-slate-900 hover:bg-gray-200'
+                          : 'bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-slate-900 hover:bg-gray-200'
                       }`}
                       style={bundle.featured ? { background: FREE_ACCESS_MODE ? 'linear-gradient(135deg, var(--semantic-success, var(--success)) 0%, var(--teal) 100%)' : premiumGradient } : {}}
                     >
@@ -1506,7 +1506,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* ═══ OFFERINGS SECTION ═══ */}
-      <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-background">
+      <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
@@ -1533,7 +1533,7 @@ export default function RusingAcademyLanding() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-50/80 to-white border border-gray-100 dark:border-border hover:border-teal-200 transition-all hover:shadow-xl hover:-translate-y-1"
+                  className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-50/80 to-white border border-gray-100 dark:border-white/15 hover:border-teal-200 transition-all hover:shadow-xl hover:-translate-y-1"
                 >
                   <div 
                     className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity"
@@ -1621,7 +1621,7 @@ export default function RusingAcademyLanding() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-6 rounded-2xl bg-white dark:bg-background/90 backdrop-blur-sm border border-gray-100 dark:border-border shadow-sm hover:shadow-lg transition-all"
+                    className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm border border-gray-100 dark:border-white/15 shadow-sm hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start gap-4">
                       <Quote className="w-8 h-8 text-teal-500 flex-shrink-0 mt-1" />
@@ -1684,7 +1684,7 @@ export default function RusingAcademyLanding() {
                 href="https://calendly.com/steven-barholere/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-background text-slate-900 shadow-xl hover:shadow-2xl"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-slate-900 shadow-xl hover:shadow-2xl"
               >
                 {t.cta.button1}
                 <ArrowRight className="w-4 h-4" />
@@ -1693,7 +1693,7 @@ export default function RusingAcademyLanding() {
                 href="https://calendly.com/steven-barholere/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white/15 dark:bg-background/10 text-white border-2 border-white/30 hover:bg-white/25 dark:bg-background/20 backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-white border-2 border-white/30 hover:bg-white/25 dark:bg-white/[0.08] dark:backdrop-blur-md/20 backdrop-blur-sm"
               >
                 {t.cta.button2}
               </a>

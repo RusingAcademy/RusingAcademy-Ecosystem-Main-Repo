@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 const statusColors: Record<string, string> = {
-  Draft: "bg-gray-100 dark:bg-card text-gray-700",
+  Draft: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700",
   Sent: "bg-blue-100 text-blue-700",
   Accepted: "bg-green-100 text-green-700",
   Rejected: "bg-red-100 text-red-700",
@@ -93,10 +93,10 @@ export default function Estimates() {
         </select>
       </div>
 
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">No.</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Customer</th>
@@ -121,7 +121,7 @@ export default function Estimates() {
               </tr>
             ) : (
               paginated.map((est: any) => (
-                <tr key={est.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+                <tr key={est.id} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   <td className="px-4 py-3 text-sm text-gray-600">
                     {est.estimateDate ? new Date(est.estimateDate).toLocaleDateString("en-CA") : "-"}
                   </td>
@@ -135,7 +135,7 @@ export default function Estimates() {
                     {est.expiryDate ? new Date(est.expiryDate).toLocaleDateString("en-CA") : "-"}
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[est.status] || "bg-gray-100 dark:bg-card text-gray-600"}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[est.status] || "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"}`}>
                       {est.status}
                     </span>
                   </td>

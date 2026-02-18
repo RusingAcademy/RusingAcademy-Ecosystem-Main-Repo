@@ -47,7 +47,7 @@ const labels = {
 };
 
 const levelColors: Record<string, string> = {
-  X: "bg-gray-100 dark:bg-card text-gray-700 dark:text-muted-foreground dark:bg-card dark:text-muted-foreground",
+  X: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700 dark:text-muted-foreground dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:text-muted-foreground",
   A: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
   B: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
   C: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",

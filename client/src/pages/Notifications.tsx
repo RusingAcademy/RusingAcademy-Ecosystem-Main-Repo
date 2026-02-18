@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal - Notifications Center
+ * RusingÂcademy Learning Portal - Notifications Center
  * Live notifications from tRPC with mark-as-read, filtering, and unread badges.
  */
 import DashboardLayout from "@/components/DashboardLayout";
@@ -93,7 +93,7 @@ export default function Notifications() {
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-medium transition-all ${
                 filter === tab.key
                   ? "bg-teal-700 text-white shadow-sm"
-                  : "bg-white dark:bg-card border border-gray-200 dark:border-border text-gray-600 hover:border-teal-700/30"
+                  : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-gray-200 dark:border-white/15 text-gray-600 hover:border-teal-700/30"
               }`}
             >
               <span className="material-icons" >{tab.icon}</span>
@@ -106,12 +106,12 @@ export default function Notifications() {
         {isLoading ? (
           <div className="space-y-3">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white dark:bg-background border border-gray-100 dark:border-border rounded-xl p-4 animate-pulse">
+              <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-100 dark:border-white/15 rounded-xl p-4 animate-pulse">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gray-100" />
+                  <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm" />
                   <div className="flex-1">
-                    <div className="h-4 bg-gray-100 dark:bg-card rounded w-3/4 mb-2" />
-                    <div className="h-3 bg-gray-100 dark:bg-card rounded w-1/2" />
+                    <div className="h-4 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded w-3/4 mb-2" />
+                    <div className="h-3 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded w-1/2" />
                   </div>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function Notifications() {
           </div>
         ) : filteredNotifications.length === 0 ? (
           <div className="text-center py-8 md:py-12 lg:py-16">
-            <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-card flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 flex items-center justify-center mx-auto mb-4">
               <span className="material-icons text-gray-300" style={{ fontSize: "32px" }}>notifications_none</span>
             </div>
             <p className="text-sm font-medium text-gray-500">No notifications yet</p>
@@ -130,7 +130,7 @@ export default function Notifications() {
             {filteredNotifications.map((n) => (
               <div
                 key={n.id}
-                className={`bg-white dark:bg-card border rounded-xl p-4 transition-all hover:shadow-sm cursor-pointer ${
+                className={`bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border rounded-xl p-4 transition-all hover:shadow-sm cursor-pointer ${
                   n.isRead ? "border-gray-100" : "border-teal-700/20 bg-teal-700/[0.02]"
                 }`}
                 onClick={() => {

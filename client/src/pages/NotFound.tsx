@@ -35,8 +35,8 @@ export default function NotFound() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-obsidian dark:to-teal-900">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 dark:bg-obsidian/80 backdrop-blur-sm">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg">
+      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 dark:bg-white/[0.08] dark:backdrop-blur-md backdrop-blur-sm">
         <CardContent className="pt-8 pb-8 text-center">
           <div className="flex justify-center mb-6">
             <div className="relative">

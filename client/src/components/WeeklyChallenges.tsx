@@ -76,7 +76,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
         </CardHeader>
         <CardContent className="space-y-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-20 bg-slate-100 dark:bg-foundation rounded" />
+            <div key={i} className="h-20 bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md rounded" />
           ))}
         </CardContent>
       </Card>
@@ -132,8 +132,8 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                   isComplete && !isClaimed
                     ? "bg-emerald-50 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800"
                     : isClaimed
-                    ? "bg-slate-50 border-slate-200 dark:bg-foundation/50 dark:border-teal-800 opacity-75"
-                    : "bg-white dark:bg-card border-slate-200 dark:bg-foundation dark:border-teal-800 hover:border-amber-300 dark:hover:border-amber-700"
+                    ? "bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm border-slate-200 dark:bg-white/[0.08] dark:backdrop-blur-md/50 dark:border-teal-800 opacity-75"
+                    : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-slate-200 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-teal-800 hover:border-amber-300 dark:hover:border-amber-700"
                 )}
               >
                 <div className="flex items-start gap-3">
@@ -141,7 +141,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     "p-2 rounded-lg",
                     isComplete 
                       ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400"
-                      : "bg-slate-100 text-black dark:text-foreground dark:bg-teal-800 dark:text-cyan-300"
+                      : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black dark:text-foreground dark:bg-teal-800 dark:text-cyan-300"
                   )}>
                     {challengeIcons[challenge.type] || <Trophy className="h-5 w-5" />}
                   </div>

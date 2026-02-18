@@ -115,7 +115,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
           <div className="relative">
             <img
               src={RA_LOGO}
-              alt="RusingAcademy"
+              alt="RusingÂcademy"
               className="w-10 h-10 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105"
               style={{ boxShadow: "0 2px 8px rgba(27, 20, 100, 0.1)" }}
             />
@@ -262,7 +262,7 @@ export default function LeftSidebar({ activePage, onPageChange }: LeftSidebarPro
           className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-all w-full group"
         >
           <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
-          <span>RusingAcademy.com</span>
+          <span>RusingÂcademy.com</span>
         </a>
 
         {/* WebSocket status + Footer */}

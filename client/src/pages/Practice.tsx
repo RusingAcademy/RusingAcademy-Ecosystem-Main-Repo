@@ -322,7 +322,7 @@ export default function Practice() {
   // Loading state
   if (authLoading) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
@@ -342,7 +342,7 @@ export default function Practice() {
   // Not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <Header />
         <main className="flex-1 flex items-center justify-center px-4">
           <Card className="max-w-md w-full">
@@ -371,7 +371,7 @@ export default function Practice() {
   // Active simulation
   if (isSimulationActive && selectedType && selectedLevel) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <Header />
         <main className="flex-1 px-4 py-8">
           <div className="max-w-4xl mx-auto">
@@ -399,7 +399,7 @@ export default function Practice() {
 
   // Selection screen
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-obsidian">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <Header />
       <main className="flex-1 px-4 py-8">
         <div className="max-w-6xl mx-auto">

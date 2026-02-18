@@ -58,13 +58,13 @@ export default function HRCalendar() {
             <h1 className="text-2xl font-bold text-gray-900">{ui.title}</h1>
             <p className="text-sm text-gray-500 mt-1">{ui.subtitle}</p>
           </div>
-          <div className="flex gap-2 bg-gray-100 dark:bg-card p-1 rounded-lg">
+          <div className="flex gap-2 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 p-1 rounded-lg">
             {(["month", "week", "list"] as const).map((mode) => (
               <button
                 key={mode}
                 onClick={() => setViewMode(mode)}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                  viewMode === mode ? "bg-white dark:bg-card text-blue-600 shadow-sm" : "text-gray-500 hover:text-gray-700"
+                  viewMode === mode ? "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-blue-600 shadow-sm" : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {ui[mode]}
@@ -74,15 +74,15 @@ export default function HRCalendar() {
         </div>
 
         {/* Calendar Navigation */}
-        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
-            <button aria-label="Action" onClick={prevMonth} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg transition-colors">
+            <button aria-label="Action" onClick={prevMonth} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg transition-colors">
               <span className="material-icons text-gray-600">chevron_left</span>
             </button>
             <h2 className="text-lg font-semibold text-gray-900">
               {months[currentMonth]} {currentYear}
             </h2>
-            <button aria-label="Action" onClick={nextMonth} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg transition-colors">
+            <button aria-label="Action" onClick={nextMonth} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg transition-colors">
               <span className="material-icons text-gray-600">chevron_right</span>
             </button>
           </div>
@@ -135,7 +135,7 @@ export default function HRCalendar() {
         </div>
 
         {/* Empty State */}
-        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-12 text-center">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
             <span className="material-icons text-lg md:text-2xl lg:text-3xl text-blue-600">event_note</span>
           </div>

@@ -90,7 +90,7 @@ export default function Leaderboard() {
       case 1:
         return "bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/30 dark:to-amber-950/30 border-yellow-300 dark:border-yellow-700 shadow-sm shadow-yellow-200/50 dark:shadow-yellow-900/30";
       case 2:
-        return "bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-950/30 dark:to-teal-950/30 border-gray-300 dark:border-border shadow-sm";
+        return "bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-950/30 dark:to-teal-950/30 border-gray-300 dark:border-white/15 shadow-sm";
       case 3:
         return "bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border-amber-300 dark:border-amber-700 shadow-sm";
       default:

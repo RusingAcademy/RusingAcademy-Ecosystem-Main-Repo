@@ -1,6 +1,6 @@
 /**
  * NativeCalendar Component
- * RusingAcademy Native Booking Calendar System
+ * RusingÂcademy Native Booking Calendar System
  */
 
 import { useState, useMemo } from "react";

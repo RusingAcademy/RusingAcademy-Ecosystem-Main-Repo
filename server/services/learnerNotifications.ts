@@ -132,8 +132,8 @@ function getTemplate(event: LearnerEvent): NotificationTemplate {
     case "welcome":
       return {
         title: {
-          en: "Welcome to RusingAcademy!",
-          fr: "Bienvenue à RusingAcademy !",
+          en: "Welcome to RusingÂcademy!",
+          fr: "Bienvenue à RusingÂcademy !",
         },
         message: {
           en: `Welcome${event.userName ? `, ${event.userName}` : ""}! Start your bilingual learning journey today. Explore our courses and programs.`,

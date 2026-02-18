@@ -82,7 +82,7 @@ export default function BalanceSheetReport() {
     if (!bs) return;
     const rows = [
       ["Balance Sheet"],
-      [(company as any)?.companyName || "RusingAcademy"],
+      [(company as any)?.companyName || "RusingÂcademy"],
       [`As of ${asOfLabel}`],
       [""],
       ["ASSETS"],
@@ -114,7 +114,7 @@ export default function BalanceSheetReport() {
     const groups: Record<string, { name: string; amount: number }[]> = {};
     for (const a of bs.assets) {
       let group = "Other Assets";
-      if (a.name.includes("Bank") || a.name === "RusingAcademy") group = "Bank Accounts";
+      if (a.name.includes("Bank") || a.name === "RusingÂcademy") group = "Bank Accounts";
       else if (a.name.includes("Receivable")) group = "Accounts Receivable";
       else if (a.name.includes("Undeposited") || a.name.includes("Prepaid") || a.name.includes("Inventory") || a.name.includes("GST/HST Receivable")) group = "Other Current Assets";
       if (!groups[group]) groups[group] = [];
@@ -136,7 +136,7 @@ export default function BalanceSheetReport() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload) return null;
     return (
-      <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg p-3 text-sm">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg shadow-lg p-3 text-sm">
         <p className="font-semibold text-gray-800 dark:text-foreground mb-1">{label}</p>
         {payload.map((entry: any, i: number) => (
           <div key={i} className="flex items-center gap-2">
@@ -153,33 +153,33 @@ export default function BalanceSheetReport() {
     <div className="p-6 max-w-[900px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/reports")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
+          <button onClick={() => navigate("/reports")} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
             <h1 className="text-2xl font-bold text-gray-800">Balance Sheet</h1>
-            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingAcademy"} — As of {asOfLabel}</p>
+            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingÂcademy"} — As of {asOfLabel}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           {/* View Mode Toggle */}
-          <div className="flex items-center border border-gray-200 dark:border-border dark:border-border rounded-lg overflow-hidden">
+          <div className="flex items-center border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg overflow-hidden">
             <button aria-label="Action"
-              className={`p-2 ${viewMode === "table" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
+              className={`p-2 ${viewMode === "table" ? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("table")}
               title="Table view"
             >
               <Table2 size={16} />
             </button>
             <button aria-label="Action"
-              className={`p-2 ${viewMode === "chart" ? "bg-gray-100 dark:bg-card text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
+              className={`p-2 ${viewMode === "chart" ? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
               onClick={() => setViewMode("chart")}
               title="Chart view"
             >
               <BarChart3 size={16} />
             </button>
           </div>
-          <div className="flex items-center gap-1 border border-gray-200 dark:border-border dark:border-border rounded-lg px-3 py-1.5">
+          <div className="flex items-center gap-1 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg px-3 py-1.5">
             <Calendar size={14} className="text-gray-400" />
             <select
               className="text-sm bg-transparent border-none focus:outline-none"

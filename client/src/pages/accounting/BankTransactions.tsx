@@ -133,7 +133,7 @@ export default function BankTransactions() {
               <span className="text-sm font-bold text-gray-600">RA</span>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">{bankData?.bankAccounts?.name || "RusingAcademy"}</h3>
+              <h3 className="font-semibold text-gray-800">{bankData?.bankAccounts?.name || "RusingÂcademy"}</h3>
               <p className="text-xs text-gray-500">Updated {bankData?.bankAccounts?.lastUpdated || "recently"}</p>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function BankTransactions() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-border dark:border-border">
+      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
         {["For Review", "Categorized", "Excluded", "Matched", "All"].map(tab => (
           <button
             key={tab}
@@ -172,10 +172,10 @@ export default function BankTransactions() {
       </div>
 
       {/* Transaction Table */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
-            <tr className="bg-gray-50">
+            <tr className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="w-8"><input type="checkbox" className="rounded" /></th>
               <th>Date</th>
               <th>Description</th>
@@ -189,7 +189,7 @@ export default function BankTransactions() {
               const txn = row.transaction || row;
               const amount = parseFloat(txn.amount || "0");
               return (
-                <tr key={txn.id} className="hover:bg-gray-50">
+                <tr key={txn.id} className="hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   <td><input type="checkbox" className="rounded" /></td>
                   <td className="text-gray-700">{txn.transactionDate ? new Date(txn.transactionDate).toLocaleDateString("en-CA") : ""}</td>
                   <td className="text-gray-800 dark:text-foreground max-w-[300px] truncate">{txn.description || "—"}</td>
@@ -201,7 +201,7 @@ export default function BankTransactions() {
                       txn.status === "For Review" ? "bg-yellow-100 text-yellow-700" :
                       txn.status === "Categorized" ? "bg-green-100 text-green-700" :
                       txn.status === "Matched" ? "bg-blue-100 text-blue-700" :
-                      "bg-gray-100 dark:bg-card text-gray-600"
+                      "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"
                     }`}>
                       {txn.status}
                     </span>
@@ -304,7 +304,7 @@ export default function BankTransactions() {
             {csvData.length > 0 && dateCol && descCol && amountCol && (
               <div className="border rounded-lg overflow-hidden max-h-40 overflow-y-auto">
                 <table className="w-full text-xs">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                     <tr>
                       <th className="px-2 py-1 text-left">Date</th>
                       <th className="px-2 py-1 text-left">Description</th>

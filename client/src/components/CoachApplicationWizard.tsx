@@ -1190,7 +1190,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
                     "flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors",
                     data.specializations[item.key as keyof Specializations]
                       ? "border-teal-500 bg-teal-50"
-                      : "border-gray-200 dark:border-border hover:border-gray-300"
+                      : "border-gray-200 dark:border-white/15 hover:border-gray-300"
                   )}
                   onClick={() => updateSpecializations(
                     item.key as keyof Specializations,
@@ -1540,7 +1540,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
             />
           </div>
 
-          <div className="bg-white dark:bg-background rounded-lg p-4">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4">
             <h4 className="font-medium mb-3 flex items-center gap-2">
               <Camera className="h-4 w-4" />
               {isEn ? "Photo Guidelines" : "Directives pour la photo"}
@@ -1613,7 +1613,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
           )}
         </div>
 
-        <div className="bg-white dark:bg-background rounded-lg p-4">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4">
           <h4 className="font-medium mb-3 flex items-center gap-2">
             <Play className="h-4 w-4" />
             {isEn ? "Video Tips" : "Conseils pour la vidéo"}
@@ -1922,7 +1922,7 @@ export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, p
                   "w-10 h-10 rounded-full flex items-center justify-center mb-1",
                   isActive && "bg-teal-100",
                   isCompleted && "bg-green-100",
-                  !isActive && !isCompleted && "bg-gray-100"
+                  !isActive && !isCompleted && "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"
                 )}>
                   {isCompleted ? (
                     <CheckCircle className="h-5 w-5" />

@@ -485,7 +485,7 @@ export default function BarholexMediaLanding() {
                 </a>
                 <a
                   href="#expertise"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-black dark:text-foreground bg-white dark:bg-background border-2 border-slate-200 hover:border-amber-400 shadow-sm"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-black dark:text-foreground bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-2 border-slate-200 hover:border-amber-400 shadow-sm"
                 >
                   {t.hero.cta2}
                 </a>
@@ -609,7 +609,7 @@ export default function BarholexMediaLanding() {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="relative p-8 rounded-2xl bg-white dark:bg-background border border-gray-100 dark:border-border shadow-sm hover:shadow-lg transition-all duration-300"
+                  className="relative p-8 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-100 dark:border-white/15 shadow-sm hover:shadow-lg transition-all duration-300"
                 >
                   <div 
                     className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
@@ -679,7 +679,7 @@ export default function BarholexMediaLanding() {
                   className={`flex items-center gap-3 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                     activeExpertise === index
                       ? 'text-white shadow-lg'
-                      : 'bg-white dark:bg-card border border-gray-200 dark:border-border hover:border-gray-300'
+                      : 'bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-gray-200 dark:border-white/15 hover:border-gray-300'
                   }`}
                   style={{
                     background: activeExpertise === index ? colors.navy : undefined,

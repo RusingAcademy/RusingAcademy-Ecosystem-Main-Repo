@@ -54,7 +54,7 @@ export default function Organizations() {
         {/* Hero Section */}
         <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16 sm:py-24">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100/50 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-800/50 backdrop-blur-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100/50 dark:bg-teal-900/30 border border-teal-200/50 dark:border-white/15 backdrop-blur-sm mb-6">
               <Building2 className="w-4 h-4 text-teal-600 dark:text-teal-400" />
               <span className="text-sm font-medium text-teal-700 dark:text-teal-300">
                 {language === "fr" ? "Mode Organisationnel" : "Organizational Mode"}
@@ -89,8 +89,8 @@ export default function Organizations() {
               className="px-8 py-6 text-lg font-semibold rounded-lg bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {language === "fr"
-                ? "Se connecter via RusingAcademy"
-                : "Sign in via RusingAcademy"}
+                ? "Se connecter via RusingÂcademy"
+                : "Sign in via RusingÂcademy"}
             </Button>
 
             <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mt-4">
@@ -159,7 +159,7 @@ export default function Organizations() {
         {/* Contact Section */}
         <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-8 md:py-12 lg:py-16">
           <div className="max-w-2xl mx-auto">
-            <div className="p-8 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 border border-teal-200/50 dark:border-teal-800/50 backdrop-blur-sm">
+            <div className="p-8 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 border border-teal-200/50 dark:border-white/15 backdrop-blur-sm">
               <h3 className="text-2xl font-bold text-black dark:text-foreground mb-4 text-center">
                 {language === "fr"
                   ? "Intéressé par le mode organisationnel?"

@@ -104,12 +104,12 @@ export default function ForGovernment() {
       ],
       testimonialsTitle: "Trusted by Government Organizations",
       testimonials: [
-        { quote: "RusingAcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.", author: "Director of HR", company: "Federal Department" },
+        { quote: "RusingÂcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.", author: "Director of HR", company: "Federal Department" },
         { quote: "The coaching marketplace gave our employees personalized support that made all the difference in their language journey.", author: "Training Manager", company: "Crown Corporation" },
         { quote: "Finally, a solution that understands government compliance requirements while delivering modern, engaging learning experiences.", author: "Chief Learning Officer", company: "Provincial Agency" }
       ],
       ctaTitle: "Ready to Achieve Bilingual Excellence?",
-      ctaSubtitle: "Join 50+ government departments that trust RusingAcademy for their official languages training.",
+      ctaSubtitle: "Join 50+ government departments that trust RusingÂcademy for their official languages training.",
       formTitle: "Request a Demo",
       formSubtitle: "Fill out the form below and our government solutions team will contact you within 24 hours.",
       formFields: {
@@ -172,12 +172,12 @@ export default function ForGovernment() {
       ],
       testimonialsTitle: "La confiance des organisations gouvernementales",
       testimonials: [
-        { quote: "RusingAcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.", author: "Directeur des RH", company: "Ministère fédéral" },
+        { quote: "RusingÂcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.", author: "Directeur des RH", company: "Ministère fédéral" },
         { quote: "Le marché de coaching a offert à nos employés un soutien personnalisé qui a fait toute la différence.", author: "Gestionnaire de formation", company: "Société d'État" },
         { quote: "Enfin, une solution qui comprend les exigences de conformité gouvernementale tout en offrant des expériences modernes.", author: "Directeur de l'apprentissage", company: "Agence provinciale" }
       ],
       ctaTitle: "Prêt à atteindre l'excellence bilingue?",
-      ctaSubtitle: "Rejoignez plus de 50 ministères gouvernementaux qui font confiance à RusingAcademy.",
+      ctaSubtitle: "Rejoignez plus de 50 ministères gouvernementaux qui font confiance à RusingÂcademy.",
       formTitle: "Demander une démo",
       formSubtitle: "Remplissez le formulaire ci-dessous et notre équipe solutions gouvernementales vous contactera dans les 24 heures.",
       formFields: {
@@ -262,7 +262,7 @@ export default function ForGovernment() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-gray-200 dark:border-border dark:border-border/50 bg-white dark:bg-background/50 backdrop-blur-sm">
+        <section className="py-8 border-y border-gray-200 dark:border-white/15 dark:border-white/15/50 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={departments.ref} className="text-center">
@@ -327,7 +327,7 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="w-12 h-12 rounded-xl bg-teal-400/10 flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-teal-400" />
@@ -359,7 +359,7 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="relative p-4 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg text-center group hover:shadow-xl transition-all"
+                  className="relative p-4 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-lg text-center group hover:shadow-xl transition-all"
                 >
                   <div 
                     className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center text-white font-bold"
@@ -404,7 +404,7 @@ export default function ForGovernment() {
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
                       ? "border-teal-400 bg-gradient-to-br from-[#F0FDFA] to-white shadow-xl scale-105" 
-                      : "border-gray-200 dark:border-border bg-white/80"
+                      : "border-gray-200 dark:border-white/15 bg-white/80"
                   }`}
                 >
                   {pkg.popular && (
@@ -434,7 +434,7 @@ export default function ForGovernment() {
                       className={`w-full rounded-full ${
                         pkg.popular 
                           ? "bg-teal-400 hover:bg-teal-500 text-white" 
-                          : "bg-gray-100 dark:bg-card hover:bg-gray-200 text-black"
+                          : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:bg-gray-200 text-black"
                       }`}
                       onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                     >
@@ -463,7 +463,7 @@ export default function ForGovernment() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg"
+                  className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-lg"
                 >
                   <Quote className="w-8 h-8 text-teal-400/30 mb-4" />
                   <p className="text-black dark:text-foreground mb-6 italic">"{testimonial.quote}"</p>
@@ -502,7 +502,7 @@ export default function ForGovernment() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="p-8 rounded-3xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-xl"
+                className="p-8 rounded-3xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-xl"
               >
                 <h3 className="text-xl font-bold text-black dark:text-foreground mb-2">{t.formTitle}</h3>
                 <p className="text-black dark:text-foreground mb-6">{t.formSubtitle}</p>
@@ -519,30 +519,30 @@ export default function ForGovernment() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.name} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                       <Input 
                         type="email" 
                         placeholder={t.formFields.email} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input 
                         placeholder={t.formFields.department} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-teal-400 focus:ring-teal-400"
                         required 
                       />
                       <Input 
                         placeholder={t.formFields.learners} 
-                        className="h-12 rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-teal-400 focus:ring-teal-400"
+                        className="h-12 rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-teal-400 focus:ring-teal-400"
                       />
                     </div>
                     <Textarea 
                       placeholder={t.formFields.message} 
-                      className="min-h-[120px] rounded-xl border-gray-200 dark:border-border dark:border-border focus:border-teal-400 focus:ring-teal-400"
+                      className="min-h-[120px] rounded-xl border-gray-200 dark:border-white/15 dark:border-white/15 focus:border-teal-400 focus:ring-teal-400"
                       rows={4}
                     />
                     <Button 

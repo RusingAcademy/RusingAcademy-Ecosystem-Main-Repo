@@ -1,5 +1,5 @@
 /**
- * CelebrationOverlay — RusingAcademy Learning Portal
+ * CelebrationOverlay — RusingÂcademy Learning Portal
  * Animated celebrations: confetti, level-up fanfare, badge unlock, streak milestones
  * Uses canvas-confetti for particle effects + CSS animations for modals
  */

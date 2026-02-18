@@ -84,7 +84,7 @@ export default function SalesTax() {
             {currentFiling.status === "Upcoming" ? "CURRENT PERIOD" : currentFiling.status?.toUpperCase()}
           </div>
 
-          <div className="space-y-2 border-t border-gray-100 dark:border-border pt-4">
+          <div className="space-y-2 border-t border-gray-100 dark:border-white/15 pt-4">
             <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600">Collected on sales</span>
               <span className="font-medium text-gray-800">${Number(currentFiling.taxCollected || 0).toFixed(2)}</span>
@@ -93,7 +93,7 @@ export default function SalesTax() {
               <span className="text-gray-600">Paid on purchases</span>
               <span className="font-medium text-gray-800">${Number(currentFiling.taxPaid || 0).toFixed(2)}</span>
             </div>
-            <div className="flex items-center justify-between text-sm font-bold border-t border-gray-200 dark:border-border dark:border-border pt-2">
+            <div className="flex items-center justify-between text-sm font-bold border-t border-gray-200 dark:border-white/15 dark:border-white/15 pt-2">
               <span className="text-gray-800">Net tax owing</span>
               <span className="text-gray-900">${Number(currentFiling.amountOwing || 0).toFixed(2)}</span>
             </div>
@@ -109,7 +109,7 @@ export default function SalesTax() {
         </div>
         <div className="space-y-2">
           {rates.map((rate: any) => (
-            <div key={rate.id} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-border last:border-0">
+            <div key={rate.id} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-white/15 last:border-0">
               <div>
                 <div className="font-medium text-gray-800">{rate.name}</div>
                 <div className="text-xs text-gray-500">{rate.agency || "CRA"} · {rate.code}</div>
@@ -122,10 +122,10 @@ export default function SalesTax() {
 
       {/* Filing History */}
       <h2 className="text-lg font-semibold text-gray-800 dark:text-foreground mb-4">Filing History</h2>
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-50 dark:bg-background border-b">
+            <tr className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-b">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Period</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Agency</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
@@ -135,7 +135,7 @@ export default function SalesTax() {
           </thead>
           <tbody>
             {filings.map((f: any) => (
-              <tr key={f.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+              <tr key={f.id} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                 <td className="px-4 py-3 text-sm text-gray-700">
                   {f.periodStart ? new Date(f.periodStart).toLocaleDateString("en-CA") : ""} – {f.periodEnd ? new Date(f.periodEnd).toLocaleDateString("en-CA") : ""}
                 </td>
@@ -145,7 +145,7 @@ export default function SalesTax() {
                     f.status === "Paid" ? "bg-green-100 text-green-700" :
                     f.status === "Filed" ? "bg-blue-100 text-blue-700" :
                     f.status === "Due" ? "bg-yellow-100 text-yellow-700" :
-                    "bg-gray-100 dark:bg-card text-gray-600"
+                    "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"
                   }`}>
                     {f.status}
                   </span>

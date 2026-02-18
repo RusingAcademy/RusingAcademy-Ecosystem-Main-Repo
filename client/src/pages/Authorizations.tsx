@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal - Authorizations Page
+ * RusingÂcademy Learning Portal - Authorizations Page
  * Design: 3 tabs - Modules / Pre-Authorized Hours / Extra Information
  * Table with teal header
  */
@@ -64,7 +64,7 @@ export default function Authorizations() {
               </thead>
               <tbody>
                 {moduleAuths.map((auth, i) => (
-                  <tr key={i} className={`border-t border-gray-100 dark:border-border ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
+                  <tr key={i} className={`border-t border-gray-100 dark:border-white/15 ${i % 2 === 0 ? "bg-white" : "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50"} hover:bg-teal-50`}>
                     <td className="px-4 py-3 text-sm text-gray-800">{auth.module}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{auth.startDate}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{auth.endDate}</td>

@@ -73,7 +73,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4 py-2">
-          <div className="p-3 bg-gray-50 dark:bg-background rounded-lg">
+          <div className="p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
             <p className="text-xs text-black dark:text-foreground mb-1">Section</p>
             <p className="text-sm font-medium truncate">{sectionTitle || "Untitled Section"}</p>
           </div>
@@ -85,7 +85,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
               <button
                 onClick={() => setMode("copy")}
                 className={`flex items-center gap-2 p-3 rounded-lg border text-sm transition-all ${
-                  mode === "copy" ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-200 dark:border-border hover:border-gray-300"
+                  mode === "copy" ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-200 dark:border-white/15 hover:border-gray-300"
                 }`}
               >
                 <Copy className={`h-4 w-4 ${mode === "copy" ? "text-indigo-500" : "text-cyan-300"}`} />
@@ -97,7 +97,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
               <button
                 onClick={() => setMode("move")}
                 className={`flex items-center gap-2 p-3 rounded-lg border text-sm transition-all ${
-                  mode === "move" ? "border-orange-500 bg-orange-50 ring-1 ring-orange-200" : "border-gray-200 dark:border-border hover:border-gray-300"
+                  mode === "move" ? "border-orange-500 bg-orange-50 ring-1 ring-orange-200" : "border-gray-200 dark:border-white/15 hover:border-gray-300"
                 }`}
               >
                 <ArrowRight className={`h-4 w-4 ${mode === "move" ? "text-orange-500" : "text-cyan-300"}`} />

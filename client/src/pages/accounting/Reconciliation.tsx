@@ -60,7 +60,7 @@ export default function Reconciliation() {
 
       {/* New Reconciliation Form */}
       {showNewForm && (
-        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border p-6 mb-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 p-6 mb-6">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-foreground mb-4">New Reconciliation</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
             <div>
@@ -119,10 +119,10 @@ export default function Reconciliation() {
       </div>
 
       {/* Reconciliation History */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
+            <tr className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Statement Date</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Account</th>
               <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Statement Balance</th>
@@ -147,7 +147,7 @@ export default function Reconciliation() {
               (reconciliations || []).map((rec: any) => {
                 const diff = parseFloat(rec.difference || "0");
                 return (
-                  <tr key={rec.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+                  <tr key={rec.id} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {rec.statementDate ? new Date(rec.statementDate).toLocaleDateString("en-CA") : "-"}
                     </td>

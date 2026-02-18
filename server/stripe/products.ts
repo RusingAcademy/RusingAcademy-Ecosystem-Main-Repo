@@ -76,7 +76,7 @@ export function calculatePackagePrice(
 }
 
 // ============================================================================
-// PATH SERIES™ COURSE PRODUCTS (RusingAcademy)
+// PATH SERIES™ COURSE PRODUCTS (RusingÂcademy)
 // Official pricing from https://www.rusing.academy/
 // ============================================================================
 

@@ -298,12 +298,12 @@ describe("PDF Progress Report Service", () => {
     expect(html).toContain("No recent activity");
   });
 
-  it("should include RusingAcademy branding in footer", async () => {
+  it("should include RusingÂcademy branding in footer", async () => {
     const { generateReportHTML } = await import("./services/pdfProgressReport");
     const mockData = createMockReportData();
     const html = generateReportHTML(mockData, "en");
     
-    expect(html).toContain("RusingAcademy");
+    expect(html).toContain("RusingÂcademy");
     expect(html).toContain("Lingueefy");
     expect(html).toContain("Barholex Media");
   });

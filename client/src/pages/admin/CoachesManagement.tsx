@@ -168,10 +168,10 @@ export default function CoachesManagement() {
 
     return (
       <div key={app.id} className="border-b last:border-b-0">
-        <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-foundation/50 transition-colors">
+        <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-foundation/50 transition-colors">
           <div className="flex items-center gap-4 flex-1 min-w-0">
             {/* Photo */}
-            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-foundation overflow-hidden flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md overflow-hidden flex-shrink-0">
               {app.photoUrl || app.profilePhotoUrl ? (
                 <img
                   src={app.photoUrl || app.profilePhotoUrl}
@@ -247,7 +247,7 @@ export default function CoachesManagement() {
 
         {/* Expanded Quick Preview */}
         {isExpanded && (
-          <div className="px-4 pb-4 pt-0 bg-slate-50/50 dark:bg-foundation/20">
+          <div className="px-4 pb-4 pt-0 bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 dark:bg-white/[0.08] dark:backdrop-blur-md/20">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               {app.bio && (
                 <div>
@@ -315,7 +315,7 @@ export default function CoachesManagement() {
           </div>
           <div className="flex items-center justify-between gap-2 overflow-x-auto">
             {[
-              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100 dark:bg-card", textColor: "text-slate-600 dark:text-slate-300", icon: UserPlus },
+              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15", textColor: "text-slate-600 dark:text-slate-300", icon: UserPlus },
               { label: "Pending", count: pending.length, color: "bg-amber-50 dark:bg-amber-900/20", textColor: "text-amber-600", icon: Clock },
               { label: "Under Review", count: underReview.length, color: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-600", icon: Eye },
               { label: "Approved", count: approved.length, color: "bg-emerald-50 dark:bg-emerald-900/20", textColor: "text-emerald-600", icon: CheckCircle },
@@ -431,7 +431,7 @@ export default function CoachesManagement() {
             <div className="space-y-6">
               {/* Header */}
               <div className="flex items-center gap-4">
-                <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-foundation overflow-hidden flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md overflow-hidden flex-shrink-0">
                   {selectedApp.photoUrl || selectedApp.profilePhotoUrl ? (
                     <img
                       src={selectedApp.photoUrl || selectedApp.profilePhotoUrl}
@@ -483,7 +483,7 @@ export default function CoachesManagement() {
               {selectedApp.headline && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Headline (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-foundation/50 rounded-lg p-3">{selectedApp.headline}</p>
+                  <p className="text-sm bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 rounded-lg p-3">{selectedApp.headline}</p>
                 </div>
               )}
 
@@ -499,7 +499,7 @@ export default function CoachesManagement() {
               {selectedApp.bio && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Bio (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-foundation/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
+                  <p className="text-sm bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
                 </div>
               )}
 

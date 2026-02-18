@@ -13,7 +13,7 @@ const t = {
     title: { en: "Coach Terms & Conditions", fr: "Termes et Conditions pour les Coachs" },
     subtitle: { en: "Coach Partnership Agreement", fr: "Contrat de Partenariat Coach" },
     company: "Rusinga International Consulting Ltd.",
-    brand: { en: 'Commercially known as "RusingAcademy"', fr: 'Commercialement connue sous le nom de « RusingAcademy »' },
+    brand: { en: 'Commercially known as "RusingÂcademy"', fr: 'Commercialement connue sous le nom de « RusingÂcademy »' },
     platform: { en: "Language Coaching Platform for Canadian Public Servants", fr: "Plateforme de Coaching Linguistique pour Fonctionnaires Canadiens" },
     updated: { en: "Last updated", fr: "Dernière mise à jour" },
     version: { en: "Version", fr: "Version" },
@@ -26,12 +26,12 @@ const t = {
     },
     defs: {
       en: [
-        { term: '"The Company"', def: 'means Rusinga International Consulting Ltd., a Canadian corporation, commercially known as "RusingAcademy".' },
+        { term: '"The Company"', def: 'means Rusinga International Consulting Ltd., a Canadian corporation, commercially known as "RusingÂcademy".' },
         { term: '"The Platform"', def: 'means all technological services and web applications operated by the Company for connecting coaches and learners.' },
         { term: '"The Coach"', def: 'means any certified professional who has accepted these Terms to offer coaching services through the Platform.' },
       ],
       fr: [
-        { term: '« La Société »', def: 'désigne Rusinga International Consulting Ltd., société canadienne, commercialement connue sous le nom de « RusingAcademy ».' },
+        { term: '« La Société »', def: 'désigne Rusinga International Consulting Ltd., société canadienne, commercialement connue sous le nom de « RusingÂcademy ».' },
         { term: '« La Plateforme »', def: 'désigne l\'ensemble des services technologiques et applications web opérés par la Société pour la mise en relation de coachs et d\'apprenants.' },
         { term: '« Le Coach »', def: 'désigne tout professionnel certifié ayant accepté les présentes conditions pour offrir des services de coaching via la Plateforme.' },
       ],
@@ -234,9 +234,9 @@ export default function CoachTerms() {
   const termsVersion = "v2026.01.29";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-obsidian/80 backdrop-blur-md border-b border-slate-200 dark:border-teal-800">
+      <header className="sticky top-0 z-50 bg-white/80 dark:bg-white/[0.08] dark:backdrop-blur-md backdrop-blur-md border-b border-slate-200 dark:border-teal-800">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/coach/dashboard">
@@ -267,7 +267,7 @@ export default function CoachTerms() {
 
       {/* Content */}
       <main className="container mx-auto px-4 py-6 md:py-8 lg:py-12 max-w-4xl">
-        <div className="bg-white dark:bg-card dark:bg-foundation rounded-2xl shadow-xl border border-slate-200 dark:border-teal-800 overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 dark:border-teal-800 overflow-hidden">
           {/* Title Section */}
           <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-8 py-8 text-white">
             <div className="flex items-center gap-3 mb-4">
@@ -275,7 +275,7 @@ export default function CoachTerms() {
                 loading="lazy"
                 src="/rusinga-logo.png"
                 alt="Rusinga International Consulting Ltd."
-                className="w-12 h-12 rounded-lg bg-white dark:bg-background p-1"
+                className="w-12 h-12 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md p-1"
                 onError={(e) => { e.currentTarget.style.display = "none"; }}
               />
               <div>
@@ -283,7 +283,7 @@ export default function CoachTerms() {
                 <p className="text-teal-100 text-sm">{t.hero.subtitle[l]}</p>
               </div>
             </div>
-            <div className="bg-white dark:bg-background/10 rounded-lg p-4 mt-4">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg p-4 mt-4">
               <p className="font-semibold">{t.hero.company}</p>
               <p className="text-teal-100 text-sm">{t.hero.brand[l]}</p>
               <p className="text-teal-200 text-xs mt-2">{t.hero.platform[l]}</p>
@@ -316,14 +316,14 @@ export default function CoachTerms() {
                 {t.s2.title[l]}
               </h2>
               <div className="space-y-6">
-                <div className="bg-white dark:bg-card dark:bg-foundation rounded-lg p-4 border border-amber-300 dark:border-amber-600">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 border border-amber-300 dark:border-amber-600">
                   <p className="text-lg font-semibold text-black dark:text-foreground mb-2">
                     {t.s2.rate[l]} <span className="text-amber-600 text-2xl">{t.s2.rateValue}</span>
                   </p>
                   <p className="text-black dark:text-foreground/90" dangerouslySetInnerHTML={{ __html: t.s2.desc[l] }} />
                 </div>
 
-                <div className="bg-white dark:bg-card dark:bg-foundation rounded-lg p-5 border border-slate-200 dark:border-border">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-5 border border-slate-200 dark:border-white/15">
                   <h3 className="font-bold text-black dark:text-foreground mb-4 text-center">{t.s2.breakdownTitle[l]}</h3>
                   <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mb-4 text-center">{t.s2.breakdownDesc[l]}</p>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -342,7 +342,7 @@ export default function CoachTerms() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white dark:bg-card dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-border">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 border border-slate-200 dark:border-white/15">
                     <h4 className="font-semibold text-black dark:text-foreground mb-2">{t.s2.example.title[l]}</h4>
                     <ul className="text-sm text-black dark:text-foreground dark:text-cyan-300 space-y-1">
                       {t.s2.example.lines[l].map((line, i) => (
@@ -350,7 +350,7 @@ export default function CoachTerms() {
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-white dark:bg-card dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-border">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 border border-slate-200 dark:border-white/15">
                     <h4 className="font-semibold text-black dark:text-foreground mb-2">{t.s2.benefits.title[l]}</h4>
                     <ul className="text-sm text-black dark:text-foreground dark:text-cyan-300 space-y-1">
                       {t.s2.benefits.lines[l].map((line, i) => (

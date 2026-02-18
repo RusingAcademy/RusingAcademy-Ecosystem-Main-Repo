@@ -98,7 +98,7 @@ describe("EcosystemHeaderGold Accessibility", () => {
       
       const rusingLink = screen.getByRole("link", { name: /go to rusingâcademy/i });
       expect(rusingLink).toBeDefined();
-      expect(rusingLink.getAttribute("title")).toBe("Explore RusingAcademy");
+      expect(rusingLink.getAttribute("title")).toBe("Explore RusingÂcademy");
 
       const lingueefyLink = screen.getByRole("link", { name: /go to lingueefy/i });
       expect(lingueefyLink).toBeDefined();

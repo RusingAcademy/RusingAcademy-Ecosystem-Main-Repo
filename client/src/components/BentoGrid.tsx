@@ -32,10 +32,10 @@ export const SemanticColors = {
     accent: "bg-blue-500",
   },
   neutral: {
-    bg: "bg-gray-50 dark:bg-background dark:bg-gray-950/30",
+    bg: "bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-gray-950/30",
     text: "text-gray-700 dark:text-muted-foreground",
-    border: "border-gray-200 dark:border-border dark:border-gray-800",
-    accent: "bg-gray-500",
+    border: "border-gray-200 dark:border-white/15 dark:border-gray-800",
+    accent: "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm0",
   },
 } as const;
 

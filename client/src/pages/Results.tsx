@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal - Results Page
+ * RusingÂcademy Learning Portal - Results Page
  * Design: Tabs for Final Quiz Results / Summary of Results (Chart) / Proficiency Levels (Table)
  * Bar chart + data table
  */
@@ -86,13 +86,13 @@ export default function Results() {
               </thead>
               <tbody>
                 {quizResults.map((result, i) => (
-                  <tr key={i} className={`border-t border-gray-100 dark:border-border ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"} hover:bg-teal-50`}>
+                  <tr key={i} className={`border-t border-gray-100 dark:border-white/15 ${i % 2 === 0 ? "bg-white" : "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50"} hover:bg-teal-50`}>
                     <td className="px-4 py-3 text-sm text-gray-800">{result.module}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{result.quiz}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{result.score}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{result.passingGrade}</td>
                     <td className="px-4 py-3">
-                      <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-card text-gray-500">
+                      <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500">
                         {result.status}
                       </span>
                     </td>
@@ -135,7 +135,7 @@ export default function Results() {
               </thead>
               <tbody>
                 {proficiencyLevels.map((level, i) => (
-                  <tr key={i} className={`border-t border-gray-100 dark:border-border ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}>
+                  <tr key={i} className={`border-t border-gray-100 dark:border-white/15 ${i % 2 === 0 ? "bg-white" : "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50"}`}>
                     <td className="px-4 py-3 text-sm text-gray-800">{level.skill}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{level.level}</td>
                     <td className="px-4 py-3 text-xs text-gray-500">{level.date}</td>

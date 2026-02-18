@@ -104,7 +104,7 @@ export const PersonaPathways: React.FC = () => {
                   {path.description}
                 </p>
                 <Link href={path.path}>
-                  <Button className="w-full sm:w-auto bg-white text-slate-900 hover:bg-slate-100 px-8 py-6 rounded-full font-bold text-lg">
+                  <Button className="w-full sm:w-auto bg-white text-slate-900 hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm px-8 py-6 rounded-full font-bold text-lg">
                     {path.cta}
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>

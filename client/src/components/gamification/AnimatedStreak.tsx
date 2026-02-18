@@ -200,7 +200,7 @@ export function AnimatedStreak({
         {/* Milestone badge */}
         {milestone && showMilestones && (
           <motion.div
-            className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white dark:bg-card dark:bg-foundation shadow-lg flex items-center justify-center text-lg"
+            className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md shadow-lg flex items-center justify-center text-lg"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", delay: 0.3 }}
@@ -310,7 +310,7 @@ export function CompactAnimatedStreak({
         "flex items-center gap-2 px-3 py-1.5 rounded-full",
         isActive && currentStreak > 0
           ? `bg-gradient-to-r ${colors.from} ${colors.to} text-white`
-          : "bg-slate-100 dark:bg-foundation text-black",
+          : "bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md text-black",
         className
       )}
       whileHover={{ scale: 1.05 }}

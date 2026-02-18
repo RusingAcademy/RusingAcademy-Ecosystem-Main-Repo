@@ -1,6 +1,6 @@
 /**
  * Email Deliverability Configuration Service
- * RusingAcademy Learning Ecosystem
+ * RusingÂcademy Learning Ecosystem
  * 
  * This service manages email authentication (SPF, DKIM, DMARC) configuration
  * and provides utilities for ensuring optimal email deliverability.
@@ -75,7 +75,7 @@ export async function sendDiagnosticReportEmail(config: DiagnosticEmailConfig): 
     to: recipientEmail,
     from: {
       email: 'diagnostic@rusingacademy.ca',
-      name: 'RusingAcademy Diagnostic'
+      name: 'RusingÂcademy Diagnostic'
     },
     replyTo: 'support@rusingacademy.ca',
     subject: `Your Personalized Language Diagnostic Report - Score: ${diagnosticScore}%`,

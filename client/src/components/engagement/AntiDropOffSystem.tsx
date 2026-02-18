@@ -116,7 +116,7 @@ export function NudgeModal({ isOpen, onClose, message, incentive }: { isOpen: bo
       <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-[#1A1A2E] rounded-2xl p-6 max-w-md w-full border border-white/10">
         <div className="text-center"><span className="text-2xl md:text-4xl lg:text-5xl mb-4 block">👋</span><h2 className="text-xl font-bold text-white mb-2">On vous attend!</h2><p className="text-white/60 mb-6">{message}</p></div>
         {incentive && <div className="bg-foundation-soft/10 rounded-xl p-4 mb-6 text-center"><p className="text-foundation font-medium">🎁 Bonus de retour: +{incentive.value} XP</p></div>}
-        <div className="flex gap-3"><button onClick={onClose} className="flex-1 py-3 bg-white dark:bg-background/10 rounded-xl text-white">Plus tard</button><button onClick={onClose} className="flex-1 py-3 bg-foundation-soft rounded-xl text-white font-medium">Reprendre</button></div>
+        <div className="flex gap-3"><button onClick={onClose} className="flex-1 py-3 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl text-white">Plus tard</button><button onClick={onClose} className="flex-1 py-3 bg-foundation-soft rounded-xl text-white font-medium">Reprendre</button></div>
       </motion.div>
     </motion.div>
   );

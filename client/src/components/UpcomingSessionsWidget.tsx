@@ -143,7 +143,7 @@ export function UpcomingSessionsWidget({
                   "p-4 rounded-xl border transition-all",
                   isSoon
                     ? "bg-emerald-50 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800 animate-pulse"
-                    : "bg-white dark:bg-card border-slate-200 dark:bg-foundation dark:border-teal-800 hover:border-emerald-300 dark:hover:border-emerald-700"
+                    : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-slate-200 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-teal-800 hover:border-emerald-300 dark:hover:border-emerald-700"
                 )}
               >
                 <div className="flex items-center gap-3">

@@ -103,7 +103,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                 const isFirst = idx === 0;
 
                 return (
-                  <div key={rev.id} className={`rounded-lg border transition-all ${isFirst ? "border-indigo-200 bg-indigo-50/30" : "border-gray-100 dark:border-border hover:border-gray-200"}`}>
+                  <div key={rev.id} className={`rounded-lg border transition-all ${isFirst ? "border-indigo-200 bg-indigo-50/30" : "border-gray-100 dark:border-white/15 hover:border-gray-200"}`}>
                     <div
                       className="flex items-start gap-3 p-3 cursor-pointer"
                       onClick={() => setExpandedId(isExpanded ? null : rev.id)}
@@ -163,7 +163,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
 
                     {/* Expanded details */}
                     {isExpanded && (
-                      <div className="px-3 pb-3 pt-0 border-t border-gray-100 dark:border-border mt-0">
+                      <div className="px-3 pb-3 pt-0 border-t border-gray-100 dark:border-white/15 mt-0">
                         <div className="grid grid-cols-2 gap-3 mt-2">
                           {rev.previousData && (
                             <div className="space-y-1">

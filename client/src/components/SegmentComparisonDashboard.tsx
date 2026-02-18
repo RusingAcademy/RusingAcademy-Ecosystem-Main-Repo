@@ -415,7 +415,7 @@ export default function SegmentComparisonDashboard() {
                         </div>
                         <span className="font-semibold">{formatMetricValue(value)}</span>
                       </div>
-                      <div className="h-8 bg-slate-100 dark:bg-foundation rounded-full overflow-hidden">
+                      <div className="h-8 bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full overflow-hidden">
                         <div
                           className={`h-full ${getBarColor(index)} rounded-full transition-all duration-500`}
                           style={{ width: `${Math.max(percentage, 2)}%` }}
@@ -541,7 +541,7 @@ export default function SegmentComparisonDashboard() {
               </thead>
               <tbody>
                 {segmentMetrics.map((metric, index) => (
-                  <tr key={metric.id} className="border-b hover:bg-white dark:bg-background dark:hover:bg-foundation">
+                  <tr key={metric.id} className="border-b hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:hover:bg-foundation">
                     <td className="py-2 px-3">
                       <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-full ${getBarColor(index)}`} />

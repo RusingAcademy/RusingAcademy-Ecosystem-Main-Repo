@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Animation Utilities
+ * RusingÂcademy Animation Utilities
  * 
  * Framer Motion animation variants and utilities for consistent,
  * professional animations across the ecosystem.

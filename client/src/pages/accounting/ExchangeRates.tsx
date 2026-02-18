@@ -73,7 +73,7 @@ export default function ExchangeRates() {
     <div className="p-6 max-w-[1100px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/settings")} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+          <button onClick={() => navigate("/settings")} className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
@@ -142,7 +142,7 @@ export default function ExchangeRates() {
               {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div className="col-span-2 bg-gray-50 dark:bg-background rounded-md px-3 py-2 text-center">
+          <div className="col-span-2 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-md px-3 py-2 text-center">
             {latestRate ? (
               <div>
                 <div className="text-lg font-bold text-gray-800">
@@ -198,7 +198,7 @@ export default function ExchangeRates() {
           <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Latest Rates by Pair</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {ratePairs.map((r: any) => (
-              <div key={`${r.fromCurrency}-${r.toCurrency}`} className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border p-3 hover:shadow-sm transition-shadow">
+              <div key={`${r.fromCurrency}-${r.toCurrency}`} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 p-3 hover:shadow-sm transition-shadow">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-bold text-gray-800">{r.fromCurrency}/{r.toCurrency}</span>
                   <span className="text-xs text-gray-400">{r.source || "Manual"}</span>
@@ -224,10 +224,10 @@ export default function ExchangeRates() {
           <p className="text-sm text-gray-400">Add rates to enable multi-currency transactions</p>
         </div>
       ) : (
-        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">From</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">To</th>
                 <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Rate</th>
@@ -237,7 +237,7 @@ export default function ExchangeRates() {
             </thead>
             <tbody>
               {items.map((r: any) => (
-                <tr key={r.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+                <tr key={r.id} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   <td className="px-4 py-3 text-sm font-medium text-gray-800">{r.fromCurrency}</td>
                   <td className="px-4 py-3 text-sm font-medium text-gray-800">{r.toCurrency}</td>
                   <td className="px-4 py-3 text-sm text-gray-700 dark:text-muted-foreground text-right font-mono">{parseFloat(r.rate).toFixed(4)}</td>

@@ -5,7 +5,7 @@ const translations = {
   en: {
     title: "Cookie Policy",
     lastUpdated: "Last updated: January 7, 2026",
-    intro: "This Cookie Policy explains how Lingueefy, operated by Rusinga International Consulting Ltd. (commercially known as RusingAcademy) (\"we\", \"us\", or \"our\"), uses cookies and similar technologies when you visit our website.",
+    intro: "This Cookie Policy explains how Lingueefy, operated by Rusinga International Consulting Ltd. (commercially known as RusingÂcademy) (\"we\", \"us\", or \"our\"), uses cookies and similar technologies when you visit our website.",
     sections: [
       {
         title: "What Are Cookies?",
@@ -68,7 +68,7 @@ const translations = {
         content: "If you have questions about our use of cookies or this policy, please contact us at:",
         contact: {
           email: "admin@rusingacademy.ca",
-          company: "Rusinga International Consulting Ltd. (RusingAcademy)",
+          company: "Rusinga International Consulting Ltd. (RusingÂcademy)",
           address: "Ottawa, Ontario, Canada"
         }
       }
@@ -83,7 +83,7 @@ const translations = {
   fr: {
     title: "Politique de cookies",
     lastUpdated: "Dernière mise à jour : 7 janvier 2026",
-    intro: "Cette politique de cookies explique comment Lingueefy, exploité par Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingAcademy) (« nous », « notre » ou « nos »), utilise les cookies et technologies similaires lorsque vous visitez notre site Web.",
+    intro: "Cette politique de cookies explique comment Lingueefy, exploité par Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingÂcademy) (« nous », « notre » ou « nos »), utilise les cookies et technologies similaires lorsque vous visitez notre site Web.",
     sections: [
       {
         title: "Que sont les cookies?",
@@ -146,7 +146,7 @@ const translations = {
         content: "Si vous avez des questions sur notre utilisation des cookies ou cette politique, veuillez nous contacter à :",
         contact: {
           email: "admin@rusingacademy.ca",
-          company: "Rusinga International Consulting Ltd. (RusingAcademy)",
+          company: "Rusinga International Consulting Ltd. (RusingÂcademy)",
           address: "Ottawa, Ontario, Canada"
         }
       }

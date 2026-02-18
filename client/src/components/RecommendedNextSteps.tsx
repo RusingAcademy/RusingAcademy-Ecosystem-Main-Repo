@@ -30,7 +30,7 @@ const TYPE_ICONS: Record<string, typeof BookOpen> = {
 const PRIORITY_COLORS: Record<string, string> = {
   high: "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300",
   medium: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  low: "bg-slate-100 text-black dark:text-foreground dark:bg-foundation dark:text-cyan-300",
+  low: "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black dark:text-foreground dark:bg-white/[0.08] dark:backdrop-blur-md dark:text-cyan-300",
 };
 
 export function RecommendedNextSteps({ language, className }: RecommendedNextStepsProps) {
@@ -93,9 +93,9 @@ export function RecommendedNextSteps({ language, className }: RecommendedNextSte
           return (
             <div
               key={idx}
-              className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-foundation/50 hover:bg-slate-100 dark:hover:bg-foundation transition-colors"
+              className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-foundation transition-colors"
             >
-              <div className="mt-0.5 p-2 rounded-lg bg-white dark:bg-card dark:bg-teal-800 shadow-sm">
+              <div className="mt-0.5 p-2 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-teal-800 shadow-sm">
                 <Icon className="h-4 w-4 text-black dark:text-foreground/90" />
               </div>
               <div className="flex-1 min-w-0">

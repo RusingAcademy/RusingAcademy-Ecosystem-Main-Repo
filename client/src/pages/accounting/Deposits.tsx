@@ -67,7 +67,7 @@ export default function Deposits() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-border dark:border-border">
+      <div className="flex items-center gap-4 mb-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
         <button
           className={`pb-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "payments" ? "border-green-600 text-green-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}
           onClick={() => { setActiveTab("payments"); setPage(1); }}
@@ -96,10 +96,10 @@ export default function Deposits() {
       </div>
 
       {activeTab === "payments" && (
-        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Reference</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Method</th>
@@ -119,7 +119,7 @@ export default function Deposits() {
                 </tr>
               ) : (
                 paginated.map((p: any) => (
-                  <tr key={p.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+                  <tr key={p.id} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {p.paymentDate ? new Date(p.paymentDate).toLocaleDateString("en-CA") : "-"}
                     </td>
@@ -136,10 +136,10 @@ export default function Deposits() {
       )}
 
       {activeTab === "transfers" && (
-        <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-border dark:border-border bg-gray-50">
+              <tr className="border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">From</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">To</th>
@@ -159,7 +159,7 @@ export default function Deposits() {
                 </tr>
               ) : (
                 paginated.map((t: any) => (
-                  <tr key={t.id} className="border-b border-gray-100 dark:border-border hover:bg-gray-50">
+                  <tr key={t.id} className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {t.transferDate ? new Date(t.transferDate).toLocaleDateString("en-CA") : "-"}
                     </td>

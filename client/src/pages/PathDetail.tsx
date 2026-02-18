@@ -55,7 +55,7 @@ function CoursesIncludedSection({ pathId, language }: { pathId: number; language
 
   if (isLoading) {
     return (
-      <section className="py-8 md:py-12 lg:py-16 bg-slate-50">
+      <section className="py-8 md:py-12 lg:py-16 bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" />
@@ -75,7 +75,7 @@ function CoursesIncludedSection({ pathId, language }: { pathId: number; language
   }
 
   return (
-    <section className="py-8 md:py-12 lg:py-16 bg-slate-50">
+    <section className="py-8 md:py-12 lg:py-16 bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
       <div className="container px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-8 text-center">
           {t ? "Cours Inclus" : "Courses Included"}
@@ -395,7 +395,7 @@ export default function PathDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
 <div className="container py-8 md:py-12 lg:py-16 px-4">
           <div className="animate-pulse space-y-8">
             <div className="h-64 bg-slate-200 rounded-xl" />
@@ -410,7 +410,7 @@ export default function PathDetail() {
 
   if (!displayPath) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
 <div className="container py-8 md:py-12 lg:py-16 px-4 text-center">
           <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-black dark:text-foreground mb-2">
@@ -434,7 +434,7 @@ export default function PathDetail() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <SEO
         title={displayPath.title || "Learning Path"}
-        description={displayPath.description?.slice(0, 160) || "Explore this learning path on RusingAcademy"}
+        description={displayPath.description?.slice(0, 160) || "Explore this learning path on RusingÂcademy"}
         canonical={`/paths/${slug}`}
         type="product"
       />
@@ -453,8 +453,8 @@ export default function PathDetail() {
         )}
         {!(displayPath.bannerUrl || displayPath.thumbnailUrl) && (
           <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-white dark:bg-background rounded-full blur-3xl" />
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-white dark:bg-background rounded-full blur-3xl" />
+            <div className="absolute top-20 left-10 w-72 h-72 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full blur-3xl" />
           </div>
         )}
         
@@ -505,22 +505,22 @@ export default function PathDetail() {
               
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white dark:bg-background/80 backdrop-blur rounded-lg p-4 text-center">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur rounded-lg p-4 text-center">
                   <Clock className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-black dark:text-foreground">{displayPath.durationWeeks || 4}</div>
                   <div className="text-sm text-black dark:text-foreground">{t ? "Semaines" : "Weeks"}</div>
                 </div>
-                <div className="bg-white dark:bg-background/80 backdrop-blur rounded-lg p-4 text-center">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur rounded-lg p-4 text-center">
                   <BookOpen className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-black dark:text-foreground">{displayPath.structuredHours || 30}</div>
                   <div className="text-sm text-black dark:text-foreground">{t ? "Heures" : "Hours"}</div>
                 </div>
-                <div className="bg-white dark:bg-background/80 backdrop-blur rounded-lg p-4 text-center">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur rounded-lg p-4 text-center">
                   <Target className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-black dark:text-foreground">{displayPath.pfl2Level || "—"}</div>
                   <div className="text-sm text-black dark:text-foreground">PFL2</div>
                 </div>
-                <div className="bg-white dark:bg-background/80 backdrop-blur rounded-lg p-4 text-center">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur rounded-lg p-4 text-center">
                   <Users className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-black dark:text-foreground">{displayPath?.totalEnrollments || 0}</div>
                   <div className="text-sm text-black dark:text-foreground">{t ? "Inscrits" : "Enrolled"}</div>
@@ -528,7 +528,7 @@ export default function PathDetail() {
               </div>
               
               {/* Target Audience */}
-              <div className="bg-white dark:bg-background/80 backdrop-blur rounded-lg p-4 mb-6">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur rounded-lg p-4 mb-6">
                 <h3 className="font-semibold text-black dark:text-foreground mb-2 flex items-center gap-2">
                   <Target className="w-5 h-5 text-amber-600" />
                   {t ? "Public Cible" : "Target Audience"}
@@ -678,7 +678,7 @@ export default function PathDetail() {
       </section>
 
       {/* Learning Outcomes Section */}
-      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-8 text-center">
             {t ? "Ce Que Vous Apprendrez" : "What You'll Learn"}
@@ -691,7 +691,7 @@ export default function PathDetail() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="flex items-start gap-3 p-4 bg-slate-50 rounded-lg"
+                className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded-lg"
               >
                 <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                 <span className="text-black dark:text-foreground">
@@ -721,7 +721,7 @@ export default function PathDetail() {
             <Button
               size="lg"
               variant="secondary"
-              className="bg-white dark:bg-background text-black dark:text-foreground hover:bg-slate-100"
+              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"
               onClick={handleEnroll}
               disabled={enrollMutation.isPending || enrollmentStatus?.isEnrolled}
             >
@@ -743,7 +743,7 @@ export default function PathDetail() {
               )}
             </Button>
             <Link href="/paths">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white dark:bg-background/10">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 {t ? "Voir Tous les Parcours" : "View All Paths"}
               </Button>

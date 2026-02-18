@@ -109,7 +109,7 @@ export default function LearnCourse() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Header */}
-      <div className="border-b bg-white dark:bg-background/80 backdrop-blur-sm sticky top-0 z-10">
+      <div className="border-b bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container max-w-5xl py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -242,7 +242,7 @@ export default function LearnCourse() {
                           <Link
                             key={lesson.id}
                             href={`/courses/${courseId}/lessons/${lesson.id}`}
-                            className="flex items-center justify-between p-3 rounded-lg border hover:bg-slate-50 transition-colors group"
+                            className="flex items-center justify-between p-3 rounded-lg border hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm transition-colors group"
                           >
                             <div className="flex items-center gap-3">
                               <div className="flex items-center justify-center w-6 h-6">

@@ -258,7 +258,7 @@ export async function journalizeExpense(expenseId: number) {
     : await findOrCreateSystemAccount("Miscellaneous Expenses", "Expenses");
 
   // Credit comes from bank or AP
-  const bankAccount = await findOrCreateSystemAccount("RusingAcademy", "Bank");
+  const bankAccount = await findOrCreateSystemAccount("RusingÂcademy", "Bank");
 
   const taxAmount = parseFloat(exp.taxAmount || "0");
   const subtotal = total - taxAmount;

@@ -206,7 +206,7 @@ export default function AdminDashboardContent({ user }: AdminDashboardProps) {
                 <Card>
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-full bg-foundation-soft dark:bg-foundation-soft/30 flex items-center justify-center">
+                      <div className="h-12 w-12 rounded-full bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md-soft/30 flex items-center justify-center">
                         <TrendingUp className="h-6 w-6 text-foundation" />
                       </div>
                       <div>

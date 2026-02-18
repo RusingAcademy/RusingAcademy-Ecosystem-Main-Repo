@@ -185,7 +185,7 @@ export default function Expenses() {
                   className={`px-3 py-1 rounded-full text-xs font-medium border ${
                     typeFilter === type
                       ? "bg-green-600 text-white border-green-600"
-                      : "bg-white dark:bg-card text-gray-600 border-gray-300 hover:border-gray-400"
+                      : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 border-gray-300 hover:border-gray-400"
                   }`}
                   onClick={() => { setTypeFilter(type); setPage(1); setSelectedIds(new Set()); }}
                 >
@@ -223,10 +223,10 @@ export default function Expenses() {
       </div>
 
       {/* Expense Table */}
-      <div className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full qb-table">
           <thead>
-            <tr className="bg-gray-50">
+            <tr className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <th className="w-8">
                 <input
                   type="checkbox"
@@ -250,7 +250,7 @@ export default function Expenses() {
               return (
                 <tr
                   key={exp.id}
-                  className={`hover:bg-gray-50 dark:bg-background cursor-pointer ${selectedIds.has(exp.id) ? "bg-blue-50" : ""}`}
+                  className={`hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer ${selectedIds.has(exp.id) ? "bg-blue-50" : ""}`}
                   onClick={() => navigate(`/expenses/${exp.id}`)}
                 >
                   <td onClick={(e) => e.stopPropagation()}>
@@ -268,7 +268,7 @@ export default function Expenses() {
                   <td className="text-right text-gray-600">${Number(exp.taxAmount || 0).toFixed(2)}</td>
                   <td className="text-right font-medium text-gray-800">${Number(exp.total || 0).toLocaleString("en-CA", { minimumFractionDigits: 2 })}</td>
                   <td>
-                    <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded" onClick={(e) => { e.stopPropagation(); navigate(`/expenses/${exp.id}`); }}>
+                    <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded" onClick={(e) => { e.stopPropagation(); navigate(`/expenses/${exp.id}`); }}>
                       <MoreVertical size={14} className="text-gray-400" />
                     </button>
                   </td>
@@ -287,7 +287,7 @@ export default function Expenses() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-border dark:border-border bg-gray-50">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
             <span className="text-sm text-gray-500">
               Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, sorted.length)} of {sorted.length}
             </span>

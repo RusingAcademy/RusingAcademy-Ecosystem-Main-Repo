@@ -43,12 +43,12 @@ export function NotificationBell() {
         {unreadCount > 0 && <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">{unreadCount}</span>}
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-background rounded-lg shadow-xl border border-slate-200 z-50 max-h-96 overflow-y-auto">
+        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow-xl border border-slate-200 z-50 max-h-96 overflow-y-auto">
           <div className="p-4 border-b border-slate-200"><h3 className="font-semibold text-slate-900">Notifications</h3></div>
           {notifications.length === 0 ? <p className="p-4 text-slate-500 text-center">No notifications</p> : notifications.slice(0, 10).map(n => {
             const Icon = iconMap[n.type];
             return (
-              <div key={n.id} className={`p-4 border-b border-slate-100 hover:bg-white dark:bg-card cursor-pointer ${!n.read ? 'bg-blue-50' : ''}`} onClick={() => markAsRead(n.id)}>
+              <div key={n.id} className={`p-4 border-b border-slate-100 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 cursor-pointer ${!n.read ? 'bg-blue-50' : ''}`} onClick={() => markAsRead(n.id)}>
                 <div className="flex items-start gap-3">
                   <Icon className="w-5 h-5 text-blue-600 mt-0.5" />
                   <div className="flex-1"><p className="font-medium text-slate-900 text-sm">{n.title}</p><p className="text-slate-600 text-xs mt-1">{n.message}</p></div>

@@ -80,7 +80,7 @@ export function ProgressCelebration({ celebration, language = "en", onComplete }
       
       {/* Celebration Card */}
       <div 
-        className={`relative bg-white dark:bg-card rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 text-center transition-all duration-500 ${
+        className={`relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 text-center transition-all duration-500 ${
           phase === "enter" ? "opacity-0 scale-75" :
           phase === "show" ? "opacity-100 scale-100" :
           "opacity-0 scale-110"

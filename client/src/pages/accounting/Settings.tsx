@@ -75,7 +75,7 @@ export default function Settings() {
   return (
     <div className="p-6 max-w-[1000px] mx-auto">
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate("/")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
+        <button onClick={() => navigate("/")} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg">
           <ArrowLeft size={20} className="text-gray-600" />
         </button>
         <h1 className="text-2xl font-bold text-gray-800">Settings</h1>
@@ -88,7 +88,7 @@ export default function Settings() {
             <button aria-label="Action"
               key={tab.id}
               className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-left mb-1 transition-colors ${
-                activeTab === tab.id ? "bg-green-50 text-green-600 font-medium" : "text-gray-600 hover:bg-gray-50"
+                activeTab === tab.id ? "bg-green-50 text-green-600 font-medium" : "text-gray-600 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm"
               }`}
               onClick={() => setActiveTab(tab.id)}
             >

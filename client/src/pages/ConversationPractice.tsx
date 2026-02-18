@@ -296,7 +296,7 @@ export default function ConversationPractice() {
                             className={`p-4 rounded-xl border-2 text-left transition-all ${
                               selectedCoach === coach.key
                                 ? "border-cta bg-cta/5"
-                                : "border-gray-200 dark:border-border hover:border-gray-300"
+                                : "border-gray-200 dark:border-white/15 hover:border-gray-300"
                             }`}
                           >
                             <span className="text-2xl mb-1 block">{coach.emoji}</span>
@@ -339,7 +339,7 @@ export default function ConversationPractice() {
                               className={`p-3 rounded-xl border-2 text-left transition-all flex items-center gap-3 ${
                                 selectedSkill === skill.value
                                   ? "border-cta bg-cta/5"
-                                  : "border-gray-200 dark:border-border hover:border-gray-300"
+                                  : "border-gray-200 dark:border-white/15 hover:border-gray-300"
                               }`}
                             >
                               <SkillIcon className={`h-5 w-5 ${selectedSkill === skill.value ? "text-cta" : "text-muted-foreground"}`} />
@@ -392,7 +392,7 @@ export default function ConversationPractice() {
         {sessionState === "active" && (
           <div className="flex flex-col h-[calc(100vh-64px)]">
             {/* Session Header */}
-            <div className="bg-white dark:bg-background border-b px-4 py-3 flex items-center justify-between">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="text-xl">
                   {coachOptions.find((c) => c.key === selectedCoach)?.emoji}
@@ -429,7 +429,7 @@ export default function ConversationPractice() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
               <AnimatePresence>
                 {messages.map((msg) => (
                   <motion.div
@@ -443,7 +443,7 @@ export default function ConversationPractice() {
                         className={`rounded-2xl px-4 py-3 ${
                           msg.role === "user"
                             ? "bg-foundation text-white rounded-br-sm"
-                            : "bg-white dark:bg-card shadow-sm border rounded-bl-sm"
+                            : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 shadow-sm border rounded-bl-sm"
                         }`}
                       >
                         <Streamdown>{msg.content}</Streamdown>
@@ -475,7 +475,7 @@ export default function ConversationPractice() {
               </AnimatePresence>
               {isSending && (
                 <div className="flex justify-start">
-                  <div className="bg-white dark:bg-background shadow-sm border rounded-2xl rounded-bl-sm px-4 py-3">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-sm border rounded-2xl rounded-bl-sm px-4 py-3">
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <Loader2 className="h-4 w-4 animate-spin" />
                       <span className="text-sm">{isEn ? "Thinking..." : "Réflexion..."}</span>
@@ -487,7 +487,7 @@ export default function ConversationPractice() {
             </div>
 
             {/* Input Area */}
-            <div className="bg-white dark:bg-background border-t p-4">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-t p-4">
               <div className="flex items-end gap-2 max-w-4xl mx-auto">
                 {/* Mic button */}
                 <Button
@@ -558,7 +558,7 @@ export default function ConversationPractice() {
                       : `Vous avez échangé ${messages.filter((m) => m.role === "user").length} messages. Continuez à pratiquer pour vous améliorer!`}
                   </p>
                   {lastEvaluation && (
-                    <div className="bg-gray-50 dark:bg-background rounded-xl p-4 mb-6">
+                    <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-4 mb-6">
                       <p className="text-sm font-medium text-foundation mb-2">
                         {isEn ? "Last Score" : "Dernier Score"}
                       </p>

@@ -96,7 +96,7 @@ function HeroSection({ language }: { language: string }) {
         >
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60 text-white text-sm font-medium">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm border border-white/60 text-white text-sm font-medium">
               <Globe className="w-4 h-4 text-cta400" />
               {language === "en" ? "Canada's Premier Bilingual Training Ecosystem" : "L'écosystème de formation bilingue de référence au Canada"}
             </span>
@@ -149,7 +149,7 @@ function HeroSection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/60 text-white hover:bg-white dark:bg-background/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
+                className="border-2 border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
               >
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
               </Button>
@@ -193,7 +193,7 @@ function TrilemmeSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -238,7 +238,7 @@ function TrilemmeSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-background rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
             >
               <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${obstacle.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <obstacle.icon className="w-8 h-8 text-white" />
@@ -270,12 +270,12 @@ function TrilemmeSection({ language }: { language: string }) {
                 <p className="text-lg text-black dark:text-foreground leading-relaxed">
                   {language === "en" ? (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
+                      <strong className="text-black dark:text-foreground">RusingÂcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
                       <strong className="text-cta600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
+                      <strong className="text-black dark:text-foreground">RusingÂcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
                       <strong className="text-cta600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
@@ -298,8 +298,8 @@ function EcosystemSection({ language }: { language: string }) {
       id: "courses",
       nameEn: "Your Courses",
       nameFr: "Vos Cours",
-      brandEn: "RusingAcademy",
-      brandFr: "RusingAcademy",
+      brandEn: "RusingÂcademy",
+      brandFr: "RusingÂcademy",
       descEn: "Structured crash courses designed for the federal public service. 6 progressive paths from A to C, with guaranteed results.",
       descFr: "Cours intensifs structurés conçus pour la fonction publique fédérale. 6 parcours progressifs de A à C, avec résultats garantis.",
       icon: GraduationCap,
@@ -342,7 +342,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section id="ecosystem" className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background scroll-mt-20">
+    <section id="ecosystem" className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md scroll-mt-20">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -374,7 +374,7 @@ function EcosystemSection({ language }: { language: string }) {
             <motion.div
               key={pillar.id}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 ecosystem-card"
+              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 ecosystem-card"
             >
               {/* Image */}
               <div className="relative h-44 md:h-56 overflow-hidden ecosystem-card-image">
@@ -457,7 +457,7 @@ function MethodologySection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -496,7 +496,7 @@ function MethodologySection({ language }: { language: string }) {
                 <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-slate-300 to-transparent" />
               )}
 
-              <div className="bg-white dark:bg-background rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
                 {/* Step Number */}
                 <div className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4" style={{color: 'var(--text)'}}>{step.number}</div>
 
@@ -522,7 +522,7 @@ function MethodologySection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 4: OFFRES — The RusingAcademy Solution
+// SECTION 4: OFFRES — The RusingÂcademy Solution
 // ============================================================================
 function OffersSection({ language }: { language: string }) {
   const offers = [
@@ -571,7 +571,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -582,7 +582,7 @@ function OffersSection({ language }: { language: string }) {
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-            {language === "en" ? "The RusingAcademy Solution" : "La solution RusingAcademy"}
+            {language === "en" ? "The RusingÂcademy Solution" : "La solution RusingÂcademy"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
@@ -603,7 +603,7 @@ function OffersSection({ language }: { language: string }) {
             <motion.div
               key={offer.id}
               variants={scaleIn}
-              className="group bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
@@ -694,7 +694,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -726,7 +726,7 @@ function TargetAudienceSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white dark:bg-background rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all duration-300"
+              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cta to-cta flex items-center justify-center flex-shrink-0">
@@ -812,7 +812,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -844,7 +844,7 @@ function TestimonialsSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl transition-shadow duration-300"
             >
               {/* Author Header with Photo */}
               <div className="flex items-center gap-5 p-8 bg-gradient-to-r from-orange-50/50 to-white border-b border-amber-100/50">
@@ -897,7 +897,7 @@ function TestimonialsSection({ language }: { language: string }) {
 // ============================================================================
 function LeadershipSection({ language }: { language: string }) {
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header - Title removed per user request, lead paragraph kept */}
         <motion.div
@@ -907,7 +907,7 @@ function LeadershipSection({ language }: { language: string }) {
           variants={staggerContainer}
           className="max-w-5xl mx-auto"
         >
-            <div className="bg-white dark:bg-background rounded-3xl shadow-xl overflow-hidden border border-slate-100 leadership-card">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-3xl shadow-xl overflow-hidden border border-slate-100 leadership-card">
             <div className="grid md:grid-cols-2">
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto leadership-image">
@@ -1063,7 +1063,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                 onClick={() => setSelectedImage(board.src)}
               >
                 {/* Glassmorphism Card */}
-                <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-background/80 backdrop-blur-xl border border-white/70 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
+                <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-xl border border-white/70 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
                   {/* Gradient Border Effect */}
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-cta/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
@@ -1084,7 +1084,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                       
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
-                        <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white dark:bg-background/90 backdrop-blur-sm shadow-xl">
+                        <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm shadow-xl">
                           <ZoomIn className="w-5 h-5 text-teal-600" />
                           <span className="font-medium text-black dark:text-foreground">
                             {language === "en" ? "Click to enlarge" : "Cliquez pour agrandir"}
@@ -1121,7 +1121,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             variants={fadeInUp}
             className="text-center mt-12"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100/80 backdrop-blur-sm border border-slate-200">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm/80 backdrop-blur-sm border border-slate-200">
               <Users className="w-5 h-5 text-teal-600" />
               <p className="text-sm text-black dark:text-foreground">
                 {language === "en"
@@ -1162,7 +1162,7 @@ function InstitutionsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-8 md:py-12 lg:py-16 px-4 bg-white dark:bg-background">
+    <section className="py-8 md:py-12 lg:py-16 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1225,7 +1225,7 @@ function InstitutionsSection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 9: VALEUR — Why Choose RusingAcademy
+// SECTION 9: VALEUR — Why Choose RusingÂcademy
 // ============================================================================
 function ValueSection({ language }: { language: string }) {
   const values = [
@@ -1260,7 +1260,7 @@ function ValueSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1271,7 +1271,7 @@ function ValueSection({ language }: { language: string }) {
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-            {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy ?"}
+            {language === "en" ? "Why Choose RusingÂcademy?" : "Pourquoi choisir RusingÂcademy ?"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
@@ -1344,7 +1344,7 @@ function TeamSection({ language }: { language: string }) {
     },
     {
       name: "Sue-Anne Richer",
-      role: "Chief Learning Officer - RusingAcademy",
+      role: "Chief Learning Officer - RusingÂcademy",
       image: "https://rusingacademy-cdn.b-cdn.net/images/team-sueanne.jpg",
       linkedin: "https://www.linkedin.com/in/sue-anne-richer-46ab2a383/",
       bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
@@ -1369,7 +1369,7 @@ function TeamSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1401,7 +1401,7 @@ function TeamSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group bg-white dark:bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200"
+              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200"
             >
               {/* Unified Card - Image fills top to bottom on left, content on right */}
               <div className="flex flex-col md:flex-row h-full">
@@ -1418,7 +1418,7 @@ function TeamSection({ language }: { language: string }) {
                 </div>
 
                 {/* Content Container - Fills remaining space */}
-                <div className="flex-1 p-6 flex flex-col justify-between bg-white dark:bg-background">
+                <div className="flex-1 p-6 flex flex-col justify-between bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                   <div>
                     <h3 className="text-xl font-bold text-black dark:text-foreground mb-1 font-serif italic">{member.name}</h3>
                     <p className="text-teal-700 font-medium text-sm mb-3">{member.role}</p>
@@ -1490,7 +1490,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white hover:bg-white dark:bg-background/10 gap-2 px-8 h-14 text-base font-semibold rounded-full text-white"
+                className="border-2 border-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 gap-2 px-8 h-14 text-base font-semibold rounded-full text-white"
               >
                 <ClipboardCheck className="w-5 h-5" />
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
@@ -1500,7 +1500,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white hover:bg-white dark:bg-background/10 gap-2 px-8 h-14 text-base font-semibold rounded-full text-white"
+                className="border-2 border-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 gap-2 px-8 h-14 text-base font-semibold rounded-full text-white"
               >
                 <FileText className="w-5 h-5" />
                 {language === "en" ? "Explore the product library" : "Explorer la bibliothèque de produits"}
@@ -1889,7 +1889,7 @@ function ProofGallerySection({ language }: { language: string }) {
                 </div>
                 
                 {/* Content */}
-                <div className="p-4 bg-white dark:bg-background/5 backdrop-blur-sm">
+                <div className="p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 backdrop-blur-sm">
                   <h3 className="font-bold text-white text-base mb-1">
                     {language === "en" ? capsule.titleEn : capsule.titleFr}
                   </h3>
@@ -1922,7 +1922,7 @@ function ProofGallerySection({ language }: { language: string }) {
                 
                 {/* Disqus Comments Section */}
                 {showDisqus === capsule.id && (
-                  <div className="p-4 bg-white dark:bg-background rounded-b-2xl">
+                  <div className="p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-b-2xl">
                     <DisqusComments
                       identifier={`homepage-capsule-${capsule.id}`}
                       title={language === "en" ? capsule.titleEn : capsule.titleFr}
@@ -1969,10 +1969,10 @@ function FAQSection({ language }: { language: string }) {
 
   const faqs = [
     {
-      questionEn: "What is the difference between RusingAcademy and Lingueefy?",
-      questionFr: "Quelle est la différence entre RusingAcademy et Lingueefy ?",
-      answerEn: "RusingAcademy provides structured courses and curriculum for B2B/B2G clients, while Lingueefy is our B2C coaching platform connecting individuals with certified coaches and AI practice tools.",
-      answerFr: "RusingAcademy offre des cours et des programmes structurés pour les clients B2B/B2G, tandis que Lingueefy est notre plateforme de coaching B2C connectant les individus avec des coachs certifiés et des outils de pratique IA.",
+      questionEn: "What is the difference between RusingÂcademy and Lingueefy?",
+      questionFr: "Quelle est la différence entre RusingÂcademy et Lingueefy ?",
+      answerEn: "RusingÂcademy provides structured courses and curriculum for B2B/B2G clients, while Lingueefy is our B2C coaching platform connecting individuals with certified coaches and AI practice tools.",
+      answerFr: "RusingÂcademy offre des cours et des programmes structurés pour les clients B2B/B2G, tandis que Lingueefy est notre plateforme de coaching B2C connectant les individus avec des coachs certifiés et des outils de pratique IA.",
     },
     {
       questionEn: "How long does it take to reach Level C?",
@@ -1983,8 +1983,8 @@ function FAQSection({ language }: { language: string }) {
     {
       questionEn: "Do you offer training for government departments?",
       questionFr: "Offrez-vous des formations pour les ministères gouvernementaux ?",
-      answerEn: "Yes, RusingAcademy specializes in B2B/B2G training solutions. We offer custom programs, team dashboards, and on-site training options for government departments and organizations.",
-      answerFr: "Oui, RusingAcademy se spécialise dans les solutions de formation B2B/B2G. Nous offrons des programmes personnalisés, des tableaux de bord d'équipe et des options de formation sur site pour les ministères et organisations gouvernementales.",
+      answerEn: "Yes, RusingÂcademy specializes in B2B/B2G training solutions. We offer custom programs, team dashboards, and on-site training options for government departments and organizations.",
+      answerFr: "Oui, RusingÂcademy se spécialise dans les solutions de formation B2B/B2G. Nous offrons des programmes personnalisés, des tableaux de bord d'équipe et des options de formation sur site pour les ministères et organisations gouvernementales.",
     },
     {
       questionEn: "What is your success rate?",
@@ -2001,7 +2001,7 @@ function FAQSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-background">
+    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -2033,11 +2033,11 @@ function FAQSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={fadeInUp}
-              className="bg-white dark:bg-background rounded-xl border border-slate-200 overflow-hidden"
+              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-slate-200 overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white dark:bg-background transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors"
               >
                 <span className="font-semibold text-black dark:text-foreground pr-4">
                   {language === "en" ? faq.questionEn : faq.questionFr}

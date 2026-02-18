@@ -327,7 +327,7 @@ describe("SEO Editor — updateSeo", () => {
     try {
       await api.seo.updateSeo({
         pageId: 999999,
-        metaTitle: "SLE Preparation Course | RusingAcademy",
+        metaTitle: "SLE Preparation Course | RusingÂcademy",
         metaDescription:
           "Prepare for your Second Language Evaluation with expert bilingual training.",
         ogImage: "https://example.com/og.jpg",
@@ -593,7 +593,7 @@ describe("SEO Editor — SEO Score Calculation Logic", () => {
   it("should give higher score for complete SEO data", () => {
     // Simulate the scoring logic from SeoEditorPanel
     const completeData = {
-      metaTitle: "SLE Preparation Course | RusingAcademy", // 40 chars (30-60 range)
+      metaTitle: "SLE Preparation Course | RusingÂcademy", // 40 chars (30-60 range)
       metaDescription:
         "Prepare for your Second Language Evaluation with expert bilingual training for Canadian public servants. Structured programs and assessments.", // ~140 chars (120-160 range)
       ogImage: "https://example.com/og.jpg",
@@ -652,7 +652,7 @@ describe("SEO Editor — SEO Score Calculation Logic", () => {
 
   it("should penalize noIndex pages", () => {
     const noIndexData = {
-      metaTitle: "SLE Preparation Course | RusingAcademy",
+      metaTitle: "SLE Preparation Course | RusingÂcademy",
       metaDescription:
         "Prepare for your Second Language Evaluation with expert bilingual training for Canadian public servants. Structured programs and assessments.",
       ogImage: "https://example.com/og.jpg",

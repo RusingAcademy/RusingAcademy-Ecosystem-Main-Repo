@@ -180,7 +180,7 @@ export default function ImportExport() {
             Import Contacts
           </CardTitle>
           <CardDescription>
-            Upload a CSV file with <code className="bg-gray-100 dark:bg-card px-1 rounded">name</code> and <code className="bg-gray-100 dark:bg-card px-1 rounded">email</code> columns. Optional: <code className="bg-gray-100 dark:bg-card px-1 rounded">role</code> column.
+            Upload a CSV file with <code className="bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 px-1 rounded">name</code> and <code className="bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 px-1 rounded">email</code> columns. Optional: <code className="bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 px-1 rounded">role</code> column.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -216,7 +216,7 @@ export default function ImportExport() {
               </div>
             )}
           </div>
-          <div className="mt-3 p-3 bg-gray-50 dark:bg-background rounded-lg">
+          <div className="mt-3 p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
             <p className="text-xs text-black dark:text-foreground font-medium mb-1">CSV Format Example:</p>
             <code className="text-xs text-black dark:text-foreground block">
               name,email,role<br />
@@ -270,7 +270,7 @@ export default function ImportExport() {
       </div>
 
       {/* Tips */}
-      <Card className="bg-gray-50 dark:bg-background border-gray-200 dark:border-border dark:border-border">
+      <Card className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-gray-200 dark:border-white/15 dark:border-white/15">
         <CardContent className="py-4">
           <h3 className="font-medium text-black dark:text-foreground text-sm mb-2">Tips</h3>
           <ul className="text-xs text-black dark:text-foreground space-y-1">

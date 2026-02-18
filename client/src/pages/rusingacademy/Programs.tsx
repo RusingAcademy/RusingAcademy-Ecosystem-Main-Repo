@@ -316,7 +316,7 @@ export default function Programs() {
       </section>
 
       {/* Path Series Methodology */}
-      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-700">Proprietary Framework</Badge>
@@ -374,7 +374,7 @@ export default function Programs() {
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cta to-cta-2 flex items-center justify-center text-white font-bold text-xl">
                       70%
                     </div>
-                    <CardTitle>RusingAcademy Platform</CardTitle>
+                    <CardTitle>RusingÂcademy Platform</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -511,7 +511,7 @@ export default function Programs() {
       </section>
 
       {/* Bundle Packages */}
-      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <section className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container">
           <div className="text-center mb-6 md:mb-8 lg:mb-12">
             <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-orange-50 text-cta">
@@ -649,13 +649,13 @@ export default function Programs() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/request-proposal">
-                <Button size="lg" className="bg-white dark:bg-background text-orange-600 hover:bg-gray-100">
+                <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-orange-600 hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   Book Free Assessment
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/rusingacademy">
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white dark:bg-background/10">
+                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
                   Learn More
                 </Button>
               </Link>

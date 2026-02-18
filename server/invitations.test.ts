@@ -429,12 +429,12 @@ describe("invitation email template", () => {
     expect(routerContent).toContain("7 days");
   });
 
-  it("should use RusingAcademy branding", () => {
+  it("should use RusingÂcademy branding", () => {
     const routerContent = fs.readFileSync(
       path.resolve(__dirname, "routers/invitations.ts"),
       "utf-8"
     );
-    expect(routerContent).toContain("RusingAcademy");
+    expect(routerContent).toContain("RusingÂcademy");
     expect(routerContent).toContain("EMAIL_BRANDING");
   });
 });

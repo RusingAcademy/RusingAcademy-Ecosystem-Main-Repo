@@ -11,11 +11,11 @@ import { toast } from "sonner";
 function LoadingSkeleton() {
   return (
     <div className="animate-pulse space-y-6 max-w-7xl mx-auto">
-      <div className="h-12 bg-gray-100 dark:bg-card rounded-xl w-1/3" />
+      <div className="h-12 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl w-1/3" />
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[1, 2, 3].map(i => <div key={i} className="h-28 bg-gray-100 dark:bg-card rounded-xl" />)}
+        {[1, 2, 3].map(i => <div key={i} className="h-28 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl" />)}
       </div>
-      <div className="h-64 bg-gray-100 dark:bg-card rounded-xl" />
+      <div className="h-64 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl" />
     </div>
   );
 }
@@ -56,8 +56,8 @@ export default function HRCompliance() {
           </h2>
           <p className="text-sm text-gray-500">
             {lang === "fr"
-              ? "Contactez votre administrateur RusingAcademy pour obtenir l'accès."
-              : "Contact your RusingAcademy administrator for access."}
+              ? "Contactez votre administrateur RusingÂcademy pour obtenir l'accès."
+              : "Contact your RusingÂcademy administrator for access."}
           </p>
         </div>
       </HRLayout>
@@ -100,7 +100,7 @@ export default function HRCompliance() {
 
         {/* Risk Summary */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white dark:bg-background rounded-xl border border-red-100 p-5">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-red-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center">
                 <span className="material-icons text-red-500 text-xl">error</span>
@@ -112,7 +112,7 @@ export default function HRCompliance() {
             </div>
             <p className="text-[10px] text-gray-400">{lang === "fr" ? "Écart significatif, intervention urgente" : "Significant gap, urgent intervention needed"}</p>
           </div>
-          <div className="bg-white dark:bg-background rounded-xl border border-amber-100 p-5">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-amber-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
                 <span className="material-icons text-amber-500 text-xl">warning</span>
@@ -124,7 +124,7 @@ export default function HRCompliance() {
             </div>
             <p className="text-[10px] text-gray-400">{lang === "fr" ? "En progression, suivi nécessaire" : "Progressing, monitoring needed"}</p>
           </div>
-          <div className="bg-white dark:bg-background rounded-xl border border-green-100 p-5">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-green-100 p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
                 <span className="material-icons text-green-500 text-xl">check_circle</span>
@@ -139,7 +139,7 @@ export default function HRCompliance() {
         </div>
 
         {/* Compliance Table */}
-        <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 overflow-hidden">
           {allRecords.length === 0 ? (
             <div className="text-center py-6 md:py-8 lg:py-12">
               <span className="material-icons text-2xl md:text-4xl lg:text-5xl text-gray-300 mb-3">verified</span>
@@ -156,7 +156,7 @@ export default function HRCompliance() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 dark:bg-background border-b border-gray-100">
+                  <tr className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-100">
                     <th className="text-left py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Participant" : "Participant"}</th>
                     <th className="text-center py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Profil requis" : "Required Profile"}</th>
                     <th className="text-center py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Profil actuel" : "Current Profile"}</th>
@@ -167,7 +167,7 @@ export default function HRCompliance() {
                 </thead>
                 <tbody>
                   {allRecords.map((rec: any) => (
-                    <tr key={rec.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50">
+                    <tr key={rec.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                       <td className="py-3 px-4">
                         <div>
                           <p className="text-sm font-medium text-gray-900">{(rec as any).participantName ?? `Participant #${rec.participantId}`}</p>

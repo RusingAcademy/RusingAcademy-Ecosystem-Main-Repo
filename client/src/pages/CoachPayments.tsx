@@ -75,7 +75,7 @@ export default function CoachPayments() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-white dark:bg-card dark:bg-obsidian">
+      <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
         <Header />
         <main className="max-w-4xl mx-auto px-4 py-8 md:py-12 lg:py-16 text-center">
           <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
@@ -96,7 +96,7 @@ export default function CoachPayments() {
   const hasAccount = stripeStatus?.hasAccount;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-card dark:bg-obsidian">
+    <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <Header />
       
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -111,7 +111,7 @@ export default function CoachPayments() {
         </div>
 
         {/* Stripe Connect Status Card */}
-        <div className="bg-white dark:bg-card dark:bg-foundation rounded-2xl shadow-sm border border-gray-200 dark:border-border dark:border-teal-800 p-6 mb-8">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-sm border border-gray-200 dark:border-white/15 dark:border-teal-800 p-6 mb-8">
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-teal-700 rounded-xl flex items-center justify-center">
@@ -146,7 +146,7 @@ export default function CoachPayments() {
                 </span>
               )
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-card dark:bg-teal-800 text-black dark:text-foreground dark:text-cyan-300">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-teal-800 text-black dark:text-foreground dark:text-cyan-300">
                 Not Connected
               </span>
             )}
@@ -161,7 +161,7 @@ export default function CoachPayments() {
                 </h3>
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-card dark:bg-foundation rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg flex items-center justify-center shadow-sm">
                       <Zap className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
@@ -172,7 +172,7 @@ export default function CoachPayments() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-card dark:bg-foundation rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg flex items-center justify-center shadow-sm">
                       <Shield className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
@@ -183,7 +183,7 @@ export default function CoachPayments() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-card dark:bg-foundation rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg flex items-center justify-center shadow-sm">
                       <TrendingUp className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
@@ -217,7 +217,7 @@ export default function CoachPayments() {
           ) : isOnboarded ? (
             <div className="space-y-4">
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white dark:bg-card dark:bg-teal-800/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-teal-800/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Charges Enabled</span>
@@ -226,7 +226,7 @@ export default function CoachPayments() {
                     You can accept payments from students
                   </p>
                 </div>
-                <div className="bg-white dark:bg-card dark:bg-teal-800/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-teal-800/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Payouts Enabled</span>
@@ -235,7 +235,7 @@ export default function CoachPayments() {
                     Earnings are transferred to your bank
                   </p>
                 </div>
-                <div className="bg-white dark:bg-card dark:bg-teal-800/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-teal-800/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Fully Verified</span>
@@ -248,7 +248,7 @@ export default function CoachPayments() {
 
               <button aria-label="Action"
                 onClick={handleOpenDashboard}
-                className="w-full py-3 bg-gray-100 dark:bg-card dark:bg-teal-800 text-black dark:text-foreground rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-foundation-2 transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-teal-800 text-black dark:text-foreground rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-foundation-2 transition-colors flex items-center justify-center gap-2"
               >
                 <ExternalLink className="w-5 h-5" />
                 Open Stripe Dashboard
@@ -285,7 +285,7 @@ export default function CoachPayments() {
         {/* Earnings Summary */}
         {earnings && (
           <div className="grid md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white dark:bg-card dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-border dark:border-teal-800">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/15 dark:border-teal-800">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
                   <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -297,7 +297,7 @@ export default function CoachPayments() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-card dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-border dark:border-teal-800">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/15 dark:border-teal-800">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -309,9 +309,9 @@ export default function CoachPayments() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-card dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-border dark:border-teal-800">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/15 dark:border-teal-800">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-foundation-soft dark:bg-foundation-soft/30 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md-soft/30 rounded-lg flex items-center justify-center">
                   <Clock className="w-5 h-5 text-foundation dark:text-foundation" />
                 </div>
                 <span className="text-sm text-black dark:text-foreground dark:text-cyan-300">Pending</span>
@@ -321,7 +321,7 @@ export default function CoachPayments() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-card dark:bg-foundation rounded-xl p-6 shadow-sm border border-gray-200 dark:border-border dark:border-teal-800">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/15 dark:border-teal-800">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center">
                   <Calendar className="w-5 h-5 text-teal-600 dark:text-teal-400" />
@@ -336,19 +336,19 @@ export default function CoachPayments() {
         )}
 
         {/* Commission Info */}
-        <div className="bg-white dark:bg-card dark:bg-foundation rounded-2xl shadow-sm border border-gray-200 dark:border-border dark:border-teal-800 p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-sm border border-gray-200 dark:border-white/15 dark:border-teal-800 p-6">
           <h3 className="text-lg font-semibold text-black dark:text-foreground mb-4">
             Commission Structure
           </h3>
           <div className="space-y-3">
-            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-border dark:border-teal-800">
+            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-white/15 dark:border-teal-800">
               <div>
                 <span className="font-medium text-black dark:text-foreground">Standard Rate</span>
                 <p className="text-sm text-black dark:text-foreground dark:text-cyan-300">Platform fee on each session</p>
               </div>
               <span className="text-lg font-semibold text-black dark:text-foreground">15%</span>
             </div>
-            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-border dark:border-teal-800">
+            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-white/15 dark:border-teal-800">
               <div>
                 <span className="font-medium text-black dark:text-foreground">Verified SLE Coach</span>
                 <p className="text-sm text-black dark:text-foreground dark:text-cyan-300">With official SLE certification</p>

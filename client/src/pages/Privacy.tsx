@@ -8,7 +8,7 @@ export default function Privacy() {
     en: {
       title: "Privacy Policy",
       lastUpdated: "Last updated: January 7, 2026",
-      intro: "Rusinga International Consulting Ltd., commercially known as RusingAcademy (\"we\", \"us\", \"our\") operates Lingueefy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
+      intro: "Rusinga International Consulting Ltd., commercially known as RusingÂcademy (\"we\", \"us\", \"our\") operates Lingueefy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
       sections: [
         {
           title: "1. Information We Collect",
@@ -56,14 +56,14 @@ export default function Privacy() {
         },
         {
           title: "12. Contact Us",
-          content: `For privacy-related questions or to exercise your rights, contact our Privacy Officer at: admin@rusingacademy.ca or Rusinga International Consulting Ltd. (commercially known as RusingAcademy), Ottawa, Ontario, Canada.`,
+          content: `For privacy-related questions or to exercise your rights, contact our Privacy Officer at: admin@rusingacademy.ca or Rusinga International Consulting Ltd. (commercially known as RusingÂcademy), Ottawa, Ontario, Canada.`,
         },
       ],
     },
     fr: {
       title: "Politique de confidentialité",
       lastUpdated: "Dernière mise à jour : 7 janvier 2026",
-      intro: "Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingAcademy (« nous », « notre », « nos ») exploite Lingueefy. Cette Politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme.",
+      intro: "Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingÂcademy (« nous », « notre », « nos ») exploite Lingueefy. Cette Politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme.",
       sections: [
         {
           title: "1. Informations que nous collectons",
@@ -111,7 +111,7 @@ export default function Privacy() {
         },
         {
           title: "12. Nous contacter",
-          content: `Pour les questions relatives à la confidentialité ou pour exercer vos droits, contactez notre Responsable de la confidentialité à : admin@rusingacademy.ca ou Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingAcademy), Ottawa, Ontario, Canada.`,
+          content: `Pour les questions relatives à la confidentialité ou pour exercer vos droits, contactez notre Responsable de la confidentialité à : admin@rusingacademy.ca ou Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingÂcademy), Ottawa, Ontario, Canada.`,
         },
       ],
     },

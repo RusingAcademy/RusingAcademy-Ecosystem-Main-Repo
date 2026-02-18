@@ -309,7 +309,7 @@ export function AnimatedBadge({
       <AnimatePresence>
         {isHovered && description && (
           <motion.div
-            className="absolute bottom-full mb-2 px-3 py-2 bg-obsidian dark:bg-foundation text-white text-xs rounded-lg shadow-xl z-30 max-w-[150px] text-center"
+            className="absolute bottom-full mb-2 px-3 py-2 bg-obsidian dark:bg-white/[0.08] dark:backdrop-blur-md text-white text-xs rounded-lg shadow-xl z-30 max-w-[150px] text-center"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}

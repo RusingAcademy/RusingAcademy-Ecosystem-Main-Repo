@@ -25,8 +25,8 @@ const portalConfigs: Record<string, PortalConfig> = {
     titleFr: "Portail Coach",
     subtitle: "Manage your students, sessions & earnings",
     subtitleFr: "Gérez vos étudiants, sessions et revenus",
-    description: "A dedicated workspace for RusingAcademy language coaches to manage their teaching practice, track student progress, schedule sessions, and monitor earnings.",
-    descriptionFr: "Un espace dédié aux coachs linguistiques de RusingAcademy pour gérer leur pratique d'enseignement, suivre les progrès des étudiants, planifier des sessions et surveiller les revenus.",
+    description: "A dedicated workspace for RusingÂcademy language coaches to manage their teaching practice, track student progress, schedule sessions, and monitor earnings.",
+    descriptionFr: "Un espace dédié aux coachs linguistiques de RusingÂcademy pour gérer leur pratique d'enseignement, suivre les progrès des étudiants, planifier des sessions et surveiller les revenus.",
     icon: "person",
     color: "var(--color-violet-600, var(--accent-purple))",
     bgGradient: "linear-gradient(160deg, #f5f3ff 0%, #ede9fe 40%, #ddd6fe 100%)",
@@ -63,8 +63,8 @@ const portalConfigs: Record<string, PortalConfig> = {
     titleFr: "Système de Contrôle Admin",
     subtitle: "Full platform management & analytics",
     subtitleFr: "Gestion complète de la plateforme et analytique",
-    description: "The central command center for RusingAcademy platform administrators. Manage users, content, commerce, marketing, analytics, and all system configurations from a single unified interface.",
-    descriptionFr: "Le centre de commande central pour les administrateurs de la plateforme RusingAcademy. Gérez les utilisateurs, le contenu, le commerce, le marketing, l'analytique et toutes les configurations système depuis une interface unifiée.",
+    description: "The central command center for RusingÂcademy platform administrators. Manage users, content, commerce, marketing, analytics, and all system configurations from a single unified interface.",
+    descriptionFr: "Le centre de commande central pour les administrateurs de la plateforme RusingÂcademy. Gérez les utilisateurs, le contenu, le commerce, le marketing, l'analytique et toutes les configurations système depuis une interface unifiée.",
     icon: "admin_panel_settings",
     color: "var(--semantic-danger, var(--danger))",
     bgGradient: "linear-gradient(160deg, #fef2f2 0%, var(--danger-soft) 40%, #fecaca 100%)",
@@ -87,7 +87,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
   const lang = typeof window !== "undefined" && localStorage.getItem("ra-language") === "fr" ? "fr" : "en";
 
   return (
-    <div className="min-h-screen flex bg-white dark:bg-background">
+    <div className="min-h-screen flex bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       {/* Left Side — Portal-themed hero */}
       <div
         className="hidden lg:flex lg:w-1/2 items-center justify-center p-12 relative overflow-hidden"
@@ -130,7 +130,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
             {config.features.map((f) => (
               <span
                 key={f.en}
-                className="text-xs px-3 py-1.5 rounded-full text-gray-700 dark:text-muted-foreground font-medium bg-white dark:bg-background/80 border border-gray-200 dark:border-border dark:border-border shadow-sm"
+                className="text-xs px-3 py-1.5 rounded-full text-gray-700 dark:text-muted-foreground font-medium bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 border border-gray-200 dark:border-white/15 dark:border-white/15 shadow-sm"
               >
                 {lang === "fr" ? f.fr : f.en}
               </span>
@@ -140,10 +140,10 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
       </div>
 
       {/* Right Side — Coming Soon */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-background">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="w-full max-w-md text-center">
           {/* Logo */}
-          <img src={LOGO_ICON} alt="RusingAcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />
+          <img src={LOGO_ICON} alt="RusingÂcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />
 
           {/* Construction badge */}
           <div
@@ -177,7 +177,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
               <span>{lang === "fr" ? "Progression" : "Progress"}</span>
               <span>Phase 0</span>
             </div>
-            <div className="w-full h-2 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-1000"
                 style={{
@@ -189,7 +189,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
           </div>
 
           {/* Planned features preview */}
-          <div className="text-left bg-gray-50 dark:bg-background rounded-xl p-5 mb-8 border border-gray-100">
+          <div className="text-left bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-5 mb-8 border border-gray-100">
             <p className="text-xs text-gray-400 uppercase tracking-wider mb-3 font-medium">
               {lang === "fr" ? "Fonctionnalités prévues" : "Planned Features"}
             </p>
@@ -214,7 +214,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
 
           {/* Footer */}
           <p className="text-center text-xs text-gray-400 mt-10">
-            © 2026 RusingAcademy — Barholex Media Inc.
+            © 2026 RusingÂcademy — Barholex Media Inc.
           </p>
           <p className="text-center text-[10px] text-gray-300 mt-1">
             Rusinga International Consulting Ltd.

@@ -88,7 +88,7 @@ export default function SupplierDetail() {
     <div className="p-6 max-w-[900px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/suppliers")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
+          <button onClick={() => navigate("/suppliers")} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">

@@ -142,7 +142,7 @@ function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
     relative overflow-hidden rounded-xl
-    bg-white dark:bg-card dark:bg-obsidian
+    bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md
     border border-slate-200 dark:border-teal-800
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
@@ -170,11 +170,11 @@ const GlassStatCard = ({
 }) => {
   // Accessible color scheme with high contrast
   const colorClasses = {
-    emerald: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
-    blue: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
-    purple: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
-    amber: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
-    rose: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-foundation dark:text-foreground",
+    emerald: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:text-foreground",
+    blue: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:text-foreground",
+    purple: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:text-foreground",
+    amber: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:text-foreground",
+    rose: "from-teal-800 to-teal-800 text-black dark:text-foreground bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:text-foreground",
   };
 
   return (
@@ -457,19 +457,19 @@ export default function LearnerDashboard() {
   }
 
   return (
-    <Wrap className="bg-slate-50 dark:bg-obsidian">
+    <Wrap className="bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-foundation/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-foundation/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           
           {/* Hero Section - Welcome Banner - Professional & Accessible */}
-          <div className="learner-hero relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-obsidian p-8 md:p-10 border border-teal-800/50">
+          <div className="learner-hero relative mb-8 overflow-hidden rounded-2xl bg-foundation dark:bg-white/[0.08] dark:backdrop-blur-md p-8 md:p-10 border border-teal-800/50">
             <div className="absolute inset-0 bg-gradient-to-br from-teal-800/50 to-obsidian/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
@@ -482,7 +482,7 @@ export default function LearnerDashboard() {
                     })}
                   </span>
                   {displayStreak > 0 && (
-                    <Badge className="bg-white/15 dark:bg-background/20 text-white border-0 hover:bg-white/25 dark:bg-background/30 backdrop-blur-sm">
+                    <Badge className="bg-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-white border-0 hover:bg-white/25 dark:bg-white/[0.08] dark:backdrop-blur-md/30 backdrop-blur-sm">
                       <Flame className="h-3 w-3 mr-1" />
                       {displayStreak} {language === "fr" ? "jours" : "days"}
                     </Badge>
@@ -499,14 +499,14 @@ export default function LearnerDashboard() {
                 <RoleSwitcherCompact />
                 {resumePoint && (
                   <Link href={`/courses/${resumePoint.courseId}/lessons/${resumePoint.lessonId}`}>
-                    <Button size="lg" className="bg-white dark:bg-background text-black dark:text-foreground hover:bg-slate-100 shadow-lg">
+                    <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm shadow-lg">
                       <Play className="h-5 w-5 mr-2" />
                       {language === "fr" ? "Reprendre" : "Resume"}
                     </Button>
                   </Link>
                 )}
                 <Link href="/ai-practice">
-                  <Button size="lg" variant={resumePoint ? "outline" : "default"} className={resumePoint ? "border-white/50 text-white hover:bg-white/10" : "bg-white dark:bg-card text-black dark:text-foreground hover:bg-slate-100 shadow-lg"}>
+                  <Button size="lg" variant={resumePoint ? "outline" : "default"} className={resumePoint ? "border-white/50 text-white hover:bg-white/10" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm shadow-lg"}>
                     <Bot className="h-5 w-5 mr-2" />
                     {l.startPractice}
                   </Button>
@@ -583,7 +583,7 @@ export default function LearnerDashboard() {
                     />
                   </div>
                   <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
-                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50">
+                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-white/15">
                       <p className="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-teal-800 to-obsidian dark:from-slate-200 dark:to-white bg-clip-text text-transparent">{displayCurrentLevel}</p>
                       <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mt-1">{l.currentLevel}</p>
                     </div>
@@ -671,14 +671,14 @@ export default function LearnerDashboard() {
                 {coursesLoading ? (
                   <div className="grid md:grid-cols-2 gap-4">
                     {[1, 2].map((i) => (
-                      <div key={i} className="h-32 rounded-xl bg-slate-100 dark:bg-foundation animate-pulse" />
+                      <div key={i} className="h-32 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md animate-pulse" />
                     ))}
                   </div>
                 ) : courses.length > 0 ? (
                   <div className="grid md:grid-cols-2 gap-4">
                     {courses.slice(0, 2).map((course: any) => (
                       <Link key={course.id} href={`/courses/${course.id}`}>
-                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-white/15 hover:shadow-lg transition-all duration-300 cursor-pointer">
                           <div className="flex items-start gap-4">
                             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
                               <BookOpen className="h-7 w-7 text-white" />
@@ -733,7 +733,7 @@ export default function LearnerDashboard() {
                 {sessionsLoading ? (
                   <div className="space-y-4">
                     {[1, 2].map((i) => (
-                      <div key={i} className="h-24 rounded-xl bg-slate-100 dark:bg-foundation animate-pulse" />
+                      <div key={i} className="h-24 rounded-xl bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md animate-pulse" />
                     ))}
                   </div>
                 ) : upcomingSessions.length > 0 ? (
@@ -741,7 +741,7 @@ export default function LearnerDashboard() {
                     {upcomingSessions.slice(0, 3).map((session: any) => (
                       <div
                         key={session.id}
-                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-teal-800/50 hover:shadow-md transition-all duration-300"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-teal-900 dark:to-obsidian border border-slate-200/50 dark:border-white/15 hover:shadow-md transition-all duration-300"
                       >
                         <div className="flex items-center gap-4">
                           <Avatar className="h-12 w-12 ring-2 ring-purple-200 dark:ring-purple-800">

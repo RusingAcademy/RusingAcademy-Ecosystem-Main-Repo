@@ -58,7 +58,7 @@ export default function DesignAdmin() {
         <TabsList><TabsTrigger value="themes">Themes</TabsTrigger><TabsTrigger value="colors">Colors & Branding</TabsTrigger><TabsTrigger value="typography">Typography</TabsTrigger><TabsTrigger value="layout">Layout</TabsTrigger></TabsList>
         <TabsContent value="themes" className="mt-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[{ name: "RusingAcademy Default", desc: "Professional dark theme with brand colors", active: true },{ name: "Light Professional", desc: "Clean white background with subtle accents", active: false },{ name: "Bold Modern", desc: "High contrast with vibrant gradients", active: false }].map(theme => (
+            {[{ name: "RusingÂcademy Default", desc: "Professional dark theme with brand colors", active: true },{ name: "Light Professional", desc: "Clean white background with subtle accents", active: false },{ name: "Bold Modern", desc: "High contrast with vibrant gradients", active: false }].map(theme => (
               <Card key={theme.name} className={theme.active ? "ring-2 ring-primary" : ""}>
                 <CardContent className="p-4">
                   <div className="h-32 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 mb-3 flex items-center justify-center"><Palette className="h-8 w-8 text-white/50" /></div>
@@ -91,7 +91,7 @@ export default function DesignAdmin() {
           <Card><CardContent className="p-6 space-y-4">
             <h3 className="font-medium flex items-center gap-2"><Type className="h-5 w-5" /> Typography</h3>
             <div><Label>Font Family</Label><Select value={fontFamily} onValueChange={setFontFamily}><SelectTrigger className="mt-1"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="Inter">Inter</SelectItem><SelectItem value="Poppins">Poppins</SelectItem><SelectItem value="Roboto">Roboto</SelectItem><SelectItem value="Open Sans">Open Sans</SelectItem><SelectItem value="Montserrat">Montserrat</SelectItem><SelectItem value="Lato">Lato</SelectItem></SelectContent></Select></div>
-            <div className="p-4 border rounded-lg mt-4" style={{ fontFamily }}><p className="text-2xl font-bold mb-2" style={{ fontFamily }}>Heading Preview — {fontFamily}</p><p className="text-sm text-muted-foreground" style={{ fontFamily }}>The quick brown fox jumps over the lazy dog. RusingAcademy helps public servants achieve bilingual excellence.</p></div>
+            <div className="p-4 border rounded-lg mt-4" style={{ fontFamily }}><p className="text-2xl font-bold mb-2" style={{ fontFamily }}>Heading Preview — {fontFamily}</p><p className="text-sm text-muted-foreground" style={{ fontFamily }}>The quick brown fox jumps over the lazy dog. RusingÂcademy helps public servants achieve bilingual excellence.</p></div>
           </CardContent></Card>
         </TabsContent>
         <TabsContent value="layout" className="mt-4">

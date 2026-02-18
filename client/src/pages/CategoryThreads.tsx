@@ -116,7 +116,7 @@ export default function CategoryThreads() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mb-6 p-6 rounded-2xl bg-white dark:bg-background/5 border border-teal-400/30"
+              className="mb-6 p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-teal-400/30"
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold">{language === "en" ? "Start a New Discussion" : "Commencer une nouvelle discussion"}</h3>
@@ -129,13 +129,13 @@ export default function CategoryThreads() {
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 placeholder={language === "en" ? "Discussion title..." : "Titre de la discussion..."}
-                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-background/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 mb-3"
               />
               <textarea
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
                 placeholder={language === "en" ? "Share more details..." : "Partagez plus de détails..."}
-                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-background/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
+                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/20 focus:border-teal-400 focus:outline-none text-white placeholder-white/40 resize-none mb-3"
                 rows={4}
               />
               <div className="flex justify-end">
@@ -167,7 +167,7 @@ export default function CategoryThreads() {
                 transition={{ delay: index * 0.03 }}
               >
                 <Link href={`/community/thread/${thread.id}`}>
-                  <div className="group p-5 rounded-xl bg-white dark:bg-background/5 border border-white/10 hover:border-teal-400/30 transition-all cursor-pointer">
+                  <div className="group p-5 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/10 hover:border-teal-400/30 transition-all cursor-pointer">
                     <div className="flex items-start gap-4">
                       {/* Author avatar */}
                       <div className="hidden sm:block">

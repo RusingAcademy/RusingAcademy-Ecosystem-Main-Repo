@@ -18,7 +18,7 @@ import ProofGallery from "@/components/ProofGallery";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
 
-// Hero carousel images - real photos from RusingAcademy training sessions
+// Hero carousel images - real photos from RusingÂcademy training sessions
 const heroCarouselImages = [
   {
     src: "https://rusingacademy-cdn.b-cdn.net/images/generated/hero-ecosystem.jpg",
@@ -58,7 +58,7 @@ interface BrandCard {
 const brands: BrandCard[] = [
   {
     id: "rusingacademy",
-    name: "RusingAcademy",
+    name: "RusingÂcademy",
     color: "var(--teal)",
     image: "https://rusingacademy-cdn.b-cdn.net/images/generated/rusingacademy-hero.jpg",
     pitch: {
@@ -79,7 +79,7 @@ const brands: BrandCard[] = [
         "Conçu pour une culture de travail bilingue",
       ],
     },
-    cta: { en: "Explore RusingAcademy", fr: "Découvrir RusingAcademy" },
+    cta: { en: "Explore RusingÂcademy", fr: "Découvrir RusingÂcademy" },
     link: "/rusingacademy",
   },
   {
@@ -220,7 +220,7 @@ export default function EcosystemLanding() {
       bg: "bg-[#F4F6F9]",
       text: "text-[#1A1F2E]",
       textSecondary: "text-black",
-      surface: "bg-white dark:bg-card border border-[#E2E8F0] shadow-lg",
+      surface: "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-[#E2E8F0] shadow-lg",
       surfaceHover: "hover:bg-[#F8FAFC]",
       heroOverlay: "bg-gradient-to-br from-white/95 to-white/80",
       glow: "opacity-15",
@@ -232,7 +232,7 @@ export default function EcosystemLanding() {
   return (
     <div className={`min-h-screen ${t.bg} ${t.text} transition-colors duration-300 overflow-x-hidden`}>
       <SEO
-        title="RusingAcademy Learning Ecosystem"
+        title="RusingÂcademy Learning Ecosystem"
         description="Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd."
         canonical="https://www.rusingacademy.ca"
       />
@@ -521,8 +521,8 @@ export default function EcosystemLanding() {
                 {[
                   {
                     quote: {
-                      en: "RusingAcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
-                      fr: "Le Path Series™ de RusingAcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
+                      en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
+                      fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
                     },
                     author: "Michael Anderson",
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },

@@ -52,7 +52,7 @@ export default function EcosystemHome() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <SEO 
-        title={language === 'fr' ? 'Écosystème RusingAcademy | Excellence Bilingue' : 'RusingAcademy Ecosystem | Bilingual Excellence'}
+        title={language === 'fr' ? 'Écosystème RusingÂcademy | Excellence Bilingue' : 'RusingÂcademy Ecosystem | Bilingual Excellence'}
         description={t.description}
       />
 

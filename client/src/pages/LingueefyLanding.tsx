@@ -101,7 +101,7 @@ const FloatingCoachBubble = ({
         </div>
         
         {/* Info tooltip on hover */}
-        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white dark:bg-background rounded-lg shadow-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-2 whitespace-nowrap z-10">
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg shadow-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-2 whitespace-nowrap z-10">
           <div className="font-semibold text-black dark:text-foreground text-sm">{name}</div>
           <div className="text-xs text-black dark:text-foreground">{specialty}</div>
           <div className="flex items-center gap-1 mt-1">
@@ -948,7 +948,7 @@ export default function LingueefyLanding() {
             
             {/* Search bar - inspired by Preply */}
             <div className="max-w-3xl mx-auto mb-4 md:mb-6 lg:mb-10">
-              <div className="bg-white dark:bg-background rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
                 <div className="flex-1 relative">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-cyan-300" />
                   <Input 
@@ -960,7 +960,7 @@ export default function LingueefyLanding() {
                 </div>
                 <div className="flex gap-2">
                   <select 
-                    className="h-14 px-4 rounded-xl bg-white dark:bg-background border-0 text-black dark:text-foreground font-medium cursor-pointer hover:bg-slate-100 transition-colors"
+                    className="h-14 px-4 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-0 text-black dark:text-foreground font-medium cursor-pointer hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm transition-colors"
                     value={selectedLevel}
                     onChange={(e) => setSelectedLevel(e.target.value)}
                   >
@@ -993,7 +993,7 @@ export default function LingueefyLanding() {
               {c.hero.stats.map((stat, index) => (
                 <div 
                   key={index} 
-                  className="bg-white dark:bg-background rounded-2xl p-4 border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-4 border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
                   <stat.icon className="w-6 h-6 text-teal-600 mx-auto mb-2" />
                   <div className="text-2xl md:text-3xl font-bold text-black dark:text-foreground">{stat.value}</div>
@@ -1018,7 +1018,7 @@ export default function LingueefyLanding() {
       </section>
 
       {/* How It Works - Editorial rhythm with asymmetry */}
-      <section className="py-20 md:py-28 bg-white dark:bg-background relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md relative overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 right-10 w-40 h-40 border border-teal-200 rounded-full" />
@@ -1027,7 +1027,7 @@ export default function LingueefyLanding() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
-            <Badge className="mb-4 bg-slate-100 text-black dark:text-foreground">How It Works</Badge>
+            <Badge className="mb-4 bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black dark:text-foreground">How It Works</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-foreground mb-4">{c.howItWorks.title}</h2>
             <p className="text-xl text-black dark:text-foreground max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
           </div>
@@ -1048,14 +1048,14 @@ export default function LingueefyLanding() {
                     {index + 1}
                   </div>
                   
-                  <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white dark:bg-background">
+                  <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                     <CardContent className="p-6 text-center">
                       <div className="w-16 h-16 bg-gradient-to-br from-teal-100 to-teal-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <step.icon className="w-8 h-8 text-teal-600" />
                       </div>
                       <h3 className="text-xl font-semibold text-black dark:text-foreground mb-2">{step.title}</h3>
                       <p className="text-black dark:text-foreground mb-3">{step.description}</p>
-                      <Badge variant="secondary" className="bg-slate-100 text-black dark:text-foreground">
+                      <Badge variant="secondary" className="bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black dark:text-foreground">
                         <Clock className="w-3 h-3 mr-1" />
                         {step.duration}
                       </Badge>
@@ -1087,7 +1087,7 @@ export default function LingueefyLanding() {
           <div className="max-w-5xl mx-auto mb-8 md:mb-12 lg:mb-16">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Marketplace Option */}
-              <div className="bg-white dark:bg-background rounded-3xl p-8 border-2 border-slate-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-3xl p-8 border-2 border-slate-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group">
                 <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Users className="w-8 h-8 text-teal-600" />
                 </div>
@@ -1183,7 +1183,7 @@ export default function LingueefyLanding() {
                         className={`w-full py-6 rounded-xl text-lg font-semibold ${
                           plan.popular 
                             ? 'bg-teal-600 hover:bg-teal-700 text-white' 
-                            : 'bg-slate-100 hover:bg-slate-200 text-black'
+                            : 'bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm hover:bg-slate-200 text-black'
                         }`}
                       >
                         {plan.cta}
@@ -1255,7 +1255,7 @@ export default function LingueefyLanding() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
-            <Badge className="mb-4 bg-slate-100 text-black dark:text-foreground">{c.sleLevels.badge}</Badge>
+            <Badge className="mb-4 bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black dark:text-foreground">{c.sleLevels.badge}</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-foreground mb-4">{c.sleLevels.title}</h2>
             <p className="text-xl text-black dark:text-foreground max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
           </div>
@@ -1381,10 +1381,10 @@ export default function LingueefyLanding() {
                     
                     {/* Quick actions */}
                     <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button aria-label="Action" className="w-10 h-10 bg-white dark:bg-background/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-background transition-colors">
+                      <button aria-label="Action" className="w-10 h-10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors">
                         <Heart className="w-5 h-5 text-black dark:text-foreground" />
                       </button>
-                      <button aria-label="Action" className="w-10 h-10 bg-white dark:bg-background/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-background transition-colors">
+                      <button aria-label="Action" className="w-10 h-10 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 rounded-full flex items-center justify-center hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors">
                         <Video className="w-5 h-5 text-black dark:text-foreground" />
                       </button>
                     </div>
@@ -1412,7 +1412,7 @@ export default function LingueefyLanding() {
                     
                     <div className="flex flex-wrap gap-2 mb-4">
                       {coach.languages.map((lang, i) => (
-                        <Badge key={i} variant="secondary" className="bg-slate-100 text-black dark:text-foreground">
+                        <Badge key={i} variant="secondary" className="bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black dark:text-foreground">
                           <Globe className="w-3 h-3 mr-1" />
                           {lang}
                         </Badge>
@@ -1434,7 +1434,7 @@ export default function LingueefyLanding() {
       </section>
 
       {/* Services - Color-coded cards with asymmetry */}
-      <section className="py-20 md:py-28 bg-white dark:bg-background">
+      <section className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <Badge className="mb-4 bg-cta-soft text-cta">Our Services</Badge>
@@ -1534,10 +1534,10 @@ export default function LingueefyLanding() {
       </section>
 
       {/* FAQ - Clean, accessible */}
-      <section className="py-20 md:py-28 bg-white dark:bg-background">
+      <section className="py-20 md:py-28 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
-            <Badge className="mb-4 bg-slate-100 text-black dark:text-foreground">FAQ</Badge>
+            <Badge className="mb-4 bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-black dark:text-foreground">FAQ</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-foreground mb-4">{c.faq.title}</h2>
           </div>
           
@@ -1572,8 +1572,8 @@ export default function LingueefyLanding() {
       <section className="py-20 md:py-28 bg-gradient-to-br from-teal-600 via-teal-700 to-teal-800 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-40 h-40 bg-white dark:bg-background/5 rounded-full blur-2xl" />
-          <div className="absolute bottom-10 right-10 w-60 h-60 bg-white dark:bg-background/5 rounded-full blur-2xl" />
+          <div className="absolute top-10 left-10 w-40 h-40 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 rounded-full blur-2xl" />
+          <div className="absolute bottom-10 right-10 w-60 h-60 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 rounded-full blur-2xl" />
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -1582,7 +1582,7 @@ export default function LingueefyLanding() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/courses">
-              <Button size="lg" className="bg-white dark:bg-background text-teal-700 hover:bg-teal-50 px-10 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all">
+              <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 px-10 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all">
                 {c.cta.button}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

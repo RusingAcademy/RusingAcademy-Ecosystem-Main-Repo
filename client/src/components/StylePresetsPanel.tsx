@@ -88,11 +88,11 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
               key={preset.id}
               onClick={() => applyMut.mutate({ presetId: preset.id, sectionId })}
               disabled={applyMut.isPending}
-              className="group relative flex items-center gap-2 p-2 rounded-lg border border-gray-200 dark:border-border dark:border-border hover:border-indigo-300 hover:shadow-sm transition-all text-left"
+              className="group relative flex items-center gap-2 p-2 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 hover:border-indigo-300 hover:shadow-sm transition-all text-left"
             >
               <div className="flex gap-0.5 shrink-0">
-                <div className="w-4 h-4 rounded-sm border border-gray-200 dark:border-border dark:border-border" style={{ backgroundColor: preset.styles.backgroundColor || "#fff" }} />
-                <div className="w-4 h-4 rounded-sm border border-gray-200 dark:border-border dark:border-border" style={{ backgroundColor: preset.styles.textColor || "#000" }} />
+                <div className="w-4 h-4 rounded-sm border border-gray-200 dark:border-white/15 dark:border-white/15" style={{ backgroundColor: preset.styles.backgroundColor || "#fff" }} />
+                <div className="w-4 h-4 rounded-sm border border-gray-200 dark:border-white/15 dark:border-white/15" style={{ backgroundColor: preset.styles.textColor || "#000" }} />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-[11px] font-medium truncate">{preset.name}</p>
@@ -146,13 +146,13 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
       )}
 
       {/* Current style preview */}
-      <div className="p-2.5 rounded-lg border border-dashed border-gray-200 dark:border-border dark:border-border bg-gray-50/50">
+      <div className="p-2.5 rounded-lg border border-dashed border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50">
         <p className="text-[10px] text-cyan-300 mb-1.5">Current Section Style</p>
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded border" style={{ backgroundColor: currentStyles.backgroundColor }} />
           <div className="text-[10px] space-y-0.5">
-            <p>BG: <code className="bg-gray-100 dark:bg-card px-1 rounded">{currentStyles.backgroundColor}</code></p>
-            <p>Text: <code className="bg-gray-100 dark:bg-card px-1 rounded">{currentStyles.textColor}</code></p>
+            <p>BG: <code className="bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 px-1 rounded">{currentStyles.backgroundColor}</code></p>
+            <p>Text: <code className="bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 px-1 rounded">{currentStyles.textColor}</code></p>
           </div>
         </div>
       </div>
@@ -166,7 +166,7 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-3 py-2">
-            <div className="p-3 bg-gray-50 dark:bg-background rounded-lg">
+            <div className="p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
               <p className="text-xs text-black dark:text-foreground mb-1">Current Style</p>
               <div className="flex items-center gap-3">
                 <div className="flex gap-1">

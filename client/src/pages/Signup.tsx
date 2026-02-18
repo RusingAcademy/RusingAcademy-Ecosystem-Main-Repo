@@ -177,7 +177,7 @@ function SignupContent() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4 relative">
       {/* Home Button */}
       <Link href="/">
-        <button aria-label="Action" className="absolute top-4 left-4 p-3 rounded-full bg-white dark:bg-background/10 hover:bg-white dark:bg-background/20 transition-colors border border-white/60">
+        <button aria-label="Action" className="absolute top-4 left-4 p-3 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 transition-colors border border-white/60">
           <Home className="h-5 w-5 text-white" />
         </button>
       </Link>
@@ -186,7 +186,7 @@ function SignupContent() {
           <div className="mx-auto mb-4">
             <img
               loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
-              alt="RusingAcademy"
+              alt="RusingÂcademy"
               className="h-16 w-auto"
             />
           </div>
@@ -194,7 +194,7 @@ function SignupContent() {
             Create Your Account
           </CardTitle>
           <CardDescription className="text-cyan-300">
-            Join RusingAcademy and start your bilingual journey
+            Join RusingÂcademy and start your bilingual journey
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -211,7 +211,7 @@ function SignupContent() {
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-white dark:bg-background hover:bg-gray-100 dark:bg-card text-black dark:text-foreground border-gray-300"
+              className="w-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground border-gray-300"
               onClick={handleGoogleSignUp}
               disabled={signupMutation.isPending}
             >
@@ -377,7 +377,7 @@ function SignupContent() {
             </Link>
           </div>
           <div className="text-center text-xs text-black dark:text-foreground pt-4 border-t border-teal-800">
-            Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
+            Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
           </div>
         </CardFooter>
       </Card>

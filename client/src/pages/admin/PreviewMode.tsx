@@ -179,7 +179,7 @@ export default function PreviewMode() {
                             {(mode.id === "learner" ? students : coaches)?.map((u: any) => (
                               <button aria-label="Action"
                                 key={u.id}
-                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:bg-card text-sm flex items-center gap-2 transition-colors"
+                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-sm flex items-center gap-2 transition-colors"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedUserId(u.id);
@@ -204,7 +204,7 @@ export default function PreviewMode() {
                       )}
 
                       {!mode.requiresUser && (
-                        <Button variant="outline" size="sm" className="mt-3 group-hover:bg-gray-50">
+                        <Button variant="outline" size="sm" className="mt-3 group-hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                           <Eye className="w-4 h-4 mr-1" /> Preview
                         </Button>
                       )}
@@ -246,7 +246,7 @@ export default function PreviewMode() {
   // Fullscreen preview
   if (isFullscreen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white dark:bg-background flex flex-col">
+      <div className="fixed inset-0 z-50 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md flex flex-col">
         {/* Fullscreen toolbar */}
         <div className={`px-4 py-2 ${currentMode?.bg} border-b flex items-center justify-between shrink-0`}>
           <div className="flex items-center gap-3">
@@ -260,29 +260,29 @@ export default function PreviewMode() {
           </div>
           <div className="flex items-center gap-2">
             {/* Device toggles */}
-            <div className="flex items-center gap-1 bg-white dark:bg-background/80 rounded-lg p-1">
+            <div className="flex items-center gap-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 rounded-lg p-1">
               <button
                 onClick={() => setDeviceMode("desktop")}
-                className={`p-1.5 rounded ${deviceMode === "desktop" ? "bg-gray-200" : "hover:bg-gray-100"}`}
+                className={`p-1.5 rounded ${deviceMode === "desktop" ? "bg-gray-200" : "hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}
               >
                 <Monitor className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setDeviceMode("tablet")}
-                className={`p-1.5 rounded ${deviceMode === "tablet" ? "bg-gray-200" : "hover:bg-gray-100"}`}
+                className={`p-1.5 rounded ${deviceMode === "tablet" ? "bg-gray-200" : "hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}
               >
                 <Tablet className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setDeviceMode("mobile")}
-                className={`p-1.5 rounded ${deviceMode === "mobile" ? "bg-gray-200" : "hover:bg-gray-100"}`}
+                className={`p-1.5 rounded ${deviceMode === "mobile" ? "bg-gray-200" : "hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}
               >
                 <Smartphone className="w-4 h-4" />
               </button>
             </div>
             {/* Page selector */}
             <Select value={previewUrl} onValueChange={setPreviewUrl}>
-              <SelectTrigger className="w-48 h-8 text-xs bg-white dark:bg-background">
+              <SelectTrigger className="w-48 h-8 text-xs bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -300,9 +300,9 @@ export default function PreviewMode() {
           </div>
         </div>
         {/* Iframe */}
-        <div className="flex-1 flex items-start justify-center bg-gray-100 dark:bg-card overflow-auto p-4">
+        <div className="flex-1 flex items-start justify-center bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 overflow-auto p-4">
           <div
-            className="bg-white dark:bg-background shadow-2xl rounded-lg overflow-hidden transition-all duration-300"
+            className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-2xl rounded-lg overflow-hidden transition-all duration-300"
             style={{
               width: DEVICE_WIDTHS[deviceMode],
               maxWidth: "100%",
@@ -369,24 +369,24 @@ export default function PreviewMode() {
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-2">
               {/* Device toggles */}
-              <div className="flex items-center gap-1 bg-gray-100 dark:bg-card rounded-lg p-1">
+              <div className="flex items-center gap-1 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg p-1">
                 <button
                   onClick={() => setDeviceMode("desktop")}
-                  className={`p-2 rounded-md transition-colors ${deviceMode === "desktop" ? "bg-white dark:bg-card shadow-sm" : "hover:bg-gray-200"}`}
+                  className={`p-2 rounded-md transition-colors ${deviceMode === "desktop" ? "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 shadow-sm" : "hover:bg-gray-200"}`}
                   title="Desktop"
                 >
                   <Monitor className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setDeviceMode("tablet")}
-                  className={`p-2 rounded-md transition-colors ${deviceMode === "tablet" ? "bg-white dark:bg-card shadow-sm" : "hover:bg-gray-200"}`}
+                  className={`p-2 rounded-md transition-colors ${deviceMode === "tablet" ? "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 shadow-sm" : "hover:bg-gray-200"}`}
                   title="Tablet"
                 >
                   <Tablet className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setDeviceMode("mobile")}
-                  className={`p-2 rounded-md transition-colors ${deviceMode === "mobile" ? "bg-white dark:bg-card shadow-sm" : "hover:bg-gray-200"}`}
+                  className={`p-2 rounded-md transition-colors ${deviceMode === "mobile" ? "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 shadow-sm" : "hover:bg-gray-200"}`}
                   title="Mobile"
                 >
                   <Smartphone className="w-4 h-4" />
@@ -418,9 +418,9 @@ export default function PreviewMode() {
           </div>
 
           {/* Preview iframe */}
-          <div className="flex justify-center bg-gray-100 dark:bg-card rounded-xl p-4 min-h-[600px]">
+          <div className="flex justify-center bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl p-4 min-h-[600px]">
             <div
-              className="bg-white dark:bg-background shadow-xl rounded-lg overflow-hidden transition-all duration-300 border"
+              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-xl rounded-lg overflow-hidden transition-all duration-300 border"
               style={{
                 width: DEVICE_WIDTHS[deviceMode],
                 maxWidth: "100%",
@@ -569,15 +569,15 @@ export default function PreviewMode() {
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                      <div className="text-center p-3 bg-gray-50 dark:bg-background rounded-lg">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                         <div className="text-2xl font-bold text-violet-600">{(previewData as any).profile.averageRating || "N/A"}</div>
                         <div className="text-xs text-black dark:text-foreground">Rating</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 dark:bg-background rounded-lg">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                         <div className="text-2xl font-bold text-emerald-600">{(previewData as any).profile.totalSessions || 0}</div>
                         <div className="text-xs text-black dark:text-foreground">Sessions</div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 dark:bg-background rounded-lg">
+                      <div className="text-center p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                         <div className="text-2xl font-bold text-blue-600">{(previewData as any).profile.totalStudents || 0}</div>
                         <div className="text-xs text-black dark:text-foreground">Students</div>
                       </div>
@@ -643,7 +643,7 @@ export default function PreviewMode() {
                       { label: "Bulk User Import", desc: "Import team members via CSV for quick onboarding" },
                       { label: "Certificate Management", desc: "View and download team certificates and transcripts" },
                     ].map((feature) => (
-                      <div key={feature.label} className="p-3 bg-gray-50 dark:bg-background rounded-lg">
+                      <div key={feature.label} className="p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                         <div className="font-medium text-sm">{feature.label}</div>
                         <div className="text-xs text-black dark:text-foreground mt-0.5">{feature.desc}</div>
                       </div>

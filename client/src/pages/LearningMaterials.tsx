@@ -1,5 +1,5 @@
 /**
- * LearningMaterials — RusingAcademy Learning Portal
+ * LearningMaterials — RusingÂcademy Learning Portal
  * Design: Premium glassmorphism, teal/gold accents
  * Now integrates with real course data from programs
  */
@@ -64,7 +64,7 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
         <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${
           status === "Completed" ? "bg-[rgba(245,166,35,0.12)] text-amber-600" :
           status === "In Progress" ? "bg-[rgba(0,128,144,0.1)] text-teal-700" :
-          "bg-gray-100 dark:bg-card text-gray-500"
+          "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500"
         }`}>
           {status}
         </span>
@@ -225,7 +225,7 @@ export default function LearningMaterials() {
                         test.status === "Passed" ? "bg-green-50 text-green-600" :
                         test.status === "Available" ? "bg-[rgba(0,128,144,0.1)] text-teal-700" :
                         test.status === "In Progress" ? "bg-blue-50 text-blue-600" :
-                        "bg-gray-100 dark:bg-card text-gray-500"
+                        "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500"
                       }`}>{test.status}</span>
                     </td>
                     <td className="px-4 py-3 text-sm font-medium" style={{ color: test.score !== "-" ? "var(--brand-teal, var(--teal))" : "var(--color-gray-400, var(--muted-foreground))" }}>
@@ -257,7 +257,7 @@ export default function LearningMaterials() {
                   <div className="flex-1 min-w-0">
                     <h3 className="text-sm font-semibold text-gray-900 dark:text-foreground group-hover:text-teal-700 transition-colors">{ref.name}</h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-card text-gray-500 font-medium">{ref.type}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500 font-medium">{ref.type}</span>
                       <span className="text-[10px] text-gray-400">{ref.category}</span>
                     </div>
                   </div>

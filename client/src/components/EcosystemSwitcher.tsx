@@ -21,7 +21,7 @@ import { Link, useLocation } from "wouter";
 const PLATFORMS = [
   {
     slug: "rusingacademy",
-    name: "RusingAcademy",
+    name: "RusingÂcademy",
     taglineFr: "Formation B2B/B2G",
     taglineEn: "B2B/B2G Training",
     icon: GraduationCap,
@@ -141,7 +141,7 @@ export function EcosystemSwitcher({
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:bg-card dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-zinc-800 transition-colors"
                   aria-label={language === "fr" ? "Fermer" : "Close"}
                 >
                   <X className="w-5 h-5 text-gray-500" />
@@ -162,10 +162,10 @@ export function EcosystemSwitcher({
                         whileTap={{ scale: 0.98 }}
                         className={cn(
                           "w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300",
-                          "border border-transparent hover:border-gray-200 dark:border-border dark:hover:border-zinc-700",
+                          "border border-transparent hover:border-gray-200 dark:border-white/15 dark:hover:border-zinc-700",
                           isActive
                             ? "bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800"
-                            : "hover:bg-white dark:bg-card dark:hover:bg-zinc-800/50"
+                            : "hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-zinc-800/50"
                         )}
                       >
                         {/* Platform Icon */}
@@ -216,12 +216,12 @@ export function EcosystemSwitcher({
                 {isAuthenticated ? (
                   <>
                     <Link href="/dashboard">
-                      <button aria-label="Action" className="p-2 rounded-lg hover:bg-gray-100 dark:bg-card dark:hover:bg-zinc-800 transition-colors">
+                      <button aria-label="Action" className="p-2 rounded-lg hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-zinc-800 transition-colors">
                         <User className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
                     <Link href="/app/settings">
-                      <button aria-label="Action" className="p-2 rounded-lg hover:bg-gray-100 dark:bg-card dark:hover:bg-zinc-800 transition-colors">
+                      <button aria-label="Action" className="p-2 rounded-lg hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-zinc-800 transition-colors">
                         <Settings className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>

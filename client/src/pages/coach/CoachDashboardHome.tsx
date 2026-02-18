@@ -11,7 +11,7 @@ const ACCENT = "var(--color-violet-600, var(--color-violet-600, var(--accent-pur
 
 function KPICard({ icon, value, label, trend, trendUp, loading }: { icon: string; value: string; label: string; trend?: string; trendUp?: boolean; loading?: boolean }) {
   return (
-    <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${ACCENT}10` }}>
           <span className="material-icons text-xl" style={{ color: ACCENT }}>{icon}</span>
@@ -23,7 +23,7 @@ function KPICard({ icon, value, label, trend, trendUp, loading }: { icon: string
         )}
       </div>
       {loading ? (
-        <div className="h-8 w-16 bg-gray-100 dark:bg-card rounded animate-pulse mt-3" />
+        <div className="h-8 w-16 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded animate-pulse mt-3" />
       ) : (
         <p className="text-2xl font-bold text-gray-900 dark:text-foreground mt-3">{value}</p>
       )}
@@ -97,7 +97,7 @@ export default function CoachDashboardHome() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Upcoming Sessions */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-gray-900">
                   {lang === "fr" ? "Sessions à venir" : "Upcoming Sessions"}
@@ -109,7 +109,7 @@ export default function CoachDashboardHome() {
               {upcomingQuery.isLoading ? (
                 <div className="space-y-3">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-16 bg-gray-50 dark:bg-background rounded-xl animate-pulse" />
+                    <div key={i} className="h-16 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl animate-pulse" />
                   ))}
                 </div>
               ) : upcomingSessions.length === 0 ? (
@@ -122,7 +122,7 @@ export default function CoachDashboardHome() {
               ) : (
                 <div className="space-y-3">
                   {upcomingSessions.map((session: any) => (
-                    <div key={session.id} className="flex items-center gap-4 p-4 bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border hover:shadow-sm transition-shadow">
+                    <div key={session.id} className="flex items-center gap-4 p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 hover:shadow-sm transition-shadow">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, var(--color-purple-600, #9333ea))] flex items-center justify-center text-white font-bold text-sm">
                         {(session.learnerName || "?").charAt(0)}
                       </div>
@@ -155,7 +155,7 @@ export default function CoachDashboardHome() {
                 { icon: "account_balance_wallet", label: lang === "fr" ? "Revenus" : "Revenue", href: "/coach/revenue", color: "var(--semantic-warning, var(--semantic-warning, var(--warning)))" },
               ].map((action) => (
                 <Link key={action.label} href={action.href}>
-                  <button aria-label="Action" className="w-full flex flex-col items-center gap-2 p-4 bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border hover:shadow-md transition-all group">
+                  <button aria-label="Action" className="w-full flex flex-col items-center gap-2 p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 hover:shadow-md transition-all group">
                     <span className="material-icons text-2xl transition-transform group-hover:scale-110" style={{ color: action.color }}>
                       {action.icon}
                     </span>
@@ -169,13 +169,13 @@ export default function CoachDashboardHome() {
           {/* Right Column */}
           <div className="space-y-6">
             {/* Active Learners */}
-            <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
               <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-4">
                 {lang === "fr" ? "Étudiants actifs" : "Active Students"}
               </h2>
               {learnersQuery.isLoading ? (
                 <div className="space-y-3">
-                  {[1, 2, 3].map((i) => <div key={i} className="h-10 bg-gray-50 dark:bg-background rounded animate-pulse" />)}
+                  {[1, 2, 3].map((i) => <div key={i} className="h-10 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded animate-pulse" />)}
                 </div>
               ) : learners.length === 0 ? (
                 <div className="text-center py-6">
@@ -188,7 +188,7 @@ export default function CoachDashboardHome() {
                 <div>
                   {learners.slice(0, 5).map((learner: any) => (
                     <div key={learner.id || learner.learnerId} className="flex items-center gap-3 py-3 border-b border-gray-50 last:border-0">
-                      <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-card flex items-center justify-center text-gray-600 font-semibold text-xs">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 flex items-center justify-center text-gray-600 font-semibold text-xs">
                         {(learner.name || learner.learnerName || "?").charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -216,7 +216,7 @@ export default function CoachDashboardHome() {
               </h3>
               {earningsQuery.isLoading ? (
                 <div className="space-y-2">
-                  {[1, 2, 3].map((i) => <div key={i} className="h-5 bg-white dark:bg-background/10 rounded animate-pulse" />)}
+                  {[1, 2, 3].map((i) => <div key={i} className="h-5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded animate-pulse" />)}
                 </div>
               ) : (
                 <div className="space-y-2">

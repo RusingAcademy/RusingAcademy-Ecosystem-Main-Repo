@@ -240,7 +240,7 @@ export function AdminApplicationDashboard() {
       case "rejected":
         return "bg-red-100 text-red-800";
       default:
-        return "bg-gray-100 dark:bg-card text-black";
+        return "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black";
     }
   };
 
@@ -378,7 +378,7 @@ export function AdminApplicationDashboard() {
                 placeholder={l.search}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-card dark:bg-foundation text-black dark:text-foreground"
+                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground"
               />
             </div>
 
@@ -386,7 +386,7 @@ export function AdminApplicationDashboard() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-card dark:bg-foundation text-black dark:text-foreground"
+              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground"
             >
               <option value="all">{l.status}: All</option>
               <option value="submitted">{l.submitted}</option>
@@ -399,7 +399,7 @@ export function AdminApplicationDashboard() {
             <select
               value={languageFilter}
               onChange={(e) => setLanguageFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-card dark:bg-foundation text-black dark:text-foreground"
+              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground"
             >
               <option value="all">{l.language}: All</option>
               <option value="french">French</option>
@@ -411,7 +411,7 @@ export function AdminApplicationDashboard() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-card dark:bg-foundation text-black dark:text-foreground"
+              className="px-4 py-2 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground"
             >
               <option value="createdAt">
                 {l.sortBy}: {l.date}
@@ -491,7 +491,7 @@ export function AdminApplicationDashboard() {
                   {applications.map((app: Application) => (
                     <tr
                       key={app.id}
-                      className="border-b border-slate-200 dark:border-teal-800 hover:bg-white dark:bg-background dark:hover:bg-foundation"
+                      className="border-b border-slate-200 dark:border-teal-800 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:hover:bg-foundation"
                     >
                       <td className="py-3 px-4">
                         <button onClick={() => toggleApplicationSelection(app.id)}>
@@ -845,7 +845,7 @@ export function AdminApplicationDashboard() {
                 placeholder={l.rejectReason}
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-card dark:bg-foundation text-black dark:text-foreground"
+                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground"
                 rows={4}
                 autoFocus
               />
@@ -888,7 +888,7 @@ export function AdminApplicationDashboard() {
                 placeholder={bulkAction === "approve" ? l.approveNotes : l.rejectReason}
                 value={bulkNotes}
                 onChange={(e) => setBulkNotes(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-card dark:bg-foundation text-black dark:text-foreground"
+                className="w-full p-3 border border-slate-200 dark:border-teal-800 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground"
                 rows={4}
               />
               <div className="flex gap-2">

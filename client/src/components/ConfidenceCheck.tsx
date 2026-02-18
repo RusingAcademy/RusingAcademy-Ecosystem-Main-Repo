@@ -59,7 +59,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
   
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-background rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-teal-500 to-teal-600 p-6 text-white">
           <div className="flex items-center gap-3 mb-2">
@@ -110,7 +110,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
                     className={`p-3 rounded-xl border-2 transition-all text-left ${
                       needsReview.includes(topic.id)
                         ? "bg-teal-50 border-teal-500 text-teal-700"
-                        : "bg-white dark:bg-card border-gray-200 dark:border-border hover:border-gray-300"
+                        : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-gray-200 dark:border-white/15 hover:border-gray-300"
                     }`}
                   >
                     <span className="text-xl mr-2">{topic.icon}</span>
@@ -143,7 +143,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
               />
               
               {/* Summary */}
-              <div className="mt-4 p-3 bg-white dark:bg-background rounded-xl">
+              <div className="mt-4 p-3 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl">
                 <p className="text-sm text-black dark:text-foreground">
                   <span className="font-medium">Your confidence:</span>{" "}
                   {CONFIDENCE_LEVELS.find(l => l.level === selectedLevel)?.emoji}{" "}
@@ -161,7 +161,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
         </div>
         
         {/* Footer */}
-        <div className="border-t border-gray-200 dark:border-border dark:border-border p-4 flex justify-between">
+        <div className="border-t border-gray-200 dark:border-white/15 dark:border-white/15 p-4 flex justify-between">
           <button
             onClick={onSkip}
             className="px-4 py-2 text-black dark:text-foreground hover:text-black dark:text-foreground"

@@ -200,7 +200,7 @@ export default function CoachingHub() {
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold text-slate-900">Session en cours</h3>
                           <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500 text-white text-xs font-medium rounded-full">
-                            <span className="w-1.5 h-1.5 bg-white dark:bg-background rounded-full animate-pulse" />
+                            <span className="w-1.5 h-1.5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full animate-pulse" />
                             En direct
                           </span>
                         </div>
@@ -238,7 +238,7 @@ export default function CoachingHub() {
                           <h4 className="font-medium text-slate-900">{session.title}</h4>
                           {session.status === "live" && (
                             <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500 text-white text-xs font-medium rounded-full">
-                              <span className="w-1.5 h-1.5 bg-white dark:bg-background rounded-full animate-pulse" />
+                              <span className="w-1.5 h-1.5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full animate-pulse" />
                               En direct
                             </span>
                           )}
@@ -255,7 +255,7 @@ export default function CoachingHub() {
                           <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{session.time} ({session.duration})</span>
                           <span className={cn("px-2 py-0.5 rounded text-xs font-medium", session.platform === "zoom" ? "bg-blue-100 text-blue-700" : "bg-foundation-soft text-foundation")}>{session.platform === "zoom" ? "Zoom" : "Teams"}</span>
                         </div>
-                        {session.notes && <div className="mt-3 p-3 bg-slate-100 rounded-lg"><p className="text-sm text-slate-600"><strong>Notes:</strong> {session.notes}</p></div>}
+                        {session.notes && <div className="mt-3 p-3 bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded-lg"><p className="text-sm text-slate-600"><strong>Notes:</strong> {session.notes}</p></div>}
                         {session.materials && session.materials.length > 0 && (
                           <div className="mt-3 flex items-center gap-2">
                             {session.materials.map((m, i) => (

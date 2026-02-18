@@ -100,7 +100,7 @@ export default function CustomerDetail() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/customers")} className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg">
+          <button onClick={() => navigate("/customers")} className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
@@ -235,7 +235,7 @@ export default function CustomerDetail() {
               {(invoices as any[])?.length ? (
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b-2 border-gray-200 dark:border-border dark:border-border">
+                    <tr className="border-b-2 border-gray-200 dark:border-white/15 dark:border-white/15">
                       <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Date</th>
                       <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Type</th>
                       <th className="text-left text-xs font-bold text-gray-500 uppercase pb-2">Number</th>
@@ -248,7 +248,7 @@ export default function CustomerDetail() {
                     {(invoices as any[])?.map((inv: any) => (
                       <tr
                         key={inv.id}
-                        className="border-b border-gray-100 dark:border-border hover:bg-gray-50 dark:bg-background cursor-pointer"
+                        className="border-b border-gray-100 dark:border-white/15 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md cursor-pointer"
                         onClick={() => navigate(`/invoices/${inv.id}`)}
                       >
                         <td className="py-2 text-sm text-gray-800">{new Date(inv.invoiceDate).toLocaleDateString("en-CA")}</td>
@@ -259,7 +259,7 @@ export default function CustomerDetail() {
                             inv.status === "Overdue" ? "bg-orange-100 text-orange-700" :
                             inv.status === "Deposited" || inv.status === "Paid" ? "bg-green-100 text-green-700" :
                             inv.status === "Sent" ? "bg-blue-100 text-blue-700" :
-                            "bg-gray-100 dark:bg-card text-gray-600"
+                            "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600"
                           }`}>
                             {inv.status}
                           </span>

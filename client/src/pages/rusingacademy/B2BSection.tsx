@@ -12,7 +12,7 @@ export default function B2BSection() {
       badge: "B2B Solutions",
       title: "Corporate Language Training",
       highlight: "For Private Sector",
-      subtitle: "Empower your workforce with professional language training. RusingAcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
+      subtitle: "Empower your workforce with professional language training. RusingÂcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
       cta: "Request a Consultation",
       stats: [
         { value: "200+", label: "Corporate Clients" },
@@ -20,7 +20,7 @@ export default function B2BSection() {
         { value: "92%", label: "Completion Rate" },
         { value: "4.9/5", label: "Client Satisfaction" }
       ],
-      benefitsTitle: "Why Businesses Choose RusingAcademy",
+      benefitsTitle: "Why Businesses Choose RusingÂcademy",
       benefits: [
         { icon: Target, title: "Industry-Specific Training", desc: "Customized curricula for finance, healthcare, legal, tech sectors." },
         { icon: Clock, title: "Flexible Learning", desc: "On-site, virtual, or hybrid. Self-paced and live sessions." },
@@ -35,7 +35,7 @@ export default function B2BSection() {
       ],
       testimonialsTitle: "Trusted by Leading Canadian Businesses",
       testimonials: [
-        { quote: "RusingAcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
+        { quote: "RusingÂcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
         { quote: "The industry-specific curriculum opened new market opportunities for our consultants.", author: "Managing Partner", company: "Top-10 Consulting Firm" }
       ],
       ctaTitle: "Ready to Transform Your Workforce?",
@@ -45,7 +45,7 @@ export default function B2BSection() {
       badge: "Solutions B2B",
       title: "Formation linguistique corporative",
       highlight: "Pour le secteur privé",
-      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingAcademy aide les entreprises canadiennes à développer des talents bilingues.",
+      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingÂcademy aide les entreprises canadiennes à développer des talents bilingues.",
       cta: "Demander une consultation",
       stats: [
         { value: "200+", label: "Clients corporatifs" },
@@ -53,7 +53,7 @@ export default function B2BSection() {
         { value: "92%", label: "Taux de complétion" },
         { value: "4.9/5", label: "Satisfaction client" }
       ],
-      benefitsTitle: "Pourquoi les entreprises choisissent RusingAcademy",
+      benefitsTitle: "Pourquoi les entreprises choisissent RusingÂcademy",
       benefits: [
         { icon: Target, title: "Formation par industrie", desc: "Programmes personnalisés pour finance, santé, juridique, tech." },
         { icon: Clock, title: "Apprentissage flexible", desc: "Sur site, virtuel ou hybride. Auto-formation et sessions en direct." },
@@ -68,7 +68,7 @@ export default function B2BSection() {
       ],
       testimonialsTitle: "La confiance des grandes entreprises canadiennes",
       testimonials: [
-        { quote: "RusingAcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
+        { quote: "RusingÂcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
         { quote: "Le curriculum spécifique à notre industrie a ouvert de nouvelles opportunités de marché.", author: "Associé directeur", company: "Cabinet de conseil Top-10" }
       ],
       ctaTitle: "Prêt à transformer votre équipe?",
@@ -95,7 +95,7 @@ export default function B2BSection() {
           </Button>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto">
             {t.stats.map((stat, i) => (
-              <div key={i} className="text-center p-4 rounded-xl bg-white dark:bg-background/5 border border-white/60">
+              <div key={i} className="text-center p-4 rounded-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5 border border-white/60">
                 <div className="text-lg md:text-2xl lg:text-3xl font-bold text-cta">{stat.value}</div>
                 <div className="text-sm text-white/90">{stat.label}</div>
               </div>
@@ -105,12 +105,12 @@ export default function B2BSection() {
       </div>
 
       {/* Benefits */}
-      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container mx-auto px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.benefitsTitle}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.benefits.map((benefit, i) => (
-              <Card key={i} className="border-gray-200 dark:border-border dark:border-border hover:shadow-lg transition-shadow">
+              <Card key={i} className="border-gray-200 dark:border-white/15 dark:border-white/15 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-xl bg-foundation/10 flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-foundation" aria-hidden="true" />
@@ -125,7 +125,7 @@ export default function B2BSection() {
       </div>
 
       {/* Packages */}
-      <div className="py-8 md:py-12 lg:py-16 bg-gray-50">
+      <div className="py-8 md:py-12 lg:py-16 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.packagesTitle}</h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -158,12 +158,12 @@ export default function B2BSection() {
       </div>
 
       {/* Testimonials */}
-      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-background">
+      <div className="py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="container mx-auto px-6">
           <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-foundation text-center mb-6 md:mb-8 lg:mb-12">{t.testimonialsTitle}</h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {t.testimonials.map((testimonial, i) => (
-              <Card key={i} className="border-gray-200 dark:border-border dark:border-border">
+              <Card key={i} className="border-gray-200 dark:border-white/15 dark:border-white/15">
                 <CardContent className="p-6">
                   <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[var(--brand-cta)] text-cta" />)}

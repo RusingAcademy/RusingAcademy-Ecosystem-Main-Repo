@@ -111,7 +111,7 @@ function LeadCard({ lead, onDragStart, onViewDetails, onSchedule, language }: Le
       
       {/* Score */}
       <div className="flex items-center gap-2 mb-3">
-        <div className="flex-1 bg-white dark:bg-background/10 rounded-full h-2">
+        <div className="flex-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-full h-2">
           <div 
             className="h-2 rounded-full transition-all"
             style={{ width: `${lead.leadScore}%`, backgroundColor: scoreColor }}
@@ -126,7 +126,7 @@ function LeadCard({ lead, onDragStart, onViewDetails, onSchedule, language }: Le
       <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={() => onViewDetails(lead)}
-          className="flex-1 px-3 py-1.5 bg-white dark:bg-background/10 rounded-lg text-xs text-slate-300 hover:bg-white dark:bg-background/20 transition-colors"
+          className="flex-1 px-3 py-1.5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg text-xs text-slate-300 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 transition-colors"
         >
           {t.viewDetails}
         </button>
@@ -345,7 +345,7 @@ export default function LeadPipelineKanban() {
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
-                  className="p-2 hover:bg-white dark:bg-background/10 rounded-lg"
+                  className="p-2 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg"
                 >
                   ✕
                 </button>
@@ -428,7 +428,7 @@ export default function LeadPipelineKanban() {
                   </label>
                   <input
                     type="date"
-                    className="w-full px-4 py-2 bg-slate-700/50 dark:bg-background/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-700/50 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
                     defaultValue={new Date().toISOString().split("T")[0]}
                   />
                 </div>
@@ -438,7 +438,7 @@ export default function LeadPipelineKanban() {
                   </label>
                   <input
                     type="time"
-                    className="w-full px-4 py-2 bg-slate-700/50 dark:bg-background/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-700/50 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
                     defaultValue="10:00"
                   />
                 </div>
@@ -446,7 +446,7 @@ export default function LeadPipelineKanban() {
                   <label className="block text-sm text-slate-400 mb-1">
                     {language === "en" ? "Duration" : "Durée"}
                   </label>
-                  <select className="w-full px-4 py-2 bg-slate-700/50 dark:bg-background/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none">
+                  <select className="w-full px-4 py-2 bg-slate-700/50 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none">
                     <option value="15">15 {language === "en" ? "minutes" : "minutes"}</option>
                     <option value="30" selected>30 {language === "en" ? "minutes" : "minutes"}</option>
                     <option value="45">45 {language === "en" ? "minutes" : "minutes"}</option>
@@ -458,7 +458,7 @@ export default function LeadPipelineKanban() {
                     {language === "en" ? "Notes" : "Notes"}
                   </label>
                   <textarea
-                    className="w-full px-4 py-2 bg-white dark:bg-background/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none resize-none"
+                    className="w-full px-4 py-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none resize-none"
                     rows={3}
                     placeholder={language === "en" ? "Meeting agenda..." : "Ordre du jour..."}
                   />
@@ -471,7 +471,7 @@ export default function LeadPipelineKanban() {
                     setShowScheduleModal(false);
                     setSelectedLead(null);
                   }}
-                  className="flex-1 px-4 py-2 bg-white/10 dark:bg-background/10 text-white rounded-lg hover:bg-white/20 dark:bg-background/20 transition-colors border border-white/10"
+                  className="flex-1 px-4 py-2 bg-white/10 dark:bg-white/[0.08] dark:backdrop-blur-md/10 text-white rounded-lg hover:bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 transition-colors border border-white/10"
                 >
                   {language === "en" ? "Cancel" : "Annuler"}
                 </button>

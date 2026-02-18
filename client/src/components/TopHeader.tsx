@@ -70,7 +70,7 @@ export default function TopHeader({ onMenuToggle, onCreatePost, onNotificationsT
           <div className="relative">
             <img
               src={RA_LOGO}
-              alt="RusingAcademy"
+              alt="RusingÂcademy"
               className="w-8 h-8 rounded-lg object-contain"
               style={{ boxShadow: "0 2px 8px rgba(27, 20, 100, 0.1)" }}
             />

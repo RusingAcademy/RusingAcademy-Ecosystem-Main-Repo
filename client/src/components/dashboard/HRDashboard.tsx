@@ -74,11 +74,11 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-background flex">
+    <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-white dark:bg-background border-r border-gray-200 dark:border-border dark:border-border flex flex-col">
+      <aside className="w-64 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-r border-gray-200 dark:border-white/15 dark:border-white/15 flex flex-col">
         {/* Org Header */}
-        <div className="p-4 border-b border-gray-200 dark:border-border dark:border-border">
+        <div className="p-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center">
               <Building2 className="w-5 h-5 text-teal-600" />
@@ -101,13 +101,13 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 activeSection === item.id
                   ? "bg-teal-50 text-teal-700"
-                  : "text-black dark:text-foreground hover:bg-white dark:bg-card hover:text-black"
+                  : "text-black dark:text-foreground hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:text-black"
               }`}
             >
               <item.icon className="w-5 h-5 flex-shrink-0" />
               <span className="flex-1 text-left">{item.label}</span>
               {item.count !== undefined && (
-                <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-card text-black dark:text-foreground">
+                <span className="px-2 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground">
                   {item.count}
                 </span>
               )}
@@ -121,7 +121,7 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
         </nav>
 
         {/* User Info */}
-        <div className="p-4 border-t border-gray-200 dark:border-border dark:border-border">
+        <div className="p-4 border-t border-gray-200 dark:border-white/15 dark:border-white/15">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-sm font-medium">
               {user.name?.charAt(0) || "U"}
@@ -137,7 +137,7 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
       {/* Main Content */}
       <main className="flex-1 overflow-auto">
         {/* Top Bar */}
-        <header className="bg-white dark:bg-background border-b border-gray-200 dark:border-border dark:border-border px-6 py-4">
+        <header className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-200 dark:border-white/15 dark:border-white/15 px-6 py-4">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-semibold text-black dark:text-foreground">
               {menuItems.find(m => m.id === activeSection)?.label}
@@ -150,7 +150,7 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 pr-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="pl-9 pr-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -214,12 +214,12 @@ function GetStartedSection({ organizationId, checklist }: { organizationId: numb
         {steps.map((step, index) => (
           <div
             key={step.id}
-            className={`bg-white dark:bg-card rounded-xl border p-5 flex items-center gap-4 ${
+            className={`bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl border p-5 flex items-center gap-4 ${
               step.completed ? "border-green-200 bg-green-50/50" : "border-gray-200"
             }`}
           >
             <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-              step.completed ? "bg-green-100 text-green-600" : "bg-gray-100 dark:bg-card text-cyan-300"
+              step.completed ? "bg-green-100 text-green-600" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-cyan-300"
             }`}>
               {step.completed ? (
                 <CheckSquare className="w-5 h-5" />
@@ -263,7 +263,7 @@ function DashboardSection({ stats, cohorts }: { stats: any; cohorts: any }) {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpiCards.map((kpi) => (
-          <div key={kpi.label} className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
+          <div key={kpi.label} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-5">
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm text-black dark:text-foreground">{kpi.label}</span>
               <kpi.icon className={`w-5 h-5 text-${kpi.color}-500`} />
@@ -292,8 +292,8 @@ function DashboardSection({ stats, cohorts }: { stats: any; cohorts: any }) {
       )}
 
       {/* Quick Stats by Cohort */}
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border">
-        <div className="p-4 border-b border-gray-200 dark:border-border dark:border-border">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15">
+        <div className="p-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
           <h3 className="font-semibold text-black dark:text-foreground">Cohort Overview</h3>
         </div>
         <div className="divide-y divide-gray-100">
@@ -308,7 +308,7 @@ function DashboardSection({ stats, cohorts }: { stats: any; cohorts: any }) {
                   <p className="text-sm font-medium text-black dark:text-foreground">{cohort.avgProgress}%</p>
                   <p className="text-xs text-black dark:text-foreground">avg progress</p>
                 </div>
-                <div className="w-24 h-2 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+                <div className="w-24 h-2 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-teal-500 rounded-full" 
                     style={{ width: `${cohort.avgProgress}%` }}
@@ -353,14 +353,14 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
           <select 
             value={filterCohort}
             onChange={(e) => setFilterCohort(e.target.value)}
-            className="px-3 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm"
+            className="px-3 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg text-sm"
           >
             <option value="">All Cohorts</option>
           </select>
           <select 
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm"
+            className="px-3 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg text-sm"
           >
             <option value="">All Status</option>
             <option value="active">Active</option>
@@ -378,9 +378,9 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
       </div>
 
       {/* Learners Table */}
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-white dark:bg-background border-b border-gray-200 dark:border-border dark:border-border">
+          <thead className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-200 dark:border-white/15 dark:border-white/15">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Learner</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Cohort</th>
@@ -392,7 +392,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
           </thead>
           <tbody className="divide-y divide-gray-100">
             {filteredLearners.map((learner: any) => (
-              <tr key={learner.id} className="hover:bg-white dark:bg-background">
+              <tr key={learner.id} className="hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 text-sm font-medium">
@@ -412,7 +412,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-20 h-2 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+                    <div className="w-20 h-2 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-teal-500 rounded-full" 
                         style={{ width: `${learner.progress || 0}%` }}
@@ -425,7 +425,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
                   {learner.lastActiveAt ? new Date(learner.lastActiveAt).toLocaleDateString() : "Never"}
                 </td>
                 <td className="px-4 py-3">
-                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded">
                     <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>
@@ -472,14 +472,14 @@ function CohortsSection({ organizationId, cohorts }: { organizationId: number; c
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cohorts?.map((cohort: any) => (
-          <div key={cohort.id} className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
+          <div key={cohort.id} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-5">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="font-semibold text-black dark:text-foreground">{cohort.name}</h3>
                 <p className="text-sm text-black dark:text-foreground">{cohort.department || "No department"}</p>
               </div>
               <span className={`px-2 py-1 text-xs font-medium rounded ${
-                cohort.status === "active" ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-card text-black"
+                cohort.status === "active" ? "bg-green-100 text-green-700" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black"
               }`}>
                 {cohort.status}
               </span>
@@ -500,17 +500,17 @@ function CohortsSection({ organizationId, cohorts }: { organizationId: number; c
               </div>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-border flex gap-2">
+            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-white/15 flex gap-2">
               <button className="flex-1 px-3 py-2 text-sm text-teal-600 hover:bg-teal-50 rounded-lg">
                 View Members
               </button>
-              <button className="flex-1 px-3 py-2 text-sm text-black dark:text-foreground hover:bg-white dark:bg-background rounded-lg">
+              <button className="flex-1 px-3 py-2 text-sm text-black dark:text-foreground hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                 Edit
               </button>
             </div>
           </div>
         )) || (
-          <div className="col-span-full p-8 text-center text-black dark:text-foreground bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border">
+          <div className="col-span-full p-8 text-center text-black dark:text-foreground bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15">
             No cohorts yet. Create your first cohort to organize learners.
           </div>
         )}
@@ -545,9 +545,9 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
         </button>
       </div>
 
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-white dark:bg-background border-b border-gray-200 dark:border-border dark:border-border">
+          <thead className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-200 dark:border-white/15 dark:border-white/15">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Course/Path</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Assigned To</th>
@@ -559,7 +559,7 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
           </thead>
           <tbody className="divide-y divide-gray-100">
             {assignments?.map((assignment: any) => (
-              <tr key={assignment.id} className="hover:bg-white dark:bg-background">
+              <tr key={assignment.id} className="hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-foundation-soft flex items-center justify-center">
@@ -578,7 +578,7 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
                   <span className={`px-2 py-1 text-xs font-medium rounded ${
                     assignment.assignmentType === "required" 
                       ? "bg-red-100 text-red-700" 
-                      : "bg-gray-100 dark:bg-card text-black"
+                      : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black"
                   }`}>
                     {assignment.assignmentType}
                   </span>
@@ -590,13 +590,13 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
                   <span className={`px-2 py-1 text-xs font-medium rounded ${
                     assignment.status === "completed" ? "bg-green-100 text-green-700" :
                     assignment.status === "active" ? "bg-blue-100 text-blue-700" :
-                    "bg-gray-100 dark:bg-card text-black"
+                    "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black"
                   }`}>
                     {assignment.status}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded">
                     <MoreVertical className="w-4 h-4 text-cyan-300" />
                   </button>
                 </td>
@@ -652,7 +652,7 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
         <div className="flex gap-2">
           <button 
             onClick={() => handleExport("csv")}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm font-medium hover:bg-white dark:bg-background"
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg text-sm font-medium hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md"
           >
             <Download className="w-4 h-4" />
             Export CSV
@@ -668,18 +668,18 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-4">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-4">
         <div className="flex flex-wrap gap-4">
-          <select className="px-3 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm">
+          <select className="px-3 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg text-sm">
             <option value="">All Cohorts</option>
           </select>
-          <select className="px-3 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm">
+          <select className="px-3 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg text-sm">
             <option value="">All Levels</option>
             <option value="BBB">BBB</option>
             <option value="CBC">CBC</option>
             <option value="CCC">CCC</option>
           </select>
-          <select className="px-3 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg text-sm">
+          <select className="px-3 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg text-sm">
             <option value="30">Last 30 days</option>
             <option value="60">Last 60 days</option>
             <option value="90">Last 90 days</option>
@@ -689,8 +689,8 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
       </div>
 
       {/* Progress by Cohort */}
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border">
-        <div className="p-4 border-b border-gray-200 dark:border-border dark:border-border">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15">
+        <div className="p-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
           <h3 className="font-semibold text-black dark:text-foreground">Progress by Cohort</h3>
         </div>
         <div className="p-4">
@@ -700,7 +700,7 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
                 <span className="font-medium text-black dark:text-foreground">{cohort.name}</span>
                 <span className="text-sm text-black dark:text-foreground">{cohort.completionRate}% complete</span>
               </div>
-              <div className="w-full h-3 bg-gray-100 dark:bg-card rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-teal-500 rounded-full transition-all" 
                   style={{ width: `${cohort.completionRate}%` }}
@@ -714,12 +714,12 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
       </div>
 
       {/* Completion Table */}
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden">
-        <div className="p-4 border-b border-gray-200 dark:border-border dark:border-border">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
+        <div className="p-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
           <h3 className="font-semibold text-black dark:text-foreground">Completion Details</h3>
         </div>
         <table className="w-full">
-          <thead className="bg-white dark:bg-background border-b border-gray-200 dark:border-border dark:border-border">
+          <thead className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-200 dark:border-white/15 dark:border-white/15">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Learner</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Course</th>
@@ -729,7 +729,7 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {reportData?.completions?.map((completion: any, i: number) => (
-              <tr key={i} className="hover:bg-white dark:bg-background">
+              <tr key={i} className="hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <td className="px-4 py-3 font-medium text-black dark:text-foreground">{completion.learnerName}</td>
                 <td className="px-4 py-3 text-black dark:text-foreground">{completion.courseName}</td>
                 <td className="px-4 py-3">
@@ -764,9 +764,9 @@ function AssessmentsSection({ organizationId }: { organizationId: number }) {
         <p className="text-black dark:text-foreground">View quiz and evaluation scores by cohort.</p>
       </div>
 
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-white dark:bg-background border-b border-gray-200 dark:border-border dark:border-border">
+          <thead className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-200 dark:border-white/15 dark:border-white/15">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Assessment</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-black dark:text-foreground uppercase">Cohort</th>
@@ -777,7 +777,7 @@ function AssessmentsSection({ organizationId }: { organizationId: number }) {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {assessments?.map((assessment: any) => (
-              <tr key={assessment.id} className="hover:bg-white dark:bg-background">
+              <tr key={assessment.id} className="hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                 <td className="px-4 py-3 font-medium text-black dark:text-foreground">{assessment.name}</td>
                 <td className="px-4 py-3 text-black dark:text-foreground">{assessment.cohortName}</td>
                 <td className="px-4 py-3">
@@ -818,7 +818,7 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
 
       {/* Trend Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-5">
           <h3 className="text-sm text-black dark:text-foreground mb-2">Active Learners (This Week)</h3>
           <div className="flex items-end gap-2">
             <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{analytics?.activeThisWeek || 0}</span>
@@ -829,13 +829,13 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
             )}
           </div>
         </div>
-        <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-5">
           <h3 className="text-sm text-black dark:text-foreground mb-2">Completions (This Month)</h3>
           <div className="flex items-end gap-2">
             <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{analytics?.completionsThisMonth || 0}</span>
           </div>
         </div>
-        <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-5">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-5">
           <h3 className="text-sm text-black dark:text-foreground mb-2">Avg. Time to Complete</h3>
           <div className="flex items-end gap-2">
             <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{analytics?.avgTimeToComplete || "-"}</span>
@@ -845,8 +845,8 @@ function AnalyticsSection({ organizationId }: { organizationId: number }) {
       </div>
 
       {/* Top Modules */}
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border">
-        <div className="p-4 border-b border-gray-200 dark:border-border dark:border-border">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15">
+        <div className="p-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
           <h3 className="font-semibold text-black dark:text-foreground">Top Modules</h3>
         </div>
         <div className="divide-y divide-gray-100">
@@ -897,7 +897,7 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
         <p className="text-black dark:text-foreground">Manage your organization's basic settings.</p>
       </div>
 
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-6 space-y-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-6 space-y-6">
         <div>
           <label className="block text-sm font-medium text-black dark:text-foreground mb-2">
             Organization Name
@@ -906,7 +906,7 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
             type="text"
             value={orgName}
             onChange={(e) => setOrgName(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         </div>
 
@@ -919,7 +919,7 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
             value={emailDomain}
             onChange={(e) => setEmailDomain(e.target.value)}
             placeholder="e.g., company.com"
-            className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
           <p className="mt-1 text-sm text-black dark:text-foreground">
             Only users with this email domain can be invited.
@@ -935,7 +935,7 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
         </button>
       </div>
 
-      <div className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 p-6">
         <h3 className="font-semibold text-black dark:text-foreground mb-2">Need Help?</h3>
         <p className="text-black dark:text-foreground text-sm">
           For technical settings, billing, or platform configuration, please contact your platform administrator.
@@ -964,7 +964,7 @@ function InviteLearnerModal({ organizationId, onClose }: { organizationId: numbe
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-background rounded-xl w-full max-w-md p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl w-full max-w-md p-6">
         <h2 className="text-lg font-semibold text-black dark:text-foreground mb-4">Invite Learner</h2>
         <div className="space-y-4">
           <div>
@@ -973,7 +973,7 @@ function InviteLearnerModal({ organizationId, onClose }: { organizationId: numbe
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             />
           </div>
           <div>
@@ -982,12 +982,12 @@ function InviteLearnerModal({ organizationId, onClose }: { organizationId: numbe
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             />
           </div>
         </div>
         <div className="flex gap-3 mt-6">
-          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg">
+          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg">
             Cancel
           </button>
           <button 
@@ -1020,7 +1020,7 @@ function CreateCohortModal({ organizationId, onClose }: { organizationId: number
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-background rounded-xl w-full max-w-md p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl w-full max-w-md p-6">
         <h2 className="text-lg font-semibold text-black dark:text-foreground mb-4">Create Cohort</h2>
         <div className="space-y-4">
           <div>
@@ -1029,7 +1029,7 @@ function CreateCohortModal({ organizationId, onClose }: { organizationId: number
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             />
           </div>
           <div>
@@ -1038,7 +1038,7 @@ function CreateCohortModal({ organizationId, onClose }: { organizationId: number
               type="text"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             />
           </div>
           <div>
@@ -1046,7 +1046,7 @@ function CreateCohortModal({ organizationId, onClose }: { organizationId: number
             <select
               value={targetLevel}
               onChange={(e) => setTargetLevel(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             >
               <option value="">Select target</option>
               <option value="BBB">BBB</option>
@@ -1056,7 +1056,7 @@ function CreateCohortModal({ organizationId, onClose }: { organizationId: number
           </div>
         </div>
         <div className="flex gap-3 mt-6">
-          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg">
+          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg">
             Cancel
           </button>
           <button 
@@ -1098,7 +1098,7 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-background rounded-xl w-full max-w-md p-6">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl w-full max-w-md p-6">
         <h2 className="text-lg font-semibold text-black dark:text-foreground mb-4">Create Assignment</h2>
         <div className="space-y-4">
           <div>
@@ -1106,7 +1106,7 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
             <select
               value={cohortId}
               onChange={(e) => setCohortId(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             >
               <option value="">Select cohort</option>
               {cohorts?.map((c: any) => (
@@ -1119,7 +1119,7 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
             <select
               value={courseId}
               onChange={(e) => setCourseId(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             >
               <option value="">Select course</option>
               {courses?.map((c: any) => (
@@ -1132,7 +1132,7 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
             <select
               value={assignmentType}
               onChange={(e) => setAssignmentType(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             >
               <option value="required">Required</option>
               <option value="optional">Optional</option>
@@ -1145,12 +1145,12 @@ function CreateAssignmentModal({ organizationId, cohorts, onClose }: { organizat
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg"
             />
           </div>
         </div>
         <div className="flex gap-3 mt-6">
-          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-border dark:border-border rounded-lg">
+          <button onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg">
             Cancel
           </button>
           <button 

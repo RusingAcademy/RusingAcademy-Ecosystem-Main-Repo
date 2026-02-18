@@ -299,16 +299,16 @@ export default function CoachProfile() {
     url: `https://www.rusingacademy.ca/coaches/${coach.slug}`,
     worksFor: {
       "@type": "Organization",
-      name: "Lingueefy by RusingAcademy",
+      name: "Lingueefy by RusingÂcademy",
     },
     knowsLanguage: coach.languages === "both" ? ["French", "English"] : [coach.languages === "french" ? "French" : "English"],
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-card dark:bg-obsidian">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <SEO
         title={`${coach.name || coach.firstName} - ${coach.headline || 'Language Coach'}`}
-        description={coach.bio?.substring(0, 160) || `Book a session with ${coach.name || coach.firstName}, a certified language coach on RusingAcademy.`}
+        description={coach.bio?.substring(0, 160) || `Book a session with ${coach.name || coach.firstName}, a certified language coach on RusingÂcademy.`}
         canonical={`/coaches/${coach.slug}`}
         image={coach.photoUrl || undefined}
         schema={personSchema}
@@ -338,7 +338,7 @@ export default function CoachProfile() {
             </div>
             
             {/* Profile Header Card with Glassmorphism — Audit 2 fix */}
-            <div className="backdrop-blur-xl bg-white/20 dark:bg-background/10 border border-white/60 rounded-3xl p-8 shadow-2xl">
+            <div className="backdrop-blur-xl bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 border border-white/60 rounded-3xl p-8 shadow-2xl">
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Avatar Section */}
                 <div className="shrink-0 flex flex-col items-center lg:items-start">
@@ -360,10 +360,10 @@ export default function CoachProfile() {
                         coachId={coach.id}
                         initialFavorited={isFavorite}
                         onToggle={(favorited) => setIsFavorite(favorited)}
-                        className="bg-white/20 dark:bg-background/10 hover:bg-white/30 dark:hover:bg-background/20 border-white/60"
+                        className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:bg-white/30 dark:hover:bg-background/20 border-white/60"
                       />
                     )}
-                    <Button variant="outline" size="icon" className="bg-white/20 dark:bg-background/10 hover:bg-white/30 dark:hover:bg-background/20 border-white/60 text-slate-900 dark:text-white">
+                    <Button variant="outline" size="icon" className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:bg-white/30 dark:hover:bg-background/20 border-white/60 text-slate-900 dark:text-white">
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -380,7 +380,7 @@ export default function CoachProfile() {
 
                   {/* Stats Row - Glassmorphism Cards */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div className="backdrop-blur-md bg-white/20 dark:bg-background/10 rounded-xl p-4 text-center border border-white/60">
+                    <div className="backdrop-blur-md bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                         <span className="text-2xl font-bold text-slate-900 dark:text-white">{coach.averageRating || "New"}</span>
@@ -389,14 +389,14 @@ export default function CoachProfile() {
                         {reviews && reviews.length > 0 ? `${reviews.length} reviews` : "Rating"}
                       </p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/20 dark:bg-background/10 rounded-xl p-4 text-center border border-white/60">
+                    <div className="backdrop-blur-md bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Users className="h-5 w-5 text-cyan-400" />
                         <span className="text-2xl font-bold text-slate-900 dark:text-white">{coach.totalStudents || 0}</span>
                       </div>
                       <p className="text-sm text-slate-800 dark:text-white/90">{isEn ? "Students" : "Étudiants"}</p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/20 dark:bg-background/10 rounded-xl p-4 text-center border border-white/60">
+                    <div className="backdrop-blur-md bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <CalendarIcon className="h-5 w-5 text-teal-400" />
                         <span className="text-2xl font-bold text-slate-900 dark:text-white">{coach.totalSessions || 0}</span>
@@ -412,7 +412,7 @@ export default function CoachProfile() {
                         <p className="text-sm text-emerald-200 font-medium">{isEn ? "Success Rate" : "Taux de réussite"}</p>
                       </div>
                     ) : (
-                      <div className="backdrop-blur-md bg-white/20 dark:bg-background/10 rounded-xl p-4 text-center border border-white/60">
+                      <div className="backdrop-blur-md bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 rounded-xl p-4 text-center border border-white/60">
                         <div className="flex items-center justify-center gap-1 mb-1">
                           <Clock className="h-5 w-5 text-foundation" />
                           <span className="text-2xl font-bold text-slate-900 dark:text-white">{coach.responseTimeHours || 24}h</span>
@@ -434,7 +434,7 @@ export default function CoachProfile() {
 
                   {/* Specializations */}
                   <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                    <Badge className="bg-white/20 dark:bg-background/20 text-slate-900 dark:text-white border-white/60 hover:bg-white/30 dark:hover:bg-background/30">
+                    <Badge className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 text-slate-900 dark:text-white border-white/60 hover:bg-white/30 dark:hover:bg-background/30">
                       <Globe className="h-3 w-3 mr-1" />
                       {languageLabel}
                     </Badge>
@@ -534,7 +534,7 @@ export default function CoachProfile() {
 
               {/* Tabs - Custom Implementation */}
               <div className="w-full">
-                <div className="bg-white dark:bg-card dark:bg-foundation inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-teal-800 mb-6">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-teal-800 mb-6">
                   <button
                     onClick={() => setActiveTab("about")}
                     aria-pressed={activeTab === "about"}
@@ -714,7 +714,7 @@ export default function CoachProfile() {
                   ) : (
                     <Card className="border-0 shadow-lg">
                       <CardContent className="pt-8 pb-8 text-center">
-                        <div className="w-16 h-16 bg-slate-100 dark:bg-foundation rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div className="w-16 h-16 bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4">
                           <MessageSquare className="h-8 w-8 text-cyan-300" />
                         </div>
                         <p className="text-slate-800 dark:text-foreground">
@@ -749,7 +749,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "trial" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-card dark:bg-foundation border-slate-200 dark:border-teal-800 hover:border-teal-300"
+                            : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800 hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("trial")}
                       >
@@ -768,7 +768,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "single" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-white dark:bg-card dark:bg-foundation border-slate-200 dark:border-teal-800 hover:border-teal-300"
+                            : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800 hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("single")}
                       >
@@ -1085,7 +1085,7 @@ export default function CoachProfile() {
       </main>
 
       {/* Mobile Sticky Booking Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-card dark:bg-obsidian border-t border-slate-200 dark:border-teal-800 shadow-2xl p-3">
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-t border-slate-200 dark:border-teal-800 shadow-2xl p-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-slate-800 dark:text-foreground truncate">{coach.name}</p>

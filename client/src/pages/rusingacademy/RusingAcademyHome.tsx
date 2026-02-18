@@ -165,8 +165,8 @@ export default function RusingAcademyHome() {
 
   const TESTIMONIALS = [
     {
-      quoteEn: "RusingAcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.",
-      quoteFr: "RusingAcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.",
+      quoteEn: "RusingÂcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.",
+      quoteFr: "RusingÂcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.",
       authorEn: "Director of HR",
       authorFr: "Directeur des RH",
       orgEn: "Federal Department",
@@ -261,7 +261,7 @@ export default function RusingAcademyHome() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-8 border-y border-gray-200 dark:border-border dark:border-border/50 bg-white dark:bg-background/50 backdrop-blur-sm">
+        <section className="py-8 border-y border-gray-200 dark:border-white/15 dark:border-white/15/50 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={successRate.ref} className="text-center">
@@ -306,7 +306,7 @@ export default function RusingAcademyHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="relative p-4 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg text-center group hover:shadow-xl transition-all"
+                  className="relative p-4 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-lg text-center group hover:shadow-xl transition-all"
                 >
                   <div 
                     className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center text-white font-bold"
@@ -324,7 +324,7 @@ export default function RusingAcademyHome() {
             <div className="mt-10 text-center">
               <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-gradient-to-r from-[var(--barholex-gold-hover)] to-[#2DD4BF] text-white">
                 <span className="font-semibold">70% {language === "en" ? "Platform" : "Plateforme"}</span>
-                <span className="w-px h-6 bg-white dark:bg-background/30" />
+                <span className="w-px h-6 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/30" />
                 <span className="font-semibold">30% {language === "en" ? "Live Coaching" : "Coaching en direct"}</span>
               </div>
             </div>
@@ -336,7 +336,7 @@ export default function RusingAcademyHome() {
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-                {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy?"}
+                {language === "en" ? "Why Choose RusingÂcademy?" : "Pourquoi choisir RusingÂcademy?"}
               </h2>
             </div>
 
@@ -347,7 +347,7 @@ export default function RusingAcademyHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background/80 backdrop-blur-sm border border-gray-200 dark:border-border dark:border-border/50 shadow-lg"
+                  className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-sm border border-gray-200 dark:border-white/15 dark:border-white/15/50 shadow-lg"
                 >
                   <div className="w-12 h-12 rounded-xl bg-cta-2/10 flex items-center justify-center mb-4">
                     <feature.icon className="w-6 h-6 text-cta-2" />
@@ -389,7 +389,7 @@ export default function RusingAcademyHome() {
                   className={`relative p-6 rounded-2xl border-2 ${
                     pkg.popular 
                       ? "border-cta-2 bg-gradient-to-br from-orange-50 to-white shadow-xl" 
-                      : "border-gray-200 dark:border-border bg-white/80"
+                      : "border-gray-200 dark:border-white/15 bg-white/80"
                   }`}
                 >
                   {pkg.popular && (
@@ -419,7 +419,7 @@ export default function RusingAcademyHome() {
                       className={`w-full rounded-full ${
                         pkg.popular 
                           ? "bg-cta-2 hover:bg-cta text-white" 
-                          : "bg-gray-100 dark:bg-card hover:bg-gray-200 text-black"
+                          : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:bg-gray-200 text-black"
                       }`}
                     >
                       {language === "en" ? "Get Started" : "Commencer"}
@@ -447,7 +447,7 @@ export default function RusingAcademyHome() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white dark:bg-background/10 backdrop-blur-sm border border-white/60"
+                  className="p-6 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm border border-white/60"
                 >
                   <Quote className="w-8 h-8 text-cta-2 mb-4" />
                   <p className="text-white/90 mb-4 italic">
@@ -483,7 +483,7 @@ export default function RusingAcademyHome() {
               <Link href="/rusingacademy/contact">
                 <Button 
                   size="lg" 
-                  className="rounded-full px-8 h-14 text-lg font-semibold bg-white dark:bg-background text-cta-2 hover:bg-orange-50"
+                  className="rounded-full px-8 h-14 text-lg font-semibold bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-cta-2 hover:bg-orange-50"
                 >
                   {language === "en" ? "Request a Proposal" : "Demander une proposition"}
                   <ArrowRight className="ml-2 h-5 w-5" />

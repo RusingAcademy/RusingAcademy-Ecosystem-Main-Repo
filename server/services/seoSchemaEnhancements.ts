@@ -1,6 +1,6 @@
 /**
  * SEO Schema.org JSON-LD Enhancements
- * RusingAcademy Learning Ecosystem
+ * RusingÂcademy Learning Ecosystem
  * 
  * Structured data markup for improved search engine visibility
  * and rich snippet display in Google Search results.
@@ -11,7 +11,7 @@
 export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
-  "name": "RusingAcademy",
+  "name": "RusingÂcademy",
   "alternateName": "Rusinga International Consulting Ltd.",
   "url": "https://www.rusingacademy.ca",
   "logo": "https://www.rusingacademy.ca/images/logo-rusingacademy.png",
@@ -48,7 +48,7 @@ export const SLE_COURSE_SCHEMA = {
   "description": "Comprehensive Second Language Evaluation (SLE) preparation program for Canadian public servants.",
   "provider": {
     "@type": "EducationalOrganization",
-    "name": "RusingAcademy",
+    "name": "RusingÂcademy",
     "url": "https://www.rusingacademy.ca"
   },
   "educationalLevel": "Professional",

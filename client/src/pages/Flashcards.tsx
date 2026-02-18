@@ -170,7 +170,7 @@ export default function Flashcards() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50/80">
+    <div className="flex h-screen bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/80">
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       <main className="flex-1 overflow-y-auto" role="main">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
@@ -190,7 +190,7 @@ export default function Flashcards() {
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">play_arrow</span>
                     {t("flashcards.startReview")}
                   </button>
-                  <button onClick={() => setShowDeckForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 dark:border-border dark:border-border text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-background transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                  <button onClick={() => setShowDeckForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/15 dark:border-white/15 text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                     aria-label={t("flashcards.newDeck")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
                     {t("flashcards.newDeck")}
@@ -204,12 +204,12 @@ export default function Flashcards() {
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">play_arrow</span>
                     {t("flashcards.startReview")}
                   </button>
-                  <button onClick={() => setShowCardForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 dark:border-border dark:border-border text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-background transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                  <button onClick={() => setShowCardForm(true)} className="px-4 py-2 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/15 dark:border-white/15 text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                     aria-label={t("flashcards.addCard")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">add</span>
                     {t("flashcards.addCard")}
                   </button>
-                  <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 dark:bg-card transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                  <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                     aria-label={t("flashcards.backToDecks")}>
                     <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">arrow_back</span>
                     {t("flashcards.backToDecks")}
@@ -217,7 +217,7 @@ export default function Flashcards() {
                 </>
               )}
               {(viewMode === "review" || viewMode === "summary") && (
-                <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); if (timerRef.current) clearInterval(timerRef.current); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 dark:bg-card transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); if (timerRef.current) clearInterval(timerRef.current); }} className="px-3 py-2 rounded-xl text-sm text-gray-500 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                   aria-label={t("flashcards.backToDecks")}>
                   <span className="material-icons text-base mr-1 align-middle" aria-hidden="true">arrow_back</span>
                   {t("flashcards.backToDecks")}
@@ -237,7 +237,7 @@ export default function Flashcards() {
                 { label: t("flashcards.streak"), value: streak?.currentStreak ?? 0, icon: "local_fire_department", color: "text-orange-600", bg: "bg-orange-50" },
                 { label: t("flashcards.accuracy"), value: `${streak?.accuracy ?? 0}%`, icon: "target", color: "text-purple-600", bg: "bg-purple-50" },
               ].map((s, i) => (
-                <div key={i} className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-4 text-center hover:shadow-sm transition-all" role="listitem">
+                <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-4 text-center hover:shadow-sm transition-all" role="listitem">
                   <div className={`w-10 h-10 mx-auto mb-2 rounded-xl ${s.bg} flex items-center justify-center`}>
                     <span className={`material-icons text-lg ${s.color}`} aria-hidden="true">{s.icon}</span>
                   </div>
@@ -251,12 +251,12 @@ export default function Flashcards() {
           {/* Deck Form Modal */}
           {showDeckForm && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" role="dialog" aria-modal="true" aria-label={t("flashcards.newDeck")}>
-              <div className="bg-white dark:bg-background rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
                 <h2 className="text-lg font-bold text-gray-900 dark:text-foreground mb-4">{t("flashcards.newDeck")}</h2>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.deckName")}</label>
-                    <input value={deckName} onChange={e => setDeckName(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-border dark:border-border text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
+                    <input value={deckName} onChange={e => setDeckName(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.color")}</label>
@@ -270,7 +270,7 @@ export default function Flashcards() {
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 mt-6">
-                  <button onClick={() => setShowDeckForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 dark:bg-card focus:outline-none focus:ring-2 focus:ring-teal-700/30">{t("flashcards.cancel")}</button>
+                  <button onClick={() => setShowDeckForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 focus:outline-none focus:ring-2 focus:ring-teal-700/30">{t("flashcards.cancel")}</button>
                   <button onClick={() => createDeck.mutate({ title: deckName, description: deckDesc })} disabled={!deckName.trim()}
                     className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-700/30" >{t("flashcards.create")}</button>
                 </div>
@@ -281,24 +281,24 @@ export default function Flashcards() {
           {/* Card Form Modal */}
           {showCardForm && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" role="dialog" aria-modal="true" aria-label={t("flashcards.addCard")}>
-              <div className="bg-white dark:bg-background rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
                 <h2 className="text-lg font-bold text-gray-900 dark:text-foreground mb-4">{t("flashcards.addCard")}</h2>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.front")}</label>
-                    <input value={cardFront} onChange={e => setCardFront(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-border dark:border-border text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
+                    <input value={cardFront} onChange={e => setCardFront(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.back")}</label>
-                    <input value={cardBack} onChange={e => setCardBack(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-border dark:border-border text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
+                    <input value={cardBack} onChange={e => setCardBack(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{t("flashcards.hint")}</label>
-                    <input value={cardHint} onChange={e => setCardHint(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-border dark:border-border text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
+                    <input value={cardHint} onChange={e => setCardHint(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 text-sm focus:outline-none focus:ring-2 focus:ring-teal-700/30" />
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 mt-6">
-                  <button onClick={() => setShowCardForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 dark:bg-card focus:outline-none focus:ring-2 focus:ring-teal-700/30">{t("flashcards.cancel")}</button>
+                  <button onClick={() => setShowCardForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 focus:outline-none focus:ring-2 focus:ring-teal-700/30">{t("flashcards.cancel")}</button>
                   <button onClick={() => { if (selectedDeckId) createCard.mutate({ deckId: selectedDeckId, front: cardFront, back: cardBack, hint: cardHint || undefined }); }} disabled={!cardFront.trim() || !cardBack.trim()}
                     className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-700/30" >{t("flashcards.save")}</button>
                 </div>
@@ -331,7 +331,7 @@ export default function Flashcards() {
                 {decks.map((deck: any) => {
                   const color = getColor(deck.category || "teal");
                   return (
-                    <div key={deck.id} className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border overflow-hidden cursor-pointer group hover:shadow-md transition-all focus-within:ring-2 focus-within:ring-teal-700/30"
+                    <div key={deck.id} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 overflow-hidden cursor-pointer group hover:shadow-md transition-all focus-within:ring-2 focus-within:ring-teal-700/30"
                       onClick={() => { setSelectedDeckId(deck.id); setViewMode("cards"); }}
                       role="listitem"
                       aria-label={`${deck.title} — ${deck.cardCount} ${t("flashcards.cards")}`}
@@ -343,7 +343,7 @@ export default function Flashcards() {
                             <span className={`material-icons ${color.text}`} aria-hidden="true">style</span>
                           </div>
                           <button onClick={(e) => { e.stopPropagation(); if (confirm(t("flashcards.delete") + "?")) deleteDeck.mutate({ deckId: deck.id }); }}
-                            className="p-1.5 rounded-lg hover:bg-gray-100 dark:bg-card opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-red-300"
+                            className="p-1.5 rounded-lg hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-red-300"
                             aria-label={`${t("flashcards.delete")} ${deck.title}`}>
                             <span className="material-icons text-sm text-gray-400" aria-hidden="true">delete</span>
                           </button>
@@ -401,8 +401,8 @@ export default function Flashcards() {
                     mastered: t("flashcards.mastered"),
                   };
                   return (
-                    <div key={card.id} role="listitem" className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-4 flex items-start gap-4 group hover:shadow-sm transition-all">
-                      <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-background flex items-center justify-center text-xs font-bold text-gray-400 shrink-0" aria-hidden="true">
+                    <div key={card.id} role="listitem" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-4 flex items-start gap-4 group hover:shadow-sm transition-all">
+                      <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-center text-xs font-bold text-gray-400 shrink-0" aria-hidden="true">
                         {i + 1}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -417,7 +417,7 @@ export default function Flashcards() {
                               {statusText[statusLabel]}
                             </span>
                             <button onClick={() => { if (selectedDeckId && confirm(t("flashcards.delete") + "?")) deleteCard.mutate({ cardId: card.id }); }}
-                              className="p-1 rounded hover:bg-gray-100 dark:bg-card opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-red-300"
+                              className="p-1 rounded hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-red-300"
                               aria-label={`${t("flashcards.delete")} card ${i + 1}`}>
                               <span className="material-icons text-sm text-gray-400" aria-hidden="true">delete</span>
                             </button>
@@ -469,7 +469,7 @@ export default function Flashcards() {
 
                 {/* Card */}
                 <div
-                  className="bg-white dark:bg-background rounded-2xl border border-gray-200 dark:border-border dark:border-border shadow-sm min-h-[300px] flex flex-col items-center justify-center p-8 cursor-pointer transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-700/30"
+                  className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl border border-gray-200 dark:border-white/15 dark:border-white/15 shadow-sm min-h-[300px] flex flex-col items-center justify-center p-8 cursor-pointer transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-700/30"
                   onClick={() => setIsFlipped(!isFlipped)}
                   onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setIsFlipped(!isFlipped); }}}
                   tabIndex={0}
@@ -536,21 +536,21 @@ export default function Flashcards() {
               <p className="text-sm text-gray-500 mb-8">{t("flashcards.greatSession")}</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
                   <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-blue-50 flex items-center justify-center">
                     <span className="material-icons text-lg text-blue-600" aria-hidden="true">content_copy</span>
                   </div>
                   <p className="text-2xl font-bold text-gray-900">{sessionTotal}</p>
                   <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">{t("flashcards.cardsReviewed")}</p>
                 </div>
-                <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
                   <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-green-50 flex items-center justify-center">
                     <span className="material-icons text-lg text-green-600" aria-hidden="true">check_circle</span>
                   </div>
                   <p className="text-2xl font-bold text-gray-900">{sessionTotal > 0 ? Math.round((sessionCorrect / sessionTotal) * 100) : 0}%</p>
                   <p className="text-[10px] text-gray-500 uppercase tracking-wider mt-1">{t("flashcards.correctRate")}</p>
                 </div>
-                <div className="bg-white dark:bg-background rounded-xl border border-gray-100 dark:border-border p-5">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
                   <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-purple-50 flex items-center justify-center">
                     <span className="material-icons text-lg text-purple-600" aria-hidden="true">timer</span>
                   </div>
@@ -579,7 +579,7 @@ export default function Flashcards() {
                   {t("flashcards.studyMore")}
                 </button>
                 <button onClick={() => { setViewMode("decks"); setSelectedDeckId(null); }}
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold border border-gray-200 dark:border-border dark:border-border text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-background transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30">
+                  className="px-6 py-2.5 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/15 dark:border-white/15 text-gray-700 dark:text-muted-foreground hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30">
                   {t("flashcards.backToDecks")}
                 </button>
               </div>

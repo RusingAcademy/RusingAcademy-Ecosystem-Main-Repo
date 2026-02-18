@@ -114,7 +114,7 @@ export function CancellationModal({ isOpen, onClose, session, onCancelled }: Can
 
         <div className="space-y-4 py-4">
           {/* Session Details */}
-          <div className="bg-white dark:bg-background rounded-lg p-4 space-y-2">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 space-y-2">
             <div className="flex justify-between">
               <span className="text-black dark:text-foreground">{labels.coachLabel}:</span>
               <span className="font-medium">{session.coachName}</span>

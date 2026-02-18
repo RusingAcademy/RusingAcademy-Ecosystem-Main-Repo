@@ -147,7 +147,7 @@ export default function ProfStevenChatbot() {
         role="dialog"
         aria-modal="true"
         aria-label="Prof. Steven AI chatbot popup"
-        className={`fixed bottom-[120px] right-6 w-[380px] max-w-[calc(100vw-40px)] bg-white dark:bg-card rounded-2xl shadow-2xl z-[10000] overflow-hidden font-sans transition-all duration-300 ${
+        className={`fixed bottom-[120px] right-6 w-[380px] max-w-[calc(100vw-40px)] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-2xl shadow-2xl z-[10000] overflow-hidden font-sans transition-all duration-300 ${
           isOpen ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 translate-y-5 scale-95 pointer-events-none'
         }`}
         style={{ display: isOpen ? 'block' : 'none' }}
@@ -162,7 +162,7 @@ export default function ProfStevenChatbot() {
           <div>
             <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
               Prof. Steven 
-              <span className="bg-white dark:bg-background/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
+              <span className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
                 AI Assistant
               </span>
             </h3>
@@ -170,7 +170,7 @@ export default function ProfStevenChatbot() {
           </div>
           <button 
             onClick={togglePopup}
-            className="absolute top-3 right-3 w-8 h-8 bg-white dark:bg-background/20 hover:bg-white dark:bg-background/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
+            className="absolute top-3 right-3 w-8 h-8 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
             aria-label="Close chatbot"
           >
             <X className="w-5 h-5" />
@@ -229,7 +229,7 @@ export default function ProfStevenChatbot() {
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 bg-white dark:bg-background text-center border-t border-gray-100">
+        <div className="px-5 py-3 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-center border-t border-gray-100">
           <span className="text-xs text-black dark:text-foreground">⚡ {t.poweredBy}</span>
         </div>
       </div>

@@ -1,5 +1,5 @@
 /**
- * RusingAcademy Learning Portal — My Profile Page (Sprint H1)
+ * RusingÂcademy Learning Portal — My Profile Page (Sprint H1)
  * Fully database-driven, bilingual, WCAG 2.1 AA accessible
  * Sections: Personal Info, SLE Levels, Learning Goals, Certification, Preferences
  */
@@ -120,7 +120,7 @@ const ui = {
 
 function LevelBadge({ level }: { level: string }) {
   const colors: Record<string, string> = {
-    X: "bg-gray-100 dark:bg-card text-gray-600 border-gray-300",
+    X: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 border-gray-300",
     A: "bg-blue-50 text-blue-700 border-blue-300",
     B: "bg-emerald-50 text-emerald-700 border-emerald-300",
     C: "bg-amber-50 text-amber-700 border-amber-300",
@@ -263,7 +263,7 @@ export default function MyProfile() {
             onClick={() => setIsEditing(!isEditing)}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               isEditing
-                ? "bg-gray-100 dark:bg-card text-gray-700 dark:text-muted-foreground hover:bg-gray-200"
+                ? "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700 dark:text-muted-foreground hover:bg-gray-200"
                 : "bg-teal-700/10 text-teal-700 hover:bg-teal-700/20"
             }`}
             aria-label={isEditing ? t.viewMode : t.editMode}
@@ -275,7 +275,7 @@ export default function MyProfile() {
 
         <div className="space-y-6">
           {/* ── Personal Information ── */}
-          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-personal">
+          <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden" aria-labelledby="section-personal">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-personal" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">person</span>
@@ -343,7 +343,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── SLE Proficiency Levels ── */}
-          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-sle">
+          <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden" aria-labelledby="section-sle">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-sle" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">assessment</span>
@@ -366,7 +366,7 @@ export default function MyProfile() {
                             {SLE_LEVELS.map((lvl) => (
                               <button key={lvl} onClick={() => (setter as (v: string) => void)(lvl)}
                                 className={`w-8 h-8 rounded-full text-xs font-bold border transition-all ${
-                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-card text-gray-500 border-gray-300 hover:border-teal-700"
+                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500 border-gray-300 hover:border-teal-700"
                                 }`} aria-label={`${label}: ${lvl}`}>
                                 {lvl}
                               </button>
@@ -393,7 +393,7 @@ export default function MyProfile() {
                             {SLE_LEVELS.map((lvl) => (
                               <button key={lvl} onClick={() => (setter as (v: string) => void)(lvl)}
                                 className={`w-8 h-8 rounded-full text-xs font-bold border transition-all ${
-                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-card text-gray-500 border-gray-300 hover:border-teal-700"
+                                  val === lvl ? "bg-teal-700 text-white border-teal-700" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500 border-gray-300 hover:border-teal-700"
                                 }`} aria-label={`${label}: ${lvl}`}>
                                 {lvl}
                               </button>
@@ -411,7 +411,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── Learning Goals ── */}
-          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-goals">
+          <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden" aria-labelledby="section-goals">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-goals" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">flag</span>
@@ -484,7 +484,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── SLE Certification ── */}
-          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-cert">
+          <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden" aria-labelledby="section-cert">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-cert" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">verified</span>
@@ -538,7 +538,7 @@ export default function MyProfile() {
           </section>
 
           {/* ── Preferences ── */}
-          <section className="bg-white dark:bg-background rounded-xl border border-gray-200 dark:border-border dark:border-border overflow-hidden" aria-labelledby="section-prefs">
+          <section className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden" aria-labelledby="section-prefs">
             <div className="bg-[rgba(0,128,144,0.08)] px-6 py-3">
               <h2 id="section-prefs" className="text-base font-semibold text-gray-800 dark:text-foreground flex items-center gap-2">
                 <span className="material-icons text-teal-700 text-lg">settings</span>
@@ -568,7 +568,7 @@ export default function MyProfile() {
           {isEditing && (
             <div className="flex justify-end gap-3 pb-8">
               <button onClick={() => setIsEditing(false)}
-                className="px-6 py-2.5 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 dark:bg-card hover:bg-gray-200 transition-colors">
+                className="px-6 py-2.5 rounded-lg text-sm font-medium text-gray-600 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:bg-gray-200 transition-colors">
                 {t.viewMode}
               </button>
               <button onClick={handleSave} disabled={updateProfile.isPending}

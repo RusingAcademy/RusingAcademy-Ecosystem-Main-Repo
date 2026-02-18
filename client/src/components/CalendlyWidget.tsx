@@ -42,7 +42,7 @@ export default function CalendlyWidget({ url, onClose, title = "Schedule Your Se
       aria-modal="true"
       aria-label={title}
     >
-      <div className="bg-white dark:bg-background rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-[900px] max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div className="flex items-center gap-3">
@@ -53,7 +53,7 @@ export default function CalendlyWidget({ url, onClose, title = "Schedule Your Se
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:bg-card transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 transition-colors"
             aria-label="Close"
           >
             <span className="material-icons text-gray-500">close</span>

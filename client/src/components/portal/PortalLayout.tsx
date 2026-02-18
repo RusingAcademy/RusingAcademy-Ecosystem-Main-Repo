@@ -61,7 +61,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
   const userName = user?.name || "Apprenant";
 
   return (
-    <div className="min-h-screen bg-white dark:bg-background flex">
+    <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md flex">
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 w-64 bg-obsidian text-white flex flex-col z-20">
         {/* Logo */}
@@ -70,7 +70,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-teal-700 flex items-center justify-center">
               <BookOpen className="h-4 w-4 text-white" />
             </div>
-            <span className="font-semibold text-lg">RusingAcademy</span>
+            <span className="font-semibold text-lg">RusingÂcademy</span>
           </Link>
         </div>
 
@@ -148,14 +148,14 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
       {/* Main Content */}
       <div className="flex-1 ml-64">
         {/* Top Header */}
-        <header className="h-16 bg-white dark:bg-background border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
+        <header className="h-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
           <div className="flex items-center gap-4">
             <h1 className="text-lg font-semibold text-slate-900">
               Portail d'Apprentissage
             </h1>
           </div>
           <div className="flex items-center gap-4">
-            <button aria-label="Action" className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors">
+            <button aria-label="Action" className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded-lg transition-colors">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
             </button>

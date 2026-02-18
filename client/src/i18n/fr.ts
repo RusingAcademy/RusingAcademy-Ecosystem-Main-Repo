@@ -86,7 +86,7 @@ const fr: Translations = {
   // Membership
   membership: {
     title: "Choisissez votre forfait",
-    subtitle: "Débloquez des fonctionnalités premium, du contenu exclusif et accélérez votre parcours bilingue avec RusingAcademy.",
+    subtitle: "Débloquez des fonctionnalités premium, du contenu exclusif et accélérez votre parcours bilingue avec RusingÂcademy.",
     currentPlan: "Forfait actuel",
     manageSubscription: "Gérer l'abonnement",
     activePlan: "Forfait actif",
@@ -112,7 +112,7 @@ const fr: Translations = {
   // Referrals
   referrals: {
     title: "Programme de parrainage",
-    subtitle: "Invitez des amis et gagnez des récompenses lorsqu'ils rejoignent RusingAcademy.",
+    subtitle: "Invitez des amis et gagnez des récompenses lorsqu'ils rejoignent RusingÂcademy.",
     yourLink: "Votre lien de parrainage",
     copyLink: "Copier le lien",
     copied: "Copié !",

@@ -29,7 +29,7 @@ export function GlassCard({
       case 'turquoise':
         return 'bg-cyan-900/30 border-cyan-500/30 text-white';
       default:
-        return 'bg-white/80 dark:bg-foundation/80 border-white/60 dark:border-teal-800/50 text-black dark:text-foreground';
+        return 'bg-white/80 dark:bg-white/[0.08] dark:backdrop-blur-md/80 border-white/60 dark:border-white/15 text-black dark:text-foreground';
     }
   };
 

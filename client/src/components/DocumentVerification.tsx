@@ -188,7 +188,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
       {/* Upload Form */}
       {showUploadForm && !readOnly && (
-        <div className="bg-white dark:bg-card dark:bg-card/50 rounded-xl p-6 border border-gray-200 dark:border-border dark:border-border">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15/50 rounded-xl p-6 border border-gray-200 dark:border-white/15 dark:border-white/15">
           <h4 className="font-medium text-gray-900 dark:text-foreground dark:text-foreground mb-4">
             Upload New Document
           </h4>
@@ -210,7 +210,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                       className={`p-3 rounded-lg border text-left transition-all ${
                         selectedType === type.value
                           ? "border-teal-500 bg-teal-50 dark:bg-teal-900/20"
-                          : "border-gray-200 dark:border-border dark:border-border hover:border-gray-300 dark:hover:border-gray-600"
+                          : "border-gray-200 dark:border-white/15 dark:border-white/15 hover:border-gray-300 dark:hover:border-gray-600"
                       }`}
                     >
                       <Icon className={`w-5 h-5 mb-1 ${selectedType === type.value ? "text-teal-600" : "text-gray-400"}`} />
@@ -231,7 +231,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., Bachelor's Degree in French"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
@@ -245,7 +245,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 value={issuingAuthority}
                 onChange={(e) => setIssuingAuthority(e.target.value)}
                 placeholder="e.g., University of Ottawa"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
@@ -258,7 +258,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 type="date"
                 value={issueDate}
                 onChange={(e) => setIssueDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
@@ -271,7 +271,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 type="date"
                 value={expiryDate}
                 onChange={(e) => setExpiryDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
@@ -285,7 +285,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 onChange={(e) => setDescription(e.target.value)}
                 rows={2}
                 placeholder="Add any additional details about this document..."
-                className="w-full px-4 py-2 border border-gray-300 dark:border-border rounded-lg bg-white dark:bg-card dark:bg-muted text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-white/15 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm text-gray-900 dark:text-foreground dark:text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
               />
             </div>
 
@@ -299,7 +299,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors ${
                   selectedFile
                     ? "border-teal-500 bg-teal-50 dark:bg-teal-900/20"
-                    : "border-gray-300 dark:border-border hover:border-gray-400 dark:hover:border-gray-500"
+                    : "border-gray-300 dark:border-white/15 hover:border-gray-400 dark:hover:border-gray-500"
                 }`}
               >
                 <input
@@ -339,7 +339,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 resetForm();
                 setShowUploadForm(false);
               }}
-              className="px-4 py-2 text-gray-700 dark:text-muted-foreground hover:bg-gray-100 dark:bg-card dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="px-4 py-2 text-gray-700 dark:text-muted-foreground hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               Cancel
             </button>
@@ -376,10 +376,10 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
             return (
               <div
                 key={doc.id}
-                className="bg-white dark:bg-card dark:bg-card rounded-xl p-4 border border-gray-200 dark:border-border dark:border-border flex items-start gap-4"
+                className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl p-4 border border-gray-200 dark:border-white/15 dark:border-white/15 flex items-start gap-4"
               >
                 {/* Type Icon */}
-                <div className="w-12 h-12 bg-gray-100 dark:bg-card dark:bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:backdrop-blur-sm rounded-lg flex items-center justify-center flex-shrink-0">
                   <TypeIcon className="w-6 h-6 text-gray-600 dark:text-muted-foreground" />
                 </div>
 
@@ -416,7 +416,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                       href={doc.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:text-foreground dark:hover:text-white hover:bg-gray-100 dark:bg-card dark:hover:bg-gray-700 rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:text-foreground dark:hover:text-white hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-gray-700 rounded-lg transition-colors"
                     >
                       <Eye className="w-4 h-4" />
                       View
@@ -424,7 +424,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                     <a
                       href={doc.fileUrl}
                       download={doc.fileName}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:text-foreground dark:hover:text-white hover:bg-gray-100 dark:bg-card dark:hover:bg-gray-700 rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:text-foreground dark:hover:text-white hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-gray-700 rounded-lg transition-colors"
                     >
                       <Download className="w-4 h-4" />
                       Download
@@ -444,7 +444,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
             );
           })
         ) : (
-          <div className="text-center py-6 md:py-8 lg:py-12 bg-white dark:bg-card dark:bg-card/50 rounded-xl">
+          <div className="text-center py-6 md:py-8 lg:py-12 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15/50 rounded-xl">
             <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
             <h4 className="font-medium text-gray-900 dark:text-foreground dark:text-foreground mb-1">No Documents Yet</h4>
             <p className="text-sm text-gray-500 dark:text-muted-foreground">

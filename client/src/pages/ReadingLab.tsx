@@ -171,7 +171,7 @@ export default function ReadingLab() {
   if (!user) { window.location.href = getLoginUrl(); return null; }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
       <Sidebar />
       <main className="flex-1 overflow-y-auto" role="main" aria-label={t("reading.title")}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
@@ -201,7 +201,7 @@ export default function ReadingLab() {
                 { label: isFr ? "MPM moy." : "Avg WPM", value: stats.avgWpm ?? 0, icon: "speed", color: "var(--color-violet-500, var(--accent-purple))" },
                 { label: t("grammar.totalTime"), value: `${Math.round((stats.totalTime ?? 0) / 60)}m`, icon: "timer", color: "var(--semantic-danger, var(--danger))" },
               ].map((s, i) => (
-                <div key={i} className="bg-white dark:bg-background rounded-2xl p-4 border border-gray-100 dark:border-border shadow-sm text-center" role="status">
+                <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-4 border border-gray-100 dark:border-white/15 shadow-sm text-center" role="status">
                   <span className="material-icons text-2xl mb-1" style={{ color: s.color }} aria-hidden="true">{s.icon}</span>
                   <div className="text-xl font-bold text-gray-900">{s.value}</div>
                   <div className="text-xs text-gray-500">{s.label}</div>
@@ -222,7 +222,7 @@ export default function ReadingLab() {
                   <p className="text-sm text-gray-500 max-w-sm mx-auto">{t("reading.emptyDesc")}</p>
                 </div>
               ) : history.map((h: any, i: number) => (
-                <div key={i} className="bg-white dark:bg-background rounded-xl p-4 border border-gray-100 dark:border-border shadow-sm flex items-center justify-between">
+                <div key={i} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-4 border border-gray-100 dark:border-white/15 shadow-sm flex items-center justify-between">
                   <div>
                     <div className="font-semibold text-gray-900">{h.passageTitle}</div>
                     <div className="text-sm text-gray-500 flex items-center gap-3 mt-1">
@@ -245,7 +245,7 @@ export default function ReadingLab() {
                 {["A1", "A2", "B1", "B2", "C1"].map(level => (
                   <button key={level} onClick={() => { setSelectedLevel(level); setPassageIndex(0); }}
                     role="radio" aria-checked={selectedLevel === level}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white dark:bg-card text-gray-600 border border-gray-200 dark:border-border hover:border-teal-700"}`}>
+                    className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${selectedLevel === level ? "bg-teal-700 text-white shadow-md" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 border border-gray-200 dark:border-white/15 hover:border-teal-700"}`}>
                     {level}
                   </button>
                 ))}
@@ -253,7 +253,7 @@ export default function ReadingLab() {
               <div className="space-y-4" role="list" aria-label={t("reading.passage")}>
                 {PASSAGES[selectedLevel]?.map((p, i) => (
                   <div key={i} role="listitem"
-                    className="bg-white dark:bg-background rounded-2xl p-6 border border-gray-100 dark:border-border shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
+                    className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-6 border border-gray-100 dark:border-white/15 shadow-sm hover:shadow-md transition-shadow cursor-pointer focus-within:ring-2 focus-within:ring-teal-700/30"
                     onClick={() => { setPassageIndex(i); startReading(); }}
                     onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setPassageIndex(i); startReading(); }}}
                     tabIndex={0}
@@ -290,7 +290,7 @@ export default function ReadingLab() {
                   </button>
                 </div>
               </div>
-              <article className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm">
+              <article className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 border border-gray-100 dark:border-white/15 shadow-sm">
                 <p className="text-lg leading-relaxed text-gray-800 dark:text-foreground font-serif">{passage?.text}</p>
               </article>
               <div className="text-center mt-4 text-sm text-gray-400">
@@ -307,13 +307,13 @@ export default function ReadingLab() {
               </div>
               <div className="space-y-6">
                 {passage?.questions.map((q, qi) => (
-                  <div key={qi} className="bg-white dark:bg-background rounded-2xl p-6 border border-gray-100 dark:border-border shadow-sm">
+                  <div key={qi} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-6 border border-gray-100 dark:border-white/15 shadow-sm">
                     <p className="font-semibold text-gray-900 dark:text-foreground mb-4">{qi + 1}. {q.q}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label={q.q}>
                       {q.options.map((opt, oi) => (
                         <button key={oi} onClick={() => answerQuestion(qi, oi)}
                           role="radio" aria-checked={answers[qi] === oi}
-                          className={`p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${answers[qi] === oi ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 dark:bg-background text-gray-700 dark:text-muted-foreground hover:bg-gray-100 dark:bg-card border border-gray-200"}`}>
+                          className={`p-3 rounded-xl text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-teal-700/30 ${answers[qi] === oi ? "bg-teal-700 text-white shadow-md" : "bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md text-gray-700 dark:text-muted-foreground hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border border-gray-200"}`}>
                           <span className="font-semibold mr-2">{String.fromCharCode(65 + oi)}.</span> {opt}
                         </button>
                       ))}
@@ -335,7 +335,7 @@ export default function ReadingLab() {
             </div>
           ) : (
             <div role="region" aria-label={t("grammar.drillComplete")}>
-              <div className="bg-white dark:bg-background rounded-2xl p-8 border border-gray-100 dark:border-border shadow-sm text-center mb-8">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 border border-gray-100 dark:border-white/15 shadow-sm text-center mb-8">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
                   <span className="material-icons text-xl md:text-3xl lg:text-4xl text-amber-500" aria-hidden="true">emoji_events</span>
                 </div>

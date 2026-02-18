@@ -28,7 +28,7 @@ vi.mock("./email-branding", () => ({
     },
     company: {
       legalName: "Rusinga International Consulting Ltd.",
-      tradeName: "RusingAcademy",
+      tradeName: "RusingÂcademy",
       productName: "Lingueefy",
       tagline: "Master Your Second Language for the Public Service",
       taglineFr: "Maîtrisez votre langue seconde pour la fonction publique",

@@ -89,7 +89,7 @@ interface PipelineStage {
 
 const PIPELINE_STAGES: Omit<PipelineStage, "leads">[] = [
   { id: "new", title: "New", titleFr: "Nouveau", color: "text-blue-600", bgColor: "bg-blue-50 dark:bg-blue-950/30" },
-  { id: "contacted", title: "Contacted", titleFr: "Contacté", color: "text-foundation", bgColor: "bg-foundation-soft dark:bg-foundation-soft-950/30" },
+  { id: "contacted", title: "Contacted", titleFr: "Contacté", color: "text-foundation", bgColor: "bg-foundation-soft dark:bg-white/[0.08] dark:backdrop-blur-md-soft-950/30" },
   { id: "qualified", title: "Qualified", titleFr: "Qualifié", color: "text-amber-600", bgColor: "bg-amber-50 dark:bg-amber-950/30" },
   { id: "proposal", title: "Proposal", titleFr: "Proposition", color: "text-orange-600", bgColor: "bg-orange-50 dark:bg-orange-950/30" },
   { id: "converted", title: "Won", titleFr: "Gagné", color: "text-green-600", bgColor: "bg-green-50 dark:bg-green-950/30" },
@@ -196,7 +196,7 @@ export default function DealPipelineKanban() {
       clearFilters: "Clear Filters",
       activeFilters: "Active Filters",
       lingueefy: "Lingueefy",
-      rusingacademy: "RusingAcademy",
+      rusingacademy: "RusingÂcademy",
       barholex: "Barholex",
       ecosystem_hub: "Ecosystem Hub",
       external: "External",
@@ -248,7 +248,7 @@ export default function DealPipelineKanban() {
       clearFilters: "Effacer les filtres",
       activeFilters: "Filtres actifs",
       lingueefy: "Lingueefy",
-      rusingacademy: "RusingAcademy",
+      rusingacademy: "RusingÂcademy",
       barholex: "Barholex",
       ecosystem_hub: "Ecosystem Hub",
       external: "Externe",
@@ -456,7 +456,7 @@ export default function DealPipelineKanban() {
   };
 
   const getScoreColor = (score: number | null) => {
-    if (!score) return "bg-gray-100 dark:bg-card text-black";
+    if (!score) return "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black";
     if (score >= 70) return "bg-green-100 text-green-700";
     if (score >= 40) return "bg-amber-100 text-amber-700";
     return "bg-red-100 text-red-700";
@@ -685,7 +685,7 @@ export default function DealPipelineKanban() {
             onDrop={(e) => handleDrop(e, stage.id)}
           >
             {/* Stage Header */}
-            <div className="p-3 border-b bg-white/50 dark:bg-obsidian/20 rounded-t-lg">
+            <div className="p-3 border-b bg-white/50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-t-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className={`font-semibold ${stage.color}`}>
@@ -719,7 +719,7 @@ export default function DealPipelineKanban() {
                       setSelectedLead(lead);
                       setShowLeadDialog(true);
                     }}
-                    className={`bg-white dark:bg-card dark:bg-obsidian rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
+                    className={`bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
                       draggedLead?.id === lead.id ? "opacity-50" : ""
                     }`}
                   >
@@ -916,11 +916,11 @@ export default function DealPipelineKanban() {
 
               {/* Metrics */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation">
+                <div className="p-3 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
                   <p className="text-xs text-muted-foreground">{l.score}</p>
                   <p className="text-lg font-bold">{selectedLead.leadScore || 0}</p>
                 </div>
-                <div className="p-3 rounded-lg bg-white dark:bg-card dark:bg-foundation">
+                <div className="p-3 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
                   <p className="text-xs text-muted-foreground">{l.dealValue}</p>
                   <p className="text-lg font-bold">
                     {selectedLead.dealValue

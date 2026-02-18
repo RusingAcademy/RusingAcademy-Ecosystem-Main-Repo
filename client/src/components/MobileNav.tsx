@@ -129,7 +129,7 @@ export default function MobileNav({ isOpen, onClose, activePage, onPageChange }:
             >
               <div className="flex items-center gap-2.5">
                 <div className="avatar-ring">
-                  <img src={RA_LOGO} alt="RusingAcademy" className="w-8 h-8 rounded-lg object-contain" />
+                  <img src={RA_LOGO} alt="RusingÂcademy" className="w-8 h-8 rounded-lg object-contain" />
                 </div>
                 <div className="leading-tight">
                   <span className="text-sm font-extrabold" >Rusing</span>
@@ -196,7 +196,7 @@ export default function MobileNav({ isOpen, onClose, activePage, onPageChange }:
                 onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(248, 247, 244, 0.8)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
               >
-                <GraduationCap className="w-5 h-5" /> RusingAcademy.com
+                <GraduationCap className="w-5 h-5" /> RusingÂcademy.com
               </a>
               <div className="pt-3 mt-3" style={{ borderTop: "1px solid rgba(27, 20, 100, 0.04)" }}>
                 <p className="text-[9px] text-muted-foreground/50 text-center leading-tight">

@@ -1,6 +1,6 @@
 /**
  * Performance Monitoring Dashboard
- * RusingAcademy Learning Ecosystem
+ * RusingÂcademy Learning Ecosystem
  * 
  * Real-time monitoring dashboard for tracking KPIs including
  * traffic, conversion rates, email performance, and Core Web Vitals.

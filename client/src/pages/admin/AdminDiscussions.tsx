@@ -132,8 +132,8 @@ const AdminDiscussions = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50/50 dark:bg-background/50 min-h-screen">
-      <header className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-border dark:border-border">
+    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 min-h-screen">
+      <header className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
         <div className="flex items-center space-x-4">
           <div className="p-3 bg-blue-100 rounded-full dark:bg-blue-900/50">
             <MessageCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -224,7 +224,7 @@ const AdminDiscussions = () => {
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-background dark:bg-card">
+                  <thead className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
@@ -234,7 +234,7 @@ const AdminDiscussions = () => {
                       <th scope="col" className="relative px-6 py-3"><span className="sr-only">Actions</span></th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-card divide-y divide-gray-200 dark:bg-background dark:divide-gray-700">
+                  <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 divide-y divide-gray-200 dark:bg-white/[0.08] dark:backdrop-blur-md dark:divide-gray-700">
                     {threads.map((thread) => (
                       <tr key={thread.id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-foreground dark:text-foreground">{thread.title}</td>
@@ -316,7 +316,7 @@ const AdminDiscussions = () => {
               <div className="space-y-2">
                 <h3 className="font-medium">Posting Rules</h3>
                 <textarea
-                  className="w-full p-2 border rounded-md bg-transparent dark:border-border"
+                  className="w-full p-2 border rounded-md bg-transparent dark:border-white/15"
                   rows={4}
                   value={postingRules}
                   onChange={(e) => setPostingRules(e.target.value)}

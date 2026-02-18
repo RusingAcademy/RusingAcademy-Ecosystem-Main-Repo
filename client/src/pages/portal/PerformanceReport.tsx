@@ -39,15 +39,15 @@ export default function PerformanceReport() {
           </button>
         </div>
 
-        <div className="bg-white dark:bg-background rounded-xl shadow-sm border border-slate-200 p-8 mb-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-sm border border-slate-200 p-8 mb-6">
           <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-200">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center"><FileText className="w-8 h-8 text-blue-600" /></div>
             <div><h2 className="text-xl font-semibold text-slate-900">{reportData.learnerName}</h2><p className="text-slate-600">Rapport généré le {reportData.generatedDate}</p></div>
           </div>
 
           <div className="grid grid-cols-2 gap-6 mb-8">
-            <div className="bg-white dark:bg-background rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><Target className="w-4 h-4" /><span className="text-sm">Objectif</span></div><p className="text-2xl font-bold text-slate-900">Niveau {reportData.currentLevel} → {reportData.targetLevel}</p></div>
-            <div className="bg-white dark:bg-background rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><TrendingUp className="w-4 h-4" /><span className="text-sm">Progression globale</span></div><p className="text-2xl font-bold text-blue-600">{reportData.overallProgress}%</p></div>
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><Target className="w-4 h-4" /><span className="text-sm">Objectif</span></div><p className="text-2xl font-bold text-slate-900">Niveau {reportData.currentLevel} → {reportData.targetLevel}</p></div>
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><TrendingUp className="w-4 h-4" /><span className="text-sm">Progression globale</span></div><p className="text-2xl font-bold text-blue-600">{reportData.overallProgress}%</p></div>
           </div>
 
           <h3 className="text-lg font-semibold text-slate-900 mb-4">Détail des compétences</h3>
@@ -59,12 +59,12 @@ export default function PerformanceReport() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[{icon:Award,label:'Tests complétés',value:reportData.testsCompleted},{icon:TrendingUp,label:'Score moyen',value:`${reportData.averageScore}%`},{icon:FileText,label:'Chapitres',value:reportData.chaptersCompleted},{icon:Calendar,label:'Heures d\'étude',value:reportData.studyHours}].map(stat => (
-              <div key={stat.label} className="text-center p-4 bg-white dark:bg-background rounded-lg"><stat.icon className="w-6 h-6 text-blue-600 mx-auto mb-2" /><p className="text-2xl font-bold text-slate-900">{stat.value}</p><p className="text-sm text-slate-600">{stat.label}</p></div>
+              <div key={stat.label} className="text-center p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg"><stat.icon className="w-6 h-6 text-blue-600 mx-auto mb-2" /><p className="text-2xl font-bold text-slate-900">{stat.value}</p><p className="text-sm text-slate-600">{stat.label}</p></div>
             ))}
           </div>
         </div>
 
-        <p className="text-center text-sm text-slate-500">Ce rapport est généré automatiquement par RusingAcademy et peut être utilisé comme justificatif officiel de formation linguistique.</p>
+        <p className="text-center text-sm text-slate-500">Ce rapport est généré automatiquement par RusingÂcademy et peut être utilisé comme justificatif officiel de formation linguistique.</p>
       </div>
     </PortalLayout>
   );

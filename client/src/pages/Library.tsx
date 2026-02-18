@@ -1,6 +1,6 @@
 /**
  * Library Page — /library
- * RusingAcademy Product Library
+ * RusingÂcademy Product Library
  * 
  * Premium, marketing-friendly product catalog page with:
  * - Hero section with glassmorphism value proposition
@@ -131,7 +131,7 @@ function LibraryHero({ language }: { language: string }) {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-10 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"
       />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white dark:bg-background/[0.02] rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/[0.02] rounded-full blur-3xl" />
 
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -148,25 +148,25 @@ function LibraryHero({ language }: { language: string }) {
         >
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-6">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-background/10 backdrop-blur-md text-white/90 border border-white/15 shadow-lg">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md text-white/90 border border-white/15 shadow-lg">
               <BookOpen className="w-4 h-4 text-orange-500" />
-              {language === "fr" ? "Collection RusingAcademy" : "RusingAcademy Collection"}
+              {language === "fr" ? "Collection RusingÂcademy" : "RusingÂcademy Collection"}
             </span>
           </motion.div>
 
           {/* Title with glassmorphism */}
           <motion.div variants={fadeInUp}>
-            <div className="inline-block px-8 py-6 md:px-12 md:py-8 rounded-3xl bg-white dark:bg-background/[0.07] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] mb-8">
+            <div className="inline-block px-8 py-6 md:px-12 md:py-8 rounded-3xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/[0.07] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] mb-8">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                 {language === "fr" ? (
                   <>
                     La Bibliothèque{" "}
-                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>
+                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingÂcademy</span>
                   </>
                 ) : (
                   <>
                     The{" "}
-                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>{" "}
+                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingÂcademy</span>{" "}
                     Library
                   </>
                 )}
@@ -191,7 +191,7 @@ function LibraryHero({ language }: { language: string }) {
                 key={i}
                 whileHover={{ y: -4, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="flex flex-col items-center gap-1.5 px-6 py-4 rounded-2xl bg-white dark:bg-background/[0.08] backdrop-blur-md border border-white/10 min-w-[100px]"
+                className="flex flex-col items-center gap-1.5 px-6 py-4 rounded-2xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/[0.08] backdrop-blur-md border border-white/10 min-w-[100px]"
               >
                 <stat.icon className="w-5 h-5 text-orange-500" />
                 <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
@@ -281,7 +281,7 @@ function FilterBar({
     filters.search !== "";
 
   return (
-    <section className="sticky top-0 z-30 bg-white dark:bg-background/95 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+    <section className="sticky top-0 z-30 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/95 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
       <div className="container mx-auto px-6 md:px-8 py-4">
         {/* Search + Toggle */}
         <div className="flex items-center gap-4">
@@ -347,7 +347,7 @@ function FilterBar({
                     key={filter.key}
                     value={filter.value}
                     onChange={(e) => setFilters({ ...filters, [filter.key]: e.target.value })}
-                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white dark:bg-background focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20 outline-none transition-all duration-200 hover:border-slate-300"
+                    className="h-10 rounded-xl border border-slate-200 px-3 text-sm bg-white dark:bg-white/[0.08] dark:backdrop-blur-md focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20 outline-none transition-all duration-200 hover:border-slate-300"
                   >
                     {filter.options.map((o) => (
                       <option key={o.value} value={o.value}>{o.label}</option>
@@ -412,7 +412,7 @@ function ProductCard({
   return (
     <motion.div variants={cardVariant}>
       <Card
-        className="group relative overflow-hidden border border-slate-200/80 hover:border-orange-500/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] transition-all duration-500 cursor-pointer bg-white dark:bg-background h-full flex flex-col rounded-2xl"
+        className="group relative overflow-hidden border border-slate-200/80 hover:border-orange-500/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] transition-all duration-500 cursor-pointer bg-white dark:bg-white/[0.08] dark:backdrop-blur-md h-full flex flex-col rounded-2xl"
         onClick={() => onSelect(item)}
         tabIndex={0}
         role="button"
@@ -454,7 +454,7 @@ function ProductCard({
 
           {/* Language badge */}
           <div className="absolute top-3 right-3">
-            <Badge variant="secondary" className="bg-white dark:bg-background/90 backdrop-blur-sm text-slate-700 text-xs shadow-sm">
+            <Badge variant="secondary" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm text-slate-700 text-xs shadow-sm">
               <Globe className="w-3 h-3 mr-1" />
               {langBadge}
             </Badge>
@@ -464,7 +464,7 @@ function ProductCard({
           <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400">
             <Button
               size="sm"
-              className="w-full bg-white dark:bg-background/95 backdrop-blur-md text-foundation hover:bg-white dark:bg-background rounded-full font-medium text-xs shadow-lg"
+              className="w-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/95 backdrop-blur-md text-foundation hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full font-medium text-xs shadow-lg"
             >
               <Eye className="w-3.5 h-3.5 mr-1.5" />
               {language === "fr" ? "Aperçu rapide" : "Quick View"}
@@ -591,10 +591,10 @@ function ProductDetailModal({
                       {language === "fr" ? "Nouveau" : "New"}
                     </Badge>
                   )}
-                  <Badge className="bg-white dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                  <Badge className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                     {item.format}
                   </Badge>
-                  <Badge className="bg-white dark:bg-background/15 backdrop-blur-sm text-white border border-white/10 text-xs">
+                  <Badge className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/15 backdrop-blur-sm text-white border border-white/10 text-xs">
                     <Globe className="w-3 h-3 mr-1" />
                     {item.language === "BILINGUAL" ? (language === "fr" ? "Bilingue" : "Bilingual") : item.language}
                   </Badge>
@@ -758,7 +758,7 @@ function CategoryPills({
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               isActive
                 ? "bg-foundation text-white shadow-md shadow-teal-800/20"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:shadow-sm"
+                : "bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm text-slate-600 hover:bg-slate-200 hover:shadow-sm"
             }`}
           >
             <Icon className="w-4 h-4" />
@@ -900,22 +900,22 @@ export default function Library() {
       <Helmet>
         <title>
           {language === "fr"
-            ? "Bibliothèque | RusingAcademy — Livres, Cours & Ressources SLE"
-            : "Library | RusingAcademy — Books, Courses & SLE Resources"}
+            ? "Bibliothèque | RusingÂcademy — Livres, Cours & Ressources SLE"
+            : "Library | RusingÂcademy — Books, Courses & SLE Resources"}
         </title>
         <meta
           name="description"
           content={
             language === "fr"
-              ? "Explorez la bibliothèque complète RusingAcademy : livres, guides, cours et ressources pour réussir les examens SLE et exceller dans la fonction publique canadienne bilingue."
-              : "Explore the complete RusingAcademy library: books, guides, courses, and resources to pass SLE exams and excel in Canada's bilingual public service."
+              ? "Explorez la bibliothèque complète RusingÂcademy : livres, guides, cours et ressources pour réussir les examens SLE et exceller dans la fonction publique canadienne bilingue."
+              : "Explore the complete RusingÂcademy library: books, guides, courses, and resources to pass SLE exams and excel in Canada's bilingual public service."
           }
         />
-        <meta property="og:title" content={language === "fr" ? "Bibliothèque RusingAcademy" : "RusingAcademy Library"} />
+        <meta property="og:title" content={language === "fr" ? "Bibliothèque RusingÂcademy" : "RusingÂcademy Library"} />
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
         {/* Hero with Scroll Animation */}
         <ScrollAnimationWrapper animation="fade-in" duration={1000}>
           <LibraryHero language={language} />

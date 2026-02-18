@@ -133,7 +133,7 @@ export class MessagingService {
 
     const emailContent = {
       to: recipient.email,
-      from: { email: 'messages@rusingacademy.com', name: 'RusingAcademy' },
+      from: { email: 'messages@rusingacademy.com', name: 'RusingÂcademy' },
       subject: `${senderLabel} ${message.senderName} vous a envoyé un message`,
       html: `
         <!DOCTYPE html>

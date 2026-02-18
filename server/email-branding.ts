@@ -2,7 +2,7 @@
  * Email Branding Configuration
  * 
  * Contains all branding assets and legal text for email templates.
- * Uses RusingAcademy branding for official communications.
+ * Uses RusingÂcademy branding for official communications.
  */
 
 export const EMAIL_BRANDING = {
@@ -28,7 +28,7 @@ export const EMAIL_BRANDING = {
   // Company legal information
   company: {
     legalName: "Rusinga International Consulting Ltd.",
-    tradeName: "RusingAcademy",
+    tradeName: "RusingÂcademy",
     productName: "Lingueefy",
     tagline: "Master Your Second Language for the Public Service",
     taglineFr: "Maîtrisez votre langue seconde pour la fonction publique",
@@ -48,8 +48,8 @@ export const EMAIL_BRANDING = {
   
   // Legal footer text
   footer: {
-    en: `© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.`,
-    fr: `© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingAcademy. Tous droits réservés.`,
+    en: `© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.`,
+    fr: `© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingÂcademy. Tous droits réservés.`,
   },
   
   // Social links
@@ -60,12 +60,12 @@ export const EMAIL_BRANDING = {
 };
 
 /**
- * Generate email header HTML with RusingAcademy branding
+ * Generate email header HTML with RusingÂcademy branding
  */
 export function generateEmailHeader(title: string, subtitle?: string): string {
   return `
     <div style="background: linear-gradient(135deg, ${EMAIL_BRANDING.colors.primary} 0%, ${EMAIL_BRANDING.colors.primaryLight} 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 200px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 200px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">${title}</h1>
       ${subtitle ? `<p style="margin: 10px 0 0; opacity: 0.9;">${subtitle}</p>` : ""}
     </div>

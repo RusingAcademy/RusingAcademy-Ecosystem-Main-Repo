@@ -59,7 +59,7 @@ export default function TrustedByPublicServants() {
   const { language } = useLanguage();
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-background relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{

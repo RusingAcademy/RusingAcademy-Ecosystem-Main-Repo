@@ -65,7 +65,7 @@ const statusConfig: Record<LeadStatus, { label: string; color: string; icon: Rea
 };
 
 const brandLabels: Record<string, string> = {
-  rusingacademy: "RusingAcademy",
+  rusingacademy: "RusingÂcademy",
   lingueefy: "Lingueefy",
   barholex: "Barholex Media",
   external: "External",
@@ -222,7 +222,7 @@ export default function AdminLeads() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Sources</SelectItem>
-                  <SelectItem value="rusingacademy">RusingAcademy</SelectItem>
+                  <SelectItem value="rusingacademy">RusingÂcademy</SelectItem>
                   <SelectItem value="lingueefy">Lingueefy</SelectItem>
                   <SelectItem value="barholex">Barholex Media</SelectItem>
                 </SelectContent>
@@ -258,7 +258,7 @@ export default function AdminLeads() {
                   </TableHeader>
                   <TableBody>
                     {leads.map((lead: any) => (
-                      <TableRow key={lead.id} className="cursor-pointer hover:bg-slate-50 dark:hover:bg-foundation" onClick={() => setSelectedLead(lead)}>
+                      <TableRow key={lead.id} className="cursor-pointer hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-foundation" onClick={() => setSelectedLead(lead)}>
                         <TableCell>
                           <div className="flex flex-col">
                             <span className="font-medium text-black dark:text-foreground">
@@ -373,7 +373,7 @@ export default function AdminLeads() {
                 {/* Message */}
                 <div>
                   <h4 className="text-sm font-medium text-black dark:text-foreground/90 mb-2">Message</h4>
-                  <div className="p-4 bg-slate-50 dark:bg-foundation rounded-lg">
+                  <div className="p-4 bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
                     <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 whitespace-pre-wrap">
                       {selectedLead.message}
                     </p>
@@ -406,7 +406,7 @@ export default function AdminLeads() {
                   <Button
                     variant="outline"
                     className="gap-2"
-                    onClick={() => window.open(`mailto:${selectedLead.email}?subject=Re: Your inquiry to RusingAcademy`, '_blank')}
+                    onClick={() => window.open(`mailto:${selectedLead.email}?subject=Re: Your inquiry to RusingÂcademy`, '_blank')}
                   >
                     <Mail className="w-4 h-4" />
                     Send Email

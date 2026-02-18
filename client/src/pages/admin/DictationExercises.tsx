@@ -163,7 +163,7 @@ export default function DictationExercises() {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                       <tr>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sentence</th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CEFR</th>
@@ -174,7 +174,7 @@ export default function DictationExercises() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white dark:bg-background divide-y divide-gray-200">
+                    <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md divide-y divide-gray-200">
                       {exercises.map((exercise) => (
                         <tr key={exercise.id}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{exercise.sentence}</td>

@@ -103,7 +103,7 @@ export function XPNotification({
 
               {/* Icon */}
               <motion.div
-                className="relative w-10 h-10 rounded-full bg-white dark:bg-background/20 flex items-center justify-center"
+                className="relative w-10 h-10 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 flex items-center justify-center"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >

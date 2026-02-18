@@ -197,7 +197,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
 
       {/* Timeline */}
       {timeline && timeline.length > 0 && (
-        <div className="bg-white dark:bg-card dark:bg-obsidian rounded-lg border border-slate-200 dark:border-teal-800 p-6">
+        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-slate-200 dark:border-teal-800 p-6">
           <h3 className="text-lg font-bold mb-6 text-black dark:text-foreground">
             {language === 'fr' ? 'Historique de candidature' : 'Application Timeline'}
           </h3>
@@ -210,7 +210,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
             {timeline.map((event, index) => (
               <div key={event.id} className="relative pl-20">
                 {/* Timeline dot */}
-                <div className="absolute left-0 top-1 w-12 h-12 bg-white dark:bg-card dark:bg-obsidian border-4 border-teal-500 rounded-full flex items-center justify-center">
+                <div className="absolute left-0 top-1 w-12 h-12 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-4 border-teal-500 rounded-full flex items-center justify-center">
                   <div className="text-teal-600 dark:text-teal-400">
                     {event.icon === 'check' && <CheckCircle2 className="w-5 h-5" />}
                     {event.icon === 'clock' && <Clock className="w-5 h-5 animate-spin" />}
@@ -220,7 +220,7 @@ export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTracke
                 </div>
 
                 {/* Event content */}
-                <div className="bg-white dark:bg-card dark:bg-foundation rounded-lg p-4 border border-slate-200 dark:border-teal-800">
+                <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 border border-slate-200 dark:border-teal-800">
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-black dark:text-foreground">
                       {event.message}

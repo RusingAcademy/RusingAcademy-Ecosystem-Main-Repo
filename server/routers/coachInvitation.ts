@@ -128,12 +128,12 @@ export const coachInvitationRouter = router({
         const htmlContent = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
             <div style="text-align: center; padding: 30px 0;">
-              <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 200px; height: auto;" />
+              <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 200px; height: auto;" />
             </div>
             <div style="padding: 20px; background: #f9fafb; border-radius: 12px;">
-              <h2 style="color: ${EMAIL_BRANDING.colors.primary}; margin-top: 0;">You're Invited to Join RusingAcademy as a Coach!</h2>
+              <h2 style="color: ${EMAIL_BRANDING.colors.primary}; margin-top: 0;">You're Invited to Join RusingÂcademy as a Coach!</h2>
               <p style="color: ${EMAIL_BRANDING.colors.text}; line-height: 1.6;">
-                You have been invited to join the RusingAcademy coaching team. As a coach, you'll help public servants 
+                You have been invited to join the RusingÂcademy coaching team. As a coach, you'll help public servants 
                 master their second language through personalized 1-on-1 sessions.
               </p>
               <p style="color: ${EMAIL_BRANDING.colors.text}; line-height: 1.6;">
@@ -156,7 +156,7 @@ export const coachInvitationRouter = router({
         
         await sendEmail({
           to: input.email,
-          subject: "You're Invited to Coach at RusingAcademy",
+          subject: "You're Invited to Coach at RusingÂcademy",
           html: htmlContent,
         });
         log.info(`[CoachInvite] Invitation email sent to ${input.email}`);

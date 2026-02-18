@@ -198,7 +198,7 @@ export default function EmailTemplates() {
 
   const previewBody = (body: string) => {
     return body
-      .replace(/\{\{company_name\}\}/g, "RusingAcademy")
+      .replace(/\{\{company_name\}\}/g, "RusingÂcademy")
       .replace(/\{\{customer_name\}\}/g, "John Smith")
       .replace(/\{\{customer_email\}\}/g, "john@example.com")
       .replace(/\{\{invoice_number\}\}/g, "INV-001")
@@ -220,21 +220,21 @@ export default function EmailTemplates() {
       {/* Editor Modal */}
       {editingTemplate && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-background rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-border dark:border-border">
+          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
               <h2 className="text-lg font-bold text-gray-800">
                 {editingTemplate.isNew ? "Create Template" : "Edit Template"}
               </h2>
               <div className="flex items-center gap-2">
                 <button aria-label="Action"
-                  className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg text-gray-500"
+                  className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg text-gray-500"
                   onClick={() => setShowPreview(!showPreview)}
                   title="Preview"
                 >
                   <Eye size={16} />
                 </button>
                 <button aria-label="Action"
-                  className="p-2 hover:bg-gray-100 dark:bg-card rounded-lg text-gray-500"
+                  className="p-2 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg text-gray-500"
                   onClick={() => setEditingTemplate(null)}
                 >
                   <X size={16} />
@@ -301,11 +301,11 @@ export default function EmailTemplates() {
                       <Copy size={12} /> Insert merge field
                     </button>
                     {showMergeFields && (
-                      <div className="absolute right-0 top-full mt-1 bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-lg shadow-lg z-10 py-1 w-64 max-h-64 overflow-y-auto">
+                      <div className="absolute right-0 top-full mt-1 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg shadow-lg z-10 py-1 w-64 max-h-64 overflow-y-auto">
                         {MERGE_FIELDS.map(mf => (
                           <button
                             key={mf.field}
-                            className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:bg-background flex items-center justify-between"
+                            className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-between"
                             onClick={() => insertMergeField(mf.field)}
                           >
                             <code className="text-xs text-sky-600 bg-blue-50 px-1 rounded">{mf.field}</code>
@@ -337,9 +337,9 @@ export default function EmailTemplates() {
 
               {/* Preview */}
               {showPreview && (
-                <div className="border border-gray-200 dark:border-border dark:border-border rounded-lg p-4 bg-gray-50">
+                <div className="border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg p-4 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Preview</h4>
-                  <div className="bg-white dark:bg-background rounded-lg p-4 border border-gray-200 dark:border-border dark:border-border">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg p-4 border border-gray-200 dark:border-white/15 dark:border-white/15">
                     <p className="text-sm font-medium text-gray-800 dark:text-foreground mb-3 pb-2 border-b border-gray-100">
                       Subject: {previewBody(editingTemplate.subject)}
                     </p>
@@ -352,7 +352,7 @@ export default function EmailTemplates() {
             </div>
 
             {/* Footer */}
-            <div className="flex items-center justify-end gap-2 p-4 border-t border-gray-200 dark:border-border dark:border-border">
+            <div className="flex items-center justify-end gap-2 p-4 border-t border-gray-200 dark:border-white/15 dark:border-white/15">
               <button
                 className="qb-btn-outline"
                 onClick={() => setEditingTemplate(null)}
@@ -386,7 +386,7 @@ export default function EmailTemplates() {
       <div className="flex items-center gap-2 mb-4">
         <button aria-label="Action"
           className={`px-3 py-1 rounded-full text-xs font-medium border ${
-            typeFilter === "all" ? "bg-green-600 text-white border-green-600" : "bg-white dark:bg-card text-gray-600 border-gray-300 hover:border-gray-400"
+            typeFilter === "all" ? "bg-green-600 text-white border-green-600" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 border-gray-300 hover:border-gray-400"
           }`}
           onClick={() => setTypeFilter("all")}
         >
@@ -396,7 +396,7 @@ export default function EmailTemplates() {
           <button aria-label="Action"
             key={t.value}
             className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 ${
-              typeFilter === t.value ? "bg-green-600 text-white border-green-600" : "bg-white dark:bg-card text-gray-600 border-gray-300 hover:border-gray-400"
+              typeFilter === t.value ? "bg-green-600 text-white border-green-600" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 border-gray-300 hover:border-gray-400"
             }`}
             onClick={() => setTypeFilter(t.value)}
           >
@@ -409,11 +409,11 @@ export default function EmailTemplates() {
       {isLoading ? (
         <div className="space-y-3">
           {[1, 2, 3].map(i => (
-            <div key={i} className="h-20 bg-gray-100 dark:bg-card rounded-lg animate-pulse" />
+            <div key={i} className="h-20 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-lg animate-pulse" />
           ))}
         </div>
       ) : filteredTemplates.length === 0 ? (
-        <div className="text-center py-6 md:py-8 lg:py-12 bg-gray-50 dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border">
+        <div className="text-center py-6 md:py-8 lg:py-12 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15">
           <Mail size={32} className="mx-auto text-gray-300 mb-3" />
           <p className="text-gray-500 mb-2">No email templates yet</p>
           <p className="text-sm text-gray-400 mb-4">Create templates to streamline your email communications</p>
@@ -436,7 +436,7 @@ export default function EmailTemplates() {
             return (
               <div
                 key={template.id}
-                className="bg-white dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border p-4 hover:border-gray-300 transition-colors"
+                className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 p-4 hover:border-gray-300 transition-colors"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
@@ -461,7 +461,7 @@ export default function EmailTemplates() {
                   </div>
                   <div className="flex items-center gap-1">
                     <button aria-label="Action"
-                      className="p-1.5 hover:bg-gray-100 dark:bg-card rounded text-gray-400 hover:text-gray-600"
+                      className="p-1.5 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded text-gray-400 hover:text-gray-600"
                       onClick={() => handleEdit(template)}
                       title="Edit"
                     >
@@ -483,7 +483,7 @@ export default function EmailTemplates() {
       )}
 
       {/* Merge Fields Reference */}
-      <div className="mt-6 p-4 bg-gray-50 dark:bg-background rounded-lg border border-gray-200 dark:border-border dark:border-border">
+      <div className="mt-6 p-4 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15">
         <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Available Merge Fields</h4>
         <div className="grid grid-cols-2 gap-2">
           {MERGE_FIELDS.map(mf => (

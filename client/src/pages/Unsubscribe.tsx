@@ -105,7 +105,7 @@ export default function Unsubscribe() {
 
   if (status === "success") {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardContent className="pt-8 pb-8 text-center">
             <div className="mx-auto w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-6">
@@ -126,7 +126,7 @@ export default function Unsubscribe() {
 
   if (status === "error") {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center p-4">
         <Card className="max-w-md w-full">
           <CardContent className="pt-8 pb-8 text-center">
             <div className="mx-auto w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-6">
@@ -150,10 +150,10 @@ export default function Unsubscribe() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-obsidian dark:to-teal-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-white/[0.06] dark:to-white/[0.10] dark:backdrop-blur-lg flex items-center justify-center p-4">
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center mb-4">
+          <div className="mx-auto w-16 h-16 rounded-full bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-center mb-4">
             <Mail className="h-8 w-8 text-black dark:text-foreground dark:text-cyan-300" />
           </div>
           <CardTitle className="text-2xl">{l.title}</CardTitle>

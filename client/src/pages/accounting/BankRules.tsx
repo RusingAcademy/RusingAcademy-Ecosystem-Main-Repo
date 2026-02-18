@@ -65,7 +65,7 @@ export default function BankRules() {
     <div className="p-6 max-w-[1000px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/bank-transactions")} className="p-1 hover:bg-gray-100 dark:bg-card rounded">
+          <button onClick={() => navigate("/bank-transactions")} className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded">
             <ArrowLeft size={20} className="text-gray-600" />
           </button>
           <div>
@@ -182,7 +182,7 @@ export default function BankRules() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => updateMutation.mutate({ id: rule.id, isActive: !rule.isActive })}
-                  className="p-1.5 hover:bg-gray-100 dark:bg-card rounded"
+                  className="p-1.5 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded"
                   title={rule.isActive ? "Deactivate" : "Activate"}
                 >
                   {rule.isActive ? <ToggleRight size={20} className="text-green-600" /> : <ToggleLeft size={20} className="text-gray-400" />}

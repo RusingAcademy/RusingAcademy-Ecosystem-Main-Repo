@@ -32,8 +32,8 @@ export function useWelcomeToast() {
         // First time user
         toast.success(
           isEn 
-            ? `Welcome to RusingAcademy, ${firstName}! 🎉`
-            : `Bienvenue sur RusingAcademy, ${firstName} ! 🎉`,
+            ? `Welcome to RusingÂcademy, ${firstName}! 🎉`
+            : `Bienvenue sur RusingÂcademy, ${firstName} ! 🎉`,
           {
             description: isEn
               ? "Your journey to bilingual excellence starts now. Explore our courses and book your first coaching session!"

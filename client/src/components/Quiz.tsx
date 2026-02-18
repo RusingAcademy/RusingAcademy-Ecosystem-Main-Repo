@@ -162,7 +162,7 @@ export function Quiz({
     const passed = percentage >= passingScore;
     
     return (
-      <div className="bg-white dark:bg-background rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
+      <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
         <div className={`p-8 text-center ${passed ? "bg-gradient-to-br from-teal-500 to-teal-600" : "bg-gradient-to-br from-cta to-red-500"} text-white`}>
           <div className="text-3xl md:text-5xl lg:text-6xl mb-4">{passed ? "🎉" : "📚"}</div>
           <h2 className="text-2xl font-bold mb-2">
@@ -212,7 +212,7 @@ export function Quiz({
           <div className="flex gap-3">
             <button
               onClick={onExit}
-              className="flex-1 py-3 border border-gray-300 rounded-xl text-black dark:text-foreground hover:bg-white dark:bg-background font-medium"
+              className="flex-1 py-3 border border-gray-300 rounded-xl text-black dark:text-foreground hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md font-medium"
             >
               {language === "fr" ? "Retour au cours" : "Back to Course"}
             </button>
@@ -239,7 +239,7 @@ export function Quiz({
   }
   
   return (
-    <div className="bg-white dark:bg-background rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
+    <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
       {/* Header */}
       <div className="bg-gradient-to-r from-teal-500 to-teal-600 p-4 text-white">
         <div className="flex items-center justify-between mb-2">
@@ -255,9 +255,9 @@ export function Quiz({
         
         {/* Progress bar */}
         <div className="flex items-center gap-2">
-          <div className="flex-1 h-2 bg-white dark:bg-background/20 rounded-full overflow-hidden">
+          <div className="flex-1 h-2 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/20 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-white dark:bg-background transition-all duration-300"
+              className="h-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-all duration-300"
               style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
             />
           </div>
@@ -278,7 +278,7 @@ export function Quiz({
               const isSelected = selectedAnswer === index;
               const isCorrectOption = index === currentQuestion.correctAnswer;
               
-              let optionStyle = "bg-white dark:bg-card border-gray-200 dark:border-border hover:border-teal-300";
+              let optionStyle = "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-gray-200 dark:border-white/15 hover:border-teal-300";
               
               if (isAnswered) {
                 if (isCorrectOption) {
@@ -319,7 +319,7 @@ export function Quiz({
               const isSelected = selectedAnswer === option;
               const isCorrectOption = option === currentQuestion.correctAnswer;
               
-              let optionStyle = "bg-white dark:bg-card border-gray-200 dark:border-border hover:border-teal-300";
+              let optionStyle = "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 border-gray-200 dark:border-white/15 hover:border-teal-300";
               
               if (isAnswered) {
                 if (isCorrectOption) {
@@ -363,7 +363,7 @@ export function Quiz({
       </div>
       
       {/* Footer */}
-      <div className="border-t border-gray-200 dark:border-border dark:border-border p-4 flex justify-between">
+      <div className="border-t border-gray-200 dark:border-white/15 dark:border-white/15 p-4 flex justify-between">
         <button
           onClick={onExit}
           className="px-4 py-2 text-black dark:text-foreground hover:text-black dark:text-foreground"

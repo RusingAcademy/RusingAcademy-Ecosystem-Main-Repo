@@ -53,7 +53,7 @@ export default function LingueefySubHeader() {
           style={{ height: isScrolled ? "44px" : "44px" }}
         >
           {/* Home Button - Left */}
-          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-foundation dark:hover:bg-foundation-2" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
+          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm hover:bg-slate-200 dark:bg-white/[0.08] dark:backdrop-blur-md dark:hover:bg-foundation-2" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
             <Home className="h-5 w-5 text-black dark:text-foreground dark:text-cyan-300" />
           </Link>
 

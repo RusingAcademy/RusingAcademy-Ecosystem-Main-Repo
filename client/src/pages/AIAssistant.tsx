@@ -1,5 +1,5 @@
 /**
- * AI Assistant — RusingAcademy Learning Portal
+ * AI Assistant — RusingÂcademy Learning Portal
  * Bilingual AI Language Coach with chat interface and adaptive recommendations
  * Design: Clean white light theme, accessible
  */
@@ -85,7 +85,7 @@ export default function AIAssistant() {
           {/* Right Panel — Recommendations & Quick Actions */}
           <div className="space-y-4">
             {/* Recommendations */}
-            <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 dark:text-foreground mb-3 flex items-center gap-2">
                 <span className="material-icons text-teal-700" >auto_awesome</span>
                 {t("dashboard.recommended")}
@@ -93,7 +93,7 @@ export default function AIAssistant() {
               <div className="space-y-2">
                 {recommendationsQuery.data?.map((rec, idx) => (
                   <Link key={idx} href={rec.link}>
-                    <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:bg-background transition-colors cursor-pointer group">
+                    <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors cursor-pointer group">
                       <span className="material-icons text-teal-700 mt-0.5" >{rec.icon}</span>
                       <div>
                         <p className="text-sm font-medium text-gray-900 dark:text-foreground group-hover:text-teal-700 transition-colors">{rec.title}</p>
@@ -111,7 +111,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Quick Topics */}
-            <div className="bg-white dark:bg-background border border-gray-200 dark:border-border dark:border-border rounded-xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 dark:text-foreground mb-3 flex items-center gap-2">
                 <span className="material-icons text-amber-500" >tips_and_updates</span>
                 {lang === "fr" ? "Sujets rapides" : "Quick Topics"}
@@ -129,7 +129,7 @@ export default function AIAssistant() {
                     onClick={() => handleSend(lang === "fr"
                       ? `Aidez-moi avec ${topic.label.toLowerCase()}`
                       : `Help me with ${topic.label.toLowerCase()}`)}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-border dark:border-border text-gray-600 hover:border-teal-700 hover:text-teal-700 hover:bg-teal-700/5 transition-all">
+                    className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-white/15 dark:border-white/15 text-gray-600 hover:border-teal-700 hover:text-teal-700 hover:bg-teal-700/5 transition-all">
                     {topic.emoji} {topic.label}
                   </button>
                 ))}
@@ -137,7 +137,7 @@ export default function AIAssistant() {
             </div>
 
             {/* AI Capabilities */}
-            <div className="bg-gray-50 dark:bg-background border border-gray-100 dark:border-border rounded-xl p-4">
+            <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-100 dark:border-white/15 rounded-xl p-4">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
                 {lang === "fr" ? "Capacités" : "Capabilities"}
               </h3>

@@ -197,7 +197,7 @@ export default function LeadScoringDashboard() {
     if (score >= 80) return "text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30";
     if (score >= 60) return "text-blue-600 bg-blue-100 dark:bg-blue-900/30";
     if (score >= 40) return "text-amber-600 bg-amber-100 dark:bg-amber-900/30";
-    return "text-black dark:text-foreground bg-slate-100 dark:bg-foundation";
+    return "text-black dark:text-foreground bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md";
   };
 
   const getScoreTrend = (score: number, previousScore?: number) => {
@@ -339,7 +339,7 @@ export default function LeadScoringDashboard() {
                   <p className="text-sm text-muted-foreground">{l.coldLeads}</p>
                   <p className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">{stats.coldLeads}</p>
                 </div>
-                <div className="h-12 w-12 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center">
+                <div className="h-12 w-12 rounded-full bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-center">
                   <Clock className="h-6 w-6 text-black dark:text-foreground" />
                 </div>
               </div>
@@ -374,7 +374,7 @@ export default function LeadScoringDashboard() {
                   return (
                     <div
                       key={lead.id}
-                      className={`flex items-center gap-4 p-3 rounded-lg border cursor-pointer transition-colors hover:bg-white dark:bg-card dark:hover:bg-foundation/50 ${
+                      className={`flex items-center gap-4 p-3 rounded-lg border cursor-pointer transition-colors hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:hover:bg-foundation/50 ${
                         selectedLead?.id === lead.id ? "ring-2 ring-primary" : ""
                       }`}
                       onClick={() => setSelectedLead(lead)}
@@ -436,7 +436,7 @@ export default function LeadScoringDashboard() {
             {selectedLead ? (
               <div className="space-y-4">
                 {/* Score Breakdown */}
-                <div className="p-4 rounded-lg bg-white dark:bg-card dark:bg-foundation/50">
+                <div className="p-4 rounded-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md/50">
                   <h4 className="text-sm font-medium mb-3">{l.scoreBreakdown}</h4>
                   <div className="space-y-3">
                     <div>
@@ -474,7 +474,7 @@ export default function LeadScoringDashboard() {
                     activitiesQuery.data.activities.map((activity: LeadActivity, idx: number) => (
                       <div key={activity.id || idx} className="flex gap-3">
                         <div className="flex flex-col items-center">
-                          <div className="h-8 w-8 rounded-full bg-slate-100 dark:bg-foundation flex items-center justify-center">
+                          <div className="h-8 w-8 rounded-full bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-center">
                             {getActivityIcon(activity.type)}
                           </div>
                           {idx < (activitiesQuery.data?.activities?.length || 0) - 1 && (

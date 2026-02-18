@@ -54,14 +54,14 @@ async function sendInvitationEmail(params: {
   const roleName = role.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   const html = `
-    ${generateEmailHeader("You're Invited to RusingAcademy", `Join as ${roleName}`)}
+    ${generateEmailHeader("You're Invited to RusingÂcademy", `Join as ${roleName}`)}
     <div style="padding: 32px; font-family: ${EMAIL_BRANDING.fontFamily}; color: #1a1a2e;">
       <p style="font-size: 16px; line-height: 1.6;">Hello,</p>
       <p style="font-size: 16px; line-height: 1.6;">
-        <strong>${inviterName}</strong> has invited you to join <strong>RusingAcademy</strong> as a <strong>${roleName}</strong>.
+        <strong>${inviterName}</strong> has invited you to join <strong>RusingÂcademy</strong> as a <strong>${roleName}</strong>.
       </p>
       <p style="font-size: 16px; line-height: 1.6;">
-        RusingAcademy is a premium bilingual learning platform dedicated to helping Canadian public servants achieve their language proficiency goals.
+        RusingÂcademy is a premium bilingual learning platform dedicated to helping Canadian public servants achieve their language proficiency goals.
       </p>
       <div style="text-align: center; margin: 32px 0;">
         <a href="${inviteUrl}" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, ${EMAIL_BRANDING.primaryColor}, ${EMAIL_BRANDING.accentColor || "#6366f1"}); color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
@@ -80,9 +80,9 @@ async function sendInvitationEmail(params: {
 
   return sendEmail({
     to: email,
-    subject: `You're invited to join RusingAcademy as ${roleName}`,
+    subject: `You're invited to join RusingÂcademy as ${roleName}`,
     html,
-    text: `${inviterName} has invited you to join RusingAcademy as a ${roleName}. Accept your invitation here: ${inviteUrl} — This invitation expires in 7 days.`,
+    text: `${inviterName} has invited you to join RusingÂcademy as a ${roleName}. Accept your invitation here: ${inviteUrl} — This invitation expires in 7 days.`,
   });
 }
 
@@ -156,7 +156,7 @@ export const invitationsRouter = router({
 
       // Send invitation email
       const baseUrl = getBaseUrl(ctx.req);
-      const inviterName = ctx.user.name || ctx.user.email || "RusingAcademy Admin";
+      const inviterName = ctx.user.name || ctx.user.email || "RusingÂcademy Admin";
       
       try {
         await sendInvitationEmail({
@@ -280,7 +280,7 @@ export const invitationsRouter = router({
 
       // Send email
       const baseUrl = getBaseUrl(ctx.req);
-      const inviterName = ctx.user.name || ctx.user.email || "RusingAcademy Admin";
+      const inviterName = ctx.user.name || ctx.user.email || "RusingÂcademy Admin";
 
       try {
         await sendInvitationEmail({
