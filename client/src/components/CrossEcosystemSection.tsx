@@ -734,13 +734,13 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   <ScrollArrow direction="right" onClick={() => shortsScroll.scrollByAmount('right')} />
                   
                   {/* Fade edges */}
-                  <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
-                  <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
                   
                   <div
                     ref={shortsScroll.scrollRef}
                     {...shortsScroll.handlers}
-                    className="flex flex-nowrap gap-5 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
+                    className="flex flex-nowrap gap-3 md:gap-5 overflow-x-auto scrollbar-hide px-6 md:px-20 py-4 cursor-grab select-none shorts-carousel"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                   >
                     {/* Duplicate for seamless loop — each gets a UNIQUE instanceKey */}
@@ -749,7 +749,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                       const instanceKey = isDuplicate ? `${short.id}-dup` : short.id;
                       const realIndex = isDuplicate ? i - featuredShorts.length : i;
                       return (
-                        <div key={instanceKey} className="scroll-card shrink-0 w-[160px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
+                        <div key={instanceKey} className="scroll-card shrink-0 w-[150px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
                           {renderShortCard(short, realIndex, instanceKey)}
                         </div>
                       );
@@ -794,13 +794,13 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   <ScrollArrow direction="left" onClick={() => capsulesScroll.scrollByAmount('left')} />
                   <ScrollArrow direction="right" onClick={() => capsulesScroll.scrollByAmount('right')} />
                   
-                  <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
-                  <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
                   
                   <div
                     ref={capsulesScroll.scrollRef}
                     {...capsulesScroll.handlers}
-                    className="flex flex-nowrap gap-6 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
+                    className="flex flex-nowrap gap-4 md:gap-6 overflow-x-auto scrollbar-hide px-6 md:px-20 py-4 cursor-grab select-none capsules-carousel"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                   >
                     {[...learningCapsules, ...learningCapsules].map((capsule, idx) => {
