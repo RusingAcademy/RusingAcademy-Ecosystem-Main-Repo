@@ -87,8 +87,10 @@ export default function Courses() {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="SLE Courses - Path Series™ Curriculum"
-        description="Browse our comprehensive SLE course catalog. From beginner to advanced, find the perfect path to your bilingual goals with Path Series™ methodology."
+        title={isEn ? "SLE Courses - Path Series™ Curriculum" : "Cours ELE - Programme Path Series™"}
+        description={isEn
+          ? "Browse our comprehensive SLE course catalog. From beginner to advanced, find the perfect path to your bilingual goals with Path Series™ methodology."
+          : "Parcourez notre catalogue complet de cours ELE. Du débutant à l'avancé, trouvez le parcours idéal vers vos objectifs bilingues avec la méthodologie Path Series™."}
         canonical="https://www.rusingacademy.ca/courses"
       />
       

@@ -539,8 +539,10 @@ export default function CoursesPage() {
   return (
     <>
       <SEO 
-        title="Courses | Path Series™ SLE Training"
-        description="Explore our comprehensive Path Series™ courses designed for Canadian public servants. From A1 to C1, find the perfect course for your SLE certification journey."
+        title={language === 'en' ? "Courses | Path Series™ SLE Training" : "Cours | Formation ELE Path Series™"}
+        description={language === 'en'
+          ? "Explore our comprehensive Path Series™ courses designed for Canadian public servants. From A1 to C1, find the perfect course for your SLE certification journey."
+          : "Découvrez nos cours Path Series™ conçus pour les fonctionnaires canadiens. De A1 à C1, trouvez le cours idéal pour votre parcours de certification ELE."}
       />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
