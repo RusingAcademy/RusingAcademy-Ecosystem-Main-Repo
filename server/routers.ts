@@ -170,6 +170,10 @@ import { notificationRouter as notificationEnhancedRouter } from "./routers/noti
 import { videoRouter } from "./routers/video";
 import { coachAnalyticsRouter } from "./routers/coachAnalytics";
 import { calendlyIntegrationRouter } from "./routers/calendlyIntegration";
+// ═══ Phase 4: HR & Admin Routers ═══
+import { featureFlagsRouter } from "./routers/featureFlags";
+import { adminMonitoringRouter } from "./routers/adminMonitoring";
+import { hrReportsRouter } from "./routers/hrReports";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9197,6 +9201,10 @@ export const appRouter = router({
   video: videoRouter,
   coachAnalytics: coachAnalyticsRouter,
   calendlyIntegration: calendlyIntegrationRouter,
+  // Phase 4: HR & Admin
+  featureFlags: featureFlagsRouter,
+  adminMonitoring: adminMonitoringRouter,
+  hrReports: hrReportsRouter,
   notificationEnhanced: notificationEnhancedRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
