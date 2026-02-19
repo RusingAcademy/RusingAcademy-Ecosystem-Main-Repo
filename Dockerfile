@@ -29,7 +29,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 
 # Cache-bust: invalidate Docker layer cache when source changes
-ARG CACHEBUST=1
+ARG CACHEBUST=1771459377
 COPY . .
 
 # Build the application (Vite frontend + esbuild backend)
