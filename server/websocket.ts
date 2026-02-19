@@ -3,7 +3,7 @@
  * Phase 1: Real-time communication infrastructure
  *
  * Features:
- * - JWT-authenticated connections
+ * - JWT-authenticated connections (using jose — same as session.ts)
  * - Automatic room assignment by user role
  * - Broadcast service for tRPC mutations
  * - Graceful reconnection with exponential backoff
@@ -11,7 +11,7 @@
  */
 import { Server, Socket } from "socket.io";
 import type { Server as HttpServer } from "http";
-import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose";
 import { getDb } from "./db";
 import { users } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
@@ -33,9 +33,19 @@ export interface WSEvent {
 
 // ── Configuration ────────────────────────────────────────────────────────────
 
-const JWT_SECRET = process.env.JWT_SECRET || process.env.SESSION_SECRET || "fallback-dev-secret";
 const WS_CORS_ORIGIN = process.env.WEBSOCKET_CORS_ORIGIN || process.env.CORS_ORIGIN || "*";
 const ROLE_ROOMS = ["admin", "coach", "learner", "hr", "superadmin"];
+
+/**
+ * Get the JWT secret key as Uint8Array — consistent with session.ts
+ */
+function getSecretKey(): Uint8Array {
+  const secret = process.env.JWT_SECRET || process.env.SESSION_SECRET || "";
+  if (!secret) {
+    throw new Error("JWT_SECRET is not configured for WebSocket auth");
+  }
+  return new TextEncoder().encode(secret);
+}
 
 // ── Singleton ────────────────────────────────────────────────────────────────
 
@@ -79,8 +89,14 @@ export async function initWebSocket(httpServer: HttpServer): Promise<Server | nu
         return next(new Error("Authentication required"));
       }
 
-      const decoded = jwt.verify(token, JWT_SECRET) as { userId?: number; id?: number; sub?: string };
-      const userId = decoded.userId || decoded.id || (decoded.sub ? parseInt(decoded.sub, 10) : 0);
+      // Use jose jwtVerify — same library and approach as session.ts
+      const secretKey = getSecretKey();
+      const { payload: decoded } = await jwtVerify(token, secretKey);
+
+      const userId =
+        (decoded.userId as number) ||
+        (decoded.id as number) ||
+        (decoded.sub ? parseInt(decoded.sub, 10) : 0);
 
       if (!userId) {
         return next(new Error("Invalid token payload"));
