@@ -8,6 +8,7 @@ import { getDb } from "../db";
 import { notifications, pushSubscriptions, users } from "../../drizzle/schema";
 import { getIO } from "../websocket";
 import webpush from "web-push";
+import { logNotification } from "./notificationLogService";
 
 // ─── VAPID Configuration ───────────────────────────────────────────────
 const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY || "";
@@ -79,6 +80,41 @@ export async function createEnhancedNotification(
         notificationId,
         type: input.type,
       },
+    });
+  }
+
+  // ─── PR 0.2: Log delivery to notifications_log (fire-and-forget) ───
+  if (wsDelivered) {
+    logNotification({
+      userId: input.userId,
+      type: input.type,
+      title: input.title,
+      body: input.message,
+      data: input.metadata,
+      channel: "websocket",
+      status: "delivered",
+    });
+  }
+  if (pushSent) {
+    logNotification({
+      userId: input.userId,
+      type: input.type,
+      title: input.title,
+      body: input.message,
+      data: input.metadata,
+      channel: "push",
+      status: "sent",
+    });
+  }
+  if (!wsDelivered && !pushSent) {
+    logNotification({
+      userId: input.userId,
+      type: input.type,
+      title: input.title,
+      body: input.message,
+      data: input.metadata,
+      channel: "websocket",
+      status: "pending",
     });
   }
 
