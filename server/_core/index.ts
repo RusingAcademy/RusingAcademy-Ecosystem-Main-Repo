@@ -41,6 +41,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic } from "./vite";
 import { metricsCollector, globalErrorHandler, registerMetricsEndpoint } from "../middleware/observability";
+import { initSentry, captureException } from "../lib/sentry";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -62,6 +63,9 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
+  // PR 0.3: Initialize Sentry (no-op if SENTRY_DSN not set)
+  initSentry();
+
   const app = express();
   const server = createServer(app);
   // Stripe webhook must be registered BEFORE body parser to get raw body

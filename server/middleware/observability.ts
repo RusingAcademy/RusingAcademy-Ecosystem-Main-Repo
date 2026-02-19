@@ -114,6 +114,12 @@ export function metricsCollector(req: Request, res: Response, next: NextFunction
  * Captures unhandled errors, logs them with full context, and returns a safe response.
  */
 export function globalErrorHandler(err: Error, req: Request, res: Response, _next: NextFunction): void {
+  // PR 0.3: Capture to Sentry (no-op if DSN not set)
+  try {
+    const { captureException } = require("../lib/sentry");
+    captureException(err, { requestId: req.requestId, method: req.method, path: req.path });
+  } catch { /* Sentry must never crash the app */ }
+
   const requestId = req.requestId || req.headers["x-request-id"] as string || "unknown";
 
   log.error({
