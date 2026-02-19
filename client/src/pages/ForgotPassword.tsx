@@ -1,26 +1,28 @@
-import { useState } from "react";
+/**
+ * ForgotPassword Page — Refactored with Auth Design System
+ * Phase 1: Auth UI/UX Harmonization with HAZY palette
+ */
+import { useState, useCallback } from "react";
 import { Link } from "wouter";
 import { trpc } from "../lib/trpc";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, CheckCircle, AlertCircle, ArrowLeft, Mail } from "lucide-react";
+import { AlertCircle, ArrowLeft, Mail } from "lucide-react";
+import { AuthLayout, AuthCard, AuthInput, AuthButton } from "@/components/auth";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [language] = useState<"en" | "fr">("en");
+
+  const t = useCallback(
+    (en: string, fr: string) => (language === "fr" ? fr : en),
+    [language],
+  );
 
   // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
   const forgotPasswordMutation = trpc.customAuth.forgotPassword.useMutation({
-    onSuccess: () => {
-      setSuccess(true);
-    },
-    onError: (err) => {
-      setError(err.message);
-    },
+    onSuccess: () => { setSuccess(true); },
+    onError: (err: { message: string }) => { setError(err.message); },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,107 +33,82 @@ export default function ForgotPassword() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <div className="mx-auto w-16 h-16 bg-teal-500/20 rounded-full flex items-center justify-center">
-                <Mail className="w-8 h-8 text-teal-400" />
-              </div>
-              <h2 className="text-2xl font-bold text-white">Check Your Email</h2>
-              <p className="text-white/90">
-                If an account exists with <span className="font-medium text-teal-400">{email}</span>,
-                you'll receive a password reset link shortly.
-              </p>
-              <p className="text-sm text-cyan-300">
-                The link will expire in 1 hour.
-              </p>
-              <div className="pt-4">
-                <Link to="/login">
-                  <Button variant="outline" className="bg-teal-800/50 border-slate-600 text-white hover:bg-foundation-2">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Login
-                  </Button>
-                </Link>
-              </div>
+      <AuthLayout>
+        <AuthCard>
+          <div className="text-center space-y-4 py-4">
+            <div className="mx-auto w-16 h-16 bg-[var(--brand-foundation)]/20 rounded-full flex items-center justify-center">
+              <Mail className="w-8 h-8 text-[var(--barholex-gold)]" />
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <h2 className="text-xl font-bold text-white">
+              {t("Check Your Email", "Vérifiez votre courriel")}
+            </h2>
+            <p className="text-white/50 text-sm">
+              {t("If an account exists with", "Si un compte existe avec")}{" "}
+              <span className="font-medium text-[var(--barholex-gold)]">{email}</span>,{" "}
+              {t("you'll receive a password reset link shortly.", "vous recevrez un lien de réinitialisation sous peu.")}
+            </p>
+            <p className="text-white/30 text-xs">
+              {t("The link will expire in 1 hour.", "Le lien expirera dans 1 heure.")}
+            </p>
+            <div className="pt-2">
+              <Link to="/login">
+                <AuthButton variant="secondary">
+                  <ArrowLeft className="w-4 h-4" />
+                  {t("Back to Login", "Retour à la connexion")}
+                </AuthButton>
+              </Link>
+            </div>
+          </div>
+        </AuthCard>
+      </AuthLayout>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
-      <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4">
-            <img
-              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
-              alt="RusingÂcademy"
-              className="h-16 w-auto"
-            />
-          </div>
-          <CardTitle className="text-2xl font-bold text-white">
-            Reset Your Password
-          </CardTitle>
-          <CardDescription className="text-cyan-300">
-            Enter your email address and we'll send you a link to reset your password
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && (
-              <Alert variant="destructive" className="bg-red-900/50 border-red-800">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-white">
-                Email Address
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60"
-              />
+    <AuthLayout>
+      <AuthCard
+        title={t("Reset Your Password", "Réinitialisez votre mot de passe")}
+        subtitle={t(
+          "Enter your email and we'll send you a reset link",
+          "Entrez votre courriel et nous vous enverrons un lien de réinitialisation"
+        )}
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              {error}
             </div>
+          )}
 
-            <Button
-              type="submit"
-              className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white"
-              disabled={forgotPasswordMutation.isPending}
-            >
-              {forgotPasswordMutation.isPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                "Send Reset Link"
-              )}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center">
-            <Link to="/login" className="text-sm text-teal-400 hover:text-teal-300 flex items-center justify-center">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Login
-            </Link>
-          </div>
-          <div className="text-center text-xs text-black dark:text-foreground pt-4 border-t border-teal-800">
-            Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
+          <AuthInput
+            icon={<Mail className="w-4 h-4" />}
+            name="email"
+            type="email"
+            placeholder={t("Email address", "Adresse courriel")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+          />
+
+          <AuthButton
+            type="submit"
+            isLoading={forgotPasswordMutation.isPending}
+            loadingText={t("Sending...", "Envoi...")}
+            icon={<Mail className="w-4 h-4" />}
+          >
+            {t("Send Reset Link", "Envoyer le lien")}
+          </AuthButton>
+        </form>
+
+        <p className="text-center mt-4">
+          <Link to="/login" className="text-white/40 text-xs hover:text-white/60 transition-colors flex items-center justify-center gap-1">
+            <ArrowLeft className="w-3 h-3" />
+            {t("Back to Login", "Retour à la connexion")}
+          </Link>
+        </p>
+      </AuthCard>
+    </AuthLayout>
   );
 }
