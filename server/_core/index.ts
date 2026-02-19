@@ -6,6 +6,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerSecurityMiddleware } from "../middleware/security";
 import { registerOAuthRoutes } from "./oauth"
 import { handleStripeWebhook } from "../stripe/webhook";
+import { handleStripeConnectWebhook } from "../webhooks/stripeConnect";
 import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
 import { executeOutcomeRemindersCron, getOutcomeReminderSummary } from "../cron/outcome-reminders";
 import { runLeadScoreRecalculation } from "../cron/lead-score-recalc";
@@ -27,6 +28,7 @@ import {
 import calendlyRouter from "../webhooks/calendly";
 import { startReminderScheduler } from "../session-reminders";
 import { startHealthCheckScheduler } from "../cron/health-checks";
+import { initWebSocket } from "../websocket";
 import { scheduleReminderJobs, runAllReminderJobs } from "../jobs/reminderJobs";
 import { sql } from "drizzle-orm";
 import { getDb } from "../db";
@@ -64,6 +66,9 @@ async function startServer() {
   const server = createServer(app);
   // Stripe webhook must be registered BEFORE body parser to get raw body
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
+
+  // Stripe Connect webhook (separate endpoint for Connect-specific events)
+  app.post("/api/webhooks/stripe-connect", express.raw({ type: "application/json" }), handleStripeConnectWebhook);
 
   // Security middleware (helmet, CORS, rate limiting, sanitization)
   registerSecurityMiddleware(app);
@@ -582,6 +587,9 @@ async function startServer() {
   if (port !== preferredPort) {
     console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
+
+  // Initialize WebSocket (Socket.io) on the HTTP server
+  await initWebSocket(server);
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);

@@ -6,6 +6,7 @@
 import { useState, useEffect } from "react";
 import HRSidebar from "./HRSidebar";
 import SocialLinks from "./SocialLinks";
+import { UniversalBreadcrumb } from "@/components/UniversalBreadcrumb";
 
 const LOGO_ICON = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mrXRaWLUDJGHdcjc.png";
 
@@ -36,7 +37,10 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
         </span>
       </header>
       <main id="main-content" className="lg:ml-[240px] min-h-screen pt-14 lg:pt-0 flex flex-col" role="main" tabIndex={-1}>
-        <div className="flex-1 p-4 lg:p-6">{children}</div>
+        <div className="flex-1 p-4 lg:p-6">
+          <UniversalBreadcrumb portal="hr" compact className="mb-3" />
+          {children}
+        </div>
         <footer className="text-center py-4 border-t border-gray-100 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md" role="contentinfo">
           <SocialLinks size={14} color="var(--color-gray-400, var(--muted-foreground))" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">© 2026 RusingÂcademy — A Division of <span className="font-medium text-blue-600">Rusinga International Consulting Ltd.</span></p>
