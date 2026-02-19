@@ -538,6 +538,11 @@ function Router() {
       <Route path="/admin/landing-pages">{() => <L><AdminControlCenter section="landing-pages" /></L>}</Route>
       <Route path="/admin/email-sequences">{() => <L><AdminControlCenter section="email-sequences" /></L>}</Route>
       <Route path="/admin/theme-customizer">{() => <L><AdminControlCenter section="theme-customizer" /></L>}</Route>
+      <Route path="/admin/group-sessions">{() => <L><AdminControlCenter section="group-sessions" /></L>}</Route>
+      <Route path="/admin/automation-engine">{() => <L><AdminControlCenter section="automation-engine" /></L>}</Route>
+      <Route path="/admin/learner-360">{() => <L><AdminControlCenter section="learner-360" /></L>}</Route>
+      <Route path="/admin/analytics-dashboard">{() => <L><AdminControlCenter section="analytics-dashboard" /></L>}</Route>
+      <Route path="/admin/public-api">{() => <L><AdminControlCenter section="public-api" /></L>}</Route>
 
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <L><AdminControlCenter section="overview" /></L>}</Route>

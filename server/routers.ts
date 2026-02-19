@@ -171,6 +171,11 @@ import { membershipAdminRouter } from "./routers/membershipAdmin";
 import { landingPagesRouter } from "./routers/landingPages";
 import { emailAutomationRouter } from "./routers/emailAutomation";
 import { themeCustomizerRouter } from "./routers/themeCustomizer";
+import { groupSessionsRouter } from "./routers/groupSessions";
+import { automationEngineRouter } from "./routers/automationEngine";
+import { learner360Router } from "./routers/learner360";
+import { analyticsDashboardRouter } from "./routers/analyticsDashboard";
+import { publicApiRouter } from "./routers/publicApiV1";
 // ═══ Phase 3: Coach Experience Routers ═══
 import { videoRouter } from "./routers/video";
 import { coachAnalyticsRouter } from "./routers/coachAnalytics";
@@ -9223,8 +9228,12 @@ export const appRouter = router({
   membershipAdmin: membershipAdminRouter,
   landingPages: landingPagesRouter,
   emailAutomation: emailAutomationRouter,
-  themeCustomizer: themeCustomizerRouter,
-
+   themeCustomizer: themeCustomizerRouter,
+  groupSessions: groupSessionsRouter,
+  automationEngine: automationEngineRouter,
+  learner360: learner360Router,
+  analyticsDashboard: analyticsDashboardRouter,
+  publicApi: publicApiRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

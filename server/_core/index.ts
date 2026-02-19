@@ -175,6 +175,10 @@ async function startServer() {
   // Admin migrations (secured with MIGRATION_SECRET)
   app.use("/api/admin/migrations", adminMigrationsRouter);
 
+  // Public API v1 (secured with API key)
+  const { apiV1Router } = await import("../routes/apiV1");
+  app.use("/api/v1", apiV1Router);
+
   // Voice API routes (MiniMax TTS + OpenAI Whisper STT)
   registerVoiceRoutes(app);
   

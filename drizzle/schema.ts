@@ -5576,3 +5576,9 @@ export type AiConversationHistory = typeof aiConversationHistory.$inferSelect;
 export * from "./landing-pages-schema";
 export * from "./email-automation-schema";
 export * from "./theme-customizer-schema";
+// ═══ Phase 10-14: Group Sessions, Automation, Learner 360, Analytics, Public API ═══
+export * from "./group-sessions-schema";
+export * from "./automation-engine-schema";
+export * from "./learner360-tags-schema";
+export * from "./analytics-dashboard-schema";
+export * from "./public-api-schema";

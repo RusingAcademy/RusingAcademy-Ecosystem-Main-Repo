@@ -72,6 +72,11 @@ import {
   LandingPages,
   EmailSequences,
   ThemeCustomizer,
+  GroupSessions,
+  AutomationEngine,
+  Learner360,
+  AnalyticsDashboard,
+  PublicApi,
 } from "./admin";
 
 interface Props {
@@ -165,6 +170,11 @@ const sectionMap: Record<string, React.ComponentType> = {
   "landing-pages": LandingPages,
   "email-sequences": EmailSequences,
   "theme-customizer": ThemeCustomizer,
+  "group-sessions": GroupSessions,
+  "automation-engine": AutomationEngine,
+  "learner-360": Learner360,
+  "analytics-dashboard": AnalyticsDashboard,
+  "public-api": PublicApi,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {
