@@ -5528,3 +5528,46 @@ export const reportHistory = mysqlTable("report_history", {
   index("idx_report_user").on(table.userId),
 ]));
 export type ReportHistory = typeof reportHistory.$inferSelect;
+
+
+// ============================================================
+// Phase 5: Budget Forecasting & AI Companion Tables
+// ============================================================
+
+/** HR Budget Forecasts */
+export const hrBudgetForecasts = mysqlTable("hr_budget_forecasts", {
+  id: int("id").primaryKey().autoincrement(),
+  year: int("year").notNull(),
+  quarter: int("quarter"),
+  departmentId: int("department_id"),
+  category: varchar("category", { length: 100 }).notNull(),
+  plannedAmount: decimal("planned_amount", { precision: 12, scale: 2 }).notNull().default("0"),
+  actualAmount: decimal("actual_amount", { precision: 12, scale: 2 }),
+  varianceAmount: decimal("variance_amount", { precision: 12, scale: 2 }),
+  notes: text("notes"),
+  createdBy: int("created_by").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_budget_year").on(table.year),
+  index("idx_budget_category").on(table.category),
+  index("idx_budget_dept").on(table.departmentId),
+]));
+export type HrBudgetForecast = typeof hrBudgetForecasts.$inferSelect;
+
+/** AI Companion Conversation History */
+export const aiConversationHistory = mysqlTable("ai_conversation_history", {
+  id: int("id").primaryKey().autoincrement(),
+  userId: int("user_id").notNull(),
+  context: varchar("context", { length: 50 }).notNull().default("general"),
+  question: text("question").notNull(),
+  answer: text("answer").notNull(),
+  tokensUsed: int("tokens_used").default(0),
+  responseTimeMs: int("response_time_ms").default(0),
+  cached: boolean("cached").default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_ai_user").on(table.userId),
+  index("idx_ai_context").on(table.context),
+]));
+export type AiConversationHistory = typeof aiConversationHistory.$inferSelect;
