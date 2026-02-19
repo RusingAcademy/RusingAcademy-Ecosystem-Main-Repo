@@ -3,6 +3,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { metricsRouter } from "./routers/metrics";
+import { landingPagesRouter } from "./routers/landingPages";
 import { contactRouter } from "./routers/contact";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { TRPCError } from "@trpc/server";
@@ -9214,8 +9215,8 @@ export const appRouter = router({
   earnings: earningsRouter,
   budgetForecast: budgetForecastRouter,
   notificationEnhanced: notificationEnhancedRouter,
-
-  // Cron jobs router (protected by CRON_SECRET)
+  landingPages: landingPagesRouter,
+  // Cron jobs routerr (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure
       .input(z.object({ secret: z.string() }))

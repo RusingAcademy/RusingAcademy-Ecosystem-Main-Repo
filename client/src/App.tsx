@@ -290,6 +290,9 @@ const AcctSuppliers = lazy(() => import("./pages/accounting/Suppliers"));
 const AcctTrialBalanceReport = lazy(() => import("./pages/accounting/TrialBalanceReport"));
 const LibraryPage = lazy(() => import("./pages/Library"));
 const BookLandingPage = lazy(() => import("./pages/BookLandingPage"));
+const AdminLandingPages = lazy(() => import("./pages/admin/LandingPages"));
+const AdminLandingPageEditor = lazy(() => import("./pages/admin/LandingPageEditor"));
+const PublicLandingPage = lazy(() => import("./pages/public/LandingPage"));
 
 // ─── Router ────────────────────────────────────────────────────────────────
 function Router() {
@@ -538,10 +541,16 @@ function Router() {
       <Route path="/admin/dashboard">{() => <L><AdminControlCenter section="overview" /></L>}</Route>
       <Route path="/admin/commission">{() => <L><AdminCommission /></L>}</Route>
       <Route path="/admin/reminders">{() => <L><AdminReminders /></L>}</Route>
+      {/* Landing Pages (Phase 8.1) */}
+      <Route path="/admin/landing-pages">{() => <L><AdminLandingPages /></L>}</Route>
+      <Route path="/admin/landing-pages/:id">{() => <L><AdminLandingPageEditor /></L>}</Route>
       <Route path="/admin/content">{() => <L><AdminContentManagement /></L>}</Route>
       <Route path="/admin/leads">{() => <L><AdminLeads /></L>}</Route>
       <Route path="/dashboard/admin/leads">{() => <L><AdminLeads /></L>}</Route>
       
+      {/* Public Landing Pages (Phase 8.1) */}
+      <Route path="/p/:slug">{() => <PublicLandingPage />}</Route>
+
       {/* Ecosystem - RusingÂcademy */}
       <Route path="/rusingacademy">{() => <L><RusingAcademyLanding /></L>}</Route>
       <Route path="/rusingacademy/old">{() => <L><RusingAcademyHome /></L>}</Route>
