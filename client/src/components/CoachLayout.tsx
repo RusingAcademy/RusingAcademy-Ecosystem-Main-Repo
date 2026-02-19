@@ -5,6 +5,7 @@
 import { useState, useEffect } from "react";
 import CoachSidebar from "./CoachSidebar";
 import SocialLinks from "./SocialLinks";
+import { UniversalBreadcrumb } from "@/components/UniversalBreadcrumb";
 
 const LOGO_ICON = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mrXRaWLUDJGHdcjc.png";
 
@@ -56,6 +57,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
       <main id="main-content" className="lg:ml-[240px] min-h-screen pt-14 lg:pt-0 flex flex-col"
         role="main" tabIndex={-1}>
         <div className="flex-1 p-4 lg:p-6">
+          <UniversalBreadcrumb portal="coach" compact className="mb-3" />
           {children}
         </div>
 

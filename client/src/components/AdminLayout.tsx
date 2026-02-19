@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import GlobalSearchBar from "@/pages/admin/GlobalSearch";
+import { UniversalBreadcrumb } from "@/components/UniversalBreadcrumb";
 import { usePermissions } from "@/hooks/usePermissions";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -344,6 +345,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Bell className="h-4 w-4" />
               </Button>
             </div>
+          </div>
+          <div className="px-6 pt-3">
+            <UniversalBreadcrumb portal="admin" compact />
           </div>
           <div className="p-6">{children}</div>
         </main>

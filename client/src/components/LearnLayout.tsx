@@ -21,6 +21,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LearnLayoutProvider } from "@/contexts/LearnLayoutContext";
+import { UniversalBreadcrumb } from "@/components/UniversalBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -589,6 +590,9 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
               // The tRPC cache will be invalidated by the mutation
             }}
           >
+            <div className="px-4 pt-2">
+              <UniversalBreadcrumb portal="learner" compact />
+            </div>
             {children}
           </LearnLayoutProvider>
         </main>
