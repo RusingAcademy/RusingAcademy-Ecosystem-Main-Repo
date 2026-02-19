@@ -162,6 +162,10 @@ import {
 import { attachmentsRouter } from "./routers/attachments";
 import { celebrationsRouter } from "./routers/celebrations";
 import { clientPortalRouter } from "./routers/clientPortal";
+// ═══ Phase 2: Real-time Communication Routers ═══
+import { chatRouter as chatRoomsRouter } from "./routers/chat";
+import { progressSyncRouter } from "./routers/progressSync";
+import { notificationRouter as notificationEnhancedRouter } from "./routers/notification";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9182,6 +9186,11 @@ export const appRouter = router({
   charts: chartsRouter,
   invoicePdf: invoicePdfRouter,
   reports: reportsRouter,
+
+  // ═══ Phase 2: Real-time Communication ═══
+  chatRooms: chatRoomsRouter,
+  progressSync: progressSyncRouter,
+  notificationEnhanced: notificationEnhancedRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({

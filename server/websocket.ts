@@ -171,6 +171,45 @@ export async function initWebSocket(httpServer: HttpServer): Promise<Server | nu
       socket.emit("pong", { timestamp: Date.now() });
     });
 
+    // ── Phase 2: Chat Room Events ────────────────────────────────────────────
+    socket.on("chat:join", (roomId: string) => {
+      if (typeof roomId === "string" && roomId.length < 100) {
+        socket.join(`chat:${roomId}`);
+        socket.to(`chat:${roomId}`).emit("chat:user_joined", {
+          userId: authSocket.userId,
+          userName: authSocket.userName,
+          roomId,
+          timestamp: Date.now(),
+        });
+      }
+    });
+
+    socket.on("chat:leave", (roomId: string) => {
+      socket.leave(`chat:${roomId}`);
+      socket.to(`chat:${roomId}`).emit("chat:user_left", {
+        userId: authSocket.userId,
+        userName: authSocket.userName,
+        roomId,
+        timestamp: Date.now(),
+      });
+    });
+
+    socket.on("chat:typing", (data: { roomId: string; isTyping: boolean }) => {
+      if (typeof data.roomId === "string") {
+        socket.to(`chat:${data.roomId}`).emit("chat:typing", {
+          userId: authSocket.userId,
+          userName: authSocket.userName,
+          isTyping: data.isTyping,
+          roomId: data.roomId,
+        });
+      }
+    });
+
+    // ── Phase 2: Progress Sync Events ────────────────────────────────────────
+    socket.on("progress:sync_request", () => {
+      socket.emit("progress:sync_ack", { timestamp: Date.now() });
+    });
+
     socket.on("disconnect", (reason) => {
       console.log(`❌ WS: User ${authSocket.userId} disconnected: ${reason}`);
     });
