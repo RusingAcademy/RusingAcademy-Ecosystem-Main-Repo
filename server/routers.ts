@@ -166,6 +166,7 @@ import { clientPortalRouter } from "./routers/clientPortal";
 import { chatRouter as chatRoomsRouter } from "./routers/chat";
 import { progressSyncRouter } from "./routers/progressSync";
 import { notificationRouter as notificationEnhancedRouter } from "./routers/notification";
+import { notificationLogsRouter } from "./routers/notificationLogs";
 // ═══ Phase 3: Coach Experience Routers ═══
 import { videoRouter } from "./routers/video";
 import { coachAnalyticsRouter } from "./routers/coachAnalytics";
@@ -9214,6 +9215,7 @@ export const appRouter = router({
   earnings: earningsRouter,
   budgetForecast: budgetForecastRouter,
   notificationEnhanced: notificationEnhancedRouter,
+  notificationLogs: notificationLogsRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
