@@ -174,6 +174,10 @@ import { calendlyIntegrationRouter } from "./routers/calendlyIntegration";
 import { featureFlagsRouter } from "./routers/featureFlags";
 import { adminMonitoringRouter } from "./routers/adminMonitoring";
 import { hrReportsRouter } from "./routers/hrReports";
+// ═══ Phase 5: Optimization Routers ═══
+import { aiCompanionRouter } from "./routers/aiCompanion";
+import { earningsRouter } from "./routers/earnings";
+import { budgetForecastRouter } from "./routers/budgetForecast";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9205,6 +9209,10 @@ export const appRouter = router({
   featureFlags: featureFlagsRouter,
   adminMonitoring: adminMonitoringRouter,
   hrReports: hrReportsRouter,
+  // Phase 5
+  aiCompanion: aiCompanionRouter,
+  earnings: earningsRouter,
+  budgetForecast: budgetForecastRouter,
   notificationEnhanced: notificationEnhancedRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
