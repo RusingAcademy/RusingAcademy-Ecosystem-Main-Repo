@@ -27,7 +27,10 @@ function DashboardSkeleton() {
  * DashboardContent - The actual dashboard content based on user role
  * 
  * This component is only rendered AFTER authentication is confirmed
- * by the ProtectedRoute wrapper
+ * by the ProtectedRoute wrapper.
+ * 
+ * Phase 5 Enhancement: Owner users are now routed to /owner (Owner Portal)
+ * instead of /dashboard/admin, giving them their dedicated super-admin view.
  */
 function DashboardContent() {
   const { user, isLoading } = useAuthContext();
@@ -46,28 +49,25 @@ function DashboardContent() {
 
     // Role-based redirect
     const role = user.role?.toLowerCase() || "learner";
+    const isOwner = (user as any).isOwner || role === "owner";
     const currentPath = window.location.pathname;
     
     // Don't redirect if already on a specific dashboard route
     if (currentPath.startsWith("/dashboard/")) {
-      if (AUTH_DEBUG) {
-        
-      }
       return;
     }
 
     let targetPath = "/dashboard/learner";
     
-    if (role === "owner" || role === "admin") {
+    // Phase 5: Owner users go to Owner Portal
+    if (isOwner) {
+      targetPath = "/owner";
+    } else if (role === "admin") {
       targetPath = "/dashboard/admin";
-    } else if (role === "hr") {
+    } else if (role === "hr_admin" || role === "hr") {
       targetPath = "/dashboard/hr";
     } else if (role === "coach") {
       targetPath = "/dashboard/coach";
-    }
-
-    if (AUTH_DEBUG) {
-      
     }
 
     setHasRedirected(true);
@@ -86,14 +86,14 @@ function DashboardContent() {
 
   // Fallback: render based on role directly (shouldn't normally reach here)
   const role = user.role?.toLowerCase() || "learner";
-  
-  if (AUTH_DEBUG) {
-    
-  }
+  const isOwner = (user as any).isOwner || role === "owner";
 
-  if (role === "owner" || role === "admin") {
+  if (isOwner) {
+    // Owner Portal is at /owner, redirect there
+    return <DashboardSkeleton />;
+  } else if (role === "admin") {
     return <Suspense fallback={<DashboardSkeleton />}><AdminDashboard /></Suspense>;
-  } else if (role === "hr") {
+  } else if (role === "hr_admin" || role === "hr") {
     return <Suspense fallback={<DashboardSkeleton />}><HRDashboard /></Suspense>;
   } else if (role === "coach") {
     return <Suspense fallback={<DashboardSkeleton />}><CoachDashboard /></Suspense>;
@@ -106,8 +106,9 @@ function DashboardContent() {
  * DashboardRouter - RBAC-based dashboard routing
  * 
  * Routes users to the appropriate dashboard based on their role:
- * - Owner/Admin → Admin Dashboard
- * - HR → HR Dashboard
+ * - Owner → Owner Portal (/owner) [Phase 5]
+ * - Admin → Admin Dashboard
+ * - HR Admin → HR Dashboard
  * - Coach → Coach Dashboard
  * - Learner → Learner Dashboard
  * 
