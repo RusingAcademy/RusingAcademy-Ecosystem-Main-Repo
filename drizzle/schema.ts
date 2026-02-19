@@ -5571,3 +5571,14 @@ export const aiConversationHistory = mysqlTable("ai_conversation_history", {
   index("idx_ai_context").on(table.context),
 ]));
 export type AiConversationHistory = typeof aiConversationHistory.$inferSelect;
+
+// ═══ Phase 7-9: Landing Pages, Email Automation, Theme Customizer ═══
+export * from "./landing-pages-schema";
+export * from "./email-automation-schema";
+export * from "./theme-customizer-schema";
+// ═══ Phase 10-14: Group Sessions, Automation, Learner 360, Analytics, Public API ═══
+export * from "./group-sessions-schema";
+export * from "./automation-engine-schema";
+export * from "./learner360-tags-schema";
+export * from "./analytics-dashboard-schema";
+export * from "./public-api-schema";

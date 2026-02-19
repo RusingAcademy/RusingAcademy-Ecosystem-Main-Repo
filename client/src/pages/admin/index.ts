@@ -68,3 +68,12 @@ export { default as LearningPathBuilder } from "./LearningPathBuilder";
 export { default as ContentWorkflowBoard } from "./ContentWorkflowBoard";
 // ═══ Phase 0.1: Feature Flags Infrastructure ═══
 export { default as FeatureFlags } from "./FeatureFlags";
+export { default as MembershipTiers } from "./MembershipTiers";
+export { default as LandingPages } from "./LandingPages";
+export { default as EmailSequences } from "./EmailSequences";
+export { default as ThemeCustomizer } from "./ThemeCustomizer";
+export { default as GroupSessions } from "./GroupSessions";
+export { default as AutomationEngine } from "./AutomationEngine";
+export { default as Learner360 } from "./Learner360";
+export { default as AnalyticsDashboard } from "./AnalyticsDashboard";
+export { default as PublicApi } from "./PublicApi";
