@@ -5,6 +5,7 @@ import { groupSessions, groupSessionParticipants } from "../../drizzle/group-ses
 import { sessions } from "../../drizzle/schema";
 import { eq, and, desc, gte, sql } from "drizzle-orm";
 import { featureFlagService } from "../services/featureFlagService";
+import { dailyVideoService } from "../services/dailyVideoService";
 
 export const groupSessionsRouter = router({
   // List upcoming group sessions (public-facing for learners)
@@ -33,7 +34,7 @@ export const groupSessionsRouter = router({
       return { ...gs, participants };
     }),
 
-  // Admin: Create group session
+  // Admin: Create group session (with optional Daily.co room)
   create: adminProcedure
     .input(z.object({
       sessionId: z.number(),
@@ -48,14 +49,40 @@ export const groupSessionsRouter = router({
       recurrencePattern: z.enum(["weekly", "biweekly", "monthly"]).optional(),
       registrationDeadline: z.string().optional(),
       isPublic: z.boolean().default(true),
+      enableVideo: z.boolean().default(false),
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      const { enableVideo, ...sessionData } = input;
+
       const result = await db.insert(groupSessions).values({
-        ...input,
-        registrationDeadline: input.registrationDeadline ? new Date(input.registrationDeadline) : null,
+        ...sessionData,
+        registrationDeadline: sessionData.registrationDeadline ? new Date(sessionData.registrationDeadline) : null,
       });
-      return { id: result[0].insertId, success: true };
+
+      const insertedId = result[0].insertId;
+
+      // Create Daily.co video room if requested and configured
+      let videoRoomUrl: string | null = null;
+      if (enableVideo && dailyVideoService.isConfigured()) {
+        try {
+          const room = await dailyVideoService.createRoom(insertedId, {
+            maxParticipants: input.maxParticipants,
+            enableChat: true,
+            enableScreenshare: true,
+          });
+          videoRoomUrl = room.url;
+          // Store the video room URL in the group session
+          await db.update(groupSessions)
+            .set({ videoRoomUrl: room.url })
+            .where(eq(groupSessions.id, Number(insertedId)));
+        } catch (error) {
+          // Video room creation failed — session still created, video can be added later
+          console.warn("Failed to create Daily.co room:", error);
+        }
+      }
+
+      return { id: insertedId, success: true, videoRoomUrl };
     }),
 
   // Admin: Update group session
@@ -77,11 +104,17 @@ export const groupSessionsRouter = router({
       return { success: true };
     }),
 
-  // Admin: Delete group session
+  // Admin: Delete group session (also cleans up Daily.co room)
   delete: adminProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      // Clean up Daily.co room
+      try {
+        await dailyVideoService.deleteRoom(input.id);
+      } catch {
+        // Non-critical — room might not exist
+      }
       await db.delete(groupSessionParticipants).where(eq(groupSessionParticipants.groupSessionId, input.id));
       await db.delete(groupSessions).where(eq(groupSessions.id, input.id));
       return { success: true };
@@ -92,6 +125,95 @@ export const groupSessionsRouter = router({
     const db = await getDb();
     return db.select().from(groupSessions).orderBy(desc(groupSessions.createdAt)).limit(100);
   }),
+
+  // ═══ Daily.co Video Integration (Phase 10.1) ═══
+
+  // Create or get video room for a group session
+  createVideoRoom: adminProcedure
+    .input(z.object({
+      groupSessionId: z.number(),
+      maxParticipants: z.number().min(2).max(100).default(20),
+    }))
+    .mutation(async ({ input }) => {
+      if (!dailyVideoService.isConfigured()) {
+        throw new Error("Daily.co is not configured. Please set DAILY_API_KEY environment variable.");
+      }
+
+      const db = await getDb();
+      const [gs] = await db.select().from(groupSessions).where(eq(groupSessions.id, input.groupSessionId)).limit(1);
+      if (!gs) throw new Error("Group session not found");
+
+      const room = await dailyVideoService.createRoom(input.groupSessionId, {
+        maxParticipants: input.maxParticipants,
+        enableChat: true,
+        enableScreenshare: true,
+      });
+
+      // Store the video room URL
+      await db.update(groupSessions)
+        .set({ videoRoomUrl: room.url })
+        .where(eq(groupSessions.id, input.groupSessionId));
+
+      return { url: room.url, roomName: room.roomName, success: true };
+    }),
+
+  // Get video token for joining a session
+  getVideoToken: protectedProcedure
+    .input(z.object({
+      groupSessionId: z.number(),
+    }))
+    .query(async ({ input, ctx }) => {
+      if (!dailyVideoService.isConfigured()) {
+        return { available: false, reason: "Video not configured" };
+      }
+
+      const db = await getDb();
+      const [gs] = await db.select().from(groupSessions).where(eq(groupSessions.id, input.groupSessionId)).limit(1);
+      if (!gs) throw new Error("Group session not found");
+      if (!gs.videoRoomUrl) {
+        return { available: false, reason: "No video room for this session" };
+      }
+
+      const roomName = `group-session-${input.groupSessionId}`;
+      const user = ctx as any;
+      const isAdmin = user?.role === "admin" || user?.role === "coach";
+
+      const token = await dailyVideoService.createToken(roomName, {
+        isOwner: isAdmin,
+        userName: user?.name || user?.email || "Participant",
+        userId: String(user?.userId || user?.id || ""),
+      });
+
+      return {
+        available: true,
+        roomUrl: gs.videoRoomUrl,
+        token,
+        roomName,
+      };
+    }),
+
+  // Delete video room for a session
+  deleteVideoRoom: adminProcedure
+    .input(z.object({ groupSessionId: z.number() }))
+    .mutation(async ({ input }) => {
+      await dailyVideoService.deleteRoom(input.groupSessionId);
+      const db = await getDb();
+      await db.update(groupSessions)
+        .set({ videoRoomUrl: null })
+        .where(eq(groupSessions.id, input.groupSessionId));
+      return { success: true };
+    }),
+
+  // Get video room presence (who's currently in the call)
+  getVideoPresence: protectedProcedure
+    .input(z.object({ groupSessionId: z.number() }))
+    .query(async ({ input }) => {
+      const roomName = `group-session-${input.groupSessionId}`;
+      const presence = await dailyVideoService.getRoomPresence(roomName);
+      return presence;
+    }),
+
+  // ═══ Learner Endpoints ═══
 
   // Learner: Register for group session
   register: protectedProcedure

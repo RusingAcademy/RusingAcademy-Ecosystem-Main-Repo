@@ -33,6 +33,9 @@ export const groupSessions = mysqlTable("group_sessions", {
   registrationDeadline: timestamp("registrationDeadline"),
   isPublic: boolean("isPublic").default(true),
   
+  // Daily.co video integration (Phase 10.1)
+  videoRoomUrl: varchar("videoRoomUrl", { length: 500 }),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
