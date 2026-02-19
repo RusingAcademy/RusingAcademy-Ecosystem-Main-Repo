@@ -3,7 +3,7 @@
  * Provides cached, streaming AI responses with context-aware prompts
  * Uses OpenAI API with in-memory response cache
  */
-import { getDb } from "../_core/db";
+import { getDb } from "../db";
 import * as schema from "../../drizzle/schema";
 import { eq, desc, and } from "drizzle-orm";
 

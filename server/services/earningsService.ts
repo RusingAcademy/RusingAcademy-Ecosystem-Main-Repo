@@ -2,7 +2,7 @@
  * Phase 5: Coach Earnings Dashboard Service
  * Provides detailed earnings analytics for coaches
  */
-import { getDb } from "../_core/db";
+import { getDb } from "../db";
 import * as schema from "../../drizzle/schema";
 import { eq, and, gte, lte, sql, desc } from "drizzle-orm";
 

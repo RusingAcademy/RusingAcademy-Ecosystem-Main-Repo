@@ -2,7 +2,7 @@
  * Phase 5: HR Budget Forecasting Service
  * Provides budget planning, forecasting, and variance analysis
  */
-import { getDb } from "../_core/db";
+import { getDb } from "../db";
 import * as schema from "../../drizzle/schema";
 import { eq, and, sql, desc } from "drizzle-orm";
 
