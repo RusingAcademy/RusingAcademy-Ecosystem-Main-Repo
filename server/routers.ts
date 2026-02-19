@@ -172,6 +172,7 @@ import { coachAnalyticsRouter } from "./routers/coachAnalytics";
 import { calendlyIntegrationRouter } from "./routers/calendlyIntegration";
 // ═══ Phase 4: HR & Admin Routers ═══
 import { featureFlagsRouter } from "./routers/featureFlags";
+import { emailAutomationRouter } from "./routers/emailAutomation";
 import { adminMonitoringRouter } from "./routers/adminMonitoring";
 import { hrReportsRouter } from "./routers/hrReports";
 // ═══ Phase 5: Optimization Routers ═══
@@ -9207,6 +9208,7 @@ export const appRouter = router({
   calendlyIntegration: calendlyIntegrationRouter,
   // Phase 4: HR & Admin
   featureFlags: featureFlagsRouter,
+  emailAutomation: emailAutomationRouter,
   adminMonitoring: adminMonitoringRouter,
   hrReports: hrReportsRouter,
   // Phase 5

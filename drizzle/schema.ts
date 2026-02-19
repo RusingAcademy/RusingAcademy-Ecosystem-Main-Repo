@@ -5571,3 +5571,6 @@ export const aiConversationHistory = mysqlTable("ai_conversation_history", {
   index("idx_ai_context").on(table.context),
 ]));
 export type AiConversationHistory = typeof aiConversationHistory.$inferSelect;
+
+// Phase 8.2: Email Automation
+export * from "./email-automation-schema";

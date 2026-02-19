@@ -66,3 +66,4 @@ export { default as GovernmentReporting } from "./GovernmentReporting";
 export { default as WebhookHealthDashboard } from "./WebhookHealthDashboard";
 export { default as LearningPathBuilder } from "./LearningPathBuilder";
 export { default as ContentWorkflowBoard } from "./ContentWorkflowBoard";
+export { default as EmailSequences } from "./EmailSequences";
