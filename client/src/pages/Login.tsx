@@ -548,6 +548,7 @@ function LoginContent() {
   const [error, setError] = useState<string | null>(null);
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   /* ─── URL Params ─── */
@@ -974,6 +975,20 @@ function LoginContent() {
                 </div>
               </div>
 
+              {/* Remember Me */}
+              <div className="flex items-center gap-2 mt-1">
+                <input
+                  type="checkbox"
+                  id="remember-me-desktop"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-3.5 h-3.5 rounded border-white/20 bg-white/[0.06] text-[var(--barholex-gold)] focus:ring-[var(--barholex-gold)]/40 focus:ring-offset-0"
+                />
+                <label htmlFor="remember-me-desktop" className="text-white/40 text-[10px] cursor-pointer select-none">
+                  {t("Remember me", "Se souvenir de moi")}
+                </label>
+              </div>
+
               {/* Primary CTA — Sign In with Email */}
               <button aria-label="Action"
                 type="submit"
@@ -1268,7 +1283,19 @@ function LoginContent() {
                 )}
               </button>
             </div>
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="remember-me-mobile"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-3.5 h-3.5 rounded border-white/20 bg-white/[0.06] text-[var(--barholex-gold)] focus:ring-[var(--barholex-gold)]/40 focus:ring-offset-0"
+                />
+                <label htmlFor="remember-me-mobile" className="text-white/40 text-[10px] cursor-pointer select-none">
+                  {t("Remember me", "Se souvenir de moi")}
+                </label>
+              </div>
               <Link
                 to="/forgot-password"
                 className="text-[var(--barholex-gold)]/60 text-[10px] hover:text-[var(--barholex-gold)] transition-colors"

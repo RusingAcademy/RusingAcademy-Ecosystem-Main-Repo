@@ -1,50 +1,43 @@
-import { useState, useEffect } from "react";
+/**
+ * ResetPassword Page — Refactored with Auth Design System
+ * Phase 1: Auth UI/UX Harmonization with HAZY palette
+ */
+import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useSearch } from "wouter";
 import { trpc } from "../lib/trpc";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle, ArrowLeft, Lock } from "lucide-react";
+import { AuthLayout, AuthCard, AuthInput, AuthButton, PasswordStrength } from "@/components/auth";
 
 export default function ResetPassword() {
   const [, setLocation] = useLocation();
   const searchString = useSearch();
   const searchParams = new URLSearchParams(searchString);
   const token = searchParams.get("token");
-  
-  const [formData, setFormData] = useState({
-    password: "",
-    confirmPassword: "",
-  });
+  const [language] = useState<"en" | "fr">("en");
+
+  const t = useCallback(
+    (en: string, fr: string) => (language === "fr" ? fr : en),
+    [language],
+  );
+
+  const [formData, setFormData] = useState({ password: "", confirmPassword: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [tokenValid, setTokenValid] = useState<boolean | null>(null);
 
-  // Verify token on mount
   // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
   const verifyTokenMutation = trpc.customAuth.verifyResetToken.useMutation({
-    onSuccess: (data) => {
-      setTokenValid(data.valid);
-    },
-    onError: () => {
-      setTokenValid(false);
-    },
+    onSuccess: (data: { valid: boolean }) => { setTokenValid(data.valid); },
+    onError: () => { setTokenValid(false); },
   });
 
   const resetPasswordMutation = trpc.customAuth.resetPassword.useMutation({
     onSuccess: () => {
       setSuccess(true);
-      // Redirect to login after 3 seconds
-      setTimeout(() => {
-        setLocation("/login");
-      }, 3000);
+      setTimeout(() => { setLocation("/login"); }, 3000);
     },
-    onError: (err) => {
-      setError(err.message);
-    },
+    onError: (err: { message: string }) => { setError(err.message); },
   });
 
   useEffect(() => {
@@ -60,197 +53,151 @@ export default function ResetPassword() {
     setError(null);
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      setError(t("Passwords do not match", "Les mots de passe ne correspondent pas"));
       return;
     }
-
     if (formData.password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError(t("Password must be at least 8 characters", "Le mot de passe doit contenir au moins 8 caractères"));
       return;
     }
-
     if (!token) {
-      setError("Invalid reset token");
+      setError(t("Invalid reset token", "Jeton de réinitialisation invalide"));
       return;
     }
 
-    resetPasswordMutation.mutate({
-      token,
-      newPassword: formData.password,
-    });
+    resetPasswordMutation.mutate({ token, newPassword: formData.password });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Loading state while verifying token
+  // Loading state
   if (tokenValid === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <Loader2 className="w-12 h-12 text-teal-400 mx-auto animate-spin" />
-              <p className="text-white/90">Verifying reset link...</p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <AuthLayout>
+        <AuthCard>
+          <div className="text-center space-y-4 py-8">
+            <Loader2 className="w-12 h-12 text-[var(--barholex-gold)] mx-auto animate-spin" />
+            <p className="text-white/50 text-sm">
+              {t("Verifying reset link...", "Vérification du lien...")}
+            </p>
+          </div>
+        </AuthCard>
+      </AuthLayout>
     );
   }
 
-  // Invalid or expired token
+  // Invalid/expired token
   if (!tokenValid) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <AlertCircle className="w-16 h-16 text-red-500 mx-auto" />
-              <h2 className="text-2xl font-bold text-white">Invalid or Expired Link</h2>
-              <p className="text-white/90">
-                This password reset link is invalid or has expired.
-                Please request a new one.
-              </p>
-              <div className="pt-4 space-y-2">
-                <Link to="/forgot-password">
-                  <Button className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white">
-                    Request New Link
-                  </Button>
-                </Link>
-                <Link to="/login">
-                  <Button variant="outline" className="w-full bg-teal-800/50 border-slate-600 text-white hover:bg-foundation-2">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Login
-                  </Button>
-                </Link>
-              </div>
+      <AuthLayout>
+        <AuthCard>
+          <div className="text-center space-y-4 py-4">
+            <AlertCircle className="w-16 h-16 text-red-500 mx-auto" />
+            <h2 className="text-xl font-bold text-white">
+              {t("Invalid or Expired Link", "Lien invalide ou expiré")}
+            </h2>
+            <p className="text-white/50 text-sm">
+              {t("This password reset link is invalid or has expired.", "Ce lien de réinitialisation est invalide ou a expiré.")}
+            </p>
+            <div className="pt-2 space-y-2">
+              <Link to="/forgot-password">
+                <AuthButton>{t("Request New Link", "Demander un nouveau lien")}</AuthButton>
+              </Link>
+              <Link to="/login">
+                <AuthButton variant="secondary">
+                  <ArrowLeft className="w-4 h-4" />
+                  {t("Back to Login", "Retour à la connexion")}
+                </AuthButton>
+              </Link>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </AuthCard>
+      </AuthLayout>
     );
   }
 
   // Success state
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
-        <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
-              <h2 className="text-2xl font-bold text-white">Password Reset!</h2>
-              <p className="text-white/90">
-                Your password has been successfully reset.
-              </p>
-              <p className="text-sm text-cyan-300">
-                Redirecting to login...
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <AuthLayout>
+        <AuthCard>
+          <div className="text-center space-y-4 py-4">
+            <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+            <h2 className="text-xl font-bold text-white">
+              {t("Password Reset!", "Mot de passe réinitialisé !")}
+            </h2>
+            <p className="text-white/50 text-sm">
+              {t("Redirecting to login...", "Redirection vers la connexion...")}
+            </p>
+          </div>
+        </AuthCard>
+      </AuthLayout>
     );
   }
 
+  // Reset form
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-obsidian via-teal-900 to-obsidian p-4">
-      <Card className="w-full max-w-md bg-foundation/50 border-teal-800">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4">
-            <img
-              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
-              alt="RusingÂcademy"
-              className="h-16 w-auto"
-            />
-          </div>
-          <CardTitle className="text-2xl font-bold text-white">
-            Create New Password
-          </CardTitle>
-          <CardDescription className="text-cyan-300">
-            Enter your new password below
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && (
-              <Alert variant="destructive" className="bg-red-900/50 border-red-800">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+    <AuthLayout>
+      <AuthCard
+        title={t("Create New Password", "Créer un nouveau mot de passe")}
+        subtitle={t("Enter your new password below", "Entrez votre nouveau mot de passe ci-dessous")}
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              {error}
+            </div>
+          )}
 
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-white">
-                New Password
-              </Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter new password (min 8 characters)"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  minLength={8}
-                  className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
-                />
+          <div>
+            <AuthInput
+              icon={<Lock className="w-4 h-4" />}
+              name="password"
+              type={showPassword ? "text" : "password"}
+              placeholder={t("New password (min 8 characters)", "Nouveau mot de passe (min 8 caractères)")}
+              value={formData.password}
+              onChange={handleChange}
+              required
+              minLength={8}
+              autoComplete="new-password"
+              rightElement={
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  aria-pressed={showPassword}
+                  className="text-white/30 hover:text-white/60 transition-colors"
+                  aria-label={showPassword ? t("Hide password", "Masquer") : t("Show password", "Afficher")}
                 >
-                  {showPassword ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-white">
-                Confirm New Password
-              </Label>
-              <Input
-                id="confirmPassword"
-                name="confirmPassword"
-                type={showPassword ? "text" : "password"}
-                placeholder="Confirm your new password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                className="bg-teal-800/50 border-slate-600 text-white placeholder:text-white/60"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white"
-              disabled={resetPasswordMutation.isPending}
-            >
-              {resetPasswordMutation.isPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Resetting...
-                </>
-              ) : (
-                "Reset Password"
-              )}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-xs text-black dark:text-foreground pt-4 border-t border-teal-800">
-            Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
+              }
+            />
+            <PasswordStrength password={formData.password} t={t} />
           </div>
-        </CardFooter>
-      </Card>
-    </div>
+
+          <AuthInput
+            icon={<Lock className="w-4 h-4" />}
+            name="confirmPassword"
+            type={showPassword ? "text" : "password"}
+            placeholder={t("Confirm new password", "Confirmer le nouveau mot de passe")}
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+            autoComplete="new-password"
+          />
+
+          <AuthButton
+            type="submit"
+            isLoading={resetPasswordMutation.isPending}
+            loadingText={t("Resetting...", "Réinitialisation...")}
+            icon={<Lock className="w-4 h-4" />}
+          >
+            {t("Reset Password", "Réinitialiser le mot de passe")}
+          </AuthButton>
+        </form>
+      </AuthCard>
+    </AuthLayout>
   );
 }
