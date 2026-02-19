@@ -156,13 +156,14 @@ export async function getAIResponse(
     // Log interaction for analytics
     try {
       const db = await getDb();
-      await db.insert(schema.aiInteractionLogs).values({
+      await db.insert(schema.aiConversationHistory).values({
         userId: userId || 0,
         question: question.substring(0, 500),
+        answer: responseText.substring(0, 2000),
         context,
-        responseTime: Date.now() - startTime,
+        responseTimeMs: Date.now() - startTime,
         cached: false,
-        tokenCount: data.usage?.total_tokens || 0,
+        tokensUsed: data.usage?.total_tokens || 0,
       });
     } catch (logErr) {
       // Non-critical, don't fail the response

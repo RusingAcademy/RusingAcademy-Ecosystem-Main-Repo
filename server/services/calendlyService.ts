@@ -1,5 +1,5 @@
 import { createLogger } from "../logger";
-import { db } from "../db";
+import { getDb } from "../db";
 import { coachProfiles, sessions, coachCalendlyIntegrations } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { broadcastService } from "../websocket";
@@ -203,6 +203,7 @@ export const calendlyOAuthService = {
   },
 
   async refreshAccessToken(integrationId: number): Promise<string> {
+    const db = await getDb();
     const integration = await db.select().from(coachCalendlyIntegrations).where(eq(coachCalendlyIntegrations.id, integrationId)).then((r) => r[0]);
     if (!integration?.refreshToken) throw new Error("No refresh token available");
 
@@ -231,6 +232,7 @@ export const calendlyOAuthService = {
   },
 
   async connectCoach(coachProfileId: number, code: string, redirectUri: string): Promise<{ schedulingUrl: string }> {
+    const db = await getDb();
     const tokens = await this.exchangeCodeForToken(code, redirectUri);
     const userInfo = await fetch(`${CALENDLY_API_BASE}/users/me`, {
       headers: { Authorization: `Bearer ${tokens.access_token}` },
@@ -270,11 +272,13 @@ export const calendlyOAuthService = {
   },
 
   async disconnectCoach(coachProfileId: number): Promise<void> {
+    const db = await getDb();
     await db.update(coachCalendlyIntegrations).set({ isActive: false, updatedAt: new Date() }).where(eq(coachCalendlyIntegrations.coachProfileId, coachProfileId));
     await db.update(coachProfiles).set({ calendarType: "internal", calendlyUrl: null }).where(eq(coachProfiles.id, coachProfileId));
   },
 
   async getConnectionStatus(coachProfileId: number) {
+    const db = await getDb();
     const integration = await db.select().from(coachCalendlyIntegrations).where(eq(coachCalendlyIntegrations.coachProfileId, coachProfileId)).then((r) => r[0]);
     if (!integration) return { connected: false };
     return {
@@ -307,6 +311,7 @@ export const calendlyWebhookHandler = {
   },
 
   async handleInviteeCreated(payload: CalendlyWebhookPayload): Promise<void> {
+    const db = await getDb();
     const { event, invitee } = payload.payload;
     const existingSession = await db.select().from(sessions).where(eq(sessions.calendlyEventId, event.uri)).then((r) => r[0]);
     if (existingSession) {
@@ -321,6 +326,7 @@ export const calendlyWebhookHandler = {
   },
 
   async handleInviteeCanceled(payload: CalendlyWebhookPayload): Promise<void> {
+    const db = await getDb();
     const { event } = payload.payload;
     const session = await db.select().from(sessions).where(eq(sessions.calendlyEventId, event.uri)).then((r) => r[0]);
     if (!session) return;
@@ -330,6 +336,7 @@ export const calendlyWebhookHandler = {
   },
 
   async handleInviteeNoShow(payload: CalendlyWebhookPayload): Promise<void> {
+    const db = await getDb();
     const session = await db.select().from(sessions).where(eq(sessions.calendlyEventId, payload.payload.event.uri)).then((r) => r[0]);
     if (!session) return;
     await db.update(sessions).set({ status: "no_show" }).where(eq(sessions.id, session.id));
