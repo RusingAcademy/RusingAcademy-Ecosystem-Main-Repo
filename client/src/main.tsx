@@ -9,6 +9,10 @@ import { ClerkProviderWrapper } from "./providers/ClerkProviderWrapper";
 import { getLoginUrl } from "./const";
 import "./index.css";
 import { initAnalytics } from "./lib/analytics";
+import { initSentryClient } from "./lib/sentry";
+
+// PR 0.3: Initialize Sentry (no-op if VITE_SENTRY_DSN not set)
+initSentryClient();
 
 // Initialize all analytics (GA4 + Umami)
 initAnalytics();
