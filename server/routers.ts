@@ -107,6 +107,7 @@ import { progressCascadeRouter } from "./routers/progressCascade";
 import { badgeShowcaseRouter } from "./routers/badgeShowcase";
 import { invitationsRouter } from "./routers/invitations";
 import { adminDashboardDataRouter } from "./routers/adminDashboardData";
+import { ownerRouter } from "./routers/owner";
 import { adminFlashcardsRouter, adminVocabularyRouter, adminGrammarDrillsRouter, adminDailyReviewRouter, adminStudyGroupsRouter } from "./routers/adminSkillLabs";
 import { dailyGoalsRouter } from "./routers/dailyGoals";
 // ═══ SLE Skill Labs Routers (Sprint E4) ═══
@@ -9234,6 +9235,8 @@ export const appRouter = router({
   learner360: learner360Router,
   analyticsDashboard: analyticsDashboardRouter,
   publicApi: publicApiRouter,
+  // Auth Phase 3: Owner Portal
+  owner: ownerRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure
