@@ -66,3 +66,5 @@ export { default as GovernmentReporting } from "./GovernmentReporting";
 export { default as WebhookHealthDashboard } from "./WebhookHealthDashboard";
 export { default as LearningPathBuilder } from "./LearningPathBuilder";
 export { default as ContentWorkflowBoard } from "./ContentWorkflowBoard";
+// ═══ Phase 0.1: Feature Flags Infrastructure ═══
+export { default as FeatureFlags } from "./FeatureFlags";
