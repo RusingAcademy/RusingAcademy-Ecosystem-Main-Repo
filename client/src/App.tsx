@@ -10,6 +10,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import { GamificationProvider } from "./contexts/GamificationContext";
+import { FeatureFlagProvider } from "./hooks/useFeatureFlag";
 import { usePageTracking } from "./hooks/useAnalytics";
 import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
@@ -531,6 +532,8 @@ function Router() {
       <Route path="/admin/assessments">{() => <L><AdminControlCenter section="assessments" /></L>}</Route>
       {/* Analytics */}
       <Route path="/admin/reports">{() => <L><AdminControlCenter section="reports" /></L>}</Route>
+      {/* Phase 0.1: Feature Flags */}
+      <Route path="/admin/feature-flags">{() => <L><AdminControlCenter section="feature-flags" /></L>}</Route>
 
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <L><AdminControlCenter section="overview" /></L>}</Route>
@@ -746,6 +749,7 @@ function App() {
             <TooltipProvider>
               <NotificationProvider>
                 <GamificationProvider>
+                <FeatureFlagProvider>
                   <Toaster />
                   <PostLoginRedirect />
                   {/* Skip link for keyboard navigation accessibility */}
@@ -761,6 +765,7 @@ function App() {
                   <SkipToContent />
                   <PWAInstallBanner />
                   <ScrollToTopButton />
+                </FeatureFlagProvider>
                 </GamificationProvider>
               </NotificationProvider>
             </TooltipProvider>

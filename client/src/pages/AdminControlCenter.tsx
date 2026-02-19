@@ -66,6 +66,8 @@ import {
   WebhookHealthDashboard,
   LearningPathBuilder,
   ContentWorkflowBoard,
+  // Phase 0.1: Feature Flags
+  FeatureFlags,
 } from "./admin";
 
 interface Props {
@@ -153,6 +155,8 @@ const sectionMap: Record<string, React.ComponentType> = {
   "quiz-management": QuizManagement,
   "learning-paths": LearningPathBuilder,
   "content-workflow": ContentWorkflowBoard,
+  // Phase 0.1: Feature Flags
+  "feature-flags": FeatureFlags,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {
