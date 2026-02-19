@@ -178,6 +178,7 @@ import { hrReportsRouter } from "./routers/hrReports";
 import { aiCompanionRouter } from "./routers/aiCompanion";
 import { earningsRouter } from "./routers/earnings";
 import { budgetForecastRouter } from "./routers/budgetForecast";
+import { membershipAdminRouter } from "./routers/membershipAdmin";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9214,6 +9215,7 @@ export const appRouter = router({
   earnings: earningsRouter,
   budgetForecast: budgetForecastRouter,
   notificationEnhanced: notificationEnhancedRouter,
+  membershipAdmin: membershipAdminRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({

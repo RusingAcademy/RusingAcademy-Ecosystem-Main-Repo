@@ -1,7 +1,7 @@
 // client/src/hooks/useFeatureFlag.tsx — Phase 4: Feature Flag React integration
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 interface FeatureFlagContextType {
   isEnabled: (key: string) => boolean;
