@@ -68,3 +68,7 @@ export { default as LearningPathBuilder } from "./LearningPathBuilder";
 export { default as ContentWorkflowBoard } from "./ContentWorkflowBoard";
 // ═══ Phase 0.1: Feature Flags Infrastructure ═══
 export { default as FeatureFlags } from "./FeatureFlags";
+export { default as MembershipTiers } from "./MembershipTiers";
+export { default as LandingPages } from "./LandingPages";
+export { default as EmailSequences } from "./EmailSequences";
+export { default as ThemeCustomizer } from "./ThemeCustomizer";

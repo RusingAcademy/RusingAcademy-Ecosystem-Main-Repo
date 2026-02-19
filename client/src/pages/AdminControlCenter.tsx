@@ -68,6 +68,10 @@ import {
   ContentWorkflowBoard,
   // Phase 0.1: Feature Flags
   FeatureFlags,
+  MembershipTiers,
+  LandingPages,
+  EmailSequences,
+  ThemeCustomizer,
 } from "./admin";
 
 interface Props {
@@ -157,6 +161,10 @@ const sectionMap: Record<string, React.ComponentType> = {
   "content-workflow": ContentWorkflowBoard,
   // Phase 0.1: Feature Flags
   "feature-flags": FeatureFlags,
+  "membership-tiers": MembershipTiers,
+  "landing-pages": LandingPages,
+  "email-sequences": EmailSequences,
+  "theme-customizer": ThemeCustomizer,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

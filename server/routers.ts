@@ -167,6 +167,10 @@ import { chatRouter as chatRoomsRouter } from "./routers/chat";
 import { progressSyncRouter } from "./routers/progressSync";
 import { notificationRouter as notificationEnhancedRouter } from "./routers/notification";
 import { notificationLogsRouter } from "./routers/notificationLogs";
+import { membershipAdminRouter } from "./routers/membershipAdmin";
+import { landingPagesRouter } from "./routers/landingPages";
+import { emailAutomationRouter } from "./routers/emailAutomation";
+import { themeCustomizerRouter } from "./routers/themeCustomizer";
 // ═══ Phase 3: Coach Experience Routers ═══
 import { videoRouter } from "./routers/video";
 import { coachAnalyticsRouter } from "./routers/coachAnalytics";
@@ -9216,6 +9220,10 @@ export const appRouter = router({
   budgetForecast: budgetForecastRouter,
   notificationEnhanced: notificationEnhancedRouter,
   notificationLogs: notificationLogsRouter,
+  membershipAdmin: membershipAdminRouter,
+  landingPages: landingPagesRouter,
+  emailAutomation: emailAutomationRouter,
+  themeCustomizer: themeCustomizerRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({

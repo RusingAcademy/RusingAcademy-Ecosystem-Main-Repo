@@ -534,6 +534,10 @@ function Router() {
       <Route path="/admin/reports">{() => <L><AdminControlCenter section="reports" /></L>}</Route>
       {/* Phase 0.1: Feature Flags */}
       <Route path="/admin/feature-flags">{() => <L><AdminControlCenter section="feature-flags" /></L>}</Route>
+      <Route path="/admin/membership-tiers">{() => <L><AdminControlCenter section="membership-tiers" /></L>}</Route>
+      <Route path="/admin/landing-pages">{() => <L><AdminControlCenter section="landing-pages" /></L>}</Route>
+      <Route path="/admin/email-sequences">{() => <L><AdminControlCenter section="email-sequences" /></L>}</Route>
+      <Route path="/admin/theme-customizer">{() => <L><AdminControlCenter section="theme-customizer" /></L>}</Route>
 
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <L><AdminControlCenter section="overview" /></L>}</Route>
