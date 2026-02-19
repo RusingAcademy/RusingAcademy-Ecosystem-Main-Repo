@@ -653,131 +653,54 @@ export default function RusingÂcademyLanding() {
       {/* ═══ FREE ACCESS PROMO BANNER ═══ */}
       <PromoBanner lang={lang} />
 
-      {/* ═══ PREMIUM HERO SECTION ═══ */}
+      {/* ═══ PREMIUM HERO SECTION — Full-bleed classroom photo with glassmorphism ═══ */}
       <section 
         ref={heroRef}
-        className="relative min-h-[90vh] flex items-center overflow-hidden"
+        className="relative min-h-[85vh] md:min-h-[80vh] flex items-center overflow-hidden"
       >
-        {/* Elegant White Background */}
+        {/* Full-bleed background image */}
         <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0"
-            style={{ 
-              background: 'linear-gradient(180deg, var(--text-inverse) 0%, #F8FAFC 50%, #F1F5F9 100%)'
-            }}
+          <img
+            src="https://rusingacademy-cdn.b-cdn.net/images/hero/steven-class.jpeg"
+            alt="Steven Barholere teaching a bilingual training class"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+            fetchPriority="high"
           />
-          
-          {/* Subtle Colored Accent Overlay */}
-          <div 
-            className="absolute inset-0 opacity-30"
-            style={{ 
-              background: 'radial-gradient(ellipse at 20% 20%, rgba(13, 148, 136, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(249, 115, 22, 0.1) 0%, transparent 60%)'
-            }}
-          />
-          
-          {/* Floating Orbs for Depth */}
-          <motion.div
-            className="absolute w-96 h-96 rounded-full opacity-40"
-            style={{ 
-              background: 'radial-gradient(circle, rgba(13, 148, 136, 0.3) 0%, transparent 70%)',
-              top: '10%',
-              left: '5%',
-              filter: 'blur(80px)'
-            }}
-            animate={{ 
-              x: [0, 30, 0],
-              y: [0, -20, 0],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ 
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute w-80 h-80 rounded-full opacity-35"
-            style={{ 
-              background: 'radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%)',
-              bottom: '15%',
-              right: '10%',
-              filter: 'blur(70px)'
-            }}
-            animate={{ 
-              x: [0, -25, 0],
-              y: [0, 25, 0],
-              scale: [1, 1.15, 1]
-            }}
-            transition={{ 
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute w-64 h-64 rounded-full opacity-30"
-            style={{ 
-              background: 'radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%)',
-              top: '50%',
-              right: '25%',
-              filter: 'blur(60px)'
-            }}
-            animate={{ 
-              x: [0, 20, 0],
-              y: [0, -30, 0],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{ 
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          
-          {/* Subtle Grid Pattern */}
-          <div 
-            className="absolute inset-0 opacity-[0.03]"
-            style={{ 
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
         </div>
 
-        <div className="relative max-w-5xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16 lg:py-24 text-center">
-          <div className="flex flex-col items-center">
-            <motion.div
-              style={{ opacity: heroOpacity, scale: heroScale }}
-              initial="hidden"
-              animate="visible"
-              variants={animationVariants.staggerContainer}
-              className="text-center"
-            >
+        {/* Glassmorphism text panel — left-aligned */}
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32 z-10">
+          <motion.div
+            style={{ opacity: heroOpacity, scale: heroScale }}
+            initial="hidden"
+            animate="visible"
+            variants={animationVariants.staggerContainer}
+            className="max-w-xl lg:max-w-2xl"
+          >
+            <div className="backdrop-blur-xl bg-white/[0.12] border border-white/[0.18] rounded-3xl p-8 md:p-10 lg:p-12 shadow-2xl">
               {/* Badge */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="inline-flex flex-col items-center gap-2 mb-8"
+                className="mb-5"
               >
-                <div 
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-teal-700 text-sm font-semibold shadow-lg backdrop-blur-sm"
-                  style={{ background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%)', border: '1px solid rgba(13, 148, 136, 0.3)' }}
-                >
-                  <Sparkles className="w-4 h-4" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/25 text-white text-sm font-medium">
+                  <Sparkles className="w-4 h-4 text-orange-400" />
                   {t.hero.badge}
-                </div>
-                <span className="text-sm text-slate-600 font-medium">{t.hero.badgeSub}</span>
+                </span>
+                <span className="block mt-2 text-sm text-white/80 font-medium">{t.hero.badgeSub}</span>
               </motion.div>
 
               {/* Title */}
               <motion.h1 
                 variants={animationVariants.fadeInUp}
-                className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-6"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-white"
               >
-                <span className="text-slate-900">{t.hero.title}</span>
-                <br />
-                <span 
-                  className="bg-clip-text text-transparent"
-                  style={{ backgroundImage: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, #F97316 100%)' }}
-                >
+                {t.hero.title}{" "}
+                <span className="text-orange-400">
                   {t.hero.titleHighlight}
                 </span>
               </motion.h1>
@@ -785,7 +708,7 @@ export default function RusingÂcademyLanding() {
               {/* Subtitle */}
               <motion.p 
                 variants={animationVariants.fadeInUp}
-                className="text-lg md:text-xl mb-4 md:mb-6 lg:mb-10 max-w-2xl mx-auto text-slate-600 leading-relaxed"
+                className="text-base md:text-lg text-white/90 mb-8 leading-relaxed"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -794,15 +717,15 @@ export default function RusingÂcademyLanding() {
               {FREE_ACCESS_MODE && (
                 <motion.div 
                   variants={animationVariants.fadeInUp}
-                  className="mb-8"
+                  className="mb-6"
                 >
-                  <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-emerald-50 border-2 border-emerald-200 shadow-lg shadow-emerald-100/50">
+                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-md">
                     <div className="flex items-center gap-2">
-                      <Gift className="w-5 h-5 text-emerald-600" />
-                      <span className="text-emerald-800 font-bold text-base">{t.promo.badge}</span>
+                      <Gift className="w-5 h-5 text-emerald-300" />
+                      <span className="text-emerald-300 font-bold text-sm">{t.promo.badge}</span>
                     </div>
-                    <div className="w-px h-5 bg-emerald-300" />
-                    <span className="text-emerald-700 text-sm font-medium">{t.promo.promoNote}</span>
+                    <div className="w-px h-4 bg-white/30" />
+                    <span className="text-white/80 text-xs font-medium">{t.promo.promoNote}</span>
                   </div>
                 </motion.div>
               )}
@@ -810,12 +733,11 @@ export default function RusingÂcademyLanding() {
               {/* CTAs */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex flex-wrap justify-center gap-4 mb-4 md:mb-6 lg:mb-10"
+                className="flex flex-wrap gap-4"
               >
                 <Link
                   href="/curriculum"
-                  className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-2xl shadow-xl"
-                  style={{ background: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 100%)' }}
+                  className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-2xl shadow-xl bg-gradient-to-r from-orange-500 to-orange-600"
                 >
                   {t.hero.cta1}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -824,7 +746,7 @@ export default function RusingÂcademyLanding() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 border-2 border-teal-200 hover:border-teal-400 hover:bg-teal-50 shadow-lg"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 border-2 border-white/40 text-white hover:bg-white/15 hover:border-white/60 backdrop-blur-sm"
                 >
                   <Calendar className="w-5 h-5" />
                   {t.hero.cta2}
@@ -834,13 +756,13 @@ export default function RusingÂcademyLanding() {
               {/* Trust Indicators */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex items-center justify-center gap-4 text-sm text-slate-600"
+                className="flex items-center gap-4 text-sm text-white/80 mt-8"
               >
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div 
                       key={i}
-                      className="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-br from-teal-600 to-teal-700 flex items-center justify-center text-white text-xs font-bold shadow-lg"
+                      className="w-9 h-9 rounded-full border-2 border-white/30 bg-gradient-to-br from-teal-600 to-teal-700 flex items-center justify-center text-white text-xs font-bold shadow-lg"
                     >
                       {['S', 'M', 'J', 'A'][i-1]}
                     </div>
@@ -848,57 +770,61 @@ export default function RusingÂcademyLanding() {
                 </div>
                 <span>{t.hero.trust}</span>
               </motion.div>
-            </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-            {/* Floating Stats Cards */}
-            <motion.div 
-              className="flex flex-wrap justify-center gap-6 mt-12"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-            >
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
-                <div className="flex items-center gap-3">
-                  <div 
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 100%)' }}
-                  >
-                    <TrendingUp className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-slate-900">3-4x</p>
-                    <p className="text-xs text-slate-500 font-medium">{lang === 'fr' ? 'Plus rapide' : 'Faster Results'}</p>
-                  </div>
+      {/* Floating Stats Cards — below hero */}
+      <section className="py-6 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+        <div className="max-w-5xl mx-auto px-6">
+          <motion.div 
+            className="flex flex-wrap justify-center gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="flex items-center gap-3">
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 100%)' }}
+                >
+                  <TrendingUp className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">3-4x</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{lang === 'fr' ? 'Plus rapide' : 'Faster Results'}</p>
                 </div>
               </div>
-              
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    ))}
-                  </div>
-                  <span className="text-sm font-semibold text-slate-900">95% {lang === 'fr' ? 'R\u00e9ussite' : 'Success'}</span>
+            </div>
+            
+            <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="flex items-center gap-2">
+                <div className="flex">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />
+                  ))}
+                </div>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white">95% {lang === 'fr' ? 'R\u00e9ussite' : 'Success'}</span>
+              </div>
+            </div>
+            
+            <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="flex items-center gap-3">
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, var(--accent-purple) 0%, #DB2777 100%)' }}
+                >
+                  <Users className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">2,500+</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{lang === 'fr' ? 'Fonctionnaires' : 'Public Servants'}</p>
                 </div>
               </div>
-              
-              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm border border-slate-200/80 hover:shadow-xl transition-all hover:-translate-y-0.5">
-                <div className="flex items-center gap-3">
-                  <div 
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, var(--accent-purple) 0%, #DB2777 100%)' }}
-                  >
-                    <Users className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-slate-900">2,500+</p>
-                    <p className="text-xs text-slate-500 font-medium">{lang === 'fr' ? 'Fonctionnaires' : 'Public Servants'}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
