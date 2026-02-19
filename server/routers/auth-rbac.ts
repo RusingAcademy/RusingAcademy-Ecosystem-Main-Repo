@@ -231,11 +231,39 @@ router.get("/permissions", async (req, res) => {
       });
     }
 
-    // For other roles, return role-based permissions
+    // For other roles, query role_permissions table for actual permissions
+    const [rolePerms] = await db.execute(sql`
+      SELECT p.module, p.submodule, p.action
+      FROM role_permissions rp
+      JOIN roles r ON rp.roleId = r.id
+      JOIN permissions p ON rp.permissionId = p.id
+      WHERE r.name = ${user.role}
+      ORDER BY p.module, p.submodule, p.action
+    `);
+
+    const permissions = Array.isArray(rolePerms)
+      ? rolePerms.map((r: any) => `${r.module}.${r.submodule}.${r.action}`)
+      : [];
+
+    // Also check user_permissions for per-user overrides
+    const [userPerms] = await db.execute(sql`
+      SELECT p.module, p.submodule, p.action
+      FROM user_permissions up
+      JOIN permissions p ON up.permissionId = p.id
+      WHERE up.userId = ${userId} AND up.granted = 1
+    `);
+
+    const userPermList = Array.isArray(userPerms)
+      ? userPerms.map((r: any) => `${r.module}.${r.submodule}.${r.action}`)
+      : [];
+
+    // Merge role + user permissions (deduplicate)
+    const allPerms = [...new Set([...permissions, ...userPermList])];
+
     return res.json({
       role: user.role,
       isOwner: user.isOwner,
-      permissions: [], // Would need to query role_permissions table
+      permissions: allPerms,
     });
   } catch (error) {
     log.error("Get permissions error:", error);
@@ -273,8 +301,21 @@ router.get("/check-permission", async (req, res) => {
       return res.json({ hasPermission: true });
     }
 
-    // For non-owners, would need to check role_permissions table
-    return res.json({ hasPermission: false });
+    // Parse permission string (module.submodule.action)
+    const parts = (permission as string).split(".");
+    let mod: string, action: string, submodule: string | undefined;
+    if (parts.length === 3) {
+      [mod, submodule, action] = parts;
+    } else if (parts.length === 2) {
+      [mod, action] = parts;
+    } else {
+      return res.json({ hasPermission: false });
+    }
+
+    // Check role_permissions table via the middleware
+    const { hasPermission: checkPerm } = await import("../rbacMiddleware");
+    const allowed = await checkPerm(user?.role || "user", { module: mod, action, submodule });
+    return res.json({ hasPermission: allowed });
   } catch (error) {
     log.error("Check permission error:", error);
     return res.status(500).json({ error: "Server error" });

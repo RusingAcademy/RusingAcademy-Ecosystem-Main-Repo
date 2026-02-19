@@ -3,7 +3,7 @@
  * 
  * Centralizes permission checks and audit logging for all admin mutations.
  * 
- * RBAC: Checks role_permissions table for (role, module, action) tuples.
+ * RBAC: Checks role_permissions table via JOIN on roles + permissions tables.
  * Audit: Logs every admin mutation with who/what/when + diff of changes.
  */
 import { TRPCError } from "@trpc/server";
@@ -17,23 +17,24 @@ const log = createLogger("rbacMiddleware");
 // ============================================================================
 
 export interface PermissionCheck {
-  module: string;   // e.g., "courses", "coaching", "payments", "users", "settings"
-  action: string;   // e.g., "view", "create", "edit", "delete", "export"
+  module: string;      // e.g., "products", "people", "marketing", "website", "insights", "settings", "platform", "hr"
+  action: string;      // e.g., "view", "create", "update", "delete", "export"
+  submodule?: string;  // e.g., "courses", "coaching", "learners", "cohorts"
 }
 
 /**
- * Check if a user's role has permission for a specific module+action.
+ * Check if a user's role has permission for a specific module.submodule.action.
+ * Uses the normalized roles → role_permissions → permissions JOIN.
  * Returns true if allowed, false if denied.
  * 
- * Falls back to true for "admin" role (superadmin) if no explicit permission exists.
- * Falls back to false for other roles if no explicit permission exists.
+ * Owner and admin roles always have full access (wildcard bypass).
  */
 export async function hasPermission(
   userRole: string,
   check: PermissionCheck
 ): Promise<boolean> {
   // Superadmin bypass: owner/admin always has access
-  if (userRole === "admin") return true;
+  if (userRole === "owner" || userRole === "admin") return true;
 
   const db = await getDb();
   if (!db) {
@@ -42,24 +43,38 @@ export async function hasPermission(
   }
 
   try {
-    const [rows] = await db.execute(sql`
-      SELECT allowed FROM role_permissions 
-      WHERE role = ${userRole} AND module = ${check.module} AND action = ${check.action}
-      LIMIT 1
-    `);
+    // Use proper JOIN: roles → role_permissions → permissions
+    const query = check.submodule
+      ? sql`
+          SELECT rp.id FROM role_permissions rp
+          JOIN roles r ON rp.roleId = r.id
+          JOIN permissions p ON rp.permissionId = p.id
+          WHERE r.name = ${userRole}
+            AND p.module = ${check.module}
+            AND p.submodule = ${check.submodule}
+            AND p.action = ${check.action}
+          LIMIT 1
+        `
+      : sql`
+          SELECT rp.id FROM role_permissions rp
+          JOIN roles r ON rp.roleId = r.id
+          JOIN permissions p ON rp.permissionId = p.id
+          WHERE r.name = ${userRole}
+            AND p.module = ${check.module}
+            AND p.action = ${check.action}
+          LIMIT 1
+        `;
 
-    const row = Array.isArray(rows) && rows[0] ? rows[0] as any : null;
+    const [rows] = await db.execute(query);
+    const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
     
-    if (!row) {
-      // No explicit permission found — deny by default for non-admin
-      return false;
-    }
-
-    return Boolean(row.allowed);
+    // Presence of a row = permission granted (no 'allowed' column needed)
+    return row !== null;
   } catch (error) {
     log.error({
       role: userRole,
       module: check.module,
+      submodule: check.submodule,
       action: check.action,
       error: error instanceof Error ? error.message : String(error),
     }, "Permission check failed");
@@ -68,8 +83,62 @@ export async function hasPermission(
 }
 
 /**
+ * Check multiple permissions at once. Returns true if ALL are granted.
+ */
+export async function hasAllPermissions(
+  userRole: string,
+  checks: PermissionCheck[]
+): Promise<boolean> {
+  for (const check of checks) {
+    if (!(await hasPermission(userRole, check))) return false;
+  }
+  return true;
+}
+
+/**
+ * Check multiple permissions at once. Returns true if ANY is granted.
+ */
+export async function hasAnyPermission(
+  userRole: string,
+  checks: PermissionCheck[]
+): Promise<boolean> {
+  for (const check of checks) {
+    if (await hasPermission(userRole, check)) return true;
+  }
+  return false;
+}
+
+/**
+ * Get all permissions for a role as module.submodule.action strings.
+ */
+export async function getRolePermissions(userRole: string): Promise<string[]> {
+  if (userRole === "owner" || userRole === "admin") return ["*"];
+
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    const [rows] = await db.execute(sql`
+      SELECT p.module, p.submodule, p.action
+      FROM role_permissions rp
+      JOIN roles r ON rp.roleId = r.id
+      JOIN permissions p ON rp.permissionId = p.id
+      WHERE r.name = ${userRole}
+      ORDER BY p.module, p.submodule, p.action
+    `);
+
+    return Array.isArray(rows)
+      ? rows.map((r: any) => `${r.module}.${r.submodule}.${r.action}`)
+      : [];
+  } catch (error) {
+    log.error({ role: userRole, error: error instanceof Error ? error.message : String(error) }, "Failed to get role permissions");
+    return [];
+  }
+}
+
+/**
  * Create a tRPC middleware that checks RBAC permissions.
- * Usage: protectedProcedure.use(requirePermission({ module: "courses", action: "edit" }))
+ * Usage: protectedProcedure.use(requirePermission({ module: "products", submodule: "courses", action: "edit" }))
  */
 export function requirePermission(check: PermissionCheck) {
   return async ({ ctx, next }: { ctx: any; next: () => Promise<any> }) => {
@@ -81,15 +150,43 @@ export function requirePermission(check: PermissionCheck) {
         userId: ctx.user?.id,
         role: userRole,
         module: check.module,
+        submodule: check.submodule,
         action: check.action,
       }, "Permission denied");
       throw new TRPCError({
         code: "FORBIDDEN",
-        message: `You do not have permission to ${check.action} in ${check.module}`,
+        message: `You do not have permission to ${check.action} ${check.submodule || check.module}`,
       });
     }
 
     return next();
+  };
+}
+
+/**
+ * Create an Express middleware that checks RBAC permissions.
+ * Usage: router.get("/admin/courses", requireExpressPermission({ module: "products", submodule: "courses", action: "view" }), handler)
+ */
+export function requireExpressPermission(check: PermissionCheck) {
+  return async (req: any, res: any, next: any) => {
+    const userRole = req.user?.role || "user";
+    const allowed = await hasPermission(userRole, check);
+
+    if (!allowed) {
+      log.warn({
+        userId: req.user?.id,
+        role: userRole,
+        module: check.module,
+        submodule: check.submodule,
+        action: check.action,
+      }, "Permission denied (Express)");
+      return res.status(403).json({
+        error: "Forbidden",
+        message: `You do not have permission to ${check.action} ${check.submodule || check.module}`,
+      });
+    }
+
+    next();
   };
 }
 
