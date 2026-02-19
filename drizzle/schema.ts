@@ -5388,3 +5388,60 @@ export const notificationsLog = mysqlTable("notifications_log", {
 ]));
 export type NotificationLog = typeof notificationsLog.$inferSelect;
 export type InsertNotificationLog = typeof notificationsLog.$inferInsert;
+
+// ═══════════════════════════════════════════════════════════════
+// PHASE 3: Coach Experience — New Tables
+// ═══════════════════════════════════════════════════════════════
+
+// ─── Calendly OAuth Integration ─────────────────────────────
+export const coachCalendlyIntegrations = mysqlTable("coach_calendly_integrations", {
+  id: int("id").autoincrement().primaryKey(),
+  coachProfileId: int("coachProfileId").notNull().references(() => coachProfiles.id),
+  calendlyUserUri: text("calendlyUserUri").notNull(),
+  accessToken: text("accessToken").notNull(),
+  refreshToken: text("refreshToken"),
+  tokenExpiresAt: timestamp("tokenExpiresAt"),
+  schedulingUrl: varchar("schedulingUrl", { length: 500 }),
+  eventTypeUri: varchar("eventTypeUri", { length: 500 }),
+  webhookSubscriptionUri: varchar("webhookSubscriptionUri", { length: 500 }),
+  isActive: boolean("isActive").default(true),
+  lastSyncAt: timestamp("lastSyncAt"),
+  syncError: text("syncError"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => ([
+  uniqueIndex("idx_calendly_coach_profile").on(table.coachProfileId),
+]));
+export type CoachCalendlyIntegration = typeof coachCalendlyIntegrations.$inferSelect;
+export type InsertCoachCalendlyIntegration = typeof coachCalendlyIntegrations.$inferInsert;
+
+// ─── Session Feedback (Learner → Coach) ─────────────────────
+export const sessionFeedback = mysqlTable("session_feedback", {
+  id: int("id").autoincrement().primaryKey(),
+  sessionId: int("sessionId").notNull().references(() => sessions.id),
+  rating: int("rating").notNull(), // 1-5
+  comment: text("comment"),
+  tags: json("tags"), // ['punctual', 'helpful', 'knowledgeable']
+  wouldRecommend: boolean("wouldRecommend"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, (table) => ([
+  uniqueIndex("idx_feedback_session").on(table.sessionId),
+]));
+export type SessionFeedback = typeof sessionFeedback.$inferSelect;
+export type InsertSessionFeedback = typeof sessionFeedback.$inferInsert;
+
+// ─── Session Recordings (Daily.co) ──────────────────────────
+export const sessionRecordings = mysqlTable("session_recordings", {
+  id: int("id").autoincrement().primaryKey(),
+  sessionId: int("sessionId").notNull().references(() => sessions.id),
+  dailyRecordingId: varchar("dailyRecordingId", { length: 255 }).notNull(),
+  durationSeconds: int("durationSeconds"),
+  shareToken: varchar("shareToken", { length: 100 }),
+  downloadUrl: text("downloadUrl"),
+  expiresAt: timestamp("expiresAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_recordings_session").on(table.sessionId),
+]));
+export type SessionRecording = typeof sessionRecordings.$inferSelect;
+export type InsertSessionRecording = typeof sessionRecordings.$inferInsert;

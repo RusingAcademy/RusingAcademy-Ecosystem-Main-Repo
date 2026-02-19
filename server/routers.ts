@@ -166,6 +166,10 @@ import { clientPortalRouter } from "./routers/clientPortal";
 import { chatRouter as chatRoomsRouter } from "./routers/chat";
 import { progressSyncRouter } from "./routers/progressSync";
 import { notificationRouter as notificationEnhancedRouter } from "./routers/notification";
+// ═══ Phase 3: Coach Experience Routers ═══
+import { videoRouter } from "./routers/video";
+import { coachAnalyticsRouter } from "./routers/coachAnalytics";
+import { calendlyIntegrationRouter } from "./routers/calendlyIntegration";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -9190,6 +9194,9 @@ export const appRouter = router({
   // ═══ Phase 2: Real-time Communication ═══
   chatRooms: chatRoomsRouter,
   progressSync: progressSyncRouter,
+  video: videoRouter,
+  coachAnalytics: coachAnalyticsRouter,
+  calendlyIntegration: calendlyIntegrationRouter,
   notificationEnhanced: notificationEnhancedRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
