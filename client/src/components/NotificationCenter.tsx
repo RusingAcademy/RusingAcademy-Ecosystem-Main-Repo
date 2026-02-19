@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useWebSocket } from "@/hooks/useWebSocket";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -51,8 +52,24 @@ export function NotificationCenter() {
   const { language } = useLanguage();
   const isEn = language === "en";
   const [isOpen, setIsOpen] = useState(false);
+  const { socket } = useWebSocket();
   
   const { data: notifications, refetch } = trpc.notification.getInAppNotifications.useQuery();
+
+  // Listen for real-time notifications via WebSocket
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleNewNotification = () => {
+      refetch();
+    };
+
+    socket.on("notification:new", handleNewNotification);
+
+    return () => {
+      socket.off("notification:new", handleNewNotification);
+    };
+  }, [socket, refetch]);
   const markReadMutation = trpc.notification.markNotificationRead.useMutation();
   const markAllReadMutation = trpc.notification.markAllNotificationsRead.useMutation();
   const deleteMutation = trpc.notification.deleteNotification.useMutation();

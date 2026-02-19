@@ -2953,6 +2953,10 @@ export const lessonProgress = mysqlTable("lesson_progress", {
   completedAt: timestamp("completedAt"),
   lastAccessedAt: timestamp("lastAccessedAt"),
   
+  // Phase 2: Real-time sync fields
+  lastSyncAt: timestamp("lastSyncAt"),
+  syncVersion: int("syncVersion").default(1),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 }, (table) => ([
@@ -5268,3 +5272,119 @@ export const referrals = mysqlTable("referrals", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   convertedAt: timestamp("convertedAt"),
 });
+
+// ============================================================================
+// PHASE 2: REAL-TIME COMMUNICATION TABLES
+// ============================================================================
+
+// ─── Chat Rooms (group/course/community chat) ─────────────────────────
+export const chatRooms = mysqlTable("chat_rooms", {
+  id: int("id").autoincrement().primaryKey(),
+
+  name: varchar("name", { length: 255 }).notNull(),
+  type: mysqlEnum("type", ["direct", "course", "module", "community"]).notNull(),
+  referenceId: int("referenceId"), // courseId, moduleId, or NULL for community
+  createdBy: int("createdBy").references(() => users.id),
+  isActive: boolean("isActive").default(true),
+
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => ([
+  index("idx_chat_rooms_type").on(table.type),
+  index("idx_chat_rooms_reference").on(table.referenceId),
+]));
+export type ChatRoom = typeof chatRooms.$inferSelect;
+export type InsertChatRoom = typeof chatRooms.$inferInsert;
+
+// ─── Chat Messages (room-based messaging) ──────────────────────────────
+export const chatMessages = mysqlTable("chat_messages", {
+  id: int("id").autoincrement().primaryKey(),
+
+  roomId: int("roomId").notNull().references(() => chatRooms.id),
+  senderId: int("senderId").notNull().references(() => users.id),
+  content: text("content").notNull(),
+  messageType: mysqlEnum("messageType", ["text", "image", "file", "system"]).default("text"),
+  replyToId: int("replyToId"), // self-reference for threaded replies
+  isEdited: boolean("isEdited").default(false),
+  isDeleted: boolean("isDeleted").default(false),
+
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => ([
+  index("idx_chat_messages_room").on(table.roomId, table.createdAt),
+  index("idx_chat_messages_sender").on(table.senderId),
+]));
+export type ChatMessage = typeof chatMessages.$inferSelect;
+export type InsertChatMessage = typeof chatMessages.$inferInsert;
+
+// ─── Chat Room Members ─────────────────────────────────────────────────
+export const chatRoomMembers = mysqlTable("chat_room_members", {
+  id: int("id").autoincrement().primaryKey(),
+
+  roomId: int("roomId").notNull().references(() => chatRooms.id),
+  userId: int("userId").notNull().references(() => users.id),
+  role: mysqlEnum("role", ["admin", "moderator", "member"]).default("member"),
+  lastReadAt: timestamp("lastReadAt"),
+  joinedAt: timestamp("joinedAt").defaultNow().notNull(),
+}, (table) => ([
+  uniqueIndex("idx_chat_room_member_unique").on(table.roomId, table.userId),
+  index("idx_chat_room_members_user").on(table.userId),
+]));
+export type ChatRoomMember = typeof chatRoomMembers.$inferSelect;
+export type InsertChatRoomMember = typeof chatRoomMembers.$inferInsert;
+
+// ─── User Notification Preferences ─────────────────────────────────────
+export const userNotificationPreferences = mysqlTable("user_notification_preferences", {
+  id: int("id").autoincrement().primaryKey(),
+
+  userId: int("userId").notNull().references(() => users.id),
+
+  // Push notification toggles
+  pushEnabled: boolean("pushEnabled").default(true),
+  pushProgressReminders: boolean("pushProgressReminders").default(true),
+  pushStreakAlerts: boolean("pushStreakAlerts").default(true),
+  pushSessionReminders: boolean("pushSessionReminders").default(true),
+  pushMessages: boolean("pushMessages").default(true),
+  pushAchievements: boolean("pushAchievements").default(true),
+  pushSystemAlerts: boolean("pushSystemAlerts").default(true),
+
+  // Email toggles
+  emailEnabled: boolean("emailEnabled").default(true),
+  emailWeeklyDigest: boolean("emailWeeklyDigest").default(true),
+
+  // Quiet hours (stored as HH:MM strings)
+  quietHoursStart: varchar("quietHoursStart", { length: 5 }),
+  quietHoursEnd: varchar("quietHoursEnd", { length: 5 }),
+
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => ([
+  uniqueIndex("idx_user_notif_prefs_user").on(table.userId),
+]));
+export type UserNotificationPreference = typeof userNotificationPreferences.$inferSelect;
+export type InsertUserNotificationPreference = typeof userNotificationPreferences.$inferInsert;
+
+// ─── Notifications Log (delivery tracking) ─────────────────────────────
+export const notificationsLog = mysqlTable("notifications_log", {
+  id: int("id").autoincrement().primaryKey(),
+
+  userId: int("userId").notNull().references(() => users.id),
+  type: varchar("type", { length: 50 }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  body: text("body"),
+  data: json("data"),
+  channel: mysqlEnum("channel", ["push", "websocket", "email"]).notNull(),
+  status: mysqlEnum("status", ["pending", "sent", "delivered", "failed", "read"]).default("pending"),
+
+  sentAt: timestamp("sentAt"),
+  deliveredAt: timestamp("deliveredAt"),
+  readAt: timestamp("readAt"),
+  error: text("error"),
+
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_notifications_log_user").on(table.userId, table.createdAt),
+  index("idx_notifications_log_status").on(table.status),
+]));
+export type NotificationLog = typeof notificationsLog.$inferSelect;
+export type InsertNotificationLog = typeof notificationsLog.$inferInsert;
