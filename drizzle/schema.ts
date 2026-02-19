@@ -5445,3 +5445,86 @@ export const sessionRecordings = mysqlTable("session_recordings", {
 ]));
 export type SessionRecording = typeof sessionRecordings.$inferSelect;
 export type InsertSessionRecording = typeof sessionRecordings.$inferInsert;
+
+
+// ─── Phase 4: Feature Flags ─────────────────────────────────────────────────
+export const featureFlags = mysqlTable("feature_flags", {
+  id: int("id").primaryKey().autoincrement(),
+  key: varchar("key", { length: 100 }).notNull().unique(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  enabled: boolean("enabled").default(false).notNull(),
+  environment: varchar("environment", { length: 50 }).default("all").notNull(),
+  rolloutPercentage: int("rollout_percentage").default(100).notNull(),
+  targetUserIds: text("target_user_ids"),
+  targetRoles: text("target_roles"),
+  metadata: text("metadata"),
+  createdBy: int("created_by"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+export type FeatureFlag = typeof featureFlags.$inferSelect;
+export type InsertFeatureFlag = typeof featureFlags.$inferInsert;
+
+export const featureFlagHistory = mysqlTable("feature_flag_history", {
+  id: int("id").primaryKey().autoincrement(),
+  flagId: int("flag_id").notNull(),
+  action: varchar("action", { length: 50 }).notNull(),
+  previousValue: text("previous_value"),
+  newValue: text("new_value"),
+  changedBy: int("changed_by"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_ffh_flag").on(table.flagId),
+]));
+
+// ─── Phase 4: Monitoring ────────────────────────────────────────────────────
+export const customMetrics = mysqlTable("custom_metrics", {
+  id: int("id").primaryKey().autoincrement(),
+  name: varchar("name", { length: 100 }).notNull(),
+  value: varchar("value", { length: 255 }).notNull(),
+  labels: text("labels"),
+  recordedAt: timestamp("recorded_at").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_metrics_name_time").on(table.name, table.recordedAt),
+]));
+
+export const alertConfigs = mysqlTable("alert_configs", {
+  id: int("id").primaryKey().autoincrement(),
+  name: varchar("name", { length: 255 }).notNull(),
+  metric: varchar("metric", { length: 100 }).notNull(),
+  condition: varchar("condition", { length: 10 }).notNull(),
+  threshold: varchar("threshold", { length: 50 }).notNull(),
+  windowMinutes: int("window_minutes").default(5),
+  channels: varchar("channels", { length: 255 }).default("email"),
+  recipients: text("recipients"),
+  enabled: boolean("enabled").default(true).notNull(),
+  createdBy: int("created_by"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const alertHistory = mysqlTable("alert_history", {
+  id: int("id").primaryKey().autoincrement(),
+  configId: int("config_id").notNull(),
+  metricValue: varchar("metric_value", { length: 50 }).notNull(),
+  triggeredAt: timestamp("triggered_at").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_alert_hist_config").on(table.configId),
+]));
+
+// ─── Phase 4: HR Report History ─────────────────────────────────────────────
+export const reportHistory = mysqlTable("report_history", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  type: varchar("type", { length: 50 }).notNull(),
+  userId: int("user_id").notNull(),
+  filePath: varchar("file_path", { length: 500 }).notNull(),
+  filters: text("filters"),
+  dateRangeStart: timestamp("date_range_start"),
+  dateRangeEnd: timestamp("date_range_end"),
+  locale: varchar("locale", { length: 5 }).default("en"),
+  expiresAt: timestamp("expires_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ([
+  index("idx_report_user").on(table.userId),
+]));
+export type ReportHistory = typeof reportHistory.$inferSelect;
