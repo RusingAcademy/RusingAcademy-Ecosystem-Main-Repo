@@ -291,9 +291,7 @@ const AcctSuppliers = lazy(() => import("./pages/accounting/Suppliers"));
 const AcctTrialBalanceReport = lazy(() => import("./pages/accounting/TrialBalanceReport"));
 const LibraryPage = lazy(() => import("./pages/Library"));
 const BookLandingPage = lazy(() => import("./pages/BookLandingPage"));
-// ═══ Auth Phase 3: Owner Portal ═══
-const OwnerDashboard = lazy(() => import("./pages/owner/OwnerDashboard"));
-const InvitationDashboard = lazy(() => import("./pages/owner/InvitationDashboard"));
+// ═══ Auth Phase 3: Owner Portal (redirects to Admin Control Center) ═══
 
 // ─── Router ────────────────────────────────────────────────────────────────
 function Router() {
@@ -547,10 +545,9 @@ function Router() {
       <Route path="/admin/analytics-dashboard">{() => <L><AdminControlCenter section="analytics-dashboard" /></L>}</Route>
       <Route path="/admin/public-api">{() => <L><AdminControlCenter section="public-api" /></L>}</Route>
 
-      {/* ═══ Auth Phase 3: Owner Portal ═══ */}
-      <Route path="/owner">{() => <L><OwnerDashboard /></L>}</Route>
-      <Route path="/owner/invitations">{() => <L><InvitationDashboard /></L>}</Route>
-      <Route path="/owner/:rest*">{() => <L><OwnerDashboard /></L>}</Route>
+      {/* ═══ Owner routes redirect to Admin Control Center ═══ */}
+      <Route path="/owner">{() => { window.location.replace("/admin"); return null; }}</Route>
+      <Route path="/owner/:rest*">{() => { window.location.replace("/admin"); return null; }}</Route>
 
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <L><AdminControlCenter section="overview" /></L>}</Route>
