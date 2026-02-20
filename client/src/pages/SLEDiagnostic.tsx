@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -6,10 +6,13 @@ import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { CheckCircle, Clock, Users, Award, ArrowRight, Star } from "lucide-react";
+import { CheckCircle, Clock, Users, Award, ArrowRight, Star, ClipboardCheck, Loader2 } from "lucide-react";
+
+const DiagnosticQuiz = lazy(() => import("@/components/DiagnosticQuiz"));
 
 export default function SLEDiagnostic() {
   const { language } = useLanguage();
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const labels = {
     en: {
@@ -345,6 +348,66 @@ export default function SLEDiagnostic() {
                 </CardContent>
               </Card>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Free Self-Assessment Section */}
+        <section id="free-assessment" className="py-16 lg:py-24 bg-gradient-to-br from-teal-900 via-teal-800 to-[#192524] text-white">
+          <div className="container max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8"
+            >
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                <ClipboardCheck className="h-5 w-5 text-teal-300" />
+                <span className="text-sm font-medium text-teal-200">
+                  {language === 'en' ? 'Free Self-Assessment' : 'Auto-\u00e9valuation gratuite'}
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                {language === 'en' ? 'Try Our Free SLE Quick Assessment' : 'Essayez notre \u00e9valuation rapide ELS gratuite'}
+              </h2>
+              <p className="text-lg text-teal-200 max-w-2xl mx-auto">
+                {language === 'en'
+                  ? 'Answer a few questions to get an instant estimate of your SLE level. No account required.'
+                  : 'R\u00e9pondez \u00e0 quelques questions pour obtenir une estimation instantan\u00e9e de votre niveau ELS. Aucun compte requis.'}
+              </p>
+            </motion.div>
+            {!showQuiz ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-center"
+              >
+                <Button
+                  size="lg"
+                  onClick={() => setShowQuiz(true)}
+                  className="bg-white text-teal-900 hover:bg-teal-50 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                >
+                  <ClipboardCheck className="mr-2 h-5 w-5" />
+                  {language === 'en' ? 'Start Free Assessment' : 'Commencer l\'\u00e9valuation gratuite'}
+                </Button>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+              >
+                <Suspense fallback={
+                  <div className="flex items-center justify-center py-12">
+                    <Loader2 className="h-8 w-8 animate-spin text-teal-300" />
+                  </div>
+                }>
+                  <DiagnosticQuiz />
+                </Suspense>
+              </motion.div>
+            )}
           </div>
         </section>
 

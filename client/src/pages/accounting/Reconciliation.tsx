@@ -3,8 +3,18 @@ import { trpc } from "@/lib/trpc";
 import { Plus, CheckCircle, Clock, AlertCircle, Scale, ExternalLink } from "lucide-react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Bank Reconciliation", subtitle: "Match bank statements with records", account: "Account", startDate: "Start Date", endDate: "End Date", reconcile: "Reconcile" },
+  fr: { title: "Rapprochement bancaire", subtitle: "Associer les relevés bancaires aux enregistrements", account: "Compte", startDate: "Date de début", endDate: "Date de fin", reconcile: "Rapprocher" },
+};
 
 export default function Reconciliation() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: accounts } = trpc.accounts.list.useQuery({ type: "Bank" });
   const [selectedAccountId, setSelectedAccountId] = useState<number | undefined>(undefined);

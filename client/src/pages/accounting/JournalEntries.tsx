@@ -5,8 +5,18 @@ import { trpc } from "@/lib/trpc";
 import { useLocation } from "wouter";
 import { Plus, Loader2, BookOpen } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Journal Entries", subtitle: "Record manual journal entries", newEntry: "New Entry", date: "Date", reference: "Reference", debit: "Debit", credit: "Credit" },
+  fr: { title: "Écritures comptables", subtitle: "Enregistrer les écritures comptables manuelles", newEntry: "Nouvelle écriture", date: "Date", reference: "Référence", debit: "Débit", credit: "Crédit" },
+};
 
 export default function JournalEntries() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: entries, isLoading } = trpc.journalEntries.list.useQuery();
 

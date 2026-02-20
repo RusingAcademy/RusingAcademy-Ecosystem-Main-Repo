@@ -6,8 +6,18 @@ import { useState, useMemo } from "react";
 import { useRoute, useLocation } from "wouter";
 import { ArrowLeft, Loader2, Edit, Save, X, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Supplier Details", contact: "Contact", bills: "Bills", payments: "Payments", balance: "Balance", edit: "Edit" },
+  fr: { title: "Détails du fournisseur", contact: "Contact", bills: "Factures", payments: "Paiements", balance: "Solde", edit: "Modifier" },
+};
 
 export default function SupplierDetail() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/suppliers/:id");
   const [, navigate] = useLocation();
   const supplierId = params?.id ? Number(params.id) : 0;

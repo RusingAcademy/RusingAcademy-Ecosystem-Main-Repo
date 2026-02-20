@@ -5,8 +5,18 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Deposits", subtitle: "Record bank deposits", newDeposit: "New Deposit", account: "Account", date: "Date", amount: "Amount" },
+  fr: { title: "Dépôts", subtitle: "Enregistrer les dépôts bancaires", newDeposit: "Nouveau dépôt", account: "Compte", date: "Date", amount: "Montant" },
+};
 
 export default function Deposits() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<"payments" | "transfers">("payments");
   const [showTransfer, setShowTransfer] = useState(false);

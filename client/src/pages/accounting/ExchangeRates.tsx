@@ -8,13 +8,23 @@ import { ArrowLeft, Plus, Loader2, Globe, RefreshCw, ArrowRightLeft, TrendingUp,
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CURRENCIES = ["CAD", "USD", "EUR", "GBP", "JPY", "CHF", "AUD", "MXN", "CNY"];
 const CURRENCY_SYMBOLS: Record<string, string> = {
   CAD: "C$", USD: "$", EUR: "€", GBP: "£", JPY: "¥", CHF: "Fr", AUD: "A$", MXN: "Mex$", CNY: "¥",
 };
 
+
+const labels = {
+  en: { title: "Exchange Rates", subtitle: "Manage currency exchange rates", currency: "Currency", rate: "Rate", lastUpdated: "Last Updated", refresh: "Refresh" },
+  fr: { title: "Taux de change", subtitle: "Gérer les taux de change des devises", currency: "Devise", rate: "Taux", lastUpdated: "Dernière mise à jour", refresh: "Actualiser" },
+};
+
 export default function ExchangeRates() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: rates, isLoading, refetch } = trpc.exchangeRates.list.useQuery();
   const createMutation = trpc.exchangeRates.create.useMutation({

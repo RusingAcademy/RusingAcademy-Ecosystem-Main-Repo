@@ -32,6 +32,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import PortalLayout from "@/components/portal/PortalLayout";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Resource {
   id: string;
@@ -142,7 +143,16 @@ const levelColors = {
   C: "bg-blue-100 text-blue-700",
 };
 
+
+const labels = {
+  en: { title: "Resource Library", subtitle: "Browse learning materials and downloads", search: "Search resources...", category: "Category", download: "Download", preview: "Preview" },
+  fr: { title: "Bibliothèque de ressources", subtitle: "Parcourir les matériels d'apprentissage et téléchargements", search: "Rechercher des ressources...", category: "Catégorie", download: "Télécharger", preview: "Aperçu" },
+};
+
 export default function ResourceLibrary() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");

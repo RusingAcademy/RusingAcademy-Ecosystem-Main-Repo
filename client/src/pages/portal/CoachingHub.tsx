@@ -27,6 +27,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import PortalLayout from "@/components/portal/PortalLayout";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Coach {
   id: string;
@@ -109,7 +110,16 @@ const pastSessions: Session[] = [
   },
 ];
 
+
+const labels = {
+  en: { title: "Coaching Hub", subtitle: "Access your coaching sessions and resources", upcomingSessions: "Upcoming Sessions", pastSessions: "Past Sessions", myCoach: "My Coach", bookSession: "Book Session", noSessions: "No upcoming sessions" },
+  fr: { title: "Centre de coaching", subtitle: "Accéder à vos séances de coaching et ressources", upcomingSessions: "Séances à venir", pastSessions: "Séances passées", myCoach: "Mon coach", bookSession: "Réserver une séance", noSessions: "Aucune séance à venir" },
+};
+
 export default function CoachingHub() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useUser();
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
 

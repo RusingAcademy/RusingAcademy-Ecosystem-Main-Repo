@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { trpc } from "@/lib/trpc";
 import {
   Zap,
   Brain,
@@ -25,6 +26,8 @@ import {
   Building2,
   Play,
   Users,
+  Send,
+  Loader2,
 } from "lucide-react";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 
@@ -36,10 +39,48 @@ const coachPhotos = [
   "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/UZJdzqXRKyBtsmSe.jpg",
 ];
 
+type ChatMessage = { role: "user" | "assistant"; content: string };
+
 export default function AICoach() {
   const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const isEn = language === "en";
+
+  // Interactive AI Chat state
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    { role: "assistant", content: isEn
+      ? "Hello! I'm your SLE AI Coach. Ask me anything about SLE preparation, French grammar, or practice scenarios. How can I help you today?"
+      : "Bonjour! Je suis votre coach IA ELS. Posez-moi vos questions sur la pr\u00e9paration ELS, la grammaire fran\u00e7aise ou les sc\u00e9narios de pratique. Comment puis-je vous aider aujourd'hui?" },
+  ]);
+  const [chatInput, setChatInput] = useState("");
+  const chatScrollRef = useRef<HTMLDivElement>(null);
+  const quickChatMutation = trpc.ai.quickChat.useMutation({
+    onSuccess: (data) => {
+      setChatMessages(prev => [...prev, { role: "assistant", content: data.content }]);
+    },
+    onError: () => {
+      setChatMessages(prev => [...prev, { role: "assistant", content: isEn ? "Sorry, I'm temporarily unavailable. Please try again." : "D\u00e9sol\u00e9, je suis temporairement indisponible. Veuillez r\u00e9essayer." }]);
+    },
+  });
+  const chatPending = quickChatMutation.isPending;
+
+  useEffect(() => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
+    }
+  }, [chatMessages, chatPending]);
+
+  const handleSendChat = (text: string) => {
+    const msg = text.trim();
+    if (!msg || chatPending) return;
+    setChatInput("");
+    const userMsg: ChatMessage = { role: "user", content: msg };
+    setChatMessages(prev => [...prev, userMsg]);
+    quickChatMutation.mutate({
+      message: msg,
+      conversationHistory: chatMessages.filter(m => m.role !== "assistant" || chatMessages.indexOf(m) > 0).map(m => ({ role: m.role, content: m.content })),
+    });
+  };
 
   const labels = {
     en: {
@@ -283,11 +324,11 @@ export default function AICoach() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6 md:mb-8 lg:mb-12">
-                <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2">
+                <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2" onClick={() => document.getElementById('ai-chat-section')?.scrollIntoView({ behavior: 'smooth' })}>
                   <Play className="h-4 w-4" />
                   {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/20 dark:hover:bg-background/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/20 dark:hover:bg-background/10 gap-2" onClick={() => document.getElementById('ai-chat-section')?.scrollIntoView({ behavior: 'smooth' })}>
                   <MessageSquare className="h-4 w-4" />
                   {isEn ? "Try Demo" : "Essayer la démo"}
                 </Button>
@@ -411,8 +452,8 @@ export default function AICoach() {
           </div>
         </section>
 
-        {/* AI Coach Preview */}
-        <section className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+        {/* AI Coach Preview — Interactive Chat */}
+        <section id="ai-chat-section" className="py-10 md:py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -460,43 +501,85 @@ export default function AICoach() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian rounded-2xl p-8 text-white">
-                  <div className="flex items-center gap-4 mb-6">
+                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-obsidian rounded-2xl overflow-hidden text-white flex flex-col" style={{ height: '480px' }}>
+                  {/* Chat Header */}
+                  <div className="flex items-center gap-4 p-5 border-b border-white/10">
                     <div className="relative">
                       <img loading="lazy" decoding="async"
                         src={coachPhotos[0]} 
                         alt="SLE AI Coach"
-                        className="h-16 w-16 rounded-full object-cover ring-4 ring-teal-400/50 transition-all duration-300 hover:scale-110 hover:ring-teal-300 hover:shadow-xl hover:shadow-teal-400/40"
+                        className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-400/50"
                       />
-                      <div className="absolute -bottom-1 -right-1 h-6 w-6 bg-teal-400 rounded-full flex items-center justify-center">
+                      <div className="absolute -bottom-1 -right-1 h-5 w-5 bg-teal-400 rounded-full flex items-center justify-center">
                         <Sparkles className="h-3 w-3 text-white" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold">SLE AI Companion</h3>
-                      <p className="text-teal-200 text-sm">{isEn ? "Your AI Language Coach" : "Votre coach linguistique IA"}</p>
+                      <h3 className="text-lg font-semibold">SLE AI Coach</h3>
+                      <p className="text-teal-300 text-xs">{chatPending ? (isEn ? "Typing..." : "En train d'écrire...") : (isEn ? "Online — Ready to help" : "En ligne — Prêt à aider")}</p>
                     </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-sm rounded-lg p-4">
-                      <p className="text-sm text-slate-800 dark:text-teal-100">
-                        {isEn
-                          ? '"Hello! I\'m your SLE AI Companion. How can I help you prepare for your SLE exam today?"'
-                          : '"Bonjour! Je suis votre Compagnon IA ELS. Comment puis-je vous aider à préparer votre examen ELS aujourd\'hui?"'}
-                      </p>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button size="sm" className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
-                        <Mic className="h-4 w-4 mr-2" />
-                        {isEn ? "Oral Practice" : "Pratique orale"}
-                      </Button>
-                      <Button size="sm" className="bg-white/20 dark:bg-white/[0.08] dark:backdrop-blur-md/20 hover:bg-white/30 dark:hover:bg-background/30 text-slate-900 dark:text-white border-0">
-                        <PenTool className="h-4 w-4 mr-2" />
-                        {isEn ? "Written" : "Écrit"}
-                      </Button>
-                    </div>
+                  {/* Chat Messages */}
+                  <div ref={chatScrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
+                    {chatMessages.map((msg, i) => (
+                      <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`max-w-[85%] rounded-xl px-4 py-2.5 text-sm leading-relaxed ${
+                          msg.role === 'user'
+                            ? 'bg-teal-500 text-white'
+                            : 'bg-white/15 backdrop-blur-sm text-teal-50'
+                        }`}>
+                          <p className="whitespace-pre-wrap">{msg.content}</p>
+                        </div>
+                      </div>
+                    ))}
+                    {chatPending && (
+                      <div className="flex justify-start">
+                        <div className="bg-white/15 backdrop-blur-sm rounded-xl px-4 py-3">
+                          <Loader2 className="h-4 w-4 animate-spin text-teal-300" />
+                        </div>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Quick Prompts */}
+                  {chatMessages.length <= 1 && (
+                    <div className="px-4 pb-2 flex flex-wrap gap-1.5">
+                      {(isEn ? [
+                        "Give me 3 SLE oral tips",
+                        "Explain passé composé vs imparfait",
+                        "French expressions for meetings",
+                      ] : [
+                        "3 conseils pour l'oral ELS",
+                        "Expliquez le passé composé vs l'imparfait",
+                        "Expressions françaises pour les réunions",
+                      ]).map((prompt, i) => (
+                        <button key={i} onClick={() => handleSendChat(prompt)} className="text-xs bg-white/10 hover:bg-white/20 rounded-full px-3 py-1.5 text-teal-200 transition-colors">
+                          {prompt}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Chat Input */}
+                  <form onSubmit={(e) => { e.preventDefault(); handleSendChat(chatInput); }} className="flex gap-2 p-3 border-t border-white/10">
+                    <input
+                      type="text"
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      placeholder={isEn ? "Type your message..." : "Tapez votre message..."}
+                      className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-teal-300/60 focus:outline-none focus:ring-2 focus:ring-teal-400/50"
+                      disabled={chatPending}
+                    />
+                    <Button
+                      type="submit"
+                      size="icon"
+                      disabled={!chatInput.trim() || chatPending}
+                      className="bg-teal-500 hover:bg-teal-400 text-white rounded-xl h-10 w-10 shrink-0"
+                    >
+                      {chatPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                    </Button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -579,7 +662,7 @@ export default function AICoach() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl gap-2">
+              <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-700 hover:bg-teal-50 shadow-xl gap-2" onClick={() => document.getElementById('ai-chat-section')?.scrollIntoView({ behavior: 'smooth' })}>
                 <Play className="h-4 w-4" />
                 {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
               </Button>

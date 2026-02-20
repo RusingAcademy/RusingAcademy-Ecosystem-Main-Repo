@@ -7,8 +7,18 @@ import { useState, useMemo } from "react";
 import { ArrowLeft, Check, X, Loader2, RefreshCw, CheckCircle2 } from "lucide-react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Reconciliation Workspace", subtitle: "Match and categorize transactions", matched: "Matched", unmatched: "Unmatched", approve: "Approve" },
+  fr: { title: "Espace de rapprochement", subtitle: "Associer et catégoriser les transactions", matched: "Associé", unmatched: "Non associé", approve: "Approuver" },
+};
 
 export default function ReconciliationWorkspace() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: accountsList } = trpc.accounts.list.useQuery();
   const [selectedAccountId, setSelectedAccountId] = useState<number | null>(null);

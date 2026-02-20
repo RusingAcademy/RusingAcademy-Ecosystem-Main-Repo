@@ -8,10 +8,20 @@ import { Plus, MoreVertical, Search, Filter, Truck, ChevronLeft, ChevronRight, A
 import { toast } from "sonner";
 import { TableSkeleton } from "@/components/TableSkeleton";
 import { EmptyState } from "@/components/EmptyState";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PAGE_SIZE = 20;
 
+
+const labels = {
+  en: { title: "Suppliers", subtitle: "Manage your supplier database", addSupplier: "Add Supplier", search: "Search suppliers...", name: "Name", email: "Email" },
+  fr: { title: "Fournisseurs", subtitle: "Gérer votre base de données fournisseurs", addSupplier: "Ajouter un fournisseur", search: "Rechercher des fournisseurs...", name: "Nom", email: "Courriel" },
+};
+
 export default function Suppliers() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);

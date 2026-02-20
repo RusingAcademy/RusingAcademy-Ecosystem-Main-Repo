@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ACCOUNT_TYPES = [
   "Bank", "Accounts Receivable", "Other Current Assets",
@@ -18,7 +19,16 @@ const ACCOUNT_TYPES = [
   "Other Income", "Other Expenses",
 ];
 
+
+const labels = {
+  en: { title: "Chart of Accounts", subtitle: "Manage your account structure", addAccount: "Add Account", accountName: "Account Name", type: "Type", balance: "Balance" },
+  fr: { title: "Plan comptable", subtitle: "Gérer la structure de vos comptes", addAccount: "Ajouter un compte", accountName: "Nom du compte", type: "Type", balance: "Solde" },
+};
+
 export default function ChartOfAccounts() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [typeFilter, setTypeFilter] = useState("All");
   const [search, setSearch] = useState("");

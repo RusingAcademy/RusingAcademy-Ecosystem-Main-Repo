@@ -6,8 +6,18 @@ import { trpc } from "@/lib/trpc";
 import { useRoute, useLocation } from "wouter";
 import { ArrowLeft, Download, Printer, Loader2, FileDown } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Invoice PDF", download: "Download PDF", print: "Print", billTo: "Bill To", subtotal: "Subtotal", tax: "Tax", total: "Total" },
+  fr: { title: "Facture PDF", download: "Télécharger le PDF", print: "Imprimer", billTo: "Facturer à", subtotal: "Sous-total", tax: "Taxe", total: "Total" },
+};
 
 export default function InvoicePdf() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/invoices/:id/pdf");
   const [, navigate] = useLocation();
   const invoiceId = params?.id ? Number(params.id) : 0;

@@ -7,8 +7,18 @@ import { useParams } from "wouter";
 import { SectionRenderer } from "@/components/templates/SectionRenderer";
 import { Loader2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Landing Page", loading: "Loading...", notFound: "Page not found", backHome: "Back to Home" },
+  fr: { title: "Page d'atterrissage", loading: "Chargement...", notFound: "Page introuvable", backHome: "Retour à l'accueil" },
+};
 
 export default function LandingPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const params = useParams<{ slug: string }>();
   const { data: page, isLoading, error } = trpc.landingPages.getBySlug.useQuery(
     { slug: params.slug || "" },

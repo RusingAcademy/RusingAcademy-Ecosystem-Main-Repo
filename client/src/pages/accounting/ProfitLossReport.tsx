@@ -10,6 +10,7 @@ import { ArrowLeft, Loader2, Download, Printer, Calendar, BarChart3, Table2, Git
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, LineChart, Line,
 } from "recharts";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PERIOD_PRESETS = [
   { value: "month", label: "This Month" },
@@ -20,7 +21,16 @@ const PERIOD_PRESETS = [
   { value: "all", label: "All Dates" },
 ];
 
+
+const labels = {
+  en: { title: "Profit & Loss", subtitle: "Revenue, expenses, and net income", revenue: "Revenue", expenses: "Expenses", netIncome: "Net Income", grossProfit: "Gross Profit" },
+  fr: { title: "Profits et pertes", subtitle: "Revenus, dépenses et revenu net", revenue: "Revenus", expenses: "Dépenses", netIncome: "Revenu net", grossProfit: "Bénéfice brut" },
+};
+
 export default function ProfitLossReport() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: company } = trpc.company.get.useQuery();
 

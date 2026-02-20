@@ -9,8 +9,18 @@ import {
   ArrowLeft, Loader2, Mail, Phone, Globe, MapPin, Edit, Save, X
 } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Customer Details", contact: "Contact", invoices: "Invoices", payments: "Payments", balance: "Balance", edit: "Edit" },
+  fr: { title: "Détails du client", contact: "Contact", invoices: "Factures", payments: "Paiements", balance: "Solde", edit: "Modifier" },
+};
 
 export default function CustomerDetail() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/customers/:id");
   const [, navigate] = useLocation();
   const customerId = params?.id ? Number(params.id) : 0;
