@@ -5,19 +5,66 @@ import { getDb } from "../db";
 import { challenges, userChallenges } from "../../drizzle/schema";
 
 export const challengesRouter = router({
-  // ── List Active Challenges ──────────────────────────────────
+   // ── List Active Challenges ──────────────────────────────────
   list: publicProcedure
     .input(z.object({ limit: z.number().default(20) }))
     .query(async ({ input }) => {
       const db = await getDb();
       if (!db) return [];
-
       return db
         .select()
         .from(challenges)
         .where(eq(challenges.isActive, true))
         .orderBy(desc(challenges.createdAt))
         .limit(input.limit);
+    }),
+
+  // ── List All Challenges (Admin) ─────────────────────────────
+  listAll: adminProcedure
+    .input(z.object({ limit: z.number().default(100) }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      return db
+        .select()
+        .from(challenges)
+        .orderBy(desc(challenges.createdAt))
+        .limit(input.limit);
+    }),
+
+  // ── Update Challenge (Admin) ────────────────────────────────
+  update: adminProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        name: z.string().min(3).max(100).optional(),
+        nameFr: z.string().optional(),
+        description: z.string().optional(),
+        descriptionFr: z.string().optional(),
+        type: z.enum(["sessions", "reviews", "referrals", "streak", "first_session"]).optional(),
+        targetCount: z.number().min(1).optional(),
+        pointsReward: z.number().min(1).optional(),
+        period: z.enum(["daily", "weekly", "monthly", "one_time"]).optional(),
+        isActive: z.boolean().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+      const { id, ...data } = input;
+      await db.update(challenges).set(data).where(eq(challenges.id, id));
+      return { success: true };
+    }),
+
+  // ── Delete Challenge (Admin) ────────────────────────────────
+  delete: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+      await db.delete(userChallenges).where(eq(userChallenges.challengeId, input.id));
+      await db.delete(challenges).where(eq(challenges.id, input.id));
+      return { success: true };
     }),
 
   // ── Get Challenge Details ───────────────────────────────────
@@ -39,7 +86,7 @@ export const challengesRouter = router({
         nameFr: z.string().optional(),
         description: z.string().optional(),
         descriptionFr: z.string().optional(),
-        type: z.enum(["posts", "comments", "streak", "events", "courses", "corrections"]),
+        type: z.enum(["sessions", "reviews", "referrals", "streak", "first_session"]),
         targetCount: z.number().min(1),
         pointsReward: z.number().min(1),
         period: z.enum(["daily", "weekly", "monthly", "one_time"]),

@@ -5,6 +5,7 @@
 import HRLayout from "@/components/HRLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 export default function HRSettings() {
   const { language } = useLanguage();

@@ -5,6 +5,7 @@
 import HRLayout from "@/components/HRLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
+import { trpc } from "@/lib/trpc";
 
 type NotifFilter = "all" | "training" | "compliance" | "system";
 

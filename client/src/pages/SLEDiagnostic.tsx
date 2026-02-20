@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CheckCircle, Clock, Users, Award, ArrowRight, Star } from "lucide-react";
 
@@ -418,7 +417,7 @@ export default function SLEDiagnostic() {
         </section>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }

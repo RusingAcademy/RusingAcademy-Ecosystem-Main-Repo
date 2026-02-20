@@ -26,8 +26,9 @@ import {
   Settings as SettingsIcon,
 } from "lucide-react";
 import React, { useState } from "react";
+import { trpc } from "@/lib/trpc";
 
-// TODO: Replace with tRPC router types once available
+// Connected to discussions tRPC router
 type Thread = {
   id: string;
   title: string;
@@ -49,53 +50,56 @@ type FlaggedContent = {
 };
 
 const AdminDiscussions = () => {
-  // TODO: Replace with tRPC hooks
-  const [stats, setStats] = useState({
-    totalThreads: 1256,
-    totalReplies: 8432,
-    activeUsers: 345,
-    reportedContent: 12,
+  // ── tRPC queries ──
+  const { data: threadsData, refetch: refetchThreads } = trpc.discussions.getThreads.useQuery(
+    { page: 1, limit: 50 },
+    { retry: false }
+  );
+  const { data: reportsData, refetch: refetchReports } = trpc.discussions.getReports.useQuery(
+    undefined,
+    { retry: false }
+  );
+  const deleteMutation = trpc.discussions.deleteThread.useMutation({
+    onSuccess: () => { refetchThreads(); toast.warning("Thread deleted."); },
+    onError: (err) => toast.error(err.message),
   });
-  const [threads, setThreads] = useState<Thread[]>([
-    {
-      id: "1",
-      title: "Struggling with French Subjunctive",
-      category: "Grammar",
-      author: "Eleanor Vance",
-      replies: 15,
-      status: "active",
-      createdAt: new Date(),
-    },
-    {
-      id: "2",
-      title: "Best resources for SLE vocabulary?",
-      category: "SLE Prep",
-      author: "Marcus Holloway",
-      replies: 22,
-      status: "active",
-      createdAt: new Date(),
-    },
-    {
-      id: "3",
-      title: "Pronunciation tips for 'r' sound",
-      category: "Pronunciation",
-      author: "Anya Petrova",
-      replies: 8,
-      status: "locked",
-      createdAt: new Date(),
-    },
-  ]);
-  const [flaggedContent, setFlaggedContent] = useState<FlaggedContent[]>([
-    {
-      id: "fc1",
-      threadId: "2",
-      threadTitle: "Best resources for SLE vocabulary?",
-      contentSnippet: "This is spam, buy my course...",
-      reportedBy: "John Doe",
-      reason: "Spam/Advertising",
-      reportedAt: new Date(),
-    },
-  ]);
+  const lockMutation = trpc.discussions.toggleLock.useMutation({
+    onSuccess: () => { refetchThreads(); toast.success("Thread lock toggled."); },
+    onError: (err) => toast.error(err.message),
+  });
+  const resolveReportMutation = trpc.discussions.resolveReport.useMutation({
+    onSuccess: () => { refetchReports(); toast.success("Report resolved."); },
+    onError: (err) => toast.error(err.message),
+  });
+
+  // Map tRPC data to UI format
+  const threads: Thread[] = (threadsData?.threads ?? []).map((t: any) => ({
+    id: String(t.id),
+    title: t.title || "Untitled",
+    category: t.category || "General",
+    author: t.authorName || "Anonymous",
+    replies: t.replyCount || 0,
+    status: t.isLocked ? "locked" : "active",
+    createdAt: new Date(t.createdAt),
+  }));
+
+  const flaggedContent: FlaggedContent[] = (reportsData ?? []).map((r: any) => ({
+    id: String(r.id),
+    threadId: String(r.threadId || ""),
+    threadTitle: r.threadTitle || "",
+    contentSnippet: r.reason || "",
+    reportedBy: r.reporterName || "Anonymous",
+    reason: r.reason || "Other",
+    reportedAt: new Date(r.createdAt),
+  }));
+
+  const stats = {
+    totalThreads: threadsData?.total ?? 0,
+    totalReplies: threads.reduce((sum, t) => sum + t.replies, 0),
+    activeUsers: threads.length,
+    reportedContent: flaggedContent.length,
+  };
+
   const [categories, setCategories] = useState([
     "Grammar",
     "Vocabulary",
@@ -108,26 +112,19 @@ const AdminDiscussions = () => {
     "1. Be respectful. 2. No spam or self-promotion. 3. Stay on topic."
   );
 
-  // TODO: Implement tRPC mutations for actions
   const handleCreateThread = () => {
     toast.info("New thread creation initiated.");
-    // Placeholder for mutation
   };
 
   const handleLockThread = (id: string) => {
-    setThreads(
-      threads.map((t) => (t.id === id ? { ...t, status: "locked" } : t))
-    );
-    toast.success(`Thread ${id} has been locked.`);
+    lockMutation.mutate({ threadId: Number(id) });
   };
 
   const handleDeleteThread = (id: string) => {
-    setThreads(threads.filter((t) => t.id !== id));
-    toast.warning(`Thread ${id} has been deleted.`);
+    deleteMutation.mutate({ threadId: Number(id) });
   };
 
   const handleSaveChanges = () => {
-    // TODO: Add tRPC mutation to save settings
     toast.success("Settings have been saved successfully!");
   };
 
