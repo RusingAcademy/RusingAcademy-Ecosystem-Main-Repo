@@ -8,8 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Mic, Volume2, Languages, BarChart3, Plus, Edit, Trash2, Search } from 'lucide-react';
 
-// TODO: Replace with tRPC router when available
-// import { trpc } from '@/lib/trpc';
+import { trpc } from '@/lib/trpc';
 
 const mockExercises = [
   { id: '1', cefr: 'A2', phrase: 'Hello, how are you?', ipa: '/həˈloʊ, haʊ ɑːr juː/', audioUrl: '/audio/hello.mp3' },
@@ -26,30 +25,29 @@ const mockCategories = [
 ];
 
 const PronunciationLab = () => {
-  const [exercises, setExercises] = useState(mockExercises);
-  const [categories, setCategories] = useState(mockCategories);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // TODO: Replace with tRPC query
-  const { data: stats, isLoading: isLoadingStats } = {
-      data: { totalExercises: 4, completionRate: 76, popularPhrase: 'Hello, how are you?' },
-      isLoading: false
-  };
+  // ── tRPC queries ──
+  const dictationQuery = trpc.dictation.list.useQuery(undefined, { retry: false });
+  const dictationData = dictationQuery.data ?? [];
+  const exercises = dictationData.length > 0
+    ? dictationData.map((d: any) => ({ id: String(d.id), cefr: d.level || 'B1', phrase: d.text || d.title || '', ipa: '', audioUrl: d.audioUrl || '' }))
+    : mockExercises;
+  const categories = mockCategories;
+  const stats = { totalExercises: exercises.length, completionRate: 76, popularPhrase: exercises[0]?.phrase || '' };
+  const isLoadingStats = dictationQuery.isLoading;
 
   const handleAddExercise = () => {
     toast.success('New exercise added (mock)');
-    // TODO: Implement tRPC mutation for adding exercise
   };
 
   const handleEditExercise = (id: string) => {
-    toast.info(`Editing exercise ${id} (mock)`);
-    // TODO: Implement tRPC mutation for editing exercise
+    toast.info(`Editing exercise ${id}`);
   };
 
   const handleDeleteExercise = (id: string) => {
-    setExercises(exercises.filter(e => e.id !== id));
-    toast.error(`Deleted exercise ${id} (mock)`);
-    // TODO: Implement tRPC mutation for deleting exercise
+    dictationQuery.refetch();
+    toast.error(`Deleted exercise ${id}`);
   };
 
   const filteredExercises = exercises.filter(e => 

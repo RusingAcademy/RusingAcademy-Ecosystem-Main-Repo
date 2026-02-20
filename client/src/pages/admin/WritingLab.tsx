@@ -9,25 +9,32 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { trpc } from '@/lib/trpc';
-
-const mockStats = { totalSubmissions: 234, avgScore: 74, pendingReviews: 18, activeWriters: 89 };
-const mockPrompts = [
-  { id: 1, title: "Décrivez votre journée de travail idéale", level: "A2", topic: "Daily Life", wordLimit: 150, submissions: 45, status: "active" },
-  { id: 2, title: "Argumentez pour ou contre le télétravail", level: "B2", topic: "Professional", wordLimit: 300, submissions: 28, status: "active" },
-  { id: 3, title: "Rédigez un rapport sur les changements climatiques", level: "C1", topic: "Academic", wordLimit: 500, submissions: 12, status: "active" },
-  { id: 4, title: "Écrivez un courriel à votre superviseur", level: "B1", topic: "Professional", wordLimit: 200, submissions: 67, status: "active" },
-  { id: 5, title: "Présentez-vous à un nouveau collègue", level: "A1", topic: "Daily Life", wordLimit: 100, submissions: 89, status: "draft" },
-];
-const mockSubmissions = [
-  { id: 1, learner: "Marie D.", prompt: "Décrivez votre journée...", score: 82, grammar: 85, vocabulary: 78, coherence: 84, status: "reviewed", date: "2026-02-12" },
-  { id: 2, learner: "Jean P.", prompt: "Argumentez pour ou contre...", score: null, grammar: null, vocabulary: null, coherence: null, status: "pending", date: "2026-02-13" },
-  { id: 3, learner: "Sophie L.", prompt: "Rédigez un rapport...", score: 71, grammar: 68, vocabulary: 75, coherence: 70, status: "reviewed", date: "2026-02-11" },
-];
+import { trpc } from "@/lib/trpc";
 
 export default function WritingLab() {
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
+
+  // ── tRPC queries ──
+  const promptsQuery = trpc.writing.list.useQuery(undefined, { retry: false });
+  const isLoading = promptsQuery.isLoading;
+  const prompts = promptsQuery.data ?? [];
+  const mockPrompts = prompts.map((p: any) => ({
+    id: p.id,
+    title: p.title || p.prompt || "Writing Prompt",
+    level: p.level || "B1",
+    topic: p.topic || "General",
+    wordLimit: p.wordLimit || 200,
+    submissions: p.submissionCount || 0,
+    status: p.status || "active",
+  }));
+  const mockStats = {
+    totalSubmissions: mockPrompts.reduce((s: number, p: any) => s + p.submissions, 0),
+    avgScore: 0,
+    pendingReviews: 0,
+    activeWriters: 0,
+  };
+  const mockSubmissions: any[] = [];  // Loaded per-prompt when viewing submissions
 
   const levelColor = (level: string) => {
     const colors: Record<string, string> = { A1: "bg-green-500/10 text-green-500", A2: "bg-emerald-500/10 text-emerald-500", B1: "bg-blue-500/10 text-blue-500", B2: "bg-indigo-500/10 text-indigo-500", C1: "bg-purple-500/10 text-purple-500" };

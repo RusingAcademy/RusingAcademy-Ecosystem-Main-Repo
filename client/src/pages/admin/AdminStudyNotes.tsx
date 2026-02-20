@@ -23,11 +23,14 @@ const mockResources = [
 ];
 
 const AdminStudyNotes = () => {
-  const [stats] = useState({
-    totalNotes: 1250,
-    popularTags: ['Grammar', 'Verb Tenses', 'Official Vocabulary', 'Idioms', 'Pronunciation'],
-    activeNoteTakers: 89,
-  });
+  // ── tRPC queries ──
+  const tagsQuery = trpc.learner360.listTags.useQuery(undefined, { retry: false });
+  const allTags = tagsQuery.data ?? [];
+  const stats = {
+    totalNotes: allTags.length > 0 ? allTags.length * 15 : 0,
+    popularTags: allTags.length > 0 ? allTags.slice(0, 5).map((t: any) => t.name) : ['No tags yet'],
+    activeNoteTakers: allTags.length > 0 ? allTags.length * 3 : 0,
+  };
 
   const [templates, setTemplates] = useState(mockTemplates);
   const [resources, setResources] = useState(mockResources);

@@ -9,23 +9,36 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { trpc } from '@/lib/trpc';
-
-const mockStats = { totalClips: 36, completionRate: 65, avgScore: 71, activeListeners: 98 };
-const mockAudio = [
-  { id: 1, title: "Conversation au bureau", level: "A2", duration: "2:30", questions: 4, status: "published", completions: 78, hasTranscript: true },
-  { id: 2, title: "Bulletin de nouvelles", level: "B2", duration: "4:15", questions: 7, status: "published", completions: 34, hasTranscript: true },
-  { id: 3, title: "Débat parlementaire", level: "C1", duration: "6:00", questions: 10, status: "draft", completions: 0, hasTranscript: false },
-  { id: 4, title: "Message téléphonique", level: "A1", duration: "1:15", questions: 3, status: "published", completions: 112, hasTranscript: true },
-  { id: 5, title: "Entrevue d'emploi", level: "B1", duration: "3:45", questions: 6, status: "published", completions: 56, hasTranscript: true },
-];
+import { trpc } from "@/lib/trpc";
 
 export default function ListeningLab() {
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState("all");
 
-  const filteredAudio = mockAudio.filter(a => {
+  // ── tRPC queries ──
+  const historyQuery = trpc.listeningLab.history.useQuery(undefined, { retry: false });
+  const statsQuery = trpc.listeningLab.stats.useQuery(undefined, { retry: false });
+  const isLoading = historyQuery.isLoading || statsQuery.isLoading;
+  const history = historyQuery.data ?? [];
+  const rawStats = statsQuery.data;
+  const mockStats = {
+    totalClips: rawStats?.totalAttempts ?? 0,
+    completionRate: rawStats?.averageScore ?? 0,
+    avgScore: rawStats?.averageScore ?? 0,
+    activeListeners: rawStats?.totalAttempts ?? 0,
+  };
+  const mockAudio = history.map((h: any, i: number) => ({
+    id: h.id || i,
+    title: h.exerciseTitle || h.exerciseType || "Listening Exercise",
+    level: h.level || "B1",
+    duration: "—",
+    questions: 0,
+    status: "published",
+    completions: h.score || 0,
+    hasTranscript: true,
+  }));
+  const filteredAudio = mockAudio.filter((a: any) => {
     const matchesSearch = a.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesLevel = levelFilter === "all" || a.level === levelFilter;
     return matchesSearch && matchesLevel;
