@@ -101,7 +101,7 @@ export default function EmailSequences() {
         </div>
         <Dialog open={showCreate} onOpenChange={setShowCreate}>
           <DialogTrigger asChild>
-            <Button><Plus className="h-4 w-4 mr-2" /> New Sequence</Button>
+            <Button onClick={() => toast.info("Opening form...")}><Plus className="h-4 w-4 mr-2" /> New Sequence</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

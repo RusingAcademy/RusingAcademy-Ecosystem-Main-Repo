@@ -137,7 +137,7 @@ Score moyen: ${stats.avgScore}/100
           </CardHeader>
           <CardContent>
             <Link href="/login">
-              <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-500">
+              <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-500" onClick={() => toast.info("Se connecter")}>
                 Se connecter
               </Button>
             </Link>
@@ -159,7 +159,7 @@ Score moyen: ${stats.avgScore}/100
               Cette session n'existe pas ou vous n'y avez pas accès.
             </p>
             <Link href="/practice-history">
-              <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-500">
+              <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-500" onClick={() => toast.info("Retour à l'historique")}>
                 Retour à l'historique
               </Button>
             </Link>

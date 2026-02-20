@@ -442,7 +442,7 @@ export default function CoachTerms() {
             {/* Back Button */}
             <div className="pt-6">
               <Link href="/coach/dashboard">
-                <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white">
+                <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white" onClick={() => window.location.href = "/"}>
                   {t.backBtn[l]}
                 </Button>
               </Link>

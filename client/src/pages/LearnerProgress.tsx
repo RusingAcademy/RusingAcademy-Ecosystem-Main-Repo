@@ -3,6 +3,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 // Header removed — excluded route uses dedicated layout
 // Footer removed — excluded route uses dedicated layout
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -209,7 +210,7 @@ export default function LearnerProgress() {
             </CardHeader>
             <CardContent>
               <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => toast.info("{t.signIn}")}>
                   {t.signIn}
                 </Button>
               </a>

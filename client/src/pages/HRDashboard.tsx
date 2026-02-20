@@ -4,6 +4,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 // Footer removed — excluded route uses dedicated layout
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -387,7 +388,7 @@ export default function HRDashboard() {
             </CardHeader>
             <CardContent>
               <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => toast.info("{l.signIn}")}>
                   {l.signIn}
                 </Button>
               </a>
@@ -929,7 +930,7 @@ export default function HRDashboard() {
                             </Badge>
                           </TableCell>
                           <TableCell>
-                            <Button variant="outline" size="sm">
+                            <Button variant="outline" size="sm" onClick={() => toast.info("{l.manageCohort}")}>
                               {l.manageCohort}
                             </Button>
                           </TableCell>

@@ -209,7 +209,7 @@ const PronunciationLab = () => {
                                     <p className="text-sm text-muted-foreground">{cat.count} exercises</p>
                                 </div>
                                 <div>
-                                    <Button variant="outline" size="sm">Manage</Button>
+                                    <Button variant="outline" size="sm" onClick={() => toast.info("Manage")}>Manage</Button>
                                 </div>
                             </div>
                         ))}

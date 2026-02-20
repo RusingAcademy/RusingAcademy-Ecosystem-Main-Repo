@@ -855,7 +855,7 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <Link href="/">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => window.location.href = "/"}>
                   {l.goHome}
                 </Button>
               </Link>

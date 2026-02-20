@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -147,7 +148,7 @@ export default function B2BSection() {
                       </li>
                     ))}
                   </ul>
-                  <Button className={`w-full ${pkg.popular ? 'bg-cta hover:bg-cta' : 'bg-foundation hover:bg-[#0a2a2b]'}`}>
+                  <Button className={`w-full ${pkg.popular ? 'bg-cta hover:bg-cta' : 'bg-foundation hover:bg-[#0a2a2b]'}`} onClick={() => toast.info("{t.cta}")}>
                     {t.cta}
                   </Button>
                 </CardContent>

@@ -8,6 +8,7 @@ import { useParams, useLocation, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -292,7 +293,7 @@ export default function LearnCourse() {
                   ? "Vous avez terminé ce cours avec succès."
                   : "You have successfully completed this course."}
               </p>
-              <Button variant="outline" className="border-green-300 text-green-700 hover:bg-green-100">
+              <Button variant="outline" className="border-green-300 text-green-700 hover:bg-green-100" onClick={() => toast.info("{t ? \"Obtenir le certificat\" : \"Get C")}>
                 {t ? "Obtenir le certificat" : "Get Certificate"}
               </Button>
             </CardContent>

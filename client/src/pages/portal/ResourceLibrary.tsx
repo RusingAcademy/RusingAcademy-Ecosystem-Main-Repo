@@ -26,6 +26,7 @@ import {
   List,
   SlidersHorizontal
 } from "lucide-react";
+import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -179,7 +180,7 @@ export default function ResourceLibrary() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
             <Input placeholder="Rechercher dans la bibliothèque..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10" />
           </div>
-          <Button variant="outline" className="gap-2"><SlidersHorizontal className="h-4 w-4" />Filtres</Button>
+          <Button variant="outline" className="gap-2" onClick={() => toast.info("Filtres")}><SlidersHorizontal className="h-4 w-4" />Filtres</Button>
         </div>
 
         <div className="flex items-center gap-2 overflow-x-auto pb-2">
@@ -221,8 +222,8 @@ export default function ResourceLibrary() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2 mt-4 pt-3 border-t border-slate-100">
-                        {resource.previewUrl && <Button variant="outline" size="sm" className="gap-1 flex-1"><Eye className="h-3 w-3" />Aperçu</Button>}
-                        <Button variant="outline" size="sm" className="gap-1 flex-1"><Download className="h-3 w-3" />Télécharger</Button>
+                        {resource.previewUrl && <Button variant="outline" size="sm" className="gap-1 flex-1" onClick={() => toast.info("Aperçu")}><Eye className="h-3 w-3" />Aperçu</Button>}
+                        <Button variant="outline" size="sm" className="gap-1 flex-1" onClick={() => toast.info("Télécharger")}><Download className="h-3 w-3" />Télécharger</Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -263,7 +264,7 @@ export default function ResourceLibrary() {
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-1">Besoin d'aide?</h3>
                   <p className="text-sm text-slate-500 mb-4">Consultez notre guide d'utilisation de la bibliothèque</p>
-                  <Button variant="outline" className="w-full">Voir le guide</Button>
+                  <Button variant="outline" className="w-full" onClick={() => toast.info("Voir le guide")}>Voir le guide</Button>
                 </div>
               </CardContent>
             </Card>

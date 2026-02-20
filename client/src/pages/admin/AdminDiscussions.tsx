@@ -273,8 +273,8 @@ const AdminDiscussions = () => {
                           <p className="text-xs text-muted-foreground mt-1">Reported by {item.reportedBy} for: <span className="font-medium">{item.reason}</span></p>
                         </div>
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="sm"><Shield className="w-4 h-4 mr-2"/>Dismiss</Button>
-                          <Button variant="destructive" size="sm"><Trash2 className="w-4 h-4 mr-2"/>Remove Content</Button>
+                          <Button variant="outline" size="sm" onClick={() => toast.info("Dismiss")}><Shield className="w-4 h-4 mr-2"/>Dismiss</Button>
+                          <Button variant="destructive" size="sm" onClick={() => toast.error("Item removed")}><Trash2 className="w-4 h-4 mr-2"/>Remove Content</Button>
                         </div>
                       </div>
                     </div>
@@ -307,7 +307,7 @@ const AdminDiscussions = () => {
                 </div>
                 <div className="flex items-center space-x-2 pt-2">
                     <Input placeholder="New category name" className="max-w-xs"/>
-                    <Button>Add Category</Button>
+                    <Button onClick={() => toast.info("Opening form...")}>Add Category</Button>
                 </div>
               </div>
               <div className="space-y-2">

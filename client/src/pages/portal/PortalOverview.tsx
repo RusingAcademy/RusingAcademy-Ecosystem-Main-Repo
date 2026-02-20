@@ -18,6 +18,7 @@ import {
   TrendingUp,
   Award
 } from "lucide-react";
+import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PortalLayout from "@/components/portal/PortalLayout";
@@ -170,9 +171,9 @@ export default function PortalOverview() {
                         </div>
                       </div>
                       {session.isLive ? (
-                        <Button className="bg-emerald-600 hover:bg-emerald-700 gap-2"><Video className="h-4 w-4" />Rejoindre</Button>
+                        <Button className="bg-emerald-600 hover:bg-emerald-700 gap-2" onClick={() => window.location.href = "/register"}><Video className="h-4 w-4" />Rejoindre</Button>
                       ) : (
-                        <Button variant="outline" className="gap-2"><Calendar className="h-4 w-4" />Rappel</Button>
+                        <Button variant="outline" className="gap-2" onClick={() => toast.info("Rappel")}><Calendar className="h-4 w-4" />Rappel</Button>
                       )}
                     </div>
                   </div>

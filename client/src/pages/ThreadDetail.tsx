@@ -462,7 +462,7 @@ export default function ThreadDetail() {
                 {language === "en" ? "Sign in to join the discussion" : "Connectez-vous pour participer à la discussion"}
               </p>
               <a href={getLoginUrl()}>
-                <Button className="community-btn-primary text-sm font-bold">
+                <Button className="community-btn-primary text-sm font-bold" onClick={() => window.location.href = "/login"}>
                   {language === "en" ? "Sign In" : "Se connecter"}
                 </Button>
               </a>

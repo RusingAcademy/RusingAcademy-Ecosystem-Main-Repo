@@ -91,7 +91,7 @@ export default function ReportsAdmin() {
               </div>
               <div className="flex items-center justify-between">
                 <Badge variant="outline" className="text-[10px]">Live data</Badge>
-                <Button variant="ghost" size="sm" className="text-xs gap-1"><Printer className="h-3 w-3" /> Generate</Button>
+                <Button variant="ghost" size="sm" className="text-xs gap-1" onClick={() => toast.info("Generate")}><Printer className="h-3 w-3" /> Generate</Button>
               </div>
             </CardContent>
           </Card>

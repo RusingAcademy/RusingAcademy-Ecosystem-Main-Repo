@@ -297,7 +297,7 @@ export default function BookSession() {
             <h2 className="text-xl font-semibold text-black dark:text-foreground mb-2">{l.noPlan}</h2>
             <p className="text-black dark:text-foreground dark:text-cyan-300 mb-6">{l.noPlanDesc}</p>
             <Link href="/ecosystem">
-              <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
+              <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700" onClick={() => toast.info("{l.viewPlans}")}>
                 {l.viewPlans}
               </Button>
             </Link>

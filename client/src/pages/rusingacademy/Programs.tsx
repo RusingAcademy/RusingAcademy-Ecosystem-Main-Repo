@@ -289,7 +289,7 @@ export default function Programs() {
                 Explore the Program
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-orange-300 text-cta hover:bg-orange-50">
+              <Button size="lg" variant="outline" className="border-2 border-orange-300 text-cta hover:bg-orange-50" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                 View All Paths
               </Button>
             </div>
@@ -655,7 +655,7 @@ export default function Programs() {
                 </Button>
               </Link>
               <Link href="/rusingacademy">
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
+                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10" onClick={() => window.scrollTo({ top: document.body.scrollHeight * 0.3, behavior: "smooth" })}>
                   Learn More
                 </Button>
               </Link>

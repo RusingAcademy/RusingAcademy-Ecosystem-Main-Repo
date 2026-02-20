@@ -432,7 +432,7 @@ export default function BundlesAndPaths() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10" onClick={() => toast.info("{isEn ? \"Talk to an Advisor\" : \"Parle")}>
                   {isEn ? "Talk to an Advisor" : "Parler à un Conseiller"}
                 </Button>
               </Link>

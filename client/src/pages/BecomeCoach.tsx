@@ -315,7 +315,7 @@ export default function BecomeCoach() {
               </ul>
             </div>
             <a href="/">
-              <Button variant="outline" className="gap-2">
+              <Button variant="outline" className="gap-2" onClick={() => window.location.href = "/"}>
                 {l.backToHome}
               </Button>
             </a>

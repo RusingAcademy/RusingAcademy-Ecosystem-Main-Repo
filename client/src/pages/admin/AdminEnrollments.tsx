@@ -187,7 +187,7 @@ export default function AdminEnrollments() {
           {/* Manual Enrollment Dialog */}
           <Dialog open={enrollDialogOpen} onOpenChange={setEnrollDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="gap-1.5 bg-teal-600 hover:bg-teal-700">
+              <Button className="gap-1.5 bg-teal-600 hover:bg-teal-700" onClick={() => toast.info("Manual Enroll")}>
                 <UserPlus className="h-4 w-4" /> Manual Enroll
               </Button>
             </DialogTrigger>

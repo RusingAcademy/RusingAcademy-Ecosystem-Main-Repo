@@ -182,7 +182,7 @@ export default function DictationExercises() {
                           <td className="px-6 py-4 whitespace-nowrap"><Badge>{exercise.cefrLevel}</Badge></td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exercise.category}</td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <Button variant="outline" size="sm"><FileAudio className="h-4 w-4 mr-2" /> Play</Button>
+                            <Button variant="outline" size="sm" onClick={() => toast.info("Play")}><FileAudio className="h-4 w-4 mr-2" /> Play</Button>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <Button variant="ghost" size="sm"><Edit className="h-4 w-4" /></Button>
@@ -208,7 +208,7 @@ export default function DictationExercises() {
                     {/* TODO: Implement CRUD for categories */}
                     <div className="flex items-center gap-2 mb-4">
                         <Input placeholder="New category name" className="max-w-xs" />
-                        <Button>Add Category</Button>
+                        <Button onClick={() => toast.info("Opening form...")}>Add Category</Button>
                     </div>
                     <div className="space-y-2">
                         {categories.map(cat => (

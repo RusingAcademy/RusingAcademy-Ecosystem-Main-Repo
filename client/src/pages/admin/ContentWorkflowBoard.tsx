@@ -278,7 +278,7 @@ export default function ContentWorkflowBoard() {
             <Badge variant="secondary">{selectedIds.size} {t.selected}</Badge>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button size="sm" variant="outline">{t.moveSelected}</Button>
+                <Button size="sm" variant="outline" onClick={() => toast.info("{t.moveSelected}")}>{t.moveSelected}</Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 {statusOrder.map(s => (

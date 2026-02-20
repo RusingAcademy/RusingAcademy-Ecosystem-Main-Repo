@@ -387,14 +387,14 @@ export default function ComponentsShowcase() {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex flex-wrap gap-4">
-                  <Button>Default</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="destructive">Destructive</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
+                  <Button onClick={() => toast.info("Default")}>Default</Button>
+                  <Button variant="secondary" onClick={() => toast.info("Secondary")}>Secondary</Button>
+                  <Button variant="destructive" onClick={() => toast.info("Destructive")}>Destructive</Button>
+                  <Button variant="outline" onClick={() => toast.info("Outline")}>Outline</Button>
+                  <Button variant="ghost" onClick={() => toast.info("Ghost")}>Ghost</Button>
                   <Button variant="link">Link</Button>
-                  <Button size="sm">Small</Button>
-                  <Button size="lg">Large</Button>
+                  <Button size="sm" onClick={() => toast.info("Small")}>Small</Button>
+                  <Button size="lg" onClick={() => toast.info("Large")}>Large</Button>
                   <Button size="icon">
                     <Check className="h-4 w-4" />
                   </Button>
@@ -911,7 +911,7 @@ export default function ComponentsShowcase() {
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button>Save changes</Button>
+                    <Button onClick={() => toast.success("Changes saved")}>Save changes</Button>
                   </CardFooter>
                 </Card>
               </TabsContent>
@@ -934,7 +934,7 @@ export default function ComponentsShowcase() {
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button>Save password</Button>
+                    <Button onClick={() => toast.success("Changes saved")}>Save password</Button>
                   </CardFooter>
                 </Card>
               </TabsContent>
@@ -1022,7 +1022,7 @@ export default function ComponentsShowcase() {
                 <div className="flex flex-wrap gap-4">
                   <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                     <DialogTrigger asChild>
-                      <Button variant="outline">Open Dialog</Button>
+                      <Button variant="outline" onClick={() => toast.info("Open Dialog")}>Open Dialog</Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
@@ -1058,7 +1058,7 @@ export default function ComponentsShowcase() {
 
                   <Sheet>
                     <SheetTrigger asChild>
-                      <Button variant="outline">Open Sheet</Button>
+                      <Button variant="outline" onClick={() => toast.info("Open Sheet")}>Open Sheet</Button>
                     </SheetTrigger>
                     <SheetContent>
                       <SheetHeader>
@@ -1073,7 +1073,7 @@ export default function ComponentsShowcase() {
 
                   <Drawer>
                     <DrawerTrigger asChild>
-                      <Button variant="outline">Open Drawer</Button>
+                      <Button variant="outline" onClick={() => toast.info("Open Drawer")}>Open Drawer</Button>
                     </DrawerTrigger>
                     <DrawerContent>
                       <DrawerHeader>
@@ -1085,7 +1085,7 @@ export default function ComponentsShowcase() {
                       <DrawerFooter>
                         <Button>Submit</Button>
                         <DrawerClose asChild>
-                          <Button variant="outline">Cancel</Button>
+                          <Button variant="outline" onClick={() => toast.info("Cancel")}>Cancel</Button>
                         </DrawerClose>
                       </DrawerFooter>
                     </DrawerContent>
@@ -1093,7 +1093,7 @@ export default function ComponentsShowcase() {
 
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button variant="outline">Open Popover</Button>
+                      <Button variant="outline" onClick={() => toast.info("Open Popover")}>Open Popover</Button>
                     </PopoverTrigger>
                     <PopoverContent>
                       <div className="space-y-2">
@@ -1107,7 +1107,7 @@ export default function ComponentsShowcase() {
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button variant="outline">Hover me</Button>
+                      <Button variant="outline" onClick={() => toast.info("Hover me")}>Hover me</Button>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Add to library</p>
@@ -1126,7 +1126,7 @@ export default function ComponentsShowcase() {
                 <div className="flex flex-wrap gap-4">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline">Dropdown Menu</Button>
+                      <Button variant="outline" onClick={() => toast.info("Dropdown Menu")}>Dropdown Menu</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -1140,7 +1140,7 @@ export default function ComponentsShowcase() {
 
                   <ContextMenu>
                     <ContextMenuTrigger asChild>
-                      <Button variant="outline">Right Click Me</Button>
+                      <Button variant="outline" onClick={() => toast.info("Right Click Me")}>Right Click Me</Button>
                     </ContextMenuTrigger>
                     <ContextMenuContent>
                       <ContextMenuItem>Profile</ContextMenuItem>
@@ -1152,7 +1152,7 @@ export default function ComponentsShowcase() {
 
                   <HoverCard>
                     <HoverCardTrigger asChild>
-                      <Button variant="outline">Hover Card</Button>
+                      <Button variant="outline" onClick={() => toast.info("Hover Card")}>Hover Card</Button>
                     </HoverCardTrigger>
                     <HoverCardContent>
                       <div className="space-y-2">

@@ -266,7 +266,7 @@ export default function CoachProfile() {
                   : "Le profil du coach que vous recherchez n'existe pas ou a été supprimé."}
               </p>
               <Link href="/coaches">
-                <Button className="bg-teal-600 hover:bg-teal-700">
+                <Button className="bg-teal-600 hover:bg-teal-700" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                   {isEn ? "Browse All Coaches" : "Voir tous les coachs"}
                 </Button>
               </Link>

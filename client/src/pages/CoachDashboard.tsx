@@ -312,7 +312,7 @@ export default function CoachDashboard() {
             </CardHeader>
             <CardContent>
               <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => toast.info("{l.signIn}")}>
                   {l.signIn}
                 </Button>
               </a>
@@ -343,12 +343,12 @@ export default function CoachDashboard() {
               </p>
               <div className="flex flex-col gap-3">
                 <Link href="/become-a-coach">
-                  <Button className="w-full">
+                  <Button className="w-full" onClick={() => toast.info("{language === \"fr\" ? \"Devenir coach\"")}>
                     {language === "fr" ? "Devenir coach" : "Become a Coach"}
                   </Button>
                 </Link>
                 <Link href="/coaches">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                     {language === "fr" ? "Voir tous les coachs" : "Browse All Coaches"}
                   </Button>
                 </Link>
@@ -575,7 +575,7 @@ export default function CoachDashboard() {
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle className="text-lg">{l.todaysSessions}</CardTitle>
                   <Link href="/app/availability">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => toast.info("{l.viewAll}")}>
                       {l.viewAll}
                     </Button>
                   </Link>
@@ -852,7 +852,7 @@ export default function CoachDashboard() {
                       {language === "fr" ? "Votre vidéo d'introduction" : "Your Intro Video"}
                     </CardTitle>
                     <Link href="/app/coach-profile/edit">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={() => toast.info("Opening editor...")}>
                         {language === "fr" ? "Modifier" : "Edit"}
                       </Button>
                     </Link>

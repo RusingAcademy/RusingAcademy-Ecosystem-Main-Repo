@@ -313,7 +313,7 @@ END:VCALENDAR`;
               </Button>
             </Link>
             <Link href="/coaches">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                 {l.browseCoaches}
               </Button>
             </Link>

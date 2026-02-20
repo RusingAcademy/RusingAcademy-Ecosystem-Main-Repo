@@ -1,4 +1,5 @@
 import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -26,7 +27,7 @@ export default function PreviewStudent() {
           <Card key={c.id} className="hover:shadow-md transition-shadow"><CardContent className="p-5">
             <div className="flex items-center gap-2 mb-3"><GraduationCap className="h-5 w-5" style={{ color: "var(--brand-foundation)" }} /><Badge variant="secondary">{c.category || "General"}</Badge></div>
             <h3 className="font-semibold mb-2">{c.title}</h3><p className="text-sm text-muted-foreground line-clamp-3 mb-4">{c.description || "No description"}</p>
-            <div className="flex items-center justify-between"><span className="text-sm font-medium">{c.price ? `$${(c.price/100).toFixed(2)}` : "Free"}</span><Button size="sm" className="gap-1"><Play className="h-3.5 w-3.5" /> Enroll</Button></div>
+            <div className="flex items-center justify-between" onClick={() => toast.info("Enroll")}><span className="text-sm font-medium">{c.price ? `$${(c.price/100).toFixed(2)}` : "Free"}</span><Button size="sm" className="gap-1"><Play className="h-3.5 w-3.5" /> Enroll</Button></div>
           </CardContent></Card>
         ))}</div>
       )}

@@ -252,7 +252,7 @@ export default function EmailPage() {
                   <item.icon className="h-8 w-8 text-muted-foreground mb-3" />
                   <h3 className="font-semibold mb-1">{item.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{item.desc}</p>
-                  <Button size="sm" variant="outline">Open</Button>
+                  <Button size="sm" variant="outline" onClick={() => toast.info("Open")}>Open</Button>
                 </CardContent>
               </Card>
             ))}

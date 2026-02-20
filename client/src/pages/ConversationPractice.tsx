@@ -577,7 +577,7 @@ export default function ConversationPractice() {
                       {isEn ? "New Session" : "Nouvelle Session"}
                     </Button>
                     <Link href="/app/practice-history">
-                      <Button variant="outline">
+                      <Button variant="outline" onClick={() => toast.info("{isEn ? \"View History\" : \"Voir l'Hist")}>
                         {isEn ? "View History" : "Voir l'Historique"}
                       </Button>
                     </Link>

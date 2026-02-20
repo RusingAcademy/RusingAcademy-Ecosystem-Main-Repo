@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -204,7 +205,7 @@ export default function PreviewMode() {
                       )}
 
                       {!mode.requiresUser && (
-                        <Button variant="outline" size="sm" className="mt-3 group-hover:bg-gray-50">
+                        <Button variant="outline" size="sm" className="mt-3 group-hover:bg-gray-50" onClick={() => toast.info("Preview")}>
                           <Eye className="w-4 h-4 mr-1" /> Preview
                         </Button>
                       )}

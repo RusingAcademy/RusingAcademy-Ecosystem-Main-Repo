@@ -75,7 +75,7 @@ export default function Bills() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Bills</h1>
         <Link href="/bills/new">
-          <Button className="bg-green-600 hover:bg-green-700">
+          <Button className="bg-green-600 hover:bg-green-700" onClick={() => toast.info("Opening form...")}>
             <Plus size={16} className="mr-1" /> Create bill
           </Button>
         </Link>

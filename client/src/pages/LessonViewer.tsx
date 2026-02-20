@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useLearnLayout } from "@/contexts/LearnLayoutContext";
 // Header removed — uses ecosystem layout or dedicated layout
 // Footer removed — uses ecosystem layout or dedicated layout
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -850,7 +851,7 @@ export default function LessonViewer() {
                           ? "Share your thoughts, ask questions, and connect with other learners."
                           : "Partagez vos réflexions, posez des questions et connectez-vous avec d'autres apprenants."}
                       </p>
-                      <Button variant="outline">
+                      <Button variant="outline" onClick={() => toast.info("{isEn ? \"Coming Soon\" : \"Bientôt disp")}>
                         {isEn ? "Coming Soon" : "Bientôt disponible"}
                       </Button>
                     </div>
