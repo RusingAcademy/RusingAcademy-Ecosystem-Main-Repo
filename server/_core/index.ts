@@ -165,6 +165,7 @@ async function startServer() {
 
   // Auth RBAC routes (password setup, permissions)
   app.use("/api/auth", authRbacRouter);
+  app.use("/api/auth-rbac", authRbacRouter); // Also mount at /api/auth-rbac for frontend compatibility
   
   // Google OAuth routes
   app.use("/api/auth", googleAuthRouter);

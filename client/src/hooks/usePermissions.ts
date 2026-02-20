@@ -87,10 +87,12 @@ export function usePermissions() {
       } catch (err) {
         if (!cancelled) {
           // Fallback: use user role from auth context for basic access
+          const userRole = user?.role || "";
+          const ownerFallback = userRole === "owner" || !!(user as any)?.isOwner;
           setState({
-            permissions: [],
-            role: user?.role || "",
-            isOwner: false,
+            permissions: ownerFallback ? ["*"] : [],
+            role: userRole,
+            isOwner: ownerFallback,
             loading: false,
             error: err instanceof Error ? err.message : "Unknown error",
           });
@@ -120,11 +122,11 @@ export function usePermissions() {
   const can = useCallback(
     (permission: string): boolean => {
       if (!isAuthenticated) return false;
-      if (state.isOwner) return true;
+      if (state.isOwner || state.role === "owner") return true;
       if (permissionSet.has("*")) return true;
       return permissionSet.has(permission);
     },
-    [isAuthenticated, state.isOwner, permissionSet]
+    [isAuthenticated, state.isOwner, state.role, permissionSet]
   );
 
   /**

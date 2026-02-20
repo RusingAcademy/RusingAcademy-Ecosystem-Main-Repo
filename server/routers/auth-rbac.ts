@@ -5,6 +5,7 @@ import * as bcrypt from "bcryptjs";
 import { createHash } from "crypto";
 import * as schema from "../../drizzle/schema";
 import { createLogger } from "../logger";
+import { getSessionFromRequest } from "../_core/session";
 const log = createLogger("routers-auth-rbac");
 
 const router = Router();
@@ -195,7 +196,15 @@ router.post("/request-reset", async (req, res) => {
 // Get current user permissions
 router.get("/permissions", async (req, res) => {
   try {
-    const userId = (req as any).userId;
+    // Parse session from cookie if userId not already set by middleware
+    let userId = (req as any).userId;
+    if (!userId) {
+      const session = await getSessionFromRequest(req);
+      if (session) {
+        userId = session.userId;
+        (req as any).userId = userId;
+      }
+    }
     const db = await getDb();
 
     if (!db) {
