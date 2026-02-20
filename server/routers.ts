@@ -3541,6 +3541,53 @@ Remember: You're preparing them for real SLE oral interaction exams, so focus on
       };
     }),
 
+  // Quick chat — no session required (for AICoach page & FloatingAICompanion)
+  quickChat: publicProcedure
+    .input(
+      z.object({
+        message: z.string().min(1).max(2000),
+        conversationHistory: z.array(
+          z.object({
+            role: z.enum(["user", "assistant"]),
+            content: z.string(),
+          })
+        ).default([]),
+        context: z.enum(["general", "grammar", "vocabulary", "exam_prep", "writing", "oral"]).default("general"),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const systemPrompt = `You are the RusingAcademy SLE AI Coach — a bilingual (English/French) language assistant for Canadian public servants preparing for SLE exams. You are warm, encouraging, and professional.
+
+Your expertise:
+- SLE Oral Interaction (levels A, B, C)
+- SLE Written Expression
+- SLE Reading Comprehension
+- French grammar, vocabulary, and pronunciation tips
+- Federal public service workplace scenarios
+
+Guidelines:
+- Match the user's language. If they write in French, respond in French.
+- Keep responses concise (2-3 paragraphs) and actionable.
+- Provide corrections gently with the correct form.
+- Use workplace scenarios: meetings, briefings, emails, presentations.
+- End with an encouraging note or a follow-up question to keep practice going.`;
+
+      const messages = [
+        { role: "system" as const, content: systemPrompt },
+        ...input.conversationHistory.slice(-10).map(msg => ({
+          role: msg.role as "user" | "assistant",
+          content: msg.content,
+        })),
+        { role: "user" as const, content: input.message },
+      ];
+
+      const response = await invokeLLM({ messages });
+      const content = response.choices[0]?.message?.content;
+      const responseText = typeof content === 'string' ? content : "I apologize, I couldn't generate a response. Please try again.";
+
+      return { content: responseText };
+    }),
+
   // Get learner's AI session history
   history: protectedProcedure.query(async ({ ctx }) => {
     const learner = await getLearnerByUserId(ctx.user.id);
