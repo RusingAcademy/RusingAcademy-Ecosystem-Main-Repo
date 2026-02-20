@@ -610,7 +610,7 @@ export default function AICoach() {
         </section>
       </main>
 
-      {!isInsideAppLayout && }
+      {!isInsideAppLayout && null}
     </div>
   );
 }
