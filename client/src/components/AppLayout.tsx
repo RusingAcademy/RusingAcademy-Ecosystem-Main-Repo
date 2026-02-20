@@ -26,6 +26,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { ECOSYSTEM_URLS } from "@/lib/ecosystem-urls";
 import {
   LayoutDashboard,
   BookOpen,
@@ -320,6 +321,13 @@ const navSections: NavSection[] = [
   },
 ];
 
+// ── ECOSYSTEM cross-navigation (rendered separately, not role-filtered) ──
+const ecosystemLinks = [
+  { id: "eco-coach", label: "Coach Portal", labelFr: "Portail Coach", icon: "school", path: "/coach/portal" },
+  { id: "eco-community", label: "Community Hub", labelFr: "Communauté", icon: "forum", path: ECOSYSTEM_URLS.community, external: true },
+  { id: "eco-sales", label: "Sales Dashboard", labelFr: "Tableau des ventes", icon: "receipt_long", path: ECOSYSTEM_URLS.sales, external: true },
+];
+
 const bottomItems: NavItem[] = [
   {
     id: "settings",
@@ -470,6 +478,41 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             ))}
           </div>
         ))}
+        {/* ECOSYSTEM cross-navigation */}
+        <div className="px-1 pt-2">
+          {!collapsed && (
+            <p className="px-2.5 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+              {isFr ? "Écosystème" : "Ecosystem"}
+            </p>
+          )}
+          {ecosystemLinks.map((link) => (
+            <Tooltip key={link.id}>
+              <TooltipTrigger asChild>
+                <a
+                  href={link.path}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  className={cn(
+                    "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                    collapsed && "justify-center px-0"
+                  )}
+                >
+                  <span className={cn("material-icons", collapsed ? "text-xl" : "text-lg")} style={{ fontSize: collapsed ? '20px' : '16px' }}>{link.icon}</span>
+                  {!collapsed && (
+                    <span className="truncate text-xs">
+                      {isFr ? link.labelFr : link.label}
+                    </span>
+                  )}
+                </a>
+              </TooltipTrigger>
+              {collapsed && (
+                <TooltipContent side="right">
+                  {isFr ? link.labelFr : link.label}
+                </TooltipContent>
+              )}
+            </Tooltip>
+          ))}
+        </div>
       </nav>
 
       {/* Bottom */}

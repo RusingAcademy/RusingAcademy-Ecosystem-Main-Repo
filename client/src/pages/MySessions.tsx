@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -121,11 +121,11 @@ export default function MySessions() {
   if (authLoading) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        {!isInsideAppLayout && <Header />}
+        {null}
         <main className="flex-1 flex items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </main>
-        {!isInsideAppLayout && <Footer />}
+        {null}
       </div>
     );
   }
@@ -134,7 +134,7 @@ export default function MySessions() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        {!isInsideAppLayout && <Header />}
+        {null}
         <main className="flex-1 flex items-center justify-center py-6 md:py-8 lg:py-12">
           <Card className="max-w-md w-full mx-4 text-center">
             <CardContent className="pt-8 pb-8">
@@ -146,7 +146,7 @@ export default function MySessions() {
             </CardContent>
           </Card>
         </main>
-        {!isInsideAppLayout && <Footer />}
+        {null}
       </div>
     );
   }
@@ -186,7 +186,7 @@ export default function MySessions() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {!isInsideAppLayout && <Header />}
+      {null}
 
       <main className="flex-1 py-8">
         <div className="container max-w-4xl mx-auto px-4">
@@ -492,7 +492,7 @@ export default function MySessions() {
         </div>
       </main>
 
-      {!isInsideAppLayout && <Footer />}
+      {null}
 
       {/* Reschedule Modal */}
       {rescheduleSession && (

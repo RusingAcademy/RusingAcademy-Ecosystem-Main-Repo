@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -187,9 +187,9 @@ export default function HRDashboard() {
     if (isInsideAppLayout) return <>{children}</>;
     return (
       <div className={`min-h-screen flex flex-col ${className}`}>
-        <Header />
+        
         {children}
-        <Footer />
+        
       </div>
     );
   };

@@ -24,8 +24,8 @@ import {
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow, format, isToday, isYesterday } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { useSearch } from "wouter";
 import { toast } from "sonner";
 
@@ -240,7 +240,7 @@ export default function Messages() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        <Header />
+        
         <main className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
           <Card className="max-w-md mx-auto">
             <CardContent className="p-8 text-center">
@@ -259,14 +259,14 @@ export default function Messages() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
+        
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <Header />
+      
       
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
@@ -589,7 +589,7 @@ export default function Messages() {
         </div>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }

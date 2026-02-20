@@ -6,8 +6,8 @@
  */
 
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -152,7 +152,7 @@ export default function LearnerCourses() {
   if (authLoading) {
     return (
       <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="relative w-20 h-20 mx-auto mb-6">
@@ -172,7 +172,7 @@ export default function LearnerCourses() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center px-4">
           <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
             <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-6">
@@ -199,7 +199,7 @@ export default function LearnerCourses() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
-      <Header />
+      
 
       {/* Background decoration */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -410,7 +410,7 @@ export default function LearnerCourses() {
         </div>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }

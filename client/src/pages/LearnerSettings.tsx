@@ -3,8 +3,8 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { NotificationPreferences } from "@/components/NotificationPreferences";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -239,7 +239,7 @@ export default function LearnerSettings() {
   if (!authLoading && !isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        {!isInsideAppLayout && <Header />}
+        {null}
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -255,14 +255,14 @@ export default function LearnerSettings() {
             </CardContent>
           </Card>
         </main>
-        {!isInsideAppLayout && <Footer />}
+        {null}
       </div>
     );
   }
   
   return (
     <div className="min-h-screen flex flex-col bg-muted/30">
-      {!isInsideAppLayout && <Header />}
+      {null}
       
       <main className="flex-1 py-8">
         <div className="container max-w-4xl mx-auto px-4">
@@ -613,7 +613,7 @@ export default function LearnerSettings() {
         </div>
       </main>
       
-      {!isInsideAppLayout && <Footer />}
+      {null}
     </div>
   );
 }

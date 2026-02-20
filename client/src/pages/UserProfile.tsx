@@ -17,8 +17,8 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { Link, useParams } from "wouter";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — uses ecosystem layout or dedicated layout
+// Footer removed — uses ecosystem layout or dedicated layout
 
 export default function UserProfile() {
   const { userId } = useParams<{ userId: string }>();
@@ -76,7 +76,7 @@ export default function UserProfile() {
   if (profileLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <main className="container py-8">
           <Skeleton className="h-64 w-full mb-8" />
           <div className="grid md:grid-cols-3 gap-6">
@@ -85,7 +85,7 @@ export default function UserProfile() {
             <Skeleton className="h-48" />
           </div>
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -93,7 +93,7 @@ export default function UserProfile() {
   if (!profile) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <main className="container py-8 text-center">
           <h1 className="text-2xl font-bold mb-4">User Not Found</h1>
           <p className="text-muted-foreground mb-6">This profile does not exist or has been removed.</p>
@@ -101,7 +101,7 @@ export default function UserProfile() {
             <Button>Back to Leaderboard</Button>
           </Link>
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -110,7 +110,7 @@ export default function UserProfile() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      
       <main className="container py-8">
         <Link href="/app/badges">
           <Button variant="ghost" className="mb-6">
@@ -258,7 +258,7 @@ export default function UserProfile() {
           </Card>
         </div>
       </main>
-      <Footer />
+      
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import LoyaltyDashboard from "@/components/LoyaltyDashboard";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,11 +18,11 @@ export default function LearnerLoyalty() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        {!isInsideAppLayout && <Header />}
+        {null}
         <main className="flex-1 flex items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </main>
-        {!isInsideAppLayout && <Footer />}
+        {null}
       </div>
     );
   }
@@ -30,7 +30,7 @@ export default function LearnerLoyalty() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        {!isInsideAppLayout && <Header />}
+        {null}
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardContent className="p-8 text-center">
@@ -49,14 +49,14 @@ export default function LearnerLoyalty() {
             </CardContent>
           </Card>
         </main>
-        {!isInsideAppLayout && <Footer />}
+        {null}
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {!isInsideAppLayout && <Header />}
+      {null}
       
       <main className="flex-1">
         <div className="container py-8">
@@ -77,7 +77,7 @@ export default function LearnerLoyalty() {
         </div>
       </main>
 
-      {!isInsideAppLayout && <Footer />}
+      {null}
     </div>
   );
 }

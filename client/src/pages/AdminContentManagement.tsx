@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import {
   BarChart,
   Bar,
@@ -603,7 +603,7 @@ export default function AdminContentManagement() {
   
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      
       
       <main className="container py-8">
         <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
@@ -1477,7 +1477,7 @@ export default function AdminContentManagement() {
         </DialogContent>
       </Dialog>
       
-      <Footer />
+      
     </div>
   );
 }

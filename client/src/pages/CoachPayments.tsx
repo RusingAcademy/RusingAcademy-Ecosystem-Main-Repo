@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — coach routes use dedicated layout without duplicate nav
+// Footer removed — coach routes use dedicated layout
 import {
   CreditCard,
   ExternalLink,
@@ -76,7 +76,7 @@ export default function CoachPayments() {
   if (!user) {
     return (
       <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
-        <Header />
+        
         <main className="max-w-4xl mx-auto px-4 py-8 md:py-12 lg:py-16 text-center">
           <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-black dark:text-foreground mb-2">
@@ -86,7 +86,7 @@ export default function CoachPayments() {
             You need to be signed in as a coach to access this page.
           </p>
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -97,7 +97,7 @@ export default function CoachPayments() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
-      <Header />
+      
       
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Page Header */}
@@ -366,7 +366,7 @@ export default function CoachPayments() {
         </div>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }
