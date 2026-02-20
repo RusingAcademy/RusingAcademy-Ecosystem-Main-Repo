@@ -40,9 +40,9 @@ function L({ children, section }: { children: React.ReactNode; section?: string 
 }
 
 // ─── ALL Page Imports — Lazy-loaded for code splitting ─────────────────────
-// Core layout components (kept static for instant shell rendering)
-import DashboardRouter from "./components/DashboardRouter";
-import EcosystemLayout from "./components/EcosystemLayout";
+// Core layout components — lazy-loaded to reduce main bundle
+const DashboardRouter = lazy(() => import("./components/DashboardRouter"));
+const EcosystemLayout = lazy(() => import("./components/EcosystemLayout"));
 
 // Auth Pages
 const SignIn = lazy(() => import("./pages/SignIn"));
@@ -770,9 +770,11 @@ function App() {
                   <a href="#main-content" className="skip-link">
                     Skip to main content
                   </a>
-                  <EcosystemLayout>
-                    <Router />
-                  </EcosystemLayout>
+                  <Suspense fallback={<PageSkeleton />}>
+                    <EcosystemLayout>
+                      <Router />
+                    </EcosystemLayout>
+                  </Suspense>
                   <SLEAICompanionMobileButton />
                   <NotificationPermission />
                   <OfflineIndicator />
