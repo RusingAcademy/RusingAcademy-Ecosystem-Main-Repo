@@ -11,6 +11,7 @@ import {
   MessageCircle, DollarSign, ShoppingCart, FileSpreadsheet, Handshake,
   Link2, Palette, Navigation, PenTool, Megaphone, Inbox, CalendarDays,
   Filter, UserCheck, BarChart2, PieChart, HelpCircle, Layers, type LucideIcon, ChevronDown,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -23,8 +24,9 @@ import GlobalSearchBar from "@/pages/admin/GlobalSearch";
 import { UniversalBreadcrumb } from "@/components/UniversalBreadcrumb";
 import { usePermissions } from "@/hooks/usePermissions";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ECOSYSTEM_URLS } from "@/lib/ecosystem-urls";
 
-interface NavItem { id: string; label: string; labelFr?: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
+interface NavItem { id: string; label: string; labelFr?: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; external?: boolean; }
 interface NavSection { title: string; titleFr?: string; items: NavItem[]; collapsible?: boolean; }
 
 // ============================================================================
@@ -131,6 +133,13 @@ const navSections: NavSection[] = [
     { id: "org-billing", label: "Org Billing", icon: Receipt, path: "/admin/org-billing", requiredPermission: "manage_enterprise" },
     { id: "weekly-challenges", label: "Challenges", icon: Trophy, path: "/admin/weekly-challenges", requiredPermission: "manage_courses" },
     { id: "webhook-health", label: "Webhook Health", icon: Zap, path: "/admin/webhook-health", requiredPermission: "manage_settings" },
+  ]},
+
+  // ── ECOSYSTEM ─────────────────────────────────────────────────────────────
+  { title: "ECOSYSTEM", titleFr: "ÉCOSYSTÈME", collapsible: false, items: [
+    { id: "learning-portal", label: "Learning Portal", labelFr: "Portail d'apprentissage", icon: GraduationCap, path: ECOSYSTEM_URLS.portal, external: true },
+    { id: "community-hub", label: "Community Hub", labelFr: "Communauté", icon: MessageCircle, path: ECOSYSTEM_URLS.community, external: true },
+    { id: "sales-dashboard", label: "Sales Dashboard", labelFr: "Tableau des ventes", icon: Receipt, path: ECOSYSTEM_URLS.sales, external: true },
   ]},
 ];
 
@@ -250,21 +259,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   {!isSectionCollapsed && section.items.map((item) => (
                     <Tooltip key={item.id}>
                       <TooltipTrigger asChild>
-                        <Link href={item.path}>
-                          <button aria-label={language === 'fr' && item.labelFr ? item.labelFr : item.label} className={cn(
-                            "w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
-                            isActive(item.path)
-                              ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium border-l-3 border-[var(--admin-terracotta,#B87333)]"
-                              : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                            collapsed && "justify-center px-0"
-                          )}>
+                        {item.external ? (
+                          <a href={item.path} target="_blank" rel="noopener noreferrer"
+                            className={cn(
+                              "w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
+                              "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                              collapsed && "justify-center px-0"
+                            )}>
                             <item.icon className={cn("h-4 w-4 shrink-0", collapsed && "h-5 w-5")} />
                             {!collapsed && <span className="truncate">{language === 'fr' && item.labelFr ? item.labelFr : item.label}</span>}
-                            {!collapsed && item.badge !== undefined && item.badge > 0 && (
-                              <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">{item.badge}</span>
-                            )}
-                          </button>
-                        </Link>
+                            {!collapsed && <ExternalLink className="ml-auto h-3 w-3 text-muted-foreground" />}
+                          </a>
+                        ) : (
+                          <Link href={item.path}>
+                            <button aria-label={language === 'fr' && item.labelFr ? item.labelFr : item.label} className={cn(
+                              "w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
+                              isActive(item.path)
+                                ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium border-l-3 border-[var(--admin-terracotta,#B87333)]"
+                                : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                              collapsed && "justify-center px-0"
+                            )}>
+                              <item.icon className={cn("h-4 w-4 shrink-0", collapsed && "h-5 w-5")} />
+                              {!collapsed && <span className="truncate">{language === 'fr' && item.labelFr ? item.labelFr : item.label}</span>}
+                              {!collapsed && item.badge !== undefined && item.badge > 0 && (
+                                <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">{item.badge}</span>
+                              )}
+                            </button>
+                          </Link>
+                        )}
                       </TooltipTrigger>
                       {collapsed && <TooltipContent side="right">{item.label}</TooltipContent>}
                     </Tooltip>
