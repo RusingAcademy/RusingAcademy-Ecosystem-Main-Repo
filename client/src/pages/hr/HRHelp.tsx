@@ -12,6 +12,12 @@ export default function HRHelp() {
   const isEn = language === "en";
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Fetch onboarding checklist as help resources
+  const { data: checklist } = trpc.hr.getOnboardingChecklist.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
   const ui = {
     title: isEn ? "Help & Support" : "Aide et support",
     subtitle: isEn ? "Find answers, resources, and contact our support team" : "Trouvez des réponses, des ressources et contactez notre équipe de support",

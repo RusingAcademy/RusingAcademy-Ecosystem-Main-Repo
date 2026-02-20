@@ -14,6 +14,15 @@ export default function HRNotifications() {
   const isEn = language === "en";
   const [filter, setFilter] = useState<NotifFilter>("all");
 
+  // Fetch dashboard stats which include alerts/notifications
+  const { data: dashboardStats } = trpc.hr.getDashboardStats.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
+  // Extract alerts from dashboard stats
+  const alerts = dashboardStats?.alerts || [];
+
   const ui = {
     title: isEn ? "Notifications" : "Notifications",
     subtitle: isEn ? "Stay informed about training progress and compliance updates" : "Restez informé des progrès de formation et des mises à jour de conformité",

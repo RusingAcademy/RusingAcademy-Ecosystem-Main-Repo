@@ -11,6 +11,22 @@ export default function HRSettings() {
   const { language } = useLanguage();
   const isEn = language === "en";
 
+  // Fetch organization settings
+  const { data: org } = trpc.hr.getOrganization.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
+  // Update organization mutation
+  const updateOrgMutation = trpc.hr.updateOrganization.useMutation({
+    onSuccess: () => {
+      toast.success(isEn ? "Settings saved successfully" : "Paramètres sauvegardés avec succès");
+    },
+    onError: () => {
+      toast.error(isEn ? "Failed to save settings" : "Échec de la sauvegarde des paramètres");
+    },
+  });
+
   const ui = {
     title: isEn ? "Settings" : "Paramètres",
     subtitle: isEn ? "Manage your portal preferences and team access" : "Gérez vos préférences de portail et l'accès de l'équipe",
