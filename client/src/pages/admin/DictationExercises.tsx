@@ -22,8 +22,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-// TODO: Replace with trpc hooks once the router is available
-// import { trpc } from "@/lib/trpc";
+import { trpc } from "@/lib/trpc";
 
 const mockExercises = [
   {
@@ -56,18 +55,20 @@ const mockCategories = [
 ];
 
 export default function DictationExercises() {
-  const [exercises, setExercises] = useState(mockExercises);
-  const [categories, setCategories] = useState(mockCategories);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // TODO: Replace with actual trpc query
-  // const { data: stats, isLoading: isStatsLoading } = trpc.admin.dictation.getStats.useQuery();
+  // ── tRPC queries ──
+  const dictationQuery = trpc.dictation.list.useQuery(undefined, { retry: false });
+  const dictationData = dictationQuery.data ?? [];
+  const exercises = dictationData.length > 0
+    ? dictationData.map((d: any) => ({ id: String(d.id), cefrLevel: d.level || 'B1', sentence: d.text || d.title || '', audioUrl: d.audioUrl || '', category: d.category || 'General' }))
+    : mockExercises;
+  const categories = mockCategories;
+  const isLoading = dictationQuery.isLoading;
   const stats = {
-    totalExercises: 3,
+    totalExercises: exercises.length,
     avgAccuracy: 85.4,
     completionRate: 76.2,
   };
-  const isStatsLoading = false;
+  const isStatsLoading = dictationQuery.isLoading;
 
   const handleAddExercise = () => {
     toast.success("New exercise added successfully!");
