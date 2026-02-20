@@ -16,7 +16,7 @@ import {
   Receipt, Globe, Megaphone, Search, Settings, Bell,
   HelpCircle, ChevronDown, ChevronRight, MoreHorizontal,
   SlidersHorizontal, X, FileText, Banknote, ClipboardList,
-  Calendar, LogIn, LogOut, User, Loader2
+  Calendar, LogIn, LogOut, User, Loader2, GraduationCap, ShieldCheck, MessageCircle
 } from "lucide-react";
 import { toast } from "sonner";
 import NotificationCenter from "./NotificationCenter";
@@ -301,6 +301,26 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <Calculator size={20} />
             <span className="mt-0.5">Accounting</span>
           </button>
+        </div>
+
+        {/* Ecosystem Cross-Navigation */}
+        <div className="mt-1 border-t border-gray-200 pt-2 w-full">
+          <div className="text-[9px] text-gray-400 font-semibold uppercase tracking-wider text-center mb-1">Ecosystem</div>
+          <a href={typeof window !== 'undefined' ? window.location.origin + '/admin' : '/admin'}
+            className="flex flex-col items-center py-2 px-1 text-[10px] text-gray-600 hover:text-gray-900 w-full">
+            <ShieldCheck size={20} />
+            <span className="mt-0.5">Admin</span>
+          </a>
+          <a href={typeof window !== 'undefined' ? window.location.origin + '/app' : '/app'}
+            className="flex flex-col items-center py-2 px-1 text-[10px] text-gray-600 hover:text-gray-900 w-full">
+            <GraduationCap size={20} />
+            <span className="mt-0.5">Portal</span>
+          </a>
+          <a href={typeof window !== 'undefined' ? window.location.origin + '/community' : '/community'}
+            className="flex flex-col items-center py-2 px-1 text-[10px] text-gray-600 hover:text-gray-900 w-full">
+            <MessageCircle size={20} />
+            <span className="mt-0.5">Community</span>
+          </a>
         </div>
 
         <div className="mt-auto">

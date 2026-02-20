@@ -226,6 +226,32 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
           )}
         </nav>
 
+        {/* Cross-Navigation — Ecosystem Links */}
+        <div className="px-3 py-2 border-t border-gray-100">
+          {!collapsed && (
+            <p className="text-[10px] font-semibold tracking-wider text-gray-400 uppercase px-3 mb-1">ECOSYSTEM</p>
+          )}
+          <a href={typeof window !== 'undefined' && window.location.origin ? window.location.origin + '/admin' : '/admin'}
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all group">
+            <span className="material-icons text-lg text-gray-400 group-hover:text-[#008090]">admin_panel_settings</span>
+            {!collapsed && <span className="font-medium">Admin Control Center</span>}
+            {!collapsed && <span className="material-icons text-xs text-gray-300 ml-auto">open_in_new</span>}
+          </a>
+          <a href={(typeof window !== 'undefined' && (window as any).__ECOSYSTEM_COMMUNITY_URL) || '/community'}
+            target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all group">
+            <span className="material-icons text-lg text-gray-400 group-hover:text-[#008090]">forum</span>
+            {!collapsed && <span className="font-medium">Community Hub</span>}
+            {!collapsed && <span className="material-icons text-xs text-gray-300 ml-auto">open_in_new</span>}
+          </a>
+          <a href="https://www.rusingacademy.com" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all group">
+            <span className="material-icons text-lg text-gray-400 group-hover:text-[#008090]">language</span>
+            {!collapsed && <span className="font-medium">RusingAcademy.com</span>}
+            {!collapsed && <span className="material-icons text-xs text-gray-300 ml-auto">open_in_new</span>}
+          </a>
+        </div>
+
         {/* User Profile Section */}
         <div className="p-4 border-t border-gray-100">
           <Link href="/profile">

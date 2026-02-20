@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 import { getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, Users, GraduationCap, ShieldCheck, Globe, ExternalLink } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -200,6 +200,40 @@ function DashboardLayoutContent({
               })}
             </SidebarMenu>
           </SidebarContent>
+
+          {/* Cross-Navigation — Ecosystem Links */}
+          <div className="px-3 py-2 border-t">
+            <p className="text-[10px] font-semibold tracking-wider text-muted-foreground uppercase px-2 mb-1 group-data-[collapsible=icon]:hidden">ECOSYSTEM</p>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href={typeof window !== 'undefined' ? window.location.origin + '/admin' : '/admin'}>
+                    <ShieldCheck className="h-4 w-4" />
+                    <span>Admin Control Center</span>
+                    <ExternalLink className="ml-auto h-3 w-3 text-muted-foreground" />
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href={typeof window !== 'undefined' ? window.location.origin + '/app' : '/app'}>
+                    <GraduationCap className="h-4 w-4" />
+                    <span>Learning Portal</span>
+                    <ExternalLink className="ml-auto h-3 w-3 text-muted-foreground" />
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href="https://www.rusingacademy.com" target="_blank" rel="noopener noreferrer">
+                    <Globe className="h-4 w-4" />
+                    <span>RusingAcademy.com</span>
+                    <ExternalLink className="ml-auto h-3 w-3 text-muted-foreground" />
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </div>
 
           <SidebarFooter className="p-3">
             <DropdownMenu>
