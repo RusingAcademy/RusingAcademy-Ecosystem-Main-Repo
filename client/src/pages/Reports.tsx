@@ -6,6 +6,7 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useGamification } from "@/contexts/GamificationContext";
+import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 import { useState, useMemo } from "react";
 
@@ -204,6 +205,12 @@ function ActivityHeatmap({ data, weeks = 12 }: { data: Record<string, number>; w
 export default function Reports() {
   const { user } = useAuth();
   const gamification = useGamification();
+
+  // Fetch real progress data from the server
+  const { data: progressData } = trpc.progressReport.getMyProgressData.useQuery(
+    { periodDays: 30 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
   const [activeTab, setActiveTab] = useState<"overview" | "progress" | "sle" | "activity">("overview");
 
   // Generate sample data based on actual user stats
