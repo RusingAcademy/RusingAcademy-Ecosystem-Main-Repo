@@ -45,11 +45,11 @@ const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
    LoginContent — Main Auth Component
    ═══════════════════════════════════════════════════════ */
 function LoginContent() {
+  const { language } = useLanguage();
   const searchString = useSearch();
   const { refresh } = useAuthContext();
 
   /* ─── State ─── */
-  const [language, setLanguage] = useState<"en" | "fr">("en");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -178,7 +178,7 @@ function LoginContent() {
      RENDER
      ═══════════════════════════════════════════════════════ */
   return (
-    <AuthLayout language={language} onLanguageChange={setLanguage}>
+    <AuthLayout language={language}>
       <AuthCard
         title={t("Welcome Back", "Bon retour")}
         subtitle={t("Sign in to continue your learning journey", "Connectez-vous pour continuer votre parcours")}

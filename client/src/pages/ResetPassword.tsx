@@ -23,7 +23,6 @@ export default function ResetPassword() {
   const searchString = useSearch();
   const searchParams = new URLSearchParams(searchString);
   const token = searchParams.get("token");
-  const [language, setLanguage] = useState<"en" | "fr">("en");
 
   const t = useCallback(
     (en: string, fr: string) => (language === "fr" ? fr : en),
@@ -85,7 +84,7 @@ export default function ResetPassword() {
   // Loading state
   if (tokenValid === null) {
     return (
-      <AuthLayout language={language} onLanguageChange={setLanguage}>
+      <AuthLayout language={language}>
         <AuthCard>
           <div className="text-center space-y-4 py-8">
             <Loader2 className="w-12 h-12 text-[var(--barholex-gold)] mx-auto animate-spin" />
@@ -101,7 +100,7 @@ export default function ResetPassword() {
   // Invalid/expired token
   if (!tokenValid) {
     return (
-      <AuthLayout language={language} onLanguageChange={setLanguage}>
+      <AuthLayout language={language}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
             <AlertCircle className="w-16 h-16 text-red-400 mx-auto" />
@@ -131,7 +130,7 @@ export default function ResetPassword() {
   // Success state
   if (success) {
     return (
-      <AuthLayout language={language} onLanguageChange={setLanguage}>
+      <AuthLayout language={language}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
             <CheckCircle className="w-16 h-16 text-green-400 mx-auto" />
@@ -149,7 +148,7 @@ export default function ResetPassword() {
 
   // Reset form
   return (
-    <AuthLayout language={language} onLanguageChange={setLanguage}>
+    <AuthLayout language={language}>
       <AuthCard
         title={t("Create New Password", "Créer un nouveau mot de passe")}
         subtitle={t("Enter your new password below", "Entrez votre nouveau mot de passe ci-dessous")}

@@ -19,9 +19,9 @@ const labels = {
 const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 
 function SignupContent() {
+  const { language } = useLanguage();
   const searchString = useSearch();
   const { refresh } = useAuthContext();
-  const [language, setLanguage] = useState<"en" | "fr">("en");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -96,7 +96,7 @@ function SignupContent() {
 
   if (success) {
     return (
-      <AuthLayout language={language} onLanguageChange={setLanguage}>
+      <AuthLayout language={language}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
             <CheckCircle className="w-16 h-16 text-green-400 mx-auto" />
@@ -113,7 +113,7 @@ function SignupContent() {
   }
 
   return (
-    <AuthLayout language={language} onLanguageChange={setLanguage}>
+    <AuthLayout language={language}>
       <AuthCard
         title={t("Create Your Account", "Créez votre compte")}
         subtitle={t("Join RusingÂcademy and start your bilingual journey", "Rejoignez RusingÂcademy et commencez votre parcours bilingue")}
