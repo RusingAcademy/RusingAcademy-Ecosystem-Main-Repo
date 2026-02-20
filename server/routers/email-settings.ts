@@ -15,7 +15,7 @@ export const emailSettingsRouter = router({
    */
   getStatus: protectedProcedure.query(async ({ ctx }) => {
     // Only allow owner to view email settings
-    if (ctx.user.role !== "admin") {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
       throw new TRPCError({
         code: "FORBIDDEN",
         message: "Only the owner can view email settings",
@@ -30,7 +30,7 @@ export const emailSettingsRouter = router({
    */
   testConnection: protectedProcedure.mutation(async ({ ctx }) => {
     // Only allow owner to test email connection
-    if (ctx.user.role !== "admin") {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
       throw new TRPCError({
         code: "FORBIDDEN",
         message: "Only the owner can test email connection",
@@ -49,7 +49,7 @@ export const emailSettingsRouter = router({
     }))
     .mutation(async ({ ctx, input }) => {
       // Only allow owner to send test emails
-      if (ctx.user.role !== "admin") {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "Only the owner can send test emails",
@@ -124,7 +124,7 @@ verification emails, password reset links, and booking confirmations.
    */
   getConfigurationGuide: protectedProcedure.query(async ({ ctx }) => {
     // Only allow owner to view configuration guide
-    if (ctx.user.role !== "admin") {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
       throw new TRPCError({
         code: "FORBIDDEN",
         message: "Only the owner can view email configuration",

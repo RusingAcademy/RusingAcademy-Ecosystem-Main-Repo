@@ -13,7 +13,7 @@ import { getDb, getEmailLogs, getEmailDeliveryStats, getAdminCourseReviews } fro
 import { eq, desc, sql } from "drizzle-orm";
 
 const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
-  if (ctx.user.role !== "admin") {
+  if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
     throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
   }
   return next({ ctx });

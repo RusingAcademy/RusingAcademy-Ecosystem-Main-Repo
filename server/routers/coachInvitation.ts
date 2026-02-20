@@ -80,7 +80,7 @@ export const coachInvitationRouter = router({
   
   // Admin: Get all coaches with invitation status
   getCoachesWithStatus: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
       throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
     }
     return await getCoachesWithInvitationStatus();
@@ -88,7 +88,7 @@ export const coachInvitationRouter = router({
   
   // Admin: Get all invitations
   listAll: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
       throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
     }
     return await getAllCoachInvitations();
@@ -102,7 +102,7 @@ export const coachInvitationRouter = router({
       expiresInDays: z.number().min(1).max(90).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       
@@ -175,7 +175,7 @@ export const coachInvitationRouter = router({
   revoke: protectedProcedure
     .input(z.object({ invitationId: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       await revokeCoachInvitation(input.invitationId);

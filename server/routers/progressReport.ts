@@ -38,7 +38,7 @@ export const progressReportRouter = router({
     }))
     .mutation(async ({ ctx, input }) => {
       // Verify the requester is admin or coach
-      if (ctx.user.role !== "admin") {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
         // If not admin, could be a coach — we allow it but log it
         log.info(`[ProgressReport] Coach ${ctx.user.id} generating report for learner ${input.learnerId}`);
       }

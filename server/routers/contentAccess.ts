@@ -15,7 +15,7 @@ export const contentAccessRouter = router({
     if (!db) return { hasAccess: true, reason: "no_db" };
 
     // Admin always has access
-    if (ctx.user.role === "admin") return { hasAccess: true, reason: "admin" };
+    if (ctx.user.role === "admin" || ctx.user.role === "owner" || ctx.user.isOwner) return { hasAccess: true, reason: "admin" };
 
     // Check if there's an access rule for this content
     const [rule] = await db.select().from(contentAccessRules)
@@ -75,7 +75,7 @@ export const contentAccessRouter = router({
     requiredTierId: z.number().nullable(),
     dripDelayDays: z.number().default(0),
   })).mutation(async ({ ctx, input }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
@@ -113,7 +113,7 @@ export const contentAccessRouter = router({
 
   // Admin: list all access rules
   listRules: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) return [];
 

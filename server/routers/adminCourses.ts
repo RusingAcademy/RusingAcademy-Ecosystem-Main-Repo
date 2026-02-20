@@ -14,7 +14,7 @@ export const adminCoursesRouter = router({
       status: z.enum(["draft", "review", "published", "archived"]).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -42,7 +42,7 @@ export const adminCoursesRouter = router({
       sortOrder: z.number().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -70,7 +70,7 @@ export const adminCoursesRouter = router({
       sortOrder: z.number().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -96,7 +96,7 @@ export const adminCoursesRouter = router({
       limit: z.number().default(20),
     }).optional())
     .query(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -151,7 +151,7 @@ export const adminCoursesRouter = router({
       previewVideoUrl: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -211,7 +211,7 @@ export const adminCoursesRouter = router({
       dripUnit: z.enum(["days", "weeks", "months"]).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -234,7 +234,7 @@ export const adminCoursesRouter = router({
       status: z.enum(["draft", "review", "published", "archived"]),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -260,7 +260,7 @@ export const adminCoursesRouter = router({
       status: z.enum(["draft", "review", "published", "archived"]),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -286,7 +286,7 @@ export const adminCoursesRouter = router({
   deleteCourse: protectedProcedure
     .input(z.object({ courseId: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -309,7 +309,7 @@ export const adminCoursesRouter = router({
   duplicateCourse: protectedProcedure
     .input(z.object({ courseId: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -372,7 +372,7 @@ export const adminCoursesRouter = router({
   getCourseForEdit: protectedProcedure
     .input(z.object({ courseId: z.number() }))
     .query(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -416,7 +416,7 @@ export const adminCoursesRouter = router({
       sortOrder: z.number().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -460,7 +460,7 @@ export const adminCoursesRouter = router({
       isPreview: z.boolean().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -481,7 +481,7 @@ export const adminCoursesRouter = router({
   deleteModule: protectedProcedure
     .input(z.object({ moduleId: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -513,7 +513,7 @@ export const adminCoursesRouter = router({
       moduleIds: z.array(z.number()),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -556,7 +556,7 @@ export const adminCoursesRouter = router({
       sortOrder: z.number().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -628,7 +628,7 @@ export const adminCoursesRouter = router({
       isMandatory: z.boolean().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -649,7 +649,7 @@ export const adminCoursesRouter = router({
   deleteLesson: protectedProcedure
     .input(z.object({ lessonId: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -683,7 +683,7 @@ export const adminCoursesRouter = router({
       lessonIds: z.array(z.number()),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -711,7 +711,7 @@ export const adminCoursesRouter = router({
       mimeType: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -734,7 +734,7 @@ export const adminCoursesRouter = router({
 
   getCourseStats: protectedProcedure
     .query(async ({ ctx }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -773,7 +773,7 @@ export const adminCoursesRouter = router({
   getContentQuality: protectedProcedure
     .input(z.object({ courseId: z.number() }))
     .query(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -871,7 +871,7 @@ export const adminCoursesRouter = router({
       })),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -987,7 +987,7 @@ export const adminCoursesRouter = router({
   
   getContentHealth: protectedProcedure
     .query(async ({ ctx }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();

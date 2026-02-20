@@ -186,7 +186,7 @@ export const discussionsRouter = router({
       `);
       const thread = (threadRows as any[])?.[0];
       if (!thread) throw new TRPCError({ code: "NOT_FOUND" });
-      if (thread.userId !== userId && ctx.user?.role !== "admin") {
+      if (thread.userId !== userId && ctx.user?.role !== "admin" && ctx.user?.role !== "owner" && !ctx.user?.isOwner) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Cannot delete another user's thread" });
       }
 
@@ -293,7 +293,7 @@ export const discussionsRouter = router({
     .input(z.object({ threadId: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const db = await ensureDiscussionTables();
-      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user?.role !== "admin" && ctx.user?.role !== "owner" && !ctx.user?.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
 
       await db.execute(sql`
         UPDATE discussion_threads SET isPinned = NOT isPinned WHERE id = ${input.threadId}
@@ -306,7 +306,7 @@ export const discussionsRouter = router({
     .input(z.object({ threadId: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const db = await ensureDiscussionTables();
-      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user?.role !== "admin" && ctx.user?.role !== "owner" && !ctx.user?.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
 
       await db.execute(sql`
         UPDATE discussion_threads SET isLocked = NOT isLocked WHERE id = ${input.threadId}
@@ -328,7 +328,7 @@ export const discussionsRouter = router({
       `);
       const thread = (threadRows as any[])?.[0];
       if (!thread) throw new TRPCError({ code: "NOT_FOUND" });
-      if (thread.userId !== userId && ctx.user?.role !== "admin") {
+      if (thread.userId !== userId && ctx.user?.role !== "admin" && ctx.user?.role !== "owner" && !ctx.user?.isOwner) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Only thread author or admin can mark accepted answer" });
       }
 
@@ -351,7 +351,7 @@ export const discussionsRouter = router({
     }).optional())
     .query(async ({ ctx }) => {
       const db = await ensureDiscussionTables();
-      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user?.role !== "admin" && ctx.user?.role !== "owner" && !ctx.user?.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
 
       const [reports] = await db.execute(sql`
         SELECT r.*, u.name as reporterName
@@ -371,7 +371,7 @@ export const discussionsRouter = router({
     }))
     .mutation(async ({ ctx, input }) => {
       const db = await ensureDiscussionTables();
-      if (ctx.user?.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user?.role !== "admin" && ctx.user?.role !== "owner" && !ctx.user?.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
 
       await db.execute(sql`
         UPDATE discussion_reports

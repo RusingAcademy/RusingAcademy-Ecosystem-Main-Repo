@@ -116,7 +116,7 @@ export const referralRouter = router({
 
   // Admin: all referral stats
   adminReferralStats: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) return { totalReferrals: 0, totalConversions: 0, totalCommissions: 0, topReferrers: [] };
 

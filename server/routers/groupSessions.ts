@@ -176,7 +176,7 @@ export const groupSessionsRouter = router({
 
       const roomName = `group-session-${input.groupSessionId}`;
       const user = ctx as any;
-      const isAdmin = user?.role === "admin" || user?.role === "coach";
+      const isAdmin = user?.role === "admin" || user?.role === "owner" || (user as any)?.isOwner || user?.role === "coach";
 
       const token = await dailyVideoService.createToken(roomName, {
         isOwner: isAdmin,

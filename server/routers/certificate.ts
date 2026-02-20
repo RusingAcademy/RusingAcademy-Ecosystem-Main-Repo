@@ -109,7 +109,7 @@ export const certificateRouter = router({
   adminList: protectedProcedure.input(z.object({
     limit: z.number().min(1).max(100).default(50),
   }).optional()).query(async ({ ctx, input }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) return [];
 

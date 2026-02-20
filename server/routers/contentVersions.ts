@@ -15,7 +15,7 @@ import {
 } from "../services/contentVersionService";
 
 function adminGuard(role: string) {
-  if (role !== "admin") throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+  if (role !== "admin" && role !== "owner") throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
 }
 
 export const contentVersionsRouter = router({

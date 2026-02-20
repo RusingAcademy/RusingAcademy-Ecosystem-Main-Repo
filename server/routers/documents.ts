@@ -121,7 +121,7 @@ export const documentsRouter = router({
   verify: protectedProcedure
     .input(z.object({ documentId: z.number(), notes: z.string().optional() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
@@ -145,7 +145,7 @@ export const documentsRouter = router({
   reject: protectedProcedure
     .input(z.object({ documentId: z.number(), reason: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();

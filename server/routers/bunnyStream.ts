@@ -89,7 +89,7 @@ export const bunnyStreamRouter = router({
   delete: protectedProcedure
     .input(z.object({ videoId: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      if (ctx.user.role !== "admin") {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "Only admins can delete videos",

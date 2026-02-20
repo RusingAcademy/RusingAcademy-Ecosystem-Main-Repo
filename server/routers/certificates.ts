@@ -380,7 +380,7 @@ export const certificatesRouter = router({
       offset: z.number().min(0).default(0),
     }).optional())
     .query(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();

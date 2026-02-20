@@ -25,7 +25,7 @@ export const adminPayoutsRouter = router({
    */
   getPendingPayouts: protectedProcedure.query(async ({ ctx }) => {
     // Admin check
-    if (ctx.user.role !== "admin" && ctx.user.role !== "super_admin") {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.role !== "super_admin") {
       throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
     }
     return await getPendingPayouts();
@@ -37,7 +37,7 @@ export const adminPayoutsRouter = router({
   processCoachPayout: protectedProcedure
     .input(z.object({ coachId: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.role !== "super_admin") {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.role !== "super_admin") {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
 
@@ -58,7 +58,7 @@ export const adminPayoutsRouter = router({
    * Process all pending payouts in batch.
    */
   processAllPayouts: protectedProcedure.mutation(async ({ ctx }) => {
-    if (ctx.user.role !== "admin" && ctx.user.role !== "super_admin") {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.role !== "super_admin") {
       throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
     }
 
@@ -78,7 +78,7 @@ export const adminPayoutsRouter = router({
       }).optional()
     )
     .query(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin" && ctx.user.role !== "super_admin") {
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.role !== "super_admin") {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
 
@@ -93,7 +93,7 @@ export const adminPayoutsRouter = router({
    * Get payout dashboard summary stats.
    */
   getDashboardStats: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin" && ctx.user.role !== "super_admin") {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.role !== "super_admin") {
       throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
     }
 
