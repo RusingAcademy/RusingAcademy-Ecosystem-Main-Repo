@@ -10,6 +10,13 @@ import CoachDashboardContent from "@/components/dashboard/CoachDashboard";
 import AdminDashboardContent from "@/components/dashboard/AdminDashboard";
 import { HRDashboard } from "@/components/dashboard/HRDashboard";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Dashboard", description: "Manage and configure dashboard" },
+  fr: { title: "Dashboard", description: "Gérer et configurer dashboard" },
+};
+
 type DashboardView = "admin" | "hr" | "coach" | "learner";
 
 /**
@@ -27,6 +34,9 @@ type DashboardView = "admin" | "hr" | "coach" | "learner";
  * - Learner/Coach cannot access /dashboard/admin or /dashboard/hr (403)
  */
 export default function Dashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, setLocation] = useLocation();
   const { user, isAuthenticated, loading } = useAuth();
   

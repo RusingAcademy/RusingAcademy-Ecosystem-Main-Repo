@@ -11,11 +11,21 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Reviews", description: "Manage and configure admin reviews" },
+  fr: { title: "Admin Reviews", description: "Gérer et configurer admin reviews" },
+};
+
   Star, Search, Eye, EyeOff, MessageSquare, Trash2,
   Shield, RefreshCw,
 } from "lucide-react";
 
 export default function AdminReviews() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [ratingFilter, setRatingFilter] = useState<string>("all");
   const [respondDialogOpen, setRespondDialogOpen] = useState(false);

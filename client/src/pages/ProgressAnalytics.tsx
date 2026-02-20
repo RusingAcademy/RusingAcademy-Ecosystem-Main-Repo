@@ -8,7 +8,17 @@ import { trpc } from "@/lib/trpc";
 import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Progress Analytics", description: "Manage and configure progress analytics" },
+  fr: { title: "Progress Analytics", description: "Gérer et configurer progress analytics" },
+};
+
 export default function ProgressAnalytics() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, loading: authLoading } = useAuth();
   const { data: gamification } = trpc.gamification.getProfile.useQuery(undefined, { enabled: !!user });
   const { data: readingStats } = trpc.readingLab.stats.useQuery(undefined, { enabled: !!user });

@@ -11,7 +11,17 @@ import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { Palette, Layout, Type, Eye, Edit, Paintbrush, Layers, Monitor, Save } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Design Admin", description: "Manage and configure design admin" },
+  fr: { title: "Design Admin", description: "Gérer et configurer design admin" },
+};
+
 export default function DesignAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [activeTab, setActiveTab] = useState("themes");
 

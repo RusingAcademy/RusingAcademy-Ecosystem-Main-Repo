@@ -8,7 +8,17 @@ import { trpc } from "../lib/trpc";
 import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle, ArrowLeft, Lock } from "lucide-react";
 import { AuthLayout, AuthCard, AuthInput, AuthButton, PasswordStrength } from "@/components/auth";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Reset Password", description: "Manage and configure reset password" },
+  fr: { title: "Reset Password", description: "Gérer et configurer reset password" },
+};
+
 export default function ResetPassword() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, setLocation] = useLocation();
   const searchString = useSearch();
   const searchParams = new URLSearchParams(searchString);

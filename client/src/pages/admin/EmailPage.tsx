@@ -10,12 +10,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Email Page", description: "Manage and configure email page" },
+  fr: { title: "Email Page", description: "Gérer et configurer email page" },
+};
+
   Mail, Send, FileText, Users, Settings,
   CheckCircle, XCircle, AlertTriangle, RefreshCw,
   BarChart3, Clock,
 } from "lucide-react";
 
 export default function EmailPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [typeFilter, setTypeFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");

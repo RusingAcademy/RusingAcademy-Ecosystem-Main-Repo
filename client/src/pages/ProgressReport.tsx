@@ -11,7 +11,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { FileText, Download, Printer, Loader2, Calendar, Globe } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Progress Report", description: "Manage and configure progress report" },
+  fr: { title: "Progress Report", description: "Gérer et configurer progress report" },
+};
+
 export default function ProgressReport() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [periodDays, setPeriodDays] = useState(30);
   const [language, setLanguage] = useState<"fr" | "en">("en");

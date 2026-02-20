@@ -2,6 +2,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { useLocation } from "wouter";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Global Search", description: "Manage and configure global search" },
+  fr: { title: "Global Search", description: "Gérer et configurer global search" },
+};
+
   Search, X, Users, BookOpen, FileText, Mail, Bell,
   ArrowRight, Zap, Target, Settings, BarChart3, Download,
   UserPlus, Command
@@ -45,6 +52,9 @@ const actionIcons: Record<string, any> = {
 };
 
 export default function GlobalSearchBar() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");

@@ -10,6 +10,13 @@ import { toast } from 'sonner';
 
 import { trpc } from '@/lib/trpc';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Study Notes", description: "Manage and configure study notes" },
+  fr: { title: "Notes d'étude", description: "Gérer et configurer notes d'étude" },
+};
+
 // Mock Data
 const mockTemplates = [
   { id: 'tpl1', topic: 'SLE Reading', title: 'Comprehension Strategy Template', created: '2023-10-15' },

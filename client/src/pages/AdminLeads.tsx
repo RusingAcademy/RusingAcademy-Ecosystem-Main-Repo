@@ -54,6 +54,13 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Leads", description: "Manage and configure admin leads" },
+  fr: { title: "Admin Leads", description: "Gérer et configurer admin leads" },
+};
+
 type LeadStatus = "new" | "contacted" | "qualified" | "converted" | "lost";
 
 const statusConfig: Record<LeadStatus, { label: string; color: string; icon: React.ReactNode }> = {
@@ -72,6 +79,9 @@ const brandLabels: Record<string, string> = {
 };
 
 export default function AdminLeads() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, loading: authLoading } = useAuth({ redirectOnUnauthenticated: true });
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");

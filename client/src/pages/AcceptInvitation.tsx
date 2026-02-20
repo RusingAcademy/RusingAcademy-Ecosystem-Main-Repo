@@ -9,6 +9,13 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, CheckCircle2, XCircle, Clock, AlertTriangle, Eye, EyeOff, ShieldCheck } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Accept Invitation", description: "Manage and configure accept invitation" },
+  fr: { title: "Accept Invitation", description: "Gérer et configurer accept invitation" },
+};
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -20,6 +27,9 @@ type InviteStatus = "loading" | "valid" | "invalid_token" | "already_accepted" |
 // ============================================================================
 
 export default function AcceptInvitation() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { token } = useParams<{ token: string }>();
   const [, navigate] = useLocation();
 

@@ -12,7 +12,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { GraduationCap, Search, Download, Users, BookOpen, TrendingUp, Clock, RefreshCw, UserPlus, XCircle } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Enrollments", description: "Manage and configure enrollments" },
+  fr: { title: "Inscriptions", description: "Gérer et configurer inscriptions" },
+};
+
 export default function AdminEnrollments() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [enrollDialogOpen, setEnrollDialogOpen] = useState(false);

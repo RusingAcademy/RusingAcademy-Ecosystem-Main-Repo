@@ -14,6 +14,13 @@ import {
 } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "All Products", description: "Manage and configure all products" },
+  fr: { title: "All Products", description: "Gérer et configurer all products" },
+};
+
 type ProductType = "all" | "courses" | "coaching" | "podcasts" | "newsletters" | "downloads" | "community";
 
 const productTypes: { key: ProductType; label: string; icon: React.ElementType; color: string }[] = [
@@ -27,6 +34,9 @@ const productTypes: { key: ProductType; label: string; icon: React.ElementType; 
 ];
 
 export default function AllProducts() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<ProductType>("all");

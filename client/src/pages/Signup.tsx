@@ -9,6 +9,13 @@ import { Eye, EyeOff, UserPlus, CheckCircle, AlertCircle, User, Mail, Lock, Arro
 import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 import { AuthLayout, AuthCard, AuthInput, AuthButton, OAuthButtons, AuthDivider, PasswordStrength } from "@/components/auth";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Signup", description: "Manage and configure signup" },
+  fr: { title: "Signup", description: "Gérer et configurer signup" },
+};
+
 const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 
 function SignupContent() {
@@ -247,6 +254,9 @@ function SignupContent() {
 }
 
 export default function Signup() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <GuestRoute redirectTo="/dashboard">
       <SignupContent />

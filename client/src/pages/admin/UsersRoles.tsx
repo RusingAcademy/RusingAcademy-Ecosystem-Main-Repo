@@ -13,7 +13,17 @@ import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { EmptyState } from "@/components/EmptyState";
 import { InviteUserModal } from "@/components/InviteUserModal";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Users & Roles", description: "Manage and configure users & roles" },
+  fr: { title: "Utilisateurs et rôles", description: "Gérer et configurer utilisateurs et rôles" },
+};
+
 export default function UsersRoles() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [page, setPage] = useState(1);

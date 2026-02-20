@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
 import { useRef, useEffect, useState } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "C M S Page", description: "Manage and configure c m s page" },
+  fr: { title: "C M S Page", description: "Gérer et configurer c m s page" },
+};
+
 /**
  * Public CMS Page Renderer — renders published CMS pages at /p/:slug
  * Supports all 16 section types with proper styling and responsive layout
@@ -395,6 +402,9 @@ function SectionRenderer({ section }: { section: any }) {
 }
 
 export default function CMSPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/p/:slug");
   const slug = params?.slug || "";
 

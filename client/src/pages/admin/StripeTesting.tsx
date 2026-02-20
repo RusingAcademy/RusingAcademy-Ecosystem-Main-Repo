@@ -7,6 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Stripe Testing", description: "Manage and configure stripe testing" },
+  fr: { title: "Tests Stripe", description: "Gérer et configurer tests stripe" },
+};
+
   CreditCard, CheckCircle, XCircle, Clock, RefreshCw,
   AlertTriangle, Zap, Copy, ExternalLink, Shield,
   ArrowRight, Bell, BarChart3, Users, Webhook,
@@ -55,6 +62,9 @@ function FlowStep({ icon: Icon, label, sublabel, status, isLast }: {
 // MAIN COMPONENT
 // ============================================================================
 export default function StripeTesting() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const { data: stats, isLoading: statsLoading } = trpc.stripeTesting.getWebhookStats.useQuery();
   const { data: events, isLoading: eventsLoading, refetch: refetchEvents } = trpc.stripeTesting.getWebhookEvents.useQuery({});

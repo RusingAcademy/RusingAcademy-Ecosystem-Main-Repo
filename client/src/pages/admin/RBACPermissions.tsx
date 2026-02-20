@@ -16,6 +16,13 @@ import {
 } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Permissions & Roles", description: "Manage and configure permissions & roles" },
+  fr: { title: "Permissions et rôles", description: "Gérer et configurer permissions et rôles" },
+};
+
 type PermTab = "matrix" | "roles" | "audit";
 
 const MODULES = [
@@ -49,6 +56,9 @@ const ROLES = [
 ];
 
 export default function RBACPermissions() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState<PermTab>("matrix");
   const [selectedRole, setSelectedRole] = useState("coach");
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set(MODULES.map(m => m.key)));

@@ -4,6 +4,13 @@ import { Link } from 'wouter';
 import { Shield, Lock, Eye, Database, UserCheck, Mail, Globe, FileText } from 'lucide-react';
 import RusingAcademyLogo from '../components/RusingAcademyLogo';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Privacy Policy", description: "Manage and configure privacy policy" },
+  fr: { title: "Privacy Policy", description: "Gérer et configurer privacy policy" },
+};
+
 const content = {
   en: {
     title: 'Privacy Policy',
@@ -228,6 +235,9 @@ Nous répondrons à votre demande dans les 30 jours.`
 };
 
 export default function PrivacyPolicy() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [lang, setLang] = useState<'en' | 'fr'>('en');
   const t = content[lang];
 

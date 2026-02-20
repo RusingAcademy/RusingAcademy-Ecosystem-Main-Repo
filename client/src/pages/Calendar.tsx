@@ -7,6 +7,13 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { useState } from "react";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Calendar", description: "Manage and configure calendar" },
+  fr: { title: "Calendar", description: "Gérer et configurer calendar" },
+};
+
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const DAYS_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -26,6 +33,9 @@ const categories = [
 ];
 
 export default function CalendarPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());

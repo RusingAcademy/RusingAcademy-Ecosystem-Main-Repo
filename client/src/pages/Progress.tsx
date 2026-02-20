@@ -5,6 +5,13 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Progress", description: "Manage and configure progress" },
+  fr: { title: "Progress", description: "Gérer et configurer progress" },
+};
+
 const progressData = [
   { module: "Module 1 (WCAG 2.1)", totalActivities: 32, completed: 1, percentage: 3, lastAccessed: "02/09/2026 07:52 PM" },
   { module: "Module 2", totalActivities: 28, completed: 0, percentage: 0, lastAccessed: "-" },
@@ -23,6 +30,9 @@ const progressData = [
 ];
 
 export default function Progress() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <DashboardLayout>
       <div className="max-w-[1200px]">

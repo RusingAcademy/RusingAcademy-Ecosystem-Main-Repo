@@ -10,6 +10,13 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Peer Review", description: "Manage and configure peer review" },
+  fr: { title: "Évaluation par les pairs", description: "Gérer et configurer évaluation par les pairs" },
+};
+
 const rubricCriteria = [
   { criterion: "Grammar & Syntax", weight: 35, description: "Accuracy of grammar, verb conjugation, and sentence structure" },
   { criterion: "Vocabulary & Expression", weight: 30, description: "Range and appropriateness of vocabulary used" },
@@ -17,6 +24,9 @@ const rubricCriteria = [
 ];
 
 export default function AdminPeerReview() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
 
   // ── tRPC queries ──

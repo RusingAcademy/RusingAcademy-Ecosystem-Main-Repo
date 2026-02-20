@@ -26,7 +26,17 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Content Pipeline Dashboard", description: "Manage and configure content pipeline dashboard" },
+  fr: { title: "Content Pipeline Dashboard", description: "Gérer et configurer content pipeline dashboard" },
+};
+
 export default function ContentPipelineDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("health");
   const [previewCourseId, setPreviewCourseId] = useState<number | null>(null);
 

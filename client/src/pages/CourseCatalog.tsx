@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Link, useLocation } from "wouter";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Course Catalog", description: "Manage and configure course catalog" },
+  fr: { title: "Course Catalog", description: "Gérer et configurer course catalog" },
+};
+
   BookOpen,
   Clock,
   Users,
@@ -39,6 +46,9 @@ const LEVEL_LABELS: Record<string, string> = {
 };
 
 export default function CourseCatalog() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t, locale } = useLocale();
   const { user, isAuthenticated } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>();

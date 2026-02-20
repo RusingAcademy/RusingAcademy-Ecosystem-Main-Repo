@@ -7,6 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Content Intelligence", description: "Manage and configure content intelligence" },
+  fr: { title: "Intelligence de contenu", description: "Gérer et configurer intelligence de contenu" },
+};
+
   Brain, TrendingUp, BarChart3, Eye, Clock, Users,
   AlertTriangle, CheckCircle, Star, ArrowUpRight,
   ArrowDownRight, Download, RefreshCw, BookOpen,
@@ -14,6 +21,9 @@ import {
 } from "lucide-react";
 
 export default function ContentIntelligence() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("performance");
   const [dateRange, setDateRange] = useState("30d");
 

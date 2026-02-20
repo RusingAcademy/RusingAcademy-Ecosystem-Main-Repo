@@ -4,6 +4,13 @@ import { trpc } from "@/lib/trpc";
 // Header removed — coach routes use dedicated layout without duplicate nav
 // Footer removed — coach routes use dedicated layout
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Coach Payments", description: "Manage and configure coach payments" },
+  fr: { title: "Coach Payments", description: "Gérer et configurer coach payments" },
+};
+
   CreditCard,
   ExternalLink,
   CheckCircle,
@@ -19,6 +26,9 @@ import {
 } from "lucide-react";
 
 export default function CoachPayments() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [isConnecting, setIsConnecting] = useState(false);
 

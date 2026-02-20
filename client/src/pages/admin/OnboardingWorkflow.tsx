@@ -11,6 +11,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Onboarding Workflow", description: "Manage and configure onboarding workflow" },
+  fr: { title: "Flux d'intégration", description: "Gérer et configurer flux d'intégration" },
+};
+
   Rocket, Mail, Bell, BookOpen, CheckCircle, Settings,
   Users, ArrowRight, Play, Pause, Edit, Save, Plus, Trash2,
 } from "lucide-react";
@@ -49,6 +56,9 @@ const STEP_COLORS: Record<string, string> = {
 };
 
 export default function OnboardingWorkflow() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("workflow");
   const [steps, setSteps] = useState<OnboardingStep[]>(DEFAULT_STEPS);
   const [isActive, setIsActive] = useState(true);

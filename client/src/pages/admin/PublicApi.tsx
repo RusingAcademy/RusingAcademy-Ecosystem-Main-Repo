@@ -7,12 +7,22 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Key, Plus, Shield, Copy, XCircle } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Public Api", description: "Manage and configure public api" },
+  fr: { title: "Public Api", description: "Gérer et configurer public api" },
+};
+
 const AVAILABLE_SCOPES = [
   "courses:read", "courses:write", "learners:read", "learners:write",
   "sessions:read", "sessions:write", "analytics:read", "memberships:read",
 ];
 
 export default function PublicApi() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [selectedScopes, setSelectedScopes] = useState<string[]>(["courses:read", "learners:read"]);

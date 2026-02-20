@@ -10,6 +10,13 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { trpc } from '@/lib/trpc';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Recommendations Engine", description: "Manage and configure recommendations engine" },
+  fr: { title: "Moteur de recommandations", description: "Gérer et configurer moteur de recommandations" },
+};
+
 const mockStats = { totalGenerated: 1245, clickThrough: 34, conversionRate: 18, activeUsers: 156 };
 const mockRules = [
   { id: 1, name: "Skill Gap Analysis", type: "ai", description: "Recommend exercises based on weak skill areas", status: "active", impact: "high" },
@@ -28,6 +35,9 @@ const mockMapping = [
 ];
 
 export default function AdminRecommendations() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
 
   return (

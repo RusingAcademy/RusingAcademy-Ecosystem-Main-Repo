@@ -17,10 +17,20 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { Link, useParams } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "User Profile", description: "Manage and configure user profile" },
+  fr: { title: "User Profile", description: "Gérer et configurer user profile" },
+};
+
 // Header removed — uses ecosystem layout or dedicated layout
 // Footer removed — uses ecosystem layout or dedicated layout
 
 export default function UserProfile() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { userId } = useParams<{ userId: string }>();
   const { user: currentUser } = useAuth();
   const numericUserId = parseInt(userId || "0", 10);

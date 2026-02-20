@@ -8,7 +8,17 @@ import { trpc } from "../lib/trpc";
 import { AlertCircle, ArrowLeft, Mail, CheckCircle } from "lucide-react";
 import { AuthLayout, AuthCard, AuthInput, AuthButton } from "@/components/auth";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Forgot Password", description: "Manage and configure forgot password" },
+  fr: { title: "Forgot Password", description: "Gérer et configurer forgot password" },
+};
+
 export default function ForgotPassword() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);

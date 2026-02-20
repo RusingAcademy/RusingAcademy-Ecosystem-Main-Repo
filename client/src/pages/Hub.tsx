@@ -14,7 +14,17 @@ import EcosystemHubContent from "./EcosystemHubSections";
 import FooterInstitutional from "@/components/FooterInstitutional";
 import SEO from "@/components/SEO";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Hub", description: "Manage and configure hub" },
+  fr: { title: "Hub", description: "Gérer et configurer hub" },
+};
+
 export default function Hub() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <SEO

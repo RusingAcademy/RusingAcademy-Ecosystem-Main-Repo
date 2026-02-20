@@ -85,6 +85,13 @@ import { getLoginUrl } from "@/const";
 import { Link } from "wouter";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Content Management", description: "Manage and configure admin content management" },
+  fr: { title: "Admin Content Management", description: "Gérer et configurer admin content management" },
+};
+
 // Sortable Question Item Component
 function SortableQuestionItem({
   question,
@@ -175,6 +182,9 @@ function SortableQuestionItem({
 }
 
 export default function AdminContentManagement() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, loading: authLoading, isAuthenticated } = useAuth({ redirectOnUnauthenticated: true });
   
   // Selection state

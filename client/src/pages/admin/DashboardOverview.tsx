@@ -11,6 +11,13 @@ import {
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Dashboard Overview", description: "Manage and configure dashboard overview" },
+  fr: { title: "Aperçu du tableau de bord", description: "Gérer et configurer aperçu du tableau de bord" },
+};
+
 function StatCard({ title, value, icon: Icon, subtitle, trend, trendLabel }: {
   title: string; value: string | number; icon: React.ElementType; subtitle?: string;
   trend?: number; trendLabel?: string;
@@ -65,6 +72,9 @@ function MiniBarChart({ data, maxHeight = 40 }: { data: { label: string; value: 
 }
 
 export default function DashboardOverview() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: analytics, isLoading: analyticsLoading } = trpc.admin.getAnalytics.useQuery();
   const { data: orgStats, isLoading: orgLoading } = trpc.admin.getOrgStats.useQuery();

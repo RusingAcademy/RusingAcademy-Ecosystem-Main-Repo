@@ -15,6 +15,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Search Results", description: "Manage and configure search results" },
+  fr: { title: "Search Results", description: "Gérer et configurer search results" },
+};
+
 type SearchType = "all" | "posts" | "courses" | "events" | "members";
 
 const tabs: { id: SearchType; label: string; icon: React.ReactNode }[] = [
@@ -26,6 +33,9 @@ const tabs: { id: SearchType; label: string; icon: React.ReactNode }[] = [
 ];
 
 export default function SearchResultsPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t } = useLocale();
   const searchParams = useSearch();
   const params = new URLSearchParams(searchParams);

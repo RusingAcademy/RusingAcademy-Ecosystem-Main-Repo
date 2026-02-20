@@ -6,7 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import { Award, Download, ExternalLink, Calendar, BookOpen } from "lucide-react";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "My Certificates", description: "Manage and configure my certificates" },
+  fr: { title: "My Certificates", description: "Gérer et configurer my certificates" },
+};
+
 export default function MyCertificates() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const { data: certificates, isLoading } = trpc.certificates.getMyCertificates.useQuery();
 

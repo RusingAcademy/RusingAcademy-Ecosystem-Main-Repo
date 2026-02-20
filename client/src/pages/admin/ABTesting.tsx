@@ -9,7 +9,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { toast } from "sonner";
 import { FlaskConical, Play, Pause, BarChart3, Plus, TrendingUp } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "A B Testing", description: "Manage and configure a b testing" },
+  fr: { title: "A B Testing", description: "Gérer et configurer a b testing" },
+};
+
 export default function ABTesting() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [showCreate, setShowCreate] = useState(false);
   const [newTest, setNewTest] = useState({ name: "", lessonIdA: "", lessonIdB: "", metric: "completion_rate", trafficSplit: 50 });
 

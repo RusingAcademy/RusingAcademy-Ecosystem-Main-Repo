@@ -24,6 +24,13 @@ import { useState } from "react";
 
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Dictation Exercises", description: "Manage and configure dictation exercises" },
+  fr: { title: "Exercices de dictée", description: "Gérer et configurer exercices de dictée" },
+};
+
 const mockExercises = [
   {
     id: "ex1",
@@ -55,6 +62,9 @@ const mockCategories = [
 ];
 
 export default function DictationExercises() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   // ── tRPC queries ──
   const dictationQuery = trpc.dictation.list.useQuery(undefined, { retry: false });
   const dictationData = dictationQuery.data ?? [];

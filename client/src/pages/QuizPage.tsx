@@ -14,6 +14,13 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Quiz Page", description: "Manage and configure quiz page" },
+  fr: { title: "Quiz Page", description: "Gérer et configurer quiz page" },
+};
+
 // ─── Fallback Question Generator ─────────────────────────────────────
 // Used when no database quiz exists for this lesson/module
 function generateQuizQuestions(moduleId: number) {
@@ -69,6 +76,9 @@ function normalizeDbQuestions(dbQuiz: any): NormalizedQuestion[] {
 }
 
 export default function QuizPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const params = useParams<{ programId: string; pathId: string; quizId: string }>();
   const [, navigate] = useLocation();
   const programId = params.programId as Program;

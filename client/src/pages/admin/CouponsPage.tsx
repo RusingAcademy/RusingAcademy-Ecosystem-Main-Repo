@@ -11,7 +11,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Coupons Page", description: "Manage and configure coupons page" },
+  fr: { title: "Coupons Page", description: "Gérer et configurer coupons page" },
+};
+
 export default function CouponsPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [code, setCode] = useState("");
   const [discount, setDiscount] = useState("");

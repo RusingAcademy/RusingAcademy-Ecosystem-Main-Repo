@@ -2,6 +2,13 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Theme Customizer", description: "Manage and configure theme customizer" },
+  fr: { title: "Theme Customizer", description: "Gérer et configurer theme customizer" },
+};
+
 const DEFAULT_TOKENS = {
   primaryColor: "#14b8a6",
   secondaryColor: "#6366f1",
@@ -13,6 +20,9 @@ const DEFAULT_TOKENS = {
 };
 
 export default function ThemeCustomizer() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [tokens, setTokens] = useState(DEFAULT_TOKENS);
   const [presetName, setPresetName] = useState("");
   const presetsQuery = trpc.themeCustomizer.list.useQuery(undefined, { retry: false });

@@ -9,6 +9,13 @@ import { ArrowLeft, Mail, Send, Plus, Loader2, Trash2, Edit, BarChart3, Users, E
 import { useLocation } from "wouter";
 import { useState } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Email Broadcasts", description: "Manage and configure email broadcasts" },
+  fr: { title: "Email Broadcasts", description: "Gérer et configurer email broadcasts" },
+};
+
 const STATUS_COLORS: Record<string, string> = {
   draft: "var(--muted-foreground)",
   scheduled: "var(--semantic-info)",
@@ -18,6 +25,9 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 export default function EmailBroadcasts() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t } = useLocale();
   const { user } = useAuth();
   const [, navigate] = useLocation();

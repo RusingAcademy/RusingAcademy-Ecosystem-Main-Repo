@@ -6,9 +6,19 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Award, Loader2, ExternalLink } from "lucide-react";
 import { useLocation } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Certificates", description: "Manage and configure certificates" },
+  fr: { title: "Certificates", description: "Gérer et configurer certificates" },
+};
+
 const RA_LOGO = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mRLHZFARZiUVtNTg.png";
 
 export default function Certificates() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t } = useLocale();
   const { isAuthenticated } = useAuth();
   const [, navigate] = useLocation();

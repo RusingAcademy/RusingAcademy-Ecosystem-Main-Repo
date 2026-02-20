@@ -11,6 +11,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Email Templates", description: "Manage and configure email templates" },
+  fr: { title: "Modèles de courriel", description: "Gérer et configurer modèles de courriel" },
+};
+
   Mail, Plus, Search, Edit2, Trash2, Copy, Eye, Save,
   Loader2, FileText, Tag, Send, Code, Palette, Variable,
   ChevronRight, ToggleLeft
@@ -44,6 +51,9 @@ const CATEGORIES = [
 ];
 
 export default function EmailTemplateBuilder() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState<EditorTab>("templates");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");

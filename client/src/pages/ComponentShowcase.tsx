@@ -173,7 +173,17 @@ import { useState } from "react";
 import { toast as sonnerToast } from "sonner";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Component Showcase", description: "Manage and configure component showcase" },
+  fr: { title: "Component Showcase", description: "Gérer et configurer component showcase" },
+};
+
 export default function ComponentsShowcase() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { theme, toggleTheme } = useTheme();
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [datePickerDate, setDatePickerDate] = useState<Date>();

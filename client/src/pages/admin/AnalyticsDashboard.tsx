@@ -3,6 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, TrendingUp, Users, DollarSign, BookOpen, Activity } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Analytics Dashboard", description: "Manage and configure analytics dashboard" },
+  fr: { title: "Analytics Dashboard", description: "Gérer et configurer analytics dashboard" },
+};
+
 const ICON_MAP: Record<string, any> = {
   revenue: DollarSign,
   enrollments: BookOpen,
@@ -35,6 +42,9 @@ const WIDTH_MAP: Record<string, string> = {
 };
 
 export default function AnalyticsDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { data: widgets, isLoading } = trpc.analyticsDashboard.getWidgets.useQuery({ dashboardId: "admin_main" });
 
   if (isLoading) {

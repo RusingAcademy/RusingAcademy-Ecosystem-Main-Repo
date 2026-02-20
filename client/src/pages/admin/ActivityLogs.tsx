@@ -7,6 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Activity Logs", description: "Manage and configure activity logs" },
+  fr: { title: "Journaux d'activité", description: "Gérer et configurer journaux d'activité" },
+};
+
   Activity, Clock, Search, ChevronLeft, ChevronRight,
   Filter, User, FileText, Shield, Settings, Trash2,
   PenLine, Plus, Eye, Download, RefreshCw,
@@ -57,6 +64,9 @@ const PAGE_SIZE = 20;
 // ============================================================================
 
 export default function ActivityLogs() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [actionFilter, setActionFilter] = useState("");
   const [targetTypeFilter, setTargetTypeFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");

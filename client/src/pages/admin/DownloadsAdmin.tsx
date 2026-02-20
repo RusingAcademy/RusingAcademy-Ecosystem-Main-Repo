@@ -47,6 +47,13 @@ import {
 } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Downloads Management", description: "Manage and configure downloads management" },
+  fr: { title: "Gestion des téléchargements", description: "Gérer et configurer gestion des téléchargements" },
+};
+
 interface ResourceForm {
   title: string;
   titleFr: string;
@@ -100,6 +107,9 @@ function getFileTypeBadgeColor(fileType: string) {
 }
 
 export default function DownloadsAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);

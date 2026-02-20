@@ -8,6 +8,13 @@ import { trpc } from "@/lib/trpc";
 import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Study Planner", description: "Manage and configure study planner" },
+  fr: { title: "Study Planner", description: "Gérer et configurer study planner" },
+};
+
 const SESSION_TYPES = [
   { id: "lesson", label: "Lesson", icon: "menu_book", color: "var(--brand-teal, var(--teal))" },
   { id: "quiz", label: "Quiz", icon: "quiz", color: "var(--color-violet-500, var(--accent-purple))" },
@@ -33,6 +40,9 @@ const MONTHS = ["January", "February", "March", "April", "May", "June", "July", 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function StudyPlanner() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, loading: authLoading } = useAuth();
   const [collapsed, setCollapsed] = useState(true);
   const [showForm, setShowForm] = useState(false);

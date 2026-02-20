@@ -3,6 +3,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RotateCcw, BarChart3, TrendingUp, Calendar, Users, RefreshCw, Trophy } from 'lucide-react';
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Daily Review", description: "Manage and configure admin daily review" },
+  fr: { title: "Admin Daily Review", description: "Gérer et configurer admin daily review" },
+};
+
 const AdminDailyReview = () => {
   const { data: stats, isLoading } = trpc.adminDailyReview.getStats.useQuery();
 

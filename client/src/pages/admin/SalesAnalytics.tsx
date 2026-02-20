@@ -8,6 +8,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Sales Analytics", description: "Manage and configure sales analytics" },
+  fr: { title: "Analytique des ventes", description: "Gérer et configurer analytique des ventes" },
+};
+
   TrendingUp, TrendingDown, DollarSign, Users, BarChart3,
   Download, Loader2, Target, ArrowRight, Percent, UserMinus,
   Calendar, Filter, Package, Layers
@@ -16,6 +23,9 @@ import {
 type SalesTab = "funnel" | "ltv" | "churn" | "revenue" | "products" | "export";
 
 export default function SalesAnalytics() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState<SalesTab>("funnel");
   const [dateFrom, setDateFrom] = useState(() => {
     const d = new Date(); d.setMonth(d.getMonth() - 6);

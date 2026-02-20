@@ -45,6 +45,13 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Visual Editor", description: "Manage and configure visual editor" },
+  fr: { title: "Éditeur visuel", description: "Gérer et configurer éditeur visuel" },
+};
+
   ArrowLeft, Monitor, Tablet, Smartphone, Eye, EyeOff, Save, Upload,
   Plus, Trash2, Copy, GripVertical, ChevronDown, ChevronUp, Settings,
   Layout, Type, Image, Video, Star, MessageSquare, List, CreditCard,

@@ -9,7 +9,17 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Executive Summary", description: "Manage and configure admin executive summary" },
+  fr: { title: "Admin Executive Summary", description: "Gérer et configurer admin executive summary" },
+};
+
 export default function AdminExecutiveSummary() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
 

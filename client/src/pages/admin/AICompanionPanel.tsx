@@ -11,6 +11,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "AI Companion", description: "Manage and configure ai companion" },
+  fr: { title: "Compagnon IA", description: "Gérer et configurer compagnon ia" },
+};
+
   Brain, Activity, Users, BarChart3, Settings2, Mic, BookOpen,
   TrendingUp, Loader2, Save, Target, Clock, MessageSquare,
   ChevronRight, AlertTriangle, ArrowLeft, Plus, Trash2, Sliders, User
@@ -30,6 +37,9 @@ const SIMULATION_TYPES = [
 ];
 
 export default function AICompanionPanel() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState<AITab>("overview");
   const [aiSettings, setAiSettings] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);

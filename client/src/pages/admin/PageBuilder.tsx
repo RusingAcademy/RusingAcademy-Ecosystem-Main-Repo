@@ -22,6 +22,13 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Page Builder", description: "Manage and configure page builder" },
+  fr: { title: "Constructeur de pages", description: "Gérer et configurer constructeur de pages" },
+};
+
   Plus, FileText, GripVertical, Trash2, Eye, EyeOff, Layout,
   Type, Image, List, MessageSquare, Star, Pencil,
   Navigation, Loader2, LayoutGrid, Copy, Monitor, Tablet,
@@ -262,6 +269,9 @@ function LivePreviewSection({ section }: { section: any }) {
 
 /* ─── Main PageBuilder Component ─── */
 export default function PageBuilder() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState<PageTab>("pages");
   const [editingPageId, setEditingPageId] = useState<number | null>(null);
   const [visualEditorPageId, setVisualEditorPageId] = useState<number | null>(null);

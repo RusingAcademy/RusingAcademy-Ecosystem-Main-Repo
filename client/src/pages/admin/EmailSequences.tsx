@@ -15,6 +15,13 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { Plus, Mail, Play, Pause, Trash2, BarChart3, Users, Clock } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Email Sequences", description: "Manage and configure email sequences" },
+  fr: { title: "Email Sequences", description: "Gérer et configurer email sequences" },
+};
+
 const TRIGGER_LABELS: Record<string, string> = {
   user_signup: "User Signup",
   course_purchase: "Course Purchase",
@@ -33,6 +40,9 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 export default function EmailSequences() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
 
   const [showCreate, setShowCreate] = useState(false);
   const [newName, setNewName] = useState("");

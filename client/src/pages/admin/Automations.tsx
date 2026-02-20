@@ -16,6 +16,13 @@ import {
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Automations", description: "Manage and configure automations" },
+  fr: { title: "Automatisations", description: "Gérer et configurer automatisations" },
+};
+
 // ─── Types ───
 type TriggerType = "enrollment" | "purchase" | "course_complete" | "lesson_complete" | "signup" | "inactivity" | "tag_added" | "manual";
 type ActionType = "send_email" | "wait" | "add_tag" | "remove_tag" | "enroll_course" | "notify_admin" | "send_sms";
@@ -190,6 +197,9 @@ function StepCard({ step, index, total, onEdit, onDelete }: {
 
 // ─── Main Component ───
 export default function Automations() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const utils = trpc.useUtils();
 
   // Backend data

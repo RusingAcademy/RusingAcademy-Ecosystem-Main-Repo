@@ -9,6 +9,13 @@ import { trpc } from "@/lib/trpc";
 import { useFeatureFlag, useFeatureFlags } from "@/hooks/useFeatureFlag";
 import MembershipTierForm from "@/components/admin/MembershipTierForm";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Membership Tiers", description: "Manage and configure membership tiers" },
+  fr: { title: "Membership Tiers", description: "Gérer et configurer membership tiers" },
+};
+
 interface Tier {
   id: number;
   name: string;
@@ -29,6 +36,9 @@ interface Tier {
 }
 
 export default function MembershipTiers() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { isLoading: flagLoading } = useFeatureFlags();
   const isEnabled = useFeatureFlag("MEMBERSHIPS_ADMIN_V2");
   const [editingTier, setEditingTier] = useState<Tier | null>(null);

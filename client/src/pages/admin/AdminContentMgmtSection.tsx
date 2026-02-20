@@ -42,7 +42,17 @@ import {
 import { toast } from "sonner";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Content Management", description: "Manage and configure content management" },
+  fr: { title: "Gestion de contenu", description: "Gérer et configurer gestion de contenu" },
+};
+
 export default function AdminContentMgmtSection() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
 

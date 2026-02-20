@@ -8,6 +8,13 @@ import { toast } from "sonner";
 import { ArrowLeft, Hash, Lock, Crown, Users, Plus, Loader2, MessageSquare } from "lucide-react";
 import { useLocation } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Channels", description: "Manage and configure channels" },
+  fr: { title: "Channels", description: "Gérer et configurer channels" },
+};
+
 const VISIBILITY_ICONS = {
   public: Hash,
   private: Lock,
@@ -21,6 +28,9 @@ const VISIBILITY_COLORS = {
 };
 
 export default function Channels() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t } = useLocale();
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();

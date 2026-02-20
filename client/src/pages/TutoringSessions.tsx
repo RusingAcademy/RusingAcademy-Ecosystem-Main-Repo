@@ -8,6 +8,13 @@ import { trpc } from "@/lib/trpc";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Tutoring Sessions", description: "Manage and configure tutoring sessions" },
+  fr: { title: "Séances de tutorat", description: "Gérer et configurer séances de tutorat" },
+};
+
 /* ─── Booking Types ─── */
 const bookingTypes = [
   {
@@ -149,6 +156,9 @@ function CalendlyEmbed({ url, onClose }: { url: string; onClose: () => void }) {
 
 /* ─── Main Component ─── */
 export default function TutoringSessions() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<"book" | "coaches" | "history">("book");
 

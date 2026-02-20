@@ -23,6 +23,13 @@ import {
 } from "lucide-react";
 import AdminSectionShell from "@/components/AdminSectionShell";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Executive Summary", description: "Manage and configure executive summary" },
+  fr: { title: "Résumé exécutif", description: "Gérer et configurer résumé exécutif" },
+};
+
 type Period = "7d" | "30d" | "90d" | "ytd" | "12m";
 
 const PERIOD_LABELS: Record<Period, string> = {
@@ -114,6 +121,9 @@ function HealthScoreRing({ score }: { score: number }) {
 
 // ── Main Component ───────────────────────────────────────────────────────────
 export default function ExecutiveSummary() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [period, setPeriod] = useState<Period>("30d");
 
   const { data: summary, isLoading: summaryLoading, refetch } = trpc.executiveSummary.getExecutiveSummary.useQuery({ period });

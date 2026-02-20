@@ -9,7 +9,17 @@ import { toast } from "sonner";
 import { MessageCircle, Users, Shield, Plus, BarChart3, MessageSquare, AlertTriangle, Sparkles } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Community Admin", description: "Manage and configure community admin" },
+  fr: { title: "Community Admin", description: "Gérer et configurer community admin" },
+};
+
 export default function CommunityAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
 
   const { data: overview, isLoading } = trpc.kajabiCommunityAdmin.getOverview.useQuery();

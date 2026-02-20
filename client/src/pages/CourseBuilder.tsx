@@ -29,6 +29,13 @@ import {
 } from "lucide-react";
 import { useLocale } from "@/i18n/LocaleContext";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Course Builder", description: "Manage and configure course builder" },
+  fr: { title: "Constructeur de cours", description: "Gérer et configurer constructeur de cours" },
+};
+
 // ─── Types ───────────────────────────────────────────────────────────
 interface ModuleDraft {
   tempId: string;
@@ -89,6 +96,9 @@ function genId() {
 
 // ─── Main Component ──────────────────────────────────────────────────
 export default function CourseBuilder() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();
   const { t } = useLocale();

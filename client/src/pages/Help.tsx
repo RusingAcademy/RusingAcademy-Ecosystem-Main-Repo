@@ -6,6 +6,13 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Link } from "wouter";
 import { useState } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Help", description: "Manage and configure help" },
+  fr: { title: "Help", description: "Gérer et configurer help" },
+};
+
 const categories = [
   { name: "Tutors", icon: "person", articles: 8 },
   { name: "Coordinators", icon: "supervisor_account", articles: 12 },
@@ -29,6 +36,9 @@ const recentActivity = [
 ];
 
 export default function Help() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
 
   return (

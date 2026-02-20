@@ -4,6 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { trpc } from '@/lib/trpc';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Grammar Drills", description: "Manage and configure grammar drills" },
+  fr: { title: "Grammar Drills", description: "Gérer et configurer grammar drills" },
+};
+
 const GrammarDrillsAdmin = () => {
   const { data: stats, isLoading: statsLoading } = trpc.adminGrammarDrills.getStats.useQuery();
   const { data: results, isLoading: resultsLoading } = trpc.adminGrammarDrills.listResults.useQuery({});

@@ -31,6 +31,13 @@ import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 import { motion } from "framer-motion";
 import { AuthLayout, AuthCard, AuthInput, AuthButton, OAuthButtons, AuthDivider } from "@/components/auth";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Login", description: "Manage and configure login" },
+  fr: { title: "Login", description: "Gérer et configurer login" },
+};
+
 /* ─── Debug Mode ─── */
 const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 
@@ -388,6 +395,9 @@ function LoginContent() {
    Login — Wrapped with GuestRoute
    ═══════════════════════════════════════════════════════ */
 export default function Login() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <GuestRoute redirectTo="/dashboard">
       <LoginContent />

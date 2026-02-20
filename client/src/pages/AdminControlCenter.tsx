@@ -1,5 +1,12 @@
 import AdminLayout from "@/components/AdminLayout";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Control Center", description: "Manage and configure admin control center" },
+  fr: { title: "Admin Control Center", description: "Gérer et configurer admin control center" },
+};
+
   DashboardOverview,
   UsersRoles,
   CoachesManagement,
@@ -178,6 +185,9 @@ const sectionMap: Record<string, React.ComponentType> = {
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const Content = sectionMap[section] || DashboardOverview;
   return (
     <AdminLayout>

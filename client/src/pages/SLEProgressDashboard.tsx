@@ -36,6 +36,13 @@ import {
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "S L E Progress Dashboard", description: "Manage and configure s l e progress dashboard" },
+  fr: { title: "S L E Progress Dashboard", description: "Gérer et configurer s l e progress dashboard" },
+};
+
 // ─── Types ───────────────────────────────────────────────────────────
 type Language = "fr" | "en";
 
@@ -181,6 +188,9 @@ const skillIcons: Record<string, typeof Mic> = {
 // MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════
 export default function SLEProgressDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [language] = useState<Language>("fr"); // Could be derived from user preference
   const [historyPage, setHistoryPage] = useState(0);

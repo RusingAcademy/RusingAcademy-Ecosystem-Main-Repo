@@ -9,6 +9,13 @@ import { Link } from "wouter";
 import { programs, type Path } from "@/data/courseData";
 import { useGamification } from "@/contexts/GamificationContext";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Learning Materials", description: "Manage and configure learning materials" },
+  fr: { title: "Learning Materials", description: "Gérer et configurer learning materials" },
+};
+
 const tabs = ["My Courses", "Tests & Quizzes", "References"];
 
 function ProgressCircle({ value, size = 40 }: { value: number; size?: number }) {
@@ -82,6 +89,9 @@ function PathRow({ path, programId }: { path: Path; programId: string }) {
 }
 
 export default function LearningMaterials() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState(0);
   const { totalXP, lessonsCompleted } = useGamification();
 

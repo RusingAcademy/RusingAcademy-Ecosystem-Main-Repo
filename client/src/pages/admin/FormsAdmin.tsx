@@ -12,7 +12,17 @@ import { toast } from "sonner";
 import { ClipboardCheck, Plus, FileText, Users, BarChart3, Edit, Eye, Trash2 } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Forms Admin", description: "Manage and configure forms admin" },
+  fr: { title: "Forms Admin", description: "Gérer et configurer forms admin" },
+};
+
 export default function FormsAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [name, setName] = useState("");
   const [type, setType] = useState("contact");

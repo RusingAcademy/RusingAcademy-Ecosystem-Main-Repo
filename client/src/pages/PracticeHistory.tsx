@@ -20,6 +20,13 @@ import { fr } from "date-fns/locale";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { CalendarDays, Filter, X } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Practice History", description: "Manage and configure practice history" },
+  fr: { title: "Practice History", description: "Gérer et configurer practice history" },
+};
+
 // Coach images mapping
 const coachImages: Record<string, string> = {
   steven: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
@@ -60,6 +67,9 @@ const skillLabels: Record<string, string> = {
 };
 
 export default function PracticeHistory() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { isInsideAppLayout } = useAppLayout();
   const { user, loading: authLoading } = useAuth();
   const [coachFilter, setCoachFilter] = useState<string>("all");

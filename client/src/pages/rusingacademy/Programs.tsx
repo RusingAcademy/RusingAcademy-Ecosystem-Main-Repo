@@ -5,6 +5,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Programs", description: "Manage and configure programs" },
+  fr: { title: "Programs", description: "Gérer et configurer programs" },
+};
+
   GraduationCap,
   Clock,
   BookOpen,
@@ -247,6 +254,9 @@ const targetProfiles = [
 ];
 
 export default function Programs() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
 
   return (

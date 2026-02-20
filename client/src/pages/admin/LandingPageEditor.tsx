@@ -10,6 +10,13 @@ import { SectionRenderer } from "@/components/templates/SectionRenderer";
 import { toast } from "sonner";
 import { Save, Plus, Trash2, ArrowUp, ArrowDown, Eye, Loader2 } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Landing Page Editor", description: "Manage and configure landing page editor" },
+  fr: { title: "Landing Page Editor", description: "Gérer et configurer landing page editor" },
+};
+
 const SECTION_TYPES = [
   { type: "hero", label: "Hero Banner", defaultContent: { headline: "Your Headline", subheadline: "Your subheadline", ctaText: "Get Started", ctaLink: "/membership" } },
   { type: "features", label: "Features Grid", defaultContent: { heading: "Features", features: [{ title: "Feature 1", description: "Description" }, { title: "Feature 2", description: "Description" }, { title: "Feature 3", description: "Description" }] } },
@@ -19,6 +26,9 @@ const SECTION_TYPES = [
 ] as const;
 
 export default function LandingPageEditor() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const params = useParams<{ id: string }>();
   const pageId = parseInt(params.id || "0");
   const [sections, setSections] = useState<any[]>([]);

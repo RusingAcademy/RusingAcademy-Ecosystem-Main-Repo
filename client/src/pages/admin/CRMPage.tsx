@@ -6,7 +6,17 @@ import { toast } from "sonner";
 import { MessageSquare, Mail, Phone, Inbox } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "C R M Page", description: "Manage and configure c r m page" },
+  fr: { title: "C R M Page", description: "Gérer et configurer c r m page" },
+};
+
 export default function CRMPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { data: inquiries, isLoading } = (trpc.admin as any).getLeadsWithScores.useQuery({ sortBy: "recent", limit: 50 });
   const allInquiries = (inquiries ?? []) as any[];
 

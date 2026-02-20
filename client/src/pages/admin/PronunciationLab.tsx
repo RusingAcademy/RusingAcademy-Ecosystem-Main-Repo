@@ -10,6 +10,13 @@ import { Mic, Volume2, Languages, BarChart3, Plus, Edit, Trash2, Search } from '
 
 import { trpc } from '@/lib/trpc';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Pronunciation Lab", description: "Manage and configure pronunciation lab" },
+  fr: { title: "Laboratoire de prononciation", description: "Gérer et configurer laboratoire de prononciation" },
+};
+
 const mockExercises = [
   { id: '1', cefr: 'A2', phrase: 'Hello, how are you?', ipa: '/həˈloʊ, haʊ ɑːr juː/', audioUrl: '/audio/hello.mp3' },
   { id: '2', cefr: 'B1', phrase: 'I would like to book a table.', ipa: '/aɪ wʊd laɪk tuː bʊk ə ˈteɪbəl/', audioUrl: '/audio/book_table.mp3' },

@@ -8,7 +8,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { Building2, Users, CreditCard, Receipt, TrendingUp, ArrowRight } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Org Billing Dashboard", description: "Manage and configure org billing dashboard" },
+  fr: { title: "Org Billing Dashboard", description: "Gérer et configurer org billing dashboard" },
+};
+
 export default function OrgBillingDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
 
   const [selectedOrgId] = useState(1);
   const [newSeats, setNewSeats] = useState("");

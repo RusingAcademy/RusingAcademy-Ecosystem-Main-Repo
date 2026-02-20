@@ -6,7 +6,17 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "My Settings", description: "Manage and configure my settings" },
+  fr: { title: "My Settings", description: "Gérer et configurer my settings" },
+};
+
 export default function MySettings() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <DashboardLayout>
       <div className="max-w-[900px]">

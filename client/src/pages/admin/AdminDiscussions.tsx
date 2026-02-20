@@ -28,6 +28,13 @@ import {
 import React, { useState } from "react";
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Discussions", description: "Manage and configure discussions" },
+  fr: { title: "Discussions", description: "Gérer et configurer discussions" },
+};
+
 // Connected to discussions tRPC router
 type Thread = {
   id: string;

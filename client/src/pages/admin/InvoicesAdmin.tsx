@@ -11,7 +11,17 @@ import { toast } from "sonner";
 import { FileSpreadsheet, Plus, Download, Search, DollarSign, Clock, CheckCircle, AlertCircle, Eye } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Invoices Admin", description: "Manage and configure invoices admin" },
+  fr: { title: "Invoices Admin", description: "Gérer et configurer invoices admin" },
+};
+
 export default function InvoicesAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [email, setEmail] = useState("");

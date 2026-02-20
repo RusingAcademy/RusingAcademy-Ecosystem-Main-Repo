@@ -7,7 +7,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Eye, BookOpen, GraduationCap, ArrowLeft, Play } from "lucide-react";
 import { useLocation } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Preview Student", description: "Manage and configure preview student" },
+  fr: { title: "Preview Student", description: "Gérer et configurer preview student" },
+};
+
 export default function PreviewStudent() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: courses, isLoading } = trpc.admin.getAllCourses.useQuery();
   const courseList = Array.isArray(courses) ? courses : ((courses as any)?.courses ?? []);

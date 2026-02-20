@@ -8,6 +8,13 @@ import { toast } from "sonner";
 import { Layers, BookOpen, Brain, BarChart3, Plus, Trash2, Search, RefreshCw } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Flashcards", description: "Manage and configure admin flashcards" },
+  fr: { title: "Admin Flashcards", description: "Gérer et configurer admin flashcards" },
+};
+
 const AdminFlashcards = () => {
   const [search, setSearch] = useState("");
   const [levelFilter, setLevelFilter] = useState<string>("");
