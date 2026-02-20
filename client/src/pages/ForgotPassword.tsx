@@ -1,18 +1,18 @@
 /**
- * ForgotPassword Page — Refactored with Auth Design System
- * Phase 1: Auth UI/UX Harmonization with HAZY palette
+ * ForgotPassword Page — v7 (Unified Auth Design System)
+ * Uses shared AuthLayout + AuthCard + AuthInput + AuthButton
  */
 import { useState, useCallback } from "react";
 import { Link } from "wouter";
 import { trpc } from "../lib/trpc";
-import { AlertCircle, ArrowLeft, Mail } from "lucide-react";
+import { AlertCircle, ArrowLeft, Mail, CheckCircle } from "lucide-react";
 import { AuthLayout, AuthCard, AuthInput, AuthButton } from "@/components/auth";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [language] = useState<"en" | "fr">("en");
+  const [language, setLanguage] = useState<"en" | "fr">("en");
 
   const t = useCallback(
     (en: string, fr: string) => (language === "fr" ? fr : en),
@@ -33,21 +33,21 @@ export default function ForgotPassword() {
 
   if (success) {
     return (
-      <AuthLayout>
+      <AuthLayout language={language} onLanguageChange={setLanguage}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
             <div className="mx-auto w-16 h-16 bg-[var(--brand-foundation)]/20 rounded-full flex items-center justify-center">
-              <Mail className="w-8 h-8 text-[var(--barholex-gold)]" />
+              <CheckCircle className="w-8 h-8 text-green-400" />
             </div>
             <h2 className="text-xl font-bold text-white">
               {t("Check Your Email", "Vérifiez votre courriel")}
             </h2>
-            <p className="text-white/50 text-sm">
+            <p className="text-white/60 text-sm">
               {t("If an account exists with", "Si un compte existe avec")}{" "}
               <span className="font-medium text-[var(--barholex-gold)]">{email}</span>,{" "}
               {t("you'll receive a password reset link shortly.", "vous recevrez un lien de réinitialisation sous peu.")}
             </p>
-            <p className="text-white/30 text-xs">
+            <p className="text-white/40 text-xs">
               {t("The link will expire in 1 hour.", "Le lien expirera dans 1 heure.")}
             </p>
             <div className="pt-2">
@@ -65,7 +65,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout language={language} onLanguageChange={setLanguage}>
       <AuthCard
         title={t("Reset Your Password", "Réinitialisez votre mot de passe")}
         subtitle={t(
@@ -83,9 +83,10 @@ export default function ForgotPassword() {
 
           <AuthInput
             icon={<Mail className="w-4 h-4" />}
+            label={t("Email", "Courriel")}
             name="email"
             type="email"
-            placeholder={t("Email address", "Adresse courriel")}
+            placeholder={t("your@email.com", "votre@courriel.com")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -103,7 +104,7 @@ export default function ForgotPassword() {
         </form>
 
         <p className="text-center mt-4">
-          <Link to="/login" className="text-white/40 text-xs hover:text-white/60 transition-colors flex items-center justify-center gap-1">
+          <Link to="/login" className="text-white/50 text-xs hover:text-white/70 transition-colors flex items-center justify-center gap-1">
             <ArrowLeft className="w-3 h-3" />
             {t("Back to Login", "Retour à la connexion")}
           </Link>

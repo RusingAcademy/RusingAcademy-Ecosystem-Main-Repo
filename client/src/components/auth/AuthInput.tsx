@@ -1,6 +1,6 @@
 /**
- * AuthInput — Styled input with icon support and HAZY palette
- * Phase 1: Auth UI/UX Harmonization
+ * AuthInput — Styled input with icon support (v7)
+ * Improved: higher contrast placeholder (white/35), better focus ring
  */
 import { InputHTMLAttributes, ReactNode, forwardRef } from "react";
 
@@ -20,21 +20,21 @@ export const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-xs font-medium text-white/50 tracking-wide"
+            className="block text-white/50 text-[10px] font-semibold tracking-wider uppercase"
           >
             {label}
           </label>
         )}
         <div className="relative">
           {icon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none">
               {icon}
             </div>
           )}
           <input
             ref={ref}
             id={inputId}
-            className={`w-full ${icon ? "pl-10" : "pl-4"} ${rightElement ? "pr-10" : "pr-4"} py-2.5 rounded-lg bg-white/[0.06] border ${error ? "border-red-500/50" : "border-white/10"} text-white text-sm placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/40 focus:border-[var(--barholex-gold)]/50 focus:bg-white/[0.08] transition-all disabled:opacity-50 ${className}`}
+            className={`w-full ${icon ? "pl-10" : "pl-4"} ${rightElement ? "pr-10" : "pr-4"} py-2.5 rounded-lg bg-white/[0.06] border ${error ? "border-red-500/50" : "border-white/10"} text-white text-sm placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/40 focus:border-[var(--barholex-gold)]/50 focus:bg-white/[0.08] transition-all disabled:opacity-50 ${className}`}
             {...props}
           />
           {rightElement && (
@@ -44,7 +44,7 @@ export const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
           )}
         </div>
         {error && (
-          <p className="text-xs text-red-400/80 mt-1">{error}</p>
+          <p className="text-xs text-red-400 mt-1">{error}</p>
         )}
       </div>
     );

@@ -1,6 +1,6 @@
 /**
- * OAuthButtons - Google and Microsoft OAuth buttons
- * Phase 1: Auth UI/UX Harmonization
+ * OAuthButtons — Google + Microsoft SSO buttons (v7)
+ * Clean, professional, high contrast — no dark mode
  */
 
 interface OAuthButtonsProps {
@@ -40,7 +40,7 @@ export function OAuthButtons({ onGoogle, onMicrosoft, disabled, t }: OAuthButton
         onClick={onGoogle}
         disabled={disabled}
         aria-label="Sign in with Google"
-        className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white text-[#333] text-xs font-semibold shadow-sm hover:shadow-lg hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/50"
+        className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white text-[#333] text-xs font-semibold shadow-sm hover:shadow-lg hover:bg-gray-50 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/50"
       >
         <GoogleIcon />
         Google

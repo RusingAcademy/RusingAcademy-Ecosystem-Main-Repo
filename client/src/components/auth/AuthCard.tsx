@@ -1,6 +1,6 @@
 /**
- * AuthCard — Glassmorphism card container for auth pages
- * Phase 1: Auth UI/UX Harmonization with HAZY palette
+ * AuthCard — Glassmorphism card container for auth pages (v7)
+ * Improved readability: higher contrast text, better glass effect
  */
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
@@ -18,25 +18,38 @@ export function AuthCard({
   title,
   subtitle,
   className = "",
-  maxWidth = "max-w-md",
 }: AuthCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`w-full ${maxWidth} mx-auto ${className}`}
+      transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`w-full mx-auto ${className}`}
     >
-      <div className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-2xl shadow-black/20 p-8">
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
+      <div
+        className="relative rounded-2xl p-7 backdrop-blur-xl"
+        style={{
+          background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+          border: "1px solid rgba(255,255,255,0.12)",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.05) inset",
+        }}
+      >
+        {/* Subtle inner glow */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+
         <div className="relative z-10">
           {title && (
             <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-white tracking-tight">
+              <h2
+                className="text-2xl text-white leading-tight mb-1.5"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
                 {title}
-              </h1>
+              </h2>
               {subtitle && (
-                <p className="mt-2 text-sm text-white/50">{subtitle}</p>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  {subtitle}
+                </p>
               )}
             </div>
           )}

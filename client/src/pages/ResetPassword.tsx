@@ -1,6 +1,6 @@
 /**
- * ResetPassword Page — Refactored with Auth Design System
- * Phase 1: Auth UI/UX Harmonization with HAZY palette
+ * ResetPassword Page — v7 (Unified Auth Design System)
+ * Uses shared AuthLayout + AuthCard + AuthInput + AuthButton
  */
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useSearch } from "wouter";
@@ -13,7 +13,7 @@ export default function ResetPassword() {
   const searchString = useSearch();
   const searchParams = new URLSearchParams(searchString);
   const token = searchParams.get("token");
-  const [language] = useState<"en" | "fr">("en");
+  const [language, setLanguage] = useState<"en" | "fr">("en");
 
   const t = useCallback(
     (en: string, fr: string) => (language === "fr" ? fr : en),
@@ -75,11 +75,11 @@ export default function ResetPassword() {
   // Loading state
   if (tokenValid === null) {
     return (
-      <AuthLayout>
+      <AuthLayout language={language} onLanguageChange={setLanguage}>
         <AuthCard>
           <div className="text-center space-y-4 py-8">
             <Loader2 className="w-12 h-12 text-[var(--barholex-gold)] mx-auto animate-spin" />
-            <p className="text-white/50 text-sm">
+            <p className="text-white/60 text-sm">
               {t("Verifying reset link...", "Vérification du lien...")}
             </p>
           </div>
@@ -91,14 +91,14 @@ export default function ResetPassword() {
   // Invalid/expired token
   if (!tokenValid) {
     return (
-      <AuthLayout>
+      <AuthLayout language={language} onLanguageChange={setLanguage}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
-            <AlertCircle className="w-16 h-16 text-red-500 mx-auto" />
+            <AlertCircle className="w-16 h-16 text-red-400 mx-auto" />
             <h2 className="text-xl font-bold text-white">
               {t("Invalid or Expired Link", "Lien invalide ou expiré")}
             </h2>
-            <p className="text-white/50 text-sm">
+            <p className="text-white/60 text-sm">
               {t("This password reset link is invalid or has expired.", "Ce lien de réinitialisation est invalide ou a expiré.")}
             </p>
             <div className="pt-2 space-y-2">
@@ -121,14 +121,14 @@ export default function ResetPassword() {
   // Success state
   if (success) {
     return (
-      <AuthLayout>
+      <AuthLayout language={language} onLanguageChange={setLanguage}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+            <CheckCircle className="w-16 h-16 text-green-400 mx-auto" />
             <h2 className="text-xl font-bold text-white">
               {t("Password Reset!", "Mot de passe réinitialisé !")}
             </h2>
-            <p className="text-white/50 text-sm">
+            <p className="text-white/60 text-sm">
               {t("Redirecting to login...", "Redirection vers la connexion...")}
             </p>
           </div>
@@ -139,7 +139,7 @@ export default function ResetPassword() {
 
   // Reset form
   return (
-    <AuthLayout>
+    <AuthLayout language={language} onLanguageChange={setLanguage}>
       <AuthCard
         title={t("Create New Password", "Créer un nouveau mot de passe")}
         subtitle={t("Enter your new password below", "Entrez votre nouveau mot de passe ci-dessous")}
@@ -155,9 +155,10 @@ export default function ResetPassword() {
           <div>
             <AuthInput
               icon={<Lock className="w-4 h-4" />}
+              label={t("New Password", "Nouveau mot de passe")}
               name="password"
               type={showPassword ? "text" : "password"}
-              placeholder={t("New password (min 8 characters)", "Nouveau mot de passe (min 8 caractères)")}
+              placeholder={t("Min 8 characters", "Min 8 caractères")}
               value={formData.password}
               onChange={handleChange}
               required
@@ -179,9 +180,10 @@ export default function ResetPassword() {
 
           <AuthInput
             icon={<Lock className="w-4 h-4" />}
+            label={t("Confirm Password", "Confirmer le mot de passe")}
             name="confirmPassword"
             type={showPassword ? "text" : "password"}
-            placeholder={t("Confirm new password", "Confirmer le nouveau mot de passe")}
+            placeholder={t("Re-enter password", "Ressaisir le mot de passe")}
             value={formData.confirmPassword}
             onChange={handleChange}
             required

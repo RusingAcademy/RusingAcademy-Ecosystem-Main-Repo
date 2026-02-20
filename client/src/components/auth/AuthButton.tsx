@@ -1,6 +1,6 @@
 /**
- * AuthButton — Primary and secondary auth buttons with HAZY palette
- * Phase 1: Auth UI/UX Harmonization
+ * AuthButton — Primary and secondary auth buttons (v7)
+ * Uses ecosystem brand-foundation gradient with gold focus ring
  */
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { Loader2 } from "lucide-react";
@@ -30,9 +30,9 @@ export function AuthButton({
 
   const variants = {
     primary:
-      "text-white shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] focus:ring-[var(--barholex-gold)]/50",
+      "text-white shadow-lg shadow-[var(--brand-foundation)]/30 hover:shadow-xl hover:shadow-[var(--brand-foundation)]/40 hover:scale-[1.01] active:scale-[0.99] focus:ring-[var(--barholex-gold)]/50",
     secondary:
-      "bg-white/[0.06] border border-white/10 text-white hover:bg-white/[0.1] hover:border-white/20 focus:ring-white/20",
+      "bg-white/[0.06] border border-white/10 text-white/80 hover:bg-white/[0.1] hover:border-white/20 hover:text-white active:scale-[0.99] focus:ring-white/20",
     ghost:
       "text-white/60 hover:text-white hover:bg-white/[0.06] focus:ring-white/20",
   };
