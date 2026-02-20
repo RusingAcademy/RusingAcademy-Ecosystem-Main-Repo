@@ -389,7 +389,7 @@ export default function AICompanionPanel() {
             <CardContent>
               <div className="space-y-2">
                 {errors.map((e: any) => (
-                  <div key={e.id} className="p-3 border rounded-lg bg-red-50/50 dark:bg-red-950/20">
+                  <div key={e.id} className="p-3 border rounded-lg bg-red-50/50">
                     <div className="flex items-center gap-2 mb-1">
                       <Badge variant="destructive" className="text-xs">{e.score}%</Badge>
                       <Badge variant="outline" className="text-xs">{e.practiceType}</Badge>

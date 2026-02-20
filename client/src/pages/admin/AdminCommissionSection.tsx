@@ -115,7 +115,7 @@ export default function AdminCommissionSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+              <div className="p-2 bg-blue-100 rounded-lg">
                 <Users className="h-5 w-5 text-blue-600" />
               </div>
               <div>
@@ -128,7 +128,7 @@ export default function AdminCommissionSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+              <div className="p-2 bg-emerald-100 rounded-lg">
                 <DollarSign className="h-5 w-5 text-emerald-600" />
               </div>
               <div>
@@ -141,7 +141,7 @@ export default function AdminCommissionSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
+              <div className="p-2 bg-amber-100 rounded-lg">
                 <Clock className="h-5 w-5 text-amber-600" />
               </div>
               <div>
@@ -154,7 +154,7 @@ export default function AdminCommissionSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+              <div className="p-2 bg-purple-100 rounded-lg">
                 <TrendingUp className="h-5 w-5 text-purple-600" />
               </div>
               <div>

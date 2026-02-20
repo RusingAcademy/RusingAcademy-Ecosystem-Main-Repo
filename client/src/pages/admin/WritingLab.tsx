@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
+import { trpc } from '@/lib/trpc';
 
 const mockStats = { totalSubmissions: 234, avgScore: 74, pendingReviews: 18, activeWriters: 89 };
 const mockPrompts = [
@@ -30,7 +31,7 @@ export default function WritingLab() {
 
   const levelColor = (level: string) => {
     const colors: Record<string, string> = { A1: "bg-green-500/10 text-green-500", A2: "bg-emerald-500/10 text-emerald-500", B1: "bg-blue-500/10 text-blue-500", B2: "bg-indigo-500/10 text-indigo-500", C1: "bg-purple-500/10 text-purple-500" };
-    return colors[level] || "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm0/10 text-gray-500";
+    return colors[level] || "bg-gray-50 text-gray-500";
   };
 
   return (

@@ -129,15 +129,15 @@ const AdminDiscussions = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 min-h-screen">
-      <header className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
+    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+      <header className="flex items-center justify-between pb-6 border-b border-gray-200">
         <div className="flex items-center space-x-4">
-          <div className="p-3 bg-blue-100 rounded-full dark:bg-blue-900/50">
-            <MessageCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+          <div className="p-3 bg-blue-100 rounded-full">
+            <MessageCircle className="w-6 h-6 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-foreground dark:text-foreground">Discussion Boards</h1>
-            <p className="text-sm text-gray-500 dark:text-muted-foreground">
+            <h1 className="text-2xl font-bold text-gray-900">Discussion Boards</h1>
+            <p className="text-sm text-gray-500">
               Manage discussion threads, moderate content, and configure board settings.
             </p>
           </div>
@@ -220,8 +220,8 @@ const AdminDiscussions = () => {
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
@@ -231,13 +231,13 @@ const AdminDiscussions = () => {
                       <th scope="col" className="relative px-6 py-3"><span className="sr-only">Actions</span></th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 divide-y divide-gray-200 dark:bg-white/[0.08] dark:backdrop-blur-md dark:divide-gray-700">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {threads.map((thread) => (
                       <tr key={thread.id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-foreground dark:text-foreground">{thread.title}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-muted-foreground">{thread.category}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-muted-foreground">{thread.author}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-muted-foreground">{thread.replies}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{thread.title}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{thread.category}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{thread.author}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{thread.replies}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
                           <Badge variant={thread.status === 'active' ? 'default' : thread.status === 'locked' ? 'secondary' : 'destructive'}>{thread.status}</Badge>
                         </td>
@@ -265,7 +265,7 @@ const AdminDiscussions = () => {
               {flaggedContent.length > 0 ? (
                 <div className="space-y-4">
                   {flaggedContent.map((item) => (
-                    <div key={item.id} className="p-4 border rounded-lg bg-yellow-50/50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+                    <div key={item.id} className="p-4 border rounded-lg bg-yellow-50/50 border-yellow-200">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="font-semibold">{item.threadTitle}</p>
@@ -283,8 +283,8 @@ const AdminDiscussions = () => {
               ) : (
                 <div className="text-center py-6 md:py-8 lg:py-12">
                   <Flag className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-foreground dark:text-foreground">No flagged content</h3>
-                  <p className="mt-1 text-sm text-gray-500 dark:text-muted-foreground">The moderation queue is currently empty.</p>
+                  <h3 className="mt-2 text-sm font-medium text-gray-900">No flagged content</h3>
+                  <p className="mt-1 text-sm text-gray-500">The moderation queue is currently empty.</p>
                 </div>
               )}
             </CardContent>
@@ -313,7 +313,7 @@ const AdminDiscussions = () => {
               <div className="space-y-2">
                 <h3 className="font-medium">Posting Rules</h3>
                 <textarea
-                  className="w-full p-2 border rounded-md bg-transparent dark:border-white/15"
+                  className="w-full p-2 border rounded-md bg-transparent"
                   rows={4}
                   value={postingRules}
                   onChange={(e) => setPostingRules(e.target.value)}

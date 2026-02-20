@@ -17,7 +17,7 @@ export default function PreviewStudent() {
         <Button variant="ghost" size="icon" onClick={() => navigate("/admin")}><ArrowLeft className="h-4 w-4" /></Button>
         <div><div className="flex items-center gap-2"><h1 className="text-2xl font-bold">Preview as Student</h1><Badge variant="secondary" className="gap-1"><Eye className="h-3 w-3" /> Student View</Badge></div><p className="text-sm text-muted-foreground">See what students see.</p></div>
       </div>
-      <Card className="border-amber-200 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800"><CardContent className="p-4 flex items-center gap-3"><Eye className="h-5 w-5 text-amber-600" /><p className="text-sm text-amber-800 dark:text-amber-200">Viewing as student. No admin controls visible.</p></CardContent></Card>
+      <Card className="border-amber-200 bg-amber-50"><CardContent className="p-4 flex items-center gap-3"><Eye className="h-5 w-5 text-amber-600" /><p className="text-sm text-amber-800">Viewing as student. No admin controls visible.</p></CardContent></Card>
       <h2 className="text-lg font-semibold">Available Courses</h2>
       {isLoading ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{[1,2,3].map(i => <Skeleton key={i} className="h-48" />)}</div> : published.length === 0 ? (
         <Card><CardContent className="p-8 text-center"><BookOpen className="h-10 w-10 text-muted-foreground mx-auto mb-3" /><p>No published courses</p></CardContent></Card>

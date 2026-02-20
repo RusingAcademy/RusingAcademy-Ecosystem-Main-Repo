@@ -193,53 +193,53 @@ export default function ExecutiveSummary() {
           value={kpis?.totalUsers?.value?.toLocaleString() ?? "0"}
           subtitle={`+${kpis?.totalUsers?.newThisPeriod ?? 0} new this period`}
           trend={kpis?.totalUsers?.trend}
-          iconColor="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
+          iconColor="bg-blue-50 text-blue-600"
         />
         <KPICard
           icon={Activity}
           label="Active Users"
           value={kpis?.activeUsers?.value?.toLocaleString() ?? "0"}
           trend={kpis?.activeUsers?.trend}
-          iconColor="bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400"
+          iconColor="bg-emerald-50 text-emerald-600"
         />
         <KPICard
           icon={DollarSign}
           label="Revenue"
           value={`$${((kpis?.totalRevenue?.value ?? 0) / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
           trend={kpis?.totalRevenue?.trend}
-          iconColor="bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+          iconColor="bg-amber-50 text-amber-600"
         />
         <KPICard
           icon={GraduationCap}
           label="Enrollments"
           value={kpis?.enrollments?.value?.toLocaleString() ?? "0"}
           trend={kpis?.enrollments?.trend}
-          iconColor="bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
+          iconColor="bg-purple-50 text-purple-600"
         />
         <KPICard
           icon={BookOpen}
           label="Total Courses"
           value={kpis?.totalCourses?.value ?? 0}
           subtitle={`${kpis?.totalCourses?.published ?? 0} published`}
-          iconColor="bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400"
+          iconColor="bg-indigo-50 text-indigo-600"
         />
         <KPICard
           icon={UserPlus}
           label="Active Coaches"
           value={kpis?.activeCoaches?.value ?? 0}
-          iconColor="bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400"
+          iconColor="bg-teal-50 text-teal-600"
         />
         <KPICard
           icon={Award}
           label="Completion Rate"
           value={`${kpis?.completionRate?.value ?? 0}%`}
-          iconColor="bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400"
+          iconColor="bg-rose-50 text-rose-600"
         />
         <KPICard
           icon={Calendar}
           label="Avg Sessions/User"
           value={kpis?.avgSessionsPerUser?.value ?? 0}
-          iconColor="bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400"
+          iconColor="bg-orange-50 text-orange-600"
         />
       </div>
 

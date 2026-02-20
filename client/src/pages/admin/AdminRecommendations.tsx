@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
+import { trpc } from '@/lib/trpc';
 
 const mockStats = { totalGenerated: 1245, clickThrough: 34, conversionRate: 18, activeUsers: 156 };
 const mockRules = [

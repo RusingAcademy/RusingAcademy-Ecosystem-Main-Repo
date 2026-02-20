@@ -20,7 +20,7 @@ function MetricRing({ value, label, color, loading }: { value: number; label: st
             strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" className="transition-all duration-1000" />
         )}
       </svg>
-      <span className="text-xl font-bold text-gray-900 dark:text-foreground -mt-[65px] mb-8">
+      <span className="text-xl font-bold text-gray-900 -mt-[65px] mb-8">
         {loading ? "—" : `${value}%`}
       </span>
       <span className="text-xs text-gray-500 mt-1">{label}</span>
@@ -58,8 +58,8 @@ export default function CoachPerformance() {
         </div>
 
         {/* Performance Rings */}
-        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-6 mb-6">
-          <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-6">{lang === "fr" ? "Indicateurs clés" : "Key Indicators"}</h2>
+        <div className="bg-white rounded-xl border border-gray-100 p-6 mb-6">
+          <h2 className="text-base font-semibold text-gray-900 mb-6">{lang === "fr" ? "Indicateurs clés" : "Key Indicators"}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             <MetricRing value={satisfactionPct} label={lang === "fr" ? "Satisfaction" : "Satisfaction"} color="var(--semantic-success, var(--semantic-success, var(--success)))" loading={isLoading} />
             <MetricRing value={successRate || satisfactionPct} label={lang === "fr" ? "Taux de réussite" : "Success Rate"} color={ACCENT} loading={isLoading} />
@@ -70,8 +70,8 @@ export default function CoachPerformance() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Key Metrics */}
-          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-4">{lang === "fr" ? "Métriques clés" : "Key Metrics"}</h2>
+          <div className="bg-white rounded-xl border border-gray-100 p-5">
+            <h2 className="text-base font-semibold text-gray-900 mb-4">{lang === "fr" ? "Métriques clés" : "Key Metrics"}</h2>
             <div className="space-y-4">
               {[
                 {
@@ -99,7 +99,7 @@ export default function CoachPerformance() {
                   color: "var(--semantic-success, var(--semantic-success, var(--success)))",
                 },
               ].map(item => (
-                <div key={item.label} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
+                <div key={item.label} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${item.color}15` }}>
                     <span className="material-icons text-xl" style={{ color: item.color }}>{item.icon}</span>
                   </div>
@@ -107,7 +107,7 @@ export default function CoachPerformance() {
                     <p className="text-sm text-gray-700">{item.label}</p>
                   </div>
                   {isLoading ? (
-                    <div className="h-6 w-16 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded animate-pulse" />
+                    <div className="h-6 w-16 bg-gray-100 rounded animate-pulse" />
                   ) : (
                     <span className="text-lg font-bold text-gray-900">{item.value}</span>
                   )}
@@ -117,11 +117,11 @@ export default function CoachPerformance() {
           </div>
 
           {/* Student Overview */}
-          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-4">{lang === "fr" ? "Aperçu des étudiants" : "Student Overview"}</h2>
+          <div className="bg-white rounded-xl border border-gray-100 p-5">
+            <h2 className="text-base font-semibold text-gray-900 mb-4">{lang === "fr" ? "Aperçu des étudiants" : "Student Overview"}</h2>
             {learnersQuery.isLoading ? (
               <div className="space-y-3">
-                {[1, 2, 3, 4].map((i) => <div key={i} className="h-14 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg animate-pulse" />)}
+                {[1, 2, 3, 4].map((i) => <div key={i} className="h-14 bg-gray-50 rounded-lg animate-pulse" />)}
               </div>
             ) : learners.length === 0 ? (
               <div className="text-center py-8">
@@ -135,12 +135,12 @@ export default function CoachPerformance() {
                 {learners.slice(0, 6).map((learner: any, i: number) => {
                   const name = learner.name || learner.learnerName || "—";
                   return (
-                    <div key={learner.id || i} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
+                    <div key={learner.id || i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                       <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, var(--color-purple-600, #9333ea))] flex items-center justify-center text-white font-bold text-xs">
                         {name.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-foreground truncate">{name}</p>
+                        <p className="text-sm font-medium text-gray-900 truncate">{name}</p>
                         <p className="text-[11px] text-gray-500">{learner.level || learner.currentLevel || ""}</p>
                       </div>
                       <span className="text-xs text-gray-500">{learner.sessionsCompleted || 0} {lang === "fr" ? "sessions" : "sessions"}</span>
@@ -153,8 +153,8 @@ export default function CoachPerformance() {
         </div>
 
         {/* Session Summary */}
-        <div className="mt-6 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5">
-          <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-4">{lang === "fr" ? "Résumé des sessions" : "Session Summary"}</h2>
+        <div className="mt-6 bg-white rounded-xl border border-gray-100 p-5">
+          <h2 className="text-base font-semibold text-gray-900 mb-4">{lang === "fr" ? "Résumé des sessions" : "Session Summary"}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
               {
@@ -178,9 +178,9 @@ export default function CoachPerformance() {
                 sub: lang === "fr" ? "Par session" : "Per session",
               },
             ].map(h => (
-              <div key={h.label} className="text-center p-4 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
+              <div key={h.label} className="text-center p-4 bg-gray-50 rounded-lg">
                 {isLoading ? (
-                  <div className="h-8 w-16 mx-auto bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded animate-pulse" />
+                  <div className="h-8 w-16 mx-auto bg-gray-100 rounded animate-pulse" />
                 ) : (
                   <p className="text-2xl font-bold text-gray-900">{h.value}</p>
                 )}

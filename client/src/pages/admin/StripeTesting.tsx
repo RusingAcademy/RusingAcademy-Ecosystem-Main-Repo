@@ -482,7 +482,7 @@ export default function StripeTesting() {
                 <p className="text-sm text-muted-foreground py-8 text-center">Loading events...</p>
               ) : !events || (events as any[]).length === 0 ? (
                 <div className="text-center py-6 md:py-8 lg:py-12">
-                  <Shield className="h-12 w-12 mx-auto text-black/40 dark:text-foreground/40 mb-3" />
+                  <Shield className="h-12 w-12 mx-auto text-black/40 mb-3" />
                   <p className="font-medium">No webhook events yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Make a test payment to see events appear here</p>
                 </div>

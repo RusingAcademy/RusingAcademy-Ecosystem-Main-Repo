@@ -169,7 +169,7 @@ export default function ComponentLab() {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                  <div className="p-2 rounded-lg bg-slate-100">
                     <item.icon className="h-4 w-4 text-slate-600" />
                   </div>
                   <div>
@@ -199,7 +199,7 @@ export default function ComponentLab() {
 
               {/* Live Demo */}
               {activeDemo === item.id && (
-                <div className="mt-4 p-4 rounded-lg bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm border border-slate-200">
+                <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
                   {item.id === "typewriter" && (
                     <div className="space-y-4">
                       <p className="text-xs text-slate-500 mb-2">Live demo with sound (click to hear):</p>
@@ -293,7 +293,7 @@ export default function ComponentLab() {
           <div className="relative z-10">
             {/* We import EcosystemSwitcher but it manages its own UI */}
             <div className="flex items-center justify-center min-h-screen">
-              <Card className="w-full max-w-2xl mx-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-2xl">
+              <Card className="w-full max-w-2xl mx-4 bg-white shadow-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>Ecosystem Navigator</CardTitle>

@@ -6,6 +6,7 @@
  * The standalone AdminCoachApplications page is preserved as a legacy route.
  */
 import { AdminApplicationDashboard } from "@/components/AdminApplicationDashboard";
+import { trpc } from '@/lib/trpc';
 
 export default function AdminCoachAppsSection() {
   return (

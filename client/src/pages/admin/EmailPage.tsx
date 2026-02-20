@@ -70,7 +70,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                  <div className="p-2 rounded-lg bg-blue-100">
                     <Mail className="h-5 w-5 text-blue-600" />
                   </div>
                   <div>
@@ -83,7 +83,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
+                  <div className="p-2 rounded-lg bg-green-100">
                     <CheckCircle className="h-5 w-5 text-green-600" />
                   </div>
                   <div>
@@ -96,7 +96,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-red-100 dark:bg-red-900/30">
+                  <div className="p-2 rounded-lg bg-red-100">
                     <XCircle className="h-5 w-5 text-red-600" />
                   </div>
                   <div>
@@ -109,7 +109,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-amber-100 dark:bg-amber-900/30">
+                  <div className="p-2 rounded-lg bg-amber-100">
                     <AlertTriangle className="h-5 w-5 text-amber-600" />
                   </div>
                   <div>

@@ -31,7 +31,7 @@ export default function InvoicesAdmin() {
     onError: (e) => toast.error(e.message),
   });
 
-  const statusColors: Record<string, string> = { paid: "bg-green-100 text-green-700", sent: "bg-blue-100 text-blue-700", draft: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700", overdue: "bg-red-100 text-red-700", cancelled: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500" };
+  const statusColors: Record<string, string> = { paid: "bg-green-100 text-green-700", sent: "bg-blue-100 text-blue-700", draft: "bg-gray-100 text-gray-700", overdue: "bg-red-100 text-red-700", cancelled: "bg-gray-100 text-gray-500" };
 
   return (
     <div className="space-y-6">

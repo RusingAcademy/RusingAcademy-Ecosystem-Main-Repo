@@ -79,7 +79,7 @@ const AdminDailyReview = () => {
                   ) : (
                     <div className="overflow-x-auto">
                       <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                        <thead className="bg-gray-50">
                           <tr>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rank</th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Learner</th>
@@ -89,14 +89,14 @@ const AdminDailyReview = () => {
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Accuracy</th>
                           </tr>
                         </thead>
-                        <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md divide-y divide-gray-200">
+                        <tbody className="bg-white divide-y divide-gray-200">
                           {(stats.topLearners as any[]).map((l: any, i: number) => (
                             <tr key={l.userId}>
                               <td className="px-4 py-3 text-sm font-bold text-gray-900">
                                 {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `#${i + 1}`}
                               </td>
                               <td className="px-4 py-3 text-sm font-medium text-gray-900">{l.name || `User #${l.userId}`}</td>
-                              <td className="px-4 py-3 text-sm text-gray-700 dark:text-muted-foreground font-semibold">{l.streakDays} days</td>
+                              <td className="px-4 py-3 text-sm text-gray-700 font-semibold">{l.streakDays} days</td>
                               <td className="px-4 py-3 text-sm text-gray-500">{l.totalCards}</td>
                               <td className="px-4 py-3 text-sm text-gray-500">{l.totalCorrect}</td>
                               <td className="px-4 py-3 text-sm">

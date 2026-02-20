@@ -41,9 +41,9 @@ export default function HROrganization() {
       <HRLayout>
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="animate-pulse space-y-6">
-            <div className="h-10 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl w-1/3" />
-            <div className="h-64 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl" />
-            <div className="h-48 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl" />
+            <div className="h-10 bg-gray-100 rounded-xl w-1/3" />
+            <div className="h-64 bg-gray-100 rounded-xl" />
+            <div className="h-48 bg-gray-100 rounded-xl" />
           </div>
         </div>
       </HRLayout>
@@ -71,21 +71,21 @@ export default function HROrganization() {
         {org ? (
           <>
             {/* Department Information */}
-            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4 flex items-center gap-2">
+            <div className="bg-white rounded-xl border border-gray-100 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="material-icons text-blue-600">business</span>
                 {ui.departmentInfo}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-lg bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                <div className="p-4 rounded-lg bg-gray-50">
                   <p className="text-xs text-gray-500 mb-1">{ui.orgName}</p>
                   <p className="text-sm font-semibold text-gray-900">{org.name || "—"}</p>
                 </div>
-                <div className="p-4 rounded-lg bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                <div className="p-4 rounded-lg bg-gray-50">
                   <p className="text-xs text-gray-500 mb-1">{ui.domain}</p>
                   <p className="text-sm font-semibold text-gray-900">{org.domain || "—"}</p>
                 </div>
-                <div className="p-4 rounded-lg bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                <div className="p-4 rounded-lg bg-gray-50">
                   <p className="text-xs text-gray-500 mb-1">{ui.sector}</p>
                   <p className="text-sm font-semibold text-gray-900">{ui.publicService}</p>
                 </div>
@@ -93,8 +93,8 @@ export default function HROrganization() {
             </div>
 
             {/* Contract Details */}
-            <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4 flex items-center gap-2">
+            <div className="bg-white rounded-xl border border-gray-100 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="material-icons text-blue-600">description</span>
                 {ui.contractDetails}
               </h3>
@@ -106,7 +106,7 @@ export default function HROrganization() {
                     <p className="text-sm font-semibold text-green-700">{ui.active}</p>
                   </div>
                 </div>
-                <div className="p-4 rounded-lg bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                <div className="p-4 rounded-lg bg-gray-50">
                   <p className="text-xs text-gray-500 mb-1">{ui.seatsIncluded}</p>
                   <p className="text-sm font-semibold text-gray-900">—</p>
                 </div>
@@ -115,11 +115,11 @@ export default function HROrganization() {
           </>
         ) : (
           /* Empty State */
-          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-12 text-center">
+          <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
             <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
               <span className="material-icons text-lg md:text-2xl lg:text-3xl text-blue-600">business</span>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-2">{ui.noOrg}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">{ui.noOrg}</h3>
             <p className="text-sm text-gray-500 max-w-md mx-auto mb-4">{ui.noOrgSub}</p>
             <a href="mailto:support@rusingacademy.com" className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
               <span className="material-icons text-sm">support_agent</span>

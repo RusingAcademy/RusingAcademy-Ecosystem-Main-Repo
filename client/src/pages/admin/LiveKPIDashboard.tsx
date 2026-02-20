@@ -218,7 +218,7 @@ export default function LiveKPIDashboard() {
                 </div>
               ) : !webhookStats ? (
                 <div className="text-center py-6">
-                  <Webhook className="h-8 w-8 mx-auto text-black/40 dark:text-foreground/40 mb-2" />
+                  <Webhook className="h-8 w-8 mx-auto text-black/40 mb-2" />
                   <p className="text-sm text-muted-foreground">No webhook data available</p>
                   <p className="text-xs text-muted-foreground mt-1">Webhook events will appear after Stripe integration is active</p>
                 </div>
@@ -291,7 +291,7 @@ export default function LiveKPIDashboard() {
                 </div>
               ) : !pipelineHealth ? (
                 <div className="text-center py-6">
-                  <Brain className="h-8 w-8 mx-auto text-black/40 dark:text-foreground/40 mb-2" />
+                  <Brain className="h-8 w-8 mx-auto text-black/40 mb-2" />
                   <p className="text-sm text-muted-foreground">No pipeline data available</p>
                   <p className="text-xs text-muted-foreground mt-1">AI pipeline metrics will appear after sessions are processed</p>
                 </div>
@@ -542,7 +542,7 @@ export default function LiveKPIDashboard() {
               <p className="text-sm text-muted-foreground py-4 text-center">Loading...</p>
             ) : !(revenue as any)?.byProduct || ((revenue as any)?.byProduct as any[]).length === 0 ? (
               <div className="text-center py-8">
-                <DollarSign className="h-10 w-10 mx-auto text-black/40 dark:text-foreground/40 mb-2" />
+                <DollarSign className="h-10 w-10 mx-auto text-black/40 mb-2" />
                 <p className="text-sm text-muted-foreground">No revenue data yet</p>
                 <p className="text-xs text-muted-foreground mt-1">Complete a test payment to see data here</p>
               </div>
@@ -580,7 +580,7 @@ export default function LiveKPIDashboard() {
             <p className="text-sm text-muted-foreground py-4 text-center">Loading...</p>
           ) : !engagement?.recentActivity || (engagement.recentActivity as any[]).length === 0 ? (
             <div className="text-center py-8">
-              <Activity className="h-10 w-10 mx-auto text-black/40 dark:text-foreground/40 mb-2" />
+              <Activity className="h-10 w-10 mx-auto text-black/40 mb-2" />
               <p className="text-sm text-muted-foreground">No recent activity</p>
               <p className="text-xs text-muted-foreground mt-1">User interactions will appear here in real-time</p>
             </div>

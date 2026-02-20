@@ -8,8 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from 'sonner';
 
-// TODO: Replace with tRPC router once available
-// import { trpc } from '@/lib/trpc';
+import { trpc } from '@/lib/trpc';
 
 // Mock Data
 const mockTemplates = [
@@ -46,8 +45,8 @@ const AdminStudyNotes = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 min-h-screen">
-      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-6 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
+    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+      <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-6 border-b border-gray-200">
         <div className="flex items-center space-x-4">
           <div className="p-3 bg-blue-100 rounded-lg">
             <StickyNote className="w-8 h-8 text-blue-600" />

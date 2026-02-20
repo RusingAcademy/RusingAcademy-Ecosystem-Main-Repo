@@ -291,7 +291,7 @@ export default function QuizManagement() {
         </Card>
         <Card>
           <CardContent className="p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
               <CheckCircle2 className="h-5 w-5 text-green-600" />
             </div>
             <div>
@@ -302,7 +302,7 @@ export default function QuizManagement() {
         </Card>
         <Card>
           <CardContent className="p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
               <AlertCircle className="h-5 w-5 text-amber-600" />
             </div>
             <div>
@@ -313,7 +313,7 @@ export default function QuizManagement() {
         </Card>
         <Card>
           <CardContent className="p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
               <BarChart3 className="h-5 w-5 text-blue-600" />
             </div>
             <div>

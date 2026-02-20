@@ -122,7 +122,7 @@ export default function MediaLibrary() {
       ) : items.length === 0 ? (
         <Card>
           <CardContent className="py-8 md:py-12 lg:py-16 text-center">
-            <Image className="h-12 w-12 mx-auto mb-4 text-black/40 dark:text-foreground/40" />
+            <Image className="h-12 w-12 mx-auto mb-4 text-black/40" />
             <h3 className="font-semibold mb-1">No media files yet</h3>
             <p className="text-sm text-muted-foreground mb-4">Upload images, videos, and documents to get started.</p>
             <Button onClick={() => setShowUploadDialog(true)}><Upload className="h-4 w-4 mr-2" /> Upload First File</Button>
@@ -138,7 +138,7 @@ export default function MediaLibrary() {
                 {item.mimeType?.startsWith("image/") ? (
                   <div className="aspect-square bg-muted"><img src={item.url} alt={item.altText || item.fileName} className="w-full h-full object-cover" /></div>
                 ) : (
-                  <div className="aspect-square bg-muted flex items-center justify-center"><Icon className="h-10 w-10 text-black/60 dark:text-foreground/60" /></div>
+                  <div className="aspect-square bg-muted flex items-center justify-center"><Icon className="h-10 w-10 text-black/60" /></div>
                 )}
                 <div className="p-2">
                   <p className="text-xs font-medium truncate">{item.fileName}</p>
