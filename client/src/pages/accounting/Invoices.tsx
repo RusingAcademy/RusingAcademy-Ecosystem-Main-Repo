@@ -11,10 +11,20 @@ import { toast } from "sonner";
 import { TableSkeleton } from "@/components/TableSkeleton";
 import { EmptyState } from "@/components/EmptyState";
 import { StatusBadge } from "@/components/StatusBadge";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PAGE_SIZE = 20;
 
+
+const labels = {
+  en: { title: "Invoices", subtitle: "Create and manage customer invoices", newInvoice: "New Invoice", search: "Search invoices...", all: "All", draft: "Draft", sent: "Sent", paid: "Paid", overdue: "Overdue" },
+  fr: { title: "Factures", subtitle: "Créer et gérer les factures clients", newInvoice: "Nouvelle facture", search: "Rechercher des factures...", all: "Tous", draft: "Brouillon", sent: "Envoyé", paid: "Payé", overdue: "En retard" },
+};
+
 export default function Invoices() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [statusFilter, setStatusFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");

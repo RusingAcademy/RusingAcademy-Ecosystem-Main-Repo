@@ -8,8 +8,18 @@ import { OwnerAuditWidget } from "@/components/owner/OwnerAuditWidget";
 import { OwnerHealthWidget } from "@/components/owner/OwnerHealthWidget";
 import { Crown } from "lucide-react";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Owner Dashboard", subtitle: "System overview and management", systemHealth: "System Health", quickActions: "Quick Actions", recentActivity: "Recent Activity" },
+  fr: { title: "Tableau de bord propriétaire", subtitle: "Aperçu et gestion du système", systemHealth: "Santé du système", quickActions: "Actions rapides", recentActivity: "Activité récente" },
+};
 
 export default function OwnerDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuthContext();
 
   return (

@@ -7,8 +7,18 @@ import { Loader2, FileCheck, DollarSign, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Sales Tax", subtitle: "Manage tax rates and filing", taxRate: "Tax Rate", collected: "Collected", owed: "Owed", file: "File Return" },
+  fr: { title: "Taxe de vente", subtitle: "Gérer les taux de taxe et déclarations", taxRate: "Taux de taxe", collected: "Collecté", owed: "Dû", file: "Produire la déclaration" },
+};
 
 export default function SalesTax() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [showPrepare, setShowPrepare] = useState(false);
   const [showPayDialog, setShowPayDialog] = useState<number | null>(null);
   const [prepareStart, setPrepareStart] = useState(() => {

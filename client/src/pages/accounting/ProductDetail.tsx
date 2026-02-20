@@ -6,8 +6,18 @@ import { useState, useMemo } from "react";
 import { useRoute, useLocation } from "wouter";
 import { ArrowLeft, Loader2, Edit, Save, X } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Product Details", name: "Name", price: "Price", sku: "SKU", category: "Category", inventory: "Inventory", edit: "Edit" },
+  fr: { title: "Détails du produit", name: "Nom", price: "Prix", sku: "UGS", category: "Catégorie", inventory: "Inventaire", edit: "Modifier" },
+};
 
 export default function ProductDetail() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/products-services/:id");
   const [, navigate] = useLocation();
   const productId = params?.id ? Number(params.id) : 0;

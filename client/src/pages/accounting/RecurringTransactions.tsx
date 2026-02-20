@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const typeColors: Record<string, string> = {
   Invoice: "bg-blue-100 text-blue-700",
@@ -16,7 +17,16 @@ const typeColors: Record<string, string> = {
 
 const CURRENCIES = ["CAD", "USD", "EUR", "GBP", "JPY", "AUD", "CHF", "CNY", "MXN"];
 
+
+const labels = {
+  en: { title: "Recurring Transactions", subtitle: "Automate regular payments and invoices", addRecurring: "Add Recurring", frequency: "Frequency", nextDate: "Next Date", amount: "Amount" },
+  fr: { title: "Transactions récurrentes", subtitle: "Automatiser les paiements et factures réguliers", addRecurring: "Ajouter récurrent", frequency: "Fréquence", nextDate: "Prochaine date", amount: "Montant" },
+};
+
 export default function RecurringTransactions() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [showCreate, setShowCreate] = useState(false);

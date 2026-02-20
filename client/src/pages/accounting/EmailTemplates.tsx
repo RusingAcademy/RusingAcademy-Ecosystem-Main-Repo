@@ -6,6 +6,7 @@ import { trpc } from "@/lib/trpc";
 import { useState, useMemo } from "react";
 import { Plus, Edit2, Trash2, Mail, Copy, Eye, X, Save, FileText, Receipt, CreditCard, Clock } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const TEMPLATE_TYPES = [
   { value: "invoice", label: "Invoice", icon: FileText, color: "#0077C5" },
@@ -93,7 +94,16 @@ Thank you,
   },
 };
 
+
+const labels = {
+  en: { title: "Email Templates", subtitle: "Customize invoice and reminder emails", template: "Template", subject: "Subject", edit: "Edit", preview: "Preview" },
+  fr: { title: "Modèles de courriel", subtitle: "Personnaliser les courriels de factures et rappels", template: "Modèle", subject: "Objet", edit: "Modifier", preview: "Aperçu" },
+};
+
 export default function EmailTemplates() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [typeFilter, setTypeFilter] = useState<string>("all");
   const [editingTemplate, setEditingTemplate] = useState<any>(null);
   const [showPreview, setShowPreview] = useState(false);

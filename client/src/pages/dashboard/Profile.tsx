@@ -19,8 +19,18 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ProtectedRoute } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "My Profile", subtitle: "Manage your account settings", personalInfo: "Personal Information", security: "Security", preferences: "Preferences", save: "Save Changes" },
+  fr: { title: "Mon profil", subtitle: "Gérer les paramètres de votre compte", personalInfo: "Informations personnelles", security: "Sécurité", preferences: "Préférences", save: "Enregistrer les modifications" },
+};
 
 export default function Profile() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
     return (
         <ProtectedRoute>
             <ProfileContent />

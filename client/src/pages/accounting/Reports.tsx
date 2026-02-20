@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Search, Star, ChevronDown, ChevronRight, MoreVertical, FileText } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const reportRoutes: Record<string, string> = {
   "Profit and Loss": "/reports/profit-and-loss",
@@ -75,7 +76,16 @@ const reportCategories = [
   },
 ];
 
+
+const labels = {
+  en: { title: "Reports", subtitle: "Financial reports and analytics", profitLoss: "Profit & Loss", balanceSheet: "Balance Sheet", cashFlow: "Cash Flow", generate: "Generate" },
+  fr: { title: "Rapports", subtitle: "Rapports financiers et analyses", profitLoss: "Profits et pertes", balanceSheet: "Bilan", cashFlow: "Flux de trésorerie", generate: "Générer" },
+};
+
 export default function Reports() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [search, setSearch] = useState("");
   const [expandedCategories, setExpandedCategories] = useState<string[]>(

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import FileAttachments from "@/components/FileAttachments";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type ExpenseLine = {
   id?: number;
@@ -19,7 +20,16 @@ type ExpenseLine = {
   taxCode?: string;
 };
 
+
+const labels = {
+  en: { title: "Expense Details", category: "Category", vendor: "Vendor", date: "Date", amount: "Amount", receipt: "Receipt", edit: "Edit" },
+  fr: { title: "Détails de la dépense", category: "Catégorie", vendor: "Fournisseur", date: "Date", amount: "Montant", receipt: "Reçu", edit: "Modifier" },
+};
+
 export default function ExpenseDetail() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/expenses/:id");
   const [, navigate] = useLocation();
   const expenseId = params?.id ? Number(params.id) : 0;

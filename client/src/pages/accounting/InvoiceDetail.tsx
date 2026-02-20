@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import FileAttachments from "@/components/FileAttachments";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type LineItem = {
   id?: number;
@@ -23,7 +24,16 @@ type LineItem = {
   taxAmount?: string;
 };
 
+
+const labels = {
+  en: { title: "Invoice Details", customer: "Customer", date: "Date", dueDate: "Due Date", items: "Items", total: "Total", send: "Send", print: "Print" },
+  fr: { title: "Détails de la facture", customer: "Client", date: "Date", dueDate: "Date d'échéance", items: "Articles", total: "Total", send: "Envoyer", print: "Imprimer" },
+};
+
 export default function InvoiceDetail() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/invoices/:id");
   const [, navigate] = useLocation();
   const invoiceId = params?.id ? Number(params.id) : 0;

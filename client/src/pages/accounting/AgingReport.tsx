@@ -4,8 +4,18 @@ import { ArrowLeft, Download, Printer } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import CsvExportButton from "@/components/CsvExportButton";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Aging Report", subtitle: "Track overdue invoices and payments", current: "Current", overdue30: "1-30 Days", overdue60: "31-60 Days", overdue90: "61-90 Days", overdue90plus: "90+ Days", total: "Total", customer: "Customer" },
+  fr: { title: "Rapport de vieillissement", subtitle: "Suivre les factures et paiements en retard", current: "Courant", overdue30: "1-30 jours", overdue60: "31-60 jours", overdue90: "61-90 jours", overdue90plus: "90+ jours", total: "Total", customer: "Client" },
+};
 
 export default function AgingReport() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [reportType, setReportType] = useState<"receivable" | "payable">("receivable");
   const { data: receivables, isLoading: loadingAR } = trpc.reports.agingReceivable.useQuery();
   const { data: payables, isLoading: loadingAP } = trpc.reports.agingPayable.useQuery();

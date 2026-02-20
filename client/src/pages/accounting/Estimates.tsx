@@ -5,6 +5,7 @@ import { Plus, Search, FileText, ArrowRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const statusColors: Record<string, string> = {
   Draft: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700",
@@ -15,7 +16,16 @@ const statusColors: Record<string, string> = {
   Closed: "bg-gray-200 text-gray-600",
 };
 
+
+const labels = {
+  en: { title: "Estimates", subtitle: "Create and manage project estimates", newEstimate: "New Estimate", customer: "Customer", date: "Date", amount: "Amount", status: "Status" },
+  fr: { title: "Estimations", subtitle: "Créer et gérer les estimations de projets", newEstimate: "Nouvelle estimation", customer: "Client", date: "Date", amount: "Montant", status: "Statut" },
+};
+
 export default function Estimates() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");

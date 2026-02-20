@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import PortalLayout from "@/components/portal/PortalLayout";
 import ProgressTracker from "@/components/portal/ProgressTracker";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Module {
   id: string;
@@ -127,7 +128,16 @@ const moduleTypeIcons = {
   quiz: Target,
 };
 
+
+const labels = {
+  en: { title: "My Learning Path", subtitle: "Track your progress and next steps", progress: "Progress", currentModule: "Current Module", nextUp: "Next Up", completed: "Completed", continue: "Continue" },
+  fr: { title: "Mon parcours d'apprentissage", subtitle: "Suivre vos progrès et prochaines étapes", progress: "Progrès", currentModule: "Module actuel", nextUp: "À suivre", completed: "Terminé", continue: "Continuer" },
+};
+
 export default function MyPath() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useUser();
   const [expandedUnit, setExpandedUnit] = useState<string | null>("unit-2");
 

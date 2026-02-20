@@ -5,8 +5,18 @@
 import { trpc } from "@/lib/trpc";
 import { useRoute, useLocation } from "wouter";
 import { ArrowLeft, Loader2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Account Register", subtitle: "View all transactions for this account", search: "Search transactions...", date: "Date", description: "Description", amount: "Amount", balance: "Balance", noResults: "No transactions found" },
+  fr: { title: "Registre des comptes", subtitle: "Voir toutes les transactions de ce compte", search: "Rechercher des transactions...", date: "Date", description: "Description", amount: "Montant", balance: "Solde", noResults: "Aucune transaction trouvée" },
+};
 
 export default function AccountRegister() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, params] = useRoute("/accounts/:id/register");
   const [, navigate] = useLocation();
   const accountId = params?.id ? Number(params.id) : 0;

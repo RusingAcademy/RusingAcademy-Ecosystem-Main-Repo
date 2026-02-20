@@ -3,10 +3,20 @@ import { useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { FileText, Download, TrendingUp, Award, Calendar, Target } from 'lucide-react';
 import PortalLayout from '../../components/portal/PortalLayout';
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ReportData { learnerName: string; currentLevel: string; targetLevel: string; overallProgress: number; oralProgress: number; writtenProgress: number; grammarProgress: number; testsCompleted: number; averageScore: number; chaptersCompleted: number; studyHours: number; startDate: string; generatedDate: string; }
 
+
+const labels = {
+  en: { title: "Performance Report", subtitle: "Your learning analytics and achievements", overallScore: "Overall Score", strengths: "Strengths", areasToImprove: "Areas to Improve", recommendations: "Recommendations" },
+  fr: { title: "Rapport de performance", subtitle: "Vos analyses d'apprentissage et réalisations", overallScore: "Score global", strengths: "Forces", areasToImprove: "Points à améliorer", recommendations: "Recommandations" },
+};
+
 export default function PerformanceReport() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useUser();
   const [isGenerating, setIsGenerating] = useState(false);
 

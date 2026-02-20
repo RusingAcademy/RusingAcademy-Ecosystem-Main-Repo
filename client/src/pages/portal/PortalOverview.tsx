@@ -23,6 +23,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PortalLayout from "@/components/portal/PortalLayout";
 import ProgressTracker from "@/components/portal/ProgressTracker";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const upcomingSessions = [
   {
@@ -81,7 +82,16 @@ const quickStats = [
   { label: "Série en cours", value: "5 jours", icon: Zap, color: "text-cta600", bg: "bg-amber-50" },
 ];
 
+
+const labels = {
+  en: { title: "Portal Overview", subtitle: "Your learning dashboard", welcomeBack: "Welcome back", continueLearning: "Continue Learning", recentActivity: "Recent Activity", quickActions: "Quick Actions" },
+  fr: { title: "Aperçu du portail", subtitle: "Votre tableau de bord d'apprentissage", welcomeBack: "Bon retour", continueLearning: "Continuer l'apprentissage", recentActivity: "Activité récente", quickActions: "Actions rapides" },
+};
+
 export default function PortalOverview() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useUser();
 
   return (

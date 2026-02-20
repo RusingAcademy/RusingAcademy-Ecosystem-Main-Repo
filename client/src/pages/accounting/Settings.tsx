@@ -7,8 +7,18 @@ import { useLocation } from "wouter";
 import { ArrowLeft, Loader2, Save, Building2, CreditCard, Bell, Shield, Users, Globe, FileSearch, Mail } from "lucide-react";
 import EmailTemplates from "./EmailTemplates";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Accounting Settings", subtitle: "Configure your accounting preferences", company: "Company Info", currency: "Currency", fiscalYear: "Fiscal Year", save: "Save" },
+  fr: { title: "Paramètres comptables", subtitle: "Configurer vos préférences comptables", company: "Info entreprise", currency: "Devise", fiscalYear: "Année fiscale", save: "Enregistrer" },
+};
 
 export default function Settings() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: company, isLoading, refetch } = trpc.company.get.useQuery();
   const updateMutation = trpc.company.update.useMutation({

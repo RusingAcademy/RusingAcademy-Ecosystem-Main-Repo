@@ -11,8 +11,18 @@ import { ArrowLeft, Loader2, Printer, Download, Calendar, BarChart3, Table2 } fr
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
 } from "recharts";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Balance Sheet", subtitle: "Assets, liabilities, and equity overview", assets: "Assets", liabilities: "Liabilities", equity: "Equity", totalAssets: "Total Assets", totalLiabilities: "Total Liabilities" },
+  fr: { title: "Bilan", subtitle: "Aperçu des actifs, passifs et capitaux propres", assets: "Actifs", liabilities: "Passifs", equity: "Capitaux propres", totalAssets: "Total des actifs", totalLiabilities: "Total des passifs" },
+};
 
 export default function BalanceSheetReport() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: company } = trpc.company.get.useQuery();
 

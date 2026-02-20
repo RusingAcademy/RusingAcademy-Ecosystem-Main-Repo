@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function parseCSV(text: string): Array<Record<string, string>> {
   const lines = text.trim().split("\n");
@@ -22,7 +23,16 @@ function parseCSV(text: string): Array<Record<string, string>> {
   });
 }
 
+
+const labels = {
+  en: { title: "Bank Transactions", subtitle: "Import and categorize bank transactions", import: "Import", match: "Match", categorize: "Categorize", status: "Status" },
+  fr: { title: "Transactions bancaires", subtitle: "Importer et catégoriser les transactions bancaires", import: "Importer", match: "Associer", categorize: "Catégoriser", status: "Statut" },
+};
+
 export default function BankTransactions() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [statusFilter, setStatusFilter] = useState("For Review");
   const [showImport, setShowImport] = useState(false);

@@ -8,10 +8,20 @@ import { Plus, MoreVertical, Search, Filter, Users, ChevronLeft, ChevronRight, A
 import { toast } from "sonner";
 import { TableSkeleton } from "@/components/TableSkeleton";
 import { EmptyState } from "@/components/EmptyState";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PAGE_SIZE = 20;
 
+
+const labels = {
+  en: { title: "Customers", subtitle: "Manage your customer database", addCustomer: "Add Customer", search: "Search customers...", name: "Name", email: "Email", balance: "Balance" },
+  fr: { title: "Clients", subtitle: "Gérer votre base de données clients", addCustomer: "Ajouter un client", search: "Rechercher des clients...", name: "Nom", email: "Courriel", balance: "Solde" },
+};
+
 export default function Customers() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);

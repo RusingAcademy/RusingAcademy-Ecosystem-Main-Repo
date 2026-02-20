@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const statusColors: Record<string, string> = {
   Draft: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700",
@@ -16,7 +17,16 @@ const statusColors: Record<string, string> = {
   Voided: "bg-gray-200 text-gray-500",
 };
 
+
+const labels = {
+  en: { title: "Bills", subtitle: "Manage vendor bills and payments", newBill: "New Bill", vendor: "Vendor", dueDate: "Due Date", amount: "Amount", status: "Status" },
+  fr: { title: "Factures fournisseurs", subtitle: "Gérer les factures et paiements fournisseurs", newBill: "Nouvelle facture", vendor: "Fournisseur", dueDate: "Date d'échéance", amount: "Montant", status: "Statut" },
+};
+
 export default function Bills() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [payBill, setPayBill] = useState<any>(null);

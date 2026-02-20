@@ -12,6 +12,7 @@ import {
 import { useLocation } from "wouter";
 import CsvExportButton from "@/components/CsvExportButton";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ACTION_COLORS: Record<string, string> = {
   create: "bg-green-100 text-green-700",
@@ -53,7 +54,16 @@ function parseDetails(details: string | null): Record<string, any> | null {
   try { return JSON.parse(details); } catch { return null; }
 }
 
+
+const labels = {
+  en: { title: "Audit Trail", subtitle: "Complete history of all financial changes", entity: "Entity", change: "Change", before: "Before", after: "After" },
+  fr: { title: "Piste d'audit", subtitle: "Historique complet de tous les changements financiers", entity: "Entité", change: "Changement", before: "Avant", after: "Après" },
+};
+
 export default function AuditTrail() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [entityFilter, setEntityFilter] = useState("");
   const [actionFilter, setActionFilter] = useState("");

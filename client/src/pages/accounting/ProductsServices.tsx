@@ -6,8 +6,18 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Plus, MoreVertical, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Products & Services", subtitle: "Manage your product catalog", addProduct: "Add Product", search: "Search products...", name: "Name", price: "Price", type: "Type" },
+  fr: { title: "Produits et services", subtitle: "Gérer votre catalogue de produits", addProduct: "Ajouter un produit", search: "Rechercher des produits...", name: "Nom", price: "Prix", type: "Type" },
+};
 
 export default function ProductsServices() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [typeFilter, setTypeFilter] = useState("All");
   const { data: products, isLoading } = trpc.products.list.useQuery();

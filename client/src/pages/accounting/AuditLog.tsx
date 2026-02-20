@@ -1,6 +1,7 @@
 import { trpc } from "@/lib/trpc";
 import { ArrowLeft, Shield, Clock } from "lucide-react";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const actionColors: Record<string, string> = {
   create: "bg-green-100 text-green-700",
@@ -10,7 +11,16 @@ const actionColors: Record<string, string> = {
   export: "bg-yellow-100 text-yellow-700",
 };
 
+
+const labels = {
+  en: { title: "Audit Log", subtitle: "Track all system changes and user actions", action: "Action", user: "User", timestamp: "Timestamp", details: "Details", noEntries: "No audit entries found" },
+  fr: { title: "Journal d'audit", subtitle: "Suivre tous les changements système et actions utilisateur", action: "Action", user: "Utilisateur", timestamp: "Horodatage", details: "Détails", noEntries: "Aucune entrée d'audit trouvée" },
+};
+
 export default function AuditLog() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { data: logs, isLoading } = trpc.audit.list.useQuery();
 
   return (

@@ -9,10 +9,20 @@ import { Plus, MoreVertical, Filter, ChevronDown, CreditCard, Search, ChevronLef
 import { toast } from "sonner";
 import { TableSkeleton } from "@/components/TableSkeleton";
 import { EmptyState } from "@/components/EmptyState";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PAGE_SIZE = 20;
 
+
+const labels = {
+  en: { title: "Expenses", subtitle: "Track and manage business expenses", newExpense: "New Expense", search: "Search expenses...", category: "Category", amount: "Amount" },
+  fr: { title: "Dépenses", subtitle: "Suivre et gérer les dépenses d'affaires", newExpense: "Nouvelle dépense", search: "Rechercher des dépenses...", category: "Catégorie", amount: "Montant" },
+};
+
 export default function Expenses() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [typeFilter, setTypeFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");

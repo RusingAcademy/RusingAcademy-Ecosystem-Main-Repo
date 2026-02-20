@@ -3,8 +3,18 @@ import { ArrowLeft, Download, Printer } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import CsvExportButton from "@/components/CsvExportButton";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "Trial Balance", subtitle: "Verify debits equal credits", account: "Account", debit: "Debit", credit: "Credit", total: "Total" },
+  fr: { title: "Balance de vérification", subtitle: "Vérifier que les débits égalent les crédits", account: "Compte", debit: "Débit", credit: "Crédit", total: "Total" },
+};
 
 export default function TrialBalanceReport() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { data: accounts, isLoading } = trpc.reports.trialBalance.useQuery();
 
   const fmt = (v: string | null | undefined) =>

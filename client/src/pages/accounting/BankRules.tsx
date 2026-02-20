@@ -7,10 +7,20 @@ import { useState } from "react";
 import { ArrowLeft, Plus, Trash2, Edit2, Loader2, Zap, ToggleLeft, ToggleRight } from "lucide-react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type Condition = { field: string; operator: string; value: string };
 
+
+const labels = {
+  en: { title: "Bank Rules", subtitle: "Automate transaction categorization", addRule: "Add Rule", condition: "Condition", category: "Category", active: "Active", inactive: "Inactive" },
+  fr: { title: "Règles bancaires", subtitle: "Automatiser la catégorisation des transactions", addRule: "Ajouter une règle", condition: "Condition", category: "Catégorie", active: "Actif", inactive: "Inactif" },
+};
+
 export default function BankRules() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const { data: rules, isLoading, refetch } = trpc.bankRules.list.useQuery();
   const { data: accountsList } = trpc.accounts.list.useQuery();

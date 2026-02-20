@@ -3,8 +3,18 @@ import { ArrowLeft, Download, Printer } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import CsvExportButton from "@/components/CsvExportButton";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+const labels = {
+  en: { title: "General Ledger", subtitle: "Complete record of all financial transactions", account: "Account", debit: "Debit", credit: "Credit", balance: "Balance" },
+  fr: { title: "Grand livre", subtitle: "Registre complet de toutes les transactions financières", account: "Compte", debit: "Débit", credit: "Crédit", balance: "Solde" },
+};
 
 export default function GeneralLedgerReport() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { data: entries, isLoading } = trpc.reports.generalLedger.useQuery();
 
   const fmt = (v: string | null | undefined) =>
