@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+    <title>RusingAcademy | Bilingual Excellence for Canadian Public Servants</title>
+    <meta name="description" content="Professional bilingual training ecosystem for Canadian public servants. SLE exam prep, expert coaching, and structured learning paths to achieve your language goals." />
+    <meta name="keywords" content="SLE exam, bilingual training, FSL, ESL, Canadian public service, language learning, RusingAcademy, French second language, English second language" />
+    <meta name="author" content="RusingAcademy — Rusinga International Consulting Ltd." />
+    <meta name="robots" content="index, follow" />
+
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0D7377" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="RusingAcademy" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="RusingAcademy" />
+    <meta name="msapplication-TileColor" content="#0D7377" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="RusingAcademy | Bilingual Excellence" />
+    <meta property="og:description" content="Professional bilingual training ecosystem for Canadian public servants. SLE exam prep, expert coaching, and structured learning paths." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jPPkhyWPubYEuCAp.png" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:locale:alternate" content="fr_CA" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RusingAcademy | Bilingual Excellence" />
+    <meta name="twitter:description" content="Professional bilingual training for Canadian public servants. SLE preparation, AI coaching, gamified learning." />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script defer src="%VITE_ANALYTICS_ENDPOINT%/umami" data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <script>
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('[PWA] Service Worker registered:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('[PWA] Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1771024206953,
+      "tag": "0000_outstanding_shooting_star",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771024405834,
+      "tag": "0001_wise_sir_ram",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1771034902710,
+      "tag": "0002_tricky_the_fallen",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1771036166672,
+      "tag": "0003_bumpy_goblin_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1771036264430,
+      "tag": "0004_tiresome_sway",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1771040081161,
+      "tag": "0005_wakeful_tyrannus",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1771041610479,
+      "tag": "0006_last_ben_parker",
+      "breakpoints": true
+    }
+  ]
+}

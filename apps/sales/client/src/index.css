@@ -1,0 +1,417 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --color-qb-green: oklch(0.55 0.18 145);
+  --color-qb-green-hover: oklch(0.48 0.18 145);
+  --color-qb-orange: oklch(0.72 0.16 70);
+  --color-qb-red: oklch(0.55 0.22 25);
+  --color-qb-blue: oklch(0.55 0.18 250);
+  --color-qb-teal: oklch(0.55 0.12 195);
+  --color-qb-gray-bg: oklch(0.97 0.002 250);
+  --color-qb-sidebar-bg: oklch(1 0 0);
+}
+
+:root {
+  --primary: oklch(0.55 0.18 145);
+  --primary-foreground: oklch(1 0 0);
+  --sidebar-primary: oklch(0.55 0.18 145);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --chart-1: oklch(0.55 0.18 145);
+  --chart-2: oklch(0.55 0.18 250);
+  --chart-3: oklch(0.72 0.16 70);
+  --chart-4: oklch(0.55 0.22 25);
+  --chart-5: oklch(0.55 0.12 195);
+  --radius: 0.375rem;
+  --background: oklch(0.97 0.002 250);
+  --foreground: oklch(0.25 0.01 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.01 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.01 250);
+  --secondary: oklch(0.96 0.002 250);
+  --secondary-foreground: oklch(0.35 0.01 250);
+  --muted: oklch(0.96 0.002 250);
+  --muted-foreground: oklch(0.55 0.01 250);
+  --accent: oklch(0.96 0.002 250);
+  --accent-foreground: oklch(0.2 0.01 250);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.90 0.004 250);
+  --input: oklch(0.90 0.004 250);
+  --ring: oklch(0.55 0.18 145);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.35 0.01 250);
+  --sidebar-accent: oklch(0.96 0.002 250);
+  --sidebar-accent-foreground: oklch(0.2 0.01 250);
+  --sidebar-border: oklch(0.92 0.004 250);
+  --sidebar-ring: oklch(0.55 0.18 145);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* QuickBooks-specific utility classes */
+  .qb-money-bar {
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .qb-card {
+    background: white;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .qb-table th {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    padding: 8px 12px;
+    border-bottom: 2px solid #e5e7eb;
+    text-align: left;
+  }
+
+  .qb-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 13px;
+  }
+
+  .qb-table tr:hover {
+    background-color: #f9fafb;
+  }
+
+  .qb-btn-green {
+    background-color: #2CA01C;
+    color: white;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background-color 0.15s;
+  }
+
+  .qb-btn-green:hover {
+    background-color: #238a15;
+  }
+
+  .qb-btn-outline {
+    border: 1px solid #8d9096;
+    color: #393a3d;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    background: white;
+    transition: all 0.15s;
+  }
+
+  .qb-btn-outline:hover {
+    background-color: #f4f5f8;
+    border-color: #393a3d;
+  }
+}
+
+/* ===== Sprint 20: Responsive Design ===== */
+@media (max-width: 768px) {
+  /* Hide sidebar on mobile */
+  [data-sidebar-rail] {
+    display: none;
+  }
+
+  /* Full-width main content on mobile */
+  .flex.h-screen > .flex-1 {
+    width: 100%;
+  }
+
+  /* Stack dashboard cards vertically */
+  .grid.grid-cols-1.lg\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Responsive tables */
+  .qb-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Compact header on mobile */
+  header.h-\[56px\] {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  /* Responsive search bar */
+  header .max-w-xl {
+    max-width: 100%;
+  }
+
+  /* Compact page padding */
+  .p-6 {
+    padding: 1rem;
+  }
+
+  /* Create modal responsive */
+  .w-\[640px\] {
+    width: calc(100vw - 2rem);
+    margin: 0 1rem;
+  }
+
+  /* Search modal responsive */
+  .w-\[600px\] {
+    width: calc(100vw - 2rem);
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra compact for small phones */
+  header .shrink-0:last-child button:not(:first-child):not(:nth-child(2)) {
+    display: none;
+  }
+
+  .qb-card {
+    padding: 12px;
+  }
+
+  .qb-table th,
+  .qb-table td {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+}
+
+/* ===== Sprint 20: Print Styles ===== */
+@media print {
+  /* Hide navigation and non-essential UI */
+  [data-sidebar-rail],
+  header,
+  footer,
+  .qb-btn-green,
+  .qb-btn-outline,
+  button,
+  nav {
+    display: none !important;
+  }
+
+  /* Full width for content */
+  body {
+    font-size: 12px;
+    color: #000;
+    background: #fff;
+  }
+
+  main {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  .flex.h-screen {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+
+  .flex-1.flex.flex-col.overflow-hidden {
+    overflow: visible !important;
+  }
+
+  /* Clean table printing */
+  .qb-card {
+    border: 1px solid #ddd;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+
+  .qb-table th {
+    background-color: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Report pages */
+  .bg-white.rounded-lg.border {
+    border: 1px solid #ddd;
+    box-shadow: none;
+  }
+
+  /* Page breaks */
+  h2, h3 {
+    page-break-after: avoid;
+  }
+
+  table {
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+}
+
+/* ===== Sprint 20: Accessibility ===== */
+/* Focus visible styles */
+*:focus-visible {
+  outline: 2px solid #2CA01C;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: #2CA01C;
+  color: white;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  transition: top 0.2s;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Sprint 20: Smooth Transitions ===== */
+/* Page transition */
+main > * {
+  animation: fadeIn 0.15s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-pulse > div {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
