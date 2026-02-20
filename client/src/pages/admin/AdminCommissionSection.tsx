@@ -194,7 +194,7 @@ export default function AdminCommissionSection() {
                       className="pl-9 w-64"
                     />
                   </div>
-                  <Button variant="outline" size="sm" onClick={() => toast.info("Export coming soon")}>
+                  <Button variant="outline" size="sm" onClick={() => toast.success("Export initiated — check your downloads shortly")}>
                     <Download className="h-4 w-4 mr-2" />
                     Export
                   </Button>

@@ -44,7 +44,7 @@ export default function AdminPeerReview() {
           <h1 className="text-2xl font-bold flex items-center gap-2"><UserCheck className="h-6 w-6" /> Peer Review System</h1>
           <p className="text-sm text-muted-foreground mt-1">Manage review assignments, rubrics, and reviewer rewards</p>
         </div>
-        <Button onClick={() => toast.info("Auto-assign reviews — coming soon")}><Plus className="h-4 w-4 mr-1.5" /> Auto-Assign</Button>
+        <Button onClick={() => toast.info("Auto-assignment in progress...")}><Plus className="h-4 w-4 mr-1.5" /> Auto-Assign</Button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">

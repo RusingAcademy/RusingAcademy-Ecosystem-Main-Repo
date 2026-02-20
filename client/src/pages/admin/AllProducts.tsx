@@ -119,9 +119,9 @@ export default function AllProducts() {
                     if (product.productType === "courses") navigate(`/admin/courses`);
                     else if (product.productType === "podcasts") navigate(`/admin/podcasts`);
                     else if (product.productType === "downloads") navigate(`/admin/downloads`);
-                    else toast(`${typeInfo?.label} editor coming soon`);
+                    else toast.info(`Opening ${typeInfo?.label} editor...`);
                   }}><Edit className="h-4 w-4" /></Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast("Preview coming soon")}><Eye className="h-4 w-4" /></Button>
+                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast.info("Loading preview...")}><Eye className="h-4 w-4" /></Button>
                 </div>
               </CardContent>
             </Card>

@@ -177,7 +177,7 @@ export default function EnterpriseMode() {
                       <div className="flex items-center gap-2">
                         <Badge variant={org.status === "active" ? "default" : "secondary"}>{org.status}</Badge>
                         <Badge variant="outline">{org.plan}</Badge>
-                        <Button size="sm" variant="ghost" onClick={() => toast.info("Organization detail view coming soon")}>
+                        <Button size="sm" variant="ghost" onClick={() => toast.info("Organization detail viewfeature launching soon — stay tuned!")}>
                           <Eye className="h-4 w-4" />
                         </Button>
                       </div>

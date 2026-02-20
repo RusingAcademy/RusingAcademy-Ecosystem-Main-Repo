@@ -56,7 +56,7 @@ export default function ListeningLab() {
           <h1 className="text-2xl font-bold flex items-center gap-2"><Headphones className="h-6 w-6" /> Listening Comprehension Lab</h1>
           <p className="text-sm text-muted-foreground mt-1">Manage audio passages, comprehension questions, and listening analytics</p>
         </div>
-        <Button onClick={() => toast.info("Create audio exercise — coming soon")}><Plus className="h-4 w-4 mr-1.5" /> Add Audio</Button>
+        <Button onClick={() => toast.info("Create audio exercise —feature launching soon — stay tuned!")}><Plus className="h-4 w-4 mr-1.5" /> Add Audio</Button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">

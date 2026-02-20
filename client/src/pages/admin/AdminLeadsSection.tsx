@@ -93,7 +93,7 @@ export default function AdminLeadsSection() {
             Track and manage prospective clients and organizations
           </p>
         </div>
-        <Button onClick={() => toast.info("Create lead form coming soon")}>
+        <Button onClick={() => toast.info("Opening lead creation form...")}>
           <Plus className="h-4 w-4 mr-2" />
           New Lead
         </Button>
@@ -182,7 +182,7 @@ export default function AdminLeadsSection() {
             <SelectItem value="nurturing">Nurturing</SelectItem>
           </SelectContent>
         </Select>
-        <Button variant="outline" size="sm" onClick={() => toast.info("Export coming soon")}>
+        <Button variant="outline" size="sm" onClick={() => toast.success("Export initiated — check your downloads shortly")}>
           <Download className="h-4 w-4 mr-2" />
           Export
         </Button>

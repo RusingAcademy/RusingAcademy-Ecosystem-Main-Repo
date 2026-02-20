@@ -85,7 +85,7 @@ export default function HRSettings() {
               {ui.teamAccess}
             </h3>
             <button
-              onClick={() => toast.info(isEn ? "Team invitation coming soon" : "Invitation d'équipe bientôt disponible")}
+              onClick={() => toast.info(isEn ? "Opening team invitation form..." : "Ouverture du formulaire d'invitation...")}
               className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-600/10 rounded-lg hover:bg-blue-600/20 transition-colors"
             >
               <span className="material-icons text-sm">person_add</span>

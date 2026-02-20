@@ -59,7 +59,7 @@ export default function ReadingLab() {
           </h1>
           <p className="text-sm text-muted-foreground mt-1">Manage reading passages, comprehension questions, and learner analytics</p>
         </div>
-        <Button onClick={() => { setShowCreate(true); toast.info("Create passage form — coming soon"); }}>
+        <Button onClick={() => { setShowCreate(true); toast.info("Create passage form —feature launching soon — stay tuned!"); }}>
           <Plus className="h-4 w-4 mr-1.5" /> Add Passage
         </Button>
       </div>

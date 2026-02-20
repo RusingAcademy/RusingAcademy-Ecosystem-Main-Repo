@@ -308,7 +308,7 @@ export default function InvoiceDetail() {
                   <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => handleStatusChange("Deposited")}>
                     <Download size={14} className="text-green-600" /> Mark as Deposited
                   </button>
-                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => toast("Feature coming soon")}>
+                  <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => toast.info("Feature — launching soon!")}>
                     <Copy size={14} /> Duplicate
                   </button>
                   <button aria-label="Action" className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center gap-2" onClick={() => {

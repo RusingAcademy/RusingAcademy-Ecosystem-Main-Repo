@@ -134,7 +134,7 @@ export default function Expenses() {
           <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/expenses/new")}>
             <Plus size={16} /> Record expense
           </button>
-          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast.info("Feature — launching soon!")}>
             Upload receipt
           </button>
         </div>
@@ -200,13 +200,13 @@ export default function Expenses() {
       {/* Search + Filter Bar */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast.info("Feature — launching soon!")}>
             Date <ChevronDown size={14} />
           </button>
-          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast.info("Feature — launching soon!")}>
             Payee <ChevronDown size={14} />
           </button>
-          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast.info("Feature — launching soon!")}>
             <Filter size={14} /> More filters
           </button>
         </div>

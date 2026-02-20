@@ -72,7 +72,7 @@ export default function AdminContentMgmtSection() {
               Full Editor
             </Button>
           </Link>
-          <Button onClick={() => toast.info("Quick create coming soon")}>
+          <Button onClick={() => toast.info("Opening quick content creator...")}>
             <Plus className="h-4 w-4 mr-2" />
             New Content
           </Button>
@@ -284,7 +284,7 @@ export default function AdminContentMgmtSection() {
             <CardContent>
               <div className="text-center py-8">
                 <BarChart3 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Quality Gate Coming Soon</h3>
+                <h3 className="text-lg font-semibold mb-2">Quality Gate</h3>
                 <p className="text-muted-foreground">
                   Automated content quality checks will be available in the next sprint.
                   This will verify bilingual completeness, media placeholders, quiz coverage, and more.

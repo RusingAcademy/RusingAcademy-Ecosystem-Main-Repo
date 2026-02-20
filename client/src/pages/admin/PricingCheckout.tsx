@@ -21,7 +21,7 @@ export default function PricingCheckout() {
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div><h1 className="text-2xl font-bold">Pricing & Checkout</h1><p className="text-sm text-muted-foreground">Manage pricing plans, checkout flows, and payment links.</p></div>
-        <Button size="sm" className="gap-1.5" onClick={() => toast("Create offer coming soon")}><Plus className="h-4 w-4" /> New Offer</Button>
+        <Button size="sm" className="gap-1.5" onClick={() => toast.info("Create offer — launching soon!")}><Plus className="h-4 w-4" /> New Offer</Button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -50,7 +50,7 @@ export default function PricingCheckout() {
                   <td className="p-3 text-right">
                     <DropdownMenu><DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="h-8 w-8"><MoreHorizontal className="h-4 w-4" /></Button></DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => toast("Edit pricing coming soon")}><Edit className="h-4 w-4 mr-2" /> Edit Price</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => toast.info("Edit pricing — launching soon!")}><Edit className="h-4 w-4 mr-2" /> Edit Price</DropdownMenuItem>
                         <DropdownMenuItem onClick={() => toast("Checkout link copied!")}><ExternalLink className="h-4 w-4 mr-2" /> Copy Checkout Link</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

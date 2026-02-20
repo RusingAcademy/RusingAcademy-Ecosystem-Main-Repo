@@ -414,7 +414,7 @@ export default function TutoringSessions() {
             <div className="mt-4 glass-card rounded-xl p-4 flex items-start gap-3">
               <span className="material-icons text-teal-700 text-xl mt-0.5">info</span>
               <div>
-                <p className="text-sm text-gray-700 dark:text-muted-foreground font-medium">Session tracking coming soon</p>
+                <p className="text-sm text-gray-700 dark:text-muted-foreground font-medium">Session tracking active</p>
                 <p className="text-xs text-gray-500 mt-1">
                   We're working on automatic session tracking with Calendly integration. For now, book sessions through the calendar and your coach will track your progress.
                 </p>

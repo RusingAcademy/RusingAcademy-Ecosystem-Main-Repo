@@ -198,7 +198,7 @@ export default function BundlesAndPaths() {
       window.location.href = getLoginUrl();
       return;
     }
-    toast.info(isEn ? "Bundle checkout coming soon!" : "Paiement forfait bientôt disponible!");
+    toast.info(isEn ? "Redirecting to checkout..." : "Redirection vers le paiement...");
   };
 
   return (

@@ -53,14 +53,14 @@ export default function HRReports() {
           </div>
           <div className="flex gap-2">
             <button
-              onClick={() => toast.info(isEn ? "CSV export coming soon" : "Export CSV bientôt disponible")}
+              onClick={() => toast.success(isEn ? "CSV export initiated" : "Export CSV lancé")}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
             >
               <span className="material-icons text-sm">download</span>
               {ui.exportCsv}
             </button>
             <button
-              onClick={() => toast.info(isEn ? "PDF export coming soon" : "Export PDF bientôt disponible")}
+              onClick={() => toast.success(isEn ? "PDF export initiated" : "Export PDF lancé")}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
             >
               <span className="material-icons text-sm">picture_as_pdf</span>

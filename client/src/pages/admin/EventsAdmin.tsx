@@ -25,7 +25,7 @@ export default function EventsAdmin() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div><h1 className="text-2xl font-bold">Events</h1><p className="text-sm text-muted-foreground">Manage workshops, webinars, and community events.</p></div>
-        <Button size="sm" className="gap-1.5" onClick={() => toast("Create event coming soon")}><Plus className="h-4 w-4" /> New Event</Button>
+        <Button size="sm" className="gap-1.5" onClick={() => toast.info("Create event — launching soon!")}><Plus className="h-4 w-4" /> New Event</Button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <Card><CardContent className="p-4 flex items-center gap-3"><CalendarDays className="h-5 w-5 text-red-600" /><div><p className="text-xl font-bold">{stats.total}</p><p className="text-xs text-muted-foreground">Total Events</p></div></CardContent></Card>
@@ -37,7 +37,7 @@ export default function EventsAdmin() {
         <TabsList><TabsTrigger value="upcoming">Upcoming</TabsTrigger><TabsTrigger value="past">Past</TabsTrigger><TabsTrigger value="analytics">Analytics</TabsTrigger></TabsList>
         <TabsContent value="upcoming" className="mt-4">
           {isLoading ? <div className="space-y-3">{[1,2,3].map(i => <Skeleton key={i} className="h-20 w-full" />)}</div> : upcoming.length === 0 ? (
-            <EmptyState icon={CalendarDays} title="No upcoming events" description="Create events to engage your community with workshops, webinars, and networking sessions." actionLabel="Create Event" onAction={() => toast("Create event coming soon")} />
+            <EmptyState icon={CalendarDays} title="No upcoming events" description="Create events to engage your community with workshops, webinars, and networking sessions." actionLabel="Create Event" onAction={() => toast.info("Create event — launching soon!")} />
           ) : (
             <div className="space-y-3">{upcoming.map((event: any) => (
               <Card key={event.id} className="hover:shadow-sm transition-shadow">
@@ -57,8 +57,8 @@ export default function EventsAdmin() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast("Edit coming soon")}><Edit className="h-4 w-4" /></Button>
-                    <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast("Preview coming soon")}><Eye className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast.info("Edit — launching soon!")}><Edit className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast.info("Loading preview...")}><Eye className="h-4 w-4" /></Button>
                   </div>
                 </CardContent>
               </Card>

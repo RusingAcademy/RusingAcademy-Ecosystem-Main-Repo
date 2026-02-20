@@ -33,7 +33,7 @@ export default function ProductsServices() {
           <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/products-services/new")}>
             <Plus size={16} /> New
           </button>
-          <button className="qb-btn-outline" onClick={() => toast("Feature coming soon")}>
+          <button className="qb-btn-outline" onClick={() => toast.info("Feature — launching soon!")}>
             More actions
           </button>
         </div>
@@ -70,7 +70,7 @@ export default function ProductsServices() {
                   {prod.price ? `$${Number(prod.price).toFixed(2)}` : "—"}
                 </td>
                 <td>
-                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded" onClick={() => toast("Feature coming soon")}>
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded" onClick={() => toast.info("Feature — launching soon!")}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>

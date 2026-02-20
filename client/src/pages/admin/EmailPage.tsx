@@ -32,9 +32,9 @@ export default function EmailPage() {
 
   const quickActions = [
     { title: "Email Templates", desc: "Create and manage reusable email templates", icon: FileText, action: () => navigate("/admin/email-templates") },
-    { title: "Broadcast", desc: "Send one-time emails to all users or segments", icon: Send, action: () => toast("Broadcast feature coming soon") },
-    { title: "Sequences", desc: "Set up automated email drip campaigns", icon: Mail, action: () => toast("Sequences feature coming soon") },
-    { title: "Subscribers", desc: "View and manage your email subscriber list", icon: Users, action: () => toast("Subscribers feature coming soon") },
+    { title: "Broadcast", desc: "Send one-time emails to all users or segments", icon: Send, action: () => toast.info("Broadcast feature — launching soon!") },
+    { title: "Sequences", desc: "Set up automated email drip campaigns", icon: Mail, action: () => toast.info("Sequences feature — launching soon!") },
+    { title: "Subscribers", desc: "View and manage your email subscriber list", icon: Users, action: () => toast.info("Subscribers feature — launching soon!") },
     { title: "Settings", desc: "Configure sender name, reply-to, and SMTP", icon: Settings, action: () => navigate("/admin/email-settings") },
   ];
 

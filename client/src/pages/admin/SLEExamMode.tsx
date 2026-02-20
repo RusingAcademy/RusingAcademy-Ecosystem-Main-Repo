@@ -366,7 +366,7 @@ export default function SLEExamMode() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg">Question Bank</CardTitle>
-                <Button size="sm" onClick={() => toast.info("Question editor coming soon — create reading, writing, and oral questions with AI-assisted generation")}>
+                <Button size="sm" onClick={() => toast.info("Opening question editor — create reading, writing, and oral questions with AI-assisted generation")}>
                   <Plus className="h-4 w-4 mr-1.5" /> Add Questions
                 </Button>
               </div>

@@ -64,7 +64,7 @@ export default function DesignAdmin() {
                   <div className="h-32 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 mb-3 flex items-center justify-center"><Palette className="h-8 w-8 text-white/50" /></div>
                   <div className="flex items-center justify-between">
                     <div><p className="font-medium text-sm">{theme.name}</p><p className="text-xs text-muted-foreground">{theme.desc}</p></div>
-                    {theme.active ? <Badge>Active</Badge> : <Button variant="outline" size="sm" onClick={() => toast("Theme switching coming soon")}>Apply</Button>}
+                    {theme.active ? <Badge>Active</Badge> : <Button variant="outline" size="sm" onClick={() => toast.info("Theme switching — launching soon!")}>Apply</Button>}
                   </div>
                 </CardContent>
               </Card>
@@ -99,7 +99,7 @@ export default function DesignAdmin() {
             <h3 className="font-medium">Layout Settings</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[{ name: "Full Width", icon: Monitor, active: true },{ name: "Boxed", icon: Layout, active: false },{ name: "Sidebar", icon: Layers, active: false }].map(l => (
-                <button key={l.name} className={`p-4 border rounded-lg text-center transition-colors ${l.active ? "ring-2 ring-primary" : "hover:bg-accent"}`} onClick={() => toast("Layout switching coming soon")}>
+                <button key={l.name} className={`p-4 border rounded-lg text-center transition-colors ${l.active ? "ring-2 ring-primary" : "hover:bg-accent"}`} onClick={() => toast.info("Layout switching — launching soon!")}>
                   <l.icon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" /><p className="text-sm font-medium">{l.name}</p>
                 </button>
               ))}

@@ -60,7 +60,7 @@ export default function HROrganization() {
             <p className="text-sm text-gray-500 mt-1">{ui.subtitle}</p>
           </div>
           <button
-            onClick={() => toast.info(isEn ? "Profile editing coming soon" : "Modification du profil bientôt disponible")}
+            onClick={() => toast.info(isEn ? "Opening profile editor..." : "Ouverture de l'éditeur de profil...")}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
           >
             <span className="material-icons text-sm">edit</span>

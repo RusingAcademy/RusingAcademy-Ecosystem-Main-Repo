@@ -168,7 +168,7 @@ export default function Invoices() {
           <button aria-label="Action" className="qb-btn-green flex items-center gap-1" onClick={() => navigate("/invoices/new")}>
             Create invoice
           </button>
-          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+          <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast.info("Feature — launching soon!")}>
             <Send size={14} /> Send reminders
           </button>
         </div>

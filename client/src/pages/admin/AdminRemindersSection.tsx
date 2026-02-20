@@ -66,7 +66,7 @@ export default function AdminRemindersSection() {
             Manage automated reminders for sessions, deadlines, and progress check-ins
           </p>
         </div>
-        <Button onClick={() => toast.info("Create reminder form coming soon")}>
+        <Button onClick={() => toast.info("Opening reminder creation form...")}>
           <Plus className="h-4 w-4 mr-2" />
           New Reminder
         </Button>

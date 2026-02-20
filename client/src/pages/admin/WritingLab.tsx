@@ -48,7 +48,7 @@ export default function WritingLab() {
           <h1 className="text-2xl font-bold flex items-center gap-2"><ScrollText className="h-6 w-6" /> Writing Lab & AI Feedback</h1>
           <p className="text-sm text-muted-foreground mt-1">Manage writing prompts, review submissions, and configure AI feedback</p>
         </div>
-        <Button onClick={() => toast.info("Create writing prompt — coming soon")}><Plus className="h-4 w-4 mr-1.5" /> Add Prompt</Button>
+        <Button onClick={() => toast.info("Create writing prompt —feature launching soon — stay tuned!")}><Plus className="h-4 w-4 mr-1.5" /> Add Prompt</Button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">

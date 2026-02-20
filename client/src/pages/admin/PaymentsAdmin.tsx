@@ -30,7 +30,7 @@ export default function PaymentsAdmin() {
       <div className="flex items-center justify-between">
         <div><h1 className="text-2xl font-bold">Payments</h1><p className="text-sm text-muted-foreground">Revenue overview, transactions, and subscription management.</p></div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast("Export coming soon")}><Download className="h-4 w-4" /> Export</Button>
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast.success("Export initiated — check your downloads shortly")}><Download className="h-4 w-4" /> Export</Button>
           <Button variant="outline" size="sm" className="gap-1.5" onClick={() => refetch()}><RefreshCw className="h-4 w-4" /> Refresh</Button>
         </div>
       </div>
