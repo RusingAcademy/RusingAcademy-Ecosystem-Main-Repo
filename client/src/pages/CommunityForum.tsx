@@ -110,7 +110,7 @@ export default function CommunityForum() {
               })}
             </div>
             <button
-              onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+              onClick={() => toast.success(lang === "fr" ? "Fonctionnalité en cours de développement. Merci de votre patience!" : "Feature under active development. Thank you for your patience!")}
               className="px-4 py-2 rounded-xl text-xs font-semibold text-white flex items-center gap-1.5 transition-all hover:opacity-90"
               style={{ background: "linear-gradient(135deg, #3C5759, #4A6B6D)", boxShadow: "0 2px 8px rgba(60, 87, 89, 0.3)" }}
               aria-label={lang === "fr" ? "Nouvelle publication" : "New post"}
@@ -242,7 +242,7 @@ export default function CommunityForum() {
                   <p className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{lang === "fr" ? "Prochaine séance" : "Next session"}</p>
                   <p className="text-xs font-medium" style={{ color: "var(--foreground)" }}>{group.nextSession}</p>
                   <button
-                    onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+                    onClick={() => toast.success(lang === "fr" ? "Fonctionnalité en cours de développement. Merci de votre patience!" : "Feature under active development. Thank you for your patience!")}
                     className="mt-1 px-3 py-1 rounded-lg text-[10px] font-semibold transition-all hover:opacity-80"
                     style={{ color: "#3C5759", border: "1px solid rgba(60, 87, 89, 0.2)" }}
                   >
@@ -252,7 +252,7 @@ export default function CommunityForum() {
               </motion.div>
             ))}
             <button
-              onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+              onClick={() => toast.success(lang === "fr" ? "Fonctionnalité en cours de développement. Merci de votre patience!" : "Feature under active development. Thank you for your patience!")}
               className="w-full py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-all hover:opacity-80"
               style={{ border: "2px dashed rgba(60, 87, 89, 0.15)", color: "var(--muted-foreground)" }}
             >

@@ -29,6 +29,8 @@ import {
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
 // ─── Types ───────────────────────────────────────────────────────────
 type ExamPhase = "setup" | "part1" | "part2" | "part3" | "part4" | "feedback";
 type ExamLevel = "B" | "C";
@@ -377,6 +379,7 @@ function CriteriaRadar({ criteria, l }: { criteria: PhaseResult["criteria"]; l: 
 // MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════
 export default function SLEExamSimulation() {
+  const { language } = useLanguage();
   const { user } = useAuth();
   const [phase, setPhase] = useState<ExamPhase>("setup");
   const [config, setConfig] = useState<ExamConfig>({ level: "B", coach: "STEVEN", language: "fr" });
@@ -402,7 +405,7 @@ export default function SLEExamSimulation() {
 
   const examPhases: ExamPhase[] = ["part1", "part2", "part3", "part4"];
   const currentPhaseConfig = PHASE_CONFIG[phase as keyof typeof PHASE_CONFIG];
-  const l = labels[config.language];
+  const l = labels[config.language] || labels.en;
   const coach = coachData[config.coach];
 
   // tRPC mutations

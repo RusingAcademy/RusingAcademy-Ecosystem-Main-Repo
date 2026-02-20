@@ -6,6 +6,13 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { useState, useRef, useCallback } from "react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Pronunciation Lab", description: "Manage and configure pronunciation lab" },
+  fr: { title: "Laboratoire de prononciation", description: "Gérer et configurer laboratoire de prononciation" },
+};
+
 const EXERCISES_BY_LEVEL = {
   A1: [
     { phrase: "Bonjour, comment allez-vous?", translation: "Hello, how are you?", ipa: "/bɔ̃.ʒuʁ kɔ.mɑ̃ ta.le vu/" },
@@ -37,6 +44,9 @@ const EXERCISES_BY_LEVEL = {
 };
 
 export default function PronunciationLab() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [level, setLevel] = useState<keyof typeof EXERCISES_BY_LEVEL>("A2");
   const [currentIndex, setCurrentIndex] = useState(0);

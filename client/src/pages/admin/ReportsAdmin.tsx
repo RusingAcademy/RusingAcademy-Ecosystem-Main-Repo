@@ -8,7 +8,17 @@ import { toast } from "sonner";
 import { Download, BarChart3, TrendingUp, Users, DollarSign, BookOpen, Calendar, FileText, Printer, Activity } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Reports Admin", description: "Manage and configure reports admin" },
+  fr: { title: "Reports Admin", description: "Gérer et configurer reports admin" },
+};
+
 export default function ReportsAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [period, setPeriod] = useState("30d");
 
   const { data: revenue } = trpc.kajabiReports.getRevenueReport.useQuery();

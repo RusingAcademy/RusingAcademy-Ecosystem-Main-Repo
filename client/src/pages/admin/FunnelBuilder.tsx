@@ -16,6 +16,13 @@ import {
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Funnel Builder", description: "Manage and configure funnel builder" },
+  fr: { title: "Constructeur d'entonnoirs", description: "Gérer et configurer constructeur d'entonnoirs" },
+};
+
 // ─── Funnel Stage Types ───
 type StageType = "opt_in" | "offer" | "checkout" | "upsell" | "confirmation" | "onboarding";
 
@@ -124,6 +131,9 @@ function StageCard({ stage, index, total, onEdit, onDelete }: {
 
 // ─── Main Funnel Builder ───
 export default function FunnelBuilder() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const utils = trpc.useUtils();
 
   // Backend data

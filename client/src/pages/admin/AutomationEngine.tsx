@@ -7,6 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Zap, Plus, Trash2, Play, Pause, Activity } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Automation Engine", description: "Manage and configure automation engine" },
+  fr: { title: "Automation Engine", description: "Gérer et configurer automation engine" },
+};
+
 const TRIGGER_LABELS: Record<string, string> = {
   user_signup: "User Signup", course_enrolled: "Course Enrolled", course_completed: "Course Completed",
   lesson_completed: "Lesson Completed", session_booked: "Session Booked", session_completed: "Session Completed",
@@ -20,6 +27,9 @@ const ACTION_LABELS: Record<string, string> = {
 };
 
 export default function AutomationEngine() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [triggerType, setTriggerType] = useState("user_signup");

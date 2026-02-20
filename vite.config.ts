@@ -205,6 +205,8 @@ export default defineConfig({
           'vendor-dnd': ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
           // Date utilities
           'vendor-date': ['date-fns'],
+          // PDF generation — loaded on demand when user downloads reports
+          'vendor-pdf': ['jspdf', 'jspdf-autotable'],
         },
       },
     },

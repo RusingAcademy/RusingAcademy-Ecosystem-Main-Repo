@@ -8,6 +8,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Trophy, Medal, Star, Zap, Target, Users, TrendingUp, RefreshCw, Award } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Gamification", description: "Manage and configure admin gamification" },
+  fr: { title: "Admin Gamification", description: "Gérer et configurer admin gamification" },
+};
+
 // Badge tier colors
 const TIER_COLORS: Record<string, string> = {
   bronze: "bg-amber-700 text-white",
@@ -29,6 +36,9 @@ const CATEGORY_ICONS: Record<string, any> = {
 };
 
 export default function AdminGamification() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
 
   // Fetch gamification stats

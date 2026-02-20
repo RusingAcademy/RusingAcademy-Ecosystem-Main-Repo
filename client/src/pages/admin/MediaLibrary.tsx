@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Media Library", description: "Manage and configure media library" },
+  fr: { title: "Media Library", description: "Gérer et configurer media library" },
+};
+
 import { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +16,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
+
   Image, Upload, Search, FolderOpen, Trash2, Edit2, Copy,
   Loader2, Grid, List, FileImage, FileVideo, FileAudio, File,
   Plus, X, Tag, Link2, Eye
@@ -17,6 +25,9 @@ import {
 type ViewMode = "grid" | "list";
 
 export default function MediaLibrary() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFolder, setSelectedFolder] = useState<string>("");

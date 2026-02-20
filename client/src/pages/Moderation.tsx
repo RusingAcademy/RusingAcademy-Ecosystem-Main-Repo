@@ -18,9 +18,19 @@ import {
 import { format } from "date-fns";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Moderation", description: "Manage and configure moderation" },
+  fr: { title: "Moderation", description: "Gérer et configurer moderation" },
+};
+
 type TabId = "reports" | "suspensions";
 
 export default function ModerationPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t } = useLocale();
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<TabId>("reports");

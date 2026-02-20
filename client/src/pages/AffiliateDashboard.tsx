@@ -9,7 +9,17 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Users, DollarSign, TrendingUp, Copy, Gift, Award, ArrowRight } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Affiliate Dashboard", description: "Manage and configure affiliate dashboard" },
+  fr: { title: "Affiliate Dashboard", description: "Gérer et configurer affiliate dashboard" },
+};
+
 export default function AffiliateDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, isAuthenticated } = useAuth();
   const [payoutAmount, setPayoutAmount] = useState("");
 

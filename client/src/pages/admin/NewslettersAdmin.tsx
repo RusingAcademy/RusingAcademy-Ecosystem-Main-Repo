@@ -13,7 +13,17 @@ import { toast } from "sonner";
 import { Newspaper, Plus, Send, Users, BarChart3, Mail, Eye, Edit } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Newsletters Admin", description: "Manage and configure newsletters admin" },
+  fr: { title: "Newsletters Admin", description: "Gérer et configurer newsletters admin" },
+};
+
 export default function NewslettersAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");

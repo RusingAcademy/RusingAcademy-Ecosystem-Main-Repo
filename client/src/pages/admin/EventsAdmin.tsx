@@ -9,7 +9,17 @@ import { toast } from "sonner";
 import { CalendarDays, Plus, Users, Clock, Video, Edit, Eye, BarChart3 } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Events Admin", description: "Manage and configure events admin" },
+  fr: { title: "Events Admin", description: "Gérer et configurer events admin" },
+};
+
 export default function EventsAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("upcoming");
 
   const { data: eventsData, isLoading } = trpc.kajabiEventsAdmin.list.useQuery({});

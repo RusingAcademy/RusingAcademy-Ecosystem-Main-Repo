@@ -96,7 +96,7 @@ export default function Organizations() {
             <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mt-4">
               {language === "fr"
                 ? "Intégration SSO à venir"
-                : "SSO integration coming soon"}
+                : "SSO integration under development"}
             </p>
           </div>
         </section>

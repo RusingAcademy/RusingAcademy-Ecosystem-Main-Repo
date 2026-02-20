@@ -8,7 +8,17 @@ import { Library, BookOpen, Brain, Sparkles, Plus, Search, RefreshCw, Users } fr
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Vocabulary", description: "Manage and configure admin vocabulary" },
+  fr: { title: "Admin Vocabulary", description: "Gérer et configurer admin vocabulary" },
+};
+
 export default function AdminVocabulary() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
   const [levelFilter, setLevelFilter] = useState<string>("");
 

@@ -7,7 +7,17 @@ import { ArrowLeft, Loader2, DollarSign, TrendingUp, Users, BarChart3, Activity,
 import { useLocation } from "wouter";
 import { useState, useMemo } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Revenue Dashboard", description: "Manage and configure revenue dashboard" },
+  fr: { title: "Revenue Dashboard", description: "Gérer et configurer revenue dashboard" },
+};
+
 export default function RevenueDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t } = useLocale();
   const { user } = useAuth();
   const [, navigate] = useLocation();

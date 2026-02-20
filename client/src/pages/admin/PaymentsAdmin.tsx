@@ -10,7 +10,17 @@ import { toast } from "sonner";
 import { DollarSign, CreditCard, TrendingUp, ArrowUpRight, RefreshCw, Search, Download, Users, Receipt } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Payments Admin", description: "Manage and configure payments admin" },
+  fr: { title: "Payments Admin", description: "Gérer et configurer payments admin" },
+};
+
 export default function PaymentsAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const [search, setSearch] = useState("");
 

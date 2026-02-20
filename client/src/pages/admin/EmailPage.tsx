@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Email Page", description: "Manage and configure email page" },
+  fr: { title: "Email Page", description: "Gérer et configurer email page" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,12 +17,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import {
+
   Mail, Send, FileText, Users, Settings,
   CheckCircle, XCircle, AlertTriangle, RefreshCw,
   BarChart3, Clock,
 } from "lucide-react";
 
 export default function EmailPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
   const [typeFilter, setTypeFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");

@@ -12,7 +12,17 @@ import { toast } from "sonner";
 import { Headphones, Plus, Edit, Trash2, Clock, BarChart3, Mic } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Podcasts Admin", description: "Manage and configure podcasts admin" },
+  fr: { title: "Podcasts Admin", description: "Gérer et configurer podcasts admin" },
+};
+
 export default function PodcastsAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

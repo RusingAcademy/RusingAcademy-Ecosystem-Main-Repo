@@ -4,8 +4,16 @@
  */
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
+
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Tutoring Sessions", description: "Manage and configure tutoring sessions" },
+  fr: { title: "Séances de tutorat", description: "Gérer et configurer séances de tutorat" },
+};
 
 /* ─── Booking Types ─── */
 const bookingTypes = [
@@ -148,8 +156,14 @@ function CalendlyEmbed({ url, onClose }: { url: string; onClose: () => void }) {
 
 /* ─── Main Component ─── */
 export default function TutoringSessions() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<"book" | "coaches" | "history">("book");
+
+  // Fetch real session history from the server
+  const { data: sessionHistory } = trpc.booking.getMyBookings?.useQuery?.() ?? { data: undefined };
   const [selectedBooking, setSelectedBooking] = useState<string | null>(null);
   const [showCalendly, setShowCalendly] = useState(false);
   const [calendlyUrl, setCalendlyUrl] = useState("");
@@ -391,6 +405,24 @@ export default function TutoringSessions() {
                   </tr>
                 </thead>
                 <tbody>
+                  {sessionHistory && sessionHistory.length > 0 ? (
+                    sessionHistory.map((session: any, idx: number) => (
+                      <tr key={idx} className="border-t border-gray-100 hover:bg-gray-50/50 transition-colors">
+                        <td className="px-4 py-3 text-sm text-gray-700">{new Date(session.date || session.createdAt).toLocaleDateString()}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600">{session.time || new Date(session.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600">{session.duration || '60'} min</td>
+                        <td className="px-4 py-3 text-sm text-gray-700 font-medium">{session.coachName || 'Coach'}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600">{session.type || 'Coaching'}</td>
+                        <td className="px-4 py-3">
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                            session.status === 'completed' ? 'bg-green-100 text-green-700' :
+                            session.status === 'cancelled' ? 'bg-red-100 text-red-700' :
+                            'bg-amber-100 text-amber-700'
+                          }`}>{session.status || 'scheduled'}</span>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
                   <tr>
                     <td colSpan={6} className="px-4 py-8 md:py-12 lg:py-16 text-center">
                       <span className="material-icons text-[48px] text-gray-300 mb-3 block">event_busy</span>
@@ -406,6 +438,7 @@ export default function TutoringSessions() {
                       </button>
                     </td>
                   </tr>
+                  )}
                 </tbody>
               </table>
             </div>

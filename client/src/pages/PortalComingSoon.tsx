@@ -4,6 +4,13 @@
  */
 import { useLocation } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Portal Coming Soon", description: "Manage and configure portal coming soon" },
+  fr: { title: "Portal Coming Soon", description: "Gérer et configurer portal coming soon" },
+};
+
 const LOGO_ICON = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mrXRaWLUDJGHdcjc.png";
 
 interface PortalConfig {
@@ -80,6 +87,9 @@ const portalConfigs: Record<string, PortalConfig> = {
 };
 
 export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, setLocation] = useLocation();
   const config = portalConfigs[portalKey] || portalConfigs.coach;
 

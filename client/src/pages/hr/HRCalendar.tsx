@@ -12,6 +12,12 @@ export default function HRCalendar() {
   const isEn = language === "en";
   const [viewMode, setViewMode] = useState<"month" | "week" | "list">("month");
 
+  // Fetch cohort data for calendar events
+  const { data: cohorts } = trpc.hr.getCohorts.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
   const ui = {
     title: isEn ? "Training Calendar" : "Calendrier de formation",
     subtitle: isEn ? "View upcoming sessions, milestones, and exam dates" : "Consultez les sessions à venir, les jalons et les dates d'examen",

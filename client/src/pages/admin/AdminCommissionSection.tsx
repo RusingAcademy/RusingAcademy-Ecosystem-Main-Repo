@@ -7,6 +7,13 @@
  * - Payout management (approve/mark paid)
  * - Earnings analytics
  */
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Commission Management", description: "Manage and configure commission management" },
+  fr: { title: "Gestion des commissions", description: "Gérer et configurer gestion des commissions" },
+};
+
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -21,6 +28,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import {
+
   DollarSign,
   Users,
   TrendingUp,
@@ -43,6 +51,9 @@ function formatBps(bps: number): string {
 }
 
 export default function AdminCommissionSection() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
   const [payoutFilter, setPayoutFilter] = useState<string>("all");

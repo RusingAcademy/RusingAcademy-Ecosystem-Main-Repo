@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Course Player", description: "Manage and configure course player" },
+  fr: { title: "Course Player", description: "Gérer et configurer course player" },
+};
+
 import { useState, useMemo, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLocale } from "@/i18n/LocaleContext";
@@ -7,6 +14,7 @@ import { toast } from "sonner";
 import { useRoute, Link } from "wouter";
 import { Streamdown } from "streamdown";
 import {
+
   BookOpen,
   Clock,
   ChevronLeft,
@@ -34,6 +42,9 @@ const CONTENT_ICONS: Record<string, React.ReactNode> = {
 };
 
 export default function CoursePlayer() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t, locale } = useLocale();
   const { user, isAuthenticated } = useAuth();
   const [, params] = useRoute("/courses/:id");

@@ -12,7 +12,17 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Pricing Checkout", description: "Manage and configure pricing checkout" },
+  fr: { title: "Pricing Checkout", description: "Gérer et configurer pricing checkout" },
+};
+
 export default function PricingCheckout() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const { data: courses, isLoading } = trpc.admin.getAllCourses.useQuery();
   const allCourses = (Array.isArray(courses) ? courses : ((courses as any)?.courses ?? [])) as any[];

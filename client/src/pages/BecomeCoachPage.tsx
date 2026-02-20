@@ -8,6 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, Users, Calendar, DollarSign, Award, ArrowRight } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Become Coach Page", description: "Manage and configure become coach page" },
+  fr: { title: "Become Coach Page", description: "Gérer et configurer become coach page" },
+};
+
 const benefits = [
   { icon: DollarSign, title: "Revenus Flexibles", description: "Fixez vos tarifs et recevez des paiements directs via Stripe" },
   { icon: Calendar, title: "Horaires Libres", description: "Gérez votre disponibilité avec notre calendrier intégré" },
@@ -24,6 +31,9 @@ const requirements = [
 ];
 
 export default function BecomeCoachPage() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}

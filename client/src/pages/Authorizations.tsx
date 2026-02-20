@@ -7,6 +7,13 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { useState } from "react";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Authorizations", description: "Manage and configure authorizations" },
+  fr: { title: "Authorizations", description: "Gérer et configurer authorizations" },
+};
+
 const tabs = ["Modules", "Pre-Authorized Hours", "Extra Information"];
 
 const moduleAuths = [
@@ -20,6 +27,9 @@ const moduleAuths = [
 ];
 
 export default function Authorizations() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState(0);
 
   return (

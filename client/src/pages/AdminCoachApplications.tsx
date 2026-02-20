@@ -3,7 +3,17 @@ import { useAuth } from "../_core/hooks/useAuth";
 // Footer removed — excluded route uses dedicated layout
 import { AdminApplicationDashboard } from "@/components/AdminApplicationDashboard";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Coach Applications", description: "Manage and configure admin coach applications" },
+  fr: { title: "Admin Coach Applications", description: "Gérer et configurer admin coach applications" },
+};
+
 export default function AdminCoachApplications() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
 
   // Auth Guard: show loading spinner while checking authentication

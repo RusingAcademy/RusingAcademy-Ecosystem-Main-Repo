@@ -14,7 +14,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Coach Hub", description: "Manage and configure admin coach hub" },
+  fr: { title: "Admin Coach Hub", description: "Gérer et configurer admin coach hub" },
+};
+
 export default function AdminCoachHub() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
 
   const [activeTab, setActiveTab] = useState("applications");

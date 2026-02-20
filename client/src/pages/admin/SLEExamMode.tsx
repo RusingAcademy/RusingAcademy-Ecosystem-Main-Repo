@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "SLE Exam Mode", description: "Manage and configure sle exam mode" },
+  fr: { title: "Mode examen ELS", description: "Gérer et configurer mode examen els" },
+};
+
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import {
+
   GraduationCap, Clock, Target, BarChart3, Users,
   Play, Settings, FileText, Award, TrendingUp,
   AlertTriangle, CheckCircle, Brain, BookOpen,
@@ -17,6 +25,9 @@ import {
 } from "lucide-react";
 
 export default function SLEExamMode() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const [showCreateExam, setShowCreateExam] = useState(false);
 

@@ -1,9 +1,17 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "AI Predictive Analytics", description: "Manage and configure ai predictive analytics" },
+  fr: { title: "Analytique prédictive IA", description: "Gérer et configurer analytique prédictive ia" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
+
   Brain, TrendingUp, AlertTriangle, Users, Target,
   ChevronRight, ArrowUp, ArrowDown, Minus, Shield,
   Lightbulb, BarChart3, Clock, Star, RefreshCw
@@ -17,6 +25,9 @@ const riskColors: Record<string, { text: string; bg: string; border: string }> =
 };
 
 export default function AIPredictive() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
   const [sortBy, setSortBy] = useState<"risk" | "progress" | "name">("risk");
 

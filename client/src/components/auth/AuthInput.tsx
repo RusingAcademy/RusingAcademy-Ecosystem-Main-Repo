@@ -20,21 +20,21 @@ export const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-white/50 text-[10px] font-semibold tracking-wider uppercase"
+            className="block text-white/70 text-[11px] font-semibold tracking-wider uppercase"
           >
             {label}
           </label>
         )}
         <div className="relative">
           {icon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/55 pointer-events-none">
               {icon}
             </div>
           )}
           <input
             ref={ref}
             id={inputId}
-            className={`w-full ${icon ? "pl-10" : "pl-4"} ${rightElement ? "pr-10" : "pr-4"} py-2.5 rounded-lg bg-white/[0.06] border ${error ? "border-red-500/50" : "border-white/10"} text-white text-sm placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/40 focus:border-[var(--barholex-gold)]/50 focus:bg-white/[0.08] transition-all disabled:opacity-50 ${className}`}
+            className={`w-full ${icon ? "pl-10" : "pl-4"} ${rightElement ? "pr-10" : "pr-4"} py-2.5 rounded-lg bg-white/[0.06] border ${error ? "border-red-500/50" : "border-white/10"} text-white text-sm placeholder:text-white/45 focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/40 focus:border-[var(--barholex-gold)]/50 focus:bg-white/[0.08] transition-all disabled:opacity-50 ${className}`}
             {...props}
           />
           {rightElement && (

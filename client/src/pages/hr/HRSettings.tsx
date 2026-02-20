@@ -11,6 +11,22 @@ export default function HRSettings() {
   const { language } = useLanguage();
   const isEn = language === "en";
 
+  // Fetch organization settings
+  const { data: org } = trpc.hr.getOrganization.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
+  // Update organization mutation
+  const updateOrgMutation = trpc.hr.updateOrganization.useMutation({
+    onSuccess: () => {
+      toast.success(isEn ? "Settings saved successfully" : "Paramètres sauvegardés avec succès");
+    },
+    onError: () => {
+      toast.error(isEn ? "Failed to save settings" : "Échec de la sauvegarde des paramètres");
+    },
+  });
+
   const ui = {
     title: isEn ? "Settings" : "Paramètres",
     subtitle: isEn ? "Manage your portal preferences and team access" : "Gérez vos préférences de portail et l'accès de l'équipe",
@@ -28,7 +44,7 @@ export default function HRSettings() {
     lmsSub: isEn ? "Connect your organization's Learning Management System" : "Connecter le système de gestion de l'apprentissage de votre organisation",
     sso: isEn ? "Single Sign-On (SSO)" : "Authentification unique (SSO)",
     ssoSub: isEn ? "Enable SSO for seamless authentication" : "Activer l'authentification unique pour une connexion transparente",
-    comingSoon: isEn ? "Coming soon" : "Bientôt disponible",
+    comingSoon: isEn ? "Under development" : "En développement",
     save: isEn ? "Save Changes" : "Enregistrer les modifications",
     dataExport: isEn ? "Data Export" : "Exportation de données",
     dataExportSub: isEn ? "Export all your organization's training data" : "Exporter toutes les données de formation de votre organisation",

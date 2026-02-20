@@ -37,6 +37,13 @@ import SessionSummaryCard from "@/components/SessionSummaryCard";
 import { PermissionGate } from "@/components/PermissionGate";
 import OptimizedImage from "@/components/OptimizedImage";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Component Lab", description: "Manage and configure component lab" },
+  fr: { title: "Laboratoire de composants", description: "Gérer et configurer laboratoire de composants" },
+};
+
 // Mock data for SessionSummaryCard
 const mockSessionSummary = {
   sessionId: 42,
@@ -127,6 +134,9 @@ const labItems = [
 ];
 
 export default function ComponentLab() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeDemo, setActiveDemo] = useState<string | null>(null);
   const [showEcosystemSwitcher, setShowEcosystemSwitcher] = useState(false);
 

@@ -10,6 +10,13 @@ import { useLocation, useSearch } from "wouter";
 import { getLoginUrl } from "@/const";
 import { useEffect } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Membership", description: "Manage and configure membership" },
+  fr: { title: "Membership", description: "Gérer et configurer membership" },
+};
+
 const TIER_ICONS: Record<string, typeof Crown> = {
   free: Star,
   pro: Zap,
@@ -23,6 +30,9 @@ const TIER_COLORS: Record<string, string> = {
 };
 
 export default function Membership() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();
   const search = useSearch();

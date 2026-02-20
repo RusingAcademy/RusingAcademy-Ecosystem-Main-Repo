@@ -3,7 +3,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLocation } from "wouter";
 import { Megaphone, Mail, Workflow, Zap, Target, ArrowRight, Calendar } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Marketing Overview", description: "Manage and configure marketing overview" },
+  fr: { title: "Marketing Overview", description: "Gérer et configurer marketing overview" },
+};
+
 export default function MarketingOverview() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [, navigate] = useLocation();
 
   const { data: overview } = trpc.kajabiMarketingOverview.getOverview.useQuery();

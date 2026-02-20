@@ -42,6 +42,13 @@ import RichTextEditor from "@/components/RichTextEditor";
 import { BunnyVideoManager } from "@/components/BunnyVideoManager";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Course Builder", description: "Manage and configure course builder" },
+  fr: { title: "Constructeur de cours", description: "Gérer et configurer constructeur de cours" },
+};
+
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTS & HELPERS
 // ═══════════════════════════════════════════════════════════════
@@ -1250,6 +1257,9 @@ function PublishGateDialog({ courseId, open, onOpenChange, onPublished }: {
 // ═══════════════════════════════════════════════════════════════
 
 export default function CourseBuilder() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [langFilter, setLangFilter] = useState<"all" | "french" | "english">("all");

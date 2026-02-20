@@ -21,6 +21,13 @@ import { DictationExercise } from "@/components/DictationExercise";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Dictation Practice", description: "Manage and configure dictation practice" },
+  fr: { title: "Dictation Practice", description: "Gérer et configurer dictation practice" },
+};
+
 type SLELevel = "A" | "B" | "C";
 
 interface DictationResult {
@@ -33,6 +40,9 @@ interface DictationResult {
 }
 
 export default function DictationPractice() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [selectedLevel, setSelectedLevel] = useState<SLELevel | null>(null);
   const [exerciseComplete, setExerciseComplete] = useState(false);
   const [exerciseResults, setExerciseResults] = useState<DictationResult[]>([]);

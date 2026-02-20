@@ -10,7 +10,17 @@ import { toast } from "sonner";
 import { Handshake, Users, DollarSign, TrendingUp, Link2, Plus, Search, Copy, Eye } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Affiliates Admin", description: "Manage and configure affiliates admin" },
+  fr: { title: "Affiliates Admin", description: "Gérer et configurer affiliates admin" },
+};
+
 export default function AffiliatesAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("partners");
   const [search, setSearch] = useState("");
 

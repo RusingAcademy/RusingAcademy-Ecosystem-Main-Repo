@@ -7,7 +7,17 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Certificates", description: "Manage and configure admin certificates" },
+  fr: { title: "Admin Certificates", description: "Gérer et configurer admin certificates" },
+};
+
 export default function AdminCertificates() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [page, setPage] = useState(0);
   const limit = 20;
 

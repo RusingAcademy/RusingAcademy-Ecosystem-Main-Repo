@@ -12,7 +12,17 @@ import { EmptyState } from "@/components/EmptyState";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Coaches Management", description: "Manage and configure coaches management" },
+  fr: { title: "Gestion des coachs", description: "Gérer et configurer gestion des coachs" },
+};
+
 export default function CoachesManagement() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { data: applications, isLoading, refetch } = trpc.admin.getCoachApplications.useQuery();
   const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
 

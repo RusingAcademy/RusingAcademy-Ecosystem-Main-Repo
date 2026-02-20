@@ -3,10 +3,18 @@
  * Design: Tabs for Final Quiz Results / Summary of Results (Chart) / Proficiency Levels (Table)
  * Bar chart + data table
  */
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Results", description: "Manage and configure results" },
+  fr: { title: "Results", description: "Gérer et configurer results" },
+};
+
 import DashboardLayout from "@/components/DashboardLayout";
 import { useState } from "react";
 import { Link } from "wouter";
 import {
+
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 
@@ -41,6 +49,9 @@ const proficiencyLevels = [
 ];
 
 export default function Results() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState(0);
 
   return (

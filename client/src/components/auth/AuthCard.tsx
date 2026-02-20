@@ -29,8 +29,8 @@ export function AuthCard({
       <div
         className="relative rounded-2xl p-7 backdrop-blur-xl"
         style={{
-          background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
-          border: "1px solid rgba(255,255,255,0.12)",
+          background: "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.05) 100%)",
+          border: "1px solid rgba(255,255,255,0.15)",
           boxShadow: "0 8px 32px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.05) inset",
         }}
       >
@@ -47,7 +47,7 @@ export function AuthCard({
                 {title}
               </h2>
               {subtitle && (
-                <p className="text-white/60 text-sm leading-relaxed">
+                <p className="text-white/75 text-sm leading-relaxed">
                   {subtitle}
                 </p>
               )}

@@ -11,6 +11,13 @@
  * - Bilingual support (EN | FR)
  * - Media library integration
  */
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Visual Editor", description: "Manage and configure visual editor" },
+  fr: { title: "Éditeur visuel", description: "Gérer et configurer éditeur visuel" },
+};
+
 import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { trpc } from "@/lib/trpc";
@@ -45,6 +52,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
+
   ArrowLeft, Monitor, Tablet, Smartphone, Eye, EyeOff, Save, Upload,
   Plus, Trash2, Copy, GripVertical, ChevronDown, ChevronUp, Settings,
   Layout, Type, Image, Video, Star, MessageSquare, List, CreditCard,

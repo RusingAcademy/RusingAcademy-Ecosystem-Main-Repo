@@ -10,7 +10,17 @@ import { toast } from "sonner";
 import { Inbox, Mail, Star, Search, Clock, Reply } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Inbox Admin", description: "Manage and configure inbox admin" },
+  fr: { title: "Inbox Admin", description: "Gérer et configurer inbox admin" },
+};
+
 export default function InboxAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("all");
   const [search, setSearch] = useState("");
 

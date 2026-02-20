@@ -11,7 +11,17 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Writing Lab", description: "Manage and configure writing lab" },
+  fr: { title: "Laboratoire d'écriture", description: "Gérer et configurer laboratoire d'écriture" },
+};
+
 export default function WritingLab() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
 

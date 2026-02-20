@@ -31,6 +31,13 @@ import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 import { motion } from "framer-motion";
 import { AuthLayout, AuthCard, AuthInput, AuthButton, OAuthButtons, AuthDivider } from "@/components/auth";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Login", description: "Manage and configure login" },
+  fr: { title: "Login", description: "Gérer et configurer login" },
+};
+
 /* ─── Debug Mode ─── */
 const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 
@@ -38,11 +45,11 @@ const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
    LoginContent — Main Auth Component
    ═══════════════════════════════════════════════════════ */
 function LoginContent() {
+  const { language } = useLanguage();
   const searchString = useSearch();
   const { refresh } = useAuthContext();
 
   /* ─── State ─── */
-  const [language, setLanguage] = useState<"en" | "fr">("en");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -171,7 +178,7 @@ function LoginContent() {
      RENDER
      ═══════════════════════════════════════════════════════ */
   return (
-    <AuthLayout language={language} onLanguageChange={setLanguage}>
+    <AuthLayout language={language}>
       <AuthCard
         title={t("Welcome Back", "Bon retour")}
         subtitle={t("Sign in to continue your learning journey", "Connectez-vous pour continuer votre parcours")}
@@ -222,7 +229,7 @@ function LoginContent() {
             <div className="flex items-center justify-between mb-1.5">
               <label
                 htmlFor="login-password"
-                className="block text-white/50 text-[10px] font-semibold tracking-wider uppercase"
+                className="block text-white/70 text-[11px] font-semibold tracking-wider uppercase"
               >
                 {t("Password", "Mot de passe")}
               </label>
@@ -266,7 +273,7 @@ function LoginContent() {
               onChange={(e) => setRememberMe(e.target.checked)}
               className="w-3.5 h-3.5 rounded border-white/20 bg-white/[0.06] text-[var(--barholex-gold)] focus:ring-[var(--barholex-gold)]/40 focus:ring-offset-0"
             />
-            <label htmlFor="remember-me" className="text-white/40 text-[10px] cursor-pointer select-none">
+            <label htmlFor="remember-me" className="text-white/60 text-[11px] cursor-pointer select-none">
               {t("Remember me", "Se souvenir de moi")}
             </label>
           </div>
@@ -300,7 +307,7 @@ function LoginContent() {
         />
 
         {/* Sign Up Link */}
-        <p className="text-center text-white/40 text-xs mt-4">
+        <p className="text-center text-white/60 text-xs mt-4">
           {t("Don't have an account?", "Pas encore de compte ?")}{" "}
           <Link to="/signup" className="text-[var(--barholex-gold)] font-semibold hover:text-[#e0b860] transition-colors">
             {t("Sign up", "S'inscrire")}
@@ -332,7 +339,7 @@ function LoginContent() {
                   className="flex items-center justify-center gap-1.5 py-2 px-2 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/15 transition-all group focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/30"
                 >
                   <portal.icon className="w-3.5 h-3.5" style={{ color: portal.color }} />
-                  <span className="text-white/50 text-[10px] font-medium group-hover:text-white/70 transition-colors">
+                  <span className="text-white/65 text-[10px] font-medium group-hover:text-white/85 transition-colors">
                     {portal.name}
                   </span>
                 </Link>
@@ -388,6 +395,9 @@ function LoginContent() {
    Login — Wrapped with GuestRoute
    ═══════════════════════════════════════════════════════ */
 export default function Login() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <GuestRoute redirectTo="/dashboard">
       <LoginContent />

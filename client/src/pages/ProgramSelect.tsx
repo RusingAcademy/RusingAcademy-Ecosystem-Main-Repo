@@ -7,9 +7,19 @@ import { programs, getTotalStats, type Program } from "@/data/courseData";
 import { useGamification } from "@/contexts/GamificationContext";
 import DashboardLayout from "@/components/DashboardLayout";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Program Select", description: "Manage and configure program select" },
+  fr: { title: "Program Select", description: "Gérer et configurer program select" },
+};
+
 const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mrXRaWLUDJGHdcjc.png";
 
 export default function ProgramSelect() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { totalXP, level, levelTitle, streak, lessonsCompleted } = useGamification();
 
   return (

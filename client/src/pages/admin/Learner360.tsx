@@ -7,7 +7,17 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tag, Plus, Trash2, Users, Filter } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Learner360", description: "Manage and configure learner360" },
+  fr: { title: "Learner360", description: "Gérer et configurer learner360" },
+};
+
 export default function Learner360() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [showTagForm, setShowTagForm] = useState(false);
   const [tagName, setTagName] = useState("");
   const [tagSlug, setTagSlug] = useState("");

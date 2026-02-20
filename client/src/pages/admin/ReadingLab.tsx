@@ -12,7 +12,17 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { Loader2 } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Reading Lab", description: "Manage and configure reading lab" },
+  fr: { title: "Laboratoire de lecture", description: "Gérer et configurer laboratoire de lecture" },
+};
+
 export default function ReadingLab() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState("all");

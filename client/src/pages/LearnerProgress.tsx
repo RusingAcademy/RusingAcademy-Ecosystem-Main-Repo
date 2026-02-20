@@ -238,8 +238,8 @@ export default function LearnerProgress() {
               <p className="text-muted-foreground">{t.subtitle}</p>
             </div>
             <Button
-              onClick={() => {
-                generateProgressReportPDF({
+              onClick={async () => {
+                await generateProgressReportPDF({
                   learnerName: user?.name || 'Learner',
                   department: profile?.department || undefined,
                   position: profile?.position || undefined,

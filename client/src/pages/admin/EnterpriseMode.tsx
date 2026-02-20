@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Enterprise Mode", description: "Manage and configure enterprise mode" },
+  fr: { title: "Mode entreprise", description: "Gérer et configurer mode entreprise" },
+};
+
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,12 +16,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import {
+
   Building2, Users, Crown, Plus, Search, Settings,
   BarChart3, Shield, Globe, Mail, Edit, Trash2, Eye,
   UserPlus, ArrowUpRight, CheckCircle,
 } from "lucide-react";
 
 export default function EnterpriseMode() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("organizations");
   const [searchQuery, setSearchQuery] = useState("");
   const [showCreateOrg, setShowCreateOrg] = useState(false);

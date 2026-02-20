@@ -10,7 +10,17 @@ import { toast } from "sonner";
 import { Users, UserCheck, UserPlus, Search, Download, Mail, Tag, MoreHorizontal } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "All Contacts", description: "Manage and configure all contacts" },
+  fr: { title: "All Contacts", description: "Gérer et configurer all contacts" },
+};
+
 export default function AllContacts() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState("all");
 

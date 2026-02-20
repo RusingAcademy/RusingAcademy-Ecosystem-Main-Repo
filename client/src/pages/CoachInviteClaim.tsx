@@ -9,7 +9,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle, XCircle, Clock, Loader2, UserCheck, ArrowRight, FileText, DollarSign } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Coach Invite Claim", description: "Manage and configure coach invite claim" },
+  fr: { title: "Coach Invite Claim", description: "Gérer et configurer coach invite claim" },
+};
+
 export default function CoachInviteClaim() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { token } = useParams<{ token: string }>();
   const [, setLocation] = useLocation();
   const { user, isAuthenticated, loading: authLoading } = useAuth();

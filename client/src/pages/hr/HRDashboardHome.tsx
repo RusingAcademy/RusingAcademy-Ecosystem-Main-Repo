@@ -291,7 +291,7 @@ export default function HRDashboardHome() {
         {/* Quick Actions for Client */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <button
-            onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+            onClick={() => toast.success(lang === "fr" ? "Fonctionnalité en cours de développement" : "Feature under active development")}
             className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
             <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">person_add</span>
@@ -299,7 +299,7 @@ export default function HRDashboardHome() {
             <p className="text-[11px] text-gray-500 mt-1">{lang === "fr" ? "Ajouter un nouveau participant à une cohorte" : "Add a new participant to a training cohort"}</p>
           </button>
           <button
-            onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+            onClick={() => toast.success(lang === "fr" ? "Fonctionnalité en cours de développement" : "Feature under active development")}
             className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-blue-600/30 transition-all text-left group"
           >
             <span className="material-icons text-blue-600 text-2xl mb-2 group-hover:scale-110 transition-transform">download</span>

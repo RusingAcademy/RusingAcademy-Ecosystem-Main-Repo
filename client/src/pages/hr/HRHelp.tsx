@@ -12,6 +12,12 @@ export default function HRHelp() {
   const isEn = language === "en";
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Fetch onboarding checklist as help resources
+  const { data: checklist } = trpc.hr.getOnboardingChecklist.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
   const ui = {
     title: isEn ? "Help & Support" : "Aide et support",
     subtitle: isEn ? "Find answers, resources, and contact our support team" : "Trouvez des réponses, des ressources et contactez notre équipe de support",
@@ -28,7 +34,7 @@ export default function HRHelp() {
     apiDocs: isEn ? "API Documentation" : "Documentation API",
     apiDocsSub: isEn ? "Technical documentation for integrations" : "Documentation technique pour les intégrations",
     viewGuide: isEn ? "View Guide" : "Voir le guide",
-    comingSoon: isEn ? "Coming soon" : "Bientôt disponible",
+    comingSoon: isEn ? "Under development" : "En développement",
   };
 
   const faqs = isEn ? [

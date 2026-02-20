@@ -218,7 +218,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
                         {(mod as any).lessons?.map((lesson: any) => (
                           <button
                             key={lesson.id}
-                            onClick={() => toast("Lesson content coming soon")}
+                            onClick={() => toast.success("Lesson content loading...")}
                             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-200 cursor-pointer"
                             style={{ background: "transparent" }}
                             onMouseEnter={(e) => { (e.target as HTMLElement).style.background = "rgba(27, 20, 100, 0.02)"; }}

@@ -29,12 +29,12 @@ export function PWAInstallBanner() {
   return (
     <>
       {/* Main Install Banner */}
-      <div className="fixed bottom-24 left-4 right-4 z-50 mx-auto max-w-md animate-in slide-in-from-bottom-4 duration-500">
+      <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md animate-in slide-in-from-bottom-4 duration-500">
         <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-r from-[#0D7377] to-[#0a5c5f] p-4 shadow-2xl backdrop-blur-sm">
           {/* Dismiss button */}
           <button
             onClick={dismissInstall}
-            className="absolute right-2 top-2 rounded-full p-1 text-white/60 transition-colors hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 hover:text-white"
+            className="absolute right-2 top-2 rounded-full p-1 text-white/60 transition-colors hover:bg-white hover:text-white"
             aria-label={isEn ? "Dismiss install banner" : "Fermer la bannière d'installation"}
           >
             <X className="h-4 w-4" />
@@ -66,7 +66,7 @@ export function PWAInstallBanner() {
             {canInstall ? (
               <button aria-label="Action"
                 onClick={installApp}
-                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 dark:bg-gray-900 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white/90 dark:hover:bg-background/90 hover:shadow-xl active:scale-95"
+                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white/90 hover:shadow-xl active:scale-95"
               >
                 <Download className="h-4 w-4 animate-bounce" />
                 {isEn ? 'Install' : 'Installer'}
@@ -74,7 +74,7 @@ export function PWAInstallBanner() {
             ) : isIOS ? (
               <button
                 onClick={() => setShowIOSInstructions(true)}
-                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 dark:bg-gray-900 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white/90 dark:hover:bg-background/90 hover:shadow-xl active:scale-95"
+                className="flex-shrink-0 flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-teal-700 shadow-lg transition-all hover:bg-white/90 hover:shadow-xl active:scale-95"
               >
                 <Download className="h-4 w-4" />
                 {isEn ? 'Install' : 'Installer'}
@@ -87,14 +87,14 @@ export function PWAInstallBanner() {
       {/* iOS Instructions Modal */}
       {showIOSInstructions && (
         <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/50 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-t-3xl bg-white dark:bg-gray-900 p-6 shadow-2xl">
+          <div className="w-full max-w-md rounded-t-3xl bg-white p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-foreground">
+              <h3 className="text-lg font-bold text-gray-900">
                 {isEn ? 'Install RusingÂcademy' : 'Installer RusingÂcademy'}
               </h3>
               <button
                 onClick={() => setShowIOSInstructions(false)}
-                className="rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:bg-gray-800"
+                className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -107,10 +107,10 @@ export function PWAInstallBanner() {
                   1
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-foreground">
+                  <p className="text-sm font-medium text-gray-900">
                     {isEn ? 'Tap the Share button' : 'Appuyez sur le bouton Partager'}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-muted-foreground mt-0.5">
+                  <p className="text-xs text-gray-500 mt-0.5">
                     {isEn
                       ? 'Look for the share icon at the bottom of Safari'
                       : "Cherchez l'icône de partage en bas de Safari"}{' '}
@@ -125,10 +125,10 @@ export function PWAInstallBanner() {
                   2
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-foreground">
+                  <p className="text-sm font-medium text-gray-900">
                     {isEn ? 'Select "Add to Home Screen"' : "Sélectionnez « Sur l'écran d'accueil »"}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-muted-foreground mt-0.5">
+                  <p className="text-xs text-gray-500 mt-0.5">
                     {isEn
                       ? 'Scroll down and tap Add to Home Screen'
                       : "Faites défiler et appuyez sur « Sur l'écran d'accueil »"}
@@ -142,10 +142,10 @@ export function PWAInstallBanner() {
                   3
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-foreground">
+                  <p className="text-sm font-medium text-gray-900">
                     {isEn ? 'Tap "Add"' : 'Appuyez sur « Ajouter »'}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-muted-foreground mt-0.5">
+                  <p className="text-xs text-gray-500 mt-0.5">
                     {isEn
                       ? 'Confirm by tapping Add in the top right corner'
                       : 'Confirmez en appuyant sur Ajouter en haut à droite'}

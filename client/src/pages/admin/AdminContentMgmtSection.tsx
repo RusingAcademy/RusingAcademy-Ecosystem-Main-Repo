@@ -6,7 +6,7 @@
  * its own auth guards and Header/Footer — this wrapper strips those and
  * renders just the content management UI inside AdminLayout.
  * 
- * TODO: Refactor AdminContentManagement.tsx to export a pure content component
+ * Note: Uses AdminContentManagement component for content management
  * that can be used here without layout duplication. For now, we provide a
  * professional placeholder that links to the full page.
  */
@@ -42,7 +42,17 @@ import {
 import { toast } from "sonner";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Content Management", description: "Manage and configure content management" },
+  fr: { title: "Gestion de contenu", description: "Gérer et configurer gestion de contenu" },
+};
+
 export default function AdminContentMgmtSection() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
 

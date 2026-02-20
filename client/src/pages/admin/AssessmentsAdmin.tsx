@@ -14,7 +14,17 @@ import { toast } from "sonner";
 import { ClipboardCheck, Plus, Users, BarChart3, FileText, Award, Brain, TrendingUp, Edit, Trash2 } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Assessments Admin", description: "Manage and configure assessments admin" },
+  fr: { title: "Assessments Admin", description: "Gérer et configurer assessments admin" },
+};
+
 export default function AssessmentsAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("assessments");
   const [createOpen, setCreateOpen] = useState(false);
   const [title, setTitle] = useState("");

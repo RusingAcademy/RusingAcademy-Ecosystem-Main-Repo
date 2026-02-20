@@ -9,7 +9,17 @@ import { toast } from "sonner";
 import { ShoppingCart, DollarSign, TrendingUp, RefreshCw, Mail, Clock, CheckCircle } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Cart Admin", description: "Manage and configure cart admin" },
+  fr: { title: "Cart Admin", description: "Gérer et configurer cart admin" },
+};
+
 export default function CartAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("abandoned");
 
   const { data, isLoading, refetch } = trpc.kajabiCart.getAbandoned.useQuery();

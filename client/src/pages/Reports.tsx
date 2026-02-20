@@ -6,8 +6,16 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useGamification } from "@/contexts/GamificationContext";
+import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 import { useState, useMemo } from "react";
+
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Reports & Analytics", description: "Manage and configure reports & analytics" },
+  fr: { title: "Rapports et analytique", description: "Gérer et configurer rapports et analytique" },
+};
 
 /* ─── Chart Components ─── */
 
@@ -202,8 +210,17 @@ function ActivityHeatmap({ data, weeks = 12 }: { data: Record<string, number>; w
 
 /* ─── Main Reports Page ─── */
 export default function Reports() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const gamification = useGamification();
+
+  // Fetch real progress data from the server
+  const { data: progressData } = trpc.progressReport.getMyProgressData.useQuery(
+    { periodDays: 30 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
   const [activeTab, setActiveTab] = useState<"overview" | "progress" | "sle" | "activity">("overview");
 
   // Generate sample data based on actual user stats

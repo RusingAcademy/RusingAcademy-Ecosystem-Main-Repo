@@ -36,7 +36,17 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Reminders", description: "Manage and configure reminders" },
+  fr: { title: "Rappels", description: "Gérer et configurer rappels" },
+};
+
 export default function AdminRemindersSection() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | "24h" | "1h">("all");
   const [channelFilter, setChannelFilter] = useState<"all" | "email" | "in_app">("all");

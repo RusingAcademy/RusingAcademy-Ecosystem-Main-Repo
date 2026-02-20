@@ -9,6 +9,13 @@ import { useUser } from '@clerk/clerk-react';
 import { trpc } from '@/lib/trpc';
 import PortalLayout from '@/components/portal/PortalLayout';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Coach Dashboard New", description: "Manage and configure coach dashboard new" },
+  fr: { title: "Coach Dashboard New", description: "Gérer et configurer coach dashboard new" },
+};
+
 // Types
 interface Session {
   id: string;
@@ -150,6 +157,9 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
 
 // Main Coach Dashboard Component
 export default function CoachDashboardNew() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useUser();
   const [activeTab, setActiveTab] = useState('overview');
 

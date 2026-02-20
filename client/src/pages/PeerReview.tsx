@@ -9,7 +9,17 @@ import Sidebar from "@/components/Sidebar";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Peer Review", description: "Manage and configure peer review" },
+  fr: { title: "Peer Review", description: "Gérer et configurer peer review" },
+};
+
 export default function PeerReview() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, loading: authLoading } = useAuth();
   const utils = trpc.useUtils();
   const { data: pendingReviews, isLoading: loadingPending } = trpc.peerReview.pending.useQuery(undefined, { enabled: !!user });

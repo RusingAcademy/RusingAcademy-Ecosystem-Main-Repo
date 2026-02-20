@@ -3,7 +3,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Lightbulb, Brain, PieChart } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Contact Insights", description: "Manage and configure contact insights" },
+  fr: { title: "Contact Insights", description: "Gérer et configurer contact insights" },
+};
+
 export default function ContactInsights() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { data: insights } = trpc.kajabiContactInsights.getInsights.useQuery({});
 
   const stats = insights ?? { signupTrend: 0, roleDistribution: {} as any, languageDistribution: {} as any, activeUsers: 0 };

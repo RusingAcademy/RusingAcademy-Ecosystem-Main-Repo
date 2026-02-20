@@ -3,7 +3,17 @@ import { useParams, useLocation } from "wouter";
 import { Helmet } from "react-helmet-async";
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Verify Certificate", description: "Manage and configure verify certificate" },
+  fr: { title: "Verify Certificate", description: "Gérer et configurer verify certificate" },
+};
+
 export default function VerifyCertificate() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const params = useParams<{ certificateNumber: string }>();
   const [, setLocation] = useLocation();
   const [searchNumber, setSearchNumber] = useState(params.certificateNumber || "");

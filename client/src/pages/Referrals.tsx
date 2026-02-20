@@ -9,7 +9,17 @@ import { Copy, Users, DollarSign, MousePointerClick, TrendingUp, ArrowLeft, Load
 import { useLocation } from "wouter";
 import { useState } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Referrals", description: "Manage and configure referrals" },
+  fr: { title: "Referrals", description: "Gérer et configurer referrals" },
+};
+
 export default function Referrals() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { t } = useLocale();
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();

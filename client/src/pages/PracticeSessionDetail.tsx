@@ -20,6 +20,13 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Practice Session Detail", description: "Manage and configure practice session detail" },
+  fr: { title: "Practice Session Detail", description: "Gérer et configurer practice session detail" },
+};
+
 // Coach images mapping
 const coachImages: Record<string, string> = {
   steven: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
@@ -49,6 +56,9 @@ const skillLabels: Record<string, string> = {
 };
 
 export default function PracticeSessionDetail() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const params = useParams<{ sessionId: string }>();
   const sessionId = Number(params.sessionId);
   const { user, loading: authLoading } = useAuth();

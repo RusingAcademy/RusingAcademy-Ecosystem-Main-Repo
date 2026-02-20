@@ -1,5 +1,6 @@
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+// Dynamic imports — jsPDF + autoTable are loaded on demand (~300KB saved from initial bundle)
+type JsPDFModule = typeof import('jspdf');
+type AutoTableModule = typeof import('jspdf-autotable');
 
 interface ProgressReportData {
   learnerName: string;
@@ -115,9 +116,11 @@ const translations = {
   },
 };
 
-export function generateProgressReportPDF(data: ProgressReportData): void {
+export async function generateProgressReportPDF(data: ProgressReportData): Promise<void> {
+  const { default: jsPDF } = await import('jspdf');
+  await import('jspdf-autotable');
   const t = translations[data.language];
-  const doc = new jsPDF();
+  const doc = new jsPDF();  // jsPDF loaded dynamically above
   
   // Colors
   const tealColor = [13, 148, 136]; // Teal-500

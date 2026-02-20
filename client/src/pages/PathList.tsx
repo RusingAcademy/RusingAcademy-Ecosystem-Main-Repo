@@ -8,7 +8,17 @@ import { getProgramById, type Program } from "@/data/courseData";
 import { useGamification } from "@/contexts/GamificationContext";
 import DashboardLayout from "@/components/DashboardLayout";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Path List", description: "Manage and configure path list" },
+  fr: { title: "Path List", description: "Gérer et configurer path list" },
+};
+
 export default function PathList() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const params = useParams<{ programId: string }>();
   const programId = params.programId as Program;
   const program = getProgramById(programId);

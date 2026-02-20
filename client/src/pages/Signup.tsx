@@ -9,12 +9,19 @@ import { Eye, EyeOff, UserPlus, CheckCircle, AlertCircle, User, Mail, Lock, Arro
 import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 import { AuthLayout, AuthCard, AuthInput, AuthButton, OAuthButtons, AuthDivider, PasswordStrength } from "@/components/auth";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Signup", description: "Manage and configure signup" },
+  fr: { title: "Signup", description: "Gérer et configurer signup" },
+};
+
 const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 
 function SignupContent() {
+  const { language } = useLanguage();
   const searchString = useSearch();
   const { refresh } = useAuthContext();
-  const [language, setLanguage] = useState<"en" | "fr">("en");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -89,7 +96,7 @@ function SignupContent() {
 
   if (success) {
     return (
-      <AuthLayout language={language} onLanguageChange={setLanguage}>
+      <AuthLayout language={language}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
             <CheckCircle className="w-16 h-16 text-green-400 mx-auto" />
@@ -106,7 +113,7 @@ function SignupContent() {
   }
 
   return (
-    <AuthLayout language={language} onLanguageChange={setLanguage}>
+    <AuthLayout language={language}>
       <AuthCard
         title={t("Create Your Account", "Créez votre compte")}
         subtitle={t("Join RusingÂcademy and start your bilingual journey", "Rejoignez RusingÂcademy et commencez votre parcours bilingue")}
@@ -247,6 +254,9 @@ function SignupContent() {
 }
 
 export default function Signup() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <GuestRoute redirectTo="/dashboard">
       <SignupContent />

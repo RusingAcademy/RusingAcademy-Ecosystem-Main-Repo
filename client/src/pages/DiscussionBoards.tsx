@@ -7,6 +7,13 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { useState, useMemo } from "react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Discussion Boards", description: "Manage and configure discussion boards" },
+  fr: { title: "Discussion Boards", description: "Gérer et configurer discussion boards" },
+};
+
 const CATEGORIES = [
   { id: "all", label: "All Topics", icon: "forum", color: "var(--brand-teal, var(--teal))" },
   { id: "grammar", label: "Grammar", icon: "spellcheck", color: "var(--color-blue-500, var(--semantic-info))" },
@@ -18,6 +25,9 @@ const CATEGORIES = [
 ];
 
 export default function DiscussionBoards() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
 
   const [category, setCategory] = useState("all");

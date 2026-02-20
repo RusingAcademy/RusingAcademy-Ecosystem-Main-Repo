@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Live KPI Dashboard", description: "Manage and configure live kpi dashboard" },
+  fr: { title: "Tableau de bord KPI en direct", description: "Gérer et configurer tableau de bord kpi en direct" },
+};
+
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import {
+
   DollarSign, Users, TrendingUp, Activity, RefreshCw,
   ArrowUpRight, ArrowDownRight, BarChart3, Brain, Target,
   Zap, Clock, BookOpen, Shield, Webhook, Cpu, AlertTriangle,
@@ -98,6 +106,9 @@ const STAGE_LABELS: Record<string, string> = {
 // ============================================================================
 
 export default function LiveKPIDashboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [period, setPeriod] = useState("7d");
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [refreshInterval, setRefreshInterval] = useState(60);

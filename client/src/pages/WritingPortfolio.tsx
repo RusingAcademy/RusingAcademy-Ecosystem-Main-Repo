@@ -36,7 +36,6 @@ export default function WritingPortfolio() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [language, setLanguage] = useState<"en" | "fr">("fr");
   const [cefrLevel, setCefrLevel] = useState<string>("B1");
   const [feedback, setFeedback] = useState<FeedbackData | null>(null);
   const [selectedSubmission, setSelectedSubmission] = useState<number | null>(null);

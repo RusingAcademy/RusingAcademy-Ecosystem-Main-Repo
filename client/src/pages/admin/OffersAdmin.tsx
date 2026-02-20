@@ -13,7 +13,17 @@ import { toast } from "sonner";
 import { Tag, Plus, DollarSign, Package, Clock, Percent, Gift, Edit, Trash2, Eye } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Offers Admin", description: "Manage and configure offers admin" },
+  fr: { title: "Offers Admin", description: "Gérer et configurer offers admin" },
+};
+
 export default function OffersAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [name, setName] = useState("");
   const [type, setType] = useState("one-time");

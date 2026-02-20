@@ -173,7 +173,17 @@ import { useState } from "react";
 import { toast as sonnerToast } from "sonner";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Component Showcase", description: "Manage and configure component showcase" },
+  fr: { title: "Component Showcase", description: "Gérer et configurer component showcase" },
+};
+
 export default function ComponentsShowcase() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { theme, toggleTheme } = useTheme();
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [datePickerDate, setDatePickerDate] = useState<Date>();
@@ -739,7 +749,7 @@ export default function ComponentsShowcase() {
                     <PaginationContent>
                       <PaginationItem>
                         <PaginationPrevious
-                          href="#"
+                          href="javascript:void(0)"
                           onClick={e => {
                             e.preventDefault();
                             setCurrentPage(Math.max(1, currentPage - 1));
@@ -749,7 +759,7 @@ export default function ComponentsShowcase() {
                       {[1, 2, 3, 4, 5].map(page => (
                         <PaginationItem key={page}>
                           <PaginationLink
-                            href="#"
+                            href="javascript:void(0)"
                             isActive={currentPage === page}
                             onClick={e => {
                               e.preventDefault();
@@ -762,7 +772,7 @@ export default function ComponentsShowcase() {
                       ))}
                       <PaginationItem>
                         <PaginationNext
-                          href="#"
+                          href="javascript:void(0)"
                           onClick={e => {
                             e.preventDefault();
                             setCurrentPage(Math.min(5, currentPage + 1));

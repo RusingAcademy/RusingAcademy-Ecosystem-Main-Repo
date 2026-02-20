@@ -25,7 +25,17 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Content Pipeline", description: "Manage and configure content pipeline" },
+  fr: { title: "Pipeline de contenu", description: "Gérer et configurer pipeline de contenu" },
+};
+
 export default function ContentPipeline() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState("overview");
   const [calendarMonth, setCalendarMonth] = useState(new Date().getMonth() + 1);
   const [calendarYear, setCalendarYear] = useState(new Date().getFullYear());

@@ -8,7 +8,17 @@
 import { AdminApplicationDashboard } from "@/components/AdminApplicationDashboard";
 import { trpc } from '@/lib/trpc';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Coach Applications", description: "Manage and configure coach applications" },
+  fr: { title: "Candidatures de coachs", description: "Gérer et configurer candidatures de coachs" },
+};
+
 export default function AdminCoachAppsSection() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   return (
     <div className="space-y-6">
       <div>

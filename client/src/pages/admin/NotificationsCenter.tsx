@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Notifications Center", description: "Manage and configure notifications center" },
+  fr: { title: "Notifications Center", description: "Gérer et configurer notifications center" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { AdminBroadcastPanel } from "@/components/AdminBroadcastPanel";
@@ -7,6 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
+
   Bell, BellOff, Check, CheckCheck, Trash2, Search,
   Filter, RefreshCw, AlertTriangle, Info, DollarSign,
   UserPlus, ShoppingCart, Star, Send, X
@@ -24,6 +32,9 @@ const typeConfig: Record<NotifType, { icon: any; color: string; bg: string }> = 
 };
 
 export default function NotificationsCenter() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState<string>("all");

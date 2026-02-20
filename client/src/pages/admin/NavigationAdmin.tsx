@@ -11,7 +11,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { Navigation, Plus, GripVertical, Edit, Trash2, ExternalLink, Menu } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Navigation Admin", description: "Manage and configure navigation admin" },
+  fr: { title: "Navigation Admin", description: "Gérer et configurer navigation admin" },
+};
+
 export default function NavigationAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [label, setLabel] = useState("");
   const [labelFr, setLabelFr] = useState("");

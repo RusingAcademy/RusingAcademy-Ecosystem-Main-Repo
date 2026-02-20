@@ -71,6 +71,10 @@ const BUNDLE_IDS: Record<string, string> = {
 import FooterInstitutional from '../components/FooterInstitutional';
 import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+
 // Path Series Images
 const pathImages = {
   I: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_a1_foundations.jpg',
@@ -562,6 +566,9 @@ function PromoBanner({ lang }: { lang: 'en' | 'fr' }) {
 }
 
 export default function RusingÂcademyLanding() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [lang, setLang] = useState<'en' | 'fr'>('en');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [selectedPath, setSelectedPath] = useState(0);

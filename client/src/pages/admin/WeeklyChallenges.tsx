@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Weekly Challenges", description: "Manage and configure weekly challenges" },
+  fr: { title: "Défis hebdomadaires", description: "Gérer et configurer défis hebdomadaires" },
+};
+
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
+
   Trophy, Plus, Search, Edit2, Trash2, Calendar, Users,
   Loader2, Target, Zap, Award, Clock, BarChart3,
   CheckCircle, XCircle, Star, Flame, BookOpen, Mic,
@@ -61,6 +69,9 @@ const challengeTypes = [
 // Data loaded from tRPC challenges router
 
 export default function WeeklyChallenges() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [showCreateDialog, setShowCreateDialog] = useState(false);

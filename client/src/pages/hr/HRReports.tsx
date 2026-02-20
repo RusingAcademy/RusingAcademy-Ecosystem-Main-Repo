@@ -13,6 +13,29 @@ export default function HRReports() {
   const { language } = useLanguage();
   const isEn = language === "en";
   const [reportType, setReportType] = useState<"progress" | "compliance" | "budget">("progress");
+  const [dateRange, setDateRange] = useState<"30" | "90" | "365" | "all">("30");
+
+  // Fetch progress report data
+  const { data: progressData, isLoading: loadingProgress } = trpc.hr.getProgressReport.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
+  // Fetch analytics data
+  const { data: analyticsData } = trpc.hr.getAnalytics.useQuery(
+    { organizationId: 1 },
+    { enabled: true, retry: false, refetchOnWindowFocus: false }
+  );
+
+  // Export mutation
+  const exportMutation = trpc.hr.exportReport.useMutation({
+    onSuccess: (data) => {
+      toast.success(isEn ? "Report exported successfully" : "Rapport exporté avec succès");
+    },
+    onError: () => {
+      toast.error(isEn ? "Export failed" : "Échec de l'exportation");
+    },
+  });
 
   const ui = {
     title: isEn ? "Reports & Analytics" : "Rapports et analyses",
@@ -53,14 +76,14 @@ export default function HRReports() {
           </div>
           <div className="flex gap-2">
             <button
-              onClick={() => toast.success(isEn ? "CSV export initiated" : "Export CSV lancé")}
+              onClick={() => exportMutation.mutate({ organizationId: 1, format: "csv" })}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
             >
               <span className="material-icons text-sm">download</span>
               {ui.exportCsv}
             </button>
             <button
-              onClick={() => toast.success(isEn ? "PDF export initiated" : "Export PDF lancé")}
+              onClick={() => exportMutation.mutate({ organizationId: 1, format: "pdf" })}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
             >
               <span className="material-icons text-sm">picture_as_pdf</span>

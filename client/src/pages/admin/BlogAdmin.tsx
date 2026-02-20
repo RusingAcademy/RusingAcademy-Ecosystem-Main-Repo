@@ -14,14 +14,23 @@ import { toast } from "sonner";
 import { PenTool, Plus, Search, Eye, Edit, Trash2, Tag, BarChart3, FileText, Globe } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Blog Admin", description: "Manage and configure blog admin" },
+  fr: { title: "Blog Admin", description: "Gérer et configurer blog admin" },
+};
+
 export default function BlogAdmin() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [createOpen, setCreateOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("posts");
   const [search, setSearch] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("general");
-  const [language, setLanguage] = useState("en");
   const [status, setStatus] = useState("draft");
 
   const { data, isLoading, refetch } = trpc.kajabiBlog.list.useQuery({ search: search || undefined });

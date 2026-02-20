@@ -8,12 +8,20 @@ import { trpc } from "../lib/trpc";
 import { AlertCircle, ArrowLeft, Mail, CheckCircle } from "lucide-react";
 import { AuthLayout, AuthCard, AuthInput, AuthButton } from "@/components/auth";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Forgot Password", description: "Manage and configure forgot password" },
+  fr: { title: "Forgot Password", description: "Gérer et configurer forgot password" },
+};
+
 export default function ForgotPassword() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [language, setLanguage] = useState<"en" | "fr">("en");
-
   const t = useCallback(
     (en: string, fr: string) => (language === "fr" ? fr : en),
     [language],
@@ -33,7 +41,7 @@ export default function ForgotPassword() {
 
   if (success) {
     return (
-      <AuthLayout language={language} onLanguageChange={setLanguage}>
+      <AuthLayout language={language}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
             <div className="mx-auto w-16 h-16 bg-[var(--brand-foundation)]/20 rounded-full flex items-center justify-center">
@@ -65,7 +73,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <AuthLayout language={language} onLanguageChange={setLanguage}>
+    <AuthLayout language={language}>
       <AuthCard
         title={t("Reset Your Password", "Réinitialisez votre mot de passe")}
         subtitle={t(

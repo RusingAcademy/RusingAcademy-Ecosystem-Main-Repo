@@ -27,12 +27,22 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Leaderboard", description: "Manage and configure leaderboard" },
+  fr: { title: "Leaderboard", description: "Gérer et configurer leaderboard" },
+};
+
 // Header removed — uses ecosystem layout or dedicated layout
 // Footer removed — uses ecosystem layout or dedicated layout
 
 type TimeFilter = "weekly" | "monthly" | "allTime";
 
 export default function Leaderboard() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user, isAuthenticated } = useAuth();
   const [timeFilter, setTimeFilter] = useState<TimeFilter>("allTime");
   const [currentPage, setCurrentPage] = useState(1);

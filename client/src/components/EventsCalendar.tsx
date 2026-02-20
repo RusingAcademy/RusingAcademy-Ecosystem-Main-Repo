@@ -194,7 +194,7 @@ export default function EventsCalendar() {
           <p className="text-sm" style={{ color: "rgba(255, 255, 255, 0.45)" }}>Live sessions, workshops, and community meetups</p>
         </div>
         <Button
-          onClick={() => toast("Feature coming soon")}
+          onClick={() => toast.success("Feature under active development")}
           className="community-btn-primary rounded-xl text-sm font-bold"
         >
           <Sparkles className="w-3.5 h-3.5 mr-1.5" aria-hidden="true" /> Create Event

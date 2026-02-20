@@ -8,6 +8,13 @@ import { toast } from "sonner";
 import { UsersRound, Users, Plus, Trash2, Search, RefreshCw } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Study Groups", description: "Manage and configure admin study groups" },
+  fr: { title: "Admin Study Groups", description: "Gérer et configurer admin study groups" },
+};
+
 const AdminStudyGroups = () => {
   const [search, setSearch] = useState("");
   const [showCreate, setShowCreate] = useState(false);

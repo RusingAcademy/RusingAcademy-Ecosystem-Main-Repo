@@ -7,7 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Clock, Lock, Unlock, Calendar, Zap, Settings } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Drip Content", description: "Manage and configure drip content" },
+  fr: { title: "Drip Content", description: "Gérer et configurer drip content" },
+};
+
 export default function DripContent() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [selectedCourse] = useState(1);
   const [cadence, setCadence] = useState<string>("weekly");
 

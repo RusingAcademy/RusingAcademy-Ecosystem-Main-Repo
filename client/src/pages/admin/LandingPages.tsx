@@ -11,7 +11,17 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Plus, Edit, Trash2, Eye, Globe, FileText, Loader2 } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Landing Pages", description: "Manage and configure landing pages" },
+  fr: { title: "Landing Pages", description: "Gérer et configurer landing pages" },
+};
+
 export default function LandingPages() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { isLoading: flagLoading } = useFeatureFlags();
   const isEnabled = useFeatureFlag("LANDING_PAGES_V1");
   const [showCreate, setShowCreate] = useState(false);

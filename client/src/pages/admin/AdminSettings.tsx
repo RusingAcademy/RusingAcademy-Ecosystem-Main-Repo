@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Settings", description: "Manage and configure settings" },
+  fr: { title: "Paramètres", description: "Gérer et configurer paramètres" },
+};
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,6 +17,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
+
   Globe, Palette, Shield, Bell, CreditCard, Link2, Database, Code,
   Save, ChevronRight, CheckCircle2, Loader2, RotateCcw, Plug, History,
   AlertTriangle, User, Clock, FileText
@@ -58,6 +66,9 @@ const DEFAULTS: Record<string, string> = {
 };
 
 export default function AdminSettings() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [activeTab, setActiveTab] = useState<TabKey>("site");
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);

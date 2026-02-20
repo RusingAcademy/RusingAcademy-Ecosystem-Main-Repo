@@ -10,6 +10,13 @@
 import { lazy, Suspense } from "react";
 import AppLayout from "@/components/AppLayout";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "App Dashboard", description: "Manage and configure app dashboard" },
+  fr: { title: "App Dashboard", description: "Gérer et configurer app dashboard" },
+};
+
 // ── Skeleton loader ──────────────────────────────────────────────────
 function SectionSkeleton() {
   return (
@@ -104,6 +111,9 @@ interface Props {
 }
 
 export default function AppDashboard({ section = "overview" }: Props) {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const Content = sectionMap[section] || LearnerDashboard;
 
   return (

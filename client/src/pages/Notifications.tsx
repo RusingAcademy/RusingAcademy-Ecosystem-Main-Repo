@@ -7,9 +7,19 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useState } from "react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Notifications", description: "Manage and configure notifications" },
+  fr: { title: "Notifications", description: "Gérer et configurer notifications" },
+};
+
 type FilterType = "all" | "achievement" | "system" | "info";
 
 export default function Notifications() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [filter, setFilter] = useState<FilterType>("all");
   const { data: notifications, isLoading } = trpc.notifications.list.useQuery({ limit: 100 });
   const markRead = trpc.notifications.markRead.useMutation({

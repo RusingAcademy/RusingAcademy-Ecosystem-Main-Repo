@@ -7,7 +7,17 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Users, Plus, Trash2, Calendar, DollarSign } from "lucide-react";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Group Sessions", description: "Manage and configure group sessions" },
+  fr: { title: "Group Sessions", description: "Gérer et configurer group sessions" },
+};
+
 export default function GroupSessions() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [maxParticipants, setMaxParticipants] = useState(10);

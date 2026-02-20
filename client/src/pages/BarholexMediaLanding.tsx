@@ -33,6 +33,10 @@ import SEO from '@/components/SEO';
 import FooterInstitutional from '@/components/FooterInstitutional';
 import CrossEcosystemSection from '@/components/CrossEcosystemSection';
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+
+
 // Premium color palette - refined and authoritative
 const colors = {
   navy: '#0A1628',
@@ -382,6 +386,9 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function BarholexMediaLanding() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [lang, setLang] = useState<'en' | 'fr'>('en');
   const [activeExpertise, setActiveExpertise] = useState(0);
 

@@ -14,7 +14,17 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Content Pipeline", description: "Manage and configure admin content pipeline" },
+  fr: { title: "Admin Content Pipeline", description: "Gérer et configurer admin content pipeline" },
+};
+
 export default function AdminContentPipeline() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("pipeline");
   const [statusFilter, setStatusFilter] = useState<string | undefined>(undefined);

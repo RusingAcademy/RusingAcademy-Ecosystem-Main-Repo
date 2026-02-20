@@ -36,6 +36,13 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Leads & CRM", description: "Manage and configure leads & crm" },
+  fr: { title: "Prospects et CRM", description: "Gérer et configurer prospects et crm" },
+};
+
 const statusColors: Record<string, string> = {
   new: "bg-blue-100 text-blue-800",
   contacted: "bg-yellow-100 text-yellow-800",
@@ -48,6 +55,9 @@ const statusColors: Record<string, string> = {
 };
 
 export default function AdminLeadsSection() {
+  const { language } = useLanguage();
+  const l = labels[language as keyof typeof labels] || labels.en;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
