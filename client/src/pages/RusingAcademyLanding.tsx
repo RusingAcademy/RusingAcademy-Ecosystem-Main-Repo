@@ -73,10 +73,7 @@ import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const labels = {
-  en: { title: "Rusing Academy Landing", description: "Manage and configure rusing academy landing" },
-  fr: { title: "Rusing Academy Landing", description: "Gérer et configurer rusing academy landing" },
-};
+
 
 // Path Series Images
 const pathImages = {

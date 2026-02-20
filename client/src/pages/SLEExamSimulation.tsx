@@ -31,11 +31,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const labels = {
-  en: { title: "S L E Exam Simulation", description: "Manage and configure s l e exam simulation" },
-  fr: { title: "S L E Exam Simulation", description: "Gérer et configurer s l e exam simulation" },
-};
-
 // ─── Types ───────────────────────────────────────────────────────────
 type ExamPhase = "setup" | "part1" | "part2" | "part3" | "part4" | "feedback";
 type ExamLevel = "B" | "C";
@@ -385,8 +380,6 @@ function CriteriaRadar({ criteria, l }: { criteria: PhaseResult["criteria"]; l: 
 // ═══════════════════════════════════════════════════════════════════════
 export default function SLEExamSimulation() {
   const { language } = useLanguage();
-  const l = labels[language as keyof typeof labels] || labels.en;
-
   const { user } = useAuth();
   const [phase, setPhase] = useState<ExamPhase>("setup");
   const [config, setConfig] = useState<ExamConfig>({ level: "B", coach: "STEVEN", language: "fr" });
@@ -412,7 +405,7 @@ export default function SLEExamSimulation() {
 
   const examPhases: ExamPhase[] = ["part1", "part2", "part3", "part4"];
   const currentPhaseConfig = PHASE_CONFIG[phase as keyof typeof PHASE_CONFIG];
-  const l = labels[config.language];
+  const l = labels[config.language] || labels.en;
   const coach = coachData[config.coach];
 
   // tRPC mutations

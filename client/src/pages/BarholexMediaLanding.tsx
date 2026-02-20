@@ -35,10 +35,7 @@ import CrossEcosystemSection from '@/components/CrossEcosystemSection';
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const labels = {
-  en: { title: "Barholex Media", description: "Manage and configure barholex media" },
-  fr: { title: "Barholex Média", description: "Gérer et configurer barholex média" },
-};
+
 
 // Premium color palette - refined and authoritative
 const colors = {
