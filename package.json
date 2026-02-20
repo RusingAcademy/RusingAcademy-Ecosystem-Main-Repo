@@ -25,7 +25,20 @@
     "sle:import:dry": "npx tsx scripts/sle/import-jsonl.ts --dry-run",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui",
-    "test:e2e:prod": "E2E_BASE_URL=https://new-rusingacademy-project-production.up.railway.app npx playwright test"
+    "test:e2e:prod": "E2E_BASE_URL=https://new-rusingacademy-project-production.up.railway.app npx playwright test",
+    "dev:portal": "cd apps/learner-portal && PORT=3001 pnpm run dev",
+    "dev:community": "cd apps/community && PORT=3002 pnpm run dev",
+    "dev:sales": "cd apps/sales && PORT=3003 pnpm run dev",
+    "build:portal": "cd apps/learner-portal && pnpm run build",
+    "build:community": "cd apps/community && pnpm run build",
+    "build:sales": "cd apps/sales && pnpm run build",
+    "start:portal": "cd apps/learner-portal && PORT=3001 pnpm run start",
+    "start:community": "cd apps/community && PORT=3002 pnpm run start",
+    "start:sales": "cd apps/sales && PORT=3003 pnpm run start",
+    "install:portal": "cd apps/learner-portal && pnpm install",
+    "install:community": "cd apps/community && pnpm install",
+    "install:sales": "cd apps/sales && pnpm install",
+    "install:apps": "cd apps/learner-portal && pnpm install && cd ../community && pnpm install && cd ../sales && pnpm install"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
