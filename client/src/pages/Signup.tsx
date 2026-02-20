@@ -1,6 +1,6 @@
 /**
- * Signup Page — Refactored with Auth Design System
- * Phase 1: Auth UI/UX Harmonization with HAZY palette
+ * Signup Page — v7 (Unified Auth Design System)
+ * Uses shared AuthLayout + AuthCard + AuthInput + AuthButton
  */
 import { useState, useCallback } from "react";
 import { Link, useSearch } from "wouter";
@@ -14,7 +14,7 @@ const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 function SignupContent() {
   const searchString = useSearch();
   const { refresh } = useAuthContext();
-  const [language] = useState<"en" | "fr">("en");
+  const [language, setLanguage] = useState<"en" | "fr">("en");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -89,10 +89,10 @@ function SignupContent() {
 
   if (success) {
     return (
-      <AuthLayout>
+      <AuthLayout language={language} onLanguageChange={setLanguage}>
         <AuthCard>
           <div className="text-center space-y-4 py-4">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+            <CheckCircle className="w-16 h-16 text-green-400 mx-auto" />
             <h2 className="text-2xl font-bold text-white">
               {t("Account Created!", "Compte créé !")}
             </h2>
@@ -106,7 +106,7 @@ function SignupContent() {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout language={language} onLanguageChange={setLanguage}>
       <AuthCard
         title={t("Create Your Account", "Créez votre compte")}
         subtitle={t("Join RusingÂcademy and start your bilingual journey", "Rejoignez RusingÂcademy et commencez votre parcours bilingue")}
@@ -130,7 +130,7 @@ function SignupContent() {
         <AuthDivider text={t("Or sign up with email", "Ou inscrivez-vous par courriel")} />
 
         {/* Email Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           {error && (
             <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs">
               <AlertCircle className="w-4 h-4 shrink-0" />
@@ -140,9 +140,10 @@ function SignupContent() {
 
           <AuthInput
             icon={<User className="w-4 h-4" />}
+            label={t("Full Name", "Nom complet")}
             name="name"
             type="text"
-            placeholder={t("Full name", "Nom complet")}
+            placeholder={t("John Doe", "Jean Dupont")}
             value={formData.name}
             onChange={handleChange}
             required
@@ -152,9 +153,10 @@ function SignupContent() {
 
           <AuthInput
             icon={<Mail className="w-4 h-4" />}
+            label={t("Email", "Courriel")}
             name="email"
             type="email"
-            placeholder={t("Email address", "Adresse courriel")}
+            placeholder={t("your@email.com", "votre@courriel.com")}
             value={formData.email}
             onChange={handleChange}
             required
@@ -165,9 +167,10 @@ function SignupContent() {
           <div>
             <AuthInput
               icon={<Lock className="w-4 h-4" />}
+              label={t("Password", "Mot de passe")}
               name="password"
               type={showPassword ? "text" : "password"}
-              placeholder={t("Password (min 8 characters)", "Mot de passe (min 8 caractères)")}
+              placeholder={t("Min 8 characters", "Min 8 caractères")}
               value={formData.password}
               onChange={handleChange}
               required
@@ -190,9 +193,10 @@ function SignupContent() {
 
           <AuthInput
             icon={<Lock className="w-4 h-4" />}
+            label={t("Confirm Password", "Confirmer le mot de passe")}
             name="confirmPassword"
             type={showPassword ? "text" : "password"}
-            placeholder={t("Confirm password", "Confirmer le mot de passe")}
+            placeholder={t("Re-enter password", "Ressaisir le mot de passe")}
             value={formData.confirmPassword}
             onChange={handleChange}
             required
@@ -212,7 +216,7 @@ function SignupContent() {
         </form>
 
         {/* Sign In Link */}
-        <p className="text-center text-white/40 text-xs mt-4">
+        <p className="text-center text-white/50 text-xs mt-4">
           {t("Already have an account?", "Vous avez déjà un compte ?")}{" "}
           <Link to="/login" className="text-[var(--barholex-gold)] font-semibold hover:text-[#e0b860] transition-colors">
             {t("Sign in", "Se connecter")}
@@ -220,11 +224,11 @@ function SignupContent() {
         </p>
 
         {/* Terms */}
-        <p className="text-center text-white/20 text-[10px] mt-3">
+        <p className="text-center text-white/30 text-[10px] mt-3">
           {t("By creating an account, you agree to our", "En créant un compte, vous acceptez nos")}{" "}
-          <Link to="/terms" className="text-white/30 hover:text-white/50 underline">{t("Terms", "Conditions")}</Link>
+          <Link to="/terms" className="text-white/40 hover:text-white/60 underline">{t("Terms", "Conditions")}</Link>
           {" & "}
-          <Link to="/privacy" className="text-white/30 hover:text-white/50 underline">{t("Privacy", "Confidentialité")}</Link>
+          <Link to="/privacy" className="text-white/40 hover:text-white/60 underline">{t("Privacy", "Confidentialité")}</Link>
         </p>
 
         {/* Debug panel */}
