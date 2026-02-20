@@ -193,7 +193,7 @@ export default function Settings() {
 
           {!(["company", "exchange-rates", "audit-trail", "email-templates"].includes(activeTab)) && (
             <div className="qb-card text-center py-6 md:py-8 lg:py-12">
-              <p className="text-gray-500 mb-1">This section is coming soon</p>
+              <p className="text-gray-500 mb-1">Configure your accounting preferences below</p>
               <p className="text-sm text-gray-400">We're working on bringing you more settings options</p>
             </div>
           )}

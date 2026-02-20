@@ -4,6 +4,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 // Footer removed — excluded route uses dedicated layout
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -86,7 +87,7 @@ function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
           {isEn ? "Achievements" : "Accomplissements"}
         </h3>
         <Link href="/app/badges">
-          <Button variant="ghost" size="sm" className="text-amber-600 hover:text-amber-700 text-xs">
+          <Button variant="ghost" size="sm" className="text-amber-600 hover:text-amber-700 text-xs" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             {isEn ? "View All" : "Tout voir"}
           </Button>
         </Link>
@@ -505,7 +506,7 @@ export default function LearnerDashboard() {
                     </Button>
                   </Link>
                 )}
-                <Link href="/ai-practice">
+                <Link href="/app/ai-practice">
                   <Button size="lg" variant={resumePoint ? "outline" : "default"} className={resumePoint ? "border-white/50 text-white hover:bg-white/10" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm shadow-lg"}>
                     <Bot className="h-5 w-5 mr-2" />
                     {l.startPractice}
@@ -707,7 +708,7 @@ export default function LearnerDashboard() {
                     </div>
                     <p className="text-black dark:text-foreground dark:text-cyan-300 mb-4">{l.noCourses}</p>
                     <Link href="/courses">
-                      <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
+                      <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700" onClick={() => window.scrollTo({ top: document.body.scrollHeight * 0.3, behavior: "smooth" })}>
                         {l.exploreCourses}
                       </Button>
                     </Link>
@@ -791,7 +792,7 @@ export default function LearnerDashboard() {
                     </div>
                     <p className="text-black dark:text-foreground dark:text-cyan-300 mb-4">{l.noSessions}</p>
                     <Link href="/coaches">
-                      <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
+                      <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700" onClick={() => toast.info("{l.viewCoaches}")}>
                         {l.viewCoaches}
                       </Button>
                     </Link>
@@ -838,7 +839,7 @@ export default function LearnerDashboard() {
                           {language === "fr" ? `Expire dans ${daysLeft} jours` : `Expires in ${daysLeft} days`}
                         </span>
                         <Link href="/coaches">
-                          <Button size="sm" variant="outline" className="text-xs h-7">
+                          <Button size="sm" variant="outline" className="text-xs h-7" onClick={() => window.location.href = "/booking"}>
                             {language === "fr" ? "Réserver" : "Book Session"}
                           </Button>
                         </Link>
@@ -865,7 +866,7 @@ export default function LearnerDashboard() {
                   {l.quickActions}
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <Link href="/ai-practice">
+                  <Link href="/app/ai-practice">
                     <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-purple-50 hover:border-purple-300 dark:hover:bg-purple-950/30 transition-all">
                       <Bot className="h-6 w-6 text-purple-600" />
                       <span className="text-xs font-medium">{l.aiPractice}</span>

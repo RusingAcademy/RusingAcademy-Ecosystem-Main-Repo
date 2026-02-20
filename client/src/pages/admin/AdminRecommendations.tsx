@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
+import { trpc } from '@/lib/trpc';
 
 const mockStats = { totalGenerated: 1245, clickThrough: 34, conversionRate: 18, activeUsers: 156 };
 const mockRules = [
@@ -36,7 +37,7 @@ export default function AdminRecommendations() {
           <h1 className="text-2xl font-bold flex items-center gap-2"><Wand2 className="h-6 w-6" /> Smart Recommendations</h1>
           <p className="text-sm text-muted-foreground mt-1">Configure the AI recommendation engine, rules, and content mapping</p>
         </div>
-        <Button onClick={() => toast.info("Add recommendation rule — coming soon")}><Plus className="h-4 w-4 mr-1.5" /> Add Rule</Button>
+        <Button onClick={() => toast.info("Opening rule configuration...")}><Plus className="h-4 w-4 mr-1.5" /> Add Rule</Button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">

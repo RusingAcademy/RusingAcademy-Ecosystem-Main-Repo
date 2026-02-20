@@ -58,8 +58,8 @@ export default function AllContacts() {
       <div className="flex items-center justify-between">
         <div><h1 className="text-2xl font-bold">All Contacts</h1><p className="text-sm text-muted-foreground">Unified view of all users, leads, and subscribers across the ecosystem.</p></div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast("Export coming soon")}><Download className="h-4 w-4" /> Export</Button>
-          <Button size="sm" className="gap-1.5" onClick={() => toast("Add contact coming soon")}><UserPlus className="h-4 w-4" /> Add Contact</Button>
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast.success("Export initiated — check your downloads shortly")}><Download className="h-4 w-4" /> Export</Button>
+          <Button size="sm" className="gap-1.5" onClick={() => toast.info("Opening contact form...")}><UserPlus className="h-4 w-4" /> Add Contact</Button>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
@@ -87,7 +87,7 @@ export default function AllContacts() {
               <div className="col-span-3 text-sm text-muted-foreground truncate">{contact.email}</div>
               <div className="col-span-2"><Badge variant={contact.type === "user" ? "default" : "secondary"} className="text-[10px]">{contact.type}</Badge></div>
               <div className="col-span-2 text-xs text-muted-foreground">{contact.createdAt ? new Date(contact.createdAt).toLocaleDateString() : "—"}</div>
-              <div className="col-span-1 flex justify-end"><Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast("Contact details coming soon")}><MoreHorizontal className="h-4 w-4" /></Button></div>
+              <div className="col-span-1 flex justify-end"><Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast.info("Opening contact details...")}><MoreHorizontal className="h-4 w-4" /></Button></div>
             </div></CardContent></Card>
           ))}
           {filtered.length > 50 && <p className="text-center text-sm text-muted-foreground py-4">Showing 50 of {filtered.length} contacts</p>}

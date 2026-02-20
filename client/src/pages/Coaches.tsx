@@ -215,7 +215,7 @@ export default function Coaches() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white/60"
                     />
-                    <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
+                    <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg" onClick={() => toast.info("{language === 'fr' ? 'Rechercher' : 'Sea")}>
                       {language === 'fr' ? 'Rechercher' : 'Search'}
                     </Button>
                   </div>

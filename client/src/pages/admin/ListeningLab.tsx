@@ -9,22 +9,36 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-
-const mockStats = { totalClips: 36, completionRate: 65, avgScore: 71, activeListeners: 98 };
-const mockAudio = [
-  { id: 1, title: "Conversation au bureau", level: "A2", duration: "2:30", questions: 4, status: "published", completions: 78, hasTranscript: true },
-  { id: 2, title: "Bulletin de nouvelles", level: "B2", duration: "4:15", questions: 7, status: "published", completions: 34, hasTranscript: true },
-  { id: 3, title: "Débat parlementaire", level: "C1", duration: "6:00", questions: 10, status: "draft", completions: 0, hasTranscript: false },
-  { id: 4, title: "Message téléphonique", level: "A1", duration: "1:15", questions: 3, status: "published", completions: 112, hasTranscript: true },
-  { id: 5, title: "Entrevue d'emploi", level: "B1", duration: "3:45", questions: 6, status: "published", completions: 56, hasTranscript: true },
-];
+import { trpc } from "@/lib/trpc";
 
 export default function ListeningLab() {
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState("all");
 
-  const filteredAudio = mockAudio.filter(a => {
+  // ── tRPC queries ──
+  const historyQuery = trpc.listeningLab.history.useQuery(undefined, { retry: false });
+  const statsQuery = trpc.listeningLab.stats.useQuery(undefined, { retry: false });
+  const isLoading = historyQuery.isLoading || statsQuery.isLoading;
+  const history = historyQuery.data ?? [];
+  const rawStats = statsQuery.data;
+  const mockStats = {
+    totalClips: rawStats?.totalAttempts ?? 0,
+    completionRate: rawStats?.averageScore ?? 0,
+    avgScore: rawStats?.averageScore ?? 0,
+    activeListeners: rawStats?.totalAttempts ?? 0,
+  };
+  const mockAudio = history.map((h: any, i: number) => ({
+    id: h.id || i,
+    title: h.exerciseTitle || h.exerciseType || "Listening Exercise",
+    level: h.level || "B1",
+    duration: "—",
+    questions: 0,
+    status: "published",
+    completions: h.score || 0,
+    hasTranscript: true,
+  }));
+  const filteredAudio = mockAudio.filter((a: any) => {
     const matchesSearch = a.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesLevel = levelFilter === "all" || a.level === levelFilter;
     return matchesSearch && matchesLevel;
@@ -32,7 +46,7 @@ export default function ListeningLab() {
 
   const levelColor = (level: string) => {
     const colors: Record<string, string> = { A1: "bg-green-500/10 text-green-500", A2: "bg-emerald-500/10 text-emerald-500", B1: "bg-blue-500/10 text-blue-500", B2: "bg-indigo-500/10 text-indigo-500", C1: "bg-purple-500/10 text-purple-500", C2: "bg-red-500/10 text-red-500" };
-    return colors[level] || "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm0/10 text-gray-500";
+    return colors[level] || "bg-gray-50 text-gray-500";
   };
 
   return (
@@ -42,7 +56,7 @@ export default function ListeningLab() {
           <h1 className="text-2xl font-bold flex items-center gap-2"><Headphones className="h-6 w-6" /> Listening Comprehension Lab</h1>
           <p className="text-sm text-muted-foreground mt-1">Manage audio passages, comprehension questions, and listening analytics</p>
         </div>
-        <Button onClick={() => toast.info("Create audio exercise — coming soon")}><Plus className="h-4 w-4 mr-1.5" /> Add Audio</Button>
+        <Button onClick={() => toast.info("Create audio exercise —feature launching soon — stay tuned!")}><Plus className="h-4 w-4 mr-1.5" /> Add Audio</Button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">

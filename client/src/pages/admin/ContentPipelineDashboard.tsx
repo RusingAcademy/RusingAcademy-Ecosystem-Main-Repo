@@ -213,7 +213,7 @@ function CourseQualityRow({ course, onPreview }: { course: any; onPreview: () =>
   );
 
   const statusColors: Record<string, string> = {
-    draft: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700",
+    draft: "bg-gray-100 text-gray-700",
     review: "bg-amber-100 text-amber-700",
     published: "bg-emerald-100 text-emerald-700",
     archived: "bg-red-100 text-red-700",

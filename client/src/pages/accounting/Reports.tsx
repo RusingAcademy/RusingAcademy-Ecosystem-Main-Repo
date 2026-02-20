@@ -103,8 +103,8 @@ export default function Reports() {
           <h1 className="text-2xl font-bold text-gray-800">Reports</h1>
           <div className="flex items-center gap-2 text-sm">
             <button className="px-3 py-1.5 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-md font-medium text-gray-800">Standard reports</button>
-            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-md" onClick={() => toast("Feature coming soon")}>Custom reports</button>
-            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-md" onClick={() => toast("Feature coming soon")}>Management reports</button>
+            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-md" onClick={() => toast.info("Feature — launching soon!")}>Custom reports</button>
+            <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-md" onClick={() => toast.info("Feature — launching soon!")}>Management reports</button>
           </div>
         </div>
       </div>
@@ -115,8 +115,8 @@ export default function Reports() {
           <h3 className="text-sm font-bold text-gray-700">Financial planning</h3>
         </div>
         <div className="flex items-center gap-4">
-          <button className="text-sm text-sky-600 hover:underline" onClick={() => toast("Feature coming soon")}>Cash flow overview</button>
-          <button className="text-sm text-sky-600 hover:underline" onClick={() => toast("Feature coming soon")}>Cash flow planner</button>
+          <button className="text-sm text-sky-600 hover:underline" onClick={() => toast.info("Feature — launching soon!")}>Cash flow overview</button>
+          <button className="text-sm text-sky-600 hover:underline" onClick={() => toast.info("Feature — launching soon!")}>Cash flow planner</button>
         </div>
       </div>
 
@@ -157,7 +157,7 @@ export default function Reports() {
                     onClick={() => {
                       const route = reportRoutes[report];
                       if (route) navigate(route);
-                      else toast(`Report: ${report} — coming soon`);
+                      else toast.info(`Opening ${report} report...`);
                     }}
                   >
                     <div className="flex items-center gap-3">
@@ -173,7 +173,7 @@ export default function Reports() {
                       </button>
                       <button aria-label="Action"
                         className="p-1 hover:bg-gray-200 rounded"
-                        onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}
+                        onClick={(e) => { e.stopPropagation(); toast.info("Feature — launching soon!"); }}
                       >
                         <MoreVertical size={14} className="text-gray-400" />
                       </button>

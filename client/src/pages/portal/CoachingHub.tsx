@@ -22,6 +22,7 @@ import {
   CalendarPlus,
   Filter
 } from "lucide-react";
+import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -259,15 +260,15 @@ export default function CoachingHub() {
                         {session.materials && session.materials.length > 0 && (
                           <div className="mt-3 flex items-center gap-2">
                             {session.materials.map((m, i) => (
-                              <Button key={i} variant="outline" size="sm" className="gap-1"><FileText className="h-3 w-3" />{m.name}</Button>
+                              <Button key={i} variant="outline" size="sm" className="gap-1" onClick={() => toast.info("{m.name}")}><FileText className="h-3 w-3" />{m.name}</Button>
                             ))}
                           </div>
                         )}
                       </div>
                       <div className="flex flex-col gap-2">
-                        {session.status === "live" && <Button className="bg-emerald-600 hover:bg-emerald-700 gap-2"><Video className="h-4 w-4" />Rejoindre</Button>}
-                        {session.status === "upcoming" && <Button variant="outline" className="gap-2"><Calendar className="h-4 w-4" />Rappel</Button>}
-                        {session.recording && <Button variant="outline" size="sm" className="gap-1"><Play className="h-3 w-3" />Revoir</Button>}
+                        {session.status === "live" && <Button className="bg-emerald-600 hover:bg-emerald-700 gap-2" onClick={() => window.location.href = "/register"}><Video className="h-4 w-4" />Rejoindre</Button>}
+                        {session.status === "upcoming" && <Button variant="outline" className="gap-2" onClick={() => toast.info("Rappel")}><Calendar className="h-4 w-4" />Rappel</Button>}
+                        {session.recording && <Button variant="outline" size="sm" className="gap-1" onClick={() => toast.info("Revoir")}><Play className="h-3 w-3" />Revoir</Button>}
                       </div>
                     </div>
                   </CardContent>
@@ -298,7 +299,7 @@ export default function CoachingHub() {
                       <span key={i} className="px-2 py-1 bg-foundation-soft text-foundation text-xs rounded-full">{s}</span>
                     ))}
                   </div>
-                  <Button variant="outline" className="w-full gap-2"><MessageSquare className="h-4 w-4" />Envoyer un message</Button>
+                  <Button variant="outline" className="w-full gap-2" onClick={() => toast.info("Envoyer un message")}><MessageSquare className="h-4 w-4" />Envoyer un message</Button>
                 </div>
               </CardContent>
             </Card>
@@ -311,7 +312,7 @@ export default function CoachingHub() {
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-1">Besoin d'aide?</h3>
                   <p className="text-sm text-slate-500 mb-4">Réservez une session supplémentaire avec votre coach</p>
-                  <Button className="w-full bg-foundation-soft hover:bg-foundation-soft">Réserver maintenant</Button>
+                  <Button className="w-full bg-foundation-soft hover:bg-foundation-soft" onClick={() => toast.info("Réserver maintenant")}>Réserver maintenant</Button>
                 </div>
               </CardContent>
             </Card>

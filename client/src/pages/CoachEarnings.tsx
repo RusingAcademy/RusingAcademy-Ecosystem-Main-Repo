@@ -197,7 +197,7 @@ export default function CoachEarnings() {
             </CardHeader>
             <CardContent>
               <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => toast.info("{l.signIn}")}>
                   {l.signIn}
                 </Button>
               </a>

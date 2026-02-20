@@ -556,7 +556,7 @@ export default function BecomeCoachNew() {
                 : "Merci d'avoir postulé pour devenir coach Lingueefy. Nous examinerons votre candidature et vous répondrons dans les 2-3 jours ouvrables."}
             </p>
             <a href="/">
-              <Button variant="outline" className="gap-2">
+              <Button variant="outline" className="gap-2" onClick={() => window.location.href = "/"}>
                 {isEn ? "Back to Home" : "Retour à l'accueil"}
               </Button>
             </a>

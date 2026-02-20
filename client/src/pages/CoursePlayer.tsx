@@ -143,7 +143,7 @@ export default function CoursePlayer() {
         <BookOpen className="w-16 h-16 text-muted-foreground" />
         <p className="text-muted-foreground">Course not found</p>
         <Link href="/courses">
-          <Button variant="outline">Back to Catalog</Button>
+          <Button variant="outline" onClick={() => window.location.href = "/"}>Back to Catalog</Button>
         </Link>
       </div>
     );

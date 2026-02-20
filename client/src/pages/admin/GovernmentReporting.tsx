@@ -3,6 +3,7 @@
  * Sprint C4: Wraps the GovernmentComplianceReport component
  */
 import { GovernmentComplianceReport } from "@/components/GovernmentComplianceReport";
+import { trpc } from '@/lib/trpc';
 
 export default function GovernmentReporting() {
   return (

@@ -168,10 +168,10 @@ export default function CoachesManagement() {
 
     return (
       <div key={app.id} className="border-b last:border-b-0">
-        <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm dark:hover:bg-foundation/50 transition-colors">
+        <div className="p-4 flex items-center justify-between hover:bg-slate-50:bg-foundation/50 transition-colors">
           <div className="flex items-center gap-4 flex-1 min-w-0">
             {/* Photo */}
-            <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md overflow-hidden flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden flex-shrink-0">
               {app.photoUrl || app.profilePhotoUrl ? (
                 <img
                   src={app.photoUrl || app.profilePhotoUrl}
@@ -193,7 +193,7 @@ export default function CoachesManagement() {
             <div className="min-w-0 flex-1">
               <p className="font-semibold text-sm truncate">{name}</p>
               <p className="text-xs text-muted-foreground truncate">{email}</p>
-              {(app.resubmissionCount > 0 || app.isResubmission) && <Badge variant="secondary" className="text-xs mt-0.5 bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">Resubmission #{app.resubmissionCount || 1}</Badge>}
+              {(app.resubmissionCount > 0 || app.isResubmission) && <Badge variant="secondary" className="text-xs mt-0.5 bg-purple-100 text-purple-700">Resubmission #{app.resubmissionCount || 1}</Badge>}
               <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
                 {app.hourlyRate && (
                   <span className="flex items-center gap-1">
@@ -247,7 +247,7 @@ export default function CoachesManagement() {
 
         {/* Expanded Quick Preview */}
         {isExpanded && (
-          <div className="px-4 pb-4 pt-0 bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 dark:bg-white/[0.08] dark:backdrop-blur-md/20">
+          <div className="px-4 pb-4 pt-0 bg-slate-50">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               {app.bio && (
                 <div>
@@ -315,12 +315,12 @@ export default function CoachesManagement() {
           </div>
           <div className="flex items-center justify-between gap-2 overflow-x-auto">
             {[
-              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15", textColor: "text-slate-600 dark:text-slate-300", icon: UserPlus },
-              { label: "Pending", count: pending.length, color: "bg-amber-50 dark:bg-amber-900/20", textColor: "text-amber-600", icon: Clock },
-              { label: "Under Review", count: underReview.length, color: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-600", icon: Eye },
-              { label: "Approved", count: approved.length, color: "bg-emerald-50 dark:bg-emerald-900/20", textColor: "text-emerald-600", icon: CheckCircle },
-              { label: "Suspended", count: lifecycleStats?.profiles?.suspended || suspended.length, color: "bg-orange-50 dark:bg-orange-900/20", textColor: "text-orange-600", icon: ShieldOff },
-              { label: "Rejected", count: rejected.length, color: "bg-red-50 dark:bg-red-900/20", textColor: "text-red-600", icon: XCircle },
+              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100", textColor: "text-slate-600", icon: UserPlus },
+              { label: "Pending", count: pending.length, color: "bg-amber-50", textColor: "text-amber-600", icon: Clock },
+              { label: "Under Review", count: underReview.length, color: "bg-blue-50", textColor: "text-blue-600", icon: Eye },
+              { label: "Approved", count: approved.length, color: "bg-emerald-50", textColor: "text-emerald-600", icon: CheckCircle },
+              { label: "Suspended", count: lifecycleStats?.profiles?.suspended || suspended.length, color: "bg-orange-50", textColor: "text-orange-600", icon: ShieldOff },
+              { label: "Rejected", count: rejected.length, color: "bg-red-50", textColor: "text-red-600", icon: XCircle },
             ].map((stage, i, arr) => (
               <div key={stage.label} className="flex items-center gap-2 flex-1 min-w-0">
                 <div className={`${stage.color} rounded-lg p-3 flex-1 min-w-[100px] text-center`}>
@@ -431,7 +431,7 @@ export default function CoachesManagement() {
             <div className="space-y-6">
               {/* Header */}
               <div className="flex items-center gap-4">
-                <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md overflow-hidden flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-slate-100 overflow-hidden flex-shrink-0">
                   {selectedApp.photoUrl || selectedApp.profilePhotoUrl ? (
                     <img
                       src={selectedApp.photoUrl || selectedApp.profilePhotoUrl}
@@ -483,7 +483,7 @@ export default function CoachesManagement() {
               {selectedApp.headline && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Headline (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 rounded-lg p-3">{selectedApp.headline}</p>
+                  <p className="text-sm bg-slate-50 rounded-lg p-3">{selectedApp.headline}</p>
                 </div>
               )}
 
@@ -491,7 +491,7 @@ export default function CoachesManagement() {
               {(selectedApp as any).headlineFr && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Headline (FR)</p>
-                  <p className="text-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">{(selectedApp as any).headlineFr}</p>
+                  <p className="text-sm bg-blue-50 rounded-lg p-3">{(selectedApp as any).headlineFr}</p>
                 </div>
               )}
 
@@ -499,7 +499,7 @@ export default function CoachesManagement() {
               {selectedApp.bio && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Bio (EN)</p>
-                  <p className="text-sm bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
+                  <p className="text-sm bg-slate-50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
                 </div>
               )}
 
@@ -507,7 +507,7 @@ export default function CoachesManagement() {
               {(selectedApp as any).bioFr && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Bio (FR)</p>
-                  <p className="text-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 whitespace-pre-wrap">{(selectedApp as any).bioFr}</p>
+                  <p className="text-sm bg-blue-50 rounded-lg p-3 whitespace-pre-wrap">{(selectedApp as any).bioFr}</p>
                 </div>
               )}
 
@@ -567,7 +567,7 @@ export default function CoachesManagement() {
               {(selectedApp.resubmissionCount > 0 || selectedApp.isResubmission) && selectedApp.previousRejectionReason && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Previous Rejection Reason</p>
-                  <p className="text-sm bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3 text-amber-700 dark:text-amber-400 whitespace-pre-wrap">{selectedApp.previousRejectionReason}</p>
+                  <p className="text-sm bg-amber-50 rounded-lg p-3 text-amber-700 whitespace-pre-wrap">{selectedApp.previousRejectionReason}</p>
                 </div>
               )}
 
@@ -575,7 +575,7 @@ export default function CoachesManagement() {
               {selectedApp.status === "rejected" && selectedApp.reviewNotes && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Rejection Reason</p>
-                  <p className="text-sm bg-red-50 dark:bg-red-900/20 rounded-lg p-3 text-red-700 dark:text-red-400 whitespace-pre-wrap">{selectedApp.reviewNotes}</p>
+                  <p className="text-sm bg-red-50 rounded-lg p-3 text-red-700 whitespace-pre-wrap">{selectedApp.reviewNotes}</p>
                 </div>
               )}
             </div>

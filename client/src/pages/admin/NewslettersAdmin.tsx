@@ -70,7 +70,7 @@ export default function NewslettersAdmin() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateOpen(false)}>Cancel</Button>
-            <Button onClick={() => { toast("Newsletter campaigns backend coming soon"); setCreateOpen(false); }} disabled={!subject}>Save Draft</Button>
+            <Button onClick={() => { toast.info("Newsletter campaigns backend — launching soon!"); setCreateOpen(false); }} disabled={!subject}>Save Draft</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

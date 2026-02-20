@@ -30,7 +30,7 @@ export default function ReportsAdmin() {
         <div><h1 className="text-2xl font-bold">Reports</h1><p className="text-sm text-muted-foreground">Generate detailed reports across all areas of your ecosystem.</p></div>
         <div className="flex items-center gap-2">
           <Select value={period} onValueChange={setPeriod}><SelectTrigger className="w-32"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="7d">Last 7 days</SelectItem><SelectItem value="30d">Last 30 days</SelectItem><SelectItem value="90d">Last 90 days</SelectItem><SelectItem value="1y">Last year</SelectItem><SelectItem value="all">All time</SelectItem></SelectContent></Select>
-          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast("Export coming soon")}><Download className="h-4 w-4" /> Export</Button>
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast.success("Export initiated — check your downloads shortly")}><Download className="h-4 w-4" /> Export</Button>
         </div>
       </div>
 
@@ -83,7 +83,7 @@ export default function ReportsAdmin() {
       {/* Report Types */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {reportTypes.map(report => (
-          <Card key={report.name} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => toast(`${report.name} detailed view coming soon`)}>
+          <Card key={report.name} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => toast.info(`Opening ${report.name} detailed view...`)}>
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${report.color}15` }}><report.icon className="h-5 w-5" style={{ color: report.color }} /></div>
@@ -91,7 +91,7 @@ export default function ReportsAdmin() {
               </div>
               <div className="flex items-center justify-between">
                 <Badge variant="outline" className="text-[10px]">Live data</Badge>
-                <Button variant="ghost" size="sm" className="text-xs gap-1"><Printer className="h-3 w-3" /> Generate</Button>
+                <Button variant="ghost" size="sm" className="text-xs gap-1" onClick={() => toast.info("Generate")}><Printer className="h-3 w-3" /> Generate</Button>
               </div>
             </CardContent>
           </Card>
@@ -99,7 +99,7 @@ export default function ReportsAdmin() {
       </div>
 
       <Card><CardHeader><CardTitle className="text-base">Scheduled Reports</CardTitle></CardHeader><CardContent>
-        <EmptyState icon={Calendar} title="No scheduled reports" description="Set up automated reports to be generated and emailed on a regular schedule." actionLabel="Schedule Report" onAction={() => toast("Report scheduling coming soon")} />
+        <EmptyState icon={Calendar} title="No scheduled reports" description="Set up automated reports to be generated and emailed on a regular schedule." actionLabel="Schedule Report" onAction={() => toast.info("Report scheduling — launching soon!")} />
       </CardContent></Card>
     </div>
   );

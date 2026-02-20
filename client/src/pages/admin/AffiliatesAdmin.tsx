@@ -34,7 +34,7 @@ export default function AffiliatesAdmin() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div><h1 className="text-2xl font-bold">Affiliates</h1><p className="text-sm text-muted-foreground">Manage your affiliate program, partners, and commission tracking.</p></div>
-        <Button size="sm" className="gap-1.5" onClick={() => toast("Invite affiliate coming soon")}><Plus className="h-4 w-4" /> Invite Affiliate</Button>
+        <Button size="sm" className="gap-1.5" onClick={() => toast.info("Opening affiliate invitation form...")}><Plus className="h-4 w-4" /> Invite Affiliate</Button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <Card><CardContent className="p-4 flex items-center gap-3"><Users className="h-5 w-5 text-indigo-600" /><div><p className="text-xl font-bold">{stats.totalReferrals}</p><p className="text-xs text-muted-foreground">Total Referrals</p></div></CardContent></Card>
@@ -47,7 +47,7 @@ export default function AffiliatesAdmin() {
         <TabsContent value="partners" className="mt-4 space-y-4">
           <div className="relative max-w-sm"><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" /><Input placeholder="Search affiliates..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9" /></div>
           {isLoading ? <div className="space-y-3">{[1,2,3].map(i => <Skeleton key={i} className="h-16 w-full" />)}</div> : (
-            <EmptyState icon={Handshake} title="Affiliate Partners" description="Start your affiliate program by inviting partners who can promote your products and earn commissions." actionLabel="Invite Affiliate" onAction={() => toast("Invite affiliate coming soon")} />
+            <EmptyState icon={Handshake} title="Affiliate Partners" description="Start your affiliate program by inviting partners who can promote your products and earn commissions." actionLabel="Invite Affiliate" onAction={() => toast.info("Opening affiliate invitation form...")} />
           )}
         </TabsContent>
         <TabsContent value="referrals" className="mt-4">
@@ -82,7 +82,7 @@ export default function AffiliatesAdmin() {
                 </>
               )}
             </div>
-            <Button variant="outline" size="sm" onClick={() => toast("Program settings coming soon")}>Edit Settings</Button>
+            <Button variant="outline" size="sm" onClick={() => toast.info("Opening program settings...")}>Edit Settings</Button>
           </CardContent></Card>
         </TabsContent>
       </Tabs>

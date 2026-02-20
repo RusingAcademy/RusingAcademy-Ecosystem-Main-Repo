@@ -16,11 +16,11 @@ function formatCurrency(cents: number) {
 function LoadingSkeleton() {
   return (
     <div className="animate-pulse space-y-6 max-w-7xl mx-auto">
-      <div className="h-12 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl w-1/3" />
+      <div className="h-12 bg-gray-100 rounded-xl w-1/3" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[1, 2, 3, 4].map(i => <div key={i} className="h-28 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl" />)}
+        {[1, 2, 3, 4].map(i => <div key={i} className="h-28 bg-gray-100 rounded-xl" />)}
       </div>
-      <div className="h-48 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl" />
+      <div className="h-48 bg-gray-100 rounded-xl" />
     </div>
   );
 }
@@ -43,7 +43,7 @@ export default function HRBudget() {
       <HRLayout>
         <div className="max-w-2xl mx-auto text-center py-8 md:py-12 lg:py-16">
           <span className="material-icons text-3xl md:text-5xl lg:text-6xl text-gray-300 mb-4">lock</span>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-foreground mb-2">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">
             {lang === "fr" ? "Accès restreint" : "Restricted Access"}
           </h2>
           <p className="text-sm text-gray-500">
@@ -82,7 +82,7 @@ export default function HRBudget() {
             { icon: "warning", label: lang === "fr" ? "En souffrance" : "Overdue", value: formatCurrency(stats.totalOverdue), color: "var(--semantic-danger, var(--danger))" },
             { icon: "pending", label: lang === "fr" ? "Factures en attente" : "Pending Invoices", value: String(stats.pendingCount), color: "var(--semantic-warning, var(--warning))" },
           ].map(card => (
-            <div key={card.label} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5 hover:shadow-md transition-shadow">
+            <div key={card.label} className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${card.color}10` }}>
                 <span className="material-icons text-xl" style={{ color: card.color }}>{card.icon}</span>
               </div>
@@ -94,11 +94,11 @@ export default function HRBudget() {
 
         {/* Payment Progress Bar */}
         {stats.totalInvoiced > 0 && (
-          <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5 mb-6">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-foreground mb-3">
+          <div className="bg-white rounded-xl border border-gray-100 p-5 mb-6">
+            <h2 className="text-base font-semibold text-gray-900 mb-3">
               {lang === "fr" ? "Progression des paiements" : "Payment Progress"}
             </h2>
-            <div className="h-6 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden flex">
+            <div className="h-6 bg-gray-100 rounded-full overflow-hidden flex">
               <div className="h-full bg-[var(--semantic-success, var(--success))] transition-all" style={{ width: `${(stats.totalPaid / stats.totalInvoiced) * 100}%` }} />
               <div className="h-full bg-red-600 transition-all" style={{ width: `${(stats.totalOverdue / stats.totalInvoiced) * 100}%` }} />
             </div>
@@ -120,7 +120,7 @@ export default function HRBudget() {
         )}
 
         {/* Billing Records Table */}
-        <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 overflow-hidden">
+        <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
           <div className="p-4 border-b border-gray-100">
             <h2 className="text-base font-semibold text-gray-900">
               {lang === "fr" ? "Historique de facturation" : "Billing History"}
@@ -137,7 +137,7 @@ export default function HRBudget() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-100">
+                  <tr className="bg-gray-50 border-b border-gray-100">
                     <th className="text-left py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Nº Facture" : "Invoice #"}</th>
                     <th className="text-left py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Description" : "Description"}</th>
                     <th className="text-right py-3 px-4 text-xs text-gray-500 font-medium">{lang === "fr" ? "Montant" : "Amount"}</th>
@@ -151,7 +151,7 @@ export default function HRBudget() {
                       paid: "bg-green-50 text-green-700 border-green-200",
                       sent: "bg-blue-50 text-blue-700 border-blue-200",
                       overdue: "bg-red-50 text-red-600 border-red-200",
-                      draft: "bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md text-gray-600 border-gray-200",
+                      draft: "bg-gray-50 text-gray-600 border-gray-200",
                     };
                     const statusLabels: Record<string, { en: string; fr: string }> = {
                       paid: { en: "Paid", fr: "Payé" },
@@ -160,7 +160,7 @@ export default function HRBudget() {
                       draft: { en: "Draft", fr: "Brouillon" },
                     };
                     return (
-                      <tr key={rec.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                      <tr key={rec.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50">
                         <td className="py-3 px-4 text-sm font-medium text-gray-900">{rec.invoiceNumber ?? `INV-${rec.id}`}</td>
                         <td className="py-3 px-4 text-sm text-gray-600">{rec.description ?? "—"}</td>
                         <td className="py-3 px-4 text-right text-sm font-medium text-gray-900">{formatCurrency(rec.amount ?? 0)}</td>

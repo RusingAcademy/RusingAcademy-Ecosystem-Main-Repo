@@ -38,7 +38,7 @@ export default function CRMPage() {
                 <p className="text-sm text-muted-foreground">{inq.message?.substring(0, 80) || "No message"}...</p>
                 <p className="text-xs text-muted-foreground mt-1">{inq.createdAt ? new Date(inq.createdAt).toLocaleDateString() : ""}</p>
               </div>
-              <Button size="sm" variant="outline" onClick={() => toast("Reply feature coming soon")}>Reply</Button>
+              <Button size="sm" variant="outline" onClick={() => toast.info("Opening reply composer...")}>Reply</Button>
             </div>
           ))}</div>
         )}

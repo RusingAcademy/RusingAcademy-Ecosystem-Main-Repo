@@ -114,7 +114,7 @@ export default function Referrals() {
                 <p className="text-sm text-green-700 font-medium">Pending Commission</p>
                 <p className="text-2xl font-bold text-green-600">${(stats?.pendingCommission ?? 0).toFixed(2)}</p>
               </div>
-              <Button variant="outline" className="border-green-300 text-green-700 hover:bg-green-100 rounded-xl">
+              <Button variant="outline" className="border-green-300 text-green-700 hover:bg-green-100 rounded-xl" onClick={() => toast.info("Request Payout")}>
                 Request Payout
               </Button>
             </CardContent>

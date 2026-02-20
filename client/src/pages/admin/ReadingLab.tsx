@@ -9,16 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-
-// TODO: Replace with trpc calls when routers are wired
-const mockStats = { totalPassages: 48, completionRate: 72, avgScore: 78, activeReaders: 156 };
-const mockPassages = [
-  { id: 1, title: "La vie quotidienne à Montréal", level: "A2", wordCount: 320, questionCount: 5, status: "published", completions: 89 },
-  { id: 2, title: "Le système parlementaire canadien", level: "B2", wordCount: 580, questionCount: 8, status: "published", completions: 45 },
-  { id: 3, title: "Les innovations technologiques", level: "C1", wordCount: 720, questionCount: 10, status: "draft", completions: 0 },
-  { id: 4, title: "Recette traditionnelle québécoise", level: "A1", wordCount: 180, questionCount: 4, status: "published", completions: 134 },
-  { id: 5, title: "L'environnement et le développement durable", level: "B1", wordCount: 450, questionCount: 6, status: "published", completions: 67 },
-];
+import { trpc } from "@/lib/trpc";
+import { Loader2 } from "lucide-react";
 
 export default function ReadingLab() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -26,7 +18,28 @@ export default function ReadingLab() {
   const [levelFilter, setLevelFilter] = useState("all");
   const [showCreate, setShowCreate] = useState(false);
 
-  const filteredPassages = mockPassages.filter(p => {
+  // ── tRPC queries ──
+  const historyQuery = trpc.readingLab.history.useQuery(undefined, { retry: false });
+  const statsQuery = trpc.readingLab.stats.useQuery(undefined, { retry: false });
+  const isLoading = historyQuery.isLoading || statsQuery.isLoading;
+  const history = historyQuery.data ?? [];
+  const rawStats = statsQuery.data;
+  const mockStats = {
+    totalPassages: rawStats?.totalAttempts ?? 0,
+    completionRate: rawStats?.averageScore ?? 0,
+    avgScore: rawStats?.averageScore ?? 0,
+    activeReaders: rawStats?.totalAttempts ?? 0,
+  };
+  const mockPassages = history.map((h: any, i: number) => ({
+    id: h.id || i,
+    title: h.exerciseTitle || h.exerciseType || "Reading Exercise",
+    level: h.level || "B1",
+    wordCount: h.wordCount || 0,
+    questionCount: h.questionCount || 0,
+    status: "published",
+    completions: h.score || 0,
+  }));
+  const filteredPassages = mockPassages.filter((p: any) => {
     const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesLevel = levelFilter === "all" || p.level === levelFilter;
     return matchesSearch && matchesLevel;
@@ -34,7 +47,7 @@ export default function ReadingLab() {
 
   const levelColor = (level: string) => {
     const colors: Record<string, string> = { A1: "bg-green-500/10 text-green-500", A2: "bg-emerald-500/10 text-emerald-500", B1: "bg-blue-500/10 text-blue-500", B2: "bg-indigo-500/10 text-indigo-500", C1: "bg-purple-500/10 text-purple-500", C2: "bg-red-500/10 text-red-500" };
-    return colors[level] || "bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm0/10 text-gray-500";
+    return colors[level] || "bg-gray-50 text-gray-500";
   };
 
   return (
@@ -46,7 +59,7 @@ export default function ReadingLab() {
           </h1>
           <p className="text-sm text-muted-foreground mt-1">Manage reading passages, comprehension questions, and learner analytics</p>
         </div>
-        <Button onClick={() => { setShowCreate(true); toast.info("Create passage form — coming soon"); }}>
+        <Button onClick={() => { setShowCreate(true); toast.info("Create passage form —feature launching soon — stay tuned!"); }}>
           <Plus className="h-4 w-4 mr-1.5" /> Add Passage
         </Button>
       </div>

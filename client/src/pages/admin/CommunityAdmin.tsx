@@ -53,7 +53,7 @@ export default function CommunityAdmin() {
             background: "linear-gradient(135deg, #3C5759, #4A6B6D)",
             boxShadow: "0 2px 8px rgba(60, 87, 89, 0.2)",
           }}
-          onClick={() => toast("Create category coming soon")}
+          onClick={() => toast.info("Create category — launching soon!")}
         >
           <Plus className="h-4 w-4" aria-hidden="true" /> New Category
         </Button>
@@ -107,7 +107,7 @@ export default function CommunityAdmin() {
               title="No community categories"
               description="Create forum categories to organize discussions and help members find relevant topics."
               actionLabel="Create Category"
-              onAction={() => toast("Create category coming soon")}
+              onAction={() => toast.info("Create category — launching soon!")}
             />
           ) : (
             <div className="space-y-2">
@@ -131,7 +131,7 @@ export default function CommunityAdmin() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => toast("Category editor coming soon")}
+                        onClick={() => toast.info("Category editor — launching soon!")}
                       >
                         Edit
                       </Button>
@@ -197,14 +197,14 @@ export default function CommunityAdmin() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => toast("Review coming soon")}
+                        onClick={() => toast.info("Review — launching soon!")}
                       >
                         Review
                       </Button>
                       <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => toast("Remove coming soon")}
+                        onClick={() => toast.info("Remove — launching soon!")}
                       >
                         Remove
                       </Button>

@@ -180,7 +180,7 @@ export default function SLEExamMode() {
             <CardContent>
               {!exams || (exams as any[]).length === 0 ? (
                 <div className="text-center py-6 md:py-8 lg:py-12">
-                  <GraduationCap className="h-12 w-12 mx-auto text-black/40 dark:text-foreground/40 mb-3" />
+                  <GraduationCap className="h-12 w-12 mx-auto text-black/40 mb-3" />
                   <p className="font-medium">No exam sessions yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Sessions will appear as learners take SLE practice exams</p>
                 </div>
@@ -260,7 +260,7 @@ export default function SLEExamMode() {
             <CardContent>
               {!stats?.byType || (stats.byType as any[]).length === 0 ? (
                 <div className="text-center py-6 md:py-8 lg:py-12">
-                  <BarChart3 className="h-12 w-12 mx-auto text-black/40 dark:text-foreground/40 mb-3" />
+                  <BarChart3 className="h-12 w-12 mx-auto text-black/40 mb-3" />
                   <p className="font-medium">No exam results yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Results will appear after students complete exams</p>
                 </div>
@@ -366,7 +366,7 @@ export default function SLEExamMode() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg">Question Bank</CardTitle>
-                <Button size="sm" onClick={() => toast.info("Question editor coming soon — create reading, writing, and oral questions with AI-assisted generation")}>
+                <Button size="sm" onClick={() => toast.info("Opening question editor — create reading, writing, and oral questions with AI-assisted generation")}>
                   <Plus className="h-4 w-4 mr-1.5" /> Add Questions
                 </Button>
               </div>

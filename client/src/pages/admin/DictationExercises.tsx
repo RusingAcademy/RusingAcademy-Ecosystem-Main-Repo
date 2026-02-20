@@ -22,8 +22,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-// TODO: Replace with trpc hooks once the router is available
-// import { trpc } from "@/lib/trpc";
+import { trpc } from "@/lib/trpc";
 
 const mockExercises = [
   {
@@ -56,18 +55,20 @@ const mockCategories = [
 ];
 
 export default function DictationExercises() {
-  const [exercises, setExercises] = useState(mockExercises);
-  const [categories, setCategories] = useState(mockCategories);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // TODO: Replace with actual trpc query
-  // const { data: stats, isLoading: isStatsLoading } = trpc.admin.dictation.getStats.useQuery();
+  // ── tRPC queries ──
+  const dictationQuery = trpc.dictation.list.useQuery(undefined, { retry: false });
+  const dictationData = dictationQuery.data ?? [];
+  const exercises = dictationData.length > 0
+    ? dictationData.map((d: any) => ({ id: String(d.id), cefrLevel: d.level || 'B1', sentence: d.text || d.title || '', audioUrl: d.audioUrl || '', category: d.category || 'General' }))
+    : mockExercises;
+  const categories = mockCategories;
+  const isLoading = dictationQuery.isLoading;
   const stats = {
-    totalExercises: 3,
+    totalExercises: exercises.length,
     avgAccuracy: 85.4,
     completionRate: 76.2,
   };
-  const isStatsLoading = false;
+  const isStatsLoading = dictationQuery.isLoading;
 
   const handleAddExercise = () => {
     toast.success("New exercise added successfully!");
@@ -163,7 +164,7 @@ export default function DictationExercises() {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                    <thead className="bg-gray-50">
                       <tr>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sentence</th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CEFR</th>
@@ -174,14 +175,14 @@ export default function DictationExercises() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md divide-y divide-gray-200">
+                    <tbody className="bg-white divide-y divide-gray-200">
                       {exercises.map((exercise) => (
                         <tr key={exercise.id}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{exercise.sentence}</td>
                           <td className="px-6 py-4 whitespace-nowrap"><Badge>{exercise.cefrLevel}</Badge></td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exercise.category}</td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <Button variant="outline" size="sm"><FileAudio className="h-4 w-4 mr-2" /> Play</Button>
+                            <Button variant="outline" size="sm" onClick={() => toast.info("Play")}><FileAudio className="h-4 w-4 mr-2" /> Play</Button>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <Button variant="ghost" size="sm"><Edit className="h-4 w-4" /></Button>
@@ -207,7 +208,7 @@ export default function DictationExercises() {
                     {/* TODO: Implement CRUD for categories */}
                     <div className="flex items-center gap-2 mb-4">
                         <Input placeholder="New category name" className="max-w-xs" />
-                        <Button>Add Category</Button>
+                        <Button onClick={() => toast.info("Opening form...")}>Add Category</Button>
                     </div>
                     <div className="space-y-2">
                         {categories.map(cat => (

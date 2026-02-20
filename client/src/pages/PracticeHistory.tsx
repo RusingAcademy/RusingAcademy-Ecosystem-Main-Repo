@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -141,7 +142,7 @@ export default function PracticeHistory() {
           </CardHeader>
           <CardContent>
             <Link href="/login">
-              <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-500">
+              <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-500" onClick={() => toast.info("Se connecter")}>
                 Se connecter
               </Button>
             </Link>
@@ -165,7 +166,7 @@ export default function PracticeHistory() {
             </p>
           </div>
           <Link href="/dashboard">
-            <Button variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
+            <Button variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10" onClick={() => toast.info("← Retour au tableau de bord")}>
               ← Retour au tableau de bord
             </Button>
           </Link>

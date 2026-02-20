@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -236,8 +237,15 @@ export default function AdminReminders() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  // ── tRPC queries ──
+  const remindersQuery = trpc.reminders.list.useQuery(undefined, { retry: false });
+  const remindersData = remindersQuery.data ?? [];
+  const allReminders = remindersData.length > 0
+    ? remindersData.map((r: any) => ({ ...r, sentAt: new Date(r.sentAt || r.createdAt), sessionDate: new Date(r.sessionDate || r.createdAt), opened: r.opened ?? false, clicked: r.clicked ?? false }))
+    : mockReminders;
+
   // Filter reminders
-  const filteredReminders = mockReminders.filter((reminder) => {
+  const filteredReminders = allReminders.filter((reminder: any) => {
     if (typeFilter !== "all" && reminder.type !== typeFilter) return false;
     if (channelFilter !== "all" && reminder.channel !== channelFilter) return false;
     if (statusFilter !== "all" && reminder.status !== statusFilter) return false;
@@ -245,10 +253,10 @@ export default function AdminReminders() {
   });
 
   // Calculate stats
-  const totalSent = mockReminders.filter((r) => r.status === "sent").length;
-  const totalOpened = mockReminders.filter((r) => r.opened).length;
-  const totalClicked = mockReminders.filter((r) => r.clicked).length;
-  const totalFailed = mockReminders.filter((r) => r.status === "failed").length;
+  const totalSent = allReminders.filter((r: any) => r.status === "sent").length;
+  const totalOpened = allReminders.filter((r: any) => r.opened).length;
+  const totalClicked = allReminders.filter((r: any) => r.clicked).length;
+  const totalFailed = allReminders.filter((r: any) => r.status === "failed").length;
   const openRate = totalSent > 0 ? Math.round((totalOpened / totalSent) * 100) : 0;
   const clickRate = totalSent > 0 ? Math.round((totalClicked / totalSent) * 100) : 0;
 

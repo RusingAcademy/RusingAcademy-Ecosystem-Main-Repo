@@ -474,7 +474,7 @@ export default function FunnelBuilder() {
                   const Icon = stageIcons[stage.type] || Workflow;
                   return (
                     <div key={stage.id} className="flex items-center gap-1">
-                      <div className={`p-1 rounded ${stageColors[stage.type] || "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}><Icon className="h-3 w-3" /></div>
+                      <div className={`p-1 rounded ${stageColors[stage.type] || "bg-gray-100"}`}><Icon className="h-3 w-3" /></div>
                       {i < funnel.stages.length - 1 && <ChevronRight className="h-3 w-3 text-muted-foreground" />}
                     </div>
                   );

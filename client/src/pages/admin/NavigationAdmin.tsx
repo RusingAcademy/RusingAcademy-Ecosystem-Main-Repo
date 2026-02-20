@@ -53,7 +53,7 @@ export default function NavigationAdmin() {
                   <p className="text-xs text-muted-foreground flex items-center gap-1">{item.url} {item.openInNewTab && <ExternalLink className="h-3 w-3" />}</p>
                 </div>
                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast("Edit coming soon")}><Edit className="h-3.5 w-3.5" /></Button>
+                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast.info("Edit — launching soon!")}><Edit className="h-3.5 w-3.5" /></Button>
                   <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => { if (confirm("Remove?")) deleteMut.mutate({ id: item.id }); }}><Trash2 className="h-3.5 w-3.5 text-red-500" /></Button>
                 </div>
               </div>

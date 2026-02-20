@@ -568,7 +568,7 @@ function FAQSection() {
             {language === 'fr' ? 'Vous avez d\'autres questions ?' : 'Still have questions?'}
           </p>
           <Link href="/contact">
-            <Button variant="outline" className="border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full px-8">
+            <Button variant="outline" className="border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full px-8" onClick={() => window.location.href = "/contact"}>
               {language === 'fr' ? 'Contactez-nous' : 'Contact Us'}
             </Button>
           </Link>
@@ -1372,7 +1372,7 @@ export default function Home() {
                     </Button>
                   </Link>
                   <Link href="/become-a-coach">
-                    <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 glass-btn-outline rounded-full px-8 h-14 text-base font-medium">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 glass-btn-outline rounded-full px-8 h-14 text-base font-medium" onClick={() => toast.info("{t(\"cta.becomeCoach\")}")}>
                       {t("cta.becomeCoach")}
                     </Button>
                   </Link>

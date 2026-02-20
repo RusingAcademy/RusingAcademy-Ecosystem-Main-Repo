@@ -3,6 +3,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 // Header removed — excluded route uses dedicated layout
 // Footer removed — excluded route uses dedicated layout
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -153,7 +154,7 @@ export default function LearnerPayments() {
             </CardHeader>
             <CardContent>
               <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => toast.info("{t.signIn}")}>
                   {t.signIn}
                 </Button>
               </a>
@@ -191,7 +192,7 @@ export default function LearnerPayments() {
                 <h3 className="text-xl font-semibold mb-2">{t.noPayments}</h3>
                 <p className="text-muted-foreground mb-6">{t.noPaymentsDesc}</p>
                 <Link href="/coaches">
-                  <Button>{t.bookSession}</Button>
+                  <Button onClick={() => window.location.href = "/booking"}>{t.bookSession}</Button>
                 </Link>
               </CardContent>
             </Card>

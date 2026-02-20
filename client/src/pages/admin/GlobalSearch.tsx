@@ -20,7 +20,7 @@ const entityColors: Record<string, string> = {
   course: "text-violet-600 bg-violet-50",
   page: "text-amber-600 bg-amber-50",
   email_template: "text-rose-600 bg-rose-50",
-  notification: "text-black dark:text-foreground bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm",
+  notification: "text-black bg-gray-50",
 };
 
 const entityLinks: Record<string, string> = {
@@ -108,11 +108,11 @@ export default function GlobalSearchBar() {
       {/* Search Trigger Button */}
       <button
         onClick={() => { setOpen(true); setTimeout(() => inputRef.current?.focus(), 50); }}
-        className="flex items-center gap-2 px-3 py-2 text-sm text-black dark:text-foreground bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 hover:bg-gray-200 rounded-lg transition-colors w-full max-w-sm"
+        className="flex items-center gap-2 px-3 py-2 text-sm text-black bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors w-full max-w-sm"
       >
         <Search className="w-4 h-4" />
         <span className="flex-1 text-left">Search everything...</span>
-        <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-xs font-mono bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded border text-cyan-300">
+        <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-xs font-mono bg-white rounded border text-cyan-300">
           <Command className="w-3 h-3" />K
         </kbd>
       </button>
@@ -122,7 +122,7 @@ export default function GlobalSearchBar() {
         <div className="fixed inset-0 z-50 bg-black/40 flex items-start justify-center pt-[15vh]">
           <div
             ref={containerRef}
-            className="w-full max-w-xl bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl shadow-2xl border overflow-hidden"
+            className="w-full max-w-xl bg-white rounded-xl shadow-2xl border overflow-hidden"
           >
             {/* Search Input */}
             <div className="flex items-center gap-3 px-4 py-3 border-b">
@@ -137,11 +137,11 @@ export default function GlobalSearchBar() {
                 autoFocus
               />
               {query && (
-                <button onClick={() => setQuery("")} className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded">
+                <button onClick={() => setQuery("")} className="p-1 hover:bg-gray-100 rounded">
                   <X className="w-4 h-4 text-cyan-300" />
                 </button>
               )}
-              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded border text-cyan-300">ESC</kbd>
+              <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 rounded border text-cyan-300">ESC</kbd>
             </div>
 
             {/* Results */}
@@ -160,7 +160,7 @@ export default function GlobalSearchBar() {
                         <div className="p-1.5 rounded-lg bg-violet-50">
                           <Icon className="w-4 h-4 text-violet-600" />
                         </div>
-                        <span className="text-sm font-medium text-black dark:text-foreground">{action.label}</span>
+                        <span className="text-sm font-medium text-black">{action.label}</span>
                         <ArrowRight className="w-3 h-3 text-white/90 ml-auto" />
                       </button>
                     );
@@ -173,7 +173,7 @@ export default function GlobalSearchBar() {
                   {(results as any[]).length === 0 ? (
                     <div className="py-8 text-center">
                       <Search className="w-8 h-8 text-white/90 mx-auto mb-2" />
-                      <p className="text-sm text-black dark:text-foreground">No results for "{query}"</p>
+                      <p className="text-sm text-black">No results for "{query}"</p>
                       <p className="text-xs text-cyan-300 mt-1">Try a different search term</p>
                     </div>
                   ) : (
@@ -183,22 +183,22 @@ export default function GlobalSearchBar() {
                       </p>
                       {(results as any[]).map((r: any, idx: number) => {
                         const Icon = entityIcons[r.entityType] || Search;
-                        const colors = entityColors[r.entityType] || "text-black dark:text-foreground bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm";
+                        const colors = entityColors[r.entityType] || "text-black bg-gray-50";
                         const link = entityLinks[r.entityType] || "/admin";
                         return (
                           <button
                             key={`${r.entityType}-${r.id}-${idx}`}
-                            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors text-left"
+                            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors text-left"
                             onClick={() => handleNavigate(link)}
                           >
                             <div className={`p-1.5 rounded-lg ${colors.split(" ")[1]}`}>
                               <Icon className={`w-4 h-4 ${colors.split(" ")[0]}`} />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-black dark:text-foreground truncate">{r.name}</p>
+                              <p className="text-sm font-medium text-black truncate">{r.name}</p>
                               <p className="text-xs text-cyan-300 truncate">{r.email}</p>
                             </div>
-                            <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground capitalize">
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-black capitalize">
                               {r.entityType?.replace("_", " ")}
                             </span>
                           </button>
@@ -211,16 +211,16 @@ export default function GlobalSearchBar() {
             </div>
 
             {/* Footer */}
-            <div className="px-4 py-2 border-t bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md flex items-center justify-between">
+            <div className="px-4 py-2 border-t bg-gray-50 flex items-center justify-between">
               <div className="flex items-center gap-4 text-xs text-cyan-300">
                 <span className="flex items-center gap-1">
-                  <kbd className="px-1 py-0.5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded border text-[10px]">↑↓</kbd> Navigate
+                  <kbd className="px-1 py-0.5 bg-white rounded border text-[10px]">↑↓</kbd> Navigate
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="px-1 py-0.5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded border text-[10px]">↵</kbd> Open
+                  <kbd className="px-1 py-0.5 bg-white rounded border text-[10px]">↵</kbd> Open
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="px-1 py-0.5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded border text-[10px]">ESC</kbd> Close
+                  <kbd className="px-1 py-0.5 bg-white rounded border text-[10px]">ESC</kbd> Close
                 </span>
               </div>
               <span className="text-xs text-cyan-300">Powered by EcosystemHub</span>

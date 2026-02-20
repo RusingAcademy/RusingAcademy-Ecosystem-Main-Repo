@@ -42,7 +42,7 @@ export default function ABTesting() {
         </div>
         <Dialog open={showCreate} onOpenChange={setShowCreate}>
           <DialogTrigger asChild>
-            <Button className="gap-2"><Plus className="h-4 w-4" /> New Test</Button>
+            <Button className="gap-2" onClick={() => toast.info("Opening form...")}><Plus className="h-4 w-4" /> New Test</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader><DialogTitle>Create A/B Test</DialogTitle></DialogHeader>

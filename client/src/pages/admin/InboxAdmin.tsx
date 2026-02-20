@@ -60,7 +60,7 @@ export default function InboxAdmin() {
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <span className="text-xs text-muted-foreground">{msg.createdAt ? new Date(msg.createdAt).toLocaleDateString() : ""}</span>
-                <Button variant="ghost" size="icon" className="h-7 w-7" onClick={(e) => { e.stopPropagation(); toast("Reply coming soon"); }}><Reply className="h-3.5 w-3.5" /></Button>
+                <Button variant="ghost" size="icon" className="h-7 w-7" onClick={(e) => { e.stopPropagation(); toast.info("Reply — launching soon!"); }}><Reply className="h-3.5 w-3.5" /></Button>
               </div>
             </CardContent>
           </Card>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import WaveDivider from "@/components/WaveDivider";
 import { Card, CardContent } from "@/components/ui/card";
@@ -611,7 +610,7 @@ export default function AICoach() {
         </section>
       </main>
 
-      {!isInsideAppLayout && <Footer />}
+      {!isInsideAppLayout && null}
     </div>
   );
 }

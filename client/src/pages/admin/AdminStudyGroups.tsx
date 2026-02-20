@@ -117,7 +117,7 @@ const AdminStudyGroups = () => {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                    <thead className="bg-gray-50">
                       <tr>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Members</th>
@@ -127,7 +127,7 @@ const AdminStudyGroups = () => {
                         <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md divide-y divide-gray-200">
+                    <tbody className="bg-white divide-y divide-gray-200">
                       {(groups as any[]).map((g: any) => (
                         <tr key={g.id}>
                           <td className="px-4 py-3">

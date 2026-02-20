@@ -1,4 +1,5 @@
 // Header removed - using EcosystemHeaderGold from layout instead
+import { toast } from "sonner";
 import Footer from "@/components/Footer"; import B2BSection from "./B2BSection"; import B2GSection from "./B2GSection";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -264,7 +265,7 @@ export default function RusingAcademyHome() {
                     </Button>
                   </Link>
                   <Link href="/rusingacademy/programs">
-                    <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 border-white/40 text-white hover:bg-white/15 hover:border-white/60 rounded-full font-medium backdrop-blur-sm">
+                    <Button size="lg" variant="outline" className="gap-2 px-8 h-12 text-base border-2 border-white/40 text-white hover:bg-white/15 hover:border-white/60 rounded-full font-medium backdrop-blur-sm" onClick={() => toast.info("{language === \"en\" ? \"View Programs\"")}>
                       {language === "en" ? "View Programs" : "Voir les programmes"}
                     </Button>
                   </Link>

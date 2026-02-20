@@ -593,7 +593,7 @@ export default function AdminContentManagement() {
               You don't have permission to access this page.
             </p>
             <Link href="/">
-              <Button className="w-full mt-4">Go Home</Button>
+              <Button className="w-full mt-4" onClick={() => window.location.href = "/"}>Go Home</Button>
             </Link>
           </CardContent>
         </Card>

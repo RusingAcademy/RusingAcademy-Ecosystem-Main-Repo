@@ -84,8 +84,8 @@ export default function MembershipTiers() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Membership Tiers</h2>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">
+          <h2 className="text-2xl font-bold text-gray-900">Membership Tiers</h2>
+          <p className="text-gray-500 mt-1">
             Manage subscription plans and Stripe pricing
           </p>
         </div>
@@ -103,13 +103,13 @@ export default function MembershipTiers() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600" />
         </div>
       ) : !tiers?.length ? (
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-12 text-center">
-          <p className="text-gray-500 dark:text-gray-400">No membership tiers yet. Create your first one.</p>
+        <div className="bg-gray-50 rounded-lg p-12 text-center">
+          <p className="text-gray-500">No membership tiers yet. Create your first one.</p>
         </div>
       ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-gray-900">
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tier</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pricing</th>
@@ -118,9 +118,9 @@ export default function MembershipTiers() {
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="divide-y divide-gray-200">
               {(tiers as Tier[]).map((tier) => (
-                <tr key={tier.id} className="hover:bg-gray-50 dark:hover:bg-gray-750">
+                <tr key={tier.id} className="hover:bg-gray-50:bg-gray-750">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       {tier.badgeColor && (
@@ -130,7 +130,7 @@ export default function MembershipTiers() {
                         />
                       )}
                       <div>
-                        <div className="font-medium text-gray-900 dark:text-white">{tier.name}</div>
+                        <div className="font-medium text-gray-900">{tier.name}</div>
                         {tier.nameFr && (
                           <div className="text-sm text-gray-500">{tier.nameFr}</div>
                         )}

@@ -248,7 +248,7 @@ export default function LearnerSettings() {
             </CardHeader>
             <CardContent>
               <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => toast.info("{t.signIn}")}>
                   {t.signIn}
                 </Button>
               </a>

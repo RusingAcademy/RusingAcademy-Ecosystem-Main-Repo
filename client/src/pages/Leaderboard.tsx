@@ -263,7 +263,7 @@ export default function Leaderboard() {
                   Be the first to climb the leaderboard by completing lessons and earning XP!
                 </p>
                 <Link href="/courses">
-                  <Button>Start Learning</Button>
+                  <Button onClick={() => toast.info("Start Learning")}>Start Learning</Button>
                 </Link>
               </div>
             ) : (

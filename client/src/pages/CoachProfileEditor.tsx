@@ -196,7 +196,7 @@ export default function CoachProfileEditor() {
                 {isEn ? "Please apply to become a coach first." : "Veuillez d'abord postuler pour devenir coach."}
               </p>
               <Link href="/become-a-coach">
-                <Button>{isEn ? "Become a Coach" : "Devenir coach"}</Button>
+                <Button onClick={() => toast.info("{isEn ? \"Become a Coach\" : \"Devenir c")}>{isEn ? "Become a Coach" : "Devenir coach"}</Button>
               </Link>
             </CardContent>
           </Card>

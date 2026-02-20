@@ -58,60 +58,7 @@ const challengeTypes = [
   { value: "conversation_practice", label: "Conversation Practice", icon: MessageSquare, color: "bg-teal-100 text-teal-700" },
 ];
 
-// Mock data for admin display
-const mockChallenges = [
-  {
-    id: 1,
-    title: "Speak Like a Pro",
-    titleFr: "Parlez Comme un Pro",
-    description: "Complete 5 oral practice sessions this week",
-    descriptionFr: "Complétez 5 sessions de pratique orale cette semaine",
-    challengeType: "oral_challenge",
-    targetCount: 5,
-    targetUnit: "sessions",
-    xpReward: 150,
-    badgeReward: "oral_champion",
-    weekStart: new Date().toISOString(),
-    weekEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-    isActive: true,
-    participants: 47,
-    completions: 12,
-  },
-  {
-    id: 2,
-    title: "Vocabulary Blitz",
-    titleFr: "Blitz de Vocabulaire",
-    description: "Learn 50 new vocabulary words",
-    descriptionFr: "Apprenez 50 nouveaux mots de vocabulaire",
-    challengeType: "vocabulary_sprint",
-    targetCount: 50,
-    targetUnit: "words",
-    xpReward: 200,
-    badgeReward: "vocab_master",
-    weekStart: new Date().toISOString(),
-    weekEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-    isActive: true,
-    participants: 83,
-    completions: 29,
-  },
-  {
-    id: 3,
-    title: "Grammar Gauntlet",
-    titleFr: "Défi de Grammaire",
-    description: "Score 80%+ on 10 grammar exercises",
-    descriptionFr: "Obtenez 80%+ sur 10 exercices de grammaire",
-    challengeType: "grammar_gauntlet",
-    targetCount: 10,
-    targetUnit: "exercises",
-    xpReward: 175,
-    badgeReward: "grammar_guru",
-    weekStart: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-    weekEnd: new Date().toISOString(),
-    isActive: false,
-    participants: 65,
-    completions: 41,
-  },
-];
+// Data loaded from tRPC challenges router
 
 export default function WeeklyChallenges() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -120,7 +67,39 @@ export default function WeeklyChallenges() {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [selectedChallenge, setSelectedChallenge] = useState<any>(null);
   const [form, setForm] = useState<ChallengeForm>(defaultForm);
-  const [challenges] = useState(mockChallenges);
+  // ── tRPC queries ──
+  const { data: challengesData, refetch } = trpc.challenges.listAll.useQuery({ limit: 100 });
+  const createMutation = trpc.challenges.create.useMutation({
+    onSuccess: () => { refetch(); toast.success("Challenge created successfully!"); setShowCreateDialog(false); setForm(defaultForm); },
+    onError: (err) => toast.error(err.message),
+  });
+  const updateMutation = trpc.challenges.update.useMutation({
+    onSuccess: () => { refetch(); toast.success("Challenge updated successfully!"); setShowEditDialog(false); },
+    onError: (err) => toast.error(err.message),
+  });
+  const deleteMutation = trpc.challenges.delete.useMutation({
+    onSuccess: () => { refetch(); toast.success("Challenge deleted"); },
+    onError: (err) => toast.error(err.message),
+  });
+
+  // Map DB fields to UI fields for backward compatibility
+  const challenges = (challengesData ?? []).map((c: any) => ({
+    id: c.id,
+    title: c.name || "",
+    titleFr: c.nameFr || "",
+    description: c.description || "",
+    descriptionFr: c.descriptionFr || "",
+    challengeType: c.type || "sessions",
+    targetCount: c.targetCount || 0,
+    targetUnit: c.period || "exercises",
+    xpReward: c.pointsReward || 0,
+    badgeReward: "",
+    weekStart: c.startAt || c.createdAt || new Date().toISOString(),
+    weekEnd: c.endAt || new Date().toISOString(),
+    isActive: c.isActive ?? true,
+    participants: 0,
+    completions: 0,
+  }));
 
   const filteredChallenges = useMemo(() => {
     return challenges.filter(
@@ -134,9 +113,16 @@ export default function WeeklyChallenges() {
   const pastChallenges = filteredChallenges.filter((c) => !c.isActive);
 
   const handleCreate = () => {
-    toast.success("Challenge created successfully!");
-    setShowCreateDialog(false);
-    setForm(defaultForm);
+    createMutation.mutate({
+      name: form.title,
+      nameFr: form.titleFr,
+      description: form.description,
+      descriptionFr: form.descriptionFr,
+      type: "sessions",
+      targetCount: form.targetCount,
+      pointsReward: form.xpReward,
+      period: "weekly",
+    });
   };
 
   const handleEdit = (challenge: any) => {
@@ -159,12 +145,21 @@ export default function WeeklyChallenges() {
   };
 
   const handleSaveEdit = () => {
-    toast.success("Challenge updated successfully!");
-    setShowEditDialog(false);
+    if (!selectedChallenge) return;
+    updateMutation.mutate({
+      id: selectedChallenge.id,
+      name: form.title,
+      nameFr: form.titleFr,
+      description: form.description,
+      descriptionFr: form.descriptionFr,
+      targetCount: form.targetCount,
+      pointsReward: form.xpReward,
+      isActive: form.isActive,
+    });
   };
 
   const handleDelete = (id: number) => {
-    toast.success("Challenge deleted");
+    deleteMutation.mutate({ id });
   };
 
   const totalParticipants = challenges.reduce((sum, c) => sum + c.participants, 0);
@@ -339,7 +334,7 @@ export default function WeeklyChallenges() {
                   <CardContent className="p-5">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}>
+                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100"}`}>
                           <TypeIcon className="h-5 w-5" />
                         </div>
                         <div>
@@ -385,7 +380,7 @@ export default function WeeklyChallenges() {
                       </div>
                     </div>
                     {/* Progress bar */}
-                    <div className="mt-3 h-1.5 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
+                    <div className="mt-3 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all"
                         style={{ width: `${completionRate}%` }}
@@ -416,7 +411,7 @@ export default function WeeklyChallenges() {
                   <CardContent className="p-5">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm"}`}>
+                        <div className={`p-2 rounded-lg ${typeInfo?.color || "bg-gray-100"}`}>
                           <TypeIcon className="h-5 w-5" />
                         </div>
                         <div>

@@ -123,7 +123,7 @@ export default function Customers() {
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500/30"
           />
         </div>
-        <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast("Feature coming soon")}>
+        <button aria-label="Action" className="qb-btn-outline flex items-center gap-1" onClick={() => toast.info("Feature — launching soon!")}>
           <Filter size={14} /> Filter
         </button>
       </div>
@@ -162,7 +162,7 @@ export default function Customers() {
                   </span>
                 </td>
                 <td>
-                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded" onClick={(e) => { e.stopPropagation(); toast("Feature coming soon"); }}>
+                  <button aria-label="Action" className="p-1 hover:bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded" onClick={(e) => { e.stopPropagation(); toast.info("Feature — launching soon!"); }}>
                     <MoreVertical size={14} className="text-gray-400" />
                   </button>
                 </td>

@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import WaveDivider from "@/components/WaveDivider";
@@ -366,7 +367,7 @@ export default function ForBusiness() {
                       </li>
                     ))}
                   </ul>
-                  <Button className={`w-full ${pkg.popular ? 'bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white' : ''}`} variant={pkg.popular ? "default" : "outline"}>
+                  <Button className={`w-full ${pkg.popular ? 'bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white' : ''}`} variant={pkg.popular ? "default" : "outline"} onClick={() => toast.info("{t.ctaPrimary}")}>
                     {t.ctaPrimary}
                   </Button>
                 </CardContent>

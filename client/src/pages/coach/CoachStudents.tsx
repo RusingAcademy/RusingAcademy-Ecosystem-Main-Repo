@@ -24,7 +24,7 @@ function StatusBadge({ status }: { status: string }) {
 
 function ProgressBar({ value }: { value: number }) {
   return (
-    <div className="w-full h-1.5 bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-full overflow-hidden">
+    <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
       <div className="h-full rounded-full transition-all" style={{ width: `${Math.min(value, 100)}%`, background: `linear-gradient(90deg, ${ACCENT}, ${ACCENT}80)` }} />
     </div>
   );
@@ -64,7 +64,7 @@ export default function CoachStudents() {
               <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                 placeholder={lang === "fr" ? "Rechercher..." : "Search..."}
                 aria-label={lang === "fr" ? "Rechercher un étudiant" : "Search students"}
-                className="pl-9 pr-4 py-2 text-sm border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-lg focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))]/20 focus:border-violet-600 outline-none w-48" />
+                className="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))]/20 focus:border-violet-600 outline-none w-48" />
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function CoachStudents() {
         <div className="flex gap-2 mb-4" role="tablist">
           {(["all", "active", "paused", "completed"] as const).map(f => (
             <button key={f} onClick={() => setFilter(f)} role="tab" aria-selected={filter === f}
-              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-violet-600 text-white" : "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-600 hover:bg-gray-200"}`}>
+              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${filter === f ? "bg-violet-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
               {f === "all" ? (lang === "fr" ? "Tous" : "All") :
                f === "active" ? (lang === "fr" ? "Actifs" : "Active") :
                f === "paused" ? (lang === "fr" ? "En pause" : "Paused") :
@@ -86,11 +86,11 @@ export default function CoachStudents() {
         {learnersQuery.isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="h-48 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl animate-pulse" />
+              <div key={i} className="h-48 bg-gray-50 rounded-xl animate-pulse" />
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-8 md:py-12 lg:py-16 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100">
+          <div className="text-center py-8 md:py-12 lg:py-16 bg-white rounded-xl border border-gray-100">
             <span className="material-icons text-gray-300 text-2xl md:text-4xl lg:text-5xl">school</span>
             <p className="text-sm text-gray-500 mt-2">
               {search
@@ -112,7 +112,7 @@ export default function CoachStudents() {
               const sessions = student.sessionsCompleted || 0;
               const level = student.level || student.currentLevel || "—";
               return (
-                <div key={student.id || student.learnerId} className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-100 dark:border-white/15 p-5 hover:shadow-md transition-shadow group">
+                <div key={student.id || student.learnerId} className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow group">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-[var(--color-purple-600, var(--color-purple-600, #9333ea))] flex items-center justify-center text-white font-bold text-sm">
@@ -137,11 +137,11 @@ export default function CoachStudents() {
                   )}
 
                   <div className="grid grid-cols-2 gap-2 text-center mb-3">
-                    <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg py-2">
+                    <div className="bg-gray-50 rounded-lg py-2">
                       <p className="text-sm font-bold text-gray-900">{sessions}</p>
                       <p className="text-[9px] text-gray-500">{lang === "fr" ? "Sessions" : "Sessions"}</p>
                     </div>
-                    <div className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg py-2">
+                    <div className="bg-gray-50 rounded-lg py-2">
                       <p className="text-sm font-bold text-gray-900">{level}</p>
                       <p className="text-[9px] text-gray-500">{lang === "fr" ? "Niveau" : "Level"}</p>
                     </div>

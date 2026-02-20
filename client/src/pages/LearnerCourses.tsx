@@ -9,6 +9,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 // Header removed — excluded route uses dedicated layout
 // Footer removed — excluded route uses dedicated layout
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -357,7 +358,7 @@ export default function LearnerCourses() {
                 <h3 className="text-xl font-semibold text-black dark:text-foreground mb-2">{l.noCourses}</h3>
                 <p className="text-black dark:text-foreground dark:text-cyan-300 mb-6">{l.noCoursesDesc}</p>
                 <Link href="/curriculum">
-                  <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
+                  <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700" onClick={() => window.scrollTo({ top: document.body.scrollHeight * 0.3, behavior: "smooth" })}>
                     {l.exploreCourses}
                   </Button>
                 </Link>
@@ -400,7 +401,7 @@ export default function LearnerCourses() {
                 <h3 className="text-lg font-semibold text-black dark:text-foreground mb-2">{l.noPlans}</h3>
                 <p className="text-black dark:text-foreground dark:text-cyan-300 mb-4">{l.noPlansDesc}</p>
                 <Link href="/ecosystem">
-                  <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
+                  <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50" onClick={() => toast.info("{l.viewPlans}")}>
                     {l.viewPlans}
                   </Button>
                 </Link>

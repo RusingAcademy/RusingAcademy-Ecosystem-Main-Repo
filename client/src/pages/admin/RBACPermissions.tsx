@@ -144,7 +144,7 @@ export default function RBACPermissions() {
       </div>
 
       {selectedRole === "admin" && (
-        <div className="p-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-lg text-sm text-amber-700 dark:text-amber-300">
+        <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-700">
           Admin role has full access to all modules and actions. This cannot be changed.
         </div>
       )}

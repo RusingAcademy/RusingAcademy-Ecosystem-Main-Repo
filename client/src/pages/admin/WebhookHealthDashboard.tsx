@@ -87,13 +87,13 @@ const t = {
 
 function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
-    processed: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
-    failed: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
-    processing: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
-    pending_retry: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    processed: "bg-green-100 text-green-800",
+    failed: "bg-red-100 text-red-800",
+    processing: "bg-blue-100 text-blue-800",
+    pending_retry: "bg-yellow-100 text-yellow-800",
   };
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${colors[status] || "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-800"}`}>
+    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${colors[status] || "bg-gray-100 text-gray-800"}`}>
       {status === "processed" && <CheckCircle2 className="h-3 w-3 mr-1" />}
       {status === "failed" && <XCircle className="h-3 w-3 mr-1" />}
       {status === "processing" && <Clock className="h-3 w-3 mr-1" />}

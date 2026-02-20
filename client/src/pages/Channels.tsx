@@ -75,7 +75,7 @@ export default function Channels() {
             </p>
           </div>
           {user?.role === "admin" && (
-            <Button className="rounded-xl"  onClick={() => toast("Channel creation coming soon")}>
+            <Button className="rounded-xl"  onClick={() => toast.info("Channel creation — launching soon!")}>
               <Plus className="w-4 h-4 mr-2" /> {t.channels.createChannel}
             </Button>
           )}

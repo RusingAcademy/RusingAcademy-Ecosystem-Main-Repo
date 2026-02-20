@@ -26,8 +26,9 @@ import {
   Settings as SettingsIcon,
 } from "lucide-react";
 import React, { useState } from "react";
+import { trpc } from "@/lib/trpc";
 
-// TODO: Replace with tRPC router types once available
+// Connected to discussions tRPC router
 type Thread = {
   id: string;
   title: string;
@@ -49,53 +50,56 @@ type FlaggedContent = {
 };
 
 const AdminDiscussions = () => {
-  // TODO: Replace with tRPC hooks
-  const [stats, setStats] = useState({
-    totalThreads: 1256,
-    totalReplies: 8432,
-    activeUsers: 345,
-    reportedContent: 12,
+  // ── tRPC queries ──
+  const { data: threadsData, refetch: refetchThreads } = trpc.discussions.getThreads.useQuery(
+    { page: 1, limit: 50 },
+    { retry: false }
+  );
+  const { data: reportsData, refetch: refetchReports } = trpc.discussions.getReports.useQuery(
+    undefined,
+    { retry: false }
+  );
+  const deleteMutation = trpc.discussions.deleteThread.useMutation({
+    onSuccess: () => { refetchThreads(); toast.warning("Thread deleted."); },
+    onError: (err) => toast.error(err.message),
   });
-  const [threads, setThreads] = useState<Thread[]>([
-    {
-      id: "1",
-      title: "Struggling with French Subjunctive",
-      category: "Grammar",
-      author: "Eleanor Vance",
-      replies: 15,
-      status: "active",
-      createdAt: new Date(),
-    },
-    {
-      id: "2",
-      title: "Best resources for SLE vocabulary?",
-      category: "SLE Prep",
-      author: "Marcus Holloway",
-      replies: 22,
-      status: "active",
-      createdAt: new Date(),
-    },
-    {
-      id: "3",
-      title: "Pronunciation tips for 'r' sound",
-      category: "Pronunciation",
-      author: "Anya Petrova",
-      replies: 8,
-      status: "locked",
-      createdAt: new Date(),
-    },
-  ]);
-  const [flaggedContent, setFlaggedContent] = useState<FlaggedContent[]>([
-    {
-      id: "fc1",
-      threadId: "2",
-      threadTitle: "Best resources for SLE vocabulary?",
-      contentSnippet: "This is spam, buy my course...",
-      reportedBy: "John Doe",
-      reason: "Spam/Advertising",
-      reportedAt: new Date(),
-    },
-  ]);
+  const lockMutation = trpc.discussions.toggleLock.useMutation({
+    onSuccess: () => { refetchThreads(); toast.success("Thread lock toggled."); },
+    onError: (err) => toast.error(err.message),
+  });
+  const resolveReportMutation = trpc.discussions.resolveReport.useMutation({
+    onSuccess: () => { refetchReports(); toast.success("Report resolved."); },
+    onError: (err) => toast.error(err.message),
+  });
+
+  // Map tRPC data to UI format
+  const threads: Thread[] = (threadsData?.threads ?? []).map((t: any) => ({
+    id: String(t.id),
+    title: t.title || "Untitled",
+    category: t.category || "General",
+    author: t.authorName || "Anonymous",
+    replies: t.replyCount || 0,
+    status: t.isLocked ? "locked" : "active",
+    createdAt: new Date(t.createdAt),
+  }));
+
+  const flaggedContent: FlaggedContent[] = (reportsData ?? []).map((r: any) => ({
+    id: String(r.id),
+    threadId: String(r.threadId || ""),
+    threadTitle: r.threadTitle || "",
+    contentSnippet: r.reason || "",
+    reportedBy: r.reporterName || "Anonymous",
+    reason: r.reason || "Other",
+    reportedAt: new Date(r.createdAt),
+  }));
+
+  const stats = {
+    totalThreads: threadsData?.total ?? 0,
+    totalReplies: threads.reduce((sum, t) => sum + t.replies, 0),
+    activeUsers: threads.length,
+    reportedContent: flaggedContent.length,
+  };
+
   const [categories, setCategories] = useState([
     "Grammar",
     "Vocabulary",
@@ -108,39 +112,32 @@ const AdminDiscussions = () => {
     "1. Be respectful. 2. No spam or self-promotion. 3. Stay on topic."
   );
 
-  // TODO: Implement tRPC mutations for actions
   const handleCreateThread = () => {
     toast.info("New thread creation initiated.");
-    // Placeholder for mutation
   };
 
   const handleLockThread = (id: string) => {
-    setThreads(
-      threads.map((t) => (t.id === id ? { ...t, status: "locked" } : t))
-    );
-    toast.success(`Thread ${id} has been locked.`);
+    lockMutation.mutate({ threadId: Number(id) });
   };
 
   const handleDeleteThread = (id: string) => {
-    setThreads(threads.filter((t) => t.id !== id));
-    toast.warning(`Thread ${id} has been deleted.`);
+    deleteMutation.mutate({ threadId: Number(id) });
   };
 
   const handleSaveChanges = () => {
-    // TODO: Add tRPC mutation to save settings
     toast.success("Settings have been saved successfully!");
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm/50 dark:bg-white/[0.08] dark:backdrop-blur-md/50 min-h-screen">
-      <header className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-white/15 dark:border-white/15">
+    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+      <header className="flex items-center justify-between pb-6 border-b border-gray-200">
         <div className="flex items-center space-x-4">
-          <div className="p-3 bg-blue-100 rounded-full dark:bg-blue-900/50">
-            <MessageCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+          <div className="p-3 bg-blue-100 rounded-full">
+            <MessageCircle className="w-6 h-6 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-foreground dark:text-foreground">Discussion Boards</h1>
-            <p className="text-sm text-gray-500 dark:text-muted-foreground">
+            <h1 className="text-2xl font-bold text-gray-900">Discussion Boards</h1>
+            <p className="text-sm text-gray-500">
               Manage discussion threads, moderate content, and configure board settings.
             </p>
           </div>
@@ -223,8 +220,8 @@ const AdminDiscussions = () => {
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
@@ -234,13 +231,13 @@ const AdminDiscussions = () => {
                       <th scope="col" className="relative px-6 py-3"><span className="sr-only">Actions</span></th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 divide-y divide-gray-200 dark:bg-white/[0.08] dark:backdrop-blur-md dark:divide-gray-700">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {threads.map((thread) => (
                       <tr key={thread.id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-foreground dark:text-foreground">{thread.title}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-muted-foreground">{thread.category}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-muted-foreground">{thread.author}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-muted-foreground">{thread.replies}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{thread.title}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{thread.category}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{thread.author}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{thread.replies}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
                           <Badge variant={thread.status === 'active' ? 'default' : thread.status === 'locked' ? 'secondary' : 'destructive'}>{thread.status}</Badge>
                         </td>
@@ -268,7 +265,7 @@ const AdminDiscussions = () => {
               {flaggedContent.length > 0 ? (
                 <div className="space-y-4">
                   {flaggedContent.map((item) => (
-                    <div key={item.id} className="p-4 border rounded-lg bg-yellow-50/50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+                    <div key={item.id} className="p-4 border rounded-lg bg-yellow-50/50 border-yellow-200">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="font-semibold">{item.threadTitle}</p>
@@ -276,8 +273,8 @@ const AdminDiscussions = () => {
                           <p className="text-xs text-muted-foreground mt-1">Reported by {item.reportedBy} for: <span className="font-medium">{item.reason}</span></p>
                         </div>
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="sm"><Shield className="w-4 h-4 mr-2"/>Dismiss</Button>
-                          <Button variant="destructive" size="sm"><Trash2 className="w-4 h-4 mr-2"/>Remove Content</Button>
+                          <Button variant="outline" size="sm" onClick={() => toast.info("Dismiss")}><Shield className="w-4 h-4 mr-2"/>Dismiss</Button>
+                          <Button variant="destructive" size="sm" onClick={() => toast.error("Item removed")}><Trash2 className="w-4 h-4 mr-2"/>Remove Content</Button>
                         </div>
                       </div>
                     </div>
@@ -286,8 +283,8 @@ const AdminDiscussions = () => {
               ) : (
                 <div className="text-center py-6 md:py-8 lg:py-12">
                   <Flag className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-foreground dark:text-foreground">No flagged content</h3>
-                  <p className="mt-1 text-sm text-gray-500 dark:text-muted-foreground">The moderation queue is currently empty.</p>
+                  <h3 className="mt-2 text-sm font-medium text-gray-900">No flagged content</h3>
+                  <p className="mt-1 text-sm text-gray-500">The moderation queue is currently empty.</p>
                 </div>
               )}
             </CardContent>
@@ -310,13 +307,13 @@ const AdminDiscussions = () => {
                 </div>
                 <div className="flex items-center space-x-2 pt-2">
                     <Input placeholder="New category name" className="max-w-xs"/>
-                    <Button>Add Category</Button>
+                    <Button onClick={() => toast.info("Opening form...")}>Add Category</Button>
                 </div>
               </div>
               <div className="space-y-2">
                 <h3 className="font-medium">Posting Rules</h3>
                 <textarea
-                  className="w-full p-2 border rounded-md bg-transparent dark:border-white/15"
+                  className="w-full p-2 border rounded-md bg-transparent"
                   rows={4}
                   value={postingRules}
                   onChange={(e) => setPostingRules(e.target.value)}

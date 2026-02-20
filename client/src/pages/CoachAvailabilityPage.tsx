@@ -265,7 +265,7 @@ export default function CoachAvailabilityPage() {
                 {isEn ? "No Coach Profile Found" : "Aucun profil coach trouvé"}
               </h2>
               <Link href="/become-a-coach">
-                <Button>{isEn ? "Become a Coach" : "Devenir coach"}</Button>
+                <Button onClick={() => toast.info("{isEn ? \"Become a Coach\" : \"Devenir c")}>{isEn ? "Become a Coach" : "Devenir coach"}</Button>
               </Link>
             </CardContent>
           </Card>

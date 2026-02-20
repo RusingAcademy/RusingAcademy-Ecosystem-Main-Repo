@@ -32,9 +32,9 @@ export default function EmailPage() {
 
   const quickActions = [
     { title: "Email Templates", desc: "Create and manage reusable email templates", icon: FileText, action: () => navigate("/admin/email-templates") },
-    { title: "Broadcast", desc: "Send one-time emails to all users or segments", icon: Send, action: () => toast("Broadcast feature coming soon") },
-    { title: "Sequences", desc: "Set up automated email drip campaigns", icon: Mail, action: () => toast("Sequences feature coming soon") },
-    { title: "Subscribers", desc: "View and manage your email subscriber list", icon: Users, action: () => toast("Subscribers feature coming soon") },
+    { title: "Broadcast", desc: "Send one-time emails to all users or segments", icon: Send, action: () => toast.info("Broadcast feature — launching soon!") },
+    { title: "Sequences", desc: "Set up automated email drip campaigns", icon: Mail, action: () => toast.info("Sequences feature — launching soon!") },
+    { title: "Subscribers", desc: "View and manage your email subscriber list", icon: Users, action: () => toast.info("Subscribers feature — launching soon!") },
     { title: "Settings", desc: "Configure sender name, reply-to, and SMTP", icon: Settings, action: () => navigate("/admin/email-settings") },
   ];
 
@@ -70,7 +70,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                  <div className="p-2 rounded-lg bg-blue-100">
                     <Mail className="h-5 w-5 text-blue-600" />
                   </div>
                   <div>
@@ -83,7 +83,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
+                  <div className="p-2 rounded-lg bg-green-100">
                     <CheckCircle className="h-5 w-5 text-green-600" />
                   </div>
                   <div>
@@ -96,7 +96,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-red-100 dark:bg-red-900/30">
+                  <div className="p-2 rounded-lg bg-red-100">
                     <XCircle className="h-5 w-5 text-red-600" />
                   </div>
                   <div>
@@ -109,7 +109,7 @@ export default function EmailPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-amber-100 dark:bg-amber-900/30">
+                  <div className="p-2 rounded-lg bg-amber-100">
                     <AlertTriangle className="h-5 w-5 text-amber-600" />
                   </div>
                   <div>
@@ -252,7 +252,7 @@ export default function EmailPage() {
                   <item.icon className="h-8 w-8 text-muted-foreground mb-3" />
                   <h3 className="font-semibold mb-1">{item.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{item.desc}</p>
-                  <Button size="sm" variant="outline">Open</Button>
+                  <Button size="sm" variant="outline" onClick={() => toast.info("Open")}>Open</Button>
                 </CardContent>
               </Card>
             ))}

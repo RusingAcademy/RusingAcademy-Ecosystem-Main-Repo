@@ -325,7 +325,7 @@ export default function MySessions() {
                     <Calendar className="h-12 w-12 mx-auto text-black dark:text-foreground mb-4" />
                     <p className="text-black dark:text-foreground mb-4">{l.noUpcoming}</p>
                     <Link href="/coaches">
-                      <Button>{l.findCoach}</Button>
+                      <Button onClick={() => toast.info("{l.findCoach}")}>{l.findCoach}</Button>
                     </Link>
                   </CardContent>
                 </Card>
@@ -383,7 +383,7 @@ export default function MySessions() {
                               </div>
                               <div className="flex flex-wrap gap-2 mt-4">
                                 <Link href={`/coach/${coach?.slug}`}>
-                                  <Button size="sm" variant="outline">
+                                  <Button size="sm" variant="outline" onClick={() => toast.info("{l.viewProfile}")}>
                                     {l.viewProfile}
                                   </Button>
                                 </Link>
@@ -467,7 +467,7 @@ export default function MySessions() {
                               </div>
                               <div className="flex flex-wrap gap-2 mt-4">
                                 <Link href={`/coach/${coach?.slug}`}>
-                                  <Button size="sm" variant="outline">
+                                  <Button size="sm" variant="outline" onClick={() => window.location.href = "/booking"}>
                                     {l.bookSession}
                                   </Button>
                                 </Link>

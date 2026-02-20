@@ -1,12 +1,9 @@
 /**
  * AdminRemindersSection — Reminders management inside AdminControlCenter
- * 
- * Wraps the core reminders UI, stripping the standalone layout
- * so it renders inside AdminLayout.
+ * Connected to reminders.getAll tRPC router for real data
  */
 import { useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -31,40 +28,33 @@ import {
   Bell,
   Plus,
   Search,
-  Filter,
   Clock,
   CheckCircle,
   AlertTriangle,
-  Users,
   Mail,
+  Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
 
-// Mock data
-const mockReminders = [
-  { id: 1, title: "Session reminder — Marie Dupont", type: "session", recipient: "marie.dupont@gc.ca", scheduledAt: "2026-02-14 09:00", status: "pending", channel: "email" },
-  { id: 2, title: "Assignment deadline — Path II Module 3", type: "deadline", recipient: "group:path-ii", scheduledAt: "2026-02-15 17:00", status: "pending", channel: "push" },
-  { id: 3, title: "Weekly progress check-in", type: "progress", recipient: "all-learners", scheduledAt: "2026-02-16 10:00", status: "sent", channel: "email" },
-  { id: 4, title: "Coach availability update", type: "admin", recipient: "coaches", scheduledAt: "2026-02-13 08:00", status: "sent", channel: "email" },
-  { id: 5, title: "SLE exam preparation — 7 days", type: "exam", recipient: "sle-candidates", scheduledAt: "2026-02-20 09:00", status: "scheduled", channel: "sms" },
-];
-
 export default function AdminRemindersSection() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState<"all" | "24h" | "1h">("all");
+  const [channelFilter, setChannelFilter] = useState<"all" | "email" | "in_app">("all");
 
-  const filteredReminders = mockReminders.filter(r => {
-    const matchesSearch = r.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = typeFilter === "all" || r.type === typeFilter;
-    return matchesSearch && matchesType;
-  });
+  // ── tRPC query ──
+  const { data, isLoading } = trpc.reminders.getAll.useQuery(
+    { type: typeFilter, channel: channelFilter, limit: 50 },
+    { retry: false }
+  );
 
-  const stats = {
-    total: mockReminders.length,
-    pending: mockReminders.filter(r => r.status === "pending").length,
-    sent: mockReminders.filter(r => r.status === "sent").length,
-    scheduled: mockReminders.filter(r => r.status === "scheduled").length,
-  };
+  const reminders = data?.reminders ?? [];
+  const stats = data?.stats ?? { totalSent: 0, openRate: 0, clickRate: 0, failed: 0 };
+
+  const filteredReminders = reminders.filter((r) =>
+    searchQuery === "" ||
+    (r.recipientName?.toLowerCase().includes(searchQuery.toLowerCase())) ||
+    (r.recipientEmail?.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
   return (
     <div className="space-y-6">
@@ -76,7 +66,7 @@ export default function AdminRemindersSection() {
             Manage automated reminders for sessions, deadlines, and progress check-ins
           </p>
         </div>
-        <Button onClick={() => toast.info("Create reminder form coming soon")}>
+        <Button onClick={() => toast.info("Opening reminder creation form...")}>
           <Plus className="h-4 w-4 mr-2" />
           New Reminder
         </Button>
@@ -87,12 +77,12 @@ export default function AdminRemindersSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+              <div className="p-2 bg-blue-100 rounded-lg">
                 <Bell className="h-5 w-5 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Total Reminders</p>
-                <p className="text-2xl font-bold">{stats.total}</p>
+                <p className="text-sm text-muted-foreground">Total Sent</p>
+                <p className="text-2xl font-bold">{stats.totalSent}</p>
               </div>
             </div>
           </CardContent>
@@ -100,25 +90,12 @@ export default function AdminRemindersSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
-                <Clock className="h-5 w-5 text-yellow-600" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Pending</p>
-                <p className="text-2xl font-bold">{stats.pending}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+              <div className="p-2 bg-green-100 rounded-lg">
                 <CheckCircle className="h-5 w-5 text-green-600" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Sent</p>
-                <p className="text-2xl font-bold">{stats.sent}</p>
+                <p className="text-sm text-muted-foreground">Open Rate</p>
+                <p className="text-2xl font-bold">{stats.openRate}%</p>
               </div>
             </div>
           </CardContent>
@@ -126,12 +103,25 @@ export default function AdminRemindersSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+              <div className="p-2 bg-purple-100 rounded-lg">
                 <CalendarClock className="h-5 w-5 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Scheduled</p>
-                <p className="text-2xl font-bold">{stats.scheduled}</p>
+                <p className="text-sm text-muted-foreground">Click Rate</p>
+                <p className="text-2xl font-bold">{stats.clickRate}%</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-red-100 rounded-lg">
+                <AlertTriangle className="h-5 w-5 text-red-600" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Failed</p>
+                <p className="text-2xl font-bold">{stats.failed}</p>
               </div>
             </div>
           </CardContent>
@@ -143,23 +133,30 @@ export default function AdminRemindersSection() {
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search reminders..."
+            placeholder="Search by recipient..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
           />
         </div>
-        <Select value={typeFilter} onValueChange={setTypeFilter}>
+        <Select value={typeFilter} onValueChange={(v) => setTypeFilter(v as any)}>
           <SelectTrigger className="w-40">
             <SelectValue placeholder="Type" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="session">Session</SelectItem>
-            <SelectItem value="deadline">Deadline</SelectItem>
-            <SelectItem value="progress">Progress</SelectItem>
-            <SelectItem value="exam">Exam</SelectItem>
-            <SelectItem value="admin">Admin</SelectItem>
+            <SelectItem value="24h">24h Reminder</SelectItem>
+            <SelectItem value="1h">1h Reminder</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={channelFilter} onValueChange={(v) => setChannelFilter(v as any)}>
+          <SelectTrigger className="w-40">
+            <SelectValue placeholder="Channel" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Channels</SelectItem>
+            <SelectItem value="email">Email</SelectItem>
+            <SelectItem value="in_app">In-App</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -167,42 +164,71 @@ export default function AdminRemindersSection() {
       {/* Table */}
       <Card>
         <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Reminder</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Recipient</TableHead>
-                <TableHead>Channel</TableHead>
-                <TableHead>Scheduled</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredReminders.map((r) => (
-                <TableRow key={r.id}>
-                  <TableCell className="font-medium">{r.title}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline" className="capitalize">{r.type}</Badge>
-                  </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">{r.recipient}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1">
-                      {r.channel === "email" && <Mail className="h-3 w-3" />}
-                      {r.channel === "push" && <Bell className="h-3 w-3" />}
-                      <span className="text-sm capitalize">{r.channel}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-sm">{r.scheduledAt}</TableCell>
-                  <TableCell>
-                    <Badge variant={r.status === "sent" ? "default" : r.status === "pending" ? "secondary" : "outline"}>
-                      {r.status}
-                    </Badge>
-                  </TableCell>
+          {isLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              <span className="ml-2 text-muted-foreground">Loading reminders...</span>
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Recipient</TableHead>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Channel</TableHead>
+                  <TableHead>Sent At</TableHead>
+                  <TableHead>Opened</TableHead>
+                  <TableHead>Status</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {filteredReminders.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                      No reminders found. Reminders are automatically created when sessions are booked.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  filteredReminders.map((r) => (
+                    <TableRow key={r.id}>
+                      <TableCell>
+                        <div>
+                          <p className="font-medium">{r.recipientName}</p>
+                          {r.recipientEmail && (
+                            <p className="text-xs text-muted-foreground">{r.recipientEmail}</p>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{r.type}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-1">
+                          {r.channel === "email" ? <Mail className="h-3 w-3" /> : <Bell className="h-3 w-3" />}
+                          <span className="text-sm capitalize">{r.channel.replace("_", " ")}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-sm">
+                        {r.sentAt ? new Date(r.sentAt).toLocaleString() : "—"}
+                      </TableCell>
+                      <TableCell>
+                        {r.opened ? (
+                          <CheckCircle className="h-4 w-4 text-green-500" />
+                        ) : (
+                          <Clock className="h-4 w-4 text-muted-foreground" />
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={r.status === "sent" ? "default" : r.status === "failed" ? "destructive" : "secondary"}>
+                          {r.status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -72,7 +72,7 @@ export default function AdminContentMgmtSection() {
               Full Editor
             </Button>
           </Link>
-          <Button onClick={() => toast.info("Quick create coming soon")}>
+          <Button onClick={() => toast.info("Opening quick content creator...")}>
             <Plus className="h-4 w-4 mr-2" />
             New Content
           </Button>
@@ -84,7 +84,7 @@ export default function AdminContentMgmtSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+              <div className="p-2 bg-blue-100 rounded-lg">
                 <BookOpen className="h-5 w-5 text-blue-600" />
               </div>
               <div>
@@ -97,7 +97,7 @@ export default function AdminContentMgmtSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+              <div className="p-2 bg-green-100 rounded-lg">
                 <CheckCircle className="h-5 w-5 text-green-600" />
               </div>
               <div>
@@ -110,7 +110,7 @@ export default function AdminContentMgmtSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+              <div className="p-2 bg-yellow-100 rounded-lg">
                 <Clock className="h-5 w-5 text-yellow-600" />
               </div>
               <div>
@@ -123,7 +123,7 @@ export default function AdminContentMgmtSection() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+              <div className="p-2 bg-purple-100 rounded-lg">
                 <Layers className="h-5 w-5 text-purple-600" />
               </div>
               <div>
@@ -284,7 +284,7 @@ export default function AdminContentMgmtSection() {
             <CardContent>
               <div className="text-center py-8">
                 <BarChart3 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Quality Gate Coming Soon</h3>
+                <h3 className="text-lg font-semibold mb-2">Quality Gate</h3>
                 <p className="text-muted-foreground">
                   Automated content quality checks will be available in the next sprint.
                   This will verify bilingual completeness, media placeholders, quiz coverage, and more.

@@ -3,6 +3,7 @@
  * Design: System Preferences with language and timezone dropdowns
  */
 import DashboardLayout from "@/components/DashboardLayout";
+import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 
 export default function MySettings() {

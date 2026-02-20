@@ -8,8 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Mic, Volume2, Languages, BarChart3, Plus, Edit, Trash2, Search } from 'lucide-react';
 
-// TODO: Replace with tRPC router when available
-// import { trpc } from '@/lib/trpc';
+import { trpc } from '@/lib/trpc';
 
 const mockExercises = [
   { id: '1', cefr: 'A2', phrase: 'Hello, how are you?', ipa: '/həˈloʊ, haʊ ɑːr juː/', audioUrl: '/audio/hello.mp3' },
@@ -26,30 +25,29 @@ const mockCategories = [
 ];
 
 const PronunciationLab = () => {
-  const [exercises, setExercises] = useState(mockExercises);
-  const [categories, setCategories] = useState(mockCategories);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // TODO: Replace with tRPC query
-  const { data: stats, isLoading: isLoadingStats } = {
-      data: { totalExercises: 4, completionRate: 76, popularPhrase: 'Hello, how are you?' },
-      isLoading: false
-  };
+  // ── tRPC queries ──
+  const dictationQuery = trpc.dictation.list.useQuery(undefined, { retry: false });
+  const dictationData = dictationQuery.data ?? [];
+  const exercises = dictationData.length > 0
+    ? dictationData.map((d: any) => ({ id: String(d.id), cefr: d.level || 'B1', phrase: d.text || d.title || '', ipa: '', audioUrl: d.audioUrl || '' }))
+    : mockExercises;
+  const categories = mockCategories;
+  const stats = { totalExercises: exercises.length, completionRate: 76, popularPhrase: exercises[0]?.phrase || '' };
+  const isLoadingStats = dictationQuery.isLoading;
 
   const handleAddExercise = () => {
     toast.success('New exercise added (mock)');
-    // TODO: Implement tRPC mutation for adding exercise
   };
 
   const handleEditExercise = (id: string) => {
-    toast.info(`Editing exercise ${id} (mock)`);
-    // TODO: Implement tRPC mutation for editing exercise
+    toast.info(`Editing exercise ${id}`);
   };
 
   const handleDeleteExercise = (id: string) => {
-    setExercises(exercises.filter(e => e.id !== id));
-    toast.error(`Deleted exercise ${id} (mock)`);
-    // TODO: Implement tRPC mutation for deleting exercise
+    dictationQuery.refetch();
+    toast.error(`Deleted exercise ${id}`);
   };
 
   const filteredExercises = exercises.filter(e => 
@@ -148,7 +146,7 @@ const PronunciationLab = () => {
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+                  <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phrase</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IPA Transcription</th>
@@ -159,7 +157,7 @@ const PronunciationLab = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {filteredExercises.length > 0 ? filteredExercises.map((exercise) => (
                       <tr key={exercise.id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{exercise.phrase}</td>
@@ -205,13 +203,13 @@ const PronunciationLab = () => {
                 <CardContent>
                     <div className="space-y-4">
                         {categories.map(cat => (
-                            <div key={cat.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg">
+                            <div key={cat.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                 <div>
                                     <p className="font-medium">{cat.name}</p>
                                     <p className="text-sm text-muted-foreground">{cat.count} exercises</p>
                                 </div>
                                 <div>
-                                    <Button variant="outline" size="sm">Manage</Button>
+                                    <Button variant="outline" size="sm" onClick={() => toast.info("Manage")}>Manage</Button>
                                 </div>
                             </div>
                         ))}

@@ -20,6 +20,7 @@ import {
   Star,
   ArrowRight
 } from "lucide-react";
+import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -249,8 +250,8 @@ export default function MyPath() {
                             <div className="flex items-center gap-3">
                               <span className="text-xs text-slate-500 flex items-center gap-1"><Clock className="h-3 w-3" />{module.duration}</span>
                               {isModuleCompleted && <CheckCircle2 className="h-5 w-5 text-emerald-500" />}
-                              {isModuleActive && <Button size="sm" className="bg-cta hover:bg-amber-600">Continuer</Button>}
-                              {!isModuleLocked && !isModuleCompleted && !isModuleActive && <Button size="sm" variant="outline">Commencer</Button>}
+                              {isModuleActive && <Button size="sm" className="bg-cta hover:bg-amber-600" onClick={() => toast.info("Continuer")}>Continuer</Button>}
+                              {!isModuleLocked && !isModuleCompleted && !isModuleActive && <Button size="sm" variant="outline" onClick={() => toast.info("Commencer")}>Commencer</Button>}
                             </div>
                           </div>
                         );

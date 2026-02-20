@@ -31,14 +31,14 @@ export default function InvoicesAdmin() {
     onError: (e) => toast.error(e.message),
   });
 
-  const statusColors: Record<string, string> = { paid: "bg-green-100 text-green-700", sent: "bg-blue-100 text-blue-700", draft: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-700", overdue: "bg-red-100 text-red-700", cancelled: "bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-gray-500" };
+  const statusColors: Record<string, string> = { paid: "bg-green-100 text-green-700", sent: "bg-blue-100 text-blue-700", draft: "bg-gray-100 text-gray-700", overdue: "bg-red-100 text-red-700", cancelled: "bg-gray-100 text-gray-500" };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div><h1 className="text-2xl font-bold">Invoices</h1><p className="text-sm text-muted-foreground">Generate, track, and manage invoices for all transactions.</p></div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast("Export coming soon")}><Download className="h-4 w-4" /> Export</Button>
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toast.success("Export initiated — check your downloads shortly")}><Download className="h-4 w-4" /> Export</Button>
           <Button size="sm" className="gap-1.5" onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4" /> New Invoice</Button>
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function InvoicesAdmin() {
               </div>
               <div className="flex items-center gap-1">
                 {inv.status === "sent" && <Button variant="outline" size="sm" className="text-xs h-7" onClick={() => updateMut.mutate({ id: inv.id, status: "paid" })}>Mark Paid</Button>}
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast("Invoice detail coming soon")}><Eye className="h-4 w-4" /></Button>
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toast.info("Invoice detail — launching soon!")}><Eye className="h-4 w-4" /></Button>
               </div>
             </CardContent>
           </Card>

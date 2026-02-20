@@ -4,6 +4,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 // Footer removed — excluded route uses dedicated layout
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -56,127 +57,37 @@ import { StatCard } from "@/components/dashboard";
 import { TeamOverviewWidget } from "@/components/TeamOverviewWidget";
 import { TeamComplianceWidget } from "@/components/TeamComplianceWidget";
 
-// Mock data for HR dashboard
-const mockTeamMembers = [
-  {
-    id: 1,
-    name: "Marie Leblanc",
-    email: "marie.leblanc@gc.ca",
-    department: "Policy Branch",
-    currentLevel: "BBB",
-    targetLevel: "CBC",
-    progress: 65,
-    sessionsCompleted: 12,
-    nextSession: "2026-01-15",
-    status: "on-track",
-  },
-  {
-    id: 2,
-    name: "Jean-Pierre Tremblay",
-    email: "jp.tremblay@gc.ca",
-    department: "Operations",
-    currentLevel: "AAA",
-    targetLevel: "BBB",
-    progress: 45,
-    sessionsCompleted: 8,
-    nextSession: "2026-01-14",
-    status: "needs-attention",
-  },
-  {
-    id: 3,
-    name: "Sarah Chen",
-    email: "sarah.chen@gc.ca",
-    department: "Finance",
-    currentLevel: "CBC",
-    targetLevel: "CCC",
-    progress: 85,
-    sessionsCompleted: 20,
-    nextSession: "2026-01-13",
-    status: "on-track",
-  },
-  {
-    id: 4,
-    name: "Michael Thompson",
-    email: "m.thompson@gc.ca",
-    department: "HR Services",
-    currentLevel: "BBB",
-    targetLevel: "CBC",
-    progress: 30,
-    sessionsCompleted: 5,
-    nextSession: null,
-    status: "at-risk",
-  },
-];
-
-// Mock budget allocation data
-const mockBudgetAllocations = [
-  {
-    id: 1,
-    department: "Policy Branch",
-    totalBudget: 50000,
-    spent: 32500,
-    allocated: 45000,
-    learners: 12,
-    avgPerLearner: 2708,
-  },
-  {
-    id: 2,
-    department: "Operations",
-    totalBudget: 35000,
-    spent: 18200,
-    allocated: 28000,
-    learners: 8,
-    avgPerLearner: 2275,
-  },
-  {
-    id: 3,
-    department: "Finance",
-    totalBudget: 25000,
-    spent: 22100,
-    allocated: 24000,
-    learners: 6,
-    avgPerLearner: 3683,
-  },
-  {
-    id: 4,
-    department: "HR Services",
-    totalBudget: 20000,
-    spent: 8500,
-    allocated: 15000,
-    learners: 5,
-    avgPerLearner: 1700,
-  },
-];
-
-const mockCohorts = [
-  {
-    id: 1,
-    name: "Q1 2026 - CBC Preparation",
-    members: 15,
-    startDate: "2026-01-06",
-    endDate: "2026-03-31",
-    avgProgress: 42,
-    status: "active",
-  },
-  {
-    id: 2,
-    name: "Executive French Immersion",
-    members: 8,
-    startDate: "2025-11-01",
-    endDate: "2026-02-28",
-    avgProgress: 78,
-    status: "active",
-  },
-  {
-    id: 3,
-    name: "New Hires Bilingual Onboarding",
-    members: 22,
-    startDate: "2026-02-01",
-    endDate: "2026-04-30",
-    avgProgress: 0,
-    status: "upcoming",
-  },
-];
+// Data types for HR dashboard
+type TeamMember = {
+  id: number;
+  name: string;
+  email: string;
+  department: string;
+  currentLevel: string;
+  targetLevel: string;
+  progress: number;
+  sessionsCompleted: number;
+  nextSession: string | null;
+  status: string;
+};
+type BudgetAllocation = {
+  id: number;
+  department: string;
+  totalBudget: number;
+  spent: number;
+  allocated: number;
+  learners: number;
+  avgPerLearner: number;
+};
+type Cohort = {
+  id: number;
+  name: string;
+  members: number;
+  startDate: string;
+  endDate: string;
+  avgProgress: number;
+  status: string;
+};
 
 export default function HRDashboard() {
   const { isInsideAppLayout } = useAppLayout();
@@ -202,6 +113,48 @@ export default function HRDashboard() {
   const [exportCohort, setExportCohort] = useState("all");
   const [exportStartDate, setExportStartDate] = useState("");
   const [exportEndDate, setExportEndDate] = useState("");
+
+  // ── tRPC queries for real data ──
+  const orgQuery = trpc.hr.getMyOrganization.useQuery(undefined, { retry: false, enabled: isAuthenticated });
+  const orgId = orgQuery.data?.id;
+  const statsQuery = trpc.hr.getDashboardStats.useQuery(
+    { organizationId: orgId! },
+    { retry: false, enabled: !!orgId }
+  );
+  const learnersQuery = trpc.hr.getLearners.useQuery(
+    { organizationId: orgId! },
+    { retry: false, enabled: !!orgId }
+  );
+  const cohortsQuery = trpc.hr.getCohorts.useQuery(
+    { organizationId: orgId! },
+    { retry: false, enabled: !!orgId }
+  );
+
+  // Map tRPC data to UI format
+  const mockTeamMembers: TeamMember[] = (learnersQuery.data ?? []).map((l: any) => ({
+    id: l.id || l.userId,
+    name: l.name || l.userName || "Unknown",
+    email: l.email || "",
+    department: l.department || "General",
+    currentLevel: l.currentLevel || "X",
+    targetLevel: l.targetLevel || "—",
+    progress: l.progress || 0,
+    sessionsCompleted: l.sessionsCompleted || 0,
+    nextSession: l.nextSession || null,
+    status: l.progress >= 70 ? "on-track" : l.progress >= 40 ? "needs-attention" : "at-risk",
+  }));
+
+  const mockCohorts: Cohort[] = (cohortsQuery.data ?? []).map((c: any) => ({
+    id: c.id,
+    name: c.name || "Unnamed Cohort",
+    members: c.memberCount || 0,
+    startDate: c.startDate ? new Date(c.startDate).toISOString().split("T")[0] : "",
+    endDate: c.endDate ? new Date(c.endDate).toISOString().split("T")[0] : "",
+    avgProgress: c.avgProgress || 0,
+    status: c.status || "active",
+  }));
+
+  const mockBudgetAllocations: BudgetAllocation[] = [];  // Budget data loaded from HR budget page
 
   // Export functionality
   const handleExport = async (format: "csv" | "pdf") => {
@@ -435,7 +388,7 @@ export default function HRDashboard() {
             </CardHeader>
             <CardContent>
               <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
+                <Button className="w-full" size="lg" onClick={() => toast.info("{l.signIn}")}>
                   {l.signIn}
                 </Button>
               </a>
@@ -977,7 +930,7 @@ export default function HRDashboard() {
                             </Badge>
                           </TableCell>
                           <TableCell>
-                            <Button variant="outline" size="sm">
+                            <Button variant="outline" size="sm" onClick={() => toast.info("{l.manageCohort}")}>
                               {l.manageCohort}
                             </Button>
                           </TableCell>

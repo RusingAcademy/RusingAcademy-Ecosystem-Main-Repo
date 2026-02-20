@@ -98,7 +98,7 @@ export default function UserProfile() {
           <h1 className="text-2xl font-bold mb-4">User Not Found</h1>
           <p className="text-muted-foreground mb-6">This profile does not exist or has been removed.</p>
           <Link href="/app/badges">
-            <Button>Back to Leaderboard</Button>
+            <Button onClick={() => window.location.href = "/"}>Back to Leaderboard</Button>
           </Link>
         </main>
         
@@ -249,7 +249,7 @@ export default function UserProfile() {
               )}
               {badges && badges.length > 8 && (
                 <Link href="/app/badges">
-                  <Button variant="outline" className="w-full mt-4">
+                  <Button variant="outline" className="w-full mt-4" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                     View All Badges
                   </Button>
                 </Link>

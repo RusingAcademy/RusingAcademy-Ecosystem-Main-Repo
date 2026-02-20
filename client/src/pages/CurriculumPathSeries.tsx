@@ -774,7 +774,7 @@ export default function CurriculumPathSeries() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Link href="/ecosystem">
-                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
+                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10" onClick={() => toast.info("{isEn ? \"Talk to a Coach\" : \"Parler à")}>
                     {isEn ? "Talk to a Coach" : "Parler à un Coach"}
                   </Button>
                 </Link>
@@ -1405,7 +1405,7 @@ export default function CurriculumPathSeries() {
                 </Button>
               </Link>
               <Link href="/ecosystem">
-                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10" onClick={() => toast.info("{isEn ? \"Find a Coach\" : \"Trouver un ")}>
                   {isEn ? "Find a Coach" : "Trouver un Coach"}
                 </Button>
               </Link>
