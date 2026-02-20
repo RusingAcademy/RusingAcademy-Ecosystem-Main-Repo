@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — coach routes use dedicated layout without duplicate nav
+// Footer removed — coach routes use dedicated layout
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -299,7 +299,7 @@ export default function CoachEarningsHistory() {
   if (!authLoading && !isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -313,14 +313,14 @@ export default function CoachEarningsHistory() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
+        
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
       
       <main className="flex-1 container mx-auto px-4 py-8">
         {/* Header */}
@@ -496,7 +496,7 @@ export default function CoachEarningsHistory() {
         </Card>
       </main>
       
-      <Footer />
+      
     </div>
   );
 }

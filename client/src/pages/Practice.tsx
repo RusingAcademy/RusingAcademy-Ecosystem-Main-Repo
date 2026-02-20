@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -323,7 +323,7 @@ export default function Practice() {
   if (authLoading) {
     return (
       <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="relative w-20 h-20 mx-auto mb-6">
@@ -343,7 +343,7 @@ export default function Practice() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center px-4">
           <Card className="max-w-md w-full">
             <CardContent className="pt-8 text-center">
@@ -372,7 +372,7 @@ export default function Practice() {
   if (isSimulationActive && selectedType && selectedLevel) {
     return (
       <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
-        <Header />
+        
         <main className="flex-1 px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <Button
@@ -392,7 +392,7 @@ export default function Practice() {
             />
           </div>
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -400,7 +400,7 @@ export default function Practice() {
   // Selection screen
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-white/[0.08] dark:backdrop-blur-md">
-      <Header />
+      
       <main className="flex-1 px-4 py-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -571,7 +571,7 @@ export default function Practice() {
           </div>
         </div>
       </main>
-      <Footer />
+      
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -183,11 +183,11 @@ export default function MyDownloads() {
   if (authLoading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center">
           <RefreshCw className="h-8 w-8 animate-spin text-primary" />
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -195,7 +195,7 @@ export default function MyDownloads() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center p-4">
           <Card className="max-w-md w-full">
             <CardContent className="pt-6 text-center">
@@ -207,14 +207,14 @@ export default function MyDownloads() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
+        
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main className="flex-1 container py-8">
         {/* Header */}
@@ -464,7 +464,7 @@ export default function MyDownloads() {
         </Tabs>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }

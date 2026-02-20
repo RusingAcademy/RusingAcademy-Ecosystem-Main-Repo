@@ -27,8 +27,8 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Link } from "wouter";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — uses ecosystem layout or dedicated layout
+// Footer removed — uses ecosystem layout or dedicated layout
 
 type TimeFilter = "weekly" | "monthly" | "allTime";
 
@@ -111,7 +111,7 @@ export default function Leaderboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      
       
       <main className="container py-8 md:py-12">
         {/* Hero Section */}
@@ -425,7 +425,7 @@ export default function Leaderboard() {
         </Card>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }

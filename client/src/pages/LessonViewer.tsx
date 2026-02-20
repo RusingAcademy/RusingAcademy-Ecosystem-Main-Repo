@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLearnLayout } from "@/contexts/LearnLayoutContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — uses ecosystem layout or dedicated layout
+// Footer removed — uses ecosystem layout or dedicated layout
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -349,7 +349,7 @@ export default function LessonViewer() {
     const backUrl = isInsideLearnLayout ? `/learn/${slug}` : `/courses/${slug}`;
     return (
       <div className={`${isInsideLearnLayout ? 'h-full' : 'min-h-screen'} bg-background`}>
-        {!isInsideLearnLayout && <Header />}
+        {null}
         <div className="max-w-4xl mx-auto px-4 py-8 md:py-12 lg:py-16 text-center">
           <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">{isEn ? "Lesson not found" : "Leçon introuvable"}</h1>
@@ -363,7 +363,7 @@ export default function LessonViewer() {
             </Link>
           </Button>
         </div>
-        {!isInsideLearnLayout && <Footer />}
+        {null}
       </div>
     );
   }

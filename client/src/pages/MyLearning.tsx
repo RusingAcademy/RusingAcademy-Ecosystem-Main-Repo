@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -145,11 +145,11 @@ export default function MyLearning() {
   if (coursesLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <div className="flex items-center justify-center py-32">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
-        <Footer />
+        
       </div>
     );
   }
@@ -166,7 +166,7 @@ export default function MyLearning() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      
       
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Welcome Section */}
@@ -416,7 +416,7 @@ export default function MyLearning() {
         </Tabs>
       </main>
 
-      <Footer />
+      
     </div>
   );
 }

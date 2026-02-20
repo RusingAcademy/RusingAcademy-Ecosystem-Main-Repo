@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header and Footer removed — coach routes excluded from ecosystem header to avoid duplicate nav bars
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -57,9 +56,7 @@ export default function CoachDashboard() {
     if (isInsideAppLayout) return <>{children}</>;
     return (
       <div className={`min-h-screen flex flex-col ${className}`}>
-        <Header />
         {children}
-        <Footer />
       </div>
     );
   };

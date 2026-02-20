@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -843,7 +843,7 @@ export default function AdminDashboard() {
   if (!authLoading && (!isAuthenticated || !isAdmin)) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -862,7 +862,7 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -898,7 +898,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">
-      <Header />
+      
 
       <main className="flex-1">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
@@ -2748,7 +2748,7 @@ export default function AdminDashboard() {
         </SheetContent>
       </Sheet>
 
-      <Footer />
+      
     </div>
   );
 }

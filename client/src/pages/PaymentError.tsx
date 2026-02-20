@@ -3,8 +3,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { XCircle, ArrowLeft, RefreshCw, MessageCircle, HelpCircle } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — uses ecosystem layout or dedicated layout
+// Footer removed — uses ecosystem layout or dedicated layout
 
 export default function PaymentError() {
   const { language } = useLanguage();
@@ -52,7 +52,7 @@ export default function PaymentError() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="max-w-lg w-full space-y-6">
           <Card className="border-red-200 dark:border-red-700/50 overflow-hidden">
@@ -99,7 +99,7 @@ export default function PaymentError() {
           </Card>
         </div>
       </main>
-      <Footer />
+      
     </div>
   );
 }

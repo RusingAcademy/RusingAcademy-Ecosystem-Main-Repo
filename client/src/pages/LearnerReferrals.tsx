@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import ReferralDashboard from "@/components/ReferralDashboard";
 import { Users } from "lucide-react";
 
@@ -10,7 +10,7 @@ export default function LearnerReferrals() {
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <Header />
+      
       
       <main className="container mx-auto px-4 py-8 pt-24">
         {/* Header */}
@@ -34,7 +34,7 @@ export default function LearnerReferrals() {
         <ReferralDashboard />
       </main>
       
-      <Footer />
+      
     </div>
   );
 }

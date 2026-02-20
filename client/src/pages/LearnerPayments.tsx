@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -144,7 +144,7 @@ export default function LearnerPayments() {
   if (!authLoading && !isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        {!isInsideAppLayout && <Header />}
+        {null}
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -160,14 +160,14 @@ export default function LearnerPayments() {
             </CardContent>
           </Card>
         </main>
-        {!isInsideAppLayout && <Footer />}
+        {null}
       </div>
     );
   }
   
   return (
     <div className="min-h-screen flex flex-col bg-muted/30">
-      {!isInsideAppLayout && <Header />}
+      {null}
       
       <main className="flex-1 py-8">
         <div className="container max-w-5xl mx-auto px-4">
@@ -305,7 +305,7 @@ export default function LearnerPayments() {
         </div>
       </main>
       
-      {!isInsideAppLayout && <Footer />}
+      {null}
     </div>
   );
 }

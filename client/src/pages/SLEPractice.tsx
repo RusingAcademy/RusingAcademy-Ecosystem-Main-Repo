@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+// Header removed — excluded route uses dedicated layout
+// Footer removed — excluded route uses dedicated layout
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -146,7 +146,7 @@ export default function SLEPractice() {
   
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-obsidian dark:to-gray-800">
-      {!isInsideAppLayout && <Header />}
+      {null}
       
       <main className="flex-1 container py-8">
         {/* Back Link */}
@@ -465,7 +465,7 @@ export default function SLEPractice() {
         )}
       </main>
       
-      {!isInsideAppLayout && <Footer />}
+      {null}
     </div>
   );
 }
