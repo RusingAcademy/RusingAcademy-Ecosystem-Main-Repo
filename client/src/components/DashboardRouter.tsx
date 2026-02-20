@@ -29,8 +29,8 @@ function DashboardSkeleton() {
  * This component is only rendered AFTER authentication is confirmed
  * by the ProtectedRoute wrapper.
  * 
- * Phase 5 Enhancement: Owner users are now routed to /owner (Owner Portal)
- * instead of /dashboard/admin, giving them their dedicated super-admin view.
+ * Owner and Admin users are routed to /admin (Admin Control Center),
+ * which is the unified administrative hub for the entire ecosystem.
  */
 function DashboardContent() {
   const { user, isLoading } = useAuthContext();
@@ -59,11 +59,9 @@ function DashboardContent() {
 
     let targetPath = "/dashboard/learner";
     
-    // Phase 5: Owner users go to Owner Portal
-    if (isOwner) {
-      targetPath = "/owner";
-    } else if (role === "admin") {
-      targetPath = "/dashboard/admin";
+    // Owner and Admin users go to the Admin Control Center
+    if (isOwner || role === "admin") {
+      targetPath = "/admin";
     } else if (role === "hr_admin" || role === "hr") {
       targetPath = "/dashboard/hr";
     } else if (role === "coach") {
@@ -88,10 +86,7 @@ function DashboardContent() {
   const role = user.role?.toLowerCase() || "learner";
   const isOwner = (user as any).isOwner || role === "owner";
 
-  if (isOwner) {
-    // Owner Portal is at /owner, redirect there
-    return <DashboardSkeleton />;
-  } else if (role === "admin") {
+  if (isOwner || role === "admin") {
     return <Suspense fallback={<DashboardSkeleton />}><AdminDashboard /></Suspense>;
   } else if (role === "hr_admin" || role === "hr") {
     return <Suspense fallback={<DashboardSkeleton />}><HRDashboard /></Suspense>;
@@ -106,8 +101,8 @@ function DashboardContent() {
  * DashboardRouter - RBAC-based dashboard routing
  * 
  * Routes users to the appropriate dashboard based on their role:
- * - Owner → Owner Portal (/owner) [Phase 5]
- * - Admin → Admin Dashboard
+ * - Owner → Admin Control Center (/admin)
+ * - Admin → Admin Control Center (/admin)
  * - HR Admin → HR Dashboard
  * - Coach → Coach Dashboard
  * - Learner → Learner Dashboard
