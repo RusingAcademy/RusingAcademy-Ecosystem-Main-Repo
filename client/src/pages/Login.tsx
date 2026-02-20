@@ -222,7 +222,7 @@ function LoginContent() {
             <div className="flex items-center justify-between mb-1.5">
               <label
                 htmlFor="login-password"
-                className="block text-white/50 text-[10px] font-semibold tracking-wider uppercase"
+                className="block text-white/70 text-[11px] font-semibold tracking-wider uppercase"
               >
                 {t("Password", "Mot de passe")}
               </label>
@@ -266,7 +266,7 @@ function LoginContent() {
               onChange={(e) => setRememberMe(e.target.checked)}
               className="w-3.5 h-3.5 rounded border-white/20 bg-white/[0.06] text-[var(--barholex-gold)] focus:ring-[var(--barholex-gold)]/40 focus:ring-offset-0"
             />
-            <label htmlFor="remember-me" className="text-white/40 text-[10px] cursor-pointer select-none">
+            <label htmlFor="remember-me" className="text-white/60 text-[11px] cursor-pointer select-none">
               {t("Remember me", "Se souvenir de moi")}
             </label>
           </div>
@@ -300,7 +300,7 @@ function LoginContent() {
         />
 
         {/* Sign Up Link */}
-        <p className="text-center text-white/40 text-xs mt-4">
+        <p className="text-center text-white/60 text-xs mt-4">
           {t("Don't have an account?", "Pas encore de compte ?")}{" "}
           <Link to="/signup" className="text-[var(--barholex-gold)] font-semibold hover:text-[#e0b860] transition-colors">
             {t("Sign up", "S'inscrire")}
@@ -332,7 +332,7 @@ function LoginContent() {
                   className="flex items-center justify-center gap-1.5 py-2 px-2 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/15 transition-all group focus:outline-none focus:ring-2 focus:ring-[var(--barholex-gold)]/30"
                 >
                   <portal.icon className="w-3.5 h-3.5" style={{ color: portal.color }} />
-                  <span className="text-white/50 text-[10px] font-medium group-hover:text-white/70 transition-colors">
+                  <span className="text-white/65 text-[10px] font-medium group-hover:text-white/85 transition-colors">
                     {portal.name}
                   </span>
                 </Link>
