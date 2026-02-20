@@ -130,7 +130,7 @@ const EXCLUDED_PATHS = [
   "/admin",
   "/app",
   "/learn",
-  "/coach/dashboard",
+  "/coach",
   "/hr",
   "/learner",
   "/my-learning",
