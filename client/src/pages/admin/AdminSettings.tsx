@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Settings", description: "Manage and configure settings" },
+  fr: { title: "Paramètres", description: "Gérer et configurer paramètres" },
+};
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,12 +17,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Settings", description: "Manage and configure settings" },
-  fr: { title: "Paramètres", description: "Gérer et configurer paramètres" },
-};
 
   Globe, Palette, Shield, Bell, CreditCard, Link2, Database, Code,
   Save, ChevronRight, CheckCircle2, Loader2, RotateCcw, Plug, History,

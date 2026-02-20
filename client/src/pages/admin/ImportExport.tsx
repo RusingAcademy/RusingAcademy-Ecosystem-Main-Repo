@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Import / Export", description: "Manage and configure import / export" },
+  fr: { title: "Importation / Exportation", description: "Gérer et configurer importation / exportation" },
+};
+
 import { useState, useRef } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -5,12 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Import / Export", description: "Manage and configure import / export" },
-  fr: { title: "Importation / Exportation", description: "Gérer et configurer importation / exportation" },
-};
 
   Download, Upload, FileSpreadsheet, Users, BookOpen,
   FileText, BarChart3, GraduationCap, RefreshCw, Check,

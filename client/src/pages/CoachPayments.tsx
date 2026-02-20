@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { useAuth } from "../_core/hooks/useAuth";
-import { trpc } from "@/lib/trpc";
-// Header removed — coach routes use dedicated layout without duplicate nav
-// Footer removed — coach routes use dedicated layout
-import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const labels = {
   en: { title: "Coach Payments", description: "Manage and configure coach payments" },
   fr: { title: "Coach Payments", description: "Gérer et configurer coach payments" },
 };
+
+import { useState } from "react";
+import { useAuth } from "../_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
+// Header removed — coach routes use dedicated layout without duplicate nav
+// Footer removed — coach routes use dedicated layout
+import {
 
   CreditCard,
   ExternalLink,

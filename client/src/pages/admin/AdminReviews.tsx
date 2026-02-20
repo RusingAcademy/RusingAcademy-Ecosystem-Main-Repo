@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Admin Reviews", description: "Manage and configure admin reviews" },
+  fr: { title: "Admin Reviews", description: "Gérer et configurer admin reviews" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,12 +18,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Admin Reviews", description: "Manage and configure admin reviews" },
-  fr: { title: "Admin Reviews", description: "Gérer et configurer admin reviews" },
-};
 
   Star, Search, Eye, EyeOff, MessageSquare, Trash2,
   Shield, RefreshCw,

@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Stripe Testing", description: "Manage and configure stripe testing" },
+  fr: { title: "Tests Stripe", description: "Gérer et configurer tests stripe" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -7,12 +14,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Stripe Testing", description: "Manage and configure stripe testing" },
-  fr: { title: "Tests Stripe", description: "Gérer et configurer tests stripe" },
-};
 
   CreditCard, CheckCircle, XCircle, Clock, RefreshCw,
   AlertTriangle, Zap, Copy, ExternalLink, Shield,

@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "AI Companion", description: "Manage and configure ai companion" },
+  fr: { title: "Compagnon IA", description: "Gérer et configurer compagnon ia" },
+};
+
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,12 +18,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "AI Companion", description: "Manage and configure ai companion" },
-  fr: { title: "Compagnon IA", description: "Gérer et configurer compagnon ia" },
-};
 
   Brain, Activity, Users, BarChart3, Settings2, Mic, BookOpen,
   TrendingUp, Loader2, Save, Target, Clock, MessageSquare,

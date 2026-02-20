@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Activity Logs", description: "Manage and configure activity logs" },
+  fr: { title: "Journaux d'activité", description: "Gérer et configurer journaux d'activité" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,12 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Activity Logs", description: "Manage and configure activity logs" },
-  fr: { title: "Journaux d'activité", description: "Gérer et configurer journaux d'activité" },
-};
 
   Activity, Clock, Search, ChevronLeft, ChevronRight,
   Filter, User, FileText, Shield, Settings, Trash2,

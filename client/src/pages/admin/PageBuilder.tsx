@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Page Builder", description: "Manage and configure page builder" },
+  fr: { title: "Constructeur de pages", description: "Gérer et configurer constructeur de pages" },
+};
+
 import { useState, useCallback, useMemo, useRef } from "react";
 import VisualEditor from "./VisualEditor";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,12 +29,6 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Page Builder", description: "Manage and configure page builder" },
-  fr: { title: "Constructeur de pages", description: "Gérer et configurer constructeur de pages" },
-};
 
   Plus, FileText, GripVertical, Trash2, Eye, EyeOff, Layout,
   Type, Image, List, MessageSquare, Star, Pencil,

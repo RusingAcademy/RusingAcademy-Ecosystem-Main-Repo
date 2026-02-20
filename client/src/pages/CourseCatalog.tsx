@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Course Catalog", description: "Manage and configure course catalog" },
+  fr: { title: "Course Catalog", description: "Gérer et configurer course catalog" },
+};
+
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLocale } from "@/i18n/LocaleContext";
@@ -6,12 +13,6 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Link, useLocation } from "wouter";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Course Catalog", description: "Manage and configure course catalog" },
-  fr: { title: "Course Catalog", description: "Gérer et configurer course catalog" },
-};
 
   BookOpen,
   Clock,

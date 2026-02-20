@@ -1,13 +1,14 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { trpc } from "@/lib/trpc";
-import { useLocation } from "wouter";
-import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const labels = {
   en: { title: "Global Search", description: "Manage and configure global search" },
   fr: { title: "Global Search", description: "Gérer et configurer global search" },
 };
+
+import { useState, useEffect, useRef, useCallback } from "react";
+import { trpc } from "@/lib/trpc";
+import { useLocation } from "wouter";
+import {
 
   Search, X, Users, BookOpen, FileText, Mail, Bell,
   ArrowRight, Zap, Target, Settings, BarChart3, Download,

@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Email Templates", description: "Manage and configure email templates" },
+  fr: { title: "Modèles de courriel", description: "Gérer et configurer modèles de courriel" },
+};
+
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,12 +18,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogC
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Email Templates", description: "Manage and configure email templates" },
-  fr: { title: "Modèles de courriel", description: "Gérer et configurer modèles de courriel" },
-};
 
   Mail, Plus, Search, Edit2, Trash2, Copy, Eye, Save,
   Loader2, FileText, Tag, Send, Code, Palette, Variable,

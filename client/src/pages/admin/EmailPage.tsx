@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Email Page", description: "Manage and configure email page" },
+  fr: { title: "Email Page", description: "Gérer et configurer email page" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,12 +17,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Email Page", description: "Manage and configure email page" },
-  fr: { title: "Email Page", description: "Gérer et configurer email page" },
-};
 
   Mail, Send, FileText, Users, Settings,
   CheckCircle, XCircle, AlertTriangle, RefreshCw,

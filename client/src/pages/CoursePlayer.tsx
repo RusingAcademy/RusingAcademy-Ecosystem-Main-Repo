@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Course Player", description: "Manage and configure course player" },
+  fr: { title: "Course Player", description: "Gérer et configurer course player" },
+};
+
 import { useState, useMemo, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLocale } from "@/i18n/LocaleContext";
@@ -7,12 +14,6 @@ import { toast } from "sonner";
 import { useRoute, Link } from "wouter";
 import { Streamdown } from "streamdown";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Course Player", description: "Manage and configure course player" },
-  fr: { title: "Course Player", description: "Gérer et configurer course player" },
-};
 
   BookOpen,
   Clock,

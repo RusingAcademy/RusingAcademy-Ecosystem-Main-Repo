@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Preview Mode", description: "Manage and configure preview mode" },
+  fr: { title: "Mode aperçu", description: "Gérer et configurer mode aperçu" },
+};
+
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -7,12 +14,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Preview Mode", description: "Manage and configure preview mode" },
-  fr: { title: "Mode aperçu", description: "Gérer et configurer mode aperçu" },
-};
 
   Eye, Users, GraduationCap, Shield, Globe, ChevronRight,
   BookOpen, Star, Clock, BarChart3, User, ArrowLeft,

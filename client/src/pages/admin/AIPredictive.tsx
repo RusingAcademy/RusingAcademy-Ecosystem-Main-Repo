@@ -1,15 +1,16 @@
-import { useState, useMemo } from "react";
-import { trpc } from "@/lib/trpc";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const labels = {
   en: { title: "AI Predictive Analytics", description: "Manage and configure ai predictive analytics" },
   fr: { title: "Analytique prédictive IA", description: "Gérer et configurer analytique prédictive ia" },
 };
+
+import { useState, useMemo } from "react";
+import { trpc } from "@/lib/trpc";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
 
   Brain, TrendingUp, AlertTriangle, Users, Target,
   ChevronRight, ArrowUp, ArrowDown, Minus, Shield,

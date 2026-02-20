@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Content Intelligence", description: "Manage and configure content intelligence" },
+  fr: { title: "Intelligence de contenu", description: "Gérer et configurer intelligence de contenu" },
+};
+
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,12 +14,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Content Intelligence", description: "Manage and configure content intelligence" },
-  fr: { title: "Intelligence de contenu", description: "Gérer et configurer intelligence de contenu" },
-};
 
   Brain, TrendingUp, BarChart3, Eye, Clock, Users,
   AlertTriangle, CheckCircle, Star, ArrowUpRight,

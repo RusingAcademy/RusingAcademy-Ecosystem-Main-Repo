@@ -1,13 +1,14 @@
-import { useAuth } from "@/_core/hooks/useAuth";
-import { trpc } from "@/lib/trpc";
-import { useLocale } from "@/i18n/LocaleContext";
-import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const labels = {
   en: { title: "Analytics", description: "Manage and configure analytics" },
   fr: { title: "Analytics", description: "Gérer et configurer analytics" },
 };
+
+import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
+import { useLocale } from "@/i18n/LocaleContext";
+import {
 
   BarChart3,
   Users,

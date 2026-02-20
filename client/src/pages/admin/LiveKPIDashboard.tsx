@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Live KPI Dashboard", description: "Manage and configure live kpi dashboard" },
+  fr: { title: "Tableau de bord KPI en direct", description: "Gérer et configurer tableau de bord kpi en direct" },
+};
+
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,12 +14,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Live KPI Dashboard", description: "Manage and configure live kpi dashboard" },
-  fr: { title: "Tableau de bord KPI en direct", description: "Gérer et configurer tableau de bord kpi en direct" },
-};
 
   DollarSign, Users, TrendingUp, Activity, RefreshCw,
   ArrowUpRight, ArrowDownRight, BarChart3, Brain, Target,

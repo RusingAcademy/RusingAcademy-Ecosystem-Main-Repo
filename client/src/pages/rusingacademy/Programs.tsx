@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Programs", description: "Manage and configure programs" },
+  fr: { title: "Programs", description: "Gérer et configurer programs" },
+};
+
 import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -5,12 +12,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Programs", description: "Manage and configure programs" },
-  fr: { title: "Programs", description: "Gérer et configurer programs" },
-};
 
   GraduationCap,
   Clock,

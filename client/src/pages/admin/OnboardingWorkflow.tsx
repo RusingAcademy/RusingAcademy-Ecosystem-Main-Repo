@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Onboarding Workflow", description: "Manage and configure onboarding workflow" },
+  fr: { title: "Flux d'intégration", description: "Gérer et configurer flux d'intégration" },
+};
+
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,12 +18,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Onboarding Workflow", description: "Manage and configure onboarding workflow" },
-  fr: { title: "Flux d'intégration", description: "Gérer et configurer flux d'intégration" },
-};
 
   Rocket, Mail, Bell, BookOpen, CheckCircle, Settings,
   Users, ArrowRight, Play, Pause, Edit, Save, Plus, Trash2,

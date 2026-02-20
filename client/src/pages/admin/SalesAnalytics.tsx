@@ -1,3 +1,10 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const labels = {
+  en: { title: "Sales Analytics", description: "Manage and configure sales analytics" },
+  fr: { title: "Analytique des ventes", description: "Gérer et configurer analytique des ventes" },
+};
+
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,12 +15,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import {
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const labels = {
-  en: { title: "Sales Analytics", description: "Manage and configure sales analytics" },
-  fr: { title: "Analytique des ventes", description: "Gérer et configurer analytique des ventes" },
-};
 
   TrendingUp, TrendingDown, DollarSign, Users, BarChart3,
   Download, Loader2, Target, ArrowRight, Percent, UserMinus,
