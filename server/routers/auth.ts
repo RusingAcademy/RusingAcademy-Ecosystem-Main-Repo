@@ -614,7 +614,48 @@ export const authRouter = router({
         message: "If an account exists with this email, a verification link will be sent.",
         verificationToken, // In production, this would be sent via email only
       };
+     }),
+
+  /**
+   * Bootstrap Owner Role — one-time endpoint to promote the platform founder to owner.
+   * Requires a secret key to prevent unauthorized access.
+   */
+  bootstrapOwner: publicProcedure
+    .input(
+      z.object({
+        email: z.string().email(),
+        bootstrapKey: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const BOOTSTRAP_KEY = "RusingAcademy-Owner-Bootstrap-2026";
+      if (input.bootstrapKey !== BOOTSTRAP_KEY) {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid bootstrap key" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      const [user] = await db
+        .select()
+        .from(schema.users)
+        .where(eq(schema.users.email, input.email.toLowerCase()))
+        .limit(1);
+
+      if (!user) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+      }
+
+      await db
+        .update(schema.users)
+        .set({ role: "owner", isOwner: true, name: "Steven Barholere" })
+        .where(eq(schema.users.id, user.id));
+
+      log.info(`[Auth] Bootstrap: ${input.email} promoted to owner (id=${user.id})`);
+      return {
+        success: true,
+        message: `User ${input.email} (id=${user.id}) promoted to owner`,
+        userId: user.id,
+      };
     }),
 });
-
 export type AuthRouter = typeof authRouter;
