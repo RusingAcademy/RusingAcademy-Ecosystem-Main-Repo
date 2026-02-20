@@ -27,7 +27,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
   }, [sidebarCollapsed]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
+    <div className="min-h-screen bg-[var(--bg,#EFECE9)]">
       <a href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-violet-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg"
         aria-label="Skip to main content">
@@ -40,7 +40,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
       />
 
       {/* Mobile header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border-b border-gray-200 dark:border-white/15 dark:border-white/15"
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center px-4 h-14 bg-white border-b border-[var(--sand,#E8E4DE)]"
         role="banner">
         <button onClick={() => setSidebarCollapsed(false)}
           className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-violet-600, var(--color-violet-600, var(--accent-purple)))] focus:ring-offset-2"
@@ -61,11 +61,11 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
           {children}
         </div>
 
-        <footer className="text-center py-4 border-t border-gray-100 dark:border-white/15 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md" role="contentinfo">
+        <footer className="text-center py-4 border-t border-[var(--sand,#E8E4DE)] bg-white" role="contentinfo">
           <SocialLinks size={14} color="var(--color-gray-400, var(--muted-foreground))" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">
             © 2026 RusingÂcademy — A Division of{" "}
-            <span className="font-medium text-violet-600">Rusinga International Consulting Ltd.</span>
+            <span className="font-medium text-[var(--brand-foundation,#1a3d3d)]">Rusinga International Consulting Ltd.</span>
           </p>
           <p className="text-[10px] text-gray-400 mt-0.5">
             Version 2.0.0 — Coach Portal
