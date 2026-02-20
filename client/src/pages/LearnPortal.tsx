@@ -637,7 +637,7 @@ export default function LearnPortal() {
                           const isInProgress = inProgressLessonIdSet.has(
                             lesson.id
                           );
-                          const isLocked = false; // TODO: drip content check
+                          const isLocked = false; // Drip content: all lessons unlocked for now
                           const lessonActivities =
                             activitiesByLesson[lesson.id] || [];
                           const lessonSlotsFilled = lessonActivities.filter(

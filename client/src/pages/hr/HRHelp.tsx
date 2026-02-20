@@ -28,7 +28,7 @@ export default function HRHelp() {
     apiDocs: isEn ? "API Documentation" : "Documentation API",
     apiDocsSub: isEn ? "Technical documentation for integrations" : "Documentation technique pour les intégrations",
     viewGuide: isEn ? "View Guide" : "Voir le guide",
-    comingSoon: isEn ? "Coming soon" : "Bientôt disponible",
+    comingSoon: isEn ? "Under development" : "En développement",
   };
 
   const faqs = isEn ? [

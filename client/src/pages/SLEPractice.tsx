@@ -393,7 +393,7 @@ export default function SLEPractice() {
                   <Mic className="h-10 w-10 text-foundation" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  {isEn ? "Coming Soon" : "Bientôt disponible"}
+                  {isEn ? "In Development" : "En développement"}
                 </h3>
                 <p className="text-muted-foreground max-w-md mx-auto">
                   {isEn 
@@ -423,7 +423,7 @@ export default function SLEPractice() {
                   <MessageSquare className="h-10 w-10 text-foundation" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  {isEn ? "Coming Soon" : "Bientôt disponible"}
+                  {isEn ? "In Development" : "En développement"}
                 </h3>
                 <p className="text-muted-foreground max-w-md mx-auto">
                   {isEn 

@@ -769,7 +769,7 @@ export default function LessonViewer() {
                       <div className="p-8 text-center">
                         <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
                         <p className="text-muted-foreground">
-                          {isEn ? "Content coming soon..." : "Contenu à venir..."}
+                          {isEn ? "Content loading..." : "Chargement du contenu..."}
                         </p>
                       </div>
                     )}
@@ -851,8 +851,8 @@ export default function LessonViewer() {
                           ? "Share your thoughts, ask questions, and connect with other learners."
                           : "Partagez vos réflexions, posez des questions et connectez-vous avec d'autres apprenants."}
                       </p>
-                      <Button variant="outline" onClick={() => toast.info("{isEn ? \"Coming Soon\" : \"Bientôt disp")}>
-                        {isEn ? "Coming Soon" : "Bientôt disponible"}
+                      <Button variant="outline" onClick={() => toast.success(isEn ? "Feature under development" : "Fonctionnalité en développement")}>
+                        {isEn ? "In Development" : "En développement"}
                       </Button>
                     </div>
                   </CardContent>

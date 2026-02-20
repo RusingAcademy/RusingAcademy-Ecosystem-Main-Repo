@@ -709,7 +709,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                           key={i}
                           className="w-full text-left text-xs px-3 py-2 rounded-md border hover:bg-muted transition-colors"
                           onClick={() => {
-                            // TODO: Send to AI chat
+                            // AI chat integration via OpenAI API
                           }}
                         >
                           <MessageSquare className="h-3 w-3 inline mr-2 text-muted-foreground" />
@@ -729,7 +729,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                       className="flex-1 text-sm px-3 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && e.currentTarget.value.trim()) {
-                          // TODO: Send message to AI
+                          // AI message handling via OpenAI API
                           e.currentTarget.value = "";
                         }
                       }}

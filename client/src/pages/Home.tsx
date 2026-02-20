@@ -335,7 +335,7 @@ function AnimatedCounter({
 }
 
 // Testimonials Carousel Component - Temporarily hidden until authentic testimonials are available
-// TODO: Re-enable when real testimonials are collected
+// Testimonials section - will be populated with real testimonials
 /*
 function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
   name: string;
@@ -621,7 +621,7 @@ export default function Home() {
   };
 
   // Testimonials data - temporarily removed until authentic testimonials are available
-  // TODO: Re-enable when real testimonials are collected
+  // Testimonials section - will be populated with real testimonials
 
   // Statistics data
   const statistics = [

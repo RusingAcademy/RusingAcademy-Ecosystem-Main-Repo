@@ -1040,7 +1040,7 @@ export default function Library() {
                 >
                   <div className="max-w-2xl mx-auto">
                     <Badge className="bg-teal-500/10 text-teal-500 border-teal-500/20 mb-4">
-                      {language === "fr" ? "Bientôt disponible" : "Coming Soon"}
+                      {language === "fr" ? "En développement" : "In Development"}
                     </Badge>
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
                       {language === "fr"

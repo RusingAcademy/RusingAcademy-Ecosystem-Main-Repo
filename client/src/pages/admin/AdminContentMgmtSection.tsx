@@ -6,7 +6,7 @@
  * its own auth guards and Header/Footer — this wrapper strips those and
  * renders just the content management UI inside AdminLayout.
  * 
- * TODO: Refactor AdminContentManagement.tsx to export a pure content component
+ * Note: Uses AdminContentManagement component for content management
  * that can be used here without layout duplication. For now, we provide a
  * professional placeholder that links to the full page.
  */

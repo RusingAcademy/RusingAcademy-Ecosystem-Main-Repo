@@ -234,8 +234,8 @@ export function generateEmailHTML(
       <p>&copy; 2026 Rusinga International Consulting Ltd.</p>
       <p>
         ${lang === "fr"
-          ? '<a href="#">Se désabonner</a> | <a href="#">Politique de confidentialité</a>'
-          : '<a href="#">Unsubscribe</a> | <a href="#">Privacy Policy</a>'}
+          ? '<a href="javascript:void(0)">Se désabonner</a> | <a href="javascript:void(0)">Politique de confidentialité</a>'
+          : '<a href="javascript:void(0)">Unsubscribe</a> | <a href="javascript:void(0)">Privacy Policy</a>'}
       </p>
     </div>
   </div>

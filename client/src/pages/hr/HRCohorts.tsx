@@ -131,7 +131,7 @@ export default function HRCohorts() {
             </p>
           </div>
           <button
-            onClick={() => toast.info(lang === "fr" ? "Bientôt disponible" : "Coming soon")}
+            onClick={() => toast.success(lang === "fr" ? "Fonctionnalité en cours de développement" : "Feature under active development")}
             className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
           >
             <span className="material-icons text-lg">add</span>

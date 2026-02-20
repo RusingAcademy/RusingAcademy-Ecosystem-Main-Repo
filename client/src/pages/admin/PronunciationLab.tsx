@@ -119,7 +119,7 @@ const PronunciationLab = () => {
                     <CardDescription>Detailed statistics and usage analytics.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {/* TODO: Add charts and more detailed stats */}
+                    <p className="text-sm text-muted-foreground">Pronunciation analytics will populate as learners complete exercises.</p>
                     <div className="text-center text-muted-foreground py-6 md:py-8 lg:py-12">
                         <BarChart3 className="mx-auto h-12 w-12 mb-4" />
                         <p>Detailed analytics and charts will be displayed here.</p>
