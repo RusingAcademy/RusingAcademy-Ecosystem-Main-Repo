@@ -24,7 +24,6 @@ export default function ProgressReport() {
 
   const { user } = useAuth();
   const [periodDays, setPeriodDays] = useState(30);
-  const [language, setLanguage] = useState<"fr" | "en">("en");
   const [reportHtml, setReportHtml] = useState<string | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 

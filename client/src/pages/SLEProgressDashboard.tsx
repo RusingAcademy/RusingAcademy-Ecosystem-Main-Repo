@@ -192,7 +192,6 @@ export default function SLEProgressDashboard() {
   const l = labels[language as keyof typeof labels] || labels.en;
 
   const { user } = useAuth();
-  const [language] = useState<Language>("fr"); // Could be derived from user preference
   const [historyPage, setHistoryPage] = useState(0);
   const [expandedSession, setExpandedSession] = useState<number | null>(null);
 

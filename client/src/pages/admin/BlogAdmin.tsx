@@ -31,7 +31,6 @@ export default function BlogAdmin() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("general");
-  const [language, setLanguage] = useState("en");
   const [status, setStatus] = useState("draft");
 
   const { data, isLoading, refetch } = trpc.kajabiBlog.list.useQuery({ search: search || undefined });
