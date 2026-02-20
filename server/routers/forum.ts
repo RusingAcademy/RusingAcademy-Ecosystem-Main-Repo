@@ -256,7 +256,7 @@ export const forumRouter = router({
       
       const [post] = await db.select().from(forumPosts).where(eq(forumPosts.id, input.postId));
       if (!post) throw new TRPCError({ code: "NOT_FOUND", message: "Post not found" });
-      if (post.authorId !== ctx.user.id && ctx.user.role !== "admin") {
+      if (post.authorId !== ctx.user.id && ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
       }
       
@@ -277,7 +277,7 @@ export const forumRouter = router({
       
       const [post] = await db.select().from(forumPosts).where(eq(forumPosts.id, input.postId));
       if (!post) throw new TRPCError({ code: "NOT_FOUND", message: "Post not found" });
-      if (post.authorId !== ctx.user.id && ctx.user.role !== "admin") {
+      if (post.authorId !== ctx.user.id && ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
       }
       
@@ -300,7 +300,7 @@ export const forumRouter = router({
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
       const { forumThreads } = await import("../../drizzle/schema");
       
       const [thread] = await db.select().from(forumThreads).where(eq(forumThreads.id, input.threadId));
@@ -319,7 +319,7 @@ export const forumRouter = router({
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
+      if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
       const { forumThreads } = await import("../../drizzle/schema");
       
       const [thread] = await db.select().from(forumThreads).where(eq(forumThreads.id, input.threadId));
@@ -342,7 +342,7 @@ export const forumRouter = router({
       
       const [thread] = await db.select().from(forumThreads).where(eq(forumThreads.id, input.threadId));
       if (!thread) throw new TRPCError({ code: "NOT_FOUND", message: "Thread not found" });
-      if (thread.authorId !== ctx.user.id && ctx.user.role !== "admin") {
+      if (thread.authorId !== ctx.user.id && ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
       }
       

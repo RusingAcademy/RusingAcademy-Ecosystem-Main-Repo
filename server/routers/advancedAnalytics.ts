@@ -15,7 +15,7 @@ export const advancedAnalyticsRouter = router({
   revenueDashboard: protectedProcedure.input(z.object({
     days: z.number().min(7).max(365).default(30),
   }).optional()).query(async ({ ctx, input }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) return null;
 
@@ -73,7 +73,7 @@ export const advancedAnalyticsRouter = router({
   engagementMetrics: protectedProcedure.input(z.object({
     days: z.number().min(7).max(365).default(30),
   }).optional()).query(async ({ ctx, input }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) return null;
 
@@ -145,7 +145,7 @@ export const advancedAnalyticsRouter = router({
 
   // Content performance
   contentPerformance: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) return null;
 
@@ -187,7 +187,7 @@ export const advancedAnalyticsRouter = router({
 
   // Referral analytics
   referralAnalytics: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) return null;
 

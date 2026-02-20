@@ -32,8 +32,9 @@ export const adminProcedure = t.procedure.use(
     const { ctx, next } = opts;
 
     const isAdmin = ctx.user?.role === 'admin';
-    const isOwner = ctx.user?.openId === process.env.OWNER_OPEN_ID;
-    if (!ctx.user || (!isAdmin && !isOwner)) {
+    const isOwnerRole = ctx.user?.role === 'owner' || ctx.user?.isOwner;
+    const isOwnerOpenId = ctx.user?.openId === process.env.OWNER_OPEN_ID;
+    if (!ctx.user || (!isAdmin && !isOwnerRole && !isOwnerOpenId)) {
       throw new TRPCError({ code: "FORBIDDEN", message: NOT_ADMIN_ERR_MSG });
     }
 

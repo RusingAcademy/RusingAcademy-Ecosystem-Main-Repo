@@ -18,7 +18,7 @@ import {
 // commission overrides, payout management, and earnings analytics.
 
 const adminGuard = (ctx: any) => {
-  if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+  if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
     throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
   }
 };

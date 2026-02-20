@@ -19,7 +19,7 @@ import { sql } from "drizzle-orm";
 
 // Admin-only guard
 const adminGuard = ({ ctx, next }: { ctx: any; next: () => Promise<any> }) => {
-  if (ctx.user?.role !== "admin") {
+  if (ctx.user?.role !== "admin" && ctx.user?.role !== "owner" && !ctx.user?.isOwner) {
     throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
   }
   return next();

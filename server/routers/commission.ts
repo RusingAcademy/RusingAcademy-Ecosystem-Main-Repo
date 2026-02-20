@@ -72,7 +72,7 @@ export const commissionRouter = router({
 
   // Seed default tiers (admin only)
   seedTiers: protectedProcedure.mutation(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") {
+    if (ctx.user.role !== "admin" && ctx.user.role !== "owner" && !ctx.user.isOwner) {
       throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
     }
     await seedDefaultCommissionTiers();
