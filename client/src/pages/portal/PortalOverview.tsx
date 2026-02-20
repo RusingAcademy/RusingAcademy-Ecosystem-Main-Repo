@@ -139,7 +139,7 @@ export default function PortalOverview() {
             <Card className="border-slate-200 shadow-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-lg font-semibold text-slate-900">Prochaines Sessions</CardTitle>
-                <Link href="/portal/coaching">
+                <Link href="/coach/portal">
                   <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 gap-1">
                     Voir tout
                     <ArrowRight className="h-4 w-4" />

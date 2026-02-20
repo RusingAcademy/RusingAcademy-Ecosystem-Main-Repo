@@ -74,7 +74,7 @@ export default function Bills() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Bills</h1>
-        <Link href="/bills/new">
+        <Link href="/accounting/bills">
           <Button className="bg-green-600 hover:bg-green-700" onClick={() => toast.info("Opening form...")}>
             <Plus size={16} className="mr-1" /> Create bill
           </Button>
@@ -128,7 +128,7 @@ export default function Bills() {
                 <td colSpan={8} className="px-4 py-6 md:py-8 lg:py-12 text-center">
                   <FileText size={40} className="mx-auto text-gray-300 mb-3" />
                   <p className="text-gray-500 text-sm">No bills yet</p>
-                  <Link href="/bills/new">
+                  <Link href="/accounting/bills">
                     <button className="mt-3 text-sm text-green-600 font-medium hover:underline">Create your first bill</button>
                   </Link>
                 </td>

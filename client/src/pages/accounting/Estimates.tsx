@@ -61,7 +61,7 @@ export default function Estimates() {
     <div className="p-6 max-w-[1200px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Estimates</h1>
-        <Link href="/estimates/new">
+        <Link href="/accounting/estimates">
           <Button className="bg-green-600 hover:bg-green-700" onClick={() => toast.info("Opening form...")}>
             <Plus size={16} className="mr-1" /> Create estimate
           </Button>
@@ -114,7 +114,7 @@ export default function Estimates() {
                 <td colSpan={7} className="px-4 py-6 md:py-8 lg:py-12 text-center">
                   <FileText size={40} className="mx-auto text-gray-300 mb-3" />
                   <p className="text-gray-500 text-sm">No estimates yet</p>
-                  <Link href="/estimates/new">
+                  <Link href="/accounting/estimates">
                     <button className="mt-3 text-sm text-green-600 font-medium hover:underline">Create your first estimate</button>
                   </Link>
                 </td>

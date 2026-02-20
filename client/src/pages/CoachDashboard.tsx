@@ -851,7 +851,7 @@ export default function CoachDashboard() {
                       <Video className="h-5 w-5" />
                       {language === "fr" ? "Votre vidéo d'introduction" : "Your Intro Video"}
                     </CardTitle>
-                    <Link href="/app/coach-profile/edit">
+                    <Link href="/app/coach-profile">
                       <Button variant="outline" size="sm" onClick={() => toast.info("Opening editor...")}>
                         {language === "fr" ? "Modifier" : "Edit"}
                       </Button>

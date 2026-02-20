@@ -648,7 +648,7 @@ export default function Programs() {
               Book your free assessment and discover which Path is right for you
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/request-proposal">
+              <Link href="/contact">
                 <Button size="lg" className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-orange-600 hover:bg-gray-100 dark:bg-white/[0.06] dark:backdrop-blur-sm">
                   Book Free Assessment
                   <ArrowRight className="ml-2 h-5 w-5" />

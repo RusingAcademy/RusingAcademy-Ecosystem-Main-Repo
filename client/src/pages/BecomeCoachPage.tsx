@@ -42,7 +42,7 @@ export default function BecomeCoachPage() {
               Partagez votre expertise linguistique avec des professionnels canadiens 
               et construisez une carrière flexible dans le coaching SLE.
             </p>
-            <Link href="/become-coach/apply">
+            <Link href="/become-a-coach">
               <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-6 text-lg">
                 Commencer ma candidature
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -105,7 +105,7 @@ export default function BecomeCoachPage() {
             Rejoignez une communauté de coaches passionnés et aidez les fonctionnaires 
             canadiens à atteindre leurs objectifs linguistiques.
           </p>
-          <Link href="/become-coach/apply">
+          <Link href="/become-a-coach">
             <Button size="lg" variant="secondary" className="px-8 py-6 text-lg">
               Démarrer le processus d'inscription
               <ArrowRight className="ml-2 h-5 w-5" />

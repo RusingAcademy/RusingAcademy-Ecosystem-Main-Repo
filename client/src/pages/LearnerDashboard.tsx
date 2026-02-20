@@ -506,7 +506,7 @@ export default function LearnerDashboard() {
                     </Button>
                   </Link>
                 )}
-                <Link href="/ai-practice">
+                <Link href="/app/ai-practice">
                   <Button size="lg" variant={resumePoint ? "outline" : "default"} className={resumePoint ? "border-white/50 text-white hover:bg-white/10" : "bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 text-black dark:text-foreground hover:bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm shadow-lg"}>
                     <Bot className="h-5 w-5 mr-2" />
                     {l.startPractice}
@@ -866,7 +866,7 @@ export default function LearnerDashboard() {
                   {l.quickActions}
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <Link href="/ai-practice">
+                  <Link href="/app/ai-practice">
                     <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-purple-50 hover:border-purple-300 dark:hover:bg-purple-950/30 transition-all">
                       <Bot className="h-6 w-6 text-purple-600" />
                       <span className="text-xs font-medium">{l.aiPractice}</span>
