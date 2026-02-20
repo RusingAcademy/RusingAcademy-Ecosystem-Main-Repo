@@ -44,7 +44,7 @@ export default function RightSidebar() {
             Write, record, or ask the community
           </p>
           <Button
-            onClick={() => toast("Feature coming soon")}
+            onClick={() => toast.success("Feature under active development")}
             className="w-full rounded-xl font-semibold text-sm text-white border-0 transition-all duration-300 hover:shadow-md active:scale-[0.97]"
             style={{
               background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)))",
@@ -74,7 +74,7 @@ export default function RightSidebar() {
             Recommended Coaches
           </h3>
           <button
-            onClick={() => toast("Feature coming soon")}
+            onClick={() => toast.success("Feature under active development")}
             className="text-[10px] font-semibold transition-colors hover-underline"
             
           >
@@ -121,7 +121,7 @@ export default function RightSidebar() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  toast("Feature coming soon");
+                  toast.success("Feature under active development");
                 }}
                 className="p-1.5 rounded-lg hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-all duration-200 opacity-0 group-hover:opacity-100"
               >
@@ -131,7 +131,7 @@ export default function RightSidebar() {
           ))}
         </div>
         <button
-          onClick={() => toast("Feature coming soon")}
+          onClick={() => toast.success("Feature under active development")}
           className="flex items-center gap-2 mt-3 text-sm font-semibold w-full justify-center py-2 rounded-xl transition-all duration-200"
           style={{
             color: "var(--brand-obsidian, var(--accent-purple-deep))",
@@ -206,7 +206,7 @@ export default function RightSidebar() {
           ))}
         </div>
         <button
-          onClick={() => toast("Feature coming soon")}
+          onClick={() => toast.success("Feature under active development")}
           className="flex items-center gap-1.5 text-sm font-semibold mt-3 w-full justify-center py-2 rounded-xl transition-all duration-200"
           style={{
             color: "var(--brand-gold, var(--barholex-gold))",
