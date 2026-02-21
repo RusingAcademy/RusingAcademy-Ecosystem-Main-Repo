@@ -631,3 +631,71 @@ textarea:focus-visible,
   pointer-events: none;
   z-index: 1;
 }
+
+/* ============================================
+   DARK MODE PERFECTION — Wave 21
+   ============================================ */
+
+/* Dark mode gold — brighter for dark backgrounds */
+:root {
+  --gold-dark-mode: #D4B85C;
+  --gold-dark-hover: #E0C96D;
+}
+
+/* Dark mode premium card refinement */
+.dark .premium-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+.dark .premium-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(201, 168, 76, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(201, 168, 76, 0.1);
+}
+
+/* Dark mode section backgrounds — deeper, richer */
+.dark .section-bg-1 { background: rgba(255, 255, 255, 0.02); }
+.dark .section-bg-2 { background: rgba(201, 168, 76, 0.03); }
+.dark .section-bg-3 { background: rgba(255, 255, 255, 0.02); }
+.dark .section-bg-4 { background: rgba(201, 168, 76, 0.02); }
+.dark .section-bg-5 { background: rgba(255, 255, 255, 0.03); }
+.dark .section-bg-6 { background: rgba(201, 168, 76, 0.02); }
+
+/* Dark mode gold divider */
+.dark .bg-\[\#C9A84C\] {
+  background-color: var(--gold-dark-mode) !important;
+}
+
+/* Dark mode text hierarchy */
+.dark .text-heading { color: rgba(255, 255, 255, 0.95); }
+.dark .text-body { color: rgba(255, 255, 255, 0.78); }
+.dark .text-muted { color: rgba(255, 255, 255, 0.55); }
+.dark .text-accent { color: var(--gold-dark-mode); }
+
+/* Dark mode trust bar */
+.dark .trust-bar {
+  background: linear-gradient(135deg, rgba(26, 32, 44, 0.95), rgba(26, 32, 44, 0.85));
+  border-color: rgba(201, 168, 76, 0.15);
+}
+
+/* Dark mode footer */
+.dark footer {
+  border-top-color: rgba(201, 168, 76, 0.15);
+}
+
+/* Dark mode FAQ active state */
+.dark .border-l-\[\#C9A84C\] {
+  border-left-color: var(--gold-dark-mode) !important;
+}
+
+/* Smooth dark mode transition */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+/* Exclude elements that need instant transitions */
+button, a, input, select, textarea, .no-transition {
+  transition-duration: 0s;
+}
