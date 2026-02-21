@@ -194,7 +194,7 @@ function TrilemmeSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -271,12 +271,12 @@ function TrilemmeSection({ language }: { language: string }) {
                 <p className="text-lg text-black dark:text-foreground leading-relaxed">
                   {language === "en" ? (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingÂcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
+                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
                       <strong className="text-cta600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingÂcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
+                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
                       <strong className="text-cta600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
@@ -299,8 +299,8 @@ function EcosystemSection({ language }: { language: string }) {
       id: "courses",
       nameEn: "Your Courses",
       nameFr: "Vos Cours",
-      brandEn: "RusingÂcademy",
-      brandFr: "RusingÂcademy",
+      brandEn: "RusingAcademy",
+      brandFr: "RusingAcademy",
       descEn: "Structured crash courses designed for the federal public service. 6 progressive paths from A to C, with guaranteed results.",
       descFr: "Cours intensifs structurés conçus pour la fonction publique fédérale. 6 parcours progressifs de A à C, avec résultats garantis.",
       icon: GraduationCap,
@@ -343,7 +343,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section id="ecosystem" className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md scroll-mt-20">
+    <section id="ecosystem" className="py-16 md:py-20 lg:py-28 px-4 section-bg-2 dark:bg-white/[0.08] dark:backdrop-blur-md scroll-mt-20">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -458,7 +458,7 @@ function MethodologySection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-3 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -523,7 +523,7 @@ function MethodologySection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 4: OFFRES — The RusingÂcademy Solution
+// SECTION 4: OFFRES — The RusingAcademy Solution
 // ============================================================================
 function OffersSection({ language }: { language: string }) {
   const offers = [
@@ -572,7 +572,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-4 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -583,7 +583,7 @@ function OffersSection({ language }: { language: string }) {
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-            {language === "en" ? "The RusingÂcademy Solution" : "La solution RusingÂcademy"}
+            {language === "en" ? "The RusingAcademy Solution" : "La solution RusingAcademy"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
@@ -695,7 +695,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-5 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -813,7 +813,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-6 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -898,7 +898,7 @@ function TestimonialsSection({ language }: { language: string }) {
 // ============================================================================
 function LeadershipSection({ language }: { language: string }) {
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header - Title removed per user request, lead paragraph kept */}
         <motion.div
@@ -1163,7 +1163,7 @@ function InstitutionsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-8 md:py-12 lg:py-16 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-12 md:py-16 lg:py-20 px-4 section-bg-2 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1226,7 +1226,7 @@ function InstitutionsSection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 9: VALEUR — Why Choose RusingÂcademy
+// SECTION 9: VALEUR — Why Choose RusingAcademy
 // ============================================================================
 function ValueSection({ language }: { language: string }) {
   const values = [
@@ -1261,7 +1261,7 @@ function ValueSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-3 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1272,7 +1272,7 @@ function ValueSection({ language }: { language: string }) {
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-            {language === "en" ? "Why Choose RusingÂcademy?" : "Pourquoi choisir RusingÂcademy ?"}
+            {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy ?"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
@@ -1345,7 +1345,7 @@ function TeamSection({ language }: { language: string }) {
     },
     {
       name: "Sue-Anne Richer",
-      role: "Chief Learning Officer - RusingÂcademy",
+      role: "Chief Learning Officer - RusingAcademy",
       image: "https://rusingacademy-cdn.b-cdn.net/images/team-sueanne.jpg",
       linkedin: "https://www.linkedin.com/in/sue-anne-richer-46ab2a383/",
       bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
@@ -1370,7 +1370,7 @@ function TeamSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-4 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1970,10 +1970,10 @@ function FAQSection({ language }: { language: string }) {
 
   const faqs = [
     {
-      questionEn: "What is the difference between RusingÂcademy and Lingueefy?",
-      questionFr: "Quelle est la différence entre RusingÂcademy et Lingueefy ?",
-      answerEn: "RusingÂcademy provides structured courses and curriculum for B2B/B2G clients, while Lingueefy is our B2C coaching platform connecting individuals with certified coaches and AI practice tools.",
-      answerFr: "RusingÂcademy offre des cours et des programmes structurés pour les clients B2B/B2G, tandis que Lingueefy est notre plateforme de coaching B2C connectant les individus avec des coachs certifiés et des outils de pratique IA.",
+      questionEn: "What is the difference between RusingAcademy and Lingueefy?",
+      questionFr: "Quelle est la différence entre RusingAcademy et Lingueefy ?",
+      answerEn: "RusingAcademy provides structured courses and curriculum for B2B/B2G clients, while Lingueefy is our B2C coaching platform connecting individuals with certified coaches and AI practice tools.",
+      answerFr: "RusingAcademy offre des cours et des programmes structurés pour les clients B2B/B2G, tandis que Lingueefy est notre plateforme de coaching B2C connectant les individus avec des coachs certifiés et des outils de pratique IA.",
     },
     {
       questionEn: "How long does it take to reach Level C?",
@@ -1984,8 +1984,8 @@ function FAQSection({ language }: { language: string }) {
     {
       questionEn: "Do you offer training for government departments?",
       questionFr: "Offrez-vous des formations pour les ministères gouvernementaux ?",
-      answerEn: "Yes, RusingÂcademy specializes in B2B/B2G training solutions. We offer custom programs, team dashboards, and on-site training options for government departments and organizations.",
-      answerFr: "Oui, RusingÂcademy se spécialise dans les solutions de formation B2B/B2G. Nous offrons des programmes personnalisés, des tableaux de bord d'équipe et des options de formation sur site pour les ministères et organisations gouvernementales.",
+      answerEn: "Yes, RusingAcademy specializes in B2B/B2G training solutions. We offer custom programs, team dashboards, and on-site training options for government departments and organizations.",
+      answerFr: "Oui, RusingAcademy se spécialise dans les solutions de formation B2B/B2G. Nous offrons des programmes personnalisés, des tableaux de bord d'équipe et des options de formation sur site pour les ministères et organisations gouvernementales.",
     },
     {
       questionEn: "What is your success rate?",
@@ -2002,7 +2002,7 @@ function FAQSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-5 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
