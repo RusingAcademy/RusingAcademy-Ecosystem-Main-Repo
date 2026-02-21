@@ -137,9 +137,9 @@ const navSections: NavSection[] = [
 
   // ── ECOSYSTEM ─────────────────────────────────────────────────────────────
   { title: "ECOSYSTEM", titleFr: "ÉCOSYSTÈME", collapsible: false, items: [
-    { id: "learning-portal", label: "Learning Portal", labelFr: "Portail d'apprentissage", icon: GraduationCap, path: ECOSYSTEM_URLS.portal, external: true },
-    { id: "community-hub", label: "Community Hub", labelFr: "Communauté", icon: MessageCircle, path: ECOSYSTEM_URLS.community, external: true },
-    { id: "sales-dashboard", label: "Sales Dashboard", labelFr: "Tableau des ventes", icon: Receipt, path: ECOSYSTEM_URLS.sales, external: true },
+    { id: "learning-portal", label: "Learning Portal", labelFr: "Portail d'apprentissage", icon: GraduationCap, path: ECOSYSTEM_URLS.portal },
+    { id: "community-hub", label: "Community Hub", labelFr: "Communauté", icon: MessageCircle, path: ECOSYSTEM_URLS.community },
+    { id: "sales-dashboard", label: "Sales Dashboard", labelFr: "Tableau des ventes", icon: Receipt, path: ECOSYSTEM_URLS.sales },
   ]},
 ];
 

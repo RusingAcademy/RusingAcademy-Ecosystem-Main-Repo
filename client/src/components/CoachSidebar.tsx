@@ -145,11 +145,11 @@ export default function CoachSidebar({ collapsed, onToggle }: CoachSidebarProps)
             <span className="material-icons text-lg text-gray-400">school</span>
             <span className="font-medium">{lang === "fr" ? "Portail Apprenant" : "Learner Portal"}</span>
           </a>
-          <a href={ECOSYSTEM_URLS.community} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent transition-all duration-200">
+          <a href={ECOSYSTEM_URLS.community} className="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent transition-all duration-200">
             <span className="material-icons text-lg text-gray-400">forum</span>
             <span className="font-medium">{lang === "fr" ? "Communauté" : "Community Hub"}</span>
           </a>
-          <a href={ECOSYSTEM_URLS.sales} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent transition-all duration-200">
+          <a href={ECOSYSTEM_URLS.sales} className="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-[3px] border-transparent transition-all duration-200">
             <span className="material-icons text-lg text-gray-400">receipt_long</span>
             <span className="font-medium">{lang === "fr" ? "Tableau des ventes" : "Sales Dashboard"}</span>
           </a>
