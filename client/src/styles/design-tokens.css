@@ -395,3 +395,40 @@ textarea:focus-visible,
 [data-cta]:focus-visible {
   box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25);
 }
+
+/* === GEOMETRIC BACKDROPS (LRDG-inspired) === */
+.geometric-backdrop {
+  position: relative;
+}
+.geometric-backdrop::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  right: -2rem;
+  width: 120px;
+  height: 120px;
+  border: 3px dashed var(--copper-muted, #C4956A);
+  border-radius: 50%;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+.geometric-backdrop::after {
+  content: '';
+  position: absolute;
+  bottom: 3rem;
+  left: -1rem;
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--teal-accent, #0D9488);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(15deg);
+}
+@media (max-width: 768px) {
+  .geometric-backdrop::before,
+  .geometric-backdrop::after {
+    display: none;
+  }
+}
