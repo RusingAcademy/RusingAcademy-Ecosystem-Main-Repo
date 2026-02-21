@@ -769,7 +769,7 @@ export default function RusingAcademyLanding() {
                   {[1, 2, 3, 4].map((i) => (
                     <div 
                       key={i}
-                      className="w-9 h-9 rounded-full border-2 border-white/30 bg-gradient-to-br from-teal-600 to-teal-700 flex items-center justify-center text-white text-xs font-bold shadow-lg"
+                      className="w-9 h-9 rounded-full border-2 border-white/30 bg-gradient-to-br from-[#C9A84C] to-[#A8893D] flex items-center justify-center text-white text-xs font-bold shadow-lg"
                     >
                       {['S', 'M', 'J', 'A'][i-1]}
                     </div>

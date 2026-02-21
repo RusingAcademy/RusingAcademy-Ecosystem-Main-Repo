@@ -269,7 +269,7 @@ export default function CoachTerms() {
       <main className="container mx-auto px-4 py-6 md:py-8 lg:py-12 max-w-4xl">
         <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 dark:border-teal-800 overflow-hidden">
           {/* Title Section */}
-          <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-8 py-8 text-white">
+          <div className="bg-gradient-to-r from-[#C9A84C] to-[#A8893D] px-8 py-8 text-white">
             <div className="flex items-center gap-3 mb-4">
               <img
                 loading="lazy"
@@ -442,7 +442,7 @@ export default function CoachTerms() {
             {/* Back Button */}
             <div className="pt-6">
               <Link href="/coach/dashboard">
-                <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white" onClick={() => window.location.href = "/"}>
+                <Button className="w-full bg-[#C9A84C] hover:bg-[#A8893D] text-white" onClick={() => window.location.href = "/"}>
                   {t.backBtn[l]}
                 </Button>
               </Link>

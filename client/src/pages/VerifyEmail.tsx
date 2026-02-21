@@ -89,7 +89,7 @@ export default function VerifyEmail() {
                 <div className="pt-4 space-y-2">
                   <Button
                     asChild
-                    className="w-full bg-teal-600 hover:bg-teal-700"
+                    className="w-full bg-[#C9A84C] hover:bg-[#A8893D]"
                   >
                     <Link to="/login">Go to Login</Link>
                   </Button>

@@ -266,7 +266,7 @@ export default function CoachProfile() {
                   : "Le profil du coach que vous recherchez n'existe pas ou a été supprimé."}
               </p>
               <Link href="/coaches">
-                <Button className="bg-teal-600 hover:bg-teal-700" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                <Button className="bg-[#C9A84C] hover:bg-[#A8893D]" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                   {isEn ? "Browse All Coaches" : "Voir tous les coachs"}
                 </Button>
               </Link>
@@ -519,7 +519,7 @@ export default function CoachProfile() {
                       return (
                         <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 dark:from-teal-900 dark:to-obsidian flex items-center justify-center rounded-b-lg">
                           <a href={url} target="_blank" rel="noopener noreferrer">
-                            <Button size="lg" className="gap-2 bg-teal-600 hover:bg-teal-700">
+                            <Button size="lg" className="gap-2 bg-[#C9A84C] hover:bg-[#A8893D]">
                               <Play className="h-5 w-5" />
                               {isEn ? "Watch Introduction" : "Voir la présentation"}
                               <ExternalLink className="h-4 w-4" />
@@ -656,7 +656,7 @@ export default function CoachProfile() {
                           </div>
                           <Button 
                             onClick={() => setShowReviewModal(true)}
-                            className="bg-teal-600 hover:bg-teal-700"
+                            className="bg-[#C9A84C] hover:bg-[#A8893D]"
                           >
                             <Star className="h-4 w-4 mr-2" />
                             {myReview ? (isEn ? "Edit Review" : "Modifier l'avis") : (isEn ? "Write Review" : "Écrire un avis")}
@@ -788,7 +788,7 @@ export default function CoachProfile() {
                     {/* Calendly or Internal Booking */}
                     {coach.calendarType === "calendly" && coach.calendlyUrl ? (
                       <Button 
-                        className="w-full bg-teal-600 hover:bg-teal-700" 
+                        className="w-full bg-[#C9A84C] hover:bg-[#A8893D]" 
                         size="lg"
                         onClick={() => window.open(coach.calendlyUrl || '', '_blank')}
                       >
@@ -804,7 +804,7 @@ export default function CoachProfile() {
                       }}
                     >
                       <DialogTrigger asChild>
-                        <Button className="w-full bg-teal-600 hover:bg-teal-700" size="lg">
+                        <Button className="w-full bg-[#C9A84C] hover:bg-[#A8893D]" size="lg">
                           <CalendarIcon className="h-4 w-4 mr-2" />
                           {isEn ? `Book ${sessionType === "trial" ? "Trial" : "Regular"} Session` : `Réserver ${sessionType === "trial" ? "essai" : "séance"}`}
                         </Button>
@@ -843,7 +843,7 @@ export default function CoachProfile() {
                                   variant={selectedTime === time ? "default" : "outline"}
                                   size="sm"
                                   onClick={() => setSelectedTime(time)}
-                                  className={selectedTime === time ? "bg-teal-600 hover:bg-teal-700 ring-2 ring-teal-600 ring-offset-2" : ""}
+                                  className={selectedTime === time ? "bg-[#C9A84C] hover:bg-[#A8893D] ring-2 ring-teal-600 ring-offset-2" : ""}
                                 >
                                   {time}
                                 </Button>
@@ -974,7 +974,7 @@ export default function CoachProfile() {
                           <Button
                             onClick={handleBookSession}
                             disabled={!selectedDate || !selectedTime || isBooking}
-                            className="gap-2 bg-teal-600 hover:bg-teal-700"
+                            className="gap-2 bg-[#C9A84C] hover:bg-[#A8893D]"
                           >
                             {isBooking ? (
                               <>
@@ -1095,7 +1095,7 @@ export default function CoachProfile() {
           </div>
           {coach.calendarType === "calendly" && coach.calendlyUrl ? (
             <Button
-              className="bg-teal-600 hover:bg-teal-700 text-white shrink-0"
+              className="bg-[#C9A84C] hover:bg-[#A8893D] text-white shrink-0"
               onClick={() => window.open(coach.calendlyUrl || '', '_blank')}
             >
               <ExternalLink className="h-4 w-4 mr-1" />
@@ -1103,7 +1103,7 @@ export default function CoachProfile() {
             </Button>
           ) : (
             <Button
-              className="bg-teal-600 hover:bg-teal-700 text-white shrink-0"
+              className="bg-[#C9A84C] hover:bg-[#A8893D] text-white shrink-0"
               onClick={() => {
                 document.getElementById('booking-sidebar')?.scrollIntoView({ behavior: 'smooth' });
               }}

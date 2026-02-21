@@ -969,7 +969,7 @@ export default function LingueefyLanding() {
                     ))}
                   </select>
                   <Link href="/coaches">
-                    <Button className="h-14 px-8 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-lg font-semibold">
+                    <Button className="h-14 px-8 bg-[#C9A84C] hover:bg-[#A8893D] text-white rounded-xl text-lg font-semibold">
                       {c.hero.cta}
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
@@ -1102,7 +1102,7 @@ export default function LingueefyLanding() {
                   ))}
                 </ul>
                 <Link href="/coaches">
-                  <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white py-6 rounded-xl text-lg font-semibold">
+                  <Button className="w-full bg-[#C9A84C] hover:bg-[#A8893D] text-white py-6 rounded-xl text-lg font-semibold">
                     {c.learningPath.marketplace.cta}
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
@@ -1182,7 +1182,7 @@ export default function LingueefyLanding() {
                       <Button 
                         className={`w-full py-6 rounded-xl text-lg font-semibold ${
                           plan.popular 
-                            ? 'bg-teal-600 hover:bg-teal-700 text-white' 
+                            ? 'bg-[#C9A84C] hover:bg-[#A8893D] text-white' 
                             : 'bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm hover:bg-slate-200 text-black'
                         }`}
                       >
@@ -1420,7 +1420,7 @@ export default function LingueefyLanding() {
                     </div>
                     
                     <Link href={`/coach/${coach.name.toLowerCase().replace(' ', '-')}`}>
-                      <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white">
+                      <Button className="w-full bg-[#C9A84C] hover:bg-[#A8893D] text-white">
                         Book a Lesson
                         <ArrowRight className="ml-2 w-4 h-4" />
                       </Button>
