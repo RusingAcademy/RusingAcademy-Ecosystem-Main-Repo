@@ -414,3 +414,8 @@ textarea:focus-visible,
   border-left: 3px solid #C9A84C;
   padding-left: 1rem;
 }
+
+/* Whitespace & Reading Comfort Tokens */
+.reading-width { max-width: 65ch; }
+.section-gap { margin-bottom: clamp(3rem, 5vw, 5rem); }
+.content-gap { margin-bottom: clamp(1.5rem, 3vw, 3rem); }
