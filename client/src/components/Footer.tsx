@@ -295,7 +295,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-11 w-11 rounded-xl bg-foundation/80 border border-teal-800 flex items-center justify-center text-white/90 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-300"
+                  className="h-11 w-11 rounded-xl bg-foundation/80 border border-teal-800 flex items-center justify-center text-white/90 hover:text-[#C9A84C] hover:bg-[#C9A84C]/10 hover:border-[#C9A84C]/40 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" aria-hidden="true" />
@@ -307,7 +307,7 @@ export default function Footer() {
           {/* CMS-driven footer columns (or hardcoded fallback) */}
           {columns.map((col, idx) => (
             <div key={idx}>
-              <h4 className="font-bold text-white mb-6 text-sm uppercase tracking-wider border-b border-teal-500/30 pb-3">
+              <h4 className="font-bold text-white mb-6 text-sm uppercase tracking-wider border-b border-[#C9A84C]/30 pb-3">
                 {col.title}
               </h4>
               <nav aria-label={col.ariaLabel}>
@@ -340,6 +340,19 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Gold divider before bottom bar */}
+      <div className="container mx-auto px-6 md:px-8 lg:px-12">
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent" />
+      </div>
+      {/* Trust Badges */}
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 py-6">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-10 text-white/60 text-xs uppercase tracking-widest font-medium">
+          <span className="flex items-center gap-2">🇨🇦 Canadian-Owned</span>
+          <span className="flex items-center gap-2">🔒 SSL Secured</span>
+          <span className="flex items-center gap-2">🏛️ GC Compliant</span>
+          <span className="flex items-center gap-2">🎓 Certified Coaches</span>
+        </div>
+      </div>
       {/* Bottom Bar — always static (copyright is non-negotiable) */}
       <div className="border-t border-teal-800/50 bg-obsidian/50">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
@@ -353,9 +366,9 @@ export default function Footer() {
                 href="https://www.rusingacademy.ca" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-sm font-bold text-teal-400 hover:text-teal-300 transition-colors"
+                className="text-sm font-bold text-[#C9A84C] hover:text-[#d4b85c] transition-colors"
               >
-                RusingAcademy
+                Rusinga International Consulting Ltd.
               </a>
             </div>
             
