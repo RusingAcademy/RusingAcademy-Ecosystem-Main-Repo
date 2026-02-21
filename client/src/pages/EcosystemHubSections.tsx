@@ -663,54 +663,57 @@ function OffersSection({ language }: { language: string }) {
           </p>
         </motion.div>
 
-        {/* Offers Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8"
-        >
-          {offers.map((offer) => (
-            <motion.div
-              key={offer.id}
-              variants={scaleIn}
-              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
-            >
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  loading="lazy" src={offer.image}
-                  alt={language === "en" ? offer.titleEn : offer.titleFr}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="flex items-center gap-2 text-white/90 text-sm mb-1">
-                    <offer.icon className="w-4 h-4" />
+        {/* Offers — Asymmetric Editorial Layout */}
+        <div className="space-y-12 md:space-y-16">
+          {offers.map((offer, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <motion.div
+                key={offer.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className={`group flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-stretch bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100`}
+              >
+                {/* Image Side */}
+                <div className="relative w-full md:w-1/2 h-64 md:h-auto min-h-[280px] overflow-hidden">
+                  <img
+                    loading="lazy"
+                    src={offer.image}
+                    alt={language === "en" ? offer.titleEn : offer.titleFr}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 to-transparent" />
+                  {/* Gold number badge */}
+                  <div className="absolute top-6 left-6 w-12 h-12 rounded-full bg-[#C9A84C] flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-lg">{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                </div>
+                
+                {/* Content Side */}
+                <div className="w-full md:w-1/2 p-8 md:p-10 lg:p-12 flex flex-col justify-center">
+                  <div className="flex items-center gap-2 text-[#C9A84C] text-sm font-medium mb-3">
+                    <offer.icon className="w-5 h-5" />
                     {language === "en" ? offer.subtitleEn : offer.subtitleFr}
                   </div>
-                  <h3 className="text-xl font-bold" style={{color: 'var(--color-white, var(--text-inverse))'}}>
+                  <h3 className="text-2xl md:text-3xl font-bold font-display text-black dark:text-foreground mb-4">
                     {language === "en" ? offer.titleEn : offer.titleFr}
                   </h3>
+                  <p className="text-black dark:text-foreground mb-8 leading-relaxed">
+                    {language === "en" ? offer.descEn : offer.descFr}
+                  </p>
+                  <Link href={offer.link}>
+                    <Button className="w-fit bg-obsidian hover:bg-foundation text-white px-8 py-3 rounded-xl group-hover:shadow-lg transition-all duration-300">
+                      {language === "en" ? offer.ctaEn : offer.ctaFr}
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <p className="text-black dark:text-foreground mb-6 leading-relaxed text-sm">
-                  {language === "en" ? offer.descEn : offer.descFr}
-                </p>
-                <Link href={offer.link}>
-                  <Button className="w-full bg-obsidian hover:bg-foundation text-white">
-                    {language === "en" ? offer.ctaEn : offer.ctaFr}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
