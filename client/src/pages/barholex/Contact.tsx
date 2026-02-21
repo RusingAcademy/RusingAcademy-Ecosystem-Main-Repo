@@ -3,6 +3,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -39,9 +41,28 @@ export default function BarholexContact() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const contactMutation = trpc.contact.submit.useMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      await contactMutation.mutateAsync({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        subject: formData.projectType || "general",
+        message: `[Barholex Media Quote Request]\nCompany: ${formData.company || "N/A"}\nBudget: ${formData.budget || "N/A"}\nTimeline: ${formData.timeline || "N/A"}\n\n${formData.message}`,
+        brand: "barholex",
+      });
+      setFormSubmitted(true);
+      toast.success(language === "fr" ? "Message envoyé avec succès !" : "Message sent successfully!");
+    } catch (error) {
+      toast.error(language === "fr" ? "Erreur lors de l'envoi. Veuillez réessayer." : "Failed to send. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -452,10 +473,13 @@ export default function BarholexContact() {
                       <Button 
                         type="submit"
                         size="lg"
-                        className="w-full bg-gradient-to-r from-barholex-gold to-amber-600 hover:from-[#B8962E] hover:to-barholex-gold text-black dark:text-foreground rounded-full h-14 text-lg font-semibold shadow-lg shadow-amber-500/20"
+                        disabled={isSubmitting}
+                        className="w-full bg-gradient-to-r from-barholex-gold to-amber-600 hover:from-[#B8962E] hover:to-barholex-gold text-black dark:text-foreground rounded-full h-14 text-lg font-semibold shadow-lg shadow-amber-500/20 disabled:opacity-60"
                       >
-                        {language === "en" ? "Send Message" : "Envoyer le message"}
-                        <Send className="ml-2 h-5 w-5" />
+                        {isSubmitting 
+                          ? (language === "en" ? "Sending..." : "Envoi en cours...") 
+                          : (language === "en" ? "Send Message" : "Envoyer le message")}
+                        {!isSubmitting && <Send className="ml-2 h-5 w-5" />}
                       </Button>
                       
                       <p className="text-center text-sm text-black dark:text-foreground mt-4">
