@@ -902,7 +902,7 @@ export default function CoursesPage() {
                         <button
                           onClick={() => handleEnroll(course.id)}
                           disabled={enrollingCourse === course.id}
-                          className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-teal-600 hover:bg-teal-700'} transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed`}
+                          className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#C9A84C] hover:bg-[#A8893D]'} transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed`}
                         >
                           {enrollingCourse === course.id ? (
                             <>

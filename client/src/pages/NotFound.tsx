@@ -71,7 +71,7 @@ export default function NotFound() {
             </Button>
             <Button
               onClick={handleGoHome}
-              className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+              className="bg-[#C9A84C] hover:bg-[#A8893D] text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
             >
               <Home className="w-4 h-4 mr-2" />
               {l.goHome}

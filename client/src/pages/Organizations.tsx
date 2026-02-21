@@ -86,7 +86,7 @@ export default function Organizations() {
             {/* Sign In Button */}
             <Button
               disabled
-              className="px-8 py-6 text-lg font-semibold rounded-lg bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-8 py-6 text-lg font-semibold rounded-lg bg-gradient-to-r from-[#C9A84C] to-[#A8893D] hover:from-teal-700 hover:to-teal-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {language === "fr"
                 ? "Se connecter via RusingAcademy"
@@ -175,7 +175,7 @@ export default function Organizations() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="/contact"
-                  className="px-6 py-3 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-semibold transition-colors duration-300 text-center"
+                  className="px-6 py-3 rounded-lg bg-[#C9A84C] hover:bg-[#A8893D] text-white font-semibold transition-colors duration-300 text-center"
                 >
                   {language === "fr" ? "Nous contacter" : "Contact Us"}
                 </a>

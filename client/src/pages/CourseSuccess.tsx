@@ -302,7 +302,7 @@ export default function CourseSuccess() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-teal-600 to-teal-700">
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-[#C9A84C] to-[#A8893D]">
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
           <GraduationCap className="w-12 h-12 text-white/90 mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">

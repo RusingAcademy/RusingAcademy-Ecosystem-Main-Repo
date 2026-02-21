@@ -399,7 +399,7 @@ export default function AdminLeads() {
                         key={status}
                         variant={selectedLead.status === status ? "default" : "outline"}
                         size="sm"
-                        className={selectedLead.status === status ? "bg-teal-600 hover:bg-teal-700" : ""}
+                        className={selectedLead.status === status ? "bg-[#C9A84C] hover:bg-[#A8893D]" : ""}
                         // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
                         onClick={() => updateStatus.mutate({ id: selectedLead.id, status })}
                         disabled={updateStatus.isPending}

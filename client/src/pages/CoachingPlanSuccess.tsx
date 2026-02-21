@@ -230,7 +230,7 @@ export default function CoachingPlanSuccess() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/dashboard">
-              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800">
+              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#C9A84C] to-[#A8893D] hover:from-teal-700 hover:to-teal-800">
                 {l.viewDashboard}
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>

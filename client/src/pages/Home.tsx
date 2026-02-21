@@ -259,7 +259,7 @@ function TypewriterTitle({
       {displayedMainText}
       {displayedText.length > mainTextLength && " "}
       {displayedHighlight && (
-        <span className="text-teal-600">{displayedHighlight}</span>
+        <span className="text-[#C9A84C]">{displayedHighlight}</span>
       )}
       {!isComplete && (
         <span 
@@ -328,7 +328,7 @@ function AnimatedCounter({
   }, [isVisible, end, duration]);
 
   return (
-    <div ref={counterRef} className="text-4xl md:text-5xl font-black text-teal-600">
+    <div ref={counterRef} className="text-4xl md:text-5xl font-black text-[#C9A84C]">
       {prefix}{count.toLocaleString()}{suffix}
     </div>
   );
@@ -436,14 +436,14 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
       </div>
       <button 
         onClick={goToPrev}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-lg flex items-center justify-center text-[#C9A84C] hover:bg-teal-50 transition-colors z-10"
         aria-label="Previous testimonial"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button 
         onClick={goToNext}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md shadow-lg flex items-center justify-center text-[#C9A84C] hover:bg-teal-50 transition-colors z-10"
         aria-label="Next testimonial"
       >
         <ChevronRight className="h-6 w-6" />
@@ -545,7 +545,7 @@ function FAQSection() {
               >
                 <span className="font-semibold text-lg text-foreground pr-4">{faq.question}</span>
                 <ChevronDown 
-                  className={`h-5 w-5 text-teal-600 flex-shrink-0 transition-transform duration-300 ${
+                  className={`h-5 w-5 text-[#C9A84C] flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`} 
                 />
@@ -568,7 +568,7 @@ function FAQSection() {
             {language === 'fr' ? 'Vous avez d\'autres questions ?' : 'Still have questions?'}
           </p>
           <Link href="/contact">
-            <Button variant="outline" className="border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full px-8" onClick={() => window.location.href = "/contact"}>
+            <Button variant="outline" className="border-teal-600 text-[#C9A84C] hover:bg-teal-50 rounded-full px-8" onClick={() => window.location.href = "/contact"}>
               {language === 'fr' ? 'Contactez-nous' : 'Contact Us'}
             </Button>
           </Link>
@@ -670,7 +670,7 @@ export default function Home() {
         <WaveDivider variant="smooth" color="#0d9488" backgroundColor="white" orientation="bottom" />
 
         {/* Animated Statistics Section - Reduced vertical height */}
-        <section className="py-10 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
+        <section className="py-10 bg-gradient-to-r from-[#C9A84C] to-[#A8893D] relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-40 h-40 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-full -translate-x-1/2 -translate-y-1/2" />
@@ -771,13 +771,13 @@ export default function Home() {
                 <ul className="space-y-3 mb-8">
                   {[t("plans.maison.feature1"), t("plans.maison.feature2"), t("plans.maison.feature3"), t("plans.maison.feature4")].map((feature, i) => (
                     <li key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-teal-600 flex-shrink-0" />
+                      <CheckCircle2 className="h-5 w-5 text-[#C9A84C] flex-shrink-0" />
                       <span className="text-sm font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <Button 
-                  className="w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full"
+                  className="w-full bg-[#C9A84C] hover:bg-[#A8893D] text-white rounded-full"
                   onClick={() => document.getElementById('pricing-plans')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {t("plans.maison.cta")} <ArrowRight className="ml-2 h-4 w-4" />
@@ -793,7 +793,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.starter.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.starter.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-xl md:text-3xl lg:text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.STARTER.priceDisplay}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-black text-[#C9A84C]">{COACHING_PLAN_PRICES.STARTER.priceDisplay}</span>
                     <span className="text-muted-foreground">/ 10h</span>
                   </div>
                 </div>
@@ -807,7 +807,7 @@ export default function Home() {
                 </ul>
                 <Button 
                   variant="outline" 
-                  className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full"
+                  className="w-full border-teal-600 text-[#C9A84C] hover:bg-teal-50 rounded-full"
                   onClick={() => handlePlanPurchase('starter-plan')}
                   disabled={purchasingPlan === 'starter-plan'}
                 >
@@ -821,7 +821,7 @@ export default function Home() {
               </div>
 
               {/* Accelerator Plan - Featured */}
-              <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-3xl p-8 shadow-2xl text-white relative transform md:-translate-y-4">
+              <div className="bg-gradient-to-br from-[#C9A84C] to-[#A8893D] rounded-3xl p-8 shadow-2xl text-white relative transform md:-translate-y-4">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black dark:text-foreground text-xs font-bold px-4 py-1 rounded-full">
                   {t("plans.mostPopular")}
                 </div>
@@ -843,7 +843,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Button 
-                  className="w-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-teal-600 hover:bg-teal-50 rounded-full font-semibold"
+                  className="w-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md text-[#C9A84C] hover:bg-teal-50 rounded-full font-semibold"
                   onClick={() => handlePlanPurchase('accelerator-plan')}
                   disabled={purchasingPlan === 'accelerator-plan'}
                 >
@@ -862,7 +862,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.immersion.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.immersion.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-xl md:text-3xl lg:text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.IMMERSION.priceDisplay}</span>
+                    <span className="text-xl md:text-3xl lg:text-4xl font-black text-[#C9A84C]">{COACHING_PLAN_PRICES.IMMERSION.priceDisplay}</span>
                     <span className="text-muted-foreground">/ 40h</span>
                   </div>
                   <p className="text-xs text-green-600 mt-2">{t("plans.immersion.savings")}</p>
@@ -877,7 +877,7 @@ export default function Home() {
                 </ul>
                 <Button 
                   variant="outline" 
-                  className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full"
+                  className="w-full border-teal-600 text-[#C9A84C] hover:bg-teal-50 rounded-full"
                   onClick={() => handlePlanPurchase('immersion-plan')}
                   disabled={purchasingPlan === 'immersion-plan'}
                 >
@@ -895,7 +895,7 @@ export default function Home() {
             <div className="mt-16 text-center">
               <div className="inline-flex flex-wrap justify-center gap-6 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl px-8 py-4 shadow-lg">
                 <div className="flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-teal-600" />
+                  <Shield className="h-5 w-5 text-[#C9A84C]" />
                   <span className="text-sm font-medium">{t("plans.guarantee1")}</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -903,7 +903,7 @@ export default function Home() {
                   <span className="text-sm font-medium">{t("plans.guarantee2")}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Award className="h-5 w-5 text-teal-600" />
+                  <Award className="h-5 w-5 text-[#C9A84C]" />
                   <span className="text-sm font-medium">{t("plans.guarantee3")}</span>
                 </div>
               </div>
@@ -1334,7 +1334,7 @@ export default function Home() {
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-4 p-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl">
                     <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="h-6 w-6 text-teal-600" />
+                      <item.icon className="h-6 w-6 text-[#C9A84C]" />
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">{item.title}</p>
