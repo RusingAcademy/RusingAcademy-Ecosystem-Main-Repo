@@ -562,3 +562,72 @@ textarea:focus-visible,
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ============================================
+   GLASSMORPHISM SYSTEM — Wave 19
+   ============================================ */
+
+/* Light glassmorphism panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+}
+
+/* Dark glassmorphism panel */
+.glass-panel-dark {
+  background: rgba(26, 32, 44, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+}
+
+/* Gold-tinted glassmorphism */
+.glass-panel-gold {
+  background: rgba(201, 168, 76, 0.06);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: 1rem;
+}
+
+/* Frosted section header */
+.frosted-header {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Dark mode overrides */
+.dark .glass-panel {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.dark .glass-panel-gold {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: rgba(201, 168, 76, 0.12);
+}
+.dark .frosted-header {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(201, 168, 76, 0.12);
+}
+
+/* Noise texture overlay for premium glass feel */
+.glass-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+}
