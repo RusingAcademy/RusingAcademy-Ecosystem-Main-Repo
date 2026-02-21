@@ -572,19 +572,13 @@ export default function EcosystemHeaderGold() {
             ))}
           </nav>
 
-          {/* Widget SLE AI Companion - In Bar 2 (desktop only, inline) */}
-          <div className="flex-shrink-0">
-            <SLEAICompanionWidget />
-          </div>
+          {/* Widget SLE AI Companion placeholder - actual mount is below, outside hidden containers */}
         </div>
       </div>
 
-      {/* SLE AI Companion Widget - Mobile/Tablet mount (< 1024px) */}
-      {/* The widget uses fixed positioning so it renders as a floating button */}
-      {/* On desktop (lg+), it's already rendered inline in Bar 2 above */}
-      <div className="lg:hidden">
-        <SLEAICompanionWidget />
-      </div>
+      {/* SLE AI Companion Widget - Single universal mount (all screen sizes) */}
+      {/* Placed outside any hidden container so it always renders its fixed-position floating button */}
+      <SLEAICompanionWidget />
 
       {/* Search Modal */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
