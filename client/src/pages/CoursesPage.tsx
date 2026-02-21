@@ -385,7 +385,7 @@ const ESL_COURSE_IDS: Record<string, string> = {
   'ESL-III': 'esl-path-iii-operational-english',
   'ESL-IV': 'esl-path-iv-strategic-expression',
   'ESL-V': 'esl-path-v-professional-mastery',
-  'ESL-VI': 'esl-path-vi-sle-accelerator',
+  'ESL-VI': 'esl-path-vi-executive-leadership',
 };
 
 // Filter options
