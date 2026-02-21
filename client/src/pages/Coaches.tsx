@@ -186,19 +186,7 @@ export default function Coaches() {
       
 
       <main id="main-content" className="flex-1">
-        {/* Compact Hero Section — profiles visible immediately */}
-          <section className="pt-4 pb-3 md:pt-6 md:pb-4 section-bg-2 border-b border-teal-200/50 dark:border-white/15">
-            <div className="container mx-auto px-6 md:px-8 lg:px-12 text-center">
-              <h1 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-2">
-                {language === 'fr' ? 'Nos Coachs Certifiés' : 'Our Certified Coaches'}
-              </h1>
-              <p className="text-base text-black/70 dark:text-foreground/70 max-w-2xl mx-auto">
-                {language === 'fr' 
-                  ? 'Trouvez le coach parfait pour vos objectifs SLE et développement professionnel'
-                  : 'Find the perfect coach for your SLE goals and professional development'}
-              </p>
-            </div>
-          </section>
+
 
         {/* Search Bar Section */}
           <section className="py-3">
