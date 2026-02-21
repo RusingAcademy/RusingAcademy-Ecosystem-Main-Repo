@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Lock, Building2, TrendingUp, Users, Zap, BarChart3, CheckCircle2 } from "lucide-react";
@@ -48,6 +49,10 @@ export default function Organizations() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-50 dark:from-teal-950 dark:via-obsidian dark:to-teal-950">
+      <SEO 
+        title={language === "fr" ? "Pour les organisations" : "For Organizations"}
+        description={language === "fr" ? "Solutions de formation bilingue pour les ministères et organisations du gouvernement canadien." : "Enterprise bilingual training solutions for Canadian government departments and organizations."}
+      />
       
 
       <main className="pt-20 pb-20">

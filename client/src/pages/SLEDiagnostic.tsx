@@ -387,7 +387,7 @@ export default function SLEDiagnostic() {
                 <Button
                   size="lg"
                   onClick={() => setShowQuiz(true)}
-                  className="bg-white text-teal-900 hover:bg-teal-50 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                  className="bg-white dark:bg-gray-100 text-teal-900 hover:bg-teal-50 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
                 >
                   <ClipboardCheck className="mr-2 h-5 w-5" />
                   {language === 'en' ? 'Start Free Assessment' : 'Commencer l\'\u00e9valuation gratuite'}

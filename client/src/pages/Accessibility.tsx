@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 import { CheckCircle, AlertCircle } from "lucide-react";
 
@@ -112,7 +113,7 @@ const translations = {
       items: [
         { name: "Web Content Accessibility Guidelines (WCAG) 2.1", url: "https://www.w3.org/WAI/WCAG21/quickref/" },
         { name: "Accessible Canada Act", url: "https://www.canada.ca/en/employment-social-development/programs/accessible-canada.html" },
-        { name: "Government of Canada Web Standards", url: "https://www.canada.ca/en/treasury-board-secretariat/services/government-communications/federal-identity-program/technical-specifications/web-standards.html" }
+        { name: "Government of Canada Web Standards", url: "https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=23601" }
       ]
     }
   },
@@ -225,7 +226,7 @@ const translations = {
       items: [
         { name: "Règles pour l'accessibilité des contenus Web (WCAG) 2.1", url: "https://www.w3.org/WAI/WCAG21/quickref/" },
         { name: "Loi canadienne sur l'accessibilité", url: "https://www.canada.ca/fr/emploi-developpement-social/programmes/canada-accessible.html" },
-        { name: "Normes Web du gouvernement du Canada", url: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/communications-gouvernementales/programme-federal-image-marque/specifications-techniques/normes-web.html" }
+        { name: "Normes Web du gouvernement du Canada", url: "https://www.tbs-sct.canada.ca/pol/doc-fra.aspx?id=23601" }
       ]
     }
   }
@@ -237,6 +238,14 @@ export default function Accessibility() {
   
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={language === "fr" ? "Déclaration d'accessibilité" : "Accessibility Statement"}
+        description={language === "fr" ? "L'engagement de RusingAcademy envers l'accessibilité numérique pour tous les fonctionnaires canadiens." : "RusingAcademy's commitment to digital accessibility for all Canadian public servants."}
+      />
+      <SEO 
+        title={language === "fr" ? "Déclaration d'accessibilité" : "Accessibility Statement"}
+        description={language === "fr" ? "L'engagement de RusingAcademy envers l'accessibilité numérique pour tous les fonctionnaires canadiens." : "RusingAcademy's commitment to digital accessibility for all Canadian public servants."}
+      />
       
       
       <main className="flex-1 py-8 md:py-12 lg:py-16" id="main-content">

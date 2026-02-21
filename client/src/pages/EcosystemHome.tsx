@@ -50,7 +50,7 @@ export default function EcosystemHome() {
   const t = heroContent[language];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-obsidian">
       <SEO 
         title={language === 'fr' ? 'Écosystème RusingAcademy | Excellence Bilingue' : 'RusingAcademy Ecosystem | Bilingual Excellence'}
         description={t.description}

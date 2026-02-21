@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { toast } from "sonner";
 
 const translations = {
   en: {
@@ -231,7 +232,7 @@ export default function Blog() {
                       </span>
                     </div>
                     <button
-                      onClick={() => alert(t.comingSoon)}
+                      onClick={() => toast.info(t.comingSoon)}
                       className="inline-flex items-center gap-2 text-primary font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded w-fit"
                     >
                       {t.readMore}
@@ -300,7 +301,7 @@ export default function Blog() {
             </p>
             <form 
               className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-              onSubmit={(e) => { e.preventDefault(); alert(t.comingSoon); }}
+              onSubmit={(e) => { e.preventDefault(); toast.info(t.comingSoon); }}
             >
               <label htmlFor="email-subscribe" className="sr-only">Email</label>
               <input

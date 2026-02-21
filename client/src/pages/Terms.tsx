@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Terms() {
@@ -135,6 +136,10 @@ export default function Terms() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={language === "fr" ? "Conditions d'utilisation" : "Terms of Service"}
+        description={language === "fr" ? "Conditions générales d'utilisation de la plateforme RusingAcademy." : "Terms and conditions for using the RusingAcademy platform."}
+      />
       
 
       <main id="main-content" className="flex-1 py-8 md:py-12 lg:py-16">

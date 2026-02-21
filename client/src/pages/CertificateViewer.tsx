@@ -1,5 +1,6 @@
 import { useParams } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Footer from "@/components/Footer";
 import Certificate from "@/components/Certificate";
@@ -38,7 +39,7 @@ export default function CertificateViewer() {
     } else {
       // Fallback: copy to clipboard
       await navigator.clipboard.writeText(url);
-      alert(isEn ? "Link copied to clipboard!" : "Lien copié dans le presse-papiers !");
+      toast.success(isEn ? "Link copied to clipboard!" : "Lien copié dans le presse-papiers !");
     }
   };
 

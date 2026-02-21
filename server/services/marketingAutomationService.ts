@@ -56,7 +56,7 @@ const SEQUENCE_DELAYS = {
 export async function startNurturingSequence(
   lead: LeadData,
   pdfUrl: string,
-  calendarUrl: string = 'https://rusingacademy.com/book-session'
+  calendarUrl: string = 'https://www.rusingacademy.ca/book-session'
 ): Promise<void> {
   // Email 1: Immediate - Diagnostic Report
   await sendDiagnosticReportEmail(lead, pdfUrl);
@@ -223,7 +223,7 @@ function generateSuccessStoryHtml(lead: LeadData): string {
           </div>
           <p>Vous aussi, vous pouvez atteindre votre objectif de niveau ${lead.targetLevel}.</p>
           <center>
-            <a href="https://rusingacademy.com/programs" class="cta-button">Découvrir Nos Programmes</a>
+            <a href="https://www.rusingacademy.ca/programs" class="cta-button">Découvrir Nos Programmes</a>
           </center>
           <p>À demain,<br><strong>L'équipe RusingAcademy</strong></p>
         </div>

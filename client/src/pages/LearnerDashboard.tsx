@@ -197,7 +197,7 @@ const GlassStatCard = ({
 
 // Helper to format SLE level object to string (e.g., { reading: 'B', writing: 'B', oral: 'C' } => "BBC")
 function formatSLELevel(level: { reading?: string; writing?: string; oral?: string } | null | undefined): string {
-  if (!level) return "XXX";
+  if (!level) return "—";
   return `${level.reading || "X"}${level.writing || "X"}${level.oral || "X"}`;
 }
 
@@ -335,8 +335,8 @@ export default function LearnerDashboard() {
   const displayStreak = ds?.currentStreak ?? 0;
   const displayStudyHours = ds?.monthlyStudyHours ?? 0;
   const displayProgress = ds?.overallProgress ?? 0;
-  const displayCurrentLevel = formatSLELevel(ds?.currentLevel as any) || "XXX";
-  const displayTargetLevel = formatSLELevel(ds?.targetLevel as any) || "XXX";
+  const displayCurrentLevel = formatSLELevel(ds?.currentLevel as any) || "—";
+  const displayTargetLevel = formatSLELevel(ds?.targetLevel as any) || "—";
   const displayDaysUntilExam = ds?.daysUntilExam ?? null;
 
   const labels = {
@@ -602,8 +602,8 @@ export default function LearnerDashboard() {
 
               {/* SLE Velocity Widget - Exam Readiness Prediction */}
               <SLEVelocityWidget
-                currentLevel={displayCurrentLevel !== "XXX" ? displayCurrentLevel : formatSLELevel(velocityData?.currentLevel) || "BBB"}
-                targetLevel={displayTargetLevel !== "XXX" ? displayTargetLevel : formatSLELevel(velocityData?.targetLevel) || "CBC"}
+                currentLevel={displayCurrentLevel !== "—" ? displayCurrentLevel : formatSLELevel(velocityData?.currentLevel) || "BBB"}
+                targetLevel={displayTargetLevel !== "—" ? displayTargetLevel : formatSLELevel(velocityData?.targetLevel) || "CBC"}
                 examDate={ds?.examDate ? new Date(ds.examDate) : velocityData?.examDate ? new Date(velocityData.examDate) : new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)}
                 weeklyHours={velocityData?.weeklyStudyHours || 0}
                 averageProgress={velocityData?.lessonsCompleted ? Math.min(velocityData.lessonsCompleted / 3, 5) : 2}

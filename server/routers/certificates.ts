@@ -27,7 +27,7 @@ const CERTIFICATE_TEMPLATE = {
     name: "RusingAcademy",
     tagline: "Excellence in Bilingual Education",
     taglineFr: "Excellence en éducation bilingue",
-    website: "rusingacademy.com",
+    website: "rusingacademy.ca",
   },
   signatory: {
     name: "Prof. Steven Rusinga",
@@ -173,7 +173,7 @@ export const certificatesRouter = router({
         recipientName: ctx.user.name || "Learner",
         courseName: course.title,
         completionDate: new Date(),
-        verificationUrl: `https://rusingacademy.com/verify/${certificateNumber}`,
+        verificationUrl: `https://www.rusingacademy.ca/verify/${certificateNumber}`,
         pdfUrl,
         metadata: {
           language: input.language,

@@ -4,6 +4,7 @@
  */
 
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, Users, Calendar, DollarSign, Award, ArrowRight } from "lucide-react";
@@ -36,6 +37,10 @@ export default function BecomeCoachPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <SEO 
+        title={language === "fr" ? "Devenir coach" : "Become a Coach"}
+        description={language === "fr" ? "Rejoignez le réseau de coaching RusingAcademy. Aidez les fonctionnaires à atteindre leurs objectifs ELS." : "Join the RusingAcademy coaching network. Help public servants achieve their SLE goals."}
+      />
       {/* Hero Section */}
       <section className="relative py-10 md:py-16 lg:py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-cta/10 to-cta/10" />

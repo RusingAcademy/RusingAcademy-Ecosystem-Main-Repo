@@ -296,10 +296,12 @@ export default function Programs() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-8 lg:mb-12">
-              <Button size="lg" className="bg-gradient-to-r from-cta to-cta-2 hover:from-cta hover:to-cta text-white shadow-lg">
-                Explore the Program
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link href="/courses">
+                <Button size="lg" className="bg-gradient-to-r from-cta to-cta-2 hover:from-cta hover:to-cta text-white shadow-lg">
+                  Explore the Program
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" className="border-2 border-orange-300 text-cta hover:bg-orange-50" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                 View All Paths
               </Button>
