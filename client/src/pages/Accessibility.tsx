@@ -112,7 +112,7 @@ const translations = {
       items: [
         { name: "Web Content Accessibility Guidelines (WCAG) 2.1", url: "https://www.w3.org/WAI/WCAG21/quickref/" },
         { name: "Accessible Canada Act", url: "https://www.canada.ca/en/employment-social-development/programs/accessible-canada.html" },
-        { name: "Government of Canada Web Standards", url: "https://www.canada.ca/en/treasury-board-secretariat/services/government-communications/federal-identity-program/technical-specifications/web-standards.html" }
+        { name: "Government of Canada Web Standards", url: "https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=23601" }
       ]
     }
   },
@@ -225,7 +225,7 @@ const translations = {
       items: [
         { name: "Règles pour l'accessibilité des contenus Web (WCAG) 2.1", url: "https://www.w3.org/WAI/WCAG21/quickref/" },
         { name: "Loi canadienne sur l'accessibilité", url: "https://www.canada.ca/fr/emploi-developpement-social/programmes/canada-accessible.html" },
-        { name: "Normes Web du gouvernement du Canada", url: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/communications-gouvernementales/programme-federal-image-marque/specifications-techniques/normes-web.html" }
+        { name: "Normes Web du gouvernement du Canada", url: "https://www.tbs-sct.canada.ca/pol/doc-fra.aspx?id=23601" }
       ]
     }
   }
