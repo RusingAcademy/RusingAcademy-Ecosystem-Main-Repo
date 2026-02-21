@@ -61,7 +61,7 @@ export default function BarholexSubHeader() {
           <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300 ml-3">
             <img loading="lazy" decoding="async"
               src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vQofylSAnWOMKrec.png" 
-              alt="RusingÂcademy Logo"
+              alt="RusingAcademy Logo"
               className="transition-all duration-300 rounded-lg object-contain"
               style={{ 
                 width: isScrolled ? "36px" : "40px",

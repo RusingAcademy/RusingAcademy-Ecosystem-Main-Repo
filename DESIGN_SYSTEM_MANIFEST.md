@@ -1,4 +1,4 @@
-> # RusingÂcademy Ecosystem — Design System Manifest
+> # RusingAcademy Ecosystem — Design System Manifest
 
 **Version:** 1.0.0 (Néo-Institutionnel / Light Luxury)
 **Date:** February 17, 2026

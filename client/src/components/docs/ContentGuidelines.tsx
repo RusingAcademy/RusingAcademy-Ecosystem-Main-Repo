@@ -140,8 +140,8 @@ const CONTENT_GUIDELINES: GuidelineSection[] = [
       {
         title: "Brand Hierarchy",
         titleFr: "Hiérarchie de la marque",
-        description: "Commercial brand names (RusingÂcademy, Lingueefy, Barholex Media) in page body. 'Rusinga International Consulting Ltd.' in footer as institutional entity.",
-        descriptionFr: "Noms de marque commerciaux (RusingÂcademy, Lingueefy, Barholex Media) dans le corps de la page. « Rusinga International Consulting Ltd. » dans le pied de page comme entité institutionnelle.",
+        description: "Commercial brand names (RusingAcademy, Lingueefy, Barholex Media) in page body. 'Rusinga International Consulting Ltd.' in footer as institutional entity.",
+        descriptionFr: "Noms de marque commerciaux (RusingAcademy, Lingueefy, Barholex Media) dans le corps de la page. « Rusinga International Consulting Ltd. » dans le pied de page comme entité institutionnelle.",
       },
       {
         title: "Color Usage",

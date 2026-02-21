@@ -1,5 +1,5 @@
 /**
- * Home / Landing Page — RusingÂcademy Ecosystem Hub
+ * Home / Landing Page — RusingAcademy Ecosystem Hub
  * Premium public-facing landing page with three brand pillars,
  * testimonials, team, YouTube carousel, FAQ, booking, and footer.
  * Redirects authenticated users to /dashboard.
@@ -33,7 +33,7 @@ const TESTIMONIALS = [
   {
     name: "Mithula Naik",
     role: "Public Servant, Government of Canada",
-    quote: "RusingÂcademy's approach completely transformed my confidence. I went from dreading my SLE to passing at Level C in just 8 weeks. The structured coaching and personalized feedback made all the difference.",
+    quote: "RusingAcademy's approach completely transformed my confidence. I went from dreading my SLE to passing at Level C in just 8 weeks. The structured coaching and personalized feedback made all the difference.",
     initials: "MN",
     color: "#008090",
   },
@@ -47,14 +47,14 @@ const TESTIMONIALS = [
   {
     name: "Edith Bramwell",
     role: "Senior Advisor, Public Service",
-    quote: "After failing my oral exam twice, I was ready to give up. RusingÂcademy's method helped me identify my weaknesses and build real fluency. I passed with a B on my third attempt — now aiming for C!",
+    quote: "After failing my oral exam twice, I was ready to give up. RusingAcademy's method helped me identify my weaknesses and build real fluency. I passed with a B on my third attempt — now aiming for C!",
     initials: "EB",
     color: "#f5a623",
   },
   {
     name: "Scott Cantin",
     role: "Manager, Government of Canada",
-    quote: "What sets RusingÂcademy apart is the genuine understanding of the public service context. The exam simulations are incredibly realistic, and the AI tools provide practice anytime I need it.",
+    quote: "What sets RusingAcademy apart is the genuine understanding of the public service context. The exam simulations are incredibly realistic, and the AI tools provide practice anytime I need it.",
     initials: "SC",
     color: "#059669",
   },
@@ -62,7 +62,7 @@ const TESTIMONIALS = [
 
 /* ─── Team ─── */
 const TEAM = [
-  { name: "Steven Barholere", role: "Founder & CEO", bio: "GC-certified language coach with 15+ years of experience. Visionary behind the RusingÂcademy ecosystem.", initials: "SB", color: "#008090", linkedin: "https://www.linkedin.com/in/stevenbarholere/" },
+  { name: "Steven Barholere", role: "Founder & CEO", bio: "GC-certified language coach with 15+ years of experience. Visionary behind the RusingAcademy ecosystem.", initials: "SB", color: "#008090", linkedin: "https://www.linkedin.com/in/stevenbarholere/" },
   { name: "Sue-Anne Richer", role: "Senior Coach", bio: "Expert in FSL coaching with a focus on oral proficiency and exam preparation strategies.", initials: "SR", color: "#8b5cf6", linkedin: "#" },
   { name: "Preciosa Baganha", role: "ESL Specialist", bio: "Dedicated to helping francophone professionals master English for the federal workplace.", initials: "PB", color: "#f5a623", linkedin: "#" },
   { name: "Erika Seguin", role: "Exam Stress Coach", bio: "Combines language coaching with stress management techniques for peak exam performance.", initials: "ES", color: "#e74c3c", linkedin: "#" },
@@ -71,8 +71,8 @@ const TEAM = [
 /* ─── FAQ ─── */
 const FAQ_ITEMS = [
   {
-    q: "What is the difference between RusingÂcademy and Lingueefy?",
-    a: "RusingÂcademy offers structured crash courses and self-paced learning paths (6 Paths, 96 lessons per program). Lingueefy provides personalized 1-on-1 coaching with certified instructors. Together, they form a complete ecosystem for bilingual excellence.",
+    q: "What is the difference between RusingAcademy and Lingueefy?",
+    a: "RusingAcademy offers structured crash courses and self-paced learning paths (6 Paths, 96 lessons per program). Lingueefy provides personalized 1-on-1 coaching with certified instructors. Together, they form a complete ecosystem for bilingual excellence.",
   },
   {
     q: "How long does it take to reach Level C?",
@@ -195,7 +195,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <img src={LOGO_ICON} alt="" className="w-8 h-8 rounded-lg" />
             <span className="text-lg font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
-              RusingÂcademy
+              RusingAcademy
             </span>
           </div>
           {/* Desktop nav */}
@@ -351,7 +351,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                name: "RusingÂcademy",
+                name: "RusingAcademy",
                 tagline: "Professional Courses & LMS",
                 desc: "Structured crash courses with 6 learning paths per program (A1→C1+). Self-paced lessons with gamification, quizzes, and SLE exam simulations.",
                 icon: "school",
@@ -570,7 +570,7 @@ export default function Home() {
             Ready to Take the <span className="text-[#008090]">Next Step</span>?
           </h2>
           <p className="text-gray-600 mt-4 text-lg max-w-2xl mx-auto">
-            Join hundreds of Canadian public servants who have transformed their bilingual capabilities with RusingÂcademy.
+            Join hundreds of Canadian public servants who have transformed their bilingual capabilities with RusingAcademy.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-10">
             <a href="https://calendly.com/rusingacademy" target="_blank" rel="noopener noreferrer"
@@ -598,7 +598,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <img src={LOGO_ICON} alt="" className="w-8 h-8 rounded-lg" />
-                <span className="text-lg font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>RusingÂcademy</span>
+                <span className="text-lg font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>RusingAcademy</span>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed mb-4">
                 Canada's premier bilingual training ecosystem. Empowering public servants to achieve bilingual excellence through expert coaching, structured courses, and innovative technology.
@@ -660,7 +660,7 @@ export default function Home() {
 
           {/* Bottom bar */}
           <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-gray-400">© 2026 RusingÂcademy — Rusinga International Consulting Ltd. / Barholex Media Inc.</p>
+            <p className="text-[11px] text-gray-400">© 2026 RusingAcademy — Rusinga International Consulting Ltd. / Barholex Media Inc.</p>
             <div className="flex items-center gap-6 text-[11px] text-gray-400">
               <a href="#" className="hover:text-[#008090] transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-[#008090] transition-colors">Terms of Service</a>

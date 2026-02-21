@@ -102,7 +102,7 @@ export default function PracticeSessionDetail() {
       const scoreStr = m.score != null ? ` [Score: ${m.score}/100]` : "";
       return `[${time}] ${speaker}${scoreStr}:\n${m.content}\n`;
     });
-    const header = `TRANSCRIPTION DE SESSION SLE — RusingÂcademy
+    const header = `TRANSCRIPTION DE SESSION SLE — RusingAcademy
 ================================================
 Coach: ${coachName}
 Niveau: ${session.level || "B"}

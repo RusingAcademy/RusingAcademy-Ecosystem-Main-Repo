@@ -35,7 +35,7 @@ interface SEOHeadProps {
 }
 
 // ─── Constants ──────────────────────────────────────────────────────────────
-const SITE_NAME = "RusingÂcademy";
+const SITE_NAME = "RusingAcademy";
 const SITE_URL = "https://www.rusingacademy.ca";
 const DEFAULT_OG_IMAGE = "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-og-1200x630.webp";
 
@@ -69,8 +69,8 @@ function setLinkTag(rel: string, href: string, attrs?: Record<string, string>) {
 export default function SEOHead({
   title = "Bilingual Excellence for Canadian Public Servants",
   titleFr = "Excellence bilingue pour les fonctionnaires canadiens",
-  description = "RusingÂcademy is the premier bilingual training ecosystem for Canadian public servants.",
-  descriptionFr = "RusingÂcademy est l'écosystème de formation bilingue de premier plan pour les fonctionnaires canadiens.",
+  description = "RusingAcademy is the premier bilingual training ecosystem for Canadian public servants.",
+  descriptionFr = "RusingAcademy est l'écosystème de formation bilingue de premier plan pour les fonctionnaires canadiens.",
   keywords = "SLE exam, bilingual training, Canadian public servants",
   keywordsFr = "examen ELS, formation bilingue, fonctionnaires canadiens",
   path = "/",

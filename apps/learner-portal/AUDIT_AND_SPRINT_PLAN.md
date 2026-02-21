@@ -1,10 +1,10 @@
 # Audit Complet & Plan des 10 Méga-Sprints
-## RusingÂcademy Learning Portal
+## RusingAcademy Learning Portal
 
 **Auteur :** Manus AI — Ingénieur Didactique Senior  
 **Date :** 13 février 2026  
 **Commanditaire :** Steven Barholere, CEO & Chief Learning Officer — RusingAcademy  
-**Objet :** Audit technique, pédagogique et fonctionnel du portail RusingÂcademy Learning Portal, suivi d'un plan stratégique de 10 méga-sprints pour compléter le projet.
+**Objet :** Audit technique, pédagogique et fonctionnel du portail RusingAcademy Learning Portal, suivi d'un plan stratégique de 10 méga-sprints pour compléter le projet.
 
 ---
 
@@ -12,7 +12,7 @@
 
 ### 1. Résumé Exécutif
 
-Le portail RusingÂcademy Learning Portal, dans son état actuel, constitue une base fonctionnelle solide qui reproduit fidèlement la structure du portail LRDG tout en y intégrant le branding premium RusingÂcademy (teal #008090, or #f5a623, glassmorphism) et un système de gamification embryonnaire. Le portail comprend **21 pages fonctionnelles**, **96 leçons structurées** en 7 slots interactifs, **75 quiz formatifs** avec questions réelles, et un système de gamification basé sur les XP, niveaux, streaks et badges.
+Le portail RusingAcademy Learning Portal, dans son état actuel, constitue une base fonctionnelle solide qui reproduit fidèlement la structure du portail LRDG tout en y intégrant le branding premium RusingAcademy (teal #008090, or #f5a623, glassmorphism) et un système de gamification embryonnaire. Le portail comprend **21 pages fonctionnelles**, **96 leçons structurées** en 7 slots interactifs, **75 quiz formatifs** avec questions réelles, et un système de gamification basé sur les XP, niveaux, streaks et badges.
 
 Cependant, l'audit révèle des lacunes significatives qui doivent être comblées pour transformer ce prototype en un produit de qualité professionnelle prêt pour le marché B2B/B2G. Les lacunes les plus critiques concernent la **persistance des données** (aucune base de données), l'**absence de contenu ESL distinct** (miroir du FSL), le **système de gamification incomplet** (état en mémoire uniquement), l'**absence totale d'accessibilité WCAG 2.1**, et le **manque de bilinguisme fonctionnel** (interface uniquement en anglais avec du contenu en français).
 
@@ -116,7 +116,7 @@ Les 11 pages héritées du clone LRDG (TutoringSessions, Authorizations, Progres
 
 **Forces :**
 - Palette teal/or/glassmorphism cohérente et premium
-- Logo RusingÂcademy intégré dans la sidebar et le login
+- Logo RusingAcademy intégré dans la sidebar et le login
 - Typographie Playfair Display + Inter bien appliquée
 - Sidebar sombre avec accents dorés élégante
 
@@ -366,9 +366,9 @@ Le plan des 10 méga-sprints intègre systématiquement les 5 recommandations de
 
 ### Avantages Concurrentiels vs LRDG
 
-Le portail RusingÂcademy, une fois les 10 sprints complétés, surpassera LRDG sur les axes suivants :
+Le portail RusingAcademy, une fois les 10 sprints complétés, surpassera LRDG sur les axes suivants :
 
-1. **Gamification complète** — LRDG n'a aucun système de gamification ; RusingÂcademy aura XP, badges, leaderboards, défis, et parcours visuels.
+1. **Gamification complète** — LRDG n'a aucun système de gamification ; RusingAcademy aura XP, badges, leaderboards, défis, et parcours visuels.
 2. **IA intégrée** — Chatbot pédagogique, recommandations adaptatives, et feedback intelligent.
 3. **Design premium** — Glassmorphism, micro-animations, et branding cohérent vs l'interface fonctionnelle mais austère de LRDG.
 4. **Deux programmes** — ESL et FSL dans un seul portail vs un seul programme chez LRDG.
@@ -388,4 +388,4 @@ Pour maximiser la valeur livrée rapidement, l'ordre recommandé est :
 
 ---
 
-*Ce document constitue la feuille de route stratégique pour transformer le prototype actuel du RusingÂcademy Learning Portal en un produit de qualité professionnelle, prêt à concurrencer et surpasser LRDG sur le marché de la formation linguistique gouvernementale canadienne.*
+*Ce document constitue la feuille de route stratégique pour transformer le prototype actuel du RusingAcademy Learning Portal en un produit de qualité professionnelle, prêt à concurrencer et surpasser LRDG sur le marché de la formation linguistique gouvernementale canadienne.*

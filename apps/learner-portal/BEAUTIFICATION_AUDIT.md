@@ -1,4 +1,4 @@
-# RusingÂcademy LRDG Ecosystem — Beautification & Aesthetification Audit
+# RusingAcademy LRDG Ecosystem — Beautification & Aesthetification Audit
 
 **Author:** Manus AI — Design Engineering Division
 **Date:** February 16, 2026
@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-The RusingÂcademy LRDG ecosystem is a functionally rich, multi-portal bilingual learning platform serving Canadian public servants. The current implementation demonstrates strong feature breadth — gamification, AI coaching, SLE exam preparation, multi-role portals, and real-time progress tracking. However, the visual layer has accumulated significant **design debt** across 50+ sprints of rapid feature development. This audit identifies 30 critical pain points organized into six diagnostic categories, each grounded in research from the GC Design System [1], WCAG 2.2 AA [2], the USWDS [3], and leading EdTech UX literature [4] [5].
+The RusingAcademy LRDG ecosystem is a functionally rich, multi-portal bilingual learning platform serving Canadian public servants. The current implementation demonstrates strong feature breadth — gamification, AI coaching, SLE exam preparation, multi-role portals, and real-time progress tracking. However, the visual layer has accumulated significant **design debt** across 50+ sprints of rapid feature development. This audit identifies 30 critical pain points organized into six diagnostic categories, each grounded in research from the GC Design System [1], WCAG 2.2 AA [2], the USWDS [3], and leading EdTech UX literature [4] [5].
 
 The core finding is that the ecosystem suffers from **visual fragmentation** — each portal and page was built with locally scoped styles rather than drawing from a unified design system. This results in 619 hardcoded color references versus only 19 uses of CSS semantic variables, 7 different font-size scales, inconsistent border-radius usage (4 competing values), and 39 pages without bilingual support. Addressing these issues systematically will elevate the platform from "functional prototype" to "world-class institutional product."
 

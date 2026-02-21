@@ -1,5 +1,5 @@
 /**
- * PathList — RusingÂcademy Learning Portal
+ * PathList — RusingAcademy Learning Portal
  * Shows all 6 Paths for a selected program with progress and gamification
  * Design: Premium glassmorphism, teal/gold, accessible
  */

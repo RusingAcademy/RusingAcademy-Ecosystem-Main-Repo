@@ -13,7 +13,7 @@ export default function B2BSection() {
       badge: "B2B Solutions",
       title: "Corporate Language Training",
       highlight: "For Private Sector",
-      subtitle: "Empower your workforce with professional language training. RusingÂcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
+      subtitle: "Empower your workforce with professional language training. RusingAcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
       cta: "Request a Consultation",
       stats: [
         { value: "200+", label: "Corporate Clients" },
@@ -21,7 +21,7 @@ export default function B2BSection() {
         { value: "92%", label: "Completion Rate" },
         { value: "4.9/5", label: "Client Satisfaction" }
       ],
-      benefitsTitle: "Why Businesses Choose RusingÂcademy",
+      benefitsTitle: "Why Businesses Choose RusingAcademy",
       benefits: [
         { icon: Target, title: "Industry-Specific Training", desc: "Customized curricula for finance, healthcare, legal, tech sectors." },
         { icon: Clock, title: "Flexible Learning", desc: "On-site, virtual, or hybrid. Self-paced and live sessions." },
@@ -36,7 +36,7 @@ export default function B2BSection() {
       ],
       testimonialsTitle: "Trusted by Leading Canadian Businesses",
       testimonials: [
-        { quote: "RusingÂcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
+        { quote: "RusingAcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
         { quote: "The industry-specific curriculum opened new market opportunities for our consultants.", author: "Managing Partner", company: "Top-10 Consulting Firm" }
       ],
       ctaTitle: "Ready to Transform Your Workforce?",
@@ -46,7 +46,7 @@ export default function B2BSection() {
       badge: "Solutions B2B",
       title: "Formation linguistique corporative",
       highlight: "Pour le secteur privé",
-      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingÂcademy aide les entreprises canadiennes à développer des talents bilingues.",
+      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingAcademy aide les entreprises canadiennes à développer des talents bilingues.",
       cta: "Demander une consultation",
       stats: [
         { value: "200+", label: "Clients corporatifs" },
@@ -54,7 +54,7 @@ export default function B2BSection() {
         { value: "92%", label: "Taux de complétion" },
         { value: "4.9/5", label: "Satisfaction client" }
       ],
-      benefitsTitle: "Pourquoi les entreprises choisissent RusingÂcademy",
+      benefitsTitle: "Pourquoi les entreprises choisissent RusingAcademy",
       benefits: [
         { icon: Target, title: "Formation par industrie", desc: "Programmes personnalisés pour finance, santé, juridique, tech." },
         { icon: Clock, title: "Apprentissage flexible", desc: "Sur site, virtuel ou hybride. Auto-formation et sessions en direct." },
@@ -69,7 +69,7 @@ export default function B2BSection() {
       ],
       testimonialsTitle: "La confiance des grandes entreprises canadiennes",
       testimonials: [
-        { quote: "RusingÂcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
+        { quote: "RusingAcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
         { quote: "Le curriculum spécifique à notre industrie a ouvert de nouvelles opportunités de marché.", author: "Associé directeur", company: "Cabinet de conseil Top-10" }
       ],
       ctaTitle: "Prêt à transformer votre équipe?",

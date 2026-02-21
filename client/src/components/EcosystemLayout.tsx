@@ -13,7 +13,7 @@ type Brand = "ecosystem" | "rusingacademy" | "lingueefy" | "barholex";
 
 // Determine which brand is active based on current path
 function getBrand(path: string): Brand {
-  // RusingÂcademy pages
+  // RusingAcademy pages
   if (path.startsWith("/rusingacademy") || path === "/courses" || path.startsWith("/courses/")) {
     return "rusingacademy";
   }
@@ -50,7 +50,7 @@ function getSubHeader(path: string): React.ReactNode | null {
     return <HubSubHeader />;
   }
   
-  // RusingÂcademy pages
+  // RusingAcademy pages
   if (
     path.startsWith("/rusingacademy") || 
     path === "/courses" || 

@@ -291,9 +291,9 @@ describe("MediaLibraryPicker Integration", () => {
 // ─── RichTextEditor Content Handling Tests ───
 describe("RichTextEditor Content Handling", () => {
   it("should handle HTML content serialization", () => {
-    const htmlContent = "<p>Welcome to <strong>RusingÂcademy</strong></p>";
+    const htmlContent = "<p>Welcome to <strong>RusingAcademy</strong></p>";
     expect(htmlContent).toContain("<strong>");
-    expect(htmlContent).toContain("RusingÂcademy");
+    expect(htmlContent).toContain("RusingAcademy");
   });
 
   it("should handle bilingual content in rich text", () => {

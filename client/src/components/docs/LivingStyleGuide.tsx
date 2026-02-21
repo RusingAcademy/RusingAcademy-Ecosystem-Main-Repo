@@ -79,7 +79,7 @@ const COLOR_TOKENS: { category: string; categoryFr: string; tokens: ColorToken[]
 
 /* ── Typography Tokens ── */
 const TYPOGRAPHY_TOKENS: TypographyToken[] = [
-  { name: "Display / H1", variable: "--font-display", sampleText: "RusingÂcademy — Excellence bilingue", specs: "Merriweather, 3rem (48px), Bold 700" },
+  { name: "Display / H1", variable: "--font-display", sampleText: "RusingAcademy — Excellence bilingue", specs: "Merriweather, 3rem (48px), Bold 700" },
   { name: "Heading / H2", variable: "--font-display", sampleText: "Coaching personnalisé pour la réussite", specs: "Merriweather, 2.25rem (36px), Bold 700" },
   { name: "Subheading / H3", variable: "--font-ui", sampleText: "Préparation aux examens SLE", specs: "Inter, 1.5rem (24px), Semibold 600" },
   { name: "Body", variable: "--font-ui", sampleText: "Notre approche combine pédagogie éprouvée et technologie innovante pour vous préparer efficacement.", specs: "Inter, 1rem (16px), Regular 400" },
@@ -113,7 +113,7 @@ export function LivingStyleGuide({ className = "" }: LivingStyleGuideProps) {
   const labels = {
     en: {
       title: "Living Style Guide",
-      subtitle: "Interactive documentation of the RusingÂcademy design system",
+      subtitle: "Interactive documentation of the RusingAcademy design system",
       colors: "Colors",
       typography: "Typography",
       spacing: "Spacing",
@@ -130,7 +130,7 @@ export function LivingStyleGuide({ className = "" }: LivingStyleGuideProps) {
     },
     fr: {
       title: "Guide de style interactif",
-      subtitle: "Documentation interactive du système de design RusingÂcademy",
+      subtitle: "Documentation interactive du système de design RusingAcademy",
       colors: "Couleurs",
       typography: "Typographie",
       spacing: "Espacement",

@@ -1,5 +1,5 @@
 /**
- * Community Forum — RusingÂcademy Learning Portal
+ * Community Forum — RusingAcademy Learning Portal
  * Enhanced social features: forum categories, study groups, member stats, recent posts
  * Design: Clean white light theme, accessible
  */

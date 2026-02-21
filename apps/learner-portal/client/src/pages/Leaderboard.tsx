@@ -1,5 +1,5 @@
 /**
- * Leaderboard — RusingÂcademy Learning Portal
+ * Leaderboard — RusingAcademy Learning Portal
  * Design: Clean white light theme, accessible, LRDG-inspired
  */
 import DashboardLayout from "@/components/DashboardLayout";

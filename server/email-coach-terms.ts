@@ -35,9 +35,9 @@ export async function sendCoachTermsAcceptanceEmail(
   });
 
   const content = language === "fr" ? {
-    subject: "Confirmation d'acceptation des Termes et Conditions - RusingÂcademy",
+    subject: "Confirmation d'acceptation des Termes et Conditions - RusingAcademy",
     greeting: `Bonjour ${coachName},`,
-    intro: "Nous vous confirmons que vous avez accepté les Termes et Conditions pour les coachs de la plateforme RusingÂcademy.",
+    intro: "Nous vous confirmons que vous avez accepté les Termes et Conditions pour les coachs de la plateforme RusingAcademy.",
     detailsTitle: "Détails de l'acceptation",
     dateLabel: "Date d'acceptation",
     versionLabel: "Version des termes",
@@ -61,12 +61,12 @@ export async function sendCoachTermsAcceptanceEmail(
     termsLink: "Vous pouvez consulter les termes complets à tout moment",
     viewTerms: "Voir les Termes et Conditions",
     questions: "Si vous avez des questions, n'hésitez pas à nous contacter.",
-    signature: "L'équipe RusingÂcademy",
+    signature: "L'équipe RusingAcademy",
     legalNote: "Ce courriel confirme votre acceptation des Termes et Conditions. Veuillez conserver ce message pour vos dossiers.",
   } : {
-    subject: "Terms and Conditions Acceptance Confirmation - RusingÂcademy",
+    subject: "Terms and Conditions Acceptance Confirmation - RusingAcademy",
     greeting: `Hello ${coachName},`,
-    intro: "We confirm that you have accepted the Terms and Conditions for coaches on the RusingÂcademy platform.",
+    intro: "We confirm that you have accepted the Terms and Conditions for coaches on the RusingAcademy platform.",
     detailsTitle: "Acceptance Details",
     dateLabel: "Acceptance Date",
     versionLabel: "Terms Version",
@@ -90,7 +90,7 @@ export async function sendCoachTermsAcceptanceEmail(
     termsLink: "You can view the complete terms at any time",
     viewTerms: "View Terms and Conditions",
     questions: "If you have any questions, please don't hesitate to contact us.",
-    signature: "The RusingÂcademy Team",
+    signature: "The RusingAcademy Team",
     legalNote: "This email confirms your acceptance of the Terms and Conditions. Please keep this message for your records.",
   };
 
@@ -198,7 +198,7 @@ export async function sendCoachTermsAcceptanceEmail(
   <div class="container">
     <!-- Header with Logo -->
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 200px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 200px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 22px;">✅ ${language === "fr" ? "Confirmation d'Acceptation" : "Acceptance Confirmation"}</h1>
       <p style="margin: 10px 0 0; opacity: 0.9; font-size: 14px;">${language === "fr" ? "Termes et Conditions pour les Coachs" : "Coach Terms and Conditions"}</p>
     </div>
@@ -267,7 +267,7 @@ export async function sendCoachTermsAcceptanceEmail(
       <!-- Company Info -->
       <div class="company-info">
         <p class="company-name">Rusinga International Consulting Ltd.</p>
-        <p class="trade-name">${language === "fr" ? "Commercialement connue sous le nom de" : "Commercially known as"} « RusingÂcademy »</p>
+        <p class="trade-name">${language === "fr" ? "Commercialement connue sous le nom de" : "Commercially known as"} « RusingAcademy »</p>
       </div>
     </div>
     

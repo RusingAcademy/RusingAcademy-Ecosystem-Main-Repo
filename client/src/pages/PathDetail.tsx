@@ -434,7 +434,7 @@ export default function PathDetail() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <SEO
         title={displayPath.title || "Learning Path"}
-        description={displayPath.description?.slice(0, 160) || "Explore this learning path on RusingÂcademy"}
+        description={displayPath.description?.slice(0, 160) || "Explore this learning path on RusingAcademy"}
         canonical={`/paths/${slug}`}
         type="product"
       />

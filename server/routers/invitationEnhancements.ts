@@ -64,39 +64,39 @@ function buildInvitationEmail(params: InvitationEmailParams): { html: string; te
 
   const subjects: Record<string, Record<string, string>> = {
     default: {
-      en: `You're invited to join RusingÂcademy as ${roleName}`,
-      fr: `Vous êtes invité(e) à rejoindre RusingÂcademy en tant que ${roleName}`,
+      en: `You're invited to join RusingAcademy as ${roleName}`,
+      fr: `Vous êtes invité(e) à rejoindre RusingAcademy en tant que ${roleName}`,
     },
     welcome: {
-      en: `Welcome to RusingÂcademy — Your journey to bilingual excellence starts here`,
-      fr: `Bienvenue à RusingÂcademy — Votre parcours vers l'excellence bilingue commence ici`,
+      en: `Welcome to RusingAcademy — Your journey to bilingual excellence starts here`,
+      fr: `Bienvenue à RusingAcademy — Votre parcours vers l'excellence bilingue commence ici`,
     },
     team: {
-      en: `Your team at RusingÂcademy is waiting for you`,
-      fr: `Votre équipe à RusingÂcademy vous attend`,
+      en: `Your team at RusingAcademy is waiting for you`,
+      fr: `Votre équipe à RusingAcademy vous attend`,
     },
     vip: {
-      en: `Exclusive invitation to RusingÂcademy — Premium Access`,
-      fr: `Invitation exclusive à RusingÂcademy — Accès Premium`,
+      en: `Exclusive invitation to RusingAcademy — Premium Access`,
+      fr: `Invitation exclusive à RusingAcademy — Accès Premium`,
     },
   };
 
   const bodies: Record<string, Record<string, string>> = {
     default: {
-      en: `<strong>${inviterName}</strong> has invited you to join <strong>RusingÂcademy</strong> as a <strong>${roleName}</strong>.`,
-      fr: `<strong>${inviterName}</strong> vous a invité(e) à rejoindre <strong>RusingÂcademy</strong> en tant que <strong>${roleName}</strong>.`,
+      en: `<strong>${inviterName}</strong> has invited you to join <strong>RusingAcademy</strong> as a <strong>${roleName}</strong>.`,
+      fr: `<strong>${inviterName}</strong> vous a invité(e) à rejoindre <strong>RusingAcademy</strong> en tant que <strong>${roleName}</strong>.`,
     },
     welcome: {
-      en: `Welcome! <strong>${inviterName}</strong> believes you'd be a great addition to the RusingÂcademy community. You've been invited to join as a <strong>${roleName}</strong>.`,
-      fr: `Bienvenue ! <strong>${inviterName}</strong> croit que vous seriez un excellent ajout à la communauté RusingÂcademy. Vous avez été invité(e) à rejoindre en tant que <strong>${roleName}</strong>.`,
+      en: `Welcome! <strong>${inviterName}</strong> believes you'd be a great addition to the RusingAcademy community. You've been invited to join as a <strong>${roleName}</strong>.`,
+      fr: `Bienvenue ! <strong>${inviterName}</strong> croit que vous seriez un excellent ajout à la communauté RusingAcademy. Vous avez été invité(e) à rejoindre en tant que <strong>${roleName}</strong>.`,
     },
     team: {
-      en: `Your organization has partnered with RusingÂcademy to provide bilingual training. <strong>${inviterName}</strong> has invited you to join as a <strong>${roleName}</strong>.`,
-      fr: `Votre organisation s'est associée à RusingÂcademy pour offrir une formation bilingue. <strong>${inviterName}</strong> vous a invité(e) à rejoindre en tant que <strong>${roleName}</strong>.`,
+      en: `Your organization has partnered with RusingAcademy to provide bilingual training. <strong>${inviterName}</strong> has invited you to join as a <strong>${roleName}</strong>.`,
+      fr: `Votre organisation s'est associée à RusingAcademy pour offrir une formation bilingue. <strong>${inviterName}</strong> vous a invité(e) à rejoindre en tant que <strong>${roleName}</strong>.`,
     },
     vip: {
-      en: `You've been selected for exclusive access to RusingÂcademy. <strong>${inviterName}</strong> has personally invited you to join as a <strong>${roleName}</strong> with premium benefits.`,
-      fr: `Vous avez été sélectionné(e) pour un accès exclusif à RusingÂcademy. <strong>${inviterName}</strong> vous a personnellement invité(e) à rejoindre en tant que <strong>${roleName}</strong> avec des avantages premium.`,
+      en: `You've been selected for exclusive access to RusingAcademy. <strong>${inviterName}</strong> has personally invited you to join as a <strong>${roleName}</strong> with premium benefits.`,
+      fr: `Vous avez été sélectionné(e) pour un accès exclusif à RusingAcademy. <strong>${inviterName}</strong> vous a personnellement invité(e) à rejoindre en tant que <strong>${roleName}</strong> avec des avantages premium.`,
     },
   };
 
@@ -121,8 +121,8 @@ function buildInvitationEmail(params: InvitationEmailParams): { html: string; te
       ${customMessage ? `<div style="margin: 20px 0; padding: 16px; background: #f8f9fa; border-left: 4px solid ${EMAIL_BRANDING.primaryColor}; border-radius: 4px;"><p style="font-size: 14px; line-height: 1.6; margin: 0; font-style: italic;">"${customMessage}"</p><p style="font-size: 12px; color: #6b7280; margin: 8px 0 0 0;">— ${inviterName}</p></div>` : ""}
       <p style="font-size: 16px; line-height: 1.6;">
         ${language === "fr"
-          ? "RusingÂcademy est une plateforme d'apprentissage bilingue premium dédiée à aider les fonctionnaires canadiens à atteindre leurs objectifs de compétence linguistique."
-          : "RusingÂcademy is a premium bilingual learning platform dedicated to helping Canadian public servants achieve their language proficiency goals."}
+          ? "RusingAcademy est une plateforme d'apprentissage bilingue premium dédiée à aider les fonctionnaires canadiens à atteindre leurs objectifs de compétence linguistique."
+          : "RusingAcademy is a premium bilingual learning platform dedicated to helping Canadian public servants achieve their language proficiency goals."}
       </p>
       <div style="text-align: center; margin: 32px 0;">
         <a href="${inviteUrl}" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, ${EMAIL_BRANDING.primaryColor}, ${EMAIL_BRANDING.accentColor || "#6366f1"}); color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
@@ -137,7 +137,7 @@ function buildInvitationEmail(params: InvitationEmailParams): { html: string; te
     ${generateEmailFooter(language)}
   `;
 
-  const text = `${inviterName} ${language === "fr" ? "vous a invité(e) à rejoindre" : "has invited you to join"} RusingÂcademy ${language === "fr" ? "en tant que" : "as"} ${roleName}. ${language === "fr" ? "Acceptez votre invitation ici" : "Accept your invitation here"}: ${inviteUrl}${customMessage ? ` — "${customMessage}"` : ""}`;
+  const text = `${inviterName} ${language === "fr" ? "vous a invité(e) à rejoindre" : "has invited you to join"} RusingAcademy ${language === "fr" ? "en tant que" : "as"} ${roleName}. ${language === "fr" ? "Acceptez votre invitation ici" : "Accept your invitation here"}: ${inviteUrl}${customMessage ? ` — "${customMessage}"` : ""}`;
 
   return { html, text, subject };
 }
@@ -166,7 +166,7 @@ export const invitationEnhancementsRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
       const baseUrl = getBaseUrl(ctx.req);
-      const inviterName = ctx.user.name || ctx.user.email || "RusingÂcademy Admin";
+      const inviterName = ctx.user.name || ctx.user.email || "RusingAcademy Admin";
       const results: Array<{ email: string; status: "sent" | "exists" | "duplicate" | "error"; message?: string }> = [];
 
       for (const email of input.emails) {
@@ -406,7 +406,7 @@ export const invitationEnhancementsRouter = router({
         .where(eq(schema.adminInvitations.id, input.invitationId));
 
       const baseUrl = getBaseUrl(ctx.req);
-      const inviterName = ctx.user.name || ctx.user.email || "RusingÂcademy Admin";
+      const inviterName = ctx.user.name || ctx.user.email || "RusingAcademy Admin";
 
       const emailContent = buildInvitationEmail({
         email: invitation.email,

@@ -1,5 +1,5 @@
 /**
- * CoachDashboardHome — RusingÂcademy Coach Portal Dashboard
+ * CoachDashboardHome — RusingAcademy Coach Portal Dashboard
  * Design: Mirror of Learning Portal — clean white/crème, teal accents, calendar, charts
  * Wired to real backend: coach.getMyProfile, coach.getTodaysSessions, coach.getEarningsSummaryV2, coach.getMyLearners
  */

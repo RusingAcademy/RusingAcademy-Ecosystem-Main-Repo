@@ -1,5 +1,5 @@
 /**
- * Search functionality for RusingÂcademy Ecosystem
+ * Search functionality for RusingAcademy Ecosystem
  * Provides unified search across coaches, courses, and content
  */
 
@@ -57,7 +57,7 @@ const STATIC_PAGES: SearchResult[] = [
     id: "page-how-it-works",
     type: "page",
     title: "How It Works",
-    description: "Learn how RusingÂcademy connects you with expert SLE coaches for personalized language training.",
+    description: "Learn how RusingAcademy connects you with expert SLE coaches for personalized language training.",
     url: "/how-it-works",
     score: 0,
   },
@@ -81,7 +81,7 @@ const STATIC_PAGES: SearchResult[] = [
     id: "page-about",
     type: "page",
     title: "About Us",
-    description: "RusingÂcademy is Canada's premier marketplace for GC/SLE language preparation.",
+    description: "RusingAcademy is Canada's premier marketplace for GC/SLE language preparation.",
     url: "/about",
     score: 0,
   },

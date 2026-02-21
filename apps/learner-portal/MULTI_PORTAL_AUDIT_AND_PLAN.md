@@ -1,4 +1,4 @@
-# RusingÂcademy Multi-Portal System — Audit & Implementation Plan
+# RusingAcademy Multi-Portal System — Audit & Implementation Plan
 
 **Prepared for:** Steven Barholere, CEO — Rusinga International Consulting Ltd.
 **Date:** February 14, 2026
@@ -8,7 +8,7 @@
 
 ## 1. Executive Summary
 
-The RusingÂcademy Learning Portal (LRDG) currently operates as a single-portal system serving learners exclusively. This document audits the existing Learner's Portal architecture, analyzes the reusable assets available in the GitHub ecosystem repository, and proposes a structured, incremental plan to build three additional portals — **Coach Portal**, **HR Portal**, and **Admin Control System** — each with its own dedicated sidebar, dashboard, and feature set, all sharing a unified authentication backbone and design language.
+The RusingAcademy Learning Portal (LRDG) currently operates as a single-portal system serving learners exclusively. This document audits the existing Learner's Portal architecture, analyzes the reusable assets available in the GitHub ecosystem repository, and proposes a structured, incremental plan to build three additional portals — **Coach Portal**, **HR Portal**, and **Admin Control System** — each with its own dedicated sidebar, dashboard, and feature set, all sharing a unified authentication backbone and design language.
 
 The approach follows the established development principles: **surgical, incremental, non-destructive**, with each portal built as an independent workspace that does not alter the validated Learner's Portal.
 
@@ -257,7 +257,7 @@ The implementation follows a strict **incremental, non-destructive** methodology
 
 #### Phase 3: Admin Control System (Sprint C — Estimated 5-8 days)
 
-**Objective:** Build a comprehensive Admin Control System for platform administrators to manage all aspects of the RusingÂcademy ecosystem — users, content, commerce, analytics, and system configuration.
+**Objective:** Build a comprehensive Admin Control System for platform administrators to manage all aspects of the RusingAcademy ecosystem — users, content, commerce, analytics, and system configuration.
 
 | Feature | Pages to Build | Priority |
 |---------|---------------|----------|
@@ -301,7 +301,7 @@ Before building individual portals, the following shared infrastructure must be 
 
 ### 5.4 Design Consistency
 
-All portals will share the RusingÂcademy design language:
+All portals will share the RusingAcademy design language:
 
 | Element | Specification |
 |---------|--------------|
@@ -309,8 +309,8 @@ All portals will share the RusingÂcademy design language:
 | **Accent Color** | `#f5a623` (gold) |
 | **Typography** | Playfair Display (headings) + system sans-serif (body) |
 | **Glassmorphism** | Applied to cards, panels, and CTAs per design mandate |
-| **Logo** | RusingÂcademy icon + wordmark in all portal headers |
-| **Footer** | "© 2026 RusingÂcademy — Barholex Media Inc." + "Rusinga International Consulting Ltd." |
+| **Logo** | RusingAcademy icon + wordmark in all portal headers |
+| **Footer** | "© 2026 RusingAcademy — Barholex Media Inc." + "Rusinga International Consulting Ltd." |
 
 Each portal will have a **distinct accent color** for visual differentiation while maintaining the overall brand identity:
 
@@ -352,4 +352,4 @@ The current Learner's Portal provides an excellent foundation for a multi-portal
 ---
 
 *Document prepared by Manus AI — February 14, 2026*
-*RusingÂcademy — Rusinga International Consulting Ltd.*
+*RusingAcademy — Rusinga International Consulting Ltd.*

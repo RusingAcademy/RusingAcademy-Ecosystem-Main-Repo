@@ -373,9 +373,9 @@ describe("Feature 3: CoachTerms Bilingual", () => {
       expect(terms).toContain("Rusinga International Consulting Ltd.");
     });
 
-    it("should include commercially known as RusingÂcademy", () => {
+    it("should include commercially known as RusingAcademy", () => {
       const terms = readFile("../client/src/pages/CoachTerms.tsx");
-      expect(terms).toContain("RusingÂcademy");
+      expect(terms).toContain("RusingAcademy");
     });
   });
 

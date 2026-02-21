@@ -72,7 +72,7 @@ export default function Contact() {
       brand: "Which brand are you contacting?",
       brands: {
         ecosystem: "Ecosystem Hub (General)",
-        rusingacademy: "RusingÂcademy",
+        rusingacademy: "RusingAcademy",
         lingueefy: "Lingueefy",
         barholex: "Barholex Media",
       },
@@ -135,7 +135,7 @@ export default function Contact() {
       brand: "Quelle marque contactez-vous?",
       brands: {
         ecosystem: "Ecosystem Hub (Général)",
-        rusingacademy: "RusingÂcademy",
+        rusingacademy: "RusingAcademy",
         lingueefy: "Lingueefy",
         barholex: "Barholex Media",
       },
@@ -205,7 +205,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">      <main id="main-content" className="flex-1">
-      <SEO title="Contact Us" description="Get in touch with RusingÂcademy for bilingual training inquiries, SLE preparation, and coaching partnerships." canonical="/contact" />
+      <SEO title="Contact Us" description="Get in touch with RusingAcademy for bilingual training inquiries, SLE preparation, and coaching partnerships." canonical="/contact" />
         <Breadcrumb 
           items={[
             { label: "Contact", labelFr: "Contact" }

@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Notifications Center
+ * RusingAcademy Learning Portal - Notifications Center
  * Live notifications from tRPC with mark-as-read, filtering, and unread badges.
  */
 import DashboardLayout from "@/components/DashboardLayout";

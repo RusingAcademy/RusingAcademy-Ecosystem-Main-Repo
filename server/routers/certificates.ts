@@ -19,12 +19,12 @@ const log = createLogger("routers-certificates");
 const CERTIFICATE_TEMPLATE = {
   brandColors: {
     primary: "#009688", // Teal - Lingueefy
-    secondary: "#FF6B35", // Orange - RusingÂcademy CTA
+    secondary: "#FF6B35", // Orange - RusingAcademy CTA
     accent: "#1a365d", // Dark blue for text
     background: "#ffffff",
   },
   organization: {
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     tagline: "Excellence in Bilingual Education",
     taglineFr: "Excellence en éducation bilingue",
     website: "rusingacademy.com",

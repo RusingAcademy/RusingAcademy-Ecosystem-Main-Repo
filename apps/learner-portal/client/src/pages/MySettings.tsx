@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - My Settings Page
+ * RusingAcademy Learning Portal - My Settings Page
  * Design: System Preferences with language and timezone dropdowns
  */
 import DashboardLayout from "@/components/DashboardLayout";

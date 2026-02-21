@@ -336,7 +336,7 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         const systemPrompt = {
           role: "system" as const,
-          content: `You are the RusingÂcademy AI Language Coach — a bilingual (English/French) assistant specialized in helping Canadian public servants prepare for their Second Language Evaluation (SLE). You provide:
+          content: `You are the RusingAcademy AI Language Coach — a bilingual (English/French) assistant specialized in helping Canadian public servants prepare for their Second Language Evaluation (SLE). You provide:
 - Grammar explanations and corrections in both English and French
 - SLE exam tips and strategies for Reading, Writing, and Oral components
 - Vocabulary building exercises relevant to the federal public service

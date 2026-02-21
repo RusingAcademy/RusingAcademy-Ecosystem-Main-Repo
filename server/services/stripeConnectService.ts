@@ -28,7 +28,7 @@ function getStripe(): Stripe {
   return stripeInstance;
 }
 
-// Platform commission: 30% of all coach payments go to RusingÂcademy
+// Platform commission: 30% of all coach payments go to RusingAcademy
 // This is agreed upon in the Coach Terms & Conditions
 const PLATFORM_FEE_PERCENT = 30;
 
@@ -60,7 +60,7 @@ export async function createConnectedAccount(params: CreateConnectedAccountParam
     individual: { first_name: firstName, last_name: lastName, email },
     business_profile: {
       mcc: "8299",
-      name: `${firstName} ${lastName} - Coach RusingÂcademy`,
+      name: `${firstName} ${lastName} - Coach RusingAcademy`,
       product_description: "Language coaching services for Canadian public servants",
     },
     metadata: { platform: "rusingacademy", role: "coach" },
@@ -103,7 +103,7 @@ export async function createSessionPaymentIntent(params: CreatePaymentIntentPara
     currency,
     application_fee_amount: platformFee,
     transfer_data: { destination: coachAccountId },
-    description: description || "Coaching session - RusingÂcademy",
+    description: description || "Coaching session - RusingAcademy",
     metadata: { platform: "rusingacademy", learnerId, sessionId, coachAccountId, platformFee: platformFee.toString() },
     automatic_payment_methods: { enabled: true },
   });

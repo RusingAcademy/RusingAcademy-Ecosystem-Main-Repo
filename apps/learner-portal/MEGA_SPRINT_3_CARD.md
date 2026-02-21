@@ -1,7 +1,7 @@
 # Méga-Sprint 3 — Advanced Gamification
 
 ## Objective
-Build the advanced gamification system that differentiates RusingÂcademy from LRDG: leaderboard with real-time rankings, weekly challenges with XP/badge rewards, and animated celebrations (confetti, level-up, streak milestones, badge unlock).
+Build the advanced gamification system that differentiates RusingAcademy from LRDG: leaderboard with real-time rankings, weekly challenges with XP/badge rewards, and animated celebrations (confetti, level-up, streak milestones, badge unlock).
 
 ## Deliverables
 1. **Leaderboard Page** — Rankings by weekly/monthly/all-time, animated entries, user avatars, rank badges

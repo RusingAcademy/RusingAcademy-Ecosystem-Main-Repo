@@ -1,5 +1,5 @@
 /**
- * SLE Practice — RusingÂcademy Learning Portal
+ * SLE Practice — RusingAcademy Learning Portal
  * SLE exam simulation modes: Reading Comprehension, Written Expression, Oral Interaction
  * Design: Clean white light theme, accessible
  */

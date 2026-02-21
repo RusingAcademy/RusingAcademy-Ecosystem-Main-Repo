@@ -114,7 +114,7 @@ export default function ProfitLossReport() {
     if (!pnl) return;
     const rows = [
       ["Profit and Loss Report"],
-      [(company as any)?.companyName || "RusingÂcademy"],
+      [(company as any)?.companyName || "RusingAcademy"],
       [periodLabel()],
       [""],
       ["INCOME"],
@@ -162,7 +162,7 @@ export default function ProfitLossReport() {
           </button>
           <div>
             <h1 className="text-2xl font-bold text-gray-800">Profit and Loss</h1>
-            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingÂcademy"}</p>
+            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingAcademy"}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">

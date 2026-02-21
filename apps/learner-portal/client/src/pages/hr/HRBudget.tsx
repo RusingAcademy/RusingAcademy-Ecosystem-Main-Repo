@@ -48,8 +48,8 @@ export default function HRBudget() {
           </h2>
           <p className="text-sm text-gray-500">
             {lang === "fr"
-              ? "Contactez votre administrateur RusingÂcademy pour obtenir l'accès."
-              : "Contact your RusingÂcademy administrator for access."}
+              ? "Contactez votre administrateur RusingAcademy pour obtenir l'accès."
+              : "Contact your RusingAcademy administrator for access."}
           </p>
         </div>
       </HRLayout>

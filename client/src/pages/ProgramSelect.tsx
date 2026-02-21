@@ -1,5 +1,5 @@
 /**
- * ProgramSelect — RusingÂcademy Learning Portal
+ * ProgramSelect — RusingAcademy Learning Portal
  * Design: Clean white light theme, accessible, LRDG-inspired
  */
 import { Link } from "wouter";
@@ -28,14 +28,14 @@ export default function ProgramSelect() {
         {/* Hero Section — Light */}
         <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-8 md:p-10 shadow-sm">
           <div className="flex items-center gap-3 mb-3">
-            <img src={LOGO_URL} alt="RusingÂcademy" className="w-10 h-10 rounded-lg" />
+            <img src={LOGO_URL} alt="RusingAcademy" className="w-10 h-10 rounded-lg" />
             <span className="text-xs font-bold uppercase tracking-widest text-teal-700">Learning Portal</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
             Choose Your Program
           </h1>
           <p className="text-gray-500 mt-2 max-w-xl text-sm">
-            Master your second official language with RusingÂcademy's comprehensive bilingual training programs. 
+            Master your second official language with RusingAcademy's comprehensive bilingual training programs. 
             Each program features 6 progressive Paths aligned with the CEFR framework (A1 to C1+).
           </p>
         </div>

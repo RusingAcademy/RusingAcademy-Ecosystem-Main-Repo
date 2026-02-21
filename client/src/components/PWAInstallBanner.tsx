@@ -45,7 +45,7 @@ export function PWAInstallBanner() {
             <div className="flex-shrink-0">
               <img
                 src="/icons/icon-192x192.png"
-                alt="RusingÂcademy"
+                alt="RusingAcademy"
                 className="h-12 w-12 rounded-xl shadow-lg"
               />
             </div>
@@ -53,7 +53,7 @@ export function PWAInstallBanner() {
             {/* Content */}
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-semibold text-white">
-                {isEn ? 'Install RusingÂcademy' : 'Installer RusingÂcademy'}
+                {isEn ? 'Install RusingAcademy' : 'Installer RusingAcademy'}
               </h3>
               <p className="text-xs text-white/70 mt-0.5">
                 {isEn
@@ -90,7 +90,7 @@ export function PWAInstallBanner() {
           <div className="w-full max-w-md rounded-t-3xl bg-white p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-bold text-gray-900">
-                {isEn ? 'Install RusingÂcademy' : 'Installer RusingÂcademy'}
+                {isEn ? 'Install RusingAcademy' : 'Installer RusingAcademy'}
               </h3>
               <button
                 onClick={() => setShowIOSInstructions(false)}

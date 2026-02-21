@@ -1,5 +1,5 @@
 /**
- * QuizPage — RusingÂcademy Learning Portal
+ * QuizPage — RusingAcademy Learning Portal
  * Summative quiz for module assessment with gamification
  * Design: Premium glassmorphism, teal/gold, step-by-step quiz
  * 

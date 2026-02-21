@@ -13,7 +13,7 @@ const t = {
     title: { en: "Coach Terms & Conditions", fr: "Termes et Conditions pour les Coachs" },
     subtitle: { en: "Coach Partnership Agreement", fr: "Contrat de Partenariat Coach" },
     company: "Rusinga International Consulting Ltd.",
-    brand: { en: 'Commercially known as "RusingÂcademy"', fr: 'Commercialement connue sous le nom de « RusingÂcademy »' },
+    brand: { en: 'Commercially known as "RusingAcademy"', fr: 'Commercialement connue sous le nom de « RusingAcademy »' },
     platform: { en: "Language Coaching Platform for Canadian Public Servants", fr: "Plateforme de Coaching Linguistique pour Fonctionnaires Canadiens" },
     updated: { en: "Last updated", fr: "Dernière mise à jour" },
     version: { en: "Version", fr: "Version" },
@@ -26,12 +26,12 @@ const t = {
     },
     defs: {
       en: [
-        { term: '"The Company"', def: 'means Rusinga International Consulting Ltd., a Canadian corporation, commercially known as "RusingÂcademy".' },
+        { term: '"The Company"', def: 'means Rusinga International Consulting Ltd., a Canadian corporation, commercially known as "RusingAcademy".' },
         { term: '"The Platform"', def: 'means all technological services and web applications operated by the Company for connecting coaches and learners.' },
         { term: '"The Coach"', def: 'means any certified professional who has accepted these Terms to offer coaching services through the Platform.' },
       ],
       fr: [
-        { term: '« La Société »', def: 'désigne Rusinga International Consulting Ltd., société canadienne, commercialement connue sous le nom de « RusingÂcademy ».' },
+        { term: '« La Société »', def: 'désigne Rusinga International Consulting Ltd., société canadienne, commercialement connue sous le nom de « RusingAcademy ».' },
         { term: '« La Plateforme »', def: 'désigne l\'ensemble des services technologiques et applications web opérés par la Société pour la mise en relation de coachs et d\'apprenants.' },
         { term: '« Le Coach »', def: 'désigne tout professionnel certifié ayant accepté les présentes conditions pour offrir des services de coaching via la Plateforme.' },
       ],

@@ -51,7 +51,7 @@ export const sequenceTemplates: Record<string, SequenceTemplate> = {
           <p>Our ecosystem includes:</p>
           <ul>
             <li><strong>Lingueefy</strong> - Master French or English for the Canadian Public Service</li>
-            <li><strong>RusingÂcademy</strong> - Corporate language training programs</li>
+            <li><strong>RusingAcademy</strong> - Corporate language training programs</li>
             <li><strong>Barholex Media</strong> - Creative digital solutions</li>
           </ul>
           <p>A member of our team will reach out shortly to discuss your needs.</p>
@@ -62,7 +62,7 @@ export const sequenceTemplates: Record<string, SequenceTemplate> = {
           <p>Notre écosystème comprend:</p>
           <ul>
             <li><strong>Lingueefy</strong> - Maîtrisez le français ou l'anglais pour la fonction publique canadienne</li>
-            <li><strong>RusingÂcademy</strong> - Programmes de formation linguistique en entreprise</li>
+            <li><strong>RusingAcademy</strong> - Programmes de formation linguistique en entreprise</li>
             <li><strong>Barholex Media</strong> - Solutions numériques créatives</li>
           </ul>
           <p>Un membre de notre équipe vous contactera sous peu pour discuter de vos besoins.</p>

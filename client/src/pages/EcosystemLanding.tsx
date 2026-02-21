@@ -18,7 +18,7 @@ import ProofGallery from "@/components/ProofGallery";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
 
-// Hero carousel images - real photos from RusingÂcademy training sessions
+// Hero carousel images - real photos from RusingAcademy training sessions
 const heroCarouselImages = [
   {
     src: "https://rusingacademy-cdn.b-cdn.net/images/generated/hero-ecosystem.jpg",
@@ -58,7 +58,7 @@ interface BrandCard {
 const brands: BrandCard[] = [
   {
     id: "rusingacademy",
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     color: "var(--teal)",
     image: "https://rusingacademy-cdn.b-cdn.net/images/generated/rusingacademy-hero.jpg",
     pitch: {
@@ -79,7 +79,7 @@ const brands: BrandCard[] = [
         "Conçu pour une culture de travail bilingue",
       ],
     },
-    cta: { en: "Explore RusingÂcademy", fr: "Découvrir RusingÂcademy" },
+    cta: { en: "Explore RusingAcademy", fr: "Découvrir RusingAcademy" },
     link: "/rusingacademy",
   },
   {
@@ -232,7 +232,7 @@ export default function EcosystemLanding() {
   return (
     <div className={`min-h-screen ${t.bg} ${t.text} transition-colors duration-300 overflow-x-hidden`}>
       <SEO
-        title="RusingÂcademy Learning Ecosystem"
+        title="RusingAcademy Learning Ecosystem"
         description="Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd."
         canonical="https://www.rusingacademy.ca"
       />
@@ -521,8 +521,8 @@ export default function EcosystemLanding() {
                 {[
                   {
                     quote: {
-                      en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
-                      fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
+                      en: "RusingAcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
+                      fr: "Le Path Series™ de RusingAcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
                     },
                     author: "Michael Anderson",
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },

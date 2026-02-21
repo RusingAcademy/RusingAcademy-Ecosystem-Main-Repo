@@ -38,7 +38,7 @@ export default function AdminControlSidebar() {
           </div>
           <div>
             <p className="text-sm font-bold text-gray-900 dark:text-foreground leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-              RusingÂcademy
+              RusingAcademy
             </p>
             <p className="text-[9px] font-semibold tracking-wider uppercase" style={{ color: ACCENT }}>
               ADMIN CONTROL
@@ -106,7 +106,7 @@ export default function AdminControlSidebar() {
           {lang === "fr" ? "Retour au portail" : "Back to Portal"}
         </Link>
         <SocialLinks size={12} color="var(--color-gray-300, #d1d5db)" className="flex items-center gap-3 mt-3" />
-        <p className="text-[9px] text-gray-300 mt-2">v2.0.0 — RusingÂcademy</p>
+        <p className="text-[9px] text-gray-300 mt-2">v2.0.0 — RusingAcademy</p>
       </div>
     </aside>
   );

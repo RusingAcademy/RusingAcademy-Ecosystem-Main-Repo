@@ -103,8 +103,8 @@ export default function HRCohorts() {
           </h2>
           <p className="text-sm text-gray-500">
             {lang === "fr"
-              ? "Contactez votre administrateur RusingÂcademy pour obtenir l'accès."
-              : "Contact your RusingÂcademy administrator for access."}
+              ? "Contactez votre administrateur RusingAcademy pour obtenir l'accès."
+              : "Contact your RusingAcademy administrator for access."}
           </p>
         </div>
       </HRLayout>
@@ -147,8 +147,8 @@ export default function HRCohorts() {
             </h2>
             <p className="text-sm text-gray-500 max-w-md mx-auto">
               {lang === "fr"
-                ? "Les cohortes de formation apparaîtront ici une fois créées par votre gestionnaire de compte RusingÂcademy."
-                : "Training cohorts will appear here once created by your RusingÂcademy account manager."}
+                ? "Les cohortes de formation apparaîtront ici une fois créées par votre gestionnaire de compte RusingAcademy."
+                : "Training cohorts will appear here once created by your RusingAcademy account manager."}
             </p>
           </div>
         )}

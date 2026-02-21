@@ -1,4 +1,4 @@
-# RusingÂcademy Design System Baseline
+# RusingAcademy Design System Baseline
 
 **Author:** Manus AI — Design Engineering Division
 **Date:** February 16, 2026
@@ -8,7 +8,7 @@
 
 ## 1. Design Philosophy
 
-RusingÂcademy serves Canadian public servants preparing for Second Language Evaluation (SLE) exams. The design must project **institutional credibility** while remaining **warm, motivating, and modern**. The aesthetic sits at the intersection of government-grade professionalism (GC Design System [1]) and premium EdTech engagement (Duolingo, Coursera, Khan Academy). Every visual decision must pass three gates:
+RusingAcademy serves Canadian public servants preparing for Second Language Evaluation (SLE) exams. The design must project **institutional credibility** while remaining **warm, motivating, and modern**. The aesthetic sits at the intersection of government-grade professionalism (GC Design System [1]) and premium EdTech engagement (Duolingo, Coursera, Khan Academy). Every visual decision must pass three gates:
 
 1. **Would a Deputy Minister trust this interface?** (Credibility gate)
 2. **Would a learner feel motivated to return daily?** (Engagement gate)

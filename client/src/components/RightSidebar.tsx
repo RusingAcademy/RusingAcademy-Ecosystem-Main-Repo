@@ -224,7 +224,7 @@ export default function RightSidebar() {
         </button>
       </motion.div>
 
-      {/* Visit RusingÂcademy — premium gradient card */}
+      {/* Visit RusingAcademy — premium gradient card */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -252,7 +252,7 @@ export default function RightSidebar() {
           <GraduationCap className="w-6 h-6"  />
         </div>
         <h3 className="text-sm font-bold text-foreground mb-1">
-          Explore RusingÂcademy
+          Explore RusingAcademy
         </h3>
         <p className="text-[11px] text-muted-foreground mb-4 leading-relaxed">
           Professional courses for bilingual excellence in Canada's public service.

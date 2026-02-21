@@ -67,7 +67,7 @@ describe("Ecosystem Enhancements", () => {
   });
 
   describe("Brand Contact Forms", () => {
-    it("should validate RusingÂcademy form fields", () => {
+    it("should validate RusingAcademy form fields", () => {
       const formData = {
         name: "John Doe",
         email: "john@gc.ca",

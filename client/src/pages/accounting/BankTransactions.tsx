@@ -143,7 +143,7 @@ export default function BankTransactions() {
               <span className="text-sm font-bold text-gray-600">RA</span>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">{bankData?.bankAccounts?.name || "RusingÂcademy"}</h3>
+              <h3 className="font-semibold text-gray-800">{bankData?.bankAccounts?.name || "RusingAcademy"}</h3>
               <p className="text-xs text-gray-500">Updated {bankData?.bankAccounts?.lastUpdated || "recently"}</p>
             </div>
           </div>
