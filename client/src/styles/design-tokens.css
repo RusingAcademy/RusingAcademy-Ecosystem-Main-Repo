@@ -395,3 +395,22 @@ textarea:focus-visible,
 [data-cta]:focus-visible {
   box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.25);
 }
+
+/* Gold accent utilities */
+.gold-underline {
+  position: relative;
+}
+.gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: #C9A84C;
+  border-radius: 2px;
+}
+.gold-border-left {
+  border-left: 3px solid #C9A84C;
+  padding-left: 1rem;
+}
