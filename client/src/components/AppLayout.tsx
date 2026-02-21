@@ -324,8 +324,8 @@ const navSections: NavSection[] = [
 // ── ECOSYSTEM cross-navigation (rendered separately, not role-filtered) ──
 const ecosystemLinks = [
   { id: "eco-coach", label: "Coach Portal", labelFr: "Portail Coach", icon: "school", path: "/coach/portal" },
-  { id: "eco-community", label: "Community Hub", labelFr: "Communauté", icon: "forum", path: ECOSYSTEM_URLS.community, external: true },
-  { id: "eco-sales", label: "Sales Dashboard", labelFr: "Tableau des ventes", icon: "receipt_long", path: ECOSYSTEM_URLS.sales, external: true },
+  { id: "eco-community", label: "Community Hub", labelFr: "Communauté", icon: "forum", path: ECOSYSTEM_URLS.community },
+  { id: "eco-sales", label: "Sales Dashboard", labelFr: "Tableau des ventes", icon: "receipt_long", path: ECOSYSTEM_URLS.sales },
 ];
 
 const bottomItems: NavItem[] = [

@@ -114,7 +114,7 @@ export const invitationsRouter = router({
       if (existingUser) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: `A user with email ${input.email} already exists (role: ${existingUser.role}).`,
+          message: `This user already has an account (role: ${existingUser.role}). To change their role, go to Users & Roles and edit their profile. To resend a welcome email, use the Resend option in the History tab.`,
         });
       }
 
