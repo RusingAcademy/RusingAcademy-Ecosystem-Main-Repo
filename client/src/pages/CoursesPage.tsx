@@ -28,10 +28,13 @@ import {
   Calendar,
   MessageCircle,
   Play,
-  Quote
+  Quote,
+  Loader2,
+  ChevronRight
 } from 'lucide-react';
 import { FREE_ACCESS_MODE } from '@shared/const';
 import { useLanguage } from '@/contexts/LanguageContext';
+import CourseImage from '@/components/CourseImage';
 
 // Bilingual UI strings
 const uiStrings = {
@@ -82,6 +85,16 @@ const uiStrings = {
     loginToEnroll: 'Please log in to enroll in a course',
     redirecting: 'Redirecting to checkout...',
     checkoutFailed: 'Failed to create checkout session',
+    // Featured Courses from DB
+    featuredBadge: 'Online Course Library',
+    featuredTitle: 'Self-Paced Online Courses',
+    featuredSubtitle: 'Start learning immediately with our expert-crafted courses. Each includes video lessons, quizzes, and a certificate of completion.',
+    viewCourse: 'View Course',
+    viewAllCourses: 'Browse All Courses',
+    lessons: 'lessons',
+    enrolled: 'enrolled',
+    freeBadge: 'Free',
+    loadingCourses: 'Loading courses...',
   },
   fr: {
     fslTab: 'Fran\u00e7ais (FLS)',
@@ -130,6 +143,16 @@ const uiStrings = {
     loginToEnroll: 'Veuillez vous connecter pour vous inscrire \u00e0 un cours',
     redirecting: 'Redirection vers le paiement...',
     checkoutFailed: '\u00c9chec de la cr\u00e9ation de la session de paiement',
+    // Featured Courses from DB
+    featuredBadge: 'Biblioth\u00e8que de cours en ligne',
+    featuredTitle: 'Cours en ligne \u00e0 votre rythme',
+    featuredSubtitle: 'Commencez \u00e0 apprendre imm\u00e9diatement avec nos cours con\u00e7us par des experts. Chaque cours comprend des le\u00e7ons vid\u00e9o, des quiz et un certificat.',
+    viewCourse: 'Voir le cours',
+    viewAllCourses: 'Parcourir tous les cours',
+    lessons: 'le\u00e7ons',
+    enrolled: 'inscrits',
+    freeBadge: 'Gratuit',
+    loadingCourses: 'Chargement des cours...',
   },
 };
 
@@ -491,6 +514,9 @@ export default function CoursesPage() {
   const { language } = useLanguage();
   const ui = uiStrings[language];
   
+  // Fetch published courses from database
+  const { data: dbCourses, isLoading: dbCoursesLoading } = trpc.courses.getFeatured.useQuery();
+
   const createCheckout = trpc.stripe.createCheckout.useMutation({
     onSuccess: (data: { url: string }) => {
       if (data.url) {
@@ -907,6 +933,141 @@ export default function CoursesPage() {
             )}
           </div>
         </section>
+
+        {/* ============================================================ */}
+        {/* FEATURED COURSES FROM DATABASE                              */}
+        {/* ============================================================ */}
+        {dbCourses && dbCourses.length > 0 && (
+          <section className="py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+            <div className="container">
+              <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-sm font-medium mb-4">
+                  <Play className="w-4 h-4" />
+                  {ui.featuredBadge}
+                </div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-foreground mb-4">
+                  {ui.featuredTitle}
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-400">
+                  {ui.featuredSubtitle}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {dbCourses.map((course, index) => (
+                  <motion.div
+                    key={course.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link href={`/courses/${course.slug}`}>
+                      <div className="group relative bg-white dark:bg-white/[0.08] rounded-2xl border border-gray-100 dark:border-white/10 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                        {/* Thumbnail */}
+                        <div className="relative aspect-video overflow-hidden">
+                          <CourseImage
+                            src={course.thumbnailUrl}
+                            alt={course.title}
+                            category={course.category || 'general_french'}
+                            className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+                          />
+                          {/* Free Badge */}
+                          {(FREE_ACCESS_MODE || (course.price === 0)) && (
+                            <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold shadow-lg">
+                              {ui.freeBadge}
+                            </div>
+                          )}
+                          {/* Category Badge */}
+                          {course.category && (
+                            <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm text-xs font-medium text-gray-700 dark:text-gray-300">
+                              {course.category.replace(/_/g, ' ')}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Content */}
+                        <div className="p-5 flex-1 flex flex-col">
+                          <h3 className="font-bold text-lg text-black dark:text-foreground mb-2 line-clamp-2 group-hover:text-teal-600 transition-colors">
+                            {language === 'fr' && course.titleFr ? course.titleFr : course.title}
+                          </h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-4 flex-1">
+                            {language === 'fr' && course.shortDescriptionFr ? course.shortDescriptionFr : course.shortDescription}
+                          </p>
+
+                          {/* Stats Row */}
+                          <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            {course.totalLessons > 0 && (
+                              <span className="flex items-center gap-1">
+                                <BookOpen className="w-4 h-4" />
+                                {course.totalLessons} {ui.lessons}
+                              </span>
+                            )}
+                            {course.totalDurationMinutes > 0 && (
+                              <span className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                {Math.floor(course.totalDurationMinutes / 60)}h
+                              </span>
+                            )}
+                            {(course.totalEnrollments ?? 0) > 0 && (
+                              <span className="flex items-center gap-1">
+                                <Users className="w-4 h-4" />
+                                {course.totalEnrollments} {ui.enrolled}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Rating + Price */}
+                          <div className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-white/10">
+                            <div className="flex items-center gap-1">
+                              {course.averageRating && Number(course.averageRating) > 0 ? (
+                                <>
+                                  <Star className="w-4 h-4 text-amber-400 fill-current" />
+                                  <span className="text-sm font-medium text-black dark:text-foreground">{Number(course.averageRating).toFixed(1)}</span>
+                                  <span className="text-xs text-gray-400">({course.totalReviews})</span>
+                                </>
+                              ) : (
+                                <span className="text-xs text-gray-400">{language === 'en' ? 'New' : 'Nouveau'}</span>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              {FREE_ACCESS_MODE || course.price === 0 ? (
+                                <span className="text-lg font-bold text-emerald-600">{ui.freeBadge}</span>
+                              ) : (
+                                <span className="text-lg font-bold text-black dark:text-foreground">${((course.price || 0) / 100).toFixed(0)}</span>
+                              )}
+                              <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-teal-600 transition-colors" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* View All Courses Link */}
+              <div className="text-center mt-10">
+                <Link href="/browse-courses">
+                  <button className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold bg-teal-600 text-white hover:bg-teal-700 transition-all hover:scale-105 shadow-lg">
+                    {ui.viewAllCourses}
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Loading state for DB courses */}
+        {dbCoursesLoading && (
+          <section className="py-12 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+            <div className="container text-center">
+              <Loader2 className="w-8 h-8 animate-spin text-teal-600 mx-auto mb-3" />
+              <p className="text-gray-500">{ui.loadingCourses}</p>
+            </div>
+          </section>
+        )}
 
         {/* Testimonials Section */}
         <section className="py-16 lg:py-20 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">

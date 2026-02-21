@@ -329,6 +329,7 @@ function Router() {
       <Route path="/curriculum-old">{() => <L><Curriculum /></L>}</Route>
       <Route path="/courses">{() => <L><CoursesPage /></L>}</Route>
       <Route path="/courses-old">{() => <L><Courses /></L>}</Route>
+      <Route path="/browse-courses">{() => <L><Courses /></L>}</Route>
       <Route path="/courses/success">{() => <L><CourseSuccess /></L>}</Route>
       <Route path="/courses/:courseId/enrolled">{() => <L><FreeEnrollmentSuccess /></L>}</Route>
       <Route path="/payment/error">{() => <L><PaymentError /></L>}</Route>
