@@ -242,13 +242,13 @@ export default function EcosystemHeaderGold() {
             {/* Language - Light Crystal Glass with Golden Hover */}
             <button
               onClick={() => setLanguage(language === "en" ? "fr" : "en")}
-              className="hidden sm:flex items-center justify-center rounded-full font-medium"
+              className="flex items-center justify-center rounded-full font-medium"
               aria-label={language === "en" ? "Switch to French" : "Switch to English"}
               title={language === "en" ? "Changer la langue en français" : "Change language to English"}
               style={{
-                padding: isScrolled ? "0 1rem" : "0 1.25rem",
+                padding: isScrolled ? "0 0.75rem" : "0 1.25rem",
                 height: isScrolled ? "2rem" : "2.5rem",
-                fontSize: isScrolled ? "0.8rem" : "0.875rem",
+                fontSize: isScrolled ? "0.75rem" : "0.875rem",
                 transition: "all var(--transition-slower)",
                 background: langHovered ? "var(--glass-bg-heavy)" : "var(--glass-bg-medium)",
                 backdropFilter: langHovered ? "blur(var(--glass-blur-lg))" : "blur(var(--glass-blur-sm))",
@@ -381,6 +381,35 @@ export default function EcosystemHeaderGold() {
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
                 <nav className="flex flex-col gap-4 mt-8" aria-label="Mobile navigation">
+                  {/* Language Toggle for Mobile */}
+                  <button
+                    onClick={() => {
+                      setLanguage(language === "en" ? "fr" : "en");
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center justify-between p-4 rounded-xl border border-blue-100/50 bg-gradient-to-r from-blue-50/50 to-transparent hover:from-blue-100/50 transition-colors"
+                    aria-label={language === "en" ? "Switch to French" : "Switch to English"}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg" aria-hidden="true">🌐</span>
+                      <span className="font-medium text-black dark:text-foreground">
+                        {language === "en" ? "Language" : "Langue"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2 py-1 rounded-md text-xs font-bold ${
+                        language === "en" 
+                          ? "bg-blue-600 text-white" 
+                          : "bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400"
+                      }`}>EN</span>
+                      <span className={`px-2 py-1 rounded-md text-xs font-bold ${
+                        language === "fr" 
+                          ? "bg-blue-600 text-white" 
+                          : "bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400"
+                      }`}>FR</span>
+                    </div>
+                  </button>
+
                   {/* Theme Toggle for Mobile */}
                   <div className="flex items-center justify-between p-4 rounded-xl border border-orange-100/50 bg-gradient-to-r from-orange-50/50 to-transparent">
                     <div className="flex items-center gap-3">
@@ -543,11 +572,18 @@ export default function EcosystemHeaderGold() {
             ))}
           </nav>
 
-          {/* Widget SLE AI Companion - In Bar 2 */}
+          {/* Widget SLE AI Companion - In Bar 2 (desktop only, inline) */}
           <div className="flex-shrink-0">
             <SLEAICompanionWidget />
           </div>
         </div>
+      </div>
+
+      {/* SLE AI Companion Widget - Mobile/Tablet mount (< 1024px) */}
+      {/* The widget uses fixed positioning so it renders as a floating button */}
+      {/* On desktop (lg+), it's already rendered inline in Bar 2 above */}
+      <div className="lg:hidden">
+        <SLEAICompanionWidget />
       </div>
 
       {/* Search Modal */}
