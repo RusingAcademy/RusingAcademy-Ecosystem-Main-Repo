@@ -76,6 +76,7 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Careers = lazy(() => import("./pages/Careers"));
 const ForDepartments = lazy(() => import("./pages/ForDepartments"));
 const ForBusiness = lazy(() => import("./pages/ForBusiness"));
@@ -357,6 +358,7 @@ function Router() {
       {/* Resource Pages */}
       <Route path="/faq">{() => <L><FAQ /></L>}</Route>
       <Route path="/blog">{() => <L><Blog /></L>}</Route>
+      <Route path="/blog/:slug">{() => <L><BlogPost /></L>}</Route>
       <Route path="/careers">{() => <L><Careers /></L>}</Route>
       <Route path="/for-departments">{() => <L><ForDepartments /></L>}</Route>
       <Route path="/for-business">{() => <L><ForBusiness /></L>}</Route>
