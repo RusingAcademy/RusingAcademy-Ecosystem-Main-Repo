@@ -53,7 +53,7 @@ import { RoleSwitcherCompact } from "@/components/RoleSwitcher";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { StatCard, ProgressRing } from "@/components/dashboard";
-import { Zap, Timer, Gamepad2 } from "lucide-react";
+import { Zap, Timer, Gamepad2, ExternalLink } from "lucide-react";
 import { SLEVelocityWidget } from "@/components/SLEVelocityWidget";
 import { CertificationExpiryWidget } from "@/components/CertificationExpiryWidget";
 import { CompactStreak } from "@/components/StreakTracker";
@@ -803,6 +803,21 @@ export default function LearnerDashboard() {
                           <Badge className={`${session.status === "confirmed" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300" : "bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300"}`}>
                             {session.status === "confirmed" ? (language === "fr" ? "Confirmé" : "Confirmed") : (language === "fr" ? "En attente" : "Pending")}
                           </Badge>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            title={language === "fr" ? "Ajouter au calendrier" : "Add to Calendar"}
+                            onClick={() => {
+                              const start = new Date(session.scheduledAt);
+                              const end = new Date(start.getTime() + 60 * 60 * 1000);
+                              const fmt = (d: Date) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+                              const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Coaching Session — ${session.coachName || 'Coach'}`)}&dates=${fmt(start)}/${fmt(end)}&details=${encodeURIComponent(`RusingAcademy coaching session with ${session.coachName || 'your coach'}`)}&location=${encodeURIComponent('https://www.rusingacademy.ca')}`;
+                              window.open(url, '_blank');
+                            }}
+                            className="text-blue-600 hover:text-blue-700 dark:text-blue-400"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </Button>
                           <Button
                             size="sm"
                             variant="ghost"
