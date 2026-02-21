@@ -239,7 +239,7 @@ function TrilemmeSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100"
+              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 hover:border-amber-200"
             >
               <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${obstacle.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <obstacle.icon className="w-8 h-8 text-white" />
@@ -375,7 +375,7 @@ function EcosystemSection({ language }: { language: string }) {
             <motion.div
               key={pillar.id}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 ecosystem-card"
+              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-slate-100 hover:border-amber-200 ecosystem-card"
             >
               {/* Image */}
               <div className="relative h-44 md:h-56 overflow-hidden ecosystem-card-image">
@@ -853,7 +853,7 @@ function TestimonialsSection({ language }: { language: string }) {
                   <img
                     loading="lazy" src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-28 h-28 rounded-full object-cover object-top border-4 border-cta-2 shadow-lg ring-4 ring-amber-100"
+                    className="w-28 h-28 rounded-full object-cover object-top border-4 border-cta-2 shadow-lg ring-4 ring-amber-100 transition-transform duration-300 hover:scale-110"
                   />
                 ) : (
                   <div className="w-28 h-28 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center border-4 border-slate-300 ring-4 ring-slate-100">
@@ -2038,24 +2038,35 @@ function FAQSection({ language }: { language: string }) {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-white/[0.12] transition-colors duration-200"
               >
                 <span className="font-semibold text-[color:var(--text-primary)] dark:text-foreground pr-4">
                   {language === "en" ? faq.questionEn : faq.questionFr}
                 </span>
-                {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-[color:var(--text-primary)] dark:text-foreground flex-shrink-0" />
-                ) : (
+                <motion.div
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <ChevronDown className="w-5 h-5 text-[color:var(--text-primary)] dark:text-foreground flex-shrink-0" />
-                )}
+                </motion.div>
               </button>
-              {openIndex === index && (
-                <div className="px-6 pb-5">
-                  <p className="text-[color:var(--text-primary)] dark:text-foreground leading-relaxed">
-                    {language === "en" ? faq.answerEn : faq.answerFr}
-                  </p>
-                </div>
-              )}
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-5">
+                      <p className="text-[color:var(--text-primary)] dark:text-foreground leading-relaxed">
+                        {language === "en" ? faq.answerEn : faq.answerFr}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </motion.div>
