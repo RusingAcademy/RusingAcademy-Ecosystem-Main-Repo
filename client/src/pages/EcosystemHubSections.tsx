@@ -544,45 +544,50 @@ function MethodologySection({ language }: { language: string }) {
           </p>
         </motion.div>
 
-        {/* Steps */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8"
-        >
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              variants={scaleIn}
-              className="relative"
-            >
-              {/* Connector Line */}
-              {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-slate-300 to-transparent" />
-              )}
-
-              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
-                {/* Step Number */}
-                <div className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4" style={{color: 'var(--text)'}}>{step.number}</div>
-
-                {/* Icon */}
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mx-auto mb-6 shadow-lg`}>
-                  <step.icon className="w-10 h-10 text-white" />
+        {/* Steps — Asymmetric Alternating Layout */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Vertical gold connector line */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#C9A84C]/20 via-[#C9A84C]/40 to-[#C9A84C]/20 -translate-x-1/2" />
+          
+          {steps.map((step, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-12 mb-12 last:mb-0 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              >
+                {/* Large Step Number — decorative side */}
+                <div className={`flex-shrink-0 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
+                  <span className="text-7xl md:text-8xl lg:text-9xl font-bold font-display text-[#C9A84C]/15 leading-none select-none">
+                    {step.number}
+                  </span>
                 </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-bold text-black dark:text-foreground mb-3">
-                  {language === "en" ? step.titleEn : step.titleFr}
-                </h3>
-                <p className="text-black dark:text-foreground leading-relaxed">
-                  {language === "en" ? step.descEn : step.descFr}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                
+                {/* Center dot on connector */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#C9A84C] border-4 border-white shadow-md z-10" />
+                
+                {/* Content Card */}
+                <div className="flex-shrink-0 w-full md:w-1/2">
+                  <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-5 shadow-lg`}>
+                      <step.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-black dark:text-foreground mb-3">
+                      {language === "en" ? step.titleEn : step.titleFr}
+                    </h3>
+                    <p className="text-black dark:text-foreground leading-relaxed">
+                      {language === "en" ? step.descEn : step.descFr}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
