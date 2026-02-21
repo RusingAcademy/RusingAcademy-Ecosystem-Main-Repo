@@ -2119,28 +2119,35 @@ function FAQSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={fadeInUp}
-              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-slate-200 overflow-hidden"
+              className={`premium-card rounded-xl overflow-hidden transition-all duration-300 ${openIndex === index ? 'border-l-4 border-l-[#C9A84C] shadow-lg shadow-[#C9A84C]/10' : ''}`}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#C9A84C]/5 transition-all duration-300"
               >
                 <span className="font-semibold text-black dark:text-foreground pr-4">
                   {language === "en" ? faq.questionEn : faq.questionFr}
                 </span>
-                {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-black dark:text-foreground flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-black dark:text-foreground flex-shrink-0" />
-                )}
+                <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-all duration-300 ${openIndex === index ? 'rotate-180 text-[#C9A84C]' : 'text-black dark:text-foreground'}`} />
               </button>
-              {openIndex === index && (
-                <div className="px-6 pb-5">
-                  <p className="text-black dark:text-foreground leading-relaxed max-w-prose">
-                    {language === "en" ? faq.answerEn : faq.answerFr}
-                  </p>
-                </div>
-              )}
+              <AnimatePresence initial={false}>
+                {openIndex === index && (
+                  <motion.div
+                    key={`faq-answer-${index}`}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-5 pt-1">
+                      <p className="text-black dark:text-foreground leading-relaxed max-w-prose">
+                        {language === "en" ? faq.answerEn : faq.answerFr}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </motion.div>
