@@ -270,7 +270,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
@@ -419,7 +419,7 @@ function EcosystemSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
@@ -534,7 +534,7 @@ function MethodologySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Our 3-Step Method" : "Notre méthode en 3 étapes"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -648,7 +648,7 @@ function OffersSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "The RusingAcademy Solution" : "La solution RusingAcademy"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -771,7 +771,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{color: '#082038'}}>
+          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4" style={{color: '#082038'}}>
             {language === "en" ? "Who benefits most from this program?" : "Qui bénéficie le plus de ce programme ?"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -889,7 +889,7 @@ function TestimonialsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Trusted by public servants" : "La confiance des fonctionnaires"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -988,7 +988,7 @@ function LeadershipSection({ language }: { language: string }) {
 
               {/* Content */}
               <motion.div variants={fadeInUp} className="p-8 md:p-12 leadership-content">
-                <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-6">
                   Meet Steven Barholere.
                 </h2>
 
@@ -1101,7 +1101,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
               </span>
             </motion.div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6">
               <span className="bg-gradient-to-r from-obsidian via-[#0a6969] to-obsidian bg-clip-text text-transparent">
                 {language === "en" ? "What His Colleagues Say" : "Ce que disent ses collègues"}
               </span>
@@ -1238,7 +1238,7 @@ function InstitutionsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-6 md:mb-8 lg:mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "They trust us" : "Ils nous font confiance"}
           </h2>
         </motion.div>
@@ -1337,7 +1337,7 @@ function ValueSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy ?"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -1446,7 +1446,7 @@ function TeamSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Meet our experts" : "Rencontrez nos experts"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
@@ -1529,7 +1529,7 @@ function FinalCTASection({ language }: { language: string }) {
         >
           {/* Header */}
           <motion.div variants={fadeInUp}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-6 text-white">
               {language === "en" ? "Ready to take the next step?" : "Prêt à franchir l'étape suivante ?"}
             </h2>
             <p className="text-xl mb-6 md:mb-8 lg:mb-12 text-white/90">
@@ -1759,7 +1759,7 @@ function ProofGallerySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{color: '#fcfcfc'}}>
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-white mb-4" style={{color: '#fcfcfc'}}>
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
           <p className="text-lg text-white/90 max-w-3xl mx-auto" style={{color: '#f9fafa'}}>
@@ -2078,7 +2078,7 @@ function FAQSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Frequently Asked Questions" : "Questions fréquemment posées"}
           </h2>
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
