@@ -175,7 +175,7 @@ export default function Careers() {
   
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <SEO title="Careers" description="Join the RusingÂcademy team. Explore career opportunities in bilingual education and EdTech." canonical="/careers" />
+      <SEO title="Careers" description="Join the RusingAcademy team. Explore career opportunities in bilingual education and EdTech." canonical="/careers" />
       
       
       <main className="flex-1" id="main-content">

@@ -1,5 +1,5 @@
 /**
- * Community Forum — RusingÂcademy Learning Portal
+ * Community Forum — RusingAcademy Learning Portal
  * Premium Redesign: HAZY glassmorphism, elevated typography, refined cards
  * Enhanced social features: forum categories, study groups, member stats, recent posts
  */

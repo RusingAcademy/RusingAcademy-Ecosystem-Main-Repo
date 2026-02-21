@@ -408,7 +408,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </div>
             <div className="min-w-0">
               <p className="text-sm font-semibold text-sidebar-foreground truncate">
-                RusingÂcademy
+                RusingAcademy
               </p>
               <p className="text-[10px] text-muted-foreground truncate">
                 {isFr

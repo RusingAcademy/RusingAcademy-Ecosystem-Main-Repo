@@ -84,7 +84,7 @@ const en = {
   // Membership
   membership: {
     title: "Choose Your Plan",
-    subtitle: "Unlock premium features, exclusive content, and accelerate your bilingual journey with RusingÂcademy.",
+    subtitle: "Unlock premium features, exclusive content, and accelerate your bilingual journey with RusingAcademy.",
     currentPlan: "Current Plan",
     manageSubscription: "Manage Subscription",
     activePlan: "Active Plan",
@@ -110,7 +110,7 @@ const en = {
   // Referrals
   referrals: {
     title: "Referral Program",
-    subtitle: "Invite friends and earn rewards when they join RusingÂcademy.",
+    subtitle: "Invite friends and earn rewards when they join RusingAcademy.",
     yourLink: "Your Referral Link",
     copyLink: "Copy Link",
     copied: "Copied!",

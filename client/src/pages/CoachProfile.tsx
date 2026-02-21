@@ -299,7 +299,7 @@ export default function CoachProfile() {
     url: `https://www.rusingacademy.ca/coaches/${coach.slug}`,
     worksFor: {
       "@type": "Organization",
-      name: "Lingueefy by RusingÂcademy",
+      name: "Lingueefy by RusingAcademy",
     },
     knowsLanguage: coach.languages === "both" ? ["French", "English"] : [coach.languages === "french" ? "French" : "English"],
   };
@@ -308,7 +308,7 @@ export default function CoachProfile() {
     <div className="min-h-screen flex flex-col bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <SEO
         title={`${coach.name || coach.firstName} - ${coach.headline || 'Language Coach'}`}
-        description={coach.bio?.substring(0, 160) || `Book a session with ${coach.name || coach.firstName}, a certified language coach on RusingÂcademy.`}
+        description={coach.bio?.substring(0, 160) || `Book a session with ${coach.name || coach.firstName}, a certified language coach on RusingAcademy.`}
         canonical={`/coaches/${coach.slug}`}
         image={coach.photoUrl || undefined}
         schema={personSchema}

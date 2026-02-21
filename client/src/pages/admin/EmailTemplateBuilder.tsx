@@ -33,7 +33,7 @@ const VARIABLE_PRESETS = [
   { key: "{{lesson_title}}", label: "Lesson Title", example: "Module 3: Oral Comprehension" },
   { key: "{{coach_name}}", label: "Coach Name", example: "Marie Tremblay" },
   { key: "{{date}}", label: "Current Date", example: new Date().toLocaleDateString() },
-  { key: "{{platform_name}}", label: "Platform Name", example: "RusingÂcademy" },
+  { key: "{{platform_name}}", label: "Platform Name", example: "RusingAcademy" },
   { key: "{{login_url}}", label: "Login URL", example: "https://app.rusingacademy.ca/login" },
   { key: "{{progress_percent}}", label: "Progress %", example: "75%" },
   { key: "{{next_session_date}}", label: "Next Session", example: "Feb 15, 2026" },
@@ -320,7 +320,7 @@ export default function EmailTemplateBuilder() {
             <div className="border rounded-lg overflow-hidden">
               {/* Email Header */}
               <div className="p-4 bg-muted/50 border-b space-y-2">
-                <div className="flex items-center gap-2 text-sm"><span className="text-muted-foreground w-16">From:</span><span className="font-medium">RusingÂcademy &lt;noreply@rusingacademy.com&gt;</span></div>
+                <div className="flex items-center gap-2 text-sm"><span className="text-muted-foreground w-16">From:</span><span className="font-medium">RusingAcademy &lt;noreply@rusingacademy.com&gt;</span></div>
                 <div className="flex items-center gap-2 text-sm"><span className="text-muted-foreground w-16">To:</span><span className="font-medium">Jean Dupont &lt;jean@example.com&gt;</span></div>
                 <div className="flex items-center gap-2 text-sm"><span className="text-muted-foreground w-16">Subject:</span><span className="font-semibold">{previewSubject || "(No subject)"}</span></div>
               </div>

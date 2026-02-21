@@ -92,7 +92,7 @@ export default function BalanceSheetReport() {
     if (!bs) return;
     const rows = [
       ["Balance Sheet"],
-      [(company as any)?.companyName || "RusingÂcademy"],
+      [(company as any)?.companyName || "RusingAcademy"],
       [`As of ${asOfLabel}`],
       [""],
       ["ASSETS"],
@@ -124,7 +124,7 @@ export default function BalanceSheetReport() {
     const groups: Record<string, { name: string; amount: number }[]> = {};
     for (const a of bs.assets) {
       let group = "Other Assets";
-      if (a.name.includes("Bank") || a.name === "RusingÂcademy") group = "Bank Accounts";
+      if (a.name.includes("Bank") || a.name === "RusingAcademy") group = "Bank Accounts";
       else if (a.name.includes("Receivable")) group = "Accounts Receivable";
       else if (a.name.includes("Undeposited") || a.name.includes("Prepaid") || a.name.includes("Inventory") || a.name.includes("GST/HST Receivable")) group = "Other Current Assets";
       if (!groups[group]) groups[group] = [];
@@ -168,7 +168,7 @@ export default function BalanceSheetReport() {
           </button>
           <div>
             <h1 className="text-2xl font-bold text-gray-800">Balance Sheet</h1>
-            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingÂcademy"} — As of {asOfLabel}</p>
+            <p className="text-sm text-gray-500">{(company as any)?.companyName || "RusingAcademy"} — As of {asOfLabel}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">

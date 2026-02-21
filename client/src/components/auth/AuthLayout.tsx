@@ -126,13 +126,13 @@ export function AuthLayout({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               src={LOGO_ICON}
-              alt="RusingÂcademy"
+              alt="RusingAcademy"
               className="w-14 h-14 rounded-xl shadow-md object-contain group-hover:shadow-lg transition-shadow"
               loading="lazy"
             />
             <div className="text-center">
               <h1 className="text-2xl text-[#1a1a1a] leading-none" style={{ fontFamily: "var(--font-display)" }}>
-                RusingÂcademy
+                RusingAcademy
               </h1>
               <p className="text-[var(--brand-foundation)] font-bold text-[10px] tracking-[0.2em] uppercase mt-1">
                 {t("Bilingual Excellence Platform", "Plateforme d'excellence bilingue")}
@@ -168,7 +168,7 @@ export function AuthLayout({
               <div className="relative bg-white">
                 <img
                   src={DASHBOARD_SCREENSHOT}
-                  alt={t("RusingÂcademy Learning Portal Dashboard", "Tableau de bord du portail RusingÂcademy")}
+                  alt={t("RusingAcademy Learning Portal Dashboard", "Tableau de bord du portail RusingAcademy")}
                   className="w-full h-auto block"
                   loading="lazy"
                 />
@@ -274,12 +274,12 @@ export function AuthLayout({
               <Link to="/">
                 <img
                   src={LOGO_ICON}
-                  alt="RusingÂcademy"
+                  alt="RusingAcademy"
                   className="w-14 h-14 rounded-2xl shadow-lg mx-auto mb-3"
                   loading="lazy"
                 />
                 <h1 className="text-2xl text-white" style={{ fontFamily: "var(--font-display)" }}>
-                  RusingÂcademy
+                  RusingAcademy
                 </h1>
                 <p className="text-[var(--barholex-gold)] font-bold text-[10px] tracking-[0.2em] uppercase mt-1">
                   {t("Bilingual Excellence Platform", "Plateforme d'excellence bilingue")}

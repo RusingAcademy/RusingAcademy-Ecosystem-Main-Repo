@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Login Page — v7 (Unified Auth Design System)
+ * RusingAcademy Login Page — v7 (Unified Auth Design System)
  * ─────────────────────────────────────────────────────
  * Uses shared AuthLayout (split-panel: cream showcase + teal auth card)
  * with AuthCard, AuthInput, AuthButton, OAuthButtons components.

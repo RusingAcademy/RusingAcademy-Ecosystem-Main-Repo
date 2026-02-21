@@ -46,7 +46,7 @@ export default function BecomeCoachPage() {
             </span>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
               Devenez Coach Linguistique<br />
-              <span className="text-cta600">RusingÂcademy</span>
+              <span className="text-cta600">RusingAcademy</span>
             </h1>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
               Partagez votre expertise linguistique avec des professionnels canadiens 
@@ -66,7 +66,7 @@ export default function BecomeCoachPage() {
       <section className="py-8 md:py-12 lg:py-16 px-4 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-center text-slate-900 mb-6 md:mb-8 lg:mb-12">
-            Pourquoi devenir coach RusingÂcademy?
+            Pourquoi devenir coach RusingAcademy?
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => (

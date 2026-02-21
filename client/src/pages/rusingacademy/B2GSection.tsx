@@ -42,7 +42,7 @@ export default function B2GSection() {
       ],
       testimonialsTitle: "Success Stories from the Public Sector",
       testimonials: [
-        { quote: "RusingÂcademy helped our team of 15 analysts achieve bilingual requirements in just 6 months.", author: "Director, Policy Branch", dept: "Treasury Board Secretariat" },
+        { quote: "RusingAcademy helped our team of 15 analysts achieve bilingual requirements in just 6 months.", author: "Director, Policy Branch", dept: "Treasury Board Secretariat" },
         { quote: "The SLE-specific approach and coach quality are unmatched. Our pass rates have never been higher.", author: "HR Director", dept: "Health Canada" }
       ],
       trustedBy: "TRUSTED BY FEDERAL DEPARTMENTS",
@@ -83,7 +83,7 @@ export default function B2GSection() {
       ],
       testimonialsTitle: "Histoires de réussite du secteur public",
       testimonials: [
-        { quote: "RusingÂcademy a aidé notre équipe de 15 analystes à atteindre les exigences bilingues en seulement 6 mois.", author: "Directeur, Direction des politiques", dept: "Secrétariat du Conseil du Trésor" },
+        { quote: "RusingAcademy a aidé notre équipe de 15 analystes à atteindre les exigences bilingues en seulement 6 mois.", author: "Directeur, Direction des politiques", dept: "Secrétariat du Conseil du Trésor" },
         { quote: "L'approche spécifique à l'ELS et la qualité des coachs sont inégalées.", author: "Directrice RH", dept: "Santé Canada" }
       ],
       trustedBy: "LA CONFIANCE DES MINISTÈRES FÉDÉRAUX",

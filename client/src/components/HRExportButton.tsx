@@ -108,7 +108,7 @@ export function HRExportButton({ organizationId, cohortId }: HRExportButtonProps
       </tbody>
     </table>
     <div class="footer">
-      <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. | ${isEn ? "Commercially known as" : "Commercialement connu sous"} RusingÂcademy</p>
+      <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. | ${isEn ? "Commercially known as" : "Commercialement connu sous"} RusingAcademy</p>
     </div>
   </div>
 </body>

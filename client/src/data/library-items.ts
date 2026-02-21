@@ -1,6 +1,6 @@
 /**
  * Library Items — Seed Data & Type Definitions
- * RusingÂcademy Product Library
+ * RusingAcademy Product Library
  * 
  * This file contains the complete product catalog for the /library page.
  * Each item includes bilingual metadata, pricing, cover images, and marketing copy.
@@ -153,7 +153,7 @@ export const LIBRARY_CATEGORIES: LibraryCategory[] = [
 ];
 
 // ============================================================================
-// SEED DATA — 29 Books (Complete RusingÂcademy Collection)
+// SEED DATA — 29 Books (Complete RusingAcademy Collection)
 // ============================================================================
 
 export const LIBRARY_ITEMS: LibraryItem[] = [

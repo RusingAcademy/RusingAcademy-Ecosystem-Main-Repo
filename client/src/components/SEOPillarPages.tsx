@@ -1,7 +1,7 @@
 /**
  * SEO Pillar Pages with Schema.org JSON-LD
  * 
- * Optimized pillar pages for RusingÂcademy, Lingueefy, and Barholex Media
+ * Optimized pillar pages for RusingAcademy, Lingueefy, and Barholex Media
  * targeting Canadian government language training keywords.
  * 
  * @component SEOPillarPages
@@ -39,7 +39,7 @@ export const generateOrganizationSchema = (brand: 'rusingacademy' | 'lingueefy' 
       '@context': 'https://schema.org',
       '@type': 'EducationalOrganization',
       '@id': 'https://rusingacademy.ca/#organization',
-      name: 'RusingÂcademy',
+      name: 'RusingAcademy',
       alternateName: 'Rusinga Academy',
       url: 'https://rusingacademy.ca',
       logo: 'https://rusingacademy.ca/logo.png',
@@ -156,7 +156,7 @@ export const PillarPage: React.FC<PillarPageProps> = ({
   
   const brandConfig = {
     rusingacademy: {
-      name: 'RusingÂcademy',
+      name: 'RusingAcademy',
       tagline: 'Excellence Bilingue pour Fonctionnaires',
       color: '#1E3A5F',
     },
@@ -242,7 +242,7 @@ export const SLEPreparationPillarPage: React.FC<{ children: React.ReactNode }> =
   <PillarPage
     brand="rusingacademy"
     title="Préparation ELS - Formation Linguistique pour Fonctionnaires"
-    description="Préparez-vous efficacement à l'Évaluation de Langue Seconde (ELS) avec RusingÂcademy."
+    description="Préparez-vous efficacement à l'Évaluation de Langue Seconde (ELS) avec RusingAcademy."
     keywords={[
       'Préparation SLE',
       'Préparation ELS',

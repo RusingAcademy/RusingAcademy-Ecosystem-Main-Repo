@@ -385,7 +385,7 @@ export default function Programs() {
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cta to-cta-2 flex items-center justify-center text-white font-bold text-xl">
                       70%
                     </div>
-                    <CardTitle>RusingÂcademy Platform</CardTitle>
+                    <CardTitle>RusingAcademy Platform</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>

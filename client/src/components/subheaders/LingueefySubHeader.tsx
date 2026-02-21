@@ -6,7 +6,7 @@
  * 
  * The EcosystemHeaderGold now handles all navigation with:
  * - Bar 1: Logo + Search + Language + Dark Mode + User
- * - Bar 2: Brand Cards (RusingÂcademy, Lingueefy, Barholex) + SLE AI Widget
+ * - Bar 2: Brand Cards (RusingAcademy, Lingueefy, Barholex) + SLE AI Widget
  * 
  * Previous implementation preserved in git history for reference.
  */

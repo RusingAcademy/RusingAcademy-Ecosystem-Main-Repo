@@ -11,7 +11,7 @@ export const StorySection: React.FC = () => {
   const content = {
     en: {
       title: "Reimagining Bilingual Excellence",
-      subtitle: "The RusingÂcademy Promise",
+      subtitle: "The RusingAcademy Promise",
       description: "Bilingualism in the public service isn't just a requirement—it's a career catalyst. Our method combines deep pedagogy with modern EdTech to deliver results that last.",
       features: [
         { icon: <Target className="w-6 h-6" />, title: "SLE Precision", text: "Curriculum strictly aligned with Canada's Official Language exams." },
@@ -22,7 +22,7 @@ export const StorySection: React.FC = () => {
     },
     fr: {
       title: "Réimaginer l'Excellence Bilingue",
-      subtitle: "La Promesse RusingÂcademy",
+      subtitle: "La Promesse RusingAcademy",
       description: "Le bilinguisme dans la fonction publique n'est pas seulement une exigence—c'est un catalyseur de carrière. Notre méthode combine une pédagogie profonde avec une EdTech moderne.",
       features: [
         { icon: <Target className="w-6 h-6" />, title: "Précision ELS", text: "Curriculum strictement aligné sur les examens officiels du Canada." },

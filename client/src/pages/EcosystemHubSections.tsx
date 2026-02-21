@@ -204,10 +204,10 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto leading-relaxed">
             {language === "en"
               ? "Every day without your Level C is a day of missed opportunities. Thousands of talented public servants face this challenge, trapped by three barriers that traditional training cannot break."
               : "Chaque jour sans votre niveau C est un jour d'opportunités manquées. Des milliers de fonctionnaires talentueux font face à ce défi, piégés par trois barrières que la formation traditionnelle ne peut briser."}
@@ -222,7 +222,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-6 md:mb-8 lg:mb-12"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground">
+          <h3 className="text-2xl md:text-3xl font-bold text-[color:var(--text-primary)] dark:text-foreground">
             {language === "en" ? "The Bilingual Excellence Trilemma" : "Le Trilemme de l'Excellence Bilingue"}
           </h3>
         </motion.div>
@@ -244,10 +244,10 @@ function TrilemmeSection({ language }: { language: string }) {
               <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${obstacle.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <obstacle.icon className="w-8 h-8 text-white" />
               </div>
-              <h4 className="text-xl font-bold text-black dark:text-foreground mb-3">
+              <h4 className="text-xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-3">
                 {language === "en" ? obstacle.titleEn : obstacle.titleFr}
               </h4>
-              <p className="text-black dark:text-foreground leading-relaxed">
+              <p className="text-[color:var(--text-primary)] dark:text-foreground leading-relaxed">
                 {language === "en" ? obstacle.descEn : obstacle.descFr}
               </p>
             </motion.div>
@@ -268,15 +268,15 @@ function TrilemmeSection({ language }: { language: string }) {
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-lg text-black dark:text-foreground leading-relaxed">
+                <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground leading-relaxed">
                   {language === "en" ? (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
+                      <strong className="text-[color:var(--text-primary)] dark:text-foreground">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
                       <strong className="text-cta600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
+                      <strong className="text-[color:var(--text-primary)] dark:text-foreground">RusingAcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
                       <strong className="text-cta600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
@@ -353,10 +353,10 @@ function EcosystemSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto leading-relaxed">
             {language === "en"
               ? "This is why we built something different. After years of watching talented professionals struggle with outdated methods, we created an integrated ecosystem that attacks the problem from every angle. Not just courses. Not just coaching. Not just technology. But all three, working together in perfect harmony. Each pillar was designed to solve a specific part of the puzzle: structured learning to build your foundation, expert coaching to break through your personal barriers, and cutting-edge media to accelerate your progress. This is the solution you've been waiting for."
               : "C'est pourquoi nous avons construit quelque chose de différent. Après des années à voir des professionnels talentueux lutter avec des méthodes dépassées, nous avons créé un écosystème intégré qui attaque le problème sous tous les angles. Pas seulement des cours. Pas seulement du coaching. Pas seulement de la technologie. Mais les trois, travaillant ensemble en parfaite harmonie. Chaque pilier a été conçu pour résoudre une partie spécifique du puzzle : un apprentissage structuré pour construire vos fondations, un coaching expert pour briser vos barrières personnelles, et des médias de pointe pour accélérer vos progrès. C'est la solution que vous attendiez."}
@@ -396,13 +396,13 @@ function EcosystemSection({ language }: { language: string }) {
 
               {/* Content */}
               <div className="p-4 md:p-6 ecosystem-card-content">
-                <p className="text-sm font-medium text-black dark:text-foreground mb-1">
+                <p className="text-sm font-medium text-[color:var(--text-primary)] dark:text-foreground mb-1">
                   {language === "en" ? pillar.nameEn : pillar.nameFr}
                 </p>
-                <h3 className="text-lg md:text-xl font-bold text-black dark:text-foreground mb-2 md:mb-3">
+                <h3 className="text-lg md:text-xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-2 md:mb-3">
                   {language === "en" ? pillar.brandEn : pillar.brandFr}
                 </h3>
-                <p className="text-sm md:text-base text-black dark:text-foreground mb-3 md:mb-4 leading-relaxed">
+                <p className="text-sm md:text-base text-[color:var(--text-primary)] dark:text-foreground mb-3 md:mb-4 leading-relaxed">
                   {language === "en" ? pillar.descEn : pillar.descFr}
                 </p>
                 <Link href={pillar.link}>
@@ -468,10 +468,10 @@ function MethodologySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "Our 3-Step Method" : "Notre méthode en 3 étapes"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Simple. Targeted. Results-oriented. Our proven methodology has helped hundreds of public servants achieve their language goals—each step builds on the previous one to create a clear path to success."
               : "Simple. Ciblée. Orientée résultats. Notre méthodologie éprouvée a aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques—chaque étape s'appuie sur la précédente pour créer un chemin clair vers le succès."}
@@ -507,10 +507,10 @@ function MethodologySection({ language }: { language: string }) {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-black dark:text-foreground mb-3">
+                <h3 className="text-xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-3">
                   {language === "en" ? step.titleEn : step.titleFr}
                 </h3>
-                <p className="text-black dark:text-foreground leading-relaxed">
+                <p className="text-[color:var(--text-primary)] dark:text-foreground leading-relaxed">
                   {language === "en" ? step.descEn : step.descFr}
                 </p>
               </div>
@@ -582,10 +582,10 @@ function OffersSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "The RusingAcademy Solution" : "La solution RusingAcademy"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Our solutions are designed specifically for Canadian public servants. Whether you need structured courses, personalized coaching, or innovative learning tools, we have the right solution for you."
               : "Nos solutions sont conçues spécifiquement pour les fonctionnaires canadiens. Que vous ayez besoin de cours structurés, de coaching personnalisé ou d'outils d'apprentissage innovants, nous avons la solution adaptée pour vous."}
@@ -627,7 +627,7 @@ function OffersSection({ language }: { language: string }) {
 
               {/* Content */}
               <div className="p-6">
-                <p className="text-black dark:text-foreground mb-6 leading-relaxed text-sm">
+                <p className="text-[color:var(--text-primary)] dark:text-foreground mb-6 leading-relaxed text-sm">
                   {language === "en" ? offer.descEn : offer.descFr}
                 </p>
                 <Link href={offer.link}>
@@ -708,7 +708,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{color: '#082038'}}>
             {language === "en" ? "Who benefits most from this program?" : "Qui bénéficie le plus de ce programme ?"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
               : "Nos programmes sont spécifiquement conçus pour les fonctionnaires canadiens à différentes étapes de leur carrière. Si vous vous reconnaissez dans l'un de ces profils, nous pouvons vous aider à atteindre vos objectifs linguistiques."}
@@ -737,7 +737,7 @@ function TargetAudienceSection({ language }: { language: string }) {
                   <h3 className="text-lg font-semibold mb-2" style={{color: '#082038'}}>
                     {language === "en" ? profile.titleEn : profile.titleFr}
                   </h3>
-                  <p className="text-black dark:text-foreground text-sm leading-relaxed">
+                  <p className="text-[color:var(--text-primary)] dark:text-foreground text-sm leading-relaxed">
                     {language === "en" ? profile.descEn : profile.descFr}
                   </p>
                 </div>
@@ -823,10 +823,10 @@ function TestimonialsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "Trusted by public servants" : "La confiance des fonctionnaires"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Don't just take our word for it. Hear from public servants who have transformed their careers through our programs—real results from real professionals."
               : "Ne nous croyez pas sur parole. Écoutez les fonctionnaires qui ont transformé leur carrière grâce à nos programmes—des résultats réels de vrais professionnels."}
@@ -857,13 +857,13 @@ function TestimonialsSection({ language }: { language: string }) {
                   />
                 ) : (
                   <div className="w-28 h-28 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center border-4 border-slate-300 ring-4 ring-slate-100">
-                    <Users className="w-8 h-8 text-black dark:text-foreground" />
+                    <Users className="w-8 h-8 text-[color:var(--text-primary)] dark:text-foreground" />
                   </div>
                 )}
                 <div className="flex-1">
-                  <h4 className="font-bold text-xl text-black dark:text-foreground">{testimonial.name}</h4>
+                  <h4 className="font-bold text-xl text-[color:var(--text-primary)] dark:text-foreground">{testimonial.name}</h4>
                   <p className="text-sm text-teal-700 font-medium">{testimonial.role}</p>
-                  <p className="text-sm text-black dark:text-foreground">{testimonial.org}</p>
+                  <p className="text-sm text-[color:var(--text-primary)] dark:text-foreground">{testimonial.org}</p>
                 </div>
                 <a
                   href={testimonial.linkedin}
@@ -879,7 +879,7 @@ function TestimonialsSection({ language }: { language: string }) {
               {/* Quote */}
               <div className="p-6">
                 <div className="text-2xl md:text-4xl lg:text-5xl text-cta400 leading-none mb-3">“</div>
-                <p className="text-black dark:text-foreground leading-relaxed text-lg italic">
+                <p className="text-[color:var(--text-primary)] dark:text-foreground leading-relaxed text-lg italic">
                   {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
                 </p>
               </div>
@@ -922,19 +922,19 @@ function LeadershipSection({ language }: { language: string }) {
 
               {/* Content */}
               <motion.div variants={fadeInUp} className="p-8 md:p-12 leadership-content">
-                <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-6">
                   Meet Steven Barholere.
                 </h2>
 
                 {/* Quote */}
                 <blockquote className="border-l-4 border-amber-500 pl-4 mb-8">
-                  <p className="text-lg text-black dark:text-foreground italic">
+                  <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground italic">
                     "Language is not merely a technical skill; it is a strategic enabler of connection, leadership, and opportunity."
                   </p>
                 </blockquote>
 
                 {/* Bio */}
-                <div className="space-y-4 text-black dark:text-foreground leading-relaxed">
+                <div className="space-y-4 text-[color:var(--text-primary)] dark:text-foreground leading-relaxed">
                   <p>
                     {language === "en"
                       ? "Throughout his career in both the private sector and Canada's federal public service, Steven Barholere observed a recurring challenge: highly capable professionals often struggle to translate years of language study into real, confident, and functional bilingual performance in the workplace."
@@ -1041,7 +1041,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
               </span>
             </h2>
             
-            <p className="text-lg md:text-xl text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto leading-relaxed">
               {language === "en"
                 ? "These heartfelt Kudoboard messages from former public servant colleagues capture the real, transformative impact of Steven's French instruction. Click to view in full resolution."
                 : "Ces messages Kudoboard sincères d'anciens collègues fonctionnaires capturent l'impact réel et transformateur de l'enseignement du français de Steven. Cliquez pour voir en pleine résolution."}
@@ -1070,8 +1070,8 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                   
                   {/* Organization & Date Caption */}
                   <div className="px-6 pt-4 pb-2">
-                    <p className="text-sm font-medium text-black dark:text-foreground">{board.organization}</p>
-                    <p className="text-xs text-black dark:text-foreground">{board.date}</p>
+                    <p className="text-sm font-medium text-[color:var(--text-primary)] dark:text-foreground">{board.organization}</p>
+                    <p className="text-xs text-[color:var(--text-primary)] dark:text-foreground">{board.date}</p>
                   </div>
 
                   {/* Image Container */}
@@ -1087,7 +1087,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                       <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
                         <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm shadow-xl">
                           <ZoomIn className="w-5 h-5 text-teal-600" />
-                          <span className="font-medium text-black dark:text-foreground">
+                          <span className="font-medium text-[color:var(--text-primary)] dark:text-foreground">
                             {language === "en" ? "Click to enlarge" : "Cliquez pour agrandir"}
                           </span>
                         </div>
@@ -1099,8 +1099,8 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                   <div className="px-6 pb-6 pt-2">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-xl font-bold text-black dark:text-foreground mb-1">{board.title}</h3>
-                        <p className="text-sm text-black dark:text-foreground">
+                        <h3 className="text-xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-1">{board.title}</h3>
+                        <p className="text-sm text-[color:var(--text-primary)] dark:text-foreground">
                           {language === "en" ? "High resolution • Click to zoom" : "Haute résolution • Cliquez pour zoomer"}
                         </p>
                       </div>
@@ -1124,7 +1124,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm/80 backdrop-blur-sm border border-slate-200">
               <Users className="w-5 h-5 text-teal-600" />
-              <p className="text-sm text-black dark:text-foreground">
+              <p className="text-sm text-[color:var(--text-primary)] dark:text-foreground">
                 {language === "en"
                   ? "Real messages from federal public servants who benefited from Steven's French instruction"
                   : "Messages réels de fonctionnaires fédéraux qui ont bénéficié de l'enseignement du français de Steven"}
@@ -1172,7 +1172,7 @@ function InstitutionsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-6 md:mb-8 lg:mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "They trust us" : "Ils nous font confiance"}
           </h2>
         </motion.div>
@@ -1271,10 +1271,10 @@ function ValueSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy ?"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "What sets us apart from traditional language schools? Our exclusive focus on the Canadian public service, combined with a proven methodology and personalized approach."
               : "Qu'est-ce qui nous distingue des écoles de langues traditionnelles ? Notre concentration exclusive sur la fonction publique canadienne, combinée à une méthodologie éprouvée et une approche personnalisée."}
@@ -1315,10 +1315,10 @@ function ValueSection({ language }: { language: string }) {
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-4">
                   <value.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-black dark:text-foreground mb-2">
+                <h3 className="text-lg font-bold text-[color:var(--text-primary)] dark:text-foreground mb-2">
                   {language === "en" ? value.titleEn : value.titleFr}
                 </h3>
-                <p className="text-black dark:text-foreground text-sm leading-relaxed">
+                <p className="text-[color:var(--text-primary)] dark:text-foreground text-sm leading-relaxed">
                   {language === "en" ? value.descEn : value.descFr}
                 </p>
               </motion.div>
@@ -1380,10 +1380,10 @@ function TeamSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "Meet our experts" : "Rencontrez nos experts"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "A team of passionate experts dedicated to your success in the Canadian public service. Our team brings together experts from education, public service, and technology—each member contributes unique expertise to ensure your success."
               : "Une équipe d'experts passionnés dédiés à votre réussite dans la fonction publique canadienne. Notre équipe réunit des experts de l'éducation, de la fonction publique et de la technologie—chaque membre apporte une expertise unique pour assurer votre réussite."}
@@ -1421,9 +1421,9 @@ function TeamSection({ language }: { language: string }) {
                 {/* Content Container - Fills remaining space */}
                 <div className="flex-1 p-6 flex flex-col justify-between bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
                   <div>
-                    <h3 className="text-xl font-bold text-black dark:text-foreground mb-1 font-serif italic">{member.name}</h3>
+                    <h3 className="text-xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-1 font-serif italic">{member.name}</h3>
                     <p className="text-teal-700 font-medium text-sm mb-3">{member.role}</p>
-                    <p className="text-black dark:text-foreground text-sm leading-relaxed">
+                    <p className="text-[color:var(--text-primary)] dark:text-foreground text-sm leading-relaxed">
                       {language === "en" ? member.bioEn : member.bioFr}
                     </p>
                   </div>
@@ -2012,10 +2012,10 @@ function FAQSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] dark:text-foreground mb-4">
             {language === "en" ? "Frequently Asked Questions" : "Questions fréquemment posées"}
           </h2>
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-[color:var(--text-primary)] dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Have questions? We've compiled answers to the most common questions from public servants considering our programs."
               : "Vous avez des questions ? Nous avons compilé les réponses aux questions les plus fréquentes des fonctionnaires qui envisagent nos programmes."}
@@ -2040,18 +2040,18 @@ function FAQSection({ language }: { language: string }) {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white dark:bg-white/[0.08] dark:backdrop-blur-md transition-colors"
               >
-                <span className="font-semibold text-black dark:text-foreground pr-4">
+                <span className="font-semibold text-[color:var(--text-primary)] dark:text-foreground pr-4">
                   {language === "en" ? faq.questionEn : faq.questionFr}
                 </span>
                 {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-black dark:text-foreground flex-shrink-0" />
+                  <ChevronUp className="w-5 h-5 text-[color:var(--text-primary)] dark:text-foreground flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-black dark:text-foreground flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-[color:var(--text-primary)] dark:text-foreground flex-shrink-0" />
                 )}
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-5">
-                  <p className="text-black dark:text-foreground leading-relaxed">
+                  <p className="text-[color:var(--text-primary)] dark:text-foreground leading-relaxed">
                     {language === "en" ? faq.answerEn : faq.answerFr}
                   </p>
                 </div>

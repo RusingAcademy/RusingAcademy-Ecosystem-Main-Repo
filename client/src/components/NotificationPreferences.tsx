@@ -60,8 +60,8 @@ const defaultPrefs: NotificationPref[] = [
     icon: Megaphone,
     labelEn: "Announcements",
     labelFr: "Annonces",
-    descEn: "Receive important announcements from RusingÂcademy",
-    descFr: "Recevoir les annonces importantes de RusingÂcademy",
+    descEn: "Receive important announcements from RusingAcademy",
+    descFr: "Recevoir les annonces importantes de RusingAcademy",
     enabled: true,
   },
 ];

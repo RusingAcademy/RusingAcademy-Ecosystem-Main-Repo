@@ -10,7 +10,7 @@ export default function Cookies() {
     en: {
       title: "Cookie Policy",
       lastUpdated: "Last updated: January 12, 2026",
-      intro: "Rusinga International Consulting Ltd., commercially known as RusingÂcademy, uses cookies and similar tracking technologies on the Lingueefy platform. This Cookie Policy explains what cookies are, how we use them, and your options for managing them.",
+      intro: "Rusinga International Consulting Ltd., commercially known as RusingAcademy, uses cookies and similar tracking technologies on the Lingueefy platform. This Cookie Policy explains what cookies are, how we use them, and your options for managing them.",
       sections: [
         {
           title: "1. What Are Cookies?",
@@ -138,7 +138,7 @@ We do not control these third-party cookies. Please review their privacy policie
           title: "10. Contact Us",
           content: `For questions about our use of cookies or to manage your cookie preferences, please contact us at:
 - Email: admin@rusingacademy.ca
-- Address: Rusinga International Consulting Ltd. (RusingÂcademy), Ottawa, Ontario, Canada
+- Address: Rusinga International Consulting Ltd. (RusingAcademy), Ottawa, Ontario, Canada
 
 We aim to respond to cookie-related inquiries within 5 business days.`,
         },
@@ -147,7 +147,7 @@ We aim to respond to cookie-related inquiries within 5 business days.`,
     fr: {
       title: "Politique relative aux cookies",
       lastUpdated: "Dernière mise à jour : 12 janvier 2026",
-      intro: "Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingÂcademy, utilise des cookies et des technologies de suivi similaires sur la plateforme Lingueefy. Cette Politique relative aux cookies explique ce que sont les cookies, comment nous les utilisons et vos options pour les gérer.",
+      intro: "Rusinga International Consulting Ltd., commercialement connue sous le nom de RusingAcademy, utilise des cookies et des technologies de suivi similaires sur la plateforme Lingueefy. Cette Politique relative aux cookies explique ce que sont les cookies, comment nous les utilisons et vos options pour les gérer.",
       sections: [
         {
           title: "1. Qu'est-ce que les cookies?",
@@ -275,7 +275,7 @@ Nous ne contrôlons pas ces cookies tiers. Veuillez consulter leurs politiques d
           title: "10. Nous contacter",
           content: `Pour des questions sur notre utilisation des cookies ou pour gérer vos préférences en matière de cookies, veuillez nous contacter à:
 - Courriel: admin@rusingacademy.ca
-- Adresse: Rusinga International Consulting Ltd. (RusingÂcademy), Ottawa, Ontario, Canada
+- Adresse: Rusinga International Consulting Ltd. (RusingAcademy), Ottawa, Ontario, Canada
 
 Nous visons à répondre aux demandes liées aux cookies dans les 5 jours ouvrables.`,
         },

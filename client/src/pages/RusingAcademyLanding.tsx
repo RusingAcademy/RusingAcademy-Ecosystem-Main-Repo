@@ -312,7 +312,7 @@ const labels = {
           level: 'CBC',
         },
         {
-          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingÂcademy programs.',
+          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingAcademy programs.',
           name: 'Learning Coordinator',
           org: 'Central Agency',
           level: 'BBB',
@@ -565,7 +565,7 @@ function PromoBanner({ lang }: { lang: 'en' | 'fr' }) {
   );
 }
 
-export default function RusingÂcademyLanding() {
+export default function RusingAcademyLanding() {
   const { language } = useLanguage();
   const l = labels[language as keyof typeof labels] || labels.en;
 
@@ -586,7 +586,7 @@ export default function RusingÂcademyLanding() {
   const t = labels[lang];
   const brand = brandColors.rusingacademy;
 
-  // Premium gradient for RusingÂcademy
+  // Premium gradient for RusingAcademy
   const premiumGradient = 'linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, #DB2777 100%)';
   const subtleGradient = 'linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(124, 58, 237, 0.1) 50%, rgba(219, 39, 119, 0.1) 100%)';
 
@@ -651,7 +651,7 @@ export default function RusingÂcademyLanding() {
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[var(--text)] text-white' : 'bg-stone-50'}`}>
       <SEO
-        title="RusingÂcademy - Path Series\u2122 SLE Training | RusingÂcademy"
+        title="RusingAcademy - Path Series\u2122 SLE Training | RusingAcademy"
         description="Intensive SLE preparation courses for Canadian public servants. Achieve BBB, CBC, or CCC certification 3-4x faster with our proven Path Series\u2122 methodology."
         // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
         keywords="SLE training, French language training, public service, Level C, BBB, CBC, CCC, federal government, bilingual certification"
@@ -882,7 +882,7 @@ export default function RusingÂcademyLanding() {
               </div>
             </motion.div>
 
-            {/* RusingÂcademy Method */}
+            {/* RusingAcademy Method */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}

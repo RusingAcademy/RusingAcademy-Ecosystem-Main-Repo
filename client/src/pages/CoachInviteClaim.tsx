@@ -163,7 +163,7 @@ export default function CoachInviteClaim() {
           </div>
           <CardTitle className="text-2xl">Réclamez votre profil coach</CardTitle>
           <CardDescription className="text-base">
-            Vous avez été invité(e) à prendre le contrôle de votre profil coach sur RusingÂcademy
+            Vous avez été invité(e) à prendre le contrôle de votre profil coach sur RusingAcademy
           </CardDescription>
         </CardHeader>
         

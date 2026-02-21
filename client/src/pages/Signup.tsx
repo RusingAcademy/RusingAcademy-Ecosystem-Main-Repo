@@ -116,7 +116,7 @@ function SignupContent() {
     <AuthLayout language={language}>
       <AuthCard
         title={t("Create Your Account", "Créez votre compte")}
-        subtitle={t("Join RusingÂcademy and start your bilingual journey", "Rejoignez RusingÂcademy et commencez votre parcours bilingue")}
+        subtitle={t("Join RusingAcademy and start your bilingual journey", "Rejoignez RusingAcademy et commencez votre parcours bilingue")}
       >
         {/* OAuth Error */}
         {oauthError && (
