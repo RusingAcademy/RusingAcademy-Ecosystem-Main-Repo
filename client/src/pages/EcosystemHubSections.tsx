@@ -260,7 +260,7 @@ function TrilemmeSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md border-t border-[#C9A84C]/20">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md border-t border-[#C9A84C]/20">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -274,7 +274,7 @@ function TrilemmeSection({ language }: { language: string }) {
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
           <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-loose">
             {language === "en"
               ? "Every day without your Level C is a day of missed opportunities. Thousands of talented public servants face this challenge, trapped by three barriers that traditional training cannot break."
               : "Chaque jour sans votre niveau C est un jour d'opportunités manquées. Des milliers de fonctionnaires talentueux font face à ce défi, piégés par trois barrières que la formation traditionnelle ne peut briser."}
@@ -314,7 +314,7 @@ function TrilemmeSection({ language }: { language: string }) {
               <h4 className="text-xl font-bold text-black dark:text-foreground mb-3">
                 {language === "en" ? obstacle.titleEn : obstacle.titleFr}
               </h4>
-              <p className="text-black dark:text-foreground leading-relaxed">
+              <p className="text-black dark:text-foreground leading-relaxed max-w-prose">
                 {language === "en" ? obstacle.descEn : obstacle.descFr}
               </p>
             </motion.div>
@@ -335,7 +335,7 @@ function TrilemmeSection({ language }: { language: string }) {
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-lg text-black dark:text-foreground leading-relaxed">
+                <p className="text-lg text-black dark:text-foreground leading-loose">
                   {language === "en" ? (
                     <>
                       <strong className="text-black dark:text-foreground">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
@@ -410,7 +410,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section id="ecosystem" className="py-16 md:py-20 lg:py-28 px-4 section-bg-2 dark:bg-white/[0.08] dark:backdrop-blur-md scroll-mt-20">
+    <section id="ecosystem" className="py-20 md:py-28 lg:py-36 px-4 section-bg-2 dark:bg-white/[0.08] dark:backdrop-blur-md scroll-mt-20">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -424,7 +424,7 @@ function EcosystemSection({ language }: { language: string }) {
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
           <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
-          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-loose">
             {language === "en"
               ? "This is why we built something different. After years of watching talented professionals struggle with outdated methods, we created an integrated ecosystem that attacks the problem from every angle. Not just courses. Not just coaching. Not just technology. But all three, working together in perfect harmony. Each pillar was designed to solve a specific part of the puzzle: structured learning to build your foundation, expert coaching to break through your personal barriers, and cutting-edge media to accelerate your progress. This is the solution you've been waiting for."
               : "C'est pourquoi nous avons construit quelque chose de différent. Après des années à voir des professionnels talentueux lutter avec des méthodes dépassées, nous avons créé un écosystème intégré qui attaque le problème sous tous les angles. Pas seulement des cours. Pas seulement du coaching. Pas seulement de la technologie. Mais les trois, travaillant ensemble en parfaite harmonie. Chaque pilier a été conçu pour résoudre une partie spécifique du puzzle : un apprentissage structuré pour construire vos fondations, un coaching expert pour briser vos barrières personnelles, et des médias de pointe pour accélérer vos progrès. C'est la solution que vous attendiez."}
@@ -526,7 +526,7 @@ function MethodologySection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-3 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-3 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -582,7 +582,7 @@ function MethodologySection({ language }: { language: string }) {
                     <h3 className="text-xl font-bold text-black dark:text-foreground mb-3">
                       {language === "en" ? step.titleEn : step.titleFr}
                     </h3>
-                    <p className="text-black dark:text-foreground leading-relaxed">
+                    <p className="text-black dark:text-foreground leading-relaxed max-w-prose">
                       {language === "en" ? step.descEn : step.descFr}
                     </p>
                   </div>
@@ -646,7 +646,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-4 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-4 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -704,7 +704,7 @@ function OffersSection({ language }: { language: string }) {
                   <h3 className="text-2xl md:text-3xl font-bold font-display text-black dark:text-foreground mb-4">
                     {language === "en" ? offer.titleEn : offer.titleFr}
                   </h3>
-                  <p className="text-black dark:text-foreground mb-8 leading-relaxed">
+                  <p className="text-black dark:text-foreground mb-8 leading-relaxed max-w-prose">
                     {language === "en" ? offer.descEn : offer.descFr}
                   </p>
                   <Link href={offer.link}>
@@ -773,7 +773,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-5 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-5 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -892,7 +892,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-6 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-6 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -959,7 +959,7 @@ function TestimonialsSection({ language }: { language: string }) {
               {/* Quote */}
               <div className="p-6">
                 <div className="text-2xl md:text-4xl lg:text-5xl text-cta400 leading-none mb-3">“</div>
-                <p className="text-black dark:text-foreground leading-relaxed text-lg italic">
+                <p className="text-black dark:text-foreground leading-relaxed max-w-prose text-lg italic">
                   {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
                 </p>
               </div>
@@ -978,7 +978,7 @@ function TestimonialsSection({ language }: { language: string }) {
 // ============================================================================
 function LeadershipSection({ language }: { language: string }) {
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header - Title removed per user request, lead paragraph kept */}
         <motion.div
@@ -1122,7 +1122,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             </h2>
           <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
             
-            <p className="text-lg md:text-xl text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-black dark:text-foreground max-w-3xl mx-auto leading-loose">
               {language === "en"
                 ? "These heartfelt Kudoboard messages from former public servant colleagues capture the real, transformative impact of Steven's French instruction. Click to view in full resolution."
                 : "Ces messages Kudoboard sincères d'anciens collègues fonctionnaires capturent l'impact réel et transformateur de l'enseignement du français de Steven. Cliquez pour voir en pleine résolution."}
@@ -1342,7 +1342,7 @@ function ValueSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-3 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-3 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1452,7 +1452,7 @@ function TeamSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-4 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-4 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -2086,7 +2086,7 @@ function FAQSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-5 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-20 md:py-28 lg:py-36 px-4 section-bg-5 dark:bg-white/[0.08] dark:backdrop-blur-md">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -2136,7 +2136,7 @@ function FAQSection({ language }: { language: string }) {
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-5">
-                  <p className="text-black dark:text-foreground leading-relaxed">
+                  <p className="text-black dark:text-foreground leading-relaxed max-w-prose">
                     {language === "en" ? faq.answerEn : faq.answerFr}
                   </p>
                 </div>
