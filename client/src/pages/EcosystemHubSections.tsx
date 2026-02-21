@@ -2123,6 +2123,8 @@ function FAQSection({ language }: { language: string }) {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
                 className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#C9A84C]/5 transition-all duration-300"
               >
                 <span className="font-semibold text-black dark:text-foreground pr-4">

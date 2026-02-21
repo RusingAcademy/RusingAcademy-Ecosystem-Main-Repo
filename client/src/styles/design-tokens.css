@@ -699,3 +699,119 @@ textarea:focus-visible,
 button, a, input, select, textarea, .no-transition {
   transition-duration: 0s;
 }
+
+/* ============================================
+   ACCESSIBILITY & PERFORMANCE — Wave 22
+   ============================================ */
+
+/* Skip to content link — visible only on focus */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-brand-gold, #C9A84C);
+  color: #1a202c;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid #C9A84C;
+  outline-offset: 2px;
+}
+
+/* Focus-visible styles for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid rgba(201, 168, 76, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(201, 168, 76, 0.8);
+  outline-offset: 2px;
+}
+
+/* Reduced motion — respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float-gentle,
+  .animate-float-slow {
+    animation: none !important;
+  }
+  .stagger-enter > * {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .parallax-section::before {
+    background-attachment: scroll !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .premium-card {
+    border-width: 2px;
+    border-color: currentColor;
+  }
+  .glass-panel,
+  .glass-panel-gold,
+  .glass-panel-dark {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: Canvas;
+    color: CanvasText;
+    border: 2px solid CanvasText;
+  }
+}
+
+/* Screen reader only — visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Ensure minimum touch target size (44x44px) */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Print styles — clean output */
+@media print {
+  .no-print,
+  nav,
+  footer,
+  .skip-to-content {
+    display: none !important;
+  }
+  body {
+    color: #000 !important;
+    background: #fff !important;
+  }
+  .premium-card {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}

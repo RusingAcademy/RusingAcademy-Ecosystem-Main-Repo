@@ -26,6 +26,8 @@ export default function Hub() {
   const l = labels[language as keyof typeof labels] || labels.en;
 
   return (
+      <>
+        <a href="#main-content" className="skip-to-content">Skip to main content</a>
     <div className="min-h-screen bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
       <SEO
         title="RusingAcademy Learning Ecosystem - Hub"
@@ -34,7 +36,8 @@ export default function Hub() {
       />
       
       {/* Main Content - 14 sections from EcosystemHub */}
-      <EcosystemHubContent />
+      <main id="main-content">
+          <EcosystemHubContent />
       
       {/* Footer Institutionnel */}
       <FooterInstitutional />
