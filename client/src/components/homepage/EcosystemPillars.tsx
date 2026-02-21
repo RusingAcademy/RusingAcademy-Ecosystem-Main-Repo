@@ -16,7 +16,7 @@ export const EcosystemPillars: React.FC = () => {
         { 
           id: 'rusingacademy',
           icon: <GraduationCap className="w-10 h-10" />, 
-          title: "RusingÂcademy", 
+          title: "RusingAcademy", 
           tagline: "The Academy",
           description: "Structured SLE preparation courses, expert-led curriculums, and a professional LMS platform.",
           cta: "Explore Courses",
@@ -52,7 +52,7 @@ export const EcosystemPillars: React.FC = () => {
         { 
           id: 'rusingacademy',
           icon: <GraduationCap className="w-10 h-10" />, 
-          title: "RusingÂcademy", 
+          title: "RusingAcademy", 
           tagline: "L'Académie",
           description: "Cours structurés de préparation aux ELS, curriculums dirigés par des experts et plateforme LMS.",
           cta: "Explorer les cours",

@@ -41,8 +41,8 @@ const KEY_MESSAGES: KeyMessage[] = [
   {
     title: "Mission Statement",
     titleFr: "Énoncé de mission",
-    content: "RusingÂcademy democratizes second-language training — making it more accessible, learner-centered, and aligned with the evolving needs of Canada's public service.",
-    contentFr: "RusingÂcademy démocratise la formation en langue seconde — la rendant plus accessible, centrée sur l'apprenant et alignée sur les besoins évolutifs de la fonction publique du Canada.",
+    content: "RusingAcademy democratizes second-language training — making it more accessible, learner-centered, and aligned with the evolving needs of Canada's public service.",
+    contentFr: "RusingAcademy démocratise la formation en langue seconde — la rendant plus accessible, centrée sur l'apprenant et alignée sur les besoins évolutifs de la fonction publique du Canada.",
   },
   {
     title: "Value Proposition",
@@ -59,8 +59,8 @@ const KEY_MESSAGES: KeyMessage[] = [
   {
     title: "Ecosystem Overview",
     titleFr: "Aperçu de l'écosystème",
-    content: "Three complementary brands — RusingÂcademy (SLE exam preparation), Lingueefy (personalized language programs), and Barholex Media (educational content & EdTech) — under Rusinga International Consulting Ltd.",
-    contentFr: "Trois marques complémentaires — RusingÂcademy (préparation aux examens ELS), Lingueefy (programmes linguistiques personnalisés) et Barholex Media (contenu éducatif et EdTech) — sous Rusinga International Consulting Ltd.",
+    content: "Three complementary brands — RusingAcademy (SLE exam preparation), Lingueefy (personalized language programs), and Barholex Media (educational content & EdTech) — under Rusinga International Consulting Ltd.",
+    contentFr: "Trois marques complémentaires — RusingAcademy (préparation aux examens ELS), Lingueefy (programmes linguistiques personnalisés) et Barholex Media (contenu éducatif et EdTech) — sous Rusinga International Consulting Ltd.",
   },
   {
     title: "Key Differentiators",
@@ -82,7 +82,7 @@ export function PressKit({ className = "" }: PressKitProps) {
   const labels = {
     en: {
       title: "Press Kit",
-      subtitle: "Brand assets, key messaging, and media resources for the RusingÂcademy ecosystem",
+      subtitle: "Brand assets, key messaging, and media resources for the RusingAcademy ecosystem",
       messaging: "Key Messaging",
       assets: "Brand Assets",
       facts: "Quick Facts",
@@ -109,7 +109,7 @@ export function PressKit({ className = "" }: PressKitProps) {
     },
     fr: {
       title: "Dossier de presse",
-      subtitle: "Actifs de marque, messages clés et ressources médias pour l'écosystème RusingÂcademy",
+      subtitle: "Actifs de marque, messages clés et ressources médias pour l'écosystème RusingAcademy",
       messaging: "Messages clés",
       assets: "Actifs de marque",
       facts: "Faits rapides",

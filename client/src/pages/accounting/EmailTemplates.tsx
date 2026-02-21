@@ -208,7 +208,7 @@ export default function EmailTemplates() {
 
   const previewBody = (body: string) => {
     return body
-      .replace(/\{\{company_name\}\}/g, "RusingÂcademy")
+      .replace(/\{\{company_name\}\}/g, "RusingAcademy")
       .replace(/\{\{customer_name\}\}/g, "John Smith")
       .replace(/\{\{customer_email\}\}/g, "john@example.com")
       .replace(/\{\{invoice_number\}\}/g, "INV-001")

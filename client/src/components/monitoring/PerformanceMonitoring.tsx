@@ -303,7 +303,7 @@ export function CoreWebVitalsDashboard({ className = "" }: CoreWebVitalsDashboar
   const labels = {
     en: {
       title: "Core Web Vitals Dashboard",
-      subtitle: "Real-time performance monitoring for the RusingÂcademy ecosystem",
+      subtitle: "Real-time performance monitoring for the RusingAcademy ecosystem",
       vitals: "Web Vitals",
       thresholds: "Alert Thresholds",
       report: "Weekly Report",
@@ -330,7 +330,7 @@ export function CoreWebVitalsDashboard({ className = "" }: CoreWebVitalsDashboar
     },
     fr: {
       title: "Tableau de bord Core Web Vitals",
-      subtitle: "Surveillance de performance en temps réel pour l'écosystème RusingÂcademy",
+      subtitle: "Surveillance de performance en temps réel pour l'écosystème RusingAcademy",
       vitals: "Web Vitals",
       thresholds: "Seuils d'alerte",
       report: "Rapport hebdomadaire",

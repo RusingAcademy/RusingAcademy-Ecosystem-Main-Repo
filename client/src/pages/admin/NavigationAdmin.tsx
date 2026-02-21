@@ -92,7 +92,7 @@ export default function NavigationAdmin() {
         <h3 className="font-medium mb-3">Navigation Preview</h3>
         <div className="border rounded-lg p-4 bg-slate-900 text-white">
           <div className="flex items-center justify-between">
-            <span className="font-bold text-lg">RusingÂcademy</span>
+            <span className="font-bold text-lg">RusingAcademy</span>
             <div className="flex items-center gap-4">
               {headerItems.map((item: any) => (<span key={item.id} className="text-sm text-slate-300 hover:text-white cursor-pointer">{item.label}</span>))}
             </div>

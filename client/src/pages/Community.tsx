@@ -197,7 +197,7 @@ export default function Community() {
 
   return (
     <div className="min-h-screen text-white dark-page" style={{ background: "linear-gradient(135deg, #0d1a19 0%, #0f2028 40%, #0a1628 100%)" }}>
-      <SEO title="Community" description="Join the RusingÂcademy learning community. Connect with fellow public servants preparing for SLE exams." canonical="/community" />
+      <SEO title="Community" description="Join the RusingAcademy learning community. Connect with fellow public servants preparing for SLE exams." canonical="/community" />
       
       {/* Hero Section — Premium Glassmorphism */}
       <section className="community-hero relative pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">

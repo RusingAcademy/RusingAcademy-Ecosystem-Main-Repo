@@ -270,8 +270,8 @@ const BADGE_CATALOG: Record<string, {
     borderColor: "border-amber-500/40",
     glowColor: "shadow-amber-500/30",
     category: "special",
-    description: "Founding member of RusingÂcademy",
-    descriptionFr: "Membre fondateur de RusingÂcademy",
+    description: "Founding member of RusingAcademy",
+    descriptionFr: "Membre fondateur de RusingAcademy",
   },
   beta_tester: {
     icon: Sparkles,

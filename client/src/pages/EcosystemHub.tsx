@@ -281,12 +281,12 @@ function TrilemmeSection({ language }: { language: string }) {
                 <p className="text-lg text-black dark:text-foreground leading-relaxed">
                   {language === "en" ? (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingÂcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
+                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
                       <strong className="text-cta600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
-                      <strong className="text-black dark:text-foreground">RusingÂcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
+                      <strong className="text-black dark:text-foreground">RusingAcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
                       <strong className="text-cta600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
@@ -309,8 +309,8 @@ function EcosystemSection({ language }: { language: string }) {
       id: "academy",
       nameEn: "Your Academy",
       nameFr: "Votre Académie",
-      brandEn: "RusingÂcademy",
-      brandFr: "RusingÂcademy",
+      brandEn: "RusingAcademy",
+      brandFr: "RusingAcademy",
       descEn: "Structured courses and professional pathways aligned with federal requirements (BBB, CBC, CCC).",
       descFr: "Parcours structurés et cours professionnels alignés sur les exigences fédérales (BBB, CBC, CCC).",
       icon: GraduationCap,
@@ -554,7 +554,7 @@ function MethodologySection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 4: OFFRES — The RusingÂcademy Solution
+// SECTION 4: OFFRES — The RusingAcademy Solution
 // ============================================================================
 function OffersSection({ language }: { language: string }) {
   const offers = [
@@ -629,7 +629,7 @@ function OffersSection({ language }: { language: string }) {
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-            {language === "en" ? "The RusingÂcademy Solution" : "La solution RusingÂcademy"}
+            {language === "en" ? "The RusingAcademy Solution" : "La solution RusingAcademy"}
           </h2>
         </motion.div>
 
@@ -1249,8 +1249,8 @@ function InstitutionsSection({ language }: { language: string }) {
         >
           <p className="text-sm text-black dark:text-foreground italic max-w-2xl mx-auto">
             {language === "en"
-              ? "Official logos of Canadian federal institutions. RusingÂcademy is a private entrepreneurial initiative."
-              : "Logos officiels des institutions fédérales canadiennes. RusingÂcademy est une initiative entrepreneuriale privée."}
+              ? "Official logos of Canadian federal institutions. RusingAcademy is a private entrepreneurial initiative."
+              : "Logos officiels des institutions fédérales canadiennes. RusingAcademy est une initiative entrepreneuriale privée."}
           </p>
         </motion.div>
       </div>
@@ -1259,7 +1259,7 @@ function InstitutionsSection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 9: VALEUR — Why Choose RusingÂcademy
+// SECTION 9: VALEUR — Why Choose RusingAcademy
 // ============================================================================
 function ValueSection({ language }: { language: string }) {
   const values = [
@@ -1320,7 +1320,7 @@ function ValueSection({ language }: { language: string }) {
           className="text-center mb-8 md:mb-12 lg:mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-            Why Choose RusingÂcademy?
+            Why Choose RusingAcademy?
           </h2>
         </motion.div>
 
@@ -1387,7 +1387,7 @@ function TeamSection({ language }: { language: string }) {
     },
     {
       name: "Sue-Anne Richer",
-      role: "Chief Learning Officer - RusingÂcademy",
+      role: "Chief Learning Officer - RusingAcademy",
       image: "https://rusingacademy-cdn.b-cdn.net/images/team-sueanne.jpg",
       bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation.",
       bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français à travers des parcours d'apprentissage clairs et la préparation aux examens.",
@@ -1559,10 +1559,10 @@ function FAQSection({ language }: { language: string }) {
 
   const faqs = [
     {
-      questionEn: "What is the difference between RusingÂcademy and Lingueefy?",
-      questionFr: "Quelle est la différence entre RusingÂcademy et Lingueefy ?",
-      answerEn: "RusingÂcademy provides structured courses and curriculum for B2B/B2G clients, while Lingueefy is our B2C coaching platform connecting individuals with certified coaches and AI practice tools.",
-      answerFr: "RusingÂcademy offre des cours et des programmes structurés pour les clients B2B/B2G, tandis que Lingueefy est notre plateforme de coaching B2C connectant les individus avec des coachs certifiés et des outils de pratique IA.",
+      questionEn: "What is the difference between RusingAcademy and Lingueefy?",
+      questionFr: "Quelle est la différence entre RusingAcademy et Lingueefy ?",
+      answerEn: "RusingAcademy provides structured courses and curriculum for B2B/B2G clients, while Lingueefy is our B2C coaching platform connecting individuals with certified coaches and AI practice tools.",
+      answerFr: "RusingAcademy offre des cours et des programmes structurés pour les clients B2B/B2G, tandis que Lingueefy est notre plateforme de coaching B2C connectant les individus avec des coachs certifiés et des outils de pratique IA.",
     },
     {
       questionEn: "How long does it take to reach Level C?",
@@ -1573,8 +1573,8 @@ function FAQSection({ language }: { language: string }) {
     {
       questionEn: "Do you offer training for government departments?",
       questionFr: "Offrez-vous des formations pour les ministères gouvernementaux ?",
-      answerEn: "Yes, RusingÂcademy specializes in B2B/B2G training solutions. We offer custom programs, team dashboards, and on-site training options for government departments and organizations.",
-      answerFr: "Oui, RusingÂcademy se spécialise dans les solutions de formation B2B/B2G. Nous offrons des programmes personnalisés, des tableaux de bord d'équipe et des options de formation sur site pour les ministères et organisations gouvernementales.",
+      answerEn: "Yes, RusingAcademy specializes in B2B/B2G training solutions. We offer custom programs, team dashboards, and on-site training options for government departments and organizations.",
+      answerFr: "Oui, RusingAcademy se spécialise dans les solutions de formation B2B/B2G. Nous offrons des programmes personnalisés, des tableaux de bord d'équipe et des options de formation sur site pour les ministères et organisations gouvernementales.",
     },
     {
       questionEn: "What is your success rate?",

@@ -89,8 +89,8 @@ export default function Organizations() {
               className="px-8 py-6 text-lg font-semibold rounded-lg bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {language === "fr"
-                ? "Se connecter via RusingÂcademy"
-                : "Sign in via RusingÂcademy"}
+                ? "Se connecter via RusingAcademy"
+                : "Sign in via RusingAcademy"}
             </Button>
 
             <p className="text-sm text-black dark:text-foreground dark:text-cyan-300 mt-4">

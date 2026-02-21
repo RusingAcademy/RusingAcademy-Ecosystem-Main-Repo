@@ -76,7 +76,7 @@ function CourseCard({ course, onSelect }: { course: DisplayCourse; onSelect: (c:
       </div>
       <div className="p-4">
         <h3 className="font-bold text-foreground text-sm mb-1 line-clamp-2 group-hover:text-indigo-900 transition-colors tracking-tight">{course.title}</h3>
-        <p className="text-xs text-muted-foreground mb-3 line-clamp-1 font-medium">{course.instructorName || "RusingÂcademy"}</p>
+        <p className="text-xs text-muted-foreground mb-3 line-clamp-1 font-medium">{course.instructorName || "RusingAcademy"}</p>
         <div className="flex items-center justify-between text-[11px] text-muted-foreground">
           <span className="flex items-center gap-1"><BookOpen className="w-3.5 h-3.5" />{course.totalLessons || 0} lessons</span>
           <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5" />{(course.totalEnrollments || 0).toLocaleString()}</span>
@@ -140,7 +140,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
             {(course.instructorName || "RA").split(" ").map(n => n[0]).join("")}
           </div>
           <div>
-            <p className="text-sm font-bold text-foreground tracking-tight">{course.instructorName || "RusingÂcademy"}</p>
+            <p className="text-sm font-bold text-foreground tracking-tight">{course.instructorName || "RusingAcademy"}</p>
             <p className="text-[11px] text-muted-foreground">Instructor</p>
           </div>
         </div>

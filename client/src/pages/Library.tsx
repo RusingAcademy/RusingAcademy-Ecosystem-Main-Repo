@@ -1,6 +1,6 @@
 /**
  * Library Page — /library
- * RusingÂcademy Product Library
+ * RusingAcademy Product Library
  * 
  * Premium, marketing-friendly product catalog page with:
  * - Hero section with glassmorphism value proposition
@@ -152,7 +152,7 @@ function LibraryHero({ language }: { language: string }) {
           <motion.div variants={fadeInUp} className="mb-6">
             <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/10 backdrop-blur-md text-white/90 border border-white/15 shadow-lg">
               <BookOpen className="w-4 h-4 text-orange-500" />
-              {language === "fr" ? "Collection RusingÂcademy" : "RusingÂcademy Collection"}
+              {language === "fr" ? "Collection RusingAcademy" : "RusingAcademy Collection"}
             </span>
           </motion.div>
 
@@ -163,12 +163,12 @@ function LibraryHero({ language }: { language: string }) {
                 {language === "fr" ? (
                   <>
                     La Bibliothèque{" "}
-                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingÂcademy</span>
+                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>
                   </>
                 ) : (
                   <>
                     The{" "}
-                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingÂcademy</span>{" "}
+                    <span className="bg-gradient-to-r from-orange-500 to-[#fb923c] bg-clip-text text-transparent">RusingAcademy</span>{" "}
                     Library
                   </>
                 )}
@@ -902,18 +902,18 @@ export default function Library() {
       <Helmet>
         <title>
           {language === "fr"
-            ? "Bibliothèque | RusingÂcademy — Livres, Cours & Ressources SLE"
-            : "Library | RusingÂcademy — Books, Courses & SLE Resources"}
+            ? "Bibliothèque | RusingAcademy — Livres, Cours & Ressources SLE"
+            : "Library | RusingAcademy — Books, Courses & SLE Resources"}
         </title>
         <meta
           name="description"
           content={
             language === "fr"
-              ? "Explorez la bibliothèque complète RusingÂcademy : livres, guides, cours et ressources pour réussir les examens SLE et exceller dans la fonction publique canadienne bilingue."
-              : "Explore the complete RusingÂcademy library: books, guides, courses, and resources to pass SLE exams and excel in Canada's bilingual public service."
+              ? "Explorez la bibliothèque complète RusingAcademy : livres, guides, cours et ressources pour réussir les examens SLE et exceller dans la fonction publique canadienne bilingue."
+              : "Explore the complete RusingAcademy library: books, guides, courses, and resources to pass SLE exams and excel in Canada's bilingual public service."
           }
         />
-        <meta property="og:title" content={language === "fr" ? "Bibliothèque RusingÂcademy" : "RusingÂcademy Library"} />
+        <meta property="og:title" content={language === "fr" ? "Bibliothèque RusingAcademy" : "RusingAcademy Library"} />
         <meta property="og:type" content="website" />
       </Helmet>
 

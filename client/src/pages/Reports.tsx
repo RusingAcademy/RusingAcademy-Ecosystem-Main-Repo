@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Reports & Analytics Page
+ * RusingAcademy Learning Portal - Reports & Analytics Page
  * Features: XP over time, quiz trends, path progress, SLE readiness, activity heatmap
  * Uses inline SVG charts for zero-dependency visualization
  */

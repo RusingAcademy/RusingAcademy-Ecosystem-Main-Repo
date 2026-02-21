@@ -21,7 +21,7 @@ import { Link, useLocation } from "wouter";
 const PLATFORMS = [
   {
     slug: "rusingacademy",
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     taglineFr: "Formation B2B/B2G",
     taglineEn: "B2B/B2G Training",
     icon: GraduationCap,

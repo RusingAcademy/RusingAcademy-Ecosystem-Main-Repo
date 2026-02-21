@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Progress Page
+ * RusingAcademy Learning Portal - Progress Page
  * Design: Summary of modules accessed with progress table
  */
 import DashboardLayout from "@/components/DashboardLayout";

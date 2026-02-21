@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Help Page
+ * RusingAcademy Learning Portal - Help Page
  * Design: Zendesk-style help center with categories and search
  */
 import DashboardLayout from "@/components/DashboardLayout";
@@ -21,17 +21,17 @@ const categories = [
 ];
 
 const promotedArticles = [
-  "How to Use the RusingÂcademy Support Form Efficiently",
-  "RusingÂcademy Learning Portal Introduction",
-  "How to navigate the RusingÂcademy portal?",
+  "How to Use the RusingAcademy Support Form Efficiently",
+  "RusingAcademy Learning Portal Introduction",
+  "How to navigate the RusingAcademy portal?",
   "Is there a guide available for using the learning materials/modules?",
 ];
 
 const recentActivity = [
   { category: "Chat and Support Form", question: "How can I contact a live agent for support?", time: "2 months ago" },
   { category: "Tutoring sessions", question: "May I continue my training at my own expense...", time: "4 months ago" },
-  { category: "Tutoring sessions", question: "Is it possible to extend my current contract with RusingÂcademy?", time: "4 months ago" },
-  { category: "RusingÂcademy Learning Portal", question: "How do I correct a registration form I just submitted?", time: "4 months ago" },
+  { category: "Tutoring sessions", question: "Is it possible to extend my current contract with RusingAcademy?", time: "4 months ago" },
+  { category: "RusingAcademy Learning Portal", question: "How do I correct a registration form I just submitted?", time: "4 months ago" },
   { category: "Tutoring sessions", question: "What is the passing grade for the End-of-Module (EOM) exam?", time: "4 months ago" },
 ];
 

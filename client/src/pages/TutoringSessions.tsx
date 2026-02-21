@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Tutoring Sessions Page
+ * RusingAcademy Learning Portal - Tutoring Sessions Page
  * Features: Calendly embed, coach profiles, booking types, session history
  */
 import DashboardLayout from "@/components/DashboardLayout";
@@ -73,7 +73,7 @@ const coaches = [
     avatar: "SB",
     color: "var(--brand-teal, var(--teal))",
     linkedin: "https://www.linkedin.com/in/steven-barholere-1a17b8a6/",
-    bio: "Founder of RusingÂcademy with 10+ years coaching public servants to bilingual excellence.",
+    bio: "Founder of RusingAcademy with 10+ years coaching public servants to bilingual excellence.",
   },
   {
     name: "Sue-Anne Richer",

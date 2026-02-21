@@ -282,7 +282,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">      
-      <SEO title="Frequently Asked Questions" description="Find answers to common questions about RusingÂcademy's SLE preparation programs, coaching services, and bilingual training." canonical="/faq" />
+      <SEO title="Frequently Asked Questions" description="Find answers to common questions about RusingAcademy's SLE preparation programs, coaching services, and bilingual training." canonical="/faq" />
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}

@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - Results Page
+ * RusingAcademy Learning Portal - Results Page
  * Design: Tabs for Final Quiz Results / Summary of Results (Chart) / Proficiency Levels (Table)
  * Bar chart + data table
  */

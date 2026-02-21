@@ -32,7 +32,7 @@ interface BrandTile {
 const brandTiles: BrandTile[] = [
   {
     id: "rusingacademy",
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     subtitle: {
       en: "Professional Courses & LMS",
       fr: "Cours professionnels & LMS",
@@ -41,7 +41,7 @@ const brandTiles: BrandTile[] = [
     logo: (
       <img loading="lazy" decoding="async"
         src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
-        alt="RusingÂcademy" 
+        alt="RusingAcademy" 
         className="w-10 h-10 rounded-lg object-cover"
       />
     ),
@@ -203,10 +203,10 @@ export default function EcosystemHeader() {
               href="/"
               className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
-              {/* RusingÂcademy Logo */}
+              {/* RusingAcademy Logo */}
               <img loading="lazy" decoding="async"
                 src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
-                alt="RusingÂcademy" 
+                alt="RusingAcademy" 
                 className="w-10 h-10 rounded-lg object-cover"
               />
               <div className="flex flex-col">
@@ -214,7 +214,7 @@ export default function EcosystemHeader() {
                   className="font-serif text-lg font-bold tracking-wide"
                   style={{ color: "var(--text-inverse)" }}
                 >
-                  RusingÂcademy
+                  RusingAcademy
                 </span>
                 <span 
                   className="hidden sm:inline text-xs font-medium"
@@ -399,7 +399,7 @@ export default function EcosystemHeader() {
                 let textColor = "white";
                 let subtitleColor = "rgba(255,255,255,0.7)";
                 
-                // RusingÂcademy - Orange/Coral brand color
+                // RusingAcademy - Orange/Coral brand color
                 if (tile.style === "dark-glass") {
                   glassStyle = {
                     background: "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",

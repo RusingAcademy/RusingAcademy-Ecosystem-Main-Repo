@@ -119,7 +119,7 @@ const labItems = [
     icon: Globe,
     bucket: "plug-and-play",
     lines: 282,
-    description: "Brand navigation overlay with animated platform cards (RusingÂcademy, Lingueefy, Barholex Media) and notification indicators.",
+    description: "Brand navigation overlay with animated platform cards (RusingAcademy, Lingueefy, Barholex Media) and notification indicators.",
     origin: "client/src/components/EcosystemSwitcher.tsx",
   },
   {
@@ -216,7 +216,7 @@ export default function ComponentLab() {
                       <div className="text-xl font-bold text-slate-900">
                         <TypewriterText
                           text="Master French 3–4× faster"
-                          highlightText="with RusingÂcademy."
+                          highlightText="with RusingAcademy."
                           highlightClassName="text-cta-2"
                           speed={60}
                           delay={500}
@@ -317,7 +317,7 @@ export default function ComponentLab() {
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {[
-                      { name: "RusingÂcademy", color: "var(--barholex-gold-hover)", desc: "Formation B2B/B2G" },
+                      { name: "RusingAcademy", color: "var(--barholex-gold-hover)", desc: "Formation B2B/B2G" },
                       { name: "Lingueefy", color: "var(--brand-foundation-2)", desc: "Coaching personnalisé" },
                       { name: "Barholex Media", color: "#1E3A5F", desc: "EdTech & Contenu" },
                     ].map((brand) => (

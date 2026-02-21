@@ -74,7 +74,7 @@ export default function PerformanceReport() {
           </div>
         </div>
 
-        <p className="text-center text-sm text-slate-500">Ce rapport est généré automatiquement par RusingÂcademy et peut être utilisé comme justificatif officiel de formation linguistique.</p>
+        <p className="text-center text-sm text-slate-500">Ce rapport est généré automatiquement par RusingAcademy et peut être utilisé comme justificatif officiel de formation linguistique.</p>
       </div>
     </PortalLayout>
   );

@@ -182,7 +182,7 @@ export default function Coaches() {
 
   return (
     <div className="min-h-screen flex flex-col section-bg-1">
-      <SEO title="Our Coaches" description="Meet RusingÂcademy's certified bilingual coaches specializing in SLE preparation and professional French training." canonical="/coaches" />
+      <SEO title="Our Coaches" description="Meet RusingAcademy's certified bilingual coaches specializing in SLE preparation and professional French training." canonical="/coaches" />
       
 
       <main id="main-content" className="flex-1">

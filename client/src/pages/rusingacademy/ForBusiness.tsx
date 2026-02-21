@@ -60,7 +60,7 @@ export default function ForBusiness() {
       badge: "B2B Corporate Solutions",
       title: "Build a Bilingual Workforce",
       highlight: "For Your Business",
-      subtitle: "Empower your team with professional language training. RusingÂcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
+      subtitle: "Empower your team with professional language training. RusingAcademy helps Canadian businesses develop bilingual talent and expand into new markets.",
       cta: "Request a Consultation",
       viewPrograms: "View Programs",
       stats: [
@@ -69,7 +69,7 @@ export default function ForBusiness() {
         { label: "Completion Rate" },
         { label: "Client Satisfaction" }
       ],
-      benefitsTitle: "Why Businesses Choose RusingÂcademy",
+      benefitsTitle: "Why Businesses Choose RusingAcademy",
       benefits: [
         { icon: Target, title: "Industry-Specific Training", desc: "Customized curricula for finance, healthcare, legal, and tech sectors." },
         { icon: Clock, title: "Flexible Learning", desc: "On-site, virtual, or hybrid. Self-paced and live coaching sessions." },
@@ -87,12 +87,12 @@ export default function ForBusiness() {
       ],
       testimonialsTitle: "Trusted by Leading Canadian Businesses",
       testimonials: [
-        { quote: "RusingÂcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
+        { quote: "RusingAcademy transformed our customer service team. French client satisfaction increased by 40%.", author: "VP Customer Experience", company: "National Insurance Co." },
         { quote: "The industry-specific curriculum opened new market opportunities for our consultants.", author: "Managing Partner", company: "Top-10 Consulting Firm" },
         { quote: "Our employees love the flexible learning options. We've seen a 60% increase in bilingual staff.", author: "HR Director", company: "Tech Startup Inc." }
       ],
       ctaTitle: "Ready to Transform Your Workforce?",
-      ctaSubtitle: "Join 200+ Canadian businesses that have achieved bilingual excellence with RusingÂcademy.",
+      ctaSubtitle: "Join 200+ Canadian businesses that have achieved bilingual excellence with RusingAcademy.",
       formTitle: "Request a Consultation",
       formSubtitle: "Fill out the form below and our team will contact you within 24 hours.",
       formFields: {
@@ -111,7 +111,7 @@ export default function ForBusiness() {
       badge: "Solutions corporatives B2B",
       title: "Bâtissez une main-d'œuvre bilingue",
       highlight: "Pour votre entreprise",
-      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingÂcademy aide les entreprises canadiennes à développer des talents bilingues.",
+      subtitle: "Donnez à votre équipe les moyens de réussir avec une formation linguistique professionnelle. RusingAcademy aide les entreprises canadiennes à développer des talents bilingues.",
       cta: "Demander une consultation",
       viewPrograms: "Voir les programmes",
       stats: [
@@ -120,7 +120,7 @@ export default function ForBusiness() {
         { label: "Taux de complétion" },
         { label: "Satisfaction client" }
       ],
-      benefitsTitle: "Pourquoi les entreprises choisissent RusingÂcademy",
+      benefitsTitle: "Pourquoi les entreprises choisissent RusingAcademy",
       benefits: [
         { icon: Target, title: "Formation par industrie", desc: "Programmes personnalisés pour finance, santé, juridique et tech." },
         { icon: Clock, title: "Apprentissage flexible", desc: "Sur site, virtuel ou hybride. Auto-formation et coaching en direct." },
@@ -138,12 +138,12 @@ export default function ForBusiness() {
       ],
       testimonialsTitle: "La confiance des grandes entreprises canadiennes",
       testimonials: [
-        { quote: "RusingÂcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
+        { quote: "RusingAcademy a transformé notre équipe de service client. La satisfaction des clients francophones a augmenté de 40%.", author: "VP Expérience client", company: "Compagnie d'assurance nationale" },
         { quote: "Le curriculum spécifique à notre industrie a ouvert de nouvelles opportunités de marché.", author: "Associé directeur", company: "Cabinet de conseil Top-10" },
         { quote: "Nos employés adorent les options d'apprentissage flexibles. Nous avons vu une augmentation de 60% du personnel bilingue.", author: "Directrice RH", company: "Tech Startup Inc." }
       ],
       ctaTitle: "Prêt à transformer votre équipe?",
-      ctaSubtitle: "Rejoignez plus de 200 entreprises canadiennes qui ont atteint l'excellence bilingue avec RusingÂcademy.",
+      ctaSubtitle: "Rejoignez plus de 200 entreprises canadiennes qui ont atteint l'excellence bilingue avec RusingAcademy.",
       formTitle: "Demander une consultation",
       formSubtitle: "Remplissez le formulaire ci-dessous et notre équipe vous contactera dans les 24 heures.",
       formFields: {

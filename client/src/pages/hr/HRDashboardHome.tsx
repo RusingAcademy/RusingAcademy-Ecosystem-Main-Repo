@@ -82,8 +82,8 @@ export default function HRDashboardHome() {
           </h2>
           <p className="text-sm text-gray-500">
             {lang === "fr"
-              ? "Ce portail est réservé aux gestionnaires de formation des organisations clientes. Contactez votre administrateur RusingÂcademy pour obtenir l'accès."
-              : "This portal is reserved for training managers of client organizations. Contact your RusingÂcademy administrator for access."}
+              ? "Ce portail est réservé aux gestionnaires de formation des organisations clientes. Contactez votre administrateur RusingAcademy pour obtenir l'accès."
+              : "This portal is reserved for training managers of client organizations. Contact your RusingAcademy administrator for access."}
           </p>
         </div>
       </HRLayout>
@@ -123,7 +123,7 @@ export default function HRDashboardHome() {
               </h1>
               <p className="text-sm text-gray-500 capitalize mt-1">{dateStr}</p>
               <p className="text-xs text-gray-400 mt-1">
-                {orgName} — {lang === "fr" ? "Contrat de formation linguistique RusingÂcademy" : "RusingÂcademy Language Training Contract"}
+                {orgName} — {lang === "fr" ? "Contrat de formation linguistique RusingAcademy" : "RusingAcademy Language Training Contract"}
               </p>
             </div>
             <div className="flex items-center gap-2">

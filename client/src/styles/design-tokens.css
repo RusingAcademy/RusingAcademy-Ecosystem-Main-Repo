@@ -235,7 +235,7 @@
   --z-tooltip: 1600;
   
   /* === BRAND ACCENTS (for ecosystem switching) === */
-  /* RusingÂcademy (Formation/LMS) - Uses CTA Copper */
+  /* RusingAcademy (Formation/LMS) - Uses CTA Copper */
   --rusingacademy-accent: var(--brand-cta);
   --rusingacademy-accent-2: var(--brand-cta-2);
   --rusingacademy-accent-soft: var(--brand-cta-soft);

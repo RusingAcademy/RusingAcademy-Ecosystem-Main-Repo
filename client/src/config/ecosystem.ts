@@ -19,7 +19,7 @@ export interface EcosystemPlatform {
 export const ECOSYSTEM_PLATFORMS: EcosystemPlatform[] = [
   {
     slug: "rusingacademy",
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     taglineEn: "B2B/B2G Training",
     taglineFr: "Formation B2B/B2G",
     icon: "graduation-cap",

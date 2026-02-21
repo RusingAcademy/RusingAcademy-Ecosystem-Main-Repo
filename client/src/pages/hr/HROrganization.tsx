@@ -32,7 +32,7 @@ export default function HROrganization() {
     billingContact: isEn ? "Billing Contact" : "Contact de facturation",
     editProfile: isEn ? "Edit Profile" : "Modifier le profil",
     noOrg: isEn ? "No organization found" : "Aucune organisation trouvée",
-    noOrgSub: isEn ? "Your organization profile will be set up by your RusingÂcademy account manager." : "Le profil de votre organisation sera configuré par votre gestionnaire de compte RusingÂcademy.",
+    noOrgSub: isEn ? "Your organization profile will be set up by your RusingAcademy account manager." : "Le profil de votre organisation sera configuré par votre gestionnaire de compte RusingAcademy.",
     contactSupport: isEn ? "Contact Support" : "Contacter le support",
   };
 

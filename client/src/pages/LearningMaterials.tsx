@@ -1,5 +1,5 @@
 /**
- * LearningMaterials — RusingÂcademy Learning Portal
+ * LearningMaterials — RusingAcademy Learning Portal
  * Design: Premium glassmorphism, teal/gold accents
  * Now integrates with real course data from programs
  */

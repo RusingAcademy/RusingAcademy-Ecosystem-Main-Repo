@@ -87,7 +87,7 @@ export default function InvoicePdf() {
           <div className="flex justify-between items-start mb-4 md:mb-6 lg:mb-10">
             <div>
               <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900">
-                {company?.companyName || "RusingÂcademy"}
+                {company?.companyName || "RusingAcademy"}
               </h1>
               {company?.address && (
                 <p className="text-sm text-gray-500 mt-1">{company.address}</p>

@@ -70,7 +70,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-teal-700 flex items-center justify-center">
               <BookOpen className="h-4 w-4 text-white" />
             </div>
-            <span className="font-semibold text-lg">RusingÂcademy</span>
+            <span className="font-semibold text-lg">RusingAcademy</span>
           </Link>
         </div>
 
