@@ -68,6 +68,44 @@ async function startServer() {
 
   const app = express();
   const server = createServer(app);
+
+  // ═══ Domain Redirect Middleware (must be FIRST) ═══
+  // Redirects all secondary domains to www.rusingacademy.ca
+  app.use((req, res, next) => {
+    const host = (req.headers.host || "").toLowerCase().replace(/:.*$/, "");
+
+    // Lingueefy domains → /lingueefy
+    if (
+      host === "lingueefy.ca" ||
+      host === "www.lingueefy.ca" ||
+      host === "lingueefy.com" ||
+      host === "www.lingueefy.com"
+    ) {
+      return res.redirect(301, `https://www.rusingacademy.ca/lingueefy${req.url === "/" ? "" : req.url}`);
+    }
+
+    // Barholex domains → /barholex
+    if (
+      host === "barholex.com" ||
+      host === "www.barholex.com" ||
+      host === "barholex.ca" ||
+      host === "www.barholex.ca"
+    ) {
+      return res.redirect(301, `https://www.rusingacademy.ca/barholex${req.url === "/" ? "" : req.url}`);
+    }
+
+    // Naked rusingacademy domains → www.rusingacademy.ca
+    if (
+      host === "rusingacademy.com" ||
+      host === "www.rusingacademy.com" ||
+      host === "rusingacademy.ca"
+    ) {
+      return res.redirect(301, `https://www.rusingacademy.ca${req.url}`);
+    }
+
+    next();
+  });
+
   // Stripe webhook must be registered BEFORE body parser to get raw body
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
 
