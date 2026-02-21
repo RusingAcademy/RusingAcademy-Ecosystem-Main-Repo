@@ -204,7 +204,7 @@ async function sendReminderEmail(
         }
       </p>
       
-      <a href="${process.env.VITE_APP_URL || "https://rusingacademy.com"}/my-sessions" 
+      <a href="${process.env.VITE_APP_URL || "https://www.rusingacademy.ca"}/my-sessions" 
          style="display: inline-block; background: #1E9B8A; color: white; padding: 12px 24px; 
                 text-decoration: none; border-radius: 6px; margin-top: 16px;">
         ${isEn ? "View Session Details" : "Voir les Détails"}

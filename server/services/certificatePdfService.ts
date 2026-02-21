@@ -229,7 +229,7 @@ export async function generateCertificatePdf(data: CertificateData): Promise<str
   doc.fontSize(8)
     .fillColor("#BBBBBB")
     .text(
-      `${isEn ? "Verify at" : "Vérifier sur"}: rusingacademy.com/verify/${data.certificateNumber}`,
+      `${isEn ? "Verify at" : "Vérifier sur"}: www.rusingacademy.ca/verify/${data.certificateNumber}`,
       0, pageH - 43, { align: "center", width: pageW }
     );
 

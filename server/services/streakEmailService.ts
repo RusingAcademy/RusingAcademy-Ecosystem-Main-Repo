@@ -121,7 +121,7 @@ function generateStreakReminderEmail(user: StreakAtRiskUser): { subject: string;
       ${freezeSection}
       
       <div style="text-align: center; margin: 32px 0;">
-        <a href="https://rusingacademy.com/learner" 
+        <a href="https://www.rusingacademy.ca/learner" 
            style="display: inline-block; background: #0F3D3E; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
           Continue Learning →
         </a>
@@ -136,7 +136,7 @@ function generateStreakReminderEmail(user: StreakAtRiskUser): { subject: string;
       
       <p style="color: #9CA3AF; font-size: 12px; text-align: center;">
         You're receiving this because you have an active streak on RusingAcademy.<br>
-        <a href="https://rusingacademy.com/settings" style="color: #6B7280;">Manage notification preferences</a>
+        <a href="https://www.rusingacademy.ca/settings" style="color: #6B7280;">Manage notification preferences</a>
       </p>
     </body>
     </html>

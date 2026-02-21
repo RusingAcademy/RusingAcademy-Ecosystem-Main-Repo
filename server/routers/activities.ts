@@ -693,7 +693,7 @@ export const activitiesRouter = router({
                           recipientName: ctx.user.name || "Learner",
                           courseName: courseForCert.title,
                           completionDate: now,
-                          verificationUrl: `https://rusingacademy.com/verify/${certificateNumber}`,
+                          verificationUrl: `https://www.rusingacademy.ca/verify/${certificateNumber}`,
                           pdfUrl,
                           metadata: {
                             language: (ctx.user as any).preferredLanguage || "en",

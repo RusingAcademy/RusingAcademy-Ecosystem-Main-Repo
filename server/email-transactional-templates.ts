@@ -75,7 +75,7 @@ export async function sendEnrollmentConfirmation(data: EnrollmentConfirmationDat
         </table>
       </div>
       <div style="text-align: center; margin-bottom: 24px;">
-        <a href="https://rusingacademy.com/courses/${courseSlug}" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+        <a href="https://www.rusingacademy.ca/courses/${courseSlug}" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
           ${isEn ? "Start Learning Now" : "Commencer à apprendre"}
         </a>
       </div>
@@ -135,7 +135,7 @@ export async function sendCourseCompletionEmail(data: CourseCompletionData): Pro
         </a>
       </div>` : ""}
       <div style="text-align: center;">
-        <a href="https://rusingacademy.com/courses" style="color: ${EMAIL_BRANDING.colors.primary}; text-decoration: none; font-size: 14px; font-weight: 500;">
+        <a href="https://www.rusingacademy.ca/courses" style="color: ${EMAIL_BRANDING.colors.primary}; text-decoration: none; font-size: 14px; font-weight: 500;">
           ${isEn ? "Explore More Courses →" : "Explorer d'autres cours →"}
         </a>
       </div>
@@ -201,7 +201,7 @@ export async function sendQuizResultsEmail(data: QuizResultsData): Promise<boole
         </table>
       </div>
       <div style="text-align: center;">
-        <a href="https://rusingacademy.com/dashboard" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+        <a href="https://www.rusingacademy.ca/dashboard" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
           ${isEn ? "Continue Learning" : "Continuer à apprendre"}
         </a>
       </div>
@@ -255,7 +255,7 @@ export async function sendStreakMilestoneEmail(data: StreakMilestoneData): Promi
         </span>
       </div>
       <div>
-        <a href="https://rusingacademy.com/dashboard" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+        <a href="https://www.rusingacademy.ca/dashboard" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
           ${isEn ? "Keep Your Streak Going" : "Maintenez votre série"}
         </a>
       </div>
@@ -478,7 +478,7 @@ export async function sendCoachAssignmentEmail(data: CoachAssignmentData): Promi
         </p>
       </div>` : ""}
       <div style="text-align: center;">
-        <a href="https://rusingacademy.com/dashboard" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+        <a href="https://www.rusingacademy.ca/dashboard" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
           ${isEn ? "View Your Dashboard" : "Voir votre tableau de bord"}
         </a>
       </div>
@@ -544,7 +544,7 @@ export async function sendHRComplianceAlertEmail(data: HRComplianceAlertData): P
         }
       </p>
       <div style="text-align: center;">
-        <a href="https://rusingacademy.com/hr/portal/compliance" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+        <a href="https://www.rusingacademy.ca/hr/portal/compliance" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 14px;">
           ${isEn ? "View Compliance Dashboard" : "Voir le tableau de conformité"}
         </a>
       </div>

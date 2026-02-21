@@ -162,7 +162,7 @@ export class MessagingService {
                 <p style="margin: 0; font-style: italic;">"${message.content.substring(0, 200)}${message.content.length > 200 ? '...' : ''}"</p>
               </div>
               <center>
-                <a href="https://rusingacademy.com/portal/messages" class="cta-button">Répondre au Message</a>
+                <a href="https://www.rusingacademy.ca/portal/messages" class="cta-button">Répondre au Message</a>
               </center>
             </div>
             <div class="footer">
@@ -189,7 +189,7 @@ export class MessagingService {
       body: message.content.substring(0, 100) + (message.content.length > 100 ? '...' : ''),
       icon: '/icons/message-notification.png',
       data: { type: 'new_message', conversationId: message.conversationId, messageId: message.id },
-      url: `https://rusingacademy.com/portal/messages?conversation=${message.conversationId}`,
+      url: `https://www.rusingacademy.ca/portal/messages?conversation=${message.conversationId}`,
     };
 
     try {

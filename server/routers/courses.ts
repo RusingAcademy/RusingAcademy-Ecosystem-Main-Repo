@@ -578,7 +578,7 @@ export const coursesRouter = router({
                   recipientName: ctx.user.name || "Learner",
                   courseName: courseForCert.title,
                   completionDate: now,
-                  verificationUrl: `https://rusingacademy.com/verify/${certNum}`,
+                  verificationUrl: `https://www.rusingacademy.ca/verify/${certNum}`,
                   pdfUrl,
                   metadata: {
                     language: (ctx.user as any).preferredLanguage || "en",
@@ -619,7 +619,7 @@ export const coursesRouter = router({
                       learnerEmail: userEmail,
                       courseName: courseForCert.title,
                       completionDate: new Date(),
-                      certificateUrl: `https://rusingacademy.com/portal/certificates`,
+                      certificateUrl: `https://www.rusingacademy.ca/portal/certificates`,
                       language: "en",
                     });
                   }
