@@ -40,12 +40,19 @@ import {
   Zap,
   TrendingUp,
   Shield,
+  ArrowUpDown,
+  LayoutGrid,
+  LayoutList,
+  SlidersHorizontal,
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+
+type SortOption = 'recommended' | 'price_low' | 'price_high' | 'rating' | 'availability' | 'sessions';
+type ViewMode = 'list' | 'compact';
 
 export default function Coaches() {
   const { language, t } = useLanguage();
@@ -55,6 +62,9 @@ export default function Coaches() {
   const [languageFilter, setLanguageFilter] = useState<string>("all");
   const [specializationFilter, setSpecializationFilter] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<string>("all");
+  const [availabilityFilter, setAvailabilityFilter] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<SortOption>("recommended");
+  const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [showFilters, setShowFilters] = useState(false);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const [hoveredCoach, setHoveredCoach] = useState<number | null>(null);
@@ -78,7 +88,7 @@ export default function Coaches() {
   // Reset display limit when filters change
   useEffect(() => {
     setDisplayLimit(10);
-  }, [searchQuery, languageFilter, specializationFilter, priceRange]);
+  }, [searchQuery, languageFilter, specializationFilter, priceRange, availabilityFilter, sortBy]);
 
   // Scroll animation observer
   useEffect(() => {
@@ -139,10 +149,18 @@ export default function Coaches() {
 
   const getLangLabel = (key: string) => languageLabels[key]?.[language] || key;
 
+  // Get availability status for coach
+  const getAvailability = (coach: { id: number; responseTimeHours?: number | null; totalSessions?: number | null }) => {
+    const responseTime = coach.responseTimeHours ?? 24;
+    if (responseTime <= 4) return { status: 'available', label: language === 'fr' ? 'Disponible' : 'Available', color: 'green', priority: 1 };
+    if (responseTime <= 12) return { status: 'tomorrow', label: language === 'fr' ? 'Demain' : 'Tomorrow', color: 'amber', priority: 2 };
+    return { status: 'this_week', label: language === 'fr' ? 'Cette semaine' : 'This Week', color: 'blue', priority: 3 };
+  };
+
   // Process coach data to extract specializations array
   const processedCoaches = useMemo(() => {
     if (!coaches) return [];
-    return coaches.map((coach) => {
+    let result = coaches.map((coach) => {
       const specs = typeof coach.specializations === 'object' && coach.specializations !== null
         ? Object.entries(coach.specializations as Record<string, boolean>)
             .filter(([_, value]) => value)
@@ -153,7 +171,42 @@ export default function Coaches() {
         specializationsArray: specs,
       };
     });
-  }, [coaches]);
+
+    // Apply availability filter
+    if (availabilityFilter !== 'all') {
+      result = result.filter((coach) => {
+        const avail = getAvailability(coach);
+        return avail.status === availabilityFilter;
+      });
+    }
+
+    // Apply sorting
+    result.sort((a, b) => {
+      switch (sortBy) {
+        case 'price_low':
+          return (a.hourlyRate || 5500) - (b.hourlyRate || 5500);
+        case 'price_high':
+          return (b.hourlyRate || 5500) - (a.hourlyRate || 5500);
+        case 'rating':
+          return (parseFloat(String(b.averageRating || 5)) - parseFloat(String(a.averageRating || 5)));
+        case 'availability': {
+          const aPriority = getAvailability(a).priority;
+          const bPriority = getAvailability(b).priority;
+          return aPriority - bPriority;
+        }
+        case 'sessions':
+          return (b.totalSessions || 0) - (a.totalSessions || 0);
+        case 'recommended':
+        default:
+          // Recommended: weight of rating + availability + sessions
+          const aScore = (parseFloat(String(a.averageRating || 5)) * 20) + ((a.totalSessions || 0) * 0.01) + (getAvailability(a).priority === 1 ? 10 : 0);
+          const bScore = (parseFloat(String(b.averageRating || 5)) * 20) + ((b.totalSessions || 0) * 0.01) + (getAvailability(b).priority === 1 ? 10 : 0);
+          return bScore - aScore;
+      }
+    });
+
+    return result;
+  }, [coaches, availabilityFilter, sortBy]);
 
   const toggleSpecialization = (spec: string) => {
     setSpecializationFilter((prev) =>
@@ -166,18 +219,30 @@ export default function Coaches() {
     setLanguageFilter("all");
     setSpecializationFilter([]);
     setPriceRange("all");
+    setAvailabilityFilter("all");
+    setSortBy("recommended");
   };
 
   const hasActiveFilters =
-    searchQuery || languageFilter !== "all" || specializationFilter.length > 0 || priceRange !== "all";
+    searchQuery || languageFilter !== "all" || specializationFilter.length > 0 || priceRange !== "all" || availabilityFilter !== "all";
 
-  // Get availability status for coach — uses real responseTimeHours data
-  // When real availability slots are populated, this will be upgraded to use coach.availableSlots
-  const getAvailability = (coach: { id: number; responseTimeHours?: number | null; totalSessions?: number | null }) => {
-    const responseTime = coach.responseTimeHours ?? 24;
-    if (responseTime <= 4) return { status: 'available', label: language === 'fr' ? 'Disponible' : 'Available', color: 'green' };
-    if (responseTime <= 12) return { status: 'tomorrow', label: language === 'fr' ? 'Demain' : 'Tomorrow', color: 'amber' };
-    return { status: 'this_week', label: language === 'fr' ? 'Cette semaine' : 'This Week', color: 'blue' };
+  // Count active filters for badge
+  const activeFilterCount = [
+    searchQuery ? 1 : 0,
+    languageFilter !== "all" ? 1 : 0,
+    specializationFilter.length,
+    priceRange !== "all" ? 1 : 0,
+    availabilityFilter !== "all" ? 1 : 0,
+  ].reduce((a, b) => a + b, 0);
+
+  // Sort option labels
+  const sortLabels: Record<SortOption, { en: string; fr: string }> = {
+    recommended: { en: "Recommended", fr: "Recommandés" },
+    price_low: { en: "Price: Low to High", fr: "Prix: croissant" },
+    price_high: { en: "Price: High to Low", fr: "Prix: décroissant" },
+    rating: { en: "Highest Rated", fr: "Mieux notés" },
+    availability: { en: "Soonest Available", fr: "Disponibilité" },
+    sessions: { en: "Most Experienced", fr: "Plus expérimentés" },
   };
 
   return (
@@ -203,7 +268,16 @@ export default function Coaches() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white/60"
                     />
-                    <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg" onClick={() => toast.info("{language === 'fr' ? 'Rechercher' : 'Sea")}>
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="p-2 mr-1 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
+                        aria-label={language === 'fr' ? 'Effacer la recherche' : 'Clear search'}
+                      >
+                        <X className="w-4 h-4 text-slate-400" />
+                      </button>
+                    )}
+                    <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
                       {language === 'fr' ? 'Rechercher' : 'Search'}
                     </Button>
                   </div>
@@ -211,6 +285,7 @@ export default function Coaches() {
               </div>
             </div>
            </section>
+
         {/* Main Content */}
           <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
             <div className="flex flex-col lg:flex-row gap-8">
@@ -224,9 +299,15 @@ export default function Coaches() {
                       <h2 className="font-semibold text-lg flex items-center gap-2">
                         <Filter className="w-5 h-5 text-teal-600" />
                         {language === 'fr' ? 'Filtres' : 'Filters'}
+                        {activeFilterCount > 0 && (
+                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-teal-600 text-white text-xs font-bold">
+                            {activeFilterCount}
+                          </span>
+                        )}
                       </h2>
                       {hasActiveFilters && (
                         <Button variant="ghost" size="sm" onClick={clearFilters} className="text-teal-600 hover:text-teal-700 hover:bg-teal-50">
+                          <X className="w-3 h-3 mr-1" />
                           {language === 'fr' ? 'Effacer' : 'Clear'}
                         </Button>
                       )}
@@ -234,13 +315,47 @@ export default function Coaches() {
                   </div>
 
                   <div className="p-6 space-y-6">
+                    {/* Availability Filter — NEW */}
+                    <div>
+                      <Label className="text-sm font-medium text-black dark:text-foreground/90 mb-3 flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-teal-600" />
+                        {language === 'fr' ? 'Disponibilité' : 'Availability'}
+                      </Label>
+                      <div className="grid grid-cols-2 gap-2 mt-2">
+                        {[
+                          { value: 'all', en: 'All', fr: 'Tous' },
+                          { value: 'available', en: 'Now', fr: 'Maintenant' },
+                          { value: 'tomorrow', en: 'Tomorrow', fr: 'Demain' },
+                          { value: 'this_week', en: 'This Week', fr: 'Cette semaine' },
+                        ].map((opt) => (
+                          <button
+                            key={opt.value}
+                            onClick={() => setAvailabilityFilter(opt.value)}
+                            aria-pressed={availabilityFilter === opt.value}
+                            className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
+                              availabilityFilter === opt.value
+                                ? opt.value === 'available' 
+                                  ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
+                                  : 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg shadow-teal-500/25'
+                                : 'bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md text-black dark:text-foreground dark:text-cyan-300 hover:bg-slate-200 dark:hover:bg-foundation-2'
+                            }`}
+                          >
+                            {opt.value === 'available' && availabilityFilter === opt.value && (
+                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse mr-1" />
+                            )}
+                            {language === 'fr' ? opt.fr : opt.en}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
                     {/* Language Filter */}
                     <div>
                       <Label className="text-sm font-medium text-black dark:text-foreground/90 mb-3 flex items-center gap-2">
                         <Globe className="w-4 h-4 text-teal-600" />
                         {language === 'fr' ? 'Langue' : 'Language'}
                       </Label>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                      <div className="grid grid-cols-3 gap-2 mt-2">
                         {['all', 'french', 'english'].map((lang) => (
                           <button
                             key={lang}
@@ -335,41 +450,147 @@ export default function Coaches() {
             {/* Coach List */}
             <div className="flex-1">
               {/* Mobile Filter Toggle */}
-              <div className="lg:hidden mb-6">
+              <div className="lg:hidden mb-4">
                 <Button
                   variant="outline"
                   onClick={() => setShowFilters(!showFilters)}
                   className="w-full justify-between bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md border-slate-200 dark:border-teal-800"
                 >
                   <span className="flex items-center gap-2">
-                    <Filter className="h-4 w-4" />
+                    <SlidersHorizontal className="h-4 w-4" />
                     {language === 'fr' ? 'Filtres' : 'Filters'}
-                    {hasActiveFilters && (
-                      <Badge className="ml-2 bg-teal-100 text-teal-700">
-                        {language === "fr" ? "Actif" : "Active"}
-                      </Badge>
+                    {activeFilterCount > 0 && (
+                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-teal-600 text-white text-xs font-bold">
+                        {activeFilterCount}
+                      </span>
                     )}
                   </span>
                   {showFilters ? <X className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                 </Button>
               </div>
 
-              {/* Results Count */}
-              <div className="flex items-center justify-between mb-6">
-                <p className="text-black dark:text-foreground">
+              {/* Results Toolbar — Sort + View Toggle + Count */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-slate-200/50 dark:border-white/15 p-3 shadow-sm" style={{ background: 'rgba(255, 255, 255, 0.10)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+                {/* Left: Results Count */}
+                <div className="flex items-center gap-3">
                   {isLoading ? (
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center gap-2 text-sm">
                       <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
                       {language === "fr" ? "Chargement..." : "Loading..."}
                     </span>
                   ) : (
-                    <span>
-                      <span className="font-semibold text-teal-600">{processedCoaches.length}</span>
-                      {' '}{language === 'fr' ? 'coachs trouvés' : 'coaches found'}
+                    <span className="text-sm font-medium text-black dark:text-foreground">
+                      <span className="text-lg font-bold text-teal-600">{processedCoaches.length}</span>
+                      {' '}{language === 'fr' ? 'coachs' : 'coaches'}
                     </span>
                   )}
-                </p>
+                </div>
+
+                {/* Right: Sort + View Toggle */}
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  {/* Sort Dropdown */}
+                  <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+                    <SelectTrigger className="w-full sm:w-48 bg-white dark:bg-white/[0.08] border-slate-200 dark:border-teal-800 text-sm h-9" style={{color: 'var(--color-black, var(--text))'}}>
+                      <div className="flex items-center gap-1.5">
+                        <ArrowUpDown className="w-3.5 h-3.5 text-teal-600 flex-shrink-0" />
+                        <SelectValue />
+                      </div>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {(Object.keys(sortLabels) as SortOption[]).map((key) => (
+                        <SelectItem key={key} value={key}>
+                          {language === 'fr' ? sortLabels[key].fr : sortLabels[key].en}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  {/* View Mode Toggle */}
+                  <div className="hidden sm:flex items-center border border-slate-200 dark:border-teal-800 rounded-lg overflow-hidden">
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className={`p-2 transition-colors ${viewMode === 'list' ? 'bg-teal-600 text-white' : 'bg-white dark:bg-white/[0.08] text-slate-500 hover:text-teal-600'}`}
+                      aria-label={language === 'fr' ? 'Vue liste' : 'List view'}
+                      title={language === 'fr' ? 'Vue liste' : 'List view'}
+                    >
+                      <LayoutList className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => setViewMode('compact')}
+                      className={`p-2 transition-colors ${viewMode === 'compact' ? 'bg-teal-600 text-white' : 'bg-white dark:bg-white/[0.08] text-slate-500 hover:text-teal-600'}`}
+                      aria-label={language === 'fr' ? 'Vue compacte' : 'Compact view'}
+                      title={language === 'fr' ? 'Vue compacte' : 'Compact view'}
+                    >
+                      <LayoutGrid className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
               </div>
+
+              {/* Active Filter Chips */}
+              {hasActiveFilters && (
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 mr-1">
+                    {language === 'fr' ? 'Filtres actifs:' : 'Active filters:'}
+                  </span>
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium hover:bg-teal-200 dark:hover:bg-teal-900/50 transition-colors"
+                    >
+                      <Search className="w-3 h-3" />
+                      "{searchQuery}"
+                      <X className="w-3 h-3 ml-0.5" />
+                    </button>
+                  )}
+                  {languageFilter !== "all" && (
+                    <button
+                      onClick={() => setLanguageFilter("all")}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium hover:bg-teal-200 dark:hover:bg-teal-900/50 transition-colors"
+                    >
+                      <Globe className="w-3 h-3" />
+                      {getLangLabel(languageFilter)}
+                      <X className="w-3 h-3 ml-0.5" />
+                    </button>
+                  )}
+                  {availabilityFilter !== "all" && (
+                    <button
+                      onClick={() => setAvailabilityFilter("all")}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
+                    >
+                      <Calendar className="w-3 h-3" />
+                      {availabilityFilter === 'available' ? (language === 'fr' ? 'Disponible' : 'Available') : availabilityFilter === 'tomorrow' ? (language === 'fr' ? 'Demain' : 'Tomorrow') : (language === 'fr' ? 'Cette semaine' : 'This Week')}
+                      <X className="w-3 h-3 ml-0.5" />
+                    </button>
+                  )}
+                  {specializationFilter.map((spec) => (
+                    <button
+                      key={spec}
+                      onClick={() => toggleSpecialization(spec)}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium hover:bg-teal-200 dark:hover:bg-teal-900/50 transition-colors"
+                    >
+                      {getSpecLabel(spec)}
+                      <X className="w-3 h-3 ml-0.5" />
+                    </button>
+                  ))}
+                  {priceRange !== "all" && (
+                    <button
+                      onClick={() => setPriceRange("all")}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium hover:bg-teal-200 dark:hover:bg-teal-900/50 transition-colors"
+                    >
+                      <Zap className="w-3 h-3" />
+                      {priceRange === 'under40' ? '<$40' : priceRange === '40to60' ? '$40-$60' : '>$60'}
+                      <X className="w-3 h-3 ml-0.5" />
+                    </button>
+                  )}
+                  <button
+                    onClick={clearFilters}
+                    className="text-xs text-slate-500 hover:text-red-500 underline transition-colors ml-1"
+                  >
+                    {language === 'fr' ? 'Tout effacer' : 'Clear all'}
+                  </button>
+                </div>
+              )}
 
               {/* Error State */}
               {error && !isLoading && (
@@ -408,15 +629,16 @@ export default function Coaches() {
                 </div>
               )}
 
-              {/* Coach Cards - Premium Grid */}
-              {!isLoading && (
+              {/* Coach Cards — LIST VIEW */}
+              {!isLoading && viewMode === 'list' && (
                 <div className="grid gap-4" role="list">
                   {processedCoaches.slice(0, displayLimit).map((coach, index) => {
                     const availability = getAvailability(coach);
                     const isHovered = hoveredCoach === coach.id;
                     
                     return (
-                      <div                        key={coach.id}
+                      <div
+                        key={coach.id}
                         ref={(el) => { if (el) cardRefs.current.set(coach.id, el); }}
                         data-coach-id={coach.id}
                         onMouseEnter={() => setHoveredCoach(coach.id)}
@@ -434,8 +656,8 @@ export default function Coaches() {
 
                         <div className="relative flex flex-col lg:flex-row">
                           {/* Coach Photo Section */}
-                          <div className="lg:w-64 relative overflow-hidden">
-                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full min-h-[200px] lg:min-h-[240px] relative bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
+                          <div className="lg:w-56 relative overflow-hidden">
+                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full min-h-[180px] lg:min-h-[220px] relative bg-slate-100 dark:bg-white/[0.08] dark:backdrop-blur-md">
                               {/* Photo */}
                               {imgErrors.has(coach.id) ? (
                                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-100 to-emerald-100 dark:from-teal-900/30 dark:to-emerald-900/30">
@@ -449,19 +671,19 @@ export default function Coaches() {
                                   loading={index < 3 ? "eager" : "lazy"}
                                   src={coach.photoUrl || coach.avatarUrl || 'https://rusingacademy-cdn.b-cdn.net/images/coaches/coach1.jpg'}
                                   alt={coach.name || 'Coach'}
-                                  width={288}
-                                  height={280}
+                                  width={256}
+                                  height={220}
                                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                   onError={() => setImgErrors(prev => new Set(prev).add(coach.id))}
                                 />
                               )}
                               
-                              {/* Gradient Overlay — reduced opacity to keep photos visible */}
+                              {/* Gradient Overlay */}
                               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-teal-950/20" />
                               
                               {/* Availability Badge */}
-                              <div className="absolute top-4 left-4">
-                                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md ${
+                              <div className="absolute top-3 left-3">
+                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold backdrop-blur-md ${
                                   availability.color === 'green' 
                                     ? 'bg-green-500/90 text-white' 
                                     : availability.color === 'amber'
@@ -477,17 +699,17 @@ export default function Coaches() {
                               </div>
 
                               {/* Rating Badge */}
-                              <div className="absolute top-4 right-4">
-                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-white/[0.08] dark:backdrop-blur-md backdrop-blur-md" style={{color: 'var(--color-black, var(--text))'}}>
+                              <div className="absolute top-3 right-3">
+                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold bg-white/90 dark:bg-white/[0.08] dark:backdrop-blur-md backdrop-blur-md" style={{color: 'var(--color-black, var(--text))'}}>
                                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                                   {coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : '5.0'}
                                 </span>
                               </div>
 
                               {/* Coach Name on Mobile */}
-                              <div className="absolute bottom-4 left-4 right-4 lg:hidden">
-                                <h3 className="text-xl font-bold text-white mb-1">{coach.name}</h3>
-                                <p className="text-white/90 text-sm line-clamp-1">{language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}</p>
+                              <div className="absolute bottom-3 left-3 right-3 lg:hidden">
+                                <h3 className="text-lg font-bold text-white mb-0.5">{coach.name}</h3>
+                                <p className="text-white/90 text-xs line-clamp-1">{language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}</p>
                               </div>
                             </div>
                           </div>
@@ -495,144 +717,234 @@ export default function Coaches() {
                           {/* Coach Info Section */}
                           <div className="flex-1 p-4 lg:p-5">
                             {/* Name & Headline - Desktop */}
-                            <div className="hidden lg:block mb-3">
-                              <h3 className="text-2xl font-bold text-black dark:text-foreground mb-2 group-hover:text-teal-600 transition-colors">
+                            <div className="hidden lg:block mb-2">
+                              <h3 className="text-xl font-bold text-black dark:text-foreground mb-1 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
-                              <p className="font-medium coach-headline-dark">
+                              <p className="text-sm font-medium coach-headline-dark line-clamp-2">
                                 {language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}
                               </p>
                             </div>
 
-                            {/* Stats Row */}
-                            <div className="flex flex-wrap items-center gap-4 mb-3">
-                              <div className="flex items-center gap-1.5 text-sm">
-                                <Users className="w-4 h-4 text-teal-600" />
-                                <span className="font-medium text-black dark:text-foreground">{coach.totalSessions || 324}</span>
-                                <span className="text-black dark:text-foreground/90">{language === 'fr' ? 'sessions' : 'sessions'}</span>
+                            {/* Stats Row — Compact */}
+                            <div className="flex flex-wrap items-center gap-3 mb-2 text-xs">
+                              <div className="flex items-center gap-1">
+                                <Users className="w-3.5 h-3.5 text-teal-600" />
+                                <span className="font-semibold text-black dark:text-foreground">{coach.totalSessions || 324}</span>
+                                <span className="text-slate-500 dark:text-foreground/70">{language === 'fr' ? 'sessions' : 'sessions'}</span>
                               </div>
-                              <div className="flex items-center gap-1.5 text-sm">
-                                <Clock className="w-4 h-4 text-teal-600" />
-                                <span className="text-black dark:text-foreground/90">{language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h</span></div>
+                              <span className="text-slate-300 dark:text-slate-600">|</span>
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-3.5 h-3.5 text-teal-600" />
+                                <span className="text-slate-500 dark:text-foreground/70">{language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h</span>
+                              </div>
                               {coach.successRate && coach.successRate > 0 && (
-                                <div className="flex items-center gap-1.5 text-sm">
-                                  <TrendingUp className="w-4 h-4 text-emerald-600" />
-                                  <span className="font-medium text-emerald-600">{coach.successRate}%</span>
-                                  <span className="text-black dark:text-foreground/90">{language === 'fr' ? 'réussite' : 'success'}</span>
-                                </div>
+                                <>
+                                  <span className="text-slate-300 dark:text-slate-600">|</span>
+                                  <div className="flex items-center gap-1">
+                                    <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
+                                    <span className="font-semibold text-emerald-600">{coach.successRate}%</span>
+                                    <span className="text-slate-500 dark:text-foreground/70">{language === 'fr' ? 'réussite' : 'success'}</span>
+                                  </div>
+                                </>
                               )}
                             </div>
 
-                            {/* Specializations */}
-                            <div className="flex flex-wrap gap-2 mb-3">
-                              <Badge className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white border-0 px-3 py-1">
+                            {/* Specializations — Streamlined */}
+                            <div className="flex flex-wrap gap-1.5 mb-2">
+                              <Badge className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white border-0 px-2 py-0.5 text-xs">
                                 {getLangLabel(coach.languages || "french")}
                               </Badge>
-                              {coach.specializationsArray.slice(0, 4).map((spec) => (
+                              {coach.specializationsArray.slice(0, 3).map((spec) => (
                                 <Badge 
                                   key={spec} 
                                   variant="outline" 
-                                  className="border-teal-300 dark:border-teal-700 text-black dark:text-foreground bg-teal-100 dark:bg-teal-800 px-3 py-1 font-medium"
+                                  className="border-teal-300 dark:border-teal-700 text-black dark:text-foreground bg-teal-50 dark:bg-teal-800 px-2 py-0.5 text-xs font-medium"
                                 >
                                   {getSpecLabel(spec)}
                                 </Badge>
                               ))}
-                              {coach.specializationsArray.length > 4 && (
-                                <Badge variant="outline" className="border-slate-200 dark:border-teal-800 text-black dark:text-foreground px-3 py-1">
-                                  +{coach.specializationsArray.length - 4}
+                              {coach.specializationsArray.length > 3 && (
+                                <Badge variant="outline" className="border-slate-200 dark:border-teal-800 text-slate-500 dark:text-foreground px-2 py-0.5 text-xs">
+                                  +{coach.specializationsArray.length - 3}
                                 </Badge>
                               )}
                             </div>
 
-                            {/* Verified Badge */}
-                            <div className="flex items-center gap-2 mb-3">
-                              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
-                                <CheckCircle className="w-3.5 h-3.5" />
+                            {/* Verified Badges — Inline compact */}
+                            <div className="flex items-center gap-1.5">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-[10px] font-medium">
+                                <CheckCircle className="w-3 h-3" />
                                 {language === 'fr' ? 'Certifié SLE' : 'SLE Certified'}
-                              </div>
-                              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-xs font-medium">
-                                <Video className="w-3.5 h-3.5" />
-                                {language === 'fr' ? 'Sessions vidéo' : 'Video Sessions'}
-                              </div>
+                              </span>
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-[10px] font-medium">
+                                <Video className="w-3 h-3" />
+                                {language === 'fr' ? 'Vidéo' : 'Video'}
+                              </span>
                             </div>
                           </div>
 
                           {/* Pricing & Actions Section */}
-                          <div className="lg:w-64 p-4 lg:p-5 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-teal-900/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-white/15 flex flex-col justify-between">
+                          <div className="lg:w-56 p-4 lg:p-4 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-teal-900/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-white/15 flex flex-col justify-between">
                             <div>
                               {/* Price */}
-                              <div className="text-center lg:text-left mb-4">
+                              <div className="text-center lg:text-left mb-3">
                                 <div className="flex items-baseline justify-center lg:justify-start gap-1">
-                                  <span className="text-lg md:text-2xl lg:text-3xl font-bold text-black dark:text-foreground">
+                                  <span className="text-lg md:text-2xl lg:text-2xl font-bold text-black dark:text-foreground">
                                     ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                                   </span>
-                                  <span className="text-black dark:text-foreground/90 text-sm font-medium">/{language === 'fr' ? 'heure' : 'hour'}</span></div>
-                                <p className="text-sm text-black dark:text-foreground/90 mt-1">
-                                  {language === 'fr' ? 'Session d\'essai' : 'Trial session'}: 
-                                  <span className="font-medium text-teal-600 ml-1">
+                                  <span className="text-black dark:text-foreground/90 text-xs font-medium">/{language === 'fr' ? 'heure' : 'hour'}</span></div>
+                                <p className="text-xs text-slate-500 dark:text-foreground/70 mt-0.5">
+                                  {language === 'fr' ? 'Essai' : 'Trial'}: 
+                                  <span className="font-semibold text-teal-600 ml-1">
                                     ${((coach.trialRate || 2500) / 100).toFixed(0)}
                                   </span>
                                 </p>
                               </div>
                             </div>
 
-                            {/* Action Buttons */}
-                            <div className="space-y-3">
+                            {/* Action Buttons — Streamlined */}
+                            <div className="space-y-2">
                               <Link href={`/coaches/${coach.slug}`}>
-                                <Button className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 transition-all duration-300">
+                                <Button className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 transition-all duration-300 h-9 text-sm">
                                   {language === 'fr' ? 'Voir le profil' : 'View Profile'}
                                   <ChevronRight className="w-4 h-4 ml-1" />
                                 </Button>
                               </Link>
                               <Link href={`/coaches/${coach.slug}?book=trial`}>
-                                <Button variant="outline" className="w-full border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20">
-                                  <Calendar className="w-4 h-4 mr-2" />
-                                  {language === 'fr' ? 'Réserver un essai' : 'Book Trial Session'}
+                                <Button variant="outline" className="w-full border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 h-9 text-sm">
+                                  <Calendar className="w-3.5 h-3.5 mr-1.5" />
+                                  {language === 'fr' ? 'Réserver un essai' : 'Book Trial'}
                                 </Button>
                               </Link>
-                              {(coach as any)?.linkedinUrl && (
-                                <a href={(coach as any)?.linkedinUrl} target="_blank" rel="noopener noreferrer">
-                                  <Button 
-                                    variant="outline" 
-                                    className="w-full border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                                  >
-                                    <Linkedin className="w-4 h-4 mr-2" />
-                                    LinkedIn
-                                  </Button>
-                                </a>
-                              )}
-                              <Button 
-                                variant="outline" 
-                                className="w-full border-teal-200 dark:border-teal-800 hover:bg-teal-50 dark:hover:bg-teal-900/20 btn-message-teal"
-                                onClick={async (e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  if (!isAuthenticated) {
-                                    // Save return URL so user comes back after login
-                                    sessionStorage.setItem('messageCoachAfterLogin', String(coach.userId));
-                                    window.location.href = getLoginUrl();
-                                    return;
-                                  }
-                                  try {
-                                    const conv = await startConversationMutation.mutateAsync({ participantId: coach.userId });
-                                    navigate(`/messages?conversation=${conv.id}`);
-                                  } catch (err: any) {
-                                    toast.error(language === 'fr' ? 'Erreur lors de la création de la conversation' : 'Failed to start conversation');
-                                  }
-                                }}
-                                disabled={startConversationMutation.isPending}
-                              >
-                                {startConversationMutation.isPending ? (
-                                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                ) : (
-                                  <MessageSquare className="w-4 h-4 mr-2" />
+                              <div className="flex gap-2">
+                                {(coach as any)?.linkedinUrl && (
+                                  <a href={(coach as any)?.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+                                    <Button 
+                                      variant="outline" 
+                                      className="w-full border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 h-8 text-xs"
+                                    >
+                                      <Linkedin className="w-3.5 h-3.5" />
+                                    </Button>
+                                  </a>
                                 )}
-                                {language === 'fr' ? 'Message' : 'Message'}
-                              </Button>
+                                <Button 
+                                  variant="outline" 
+                                  className={`${(coach as any)?.linkedinUrl ? 'flex-1' : 'w-full'} border-teal-200 dark:border-teal-800 hover:bg-teal-50 dark:hover:bg-teal-900/20 btn-message-teal h-8 text-xs`}
+                                  onClick={async (e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (!isAuthenticated) {
+                                      sessionStorage.setItem('messageCoachAfterLogin', String(coach.userId));
+                                      window.location.href = getLoginUrl();
+                                      return;
+                                    }
+                                    try {
+                                      const conv = await startConversationMutation.mutateAsync({ participantId: coach.userId });
+                                      navigate(`/messages?conversation=${conv.conversationId}`);
+                                    } catch (err: any) {
+                                      toast.error(language === 'fr' ? 'Erreur lors de la création de la conversation' : 'Failed to start conversation');
+                                    }
+                                  }}
+                                  disabled={startConversationMutation.isPending}
+                                >
+                                  {startConversationMutation.isPending ? (
+                                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                  ) : (
+                                    <MessageSquare className="w-3.5 h-3.5 mr-1" />
+                                  )}
+                                  {language === 'fr' ? 'Message' : 'Message'}
+                                </Button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Coach Cards — COMPACT / GRID VIEW */}
+              {!isLoading && viewMode === 'compact' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" role="list">
+                  {processedCoaches.slice(0, displayLimit).map((coach, index) => {
+                    const availability = getAvailability(coach);
+                    
+                    return (
+                      <Link key={coach.id} href={`/coaches/${coach.slug}`}>
+                        <div
+                          ref={(el) => { if (el) cardRefs.current.set(coach.id, el); }}
+                          data-coach-id={coach.id}
+                          className={`group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 rounded-xl shadow-md hover:shadow-xl border border-slate-200/50 dark:border-white/15 overflow-hidden transition-all duration-400 cursor-pointer ${
+                            visibleCards.has(coach.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                          }`}
+                          style={{ transitionDelay: `${index * 80}ms` }}
+                          role="listitem"
+                        >
+                          {/* Compact Card Layout */}
+                          <div className="flex items-center p-3 gap-3">
+                            {/* Avatar */}
+                            <div className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100">
+                              {imgErrors.has(coach.id) ? (
+                                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-100 to-emerald-100">
+                                  <Users className="w-6 h-6 text-teal-400" />
+                                </div>
+                              ) : (
+                                <img
+                                  loading="lazy"
+                                  src={coach.photoUrl || coach.avatarUrl || 'https://rusingacademy-cdn.b-cdn.net/images/coaches/coach1.jpg'}
+                                  alt={coach.name || 'Coach'}
+                                  className="w-full h-full object-cover"
+                                  onError={() => setImgErrors(prev => new Set(prev).add(coach.id))}
+                                />
+                              )}
+                              {/* Availability dot */}
+                              <div className={`absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full border-2 border-white ${
+                                availability.color === 'green' ? 'bg-green-500' : availability.color === 'amber' ? 'bg-amber-500' : 'bg-blue-500'
+                              }`} />
+                            </div>
+
+                            {/* Info */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-0.5">
+                                <h3 className="font-semibold text-sm text-black dark:text-foreground truncate group-hover:text-teal-600 transition-colors">
+                                  {coach.name}
+                                </h3>
+                                <span className="inline-flex items-center gap-0.5 text-xs font-medium text-amber-600">
+                                  <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                                  {coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : '5.0'}
+                                </span>
+                              </div>
+                              <p className="text-xs text-slate-500 dark:text-foreground/70 line-clamp-1 mb-1">
+                                {language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}
+                              </p>
+                              <div className="flex items-center gap-2">
+                                <Badge className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white border-0 px-1.5 py-0 text-[10px] h-4">
+                                  {getLangLabel(coach.languages || "french")}
+                                </Badge>
+                                {coach.specializationsArray.slice(0, 2).map((spec) => (
+                                  <Badge 
+                                    key={spec} 
+                                    variant="outline" 
+                                    className="border-teal-200 text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-800 px-1.5 py-0 text-[10px] h-4"
+                                  >
+                                    {getSpecLabel(spec)}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Price */}
+                            <div className="text-right flex-shrink-0">
+                              <div className="text-lg font-bold text-black dark:text-foreground">
+                                ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
+                              </div>
+                              <div className="text-[10px] text-slate-400">/{language === 'fr' ? 'hr' : 'hr'}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
                     );
                   })}
                 </div>
