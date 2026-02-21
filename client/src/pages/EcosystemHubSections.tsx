@@ -300,7 +300,7 @@ function TrilemmeSection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8 mb-8 md:mb-12 lg:mb-16"
+          className="grid md:grid-cols-3 gap-8 stagger-enter mb-8 md:mb-12 lg:mb-16"
         >
           {obstacles.map((obstacle, index) => (
             <motion.div
@@ -1090,8 +1090,8 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
       <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-white via-[#C9A84C]/[0.03] to-white relative overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#C9A84C]/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C9A84C]/8 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#C9A84C]/5 rounded-full blur-3xl animate-float-gentle" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C9A84C]/8 rounded-full blur-3xl animate-float-slow" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-slate-100/50 to-transparent rounded-full" />
         </div>
 
