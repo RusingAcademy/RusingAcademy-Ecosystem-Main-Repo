@@ -273,6 +273,7 @@ function TrilemmeSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
             {language === "en"
               ? "Every day without your Level C is a day of missed opportunities. Thousands of talented public servants face this challenge, trapped by three barriers that traditional training cannot break."
@@ -422,6 +423,7 @@ function EcosystemSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
             {language === "en"
               ? "This is why we built something different. After years of watching talented professionals struggle with outdated methods, we created an integrated ecosystem that attacks the problem from every angle. Not just courses. Not just coaching. Not just technology. But all three, working together in perfect harmony. Each pillar was designed to solve a specific part of the puzzle: structured learning to build your foundation, expert coaching to break through your personal barriers, and cutting-edge media to accelerate your progress. This is the solution you've been waiting for."
@@ -537,6 +539,7 @@ function MethodologySection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Our 3-Step Method" : "Notre méthode en 3 étapes"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Simple. Targeted. Results-oriented. Our proven methodology has helped hundreds of public servants achieve their language goals—each step builds on the previous one to create a clear path to success."
@@ -656,6 +659,7 @@ function OffersSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "The RusingAcademy Solution" : "La solution RusingAcademy"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Our solutions are designed specifically for Canadian public servants. Whether you need structured courses, personalized coaching, or innovative learning tools, we have the right solution for you."
@@ -782,6 +786,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display mb-4" style={{color: '#082038'}}>
             {language === "en" ? "Who benefits most from this program?" : "Qui bénéficie le plus de ce programme ?"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
@@ -900,6 +905,7 @@ function TestimonialsSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Trusted by public servants" : "La confiance des fonctionnaires"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Don't just take our word for it. Hear from public servants who have transformed their careers through our programs—real results from real professionals."
@@ -1114,6 +1120,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                 {language === "en" ? "What His Colleagues Say" : "Ce que disent ses collègues"}
               </span>
             </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
             
             <p className="text-lg md:text-xl text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
               {language === "en"
@@ -1348,6 +1355,7 @@ function ValueSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy ?"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "What sets us apart from traditional language schools? Our exclusive focus on the Canadian public service, combined with a proven methodology and personalized approach."
@@ -1457,6 +1465,7 @@ function TeamSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Meet our experts" : "Rencontrez nos experts"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "A team of passionate experts dedicated to your success in the Canadian public service. Our team brings together experts from education, public service, and technology—each member contributes unique expertise to ensure your success."
@@ -1770,6 +1779,7 @@ function ProofGallerySection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-white mb-4" style={{color: '#fcfcfc'}}>
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-white/90 max-w-3xl mx-auto" style={{color: '#f9fafa'}}>
             {language === "en"
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
@@ -2089,6 +2099,7 @@ function FAQSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold font-display text-black dark:text-foreground mb-4">
             {language === "en" ? "Frequently Asked Questions" : "Questions fréquemment posées"}
           </h2>
+          <div className="w-16 h-1 bg-[#C9A84C] mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-lg text-black dark:text-foreground max-w-3xl mx-auto">
             {language === "en"
               ? "Have questions? We've compiled answers to the most common questions from public servants considering our programs."
