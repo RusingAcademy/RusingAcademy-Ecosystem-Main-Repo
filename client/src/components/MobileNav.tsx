@@ -129,7 +129,7 @@ export default function MobileNav({ isOpen, onClose, activePage, onPageChange }:
             >
               <div className="flex items-center gap-2.5">
                 <div className="avatar-ring">
-                  <img src={RA_LOGO} alt="RusingAcademy" className="w-8 h-8 rounded-lg object-contain" />
+                  <img loading="lazy" src={RA_LOGO} alt="RusingAcademy" className="w-8 h-8 rounded-lg object-contain" />
                 </div>
                 <div className="leading-tight">
                   <span className="text-sm font-extrabold" >Rusing</span>

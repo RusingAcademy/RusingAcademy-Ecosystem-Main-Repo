@@ -151,7 +151,7 @@ export default function Referrals() {
                   <div key={ref.referral.id} className="flex items-center justify-between p-3 rounded-xl bg-muted/50">
                     <div className="flex items-center gap-3">
                       {ref.referredUser?.avatarUrl ? (
-                        <img src={ref.referredUser.avatarUrl} alt="" className="w-9 h-9 rounded-full" />
+                        <img loading="lazy" src={ref.referredUser.avatarUrl} alt="" className="w-9 h-9 rounded-full" />
                       ) : (
                         <div className="w-9 h-9 rounded-full bg-indigo-900/10 flex items-center justify-center text-sm font-bold" >
                           {(ref.referredUser?.name ?? "?")[0]}

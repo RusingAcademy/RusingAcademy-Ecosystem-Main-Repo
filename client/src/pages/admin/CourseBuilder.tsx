@@ -458,9 +458,9 @@ function TreeModuleRow({
           {expanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
         </button>
         {mod.badgeImageUrl ? (
-          <img src={mod.badgeImageUrl} alt="" className="w-8 h-8 rounded-lg object-cover border shadow-sm" />
+          <img loading="lazy" src={mod.badgeImageUrl} alt="" className="w-8 h-8 rounded-lg object-cover border shadow-sm" />
         ) : mod.thumbnailUrl ? (
-          <img src={mod.thumbnailUrl} alt="" className="w-8 h-8 rounded-lg object-cover border shadow-sm" />
+          <img loading="lazy" src={mod.thumbnailUrl} alt="" className="w-8 h-8 rounded-lg object-cover border shadow-sm" />
         ) : (
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-foundation to-foundation-2 flex items-center justify-center shadow-sm">
             <Layers className="h-4 w-4 text-white" />
@@ -1598,7 +1598,7 @@ export default function CourseBuilder() {
               <ArrowLeft className="h-5 w-5" />
             </Button>
             {course.thumbnailUrl && (
-              <img src={course.thumbnailUrl} alt="" className="w-16 h-16 rounded-xl object-cover border shadow-md shrink-0" />
+              <img loading="lazy" src={course.thumbnailUrl} alt="" className="w-16 h-16 rounded-xl object-cover border shadow-md shrink-0" />
             )}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
@@ -1991,7 +1991,7 @@ export default function CourseBuilder() {
             >
               {course.thumbnailUrl ? (
                 <div className="aspect-video w-full bg-muted overflow-hidden relative">
-                  <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img loading="lazy" src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute bottom-2 left-2 flex items-center gap-1.5">
                     <Badge variant={course.status === "published" ? "default" : "secondary"} className={`text-[10px] ${course.status === "published" ? "bg-emerald-500/90 text-white" : course.status === "review" ? "bg-blue-500/90 text-white" : ""}`}>

@@ -1963,7 +1963,7 @@ export default function AdminDashboard() {
                           <TableCell>
                             <div className="flex items-center gap-3">
                               {course.thumbnailUrl ? (
-                                <img src={course.thumbnailUrl} alt={course.title} className="w-16 h-10 object-cover rounded" />
+                                <img loading="lazy" src={course.thumbnailUrl} alt={course.title} className="w-16 h-10 object-cover rounded" />
                               ) : (
                                 <div className="w-16 h-10 bg-muted rounded flex items-center justify-center">
                                   <BookOpen className="h-5 w-5 text-muted-foreground" />

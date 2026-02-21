@@ -385,7 +385,7 @@ export default function CourseSettingsEditor({ courseId, onBack }: CourseSetting
               <Input value={thumbnailUrl} onChange={(e) => { setThumbnailUrl(e.target.value); markDirty(); }} placeholder="https://..." />
               {thumbnailUrl && (
                 <div className="relative aspect-video w-full max-w-sm rounded-lg overflow-hidden border bg-muted">
-                  <img src={thumbnailUrl} alt="Course thumbnail" className="w-full h-full object-cover" onError={(e) => (e.currentTarget.style.display = "none")} />
+                  <img loading="lazy" src={thumbnailUrl} alt="Course thumbnail" className="w-full h-full object-cover" onError={(e) => (e.currentTarget.style.display = "none")} />
                 </div>
               )}
             </CardContent>

@@ -223,7 +223,7 @@ export default function CategoryThreads() {
                       {/* Author avatar */}
                       <div className="hidden sm:block">
                         {thread.authorAvatar ? (
-                          <img src={thread.authorAvatar} alt="" className="w-10 h-10 rounded-full" />
+                          <img loading="lazy" src={thread.authorAvatar} alt="" className="w-10 h-10 rounded-full" />
                         ) : (
                           <div
                             className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"

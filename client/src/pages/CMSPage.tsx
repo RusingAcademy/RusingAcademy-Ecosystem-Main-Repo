@@ -111,7 +111,7 @@ function SectionRenderer({ section }: { section: any }) {
           <div className="container max-w-6xl mx-auto px-6 text-center">
             {content.backgroundImage && (
               <div className="absolute inset-0 z-0">
-                <img src={content.backgroundImage} alt="" className="w-full h-full object-cover opacity-30" />
+                <img loading="lazy" src={content.backgroundImage} alt="" className="w-full h-full object-cover opacity-30" />
               </div>
             )}
             <div className="relative z-10">
@@ -179,7 +179,7 @@ function SectionRenderer({ section }: { section: any }) {
                 <div key={i} className="p-6 rounded-xl border bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/5">
                   <p className="italic mb-4 opacity-80">"{t.quote || t.text || ""}"</p>
                   <div className="flex items-center gap-3">
-                    {t.avatar && <img src={t.avatar} alt="" className="w-10 h-10 rounded-full" />}
+                    {t.avatar && <img loading="lazy" src={t.avatar} alt="" className="w-10 h-10 rounded-full" />}
                     <div>
                       <p className="font-semibold">{t.name || "Anonymous"}</p>
                       {t.role && <p className="text-sm opacity-60">{t.role}</p>}
@@ -223,7 +223,7 @@ function SectionRenderer({ section }: { section: any }) {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {images.map((img: any, i: number) => (
                 <div key={i} className="aspect-square rounded-lg overflow-hidden">
-                  <img src={typeof img === "string" ? img : img.url} alt={img.alt || ""} className="w-full h-full object-cover hover:scale-105 transition-transform" />
+                  <img loading="lazy" src={typeof img === "string" ? img : img.url} alt={img.alt || ""} className="w-full h-full object-cover hover:scale-105 transition-transform" />
                 </div>
               ))}
             </div>
@@ -329,7 +329,7 @@ function SectionRenderer({ section }: { section: any }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {members.map((m: any, i: number) => (
                 <div key={i} className="text-center">
-                  {m.photo && <img src={m.photo} alt={m.name} className="w-24 h-24 rounded-full mx-auto mb-3 object-cover" />}
+                  {m.photo && <img loading="lazy" src={m.photo} alt={m.name} className="w-24 h-24 rounded-full mx-auto mb-3 object-cover" />}
                   <h3 className="font-semibold">{m.name || `Member ${i + 1}`}</h3>
                   {m.role && <p className="text-sm opacity-60">{m.role}</p>}
                 </div>

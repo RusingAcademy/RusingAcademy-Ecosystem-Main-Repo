@@ -237,7 +237,7 @@ export default function AdminCommissionSection() {
                         <TableCell>
                           <div className="flex items-center gap-3">
                             {coach.photoUrl ? (
-                              <img src={coach.photoUrl} alt="" className="w-8 h-8 rounded-full object-cover" />
+                              <img loading="lazy" src={coach.photoUrl} alt="" className="w-8 h-8 rounded-full object-cover" />
                             ) : (
                               <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs font-bold">
                                 {coach.slug?.charAt(0)?.toUpperCase() || "?"}
@@ -417,7 +417,7 @@ export default function AdminCommissionSection() {
                         <TableCell>
                           <div className="flex items-center gap-2">
                             {row.coachPhoto ? (
-                              <img src={row.coachPhoto} alt="" className="w-6 h-6 rounded-full" />
+                              <img loading="lazy" src={row.coachPhoto} alt="" className="w-6 h-6 rounded-full" />
                             ) : null}
                             <span className="font-medium">{row.coachSlug || "Unknown"}</span>
                           </div>

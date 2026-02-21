@@ -248,7 +248,7 @@ export default function MediaLibraryPicker({
                         }`}
                       >
                         {isImage(item.mimeType) ? (
-                          <img src={item.url} alt={item.altText || item.fileName} className="w-10 h-10 rounded object-cover" loading="lazy" />
+                          <img loading="lazy" src={item.url} alt={item.altText || item.fileName} className="w-10 h-10 rounded object-cover" loading="lazy" />
                         ) : (
                           <div className="w-10 h-10 rounded bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 flex items-center justify-center">
                             {getFileIcon(item.mimeType)}

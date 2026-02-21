@@ -49,7 +49,7 @@ export function TestimonialsTemplate({ content, lang = "en" }: TestimonialsTempl
                 <blockquote className="text-gray-700 mb-4 italic">"{quote}"</blockquote>
                 <div className="flex items-center gap-3">
                   {t.avatarUrl ? (
-                    <img src={t.avatarUrl} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+                    <img loading="lazy" src={t.avatarUrl} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
                   ) : (
                     <div className="w-10 h-10 rounded-full bg-[var(--brand-gold,#D4AF37)] flex items-center justify-center text-white font-bold">
                       {t.name.charAt(0)}

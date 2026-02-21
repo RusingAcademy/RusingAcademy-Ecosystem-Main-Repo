@@ -147,7 +147,7 @@ export default function MediaLibrary() {
               <div key={item.id} className="group relative border rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => { setSelectedMedia(item); setShowPreviewDialog(true); }}>
                 {item.mimeType?.startsWith("image/") ? (
-                  <div className="aspect-square bg-muted"><img src={item.url} alt={item.altText || item.fileName} className="w-full h-full object-cover" /></div>
+                  <div className="aspect-square bg-muted"><img loading="lazy" src={item.url} alt={item.altText || item.fileName} className="w-full h-full object-cover" /></div>
                 ) : (
                   <div className="aspect-square bg-muted flex items-center justify-center"><Icon className="h-10 w-10 text-black/60" /></div>
                 )}
@@ -185,7 +185,7 @@ export default function MediaLibrary() {
                   <div key={item.id} className="grid grid-cols-12 gap-3 px-4 py-3 items-center hover:bg-muted/30 text-sm">
                     <span className="col-span-1">
                       {item.mimeType?.startsWith("image/") ? (
-                        <img src={item.url} alt="" className="w-8 h-8 rounded object-cover" />
+                        <img loading="lazy" src={item.url} alt="" className="w-8 h-8 rounded object-cover" />
                       ) : (
                         <Icon className="h-5 w-5 text-muted-foreground" />
                       )}
@@ -257,7 +257,7 @@ export default function MediaLibrary() {
           {selectedMedia && (
             <div className="space-y-4">
               {selectedMedia.mimeType?.startsWith("image/") ? (
-                <img src={selectedMedia.url} alt={selectedMedia.altText || ""} className="w-full rounded-lg max-h-[500px] object-contain bg-muted" />
+                <img loading="lazy" src={selectedMedia.url} alt={selectedMedia.altText || ""} className="w-full rounded-lg max-h-[500px] object-contain bg-muted" />
               ) : selectedMedia.mimeType?.startsWith("video/") ? (
                 <video src={selectedMedia.url} controls className="w-full rounded-lg max-h-[500px]" />
               ) : (

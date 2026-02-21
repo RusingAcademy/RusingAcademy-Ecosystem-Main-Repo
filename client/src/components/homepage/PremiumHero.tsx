@@ -106,7 +106,7 @@ export const PremiumHero: React.FC<PremiumHeroProps> = ({ content }) => {
               <div className="flex -space-x-2">
                 {[1,2,3,4].map(i => (
                   <div key={i} className="w-8 h-8 rounded-full border-2 border-white/20 bg-gray-400 overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" />
+                    <img loading="lazy" src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" />
                   </div>
                 ))}
               </div>
