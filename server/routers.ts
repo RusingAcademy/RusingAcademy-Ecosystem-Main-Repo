@@ -9290,6 +9290,34 @@ export const appRouter = router({
   invitationEnhancements: invitationEnhancementsRouter,
   // Auth Phase 6: Security Hardening
   securityHardening: securityHardeningRouter,
+  // Public testimonials — top-rated reviews for homepage display
+  getFeaturedTestimonials: publicProcedure
+    .input(z.object({ limit: z.number().default(10) }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      try {
+        const { reviews: reviewsTable, learnerProfiles, coachProfiles } = await import("../drizzle/schema");
+        const results = await db.select({
+          id: reviewsTable.id,
+          rating: reviewsTable.rating,
+          comment: reviewsTable.comment,
+          sleAchievement: reviewsTable.sleAchievement,
+          createdAt: reviewsTable.createdAt,
+        })
+          .from(reviewsTable)
+          .where(and(
+            eq(reviewsTable.isVisible, true),
+            gte(reviewsTable.rating, 4)
+          ))
+          .orderBy(desc(reviewsTable.rating), desc(reviewsTable.createdAt))
+          .limit(input?.limit ?? 10);
+        return results;
+      } catch {
+        return [];
+      }
+    }),
+
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure
