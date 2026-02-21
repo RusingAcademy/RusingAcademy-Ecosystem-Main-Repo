@@ -1,4 +1,4 @@
-# RusingÂcademy Learning Portal - TODO
+# RusingAcademy Learning Portal - TODO
 
 ## Phase 1: Analysis
 - [x] Read ESL Path I PDF (A1 Foundations)
@@ -44,7 +44,7 @@
 - [ ] Speaking evaluation placeholder (Sprint 4)
 
 ## Phase 7: Branding & Design
-- [x] Rebrand to RusingÂcademy (logos, colors, fonts)
+- [x] Rebrand to RusingAcademy (logos, colors, fonts)
 - [x] Premium golden glassmorphism design system
 - [x] Dark sidebar with golden accents
 - [x] Responsive layout with DashboardLayout
@@ -176,7 +176,7 @@
 - [x] Verify TypeScript (0 errors) after redesign
 
 ## Méga-Sprint 11: Ecosystem Hub Landing Page + Booking Integration
-- [x] Redesign Home.tsx as premium ecosystem hub (3 brand pillars: RusingÂcademy, Lingueefy, Barholex Media)
+- [x] Redesign Home.tsx as premium ecosystem hub (3 brand pillars: RusingAcademy, Lingueefy, Barholex Media)
 - [x] Build "The Cost of Inaction" section with Bilingual Excellence Trilemma cards
 - [x] Build "Our 3-Step Method" section (Diagnose, Train, Validate) with connecting line
 - [x] Build "Who Benefits Most" section with 6 persona cards
@@ -624,7 +624,7 @@
   - [x] Language switcher (EN/FR)
   - [x] Social links + copyright footer
   - [x] Glassmorphism styling on dark teal background (from Image 2)
-  - [x] "Log In with RusingÂcademy" OAuth button preserved
+  - [x] "Log In with RusingAcademy" OAuth button preserved
   - [x] Responsive mobile layout
 - [x] Push to GitHub (feat/pwa + main synced at d3fc77d)
 
@@ -632,7 +632,7 @@
 - [x] Extract and analyze reference design code from auth-page-redesign.zip
 - [x] Adapt "Institutional Elegance" design into Login.tsx:
   - [x] Swiss Modernist asymmetric split layout (45% cream left / 55% dark teal right)
-  - [x] Left panel: "R" logo, RusingÂcademy heading, student hero image, program tags, animated counters (12 Paths, 192 Lessons, 1344 Activities)
+  - [x] Left panel: "R" logo, RusingAcademy heading, student hero image, program tags, animated counters (12 Paths, 192 Lessons, 1344 Activities)
   - [x] Right panel: glassmorphism auth card with Google/Microsoft SSO, email/password form, "Sign In with Email" OAuth button
   - [x] Floating orbs with CSS animations on dark teal gradient background
   - [x] Language switcher (EN/FR) with dropdown
@@ -647,7 +647,7 @@
 
 ## Auth Page Visual Edits (User Feedback)
 - [x] Align left and right panels at the same level (coherent alignment)
-- [x] Replace "R" logo placeholder with real RusingÂcademy logo
+- [x] Replace "R" logo placeholder with real RusingAcademy logo
 - [x] Remove duplicate logo from the right panel (glassmorphism card)
 - [x] Move email/password form section UP (above social SSO buttons)
 - [x] Move portal access cards + social links section DOWN (to bottom)
@@ -675,7 +675,7 @@
 - [ ] Phase 6: Deliver documents and present Wave 1 for execution
 
 ## Login Page Visual Edits v3
-- [x] Replace logo with real RusingÂcademy logo (teal R on orange), make it bigger, center above computer
+- [x] Replace logo with real RusingAcademy logo (teal R on orange), make it bigger, center above computer
 - [x] Center stats/counters and move them below the computer mockup
 
 ## Login Page Left Panel Fix
@@ -691,7 +691,7 @@
 - [x] Single viewport — no scrolling at 1440×900 and 1366×768 (verified 0px below viewport)
 - [x] High contrast, readable text, accessible focus states
 - [x] Brand colors: teal (#2A5C5A), gold (#C9A96A), cream (#F7F5F0)
-- [x] Real RusingÂcademy logo prominent and centered
+- [x] Real RusingAcademy logo prominent and centered
 - [x] Copyright: © 2026 Rusinga International Consulting Ltd.
 - [x] All 399/399 vitest tests passing, 0 TypeScript errors
 

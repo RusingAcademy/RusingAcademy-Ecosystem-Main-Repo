@@ -1,7 +1,7 @@
 /**
- * HRSidebar — RusingÂcademy Client Portal (for Government Departments / Organizations)
+ * HRSidebar — RusingAcademy Client Portal (for Government Departments / Organizations)
  * This is NOT an internal HR tool — it's a client-facing portal for departments
- * that have contracted RusingÂcademy for language training services.
+ * that have contracted RusingAcademy for language training services.
  * Design: White sidebar with blue (#2563eb) accents
  */
 import { Link, useLocation } from "wouter";
@@ -74,10 +74,10 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
 
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
           <Link href="/hr/portal/dashboard" className="flex items-center gap-3">
-            <img src={LOGO_ICON} alt="RusingÂcademy" className="w-8 h-8 rounded-lg" />
+            <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
             <div>
               <span className="text-gray-900 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
-                RusingÂcademy
+                RusingAcademy
               </span>
               <span className="block text-[10px] text-[#2563eb] tracking-wider uppercase font-medium">
                 {lang === "fr" ? "Portail Client" : "Client Portal"}
@@ -148,7 +148,7 @@ export default function HRSidebar({ collapsed, onToggle }: HRSidebarProps) {
           </div>
 
           <div className="text-center mt-2">
-            <span className="text-[9px] text-gray-400">v2.0.0 — RusingÂcademy</span>
+            <span className="text-[9px] text-gray-400">v2.0.0 — RusingAcademy</span>
           </div>
         </div>
       </aside>

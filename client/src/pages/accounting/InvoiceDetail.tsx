@@ -750,7 +750,7 @@ export default function InvoiceDetail() {
                         const tmpl = (emailTemplates as any[]).find((t: any) => t.id === id);
                         if (tmpl) {
                           const body = tmpl.body
-                            .replace(/\{\{company_name\}\}/g, "RusingÂcademy")
+                            .replace(/\{\{company_name\}\}/g, "RusingAcademy")
                             .replace(/\{\{customer_name\}\}/g, (customers as any[])?.find((c: any) => c.id === inv?.customerId)?.displayName || "")
                             .replace(/\{\{customer_email\}\}/g, (customers as any[])?.find((c: any) => c.id === inv?.customerId)?.email || "")
                             .replace(/\{\{invoice_number\}\}/g, inv?.invoiceNumber || "")

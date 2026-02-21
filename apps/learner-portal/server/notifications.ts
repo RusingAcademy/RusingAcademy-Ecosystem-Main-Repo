@@ -246,7 +246,7 @@ export async function sendInvitationNotification(data: {
     recipientType: "hr_manager",
     recipientEmail: data.email,
     notificationType: "invitation_sent",
-    title: `Invitation to join ${data.organizationName} on RusingÂcademy`,
+    title: `Invitation to join ${data.organizationName} on RusingAcademy`,
     content: `${data.inviterName} has invited ${data.invitedName || "you"} to join ${data.organizationName} as a ${data.role.replace(/_/g, " ")}. Accept your invitation at: ${data.inviteUrl}${data.message ? `\n\nMessage: ${data.message}` : ""}`,
   });
 

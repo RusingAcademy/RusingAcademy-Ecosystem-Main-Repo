@@ -1,5 +1,5 @@
 /**
- * LanguageContext — Bilingual FR/EN i18n system for RusingÂcademy
+ * LanguageContext — Bilingual FR/EN i18n system for RusingAcademy
  * Provides translation hooks and language toggle across the entire portal.
  * Persists preference to backend via tRPC.
  */

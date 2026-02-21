@@ -1,5 +1,5 @@
 /**
- * Weekly Challenges — RusingÂcademy Learning Portal
+ * Weekly Challenges — RusingAcademy Learning Portal
  * Design: Clean white light theme, accessible, LRDG-inspired
  */
 import DashboardLayout from "@/components/DashboardLayout";

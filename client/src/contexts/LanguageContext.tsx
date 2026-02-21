@@ -99,7 +99,7 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.contact": "Contact",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms of Service",
-    "footer.copyright": "© 2026 Lingueefy. Part of the RusingÂcademy ecosystem.",
+    "footer.copyright": "© 2026 Lingueefy. Part of the RusingAcademy ecosystem.",
     
     // Coaches Page
     "coaches.title": "Find Your SLE Coach",
@@ -454,7 +454,7 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.contact": "Contact",
     "footer.privacy": "Politique de confidentialité",
     "footer.terms": "Conditions d'utilisation",
-    "footer.copyright": "© 2026 Lingueefy. Fait partie de l'écosystème RusingÂcademy.",
+    "footer.copyright": "© 2026 Lingueefy. Fait partie de l'écosystème RusingAcademy.",
     
     // Coaches Page
     "coaches.title": "Trouvez votre coach ELS",

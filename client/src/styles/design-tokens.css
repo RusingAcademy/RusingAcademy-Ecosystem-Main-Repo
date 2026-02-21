@@ -1,6 +1,6 @@
 /**
  * ============================================
- * RUSINGÂCADEMY ECOSYSTEM - DESIGN TOKENS
+ * RUSINGACADEMY ECOSYSTEM - DESIGN TOKENS
  * ============================================
  * 
  * Design System: Month 1 - Design Foundation & Color System
@@ -235,7 +235,7 @@
   --z-tooltip: 1600;
   
   /* === BRAND ACCENTS (for ecosystem switching) === */
-  /* RusingÂcademy (Formation/LMS) - Uses CTA Copper */
+  /* RusingAcademy (Formation/LMS) - Uses CTA Copper */
   --rusingacademy-accent: var(--brand-cta);
   --rusingacademy-accent-2: var(--brand-cta-2);
   --rusingacademy-accent-soft: var(--brand-cta-soft);
@@ -280,7 +280,7 @@ body[data-brand="ecosystem"],
   --brand-accent-soft: var(--brand-foundation-soft);
 }
 
-/* --- RUSINGÂCADEMY (LMS/B2B/B2G) - Copper === */
+/* --- RUSINGACADEMY (LMS/B2B/B2G) - Copper === */
 body[data-brand="rusingacademy"],
 [data-brand="rusingacademy"] {
   --brand-accent: var(--brand-cta);

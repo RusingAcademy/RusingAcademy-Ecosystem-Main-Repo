@@ -151,8 +151,8 @@ export default function TheyTrustedUs() {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           {language === 'fr' 
-            ? '*Logos officiels des institutions fédérales canadiennes. RusingÂcademy est une initiative entrepreneuriale privée.'
-            : '*Official logos of Canadian federal institutions. RusingÂcademy is a private entrepreneurial initiative.'}
+            ? '*Logos officiels des institutions fédérales canadiennes. RusingAcademy est une initiative entrepreneuriale privée.'
+            : '*Official logos of Canadian federal institutions. RusingAcademy is a private entrepreneurial initiative.'}
         </motion.p>
       </div>
 

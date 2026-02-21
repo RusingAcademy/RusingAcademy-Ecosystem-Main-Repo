@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Admin Dashboard
+ * RusingAcademy Admin Dashboard
  * Role-based admin panel with analytics, user management, challenge CRUD, and announcements.
  * Only accessible to users with role === "admin".
  */

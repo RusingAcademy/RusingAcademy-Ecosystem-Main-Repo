@@ -26,7 +26,7 @@ export async function generateCertificatePdf(data: CertificateData): Promise<str
     margins: { top: 40, bottom: 40, left: 40, right: 40 },
     info: {
       Title: isEn ? "Certificate of Completion" : "Certificat de réussite",
-      Author: "RusingÂcademy",
+      Author: "RusingAcademy",
       Subject: data.courseTitle,
     },
   });
@@ -85,7 +85,7 @@ export async function generateCertificatePdf(data: CertificateData): Promise<str
   doc.fontSize(28)
     .fillColor("#009688")
     .font("Helvetica-Bold")
-    .text("RusingÂcademy", 0, 85, { align: "center", width: pageW });
+    .text("RusingAcademy", 0, 85, { align: "center", width: pageW });
 
   doc.fontSize(10)
     .fillColor("#888888")

@@ -338,10 +338,10 @@ interface FAQItem {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
-    question: "What is RusingÂcademy?",
-    questionFr: "Qu'est-ce que RusingÂcademy ?",
-    answer: "RusingÂcademy is Canada's premier bilingual learning ecosystem, designed to prepare public servants for official-language examinations (SLE) through expert coaching, personalized learning paths, and AI-powered practice tools.",
-    answerFr: "RusingÂcademy est l'écosystème d'apprentissage bilingue de premier plan au Canada, conçu pour préparer les fonctionnaires aux examens de langues officielles (ELS) grâce à un coaching expert, des parcours d'apprentissage personnalisés et des outils de pratique alimentés par l'IA.",
+    question: "What is RusingAcademy?",
+    questionFr: "Qu'est-ce que RusingAcademy ?",
+    answer: "RusingAcademy is Canada's premier bilingual learning ecosystem, designed to prepare public servants for official-language examinations (SLE) through expert coaching, personalized learning paths, and AI-powered practice tools.",
+    answerFr: "RusingAcademy est l'écosystème d'apprentissage bilingue de premier plan au Canada, conçu pour préparer les fonctionnaires aux examens de langues officielles (ELS) grâce à un coaching expert, des parcours d'apprentissage personnalisés et des outils de pratique alimentés par l'IA.",
     category: "General",
   },
   {
@@ -390,8 +390,8 @@ export function FAQUpdates({ className = "" }: FAQUpdatesProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const labels = {
-    en: { title: "Frequently Asked Questions", subtitle: "Common questions about the RusingÂcademy platform" },
-    fr: { title: "Foire aux questions", subtitle: "Questions courantes sur la plateforme RusingÂcademy" },
+    en: { title: "Frequently Asked Questions", subtitle: "Common questions about the RusingAcademy platform" },
+    fr: { title: "Foire aux questions", subtitle: "Questions courantes sur la plateforme RusingAcademy" },
   };
   const t = labels[locale];
 

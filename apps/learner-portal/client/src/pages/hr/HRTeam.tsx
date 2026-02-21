@@ -54,8 +54,8 @@ export default function HRTeam() {
           </h2>
           <p className="text-sm text-gray-500">
             {lang === "fr"
-              ? "Contactez votre administrateur RusingÂcademy pour obtenir l'accès au portail client."
-              : "Contact your RusingÂcademy administrator for client portal access."}
+              ? "Contactez votre administrateur RusingAcademy pour obtenir l'accès au portail client."
+              : "Contact your RusingAcademy administrator for client portal access."}
           </p>
         </div>
       </HRLayout>

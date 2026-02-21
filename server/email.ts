@@ -166,7 +166,7 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Booking Confirmed! ✓</h1>
       <p style="margin: 10px 0 0;">Your SLE coaching session is scheduled</p>
     </div>
@@ -220,7 +220,7 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -313,7 +313,7 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">New Session Booked! 🎉</h1>
       <p style="margin: 10px 0 0;">A learner has booked a session with you</p>
     </div>
@@ -365,7 +365,7 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -490,7 +490,7 @@ export async function sendLearnerRescheduleNotification(data: RescheduleEmailDat
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Rescheduled 📅</h1>
       <p style="margin: 10px 0 0;">Your coaching session time has been updated</p>
     </div>
@@ -523,7 +523,7 @@ export async function sendLearnerRescheduleNotification(data: RescheduleEmailDat
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -619,7 +619,7 @@ export async function sendCoachRescheduleNotification(data: RescheduleEmailData)
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Rescheduled 📅</h1>
       <p style="margin: 10px 0 0;">A session has been moved to a new time</p>
     </div>
@@ -652,7 +652,7 @@ export async function sendCoachRescheduleNotification(data: RescheduleEmailData)
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -774,7 +774,7 @@ export async function sendLearnerCancellationNotification(data: CancellationEmai
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Cancelled</h1>
       <p style="margin: 10px 0 0;">Your coaching session has been cancelled</p>
     </div>
@@ -805,7 +805,7 @@ export async function sendLearnerCancellationNotification(data: CancellationEmai
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -877,7 +877,7 @@ export async function sendCoachCancellationNotification(data: CancellationEmailD
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Cancelled</h1>
       <p style="margin: 10px 0 0;">A learner has cancelled their session</p>
     </div>
@@ -904,7 +904,7 @@ export async function sendCoachCancellationNotification(data: CancellationEmailD
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -1111,7 +1111,7 @@ export async function sendLearnerProgressReport(data: LearnerProgressData): Prom
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">📊 ${labels.title}</h1>
       <p style="margin: 10px 0 0; opacity: 0.9;">${weekRange}</p>
     </div>
@@ -1228,7 +1228,7 @@ export async function sendLearnerProgressReport(data: LearnerProgressData): Prom
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - ${data.language === "fr" ? "Maîtrisez votre langue seconde pour la fonction publique" : "Master Your Second Language for the Public Service"}</p>
       </div>
     </div>
@@ -1794,7 +1794,7 @@ export async function sendEventRegistrationConfirmation(data: EventRegistrationD
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">${data.status === "registered" ? "You're Registered! ✓" : "You're on the Waitlist"}</h1>
       <p style="margin: 10px 0 0;">${eventTypeLabel.en}</p>
     </div>
@@ -1875,7 +1875,7 @@ export async function sendEventRegistrationConfirmation(data: EventRegistrationD
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -1976,7 +1976,7 @@ export async function sendEventReminder(data: EventRegistrationData): Promise<bo
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Event Reminder ⏰</h1>
       <p style="margin: 10px 0 0;">Your event is tomorrow!</p>
     </div>
@@ -2038,7 +2038,7 @@ export async function sendEventReminder(data: EventRegistrationData): Promise<bo
       </div>
       
       <div class="legal-footer">
-        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingAcademy. All rights reserved.</p>
         <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>

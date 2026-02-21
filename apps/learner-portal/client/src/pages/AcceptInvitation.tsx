@@ -127,7 +127,7 @@ export default function AcceptInvitation() {
             <Building2 className="w-8 h-8 text-teal-600" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-1">You're Invited!</h1>
-          <p className="text-gray-500 text-sm">RusingÂcademy Client Portal</p>
+          <p className="text-gray-500 text-sm">RusingAcademy Client Portal</p>
         </div>
 
         <div className="bg-teal-50 rounded-xl p-5 mb-6 space-y-3">

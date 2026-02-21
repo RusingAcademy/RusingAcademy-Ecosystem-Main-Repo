@@ -1,4 +1,4 @@
-> # RusingÂcademy Ecosystem — Beautification QA Checklist
+> # RusingAcademy Ecosystem — Beautification QA Checklist
 
 **Version:** 1.0.0
 **Date:** February 17, 2026
@@ -94,6 +94,6 @@ These checks must be performed for every beautification PR.
 
 | ID | Status | Check | Details |
 |---|---|---|---|
-| W6-01 | [ ] | **Favicon Set:** | The correct RusingÂcademy favicon is visible in the browser tab and bookmarks bar. |
+| W6-01 | [ ] | **Favicon Set:** | The correct RusingAcademy favicon is visible in the browser tab and bookmarks bar. |
 | W6-02 | [ ] | **Social Share Preview:** | Pasting a key page URL (e.g., `www.rusing.academy`) into Twitter or LinkedIn shows a properly formatted preview card with title, description, and image. |
 | W6-03 | [ ] | **Structured Data:** | Google's Rich Results Test successfully validates the structured data (Organization, Course, etc.) on the relevant pages. |

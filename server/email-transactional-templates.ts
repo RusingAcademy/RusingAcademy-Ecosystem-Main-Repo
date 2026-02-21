@@ -1,6 +1,6 @@
 /**
  * Transactional Email Templates — Learner Lifecycle
- * RusingÂcademy Learning Ecosystem
+ * RusingAcademy Learning Ecosystem
  * 
  * 8 bilingual (FR/EN) transactional email templates covering:
  * 1. Enrollment Confirmation (course purchase)
@@ -245,8 +245,8 @@ export async function sendStreakMilestoneEmail(data: StreakMilestoneData): Promi
       </h2>
       <p style="color: ${EMAIL_BRANDING.colors.muted}; font-size: 14px; line-height: 1.6; max-width: 400px; margin: 0 auto 24px;">
         ${isEn
-          ? `Incredible, ${learnerName}! You've studied for ${streakDays} consecutive days. This level of dedication puts you in the top tier of RusingÂcademy learners.`
-          : `Incroyable, ${learnerName} ! Vous avez étudié pendant ${streakDays} jours consécutifs. Ce niveau de dévouement vous place parmi les meilleurs apprenants de RusingÂcademy.`
+          ? `Incredible, ${learnerName}! You've studied for ${streakDays} consecutive days. This level of dedication puts you in the top tier of RusingAcademy learners.`
+          : `Incroyable, ${learnerName} ! Vous avez étudié pendant ${streakDays} jours consécutifs. Ce niveau de dévouement vous place parmi les meilleurs apprenants de RusingAcademy.`
         }
       </p>
       <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 12px; padding: 20px; display: inline-block; margin-bottom: 24px;">

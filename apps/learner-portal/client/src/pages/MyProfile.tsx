@@ -1,5 +1,5 @@
 /**
- * RusingÂcademy Learning Portal - My Profile Page
+ * RusingAcademy Learning Portal - My Profile Page
  * Design: Form-based profile page matching original
  * Sections: Info, Name, Login, Other, Security Questions, Learner, Contact Cards, Contact, Address
  */
@@ -87,7 +87,7 @@ export default function MyProfile() {
                     <label className="text-xs text-gray-500 mb-1 block">Employer</label>
                     <input
                       type="text"
-                      value="RusingÂcademy Inc."
+                      value="RusingAcademy Inc."
                       readOnly
                       className="w-full border border-gray-300 rounded px-3 py-2 text-sm text-gray-800 bg-gray-50"
                     />
@@ -176,7 +176,7 @@ export default function MyProfile() {
             {contactCardsOpen && (
               <div className="mt-2 space-y-3">
                 <div className="bg-gray-50 rounded-md p-3 text-xs">
-                  <p className="font-medium text-gray-700 mb-1">RusingÂcademy Canada:</p>
+                  <p className="font-medium text-gray-700 mb-1">RusingAcademy Canada:</p>
                   <p className="text-[#008090]">Support Form | 514-989-1669</p>
                 </div>
                 <div className="bg-gray-50 rounded-md p-3 text-xs">

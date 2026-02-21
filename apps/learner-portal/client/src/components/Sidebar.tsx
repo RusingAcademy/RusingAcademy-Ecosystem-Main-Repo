@@ -1,5 +1,5 @@
 /**
- * Sidebar — RusingÂcademy Learning Portal
+ * Sidebar — RusingAcademy Learning Portal
  * Design: Clean white sidebar with teal accents, LRDG-inspired light theme
  */
 import { Link, useLocation } from "wouter";
@@ -99,10 +99,10 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         {/* Logo Section */}
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <img src={LOGO_ICON} alt="RusingÂcademy" className="w-8 h-8 rounded-lg" />
+            <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
             <div>
               <span className="text-gray-900 font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
-                RusingÂcademy
+                RusingAcademy
               </span>
               <span className="block text-[10px] text-[#008090] tracking-wider uppercase font-medium">Learning Portal</span>
             </div>
@@ -281,7 +281,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
           </button>
 
           <div className="text-center mt-2">
-            <span className="text-[9px] text-gray-400">v2.0.0 — RusingÂcademy</span>
+            <span className="text-[9px] text-gray-400">v2.0.0 — RusingAcademy</span>
           </div>
         </div>
       </aside>

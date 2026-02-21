@@ -1,4 +1,4 @@
-# PWA Release Notes — RusingÂcademy Sales v2.0.0
+# PWA Release Notes — RusingAcademy Sales v2.0.0
 
 **Date:** February 14, 2026  
 **Branch:** `feat/pwa`  
@@ -9,7 +9,7 @@
 
 ## Summary
 
-This release finalizes the Progressive Web App (PWA) capabilities of **RusingÂcademy Sales**, the accounting and bookkeeping application. The app is now fully installable on Chrome (desktop/Android) and provides clear Add-to-Home-Screen (A2HS) instructions for iOS Safari. All branding is aligned with the RusingAcademy Ecosystem central repository.
+This release finalizes the Progressive Web App (PWA) capabilities of **RusingAcademy Sales**, the accounting and bookkeeping application. The app is now fully installable on Chrome (desktop/Android) and provides clear Add-to-Home-Screen (A2HS) instructions for iOS Safari. All branding is aligned with the RusingAcademy Ecosystem central repository.
 
 ---
 
@@ -19,7 +19,7 @@ This release finalizes the Progressive Web App (PWA) capabilities of **RusingÂc
 
 | Field | Before | After |
 |---|---|---|
-| `name` | `"RusingAcademy QuickBooks"` | `"RusingÂcademy Sales \| Accounting & Bookkeeping"` |
+| `name` | `"RusingAcademy QuickBooks"` | `"RusingAcademy Sales \| Accounting & Bookkeeping"` |
 | `short_name` | `"QuickBooks"` | `"RA Sales"` |
 | `theme_color` | `#0077C5` (QB blue) | `#0F3D3E` (Ecosystem teal) |
 | `background_color` | `#ffffff` | `#F7F6F3` (Ecosystem porcelain) |
@@ -183,4 +183,4 @@ The implementation satisfies all Lighthouse PWA installability requirements:
 
 ---
 
-*Rusinga International Consulting Ltd. — RusingÂcademy Sales*
+*Rusinga International Consulting Ltd. — RusingAcademy Sales*

@@ -61,7 +61,7 @@ export default function RusingAcademySubHeader() {
           <Link href="/rusingacademy" className="flex items-center transition-all duration-300 ml-3">
             <img loading="lazy" decoding="async"
               src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vQofylSAnWOMKrec.png" 
-              alt="RusingÂcademy Logo"
+              alt="RusingAcademy Logo"
               className="transition-all duration-300 rounded-lg"
               style={{ 
                 width: isScrolled ? "36px" : "40px",
@@ -75,7 +75,7 @@ export default function RusingAcademySubHeader() {
           <nav 
             className="hidden lg:flex items-center gap-1"
             role="navigation"
-            aria-label={language === "fr" ? "Navigation RusingÂcademy" : "RusingÂcademy Navigation"}
+            aria-label={language === "fr" ? "Navigation RusingAcademy" : "RusingAcademy Navigation"}
           >
             {navItems.map((link) => (
               <NavDropdown

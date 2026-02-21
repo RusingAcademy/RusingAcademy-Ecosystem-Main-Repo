@@ -24,7 +24,7 @@ const ui = {
       { id: "complete", title: "All Set!" },
     ],
     welcome: {
-      title: "Welcome to RusingÂcademy",
+      title: "Welcome to RusingAcademy",
       subtitle: "Let's personalize your learning experience. This takes about 2 minutes.",
       tagline: "Preparing public servants for bilingual excellence in Canada's federal workplace",
       cta: "Get Started",
@@ -164,7 +164,7 @@ const ui = {
       { id: "complete", title: "Tout est prêt !" },
     ],
     welcome: {
-      title: "Bienvenue à RusingÂcademy",
+      title: "Bienvenue à RusingAcademy",
       subtitle: "Personnalisons votre expérience d'apprentissage. Cela prend environ 2 minutes.",
       tagline: "Préparer les fonctionnaires à l'excellence bilingue dans la fonction publique fédérale du Canada",
       cta: "Commencer",
@@ -362,7 +362,7 @@ export default function OnboardingWizard() {
 
   const saveProfile = trpc.learner.saveOnboarding.useMutation({
     onSuccess: () => {
-      toast.success(lang === "fr" ? "Profil enregistré ! Bienvenue à RusingÂcademy !" : "Profile saved! Welcome to RusingÂcademy!");
+      toast.success(lang === "fr" ? "Profil enregistré ! Bienvenue à RusingAcademy !" : "Profile saved! Welcome to RusingAcademy!");
       setStep(t.steps.length - 1);
     },
     onError: () => {

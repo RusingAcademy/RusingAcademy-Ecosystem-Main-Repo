@@ -1,5 +1,5 @@
 /*
- * RusingÂcademy Auth Page — "Institutional Elegance" v5
+ * RusingAcademy Auth Page — "Institutional Elegance" v5
  * ─────────────────────────────────────────────────────
  * Full beautification rewrite.
  * Layout: 100vh, no scroll, asymmetric split (55% left / 45% right).
@@ -502,7 +502,7 @@ export default function Login() {
           <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mx-auto mb-4 animate-pulse">
             <img
               src={LOGO_ICON}
-              alt="RusingÂcademy"
+              alt="RusingAcademy"
               className="w-10 h-10 rounded-lg"
             />
           </div>
@@ -542,7 +542,7 @@ export default function Login() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             src={LOGO_ICON}
-            alt="RusingÂcademy"
+            alt="RusingAcademy"
             className="w-12 h-12 rounded-xl shadow-md object-contain"
           />
           <div className="text-center">
@@ -550,7 +550,7 @@ export default function Login() {
               className="text-2xl text-[#1a1a1a] leading-none"
               style={{ fontFamily: "'DM Serif Display', serif" }}
             >
-              RusingÂcademy
+              RusingAcademy
             </h1>
             <p className="text-[#2A5C5A] font-bold text-[10px] tracking-[0.2em] uppercase mt-0.5">
               {t("Learning Portal", "Portail d'apprentissage")}
@@ -564,8 +564,8 @@ export default function Login() {
             <MacBookMockup
               screenshot={DASHBOARD_SCREENSHOT}
               alt={t(
-                "RusingÂcademy Learning Portal Dashboard — ESL & FSL Programs, Progress Tracking, Leaderboard",
-                "Tableau de bord du portail d'apprentissage RusingÂcademy — Programmes ALS & FLS, Suivi des progrès, Classement"
+                "RusingAcademy Learning Portal Dashboard — ESL & FSL Programs, Progress Tracking, Leaderboard",
+                "Tableau de bord du portail d'apprentissage RusingAcademy — Programmes ALS & FLS, Suivi des progrès, Classement"
               )}
             />
           </div>
@@ -899,14 +899,14 @@ export default function Login() {
           <div className="text-center mb-6">
             <img
               src={LOGO_ICON}
-              alt="RusingÂcademy"
+              alt="RusingAcademy"
               className="w-14 h-14 rounded-2xl shadow-lg mx-auto mb-3"
             />
             <h1
               className="text-2xl text-white"
               style={{ fontFamily: "'DM Serif Display', serif" }}
             >
-              RusingÂcademy
+              RusingAcademy
             </h1>
             <p className="text-[#C9A96A] font-bold text-[10px] tracking-[0.2em] uppercase mt-1">
               {t("Learning Portal", "Portail d'apprentissage")}

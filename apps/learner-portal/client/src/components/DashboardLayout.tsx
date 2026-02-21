@@ -1,5 +1,5 @@
 /**
- * DashboardLayout — RusingÂcademy Learning Portal
+ * DashboardLayout — RusingAcademy Learning Portal
  * Design: Clean white sidebar (240px), white main area, LRDG-inspired light theme
  * Accessibility: ARIA landmarks, skip-to-content, focus management
  */
@@ -52,7 +52,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </button>
         <img src={LOGO_ICON} alt="" className="h-8 ml-3 rounded-lg" aria-hidden="true" />
         <span className="ml-2 text-sm font-semibold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
-          RusingÂcademy
+          RusingAcademy
         </span>
       </header>
 
@@ -67,7 +67,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <footer className="text-center py-4 border-t border-gray-100 bg-white" role="contentinfo">
           <SocialLinks size={14} color="#9ca3af" className="flex items-center justify-center gap-4 mb-2" />
           <p className="text-[11px] text-gray-500">
-            © 2026 RusingÂcademy — A Division of{" "}
+            © 2026 RusingAcademy — A Division of{" "}
             <span className="font-medium text-[#008090]">Rusinga International Consulting Ltd.</span>
           </p>
           <p className="text-[10px] text-gray-400 mt-0.5">

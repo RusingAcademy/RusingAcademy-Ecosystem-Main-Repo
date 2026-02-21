@@ -1,6 +1,6 @@
 /**
  * BookLandingPage — /library/books/:slug
- * Individual product landing page for each book in the RusingÂcademy Library.
+ * Individual product landing page for each book in the RusingAcademy Library.
  * 
  * Enhanced with:
  * - Premium glassmorphism hero with 3D cover shadow
@@ -662,7 +662,7 @@ export default function BookLandingPage() {
   return (
     <>
       <Helmet>
-        <title>{title} | RusingÂcademy</title>
+        <title>{title} | RusingAcademy</title>
         <meta name="description" content={shortDesc} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={shortDesc} />

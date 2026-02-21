@@ -73,7 +73,7 @@ export default function TrialBalanceReport() {
 
       <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden">
         <div className="text-center py-4 border-b border-gray-200 dark:border-white/15 dark:border-white/15 bg-gray-50 dark:bg-white/[0.06] dark:backdrop-blur-sm">
-          <h2 className="text-lg font-bold text-gray-800">RusingÂcademy</h2>
+          <h2 className="text-lg font-bold text-gray-800">RusingAcademy</h2>
           <p className="text-sm text-gray-500">Trial Balance</p>
           <p className="text-xs text-gray-400">As of {new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}</p>
         </div>

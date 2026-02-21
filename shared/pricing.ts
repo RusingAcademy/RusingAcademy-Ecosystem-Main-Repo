@@ -1,5 +1,5 @@
 /**
- * Centralized Pricing Constants for RusingÂcademy Ecosystem
+ * Centralized Pricing Constants for RusingAcademy Ecosystem
  * 
  * This file is the SINGLE SOURCE OF TRUTH for all prices displayed across the ecosystem.
  * All frontend pages MUST import prices from this file to ensure consistency.
@@ -11,7 +11,7 @@
  */
 
 // ============================================================================
-// PATH SERIES™ COURSES (RusingÂcademy)
+// PATH SERIES™ COURSES (RusingAcademy)
 // Official pricing from https://www.rusing.academy/
 // ============================================================================
 
@@ -85,7 +85,7 @@ export const PATH_SERIES_PRICES = {
 } as const;
 
 // ============================================================================
-// ESL PATH SERIES™ COURSES (RusingÂcademy - English as a Second Language)
+// ESL PATH SERIES™ COURSES (RusingAcademy - English as a Second Language)
 // ============================================================================
 
 export const ESL_PATH_SERIES_PRICES = {

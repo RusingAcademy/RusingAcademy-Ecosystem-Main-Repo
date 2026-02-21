@@ -1,5 +1,5 @@
 /**
- * Voice API Routes for RusingÂcademy SLE AI Companion
+ * Voice API Routes for RusingAcademy SLE AI Companion
  * Multi-Coach Voice System with MiniMax TTS and OpenAI Whisper STT
  * 
  * Uses axios for API calls (no openai SDK dependency)

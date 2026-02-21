@@ -353,7 +353,7 @@ export default function Curriculum() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">      <main id="main-content" className="flex-1">
-      <SEO title={isEn ? "Curriculum" : "Programme d'études"} description={isEn ? "Explore RusingAcademy's structured bilingual curriculum from foundations to executive-level French." : "Découvrez le programme bilingue structuré de RusingÂcademy, des fondations au français de niveau exécutif."} canonical="/curriculum" />
+      <SEO title={isEn ? "Curriculum" : "Programme d'études"} description={isEn ? "Explore RusingAcademy's structured bilingual curriculum from foundations to executive-level French." : "Découvrez le programme bilingue structuré de RusingAcademy, des fondations au français de niveau exécutif."} canonical="/curriculum" />
         <Breadcrumb 
           items={[
             { label: "Discover Our Courses", labelFr: "Découvrez nos cours" }
@@ -370,7 +370,7 @@ export default function Curriculum() {
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <Badge variant="outline" className="glass-badge px-4 py-1.5 text-sm font-medium">
                 <Sparkles className="h-4 w-4 mr-2" />
-                {isEn ? "Path Series™ by RusingÂcademy" : "Série Path™ par RusingÂcademy"}
+                {isEn ? "Path Series™ by RusingAcademy" : "Série Path™ par RusingAcademy"}
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
@@ -449,7 +449,7 @@ export default function Curriculum() {
           </div>
         </section>
 
-        {/* Why RusingÂcademy Section */}
+        {/* Why RusingAcademy Section */}
         <section className="py-8 lg:py-12 bg-muted/30">
           <WaveDivider variant="layered" color="white" backgroundColor="#f8fafc" orientation="bottom" />
           <div className="container">

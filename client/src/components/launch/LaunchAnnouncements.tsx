@@ -5,7 +5,7 @@
  * Month 6 — Polish, Scale & Launch
  * 
  * Banner, modal, and toast components for
- * the RusingÂcademy ecosystem launch.
+ * the RusingAcademy ecosystem launch.
  */
 import React, { useState, useEffect, useCallback } from "react";
 import { useLocale } from "@/i18n/LocaleContext";
@@ -25,13 +25,13 @@ export function LaunchBanner({ variant = "top", dismissible = true, className = 
 
   const labels = {
     en: {
-      title: "RusingÂcademy is Now Live!",
+      title: "RusingAcademy is Now Live!",
       subtitle: "Canada's premier bilingual learning ecosystem for public service excellence.",
       cta: "Explore Now",
       dismiss: "Dismiss",
     },
     fr: {
-      title: "RusingÂcademy est maintenant en ligne !",
+      title: "RusingAcademy est maintenant en ligne !",
       subtitle: "L'écosystème d'apprentissage bilingue de premier plan au Canada pour l'excellence de la fonction publique.",
       cta: "Explorer maintenant",
       dismiss: "Fermer",
@@ -139,7 +139,7 @@ export function LaunchModal({ isOpen, onClose, className = "" }: LaunchModalProp
 
   const labels = {
     en: {
-      title: "Welcome to RusingÂcademy!",
+      title: "Welcome to RusingAcademy!",
       subtitle: "Your bilingual learning journey starts here.",
       features: [
         "Expert coaching for SLE preparation",
@@ -152,7 +152,7 @@ export function LaunchModal({ isOpen, onClose, className = "" }: LaunchModalProp
       later: "Maybe Later",
     },
     fr: {
-      title: "Bienvenue à RusingÂcademy !",
+      title: "Bienvenue à RusingAcademy !",
       subtitle: "Votre parcours d'apprentissage bilingue commence ici.",
       features: [
         "Coaching expert pour la préparation aux ELS",
@@ -250,12 +250,12 @@ export function LaunchToast({ isVisible, onClose, autoHideDuration = 8000, class
 
   const labels = {
     en: {
-      title: "RusingÂcademy has launched!",
+      title: "RusingAcademy has launched!",
       message: "Explore our bilingual learning ecosystem for Canadian public servants.",
       action: "Learn More",
     },
     fr: {
-      title: "RusingÂcademy est lancé !",
+      title: "RusingAcademy est lancé !",
       message: "Explorez notre écosystème d'apprentissage bilingue pour les fonctionnaires canadiens.",
       action: "En savoir plus",
     },

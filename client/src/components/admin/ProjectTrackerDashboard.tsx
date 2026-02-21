@@ -1,10 +1,10 @@
 /**
  * Project Tracker Dashboard
- * Real-time tracking of RusingÂcademy Ecosystem Development
+ * Real-time tracking of RusingAcademy Ecosystem Development
  * 
  * @route /admin/project-tracker
  * @access Admin only (Clerk protected)
- * @brand RusingÂcademy
+ * @brand RusingAcademy
  * @copyright Rusinga International Consulting Ltd.
  */
 
@@ -89,7 +89,7 @@ const PROJECT_DATA = {
   },
 
   branches: [
-    { name: 'RusingÂcademy', description: 'Pilier Académique & Formation', status: 'production', features: ['6 Paths', '96 Leçons', 'RAG AI'] },
+    { name: 'RusingAcademy', description: 'Pilier Académique & Formation', status: 'production', features: ['6 Paths', '96 Leçons', 'RAG AI'] },
     { name: 'Lingueefy', description: 'Coaching Humain & IA', status: 'production', features: ['Booking', 'Coaches', 'Messaging', 'Commission'] },
     { name: 'Barholex Media', description: 'EdTech, Consulting & Innovation', status: 'production', features: ['Services', 'Portfolio', 'Contact', 'B2B/B2G'] },
   ],
@@ -184,7 +184,7 @@ export default function ProjectTrackerDashboard() {
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-lg flex items-center justify-center font-bold text-xl">R</div>
             <div>
-              <h1 className="text-xl font-bold">RusingÂcademy Ecosystem</h1>
+              <h1 className="text-xl font-bold">RusingAcademy Ecosystem</h1>
               <p className="text-xs text-cyan-300">Project Tracker Dashboard</p>
             </div>
           </div>

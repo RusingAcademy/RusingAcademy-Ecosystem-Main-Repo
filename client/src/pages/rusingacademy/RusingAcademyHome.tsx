@@ -166,8 +166,8 @@ export default function RusingAcademyHome() {
 
   const TESTIMONIALS = [
     {
-      quoteEn: "RusingÂcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.",
-      quoteFr: "RusingÂcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.",
+      quoteEn: "RusingAcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.",
+      quoteFr: "RusingAcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.",
       authorEn: "Director of HR",
       authorFr: "Directeur des RH",
       orgEn: "Federal Department",
@@ -351,7 +351,7 @@ export default function RusingAcademyHome() {
           <div className="container mx-auto">
             <div className="text-center mb-6 md:mb-8 lg:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-foreground mb-4">
-                {language === "en" ? "Why Choose RusingÂcademy?" : "Pourquoi choisir RusingÂcademy?"}
+                {language === "en" ? "Why Choose RusingAcademy?" : "Pourquoi choisir RusingAcademy?"}
               </h2>
             </div>
 

@@ -1,5 +1,5 @@
 /**
- * Dashboard — RusingÂcademy Learning Portal
+ * Dashboard — RusingAcademy Learning Portal
  * Design: Clean white LRDG-inspired layout with teal accents, high accessibility
  */
 import DashboardLayout from "@/components/DashboardLayout";
@@ -93,7 +93,7 @@ export default function Dashboard() {
   const completedCount = challengesQuery.data?.filter((c) => c.isCompleted).length ?? 0;
 
   const announcements = [
-    { title: "Welcome to RusingÂcademy Learning Portal!", content: "Your bilingual training journey starts here. Explore our ESL and FSL programs, earn XP, unlock badges, and prepare for your SLE exams with confidence." },
+    { title: "Welcome to RusingAcademy Learning Portal!", content: "Your bilingual training journey starts here. Explore our ESL and FSL programs, earn XP, unlock badges, and prepare for your SLE exams with confidence." },
     { title: "New: Gamification System Active", content: "Track your progress with XP points, daily streaks, and achievement badges. Complete lessons to level up and unlock new content." },
   ];
 
@@ -447,7 +447,7 @@ export default function Dashboard() {
               </div>
               <div className="space-y-2">
                 {[
-                  { title: "Welcome to RusingÂcademy Portal", date: "02/12/2026" },
+                  { title: "Welcome to RusingAcademy Portal", date: "02/12/2026" },
                   { title: "Your FSL Path I is ready to begin", date: "02/10/2026" },
                   { title: "New: Gamification features enabled", date: "02/08/2026" },
                 ].map((n, i) => (

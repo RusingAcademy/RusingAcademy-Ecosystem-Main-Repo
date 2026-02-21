@@ -208,7 +208,7 @@ export default function CourseDetail() {
     <div className="min-h-screen bg-background">
       <SEO
         title={course?.title || "Course"}
-        description={course?.description?.slice(0, 160) || "Explore this course on RusingÂcademy"}
+        description={course?.description?.slice(0, 160) || "Explore this course on RusingAcademy"}
         canonical={`/courses/${slug}`}
         type="product"
         schema={course ? generateCourseSchema({

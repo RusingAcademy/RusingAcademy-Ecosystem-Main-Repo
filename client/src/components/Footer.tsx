@@ -6,7 +6,7 @@ import WaveDivider from "@/components/WaveDivider";
 import { useState, useMemo } from "react";
 import { useFooterNavigation, type NavItem } from "@/hooks/useNavigation";
 
-// Official RusingÂcademy logo
+// Official RusingAcademy logo
 const LOGO_URL = "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png";
 
 // ============================================================================
@@ -249,7 +249,7 @@ export default function Footer() {
             <Link href="/" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-xl">
               <img loading="lazy" decoding="async"
                 src={LOGO_URL}
-                alt="RusingÂcademy" 
+                alt="RusingAcademy" 
                 className="h-14 w-auto brightness-110"
               />
             </Link>
@@ -355,7 +355,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-sm font-bold text-teal-400 hover:text-teal-300 transition-colors"
               >
-                RusingÂcademy
+                RusingAcademy
               </a>
             </div>
             
@@ -366,8 +366,8 @@ export default function Footer() {
               </p>
               <p className="text-xs text-white/90 mt-1">
                 {language === "fr" 
-                  ? "Commercialement connue sous le nom de RusingÂcademy. Tous droits réservés."
-                  : "Commercially known as RusingÂcademy. All rights reserved."}
+                  ? "Commercialement connue sous le nom de RusingAcademy. Tous droits réservés."
+                  : "Commercially known as RusingAcademy. All rights reserved."}
               </p>
             </div>
           </div>

@@ -96,7 +96,7 @@ const automationTemplates: Omit<Automation, "id" | "createdAt">[] = [
     triggerConfig: {},
     status: "draft",
     steps: [
-      { id: "s1", type: "send_email", config: { subject: "Welcome to RusingÂcademy!", template: "welcome", language: "bilingual" } },
+      { id: "s1", type: "send_email", config: { subject: "Welcome to RusingAcademy!", template: "welcome", language: "bilingual" } },
       { id: "s2", type: "wait", config: { days: 1, hours: 0 } },
       { id: "s3", type: "send_email", config: { subject: "Getting Started: Your Learning Path", template: "getting_started" } },
       { id: "s4", type: "wait", config: { days: 2, hours: 0 } },

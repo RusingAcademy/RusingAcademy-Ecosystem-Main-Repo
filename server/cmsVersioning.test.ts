@@ -199,7 +199,7 @@ describe("Analytics Event Normalization", () => {
   });
 
   it("should normalize source values to lowercase", () => {
-    const sources = ["RusingÂcademy", "LINGUEEFY", "barholex"];
+    const sources = ["RusingAcademy", "LINGUEEFY", "barholex"];
     const normalized = sources.map(s => s.toLowerCase());
     expect(normalized).toEqual(["rusingacademy", "lingueefy", "barholex"]);
   });

@@ -100,7 +100,7 @@ function generateStreakReminderEmail(user: StreakAtRiskUser): { subject: string;
     </head>
     <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1F2937; max-width: 600px; margin: 0 auto; padding: 20px;">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="color: #0F3D3E; margin: 0;">RusingÂcademy</h1>
+        <h1 style="color: #0F3D3E; margin: 0;">RusingAcademy</h1>
       </div>
       
       <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); padding: 24px; border-radius: 12px; text-align: center; margin-bottom: 24px;">
@@ -135,7 +135,7 @@ function generateStreakReminderEmail(user: StreakAtRiskUser): { subject: string;
       <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;">
       
       <p style="color: #9CA3AF; font-size: 12px; text-align: center;">
-        You're receiving this because you have an active streak on RusingÂcademy.<br>
+        You're receiving this because you have an active streak on RusingAcademy.<br>
         <a href="https://rusingacademy.com/settings" style="color: #6B7280;">Manage notification preferences</a>
       </p>
     </body>

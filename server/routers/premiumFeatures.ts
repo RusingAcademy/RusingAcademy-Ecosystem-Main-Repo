@@ -1380,7 +1380,7 @@ export const orgBillingRouter = router({
             price_data: {
               currency: "cad",
               product_data: {
-                name: `RusingÂcademy ${input.plan.charAt(0).toUpperCase() + input.plan.slice(1)} Plan - ${input.seats} seats`,
+                name: `RusingAcademy ${input.plan.charAt(0).toUpperCase() + input.plan.slice(1)} Plan - ${input.seats} seats`,
                 description: `Organization billing: ${input.seats} seats × $${(seatPrice / 100).toFixed(2)}/seat/${input.billingCycle === "annual" ? "year" : "month"}`,
               },
               unit_amount: totalAmount,

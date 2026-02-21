@@ -104,12 +104,12 @@ export default function ForGovernment() {
       ],
       testimonialsTitle: "Trusted by Government Organizations",
       testimonials: [
-        { quote: "RusingÂcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.", author: "Director of HR", company: "Federal Department" },
+        { quote: "RusingAcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.", author: "Director of HR", company: "Federal Department" },
         { quote: "The coaching marketplace gave our employees personalized support that made all the difference in their language journey.", author: "Training Manager", company: "Crown Corporation" },
         { quote: "Finally, a solution that understands government compliance requirements while delivering modern, engaging learning experiences.", author: "Chief Learning Officer", company: "Provincial Agency" }
       ],
       ctaTitle: "Ready to Achieve Bilingual Excellence?",
-      ctaSubtitle: "Join 50+ government departments that trust RusingÂcademy for their official languages training.",
+      ctaSubtitle: "Join 50+ government departments that trust RusingAcademy for their official languages training.",
       formTitle: "Request a Demo",
       formSubtitle: "Fill out the form below and our government solutions team will contact you within 24 hours.",
       formFields: {
@@ -172,12 +172,12 @@ export default function ForGovernment() {
       ],
       testimonialsTitle: "La confiance des organisations gouvernementales",
       testimonials: [
-        { quote: "RusingÂcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.", author: "Directeur des RH", company: "Ministère fédéral" },
+        { quote: "RusingAcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.", author: "Directeur des RH", company: "Ministère fédéral" },
         { quote: "Le marché de coaching a offert à nos employés un soutien personnalisé qui a fait toute la différence.", author: "Gestionnaire de formation", company: "Société d'État" },
         { quote: "Enfin, une solution qui comprend les exigences de conformité gouvernementale tout en offrant des expériences modernes.", author: "Directeur de l'apprentissage", company: "Agence provinciale" }
       ],
       ctaTitle: "Prêt à atteindre l'excellence bilingue?",
-      ctaSubtitle: "Rejoignez plus de 50 ministères gouvernementaux qui font confiance à RusingÂcademy.",
+      ctaSubtitle: "Rejoignez plus de 50 ministères gouvernementaux qui font confiance à RusingAcademy.",
       formTitle: "Demander une démo",
       formSubtitle: "Remplissez le formulaire ci-dessous et notre équipe solutions gouvernementales vous contactera dans les 24 heures.",
       formFields: {

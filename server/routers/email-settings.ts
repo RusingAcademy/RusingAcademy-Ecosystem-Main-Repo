@@ -166,7 +166,7 @@ verification emails, password reset links, and booking confirmations.
         {
           name: "SMTP_FROM_NAME",
           description: "Sender display name",
-          examples: ["Lingueefy", "RusingÂcademy"],
+          examples: ["Lingueefy", "RusingAcademy"],
         },
         {
           name: "SMTP_SECURE",

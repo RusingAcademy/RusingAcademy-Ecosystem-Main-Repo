@@ -140,7 +140,7 @@ export const governmentReportingRouter = router({
           periodStart: cutoff.toISOString(),
           periodEnd: new Date().toISOString(),
           platform: {
-            name: "RusingÂcademy",
+            name: "RusingAcademy",
             version: "1.0",
             compliance: "GC-ready",
             bilingual: true,

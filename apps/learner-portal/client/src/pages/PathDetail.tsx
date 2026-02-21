@@ -1,5 +1,5 @@
 /**
- * PathDetail — RusingÂcademy Learning Portal
+ * PathDetail — RusingAcademy Learning Portal
  * Shows all modules within a Path with lessons, progress, and gamification
  * Design: Premium glassmorphism, teal/gold accents, accessible
  */

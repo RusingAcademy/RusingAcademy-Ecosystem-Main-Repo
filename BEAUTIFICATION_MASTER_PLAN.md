@@ -1,4 +1,4 @@
-# RusingÂcademy Ecosystem — Beautification Master Plan
+# RusingAcademy Ecosystem — Beautification Master Plan
 
 **Version:** 1.0.0
 **Date:** February 17, 2026
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The RusingÂcademy ecosystem has a solid design system foundation (v6.0.0 "Néo-Institutionnel / Light Luxury") with brand tokens, glassmorphism variants, and accessibility scaffolding already in place. However, the 20-wave beautification pass introduced **significant technical debt**: 2,553 redundant dark mode classes, 1,933 hardcoded hex colors bypassing the token system, 404 unresponsive text sizes, and 490 unresponsive padding values. The animation layer is minimal (2 keyframes vs. the 15+ expected for a premium platform), and critical branding assets (favicons, touch icons) are missing entirely.
+The RusingAcademy ecosystem has a solid design system foundation (v6.0.0 "Néo-Institutionnel / Light Luxury") with brand tokens, glassmorphism variants, and accessibility scaffolding already in place. However, the 20-wave beautification pass introduced **significant technical debt**: 2,553 redundant dark mode classes, 1,933 hardcoded hex colors bypassing the token system, 404 unresponsive text sizes, and 490 unresponsive padding values. The animation layer is minimal (2 keyframes vs. the 15+ expected for a premium platform), and critical branding assets (favicons, touch icons) are missing entirely.
 
 This master plan organizes the remediation into **6 waves**, each deployable independently with zero regression. Every wave produces a testable PR with before/after screenshots and a QA checklist.
 
@@ -131,7 +131,7 @@ This master plan organizes the remediation into **6 waves**, each deployable ind
 
 | Task | Approach |
 |------|----------|
-| Generate favicon set (ico, 16px, 32px, 180px, 192px, 512px, SVG) | From RusingÂcademy logo |
+| Generate favicon set (ico, 16px, 32px, 180px, 192px, 512px, SVG) | From RusingAcademy logo |
 | Generate OG image templates for social sharing | Branded templates |
 | Enhance JSON-LD structured data (Organization, Course, FAQ) | Server-side injection |
 | Add print stylesheet for certificates and reports | CSS @media print |

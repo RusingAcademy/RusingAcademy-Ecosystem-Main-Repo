@@ -1,5 +1,5 @@
 /**
- * LessonViewer — RusingÂcademy Learning Portal
+ * LessonViewer — RusingAcademy Learning Portal
  * Interactive 7-slot lesson structure with real course content
  * Slots: Hook → Video → Strategy → Written → Oral → Quiz → Coaching
  * Design: Premium glassmorphism, teal/gold, step-by-step progression

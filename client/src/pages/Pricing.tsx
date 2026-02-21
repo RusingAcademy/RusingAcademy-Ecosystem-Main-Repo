@@ -328,7 +328,7 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
-      <SEO title="Pricing & Plans" description="Explore RusingÂcademy's flexible pricing plans for SLE preparation, coaching sessions, and self-paced bilingual courses." canonical="/pricing" />
+      <SEO title="Pricing & Plans" description="Explore RusingAcademy's flexible pricing plans for SLE preparation, coaching sessions, and self-paced bilingual courses." canonical="/pricing" />
       <main id="main-content" className="flex-1">
         <Breadcrumb 
           items={[

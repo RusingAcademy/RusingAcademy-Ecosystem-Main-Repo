@@ -46,7 +46,7 @@ export default function Certificate({
       // Download the real PDF from CDN
       const link = document.createElement("a");
       link.href = pdfUrl;
-      link.download = `RusingÂcademy-Certificate-${certificateNumber}.pdf`;
+      link.download = `RusingAcademy-Certificate-${certificateNumber}.pdf`;
       link.target = "_blank";
       document.body.appendChild(link);
       link.click();
@@ -105,7 +105,7 @@ export default function Certificate({
           <div className="flex items-center gap-2 mb-3">
             <Award className="h-10 w-10 text-teal-600" />
             <div className="text-left">
-              <h2 className="text-2xl font-bold text-teal-700">RusingÂcademy</h2>
+              <h2 className="text-2xl font-bold text-teal-700">RusingAcademy</h2>
               <p className="text-xs text-black dark:text-foreground">{content.organizationTagline}</p>
             </div>
           </div>
