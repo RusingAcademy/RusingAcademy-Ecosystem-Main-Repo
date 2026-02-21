@@ -746,4 +746,584 @@ router.get("/list-users", async (req, res) => {
   }
 });
 
+// ============================================================================
+// MIGRATION: Replace old courses with 12 GC Bilingual Path Series (6 FSL + 6 ESL)
+// POST /api/admin/migrations/replace-courses-with-path-series
+// ============================================================================
+router.post("/replace-courses-with-path-series", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const migrationSecret = process.env.MIGRATION_SECRET || process.env.CRON_SECRET;
+    if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+    log.info("🚀 Starting course replacement migration...");
+    const results: string[] = [];
+
+    // ── Step 1: Delete all existing course data (cascade) ──
+    results.push("🗑️ Step 1: Deleting all existing course data...");
+    const deleteTables = [
+      "quiz_questions",
+      "activity_progress",
+      "activities",
+      "interactive_exercises",
+      "confidence_checks",
+      "learner_notes",
+      "course_comments",
+      "course_assignments",
+      "drip_schedules",
+      "lesson_progress",
+      "certificates",
+      "course_reviews",
+      "course_enrollments",
+      "bundle_courses",
+      "path_courses",
+      "live_rooms",
+      "quizzes",
+      "lessons",
+      "course_modules",
+      "courses",
+    ];
+    for (const table of deleteTables) {
+      try {
+        await db.execute(sql.raw(`DELETE FROM \`${table}\``));
+        results.push(`  ✅ Cleared ${table}`);
+      } catch (e: any) {
+        results.push(`  ⚠️ Skipped ${table}: ${e.message}`);
+      }
+    }
+
+    // ── Step 2: Insert 12 Path Series courses ──
+    results.push("\n📚 Step 2: Creating 12 GC Bilingual Path Series courses...");
+
+    const allPaths = [
+      // ── FSL Paths ──
+      {
+        pathNumber: 1, title: "Path I: FSL - Foundations", titleFr: "Path I : FLS - Fondations",
+        slug: "path-i-foundations",
+        description: "Build the fundamental communication skills required for basic professional interactions in the Canadian federal public service. Master essential greetings, introductions, and workplace vocabulary.",
+        descriptionFr: "Développez les compétences de communication fondamentales requises pour les interactions professionnelles de base dans la fonction publique fédérale canadienne. Maîtrisez les salutations essentielles, les présentations et le vocabulaire du milieu de travail.",
+        shortDescription: "Essential foundations for professional French communication in the GC workplace.",
+        shortDescriptionFr: "Bases essentielles pour la communication professionnelle en français au sein du GC.",
+        level: "beginner", category: "sle_oral", targetLanguage: "french",
+        price: 89900, originalPrice: 99900, estimatedHours: 30,
+        modules: [
+          { title: "First Professional Steps", titleFr: "Premiers Pas Professionnels", description: "Master essential greetings, introductions, and basic workplace interactions.", descriptionFr: "Maîtrisez les salutations essentielles, les présentations et les interactions de base au travail.", lessons: [
+            { title: "Hello, My Name Is...", titleFr: "Bonjour, je m'appelle..." },
+            { title: "My Office, My Team", titleFr: "Mon bureau, mon équipe" },
+            { title: "Daily Routine", titleFr: "La routine quotidienne" },
+            { title: "Asking Key Questions", titleFr: "Poser des questions clés" },
+          ]},
+          { title: "Daily Communication", titleFr: "Communication Quotidienne", description: "Master everyday workplace communication in French.", descriptionFr: "Maîtriser la communication quotidienne au travail en français.", lessons: [
+            { title: "On the Phone", titleFr: "Au téléphone" },
+            { title: "Essential Emails", titleFr: "Les courriels essentiels" },
+            { title: "Understanding Instructions", titleFr: "Comprendre des instructions" },
+            { title: "Giving Simple Directions", titleFr: "Donner des directives simples" },
+          ]},
+          { title: "Essential Interactions", titleFr: "Interactions Essentielles", description: "Navigate essential workplace interactions with confidence.", descriptionFr: "Naviguer les interactions essentielles au travail avec confiance.", lessons: [
+            { title: "Making a Polite Request", titleFr: "Faire une demande polie" },
+            { title: "Expressing Needs & Preferences", titleFr: "Exprimer besoins et préférences" },
+            { title: "Coffee Break Chat", titleFr: "La pause café" },
+            { title: "React & Respond", titleFr: "Réagir et répondre" },
+          ]},
+          { title: "Towards Autonomy", titleFr: "Vers l'Autonomie", description: "Develop independence in French workplace communication.", descriptionFr: "Développer l'autonomie dans la communication professionnelle en français.", lessons: [
+            { title: "Describing a Simple Problem", titleFr: "Décrire un problème simple" },
+            { title: "Confirming & Verifying", titleFr: "Confirmer et vérifier" },
+            { title: "Talking About Past Experience", titleFr: "Parler de son expérience passée" },
+            { title: "Final Project", titleFr: "Projet final" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 2, title: "Path II: FSL - Everyday Fluency", titleFr: "Path II : FLS - Aisance Quotidienne",
+        slug: "path-ii-everyday-fluency",
+        description: "Develop confidence in everyday professional interactions. Learn to discuss past events, future projects, and personal opinions with increasing spontaneity and accuracy.",
+        descriptionFr: "Développez votre confiance dans les interactions professionnelles quotidiennes. Apprenez à discuter d'événements passés, de projets futurs et d'opinions personnelles avec une spontanéité et une précision croissantes.",
+        shortDescription: "Build everyday fluency for confident workplace communication.",
+        shortDescriptionFr: "Développez une aisance quotidienne pour une communication confiante au travail.",
+        level: "beginner", category: "sle_oral", targetLanguage: "french",
+        price: 89900, originalPrice: 99900, estimatedHours: 30,
+        modules: [
+          { title: "Electronic Communication", titleFr: "Communication Électronique", description: "Master professional electronic communication in French.", descriptionFr: "Maîtriser la communication électronique professionnelle en français.", lessons: [
+            { title: "Professional Emails", titleFr: "Courriels professionnels" },
+            { title: "Teams & Slack Messages", titleFr: "Messages Teams et Slack" },
+            { title: "Calendar Management", titleFr: "Gestion du calendrier" },
+            { title: "Digital Etiquette", titleFr: "Étiquette numérique" },
+          ]},
+          { title: "Social Interactions", titleFr: "Interactions Sociales", description: "Navigate social situations in the workplace.", descriptionFr: "Naviguer les situations sociales au travail.", lessons: [
+            { title: "Team Lunch Conversations", titleFr: "Conversations au dîner d'équipe" },
+            { title: "Networking Events", titleFr: "Événements de réseautage" },
+            { title: "Expressing Opinions", titleFr: "Exprimer des opinions" },
+            { title: "Cultural Sensitivity", titleFr: "Sensibilité culturelle" },
+          ]},
+          { title: "Administrative Tasks", titleFr: "Tâches Administratives", description: "Handle administrative tasks in French.", descriptionFr: "Gérer les tâches administratives en français.", lessons: [
+            { title: "Leave Requests", titleFr: "Demandes de congé" },
+            { title: "Expense Reports", titleFr: "Rapports de dépenses" },
+            { title: "Meeting Minutes", titleFr: "Procès-verbaux de réunion" },
+            { title: "Filing & Documentation", titleFr: "Classement et documentation" },
+          ]},
+          { title: "Finding Your Way", titleFr: "Trouver Son Chemin", description: "Navigate the public service environment.", descriptionFr: "Naviguer l'environnement de la fonction publique.", lessons: [
+            { title: "Building Navigation", titleFr: "Navigation dans l'édifice" },
+            { title: "Asking for Directions", titleFr: "Demander des directions" },
+            { title: "Public Transit", titleFr: "Transport en commun" },
+            { title: "Path II Review & Consolidation", titleFr: "Révision et Consolidation du Path II" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 3, title: "Path III: FSL - Operational French", titleFr: "Path III : FLS - Français Opérationnel",
+        slug: "path-iii-operational-french",
+        description: "Achieve functional professional autonomy. Present arguments, participate in debates, write structured reports, and handle most workplace communication situations independently.",
+        descriptionFr: "Atteignez une autonomie professionnelle fonctionnelle. Présentez des arguments, participez à des débats, rédigez des rapports structurés et gérez la plupart des situations de communication au travail de manière indépendante.",
+        shortDescription: "Professional communication for independent workplace autonomy.",
+        shortDescriptionFr: "Communication professionnelle pour une autonomie indépendante au travail.",
+        level: "intermediate", category: "sle_oral", targetLanguage: "french",
+        price: 99900, originalPrice: 119900, estimatedHours: 35,
+        modules: [
+          { title: "Participating in Meetings", titleFr: "Participer aux Réunions", description: "Actively participate in professional meetings.", descriptionFr: "Participer activement aux réunions professionnelles.", lessons: [
+            { title: "Meeting Vocabulary", titleFr: "Vocabulaire de réunion" },
+            { title: "Expressing Agreement & Disagreement", titleFr: "Exprimer l'accord et le désaccord" },
+            { title: "Proposing Ideas", titleFr: "Proposer des idées" },
+            { title: "Summarizing Discussions", titleFr: "Résumer les discussions" },
+          ]},
+          { title: "Written Communication", titleFr: "Communication Écrite", description: "Master professional written French.", descriptionFr: "Maîtriser le français écrit professionnel.", lessons: [
+            { title: "Formal Letters", titleFr: "Lettres formelles" },
+            { title: "Reports & Briefing Notes", titleFr: "Rapports et notes d'information" },
+            { title: "Proofreading & Editing", titleFr: "Révision et correction" },
+            { title: "Policy Documents", titleFr: "Documents de politique" },
+          ]},
+          { title: "Simple Presentations", titleFr: "Présentations Simples", description: "Deliver clear presentations in French.", descriptionFr: "Livrer des présentations claires en français.", lessons: [
+            { title: "Structuring a Presentation", titleFr: "Structurer une présentation" },
+            { title: "Visual Aids & Slides", titleFr: "Aides visuelles et diapositives" },
+            { title: "Q&A Sessions", titleFr: "Séances de questions-réponses" },
+            { title: "Handling Nervousness", titleFr: "Gérer le trac" },
+          ]},
+          { title: "Negotiation & Persuasion", titleFr: "Négociation et Persuasion", description: "Develop negotiation and persuasion skills.", descriptionFr: "Développer les compétences de négociation et de persuasion.", lessons: [
+            { title: "Building Arguments", titleFr: "Construire des arguments" },
+            { title: "Compromise & Consensus", titleFr: "Compromis et consensus" },
+            { title: "Persuasive Language", titleFr: "Langage persuasif" },
+            { title: "Path III Review & Assessment", titleFr: "Révision et Évaluation du Path III" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 4, title: "Path IV: FSL - Strategic Expression", titleFr: "Path IV : FLS - Expression Stratégique",
+        slug: "path-iv-strategic-expression",
+        description: "Master precision, nuance, and leadership communication. Develop advanced grammatical structures, persuasive argumentation, and effective communication in complex professional contexts.",
+        descriptionFr: "Maîtrisez la précision, la nuance et la communication de leadership. Développez des structures grammaticales avancées, l'argumentation persuasive et la communication efficace dans des contextes professionnels complexes.",
+        shortDescription: "Advanced strategic communication for leadership roles.",
+        shortDescriptionFr: "Communication stratégique avancée pour les rôles de leadership.",
+        level: "advanced", category: "sle_oral", targetLanguage: "french",
+        price: 109900, originalPrice: 129900, estimatedHours: 35,
+        modules: [
+          { title: "Communication & Influence", titleFr: "Communication et Influence", description: "Master influential communication strategies.", descriptionFr: "Maîtriser les stratégies de communication influente.", lessons: [
+            { title: "Strategic Messaging", titleFr: "Messages stratégiques" },
+            { title: "Stakeholder Management", titleFr: "Gestion des parties prenantes" },
+            { title: "Public Speaking", titleFr: "Prise de parole en public" },
+            { title: "Media Relations", titleFr: "Relations avec les médias" },
+          ]},
+          { title: "Project Management", titleFr: "Gestion de Projet", description: "Lead projects in French.", descriptionFr: "Diriger des projets en français.", lessons: [
+            { title: "Project Planning", titleFr: "Planification de projet" },
+            { title: "Team Coordination", titleFr: "Coordination d'équipe" },
+            { title: "Status Reports", titleFr: "Rapports d'avancement" },
+            { title: "Risk Management", titleFr: "Gestion des risques" },
+          ]},
+          { title: "Sensitive Communication", titleFr: "Communication Sensible", description: "Handle sensitive topics professionally.", descriptionFr: "Gérer les sujets sensibles de manière professionnelle.", lessons: [
+            { title: "Conflict Resolution", titleFr: "Résolution de conflits" },
+            { title: "Performance Reviews", titleFr: "Évaluations de rendement" },
+            { title: "Difficult Conversations", titleFr: "Conversations difficiles" },
+            { title: "Empathetic Communication", titleFr: "Communication empathique" },
+          ]},
+          { title: "Leadership & Influence", titleFr: "Leadership et Influence", description: "Develop leadership communication skills.", descriptionFr: "Développer les compétences de communication en leadership.", lessons: [
+            { title: "Visionary Communication", titleFr: "Communication visionnaire" },
+            { title: "Motivating Teams", titleFr: "Motiver les équipes" },
+            { title: "Change Management", titleFr: "Gestion du changement" },
+            { title: "Path IV Review & Mastery Check", titleFr: "Révision et Vérification de Maîtrise du Path IV" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 5, title: "Path V: FSL - Professional Mastery", titleFr: "Path V : FLS - Maîtrise Professionnelle",
+        slug: "path-v-professional-mastery",
+        description: "Achieve expert-level communication with idiomatic mastery and cultural sophistication. Develop advanced competencies for executive roles: facilitating meetings, negotiating, and producing high-quality documents.",
+        descriptionFr: "Atteignez une communication de niveau expert avec une maîtrise idiomatique et une sophistication culturelle. Développez les compétences avancées pour les rôles exécutifs : animer des réunions, négocier et produire des documents de haute qualité.",
+        shortDescription: "Expert-level mastery for executive bilingual communication.",
+        shortDescriptionFr: "Maîtrise de niveau expert pour la communication bilingue exécutive.",
+        level: "advanced", category: "sle_oral", targetLanguage: "french",
+        price: 119900, originalPrice: 149900, estimatedHours: 40,
+        modules: [
+          { title: "Leadership & Vision", titleFr: "Leadership et Vision", description: "Communicate vision and leadership in French.", descriptionFr: "Communiquer la vision et le leadership en français.", lessons: [
+            { title: "Executive Briefings", titleFr: "Séances d'information exécutives" },
+            { title: "Strategic Planning", titleFr: "Planification stratégique" },
+            { title: "Board Presentations", titleFr: "Présentations au conseil" },
+            { title: "Organizational Vision", titleFr: "Vision organisationnelle" },
+          ]},
+          { title: "Analysis & Synthesis", titleFr: "Analyse et Synthèse", description: "Master analytical and synthesis skills in French.", descriptionFr: "Maîtriser les compétences d'analyse et de synthèse en français.", lessons: [
+            { title: "Complex Document Analysis", titleFr: "Analyse de documents complexes" },
+            { title: "Data Interpretation", titleFr: "Interprétation des données" },
+            { title: "Executive Summaries", titleFr: "Sommaires exécutifs" },
+            { title: "Policy Analysis", titleFr: "Analyse de politiques" },
+          ]},
+          { title: "Crisis Communication", titleFr: "Communication de Crise", description: "Handle crisis communication effectively.", descriptionFr: "Gérer la communication de crise efficacement.", lessons: [
+            { title: "Crisis Response", titleFr: "Réponse de crise" },
+            { title: "Media Management", titleFr: "Gestion des médias" },
+            { title: "Internal Communication", titleFr: "Communication interne" },
+            { title: "Recovery & Lessons Learned", titleFr: "Rétablissement et leçons apprises" },
+          ]},
+          { title: "Negotiation & Diplomacy", titleFr: "Négociation et Diplomatie", description: "Master high-level negotiation and diplomacy.", descriptionFr: "Maîtriser la négociation et la diplomatie de haut niveau.", lessons: [
+            { title: "Diplomatic Language", titleFr: "Langage diplomatique" },
+            { title: "Multi-party Negotiations", titleFr: "Négociations multipartites" },
+            { title: "International Relations", titleFr: "Relations internationales" },
+            { title: "Path V Capstone Assessment", titleFr: "Évaluation Finale du Path V" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 6, title: "Path VI: FSL - SLE Accelerator", titleFr: "Path VI : FLS - Accélérateur ELS",
+        slug: "path-vi-sle-accelerator",
+        description: "Intensive preparation specifically designed for Second Language Evaluation (SLE) success. Master exam strategies, complete practice exams with detailed feedback, and develop confidence for maximum performance.",
+        descriptionFr: "Préparation intensive spécialement conçue pour réussir l'Évaluation de langue seconde (ELS). Maîtrisez les stratégies d'examen, complétez des examens pratiques avec rétroaction détaillée et développez la confiance pour une performance maximale.",
+        shortDescription: "Intensive SLE exam preparation for guaranteed success.",
+        shortDescriptionFr: "Préparation intensive à l'ELS pour un succès garanti.",
+        level: "advanced", category: "exam_prep", targetLanguage: "french",
+        price: 129900, originalPrice: 159900, estimatedHours: 40,
+        modules: [
+          { title: "Reading Comprehension", titleFr: "Compréhension de Lecture", description: "Master SLE reading comprehension strategies.", descriptionFr: "Maîtriser les stratégies de compréhension de lecture de l'ELS.", lessons: [
+            { title: "Text Analysis Strategies", titleFr: "Stratégies d'analyse de texte" },
+            { title: "Vocabulary in Context", titleFr: "Vocabulaire en contexte" },
+            { title: "Inference & Deduction", titleFr: "Inférence et déduction" },
+            { title: "Practice Exam: Reading", titleFr: "Examen pratique : Lecture" },
+          ]},
+          { title: "Written Expression", titleFr: "Expression Écrite", description: "Master SLE written expression.", descriptionFr: "Maîtriser l'expression écrite de l'ELS.", lessons: [
+            { title: "Grammar Mastery", titleFr: "Maîtrise de la grammaire" },
+            { title: "Essay Structure", titleFr: "Structure de la dissertation" },
+            { title: "Formal Register", titleFr: "Registre formel" },
+            { title: "Practice Exam: Written", titleFr: "Examen pratique : Écrit" },
+          ]},
+          { title: "Oral Comprehension", titleFr: "Compréhension Orale", description: "Master SLE oral comprehension.", descriptionFr: "Maîtriser la compréhension orale de l'ELS.", lessons: [
+            { title: "Listening Strategies", titleFr: "Stratégies d'écoute" },
+            { title: "Note-Taking Techniques", titleFr: "Techniques de prise de notes" },
+            { title: "Accent & Speed Adaptation", titleFr: "Adaptation à l'accent et au débit" },
+            { title: "Practice Exam: Oral Comprehension", titleFr: "Examen pratique : Compréhension orale" },
+          ]},
+          { title: "Oral Expression", titleFr: "Expression Orale", description: "Master SLE oral expression.", descriptionFr: "Maîtriser l'expression orale de l'ELS.", lessons: [
+            { title: "Fluency & Coherence", titleFr: "Aisance et cohérence" },
+            { title: "Argumentation Strategies", titleFr: "Stratégies d'argumentation" },
+            { title: "Exam Simulation", titleFr: "Simulation d'examen" },
+            { title: "Final SLE Readiness Assessment", titleFr: "Évaluation finale de préparation à l'ELS" },
+          ]},
+        ],
+      },
+      // ── ESL Paths ──
+      {
+        pathNumber: 1, title: "ESL Path I: Foundations", titleFr: "ALS Path I : Fondations",
+        slug: "esl-path-i-foundations",
+        description: "Build the fundamental English communication skills required for basic professional interactions in the Canadian federal public service.",
+        descriptionFr: "Développez les compétences de communication fondamentales en anglais requises pour les interactions professionnelles de base dans la fonction publique fédérale canadienne.",
+        shortDescription: "Essential foundations for professional English communication in the GC workplace.",
+        shortDescriptionFr: "Bases essentielles pour la communication professionnelle en anglais au sein du GC.",
+        level: "beginner", category: "business_english", targetLanguage: "english",
+        price: 89900, originalPrice: 99900, estimatedHours: 30,
+        modules: [
+          { title: "First Impressions", titleFr: "Premières Impressions", description: "Build confidence in professional introductions.", descriptionFr: "Développer la confiance dans les présentations professionnelles.", lessons: [
+            { title: "Hello, My Name Is...", titleFr: "Bonjour, je m'appelle..." },
+            { title: "My Office, My Team", titleFr: "Mon bureau, mon équipe" },
+            { title: "Numbers, Dates & Time", titleFr: "Chiffres, dates et heure" },
+            { title: "Can You Help Me?", titleFr: "Pouvez-vous m'aider?" },
+          ]},
+          { title: "Your Work Environment", titleFr: "Votre Environnement de Travail", description: "Describe your professional environment.", descriptionFr: "Décrire votre environnement professionnel.", lessons: [
+            { title: "What Do You Do?", titleFr: "Que faites-vous?" },
+            { title: "Our Department", titleFr: "Notre ministère" },
+            { title: "Office Supplies & Technology", titleFr: "Fournitures et technologie" },
+            { title: "Health & Safety at Work", titleFr: "Santé et sécurité au travail" },
+          ]},
+          { title: "Daily Routines", titleFr: "Routines Quotidiennes", description: "Manage time and daily interactions.", descriptionFr: "Gérer le temps et les interactions quotidiennes.", lessons: [
+            { title: "My Typical Day", titleFr: "Ma journée typique" },
+            { title: "Making Appointments", titleFr: "Prendre rendez-vous" },
+            { title: "Breaks & Small Talk", titleFr: "Pauses et conversations informelles" },
+            { title: "End of the Day", titleFr: "Fin de journée" },
+          ]},
+          { title: "Getting Help", titleFr: "Obtenir de l'Aide", description: "Ask for information and clarification.", descriptionFr: "Demander des informations et des clarifications.", lessons: [
+            { title: "I Don't Understand", titleFr: "Je ne comprends pas" },
+            { title: "Where Is the...?", titleFr: "Où se trouve le...?" },
+            { title: "I Need Help With...", titleFr: "J'ai besoin d'aide avec..." },
+            { title: "Thank You & Follow Up", titleFr: "Merci et suivi" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 2, title: "ESL Path II: Everyday Fluency", titleFr: "ALS Path II : Aisance Quotidienne",
+        slug: "esl-path-ii-everyday-fluency",
+        description: "Develop confidence in everyday professional English interactions. Navigate digital tools, phone conversations, and team meetings with increasing fluency.",
+        descriptionFr: "Développez votre confiance dans les interactions professionnelles quotidiennes en anglais. Naviguez les outils numériques, les conversations téléphoniques et les réunions d'équipe avec une aisance croissante.",
+        shortDescription: "Build everyday English fluency for confident workplace communication.",
+        shortDescriptionFr: "Développez une aisance quotidienne en anglais pour une communication confiante au travail.",
+        level: "beginner", category: "business_english", targetLanguage: "english",
+        price: 89900, originalPrice: 99900, estimatedHours: 30,
+        modules: [
+          { title: "Digital Workspace", titleFr: "Espace Numérique", description: "Navigate digital tools in English.", descriptionFr: "Naviguer les outils numériques en anglais.", lessons: [
+            { title: "Email Etiquette", titleFr: "Étiquette courriel" },
+            { title: "Video Conferencing", titleFr: "Vidéoconférence" },
+            { title: "Collaborative Platforms", titleFr: "Plateformes collaboratives" },
+            { title: "Digital Security", titleFr: "Sécurité numérique" },
+          ]},
+          { title: "On the Phone", titleFr: "Au Téléphone", description: "Handle phone conversations professionally.", descriptionFr: "Gérer les conversations téléphoniques professionnellement.", lessons: [
+            { title: "Answering & Transferring", titleFr: "Répondre et transférer" },
+            { title: "Taking Messages", titleFr: "Prendre des messages" },
+            { title: "Conference Calls", titleFr: "Appels conférence" },
+            { title: "Voicemail", titleFr: "Messagerie vocale" },
+          ]},
+          { title: "Team Meetings", titleFr: "Réunions d'Équipe", description: "Participate effectively in team meetings.", descriptionFr: "Participer efficacement aux réunions d'équipe.", lessons: [
+            { title: "Meeting Basics", titleFr: "Les bases de la réunion" },
+            { title: "Sharing Updates", titleFr: "Partager des mises à jour" },
+            { title: "Asking Questions", titleFr: "Poser des questions" },
+            { title: "Action Items", titleFr: "Points d'action" },
+          ]},
+          { title: "Your Contributions", titleFr: "Vos Contributions", description: "Showcase your work and contributions.", descriptionFr: "Mettre en valeur votre travail et vos contributions.", lessons: [
+            { title: "Describing Your Work", titleFr: "Décrire votre travail" },
+            { title: "Progress Updates", titleFr: "Mises à jour de progrès" },
+            { title: "Seeking Feedback", titleFr: "Demander de la rétroaction" },
+            { title: "Celebrating Achievements", titleFr: "Célébrer les réalisations" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 3, title: "ESL Path III: Operational English", titleFr: "ALS Path III : Anglais Opérationnel",
+        slug: "esl-path-iii-operational-english",
+        description: "Achieve functional professional autonomy in English. Plan projects, provide feedback, and navigate public service culture with confidence.",
+        descriptionFr: "Atteignez une autonomie professionnelle fonctionnelle en anglais. Planifiez des projets, fournissez de la rétroaction et naviguez la culture de la fonction publique avec confiance.",
+        shortDescription: "Professional English communication for independent workplace autonomy.",
+        shortDescriptionFr: "Communication professionnelle en anglais pour une autonomie indépendante au travail.",
+        level: "intermediate", category: "business_english", targetLanguage: "english",
+        price: 99900, originalPrice: 119900, estimatedHours: 35,
+        modules: [
+          { title: "Planning & Organizing", titleFr: "Planification et Organisation", description: "Plan and organize in English.", descriptionFr: "Planifier et organiser en anglais.", lessons: [
+            { title: "Project Planning", titleFr: "Planification de projet" },
+            { title: "Setting Priorities", titleFr: "Établir les priorités" },
+            { title: "Delegating Tasks", titleFr: "Déléguer des tâches" },
+            { title: "Timeline Management", titleFr: "Gestion des échéanciers" },
+          ]},
+          { title: "Feedback", titleFr: "Rétroaction", description: "Give and receive feedback effectively.", descriptionFr: "Donner et recevoir de la rétroaction efficacement.", lessons: [
+            { title: "Constructive Feedback", titleFr: "Rétroaction constructive" },
+            { title: "Receiving Criticism", titleFr: "Recevoir la critique" },
+            { title: "Peer Reviews", titleFr: "Évaluations par les pairs" },
+            { title: "360 Feedback", titleFr: "Rétroaction 360" },
+          ]},
+          { title: "Public Service Culture", titleFr: "Culture de la Fonction Publique", description: "Navigate public service culture.", descriptionFr: "Naviguer la culture de la fonction publique.", lessons: [
+            { title: "Values & Ethics", titleFr: "Valeurs et éthique" },
+            { title: "Diversity & Inclusion", titleFr: "Diversité et inclusion" },
+            { title: "Official Languages", titleFr: "Langues officielles" },
+            { title: "Workplace Wellness", titleFr: "Bien-être au travail" },
+          ]},
+          { title: "Career Path", titleFr: "Parcours de Carrière", description: "Navigate career development.", descriptionFr: "Naviguer le développement de carrière.", lessons: [
+            { title: "Career Goals", titleFr: "Objectifs de carrière" },
+            { title: "Networking Strategies", titleFr: "Stratégies de réseautage" },
+            { title: "Interview Skills", titleFr: "Compétences d'entrevue" },
+            { title: "Professional Development", titleFr: "Développement professionnel" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 4, title: "ESL Path IV: Strategic Expression", titleFr: "ALS Path IV : Expression Stratégique",
+        slug: "esl-path-iv-strategic-expression",
+        description: "Master advanced English communication for leadership roles. Lead meetings, write for impact, present with confidence, and negotiate effectively.",
+        descriptionFr: "Maîtrisez la communication avancée en anglais pour les rôles de leadership. Dirigez des réunions, rédigez avec impact, présentez avec confiance et négociez efficacement.",
+        shortDescription: "Advanced strategic English communication for leadership roles.",
+        shortDescriptionFr: "Communication stratégique avancée en anglais pour les rôles de leadership.",
+        level: "advanced", category: "business_english", targetLanguage: "english",
+        price: 109900, originalPrice: 129900, estimatedHours: 35,
+        modules: [
+          { title: "Leading Meetings", titleFr: "Diriger des Réunions", description: "Lead meetings effectively.", descriptionFr: "Diriger des réunions efficacement.", lessons: [
+            { title: "Opening & Agenda", titleFr: "Ouverture et ordre du jour" },
+            { title: "Facilitating Discussion", titleFr: "Faciliter la discussion" },
+            { title: "Decision Making", titleFr: "Prise de décision" },
+            { title: "Closing & Follow-up", titleFr: "Clôture et suivi" },
+          ]},
+          { title: "Writing for Impact", titleFr: "Rédiger avec Impact", description: "Write compelling professional documents.", descriptionFr: "Rédiger des documents professionnels convaincants.", lessons: [
+            { title: "Executive Summaries", titleFr: "Sommaires exécutifs" },
+            { title: "Persuasive Writing", titleFr: "Rédaction persuasive" },
+            { title: "Policy Briefs", titleFr: "Notes de politique" },
+            { title: "Editing for Clarity", titleFr: "Révision pour la clarté" },
+          ]},
+          { title: "Presenting with Confidence", titleFr: "Présenter avec Confiance", description: "Deliver impactful presentations.", descriptionFr: "Livrer des présentations percutantes.", lessons: [
+            { title: "Storytelling Techniques", titleFr: "Techniques de narration" },
+            { title: "Data Visualization", titleFr: "Visualisation des données" },
+            { title: "Engaging Your Audience", titleFr: "Engager votre auditoire" },
+            { title: "Handling Tough Questions", titleFr: "Gérer les questions difficiles" },
+          ]},
+          { title: "Negotiation & Persuasion", titleFr: "Négociation et Persuasion", description: "Master negotiation and persuasion.", descriptionFr: "Maîtriser la négociation et la persuasion.", lessons: [
+            { title: "Negotiation Frameworks", titleFr: "Cadres de négociation" },
+            { title: "Win-Win Strategies", titleFr: "Stratégies gagnant-gagnant" },
+            { title: "Influence Tactics", titleFr: "Tactiques d'influence" },
+            { title: "Cross-Cultural Negotiation", titleFr: "Négociation interculturelle" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 5, title: "ESL Path V: Professional Mastery", titleFr: "ALS Path V : Maîtrise Professionnelle",
+        slug: "esl-path-v-professional-mastery",
+        description: "Achieve expert-level English communication. Manage teams, collaborate across departments, navigate policy discussions, and handle crisis communication.",
+        descriptionFr: "Atteignez une communication de niveau expert en anglais. Gérez des équipes, collaborez entre ministères, naviguez les discussions de politique et gérez la communication de crise.",
+        shortDescription: "Expert-level English mastery for executive bilingual communication.",
+        shortDescriptionFr: "Maîtrise de niveau expert en anglais pour la communication bilingue exécutive.",
+        level: "advanced", category: "business_english", targetLanguage: "english",
+        price: 119900, originalPrice: 149900, estimatedHours: 40,
+        modules: [
+          { title: "Managing People & Performance", titleFr: "Gestion des Personnes et du Rendement", description: "Manage teams effectively.", descriptionFr: "Gérer les équipes efficacement.", lessons: [
+            { title: "Performance Conversations", titleFr: "Conversations de rendement" },
+            { title: "Coaching & Mentoring", titleFr: "Coaching et mentorat" },
+            { title: "Team Building", titleFr: "Consolidation d'équipe" },
+            { title: "Conflict Management", titleFr: "Gestion des conflits" },
+          ]},
+          { title: "Interdepartmental Collaboration", titleFr: "Collaboration Interministérielle", description: "Collaborate across departments.", descriptionFr: "Collaborer entre les ministères.", lessons: [
+            { title: "Cross-functional Teams", titleFr: "Équipes interfonctionnelles" },
+            { title: "Stakeholder Engagement", titleFr: "Engagement des parties prenantes" },
+            { title: "Joint Initiatives", titleFr: "Initiatives conjointes" },
+            { title: "Shared Services", titleFr: "Services partagés" },
+          ]},
+          { title: "Policy & Legislation", titleFr: "Politique et Législation", description: "Navigate policy and legislation.", descriptionFr: "Naviguer la politique et la législation.", lessons: [
+            { title: "Policy Development", titleFr: "Élaboration de politiques" },
+            { title: "Legislative Process", titleFr: "Processus législatif" },
+            { title: "Regulatory Compliance", titleFr: "Conformité réglementaire" },
+            { title: "Impact Assessment", titleFr: "Évaluation d'impact" },
+          ]},
+          { title: "Crisis Communication", titleFr: "Communication de Crise", description: "Handle crisis communication.", descriptionFr: "Gérer la communication de crise.", lessons: [
+            { title: "Crisis Response Plans", titleFr: "Plans de réponse de crise" },
+            { title: "Media Relations", titleFr: "Relations avec les médias" },
+            { title: "Public Statements", titleFr: "Déclarations publiques" },
+            { title: "Post-Crisis Recovery", titleFr: "Rétablissement post-crise" },
+          ]},
+        ],
+      },
+      {
+        pathNumber: 6, title: "ESL Path VI: Executive Leadership", titleFr: "ALS Path VI : Leadership Exécutif",
+        slug: "esl-path-vi-executive-leadership",
+        description: "C-Suite communication excellence. Master strategic leadership, executive presence, thought leadership, and legacy building in English.",
+        descriptionFr: "Excellence en communication de la haute direction. Maîtrisez le leadership stratégique, la présence exécutive, le leadership intellectuel et la construction d'un héritage en anglais.",
+        shortDescription: "C-Suite English communication for executive leadership.",
+        shortDescriptionFr: "Communication en anglais de la haute direction pour le leadership exécutif.",
+        level: "advanced", category: "business_english", targetLanguage: "english",
+        price: 129900, originalPrice: 159900, estimatedHours: 40,
+        modules: [
+          { title: "Strategic Leadership", titleFr: "Leadership Stratégique", description: "Lead strategically in English.", descriptionFr: "Diriger stratégiquement en anglais.", lessons: [
+            { title: "Executive Decision-Making", titleFr: "Prise de décision exécutive" },
+            { title: "Vision Communication", titleFr: "Communication de la vision" },
+            { title: "Strategic Communication", titleFr: "Communication stratégique" },
+            { title: "Leading Organizational Change", titleFr: "Diriger le changement organisationnel" },
+          ]},
+          { title: "Executive Presence", titleFr: "Présence Exécutive", description: "Develop executive presence.", descriptionFr: "Développer la présence exécutive.", lessons: [
+            { title: "Gravitas & Authority", titleFr: "Gravitas et autorité" },
+            { title: "Board Presentations", titleFr: "Présentations au conseil" },
+            { title: "Media Appearances", titleFr: "Apparitions médiatiques" },
+            { title: "Thought Leadership", titleFr: "Leadership intellectuel" },
+          ]},
+          { title: "Thought Leadership", titleFr: "Leadership Intellectuel", description: "Establish thought leadership.", descriptionFr: "Établir un leadership intellectuel.", lessons: [
+            { title: "Publishing & Speaking", titleFr: "Publication et prise de parole" },
+            { title: "Industry Influence", titleFr: "Influence dans l'industrie" },
+            { title: "Mentoring & Coaching", titleFr: "Mentorat et coaching" },
+            { title: "Building Legacy", titleFr: "Bâtir un héritage" },
+          ]},
+          { title: "Legacy & Influence", titleFr: "Héritage et Influence", description: "Create lasting impact.", descriptionFr: "Créer un impact durable.", lessons: [
+            { title: "Succession Planning", titleFr: "Planification de la relève" },
+            { title: "Knowledge Transfer", titleFr: "Transfert de connaissances" },
+            { title: "Institutional Memory", titleFr: "Mémoire institutionnelle" },
+            { title: "Final Capstone", titleFr: "Projet final intégrateur" },
+          ]},
+        ],
+      },
+    ];
+
+    const courseIds: number[] = [];
+    let pathIndex = 0;
+
+    for (const path of allPaths) {
+      const isFSL = pathIndex < 6;
+      const programLabel = isFSL ? "FSL" : "ESL";
+      results.push(`\n📖 Creating ${programLabel} ${path.title}...`);
+
+      // Insert course
+      const courseResult = await db.execute(sql`
+        INSERT INTO courses (title, titleFr, slug, description, descriptionFr, shortDescription, shortDescriptionFr,
+          category, level, targetLanguage, price, originalPrice, currency, accessType,
+          totalModules, totalLessons, totalDurationMinutes, totalActivities,
+          instructorName, status, publishedAt,
+          hasCertificate, hasQuizzes, hasDownloads, pathNumber, estimatedHours)
+        VALUES (
+          ${path.title}, ${path.titleFr}, ${path.slug},
+          ${path.description}, ${path.descriptionFr},
+          ${path.shortDescription}, ${path.shortDescriptionFr},
+          ${path.category}, ${path.level}, ${path.targetLanguage},
+          ${path.price}, ${path.originalPrice}, 'CAD', 'one_time',
+          4, 16, ${path.estimatedHours * 60}, 112,
+          'Prof. Steven Rusinga', 'published', NOW(),
+          true, true, true, ${path.pathNumber}, ${path.estimatedHours}
+        )
+      `);
+
+      const courseId = (courseResult as any)[0].insertId;
+      courseIds.push(courseId);
+      results.push(`  ✅ Course created (ID: ${courseId})`);
+
+      // Insert modules and lessons
+      for (let mi = 0; mi < path.modules.length; mi++) {
+        const mod = path.modules[mi];
+        const moduleResult = await db.execute(sql`
+          INSERT INTO course_modules (courseId, title, titleFr, description, descriptionFr,
+            sortOrder, moduleNumber, totalLessons, totalDurationMinutes, status)
+          VALUES (
+            ${courseId}, ${mod.title}, ${mod.titleFr},
+            ${mod.description}, ${mod.descriptionFr},
+            ${mi}, ${mi + 1}, 4, ${path.estimatedHours * 15}, 'published'
+          )
+        `);
+        const moduleId = (moduleResult as any)[0].insertId;
+        results.push(`  📦 Module ${mi + 1}: ${mod.title} (ID: ${moduleId})`);
+
+        for (let li = 0; li < mod.lessons.length; li++) {
+          const lesson = mod.lessons[li];
+          await db.execute(sql`
+            INSERT INTO lessons (moduleId, courseId, title, titleFr,
+              contentType, sortOrder, estimatedMinutes, isMandatory, status)
+            VALUES (
+              ${moduleId}, ${courseId}, ${lesson.title}, ${lesson.titleFr},
+              'text', ${li}, 50, true, 'published'
+            )
+          `);
+        }
+        results.push(`    ✅ 4 lessons created`);
+      }
+
+      pathIndex++;
+    }
+
+    results.push(`\n🎉 Migration complete! Created ${courseIds.length} courses with ${courseIds.length * 4} modules and ${courseIds.length * 16} lessons.`);
+    results.push(`Course IDs: ${courseIds.join(", ")}`);
+
+    log.info(results.join("\n"));
+    return res.json({
+      success: true,
+      results,
+      courseIds,
+      summary: {
+        totalCourses: courseIds.length,
+        totalModules: courseIds.length * 4,
+        totalLessons: courseIds.length * 16,
+        fslCourses: 6,
+        eslCourses: 6,
+      },
+    });
+  } catch (error: any) {
+    log.error("❌ Course replacement migration failed:", error);
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+      stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+    });
+  }
+});
+
 export default router;

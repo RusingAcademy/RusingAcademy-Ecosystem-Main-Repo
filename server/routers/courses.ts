@@ -106,7 +106,7 @@ export const coursesRouter = router({
       .from(courses)
       .where(eq(courses.status, "published"))
       .orderBy(desc(courses.totalEnrollments))
-      .limit(8);
+      .limit(12);
 
     return result;
   }),
