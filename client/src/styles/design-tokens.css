@@ -419,3 +419,76 @@ textarea:focus-visible,
 .reading-width { max-width: 65ch; }
 .section-gap { margin-bottom: clamp(3rem, 5vw, 5rem); }
 .content-gap { margin-bottom: clamp(1.5rem, 3vw, 3rem); }
+
+/* ============================================
+   PREMIUM CARD SYSTEM — Wave 11
+   ============================================ */
+
+/* Base premium card */
+.premium-card {
+  background: white;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 3px solid #C9A84C;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.premium-card:hover {
+  box-shadow: 0 20px 40px -12px rgba(201, 168, 76, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+/* Dark mode premium card */
+.dark .premium-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: #C9A84C;
+}
+.dark .premium-card:hover {
+  box-shadow: 0 20px 40px -12px rgba(201, 168, 76, 0.2), 0 8px 16px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* Premium card icon container */
+.premium-card-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(201, 168, 76, 0.05));
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C9A84C;
+  flex-shrink: 0;
+}
+
+/* Premium card badge */
+.premium-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(201, 168, 76, 0.08);
+  color: #C9A84C;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+/* Premium card with glassmorphism */
+.premium-card-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 3px solid #C9A84C;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.premium-card-glass:hover {
+  box-shadow: 0 20px 40px -12px rgba(201, 168, 76, 0.12);
+  transform: translateY(-4px);
+}
