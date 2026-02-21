@@ -162,6 +162,23 @@ function HeroSection({ language }: { language: string }) {
   );
 }
 
+
+// ============================================================================
+// BRIDGE: HERO → CONTENT TRANSITION
+// ============================================================================
+function HeroContentBridge({ language }: { language: string }) {
+  return (
+    <div className="relative">
+      {/* Dark-to-light gradient bridge */}
+      <div className="h-16 md:h-24 bg-gradient-to-b from-[#0F3D3E] via-[#0F3D3E]/60 to-transparent" />
+      {/* Gold accent line */}
+      <div className="w-full flex justify-center -mt-1">
+        <div className="w-24 md:w-32 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
+      </div>
+    </div>
+  );
+}
+
 // ============================================================================
 // SECTION 1: TRILEMME DE L'EXCELLENCE BILINGUE
 // ============================================================================
@@ -194,7 +211,7 @@ function TrilemmeSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md">
+    <section className="py-16 md:py-20 lg:py-28 px-4 section-bg-1 dark:bg-white/[0.08] dark:backdrop-blur-md border-t border-[#C9A84C]/20">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
