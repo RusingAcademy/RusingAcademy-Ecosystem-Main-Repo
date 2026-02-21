@@ -179,6 +179,55 @@ function HeroContentBridge({ language }: { language: string }) {
   );
 }
 
+
+// ============================================================================
+// TRUST BAR: ANIMATED SOCIAL PROOF COUNTERS
+// ============================================================================
+function TrustBar({ language }: { language: string }) {
+  const stats = [
+    { valueEn: "500+", valueFr: "500+", labelEn: "Public Servants Trained", labelFr: "Fonctionnaires formés", icon: Users },
+    { valueEn: "6", valueFr: "6", labelEn: "Progressive Paths", labelFr: "Parcours progressifs", icon: BookOpen },
+    { valueEn: "95%", valueFr: "95%", labelEn: "Success Rate", labelFr: "Taux de réussite", icon: Award },
+    { valueEn: "3x", valueFr: "3x", labelEn: "Faster Results", labelFr: "Résultats plus rapides", icon: TrendingUp },
+  ];
+
+  return (
+    <section className="relative py-8 md:py-10 bg-gradient-to-r from-[#0F3D3E] via-[#1a5c5e] to-[#0F3D3E] overflow-hidden">
+      {/* Subtle gold shimmer line at top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent" />
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex flex-col items-center text-center group"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#C9A84C]/15 flex items-center justify-center mb-3 group-hover:bg-[#C9A84C]/25 transition-colors duration-300">
+                  <Icon className="w-5 h-5 text-[#C9A84C]" />
+                </div>
+                <span className="text-2xl md:text-3xl font-bold text-white mb-1 tracking-tight">
+                  {language === "en" ? stat.valueEn : stat.valueFr}
+                </span>
+                <span className="text-xs md:text-sm text-white/70 font-medium uppercase tracking-wider">
+                  {language === "en" ? stat.labelEn : stat.labelFr}
+                </span>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+      {/* Subtle gold shimmer line at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent" />
+    </section>
+  );
+}
+
 // ============================================================================
 // SECTION 1: TRILEMME DE L'EXCELLENCE BILINGUE
 // ============================================================================
