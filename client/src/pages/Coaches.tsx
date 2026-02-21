@@ -215,8 +215,8 @@ export default function Coaches() {
           <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
             <div className="flex flex-col lg:flex-row gap-8">
             {/* Filters Sidebar - Premium */}
-            <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-              <div className="lg:sticky lg:top-24 space-y-6">
+            <aside className={`lg:w-80 shrink-0 ${showFilters ? 'block' : 'hidden lg:block'}`}>
+              <div className="lg:sticky lg:top-24 space-y-6 max-h-[calc(100vh-7rem)] overflow-y-auto">
                 {/* Filter Card - Premium Glassmorphism */}
                 <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl shadow-xl border border-slate-200/50 dark:border-white/15 overflow-hidden backdrop-blur-md" style={{ background: 'rgba(255, 255, 255, 0.10)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
                   <div className="p-6 border-b border-slate-100 dark:border-teal-800">
