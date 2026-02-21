@@ -306,7 +306,7 @@ function TrilemmeSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+              className="group relative premium-card rounded-2xl p-8"
             >
               <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${obstacle.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <obstacle.icon className="w-8 h-8 text-white" />
@@ -443,7 +443,7 @@ function EcosystemSection({ language }: { language: string }) {
             <motion.div
               key={pillar.id}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 ecosystem-card"
+              className="group relative premium-card rounded-2xl overflow-hidden ecosystem-card"
             >
               {/* Image */}
               <div className="relative h-44 md:h-56 overflow-hidden ecosystem-card-image">
@@ -678,7 +678,7 @@ function OffersSection({ language }: { language: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`group flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-stretch bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100`}
+                className={`group flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-stretch premium-card rounded-2xl overflow-hidden`}
               >
                 {/* Image Side */}
                 <div className="relative w-full md:w-1/2 h-64 md:h-auto min-h-[280px] overflow-hidden">
@@ -1485,7 +1485,7 @@ function TeamSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200"
+              className="group premium-card rounded-2xl overflow-hidden"
             >
               {/* Unified Card - Image fills top to bottom on left, content on right */}
               <div className="flex flex-col md:flex-row h-full">
