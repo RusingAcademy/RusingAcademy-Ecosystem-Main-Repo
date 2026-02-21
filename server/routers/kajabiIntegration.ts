@@ -312,6 +312,22 @@ export const blogRouter = router({
       return post ?? null;
     }),
 
+  publicList: publicProcedure
+    .input(z.object({
+      category: z.string().optional(),
+      limit: z.number().default(20),
+      offset: z.number().default(0),
+    }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const conditions: any[] = [eq(blogPosts.status, "published")];
+      if (input?.category) conditions.push(eq(blogPosts.category, input.category));
+      const where = and(...conditions);
+      const items = await db.select().from(blogPosts).where(where).orderBy(desc(blogPosts.createdAt)).limit(input?.limit ?? 20).offset(input?.offset ?? 0);
+      const [totalResult] = await db.select({ total: count() }).from(blogPosts).where(where);
+      return { items, total: totalResult?.total ?? 0 };
+    }),
+
   getBySlug: publicProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ input }) => {

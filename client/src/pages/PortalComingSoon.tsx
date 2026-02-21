@@ -153,7 +153,7 @@ export default function PortalComingSoon({ portalKey }: { portalKey: string }) {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md">
         <div className="w-full max-w-md text-center">
           {/* Logo */}
-          <img src={LOGO_ICON} alt="RusingAcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />
+          <img loading="lazy" src={LOGO_ICON} alt="RusingAcademy" className="w-16 h-16 mx-auto mb-6 rounded-2xl shadow-md" />
 
           {/* Construction badge */}
           <div

@@ -73,7 +73,7 @@ export default function CommunityForum() {
         {/* Header — Premium glassmorphism banner */}
         <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(60, 87, 89, 0.15)" }}>
           <div className="relative h-[160px]">
-            <img src={FORUM_IMG} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+            <img loading="lazy" src={FORUM_IMG} alt="" className="w-full h-full object-cover" aria-hidden="true" />
             <div className="absolute inset-0 flex items-center" style={{ background: "linear-gradient(135deg, rgba(25, 37, 36, 0.9), rgba(60, 87, 89, 0.7))" }}>
               <div className="px-6 md:px-8">
                 <div className="flex items-center gap-2 mb-3">

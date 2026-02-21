@@ -53,7 +53,7 @@ function CourseCard({ course, onSelect }: { course: DisplayCourse; onSelect: (c:
     >
       <div className="relative h-40 overflow-hidden flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)), rgba(212, 175, 55, 0.3))" }}>
         {course.thumbnailUrl ? (
-          <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img loading="lazy" src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         ) : (
           <BookOpen className="w-12 h-12 text-white/30" />
         )}
@@ -117,7 +117,7 @@ function CourseDetail({ course, onBack }: { course: DisplayCourse; onBack: () =>
       <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: "0 8px 32px rgba(27, 20, 100, 0.1)" }}>
         <div className="w-full h-52 flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--brand-obsidian, var(--accent-purple-deep)), var(--brand-obsidian, var(--accent-purple-dark)), rgba(212, 175, 55, 0.3))" }}>
           {course.thumbnailUrl ? (
-            <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover" />
+            <img loading="lazy" src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover" />
           ) : (
             <BookOpen className="w-16 h-16 text-white/20" />
           )}

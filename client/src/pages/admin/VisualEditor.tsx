@@ -384,7 +384,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
           <div className="text-center max-w-4xl mx-auto px-6">
             {content.backgroundImage && (
               <div className="absolute inset-0 z-0">
-                <img src={content.backgroundImage} alt="" className="w-full h-full object-cover opacity-30" />
+                <img loading="lazy" src={content.backgroundImage} alt="" className="w-full h-full object-cover opacity-30" />
               </div>
             )}
             <div className="relative z-10">
@@ -516,7 +516,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
               {members.map((m: any, i: number) => (
                 <div key={i} className="text-center p-5 rounded-xl border">
                   <div className="w-20 h-20 rounded-full bg-gray-200 mx-auto mb-3 overflow-hidden">
-                    {m.photo ? <img src={m.photo} alt={m.name} className="w-full h-full object-cover" /> : <Users className="w-8 h-8 text-cyan-300 mt-6 mx-auto" />}
+                    {m.photo ? <img loading="lazy" src={m.photo} alt={m.name} className="w-full h-full object-cover" /> : <Users className="w-8 h-8 text-cyan-300 mt-6 mx-auto" />}
                   </div>
                   <h3 className="font-semibold">{m.name || "Team Member"}</h3>
                   {m.role && <p className="text-sm opacity-60">{m.role}</p>}
@@ -751,7 +751,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
                       </div>
                       {localData.content.backgroundImage && (
                         <div className="mt-1 rounded-md overflow-hidden border h-20">
-                          <img src={localData.content.backgroundImage} alt="Background preview" className="w-full h-full object-cover" />
+                          <img loading="lazy" src={localData.content.backgroundImage} alt="Background preview" className="w-full h-full object-cover" />
                         </div>
                       )}
                     </div>

@@ -383,7 +383,7 @@ export default function CourseBuilder() {
                   <CardContent className="flex items-center justify-between p-5">
                     <div className="flex items-center gap-4">
                       {course.thumbnailUrl ? (
-                        <img src={course.thumbnailUrl} alt="" className="w-16 h-16 rounded-lg object-cover" />
+                        <img loading="lazy" src={course.thumbnailUrl} alt="" className="w-16 h-16 rounded-lg object-cover" />
                       ) : (
                         <div className="w-16 h-16 rounded-lg bg-indigo-900/10 flex items-center justify-center">
                           <BookOpen className="w-7 h-7 text-indigo-900" />

@@ -99,7 +99,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         {/* Logo Section */}
         <div className="px-5 pt-5 pb-3 border-b border-gray-100">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <img src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
+            <img loading="lazy" src={LOGO_ICON} alt="RusingAcademy" className="w-8 h-8 rounded-lg" />
             <div>
               <span className="text-gray-900 dark:text-foreground font-semibold text-sm tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
                 RusingAcademy

@@ -31,7 +31,7 @@ export default function HRLayout({ children }: { children: React.ReactNode }) {
         <button onClick={() => setSidebarCollapsed(false)} className="p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
           <span className="material-icons text-gray-700">menu</span>
         </button>
-        <img src={LOGO_ICON} alt="" className="h-8 ml-3 rounded-lg" />
+        <img loading="lazy" src={LOGO_ICON} alt="" className="h-8 ml-3 rounded-lg" />
         <span className="ml-2 text-sm font-semibold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
           Client Portal
         </span>

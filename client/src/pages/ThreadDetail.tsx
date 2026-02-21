@@ -190,7 +190,7 @@ export default function ThreadDetail() {
               <div className="flex items-center gap-4 text-sm" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
                 <div className="flex items-center gap-2">
                   {thread.authorAvatar ? (
-                    <img src={thread.authorAvatar} alt="" className="w-6 h-6 rounded-full" />
+                    <img loading="lazy" src={thread.authorAvatar} alt="" className="w-6 h-6 rounded-full" />
                   ) : (
                     <div
                       className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
@@ -279,7 +279,7 @@ export default function ThreadDetail() {
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       {post.authorAvatar ? (
-                        <img src={post.authorAvatar} alt="" className="w-9 h-9 rounded-full" />
+                        <img loading="lazy" src={post.authorAvatar} alt="" className="w-9 h-9 rounded-full" />
                       ) : (
                         <div
                           className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold"

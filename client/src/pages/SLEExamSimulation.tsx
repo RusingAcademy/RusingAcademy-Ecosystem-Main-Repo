@@ -752,7 +752,7 @@ export default function SLEExamSimulation() {
                     )}
                   >
                     <div className="flex items-center gap-3">
-                      <img src={c.image} alt={c.name} className="w-12 h-12 rounded-full object-cover" />
+                      <img loading="lazy" src={c.image} alt={c.name} className="w-12 h-12 rounded-full object-cover" />
                       <div>
                         <p className="font-semibold text-white">{c.name}</p>
                         <p className="text-xs text-cyan-300">{c.flag} {c.specialty}</p>
@@ -1059,7 +1059,7 @@ export default function SLEExamSimulation() {
       {/* Top Bar */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-teal-800 bg-obsidian/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <img src={coach.image} alt={coach.name} className="w-8 h-8 rounded-full object-cover" />
+          <img loading="lazy" src={coach.image} alt={coach.name} className="w-8 h-8 rounded-full object-cover" />
           <div>
             <p className="text-sm font-semibold text-white">{coach.name}</p>
             <p className="text-[10px] text-cyan-300">{phaseLabels[phase as keyof typeof phaseLabels]}</p>
@@ -1139,7 +1139,7 @@ export default function SLEExamSimulation() {
               )}
             >
               {msg.role === "assistant" && (
-                <img src={coach.image} alt="" className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1" />
+                <img loading="lazy" src={coach.image} alt="" className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1" />
               )}
               <div className={cn(
                 "max-w-[75%] rounded-2xl px-4 py-3",
@@ -1165,7 +1165,7 @@ export default function SLEExamSimulation() {
         {/* Processing indicator */}
         {isProcessing && (
           <div className="flex items-center gap-3">
-            <img src={coach.image} alt="" className="w-8 h-8 rounded-full object-cover" />
+            <img loading="lazy" src={coach.image} alt="" className="w-8 h-8 rounded-full object-cover" />
             <div className="bg-foundation border border-teal-800 rounded-2xl px-4 py-3">
               <div className="flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin text-cyan-300" />

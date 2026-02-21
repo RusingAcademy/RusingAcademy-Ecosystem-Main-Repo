@@ -72,7 +72,7 @@ export default function Certificates() {
                     {/* Decorative border */}
                     <div className="absolute inset-2 border-2 border-barholex-gold/30 rounded-lg pointer-events-none" />
 
-                    <img src={RA_LOGO} alt="RusingAcademy" className="w-12 h-12 mx-auto mb-3 rounded-lg" />
+                    <img loading="lazy" src={RA_LOGO} alt="RusingAcademy" className="w-12 h-12 mx-auto mb-3 rounded-lg" />
                     <p className="text-xs uppercase tracking-widest text-barholex-gold font-bold mb-2">Certificate of Completion</p>
                     <h3 className="text-xl font-bold mb-1">{certificate.title}</h3>
                     <p className="text-sm text-white/70 mb-3">Awarded to <strong className="text-white">{certificate.recipientName}</strong></p>
@@ -87,7 +87,7 @@ export default function Certificates() {
                   <div className="p-5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       {course.thumbnailUrl && (
-                        <img src={course.thumbnailUrl} alt="" className="w-10 h-10 rounded-lg object-cover" />
+                        <img loading="lazy" src={course.thumbnailUrl} alt="" className="w-10 h-10 rounded-lg object-cover" />
                       )}
                       <div>
                         <p className="text-sm font-medium">{course.title}</p>

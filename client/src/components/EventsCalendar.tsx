@@ -60,7 +60,7 @@ function EventCard({ event }: { event: CommunityEvent }) {
       }}
     >
       <div className="relative h-40 overflow-hidden">
-        <img src={resolveImage(event.image)} alt={event.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <img loading="lazy" src={resolveImage(event.image)} alt={event.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
         <div
           className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white"
@@ -90,7 +90,7 @@ function EventCard({ event }: { event: CommunityEvent }) {
         <p className="text-xs mb-3 line-clamp-2 leading-relaxed" style={{ color: "rgba(255, 255, 255, 0.45)" }}>{event.description}</p>
 
         <div className="flex items-center gap-2 mb-3">
-          <img src={event.host.avatar} alt={event.host.name} className="w-6 h-6 rounded-lg object-cover" style={{ border: "1px solid rgba(60, 87, 89, 0.15)" }} />
+          <img loading="lazy" src={event.host.avatar} alt={event.host.name} className="w-6 h-6 rounded-lg object-cover" style={{ border: "1px solid rgba(60, 87, 89, 0.15)" }} />
           <span className="text-[11px]" style={{ color: "rgba(255, 255, 255, 0.45)" }}>
             Hosted by <span className="font-bold" style={{ color: "rgba(255, 255, 255, 0.75)" }}>{event.host.name}</span>
           </span>

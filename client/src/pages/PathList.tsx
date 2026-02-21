@@ -112,7 +112,7 @@ export default function PathList() {
                   <div className="flex flex-col md:flex-row">
                     {/* Cover Image */}
                     <div className="relative w-full md:w-56 h-40 md:h-auto flex-shrink-0 overflow-hidden">
-                      <img src={path.coverUrl} alt={path.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img loading="lazy" src={path.coverUrl} alt={path.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       <div className="absolute inset-0" style={{
                         background: "linear-gradient(135deg, rgba(12,25,41,0.6), transparent)",
                       }} />

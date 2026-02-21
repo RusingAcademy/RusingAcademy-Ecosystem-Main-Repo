@@ -331,7 +331,7 @@ export default function MyProfile() {
                 <div className="w-full lg:w-[160px] flex flex-col items-center">
                   <div className="w-24 h-24 rounded-full bg-gradient-to-br from-teal-700/20 to-teal-700/5 flex items-center justify-center mb-2 border-2 border-teal-700/20">
                     {profile?.avatarUrl ? (
-                      <img src={profile.avatarUrl} alt={name} className="w-full h-full rounded-full object-cover" />
+                      <img loading="lazy" src={profile.avatarUrl} alt={name} className="w-full h-full rounded-full object-cover" />
                     ) : (
                       <span className="material-icons text-teal-700 text-xl md:text-3xl lg:text-4xl">person</span>
                     )}

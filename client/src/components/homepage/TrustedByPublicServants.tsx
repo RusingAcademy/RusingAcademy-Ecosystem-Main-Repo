@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Quote, Linkedin, ExternalLink } from "lucide-react";
+import { Quote, Linkedin, Star } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 interface Testimonial {
   name: string;
@@ -58,6 +59,12 @@ const testimonials: Testimonial[] = [
 export default function TrustedByPublicServants() {
   const { language } = useLanguage();
 
+  // Fetch dynamic reviews from the database
+  const { data: dynamicReviews } = trpc.getFeaturedTestimonials.useQuery(
+    { limit: 6 },
+    { staleTime: 300000 } // Cache for 5 minutes
+  );
+
   return (
     <section className="py-12 md:py-16 lg:py-24 bg-white dark:bg-white/[0.08] dark:backdrop-blur-md relative overflow-hidden">
       {/* Subtle background pattern */}
@@ -80,7 +87,7 @@ export default function TrustedByPublicServants() {
           </p>
         </div>
 
-        {/* Testimonials Grid */}
+        {/* Featured Testimonials Grid (hardcoded — verified, with photos and LinkedIn) */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {testimonials.map((testimonial, index) => (
             <div 
@@ -138,6 +145,47 @@ export default function TrustedByPublicServants() {
             </div>
           ))}
         </div>
+
+        {/* Dynamic Reviews from Database (if any exist) */}
+        {dynamicReviews && dynamicReviews.length > 0 && (
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-center text-black dark:text-foreground mb-8">
+              {language === 'fr' ? 'Avis récents de nos apprenants' : 'Recent Learner Reviews'}
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {dynamicReviews.map((review: any) => (
+                <div
+                  key={review.id}
+                  className="bg-gradient-to-b from-emerald-50/50 to-white dark:from-emerald-950/20 dark:to-white/5 rounded-xl p-6 border border-emerald-100 dark:border-emerald-800/30 shadow-sm hover:shadow-md transition-all"
+                >
+                  <div className="flex items-center gap-1 mb-3">
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 text-amber-400 fill-amber-400" />
+                    ))}
+                    {review.sleAchievement && (
+                      <span className="ml-2 text-xs bg-emerald-100 dark:bg-emerald-800/40 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full font-medium">
+                        {review.sleAchievement}
+                      </span>
+                    )}
+                  </div>
+                  {review.comment && (
+                    <p className="text-sm text-black dark:text-foreground italic leading-relaxed line-clamp-4 mb-3">
+                      "{review.comment}"
+                    </p>
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    {review.createdAt
+                      ? new Date(review.createdAt).toLocaleDateString(
+                          language === 'fr' ? 'fr-CA' : 'en-CA',
+                          { month: 'long', year: 'numeric' }
+                        )
+                      : ''}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

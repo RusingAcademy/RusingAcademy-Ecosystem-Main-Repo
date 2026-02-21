@@ -627,7 +627,7 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
           >
             {mod.thumbnailUrl ? (
               <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 ring-1 ring-border">
-                <img src={mod.thumbnailUrl} alt={mod.title} className="w-full h-full object-cover" />
+                <img loading="lazy" src={mod.thumbnailUrl} alt={mod.title} className="w-full h-full object-cover" />
               </div>
             ) : (
               <div className="w-8 h-8 rounded-full bg-cta/10 text-cta flex items-center justify-center font-bold text-sm">

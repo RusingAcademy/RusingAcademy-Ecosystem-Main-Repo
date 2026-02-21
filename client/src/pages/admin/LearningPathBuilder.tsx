@@ -760,7 +760,7 @@ function CourseManager({
                   {index + 1}
                 </span>
                 {course.courseThumbnail ? (
-                  <img src={course.courseThumbnail} alt="" className="w-10 h-7 object-cover rounded" />
+                  <img loading="lazy" src={course.courseThumbnail} alt="" className="w-10 h-7 object-cover rounded" />
                 ) : (
                   <div className="w-10 h-7 bg-gray-200 rounded" />
                 )}
@@ -801,7 +801,7 @@ function CourseManager({
               className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-green-300 transition-colors"
             >
               {course.thumbnailUrl ? (
-                <img src={course.thumbnailUrl} alt="" className="w-10 h-7 object-cover rounded" />
+                <img loading="lazy" src={course.thumbnailUrl} alt="" className="w-10 h-7 object-cover rounded" />
               ) : (
                 <div className="w-10 h-7 bg-gray-200 rounded" />
               )}

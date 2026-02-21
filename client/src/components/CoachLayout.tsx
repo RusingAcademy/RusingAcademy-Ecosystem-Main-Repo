@@ -47,7 +47,7 @@ export default function CoachLayout({ children }: CoachLayoutProps) {
           aria-label="Open navigation menu">
           <span className="material-icons text-gray-700">menu</span>
         </button>
-        <img src={LOGO_ICON} alt="" className="h-8 ml-3 rounded-lg" />
+        <img loading="lazy" src={LOGO_ICON} alt="" className="h-8 ml-3 rounded-lg" />
         <span className="ml-2 text-sm font-semibold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
           Coach Portal
         </span>

@@ -140,7 +140,7 @@ function SocialCardPreview({
       <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden max-w-[400px]">
         {image ? (
           <div className="h-[200px] bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 relative">
-            <img src={image} alt="OG" className="w-full h-full object-cover" />
+            <img loading="lazy" src={image} alt="OG" className="w-full h-full object-cover" />
           </div>
         ) : (
           <div className="h-[200px] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
@@ -163,7 +163,7 @@ function SocialCardPreview({
     <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-lg border border-gray-200 dark:border-white/15 dark:border-white/15 overflow-hidden max-w-[400px]">
       {image ? (
         <div className="h-[210px] bg-gray-100 dark:bg-white/[0.08] dark:backdrop-blur-md dark:border-white/15 relative">
-          <img src={image} alt="OG" className="w-full h-full object-cover" />
+          <img loading="lazy" src={image} alt="OG" className="w-full h-full object-cover" />
         </div>
       ) : (
         <div className="h-[210px] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">

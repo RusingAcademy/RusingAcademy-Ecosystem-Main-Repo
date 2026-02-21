@@ -28,7 +28,7 @@ export default function ProgramSelect() {
         {/* Hero Section — Light */}
         <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md border border-gray-200 dark:border-white/15 dark:border-white/15 rounded-xl p-8 md:p-10 shadow-sm">
           <div className="flex items-center gap-3 mb-3">
-            <img src={LOGO_URL} alt="RusingAcademy" className="w-10 h-10 rounded-lg" />
+            <img loading="lazy" src={LOGO_URL} alt="RusingAcademy" className="w-10 h-10 rounded-lg" />
             <span className="text-xs font-bold uppercase tracking-widest text-teal-700">Learning Portal</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>

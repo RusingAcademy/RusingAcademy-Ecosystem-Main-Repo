@@ -51,7 +51,7 @@ export const LibraryResourceCard = ({
         'relative bg-slate-100 overflow-hidden',
         viewMode === 'grid' ? 'h-56' : 'w-64 h-full'
       )}>
-        <img 
+        <img loading="lazy" 
           src={item.cover_image || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1974&auto=format&fit=crop'} 
           alt={title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

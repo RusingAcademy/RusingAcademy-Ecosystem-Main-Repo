@@ -93,7 +93,7 @@ export default function DesignAdmin() {
             <div className="space-y-3 mt-4">
               <div><Label>Logo URL</Label><Input value={logoUrl} onChange={e => setLogoUrl(e.target.value)} placeholder="https://..." className="mt-1" /></div>
               <div><Label>Favicon URL</Label><Input value={faviconUrl} onChange={e => setFaviconUrl(e.target.value)} placeholder="https://..." className="mt-1" /></div>
-              {logoUrl && <div className="mt-2"><p className="text-xs text-muted-foreground mb-1">Logo Preview:</p><img src={logoUrl} alt="Logo" className="max-h-16 object-contain" /></div>}
+              {logoUrl && <div className="mt-2"><p className="text-xs text-muted-foreground mb-1">Logo Preview:</p><img loading="lazy" src={logoUrl} alt="Logo" className="max-h-16 object-contain" /></div>}
             </div>
           </CardContent></Card>
         </TabsContent>
