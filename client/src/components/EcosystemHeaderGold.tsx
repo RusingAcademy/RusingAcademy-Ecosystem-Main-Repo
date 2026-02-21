@@ -2,7 +2,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, LogIn, LogOut, Search, Sun, Moon, User } from "lucide-react";
+import { Menu, Home, LogIn, LogOut, Search, Sun, Moon, User, BookOpen, Users, DollarSign, Mail, GraduationCap } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { SearchModal } from "./SearchModal";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -451,6 +451,32 @@ export default function EcosystemHeaderGold() {
                         )}
                       </span>
                     </button>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-slate-200 my-2" />
+
+                  {/* Quick Navigation Links */}
+                  <div className="space-y-1">
+                    <p className="px-4 text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-2">
+                      {language === "en" ? "Quick Links" : "Liens rapides"}
+                    </p>
+                    {[
+                      { href: "/courses", icon: BookOpen, label: { en: "Courses", fr: "Cours" } },
+                      { href: "/coaches", icon: Users, label: { en: "Our Coaches", fr: "Nos coachs" } },
+                      { href: "/pricing", icon: DollarSign, label: { en: "Pricing", fr: "Tarifs" } },
+                      { href: "/for-departments", icon: GraduationCap, label: { en: "For Departments", fr: "Pour les ministères" } },
+                      { href: "/contact", icon: Mail, label: { en: "Contact Us", fr: "Nous contacter" } },
+                    ].map((item) => (
+                      <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                        <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+                          <item.icon className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+                          <span className="font-medium text-sm text-black dark:text-foreground">
+                            {language === "en" ? item.label.en : item.label.fr}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
 
                   {/* Divider */}

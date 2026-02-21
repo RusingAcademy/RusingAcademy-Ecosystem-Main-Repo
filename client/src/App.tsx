@@ -5,7 +5,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import RouteErrorBoundary from "./components/RouteErrorBoundary";
-import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
@@ -776,7 +775,6 @@ function App() {
                       <Router />
                     </EcosystemLayout>
                   </Suspense>
-                  <SLEAICompanionMobileButton />
                   <NotificationPermission />
                   <OfflineIndicator />
                   <SkipToContent />
