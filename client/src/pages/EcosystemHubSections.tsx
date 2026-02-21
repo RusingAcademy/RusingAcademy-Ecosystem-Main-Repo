@@ -239,7 +239,7 @@ function TrilemmeSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+              className="group relative bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100"
             >
               <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${obstacle.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <obstacle.icon className="w-8 h-8 text-white" />
@@ -497,7 +497,7 @@ function MethodologySection({ language }: { language: string }) {
                 <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-slate-300 to-transparent" />
               )}
 
-              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
+              <div className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 text-center">
                 {/* Step Number */}
                 <div className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4" style={{color: 'var(--text)'}}>{step.number}</div>
 
@@ -604,7 +604,7 @@ function OffersSection({ language }: { language: string }) {
             <motion.div
               key={offer.id}
               variants={scaleIn}
-              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100"
+              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-slate-100"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
@@ -727,7 +727,7 @@ function TargetAudienceSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all duration-300"
+              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-xl p-6 border border-slate-200 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cta to-cta flex items-center justify-center flex-shrink-0">
@@ -757,7 +757,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           <Link href="/sle-diagnostic">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
+              className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 hover:scale-105 transition-all duration-300"
             >
               Book your free assessment
               <ArrowRight className="w-5 h-5" />
@@ -845,7 +845,7 @@ function TestimonialsSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
               {/* Author Header with Photo */}
               <div className="flex items-center gap-5 p-8 bg-gradient-to-r from-orange-50/50 to-white border-b border-amber-100/50">
@@ -1310,7 +1310,7 @@ function ValueSection({ language }: { language: string }) {
               <motion.div
                 key={index}
                 variants={scaleIn}
-                className="bg-gradient-to-br from-slate-50 to-white rounded-xl p-6 border border-slate-100 hover:shadow-lg transition-all duration-300"
+                className="bg-gradient-to-br from-slate-50 to-white rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cta to-cta flex items-center justify-center mb-4">
                   <value.icon className="w-6 h-6 text-white" />
@@ -1402,7 +1402,7 @@ function TeamSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200"
+              className="group bg-white dark:bg-white/[0.08] dark:backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-200"
             >
               {/* Unified Card - Image fills top to bottom on left, content on right */}
               <div className="flex flex-col md:flex-row h-full">
@@ -1481,7 +1481,7 @@ function FinalCTASection({ language }: { language: string }) {
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
+                className="bg-gradient-to-r from-cta to-cta hover:from-cta hover:to-cta text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 hover:scale-105 transition-all duration-300"
               >
                 <Calendar className="w-5 h-5" />
                 {language === "en" ? "Book a free discovery call (30 min)" : "Réserver un appel découverte gratuit (30 min)"}
