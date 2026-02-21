@@ -1087,11 +1087,11 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
 
   return (
     <>
-      <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-24 px-4 bg-gradient-to-b from-white via-[#C9A84C]/[0.03] to-white relative overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cta/5 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C9A84C]/8 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-slate-100/50 to-transparent rounded-full" />
         </div>
 
@@ -1107,10 +1107,10 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             {/* Badge */}
             <motion.div 
               variants={scaleIn}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-cta/10 border border-teal-500/20 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#C9A84C]/10 to-[#C9A84C]/15 border border-[#C9A84C]/30 mb-6"
             >
-              <Heart className="w-4 h-4 text-teal-600" />
-              <span className="text-sm font-medium text-teal-700">
+              <Heart className="w-4 h-4 text-[#C9A84C]" />
+              <span className="text-sm font-medium text-[#C9A84C]">
                 {language === "en" ? "Authentic Testimonials" : "Témoignages Authentiques"}
               </span>
             </motion.div>
@@ -1145,9 +1145,9 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                 onClick={() => setSelectedImage(board.src)}
               >
                 {/* Glassmorphism Card */}
-                <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-xl border border-white/70 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
+                <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/80 backdrop-blur-xl border-2 border-[#C9A84C]/20 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-[#C9A84C]/15 group-hover:-translate-y-2">
                   {/* Gradient Border Effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-cta/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#C9A84C]/20 via-transparent to-[#C9A84C]/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Organization & Date Caption */}
                   <div className="px-6 pt-4 pb-2">
@@ -1167,7 +1167,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
                         <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white dark:bg-white/[0.08] dark:backdrop-blur-md/90 backdrop-blur-sm shadow-xl">
-                          <ZoomIn className="w-5 h-5 text-teal-600" />
+                          <ZoomIn className="w-5 h-5 text-[#C9A84C]" />
                           <span className="font-medium text-black dark:text-foreground">
                             {language === "en" ? "Click to enlarge" : "Cliquez pour agrandir"}
                           </span>
@@ -1185,7 +1185,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                           {language === "en" ? "High resolution • Click to zoom" : "Haute résolution • Cliquez pour zoomer"}
                         </p>
                       </div>
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#A8893D] flex items-center justify-center shadow-lg shadow-[#C9A84C]/25 group-hover:scale-110 transition-transform duration-300">
                         <Maximize2 className="w-5 h-5 text-white" />
                       </div>
                     </div>
@@ -1204,7 +1204,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             className="text-center mt-12"
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 dark:bg-white/[0.06] dark:backdrop-blur-sm/80 backdrop-blur-sm border border-slate-200">
-              <Users className="w-5 h-5 text-teal-600" />
+              <Users className="w-5 h-5 text-[#C9A84C]" />
               <p className="text-sm text-black dark:text-foreground">
                 {language === "en"
                   ? "Real messages from federal public servants who benefited from Steven's French instruction"
