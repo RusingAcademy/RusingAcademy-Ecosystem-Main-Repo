@@ -220,6 +220,7 @@ export default function LearnerDashboard() {
     );
   };
   const [activeTab, setActiveTab] = useState("overview");
+  const [referralCopied, setReferralCopied] = useState(false);
   const [rescheduleSession, setRescheduleSession] = useState<{
     id: number;
     coachId: number;
@@ -289,6 +290,16 @@ export default function LearnerDashboard() {
   );
 
   // Fetch gamification data
+  const { data: referralStats } = trpc.getReferralStats.useQuery(
+    undefined,
+    { enabled: !!user, staleTime: 60000 }
+  );
+
+  const { data: pastSessionsData } = trpc.learner.pastSessions.useQuery(
+    undefined,
+    { enabled: !!user, staleTime: 60000 }
+  );
+
   const { data: gamificationStats } = trpc.gamification.getMyStats.useQuery(
     undefined,
     { enabled: isAuthenticated }
@@ -372,6 +383,18 @@ export default function LearnerDashboard() {
       practiceSimulation: "Practice Simulation",
       velocity: "Learning Velocity",
       certifications: "Certifications",
+      referralTitle: "Invite & Earn",
+      referralDesc: "Share your referral link and earn XP when friends join!",
+      referralCopy: "Copy Link",
+      referralCopied: "Copied!",
+      referralInvited: "Invited",
+      referralConverted: "Joined",
+      referralPoints: "XP Earned",
+      referralViewAll: "View Referral Dashboard",
+      pastSessionsTitle: "Session History",
+      pastSessionsEmpty: "No completed sessions yet",
+      pastSessionsViewAll: "View All Sessions",
+      weeklyTrendTitle: "This Week",
     },
     fr: {
       dashboard: "Portail d'apprentissage",
@@ -405,6 +428,18 @@ export default function LearnerDashboard() {
       practiceSimulation: "Simulation de Pratique",
       velocity: "Vélocité d'Apprentissage",
       certifications: "Certifications",
+      referralTitle: "Inviter et gagner",
+      referralDesc: "Partagez votre lien et gagnez des XP quand vos amis s'inscrivent !",
+      referralCopy: "Copier le lien",
+      referralCopied: "Copié !",
+      referralInvited: "Invités",
+      referralConverted: "Inscrits",
+      referralPoints: "XP gagnés",
+      referralViewAll: "Voir le tableau de parrainage",
+      pastSessionsTitle: "Historique des sessions",
+      pastSessionsEmpty: "Aucune session complétée",
+      pastSessionsViewAll: "Voir toutes les sessions",
+      weeklyTrendTitle: "Cette semaine",
     },
   };
 
@@ -1023,6 +1058,108 @@ export default function LearnerDashboard() {
                 language={language}
                 onRenewClick={(_certId) => {}}
               />
+
+              {/* ─── Referral Quick Card ─── */}
+              <GlassCard className="p-6" hover={false}>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
+                    <Gift className="h-4 w-4 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-black dark:text-foreground">{l.referralTitle}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">{l.referralDesc}</p>
+                {referralStats?.referralLink && (
+                  <div className="flex gap-2 mb-4">
+                    <div className="flex-1 bg-white/10 dark:bg-white/5 border border-border rounded-lg px-3 py-2 text-xs text-muted-foreground truncate">
+                      {referralStats.referralLink}
+                    </div>
+                    <Button
+                      size="sm"
+                      variant={referralCopied ? "default" : "outline"}
+                      className={referralCopied ? "bg-emerald-500 hover:bg-emerald-600 text-white" : ""}
+                      onClick={() => {
+                        navigator.clipboard.writeText(referralStats.referralLink);
+                        setReferralCopied(true);
+                        toast.success(l.referralCopied);
+                        setTimeout(() => setReferralCopied(false), 3000);
+                      }}
+                    >
+                      {referralCopied ? "✓" : <Share2 className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                )}
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                  <div className="text-center p-2 rounded-lg bg-white/5 dark:bg-white/5">
+                    <p className="text-lg font-bold text-foreground">{referralStats?.totalInvites ?? 0}</p>
+                    <p className="text-[10px] text-muted-foreground">{l.referralInvited}</p>
+                  </div>
+                  <div className="text-center p-2 rounded-lg bg-white/5 dark:bg-white/5">
+                    <p className="text-lg font-bold text-emerald-500">{referralStats?.registeredInvites ?? 0}</p>
+                    <p className="text-[10px] text-muted-foreground">{l.referralConverted}</p>
+                  </div>
+                  <div className="text-center p-2 rounded-lg bg-white/5 dark:bg-white/5">
+                    <p className="text-lg font-bold text-amber-500">{referralStats?.totalPointsEarned ?? 0}</p>
+                    <p className="text-[10px] text-muted-foreground">{l.referralPoints}</p>
+                  </div>
+                </div>
+                <Link href="/referrals">
+                  <Button variant="outline" size="sm" className="w-full text-xs">
+                    {l.referralViewAll}
+                    <ChevronRight className="h-3 w-3 ml-1" />
+                  </Button>
+                </Link>
+              </GlassCard>
+
+              {/* ─── Past Sessions Timeline ─── */}
+              {pastSessionsData && pastSessionsData.length > 0 && (
+                <GlassCard className="p-6" hover={false}>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-black dark:text-foreground flex items-center gap-2">
+                      <CalendarClock className="h-5 w-5 text-blue-500" />
+                      {l.pastSessionsTitle}
+                    </h3>
+                    <Link href="/app/practice-history">
+                      <Button variant="ghost" size="sm" className="text-xs text-muted-foreground hover:text-foreground">
+                        {l.pastSessionsViewAll}
+                        <ChevronRight className="h-3 w-3 ml-1" />
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="space-y-3">
+                    {pastSessionsData.slice(0, 4).map((item: any) => (
+                      <div key={item.session.id} className="flex items-start gap-3 p-3 rounded-lg bg-white/5 dark:bg-white/5 border border-transparent hover:border-blue-400/20 transition-colors">
+                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Video className="h-4 w-4 text-blue-400" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-foreground truncate">
+                            {item.coach?.name || "Coach"}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {item.session.scheduledAt
+                              ? new Date(item.session.scheduledAt).toLocaleDateString(
+                                  language === "fr" ? "fr-CA" : "en-CA",
+                                  { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }
+                                )
+                              : ""}
+                          </p>
+                          {item.session.coachNotes && (
+                            <p className="text-xs text-muted-foreground mt-1 italic line-clamp-2">
+                              "{item.session.coachNotes}"
+                            </p>
+                          )}
+                        </div>
+                        {item.session.rating && (
+                          <div className="flex items-center gap-0.5">
+                            <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
+                            <span className="text-xs font-medium text-foreground">{item.session.rating}</span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </GlassCard>
+              )}
 
               {/* Weekly Challenges */}
               <WeeklyChallenges language={language} className="col-span-1" />
