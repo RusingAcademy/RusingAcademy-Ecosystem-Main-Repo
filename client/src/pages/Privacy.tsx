@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Privacy() {
@@ -121,6 +122,10 @@ export default function Privacy() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={language === "fr" ? "Politique de confidentialité" : "Privacy Policy"}
+        description={language === "fr" ? "Comment RusingAcademy protège vos informations personnelles et vos données." : "How RusingAcademy protects your personal information and data."}
+      />
       
 
       <main id="main-content" className="flex-1 py-8 md:py-12 lg:py-16">

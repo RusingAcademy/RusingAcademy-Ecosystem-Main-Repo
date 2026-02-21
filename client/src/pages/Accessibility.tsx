@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 import { CheckCircle, AlertCircle } from "lucide-react";
 
@@ -237,6 +238,14 @@ export default function Accessibility() {
   
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={language === "fr" ? "Déclaration d'accessibilité" : "Accessibility Statement"}
+        description={language === "fr" ? "L'engagement de RusingAcademy envers l'accessibilité numérique pour tous les fonctionnaires canadiens." : "RusingAcademy's commitment to digital accessibility for all Canadian public servants."}
+      />
+      <SEO 
+        title={language === "fr" ? "Déclaration d'accessibilité" : "Accessibility Statement"}
+        description={language === "fr" ? "L'engagement de RusingAcademy envers l'accessibilité numérique pour tous les fonctionnaires canadiens." : "RusingAcademy's commitment to digital accessibility for all Canadian public servants."}
+      />
       
       
       <main className="flex-1 py-8 md:py-12 lg:py-16" id="main-content">

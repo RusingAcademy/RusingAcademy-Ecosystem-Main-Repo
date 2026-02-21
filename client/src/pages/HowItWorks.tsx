@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -133,6 +134,10 @@ export default function HowItWorks() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={language === "fr" ? "Comment ça fonctionne" : "How It Works"}
+        description={language === "fr" ? "Découvrez comment RusingAcademy vous aide à préparer les examens ELS avec la pratique IA et le coaching expert." : "Learn how RusingAcademy helps you prepare for SLE exams with AI practice and expert coaching."}
+      />
       
 
       <main id="main-content" className="flex-1">
